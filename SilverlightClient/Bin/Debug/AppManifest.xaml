@@ -1,0 +1,36 @@
+﻿<Deployment xmlns="http://schemas.microsoft.com/client/2007/deployment" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" EntryPointAssembly="SilverlightClient" EntryPointType="SilverlightClient.App" RuntimeVersion="4.0.50826.0">
+  <Deployment.Parts>
+    <AssemblyPart x:Name="SilverlightClient" Source="SilverlightClient.dll" />
+    <AssemblyPart x:Name="EvoX.Controller" Source="EvoX.Controller.dll" />
+    <AssemblyPart x:Name="EvoX.Model" Source="EvoX.Model.dll" />
+    <AssemblyPart x:Name="EvoX.ResourceLibrary" Source="EvoX.ResourceLibrary.dll" />
+    <AssemblyPart x:Name="EvoX.SupportingClasses" Source="EvoX.SupportingClasses.dll" />
+    <AssemblyPart x:Name="EvoX.Tests" Source="EvoX.Tests.dll" />
+    <AssemblyPart x:Name="EvoX.View" Source="EvoX.View.dll" />
+    <AssemblyPart x:Name="EvoX.ViewToolkit" Source="EvoX.ViewToolkit.dll" />
+    <AssemblyPart x:Name="HtmlTextBlock" Source="HtmlTextBlock.dll" />
+    <AssemblyPart x:Name="Microsoft.Expression.Interactions" Source="Microsoft.Expression.Interactions.dll" />
+    <AssemblyPart x:Name="OrderedListClass" Source="OrderedListClass.dll" />
+    <AssemblyPart x:Name="SilverFlow.Controls" Source="SilverFlow.Controls.dll" />
+    <AssemblyPart x:Name="System.Windows.Controls.Data.Input" Source="System.Windows.Controls.Data.Input.dll" />
+    <AssemblyPart x:Name="System.Windows.Controls" Source="System.Windows.Controls.dll" />
+    <AssemblyPart x:Name="System.Windows.Controls.Input" Source="System.Windows.Controls.Input.dll" />
+    <AssemblyPart x:Name="System.Windows.Controls.Input.Toolkit" Source="System.Windows.Controls.Input.Toolkit.dll" />
+    <AssemblyPart x:Name="System.Windows.Controls.Toolkit" Source="System.Windows.Controls.Toolkit.dll" />
+    <AssemblyPart x:Name="System.Windows.Controls.Toolkit.Internals" Source="System.Windows.Controls.Toolkit.Internals.dll" />
+    <AssemblyPart x:Name="System.Windows.Interactivity" Source="System.Windows.Interactivity.dll" />
+    <AssemblyPart x:Name="System.Xml.Linq" Source="System.Xml.Linq.dll" />
+    <AssemblyPart x:Name="Windows.Toolbar" Source="Windows.Toolbar.dll" />
+    <AssemblyPart x:Name="Windows.Toolkit" Source="Windows.Toolkit.dll" />
+    <AssemblyPart x:Name="NUnit.Silverlight.Framework" Source="NUnit.Silverlight.Framework.dll" />
+    <AssemblyPart x:Name="EvoX.Dialogs" Source="EvoX.Dialogs.dll" />
+    <AssemblyPart x:Name="System.Windows.Controls.Data" Source="System.Windows.Controls.Data.dll" />
+    <AssemblyPart x:Name="System.Windows.Data" Source="System.Windows.Data.dll" />
+    <AssemblyPart x:Name="EvoX.Model.PSM.Grammar" Source="EvoX.Model.PSM.Grammar.dll" />
+    <AssemblyPart x:Name="EvoX.Model.PSM.Normalization" Source="EvoX.Model.PSM.Normalization.dll" />
+    <AssemblyPart x:Name="EvoX.DataGenerator" Source="EvoX.DataGenerator.dll" />
+    <AssemblyPart x:Name="EvoX.Translation" Source="EvoX.Translation.dll" />
+    <AssemblyPart x:Name="System.ComponentModel.DataAnnotations" Source="System.ComponentModel.DataAnnotations.dll" />
+    <AssemblyPart x:Name="NUnit.Silverlight.Compatibility" Source="NUnit.Silverlight.Compatibility.dll" />
+  </Deployment.Parts>
+</Deployment>

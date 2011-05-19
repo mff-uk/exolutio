@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="EvoX.WPFClient.OCLEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <DockPanel LastChildFill="True">        
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Height="30">
+            <Button Content="Create" Click="Create_Click" Margin="3" />
+            <Button Content="Remove" Click="Remove_Click" Margin="3" />
+            <Label Content="Scripts:" Margin="3" />
+            <ComboBox Height="23" Name="cbScripts" Width="136" SelectionChanged="cbScripts_SelectionChanged" Margin="3" />
+        </StackPanel>
+        <TextBox Name="textBox1" AcceptsReturn="True" TextChanged="textBox1_TextChanged" />
+    </DockPanel>
+</UserControl>

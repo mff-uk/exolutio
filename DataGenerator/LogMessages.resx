@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<!-- 
+		Microsoft ResX Schema
+
+		Version 1.3
+
+		The primary goals of this format is to allow a simple XML format 
+		that is mostly human readable. The generation and parsing of the 
+		various data types are done through the TypeConverter classes 
+		associated with the data types.
+
+		Example:
+
+		... ado.net/XML headers & schema ...
+		<resheader name="resmimetype">text/microsoft-resx</resheader>
+		<resheader name="version">1.3</resheader>
+		<resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+		<resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+		<data name="Name1">this is my long string</data>
+		<data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+		<data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+			[base64 mime encoded serialized .NET Framework object]
+		</data>
+		<data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+			[base64 mime encoded string representing a byte array form of the .NET Framework object]
+		</data>
+
+		There are any number of "resheader" rows that contain simple 
+		name/value pairs.
+
+		Each data row contains a name, and value. The row also contains a 
+		type or mimetype. Type corresponds to a .NET class that support 
+		text/value conversion through the TypeConverter architecture. 
+		Classes that don't support this are serialized and stored with the 
+		mimetype set.
+
+		The mimetype is used for serialized objects, and tells the 
+		ResXResourceReader how to depersist the object. This is currently not 
+		extensible. For a given mimetype the value must be set accordingly:
+
+		Note - application/x-microsoft.net.object.binary.base64 is the format 
+		that the ResXResourceWriter will generate, however the reader can 
+		read any of the formats listed below.
+
+		mimetype: application/x-microsoft.net.object.binary.base64
+		value   : The object must be serialized with 
+			: System.Serialization.Formatters.Binary.BinaryFormatter
+			: and then encoded with base64 encoding.
+
+		mimetype: application/x-microsoft.net.object.soap.base64
+		value   : The object must be serialized with 
+			: System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+			: and then encoded with base64 encoding.
+
+		mimetype: application/x-microsoft.net.object.bytearray.base64
+		value   : The object must be serialized into a byte array 
+			: using a System.ComponentModel.TypeConverter
+			: and then encoded with base64 encoding.
+	-->
+	
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>1.3</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+  <data name="XS_ABSTRACT_NOT_SPECIALIZED" xml:space="preserve">
+    <value>Class {0} is marked abstract but there are no specializations of the class in the diagram.</value>
+  </data>
+  <data name="XS_ASSOCIATION_MULTIPLICITY_LOST" xml:space="preserve">
+    <value>{0} has multiplicity {1} which cannot be expressed in the schema because it is not translated into element declaration but into groups references and attribute group can be referenced only once. Consider assigning an element label to {2} or moving its attributes into attribute container.</value>
+  </data>
+  <data name="XS_ATTRIBUTES_IN_CHOICE" xml:space="preserve">
+    <value>Attributes under choice can not be translated in "exclusive or" semantics, the had to be translated as optional</value>
+  </data>
+  <data name="XS_ATTRIBUTES_IN_CLASS_UNION" xml:space="preserve">
+    <value>Some attributes under {0} were propagated upwards. Consider giving an element label to all classes of the class union. </value>
+  </data>
+  <data name="XS_ATTRIBUTE_MULTIPLICITY_LOST" xml:space="preserve">
+    <value>Multiplicity {0} of attribute {1}.{2} can not be contained in the schema because it is  translated as a xml schema attribute. Consider moving the attribute to an attribute container. </value>
+  </data>
+  <data name="XS_CLASS_NAME_EMPTY" xml:space="preserve">
+    <value>Name of a class is empty.</value>
+  </data>
+  <data name="XS_DUPLICATE_ROOT_ELEMENTS" xml:space="preserve">
+    <value>Root element name {0} changed to {1} to avoid duplicate names. </value>
+  </data>
+  <data name="XS_ELEMENT_NAME_MISSING" xml:space="preserve">
+    <value>{0} must be named before translation.</value>
+  </data>
+  <data name="XS_INCORRECT_XSD" xml:space="preserve">
+    <value>Xml schema implementation of type {0} is incorrect and cannot be used (all xml schema elements in should be used without namespace prefix) . </value>
+  </data>
+  <data name="XS_MISSING_TYPE_XSD" xml:space="preserve">
+    <value>Type {0} does not have XSD implementation specified.</value>
+  </data>
+  <data name="XS_NON_ABSTRACT_CLASS" xml:space="preserve">
+    <value>Class {0} does not have an element label and is specialized. Consider making it abstract.</value>
+  </data>
+  <data name="XS_NO_DEFAULT_NAMESPACE" xml:space="preserve">
+    <value>Project has no namespace. </value>
+  </data>
+  <data name="XS_NO_ROOT" xml:space="preserve">
+    <value>Schema has no global element. Consider giving an element label to some of the root classes.</value>
+  </data>
+  <data name="XS_SPECIALIZED_ATTRIBUTE_GROUP" xml:space="preserve">
+    <value>Specialized class {0} does not have an element label. Its attributes were translated to an attribute group {1} but the translation does not reference it. Consider giving an element label to all specializations.</value>
+  </data>
+  <data name="XS_TRANSLATED_ATTRIBUTE_ALIAS" xml:space="preserve">
+    <value>Alias of the attribute {0} must have been changed to {1} to be a valid name for an attribute.</value>
+  </data>
+  <data name="XS_TRANSLATED_CLASS_NAME" xml:space="preserve">
+    <value>Name of the class {0} must have been changed to {1} to be a valid name for a complex type.</value>
+  </data>
+  <data name="XS_TYPE_TRANSLATED_AS_STRING" xml:space="preserve">
+    <value>Type {0} of attribute {1}.{2} is not specified, using xs:string as default.</value>
+  </data>
+  <data name="NO_NAMESPACE_PREFIX">
+    <value xml:space="preserve">No namespace prefix defined for {0}.</value>
+  </data>
+	<data name="EX_TranslateSchemaClass_should_never_be_called">
+		<value><![CDATA[TranslateSchemaClass should never be called. ]]></value>
+	</data>
+	<data name="Cardinality_of_association__0__treated_as__1__1__because_it_is_a_root_association_">
+		<value><![CDATA[Cardinality of association {0} treated as "1..1" because it is a root association.]]></value>
+	</data>
+	<data name="Lower_cardinality_of_association__0__treated_as__1__because_the_child_element_is__set__content_model_">
+		<value><![CDATA[Lower cardinality of association {0} treated as "1" because the child element is "set" content model. Lower cardinality for such associations can be only \"0\" or \"1\".]]></value>
+	</data>
+	<data name="Upper_cardinality_of_association__0__treated_as__1__because_the_child_element_is__set__content_model_">
+		<value><![CDATA[Upper cardinality of association {0} treated as "1" because the child element is "set" content model.]]></value>
+	</data>
+</root>

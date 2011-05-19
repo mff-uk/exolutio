@@ -1,0 +1,349 @@
+grammar ocl;
+
+
+oclExpression
+	:logicalImpliesExpression
+	
+	;
+	
+logicalImpliesExpression
+	: logicalXorExpression ('implies' logicalXorExpression)*
+	;
+logicalXorExpression
+	: logicalOrExpression ('xor' logicalOrExpression)*
+	;
+logicalOrExpression
+	: logicalAndExpression ('or' logicalAndExpression)*
+	;
+logicalAndExpression
+	: relationalEqExpression ('and' relationalEqExpression)*
+	;
+
+relationalEqExpression
+	:	 relationalNotEqExprassion (('='|'<>') relationalNotEqExprassion)*	 	
+	;
+relationalNotEqExprassion
+	:additiveExpression (('<'| '>'| '<='| '>=') additiveExpression)*
+	
+	;
+
+	
+additiveExpression
+	: multiplicativeExpression (('+'|'-')  multiplicativeExpression)* 
+	;	
+
+multiplicativeExpression
+	:	 unaryExpression (('*'|'/') unaryExpression)*	
+	;
+
+unaryExpression
+	:	('-'|'not') termExpression
+	|	termExpression
+	;
+	
+termExpression
+	:	primaryExperession ( (('.'|'->')propertyCall )|oclMessageExp)*
+			 
+	;
+
+primaryExperession 
+	:		
+	 	'self'		//3B
+	//|	enumLiteralExp  //8A
+	|	collectionLiteralExpAndType //8B, castecne 8E(22)
+	|	tupleLiteralExp	//8C
+	|	primitiveLiteralExp // 8D
+	//|	typeLiteralExp //8E
+	|	enumAndType //8A,8E,22
+	|	propertyCall
+	
+	|	'('oclExpression')'
+	|	ifExp
+	|	letExp
+	;
+propertyCall
+	:	pathName ('['arguments']')? isMarkedPre? ('('propertyCallParametrs')')?
+			//9 pokud se alspon jednou zopakuje, 28A, 3A - pokud je na zacatku
+			//23,24,25,34,35,36,37,38
+	|'iterate' '('(variableDeclaration ';'?)+ '|' oclExpression ')'
+	//|('iterate' '(' variableDeclaration ';')=>'iterate' '('variableDeclaration ';'variableDeclaration '|' oclExpression ')'
+	//|'iterate' '('variableDeclaration  '|' oclExpression ')'
+	//|'iterate' '('( ((variableDeclaration ';')=>variableDeclaration ';'variableDeclaration) | variableDeclaration )'|' oclExpression ')'
+		//POZOR NA STREDNIK
+		//26
+	;
+propertyCallParametrs
+	:	declarePropertyCallParametrs? arguments?
+		//25,35
+	;
+declarePropertyCallParametrs
+	:	( typedef (',' typedef )?'|') //25A
+	;
+typedef	:	SimpleName(':'type)?
+	;
+	
+enumAndType //9,28
+	 //pathName //9 pokud se alspon jednou zopakuje, 28A, 3A
+		//presunuto do propertyCall
+	//|  collectionType//28B  - obsazen v collectionLiteralExpAndType
+	: tupleType//28C
+	| primitiveType//28D
+	| oclType//28E
+	;
+
+
+
+pathName //7
+	: SimpleName ('::' SimpleName)* // RestrictedKeyword -> simple name
+	;
+	
+
+collectionLiteralExpAndType
+	:collectionTypeIdentifier ('(' type  ')')? ('{' collectionLiteralParts? '}')? //10A - bez type,10B - vsechno, 22B-nic
+	;
+
+enumLiteralExp //9
+	:pathName'::' SimpleName
+	;
+	
+collectionLiteralExp //10
+	:collectionTypeIdentifier  '{' collectionLiteralParts? '}'
+	|collectionType '{' collectionLiteralParts? '}'
+	;
+	
+
+
+
+
+
+collectionTypeIdentifier //11
+	:'Set'
+	|'Bag'
+	|'Sequence'
+	|'Collection'
+	|'OrderedSet'
+	;
+
+collectionLiteralParts //12
+	: collectionLiteralPart ( ',' collectionLiteralParts )?
+	;
+
+collectionLiteralPart //13
+	: oclExpression ('..' oclExpression)? //13B,14
+	
+	;
+
+
+primitiveLiteralExp //15
+	: IntegerLiteralExp
+	| RealLiteralExp
+	| StringLiteralExp
+	| BooleanLiteralExp
+	| UnlimitedNaturalLiteralExp
+	| NullLiteralExp
+	| InvalidLiteralExp
+	;
+tupleLiteralExp //16
+	: 'Tuple' '{' variableDeclarationList '}'
+	;
+	
+typeLiteralExp //22 
+	:type
+	;
+
+variableDeclaration //27
+	:SimpleName (':' type)? ( '=' oclExpression )?
+	;
+
+type //28
+	: pathName
+	| collectionType
+	| tupleType
+	| primitiveType
+	| oclType
+	;
+		
+primitiveType //29
+	: 'Boolean'
+	| 'Integer'
+	| 'Real'
+	| 'String'
+	| 'UnlimitedNatural'
+	;
+	
+oclType //30
+	: 'OclAny'
+	| 'OclInvalid'
+	| 'OclMessage'
+	| 'OclVoid'
+	;
+
+collectionType //31
+	: collectionTypeIdentifier '(' type  ')'
+	;
+	
+tupleType ///32
+	: 'Tuple' '(' variableDeclarationList? ')'
+	;
+
+
+variableDeclarationList //33
+	: variableDeclaration (','variableDeclarationList )?
+	;
+isMarkedPre //39
+	: '@' 'pre'
+	;
+
+arguments //40
+	: oclExpression ( ',' arguments )?
+	;
+
+
+letExp //41
+	: 'let' variableDeclaration letExpSub
+	;
+
+letExpSub //42
+	: ',' variableDeclaration letExpSub
+	| 'in' (options {greedy=false;} :oclExpression)
+	;
+
+oclMessageExp//43
+	: '^^' SimpleName '(' oclMessageArguments? ')'
+	| '^' SimpleName '(' oclMessageArguments? ')'
+	;
+oclMessageArguments//44
+	: oclMessageArg ( ',' oclMessageArguments )?
+	;
+
+oclMessageArg //45
+	: '?' (':' type)?
+	| oclExpression
+	;
+
+ifExp //46
+	: 'if' oclExpression 'then' oclExpression 'else' oclExpression 'endif'
+	;
+
+
+/*
+ * Lexer Rules
+ */
+
+
+
+BooleanLiteralExp //21
+	:'true'
+	|'false'
+	;
+	
+NullLiteralExp //47
+	: 'null'
+	;
+
+InvalidLiteralExp //48
+	: 'invalid'
+	;
+
+
+
+SimpleName
+	: NameStartChar NameChar*
+	| '_' '\'' StringChar* '\''
+	;//Chybí pravidlo C
+	
+
+UnlimitedNaturalLiteralExp //17
+	:'*'	; // muze obsahovat i cislo, ale potom by se pravidlo bylo s IntegerLiteralExp
+IntegerLiteralExp //18
+	: '0'
+	| '1'..'9' Num*
+	;
+RealLiteralExp //19
+	: Num+ (('.'Num+ (ExponentPart)?) |(ExponentPart))
+	;
+	
+StringLiteralExp //20
+	: '\'' StringChar* '\''
+	;//Chyby pravidlo B
+
+	
+NESTED_ML_COMMENT
+    :   '/*' 
+        (options {greedy=false;} : NESTED_ML_COMMENT | . )* 
+        '*/' {$channel=HIDDEN;}
+    ;
+
+LINE_COMMENT
+	:'--'  ~('\n'|'\r')* (('\r'? '\n')|EOF) {$channel=HIDDEN;}
+	;
+	
+WS
+    :   WhiteSpaceChar {$channel=HIDDEN;}
+    ;
+	
+	
+
+	
+fragment
+NameStartChar 
+	: 'A'..'Z' | '_' | '$' | 'a'..'z'
+	| '\u00C0'..'\u00D6' | '\u00D8'..'\u00F6' | '\u00F8'..'\u02FF'
+	| '\u0370'..'\u037D' | '\u037F'..'\u1FFF'
+	| '\u200C'..'\u200D' | '\u2070'..'\u218F' | '\u2C00'..'\u2FEF'
+	| '\u3001'..'\uD7FF' | '\uF900'..'\uFDCF' | '\uFDF0'..'\uFFFD'
+	
+	;//chyby podpora pro [#x10000-#xEFFFF]
+fragment
+NameChar 
+	: NameStartChar 
+	| Num
+	;
+
+fragment
+StringChar 
+	: Char | EscapeSequence
+	;
+
+fragment
+WhiteSpaceChar 
+	: '\t' | '\n' 
+	| '\f' | '\r' 
+	| ' '
+	;
+
+fragment
+Char 
+	: '\u0020'..'\u0026' | '\u0028'..'\u005B' 
+	| '\u005D'..'\uD7FF' | '\uE000'..'\uFFFD' 
+	;//chyby podpora pro [#x10000-#xEFFFF]
+	
+fragment	
+EscapeSequence 
+	: '\\'
+		('b' // #x08: backspace BS
+		| 't'  // #x09: horizontal tab HT
+		| 'n'  // #x0a: linefeed LF
+		| 'f'  // #x0c: form feed FF
+		| 'r'  // #x0d: carriage return CR
+		| '\"'  // #x22: double quote "
+		| '\''  // #x27: single quote '
+		| '\\'  // #x5c: backslash 
+		| 'x' Hex Hex // #x00 to #xFF
+		| 'u' Hex Hex Hex Hex // #x0000 to #xFFFF
+	)
+	;
+	
+fragment
+Hex : 
+	'0'..'9' | 'A'..'F' | 'a'..'f'
+	;
+fragment 
+Num	
+	: '0'..'9'
+	;
+
+fragment
+ExponentPart
+	:('e'|'E') ('+'|'-')? Num+
+	;

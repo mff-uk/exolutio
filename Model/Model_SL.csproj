@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5CE90201-BCA7-4877-8EDE-853A81E88DB1}</ProjectGuid>
+    <ProjectTypeGuids>{A1591282-1198-4647-A2B1-27E5FF5F6F3B};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EvoX.Model</RootNamespace>
+    <AssemblyName>EvoX.Model</AssemblyName>
+    <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
+    <SilverlightApplication>false</SilverlightApplication>
+    <ValidateXaml>true</ValidateXaml>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <!-- This property group is only here to support building this project using the 
+       MSBuild 3.5 toolset. In order to work correctly with this older toolset, it needs 
+       to set the TargetFrameworkVersion to v3.5 -->
+  <PropertyGroup Condition="'$(MSBuildToolsVersion)' == '3.5'">
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="mscorlib" />
+    <Reference Include="System.Windows" />
+    <Reference Include="system" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Windows.Browser" />
+    <Reference Include="System.Xml.Linq, Version=2.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AttributeType.cs" />
+    <Compile Include="Component.cs" />
+    <Compile Include="ComponentList.cs" />
+    <Compile Include="ComponentMappingDictionary.cs" />
+    <Compile Include="Diagram.cs" />
+    <Compile Include="EvoXModelException.cs" />
+    <Compile Include="EvoXObject.cs" />
+    <Compile Include="EvoXVersionedObject.cs" />
+    <Compile Include="EvoXVersionedObjectNotAPartOfSchema.cs" />
+    <Compile Include="IHasCardinality.cs" />
+    <Compile Include="ModelIterator.cs" />
+    <Compile Include="ModelVerifier.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ModelWorker.cs" />
+    <Compile Include="OCL\OCLScript.cs" />
+    <Compile Include="PIM\PIMAssociation.cs" />
+    <Compile Include="PIM\PIMAssociationEnd.cs" />
+    <Compile Include="PIM\PIMAttribute.cs" />
+    <Compile Include="PIM\PIMClass.cs" />
+    <Compile Include="PIM\PIMComponent.cs" />
+    <Compile Include="PIM\PIMDiagram.cs" />
+    <Compile Include="PIM\PIMSchema.cs" />
+    <Compile Include="Project.cs" />
+    <Compile Include="ProjectVersion.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PSM\IPSMSemanticComponent.cs" />
+    <Compile Include="PSM\PSMAssociation.cs" />
+    <Compile Include="PSM\PSMAssociationMember.cs" />
+    <Compile Include="PSM\PSMAttribute.cs" />
+    <Compile Include="PSM\PSMClass.cs" />
+    <Compile Include="PSM\PSMComponent.cs" />
+    <Compile Include="PSM\PSMContentModel.cs" />
+    <Compile Include="PSM\PSMContentModelType.cs" />
+    <Compile Include="PSM\PSMDiagram.cs" />
+    <Compile Include="PSM\PSMSchema.cs" />
+    <Compile Include="PSM\PSMSchemaClass.cs" />
+    <Compile Include="PSM\PSMSchemaReference.cs" />
+    <Compile Include="Resources\Exceptions.Designer.cs" />
+    <Compile Include="Schema.cs" />
+    <Compile Include="Serialization\IEvoXSerializable.cs" />
+    <Compile Include="Serialization\ProjectSerializationManager.cs" />
+    <Compile Include="Serialization\SerializationContext.cs" />
+    <Compile Include="Serialization\SerializationLogMessages.Designer.cs" />
+    <Compile Include="UndirectCollection.cs" />
+    <Compile Include="UnlimitedInt.cs" />
+    <Compile Include="Versioning\ElementCopiesMap.cs" />
+    <Compile Include="Versioning\IEvoXCloneable.cs" />
+    <Compile Include="Versioning\IVersionedItem.cs" />
+    <Compile Include="Versioning\Version.cs" />
+    <Compile Include="Versioning\VersionManager.cs" />
+    <Compile Include="ViewHelper\ConnectionViewHelper.cs" />
+    <Compile Include="ViewHelper\IComponentViewHelper.cs" />
+    <Compile Include="ViewHelper\LabelViewHelper.cs" />
+    <Compile Include="ViewHelper\PIMAssociationEndViewHelper.cs" />
+    <Compile Include="ViewHelper\PIMAssociationViewHelper.cs" />
+    <Compile Include="ViewHelper\PIMClassViewHelper.cs" />
+    <Compile Include="ViewHelper\PositionableElementViewHelper.cs" />
+    <Compile Include="ViewHelper\PSMAssociationViewHelper.cs" />
+    <Compile Include="ViewHelper\PSMClassViewHelper.cs" />
+    <Compile Include="ViewHelper\PSMContentModelViewHelper.cs" />
+    <Compile Include="ViewHelper\PSMSchemaClassViewHelper.cs" />
+    <Compile Include="ViewHelper\ViewHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Versioning\Versioning.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Exceptions.resx" />
+    <EmbeddedResource Include="Serialization\SerializationLogMessages.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SupportingClasses\SupportingClasses_SL.csproj">
+      <Project>{0B19B38E-962B-434E-A731-14C615C7B85D}</Project>
+      <Name>SupportingClasses_SL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{A1591282-1198-4647-A2B1-27E5FF5F6F3B}">
+        <SilverlightProjectProperties />
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

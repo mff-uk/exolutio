@@ -1,0 +1,36 @@
+﻿<xapCache source="D:\Programování\EvoX\SilverlightClient\Bin\Debug\SilverlightClient.xap" wasSigned="False" certificateThumbprint="" TimeStampUrl="" lastWriteTime="16.5.2011 18:32:36">
+  <file source="D:\Programování\EvoX\SilverlightClient\obj\Debug\SilverlightClient.dll" archivePath="SilverlightClient.dll" lastWriteTime="16.5.2011 18:32:31" />
+  <file source="D:\Programování\EvoX\Controller\Bin\Debug\EvoX.Controller.dll" archivePath="EvoX.Controller.dll" lastWriteTime="16.5.2011 18:32:22" />
+  <file source="D:\Programování\EvoX\Model\Bin\Debug\EvoX.Model.dll" archivePath="EvoX.Model.dll" lastWriteTime="16.5.2011 18:32:19" />
+  <file source="D:\Programování\EvoX\ResourceLibrary\Bin\Debug\EvoX.ResourceLibrary.dll" archivePath="EvoX.ResourceLibrary.dll" lastWriteTime="16.5.2011 18:32:12" />
+  <file source="D:\Programování\EvoX\SupportingClasses\Bin\Debug\EvoX.SupportingClasses.dll" archivePath="EvoX.SupportingClasses.dll" lastWriteTime="16.5.2011 18:32:12" />
+  <file source="D:\Programování\EvoX\Tests\Bin\Debug\EvoX.Tests.dll" archivePath="EvoX.Tests.dll" lastWriteTime="16.5.2011 18:32:20" />
+  <file source="D:\Programování\EvoX\View\Bin\Debug\EvoX.View.dll" archivePath="EvoX.View.dll" lastWriteTime="16.5.2011 18:32:27" />
+  <file source="D:\Programování\EvoX\ViewToolkit\Bin\Debug\EvoX.ViewToolkit.dll" archivePath="EvoX.ViewToolkit.dll" lastWriteTime="16.5.2011 18:32:20" />
+  <file source="D:\Programování\EvoX\SilverlightClient\Bin\Debug\HtmlTextBlock.dll" archivePath="HtmlTextBlock.dll" lastWriteTime="20.3.2011 0:15:14" />
+  <file source="C:\Program Files\Microsoft SDKs\Expression\Blend\Silverlight\v4.0\Libraries\Microsoft.Expression.Interactions.dll" archivePath="Microsoft.Expression.Interactions.dll" lastWriteTime="20.5.2010 17:08:10" />
+  <file source="D:\Programování\EvoX\ExternalBinaries\OrderedList\OrderedListClass.dll" archivePath="OrderedListClass.dll" lastWriteTime="20.3.2011 1:27:01" />
+  <file source="D:\Programování\EvoX\ExternalBinaries\FloatingWindowControl\SilverFlow.Controls.dll" archivePath="SilverFlow.Controls.dll" lastWriteTime="15.3.2011 16:51:59" />
+  <file source="C:\Program Files\Microsoft SDKs\Silverlight\v4.0\Libraries\Client\System.Windows.Controls.Data.Input.dll" archivePath="System.Windows.Controls.Data.Input.dll" lastWriteTime="26.8.2010 2:17:48" />
+  <file source="C:\Program Files\Microsoft SDKs\Silverlight\v4.0\Libraries\Client\System.Windows.Controls.dll" archivePath="System.Windows.Controls.dll" lastWriteTime="26.8.2010 2:17:48" />
+  <file source="C:\Program Files\Microsoft SDKs\Silverlight\v4.0\Libraries\Client\System.Windows.Controls.Input.dll" archivePath="System.Windows.Controls.Input.dll" lastWriteTime="26.8.2010 2:17:48" />
+  <file source="C:\Program Files\Microsoft SDKs\Silverlight\v4.0\Toolkit\Apr10\Bin\System.Windows.Controls.Input.Toolkit.dll" archivePath="System.Windows.Controls.Input.Toolkit.dll" lastWriteTime="13.4.2010 21:14:58" />
+  <file source="C:\Program Files\Microsoft SDKs\Silverlight\v4.0\Toolkit\Apr10\Bin\System.Windows.Controls.Toolkit.dll" archivePath="System.Windows.Controls.Toolkit.dll" lastWriteTime="13.4.2010 21:15:14" />
+  <file source="C:\Program Files\Microsoft SDKs\Silverlight\v4.0\Toolkit\Apr10\Bin\System.Windows.Controls.Toolkit.Internals.dll" archivePath="System.Windows.Controls.Toolkit.Internals.dll" lastWriteTime="13.4.2010 20:59:48" />
+  <file source="C:\Program Files\Microsoft SDKs\Expression\Blend\Silverlight\v4.0\Libraries\System.Windows.Interactivity.dll" archivePath="System.Windows.Interactivity.dll" lastWriteTime="20.5.2010 17:08:02" />
+  <file source="C:\Program Files\Microsoft SDKs\Silverlight\v4.0\Libraries\Client\System.Xml.Linq.dll" archivePath="System.Xml.Linq.dll" lastWriteTime="26.8.2010 2:17:48" />
+  <file source="D:\Programování\EvoX\ExternalBinaries\Windows.Toolbar\Windows.Toolbar.dll" archivePath="Windows.Toolbar.dll" lastWriteTime="17.3.2011 23:31:55" />
+  <file source="D:\Programování\EvoX\ExternalBinaries\Windows.Toolkit\Windows.Toolkit.dll" archivePath="Windows.Toolkit.dll" lastWriteTime="17.3.2011 23:31:56" />
+  <file source="D:\Programování\EvoX\Tests\Bin\Debug\NUnit.Silverlight.Framework.dll" archivePath="NUnit.Silverlight.Framework.dll" lastWriteTime="1.12.2010 8:20:16" />
+  <file source="D:\Programování\EvoX\View\Bin\Debug\EvoX.Dialogs.dll" archivePath="EvoX.Dialogs.dll" lastWriteTime="16.5.2011 18:32:13" />
+  <file source="D:\Programování\EvoX\View\Bin\Debug\System.Windows.Controls.Data.dll" archivePath="System.Windows.Controls.Data.dll" lastWriteTime="26.8.2010 2:17:48" />
+  <file source="D:\Programování\EvoX\View\Bin\Debug\System.Windows.Data.dll" archivePath="System.Windows.Data.dll" lastWriteTime="26.8.2010 2:17:48" />
+  <file source="D:\Programování\EvoX\View\Bin\Debug\EvoX.Model.PSM.Grammar.dll" archivePath="EvoX.Model.PSM.Grammar.dll" lastWriteTime="16.5.2011 18:32:23" />
+  <file source="D:\Programování\EvoX\View\Bin\Debug\EvoX.Model.PSM.Normalization.dll" archivePath="EvoX.Model.PSM.Normalization.dll" lastWriteTime="16.5.2011 18:32:23" />
+  <file source="D:\Programování\EvoX\View\Bin\Debug\EvoX.DataGenerator.dll" archivePath="EvoX.DataGenerator.dll" lastWriteTime="16.5.2011 18:32:24" />
+  <file source="D:\Programování\EvoX\View\Bin\Debug\EvoX.Translation.dll" archivePath="EvoX.Translation.dll" lastWriteTime="16.5.2011 18:32:22" />
+  <file source="C:\Program Files\Microsoft SDKs\Silverlight\v4.0\Libraries\Client\System.ComponentModel.DataAnnotations.dll" archivePath="System.ComponentModel.DataAnnotations.dll" lastWriteTime="26.8.2010 2:17:48" />
+  <file source="D:\Programování\EvoX\Tests\Bin\Debug\NUnit.Silverlight.Compatibility.dll" archivePath="NUnit.Silverlight.Compatibility.dll" lastWriteTime="16.11.2010 7:49:50" />
+  <file source="D:\Programování\EvoX\SilverlightClient\ServiceReferences.ClientConfig" archivePath="ServiceReferences.ClientConfig" lastWriteTime="22.3.2011 0:25:14" />
+  <file source="D:\Programování\EvoX\SilverlightClient\Bin\Debug\AppManifest.xaml" archivePath="AppManifest.xaml" lastWriteTime="16.5.2011 18:32:34" />
+</xapCache>

@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="EvoX.ViewToolkit.Zoomer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d" d:DesignHeight="40" d:DesignWidth="480">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="52" />
+            <ColumnDefinition Width="86" />
+            <ColumnDefinition Width="110" />
+            <ColumnDefinition Width="110" />
+            <ColumnDefinition Width="64" />
+            <ColumnDefinition Width="58*" />
+        </Grid.ColumnDefinitions>
+        <TextBlock VerticalAlignment="Center" Height="16" Width="34" Margin="12,12,6,12">Zoom:</TextBlock>
+            <Slider x:Name="zoomSlider" Minimum="0.1" Maximum="5" Value="1" Height="36.143" AutoToolTipPrecision="1" 
+                    AutoToolTipPlacement="TopLeft" TickPlacement="BottomRight" IsDirectionReversed="False" 
+                    Orientation="Horizontal" IsSnapToTickEnabled="False" IsMoveToPointEnabled="False"
+                    Ticks="0.1, 1, 2, 3, 4, 5" ValueChanged="zoomSlider_ValueChanged" Grid.Column="1" Margin="0,11,0,-7">
+            </Slider>
+        <TextBlock VerticalAlignment="Center" Text="{Binding Path=Value, ElementName=zoomSlider, StringFormat=\{0:F1\} x}" Height="16.149"  Width="24.608" Grid.Column="1" Margin="33,11,28,13"></TextBlock>
+            <Button x:Name="bZoomIn" Height="30" Width="100" Click="bZoomIn_Click" Grid.Column="2" >
+                <Button.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#FFD7D3F2"></GradientStop>
+                        <GradientStop Color="#FFD7FFFF" Offset="1"></GradientStop>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="{StaticResource ResourceKey=zoomIn}" Width="20" ></Image>
+                    <Label>Zoom In</Label>
+                </StackPanel>
+            </Button>
+            <Button Height="30" Width="100" Click="bZoomOut_Click" Grid.Column="3" >
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="1,1" StartPoint="0,0">
+                        <GradientStop Color="#FFD7D3F2" />
+                        <GradientStop Color="#FFD7FFFF" Offset="1" />
+                    </LinearGradientBrush>
+                </Button.Background>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="{StaticResource ResourceKey=zoomOut}" Width="20" ></Image>
+                    <Label>Zoom Out</Label>
+                </StackPanel>
+            </Button>
+            <Button x:Name="bReset" Height="30" Width="54" Click="bReset_Click" Grid.Column="4">
+                <Button.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#FFD7D3F2"></GradientStop>
+                        <GradientStop Color="#FFD7FFFF" Offset="1"></GradientStop>
+                    </LinearGradientBrush>
+                </Button.Background> Reset
+            </Button>
+    </Grid>
+</UserControl>

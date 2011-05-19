@@ -1,0 +1,21 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+                    xmlns:vt="clr-namespace:EvoX.ViewToolkit;assembly=EvoX.ViewToolkit" 
+                    xmlns:c="clr-namespace:EvoX.View" 
+                    xmlns:Controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit">
+
+    <c:IconConverter x:Key="iconConverter"/>
+    
+    <Style x:Key="contextMenuItemWithCommand" TargetType="vt:ContextMenuItem" >
+        <!--<Setter Property="Tag"       Value="{Binding RelativeSource={RelativeSource Self}}" />
+        <Setter Property="Header"    Value="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}" />
+        <Setter Property="Icon"      Value="{Binding RelativeSource={RelativeSource Self}, Path=Command.Icon,  Converter={StaticResource iconConverter}}" />-->
+    </Style>
+  
+	<Style x:Key="menuItemWithCommand" TargetType="Controls:MenuItem" >
+        <!--<Setter Property="Tag"       Value="{Binding RelativeSource={RelativeSource Self}}" />
+        <Setter Property="Header"    Value="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}" />
+        <Setter Property="Icon"      Value="{Binding RelativeSource={RelativeSource Self}, Path=Command.Icon,  Converter={StaticResource iconConverter}}" />-->
+    </Style>
+
+</ResourceDictionary>

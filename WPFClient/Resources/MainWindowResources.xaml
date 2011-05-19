@@ -1,0 +1,136 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:Fluent="clr-namespace:Fluent;assembly=Fluent" 
+                    xmlns:c="clr-namespace:EvoX.WPFClient.Converters">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/EvoX.ResourceLibrary;component/Images/Images.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Fluent;Component/Themes/Office2010/Silver.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    <Style TargetType="{x:Type Fluent:Button}" x:Key="ribbonBackstageCommandButtonStyle" BasedOn="{StaticResource BackstageButtonStyle }"  >
+        <Setter Property="Tag"       Value="{Binding RelativeSource={RelativeSource Self}}" />
+        <Setter Property="Header"    Value="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}" />
+        <Setter Property="Icon"      Value="{Binding RelativeSource={RelativeSource Self}, Path=Command.Icon}" />
+        <Setter Property="ToolTip">
+            <Setter.Value>
+                <Fluent:ScreenTip
+                            DataContext="{Binding Path=PlacementTarget.Tag, RelativeSource={RelativeSource Self}}"
+                            Title="{Binding Path=Command.ScreenTipTitleDisplay}"
+                            Text="{Binding Path=Command.ScreenTipText}"
+                            DisableReason="{Binding Path=Command.DisableReason}"
+                            >
+                </Fluent:ScreenTip>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="{x:Type Fluent:Button}" x:Key="ribbonTabButtonStyle" BasedOn="{StaticResource RibbonButtonStyle}"  >
+        <Setter Property="Tag"       Value="{Binding RelativeSource={RelativeSource Self}}" />
+        <Setter Property="Header"    Value="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}" />
+        <Setter Property="Icon"      Value="{Binding RelativeSource={RelativeSource Self}, Path=Command.Icon}" />
+        <Setter Property="LargeIcon"      Value="{Binding RelativeSource={RelativeSource Self}, Path=Command.Icon}" />
+                
+        <Setter Property="ToolTip">
+            <Setter.Value>
+                <Fluent:ScreenTip
+                            DataContext="{Binding Path=PlacementTarget.Tag, RelativeSource={RelativeSource Self}}"
+                            Title="{Binding Path=Command.ScreenTipTitleDisplay}"
+                            Text="{Binding Path=Command.ScreenTipText}"
+                            DisableReason="{Binding Path=Command.DisableReason}"
+                            >
+                </Fluent:ScreenTip>
+            </Setter.Value>
+        </Setter>
+        
+    </Style>
+    <Style TargetType="{x:Type Fluent:Button}" x:Key="ribbonPaneButtonStyle" >
+        <Setter Property="Tag"       Value="{Binding RelativeSource={RelativeSource Self}}" />
+        <Setter Property="Header"    Value="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}" />
+        <Setter Property="Icon"      Value="{Binding RelativeSource={RelativeSource Self}, Path=Command.Icon}" />
+
+        <Setter Property="ToolTip">
+            <Setter.Value>
+                <Fluent:ScreenTip
+                            DataContext="{Binding Path=PlacementTarget.Tag, RelativeSource={RelativeSource Self}}"
+                            Title="{Binding Path=Command.ScreenTipTitleDisplay}"
+                            Text="{Binding Path=Command.ScreenTipText}"
+                            DisableReason="{Binding Path=Command.DisableReason}"
+                            >
+                </Fluent:ScreenTip>
+            </Setter.Value>
+        </Setter>
+
+    </Style>
+    <c:MainWindowTitleConverter x:Key="titleConverter"/>
+
+    <Style x:Key="BackStageStyle" TargetType="{x:Type Button}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
+        <Setter Property="Background" Value="{StaticResource ButtonNormalBackground}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource ButtonNormalBorder}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Rectangle x:Name="rectangle1" HorizontalAlignment="Stretch" Stroke="#FFF7D223" Width="Auto" Height="Auto" VerticalAlignment="Stretch" RadiusY="2.5" RadiusX="2.5" StrokeThickness="1.3" Opacity="1" Fill="#CCFFE48A"/>
+                        <Rectangle x:Name="rectangle" HorizontalAlignment="Stretch" Margin="4,0,2,0" RadiusY="2.5" RadiusX="2.5" Stroke="Black" StrokeThickness="0" Width="Auto" Height="5" VerticalAlignment="Top" Fill="#44FFFFFF"/>
+                        <Rectangle x:Name="rectangle2" HorizontalAlignment="Stretch" Margin="2,0" RadiusY="2.5" RadiusX="2.5" Stroke="Black" StrokeThickness="0" Width="Auto" Height="8.52" VerticalAlignment="Bottom" Fill="#56FFFFFF"/>
+                        <ContentPresenter Margin="4,6,4,6" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Fill" TargetName="rectangle" Value="Transparent"/>
+                            <Setter Property="Fill" TargetName="rectangle2" Value="Transparent"/>
+                            <Setter Property="Stroke" TargetName="rectangle1">
+                                <Setter.Value>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="#FFC2762B" Offset="0"/>
+                                        <GradientStop Color="#FFC29E47" Offset="0.991"/>
+                                    </LinearGradientBrush>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="StrokeThickness" TargetName="rectangle1" Value="1.3"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Visibility" TargetName="rectangle" Value="Visible"/>
+                            <Setter Property="Visibility" TargetName="rectangle2" Value="Visible"/>
+                            <Setter Property="Visibility" TargetName="rectangle1" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="False">
+                            <Setter Property="Fill" TargetName="rectangle1">
+                                <Setter.Value>
+                                    <LinearGradientBrush EndPoint="0.5,1" Opacity="0" StartPoint="0.5,0">
+                                        <GradientStop Color="#FFF7D223" Offset="0"/>
+                                        <GradientStop Color="#FFF7D223" Offset="0.991"/>
+                                    </LinearGradientBrush>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Fill" TargetName="rectangle">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="#44FFFFFF" Opacity="0"/>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Fill" TargetName="rectangle2">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="#4CFFFFFF" Opacity="0"/>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Stroke" TargetName="rectangle1">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="#FFF7D223" Opacity="0"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="true"/>
+                        <Trigger Property="ToggleButton.IsChecked" Value="true"/>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Foreground" Value="#ADADAD"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

@@ -1,0 +1,39 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using EvoX.Controller.Commands;
+using EvoX.Model.PSM;
+using EvoX.Model;
+
+namespace EvoX.Controller.Commands.Atomic.PSM.MacroWrappers
+{
+    [PublicCommand("Shift PSM association", PublicCommandAttribute.EPulicCommandCategory.PSM_atomic)]
+    public class cmdShiftPSMAssociation : MacroCommand
+    {
+        [PublicArgument("Association", typeof(PSMAssociation))]
+        [Scope(ScopeAttribute.EScope.PSMAssociation)]
+        public Guid AssociationGuid { get; set; }
+
+        [PublicArgument("Shift left", SuggestedValue = true)]
+        public bool Left { get; set; }
+
+        public cmdShiftPSMAssociation() { }
+        
+        public cmdShiftPSMAssociation(Controller c)
+            : base(c) { }
+
+        public void Set(Guid psmAssociationGuid, bool shiftLeft)
+        {
+            AssociationGuid = psmAssociationGuid;
+            Left = shiftLeft;
+            
+        }
+
+        protected override void GenerateSubCommands()
+        {
+            Commands.Add(new acmdShiftPSMAssociation(Controller, AssociationGuid, Left));
+        }
+
+    }
+}

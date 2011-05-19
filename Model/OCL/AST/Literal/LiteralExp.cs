@@ -1,0 +1,15 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace EvoX.Model.OCL.AST
+{
+    /// <summary>
+    /// A LiteralExp is an expression with no arguments producing a value. In general the result value is identical with the
+    /// expression symbol.
+    /// </summary>
+    public class LiteralExp : OclExpression
+    {
+    }
+}

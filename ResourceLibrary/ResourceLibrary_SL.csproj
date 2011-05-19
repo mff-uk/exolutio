@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{907859AE-79A0-440E-8045-D82A408FEECD}</ProjectGuid>
+    <ProjectTypeGuids>{A1591282-1198-4647-A2B1-27E5FF5F6F3B};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EvoX.ResourceLibrary</RootNamespace>
+    <AssemblyName>EvoX.ResourceLibrary</AssemblyName>
+    <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
+    <SilverlightApplication>false</SilverlightApplication>
+    <ValidateXaml>true</ValidateXaml>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <!-- This property group is only here to support building this project using the 
+       MSBuild 3.5 toolset. In order to work correctly with this older toolset, it needs 
+       to set the TargetFrameworkVersion to v3.5 -->
+  <PropertyGroup Condition="'$(MSBuildToolsVersion)' == '3.5'">
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="mscorlib" />
+    <Reference Include="System.Windows" />
+    <Reference Include="system" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Windows.Browser" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="EvoXResourceNames.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\AddAttributes.png" />
+    <Resource Include="Images\AddChildern.png" />
+    <Resource Include="Images\aggregate.png" />
+    <Resource Include="Images\AlignObjectsBottom.png" />
+    <Resource Include="Images\AlignObjectsCenteredHorizontal.png" />
+    <Resource Include="Images\AlignObjectsCenteredVertical.png" />
+    <Resource Include="Images\AlignObjectsLeft.png" />
+    <Resource Include="Images\AlignObjectsRight.png" />
+    <Resource Include="Images\AlignObjectsTop.png" />
+    <Resource Include="Images\assocclass.png" />
+    <Resource Include="Images\associate.png" />
+    <Resource Include="Images\AttributeContainer.png" />
+    <Resource Include="Images\branch.png" />
+    <Resource Include="Images\BringForward.png" />
+    <Resource Include="Images\BringToFront.png" />
+    <Resource Include="Images\cancel.png" />
+    <Resource Include="Images\class.png" />
+    <Resource Include="Images\ClassUnion.png" />
+    <Resource Include="Images\comment.png" />
+    <Resource Include="Images\component_add.png" />
+    <Resource Include="Images\component_delete.png" />
+    <Resource Include="Images\component_edit.png" />
+    <Resource Include="Images\component_find.png" />
+    <Resource Include="Images\component_new.png" />
+    <Resource Include="Images\component_preferences.png" />
+    <Resource Include="Images\compose.png" />
+    <Resource Include="Images\ContentChoice.png" />
+    <Resource Include="Images\ContentContainer.png" />
+    <Resource Include="Images\Copy.png" />
+    <Resource Include="Images\cut.png" />
+    <Resource Include="Images\delete.png" />
+    <Resource Include="Images\delete2.png" />
+    <Resource Include="Images\disk.png" />
+    <Resource Include="Images\disks.png" />
+    <Resource Include="Images\disk_blue.png" />
+    <Resource Include="Images\disk_multiple.png" />
+    <Resource Include="Images\DistributeObjectsHorizontal.png" />
+    <Resource Include="Images\DistributeObjectsVertical.png" />
+    <Resource Include="Images\document_check.png" />
+    <Resource Include="Images\error_button.png" />
+    <Resource Include="Images\branch_delete.png" />
+    <Resource Include="Images\branch_element.png" />
+    <Content Include="Images\EvoX.ico" />
+    <Content Include="Images\EvoX16x16.bmp" />
+    <Resource Include="Images\EvoX16x16.png" />
+    <Resource Include="Images\eye.png" />
+    <Resource Include="Images\FolderYellow.ico" />
+    <Resource Include="Images\folder.png" />
+    <Resource Include="Images\font.png" />
+    <Resource Include="Images\generalize.png" />
+    <Resource Include="Images\GenericDocument.png" />
+    <Resource Include="Images\Group.png" />
+    <Resource Include="Images\help.png" />
+    <Resource Include="Images\magnifier.png" />
+    <Resource Include="Images\navigate_left.png" />
+    <Resource Include="Images\navigate_right.png" />
+    <Resource Include="Images\note_edit.png" />
+    <Resource Include="Images\OpenFolder.png" />
+    <Resource Include="Images\page.png" />
+    <Resource Include="Images\page_copy.png" />
+    <Resource Include="Images\page_paste.png" />
+    <Resource Include="Images\page_save.png" />
+    <Resource Include="Images\page_white.png" />
+    <Resource Include="Images\palette.png" />
+    <Resource Include="Images\Paste.png" />
+    <Resource Include="Images\PasteBig.png" />
+    <Resource Include="Images\pencil.png" />
+    <Resource Include="Images\Print.png" />
+    <Resource Include="Images\printer.png" />
+    <Resource Include="Images\FolderDownload.png" />
+    <Content Include="Images\props.ico" />
+    <Resource Include="Images\question_mark.png" />
+    <Resource Include="Images\redo.png" />
+    <Resource Include="Images\RemoveContainer.png" />
+    <Resource Include="Images\Save.png" />
+    <Resource Include="Images\SendBackward.png" />
+    <Resource Include="Images\SendToBack.png" />
+    <Resource Include="Images\undo.png" />
+    <Resource Include="Images\Ungroup.png" />
+    <Content Include="Images\view_remove.ico" />
+    <Content Include="Images\view_tree.ico" />
+    <Resource Include="Images\warning.png" />
+    <Resource Include="Images\xmlschema.png" />
+    <Resource Include="Images\xml_icon.gif" />
+    <Resource Include="Images\zoom_in.png" />
+    <Resource Include="Images\zoom_out.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Images\Images.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{A1591282-1198-4647-A2B1-27E5FF5F6F3B}">
+        <SilverlightProjectProperties />
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

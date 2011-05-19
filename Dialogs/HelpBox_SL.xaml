@@ -1,0 +1,32 @@
+﻿<my:FloatingWindow x:Class="EvoX.Dialogs.HelpBox"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:my="clr-namespace:SilverFlow.Controls;assembly=SilverFlow.Controls" 
+    Title="Help" Height="275" Width="572" Background="AliceBlue" xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk" xmlns:OrderedList="clr-namespace:OrderedList;assembly=OrderedListClass">
+    <Grid>
+        <Button Height="24" HorizontalAlignment="Center" Margin="0,0,0,15" Name="buttonOK" VerticalAlignment="Bottom" Width="107" Click="buttonOK_Click">OK</Button>
+        <OrderedList:OrderedList NumberType="Disc" Margin="20" NumberTextAlignment="Right">
+            <StackPanel>
+                <OrderedList:ListItem>
+                    <TextBlock Height="28" HorizontalAlignment="Left" VerticalAlignment="Top" Width="528" Text="Right click constructs (also association and association ends) to show available operations" />
+                </OrderedList:ListItem>
+                <OrderedList:ListItem>
+                    <TextBlock Height="28" HorizontalAlignment="Left" VerticalAlignment="Top" Width="528" Text="Other operations are available through the context menu of the diagram canvas" />
+                </OrderedList:ListItem>
+                <OrderedList:ListItem>
+                    <TextBlock Height="28" HorizontalAlignment="Left" VerticalAlignment="Top" Width="528" Text="You can also translate PSM Schema to a regular tree grammar" />
+                </OrderedList:ListItem>
+                <OrderedList:ListItem>
+                    <TextBlock Height="28" HorizontalAlignment="Left" VerticalAlignment="Top" Width="528" Text="Besides your own files, you can click open web project to see prepared examples" />
+                </OrderedList:ListItem>
+                <OrderedList:ListItem>
+                    <TextBlock Height="28" HorizontalAlignment="Left" VerticalAlignment="Top" Width="528" Text="Switch to PSM schema to get access to normalization commands" />
+                </OrderedList:ListItem>
+                <OrderedList:ListItem>
+                    <TextBlock Height="28" HorizontalAlignment="Left" VerticalAlignment="Top" Width="528" Text="You can also translate PSM Schema to a regular tree grammar" />
+                </OrderedList:ListItem>
+
+            </StackPanel>
+        </OrderedList:OrderedList>
+    </Grid>
+</my:FloatingWindow>

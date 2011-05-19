@@ -1,0 +1,284 @@
+﻿<UserControl x:Class="EvoX.WPFClient.EvoXRibbon"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Fluent="clr-namespace:Fluent;assembly=Fluent"                           
+             xmlns:Commands="clr-namespace:EvoX.View.Commands;assembly=EvoX.View" xmlns:Commands1="clr-namespace:EvoX.WPFClient.Commands" mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/EvoX.ResourceLibrary;component/Images/Images.xaml" ></ResourceDictionary>
+                <ResourceDictionary Source="MainWindowResources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Fluent:Ribbon x:Name="Ribbon" DockPanel.Dock="Top">
+        <Fluent:Ribbon.Menu>
+            <Fluent:Backstage Name="BackStage">
+                <Fluent:BackstageTabControl>
+                    <Fluent:Button x:Name="rbNewProject"
+						   Command="{x:Static Commands:EvoXGuiCommands.NewProjectCommand}"
+						   Style="{StaticResource ResourceKey=ribbonBackstageCommandButtonStyle}" />
+                    <Fluent:Button x:Name="rbOpenProject"
+						   Command="{x:Static Commands:EvoXGuiCommands.OpenProjectCommand}"						   
+						   Style="{StaticResource ResourceKey=ribbonBackstageCommandButtonStyle}" />
+                    <Fluent:Button x:Name="rbSaveProject"
+						   Command="{x:Static Commands:EvoXGuiCommands.SaveProjectCommand}"						   
+						   Style="{StaticResource ResourceKey=ribbonBackstageCommandButtonStyle}" />
+                    <Fluent:Button x:Name="rbSaveProjectAs"
+						   Command="{x:Static Commands:EvoXGuiCommands.SaveAsProjectCommand}"						   
+						   Style="{StaticResource ResourceKey=ribbonBackstageCommandButtonStyle}" />
+                    <Fluent:Button x:Name="rbCloseProject"
+						   Command="{x:Static Commands:EvoXGuiCommands.CloseProjectCommand}"						   
+						   Style="{StaticResource ResourceKey=ribbonBackstageCommandButtonStyle}" />
+                    <Fluent:Button x:Name="rbCloseApp"
+						   Command="{x:Static Commands:EvoXGuiCommands.CloseApplicationCommand}"						   
+						   Style="{StaticResource ResourceKey=ribbonBackstageCommandButtonStyle}" />
+
+                    <Fluent:BackstageTabItem Header="Recent">
+                        <Grid>
+                            <TabControl Margin="20,5,20,5" Style="{DynamicResource InnerBackstageTabControlStyle}">
+                                <Fluent:SeparatorTabItem Foreground="#FF5e5e5e" Header="Recent files" Width="350">
+                                    <!-- Right-side content here -->
+                                    <StackPanel HorizontalAlignment="Left" Margin="20,0,0,0" Width="Auto" >
+
+                                        <Fluent:SeparatorTabItem FontSize="12" Header="Recent directories" HorizontalAlignment="Stretch" />
+
+                                        <StackPanel x:Name="spBackstageRightPane" Margin="0,6,0,0">
+
+                                        </StackPanel>
+                                    </StackPanel>
+
+
+                                </Fluent:SeparatorTabItem>
+                            </TabControl>
+                            <StackPanel Margin="20,40" x:Name="spBackstageLeftPane">
+
+                            </StackPanel>
+                        </Grid>
+                    </Fluent:BackstageTabItem>
+                    <Fluent:BackstageTabItem Header="Window">
+                        <Grid>
+                            <TabControl Margin="20,5,20,5" Style="{DynamicResource InnerBackstageTabControlStyle}">
+                                <Fluent:SeparatorTabItem Foreground="#FF5e5e5e" Header="Window" Width="350">
+                                    <!-- Right-side content here -->
+                                    <StackPanel HorizontalAlignment="Left" Margin="20,0,0,0" Width="Auto" >
+
+                                        <Fluent:SeparatorTabItem FontSize="12" Header="" HorizontalAlignment="Stretch" />
+
+                                        <StackPanel Margin="0,6,0,0">
+
+                                        </StackPanel>
+                                    </StackPanel>
+
+
+                                </Fluent:SeparatorTabItem>
+                            </TabControl>
+                            <StackPanel Margin="20,40">
+                                <Button Command="{x:Static Commands1:StaticWPFClientCommands.ResetWindowLayout}" Style="{DynamicResource BackStageStyle}"	
+                                               HorizontalAlignment="Left" Width="345" >
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Width="345">
+                                        <!--<Image Width="32" Height="32" HorizontalAlignment="Left" />-->
+                                        <TextBlock Margin="20,6,4,6" 
+                                                   Text="Reset Window Layout" />
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </Fluent:BackstageTabItem>
+                    <Fluent:BackstageTabItem Header="Help">
+                        <Grid>
+                            <TabControl Margin="20,5,20,5" Style="{DynamicResource InnerBackstageTabControlStyle}">
+                                <Fluent:SeparatorTabItem Foreground="#FF5e5e5e" Header="Help" Width="350">
+                                    <!-- Right-side content here -->
+                                    <StackPanel HorizontalAlignment="Left" Margin="20,0,0,0" Width="Auto" >
+
+                                        <Fluent:SeparatorTabItem FontSize="12" Header="" HorizontalAlignment="Stretch" />
+
+                                        <StackPanel Margin="0,6,0,0">
+
+                                        </StackPanel>
+                                    </StackPanel>
+
+
+                                </Fluent:SeparatorTabItem>
+                            </TabControl>
+                            <StackPanel Margin="20,40">
+                                <Button Command="{x:Static Commands1:StaticWPFClientCommands.CheckForUpdates}" Style="{DynamicResource BackStageStyle}"	
+                                               HorizontalAlignment="Left" Width="345" >
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Width="345">
+                                        <!--<Image Width="32" Height="32" HorizontalAlignment="Left" />-->
+                                        <TextBlock Margin="20,6,4,6" 
+                                                   Text="Check for updates" />
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </Fluent:BackstageTabItem>
+                </Fluent:BackstageTabControl>
+            </Fluent:Backstage>
+
+        </Fluent:Ribbon.Menu>
+
+        <!--<Fluent:Ribbon.QuickAccessItems>
+			<Fluent:QuickAccessMenuItem>
+				<Fluent:Button Header="Undo" Icon="{StaticResource ResourceKey=undo}" />
+			</Fluent:QuickAccessMenuItem>
+			<Fluent:QuickAccessMenuItem>
+				<Fluent:Button Header="Redo" Icon="{StaticResource ResourceKey=redo}" />
+			</Fluent:QuickAccessMenuItem>
+		</Fluent:Ribbon.QuickAccessItems>-->
+
+        <Fluent:RibbonTabItem Header="Main">
+            <Fluent:RibbonGroupBox Header="Edit">
+                <Fluent:Button Command="{x:Static Commands:EvoXGuiCommands.UndoCommand}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
+                <Fluent:Button Command="{x:Static Commands:EvoXGuiCommands.RedoCommand}"
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
+                <Fluent:Button Command="{x:Static Commands:EvoXGuiCommands.VerifyModelCommand}"
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
+            </Fluent:RibbonGroupBox>
+
+            <!--<Fluent:RibbonGroupBox Header="Edit">
+                <Fluent:Button Header="Undo" />
+                <Fluent:Button Header="Redo" />
+            </Fluent:RibbonGroupBox>-->
+        </Fluent:RibbonTabItem>
+
+        <Fluent:RibbonTabItem Header="PIM">
+            <Fluent:RibbonGroupBox Header="Components">
+                <Fluent:Button Command="{x:Static Commands:EvoXGuiCommands.AddPIMClassCommand}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+                <Fluent:Button Command="{x:Static Commands:EvoXGuiCommands.AddPIMAttributeCommand}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+                <Fluent:Button Command="{x:Static Commands:EvoXGuiCommands.AddPIMAssociationCommand}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+            </Fluent:RibbonGroupBox>
+        </Fluent:RibbonTabItem>
+
+        <Fluent:RibbonTabItem Header="PSM">
+            <Fluent:RibbonGroupBox Header="Components">
+                <Fluent:Button Command="{x:Static Commands:EvoXGuiCommands.AddPSMClassCommand}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+                <Fluent:Button Command="{x:Static Commands:EvoXGuiCommands.AddPSMContentModel}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+                <Fluent:Button Command="{x:Static Commands:EvoXGuiCommands.AddPSMAttributeCommand}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+                <Fluent:Button Command="{x:Static Commands:EvoXGuiCommands.AddPSMAssociationCommand}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+            </Fluent:RibbonGroupBox>
+        </Fluent:RibbonTabItem>
+
+        <Fluent:RibbonTabItem  Header="Translation">
+            <Fluent:RibbonGroupBox Header="Grammar">
+                <Fluent:Button Command="{x:Static Commands:EvoXGuiCommands.TestNormalizationCommand}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+                <Fluent:Button Command="{x:Static Commands:EvoXGuiCommands.NormalizeSchemaCommandCommand}"
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
+                <Fluent:Button Command="{x:Static Commands:EvoXGuiCommands.GenerateGrammarCommand}"
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
+            </Fluent:RibbonGroupBox>
+            <Fluent:RibbonGroupBox Header="XML">
+                <Fluent:Button Command="{x:Static Commands:EvoXGuiCommands.CreateSampleDocumentCommand}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+            </Fluent:RibbonGroupBox>
+            <Fluent:RibbonGroupBox Header="XSD">
+
+            </Fluent:RibbonGroupBox>
+        </Fluent:RibbonTabItem>
+        <Fluent:RibbonTabItem  Header="Versioning">
+            <Fluent:RibbonGroupBox Header="Version">
+                <Fluent:Button Command="{x:Static Commands:EvoXGuiCommands.BranchCurrentVersionCommand}"
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
+                <Fluent:Button Command="{x:Static Commands:EvoXGuiCommands.SaveAsSingleVersionCommand}"
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
+                <Fluent:Button Command="{x:Static Commands:EvoXGuiCommands.RemoveCurrentVersionCommand}"
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
+            </Fluent:RibbonGroupBox>
+            <Fluent:RibbonGroupBox>
+                <Fluent:InRibbonGallery MinItemsInRow="1" MaxItemsInRow="5" Name="versionGallery" Visibility="Collapsed"
+                    ItemWidth="50" ItemHeight="18"                    
+                    ResizeMode="Both">
+                </Fluent:InRibbonGallery>
+
+            </Fluent:RibbonGroupBox>
+        </Fluent:RibbonTabItem>
+        <!--
+            <Fluent:RibbonTabItem Header="PIM">
+                <Fluent:RibbonGroupBox Header="PIM diagram elements">
+                    <Fluent:Button Header="Class" SizeDefinition="Large"    />
+                    <Fluent:Button Header="Associate" SizeDefinition="Large"/>
+
+                    <Fluent:Button Header="Add attribute" SizeDefinition="Middle, Small"/>
+                    <Fluent:Button Header="Add operation" SizeDefinition="Middle, Small"/>
+                    <Fluent:Button Header="Commentary" SizeDefinition="Middle, Small"/>
+
+                    <Separator />
+
+                    <Fluent:Button Header="Generalization" SizeDefinition="Middle, Small"/>
+                    <Fluent:Button Header="Association" SizeDefinition="Middle, Small"/>
+                    <Fluent:Button Header="Association class" SizeDefinition="Middle, Small"/>
+
+                    <Fluent:Button Header="Aggregation" SizeDefinition="Middle, Small"/>
+                    <Fluent:Button Header="Composition" SizeDefinition="Middle, Small"/>
+                </Fluent:RibbonGroupBox>
+
+                <Fluent:RibbonGroupBox Header="Alignment">
+                    <Fluent:Button Header="Align left" SizeDefinition="Small"/>
+                    <Fluent:Button Header="Align center" SizeDefinition="Small"/>
+                    <Fluent:Button Header="Align right" SizeDefinition="Small"/>
+
+                    <Fluent:Button Header="Align top" SizeDefinition="Small"/>
+                    <Fluent:Button Header="Align middle" SizeDefinition="Small"/>
+                    <Fluent:Button Header="Align bottom" SizeDefinition="Small"/>
+
+                </Fluent:RibbonGroupBox>
+
+                <Fluent:RibbonGroupBox Header="Derive">
+                    <Fluent:Button Header="Derive to new PSM diagram" SizeDefinition="Middle"/>
+                    <Fluent:Button Header="Derive to an existing diagram" SizeDefinition="Middle"/>
+                </Fluent:RibbonGroupBox>
+            </Fluent:RibbonTabItem>
+
+            <Fluent:RibbonTabItem Header="PSM">
+                <Fluent:RibbonGroupBox Header="PSM class">
+                    <Fluent:Button Header="Add children" />
+                    <Fluent:Button Header="Attributes" />
+                </Fluent:RibbonGroupBox>
+
+                <Fluent:RibbonGroupBox Header="PSM diagram elements">
+                    <Fluent:Button Header="Add attribute" SizeDefinition="Middle, Small" />
+                    <Fluent:Button Header="Move out" SizeDefinition="Middle, Small" />
+
+                    <Separator Width="0"></Separator>
+
+                    <Fluent:Button Header="Content choice" SizeDefinition="Middle, Small" />
+                    <Fluent:Button Header="Class union" SizeDefinition="Middle, Small" />
+                    <Fluent:Button Header="Add specializations" SizeDefinition="Middle, Small" />
+
+                    <Fluent:Button Header="Attribute container" SizeDefinition="Middle, Small" />
+                    <Fluent:Button Header="Content container" SizeDefinition="Middle, Small" />
+                    <Fluent:Button Header="Commentary" SizeDefinition="Middle, Small" />
+                </Fluent:RibbonGroupBox>
+
+                <Fluent:RibbonGroupBox Header="References">
+                    <Fluent:Button Header="Add reference" SizeDefinition="Middle, Small" />
+                    <Fluent:Button Header="Remove reference" SizeDefinition="Middle, Small" />
+                </Fluent:RibbonGroupBox>
+
+                <Fluent:RibbonGroupBox Header="Ordering">
+                    <Fluent:Button Header="Move left" SizeDefinition="Middle, Small" />
+                    <Fluent:Button Header="Move right" SizeDefinition="Middle, Small" />
+                </Fluent:RibbonGroupBox>
+            </Fluent:RibbonTabItem>
+
+            <Fluent:RibbonTabItem Header="Extensions">
+            </Fluent:RibbonTabItem>
+
+            <Fluent:RibbonTabItem Header="Evolution">
+            </Fluent:RibbonTabItem>-->
+
+    </Fluent:Ribbon>
+</UserControl>

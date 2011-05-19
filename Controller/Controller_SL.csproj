@@ -1,0 +1,239 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9D89860A-FDDF-4ADB-AABC-169957FCCE44}</ProjectGuid>
+    <ProjectTypeGuids>{A1591282-1198-4647-A2B1-27E5FF5F6F3B};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EvoX.Controller</RootNamespace>
+    <AssemblyName>EvoX.Controller</AssemblyName>
+    <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
+    <SilverlightApplication>false</SilverlightApplication>
+    <ValidateXaml>true</ValidateXaml>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <!-- This property group is only here to support building this project using the 
+       MSBuild 3.5 toolset. In order to work correctly with this older toolset, it needs 
+       to set the TargetFrameworkVersion to v3.5 -->
+  <PropertyGroup Condition="'$(MSBuildToolsVersion)' == '3.5'">
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="mscorlib" />
+    <Reference Include="System.Windows" />
+    <Reference Include="system" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Windows.Browser" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Commands\Atomic\acmdAddComponentToDiagram.cs" />
+    <Compile Include="Commands\Atomic\acmdRemoveComponentFromDiagram.cs" />
+    <Compile Include="Commands\Atomic\acmdRenameProject.cs" />
+    <Compile Include="Commands\Atomic\PIM\acmdDeletePIMClass.cs" />
+    <Compile Include="Commands\Atomic\PIM\acmdNewPIMAttribute.cs" />
+    <Compile Include="Commands\Atomic\PIM\acmdDeletePIMAttribute.cs" />
+    <Compile Include="Commands\Atomic\PIM\acmdUpdatePIMAttributeCardinality.cs" />
+    <Compile Include="Commands\Atomic\PIM\acmdUpdatePIMAttributeDefaultValue.cs" />
+    <Compile Include="Commands\Atomic\PIM\acmdUpdatePIMAttributeType.cs" />
+    <Compile Include="Commands\Atomic\PIM\acmdMovePIMAttribute.cs" />
+    <Compile Include="Commands\Atomic\PIM\acmdMoveAssociationEnd.cs" />
+    <Compile Include="Commands\Atomic\PIM\acmdNewPIMAssociation.cs" />
+    <Compile Include="Commands\Atomic\PIM\acmdDeletePIMAssociation.cs" />
+    <Compile Include="Commands\Atomic\PIM\acmdSynchroPIMAttributes.cs" />
+    <Compile Include="Commands\Atomic\PIM\acmdSynchroPIMAssociations.cs" />
+    <Compile Include="Commands\Atomic\PIM\acmdUpdatePIMAssociationEndCardinality.cs" />
+    <Compile Include="Commands\Atomic\PIM\MacroWrappers\cmdMoveAssociationEnd.cs" />
+    <Compile Include="Commands\Atomic\PIM\MacroWrappers\cmdDeletePIMAssociation.cs" />
+    <Compile Include="Commands\Atomic\PIM\MacroWrappers\cmdDeletePIMAttribute.cs" />
+    <Compile Include="Commands\Atomic\PIM\MacroWrappers\cmdDeletePIMClass.cs" />
+    <Compile Include="Commands\Atomic\PIM\MacroWrappers\cmdNewPIMAssociation.cs" />
+    <Compile Include="Commands\Atomic\PIM\MacroWrappers\cmdNewPIMAttribute.cs" />
+    <Compile Include="Commands\Atomic\PIM\MacroWrappers\cmdNewPIMClass.cs" />
+    <Compile Include="Commands\Atomic\PIM\MacroWrappers\cmdSynchroPIMAttributes.cs" />
+    <Compile Include="Commands\Atomic\PIM\MacroWrappers\cmdMovePIMAttribute.cs" />
+    <Compile Include="Commands\Atomic\PIM\MacroWrappers\cmdUpdatePIMAttributeType.cs" />
+    <Compile Include="Commands\Atomic\PIM\MacroWrappers\cmdUpdatePIMAttributeCardinality.cs" />
+    <Compile Include="Commands\Atomic\PIM\MacroWrappers\cmdUpdatePIMAssociationEndCardinality.cs" />
+    <Compile Include="Commands\Atomic\PIM\MacroWrappers\cmdSynchroPIMAssociations.cs" />
+    <Compile Include="Commands\Atomic\PSM\acmdDeletePSMDiagram.cs" />
+    <Compile Include="Commands\Atomic\PSM\acmdNewPSMDiagram.cs" />
+    <Compile Include="Commands\Atomic\PSM\acmdRenamePSMSchema.cs" />
+    <Compile Include="Commands\Atomic\PSM\acmdUpdatePSMAssociationCardinality.cs" />
+    <Compile Include="Commands\Atomic\PSM\acmdUpdatePSMAttributeCardinality.cs" />
+    <Compile Include="Commands\Atomic\PSM\acmdSetRepresentedClass.cs" />
+    <Compile Include="Commands\Atomic\PSM\acmdSetPSMClassInterpretation.cs" />
+    <Compile Include="Commands\Atomic\PSM\acmdSetPSMAttributeInterpretation.cs" />
+    <Compile Include="Commands\Atomic\PSM\acmdSetPSMAssociationInterpretation.cs" />
+    <Compile Include="Commands\Atomic\PSM\acmdUpdatePSMAttributeDefaultValue.cs" />
+    <Compile Include="Commands\Atomic\PSM\acmdUpdatePSMContentModel.cs" />
+    <Compile Include="Commands\Atomic\PSM\MacroWrappers\cmdUpdatePSMContentModel.cs" />
+    <Compile Include="Commands\Atomic\PSM\MacroWrappers\cmdSetRepresentedClass.cs" />
+    <Compile Include="Commands\Atomic\PSM\MacroWrappers\cmdMovePSMAttribute.cs" />
+    <Compile Include="Commands\Atomic\PSM\MacroWrappers\cmdReconnectPSMAssociation.cs" />
+    <Compile Include="Commands\Atomic\PSM\MacroWrappers\cmdShiftPSMAssociation.cs" />
+    <Compile Include="Commands\Atomic\PSM\MacroWrappers\cmdDeletePSMSchema.cs" />
+    <Compile Include="Commands\Atomic\PSM\MacroWrappers\cmdNewPSMSchema.cs" />
+    <Compile Include="Commands\Atomic\PSM\MacroWrappers\cmdDeletePSMAssociation.cs" />
+    <Compile Include="Commands\Atomic\PSM\MacroWrappers\cmdDeletePSMAttribute.cs" />
+    <Compile Include="Commands\Atomic\PSM\MacroWrappers\cmdDeletePSMClass.cs" />
+    <Compile Include="Commands\Atomic\PSM\MacroWrappers\cmdNewPSMAssociation.cs" />
+    <Compile Include="Commands\Atomic\PSM\MacroWrappers\cmdNewPSMContentModel.cs" />
+    <Compile Include="Commands\Atomic\PSM\MacroWrappers\cmdCreateNewPSMAttribute.cs" />
+    <Compile Include="Commands\Atomic\PSM\MacroWrappers\cmdNewPSMClass.cs" />
+    <Compile Include="Commands\Atomic\PSM\MacroWrappers\cmdDeletePSMContentModel.cs" />
+    <Compile Include="Commands\Atomic\PSM\MacroWrappers\cmdSynchroPSMAssociations.cs" />
+    <Compile Include="Commands\Atomic\PSM\MacroWrappers\cmdSynchroPSMAttributes.cs" />
+    <Compile Include="Commands\Atomic\PSM\MacroWrappers\cmdUpdatePSMAssociationCardinality.cs" />
+    <Compile Include="Commands\Atomic\PSM\MacroWrappers\cmdUpdatePSMAttributeCardinality.cs" />
+    <Compile Include="Commands\Atomic\PSM\MacroWrappers\cmdUpdatePSMAttributeType.cs" />
+    <Compile Include="Commands\Atomic\PSM\MacroWrappers\cmdUpdatePSMAttributeXForm.cs" />
+    <Compile Include="Commands\Atomic\PSM\MacroWrappers\cmdSetPSMClassInterpretation.cs" />
+    <Compile Include="Commands\Atomic\PSM\MacroWrappers\cmdSetPSMAttributeInterpretation.cs" />
+    <Compile Include="Commands\Atomic\PSM\MacroWrappers\cmdSetPSMAssociationInterpretation.cs" />
+    <Compile Include="Commands\Base\CommandReport.cs" />
+    <Compile Include="Commands\Base\ICommandWithDiagramParameter.cs" />
+    <Compile Include="Commands\Base\PublicArgumentAttribute.cs" />
+    <Compile Include="Commands\Base\PublicCommandAttribute.cs" />
+    <Compile Include="Commands\Base\ScopeAttribute.cs" />
+    <Compile Include="Commands\CommandReports.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CommandReports.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Commands\Complex\PIM\cmdCreateNewPIMAttribute.cs" />
+    <Compile Include="Commands\Complex\PIM\cmdCreateNewPIMClass.cs" />
+    <Compile Include="Commands\Complex\PIM\cmdDeletePIMClass.cs" />
+    <Compile Include="Commands\Complex\PIM\cmdDeletePIMAttribute.cs" />
+    <Compile Include="Commands\Complex\PIM\cmdDeletePIMAssociation.cs" />
+    <Compile Include="Commands\Complex\PIM\cmdCreateNewPIMAssociation.cs" />
+    <Compile Include="Commands\Complex\PIM\cmdUpdatePIMAttribute.cs" />
+    <Compile Include="Commands\Complex\PSM\cmdCreateNewPSMAttribute.cs" />
+    <Compile Include="Commands\Complex\PSM\cmdDeletePSMAttribute.cs" />
+    <Compile Include="Commands\Complex\PSM\cmdDeletePSMAssociation.cs" />
+    <Compile Include="Commands\Complex\PSM\cmdDeletePSMClass.cs" />
+    <Compile Include="Commands\Complex\PSM\cmdDeletePSMContentModelRecursive.cs" />
+    <Compile Include="Commands\Complex\PSM\cmdDeletePSMSchema.cs" />
+    <Compile Include="Commands\Complex\PSM\cmdDeletePSMAssociationMember.cs" />
+    <Compile Include="Commands\Complex\PSM\cmdDeletePSMClassAndParent.cs" />
+    <Compile Include="Commands\Complex\PSM\cmdDeletePSMAssociationRecursive.cs" />
+    <Compile Include="Commands\Complex\PSM\cmdDeletePSMClassRecursive.cs" />
+    <Compile Include="Commands\Complex\PSM\cmdMovePSMAttribute.cs" />
+    <Compile Include="Commands\Complex\PSM\cmdUpdatePSMAttribute.cs" />
+    <Compile Include="Commands\Reflection\CommandDescriptor.cs" />
+    <Compile Include="Commands\Reflection\CommandSerializer.cs" />
+    <Compile Include="Commands\Reflection\DescriptionAttribute.cs" />
+    <Compile Include="Commands\Reflection\PIMAttributeNeighboringClassParameterConsistency.cs" />
+    <Compile Include="Commands\Reflection\PIMAttributeOtherClassParameterConsistency.cs" />
+    <Compile Include="Commands\Reflection\InterpretationConsistency.cs" />
+    <Compile Include="Commands\Reflection\PublicCommandsHelper.cs" />
+    <Compile Include="Commands\Reflection\SchemaAttributeTypeParameterConsistency.cs" />
+    <Compile Include="Commands\Reflection\SchemaComponentParameterConsistency.cs" />
+    <Compile Include="Commands\Reflection\PIMAssociationAssociationEndParameterConsistency.cs" />
+    <Compile Include="Commands\Reflection\PSMClassAttributeParameterConsistency.cs" />
+    <Compile Include="Commands\Reflection\PSMSchemaComponentParameterConsistency.cs" />
+    <Compile Include="Commands\Reflection\PIMClassAttributeParameterConsistency.cs" />
+    <Compile Include="Commands\Reflection\ConsistentWithAttribute.cs" />
+    <Compile Include="Commands\Reflection\ParameterConsistency.cs" />
+    <Compile Include="Commands\Reflection\PIMSchemaComponentParameterConsistency.cs" />
+    <Compile Include="Commands\Atomic\PSM\acmdDeletePSMClass.cs" />
+    <Compile Include="Commands\Atomic\PSM\acmdReconnectPSMAssociation.cs" />
+    <Compile Include="Commands\Atomic\PSM\acmdMovePSMAttribute.cs" />
+    <Compile Include="Commands\Atomic\PSM\acmdNewPSMAssociation.cs" />
+    <Compile Include="Commands\Atomic\PSM\acmdNewPSMAttribute.cs" />
+    <Compile Include="Commands\Atomic\PSM\acmdNewPSMClass.cs" />
+    <Compile Include="Commands\Atomic\PSM\acmdNewPSMSchema.cs" />
+    <Compile Include="Commands\Atomic\PSM\acmdDeletePSMSchema.cs" />
+    <Compile Include="Commands\Atomic\PSM\acmdDeletePSMAssociation.cs" />
+    <Compile Include="Commands\Atomic\PSM\acmdDeletePSMAttribute.cs" />
+    <Compile Include="Commands\Atomic\PSM\acmdNewPSMContentModel.cs" />
+    <Compile Include="Commands\Atomic\PSM\acmdSetInterpretation.cs" />
+    <Compile Include="Commands\Atomic\PSM\acmdDeletePSMContentModel.cs" />
+    <Compile Include="Commands\Atomic\PSM\acmdSynchroPSMAssociations.cs" />
+    <Compile Include="Commands\Atomic\PSM\acmdSynchroPSMAttributes.cs" />
+    <Compile Include="Commands\Atomic\PSM\acmdUpdatePSMAttributeType.cs" />
+    <Compile Include="Commands\Atomic\PSM\acmdUpdatePSMAttributeXForm.cs" />
+    <Compile Include="Commands\Atomic\PSM\acmdShiftPSMAssociation.cs" />
+    <Compile Include="Commands\Base\CommandBase.cs" />
+    <Compile Include="Commands\Base\CommandFieldsChecker.cs" />
+    <Compile Include="Commands\Base\CommandNotInitializedException.cs" />
+    <Compile Include="Commands\Base\CommandResultAttribute.cs" />
+    <Compile Include="Commands\Atomic\PIM\acmdNewPIMClass.cs" />
+    <Compile Include="Commands\Atomic\acmdRenameComponent.cs" />
+    <Compile Include="Controller\CommandStack.cs" />
+    <Compile Include="Commands\Base\EvoXCommandException.cs" />
+    <Compile Include="Commands\Base\MacroCommand.cs" />
+    <Compile Include="Commands\Base\StackedCommand.cs" />
+    <Compile Include="Commands\CommandErrors.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CommandErrors.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Controller\Controller.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Commands\Base\RedoCommand.cs" />
+    <Compile Include="Commands\Base\UndoCommand.cs" />
+    <Compile Include="SerializableAttribute.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Model\Model_SL.csproj">
+      <Project>{5CE90201-BCA7-4877-8EDE-853A81E88DB1}</Project>
+      <Name>Model_SL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SupportingClasses\SupportingClasses_SL.csproj">
+      <Project>{0B19B38E-962B-434E-A731-14C615C7B85D}</Project>
+      <Name>SupportingClasses_SL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Commands\CommandErrors.resx" />
+    <EmbeddedResource Include="Commands\CommandReports.resx" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{A1591282-1198-4647-A2B1-27E5FF5F6F3B}">
+        <SilverlightProjectProperties />
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

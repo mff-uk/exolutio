@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<purchase code="Curabitur" version="dapibus" xmlns="http://www.example.org/">
+  <create-date>mattis</create-date>
+  <bill-to>
+    <street>erat</street>
+    <city>est</city>
+  </bill-to>
+  <cust>
+    <name>placerat</name>
+    <defaultname>
+      <email>pharetra</email>
+      <email>augue</email>
+      <phone>blandit</phone>
+      <phone>odio</phone>
+      <phone>mi</phone>
+      <phone>porta</phone>
+      <phone>placerat</phone>
+      <phone>arcu</phone>
+      <phone>euismod</phone>
+      <phone>Lorem</phone>
+      <phone>turpis</phone>
+      <phone>et</phone>
+    </defaultname>
+  </cust>
+  <items>
+    <item>
+      <defaultname>
+        <defaultname tester="luctus" />
+      </defaultname>
+    </item>
+    <item>
+      <defaultname>
+        <defaultname tester="consequat" />
+      </defaultname>
+    </item>
+    <item>
+      <defaultname>
+        <defaultname>
+          <price>eget</price>
+          <amount>mattis</amount>
+        </defaultname>
+      </defaultname>
+    </item>
+    <item>
+      <defaultname>
+        <defaultname tester="eu" />
+      </defaultname>
+    </item>
+    <item>
+      <defaultname>
+        <defaultname tester="aliquet" />
+      </defaultname>
+    </item>
+    <item>
+      <defaultname>
+        <defaultname tester="euismod" />
+      </defaultname>
+    </item>
+    <item>
+      <defaultname>
+        <defaultname tester="mauris" />
+      </defaultname>
+    </item>
+    <item>
+      <defaultname>
+        <defaultname>
+          <code>pharetra</code>
+        </defaultname>
+      </defaultname>
+    </item>
+    <item>
+      <defaultname>
+        <defaultname tester="eu" />
+      </defaultname>
+    </item>
+  </items>
+</purchase>

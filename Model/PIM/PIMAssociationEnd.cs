@@ -1,0 +1,164 @@
+﻿using System;
+using System.Xml;
+using System.Xml.Linq;
+using EvoX.Model.Serialization;
+using EvoX.Model.Versioning;
+
+namespace EvoX.Model.PIM
+{
+    public class PIMAssociationEnd : PIMComponent, IHasCardinality
+    {
+        #region Constructors
+        public PIMAssociationEnd(Project p) : base(p) { }
+        public PIMAssociationEnd(Project p, Guid g) : base(p, g) { }
+        public PIMAssociationEnd(Project p, PIMClass c, PIMSchema schema)
+            : base(p)
+        {
+            schema.PIMAssociationEnds.Add(this);
+            c.PIMAssociationEnds.Add(this);
+            PIMClass = c;
+        }
+        public PIMAssociationEnd(Project p, Guid g, PIMClass c, PIMSchema schema)
+            : base(p, g)
+        {
+            schema.PIMAssociationEnds.Add(this);
+            c.PIMAssociationEnds.Add(this);
+            PIMClass = c;
+        }
+        public PIMAssociationEnd(Project p, PIMAssociation a, PIMSchema schema)
+            : base(p)
+        {
+            schema.PIMAssociationEnds.Add(this);
+            a.PIMAssociationEnds.Add(this);
+            PIMAssociation = a;
+        }
+        public PIMAssociationEnd(Project p, Guid g, PIMAssociation a, PIMSchema schema)
+            : base(p, g)
+        {
+            schema.PIMAssociationEnds.Add(this);
+            a.PIMAssociationEnds.Add(this);
+            PIMAssociation = a;
+        }
+        public PIMAssociationEnd(Project p, PIMClass c, PIMAssociation a, PIMSchema schema)
+            : base(p)
+        {
+            schema.PIMAssociationEnds.Add(this);
+            c.PIMAssociationEnds.Add(this);
+            a.PIMAssociationEnds.Add(this);
+            PIMClass = c;
+            PIMAssociation = a;
+        }
+        public PIMAssociationEnd(Project p, Guid g, PIMClass c, PIMAssociation a, PIMSchema schema)
+            : base(p, g)
+        {
+            schema.PIMAssociationEnds.Add(this);
+            c.PIMAssociationEnds.Add(this);
+            a.PIMAssociationEnds.Add(this);
+            PIMClass = c;
+            PIMAssociation = a;
+        }
+        #endregion
+
+        #region IHasCardinality Members
+
+        private uint lower;
+
+        public uint Lower
+        {
+            get { return lower; }
+            set
+            {
+                lower = value;
+                NotifyPropertyChanged("Lower");
+                NotifyPropertyChanged("CardinalityString");
+            }
+        }
+
+        private UnlimitedInt upper;
+
+        public UnlimitedInt Upper
+        {
+            get { return upper; }
+            set { upper = value; NotifyPropertyChanged("Upper"); }
+        }
+
+        public string CardinalityString
+        {
+            get { return this.GetCardinalityString(); }
+        }
+
+        #endregion
+
+        private Guid pimClassGuid;
+
+        public PIMClass PIMClass
+        {
+            get { return Project.TranslateComponent<PIMClass>(pimClassGuid); }
+            set { pimClassGuid = value; NotifyPropertyChanged("PIMClass"); }
+        }
+
+        private Guid pimAssociationGuid;
+
+        public PIMAssociation PIMAssociation
+        {
+            get { return Project.TranslateComponent<PIMAssociation>(pimAssociationGuid); }
+            set { pimAssociationGuid = value; NotifyPropertyChanged("PIMAssociation"); }
+        }
+
+        #region Implementation of IEvoXSerializable
+
+        public override void Serialize(XElement parentNode, SerializationContext context)
+        {
+            base.Serialize(parentNode, context);
+            this.SerializeIDRef(PIMClass, "refPIMClassID", parentNode, context);
+            this.SerializeIDRef(PIMAssociation, "refPIMAssociationID", parentNode, context);
+            this.SerializeCardinality(parentNode, context);
+        }
+
+        public override void Deserialize(XElement parentNode, SerializationContext context)
+        {
+            base.Deserialize(parentNode, context);
+            pimClassGuid = this.DeserializeIDRef("refPIMClassID", parentNode, context);
+            pimAssociationGuid = this.DeserializeIDRef("refPIMAssociationID", parentNode, context);
+            this.DeserializeCardinality(parentNode, context);
+            this.PIMSchema.PIMAssociationEnds.Add(this);
+        }
+        public static PIMAssociationEnd CreateInstance(Project project)
+        {
+            return new PIMAssociationEnd(project, Guid.Empty);
+        }
+
+        #endregion
+
+        public override string ToString()
+        {
+            string s = "PIMAssociationEnd: ";
+            if (Name != null) s += "\"" + Name + "\" ";
+            s += lower + ".." + Upper + " ";
+            if (pimClassGuid != Guid.Empty && PIMClass.Name != null) s += "C: " + PIMClass.Name + " ";
+            if (pimAssociationGuid != Guid.Empty && PIMAssociation.Name != null) s += "A: " + PIMAssociation.Name + " ";
+            return s;
+        }
+
+        #region Implementation of IEvoXCloneable
+
+        public override IEvoXCloneable Clone(ProjectVersion projectVersion, ElementCopiesMap createdCopies)
+        {
+            return new PIMAssociationEnd(projectVersion.Project, createdCopies.SuggestGuid(this));
+        }
+
+        public override void FillCopy(IEvoXCloneable copyComponent, ProjectVersion projectVersion,
+                                      ElementCopiesMap createdCopies)
+        {
+            base.FillCopy(copyComponent, projectVersion, createdCopies);
+
+            PIMAssociationEnd copyPIMAssociationEnd = (PIMAssociationEnd)copyComponent;
+            copyPIMAssociationEnd.Lower = this.Lower;
+            copyPIMAssociationEnd.Upper = this.Upper;
+            copyPIMAssociationEnd.pimClassGuid = createdCopies.GetGuidForCopyOf(PIMClass);
+            copyPIMAssociationEnd.pimAssociationGuid = createdCopies.GetGuidForCopyOf(PIMAssociation);
+        }
+
+        #endregion
+    }
+}

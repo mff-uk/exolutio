@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!--This file represents the results of running a test suite-->
+<test-results name="D:\Programování\EvoX\Tests\tests.nunit" total="37" errors="0" failures="6" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2010-11-02" time="12:22:02">
+  <environment nunit-version="2.5.8.10295" clr-version="2.0.50727.4952" os-version="Microsoft Windows NT 6.1.7600.0" platform="Win32NT" cwd="D:\Programování\EvoX\Tests\bin\Debug" machine-name="TRUPIK" user="Jakub" user-domain="Trupik" />
+  <culture-info current-culture="cs-CZ" current-uiculture="en-US" />
+  <test-suite type="Project" name="D:\Programování\EvoX\Tests\tests.nunit" executed="True" result="Failure" success="False" time="0.423" asserts="0">
+    <results>
+      <test-suite type="Assembly" name="D:\Programování\EvoX\Tests\bin\Debug\Tests.dll" executed="True" result="Failure" success="False" time="0.407" asserts="0">
+        <results>
+          <test-suite type="Namespace" name="Tests" executed="True" result="Failure" success="False" time="0.399" asserts="0">
+            <results>
+              <test-suite type="Namespace" name="CodeTests" executed="True" result="Failure" success="False" time="0.390" asserts="0">
+                <results>
+                  <test-suite type="TestFixture" name="CommandReportTest" executed="True" result="Failure" success="False" time="0.370" asserts="2">
+                    <results>
+                      <test-suite type="ParameterizedTest" name="TestCommandResult" executed="True" result="Failure" success="False" time="0.310" asserts="0">
+                        <results>
+                          <test-case name="Tests.CodeTests.CommandReportTest.TestCommandResult(&quot;D:\\Programov\x00E1n\x00ED\\EvoX\\Controller\\Commands\\Atomic\\acmdRenameComponent.cs&quot;)" executed="True" result="Success" success="True" time="0.010" asserts="0" />
+                          <test-case name="Tests.CodeTests.CommandReportTest.TestCommandResult(&quot;D:\\Programov\x00E1n\x00ED\\EvoX\\Controller\\Commands\\Atomic\\PIM\\acmdDeletePIMAssociation.cs&quot;)" executed="True" result="Success" success="True" time="0.003" asserts="0" />
+                          <test-case name="Tests.CodeTests.CommandReportTest.TestCommandResult(&quot;D:\\Programov\x00E1n\x00ED\\EvoX\\Controller\\Commands\\Atomic\\PIM\\acmdDeletePIMAttribute.cs&quot;)" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                          <test-case name="Tests.CodeTests.CommandReportTest.TestCommandResult(&quot;D:\\Programov\x00E1n\x00ED\\EvoX\\Controller\\Commands\\Atomic\\PIM\\acmdDeletePIMClass.cs&quot;)" executed="True" result="Success" success="True" time="0.003" asserts="0" />
+                          <test-case name="Tests.CodeTests.CommandReportTest.TestCommandResult(&quot;D:\\Programov\x00E1n\x00ED\\EvoX\\Controller\\Commands\\Atomic\\PIM\\acmdMoveAssociationEnd.cs&quot;)" executed="True" result="Success" success="True" time="0.003" asserts="0" />
+                          <test-case name="Tests.CodeTests.CommandReportTest.TestCommandResult(&quot;D:\\Programov\x00E1n\x00ED\\EvoX\\Controller\\Commands\\Atomic\\PIM\\acmdMovePIMAttribute.cs&quot;)" executed="True" result="Success" success="True" time="0.003" asserts="0" />
+                          <test-case name="Tests.CodeTests.CommandReportTest.TestCommandResult(&quot;D:\\Programov\x00E1n\x00ED\\EvoX\\Controller\\Commands\\Atomic\\PIM\\acmdNewPIMAssociation.cs&quot;)" executed="True" result="Success" success="True" time="0.003" asserts="0" />
+                          <test-case name="Tests.CodeTests.CommandReportTest.TestCommandResult(&quot;D:\\Programov\x00E1n\x00ED\\EvoX\\Controller\\Commands\\Atomic\\PIM\\acmdNewPIMAttribute.cs&quot;)" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                          <test-case name="Tests.CodeTests.CommandReportTest.TestCommandResult(&quot;D:\\Programov\x00E1n\x00ED\\EvoX\\Controller\\Commands\\Atomic\\PIM\\acmdNewPIMClass.cs&quot;)" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                          <test-case name="Tests.CodeTests.CommandReportTest.TestCommandResult(&quot;D:\\Programov\x00E1n\x00ED\\EvoX\\Controller\\Commands\\Atomic\\PIM\\acmdSynchroPIMAssociations.cs&quot;)" executed="True" result="Failure" success="False" time="0.008" asserts="0">
+                            <failure>
+                              <message><![CDATA[Command report not set in acmdSynchroPIMAssociations .]]></message>
+                              <stack-trace><![CDATA[at Tests.CodeTests.CommandReportTest.TestCommandResult(Object fileName) in D:\Programování\EvoX\Tests\CodeTests\CommandReportTest.cs:line 93
+]]></stack-trace>
+                            </failure>
+                          </test-case>
+                          <test-case name="Tests.CodeTests.CommandReportTest.TestCommandResult(&quot;D:\\Programov\x00E1n\x00ED\\EvoX\\Controller\\Commands\\Atomic\\PIM\\acmdSynchroPIMAttributes.cs&quot;)" executed="True" result="Failure" success="False" time="0.000" asserts="0">
+                            <failure>
+                              <message><![CDATA[Command report not set in acmdSynchroPIMAttributes .]]></message>
+                              <stack-trace><![CDATA[at Tests.CodeTests.CommandReportTest.TestCommandResult(Object fileName) in D:\Programování\EvoX\Tests\CodeTests\CommandReportTest.cs:line 93
+]]></stack-trace>
+                            </failure>
+                          </test-case>
+                          <test-case name="Tests.CodeTests.CommandReportTest.TestCommandResult(&quot;D:\\Programov\x00E1n\x00ED\\EvoX\\Controller\\Commands\\Atomic\\PIM\\acmdUpdatePIMAssociationEndCardinality.cs&quot;)" executed="True" result="Success" success="True" time="0.003" asserts="0" />
+                          <test-case name="Tests.CodeTests.CommandReportTest.TestCommandResult(&quot;D:\\Programov\x00E1n\x00ED\\EvoX\\Controller\\Commands\\Atomic\\PIM\\acmdUpdatePIMAttributeCardinality.cs&quot;)" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                          <test-case name="Tests.CodeTests.CommandReportTest.TestCommandResult(&quot;D:\\Programov\x00E1n\x00ED\\EvoX\\Controller\\Commands\\Atomic\\PIM\\acmdUpdatePIMAttributeType.cs&quot;)" executed="True" result="Success" success="True" time="0.003" asserts="0" />
+                          <test-case name="Tests.CodeTests.CommandReportTest.TestCommandResult(&quot;D:\\Programov\x00E1n\x00ED\\EvoX\\Controller\\Commands\\Atomic\\PSM\\acmdAddPSMClassToRoots.cs&quot;)" executed="True" result="Success" success="True" time="0.003" asserts="0" />
+                          <test-case name="Tests.CodeTests.CommandReportTest.TestCommandResult(&quot;D:\\Programov\x00E1n\x00ED\\EvoX\\Controller\\Commands\\Atomic\\PSM\\acmdDeletePSMAssociation.cs&quot;)" executed="True" result="Success" success="True" time="0.003" asserts="0" />
+                          <test-case name="Tests.CodeTests.CommandReportTest.TestCommandResult(&quot;D:\\Programov\x00E1n\x00ED\\EvoX\\Controller\\Commands\\Atomic\\PSM\\acmdDeletePSMAttribute.cs&quot;)" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                          <test-case name="Tests.CodeTests.CommandReportTest.TestCommandResult(&quot;D:\\Programov\x00E1n\x00ED\\EvoX\\Controller\\Commands\\Atomic\\PSM\\acmdDeletePSMClass.cs&quot;)" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                          <test-case name="Tests.CodeTests.CommandReportTest.TestCommandResult(&quot;D:\\Programov\x00E1n\x00ED\\EvoX\\Controller\\Commands\\Atomic\\PSM\\acmdDeletePSMContentModel.cs&quot;)" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                          <test-case name="Tests.CodeTests.CommandReportTest.TestCommandResult(&quot;D:\\Programov\x00E1n\x00ED\\EvoX\\Controller\\Commands\\Atomic\\PSM\\acmdDeletePSMSchema.cs&quot;)" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                          <test-case name="Tests.CodeTests.CommandReportTest.TestCommandResult(&quot;D:\\Programov\x00E1n\x00ED\\EvoX\\Controller\\Commands\\Atomic\\PSM\\acmdMovePSMAttribute.cs&quot;)" executed="True" result="Success" success="True" time="0.003" asserts="0" />
+                          <test-case name="Tests.CodeTests.CommandReportTest.TestCommandResult(&quot;D:\\Programov\x00E1n\x00ED\\EvoX\\Controller\\Commands\\Atomic\\PSM\\acmdNewPSMAssociation.cs&quot;)" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                          <test-case name="Tests.CodeTests.CommandReportTest.TestCommandResult(&quot;D:\\Programov\x00E1n\x00ED\\EvoX\\Controller\\Commands\\Atomic\\PSM\\acmdNewPSMAttribute.cs&quot;)" executed="True" result="Success" success="True" time="0.003" asserts="0" />
+                          <test-case name="Tests.CodeTests.CommandReportTest.TestCommandResult(&quot;D:\\Programov\x00E1n\x00ED\\EvoX\\Controller\\Commands\\Atomic\\PSM\\acmdNewPSMClass.cs&quot;)" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                          <test-case name="Tests.CodeTests.CommandReportTest.TestCommandResult(&quot;D:\\Programov\x00E1n\x00ED\\EvoX\\Controller\\Commands\\Atomic\\PSM\\acmdNewPSMContentModel.cs&quot;)" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                          <test-case name="Tests.CodeTests.CommandReportTest.TestCommandResult(&quot;D:\\Programov\x00E1n\x00ED\\EvoX\\Controller\\Commands\\Atomic\\PSM\\acmdNewPSMSchema.cs&quot;)" executed="True" result="Success" success="True" time="0.003" asserts="0" />
+                          <test-case name="Tests.CodeTests.CommandReportTest.TestCommandResult(&quot;D:\\Programov\x00E1n\x00ED\\EvoX\\Controller\\Commands\\Atomic\\PSM\\acmdReconnectPSMAssociation.cs&quot;)" executed="True" result="Failure" success="False" time="0.003" asserts="0">
+                            <failure>
+                              <message><![CDATA[Command report not set in acmdReconnectPSMAssociation .]]></message>
+                              <stack-trace><![CDATA[at Tests.CodeTests.CommandReportTest.TestCommandResult(Object fileName) in D:\Programování\EvoX\Tests\CodeTests\CommandReportTest.cs:line 93
+]]></stack-trace>
+                            </failure>
+                          </test-case>
+                          <test-case name="Tests.CodeTests.CommandReportTest.TestCommandResult(&quot;D:\\Programov\x00E1n\x00ED\\EvoX\\Controller\\Commands\\Atomic\\PSM\\acmdRemovePSMClassFromRoots.cs&quot;)" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                          <test-case name="Tests.CodeTests.CommandReportTest.TestCommandResult(&quot;D:\\Programov\x00E1n\x00ED\\EvoX\\Controller\\Commands\\Atomic\\PSM\\acmdSetInterpretation.cs&quot;)" executed="True" result="Success" success="True" time="0.003" asserts="0" />
+                          <test-case name="Tests.CodeTests.CommandReportTest.TestCommandResult(&quot;D:\\Programov\x00E1n\x00ED\\EvoX\\Controller\\Commands\\Atomic\\PSM\\acmdShiftPSMAssociation.cs&quot;)" executed="True" result="Failure" success="False" time="0.003" asserts="0">
+                            <failure>
+                              <message><![CDATA[Command report not set in acmdShiftPSMAssociation .]]></message>
+                              <stack-trace><![CDATA[at Tests.CodeTests.CommandReportTest.TestCommandResult(Object fileName) in D:\Programování\EvoX\Tests\CodeTests\CommandReportTest.cs:line 93
+]]></stack-trace>
+                            </failure>
+                          </test-case>
+                          <test-case name="Tests.CodeTests.CommandReportTest.TestCommandResult(&quot;D:\\Programov\x00E1n\x00ED\\EvoX\\Controller\\Commands\\Atomic\\PSM\\acmdSynchroPSMAssociations.cs&quot;)" executed="True" result="Failure" success="False" time="0.003" asserts="0">
+                            <failure>
+                              <message><![CDATA[Command report not set in acmdSynchroPSMAssociations .]]></message>
+                              <stack-trace><![CDATA[at Tests.CodeTests.CommandReportTest.TestCommandResult(Object fileName) in D:\Programování\EvoX\Tests\CodeTests\CommandReportTest.cs:line 93
+]]></stack-trace>
+                            </failure>
+                          </test-case>
+                          <test-case name="Tests.CodeTests.CommandReportTest.TestCommandResult(&quot;D:\\Programov\x00E1n\x00ED\\EvoX\\Controller\\Commands\\Atomic\\PSM\\acmdSynchroPSMAttributes.cs&quot;)" executed="True" result="Failure" success="False" time="0.003" asserts="0">
+                            <failure>
+                              <message><![CDATA[Command report not set in acmdSynchroPSMAttributes .]]></message>
+                              <stack-trace><![CDATA[at Tests.CodeTests.CommandReportTest.TestCommandResult(Object fileName) in D:\Programování\EvoX\Tests\CodeTests\CommandReportTest.cs:line 93
+]]></stack-trace>
+                            </failure>
+                          </test-case>
+                          <test-case name="Tests.CodeTests.CommandReportTest.TestCommandResult(&quot;D:\\Programov\x00E1n\x00ED\\EvoX\\Controller\\Commands\\Atomic\\PSM\\acmdUpdatePSMAssociationCardinality.cs&quot;)" executed="True" result="Success" success="True" time="0.003" asserts="0" />
+                          <test-case name="Tests.CodeTests.CommandReportTest.TestCommandResult(&quot;D:\\Programov\x00E1n\x00ED\\EvoX\\Controller\\Commands\\Atomic\\PSM\\acmdUpdatePSMAttributeCardinality.cs&quot;)" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                          <test-case name="Tests.CodeTests.CommandReportTest.TestCommandResult(&quot;D:\\Programov\x00E1n\x00ED\\EvoX\\Controller\\Commands\\Atomic\\PSM\\acmdUpdatePSMAttributeType.cs&quot;)" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                          <test-case name="Tests.CodeTests.CommandReportTest.TestCommandResult(&quot;D:\\Programov\x00E1n\x00ED\\EvoX\\Controller\\Commands\\Atomic\\PSM\\acmdUpdatePSMAttributeXForm.cs&quot;)" executed="True" result="Success" success="True" time="0.003" asserts="0" />
+                          <test-case name="Tests.CodeTests.CommandReportTest.TestCommandResult(&quot;D:\\Programov\x00E1n\x00ED\\EvoX\\Controller\\Commands\\Base\\MacroCommand.cs&quot;)" executed="True" result="Success" success="True" time="0.003" asserts="0" />
+                        </results>
+                      </test-suite>
+                    </results>
+                  </test-suite>
+                </results>
+              </test-suite>
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+    </results>
+  </test-suite>
+</test-results>
