@@ -1,0 +1,14 @@
+﻿/* CSS Document for XRG for IE6 */
+#topbox {
+  border-width: 0px;
+}
+#content {
+  border-width: 3px 0px 0px 0px;
+  border-style: double;
+  top: -320px;
+  left: -13px;
+  padding-left: 26px;
+}
+#nav {
+  border-width: 3px 3px 0px 0px;
+}
