@@ -1,0 +1,245 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{AA189B65-9AE0-4B5F-9575-AD121B753309}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EvoX.Model</RootNamespace>
+    <AssemblyName>EvoX.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Component.cs" />
+    <Compile Include="ComponentList.cs" />
+    <Compile Include="ComponentMappingDictionary.cs" />
+    <Compile Include="Diagram.cs" />
+    <Compile Include="EvoXVersionedObject.cs" />
+    <Compile Include="EvoXVersionedObjectNotAPartOfSchema.cs" />
+    <Compile Include="ModelWorkerWithInheritance.cs" />
+    <Compile Include="EvoXObject.cs" />
+    <Compile Include="ModelIterator.cs" />
+    <Compile Include="ModelVerifier.cs" />
+    <Compile Include="ModelWorker.cs" />
+    <Compile Include="OCL\SupportingClasses\ActionDictionary.cs" />
+    <Compile Include="OCL\SupportingClasses\ActionList.cs" />
+    <Compile Include="OCL\TypesTable\TypeRecord.cs" />
+    <Compile Include="OCL\TypesTable\TypesTable.cs" />
+    <Compile Include="OCL\Types\AssociationClass.cs" />
+    <Compile Include="OCL\AST\AssociationClassCallExp.cs" />
+    <Compile Include="OCL\AST\CallExp.cs" />
+    <Compile Include="OCL\Types\AnyType.cs" />
+    <Compile Include="OCL\Types\BagType.cs" />
+    <Compile Include="OCL\Types\Class.cs" />
+    <Compile Include="OCL\Types\Classifier.cs" />
+    <Compile Include="OCL\AST\FeatureCallExp.cs" />
+    <Compile Include="OCL\AST\IfExp.cs" />
+    <Compile Include="OCL\AST\IterateExp.cs" />
+    <Compile Include="OCL\AST\IteratorExp.cs" />
+    <Compile Include="OCL\AST\LetExp.cs" />
+    <Compile Include="OCL\AST\Literal\BooleanLiteralExp.cs" />
+    <Compile Include="OCL\AST\Literal\CollectionItem.cs" />
+    <Compile Include="OCL\CollectionKind.cs" />
+    <Compile Include="OCL\AST\Literal\CollectionLiteralExp.cs" />
+    <Compile Include="OCL\AST\Literal\CollectionLiteralPart.cs" />
+    <Compile Include="OCL\AST\Literal\CollectionRange.cs" />
+    <Compile Include="OCL\AST\Literal\EnumLiteral.cs" />
+    <Compile Include="OCL\AST\Literal\EnumLiteralExp.cs" />
+    <Compile Include="OCL\AST\Literal\IntegerLiteralExp.cs" />
+    <Compile Include="OCL\AST\Literal\InvalidLiteralExp.cs" />
+    <Compile Include="OCL\AST\Literal\LiteralExp.cs" />
+    <Compile Include="OCL\AST\Literal\NullLiteralExp.cs" />
+    <Compile Include="OCL\AST\Literal\NumericLiteralExp.cs" />
+    <Compile Include="OCL\AST\Literal\PrimitiveLiteralExp.cs" />
+    <Compile Include="OCL\AST\Literal\RealLiteralExp.cs" />
+    <Compile Include="OCL\AST\Literal\StringLiteralExp.cs" />
+    <Compile Include="OCL\AST\Literal\TupleLiteralExp.cs" />
+    <Compile Include="OCL\AST\Literal\TupleLiteralPart.cs" />
+    <Compile Include="OCL\AST\Literal\UnlimitedNaturalLiteralExp.cs" />
+    <Compile Include="OCL\AST\LoopExp.cs" />
+    <Compile Include="OCL\AST\MessageExp.cs" />
+    <Compile Include="OCL\AST\NavigationCallExp.cs" />
+    <Compile Include="OCL\AST\OclExpression.cs" />
+    <Compile Include="OCL\Types\ICompositeType.cs" />
+    <Compile Include="OCL\Types\IConformsToComposite.cs" />
+    <Compile Include="OCL\Types\IHasOwner.cs" />
+    <Compile Include="OCL\Types\ModelElement.cs" />
+    <Compile Include="OCL\Types\Namespace.cs" />
+    <Compile Include="OCL\Types\NestedElemetCollection.cs" />
+    <Compile Include="OCL\Types\NonCompositeType.cs" />
+    <Compile Include="OCL\Types\Operation.cs" />
+    <Compile Include="OCL\AST\OperationCallExp.cs" />
+    <Compile Include="OCL\Types\OperationCollection.cs" />
+    <Compile Include="OCL\Types\Parameter.cs" />
+    <Compile Include="OCL\Types\ParameterCollection.cs" />
+    <Compile Include="OCL\Types\PrimitiveType\BooleanType.cs" />
+    <Compile Include="OCL\Types\PrimitiveType\IntegerType.cs" />
+    <Compile Include="OCL\Types\PrimitiveType\RealType.cs" />
+    <Compile Include="OCL\Types\PrimitiveType\StringType.cs" />
+    <Compile Include="OCL\Types\PrimitiveType\UnlimitedNaturalType.cs" />
+    <Compile Include="OCL\Types\Property.cs" />
+    <Compile Include="OCL\AST\PropertyCallExp.cs" />
+    <Compile Include="OCL\AST\StateExp.cs" />
+    <Compile Include="OCL\AST\TypedElement.cs" />
+    <Compile Include="OCL\AST\TypeExp.cs" />
+    <Compile Include="OCL\AST\Variable.cs" />
+    <Compile Include="OCL\AST\VariableExp.cs" />
+    <Compile Include="OCL\OCLScript.cs" />
+    <Compile Include="OCL\Types\CollectionType.cs" />
+    <Compile Include="OCL\Types\DataType.cs" />
+    <Compile Include="OCL\Types\InvalidType.cs" />
+    <Compile Include="OCL\Types\MessageType.cs" />
+    <Compile Include="OCL\Types\OrderedSetType.cs" />
+    <Compile Include="OCL\Types\PrimitiveType.cs" />
+    <Compile Include="OCL\Types\PropertyCollection.cs" />
+    <Compile Include="OCL\Types\PropertyType.cs" />
+    <Compile Include="OCL\Types\SequenceType.cs" />
+    <Compile Include="OCL\Types\SetType.cs" />
+    <Compile Include="OCL\Types\TemplateParameterType.cs" />
+    <Compile Include="OCL\Types\TupleType.cs" />
+    <Compile Include="OCL\Types\VariableDeclaration.cs" />
+    <Compile Include="OCL\Types\VoidType.cs" />
+    <Compile Include="PIM\PIMDiagram.cs" />
+    <Compile Include="PSM\IPSMSemanticComponent.cs" />
+    <Compile Include="PSM\PSMContentModelType.cs" />
+    <Compile Include="PSM\PSMDiagram.cs" />
+    <Compile Include="PSM\PSMSchemaReference.cs" />
+    <Compile Include="Serialization\IEvoXSerializable.cs" />
+    <Compile Include="Serialization\SerializationContext.cs" />
+    <Compile Include="Serialization\SerializationLogMessages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SerializationLogMessages.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UndirectCollection.cs" />
+    <Compile Include="UnlimitedInt.cs" />
+    <Compile Include="Versioning\IVersionedItem.cs" />
+    <Compile Include="Versioning\IEvoXCloneable.cs" />
+    <Compile Include="Versioning\ElementCopiesMap.cs" />
+    <Compile Include="EvoXModelException.cs" />
+    <Compile Include="ProjectVersion.cs" />
+    <Compile Include="Resources\Exceptions.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Exceptions.resx</DependentUpon>
+    </Compile>
+    <Compile Include="IHasCardinality.cs" />
+    <Compile Include="PIM\PIMAssociation.cs" />
+    <Compile Include="PIM\PIMAssociationEnd.cs" />
+    <Compile Include="PIM\PIMAttribute.cs" />
+    <Compile Include="PIM\PIMClass.cs" />
+    <Compile Include="PIM\PIMComponent.cs" />
+    <Compile Include="PIM\PIMSchema.cs" />
+    <Compile Include="Project.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="PSM\PSMAssociation.cs" />
+    <Compile Include="PSM\PSMAssociationMember.cs" />
+    <Compile Include="PSM\PSMAttribute.cs" />
+    <Compile Include="PSM\PSMClass.cs" />
+    <Compile Include="PSM\PSMComponent.cs" />
+    <Compile Include="PSM\PSMContentModel.cs" />
+    <Compile Include="PSM\PSMSchema.cs" />
+    <Compile Include="PSM\PSMSchemaClass.cs" />
+    <Compile Include="Schema.cs" />
+    <Compile Include="Serialization\ProjectSerializationManager.cs" />
+    <Compile Include="AttributeType.cs" />
+    <Compile Include="Versioning\Version.cs" />
+    <Compile Include="Versioning\VersionManager.cs" />
+    <Compile Include="ViewHelper\PSMSchemaClassViewHelper.cs" />
+    <Compile Include="ViewHelper\PSMContentModelViewHelper.cs" />
+    <Compile Include="ViewHelper\PSMClassViewHelper.cs" />
+    <Compile Include="ViewHelper\PSMAssociationViewHelper.cs" />
+    <Compile Include="ViewHelper\IComponentViewHelper.cs" />
+    <Compile Include="ViewHelper\PIMAssociationEndViewHelper.cs" />
+    <Compile Include="ViewHelper\LabelViewHelper.cs" />
+    <Compile Include="ViewHelper\PIMAssociationViewHelper.cs" />
+    <Compile Include="ViewHelper\ConnectionViewHelper.cs" />
+    <Compile Include="ViewHelper\PIMClassViewHelper.cs" />
+    <Compile Include="ViewHelper\PositionableElementViewHelper.cs" />
+    <Compile Include="ViewHelper\ViewHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SupportingClasses\SupportingClasses.csproj">
+      <Project>{AE8E2F66-03CF-44A5-8564-A32906F7F041}</Project>
+      <Name>SupportingClasses</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Model.cd" />
+    <None Include="ObjectOwnership.cd" />
+    <None Include="OCL\AST\AST.cd" />
+    <None Include="OCL\AST\Literal.cd" />
+    <None Include="OCL\Grammar\ocl.g" />
+    <None Include="OCL\Types\TypeSystem.cd" />
+    <None Include="Versioning\Versioning.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Exceptions.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Exceptions.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Serialization\SerializationLogMessages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SerializationLogMessages.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

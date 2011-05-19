@@ -1,0 +1,219 @@
+﻿<UserControl x:Class="SilverlightClient.Resources.EvoXRibbon"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:toolkit="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Toolkit" xmlns:windowsToolbar="clr-namespace:Windows.Toolbar.Controls;assembly=Windows.Toolbar" mc:Ignorable="d"
+    d:DesignHeight="98" d:DesignWidth="1184">
+	<StackPanel Orientation="Horizontal" toolkit:DockPanel.Dock="Top" Background="#FFD3E0F0">
+		<windowsToolbar:ToolbarGroup Footer="Help" VerticalContentAlignment="Top" Width="75">
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition />
+					<RowDefinition />
+					<RowDefinition />
+				</Grid.RowDefinitions>
+
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition />                    
+				</Grid.ColumnDefinitions>
+
+				<windowsToolbar:ToolbarButton Name="bHelp" Grid.RowSpan="3" Padding="4,4,4,0" HorizontalAlignment="Center" Width="64">
+					<StackPanel>
+						<Image Source="/EvoX.ResourceLibrary;component/Images/question_mark.png" Height="32"/>
+						<TextBlock Foreground="Black" Text="Basic info/help" TextWrapping="Wrap" HorizontalAlignment="Center" TextAlignment="Center"/>
+					</StackPanel>
+				</windowsToolbar:ToolbarButton>
+			</Grid>
+		</windowsToolbar:ToolbarGroup>
+		<windowsToolbar:ToolbarGroup Footer="Project" VerticalContentAlignment="Top">
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition />
+					<RowDefinition />
+					<!--<RowDefinition />-->
+				</Grid.RowDefinitions>
+
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+				</Grid.ColumnDefinitions>
+
+				<windowsToolbar:ToolbarButton Name="bNew" Grid.RowSpan="3" Padding="4,4,4,0" HorizontalAlignment="Center" VerticalContentAlignment="Top">
+					<StackPanel>
+						<Image Source="/EvoX.ResourceLibrary;component/Images/GenericDocument.png" Height="32"/>
+						<TextBlock Foreground="Black" Text="New" HorizontalAlignment="Center" />
+					</StackPanel>
+				</windowsToolbar:ToolbarButton>
+
+				<windowsToolbar:ToolbarButton Grid.RowSpan="3" Grid.Column="1" Padding="4,4,4,0" HorizontalAlignment="Center" Name="bOpenWeb" VerticalContentAlignment="Top">
+					<StackPanel Width="63">
+						<Image Source="/EvoX.ResourceLibrary;component/Images/FolderDownload.png" Height="32" Stretch="Uniform" />
+						<TextBlock Foreground="Black" Text="Open web project" HorizontalAlignment="Center" TextWrapping="Wrap"  TextAlignment="Center" />
+					</StackPanel>
+				</windowsToolbar:ToolbarButton>
+
+				<windowsToolbar:ToolbarButton Grid.Column="2" Height="22" HorizontalAlignment="Left" Name="bOpen">
+					<StackPanel Orientation="Horizontal">
+						<Image Source="/EvoX.ResourceLibrary;component/Images/OpenFolder.png" />
+						<TextBlock Foreground="Black" Text="Open local project" Margin="2,0,0,0" />
+					</StackPanel>
+				</windowsToolbar:ToolbarButton>
+
+				<windowsToolbar:ToolbarButton Grid.Row="1" Grid.Column="2" Height="22" HorizontalAlignment="Left" Name="bSaveToClient" >
+					<StackPanel Orientation="Horizontal">
+						<Image Source="/EvoX.ResourceLibrary;component/Images/save.png" />
+						<TextBlock Foreground="Black" Text="Save project to file" Margin="2,0,0,0" />
+					</StackPanel>
+				</windowsToolbar:ToolbarButton>
+
+				<!--<windowsToolbar:ToolbarButton Grid.Row="2" Grid.Column="2" Height="22" HorizontalAlignment="Left" Visibility="Collapsed" >
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/EvoX.ResourceLibrary;component/Images/OpenFolder.png" />
+                        <TextBlock Foreground="Black" Text="Open local file" Margin="2,0,0,0" />
+                    </StackPanel>
+                </windowsToolbar:ToolbarButton>-->
+			</Grid>
+		</windowsToolbar:ToolbarGroup>
+		<windowsToolbar:ToolbarGroup Footer="Edit" VerticalContentAlignment="Top">
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition />
+					<RowDefinition />
+					<RowDefinition />
+				</Grid.RowDefinitions>
+
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+				</Grid.ColumnDefinitions>
+
+				<windowsToolbar:ToolbarButton Name="bUndo" Grid.RowSpan="3" Padding="4,4,4,0" HorizontalAlignment="Center">
+					<StackPanel>
+						<Image Source="/EvoX.ResourceLibrary;component/Images/undo.png" Height="32"/>
+						<TextBlock Foreground="Black" Text="Undo" HorizontalAlignment="Center" />
+					</StackPanel>
+				</windowsToolbar:ToolbarButton>
+
+				<windowsToolbar:ToolbarButton Grid.RowSpan="3" Grid.Column="1" Padding="4,4,4,0" HorizontalAlignment="Center" Name="bRedo" >
+					<StackPanel>
+						<Image Source="/EvoX.ResourceLibrary;component/Images/redo.png" Height="32"/>
+						<TextBlock Foreground="Black" Text="Redo" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" />
+					</StackPanel>
+				</windowsToolbar:ToolbarButton>
+			</Grid>
+		</windowsToolbar:ToolbarGroup>
+		<windowsToolbar:ToolbarGroup Footer="Grammar" Padding="0,0,0,0" Name="gGrammar" Visibility="Collapsed">
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition />
+					<RowDefinition />
+					<RowDefinition />
+				</Grid.RowDefinitions>
+				<windowsToolbar:ToolbarButton Grid.Column="0" Grid.RowSpan="3" HorizontalAlignment="Center" Name="bVerifyNormalized" Padding="4,4,4,0" VerticalContentAlignment="Top">
+					<StackPanel Width="81">
+						<Image Height="32" Source="/EvoX.ResourceLibrary;component/Images/component_preferences.png" />
+						<TextBlock Foreground="Black" HorizontalAlignment="Center" Text="Verify normalization" TextAlignment="Center" TextWrapping="Wrap" />
+					</StackPanel>
+				</windowsToolbar:ToolbarButton>
+				<windowsToolbar:ToolbarButton Grid.Column="1" Grid.RowSpan="3" HorizontalAlignment="Center" Name="bNormalize" Padding="4,4,4,0" VerticalContentAlignment="Top">
+					<StackPanel Width="57">
+						<Image Height="32" Source="/EvoX.ResourceLibrary;component/Images/component_edit.png" />
+						<TextBlock Foreground="Black" HorizontalAlignment="Center" Text="Normalize schema" TextWrapping="Wrap" TextAlignment="Center" />
+					</StackPanel>
+				</windowsToolbar:ToolbarButton>
+				<windowsToolbar:ToolbarButton Grid.Column="2" Grid.RowSpan="3" HorizontalAlignment="Center" Name="bGenerateGrammar" Padding="4,4,4,0" VerticalContentAlignment="Top">
+					<StackPanel Width="57">
+						<Image Height="32" Source="/EvoX.ResourceLibrary;component/Images/component_new.png" />
+						<TextBlock Foreground="Black" HorizontalAlignment="Center" Text="Generate grammar" TextWrapping="Wrap" TextAlignment="Center" />
+					</StackPanel>
+				</windowsToolbar:ToolbarButton>
+			</Grid>
+		</windowsToolbar:ToolbarGroup>
+		<windowsToolbar:ToolbarGroup Footer="PIM components" Padding="0,0,0,0" Name="gPIM">
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition />
+					<RowDefinition />
+					<RowDefinition />
+				</Grid.RowDefinitions>
+				<windowsToolbar:ToolbarButton Grid.Column="0" Grid.RowSpan="3" HorizontalAlignment="Center" Name="bPIMClass" Padding="4,4,4,0" VerticalContentAlignment="Top">
+					<StackPanel Width="54">
+						<Image Height="32" Source="/EvoX.ResourceLibrary;component/Images/class.png" />
+						<TextBlock Foreground="Black" HorizontalAlignment="Center" Text="Add class" TextAlignment="Center" TextWrapping="Wrap" />
+					</StackPanel>
+				</windowsToolbar:ToolbarButton>
+				<windowsToolbar:ToolbarButton Grid.Column="1" Grid.RowSpan="3" HorizontalAlignment="Center" Name="bPIMAssociation" Padding="4,4,4,0" VerticalContentAlignment="Top">
+					<StackPanel Width="67">
+						<Image Height="32" Source="/EvoX.ResourceLibrary;component/Images/assocclass.png" />
+						<TextBlock Foreground="Black" HorizontalAlignment="Center" Text="Add association" TextWrapping="Wrap" TextAlignment="Center" />
+					</StackPanel>
+				</windowsToolbar:ToolbarButton>
+				<windowsToolbar:ToolbarButton Grid.Column="2" Grid.RowSpan="3" HorizontalAlignment="Center" Name="bPIMAttribute" Padding="4,4,4,0" VerticalContentAlignment="Top">
+					<StackPanel Width="57">
+						<Image Height="32" Source="/EvoX.ResourceLibrary;component/Images/AddAttributes.png" />
+						<TextBlock Foreground="Black" HorizontalAlignment="Center" Text="Add attribute" TextWrapping="Wrap" TextAlignment="Center" />
+					</StackPanel>
+				</windowsToolbar:ToolbarButton>
+			</Grid>
+		</windowsToolbar:ToolbarGroup>
+		<windowsToolbar:ToolbarGroup Footer="PSM components" Padding="0,0,0,0" Width="289" Name="gPSM" Visibility="Collapsed">
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="54"/>
+					<ColumnDefinition Width="78"/>
+					<ColumnDefinition Width="68"/>
+					<ColumnDefinition Width="84"/>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition />
+					<RowDefinition />
+					<RowDefinition />
+				</Grid.RowDefinitions>
+				<windowsToolbar:ToolbarButton Grid.Column="0" Grid.RowSpan="3" HorizontalAlignment="Center" Name="bPSMClass" Padding="4,4,4,0" VerticalContentAlignment="Top">
+					<StackPanel>
+						<Image Height="32" Source="/EvoX.ResourceLibrary;component/Images/class.png" />
+						<TextBlock Foreground="Black" HorizontalAlignment="Center" Text="Add class" TextAlignment="Center" TextWrapping="Wrap" />
+					</StackPanel>
+				</windowsToolbar:ToolbarButton>
+				<windowsToolbar:ToolbarButton Grid.Column="1" Grid.RowSpan="3" HorizontalAlignment="Center" Name="bPSMAssociation" Padding="4,4,4,0" VerticalContentAlignment="Top" >
+					<StackPanel>
+						<Image Height="32" Source="/EvoX.ResourceLibrary;component/Images/assocclass.png" />
+						<TextBlock Foreground="Black" HorizontalAlignment="Center" Text="Add association" TextWrapping="Wrap" TextAlignment="Center" />
+					</StackPanel>
+				</windowsToolbar:ToolbarButton>
+				<windowsToolbar:ToolbarButton Grid.Column="2" Grid.RowSpan="3" HorizontalAlignment="Center" Name="bPSMAttribute" Padding="4,4,4,0" VerticalContentAlignment="Top">
+					<StackPanel>
+						<Image Height="32" Source="/EvoX.ResourceLibrary;component/Images/AddAttributes.png" />
+						<TextBlock Foreground="Black" HorizontalAlignment="Center" Text="Add attribute" TextWrapping="Wrap" TextAlignment="Center" />
+					</StackPanel>
+				</windowsToolbar:ToolbarButton>
+				<windowsToolbar:ToolbarButton Grid.Column="3" Grid.RowSpan="3" HorizontalAlignment="Center" Name="bPSMContentModel" Padding="4,4,4,0" VerticalContentAlignment="Top">
+					<StackPanel>
+						<Image Height="32" Source="/EvoX.ResourceLibrary;component/Images/class.png" />
+						<TextBlock Foreground="Black" HorizontalAlignment="Center" Text="Add content model" TextAlignment="Center" TextWrapping="Wrap" />
+					</StackPanel>
+				</windowsToolbar:ToolbarButton>
+			</Grid>
+		</windowsToolbar:ToolbarGroup>
+	</StackPanel>
+	<UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/EvoX.ResourceLibrary;component/Images/Images.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+</UserControl>

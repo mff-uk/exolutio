@@ -1,0 +1,123 @@
+﻿<UserControl x:Class="EvoX.View.ProjectView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:View="clr-namespace:EvoX.View" 
+    xmlns:Model="clr-namespace:EvoX.Model;assembly=EvoX.Model" xmlns:Commands="clr-namespace:EvoX.View.Commands" xmlns:vt="clr-namespace:EvoX.ViewToolkit;assembly=EvoX.ViewToolkit">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/EvoX.ResourceLibrary;component/Images/Images.xaml" ></ResourceDictionary>
+                <ResourceDictionary Source="MenuCommandStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <DockPanel LastChildFill="True">
+        <!-- ItemTemplate="{DynamicResource singleVersionProjectTemplate}" -->
+        <TreeView Name="projectView"  SelectedItemChanged="OnItemSelected">
+            <TreeView.Resources>
+                <ContextMenu x:Key="projectContextMenu">
+                    <MenuItem Command="{x:Static Commands:EvoXGuiCommands.RenameProjectCommand}" Style="{StaticResource ResourceKey=menuItemWithCommand}"  />                    
+                    <!--<MenuItem Header="Change project's namespace" /> -->
+                    <MenuItem Command="{x:Static Commands:EvoXGuiCommands.AddPSMSchemaCommand}" Style="{StaticResource ResourceKey=menuItemWithCommand}" />
+                </ContextMenu>
+                <ContextMenu x:Key="PIMDiagramContextMenu">
+                    <!--<MenuItem Header="Add new PIM diagram..." />-->
+                </ContextMenu>
+                <ContextMenu x:Key="PSMDiagramContextMenu">
+                    <MenuItem Command="{x:Static Commands:EvoXGuiCommands.AddPSMSchemaCommand}" Style="{StaticResource ResourceKey=menuItemWithCommand}" />                    
+                </ContextMenu>
+                <ContextMenu x:Key="memberContextMenuPIM">
+                    <!--<MenuItem Header="Rename diagram" />
+                    <MenuItem Header="Remove diagram" />-->
+                </ContextMenu>
+                <vt:EvoXContextMenu x:Key="memberContextMenuPSM" Opened="EvoXContextMenu_ContextMenuOpening">
+                    <vt:ContextMenuItem Command="{x:Static Commands:EvoXGuiCommands.RenamePSMSchemaCommand}" Style="{StaticResource ResourceKey=contextMenuItemWithCommand}" />
+                    <vt:ContextMenuItem Command="{x:Static Commands:EvoXGuiCommands.RemovePSMSchemaCommand}" Style="{StaticResource ResourceKey=contextMenuItemWithCommand}" />
+                </vt:EvoXContextMenu>
+      
+                <Style x:Key="projectStyler" TargetType="TextBlock">
+                    <Setter Property="Foreground" Value="DarkBlue"/>
+                    <Setter Property="FontWeight" Value="Bold" />
+                </Style>
+                <Style x:Key="namespaceStyler" TargetType="TextBlock">
+                    <Setter Property="Foreground" Value="Blue"/>
+                    <Setter Property="FontWeight" Value="Bold" />
+                </Style>
+                <Style x:Key="groupStyler" TargetType="TreeViewItem">
+                    <Setter Property="FontWeight" Value="Bold" />
+                </Style>
+                <Style x:Key="memberStyler" TargetType="TreeViewItem">
+                    <Setter Property="FontWeight" Value="Normal" />
+                </Style>
+
+                <DataTemplate x:Key="memberTemplatePIM">
+                    <TreeViewItem Header="{Binding Path=Caption}" Style="{StaticResource memberStyler}" MouseDoubleClick="OnMemberDoubleClick" MouseUp="OnMemberClick" ContextMenu="{StaticResource memberContextMenuPIM}" Margin="-20,0,0,0"/>
+                </DataTemplate>
+                <DataTemplate x:Key="memberTemplatePSM">
+                    <TreeViewItem Style="{StaticResource memberStyler}" MouseDoubleClick="OnMemberDoubleClick" MouseUp="OnMemberClick" ContextMenu="{StaticResource memberContextMenuPSM}" Margin="-20,0,0,0">
+                        <TreeViewItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Path=Caption}"></TextBlock>
+                                <!--<TextBlock Text=" target namespace: "></TextBlock>
+                                <TextBlock Text="{Binding Path=TargetNamespace,  TargetNullValue='Default Namespace', FallbackValue='Default Namespace'}"></TextBlock>-->
+                            </StackPanel>
+                        </TreeViewItem.Header>
+                    </TreeViewItem>
+                </DataTemplate>
+
+                <DataTemplate x:Key="memberTemplateVersion">
+                    <TreeViewItem Style="{StaticResource memberStyler}" MouseDoubleClick="OnMemberDoubleClick" MouseUp="OnMemberClick" Margin="-20,0,0,0" IsExpanded="True">
+                        <TreeViewItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Path=Version.Label}"></TextBlock>
+                                <!--<TextBlock Text=" target namespace: "></TextBlock>
+                                <TextBlock Text="{Binding Path=TargetNamespace,  TargetNullValue='Default Namespace', FallbackValue='Default Namespace'}"></TextBlock>-->
+                            </StackPanel>
+                        </TreeViewItem.Header>
+                        <TreeViewItem Header="PIM Diagrams" IsExpanded="True" Style="{StaticResource groupStyler}" ItemTemplate="{StaticResource memberTemplatePIM}" ItemsSource="{Binding Path=PIMDiagrams}" ContextMenu="{StaticResource PIMDiagramContextMenu}"/>
+                        <TreeViewItem Header="PSM Diagrams" IsExpanded="True" Style="{StaticResource groupStyler}" ItemTemplate="{StaticResource memberTemplatePSM}" ItemsSource="{Binding Path=PSMDiagrams}" ContextMenu="{StaticResource PSMDiagramContextMenu}"/>
+                    </TreeViewItem>
+                </DataTemplate>
+                
+                <View:NamespaceVisibilityConverter x:Key="VisibilityConverter"/>
+
+                <HierarchicalDataTemplate x:Key="singleVersionProjectTemplate" DataType="{x:Type Model:Project}">
+                    <StackPanel>
+                        <TreeViewItem IsExpanded="True" ContextMenu="{StaticResource projectContextMenu}" Margin="-20,0,0,0">
+                            <TreeViewItem.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <!--
+                                    <TextBlock Text="{Binding Path=Schema.XMLNamespace}" ToolTip="Project's XML Namespace name" Style="{StaticResource namespaceStyler}" 
+                                               Visibility="{Binding Path=Schema.XMLNamespace, Converter={StaticResource VisibilityConverter}}"/>
+                                    <TextBlock Text=":" Style="{StaticResource namespaceStyler}" 
+                                               Visibility="{Binding Path=Schema.XMLNamespace, Converter={StaticResource VisibilityConverter}}"/>
+                                    -->
+                                    <TextBlock Text="{Binding Path=Name}" ToolTip="Project's name" Style="{StaticResource projectStyler}" />
+                                    <!--
+                                    <TextBlock Text="{Binding Path=Version/Label}" ToolTip="Project's version" Style="{StaticResource projectStyler}" Margin="3,0,0,0" />
+                                    -->
+                                </StackPanel>
+                            </TreeViewItem.Header>                            
+                            <TreeViewItem Header="PIM Diagrams" IsExpanded="True" Style="{StaticResource groupStyler}" ItemTemplate="{StaticResource memberTemplatePIM}" ItemsSource="{Binding Path=SingleVersion.PIMDiagrams}" ContextMenu="{StaticResource PIMDiagramContextMenu}"/>
+                            <TreeViewItem Header="PSM Diagrams" IsExpanded="True" Style="{StaticResource groupStyler}" ItemTemplate="{StaticResource memberTemplatePSM}" ItemsSource="{Binding Path=SingleVersion.PSMDiagrams}" ContextMenu="{StaticResource PSMDiagramContextMenu}"/>
+                        </TreeViewItem>
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+
+                <HierarchicalDataTemplate x:Key="versionedProjectTemplate" DataType="{x:Type Model:Project}">
+                    <StackPanel>
+                        <TreeViewItem IsExpanded="True" ContextMenu="{StaticResource projectContextMenu}" Margin="-20,0,0,0">
+                            <TreeViewItem.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Path=Name}" ToolTip="Project's name" Style="{StaticResource projectStyler}" />
+                                </StackPanel>
+                            </TreeViewItem.Header>
+                            <TreeViewItem Header="Versions" IsExpanded="True" Style="{StaticResource groupStyler}" ItemTemplate="{StaticResource memberTemplateVersion}" ItemsSource="{Binding Path=ProjectVersions}" />
+                        </TreeViewItem>
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+            </TreeView.Resources>
+        </TreeView>
+    </DockPanel>
+
+</UserControl>

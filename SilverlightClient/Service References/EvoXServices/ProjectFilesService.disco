@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="http://evox.ms.mff.cuni.cz/SL/ProjectFilesService.asmx?wsdl" docRef="http://evox.ms.mff.cuni.cz/SL/ProjectFilesService.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="http://evox.ms.mff.cuni.cz/SL/ProjectFilesService.asmx" xmlns:q1="http://tempuri.org/" binding="q1:ProjectFilesServiceSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="http://evox.ms.mff.cuni.cz/SL/ProjectFilesService.asmx" xmlns:q2="http://tempuri.org/" binding="q2:ProjectFilesServiceSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

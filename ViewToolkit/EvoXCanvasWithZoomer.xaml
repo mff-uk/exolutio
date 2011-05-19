@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="EvoX.ViewToolkit.EvoXCanvasWithZoomer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:vt="clr-namespace:EvoX.ViewToolkit" mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300" 
+             SizeChanged="EvoXCanvasWithZoomer_SizeChanged"
+             MouseDown="UserControl_MouseDown" 
+             MouseMove="UserControl_MouseMove" 
+             MouseUp="UserControl_MouseUp">
+    <!--<Border BorderThickness="3" BorderBrush="Black">-->
+        <!--<Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="50" />
+            </Grid.RowDefinitions>
+            <vt:EvoXCanvas Grid.Row="0" x:FieldModifier="public" x:Name="EvoXCanvas"/>     
+            <vt:Zoomer Grid.Row="1"/>
+        </Grid>-->
+    <Canvas x:Name="wrapCanvas" 
+             Focusable="False">
+            <ScrollViewer Name="scrollViewer" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Width="300" Height="300" 
+                           Focusable="False">
+            <vt:EvoXCanvas x:FieldModifier="public" x:Name="EvoXCanvas" Focusable="True">
+                <vt:EvoXCanvas.LayoutTransform>
+                    <ScaleTransform x:Name="scaleTransform"/>
+                </vt:EvoXCanvas.LayoutTransform>
+            </vt:EvoXCanvas>
+        </ScrollViewer>
+            <vt:Zoomer x:Name="zoomer" Visibility="Hidden" Canvas.Bottom="0" Width="300" Height="40" HorizontalAlignment="Left" VerticalAlignment="Bottom" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" />
+        </Canvas>
+    <!--</Border>-->
+</UserControl>

@@ -1,0 +1,13 @@
+﻿<UserControl  xmlns:toolkit="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit"  
+             x:Class="EvoX.View.DiagramView"
+             x:Name="DiagramViewV"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:ev="clr-namespace:EvoX.ViewToolkit;assembly=EvoX.ViewToolkit" xmlns:View="clr-namespace:EvoX.View" mc:Ignorable="d" 
+             d:DesignHeight="273" d:DesignWidth="430" Background="Blue"> 
+    <!--<ev:EvoXCanvas Name="EvoXCanvas" HorizontalAlignment="Left" VerticalAlignment="Top" Background="White"></ev:EvoXCanvas>-->
+    <ev:EvoXCanvasWithZoomer Name="EvoXCanvasWithZoomer" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="White"  />
+    <!--<ev:EvoXCanvas Name="EvoXCanvas" HorizontalAlignment="Left" VerticalAlignment="Top" Background="White"></ev:EvoXCanvas>-->
+</UserControl>

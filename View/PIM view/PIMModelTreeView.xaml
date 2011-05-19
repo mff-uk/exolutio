@@ -1,0 +1,191 @@
+﻿<UserControl x:Class="EvoX.View.PIMModelTreeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+
+    <TreeView Name="navigatorTreeView" BorderThickness="0">
+        <TreeView.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source="/EvoX.ResourceLibrary;component/Images/Images.xaml" />
+                    <ResourceDictionary>
+                        <ContextMenu x:Key="nestedPackagesContextMenu">
+                            <MenuItem Header="Add new package" Click="OnAddPackageClick" />
+                        </ContextMenu>
+
+                        <ContextMenu x:Key="packageClassesContextMenu">
+                            <!--
+                            <MenuItem Header="Add new class" Click="OnAddClassClick">
+                                <MenuItem.Icon>
+                                    <Image Source="{StaticResource class}" Height="24" Width="24"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            -->
+                        </ContextMenu>
+
+                        <ContextMenu x:Key="modelClassesContextMenu">
+                            <!--
+                            <MenuItem Header="Add new class" Click="OnAddClassClick">
+                                <MenuItem.Icon>
+                                    <Image Source="{StaticResource class}" Height="24" Width="24"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            -->
+                        </ContextMenu>
+
+                        <ContextMenu x:Key="packageContextMenu">
+                            <!--
+                            <MenuItem Header="Add new package" Click="OnAddPackageClick" />
+                            <MenuItem Header="Add new class" Click="OnAddClassClick">
+                                <MenuItem.Icon>
+                                    <Image Source="{StaticResource class}" Height="24" Width="24"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <Separator />
+                            <MenuItem Header="Remove" Click="OnPackageRemoveClick">
+                                <MenuItem.Icon>
+                                    <Image Source="{StaticResource delete2}" Height="24" Width="24"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <Separator />
+                            <MenuItem Header="Properties..." Click="OnPackageEditClick">
+                                <MenuItem.Icon>
+                                    <Image Source="{StaticResource props}" Height="24" Width="24"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            -->
+                        </ContextMenu>
+
+                        <ContextMenu x:Key="classContextMenu">
+                            <!--
+                            <MenuItem Header="Remove" Click="OnClassRemoveClick">
+                                <MenuItem.Icon>
+                                    <Image Source="{StaticResource delete2}" Height="24" Width="24"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <Separator />
+                            <MenuItem Header="Add new attribute" Click="OnAddAttributeClick">
+                                <MenuItem.Icon>
+                                    <Image Source="{StaticResource AddAttributes}" Height="24" Width="24"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <Separator />
+                            <MenuItem Header="Properties..." Click="OnClassEditClick">
+                                <MenuItem.Icon>
+                                    <Image Source="{StaticResource props}" Height="24" Width="24"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            -->
+                        </ContextMenu>
+
+                        <ContextMenu x:Key="attributeContextMenu">
+                            <!--
+                            <MenuItem Header="Remove" Click="OnAttributeRemoveClick">
+                                <MenuItem.Icon>
+                                    <Image Source="{StaticResource delete2}" Height="24" Width="24"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <Separator />
+                            <MenuItem Header="Properties..." Click="OnAttributeEditClick">
+                                <MenuItem.Icon>
+                                    <Image Source="{StaticResource props}" Height="24" Width="24"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            -->
+                        </ContextMenu>
+
+                        <Style x:Key="xmlElementStyler" TargetType="TextBlock">
+                            <Setter Property="Foreground" Value="Blue"/>
+                            <Setter Property="FontWeight" Value="Normal" />
+                        </Style>
+                        <Style x:Key="classAttributeStyler" TargetType="TreeViewItem">
+                            <Setter Property="FontStyle" Value="Italic"/>
+                            <Setter Property="FontWeight" Value="Normal" />
+                        </Style>
+                        <Style x:Key="assocContainerStyler" TargetType="TextBlock">
+                            <Setter Property="Foreground" Value="DarkBlue"/>
+                            <Setter Property="FontWeight" Value="Normal" />
+                        </Style>
+                        <Style x:Key="classStyler" TargetType="TextBlock">
+                            <Setter Property="FontWeight" Value="Normal" />
+                        </Style>
+                        <Style x:Key="mainItemStyler" TargetType="TreeViewItem">
+                            <Setter Property="Foreground" Value="DarkBlue"/>
+                            <Setter Property="FontWeight" Value="Bold" />
+                        </Style>
+                        <Style x:Key="packageStyler" TargetType="TreeViewItem">
+                            <Setter Property="FontWeight" Value="Bold" />
+                        </Style>
+
+                        <HierarchicalDataTemplate x:Key="classTemplate" ItemsSource="{Binding Path=PIMAttributes}">
+                            <StackPanel>
+                                <!--
+                                Command="{x:Static Gui:MainWindow.cmdIncludeClass}"
+                                CommandTarget="{Binding Path=Name}" MouseDoubleClick="OnClassDoubleClick"
+                                -->
+                                <Button DockPanel.Dock="Top" BorderThickness="0" Background="Transparent" ClickMode="Press"                                    
+                                    AllowDrop="False" >
+                                    <!--ContextMenu="{StaticResource classContextMenu}"-->
+                                    <Button.Template>
+                                        <ControlTemplate>
+                                            <ControlTemplate.Resources>
+                                                <Style TargetType="{x:Type Border}">
+                                                    <Setter Property="CornerRadius" Value="0"/>
+                                                    <Setter Property="Background" Value="Transparent"/>
+                                                </Style>
+                                            </ControlTemplate.Resources>
+                                            <Border Name="innerBorder" BorderBrush="Blue" BorderThickness="0">
+                                                <ContentPresenter Content="{TemplateBinding Button.Content}"    />
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="innerBorder" Property="BorderThickness" Value="0"/>
+                                                    <Setter TargetName="innerBorder" Property="Background" Value="LightBlue"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                    <!-- ContextMenu="{StaticResource classContextMenu}" -->
+                                    <TextBlock Text="{Binding Path=Name}" Style="{StaticResource classStyler}" Mouse.PreviewMouseDown="OnClassLeftButtonDown" />
+                                </Button>
+                            </StackPanel>
+                            <HierarchicalDataTemplate.ItemTemplate>
+                                <DataTemplate>
+                                    <!--ContextMenu="{StaticResource attributeContextMenu}"-->
+                                    <TreeViewItem Header="{Binding Path=Name}" Style="{StaticResource classAttributeStyler}"  MouseLeftButtonUp="OnAttributeClick" MouseDoubleClick="OnAttributeDoubleClick" Margin="-20,0,0,0"/>
+                                </DataTemplate>
+                            </HierarchicalDataTemplate.ItemTemplate>
+                        </HierarchicalDataTemplate>
+
+                        <DataTemplate x:Key="packageTemplate">
+                            <StackPanel>
+                                <TreeViewItem Header="{Binding Path=Name}" IsExpanded="True" Style="{StaticResource packageStyler}" ContextMenu="{StaticResource packageContextMenu}" MouseDoubleClick="OnPackageDoubleClick" Margin="-20,0,0,0">
+                                    <TreeViewItem Header="Package Classes" IsExpanded="True" Style="{StaticResource mainItemStyler}" ItemTemplate="{StaticResource classTemplate}" ContextMenu="{StaticResource packageClassesContextMenu}" ItemsSource="{Binding Path=Classes}"/>
+                                    <!--
+                                    <TreeViewItem Header="Nested Packages" IsExpanded="True" Style="{StaticResource mainItemStyler}" ItemTemplate="{DynamicResource packageTemplate}" ContextMenu="{StaticResource nestedPackagesContextMenu}" ItemsSource="{Binding Path=NestedPackages}" />
+                                    -->
+                                </TreeViewItem>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ResourceDictionary>
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+
+
+        </TreeView.Resources>
+
+        <TreeViewItem Name="modelClasses" Header="Model Classes" 
+                      IsExpanded="True" 
+                      Style="{StaticResource mainItemStyler}" 
+                      ItemTemplate ="{StaticResource classTemplate}" 
+                      ContextMenu="{StaticResource modelClassesContextMenu}" 
+                      Selected="OnPackageSelected" />
+        <!--
+        <TreeViewItem Name="nestedPackages" Header="Nested Packages" IsExpanded="True" Style="{StaticResource mainItemStyler}" ItemTemplate ="{StaticResource packageTemplate}" ContextMenu="{StaticResource nestedPackagesContextMenu}" Selected="OnPackageSelected" />
+        -->
+    </TreeView>
+
+</UserControl>

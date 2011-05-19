@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VisualState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ShowCheckBoxes="false">
+  <TopNode>[0-1000]D:\Programování\EvoX\Tests\tests.nunit</TopNode>
+  <SelectedNode>[0-1002]Tests.CodeTests.CommandReportTest.TestCommandResult</SelectedNode>
+  <ExcludeCategories>false</ExcludeCategories>
+  <Nodes>
+    <Node UniqueName="[0-1000]D:\Programování\EvoX\Tests\tests.nunit" Expanded="true" />
+    <Node UniqueName="[0-1075]D:\Programování\EvoX\Tests\bin\Debug\Tests.dll" Expanded="true" />
+    <Node UniqueName="[0-1076]Tests" Expanded="true" />
+    <Node UniqueName="[0-1077]Tests.CodeTests" Expanded="true" />
+    <Node UniqueName="[0-1001]Tests.CodeTests.CommandReportTest" Expanded="true" />
+    <Node UniqueName="[0-1002]Tests.CodeTests.CommandReportTest.TestCommandResult" Expanded="true" />
+    <Node UniqueName="[0-1079]Tests.Serialization" Expanded="true" />
+    <Node UniqueName="[0-1078]Tests.Versioning" Expanded="true" />
+    <Node UniqueName="[0-1044]Tests.Versioning.SeparateEmbedTests" Expanded="true" />
+  </Nodes>
+</VisualState>

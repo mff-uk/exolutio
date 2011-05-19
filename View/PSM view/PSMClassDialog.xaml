@@ -1,0 +1,102 @@
+﻿<Window x:Class="EvoX.View.PSMClassDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        xmlns:Dialogs="clr-namespace:EvoX.Dialogs;assembly=EvoX.Dialogs" 
+        Title="PSM class: {0}" Height="328" Width="623" 
+        WindowStartupLocation="CenterScreen" ShowInTaskbar="False" 
+        ResizeMode="NoResize" Topmost="True">
+    <Grid>
+        <Button Height="23" Margin="0,0,198,12" Name="bOk" VerticalAlignment="Bottom" IsDefault="True" Click="bOk_Click" HorizontalAlignment="Right" Width="87" TabIndex="2">
+			<Button.Content>_OK</Button.Content>
+		</Button>
+		<Button Height="23" Margin="0,0,105,12" Name="bApply" VerticalAlignment="Bottom" Click="bApply_Click" HorizontalAlignment="Right" Width="87" IsEnabled="False" TabIndex="3">Apply</Button>
+        <Button Height="23" HorizontalAlignment="Right" Margin="0,0,12,12" Name="bCancel" VerticalAlignment="Bottom" Width="87" IsCancel="True" TabIndex="4">Cancel</Button>
+        <TabControl Margin="12,12,12,41" Name="tabControl1" SelectedIndex="1">
+            <TabItem Header="General" Name="tabGeneral" TabIndex="0">
+                <TabItem.Resources>
+                    <DataTemplate x:Key="packageTemplate">
+                        <TextBlock Text="{Binding Path=QualifiedName}" />
+                    </DataTemplate>
+                </TabItem.Resources>
+                <DockPanel>
+					<GroupBox Header="PSM class general properties" Name="groupBox1" >
+						<Canvas>
+							<Dialogs:RememberingTextBox x:Name="tbName" TextChanged="tbName_TextChanged" Height="22" Canvas.Left="107" Canvas.Top="14" Width="200" TabIndex="0" />
+							<Label Name="label1" Height="26" Canvas.Left="10" Canvas.Top="12" Width="44">Name:</Label>
+							
+							<!--<Canvas Canvas.Left="0" Canvas.Top="42" Height="28" Name="cElementLabel" Width="298">
+                                <Label Name="label3" Height="26" Canvas.Left="10" Canvas.Top="0" Width="87">Element label:</Label>
+                                <Dialogs:RememberingTextBox x:Name="tbElementLabel" TextChanged="tbElementLabel_TextChanged" Height="22" Canvas.Left="107" Canvas.Top="0" Width="200" TabIndex="0" />
+							</Canvas>-->
+                            <!--
+                            <Canvas Canvas.Left="0" Canvas.Top="70" Height="28" Name="cAbstract" Width="298">
+                                <CheckBox x:Name="cbAbstract" Canvas.Left="14" Content="abstract class" Checked="cbAbstract_Checked" Height="22"  Canvas.Top="5" Width="165" TabIndex="0" />
+                                <CheckBox x:Name="cbAnyAttribute" Canvas.Left="124" Content="alow any attribute" Checked="cbAbstract_Checked" Height="22"  Canvas.Top="5" Width="165" TabIndex="0" />
+                            </Canvas>
+                            -->
+                        </Canvas>
+					</GroupBox>
+				</DockPanel>
+            </TabItem>
+            <TabItem Header="Attributes" Name="tabAttributes" TabIndex="0">
+                <DockPanel>
+					<DataGrid 
+						Name="gridAttributes" 
+						SelectionMode="Single"
+						Dialogs:AccessKeyScoper.IsAccessKeyScope="True"
+						AutoGenerateColumns="False" 
+                        BeginningEdit="gridAttributes_BeginningEdit"
+                        CellEditEnding="gridAttributes_CellEditEnding" 
+                        RowEditEnding="gridAttributes_RowEditEnding" 
+                        AlternatingRowBackground="Beige" 
+                        Background="Cornsilk" 
+                        BorderBrush="LightGray" 
+                        HorizontalGridLinesBrush="LightGray" 
+                        VerticalGridLinesBrush="LightGray" 
+                        RowBackground="Cornsilk">
+                        <DataGrid.Resources>
+                            <!--
+                              SINGLE CLICK EDITING
+                            -->
+                            <Style TargetType="{x:Type DataGridCell}">
+                                <EventSetter Event="PreviewMouseLeftButtonDown" Handler="DataGridCell_PreviewMouseLeftButtonDown"></EventSetter>
+                            </Style>
+                            <Style x:Key="CellEditStyle" TargetType="{x:Type TextBox}">
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="Padding" Value="0"/>
+                                <Style.Triggers>
+                                    <Trigger Property="Validation.HasError" Value="true">
+                                        <Setter Property="ToolTip"
+                                            Value="{Binding RelativeSource={RelativeSource Self},
+                                            Path=(Validation.Errors)[0].ErrorContent}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                            
+                        </DataGrid.Resources>
+						<DataGrid.Columns>
+                            <DataGridCheckBoxColumn Header="" x:Name="checkedColumn" Binding="{Binding Checked}" Width="30">
+                            </DataGridCheckBoxColumn>
+                            <DataGridComboBoxColumn Header="Represented attribute" MinWidth="100" x:Name="interpretationColumn" SelectedValueBinding="{Binding RepresentedAttribute}" CanUserReorder="False" Width="135" IsReadOnly="false" />
+                            <DataGridTextColumn Header="Attribute name" MinWidth="70" x:Name="nameColumn" Binding="{Binding Name}" CanUserReorder="False" Width="100" IsReadOnly="false" />
+                            <DataGridCheckBoxColumn Header="Element" x:Name="xformColumn" Binding="{Binding XFormElement}" Width="60" IsThreeState="False">
+                            </DataGridCheckBoxColumn>
+                            <!--<DataGridTextColumn Header="PIM class" MinWidth="70" x:Name="pimClassColumn" Binding="{Binding ComesFrom.Name, FallbackValue=pim-less}" Width="100" IsReadOnly="True" />-->
+							<DataGridComboBoxColumn Header="Type" MinWidth="80" x:Name="typeColumn" SelectedValueBinding="{Binding Type}" Width="80" />
+                            <DataGridTextColumn Header="Default value" x:Name="defaultValueColumn" Binding="{Binding DefaultValue}" Width="90" />
+							<DataGridTextColumn Header="Multiplicity" x:Name="multiplicityColumn" Binding="{Binding Multiplicity,  ValidatesOnExceptions=True}" EditingElementStyle="{StaticResource CellEditStyle}" Width="70" />
+						</DataGrid.Columns>
+                        <DataGrid.ContextMenu>
+                            <ContextMenu>
+                                <!--<ContextMenu.Items>
+                                    <MenuItem Header="Select all" Click="SelectAllClick"/>
+                                    <MenuItem Header="Deselect all" Click="DeselectAllClick"/>
+                                </ContextMenu.Items>-->
+                            </ContextMenu>
+                        </DataGrid.ContextMenu>
+					</DataGrid>
+                </DockPanel>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

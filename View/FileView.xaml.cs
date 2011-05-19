@@ -1,0 +1,135 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using System.Xml;
+using System.Xml.Schema;
+using EvoX.SupportingClasses;
+using ICSharpCode.AvalonEdit.Folding;
+using Microsoft.Win32;
+
+namespace EvoX.View
+{
+    /// <summary>
+    /// Interaction logic for FileView.xaml
+    /// </summary>
+    public partial class FileView : UserControl
+    {
+        public FileView()
+        {
+            InitializeComponent();
+        }
+
+        private bool allowEdit;
+        public bool AllowEdit
+        {
+            get { return allowEdit; }
+            set { allowEdit = value; }
+        }
+
+        private EDisplayedFileType displayedFileType;
+
+        private EDisplayedFileType DisplayedFileType
+        {
+            get { return displayedFileType; }
+            set { displayedFileType = value; }
+        }
+
+        public void DisplayFile(EDisplayedFileType displayedFileType, string fileContents)
+        {
+            DisplayedFileType = displayedFileType;
+            FileContents = fileContents;
+            Init();
+        }
+
+        public void DisplayFile(EDisplayedFileType displayedFileType, Stream fileContents)
+        {
+            using (StreamReader sr = new StreamReader(fileContents))
+            {
+                string contents = sr.ReadToEnd();
+                DisplayFile(displayedFileType, contents);
+            }
+        }
+
+        private XmlFoldingStrategy foldingStrategy;
+        private FoldingManager foldingManager;
+
+        //private IList<LogMessage> logMessages;
+
+        //public IList<LogMessage> LogMessages
+        //{
+        //    get
+        //    {
+        //        return logMessages;
+        //    }
+        //    set
+        //    {
+        //        logMessages = value;
+        //        LogMessage.ImageGetter = ImageGetter;
+        //        gridLog.ItemsSource = logMessages.OrderBy(message => message.Severity == LogMessage.ESeverity.Error ? 0 : 1);
+        //        int countw = logMessages.Count(e => e.Severity == LogMessage.ESeverity.Warning);
+        //        int counte = logMessages.Count(e => e.Severity == LogMessage.ESeverity.Error);
+        //        if (countw > 0 && counte > 0)
+        //            expander1.Header = String.Format("Document created with {0} errors and {1} warnings", counte, countw);
+        //        else if (countw > 0)
+        //            expander1.Header = String.Format("Document created with {0} warnings", countw);
+        //        else if (counte > 0)
+        //            expander1.Header = String.Format("Document created with {0} errors", counte);
+        //        else
+        //            expander1.Header = "Document created successfully";
+        //    }
+        //}
+
+        //public PSMDiagram Diagram { get; set; }
+
+        //private static object ImageGetter(LogMessage message)
+        //{
+        //    if (message.Severity == LogMessage.ESeverity.Error)
+        //        return ContextMenuIcon.GetContextIcon("error_button").Source;
+        //    else
+        //        return ContextMenuIcon.GetContextIcon("Warning").Source;
+        //}
+
+        public string FileContents
+        {
+            get { return tbDocument.Text; }
+            set { tbDocument.Text = value; }
+        }
+
+        public void Init()
+        {
+            if (DisplayedFileType.IsAmong(EDisplayedFileType.XML, EDisplayedFileType.XSD))
+            {
+                tbDocument.SyntaxHighlighting = ICSharpCode.AvalonEdit.Highlighting.HighlightingManager.Instance.GetDefinition("XML");
+                foldingManager = FoldingManager.Install(tbDocument.TextArea);
+                foldingStrategy = new XmlFoldingStrategy();
+            }
+
+            tbDocument.ShowLineNumbers = true;
+            UpdateFolding();
+        }
+
+
+        private void UpdateFolding()
+        {
+            if (foldingStrategy != null && !string.IsNullOrEmpty(FileContents))
+                foldingStrategy.UpdateFoldings(foldingManager, tbDocument.Document);
+        }
+
+       
+        private void tbDocument_TextChanged(object sender, EventArgs e)
+        {
+            UpdateFolding();
+        }       
+    }
+}

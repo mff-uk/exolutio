@@ -1,0 +1,295 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--xxx -->
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{290976CF-1F50-4C90-8247-81F165A18467}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EvoX.View</RootNamespace>
+    <AssemblyName>EvoX.View</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ICSharpCode.AvalonEdit">
+      <HintPath>..\ExternalBinaries\AvalonEdit\ICSharpCode.AvalonEdit.dll</HintPath>
+    </Reference>
+    <Reference Include="OrderedListWPF">
+      <HintPath>..\ExternalBinaries\OrderedList\OrderedListWPF.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Commands\BusyStateChangedEventArgs.cs" />
+    <Compile Include="Commands\CommandDialogWindow.xaml.cs">
+      <DependentUpon>CommandDialogWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Commands\CommandsResources.Designer.cs">
+      <DependentUpon>CommandsResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Commands\CurrentProjectVersionChangedEventArgs.cs" />
+    <Compile Include="Commands\Edit\guiVerifyModelCommand.cs" />
+    <Compile Include="Commands\Grammar\guiSampleDocumentCommand.cs" />
+    <Compile Include="Commands\Current.cs" />
+    <Compile Include="Commands\CurrentProjectChangedEventArgs.cs" />
+    <Compile Include="Commands\Edit\guiRedoCommand.cs" />
+    <Compile Include="Commands\Edit\guiUndoCommand.cs" />
+    <Compile Include="Commands\EvoXGuiCommands.cs" />
+    <Compile Include="Commands\guiActiveDiagramCommand.cs" />
+    <Compile Include="Commands\Grammar\guiGenerateGrammarCommand.cs" />
+    <Compile Include="Commands\Grammar\guiNormalizeSchemaCommand.cs" />
+    <Compile Include="Commands\Grammar\guiTestNormalizationCommand.cs" />
+    <Compile Include="Commands\guiControllerCommand.cs" />
+    <Compile Include="Commands\guiCurrentVersionCommand.cs" />
+    <Compile Include="Commands\guiShowHelpCommand.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Commands\IOperationParameterControl.cs" />
+    <Compile Include="Commands\IReportDisplay.cs" />
+    <Compile Include="Commands\KeyGestures.cs" />
+    <Compile Include="Commands\Local\guiLocateInterpretedComponent.cs" />
+    <Compile Include="Commands\Local\guiLocateRepresentedPSMClass.cs" />
+    <Compile Include="Commands\Local\guiScopeCommand.cs" />
+    <Compile Include="Commands\OperationParametersControlCreator.cs" />
+    <Compile Include="Commands\ParameterControls\BoolParameterEditor.cs" />
+    <Compile Include="Commands\ParameterControls\ScopePropertyEditor.cs" />
+    <Compile Include="Commands\ParameterControls\EnumParameterEditor.cs" />
+    <Compile Include="Commands\ParameterControls\GuidListBox.cs" />
+    <Compile Include="Commands\ParameterControls\GuidLookup.cs" />
+    <Compile Include="Commands\ParameterControls\IntParameterEditor.cs" />
+    <Compile Include="Commands\ParameterControls\PIMSchemaLookup.cs" />
+    <Compile Include="Commands\ParameterControls\PSMSchemaLookup.cs" />
+    <Compile Include="Commands\ParameterControls\StringParameterEditor.cs" />
+    <Compile Include="Commands\ParameterControls\UnlimitedIntParameterEditor.cs" />
+    <Compile Include="Commands\Project\guiCloseAppCommand.cs" />
+    <Compile Include="Commands\Project\guiCloseProjectCommand.cs" />
+    <Compile Include="Commands\Project\guiNewProjectCommand.cs" />
+    <Compile Include="Commands\Project\guiOpenProjectCommand.cs" />
+    <Compile Include="Commands\Project\guiProjectCommand.cs" />
+    <Compile Include="Commands\Project\guiSaveAsProjectCommand.cs" />
+    <Compile Include="Commands\Project\guiSaveProjectCommand.cs" />
+    <Compile Include="Commands\guiCommandBase.cs" />
+    <Compile Include="Commands\Versioning\guiAddVersionLinkCommand.cs" />
+    <Compile Include="Commands\Versioning\guiRemoveCurrentVersionCommand.cs" />
+    <Compile Include="Commands\Versioning\guiBranchCurrentVersionCommand.cs" />
+    <Compile Include="Commands\Versioning\guiSaveAsSingleVersionCommand.cs" />
+    <Compile Include="Containers\PSMAttributeContainer.cs" />
+    <Compile Include="Containers\IAttributesContainer.cs" />
+    <Compile Include="Containers\PIMAttributeContainer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Containers\TextBoxContainer.cs" />
+    <Compile Include="Commands\MenuHelper.cs" />
+    <Compile Include="FileView.xaml.cs">
+      <DependentUpon>FileView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="IconConverter.cs" />
+    <Compile Include="PIM view\PIMClassDialog.xaml.cs">
+      <DependentUpon>PIMClassDialog.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PIM view\PIMModelTreeView.xaml.cs">
+      <DependentUpon>PIMModelTreeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectView.xaml.cs">
+      <DependentUpon>ProjectView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PSM view\PSMClassDialog.xaml.cs">
+      <DependentUpon>PSMClassDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PSM view\PSMSchemaClassView.cs" />
+    <Compile Include="PSM view\Layout\LayoutManager.cs" />
+    <Compile Include="PSM view\Layout\VerticalTree.cs" />
+    <Compile Include="PSM view\PSMContentModelView.cs" />
+    <Compile Include="PSM view\PSMAttributeTextBox.cs" />
+    <Compile Include="PIM view\PIMAssociationView.cs" />
+    <Compile Include="PIM view\PIMAttributeTextBox.cs" />
+    <Compile Include="DiagramView.xaml.cs">
+      <DependentUpon>DiagramView.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EvoXViewException.cs" />
+    <Compile Include="ComponentViewBase.cs" />
+    <Compile Include="NodeComponentViewBase.cs" />
+    <Compile Include="PIM view\PIMClassView.cs" />
+    <Compile Include="PIM view\PIMDiagramView.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="PSM view\PSMAssociationView.cs" />
+    <Compile Include="PSM view\PSMClassView.cs" />
+    <Compile Include="PSM view\PSMDiagramView.cs" />
+    <Compile Include="ReportDisplay.xaml.cs">
+      <DependentUpon>ReportDisplay.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RepresentantsCollection.cs" />
+    <EmbeddedResource Include="Commands\CommandsResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CommandsResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Controller\Controller.csproj">
+      <Project>{71908A36-A760-41AC-BB5A-78BE2A7541DD}</Project>
+      <Name>Controller</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataGenerator\DataGenerator.csproj">
+      <Project>{809A7BE4-A208-45DB-93E8-811BD9E29ABF}</Project>
+      <Name>DataGenerator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dialogs\Dialogs.csproj">
+      <Project>{1768AE4E-0514-4C9E-AF26-02595148FF5C}</Project>
+      <Name>Dialogs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grammar\Grammar.csproj">
+      <Project>{1EC12EDD-E854-4493-A821-BB869F7640E3}</Project>
+      <Name>Grammar</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{AA189B65-9AE0-4B5F-9575-AD121B753309}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Normalization\Normalization.csproj">
+      <Project>{FDD2B4AC-D621-49ED-91D5-80B7F00ED4D5}</Project>
+      <Name>Normalization</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ResourceLibrary\ResourceLibrary.csproj">
+      <Project>{2598DE7B-9F5E-46EA-9B81-AE41E0D2D685}</Project>
+      <Name>ResourceLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SupportingClasses\SupportingClasses.csproj">
+      <Project>{AE8E2F66-03CF-44A5-8564-A32906F7F041}</Project>
+      <Name>SupportingClasses</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tests\Tests.csproj">
+      <Project>{BE439BC5-DF67-4BB8-A84C-8A6B4066F63D}</Project>
+      <Name>Tests</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Translation\Translation.csproj">
+      <Project>{9EB25848-0BF0-4EBB-B879-4F7F7739E850}</Project>
+      <Name>Translation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ViewToolkit\ViewToolkit.csproj">
+      <Project>{3FD45349-A060-4098-A8D2-34E5DB5D4296}</Project>
+      <Name>ViewToolkit</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Commands\CommandDialogWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DiagramView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FileView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MenuCommandStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PIM view\PIMClassDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PIM view\PIMModelTreeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ProjectView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PSM view\PSMClassDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ReportDisplay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
