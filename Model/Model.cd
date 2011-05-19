@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="EvoX.Model.Schema">
+    <Position X="6.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAAAAAAAAAAAAAAAAACAAAAAAgAAA=</HashCode>
+      <FileName>Schema.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ProjectVersion" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="EvoX.Model.Component">
+    <Position X="23.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAgAACAAAAAAAQAAAAAQEACBEIAAAAAAAAAAAABA=</HashCode>
+      <FileName>Component.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="EvoX.Model.AttributeType">
+    <Position X="10.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAIAAAAEAAAAQAACBAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>AttributeType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EvoX.Model.ProjectVersion">
+    <Position X="3.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IQAABgAIAAAAAAABAEABAAAAAKBAAAAAAAAIAAAgAAA=</HashCode>
+      <FileName>ProjectVersion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EvoX.Model.PIM.PIMClass">
+    <Position X="12.5" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAhIAQAAAAAAAEAAAACAAAACDAAAAAAgEAAAAAAQA=</HashCode>
+      <FileName>PIM\PIMClass.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EvoX.Model.PIM.PIMComponent">
+    <Position X="16.25" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>PIM\PIMComponent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EvoX.Model.PIM.PIMAssociation">
+    <Position X="14.75" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAABAAAACAEAAAACAAAACBAAAAAAAEQAAAAAAA=</HashCode>
+      <FileName>PIM\PIMAssociation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EvoX.Model.PIM.PIMAttribute">
+    <Position X="17" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAFAAAABAAAAAEIAAAAAABACBAQYAQAAAAAAAAAAA=</HashCode>
+      <FileName>PIM\PIMAttribute.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="PIMClass" />
+      <Property Name="AttributeType" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="EvoX.Model.PIM.PIMAssociationEnd">
+    <Position X="19.25" Y="11.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAFAAAABAAAAAEAAAgAAABACBAQQgQAAAAAAAAAAA=</HashCode>
+      <FileName>PIM\PIMAssociationEnd.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="PIMClass" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="EvoX.Model.PIM.PIMSchema">
+    <Position X="5.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAoQAAwAABCAAAEQACAAAACBAIAgAAEAQAAAAAQA=</HashCode>
+      <FileName>PIM\PIMSchema.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="EvoX.Model.PSM.PSMSchema">
+    <Position X="8" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABCAIAQAYAIAIAAAAAQABECBhCEAQAEAEAAIEAwA=</HashCode>
+      <FileName>PSM\PSMSchema.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="EvoX.Model.PSM.PSMAssociation">
+    <Position X="22.25" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAFAAAABAAAIAEAgAAQABBACBAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>PSM\PSMAssociation.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="EvoX.Model.PSM.PSMAttribute">
+    <Position X="31.75" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAFAAAABAAAAUEIAgAAAAJACBAAYAAAAAAAAAAAAA=</HashCode>
+      <FileName>PSM\PSMAttribute.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="AttributeType" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="EvoX.Model.PSM.PSMComponent">
+    <Position X="28.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAAAACBAIAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PSM\PSMComponent.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Interpretation" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="EvoX.Model.PSM.PSMClass">
+    <Position X="24.5" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAhCAAAAAAAAAEAAAAAAAAACDAIEAABAAAAAAQAAA=</HashCode>
+      <FileName>PSM\PSMClass.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Represents" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="EvoX.Model.PSM.PSMContentModel">
+    <Position X="29" Y="15.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAEAAAAAAAAACBBAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>PSM\PSMContentModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EvoX.Model.PSM.PSMSchemaClass">
+    <Position X="26.75" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PSM\PSMSchemaClass.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EvoX.Model.Project">
+    <Position X="0.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEEAAAgACBAAAMEQAAACIAgCgCBACAAABEAIgAVRAAA=</HashCode>
+      <FileName>Project.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="SingleVersion" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="ProjectVersions" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="EvoX.Model.EvoXObject">
+    <Position X="19.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgIAAAAAACAAAgCBAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>EvoXObject.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="EvoX.Model.PSM.PSMAssociationMember">
+    <Position X="26.5" Y="11.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAABCAAAAAAAAAAAQAAEAAAEAAAAAAAA=</HashCode>
+      <FileName>PSM\PSMAssociationMember.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
