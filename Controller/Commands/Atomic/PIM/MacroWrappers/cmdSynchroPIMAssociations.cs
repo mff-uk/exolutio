@@ -26,6 +26,7 @@ namespace EvoX.Controller.Commands.Atomic.PIM.MacroWrappers
 
         
         [PublicArgument("PIM schema", typeof(PIMSchema))]
+        [Scope(ScopeAttribute.EScope.PIMDiagram)]
         public Guid PIMSchemaGuid { get; set; }
         
         [PublicArgument("First set", typeof(PIMAssociation))]
