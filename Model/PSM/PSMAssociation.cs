@@ -15,11 +15,11 @@ namespace EvoX.Model.PSM
             : base(p)
         {
             Parent = parent;
+            Child = child;
             if (Parent != null)
             {
                 Parent.ChildPSMAssociations.Add(this);
             }
-            Child = child;
             if (Child != null) Child.ParentAssociation = this;
             schema.PSMAssociations.Add(this);
         }
@@ -27,11 +27,11 @@ namespace EvoX.Model.PSM
             : base(p, g)
         {
             Parent = parent;
+            Child = child;
             if (Parent != null)
             {
                 Parent.ChildPSMAssociations.Add(this);
             }
-            Child = child;
             if (Child != null) Child.ParentAssociation = this;
             schema.PSMAssociations.Add(this);
         }
@@ -39,11 +39,11 @@ namespace EvoX.Model.PSM
             : base(p)
         {
             Parent = parent;
+            Child = child;
             if (Parent != null)
             {
                 Parent.ChildPSMAssociations.Insert(this, index);
             }
-            Child = child;
             if (Child != null) Child.ParentAssociation = this;
             schema.PSMAssociations.Add(this);
         }
@@ -51,11 +51,11 @@ namespace EvoX.Model.PSM
             : base(p, g)
         {
             Parent = parent;
+            Child = child;
             if (Parent != null)
             {
                 Parent.ChildPSMAssociations.Insert(this, index);
             }
-            Child = child;
             if (Child != null) Child.ParentAssociation = this;
             schema.PSMAssociations.Add(this);
         }

@@ -101,7 +101,7 @@ namespace EvoX.Controller.Commands.Atomic.PIM
                         c2.Set(intclass, psmAttribute.AttributeType, psmAttribute.Name, psmAttribute.Lower, psmAttribute.Upper, psmAttribute.Element);
                         command.Commands.Add(c2);
 
-                        acmdSynchroPSMAttributes s2 = new acmdSynchroPSMAttributes(Controller);
+                        acmdSynchroPSMAttributes s2 = new acmdSynchroPSMAttributes(Controller) { Propagate = false };
                         s2.X1.Add(psmAttribute);
                         s2.X2.Add(attrGuid2);
                         command.Commands.Add(s2);
@@ -114,7 +114,7 @@ namespace EvoX.Controller.Commands.Atomic.PIM
                         command.Commands.Add(m2);
                     }
 
-                    //select nearest iterpreted child PSM classes, whose parent association's interpretation is the PIM association through which we are moving the attribute
+                    //select nearest interpreted child PSM classes, whose parent association's interpretation is the PIM association through which we are moving the attribute
                     IEnumerable<PSMClass> children = intclass.InterpretedSubClasses().Where<PSMClass>(pc => pc.Interpretation == targetClass && pc.ParentAssociation.Interpretation == association);
                     foreach (PSMClass child in children)
                     {
@@ -125,7 +125,7 @@ namespace EvoX.Controller.Commands.Atomic.PIM
                         c.Set(intclass, psmAttribute.AttributeType, psmAttribute.Name, psmAttribute.Lower, psmAttribute.Upper, psmAttribute.Element);
                         command.Commands.Add(c);
 
-                        acmdSynchroPSMAttributes s = new acmdSynchroPSMAttributes(Controller);
+                        acmdSynchroPSMAttributes s = new acmdSynchroPSMAttributes(Controller) { Propagate = false };
                         s.X1.Add(psmAttribute);
                         s.X2.Add(attrGuid);
                         command.Commands.Add(s);
@@ -143,13 +143,27 @@ namespace EvoX.Controller.Commands.Atomic.PIM
                         cmdCreateNewPSMAttribute c = new cmdCreateNewPSMAttribute(Controller);
                         Guid attrGuid = Guid.NewGuid();
                         c.AttributeGuid = attrGuid;
-                        c.Set(intclass, psmAttribute.AttributeType, psmAttribute.Name, psmAttribute.Lower, psmAttribute.Upper, psmAttribute.Element);
+                        c.Set(/*(*) intclass*/psmAttribute.PSMClass, psmAttribute.AttributeType, psmAttribute.Name, psmAttribute.Lower, psmAttribute.Upper, psmAttribute.Element);
                         command.Commands.Add(c);
 
-                        acmdSynchroPSMAttributes s = new acmdSynchroPSMAttributes(Controller);
+                        /*if (psmAttribute.PSMClass != intclass)
+                        {
+                            cmdMovePSMAttribute m1 = new cmdMovePSMAttribute(Controller) { Propagate = false };
+                            m1.Set(psmAttribute, intclass);
+                            command.Commands.Add(m1);
+                        }*/
+
+                        acmdSynchroPSMAttributes s = new acmdSynchroPSMAttributes(Controller) { Propagate = false };
                         s.X1.Add(psmAttribute);
                         s.X2.Add(attrGuid);
                         command.Commands.Add(s);
+
+                        /*if (psmAttribute.PSMClass != intclass)
+                        {
+                            cmdMovePSMAttribute m2 = new cmdMovePSMAttribute(Controller) { Propagate = false };
+                            m2.Set(psmAttribute, psmAttribute.PSMClass);
+                            command.Commands.Add(m2);
+                        }*/
 
                         acmdSetInterpretation i = new acmdSetPSMAttributeInterpretation(Controller, attrGuid, attribute);
                         command.Commands.Add(i);
@@ -167,25 +181,27 @@ namespace EvoX.Controller.Commands.Atomic.PIM
 
                         Guid naGuid = Guid.NewGuid();
 
-                        acmdNewPSMAssociation na = new acmdNewPSMAssociation(Controller, intclass, ncGuid, psmAttribute.PSMSchema) { AssociationGuid = naGuid };
+                        acmdNewPSMAssociation na = new acmdNewPSMAssociation(Controller, /* (**) intclass*/ psmAttribute.PSMClass, ncGuid, psmAttribute.PSMSchema) { AssociationGuid = naGuid };
                         command.Commands.Add(na);
 
                         acmdRenameComponent ra = new acmdRenameComponent(Controller, naGuid, association.Name);
                         command.Commands.Add(ra);
 
                         PIMAssociationEnd e = targetClass.PIMAssociationEnds.Single<PIMAssociationEnd>(aend => aend.PIMAssociation == association);
-                        acmdUpdatePSMAssociationCardinality carda = new acmdUpdatePSMAssociationCardinality(Controller, naGuid, e.Lower, e.Upper);
+                        acmdUpdatePSMAssociationCardinality carda = new acmdUpdatePSMAssociationCardinality(Controller, naGuid, e.Lower, e.Upper) { Propagate = false };
                         command.Commands.Add(carda);
 
                         acmdSetInterpretation ia = new acmdSetPSMAssociationInterpretation(Controller, naGuid, association);
                         command.Commands.Add(ia);
 
-                        acmdMovePSMAttribute m = new acmdMovePSMAttribute(Controller, attrGuid, ncGuid) { Propagate = false };
+                        //was: acmdMovePSMAttribute when it was intclass above (*) (**)
+                        cmdMovePSMAttribute m = new cmdMovePSMAttribute(Controller) { Propagate = false };
+                        m.Set(attrGuid, ncGuid);
                         command.Commands.Add(m);
                     }
                 }
                 //delete attribute
-                cmdDeletePSMAttribute d = new cmdDeletePSMAttribute(Controller);
+                cmdDeletePSMAttribute d = new cmdDeletePSMAttribute(Controller) { Propagate = false };
                 d.Set(psmAttribute);
                 command.Commands.Add(d);
             }
