@@ -92,6 +92,18 @@ namespace EvoX.View.Commands.ParameterControls
                     SelectedIndex = 0;
                 }
             }
+            else if (componentType == typeof(PIMAssociation))
+            {
+                Items.Clear();
+                foreach (PIMAssociation pimAssociation in ProjectVersion.PIMSchema.PIMAssociations)
+                {
+                    ListBoxItem listItem = new ListBoxItem();
+                    listItem.Content = pimAssociation.ToString();
+                    listItem.Tag = pimAssociation.ID.ToString();
+                    Items.Add(listItem);
+                    SelectedIndex = 0;
+                }
+            }
             else if (componentType == typeof (PIMSchema))
             {
                 ListBoxItem listItem = new ListBoxItem();
