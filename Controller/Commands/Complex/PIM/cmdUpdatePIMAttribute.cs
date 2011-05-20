@@ -64,6 +64,12 @@ namespace EvoX.Controller.Commands.Complex.PIM
         {
             return base.CanExecute();
         }
+
+        internal override void CommandOperation()
+        {
+            base.CommandOperation();
+            Report = new CommandReport(CommandReports.COMPLEX_UPDATE_PIM_ATTR);
+        }
         
     }
 }

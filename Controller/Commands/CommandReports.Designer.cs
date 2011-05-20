@@ -70,6 +70,195 @@ namespace EvoX.Controller.Commands {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Complex: PIM association deletion.
+        /// </summary>
+        internal static string COMPLEX_DELETE_PIM_ASSOC {
+            get {
+                return ResourceManager.GetString("COMPLEX_DELETE_PIM_ASSOC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Complex: PIM attribute deletion.
+        /// </summary>
+        internal static string COMPLEX_DELETE_PIM_ATTR {
+            get {
+                return ResourceManager.GetString("COMPLEX_DELETE_PIM_ATTR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Complex: PIM class deletion.
+        /// </summary>
+        internal static string COMPLEX_DELETE_PIM_CLASS {
+            get {
+                return ResourceManager.GetString("COMPLEX_DELETE_PIM_CLASS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Complex: PSM association member deletion.
+        /// </summary>
+        internal static string COMPLEX_DELETE_PSM_ASSOC_MEMBER {
+            get {
+                return ResourceManager.GetString("COMPLEX_DELETE_PSM_ASSOC_MEMBER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Complex: Recursive PSM association deletion.
+        /// </summary>
+        internal static string COMPLEX_DELETE_PSM_ASSOC_RECURSIVE {
+            get {
+                return ResourceManager.GetString("COMPLEX_DELETE_PSM_ASSOC_RECURSIVE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Complex: PSM association deletion.
+        /// </summary>
+        internal static string COMPLEX_DELETE_PSM_ASSOCIATION {
+            get {
+                return ResourceManager.GetString("COMPLEX_DELETE_PSM_ASSOCIATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Complex: PSM attribute deletion.
+        /// </summary>
+        internal static string COMPLEX_DELETE_PSM_ATTRIBUTE {
+            get {
+                return ResourceManager.GetString("COMPLEX_DELETE_PSM_ATTRIBUTE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Complex: PSM class deletion.
+        /// </summary>
+        internal static string COMPLEX_DELETE_PSM_CLASS {
+            get {
+                return ResourceManager.GetString("COMPLEX_DELETE_PSM_CLASS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Complex: PSM class and parent deletion.
+        /// </summary>
+        internal static string COMPLEX_DELETE_PSM_CLASS_AND_PARENT {
+            get {
+                return ResourceManager.GetString("COMPLEX_DELETE_PSM_CLASS_AND_PARENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Complex: Recursive PSM class deletion.
+        /// </summary>
+        internal static string COMPLEX_DELETE_PSM_CLASS_RECURSIVE {
+            get {
+                return ResourceManager.GetString("COMPLEX_DELETE_PSM_CLASS_RECURSIVE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Complex: Recursive PSM content model deletion.
+        /// </summary>
+        internal static string COMPLEX_DELETE_PSM_CM_RECURSIVE {
+            get {
+                return ResourceManager.GetString("COMPLEX_DELETE_PSM_CM_RECURSIVE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Complex: PSM schema deletion.
+        /// </summary>
+        internal static string COMPLEX_DELETE_PSM_SCHEMA {
+            get {
+                return ResourceManager.GetString("COMPLEX_DELETE_PSM_SCHEMA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Complex: PSM attribute movement.
+        /// </summary>
+        internal static string COMPLEX_MOVE_PSM_ATTRIBUTE {
+            get {
+                return ResourceManager.GetString("COMPLEX_MOVE_PSM_ATTRIBUTE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Complex: PIM association creation.
+        /// </summary>
+        internal static string COMPLEX_NEW_PIM_ASSOC {
+            get {
+                return ResourceManager.GetString("COMPLEX_NEW_PIM_ASSOC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Complex: PIM attribute creation.
+        /// </summary>
+        internal static string COMPLEX_NEW_PIM_ATTR {
+            get {
+                return ResourceManager.GetString("COMPLEX_NEW_PIM_ATTR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Complex: PIM class creation.
+        /// </summary>
+        internal static string COMPLEX_NEW_PIM_CLASS {
+            get {
+                return ResourceManager.GetString("COMPLEX_NEW_PIM_CLASS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Complex: PSM association creation.
+        /// </summary>
+        internal static string COMPLEX_NEW_PSM_ASSOC {
+            get {
+                return ResourceManager.GetString("COMPLEX_NEW_PSM_ASSOC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Complex: PSM attribute creation.
+        /// </summary>
+        internal static string COMPLEX_NEW_PSM_ATTR {
+            get {
+                return ResourceManager.GetString("COMPLEX_NEW_PSM_ATTR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Complex: PSM class creation.
+        /// </summary>
+        internal static string COMPLEX_NEW_PSM_CLASS {
+            get {
+                return ResourceManager.GetString("COMPLEX_NEW_PSM_CLASS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Complex: PIM attribute update.
+        /// </summary>
+        internal static string COMPLEX_UPDATE_PIM_ATTR {
+            get {
+                return ResourceManager.GetString("COMPLEX_UPDATE_PIM_ATTR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Complex: PSM attribute update.
+        /// </summary>
+        internal static string COMPLEX_UPDATE_PSM_ATTRIBUTE {
+            get {
+                return ResourceManager.GetString("COMPLEX_UPDATE_PSM_ATTRIBUTE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &apos;{0}&apos; was added to diagram &apos;{1}&apos;..
         /// </summary>
         internal static string COMPONENT_ADDED_TO_DIAGRAM {
@@ -228,6 +417,15 @@ namespace EvoX.Controller.Commands {
         internal static string SCHEMA_RENAMED {
             get {
                 return ResourceManager.GetString("SCHEMA_RENAMED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Interpretation of &apos;{0}&apos; changed from &apos;{1}&apos; to &apos;{2}&apos;.
+        /// </summary>
+        internal static string SET_INTERPRETATION {
+            get {
+                return ResourceManager.GetString("SET_INTERPRETATION", resourceCulture);
             }
         }
         

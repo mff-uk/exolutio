@@ -50,6 +50,12 @@ namespace EvoX.Controller.Commands.Complex.PIM
             if (AssociationGuid == Guid.Empty) return false;
             return base.CanExecute();
         }
-        
+
+        internal override void CommandOperation()
+        {
+            base.CommandOperation();
+            Report = new CommandReport(CommandReports.COMPLEX_DELETE_PIM_ASSOC);
+        }
+
     }
 }
