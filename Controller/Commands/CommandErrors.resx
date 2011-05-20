@@ -151,7 +151,7 @@
     <value>One of the synchronized sets of associations is not a subset of associations between the two PIM classes connected by some of the associations</value>
   </data>
   <data name="CMDERR_NO_COMMON_ASSOCIATION_OR_REPR" xml:space="preserve">
-    <value>The source and the target class are not connected by an association, neither is one a structural representant of the other.</value>
+    <value>The source and the target association members are not connected by an association, neither is one a structural representant of the other.</value>
   </data>
   <data name="CMDERR_CLASS_IS_REPRESENTED" xml:space="preserve">
     <value>The PSM class has some representants.</value>
@@ -197,5 +197,8 @@
   </data>
   <data name="CMDERR_NO_COMMON_ANCESTOR_CLASS" xml:space="preserve">
     <value>There is no common ancestor class.</value>
+  </data>
+  <data name="CMDERR_PARENT_ASSOCIATION_EXISTS" xml:space="preserve">
+    <value>Cannot create association. The child already has a parent association.</value>
   </data>
 </root>

@@ -44,12 +44,19 @@ namespace EvoX.Controller.Commands.Atomic.PSM
 
         public override bool CanExecute()
         {
-            return parentGuid != Guid.Empty
-                && Project.VerifyComponentType<PSMAssociationMember>(parentGuid)
-                && childGuid != Guid.Empty
-                && Project.VerifyComponentType<PSMAssociationMember>(childGuid)
-                && schemaGuid != Guid.Empty
-                && Project.VerifyComponentType<PSMSchema>(schemaGuid);
+            if (parentGuid == Guid.Empty
+                || !Project.VerifyComponentType<PSMAssociationMember>(parentGuid)
+                || childGuid == Guid.Empty
+                || !Project.VerifyComponentType<PSMAssociationMember>(childGuid)
+                || schemaGuid == Guid.Empty
+                || !Project.VerifyComponentType<PSMSchema>(schemaGuid)) return false;
+            if (Project.TranslateComponent<PSMAssociationMember>(childGuid).ParentAssociation != null)
+            {
+                ErrorDescription = CommandErrors.CMDERR_PARENT_ASSOCIATION_EXISTS;
+                return false;
+            }
+            
+            return true;
         }
 
         internal override void CommandOperation()

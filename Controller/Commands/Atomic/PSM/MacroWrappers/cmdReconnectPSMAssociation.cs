@@ -15,24 +15,24 @@ namespace EvoX.Controller.Commands.Atomic.PSM.MacroWrappers
         [Scope(ScopeAttribute.EScope.PSMAssociation)]
         public Guid AssociationGuid { get; set; }
 
-        [PublicArgument("New parent PSM class", typeof(PSMClass))]
-        public Guid NewClassGuid { get; set; }
+        [PublicArgument("New parent (PSM Association Member)", typeof(PSMAssociationMember))]
+        public Guid NewParentGuid { get; set; }
 
         public cmdReconnectPSMAssociation() { }        
         
         public cmdReconnectPSMAssociation(Controller c)
             : base(c) { }
 
-        public void Set(Guid psmAssociationGuid, Guid psmClassGuid)
+        public void Set(Guid psmAssociationGuid, Guid parentGuid)
         {
-            NewClassGuid = psmClassGuid;
+            NewParentGuid = parentGuid;
             AssociationGuid = psmAssociationGuid;
             
         }
 
         protected override void GenerateSubCommands()
         {
-            Commands.Add(new acmdReconnectPSMAssociation(Controller, AssociationGuid, NewClassGuid));
+            Commands.Add(new acmdReconnectPSMAssociation(Controller, AssociationGuid, NewParentGuid));
         }
     }
 }
