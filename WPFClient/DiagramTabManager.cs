@@ -122,7 +122,7 @@ namespace EvoX.WPFClient
 
             if (selectedComponent != null)
             {
-                tab.DiagramView.SetSelection(selectedComponent);
+                tab.DiagramView.SetSelection(selectedComponent, true);
             }
 
             Current.ActiveDiagram = diagram;

@@ -31,10 +31,10 @@ namespace EvoX.View.Commands
         public static guiRedoCommand RedoCommand { get; set; }
         public static guiShowHelpCommand HelpCommand { get; set; }
         public static guiSampleDocumentCommand CreateSampleDocumentCommand { get; set; }
+        public static guiLocateInterpretedComponent LocateInterpretedComponent { get; set; }
 
 
         #endregion
-
 
         #region translation
 
@@ -215,6 +215,7 @@ namespace EvoX.View.Commands
             #region other
 
             VerifyModelCommand = new guiVerifyModelCommand();
+            LocateInterpretedComponent = new guiLocateInterpretedComponent();
 
             #endregion
 

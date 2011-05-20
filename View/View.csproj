@@ -120,6 +120,9 @@
     <Compile Include="Commands\Versioning\guiRemoveCurrentVersionCommand.cs" />
     <Compile Include="Commands\Versioning\guiBranchCurrentVersionCommand.cs" />
     <Compile Include="Commands\Versioning\guiSaveAsSingleVersionCommand.cs" />
+    <Compile Include="ComponentPropertyView.xaml.cs">
+      <DependentUpon>ComponentPropertyView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Containers\PSMAttributeContainer.cs" />
     <Compile Include="Containers\IAttributesContainer.cs" />
     <Compile Include="Containers\PIMAttributeContainer.cs">
@@ -247,6 +250,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Commands\CommandDialogWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ComponentPropertyView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

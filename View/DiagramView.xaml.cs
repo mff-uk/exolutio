@@ -195,13 +195,17 @@ namespace EvoX.View
             SetSelection((IEnumerable<Component>)components);
         }
 
-        public void SetSelection(Component component)
+        public void SetSelection(Component component, bool focusComponent = false)
         {
             ClearSelection(false);
             ComponentViewBase view = RepresentantsCollection[component];
             if (view != null)
             {
                 view.Selected = true;
+                if (focusComponent)
+                {
+                    view.Focus();
+                }
             }
             InvokeSelectionChanged();
         }
@@ -209,6 +213,15 @@ namespace EvoX.View
         public IEnumerable<Component> GetSelectedComponents()
         {
             return SelectedViews.Select(view => view.ModelComponent);
+        }
+
+        public Component GetSingleSelectedComponentOrNull()
+        {
+            if (SelectedViews.Select(view => view.ModelComponent).Count() == 1)
+            {
+                return SelectedViews.Select(view => view.ModelComponent).First();
+            }
+            return null;
         }
 
         #endregion 

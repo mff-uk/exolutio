@@ -5,7 +5,7 @@ using EvoX.Model.PIM;
 using EvoX.Model.PSM;
 using EvoX.ResourceLibrary;
 
-namespace EvoX.View.Commands.Local
+namespace EvoX.View.Commands
 {
     [Scope(ScopeAttribute.EScope.PSMClass)]
     public class guiLocateRepresentedPSMClass : guiScopeCommand

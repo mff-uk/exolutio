@@ -41,8 +41,11 @@
                             </ad:DockableContent>
                         </ad:DockablePane>
                     </ad:ResizingPanel>                    
-                    <ad:DockablePane ad:ResizingPanel.ResizeWidth="250" x:Name="RightPane" >
-                        <ad:DockableContent Title="OCL" x:Name="dcOcl" >
+                    <ad:DockablePane ad:ResizingPanel.ResizeWidth="250" x:Name="RightPane" ShowTabs="True" SelectedIndex="0">
+                    	<ad:DockableContent Title="Properties" x:Name="dcProperties" >
+                            <EvoXView:ComponentPropertyView x:Name="ComponentPropertyView" />
+                    	</ad:DockableContent>
+                    	<ad:DockableContent Title="OCL" x:Name="dcOcl" >
                             <Client:OCLEditor x:Name="OCLEditor" />
                         </ad:DockableContent>
                     </ad:DockablePane>

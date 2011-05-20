@@ -20,9 +20,8 @@ namespace EvoX.View.Commands
 			// ReSharper disable DoNotCallOverridableMethodsInConstructor
             #if SILVERLIGHT
             #else 
-            if (Gesture != null)
-            {
-                
+            if (Gesture != null && Current.MainWindow != null)
+            {   
                 keyBinding = new KeyBinding(this, Gesture);
                 Current.MainWindow.InputBindings.Add(keyBinding);
                 Current.MainWindow.CommandBindings.Add(new CommandBinding(this));

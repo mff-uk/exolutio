@@ -18,6 +18,11 @@ namespace EvoX.Model.PSM
             get { return (PSMSchema)Schema; }
         }
 
+        public string SchemaQualifiedName
+        {
+            get { return string.Format("{0}:{1}", PSMSchema, this.Name); }
+        }
+
         private Guid interpretationGuid;
 
         public PIMComponent Interpretation

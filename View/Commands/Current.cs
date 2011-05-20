@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Windows;
@@ -220,5 +221,6 @@ namespace EvoX.View
         IDiagramTabManager DiagramTabManager { get; }
         IFilePresenter FilePresenter { get; }
         void RefreshMenu();
+        void FocusComponent(IEnumerable<PIMDiagram> pimDiagrams, PIMComponent component);
     }
 }

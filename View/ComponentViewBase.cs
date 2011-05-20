@@ -218,6 +218,8 @@ namespace EvoX.View
 
         #region select & highlight
 
+        public virtual void Focus() { }
+
         private bool selected;
         public virtual bool Selected
         {
