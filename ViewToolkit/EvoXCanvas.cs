@@ -327,6 +327,7 @@ namespace EvoX.ViewToolkit
 
         internal void EvoXCanvas_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            base.OnMouseDown(e);
             #if SILVERLIGHT
             CurrentState.LeftButton = true; 
             #endif
@@ -340,6 +341,11 @@ namespace EvoX.ViewToolkit
             CurrentState.RightButton = false;
             #endif
             CurrentState.Canvas_MouseUp(e);
+
+            if (e.ChangedButton == MouseButton.Right && e.OriginalSource == this)
+            {
+                this.ContextMenu.IsOpen = true;
+            }
         }
 
         internal void EvoXCanvas_MouseMove(object sender, MouseEventArgs e)
