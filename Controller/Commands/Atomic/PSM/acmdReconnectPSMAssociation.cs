@@ -10,36 +10,38 @@ namespace EvoX.Controller.Commands.Atomic.PSM
 {
     public class acmdReconnectPSMAssociation : StackedCommand
     {
-        Guid associationGuid, newClassGuid, oldClassGuid;
+        Guid associationGuid, newParentGuid, oldParentGuid;
         int index;
 
-        public acmdReconnectPSMAssociation(Controller c, Guid psmAssociationGuid, Guid psmClassGuid)
+        public acmdReconnectPSMAssociation(Controller c, Guid psmAssociationGuid, Guid parentGuid)
             : base(c)
         {
-            newClassGuid = psmClassGuid;
+            newParentGuid = parentGuid;
             associationGuid = psmAssociationGuid;
         }
 
         public override bool CanExecute()
         {
-            if (!(newClassGuid != Guid.Empty
-                && Project.VerifyComponentType<PSMClass>(newClassGuid)
+            if (!(newParentGuid != Guid.Empty
+                && Project.VerifyComponentType<PSMAssociationMember>(newParentGuid)
                 && associationGuid != Guid.Empty
                 && Project.VerifyComponentType<PSMAssociation>(associationGuid)
-                && Project.TranslateComponent<PSMAssociation>(associationGuid).Parent is PSMClass))
+                && Project.TranslateComponent<PSMAssociation>(associationGuid).Parent is PSMAssociationMember))
             {
                 ErrorDescription = CommandErrors.CMDERR_INPUT_TYPE_MISMATCH;
                 return false;
             }
 
-            PSMClass newClass = Project.TranslateComponent<PSMClass>(newClassGuid);
-            PSMClass oldClass = Project.TranslateComponent<PSMAssociation>(associationGuid).Parent as PSMClass;
+            PSMAssociationMember newParent = Project.TranslateComponent<PSMAssociationMember>(newParentGuid);
+            PSMAssociationMember oldParent = Project.TranslateComponent<PSMAssociation>(associationGuid).Parent as PSMAssociationMember;
 
-            //the two classes connected by an association (atomic operation)
-            if (newClass.ParentAssociation != null && newClass.ParentAssociation.Parent == oldClass) return true;
-            if (oldClass.ParentAssociation != null && oldClass.ParentAssociation.Parent == newClass) return true;
+            //the two parents connected by an association (atomic operation)
+            if (newParent.ParentAssociation != null && newParent.ParentAssociation.Parent == oldParent) return true;
+            if (oldParent.ParentAssociation != null && oldParent.ParentAssociation.Parent == newParent) return true;
 
-            if (newClass.RepresentedClass == oldClass || oldClass.RepresentedClass == newClass) return true;
+            if ((newParent is PSMClass) && (oldParent is PSMClass) 
+                && ((newParent as PSMClass).RepresentedClass == oldParent 
+                    || (oldParent as PSMClass).RepresentedClass == newParent)) return true;
 
             ErrorDescription = CommandErrors.CMDERR_NO_COMMON_ASSOCIATION_OR_REPR;
             return false;
@@ -49,25 +51,27 @@ namespace EvoX.Controller.Commands.Atomic.PSM
         internal override void CommandOperation()
         {
             PSMAssociation psmAssociation = Project.TranslateComponent<PSMAssociation>(associationGuid);
-            PSMClass oldClass = psmAssociation.Parent as PSMClass;
-            oldClassGuid = oldClass;
-            PSMClass newClass = Project.TranslateComponent<PSMClass>(newClassGuid);
+            PSMAssociationMember oldParent = psmAssociation.Parent as PSMAssociationMember;
+            oldParentGuid = oldParent;
+            PSMAssociationMember newParent = Project.TranslateComponent<PSMAssociationMember>(newParentGuid);
 
-            index = oldClass.ChildPSMAssociations.IndexOf(psmAssociation);
-            oldClass.ChildPSMAssociations.Remove(psmAssociation);
-            psmAssociation.Parent = newClass;
-            newClass.ChildPSMAssociations.Add(psmAssociation);
+            index = oldParent.ChildPSMAssociations.IndexOf(psmAssociation);
+            oldParent.ChildPSMAssociations.Remove(psmAssociation);
+            psmAssociation.Parent = newParent;
+            newParent.ChildPSMAssociations.Add(psmAssociation);
+
+            Report = new CommandReport(CommandReports.MOVE_PSM_ASSOCIATION, psmAssociation, oldParent, newParent);
         }
 
         internal override CommandBase.OperationResult UndoOperation()
         {
             PSMAssociation psmAssociation = Project.TranslateComponent<PSMAssociation>(associationGuid);
-            PSMClass oldClass = Project.TranslateComponent<PSMClass>(oldClassGuid);
-            PSMClass newClass = Project.TranslateComponent<PSMClass>(newClassGuid);
+            PSMAssociationMember oldParent = Project.TranslateComponent<PSMAssociationMember>(oldParentGuid);
+            PSMAssociationMember newParent = Project.TranslateComponent<PSMAssociationMember>(newParentGuid);
 
-            newClass.ChildPSMAssociations.Remove(psmAssociation);
-            psmAssociation.Parent = oldClass;
-            oldClass.ChildPSMAssociations.Insert(psmAssociation, index);
+            newParent.ChildPSMAssociations.Remove(psmAssociation);
+            psmAssociation.Parent = oldParent;
+            oldParent.ChildPSMAssociations.Insert(psmAssociation, index);
             return OperationResult.OK;
         }
     }

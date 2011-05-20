@@ -249,4 +249,7 @@
   <data name="SET_INTERPRETATION" xml:space="preserve">
     <value>Interpretation of '{0}' changed from '{1}' to '{2}'</value>
   </data>
+  <data name="MOVE_PSM_ASSOCIATION" xml:space="preserve">
+    <value>Association '{0}' moved from '{1}' to '{2}'.</value>
+  </data>
 </root>

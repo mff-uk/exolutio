@@ -313,6 +313,15 @@ namespace EvoX.Controller.Commands {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Association &apos;{0}&apos; moved from &apos;{1}&apos; to &apos;{2}&apos;..
+        /// </summary>
+        internal static string MOVE_PSM_ASSOCIATION {
+            get {
+                return ResourceManager.GetString("MOVE_PSM_ASSOCIATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to PIM associations &apos;{0}&apos; synchronized with &apos;{1}&apos;.
         /// </summary>
         internal static string PIM_ASSOC_SYNCHRO {

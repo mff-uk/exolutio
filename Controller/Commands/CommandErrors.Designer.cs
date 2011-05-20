@@ -196,7 +196,7 @@ namespace EvoX.Controller.Commands {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The source and the target class are not connected by an association, neither is one a structural representant of the other..
+        ///   Looks up a localized string similar to The source and the target association members are not connected by an association, neither is one a structural representant of the other..
         /// </summary>
         internal static string CMDERR_NO_COMMON_ASSOCIATION_OR_REPR {
             get {
@@ -219,6 +219,15 @@ namespace EvoX.Controller.Commands {
         internal static string CMDERR_NOT_SAME_INTERPRETATION {
             get {
                 return ResourceManager.GetString("CMDERR_NOT_SAME_INTERPRETATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot create association. The child already has a parent association..
+        /// </summary>
+        internal static string CMDERR_PARENT_ASSOCIATION_EXISTS {
+            get {
+                return ResourceManager.GetString("CMDERR_PARENT_ASSOCIATION_EXISTS", resourceCulture);
             }
         }
         
