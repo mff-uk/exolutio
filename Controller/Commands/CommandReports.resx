@@ -162,13 +162,25 @@
   <data name="PSM_diagram_removed" xml:space="preserve">
     <value>'{0}' was removed from to the PSM.</value>
   </data>
-	<data name="PROJECT_RENAMED">
-		<value><![CDATA[Project renamed from '{0}' to '{1}'.]]></value>
-	</data>
-  <data name="SCHEMA_RENAMED">
-    <value><![CDATA[PSMSchema '{1}' renamed from '{0}' to '{1}'.]]></value>
+  <data name="PROJECT_RENAMED" xml:space="preserve">
+    <value>Project renamed from '{0}' to '{1}'.</value>
   </data>
-	<data name="VERSION_REMOVED">
-		<value><![CDATA[Version '{0}' removed from project.]]></value>
-	</data>
+  <data name="SCHEMA_RENAMED" xml:space="preserve">
+    <value>PSMSchema '{1}' renamed from '{0}' to '{1}'.</value>
+  </data>
+  <data name="VERSION_REMOVED" xml:space="preserve">
+    <value>Version '{0}' removed from project.</value>
+  </data>
+  <data name="PIM_ASSOC_SYNCHRO" xml:space="preserve">
+    <value>PIM associations '{0}' synchronized with '{1}'</value>
+  </data>
+  <data name="PIM_ATTR_SYNCHRO" xml:space="preserve">
+    <value>PIM attributes '{0}' synchronized with '{1}'</value>
+  </data>
+  <data name="PSM_ASSOC_SYNCHRO" xml:space="preserve">
+    <value>PSM associations '{0}' synchronized with '{1}'</value>
+  </data>
+  <data name="PSM_ATTR_SYNCHRO" xml:space="preserve">
+    <value>PSM attributes '{0}' synchronized with '{1}'</value>
+  </data>
 </root>
