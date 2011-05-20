@@ -143,7 +143,7 @@ namespace EvoX.Controller.Commands.Atomic.PIM
                         cmdCreateNewPSMAttribute c = new cmdCreateNewPSMAttribute(Controller);
                         Guid attrGuid = Guid.NewGuid();
                         c.AttributeGuid = attrGuid;
-                        c.Set(/*(*) intclass*/psmAttribute.PSMClass, psmAttribute.AttributeType, psmAttribute.Name, psmAttribute.Lower, psmAttribute.Upper, psmAttribute.Element);
+                        c.Set(/*intclass*/psmAttribute.PSMClass, psmAttribute.AttributeType, psmAttribute.Name, psmAttribute.Lower, psmAttribute.Upper, psmAttribute.Element);
                         command.Commands.Add(c);
 
                         /*if (psmAttribute.PSMClass != intclass)
@@ -181,7 +181,7 @@ namespace EvoX.Controller.Commands.Atomic.PIM
 
                         Guid naGuid = Guid.NewGuid();
 
-                        acmdNewPSMAssociation na = new acmdNewPSMAssociation(Controller, /* (**) intclass*/ psmAttribute.PSMClass, ncGuid, psmAttribute.PSMSchema) { AssociationGuid = naGuid };
+                        acmdNewPSMAssociation na = new acmdNewPSMAssociation(Controller, /*intclass*/ psmAttribute.PSMClass, ncGuid, psmAttribute.PSMSchema) { AssociationGuid = naGuid };
                         command.Commands.Add(na);
 
                         acmdRenameComponent ra = new acmdRenameComponent(Controller, naGuid, association.Name);
@@ -194,9 +194,7 @@ namespace EvoX.Controller.Commands.Atomic.PIM
                         acmdSetInterpretation ia = new acmdSetPSMAssociationInterpretation(Controller, naGuid, association);
                         command.Commands.Add(ia);
 
-                        //was: acmdMovePSMAttribute when it was intclass above (*) (**)
-                        cmdMovePSMAttribute m = new cmdMovePSMAttribute(Controller) { Propagate = false };
-                        m.Set(attrGuid, ncGuid);
+                        acmdMovePSMAttribute m = new acmdMovePSMAttribute(Controller, attrGuid, ncGuid) { Propagate = false };
                         command.Commands.Add(m);
                     }
                 }
