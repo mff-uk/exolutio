@@ -43,7 +43,14 @@ namespace EvoX.ViewToolkit
         {
             MouseButtonEventArgs eventArgs = new MouseButtonEventArgs(e.MouseDevice, e.Timestamp, e.ChangedButton);
             eventArgs.RoutedEvent = EvoXCanvas.MouseDownEvent;
-            eventArgs.Source = EvoXCanvas; 
+            if (e.OriginalSource == scrollViewer)
+            {
+                eventArgs.Source = EvoXCanvas;
+            }
+            else
+            {
+                eventArgs.Source = e.OriginalSource;
+            }
             EvoXCanvas.EvoXCanvas_MouseDown(EvoXCanvas, eventArgs);
         }
 
@@ -51,7 +58,14 @@ namespace EvoX.ViewToolkit
         {
             MouseEventArgs eventArgs = new MouseEventArgs(e.MouseDevice, e.Timestamp);
             eventArgs.RoutedEvent = EvoXCanvas.MouseMoveEvent;
-            eventArgs.Source = EvoXCanvas;
+            if (e.OriginalSource == scrollViewer)
+            {
+                eventArgs.Source = EvoXCanvas;
+            }
+            else
+            {
+                eventArgs.Source = e.OriginalSource;
+            }
             EvoXCanvas.EvoXCanvas_MouseMove(EvoXCanvas, e);
             ShowHideZoomer(e);
 
@@ -64,6 +78,10 @@ namespace EvoX.ViewToolkit
             if (e.OriginalSource == scrollViewer)
             {
                 eventArgs.Source = EvoXCanvas;
+            }
+            else
+            {
+                eventArgs.Source = e.OriginalSource;
             }
             EvoXCanvas.EvoXCanvas_MouseUp(EvoXCanvas, eventArgs);
         }

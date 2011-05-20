@@ -144,5 +144,11 @@ namespace EvoX.View
             MainNode.EvoXCanvas.RemoveNode(MainNode);
             base.RemoveFromDiagram();
         }
+
+        public override void Focus()
+        {
+            base.Focus();
+            MainNode.Focus();
+        }
     }
 }

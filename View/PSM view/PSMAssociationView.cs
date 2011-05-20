@@ -165,6 +165,7 @@ namespace EvoX.View
 
             NameLabel.PositionChanged += NameLabel_PositionChanged;
             CardinalityLabel.PositionChanged += CardinalityLabel_PositionChanged;
+            Connector.SelectedChanged += Connector_SelectedChanged;
             //Connector.MouseDown += Connector_MouseDown;
             #if SILVERLIGHT
             #else
@@ -193,6 +194,11 @@ namespace EvoX.View
 //            //otherwise MouseUp is catched by DiagramView which clears selection 
 //            e.Handled = true;
 //        }
+
+        void Connector_SelectedChanged()
+        {
+            this.Selected = Connector.Selected;
+        }
 
         private void CardinalityLabel_PositionChanged()
         {
@@ -231,6 +237,12 @@ namespace EvoX.View
             {
                 base.Selected = value;
             }
+        }
+
+        public override void Focus()
+        {
+            base.Focus();
+            Connector.Focus();
         }
     }
 }

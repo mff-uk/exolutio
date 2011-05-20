@@ -8,7 +8,6 @@ using EvoX.Controller.Commands;
 using EvoX.Controller.Commands.Reflection;
 using EvoX.Model;
 using EvoX.View.Commands;
-using EvoX.View.Commands.Local;
 using EvoX.View.Commands.ParameterControls;
 using EvoX.ViewToolkit;
 using EvoX.SupportingClasses;

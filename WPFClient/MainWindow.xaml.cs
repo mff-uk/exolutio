@@ -75,7 +75,22 @@ namespace EvoX.WPFClient
         {
             if (ConfigurationManager.HasStoredLayout)
             {
-                dockManager.RestoreLayout(ConfigurationManager.LayoutFilePath);
+                try
+                {
+                    dockManager.RestoreLayout(ConfigurationManager.LayoutFilePath);
+                }
+                catch (Exception)
+                {
+                    try
+                    {
+                        Commands.StaticWPFClientCommands.ResetWindowLayout.Execute();
+                    }
+                    catch (Exception)
+                    {
+                        
+                    }
+                }
+                
             }
         }
 
@@ -245,6 +260,18 @@ namespace EvoX.WPFClient
         public void FocusComponent(Diagram diagram, Component component)
         {
             DiagramTabManager.ActivateDiagramWithElement(diagram, component);
+        }
+
+        public void FocusComponent(IEnumerable<PIMDiagram> pimDiagrams, PIMComponent component)
+        {
+            if (pimDiagrams.Count() == 1)
+            {
+                DiagramTabManager.ActivateDiagramWithElement(pimDiagrams.First(), component);
+            }
+            else
+            {
+                throw new NotImplementedException("Focus component not implemented for the case where the component is present in zero or more than one diagram.");
+            }
         }
 
         public void DisplayReport(NestedCommandReport finalReport)

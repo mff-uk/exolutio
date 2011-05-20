@@ -1,6 +1,6 @@
 using System;
 
-namespace EvoX.View.Commands.Local
+namespace EvoX.View.Commands
 {
     
     public abstract class guiScopeCommand: guiCommandBase

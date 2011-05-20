@@ -64,9 +64,7 @@
     <Compile Include="EvoXCanvasWithZoomer.xaml.cs">
       <DependentUpon>EvoXCanvasWithZoomer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControl1.xaml.cs">
-      <DependentUpon>UserControl1.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="FormControls\LinkLabel.cs" />
     <Compile Include="Zoomer.xaml.cs">
       <DependentUpon>Zoomer.xaml</DependentUpon>
     </Compile>
@@ -128,10 +126,6 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="EvoXCanvasWithZoomer.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControl1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

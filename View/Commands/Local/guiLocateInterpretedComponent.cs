@@ -8,7 +8,7 @@ using EvoX.Model.PIM;
 using EvoX.Model.PSM;
 using EvoX.ResourceLibrary;
 
-namespace EvoX.View.Commands.Local
+namespace EvoX.View.Commands
 {
     [Scope(ScopeAttribute.EScope.PSMAssociation | ScopeAttribute.EScope.PSMAttribute | ScopeAttribute.EScope.PSMClass)]
     public class guiLocateInterpretedComponent : guiScopeCommand
@@ -29,7 +29,7 @@ namespace EvoX.View.Commands.Local
             Diagram diagram = ModelIterator.GetDiagramForComponent(pimComponent);
             Current.MainWindow.FocusComponent(diagram, pimComponent);
         }
-
+        
         public override string Text
         {
             get { return "Find interpreted component "; }
