@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using EvoX.Controller.Commands;
+using EvoX.Controller.Commands.Reflection;
 using EvoX.Model.PIM;
 using EvoX.Model;
 using EvoX.Model.PSM;
@@ -28,6 +29,7 @@ namespace EvoX.Controller.Commands.Atomic.PIM.MacroWrappers
         public Guid ClassGuid { get; set; }
 
         [PublicArgument("First set", typeof(PIMAttribute))]
+        [ConsistentWith("ClassGuid", PIMClassAttributeParameterConsistency.Key)]
         public List<Guid> X1
         {
             get { return x1; }
@@ -35,6 +37,7 @@ namespace EvoX.Controller.Commands.Atomic.PIM.MacroWrappers
         }
 
         [PublicArgument("Second set", typeof(PIMAttribute))]
+        [ConsistentWith("ClassGuid", PIMClassAttributeParameterConsistency.Key)]
         public List<Guid> X2
         {
             get { return x2; }
