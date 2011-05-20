@@ -8,7 +8,7 @@ using EvoX.Model;
 
 namespace EvoX.Controller.Commands.Atomic.PSM.MacroWrappers
 {
-    [PublicCommand("Move PSM attribute (no propagation yet)", PublicCommandAttribute.EPulicCommandCategory.PSM_atomic)]
+    [PublicCommand("Move PSM attribute", PublicCommandAttribute.EPulicCommandCategory.PSM_atomic)]
     public class cmdMovePSMAttribute : MacroCommand
     {
         [PublicArgument("Attribute", typeof(PSMAttribute))]

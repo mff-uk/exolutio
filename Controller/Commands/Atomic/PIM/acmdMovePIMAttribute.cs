@@ -78,7 +78,7 @@ namespace EvoX.Controller.Commands.Atomic.PIM
             PIMClass sourceClass = attribute.PIMClass;
 
             IEnumerable<PIMAssociation> pimAssociations = targetClass.GetAssociationsWith(sourceClass);
-            IEnumerable<PSMAttribute> interpretedAttributes = attribute.GetInterpretedComponents().Cast<PSMAttribute>();
+            IEnumerable<PSMAttribute> interpretedAttributes = attribute.GetInterpretedComponents().Cast<PSMAttribute>().Where(a => a.ID != PropagateSource);
 
             foreach (PSMAttribute psmAttribute in interpretedAttributes)
             {
