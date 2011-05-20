@@ -61,7 +61,10 @@ namespace EvoX.ViewToolkit
         {
             MouseButtonEventArgs eventArgs = new MouseButtonEventArgs(e.MouseDevice, e.Timestamp, e.ChangedButton);
             eventArgs.RoutedEvent = EvoXCanvas.MouseUpEvent;
-            eventArgs.Source = EvoXCanvas;
+            if (e.OriginalSource == scrollViewer)
+            {
+                eventArgs.Source = EvoXCanvas;
+            }
             EvoXCanvas.EvoXCanvas_MouseUp(EvoXCanvas, eventArgs);
         }
 

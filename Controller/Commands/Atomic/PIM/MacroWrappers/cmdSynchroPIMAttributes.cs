@@ -22,10 +22,7 @@ namespace EvoX.Controller.Commands.Atomic.PIM.MacroWrappers
 
         public cmdSynchroPIMAttributes(Controller c)
             : base(c) { }
-
-        [PublicArgument("PIM Schema", typeof(PIMSchema))]
-        public Guid SchemaGuid { get; set; }
-
+        
         [PublicArgument("Class of the synchronized attributes", typeof(PIMClass))]
         [Scope(ScopeAttribute.EScope.PIMClass)]
         public Guid ClassGuid { get; set; }
