@@ -25,12 +25,12 @@ namespace EvoX.Controller.Commands.Atomic.PIM.MacroWrappers
             : base(c) { }
 
         
-        [PublicArgument("PIM schema", typeof(PIMSchema))]
-        [Scope(ScopeAttribute.EScope.PIMDiagram)]
-        public Guid PIMSchemaGuid { get; set; }
+        //[PublicArgument("PIM schema", typeof(PIMSchema))]
+        //[Scope(ScopeAttribute.EScope.PIMDiagram)]
+        //public Guid PIMSchemaGuid { get; set; }
         
         [PublicArgument("First set", typeof(PIMAssociation))]
-        [ConsistentWith("PIMSchemaGuid", PIMSchemaComponentParameterConsistency.Key)]
+        //[ConsistentWith("PIMSchemaGuid", PIMSchemaComponentParameterConsistency.Key)]
         public List<Guid> X1
         {
             get { return x1; }
@@ -38,7 +38,7 @@ namespace EvoX.Controller.Commands.Atomic.PIM.MacroWrappers
         }
 
         [PublicArgument("Second set", typeof(PIMAssociation))]
-        [ConsistentWith("PIMSchemaGuid", PIMSchemaComponentParameterConsistency.Key)]
+        //[ConsistentWith("PIMSchemaGuid", PIMSchemaComponentParameterConsistency.Key)]
         public List<Guid> X2
         {
             get { return x2; }
