@@ -70,6 +70,12 @@ namespace EvoX.Controller.Commands.Complex.PSM
             if (AssociationGuid == Guid.Empty) return false;
             return base.CanExecute();
         }
-        
+
+        internal override void CommandOperation()
+        {
+            base.CommandOperation();
+            Report = new CommandReport(CommandReports.COMPLEX_DELETE_PSM_ASSOCIATION);
+        }
+
     }
 }

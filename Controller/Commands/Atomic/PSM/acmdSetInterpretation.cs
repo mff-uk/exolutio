@@ -34,7 +34,7 @@ namespace EvoX.Controller.Commands.Atomic.PSM
             if (PIMComponentGuid != Guid.Empty)
                 c.Interpretation = Project.TranslateComponent<PIMComponent>(PIMComponentGuid);
             else c.Interpretation = null;
-            Report = new CommandReport("Interpretation of {0} set to {1} (was {2}).", c, c.Interpretation, oldInterpretation);
+            Report = new CommandReport(CommandReports.SET_INTERPRETATION, c, oldInterpretation, c.Interpretation);
         }
 
         internal override CommandBase.OperationResult UndoOperation()

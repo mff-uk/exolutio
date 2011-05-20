@@ -171,6 +171,69 @@
   <data name="VERSION_REMOVED" xml:space="preserve">
     <value>Version '{0}' removed from project.</value>
   </data>
+  <data name="COMPLEX_DELETE_PIM_ASSOC" xml:space="preserve">
+    <value>Complex: PIM association deletion</value>
+  </data>
+  <data name="COMPLEX_DELETE_PIM_ATTR" xml:space="preserve">
+    <value>Complex: PIM attribute deletion</value>
+  </data>
+  <data name="COMPLEX_DELETE_PIM_CLASS" xml:space="preserve">
+    <value>Complex: PIM class deletion</value>
+  </data>
+  <data name="COMPLEX_DELETE_PSM_ASSOCIATION" xml:space="preserve">
+    <value>Complex: PSM association deletion</value>
+  </data>
+  <data name="COMPLEX_DELETE_PSM_ASSOC_MEMBER" xml:space="preserve">
+    <value>Complex: PSM association member deletion</value>
+  </data>
+  <data name="COMPLEX_DELETE_PSM_ASSOC_RECURSIVE" xml:space="preserve">
+    <value>Complex: Recursive PSM association deletion</value>
+  </data>
+  <data name="COMPLEX_DELETE_PSM_ATTRIBUTE" xml:space="preserve">
+    <value>Complex: PSM attribute deletion</value>
+  </data>
+  <data name="COMPLEX_DELETE_PSM_CLASS" xml:space="preserve">
+    <value>Complex: PSM class deletion</value>
+  </data>
+  <data name="COMPLEX_DELETE_PSM_CLASS_AND_PARENT" xml:space="preserve">
+    <value>Complex: PSM class and parent deletion</value>
+  </data>
+  <data name="COMPLEX_DELETE_PSM_CLASS_RECURSIVE" xml:space="preserve">
+    <value>Complex: Recursive PSM class deletion</value>
+  </data>
+  <data name="COMPLEX_DELETE_PSM_CM_RECURSIVE" xml:space="preserve">
+    <value>Complex: Recursive PSM content model deletion</value>
+  </data>
+  <data name="COMPLEX_DELETE_PSM_SCHEMA" xml:space="preserve">
+    <value>Complex: PSM schema deletion</value>
+  </data>
+  <data name="COMPLEX_MOVE_PSM_ATTRIBUTE" xml:space="preserve">
+    <value>Complex: PSM attribute movement</value>
+  </data>
+  <data name="COMPLEX_NEW_PIM_ASSOC" xml:space="preserve">
+    <value>Complex: PIM association creation</value>
+  </data>
+  <data name="COMPLEX_NEW_PIM_ATTR" xml:space="preserve">
+    <value>Complex: PIM attribute creation</value>
+  </data>
+  <data name="COMPLEX_NEW_PIM_CLASS" xml:space="preserve">
+    <value>Complex: PIM class creation</value>
+  </data>
+  <data name="COMPLEX_NEW_PSM_ASSOC" xml:space="preserve">
+    <value>Complex: PSM association creation</value>
+  </data>
+  <data name="COMPLEX_NEW_PSM_ATTR" xml:space="preserve">
+    <value>Complex: PSM attribute creation</value>
+  </data>
+  <data name="COMPLEX_NEW_PSM_CLASS" xml:space="preserve">
+    <value>Complex: PSM class creation</value>
+  </data>
+  <data name="COMPLEX_UPDATE_PIM_ATTR" xml:space="preserve">
+    <value>Complex: PIM attribute update</value>
+  </data>
+  <data name="COMPLEX_UPDATE_PSM_ATTRIBUTE" xml:space="preserve">
+    <value>Complex: PSM attribute update</value>
+  </data>
   <data name="PIM_ASSOC_SYNCHRO" xml:space="preserve">
     <value>PIM associations '{0}' synchronized with '{1}'</value>
   </data>
@@ -182,5 +245,8 @@
   </data>
   <data name="PSM_ATTR_SYNCHRO" xml:space="preserve">
     <value>PSM attributes '{0}' synchronized with '{1}'</value>
+  </data>
+  <data name="SET_INTERPRETATION" xml:space="preserve">
+    <value>Interpretation of '{0}' changed from '{1}' to '{2}'</value>
   </data>
 </root>

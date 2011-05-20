@@ -75,6 +75,11 @@ namespace EvoX.Controller.Commands.Complex.PSM
         {
             return base.CanExecute();
         }
-        
+
+        internal override void CommandOperation()
+        {
+            base.CommandOperation();
+            Report = new CommandReport(CommandReports.COMPLEX_UPDATE_PSM_ATTRIBUTE);
+        }
     }
 }

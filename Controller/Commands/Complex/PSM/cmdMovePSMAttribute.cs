@@ -111,6 +111,11 @@ namespace EvoX.Controller.Commands.Complex.PSM
             }
             return true;
         }
-        
+
+        internal override void CommandOperation()
+        {
+            base.CommandOperation();
+            Report = new CommandReport(CommandReports.COMPLEX_MOVE_PSM_ATTRIBUTE);
+        }
     }
 }

@@ -7,6 +7,7 @@ using EvoX.Model;
 using EvoX.Model.PSM;
 using EvoX.Controller.Commands.Atomic.PSM;
 using EvoX.Controller.Commands.Complex.PSM;
+using EvoX.Controller.Commands.Reflection;
 
 namespace EvoX.Controller.Commands.Atomic.PSM.MacroWrappers
 {
@@ -22,7 +23,12 @@ namespace EvoX.Controller.Commands.Atomic.PSM.MacroWrappers
         public cmdSynchroPSMAttributes(Controller c)
             : base(c) { }
 
+        [PublicArgument("Class of the synchronized attributes", typeof(PSMClass))]
+        [Scope(ScopeAttribute.EScope.PSMClass)]
+        public Guid ClassGuid { get; set; }
+        
         [PublicArgument("First set", typeof(PSMAttribute))]
+        [ConsistentWith("ClassGuid", PSMClassAttributeParameterConsistency.Key)]
         public List<Guid> X1
         {
             get { return x1; }
@@ -30,6 +36,7 @@ namespace EvoX.Controller.Commands.Atomic.PSM.MacroWrappers
         }
 
         [PublicArgument("Second set", typeof(PSMAttribute))]
+        [ConsistentWith("ClassGuid", PSMClassAttributeParameterConsistency.Key)]
         public List<Guid> X2
         {
             get { return x2; }

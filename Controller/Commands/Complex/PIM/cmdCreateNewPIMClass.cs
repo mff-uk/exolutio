@@ -57,6 +57,12 @@ namespace EvoX.Controller.Commands.Complex.PIM
             if (Name == null || SchemaGuid == Guid.Empty) return false;
             return base.CanExecute();
         }
-        
+
+        internal override void CommandOperation()
+        {
+            base.CommandOperation();
+            Report = new CommandReport(CommandReports.COMPLEX_NEW_PIM_CLASS);
+        }
+
     }
 }
