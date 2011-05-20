@@ -84,7 +84,11 @@ namespace EvoX.Controller.Commands.Complex.PSM
                 intermediateClasses2.Reverse();
                 intermediateClasses.AddRange(intermediateClasses2);
             }
-            else
+            else if (targetClass == common)
+            {
+                //nothing
+            }
+            else 
             {
                 Debug.Assert(false, "error - common class not reachable?");
             }

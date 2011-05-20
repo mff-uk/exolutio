@@ -124,6 +124,24 @@ namespace EvoX.Controller.Commands {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to PIM associations &apos;{0}&apos; synchronized with &apos;{1}&apos;.
+        /// </summary>
+        internal static string PIM_ASSOC_SYNCHRO {
+            get {
+                return ResourceManager.GetString("PIM_ASSOC_SYNCHRO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PIM attributes &apos;{0}&apos; synchronized with &apos;{1}&apos;.
+        /// </summary>
+        internal static string PIM_ATTR_SYNCHRO {
+            get {
+                return ResourceManager.GetString("PIM_ATTR_SYNCHRO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &apos;{0}&apos; was added to the PIM. .
         /// </summary>
         internal static string PIM_component_added {
@@ -147,6 +165,24 @@ namespace EvoX.Controller.Commands {
         internal static string PROJECT_RENAMED {
             get {
                 return ResourceManager.GetString("PROJECT_RENAMED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PSM associations &apos;{0}&apos; synchronized with &apos;{1}&apos;.
+        /// </summary>
+        internal static string PSM_ASSOC_SYNCHRO {
+            get {
+                return ResourceManager.GetString("PSM_ASSOC_SYNCHRO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PSM attributes &apos;{0}&apos; synchronized with &apos;{1}&apos;.
+        /// </summary>
+        internal static string PSM_ATTR_SYNCHRO {
+            get {
+                return ResourceManager.GetString("PSM_ATTR_SYNCHRO", resourceCulture);
             }
         }
         

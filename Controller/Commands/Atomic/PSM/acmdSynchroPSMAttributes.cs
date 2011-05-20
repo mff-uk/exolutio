@@ -36,6 +36,13 @@ namespace EvoX.Controller.Commands.Atomic.PSM
             return true;
         }
 
+        internal override void CommandOperation()
+        {
+            Report = new CommandReport(CommandReports.PSM_ATTR_SYNCHRO,
+                String.Concat(Project.TranslateComponentCollection<PSMAttribute>(X1).Select<PSMAttribute, String>(a => a.ToString() + " ")),
+                String.Concat(Project.TranslateComponentCollection<PSMAttribute>(X2).Select<PSMAttribute, String>(a => a.ToString() + " ")));
+        }
+
         internal override MacroCommand PostPropagation()
         {
             MacroCommand command = new MacroCommand(Controller) { CheckFirstOnlyInCanExecute = true };
