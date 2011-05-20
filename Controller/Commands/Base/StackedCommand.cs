@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using EvoX.Model;
+using System;
 
 namespace EvoX.Controller.Commands
 {
@@ -37,6 +38,17 @@ namespace EvoX.Controller.Commands
         {
             get { return propagate; }
             set { propagate = value; }
+        }
+
+        private Guid propagateSource;
+        
+        /// <summary>
+        /// Sets the source of propagation to avoid propagating back to the source. (PSM => PIM => PSMs)
+        /// </summary>
+        public Guid PropagateSource
+        {
+            get { return propagateSource; }
+            set { propagateSource = value; }
         }
 
 		/// <summary>

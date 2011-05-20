@@ -5,6 +5,7 @@ using System.Text;
 using EvoX.Controller.Commands;
 using EvoX.Model.PSM;
 using EvoX.Model;
+using EvoX.Controller.Commands.Atomic.PIM;
 
 namespace EvoX.Controller.Commands.Atomic.PSM
 {
@@ -68,6 +69,34 @@ namespace EvoX.Controller.Commands.Atomic.PSM
             psmAttribute.PSMClass = oldClass;
             oldClass.PSMAttributes.Insert(psmAttribute, index);
             return OperationResult.OK;
+        }
+
+        internal override MacroCommand PostPropagation()
+        {
+            PSMAttribute psmAttribute = Project.TranslateComponent<PSMAttribute>(attributeGuid);
+            PSMClass oldClass = Project.TranslateComponent<PSMClass>(oldClassGuid);
+            PSMClass newClass = Project.TranslateComponent<PSMClass>(newClassGuid);
+
+            if (psmAttribute.Interpretation == null) return null;
+            
+            PSMClass oldIntContext = oldClass.NearestInterpretedClass();
+            PSMClass newIntContext = newClass.NearestInterpretedClass();
+
+            if (oldIntContext == newIntContext) return null;
+
+            MacroCommand command = new MacroCommand(Controller) { CheckFirstOnlyInCanExecute = true };
+            command.Report = new CommandReport("Post-propagation (move PSM attribute)");
+
+            if (newIntContext == null)
+            {
+                command.Commands.Add(new acmdSetPSMAttributeInterpretation(Controller, psmAttribute, Guid.Empty));
+            }
+            else
+            {
+                command.Commands.Add(new acmdMovePIMAttribute(Controller, psmAttribute.Interpretation, newIntContext.Interpretation) { PropagateSource = psmAttribute });
+            }
+
+            return command;
         }
     }
 }
