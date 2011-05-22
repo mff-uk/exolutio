@@ -52,6 +52,12 @@ namespace EvoX.View
         public override void UpdateView()
         {
             base.UpdateView();
+            Node parentNode = ((INodeComponentViewBase) DiagramView.RepresentantsCollection[Parent]).MainNode;
+            if (parentNode != Connector.StartNode)
+            {
+                Node childNode = ((INodeComponentViewBase) DiagramView.RepresentantsCollection[Child]).MainNode;
+                Connector.Connect(parentNode, childNode);
+            }
             // labels, multiplicities
             NameLabel.Text = PSMAssociation.Name;
             Cardinality = PSMAssociation.GetCardinalityString();

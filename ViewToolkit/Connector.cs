@@ -565,6 +565,14 @@ namespace EvoX.ViewToolkit
 
         public void Connect(Node node1, Node node2)
         {
+            if (StartNode != null)
+            {
+                StartNode.Connectors.Remove(this);
+            }
+            if (EndNode != null)
+            {
+                EndNode.Connectors.Remove(this);
+            }
             StartNode = node1;
             EndNode = node2;
 
@@ -587,6 +595,18 @@ namespace EvoX.ViewToolkit
             startPoint.SetPreferedPosition(optimalConnection[0]);
             endPoint.SetPreferedPosition(optimalConnection[1]);
 
+            foreach (ConnectorPoint point in Points)
+            {
+                if (point.OrderInConnector == 0)
+                {
+                    point.ParentControl.InnerConnectorControl.Children.Remove(point);
+                }
+                if (point.OrderInConnector == Points.Count - 1)
+                {
+                    point.ParentControl.InnerConnectorControl.Children.Remove(point);
+                }
+            }
+            points.Clear();
             points.Add(startPoint);
             points.Add(endPoint);
             StartNode.InnerConnectorControl.Children.Add(startPoint);

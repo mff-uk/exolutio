@@ -214,13 +214,14 @@ namespace EvoX.View.Commands.Project
 			    //{
 			    //    BusyState.SetNormalState();
 			    //}
+
+                if (Current.Project.ProjectFile != null)
+                {
+                    Current.InvokeRecentFile(Current.Project.ProjectFile);
+                }
 			}
 
             Current.MainWindow.CloseRibbonBackstage();
-            if (Current.Project.ProjectFile != null)
-            {
-                Current.InvokeRecentFile(Current.Project.ProjectFile);
-            }
 		}
 
         public void Execute(string[] droppedFilePaths, bool noOpenFileDialog)

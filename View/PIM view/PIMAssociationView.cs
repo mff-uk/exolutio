@@ -58,6 +58,13 @@ namespace EvoX.View
         public override void UpdateView()
         {
             base.UpdateView();
+            Node sourceNode = ((INodeComponentViewBase)DiagramView.RepresentantsCollection[SourceClass]).MainNode;
+            if (sourceNode != Connector.StartNode)
+            {
+                Node targetNode = ((INodeComponentViewBase)DiagramView.RepresentantsCollection[TargetClass]).MainNode;
+                Connector.Connect(sourceNode, targetNode);
+            }
+
             // labels, multiplicities
             NameLabel.Text = PIMAssociation.Name;
             SourceCardinality = PIMAssociation.PIMAssociationEnds[0].GetCardinalityString();
