@@ -56,7 +56,7 @@ namespace EvoX.WPFClient
             EvoXRibbon.FillRecent(ConfigurationManager.Configuration.RecentFiles, ConfigurationManager.Configuration.RecentDirectories);
 
             //Project sampleProject = Tests.TestUtils.CreateSimpleSampleProject();
-            if (!ConfigurationManager.Configuration.RecentFiles.IsEmpty())
+            if (!ConfigurationManager.Configuration.RecentFiles.IsEmpty() && ConfigurationManager.Configuration.RecentFiles.First().Exists)
             {
                 EvoXGuiCommands.OpenProjectCommand.Execute(ConfigurationManager.Configuration.RecentFiles.First().FullName, true, true);
             }
