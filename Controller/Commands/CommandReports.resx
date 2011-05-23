@@ -252,4 +252,10 @@
   <data name="MOVE_PSM_ASSOCIATION" xml:space="preserve">
     <value>Association '{0}' moved from '{1}' to '{2}'.</value>
   </data>
+  <data name="COMPLEX_RECONNECT_PSM_ASSOCIATION" xml:space="preserve">
+    <value>Complex: PSM association reconnect</value>
+  </data>
+  <data name="PSM_ASSOC_SHIFT" xml:space="preserve">
+    <value>PSM Association '{0}' shifted '{1}'.</value>
+  </data>
 </root>

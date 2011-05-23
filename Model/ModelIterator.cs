@@ -143,6 +143,19 @@ namespace EvoX.Model
             return false;
         }
 
+        public static PSMAssociationMember GetNearestCommonAncestorAssociationMember(this PSMAssociationMember component1, PSMAssociationMember component2)
+        {
+            IEnumerable<PSMAssociationMember> path1 = component1.GetPathToRoot();
+            IEnumerable<PSMAssociationMember> path2 = component2.GetPathToRoot();
+
+            IEnumerator<PSMAssociationMember> current = path1.GetEnumerator();
+            while (!path2.Contains(current.Current))
+            {
+                if (!current.MoveNext()) return null;
+            }
+            return current.Current;
+        }
+
         public static PSMClass GetNearestCommonAncestorClass(this PSMAssociationMember component1, PSMAssociationMember component2)
         {
             IEnumerable<PSMClass> path1 = component1.GetClassPathToRoot();
@@ -155,7 +168,28 @@ namespace EvoX.Model
             }
             return current.Current;
         }
-        
+
+        /// <summary>
+        /// Returns PSMAssociationMember path from start to root including start
+        /// </summary>
+        /// <param name="start"></param>
+        /// <returns></returns>
+        public static List<PSMAssociationMember> GetPathToRoot(this PSMAssociationMember start)
+        {
+            List<PSMAssociationMember> path = new List<PSMAssociationMember>();
+            if (start == null) return path;
+            PSMAssociationMember current = start;
+            path.Add(current);
+            while (current.ParentAssociation != null)
+            {
+                if (current.ParentAssociation == null) break;
+                else current = current.ParentAssociation.Parent;
+                path.Add(current);
+            }
+
+            return path;
+        }
+
         public static List<PSMClass> GetClassPathToRoot(this PSMAssociationMember start)
         {
             List<PSMClass> path = new List<PSMClass>();

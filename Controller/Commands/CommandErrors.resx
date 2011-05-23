@@ -201,4 +201,7 @@
   <data name="CMDERR_PARENT_ASSOCIATION_EXISTS" xml:space="preserve">
     <value>Cannot create association. The child already has a parent association.</value>
   </data>
+  <data name="CMDERR_NO_COMMON_ANCESTOR_ASSOC_MEMBER" xml:space="preserve">
+    <value>There is no common ancestor association member.</value>
+  </data>
 </root>
