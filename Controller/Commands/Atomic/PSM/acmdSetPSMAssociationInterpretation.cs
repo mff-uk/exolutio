@@ -18,6 +18,7 @@ namespace EvoX.Controller.Commands.Atomic.PSM
 
         public override bool CanExecute()
         {
+            if (ForceExecute) return true;
             if (!(PSMComponentGuid != Guid.Empty
                 && PIMComponentGuid == Guid.Empty || (Project.VerifyComponentType<PSMAssociation>(PSMComponentGuid) && Project.VerifyComponentType<PIMAssociation>(PIMComponentGuid))
                 ))

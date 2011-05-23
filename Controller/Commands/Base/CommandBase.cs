@@ -228,5 +228,10 @@ namespace EvoX.Controller.Commands
 		{
 			return this.GetType().Name;
 		}
+
+        /// <summary>
+        /// If true, CanExecute should always return true (in commands where applicable - allows temporary inconsistency when propagating)
+        /// </summary>
+        internal bool ForceExecute = false;
 	}
 }

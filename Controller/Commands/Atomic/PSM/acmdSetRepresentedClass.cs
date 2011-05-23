@@ -62,7 +62,8 @@ namespace EvoX.Controller.Commands.Atomic.PSM
                 PSMClass representedClass = Project.TranslateComponent<PSMClass>(represented);
                 representantClass.RepresentedClass = representedClass;
             }
-            Report = new CommandReport(CommandReports.STRUCTURAL_REPRESENTANT_CHANGED, representantClass, Project.TranslateComponent<PSMClass>(oldRepresented), representantClass.RepresentedClass);
+            PSMClass old = oldRepresented == Guid.Empty ? null : Project.TranslateComponent<PSMClass>(oldRepresented);
+            Report = new CommandReport(CommandReports.STRUCTURAL_REPRESENTANT_CHANGED, representantClass, old, representantClass.RepresentedClass);
         }
 
         internal override CommandBase.OperationResult UndoOperation()
