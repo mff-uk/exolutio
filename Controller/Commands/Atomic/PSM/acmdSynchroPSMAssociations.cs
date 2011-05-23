@@ -34,6 +34,14 @@ namespace EvoX.Controller.Commands.Atomic.PSM
             }*/
             return true;
         }
+
+        internal override void CommandOperation()
+        {
+            Report = new CommandReport(CommandReports.PSM_ASSOC_SYNCHRO,
+                String.Concat(Project.TranslateComponentCollection<PSMAssociation>(X1).Select<PSMAssociation, String>(a => a.ToString() + " ")),
+                String.Concat(Project.TranslateComponentCollection<PSMAssociation>(X2).Select<PSMAssociation, String>(a => a.ToString() + " ")));
+
+        }
        
     }
 }
