@@ -51,7 +51,7 @@ namespace EvoX.Controller.Commands.Atomic.PIM
 
             oldClass.PIMAssociationEnds.Remove(pimAssociationEnd);
             pimAssociationEnd.PIMClass = newClass;
-            newClass.PIMAssociationEnds.Remove(pimAssociationEnd);
+            newClass.PIMAssociationEnds.Add(pimAssociationEnd);
         }
 
         internal override CommandBase.OperationResult UndoOperation()
@@ -62,7 +62,7 @@ namespace EvoX.Controller.Commands.Atomic.PIM
 
             newClass.PIMAssociationEnds.Remove(pimAssociationEnd);
             pimAssociationEnd.PIMClass = oldClass;
-            oldClass.PIMAssociationEnds.Remove(pimAssociationEnd);
+            oldClass.PIMAssociationEnds.Add(pimAssociationEnd);
             return OperationResult.OK;
         }
     }
