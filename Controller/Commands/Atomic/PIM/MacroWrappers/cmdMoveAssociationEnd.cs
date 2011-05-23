@@ -8,7 +8,7 @@ using EvoX.Model;
 
 namespace EvoX.Controller.Commands.Atomic.PIM.MacroWrappers
 {
-    [PublicCommand("Move PIM association end to neighboring PIM Class (no propagation yet)", PublicCommandAttribute.EPulicCommandCategory.PIM_atomic)]
+    [PublicCommand("Move PIM association end to neighboring PIM Class", PublicCommandAttribute.EPulicCommandCategory.PIM_atomic)]
     public class cmdMoveAssociationEnd : MacroCommand
     {
         [PublicArgument("PIMAssociationEnd", typeof(PIMAssociationEnd))]
