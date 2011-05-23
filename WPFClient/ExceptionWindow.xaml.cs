@@ -45,6 +45,14 @@ namespace EvoX.WPFClient
                 }
 				button1.Content = "Ok";
 				button2.Visibility = Visibility.Collapsed;
+                if (xe is EvoX.Controller.Commands.EvoXCommandException)
+                {
+                    EvoX.Controller.Commands.EvoXCommandException xec = ((EvoX.Controller.Commands.EvoXCommandException)xe);
+                    if (xec.Command != null && xec.Command.ErrorDescription != null)
+                    {
+                        tbExInner.Content = xec.Command.ErrorDescription;
+                    }
+                }
 			}
 			else
 			{

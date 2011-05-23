@@ -28,6 +28,7 @@ namespace EvoX.View.Commands
         private void Current_ActiveDiagramChanged()
         {
             Diagram = Current.ActiveDiagram;
+            ScopeObject = null;
             ControllerCommand = null;
             OnCanExecuteChanged(null);
         }

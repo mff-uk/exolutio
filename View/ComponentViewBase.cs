@@ -128,13 +128,14 @@ namespace EvoX.View
             if (CanPutInDiagram(diagramView))
             {
                 PutInDiagram(diagramView, viewHelper);
-                diagramView.RepresentantsCollection.CollectionChanged -= DeferredAddCheck;
+                diagramView.DeferredAddComponents.Remove(this);
+                diagramView.DefferedAddCheck();
             }
             else
             {
                 pendingDiagramView = diagramView;
                 pendingViewHelper = viewHelper;
-                diagramView.RepresentantsCollection.CollectionChanged += DeferredAddCheck;
+                diagramView.DeferredAddComponents.Add(this);
             }
         }
 
@@ -142,30 +143,33 @@ namespace EvoX.View
         {
             if (CanRemoveFromDiagram())
             {
-                DiagramView.RepresentantsCollection.CollectionChanged -= DeferredRemoveCheck;
+                DiagramView.DeferredRemoveComponents.Remove(this);
                 RemoveFromDiagram();
+                DiagramView.DefferedRemoveCheck();
             }
             else
             {
-                DiagramView.RepresentantsCollection.CollectionChanged += DeferredRemoveCheck;
+                DiagramView.DeferredRemoveComponents.Add(this);
             }
         }
 
-        private void DeferredRemoveCheck(object sender, NotifyCollectionChangedEventArgs e)
+        internal void DeferredRemoveCheck()
         {
             if (CanRemoveFromDiagram())
             {
-                DiagramView.RepresentantsCollection.CollectionChanged -= DeferredRemoveCheck;
                 RemoveFromDiagram();
+                DiagramView.DeferredRemoveComponents.Add(this);
+                DiagramView.DefferedRemoveCheck();
             }
         }
 
-        private void DeferredAddCheck(object sender, NotifyCollectionChangedEventArgs e)
+        internal void DeferredAddCheck()
         {
             if (CanPutInDiagram(pendingDiagramView))
             {
                 PutInDiagram(pendingDiagramView, pendingViewHelper);
-                pendingDiagramView.RepresentantsCollection.CollectionChanged -= DeferredAddCheck;
+                pendingDiagramView.DeferredAddComponents.Remove(this);
+                pendingDiagramView.DefferedAddCheck();
             }
         }
 

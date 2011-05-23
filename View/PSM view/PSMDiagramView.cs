@@ -70,24 +70,31 @@ namespace EvoX.View
 
         void EvoXCanvas_ContentChanged()
         {
-            LayoutManager.DoLayout(this);
+            DoLayout();
+        }
+
+        private void DoLayout()
+        {
+            if (!this.Loading)
+            {
+                LayoutManager.DoLayout(this);
+            }
         }
 
         void EvoXCanvas_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
-            LayoutManager.DoLayout(this);
+            DoLayout();
         }
 
         void EvoXCanvas_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            LayoutManager.DoLayout(this);
-            
+            DoLayout();
         }
 
         public override IEnumerable<ComponentViewBase> LoadDiagram(Diagram diagram)
         {
             IEnumerable<ComponentViewBase> result = base.LoadDiagram(diagram);
-            LayoutManager.DoLayout(this);
+            DoLayout();
             ((EvoXContextMenu)EvoXCanvas.ContextMenu).ScopeObject = PSMDiagram.PSMSchema;
             ((EvoXContextMenu)EvoXCanvas.ContextMenu).Diagram = PSMDiagram;            
             return result;

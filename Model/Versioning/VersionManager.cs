@@ -116,7 +116,7 @@ namespace EvoX.Model.Versioning
             List<IVersionedItem> evoXList = deletedVersion.Items.ToList();
             foreach (IVersionedItem versionedItem in evoXList)
             {
-                UnregisterVersionLink(versionedItem);
+                RemoveVersionedItem(versionedItem);
             }
 
             foreach (IVersionedItem versionedItem in evoXList)
@@ -154,11 +154,8 @@ namespace EvoX.Model.Versioning
             VersionedItemPivot pivot;
             if (!pivotLookupDictionary.TryGetValue(itemVersion1, out pivot))
             {
-                pivot = new VersionedItemPivot();
-                pivotLookupDictionary[itemVersion1] = pivot;
-                pivot.PivotMapping.Add(itemVersion1.Version, itemVersion1);
-                linkedVersionedItems.CreateSubCollectionIfNeeded(pivot);
-                linkedVersionedItems[pivot].Add(itemVersion1);
+                AddVersionedItem(itemVersion1);
+                pivot = pivotLookupDictionary[itemVersion1];
             }
             
             pivotLookupDictionary[itemVersion2] = pivot;
@@ -170,18 +167,45 @@ namespace EvoX.Model.Versioning
 #endif
         }
 
-        public void UnregisterVersionLink(IVersionedItem itemRemovedVersion)
+        public void UnregisterVersionLink(IVersionedItem item1, IVersionedItem item2)
         {
-            if (!PivotLookupDictionary.ContainsKey(itemRemovedVersion) && branching)
+            throw new NotImplementedException("Member VersionManager.UnregisterVersionLink not implemented.");  
+        }
+
+        /// <summary>
+        /// Adds item to versioning infrastracture. 
+        /// </summary>
+        /// <param name="item"></param>
+        public void AddVersionedItem(IVersionedItem item)
+        {
+            if (pivotLookupDictionary.ContainsKey(item))
+            {
+                throw new EvoXModelException("Item already added into versioning infrastracture. ");
+            }
+            
+            VersionedItemPivot pivot = new VersionedItemPivot();
+            pivotLookupDictionary[item] = pivot;
+            pivot.PivotMapping.Add(item.Version, item);
+            linkedVersionedItems.CreateSubCollectionIfNeeded(pivot);
+            linkedVersionedItems[pivot].Add(item);
+        }
+
+
+        /// <summary>
+        /// Removes item from versioning infrastructure
+        /// </summary>
+        public void RemoveVersionedItem(IVersionedItem removedItem)
+        {
+            if (!PivotLookupDictionary.ContainsKey(removedItem) && branching)
             {
                 return;
             }
             
-            VersionedItemPivot pivot = PivotLookupDictionary[itemRemovedVersion];
-            Version deletedVersion = itemRemovedVersion.Version;
+            VersionedItemPivot pivot = PivotLookupDictionary[removedItem];
+            Version deletedVersion = removedItem.Version;
 
             // versioned item is going to be removed, thus it is removed from pivot lookup
-            pivotLookupDictionary.Remove(itemRemovedVersion);
+            pivotLookupDictionary.Remove(removedItem);
             List<IVersionedItem> list;
 
             // remove version links concerning the items created in the removed version
@@ -194,7 +218,6 @@ namespace EvoX.Model.Versioning
                 }
                 // and this item is removed
                 list.RemoveAll(item => item.Version == deletedVersion);
-                
             }
 
             // in the case versinedItem was the only version connected to pivot, 

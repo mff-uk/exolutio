@@ -46,6 +46,7 @@ namespace EvoX.View
 
         #region Representants, loading diagrams
 
+        public bool Loading { get; private set; }
         private readonly RepresentantsCollection representantsCollection = new RepresentantsCollection(); 
 
         public RepresentantsCollection RepresentantsCollection
@@ -53,10 +54,26 @@ namespace EvoX.View
             get { return representantsCollection; }
         }
 
+        private readonly List<ComponentViewBase> deferredAddComponents = new List<ComponentViewBase>();
+
+        public List<ComponentViewBase> DeferredAddComponents
+        {
+            get { return deferredAddComponents; }
+        }
+
+        private readonly List<ComponentViewBase> deferredRemoveComponents = new List<ComponentViewBase>();
+
+        public List<ComponentViewBase> DeferredRemoveComponents
+        {
+            get { return deferredRemoveComponents; }
+        }
+
+
         public virtual IEnumerable<ComponentViewBase> LoadDiagram(Diagram diagram)
         {
+            Loading = true; 
             this.Diagram = diagram;
-
+            
             List<ComponentViewBase> withoutViewHelpers = new List<ComponentViewBase>();
             foreach (Component component in diagram.Components)
             {
@@ -64,7 +81,24 @@ namespace EvoX.View
             }
 
             diagram.Components.CollectionChanged += Components_CollectionChanged;
+            Loading = false; 
             return withoutViewHelpers;
+        }
+
+        internal void DefferedAddCheck()
+        {
+            foreach (ComponentViewBase deferredAddComponent in DeferredAddComponents.ToArray())
+            {
+                deferredAddComponent.DeferredAddCheck();
+            }
+        }
+
+        internal void DefferedRemoveCheck()
+        {
+            foreach (ComponentViewBase deferredRemoveComponent in DeferredRemoveComponents.ToArray())
+            {
+                deferredRemoveComponent.DeferredRemoveCheck();
+            }
         }
 
         private ComponentViewBase CreateItemView(Component component, ViewHelper viewHelper, List<ComponentViewBase> withoutViewHelpers)
@@ -224,6 +258,6 @@ namespace EvoX.View
             return null;
         }
 
-        #endregion 
+        #endregion
     }
 }

@@ -116,7 +116,7 @@ namespace EvoX.Model.PSM
 
             PSMDiagram copyPSMDiagram = (PSMDiagram)copyComponent;
             copyPSMDiagram.SetProjectVersion(projectVersion);
-
+            copyPSMDiagram.LoadSchemaToDiagram(copyPSMDiagram.PSMSchema, true);
 
         }
 
