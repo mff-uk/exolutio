@@ -178,6 +178,15 @@ namespace EvoX.Controller.Commands {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There is no common ancestor association member..
+        /// </summary>
+        internal static string CMDERR_NO_COMMON_ANCESTOR_ASSOC_MEMBER {
+            get {
+                return ResourceManager.GetString("CMDERR_NO_COMMON_ANCESTOR_ASSOC_MEMBER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There is no common ancestor class..
         /// </summary>
         internal static string CMDERR_NO_COMMON_ANCESTOR_CLASS {

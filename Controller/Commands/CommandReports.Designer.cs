@@ -241,6 +241,15 @@ namespace EvoX.Controller.Commands {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Complex: PSM association reconnect.
+        /// </summary>
+        internal static string COMPLEX_RECONNECT_PSM_ASSOCIATION {
+            get {
+                return ResourceManager.GetString("COMPLEX_RECONNECT_PSM_ASSOCIATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Complex: PIM attribute update.
         /// </summary>
         internal static string COMPLEX_UPDATE_PIM_ATTR {
@@ -363,6 +372,15 @@ namespace EvoX.Controller.Commands {
         internal static string PROJECT_RENAMED {
             get {
                 return ResourceManager.GetString("PROJECT_RENAMED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PSM Association &apos;{0}&apos; shifted &apos;{1}&apos;..
+        /// </summary>
+        internal static string PSM_ASSOC_SHIFT {
+            get {
+                return ResourceManager.GetString("PSM_ASSOC_SHIFT", resourceCulture);
             }
         }
         

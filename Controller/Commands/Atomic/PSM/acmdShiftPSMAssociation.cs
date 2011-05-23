@@ -36,6 +36,8 @@ namespace EvoX.Controller.Commands.Atomic.PSM
             else index = (index + 1) % count;
             parent.ChildPSMAssociations.Remove(a);
             parent.ChildPSMAssociations.Insert(a, index);
+
+            Report = new CommandReport(CommandReports.PSM_ASSOC_SHIFT, a, left ? "left" : "right");
         }
 
         internal override CommandBase.OperationResult UndoOperation()
