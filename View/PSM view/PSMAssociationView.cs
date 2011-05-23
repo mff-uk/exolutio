@@ -52,25 +52,28 @@ namespace EvoX.View
         public override void UpdateView()
         {
             base.UpdateView();
-            Node parentNode = ((INodeComponentViewBase) DiagramView.RepresentantsCollection[Parent]).MainNode;
-            Node childNode = ((INodeComponentViewBase)DiagramView.RepresentantsCollection[Child]).MainNode;
-            if (parentNode != Connector.StartNode || childNode != Connector.EndNode)
+            if (DiagramView != null)
             {
-                Connector.Connect(parentNode, childNode);
+                Node parentNode = ((INodeComponentViewBase) DiagramView.RepresentantsCollection[Parent]).MainNode;
+                Node childNode = ((INodeComponentViewBase) DiagramView.RepresentantsCollection[Child]).MainNode;
+                if (parentNode != Connector.StartNode || childNode != Connector.EndNode)
+                {
+                    Connector.Connect(parentNode, childNode);
+                }
+                // labels, multiplicities
+                NameLabel.Text = PSMAssociation.Name;
+                Cardinality = PSMAssociation.GetCardinalityString();
+
+                NameLabel.X = ViewHelper.MainLabelViewHelper.X;
+                NameLabel.Y = ViewHelper.MainLabelViewHelper.Y;
+                NameLabel.UpdateCanvasPosition(true);
+
+                CardinalityLabel.X = ViewHelper.CardinalityLabelViewHelper.X;
+                CardinalityLabel.Y = ViewHelper.CardinalityLabelViewHelper.Y;
+                CardinalityLabel.UpdateCanvasPosition(true);
+
+                DiagramView.EvoXCanvas.InvokeContentChanged();
             }
-            // labels, multiplicities
-            NameLabel.Text = PSMAssociation.Name;
-            Cardinality = PSMAssociation.GetCardinalityString();
-
-            NameLabel.X = ViewHelper.MainLabelViewHelper.X;
-            NameLabel.Y = ViewHelper.MainLabelViewHelper.Y;
-            NameLabel.UpdateCanvasPosition(true);
-
-            CardinalityLabel.X = ViewHelper.CardinalityLabelViewHelper.X;
-            CardinalityLabel.Y = ViewHelper.CardinalityLabelViewHelper.Y;
-            CardinalityLabel.UpdateCanvasPosition(true);
-            
-            DiagramView.EvoXCanvas.InvokeContentChanged();
         }
 
         public Connector Connector { get; private set; }

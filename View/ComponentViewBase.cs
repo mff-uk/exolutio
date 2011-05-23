@@ -143,9 +143,10 @@ namespace EvoX.View
         {
             if (CanRemoveFromDiagram())
             {
+                DiagramView oldDiagramView = DiagramView;
                 DiagramView.DeferredRemoveComponents.Remove(this);
                 RemoveFromDiagram();
-                DiagramView.DefferedRemoveCheck();
+                oldDiagramView.DefferedRemoveCheck();
             }
             else
             {
