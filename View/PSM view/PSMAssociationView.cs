@@ -53,9 +53,9 @@ namespace EvoX.View
         {
             base.UpdateView();
             Node parentNode = ((INodeComponentViewBase) DiagramView.RepresentantsCollection[Parent]).MainNode;
-            if (parentNode != Connector.StartNode)
+            Node childNode = ((INodeComponentViewBase)DiagramView.RepresentantsCollection[Child]).MainNode;
+            if (parentNode != Connector.StartNode || childNode != Connector.EndNode)
             {
-                Node childNode = ((INodeComponentViewBase) DiagramView.RepresentantsCollection[Child]).MainNode;
                 Connector.Connect(parentNode, childNode);
             }
             // labels, multiplicities

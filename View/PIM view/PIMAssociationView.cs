@@ -60,15 +60,11 @@ namespace EvoX.View
             base.UpdateView();
             Node sourceNode = ((INodeComponentViewBase)DiagramView.RepresentantsCollection[SourceClass]).MainNode;
             Node targetNode = ((INodeComponentViewBase)DiagramView.RepresentantsCollection[TargetClass]).MainNode;
-            if (sourceNode != Connector.StartNode)
+            if (sourceNode != Connector.StartNode || targetNode != Connector.EndNode)
             {
                 Connector.Connect(sourceNode, targetNode);
             }
-            if (targetNode != Connector.EndNode)
-            {
-                Connector.Connect(sourceNode, targetNode);
-            }
-
+            
             // labels, multiplicities
             NameLabel.Text = PIMAssociation.Name;
             SourceCardinality = PIMAssociation.PIMAssociationEnds[0].GetCardinalityString();

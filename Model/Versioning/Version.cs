@@ -122,6 +122,7 @@ namespace EvoX.Model.Versioning
                 throw new EvoXModelException();
             }
             Items.Add(item);
+            Project.VersionManager.AddVersionedItem(item);
         }
 
         public void NotifyItemRemoved(Schema psmSchema, Component component)
@@ -144,7 +145,7 @@ namespace EvoX.Model.Versioning
                 throw new EvoXModelException();
             }
             Items.Remove(item);
-            Project.VersionManager.UnregisterVersionLink(item);
+            Project.VersionManager.RemoveVersionedItem(item);
         }
     }
 }

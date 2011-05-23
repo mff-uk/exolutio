@@ -91,6 +91,10 @@ namespace EvoX.View
         {
             if (!psmDiagramView.RepresentantsCollection.IsElementPresent(root)) return -horizontalSpace;
             INodeComponentViewBase element = (psmDiagramView.RepresentantsCollection[root] as INodeComponentViewBase);
+            if (element.MainNode == null)
+            {
+                return -1;
+            }
             double height = element.ActualHeight;
             double width = element.ActualWidth;
             double right = left + DrawSubtree(psmDiagramView, root, top + height + verticalSpace, left);
