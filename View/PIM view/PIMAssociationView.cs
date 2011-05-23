@@ -59,9 +59,13 @@ namespace EvoX.View
         {
             base.UpdateView();
             Node sourceNode = ((INodeComponentViewBase)DiagramView.RepresentantsCollection[SourceClass]).MainNode;
+            Node targetNode = ((INodeComponentViewBase)DiagramView.RepresentantsCollection[TargetClass]).MainNode;
             if (sourceNode != Connector.StartNode)
             {
-                Node targetNode = ((INodeComponentViewBase)DiagramView.RepresentantsCollection[TargetClass]).MainNode;
+                Connector.Connect(sourceNode, targetNode);
+            }
+            if (targetNode != Connector.EndNode)
+            {
                 Connector.Connect(sourceNode, targetNode);
             }
 
