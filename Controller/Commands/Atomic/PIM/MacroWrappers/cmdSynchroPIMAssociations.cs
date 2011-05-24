@@ -12,7 +12,7 @@ using EvoX.Controller.Commands.Complex.PSM;
 
 namespace EvoX.Controller.Commands.Atomic.PIM.MacroWrappers
 {
-    [PublicCommand("Synchronize two PIMAssociation sets (no propagation yet)", PublicCommandAttribute.EPulicCommandCategory.PIM_atomic)]
+    [PublicCommand("Synchronize two PIMAssociation sets", PublicCommandAttribute.EPulicCommandCategory.PIM_atomic)]
     public class cmdSynchroPIMAssociations : MacroCommand
     {
         private List<Guid> x1 = new List<Guid>();
