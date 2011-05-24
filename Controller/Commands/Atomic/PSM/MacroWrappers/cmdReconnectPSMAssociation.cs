@@ -8,7 +8,7 @@ using EvoX.Model;
 
 namespace EvoX.Controller.Commands.Atomic.PSM.MacroWrappers
 {
-    [PublicCommand("Reconnect parent PSM association end (no propagation yet)", PublicCommandAttribute.EPulicCommandCategory.PSM_atomic)]
+    [PublicCommand("Reconnect parent PSM association end", PublicCommandAttribute.EPulicCommandCategory.PSM_atomic)]
     public class cmdReconnectPSMAssociation : MacroCommand
     {
         [PublicArgument("Association", typeof(PSMAssociation))]
