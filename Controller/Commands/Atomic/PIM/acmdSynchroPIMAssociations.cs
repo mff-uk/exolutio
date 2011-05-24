@@ -69,20 +69,21 @@ namespace EvoX.Controller.Commands.Atomic.PIM
             //Twice... X1 => X2, X2 => X1
             for (int i = 0; i < 2; i++)
             {
-                IEnumerable<PSMClass> psmClasses =
-                    pimClass1.GetInterpretedComponents()
+                IEnumerable<PSMClass> psmClasses = 
+                     pimClass1.GetInterpretedComponents()
                     .Union(pimClass2.GetInterpretedComponents())
                     .Cast<PSMClass>()
                     .Where(c => c.UnInterpretedSubClasses()
                         .SelectMany<PSMClass, PSMAssociation>(cl => cl.ChildPSMAssociations)
                         .Union(c.ChildPSMAssociations)
-                        .Union(c.ParentAssociation == null
-                                ? Enumerable.Empty<PSMAssociation>()
-                                : Enumerable.Repeat(c.ParentAssociation, 1))
+                        //.Union(c.ParentAssociation == null
+                        //        ? Enumerable.Empty<PSMAssociation>()
+                        //        : Enumerable.Repeat(c.ParentAssociation, 1))
                         .Where(a => a.Interpretation != null)
-                        .Select<PSMAssociation, PIMAssociation>(psma => psma.Interpretation as PIMAssociation)
+                        .Select(psma => psma.Interpretation as PIMAssociation)
                         .Intersect(aX1)
-                        .SequenceEqual(aX1)
+                        .OrderBy(k => k.ID)
+                        .SequenceEqual(aX1.OrderBy(j => j.ID))
                         );
 
                 foreach (PSMClass psmClass in psmClasses)
@@ -90,14 +91,14 @@ namespace EvoX.Controller.Commands.Atomic.PIM
                     IEnumerable<PSMAssociation> psmAssociationsInSubClasses = psmClass.UnInterpretedSubClasses()
                         .SelectMany<PSMClass, PSMAssociation>(c => c.ChildPSMAssociations);
 
-                    IEnumerable<PSMAssociation> parentEnum = 
+                    /*IEnumerable<PSMAssociation> parentEnum = 
                         psmClass.ParentAssociation == null
                         ? Enumerable.Empty<PSMAssociation>() 
                         : Enumerable.Repeat(psmClass.ParentAssociation, 1);
-
+                    */
                     IEnumerable<PIMAssociation> interpretations = psmAssociationsInSubClasses
                         .Union(psmClass.ChildPSMAssociations)
-                        .Union(parentEnum)
+                        //.Union(parentEnum)
                         .Where(a => a.Interpretation != null)
                         .Select<PSMAssociation, PIMAssociation>(a => a.Interpretation as PIMAssociation);
                     IEnumerable<PIMAssociation> associationsToPropagate = aX2.Where<PIMAssociation>(a => !interpretations.Contains(a));
@@ -126,8 +127,8 @@ namespace EvoX.Controller.Commands.Atomic.PIM
                         command.Commands.Add(new cmdReconnectPSMAssociation(Controller) { AssociationGuid = a, NewParentGuid = psmClass, Propagate = false });
                     }
 
-                    IEnumerable<Guid> synchroGroup1 = psmAssociationsInSubClasses.Union(psmClass.ChildPSMAssociations).Union(parentEnum).Where(a => aX1.Contains(a.Interpretation)).Select<PSMAssociation, Guid>(a => a);
-                    IEnumerable<Guid> synchroGroup2 = psmAssociationsInSubClasses.Union(psmClass.ChildPSMAssociations).Union(parentEnum).Where(a => aX2.Contains(a.Interpretation)).Select<PSMAssociation, Guid>(a => a).Union(newAssociationsGuid);
+                    IEnumerable<Guid> synchroGroup1 = psmAssociationsInSubClasses.Union(psmClass.ChildPSMAssociations)/*.Union(parentEnum)*/.Where(a => aX1.Contains(a.Interpretation)).Select<PSMAssociation, Guid>(a => a);
+                    IEnumerable<Guid> synchroGroup2 = psmAssociationsInSubClasses.Union(psmClass.ChildPSMAssociations)/*.Union(parentEnum)*/.Where(a => aX2.Contains(a.Interpretation)).Select<PSMAssociation, Guid>(a => a).Union(newAssociationsGuid);
 
                     command.Commands.Add(new acmdSynchroPSMAssociations(Controller) { X1 = synchroGroup1.ToList(), X2 = synchroGroup2.ToList(), Propagate = false });
 
