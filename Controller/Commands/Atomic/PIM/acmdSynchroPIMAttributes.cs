@@ -64,13 +64,14 @@ namespace EvoX.Controller.Commands.Atomic.PIM
                 IEnumerable<PSMClass> psmClasses =
                     pimClass.GetInterpretedComponents()
                     .Cast<PSMClass>()
-                    .Where<PSMClass>(c => c.UnInterpretedSubClasses()
-                        .SelectMany<PSMClass, PSMAttribute>(cl => cl.PSMAttributes)
-                        .Union<PSMAttribute>(c.PSMAttributes)
-                        .Where<PSMAttribute>(a => a.Interpretation != null)
-                        .Select<PSMAttribute, PIMAttribute>(psma => psma.Interpretation as PIMAttribute)
-                        .Intersect<PIMAttribute>(aX1)
-                        .SequenceEqual<PIMAttribute>(aX1)
+                    .Where(c => c.UnInterpretedSubClasses()
+                        .SelectMany(cl => cl.PSMAttributes)
+                        .Union(c.PSMAttributes)
+                        .Where(a => a.Interpretation != null)
+                        .Select(psma => psma.Interpretation as PIMAttribute)
+                        .Intersect(aX1)
+                        .OrderBy(k => k.ID)
+                        .SequenceEqual(aX1.OrderBy(j => j.ID))
                         );
 
                 foreach (PSMClass psmClass in psmClasses)
