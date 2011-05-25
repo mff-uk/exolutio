@@ -8,6 +8,7 @@ using EvoX.Model;
 using EvoX.Model.PSM;
 using EvoX.Controller.Commands.Complex.PSM;
 using EvoX.Controller.Commands.Atomic.PSM;
+using System.Collections.ObjectModel;
 
 namespace EvoX.Controller.Commands.Atomic.PIM
 {
@@ -21,11 +22,11 @@ namespace EvoX.Controller.Commands.Atomic.PIM
 
         public override bool CanExecute()
         {
-            List<PIMAssociation> aX1 = X1.Select<Guid, PIMAssociation>(G => Project.TranslateComponent<PIMAssociation>(G)).ToList<PIMAssociation>();
-            List<PIMAssociation> aX2 = X2.Select<Guid, PIMAssociation>(G => Project.TranslateComponent<PIMAssociation>(G)).ToList<PIMAssociation>();
-            if (aX1.Count == 0 && aX2.Count == 0) return false;
-            PIMClass pimClass1 = aX1.Count == 0 ? aX2[0].PIMClasses[0] : aX1[0].PIMClasses[0];
-            PIMClass pimClass2 = aX1.Count == 0 ? aX2[0].PIMClasses[1] : aX1[0].PIMClasses[1];
+            ReadOnlyCollection<PIMAssociation> aX1 = Project.TranslateComponentCollection<PIMAssociation>(X1);
+            ReadOnlyCollection<PIMAssociation> aX2 = Project.TranslateComponentCollection<PIMAssociation>(X2);
+            if (aX1.Count == 0 || aX2.Count == 0) return false;
+            PIMClass pimClass1 = aX2[0].PIMClasses[0];
+            PIMClass pimClass2 = aX2[0].PIMClasses[1];
 
             IEnumerable<PIMAssociation> intersect = pimClass1.PIMAssociationEnds.Select<PIMAssociationEnd, PIMAssociation>(e => e.PIMAssociation)
                 .Intersect<PIMAssociation>(
@@ -57,18 +58,19 @@ namespace EvoX.Controller.Commands.Atomic.PIM
 
         internal override MacroCommand PrePropagation()
         {
-            IEnumerable<PIMAssociation> aX1 = Project.TranslateComponentCollection<PIMAssociation>(X1);
-            IEnumerable<PIMAssociation> aX2 = Project.TranslateComponentCollection<PIMAssociation>(X2);
-            if (aX1.Count() == 0 && aX2.Count() == 0) return null;
+            ReadOnlyCollection<PIMAssociation> aX1 = Project.TranslateComponentCollection<PIMAssociation>(X1);
+            ReadOnlyCollection<PIMAssociation> aX2 = Project.TranslateComponentCollection<PIMAssociation>(X2);
+            if (aX1.Count == 0 || aX2.Count == 0 || aX1.Union(aX2).Count() == 1) return null;
             
             MacroCommand command = new MacroCommand(Controller) { CheckFirstOnlyInCanExecute = true };
             command.Report = new CommandReport("Pre-propagation (synchronize PIM association sets)");
-            PIMClass pimClass1 = aX1.Count() == 0 ? aX2.First().PIMClasses.First() : aX1.First().PIMClasses.First();
-            PIMClass pimClass2 = aX1.Count() == 0 ? aX2.First().PIMClasses.Last() : aX1.First().PIMClasses.Last();
+            PIMClass pimClass1 = aX2.First().PIMClasses.First();
+            PIMClass pimClass2 = aX2.First().PIMClasses.Last();
 
             //Twice... X1 => X2, X2 => X1
             for (int i = 0; i < 2; i++)
             {
+                //Selects psmClasses affected by the synchronization (those which have aX1 counterpart present)
                 IEnumerable<PSMClass> psmClasses = 
                      pimClass1.GetInterpretedComponents()
                     .Union(pimClass2.GetInterpretedComponents())
@@ -91,14 +93,14 @@ namespace EvoX.Controller.Commands.Atomic.PIM
                     IEnumerable<PSMAssociation> psmAssociationsInSubClasses = psmClass.UnInterpretedSubClasses()
                         .SelectMany<PSMClass, PSMAssociation>(c => c.ChildPSMAssociations);
 
-                    /*IEnumerable<PSMAssociation> parentEnum = 
+                    IEnumerable<PSMAssociation> parentEnum = 
                         psmClass.ParentAssociation == null
                         ? Enumerable.Empty<PSMAssociation>() 
                         : Enumerable.Repeat(psmClass.ParentAssociation, 1);
-                    */
+                    
                     IEnumerable<PIMAssociation> interpretations = psmAssociationsInSubClasses
                         .Union(psmClass.ChildPSMAssociations)
-                        //.Union(parentEnum)
+                        .Union(parentEnum)
                         .Where(a => a.Interpretation != null)
                         .Select<PSMAssociation, PIMAssociation>(a => a.Interpretation as PIMAssociation);
                     IEnumerable<PIMAssociation> associationsToPropagate = aX2.Where<PIMAssociation>(a => !interpretations.Contains(a));
@@ -127,8 +129,8 @@ namespace EvoX.Controller.Commands.Atomic.PIM
                         command.Commands.Add(new cmdReconnectPSMAssociation(Controller) { AssociationGuid = a, NewParentGuid = psmClass, Propagate = false });
                     }
 
-                    IEnumerable<Guid> synchroGroup1 = psmAssociationsInSubClasses.Union(psmClass.ChildPSMAssociations)/*.Union(parentEnum)*/.Where(a => aX1.Contains(a.Interpretation)).Select<PSMAssociation, Guid>(a => a);
-                    IEnumerable<Guid> synchroGroup2 = psmAssociationsInSubClasses.Union(psmClass.ChildPSMAssociations)/*.Union(parentEnum)*/.Where(a => aX2.Contains(a.Interpretation)).Select<PSMAssociation, Guid>(a => a).Union(newAssociationsGuid);
+                    IEnumerable<Guid> synchroGroup1 = psmAssociationsInSubClasses.Union(psmClass.ChildPSMAssociations).Union(parentEnum).Where(a => aX1.Contains(a.Interpretation)).Select<PSMAssociation, Guid>(a => a);
+                    IEnumerable<Guid> synchroGroup2 = psmAssociationsInSubClasses.Union(psmClass.ChildPSMAssociations).Union(parentEnum).Where(a => aX2.Contains(a.Interpretation)).Select<PSMAssociation, Guid>(a => a).Union(newAssociationsGuid);
 
                     command.Commands.Add(new acmdSynchroPSMAssociations(Controller) { X1 = synchroGroup1.ToList(), X2 = synchroGroup2.ToList(), Propagate = false });
 
@@ -140,7 +142,7 @@ namespace EvoX.Controller.Commands.Atomic.PIM
                 }
 
                 //Swap the two lists and do it again
-                IEnumerable<PIMAssociation> temp = aX1;
+                ReadOnlyCollection<PIMAssociation> temp = aX1;
                 aX1 = aX2;
                 aX2 = temp;
             }

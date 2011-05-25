@@ -43,7 +43,7 @@ namespace EvoX.Controller.Commands.Complex.PIM
 
         protected override void GenerateSubCommands()
         {
-            ClassGuid = Guid.NewGuid();
+            if (ClassGuid == Guid.Empty) ClassGuid = Guid.NewGuid();
             Commands.Add(new acmdNewPIMClass(Controller, SchemaGuid) { ClassGuid = ClassGuid });
             Commands.Add(new acmdRenameComponent(Controller, ClassGuid, Name));
             if (DiagramGuid != Guid.Empty)
