@@ -204,4 +204,7 @@
   <data name="CMDERR_NO_COMMON_ANCESTOR_ASSOC_MEMBER" xml:space="preserve">
     <value>There is no common ancestor association member.</value>
   </data>
+  <data name="CMDERR_CANNOT_SYNCHRO_PSM_ASSOC" xml:space="preserve">
+    <value>PSM associations can be synchronized only if they all contain the same PSM class and their other PSM classes all have the same interpretation</value>
+  </data>
 </root>

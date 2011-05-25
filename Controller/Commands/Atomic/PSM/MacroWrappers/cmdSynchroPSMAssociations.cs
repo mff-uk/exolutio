@@ -12,7 +12,7 @@ using EvoX.Controller.Commands.Reflection;
 
 namespace EvoX.Controller.Commands.Atomic.PSM.MacroWrappers
 {
-    [PublicCommand("Synchronize two PSMAssociation sets (not implemented yet)", PublicCommandAttribute.EPulicCommandCategory.PSM_atomic)]
+    [PublicCommand("Synchronize two PSMAssociation sets", PublicCommandAttribute.EPulicCommandCategory.PSM_atomic)]
     public class cmdSynchroPSMAssociations : MacroCommand
     {
         private List<Guid> x1 = new List<Guid>();

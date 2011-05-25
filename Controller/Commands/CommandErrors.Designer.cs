@@ -106,6 +106,15 @@ namespace EvoX.Controller.Commands {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to PSM associations can be synchronized only if they all contain the same PSM class and their other PSM classes all have the same interpretation.
+        /// </summary>
+        internal static string CMDERR_CANNOT_SYNCHRO_PSM_ASSOC {
+            get {
+                return ResourceManager.GetString("CMDERR_CANNOT_SYNCHRO_PSM_ASSOC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Deleted class still has associations..
         /// </summary>
         internal static string CMDERR_CLASS_HAS_ASSOCIATIONS {

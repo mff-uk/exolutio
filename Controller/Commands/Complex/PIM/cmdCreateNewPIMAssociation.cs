@@ -14,6 +14,8 @@ namespace EvoX.Controller.Commands.Complex.PIM
     {
         public Guid SchemaGuid { get; set; }
 
+        public Guid AssociationGuid { get; set; }
+        
         [Scope(ScopeAttribute.EScope.PIMDiagram)]
         [PublicArgument("Diagram", typeof(Diagram), AllowNullInput = true)]
         public Guid DiagramGuid { get; set; }
@@ -72,7 +74,7 @@ namespace EvoX.Controller.Commands.Complex.PIM
 
         protected override void GenerateSubCommands()
         {
-            Guid AssociationGuid = Guid.NewGuid();
+            if (AssociationGuid == Guid.Empty) AssociationGuid = Guid.NewGuid();
             Guid AssociationEnd1Guid = Guid.NewGuid();
             Guid AssociationEnd2Guid = Guid.NewGuid();
             

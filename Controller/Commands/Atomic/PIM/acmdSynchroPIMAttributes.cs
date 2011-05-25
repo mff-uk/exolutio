@@ -8,6 +8,7 @@ using EvoX.Model;
 using EvoX.Model.PSM;
 using EvoX.Controller.Commands.Atomic.PSM;
 using EvoX.Controller.Commands.Complex.PSM;
+using System.Collections.ObjectModel;
 
 namespace EvoX.Controller.Commands.Atomic.PIM
 {
@@ -21,14 +22,14 @@ namespace EvoX.Controller.Commands.Atomic.PIM
 
         public override bool CanExecute()
         {
-            List<PIMAttribute> aX1 = X1.Select<Guid, PIMAttribute>(G => Project.TranslateComponent<PIMAttribute>(G)).ToList<PIMAttribute>();
-            List<PIMAttribute> aX2 = X2.Select<Guid, PIMAttribute>(G => Project.TranslateComponent<PIMAttribute>(G)).ToList<PIMAttribute>();
-            if (aX1.Count == 0 && aX2.Count == 0)
+            ReadOnlyCollection<PIMAttribute> aX1 = Project.TranslateComponentCollection<PIMAttribute>(X1);
+            ReadOnlyCollection<PIMAttribute> aX2 = Project.TranslateComponentCollection<PIMAttribute>(X2);
+            if (aX1.Count == 0 || aX2.Count == 0)
             {
                 ErrorDescription = CommandErrors.CMDERR_CANNOT_SYNCHRO_EMPTY_SETS;
                 return false;
             }
-            PIMClass pimClass = aX1.Count == 0 ? aX2[0].PIMClass : aX1[0].PIMClass;
+            PIMClass pimClass = aX2[0].PIMClass;
             if (!aX1.All<PIMAttribute>(a => a.PIMClass == pimClass) || !aX2.All<PIMAttribute>(a => a.PIMClass == pimClass))
             {
                 ErrorDescription = CommandErrors.CMDERR_CANNOT_SYNCHRO_ATTS_DIFFERENT_CLASSES;
@@ -51,12 +52,13 @@ namespace EvoX.Controller.Commands.Atomic.PIM
 
         internal override MacroCommand PrePropagation()
         {
+            ReadOnlyCollection<PIMAttribute> aX1 = Project.TranslateComponentCollection<PIMAttribute>(X1);
+            ReadOnlyCollection<PIMAttribute> aX2 = Project.TranslateComponentCollection<PIMAttribute>(X2);
+            if (aX1.Count == 0 || aX2.Count == 0) return null;
+
             MacroCommand command = new MacroCommand(Controller) { CheckFirstOnlyInCanExecute = true };
             command.Report = new CommandReport("Pre-propagation (synchronize PIM attribute sets)");
-            IEnumerable<PIMAttribute> aX1 = X1.Select<Guid, PIMAttribute>(G => Project.TranslateComponent<PIMAttribute>(G));
-            IEnumerable<PIMAttribute> aX2 = X2.Select<Guid, PIMAttribute>(G => Project.TranslateComponent<PIMAttribute>(G));
-            if (aX1.Count() == 0 && aX2.Count() == 0) return command;
-            PIMClass pimClass = aX1.Count() == 0 ? aX2.First().PIMClass : aX1.First().PIMClass;
+            PIMClass pimClass = aX2.First().PIMClass;
 
             //Twice... X1 => X2, X2 => X1
             for (int i = 0; i < 2; i++)
@@ -80,10 +82,10 @@ namespace EvoX.Controller.Commands.Atomic.PIM
                         .SelectMany<PSMClass, PSMAttribute>(c => c.PSMAttributes);
 
                     IEnumerable<PIMAttribute> interpretations = psmAttributesInSubClasses
-                        .Union<PSMAttribute>(psmClass.PSMAttributes)
-                        .Where<PSMAttribute>(a => a.Interpretation != null)
-                        .Select<PSMAttribute, PIMAttribute>(a => a.Interpretation as PIMAttribute);
-                    IEnumerable<PIMAttribute> attributesToPropagate = aX2.Where<PIMAttribute>(a => !interpretations.Contains<PIMAttribute>(a));
+                        .Union(psmClass.PSMAttributes)
+                        .Where(a => a.Interpretation != null)
+                        .Select(a => a.Interpretation as PIMAttribute);
+                    IEnumerable<PIMAttribute> attributesToPropagate = aX2.Where(a => !interpretations.Contains(a));
 
                     List<Guid> newAttributesGuid = new List<Guid>();
                     foreach (PIMAttribute a in attributesToPropagate)
@@ -119,7 +121,7 @@ namespace EvoX.Controller.Commands.Atomic.PIM
                 }
                 
                 //Swap the two lists and do it again
-                IEnumerable<PIMAttribute> temp = aX1;
+                ReadOnlyCollection<PIMAttribute> temp = aX1;
                 aX1 = aX2;
                 aX2 = temp;
             }

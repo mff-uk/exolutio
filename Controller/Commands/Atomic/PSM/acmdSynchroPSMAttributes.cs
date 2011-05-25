@@ -7,6 +7,8 @@ using EvoX.Model.PSM;
 using EvoX.Model;
 using EvoX.Model.PIM;
 using EvoX.Controller.Commands.Complex.PIM;
+using System.Collections.ObjectModel;
+using EvoX.Controller.Commands.Atomic.PIM;
 
 namespace EvoX.Controller.Commands.Atomic.PSM
 {
@@ -20,14 +22,14 @@ namespace EvoX.Controller.Commands.Atomic.PSM
 
         public override bool CanExecute()
         {
-            List<PSMAttribute> aX1 = X1.Select<Guid, PSMAttribute>(G => Project.TranslateComponent<PSMAttribute>(G)).ToList<PSMAttribute>();
-            List<PSMAttribute> aX2 = X2.Select<Guid, PSMAttribute>(G => Project.TranslateComponent<PSMAttribute>(G)).ToList<PSMAttribute>();
-            if (aX1.Count == 0 && aX2.Count == 0)
+            ReadOnlyCollection<PSMAttribute> aX1 = Project.TranslateComponentCollection<PSMAttribute>(X1);
+            ReadOnlyCollection<PSMAttribute> aX2 = Project.TranslateComponentCollection<PSMAttribute>(X2);
+            if (aX1.Count == 0 || aX2.Count == 0)
             {
                 ErrorDescription = CommandErrors.CMDERR_CANNOT_SYNCHRO_EMPTY_SETS;
                 return false;
             }
-            PSMClass psmClass = aX1.Count == 0 ? aX2[0].PSMClass : aX1[0].PSMClass;
+            PSMClass psmClass = aX2[0].PSMClass;
             if (!aX1.All<PSMAttribute>(a => a.PSMClass == psmClass) || !aX2.All<PSMAttribute>(a => a.PSMClass == psmClass))
             {
                 ErrorDescription = CommandErrors.CMDERR_CANNOT_SYNCHRO_ATTS_DIFFERENT_CLASSES;
@@ -45,12 +47,13 @@ namespace EvoX.Controller.Commands.Atomic.PSM
 
         internal override MacroCommand PostPropagation()
         {
+            ReadOnlyCollection<PSMAttribute> aX1 = Project.TranslateComponentCollection<PSMAttribute>(X1);
+            ReadOnlyCollection<PSMAttribute> aX2 = Project.TranslateComponentCollection<PSMAttribute>(X2);
+            if (aX1.Count == 0 || aX2.Count == 0) return null;
+            
             MacroCommand command = new MacroCommand(Controller) { CheckFirstOnlyInCanExecute = true };
             command.Report = new CommandReport("Post-propagation (synchronize PSM attribute sets)");
-            IEnumerable<PSMAttribute> aX1 = X1.Select<Guid, PSMAttribute>(G => Project.TranslateComponent<PSMAttribute>(G));
-            IEnumerable<PSMAttribute> aX2 = X2.Select<Guid, PSMAttribute>(G => Project.TranslateComponent<PSMAttribute>(G));
-            if (aX1.Count() == 0 && aX2.Count() == 0) return command;
-            PSMClass psmClass = aX1.Count() == 0 ? aX2.First().PSMClass : aX1.First().PSMClass;
+            PSMClass psmClass = aX2.First().PSMClass;
 
             if (aX1.Any(att => att.Interpretation == null) && aX2.Any(att => att.Interpretation == null)) return command;
             
@@ -60,9 +63,11 @@ namespace EvoX.Controller.Commands.Atomic.PSM
                 if (aX1.All(att => att.Interpretation != null))
                 {
                     PIMClass pimClass = (aX1.First().Interpretation as PIMAttribute).PIMClass;
-                
+                    IEnumerable<PIMAttribute> interpretations1 = aX1.Select<PSMAttribute, PIMAttribute>(a => a.Interpretation as PIMAttribute);
+                    IEnumerable<PIMAttribute> interpretations2 = aX2.Where(a => a.Interpretation != null).Select<PSMAttribute, PIMAttribute>(a => a.Interpretation as PIMAttribute);
                     IEnumerable<PSMAttribute> attributesToPropagate = aX2.Where(a => a.Interpretation == null);
 
+                    List<Guid> newAttributes = new List<Guid>();
                     foreach (PSMAttribute a in attributesToPropagate)
                     {
                         cmdCreateNewPIMAttribute c = new cmdCreateNewPIMAttribute(Controller);
@@ -73,10 +78,18 @@ namespace EvoX.Controller.Commands.Atomic.PSM
 
                         acmdSetInterpretation cmdi = new acmdSetPSMAttributeInterpretation(Controller, a, attrGuid);
                         command.Commands.Add(cmdi);
+
+                        newAttributes.Add(attrGuid);
                     }
+                    
+                    IEnumerable<Guid> synchroGroup1 = pimClass.PIMAttributes.Where(a => interpretations1.Contains(a)).Select<PIMAttribute, Guid>(g => g);
+                    IEnumerable<Guid> synchroGroup2 = pimClass.PIMAttributes.Where(a => interpretations2.Contains(a)).Select<PIMAttribute, Guid>(g => g).Union(newAttributes);
+
+                    //We could somehow add PropagateSource here...
+                    command.Commands.Add(new acmdSynchroPIMAttributes(Controller) { X1 = synchroGroup1.ToList(), X2 = synchroGroup2.ToList() });
                 }
                 //Swap the two lists and do it again
-                IEnumerable<PSMAttribute> temp = aX1;
+                ReadOnlyCollection<PSMAttribute> temp = aX1;
                 aX1 = aX2;
                 aX2 = temp;
             }
