@@ -78,9 +78,9 @@ namespace EvoX.Controller.Commands.Atomic.PIM
                     .Where(c => c.UnInterpretedSubClasses()
                         .SelectMany<PSMClass, PSMAssociation>(cl => cl.ChildPSMAssociations)
                         .Union(c.ChildPSMAssociations)
-                        //.Union(c.ParentAssociation == null
-                        //        ? Enumerable.Empty<PSMAssociation>()
-                        //        : Enumerable.Repeat(c.ParentAssociation, 1))
+                        .Union(c.ParentAssociation == null
+                                ? Enumerable.Empty<PSMAssociation>()
+                                : Enumerable.Repeat(c.ParentAssociation, 1))
                         .Where(a => a.Interpretation != null)
                         .Select(psma => psma.Interpretation as PIMAssociation)
                         .Intersect(aX1)
