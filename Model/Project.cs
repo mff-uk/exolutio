@@ -182,6 +182,7 @@ namespace EvoX.Model
             if (UsesVersioning)
             {
                 VersionManager = new VersionManager(this);
+                VersionManager.Loading = true; 
                 this.DeserializeWrappedCollection("Versions", VersionManager.Versions, Version.CreateInstance, parentNode, context);
                 this.DeserializeWrappedCollection("ProjectVersions", ProjectVersions, ProjectVersion.CreateInstance, parentNode, context);
                 XElement versionLinksElement = parentNode.Element(context.EvoXNS + "VersionLinks");
@@ -189,6 +190,7 @@ namespace EvoX.Model
                 {
                     VersionManager.DeserializeVersionLinks(versionLinksElement, context);
                 }
+                VersionManager.Loading = false; 
             }
             else
             {
@@ -230,7 +232,7 @@ namespace EvoX.Model
                 // project versions
                 this.WrapAndSerializeCollection("ProjectVersions", "ProjectVersion", ProjectVersions, projectElement, context);
                 XElement versionLinksElement = new XElement(context.EvoXNS + "VersionLinks");
-                //VersionManager.SerializeVersionLinks(versionLinksElement, context);
+                VersionManager.SerializeVersionLinks(versionLinksElement, context);
                 projectElement.Add(versionLinksElement);
             }
             else

@@ -56,12 +56,12 @@ namespace EvoX.Revalidation.Changes
             get { return EChangeCategory.Addition; }
         }   
 
-        public override bool TestCandidate(PSMComponent candidate, Version oldVersion, Version newVersion)
+        public static bool TestCandidate(PSMComponent candidate, Version oldVersion, Version newVersion)
         {
             return AdditionTest(candidate, oldVersion, newVersion);
         }
 
-        public override ChangeInstance CreateInstance(PSMComponent candidate, Version oldVersion, Version newVersion)
+        public static ChangeInstance CreateInstance(PSMComponent candidate, Version oldVersion, Version newVersion)
         {
             return new AttributeAddedChangeInstance(candidate, oldVersion, newVersion);
         }
@@ -84,12 +84,12 @@ namespace EvoX.Revalidation.Changes
             get { return EChangeCategory.Removal; }
         }
 
-        public override bool TestCandidate(PSMComponent candidate, Version oldVersion, Version newVersion)
+        public static bool TestCandidate(PSMComponent candidate, Version oldVersion, Version newVersion)
         {
             return RemovalTest(candidate, oldVersion, newVersion);
         }
 
-        public override ChangeInstance CreateInstance(PSMComponent candidate, Version oldVersion, Version newVersion)
+        public static ChangeInstance CreateInstance(PSMComponent candidate, Version oldVersion, Version newVersion)
         {
             return new AttributeRemovedChangeInstance(candidate, oldVersion, newVersion);
         }

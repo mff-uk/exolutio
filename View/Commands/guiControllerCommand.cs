@@ -154,7 +154,13 @@ namespace EvoX.View.Commands
                 w.ShowModal();
 #else
                 w.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-                w.ShowDialog();
+                //w.ShowDialog();
+                w.WindowStyle = WindowStyle.ToolWindow;
+                w.Topmost = true;
+                w.ShowInTaskbar = false;
+                w.ShowActivated = true;
+                Current.MainWindow.DisableCommands();
+                w.Show();
 
                 dialogOk = w.DialogResult == true;
 #endif

@@ -90,7 +90,7 @@ namespace EvoX.ViewToolkit
 
         public EvoXContextMenu()
         {
-            this.HorizontalContentAlignment = HorizontalAlignment.Left;
+            this.HorizontalContentAlignment = HorizontalAlignment.Stretch;
         }
     }
 }

@@ -106,9 +106,15 @@ namespace EvoX.Revalidation.Changes
             return candidate.Version == newVersion && candidate.ExistsInVersion(newVersion) && candidate.ExistsInVersion(oldVersion);
         }
 
-        public abstract bool TestCandidate(PSMComponent candidate, Version oldVersion, Version newVersion);
+        public static bool TestCandidate(PSMComponent candidate, Version oldVersion, Version newVersion)
+        {
+            throw new InvalidOperationException();
+        }
 
-        public abstract ChangeInstance CreateInstance(PSMComponent candidate, Version oldVersion, Version newVersion);
+        public static ChangeInstance CreateInstance(PSMComponent candidate, Version oldVersion, Version newVersion)
+        {
+            throw new InvalidOperationException();
+        }
     }
 
     public interface IChangeInstance<TComponent>

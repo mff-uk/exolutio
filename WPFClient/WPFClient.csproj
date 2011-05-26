@@ -205,6 +205,10 @@
       <Project>{2598DE7B-9F5E-46EA-9B81-AE41E0D2D685}</Project>
       <Name>ResourceLibrary</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Revalidation\Revalidation.csproj">
+      <Project>{43856BBC-7717-451D-BE51-6EA576C873C2}</Project>
+      <Name>Revalidation</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SupportingClasses\SupportingClasses.csproj">
       <Project>{AE8E2F66-03CF-44A5-8564-A32906F7F041}</Project>
       <Name>SupportingClasses</Name>

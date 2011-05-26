@@ -245,10 +245,17 @@ namespace EvoX.ViewToolkit
 
         private bool highlighted;
 
-        public bool Highlighted
+        public virtual bool Highlighted
         {
-            get { return highlighted; }
-            set { highlighted = value; }
+            get
+            {
+                return highlighted;
+            }
+            set
+            {
+                highlighted = value;
+                this.BorderBrush = V
+            }
         }
 
         void Node_PreviewMouseDown(object sender, MouseButtonEventArgs e)

@@ -122,6 +122,10 @@ namespace EvoX.View
         {
             FrameworkElement linkLabel = (FrameworkElement)sender;
             PIMComponent component = (PIMComponent)linkLabel.DataContext;
+            if (component == null)
+            {
+                return;
+            }
             IEnumerable<PIMDiagram> pimDiagrams = Current.ProjectVersion.PIMDiagrams.Where(d => d.PIMComponents.Contains(component));
             Current.MainWindow.FocusComponent(pimDiagrams, component);
         }

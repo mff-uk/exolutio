@@ -276,8 +276,25 @@ namespace EvoX.WPFClient
 
         public void DisplayReport(NestedCommandReport finalReport)
         {
-            ReportDisplay.DisplayedReport = finalReport;
-            ReportDisplay.Update();
+            if (ReportDisplay.IsVisible)
+            {
+                ReportDisplay.DisplayedReport = finalReport;
+                ReportDisplay.Update();
+            }
+        }
+
+        public bool CommandsDisabled { get; private set; }
+
+        public void DisableCommands()
+        {
+            EvoXRibbon.IsEnabled = false;
+            CommandsDisabled = true; 
+        }
+
+        public void EnableCommands()
+        {
+            EvoXRibbon.IsEnabled = true;
+            CommandsDisabled = false; 
         }
     }
 }

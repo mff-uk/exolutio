@@ -97,8 +97,8 @@ namespace EvoX.View
         {
             EvoXContextMenu result = new EvoXContextMenu();
             
-            result.Opened += ContextMenuOpening;
-
+            result.Opened += ContextMenu_Opened;
+            
             foreach (CommandDescriptor commandDescriptor in PublicCommandsHelper.publicCommandsByScope[scope])
             {
                 ContextMenuItem m = CreateMenuItem(commandDescriptor);
@@ -118,7 +118,7 @@ namespace EvoX.View
             }
             return result; 
         }
-
+ 
 #if SILVERLIGHT
         public static void CreateSubmenuForCommandsWithoutScope(ContextMenu contextMenu)
         {
@@ -138,12 +138,20 @@ namespace EvoX.View
                 otherItemsMenu.Items.Add(m);
             }
         }
-#endif
 
-        static void ContextMenuOpening(object sender, RoutedEventArgs routedEventArgs)
+
+#endif
+        static void ContextMenu_Opened(object sender, RoutedEventArgs eventArgs)
         {
-            EvoXContextMenu contextMenu = (EvoXContextMenu) sender;
-            PrepareCommandsScope(contextMenu.Items, contextMenu);
+            EvoXContextMenu contextMenu = (EvoXContextMenu)sender;
+            if (Current.MainWindow.CommandsDisabled)
+            {
+                contextMenu.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                PrepareCommandsScope(contextMenu.Items, contextMenu);
+            }
         }
 
         private static void PrepareCommandsScope(ItemCollection items, EvoXContextMenu contextMenu)

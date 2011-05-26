@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:Fluent="clr-namespace:Fluent;assembly=Fluent"                           
              xmlns:Commands="clr-namespace:EvoX.View.Commands;assembly=EvoX.View" xmlns:Commands1="clr-namespace:EvoX.WPFClient.Commands" mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="800">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -188,6 +188,7 @@
 
             </Fluent:RibbonGroupBox>
         </Fluent:RibbonTabItem>
+        
         <Fluent:RibbonTabItem  Header="Versioning">
             <Fluent:RibbonGroupBox Header="Version">
                 <Fluent:Button Command="{x:Static Commands:EvoXGuiCommands.BranchCurrentVersionCommand}"
@@ -195,6 +196,8 @@
                 <Fluent:Button Command="{x:Static Commands:EvoXGuiCommands.SaveAsSingleVersionCommand}"
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
                 <Fluent:Button Command="{x:Static Commands:EvoXGuiCommands.RemoveCurrentVersionCommand}"
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
+                <Fluent:Button Command="{x:Static Commands:EvoXGuiCommands.FindChangesCommand}"
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
             </Fluent:RibbonGroupBox>
             <Fluent:RibbonGroupBox>

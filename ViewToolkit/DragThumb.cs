@@ -438,7 +438,7 @@ namespace EvoX.ViewToolkit
             {
                 IsDragging = false;
                 DraggedControl.ReleaseMouseCapture();
-                e.Handled = true;
+                //e.Handled = true;
                 DragCompleted(PrevPoint, Vector.SubtractPoints(PrevPoint, DragStartPoint));
             }
         }
