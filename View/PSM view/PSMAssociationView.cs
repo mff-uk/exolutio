@@ -72,6 +72,15 @@ namespace EvoX.View
                 CardinalityLabel.Y = ViewHelper.CardinalityLabelViewHelper.Y;
                 CardinalityLabel.UpdateCanvasPosition(true);
 
+                if (PSMAssociation.Interpretation == null)
+                {
+                    Connector.Pen = ViewToolkitResources.InterpretedAssociationPen;
+                }
+                else
+                {
+                    Connector.Pen = ViewToolkitResources.SolidBlackPen;
+                }
+
                 DiagramView.EvoXCanvas.InvokeContentChanged();
             }
         }

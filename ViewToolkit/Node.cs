@@ -254,7 +254,6 @@ namespace EvoX.ViewToolkit
             set
             {
                 highlighted = value;
-                this.BorderBrush = V
             }
         }
 
