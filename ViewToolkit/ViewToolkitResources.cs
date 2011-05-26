@@ -21,6 +21,7 @@ namespace EvoX.ViewToolkit
         private static readonly SolidColorBrush selectedBorderBrush;
         private static readonly SolidColorBrush ribbonBackstageDimText;
         private static readonly SolidColorBrush navyBrush;
+        private static readonly SolidColorBrush greyBrush;
 
 #if SILVERLIGHT
         
@@ -29,6 +30,7 @@ namespace EvoX.ViewToolkit
 
         private static readonly Pen transparentPen;
         private static Pen junctionSelectedPen;
+        private static Pen interpretedAssociationPen;
 
         public static Pen SolidBlackPen
         {
@@ -36,6 +38,11 @@ namespace EvoX.ViewToolkit
             {
                 return solidBlackPen;
             }
+        }
+
+        public static Pen InterpretedAssociationPen
+        {
+            get { return interpretedAssociationPen; }
         }
 
         public static Pen TransparentPen
@@ -64,6 +71,11 @@ namespace EvoX.ViewToolkit
         public static SolidColorBrush BlackBrush
         {
             get { return blackBrush; }
+        }
+
+        public static SolidColorBrush GreyBrush
+        {
+            get { return greyBrush; }
         }
 
         public static SolidColorBrush WhiteBrush
@@ -114,6 +126,7 @@ namespace EvoX.ViewToolkit
         {
             nodeBorderBrush = new SolidColorBrush(Colors.Black);
             blackBrush = new SolidColorBrush(Colors.Black);
+            greyBrush = new SolidColorBrush(Colors.LightGray);
             whiteBrush = new SolidColorBrush(Colors.White);
             redBrush = new SolidColorBrush(Colors.Red);
             transparentBrush = new SolidColorBrush(Colors.Transparent);
@@ -128,12 +141,14 @@ namespace EvoX.ViewToolkit
             interpretedAttributeBrush = seaShellBrush; 
             ribbonBackstageDimText = new SolidColorBrush(Color.FromArgb(0xFF, 0xa1, 0x6f, 0x89));
             selectedBorderBrush = redBrush;
+            interpretedAssociationPen = new Pen();
 
 #if SILVERLIGHT
 #else
             junctionSelectedPen = new Pen(SelectedBorderBrush, 3);
             solidBlackPen = new Pen(blackBrush, 1);
             transparentPen = new Pen(Brushes.Transparent, 10);
+            interpretedAssociationPen = new Pen(greyBrush, 1);
 #endif
         }
     }

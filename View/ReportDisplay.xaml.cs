@@ -36,6 +36,8 @@ namespace EvoX.View
 
         public void DisplayReport(CommandReportBase displayedReport)
         {
+            if (!this.IsVisible)
+                return;
             this.DisplayedReport = displayedReport;
             Update();
         }

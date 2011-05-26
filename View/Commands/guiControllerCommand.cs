@@ -161,26 +161,29 @@ namespace EvoX.View.Commands
                 w.ShowActivated = true;
                 Current.MainWindow.DisableCommands();
                 w.Show();
-
-                dialogOk = w.DialogResult == true;
+                w.Closed += w_Closed;
 #endif
             }
-
-            if (!OpenDialog || dialogOk)
+            else
             {
                 DoExecute();
             }
+
+            //if (!OpenDialog || dialogOk)
+            //{
+            //    DoExecute();
+            //}
         }
 
-#if SILVERLIGHT
         void w_Closed(object sender, EventArgs e)
         {
-            if (((FloatingWindow)sender).DialogResult == true)
+            bool? dialogResult = ((CommandDialogWindow)sender).DialogResult;
+            if (dialogResult == true)
             {
                 DoExecute();
             }
         }
-#endif
+
 
         private void DoExecute()
         {
