@@ -24,10 +24,16 @@ namespace EvoX.Controller.Commands.Atomic.PIM.MacroWrappers
         [PublicArgument("PIM Class 2", typeof(PIMClass))]
         public Guid PIMClassGuid2 { get; set; }
 
-        public cmdNewPIMAssociation() { }
+        public cmdNewPIMAssociation() 
+        {
+            CheckFirstOnlyInCanExecute = true;
+        }
 
         public cmdNewPIMAssociation(Controller c)
-            : base(c) { }
+            : base(c) 
+        {
+            CheckFirstOnlyInCanExecute = true;
+        }
 
         public void Set(Guid pimClassGuid1, Guid pimClassGuid2, Guid schemaGuid)
         {

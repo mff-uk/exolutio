@@ -101,11 +101,21 @@ namespace EvoX.Controller.Commands.Atomic.PIM
                         c2.Set(intclass, psmAttribute.AttributeType, psmAttribute.Name, psmAttribute.Lower, psmAttribute.Upper, psmAttribute.Element);
                         command.Commands.Add(c2);
 
+                        if (psmAttribute.PSMClass != intclass)
+                        {
+                            command.Commands.Add(new cmdMovePSMAttribute(Controller) { AttributeGuid = psmAttribute, ClassGuid = intclass, Propagate = false });
+                        }
+
                         acmdSynchroPSMAttributes s2 = new acmdSynchroPSMAttributes(Controller) { Propagate = false };
                         s2.X1.Add(psmAttribute);
                         s2.X2.Add(attrGuid2);
                         command.Commands.Add(s2);
 
+                        if (psmAttribute.PSMClass != intclass)
+                        {
+                            command.Commands.Add(new cmdMovePSMAttribute(Controller) { AttributeGuid = psmAttribute, ClassGuid = psmAttribute.PSMClass, Propagate = false });
+                        }
+                        
                         acmdSetInterpretation i2 = new acmdSetPSMAttributeInterpretation(Controller, attrGuid2, attribute);
                         command.Commands.Add(i2);
 
@@ -125,10 +135,20 @@ namespace EvoX.Controller.Commands.Atomic.PIM
                         c.Set(intclass, psmAttribute.AttributeType, psmAttribute.Name, psmAttribute.Lower, psmAttribute.Upper, psmAttribute.Element);
                         command.Commands.Add(c);
 
-                        acmdSynchroPSMAttributes s = new acmdSynchroPSMAttributes(Controller) { Propagate = false };
-                        s.X1.Add(psmAttribute);
-                        s.X2.Add(attrGuid);
-                        command.Commands.Add(s);
+                        if (psmAttribute.PSMClass != intclass)
+                        {
+                            command.Commands.Add(new cmdMovePSMAttribute(Controller) { AttributeGuid = psmAttribute, ClassGuid = intclass, Propagate = false });
+                        }
+
+                        acmdSynchroPSMAttributes s2 = new acmdSynchroPSMAttributes(Controller) { Propagate = false };
+                        s2.X1.Add(psmAttribute);
+                        s2.X2.Add(attrGuid);
+                        command.Commands.Add(s2);
+
+                        if (psmAttribute.PSMClass != intclass)
+                        {
+                            command.Commands.Add(new cmdMovePSMAttribute(Controller) { AttributeGuid = psmAttribute, ClassGuid = psmAttribute.PSMClass, Propagate = false });
+                        }
 
                         acmdSetInterpretation i = new acmdSetPSMAttributeInterpretation(Controller, attrGuid, attribute);
                         command.Commands.Add(i);
