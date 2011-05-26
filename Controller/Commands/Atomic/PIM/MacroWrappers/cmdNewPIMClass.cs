@@ -34,10 +34,16 @@ namespace EvoX.Controller.Commands.Atomic.PIM.MacroWrappers
             }
         }
         
-        public cmdCreateNewPIMClass() { }
+        public cmdCreateNewPIMClass() 
+        {
+            CheckFirstOnlyInCanExecute = true;
+        }
 
         public cmdCreateNewPIMClass(Controller c)
-            : base(c) { }
+            : base(c) 
+        {
+            CheckFirstOnlyInCanExecute = true;
+        }
 
         public void Set(Guid schemaGuid)
         {
