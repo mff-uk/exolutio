@@ -25,7 +25,7 @@ namespace EvoX.ViewToolkit
             VirtualReferentialThumb = new VirtualReferentialThumb();
 #if SILVERLIGHT
 #else
-            PreviewMouseDown += Connector_PreviewMouseDown;
+            PreviewMouseDown += Connector_PreviewMouseDown;            
 #endif
         }
 

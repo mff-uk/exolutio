@@ -64,6 +64,7 @@
     <Compile Include="EvoXCanvasWithZoomer.xaml.cs">
       <DependentUpon>EvoXCanvasWithZoomer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FormControls\Class1.cs" />
     <Compile Include="FormControls\LinkLabel.cs" />
     <Compile Include="Zoomer.xaml.cs">
       <DependentUpon>Zoomer.xaml</DependentUpon>

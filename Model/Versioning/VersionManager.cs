@@ -29,7 +29,7 @@ namespace EvoX.Model.Versioning
         public Project Project { get; set; }
 
         private bool branching = false;
-        private bool firstVersionBranch = false; 
+        internal bool Loading { get; set; }
 
         public VersionManager(Project project)
         {
@@ -154,7 +154,7 @@ namespace EvoX.Model.Versioning
             VersionedItemPivot pivot;
             if (!pivotLookupDictionary.TryGetValue(itemVersion1, out pivot))
             {
-                AddVersionedItem(itemVersion1);
+                AddVersionedItem(itemVersion1, true);
                 pivot = pivotLookupDictionary[itemVersion1];
             }
             
@@ -173,21 +173,23 @@ namespace EvoX.Model.Versioning
         }
 
         /// <summary>
-        /// Adds item to versioning infrastracture. 
+        /// Adds new item to versioning infrastracture (item must not be linked to any other existing item).
         /// </summary>
-        /// <param name="item"></param>
-        public void AddVersionedItem(IVersionedItem item)
+        public void AddVersionedItem(IVersionedItem item, bool addWhenBranchingOrLoading = false)
         {
-            if (pivotLookupDictionary.ContainsKey(item))
+            if ((!Loading && !branching) || addWhenBranchingOrLoading)
             {
-                throw new EvoXModelException("Item already added into versioning infrastracture. ");
+                if (pivotLookupDictionary.ContainsKey(item))
+                {
+                    throw new EvoXModelException("Item already added into versioning infrastracture. ");
+                }
+
+                VersionedItemPivot pivot = new VersionedItemPivot();
+                pivotLookupDictionary[item] = pivot;
+                pivot.PivotMapping.Add(item.Version, item);
+                linkedVersionedItems.CreateSubCollectionIfNeeded(pivot);
+                linkedVersionedItems[pivot].Add(item);
             }
-            
-            VersionedItemPivot pivot = new VersionedItemPivot();
-            pivotLookupDictionary[item] = pivot;
-            pivot.PivotMapping.Add(item.Version, item);
-            linkedVersionedItems.CreateSubCollectionIfNeeded(pivot);
-            linkedVersionedItems[pivot].Add(item);
         }
 
 
@@ -228,6 +230,11 @@ namespace EvoX.Model.Versioning
             }
         }
 
+        public bool AreItemsLinked(EvoXVersionedObject item1, EvoXVersionedObject item2)
+        {
+            return pivotLookupDictionary[item1] == pivotLookupDictionary[item2];
+        }
+
 #if DEBUG
         public void VerifyConsistency()
         {
@@ -251,6 +258,22 @@ namespace EvoX.Model.Versioning
 
         #region serialization
 
+        public void SerializeVersionLinks(XElement versionLinksElement, SerializationContext context)
+        {
+            foreach (KeyValuePair<VersionedItemPivot, List<IVersionedItem>> kvp in LinkedVersionedItems)
+            {
+                XElement linkedItemsElement = new XElement(context.EvoXNS + "LinkedItems");
+                foreach (IVersionedItem versionedItem in kvp.Value)
+                {
+                    XElement linkedItemElement = new XElement(context.EvoXNS + "LinkedItem");
+                    Project.SerializeIDRef((IEvoXSerializable) versionedItem, "itemID", linkedItemElement, context);
+                    Project.SerializeSimpleValueToAttribute("versionNumber", versionedItem.Version.ID, linkedItemElement, context);
+                    linkedItemsElement.Add(linkedItemElement);
+                }
+                versionLinksElement.Add(linkedItemsElement);
+            }
+        }
+
         public void DeserializeVersionLinks(XElement parentNode, SerializationContext context)
         {
             foreach (XElement linkedItemsElement in parentNode.Elements(context.EvoXNS + "LinkedItems"))
@@ -261,34 +284,25 @@ namespace EvoX.Model.Versioning
                 foreach (XElement linkedItemElement in linkedItemsElement.Elements(context.EvoXNS + "LinkedItem"))
                 {
                     Guid id = SerializationContext.DecodeGuid(linkedItemElement.Attribute("itemID").Value);
-                    int versionNumber = SerializationContext.DecodeInt(linkedItemElement.Attribute("versionNumber").Value);
-                    Version version = this.GetVersionByNumber(versionNumber);
+                    Guid versionId = SerializationContext.DecodeGuid(linkedItemElement.Attribute("versionNumber").Value);
+                    Version version = (Version) Project.TranslateComponent(versionId);
                     linkedItemsIds[version] = id;
                 }
 
                 if (linkedItemsIds.Count > 0)
                 {
-                    Version version1 = null;
-                    IVersionedItem itemVersion1 = null;
-
                     foreach (KeyValuePair<Version, Guid> kvp in linkedItemsIds)
                     {
-                        if (version1 == null)
-                        {
-                            version1 = kvp.Key;
-                            itemVersion1 = (IVersionedItem)Project.TranslateComponent<EvoXObject>(kvp.Value);
-                        }
-                        else
-                        {
-                            Version otherVersion = kvp.Key;
-                            IVersionedItem otherItemVersion = (IVersionedItem)Project.TranslateComponent<EvoXObject>(kvp.Value);
-                            RegisterVersionLink(version1, otherVersion, itemVersion1, otherItemVersion);
-                        }
+                        IVersionedItem evoXObject = (IVersionedItem) Project.TranslateComponent(kvp.Value);
+                        pivotLookupDictionary[evoXObject] = pivot;
+                        pivot.PivotMapping.Add(kvp.Key, evoXObject);
+                        linkedVersionedItems.CreateSubCollectionIfNeeded(pivot);
+                        linkedVersionedItems[pivot].Add(evoXObject);
                     }
                 }
-
             }
         }
+
         #endregion
 
         #region separate version, embed version
@@ -348,7 +362,7 @@ namespace EvoX.Model.Versioning
             }
         }
 
-        #endregion 
+        #endregion
     }
 
 }

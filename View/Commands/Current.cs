@@ -87,7 +87,10 @@ namespace EvoX.View
         {
             get
             {
-                return activeDiagram;
+                if (Project == null || ProjectVersion == null)
+                    return null;
+                else 
+                    return activeDiagram;
             }
             set
             {
@@ -174,6 +177,14 @@ namespace EvoX.View
             Action<FileInfo> handler = RecentFile;
             if (handler != null) handler(file);
         }
+
+        public static event Action<Component> ComponentTouched;
+
+        public static void InvokeComponentTouched(Component component)
+        {
+            Action<Component> handler = ComponentTouched;
+            if (handler != null) handler(component);
+        }
     }
 
     public interface IFilePresenter
@@ -197,6 +208,8 @@ namespace EvoX.View
         void ActivateDiagramWithElement(Diagram diagram, Component selectedComponent);
 
         void CloseActiveTab();
+
+        IEnumerable<EvoXVersionedObject> AnotherOpenedVersions(EvoXVersionedObject item);
     }
 
     public interface IMainWindow
@@ -220,7 +233,10 @@ namespace EvoX.View
         void DisplayReport(NestedCommandReport finalReport);
         IDiagramTabManager DiagramTabManager { get; }
         IFilePresenter FilePresenter { get; }
+        bool CommandsDisabled { get; }
         void RefreshMenu();
         void FocusComponent(IEnumerable<PIMDiagram> pimDiagrams, PIMComponent component);
+        void DisableCommands();
+        void EnableCommands();
     }
 }

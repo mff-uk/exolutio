@@ -36,14 +36,15 @@ namespace EvoX.Revalidation
 
                     foreach (Type type in typeof(ChangeInstance).Assembly.GetTypes())
                     {
-                        ChangePredicateScopeAttribute attribute = 
-                            (ChangePredicateScopeAttribute) type.GetCustomAttributes(typeof (ChangePredicateScopeAttribute), true)[0];
-                        if (!type.IsAbstract)
+                        if (!type.IsAbstract && type.IsSubclassOf(typeof(ChangeInstance)))
                         {
+                            ChangePredicateScopeAttribute attribute =
+                                (ChangePredicateScopeAttribute)type.GetCustomAttributes(typeof(ChangePredicateScopeAttribute), true)[0];
+
                             _changePredicatesByScope.CreateSubCollectionIfNeeded(attribute.Scope);
                             _changePredicatesByScope[attribute.Scope].Add(type);
-                            testMethods[type] = type.GetMethod("TestCandidate", BindingFlags.Static);
-                            testMethods[type] = type.GetMethod("CreateInstance", BindingFlags.Static);
+                            testMethods[type] = type.GetMethod("TestCandidate", BindingFlags.Static | BindingFlags.Public);
+                            createInstanceMethods[type] = type.GetMethod("CreateInstance", BindingFlags.Static | BindingFlags.Public);
                         }
                     }
                 }
@@ -97,15 +98,18 @@ namespace EvoX.Revalidation
         {
             foreach (TPSMComponent component in components)
             {
-                foreach (Type type in changePredicatesByScope[scope])
+                if (changePredicatesByScope.ContainsKey(scope))
                 {
-                    object[] testParams = new object[]{component, oldVersion, newVersion};
-                    bool result = (bool) testMethods[type].Invoke(null, testParams);
-                    if (result)
+                    foreach (Type type in changePredicatesByScope[scope])
                     {
-                        changeSet.CreateSubCollectionIfNeeded(type);
-                        ChangeInstance instance = (ChangeInstance) createInstanceMethods[type].Invoke(null, testParams);
-                        changeSet[type].Add(instance);
+                        object[] testParams = new object[] { component, oldVersion, newVersion };
+                        bool result = (bool)testMethods[type].Invoke(null, testParams);
+                        if (result)
+                        {
+                            changeSet.CreateSubCollectionIfNeeded(type);
+                            ChangeInstance instance = (ChangeInstance)createInstanceMethods[type].Invoke(null, testParams);
+                            changeSet[type].Add(instance);
+                        }
                     }
                 }
             }

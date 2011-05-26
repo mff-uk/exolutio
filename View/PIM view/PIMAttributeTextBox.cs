@@ -34,8 +34,10 @@ namespace EvoX.View
             #if SILVERLIGHT
             ContextMenuService.SetContextMenu(this, ContextMenu);
             #else
-            MouseDoubleClick += OnMouseDoubleClick;
+            MouseDoubleClick += PIMAttributeTextBox_MouseDoubleClick;
+            MouseDown += PIMAttributeTextBox_MouseDown;
             #endif
+
             this.property.PropertyChanged += OnPropertyChangedEvent;
             Background = ViewToolkitResources.TransparentBrush;
             RefreshTextContent();
@@ -51,9 +53,7 @@ namespace EvoX.View
 			}
 		}
 
-		private EvoX.Model.AttributeType type;
-
-		private void BindType()
+	    private void BindType()
 		{
 			if (type != null)
 			{
@@ -88,11 +88,20 @@ namespace EvoX.View
 			}
 		}
 
-		private void OnMouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+	    private EvoX.Model.AttributeType type;
+
+	    void PIMAttributeTextBox_MouseDown(object sender, MouseButtonEventArgs e)
+	    {
+	        Current.InvokeComponentTouched(property);
+	    }
+
+	    private void PIMAttributeTextBox_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
 		{
             //if (classController != null)
             //    classController.ShowAttributeDialog(property);
 		}
+
+        
 
         #region Versioned element highlighting support
 

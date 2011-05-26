@@ -51,23 +51,15 @@ namespace EvoX.View
 #if SILVERLIGHT
             ContextMenuService.SetContextMenu(this, ContextMenu);
 #else
-            MouseDoubleClick += OnMouseDoubleClick;
+            MouseDoubleClick += PSMAttributeTextBox_MMouseDoubleClick;
+            MouseDown += PSMAttributeTextBox_MouseDown;
 #endif
             Background = ViewToolkitResources.TransparentBrush;
             RefreshTextContent();
             BindType();
         }
 
-        private void OnPropertyChangedEvent(object sender, PropertyChangedEventArgs e)
-		{
-			RefreshTextContent();
-			if (e.PropertyName == "Type")
-			{
-				BindType();
-			}
-		}
-
-		private EvoX.Model.AttributeType type;
+	    private EvoX.Model.AttributeType type;
 
 		private void BindType()
 		{
@@ -126,7 +118,21 @@ namespace EvoX.View
 
 		}
 
-		private void OnMouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+	    private void OnPropertyChangedEvent(object sender, PropertyChangedEventArgs e)
+	    {
+	        RefreshTextContent();
+	        if (e.PropertyName == "Type")
+	        {
+	            BindType();
+	        }
+	    }
+
+	    void PSMAttributeTextBox_MouseDown(object sender, MouseButtonEventArgs e)
+	    {
+	        Current.InvokeComponentTouched(property);
+	    }
+
+	    private void PSMAttributeTextBox_MMouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
 		{
             //if (classController != null)
             //    classController.ShowAttributeDialog(property);

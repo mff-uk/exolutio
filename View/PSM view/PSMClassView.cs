@@ -214,7 +214,7 @@ namespace EvoX.View
                 {
                     tbSRHeader.Visibility = Visibility.Visible;
                     tbSRHeader.TextAlignment = TextAlignment.Right;
-                    tbSRHeader.Text = PSMClass.Name;
+                    tbSRHeader.Text = PSMClass.RepresentedClass.Name;
                 }
                 else
                 {

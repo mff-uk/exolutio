@@ -57,12 +57,12 @@ namespace EvoX.WPFClient
             }
         }
 
-        public DiagramView ActiveDiagramView 
-        { 
-            get 
-            { 
-                return dockManager.ActiveDocument != null && dockManager.ActiveDocument is DiagramTab ? ((DiagramTab)dockManager.ActiveDocument).DiagramView : null; 
-            }         
+        public DiagramView ActiveDiagramView
+        {
+            get
+            {
+                return dockManager.ActiveDocument != null && dockManager.ActiveDocument is DiagramTab ? ((DiagramTab)dockManager.ActiveDocument).DiagramView : null;
+            }
         }
 
         public Diagram ActiveDiagram
@@ -79,7 +79,7 @@ namespace EvoX.WPFClient
         /// <param name="diagram">Diagram to be activated</param>
         public DiagramTab ActivateDiagram(Diagram diagram)
         {
-            if (ActiveDiagram != diagram)
+            if (ActiveDiagram != diagram && diagram != null)
             {
                 DiagramTab Tab = FindTab(diagram);
                 if (Tab == null)
@@ -109,7 +109,7 @@ namespace EvoX.WPFClient
         {
             Current.InvokeSelectionChanged();
         }
-        
+
         /// <summary>
         /// Activates given diagram and selects given element on it
         /// </summary>
@@ -202,7 +202,7 @@ namespace EvoX.WPFClient
         /// <param name="tab">PanelWindow to be closed</param>
         internal void RemoveTab(DiagramTab tab)
         {
-            
+
             tab.Close();
             if (dockManager.ActiveDocument == null && dockManager.Documents.Count() > 0)
             {
@@ -343,7 +343,7 @@ namespace EvoX.WPFClient
             }
         }
 
-        
+
         public void OpenTabsForProjectVersion(ProjectVersion projectVersion)
         {
             foreach (PIMDiagram pimDiagram in projectVersion.PIMDiagrams)
@@ -364,10 +364,47 @@ namespace EvoX.WPFClient
             FileTab f = new FileTab();
             f.DisplayFile(EDisplayedFileType.XML, xmlDocument.ToString());
             f.Title = ActiveDiagram.Caption + "_sample.xml";
-            
+
             f.Show(dockManager, true);
+        }
+
+        public IEnumerable<EvoXVersionedObject> AnotherOpenedVersions(EvoXVersionedObject item)
+        {
+            List<EvoXVersionedObject> result = null;
+            if (item is Diagram)
+            {
+                foreach (DocumentContent d in MainWindow.dockManager.Documents)
+                {
+                    if (d is DiagramTab && d.IsActiveInItsGroup())
+                    {
+                        Diagram diagram = ((DiagramTab)d).DiagramView.Diagram;
+                        if (item != diagram && diagram.Project.VersionManager.AreItemsLinked(item, diagram))
+                        {
+                            if (result == null)
+                            {
+                                result = new List<EvoXVersionedObject>();
+                            }
+                            result.Add(diagram);
+                        }
+                    }
+                }
+            }
+            if (result != null)
+            {
+                return result;
+            }
+            else
+            {
+                return new Diagram[0];
+            }
         }
     }
 
-    
+    public static class AvalonDockExtension
+    {
+        public static bool IsActiveInItsGroup(this ManagedContent managedContent)
+        {
+            return managedContent.ContainerPane.SelectedItem == managedContent;
+        }
+    }
 }
