@@ -27,6 +27,11 @@ namespace EvoX.View
 
         static MenuHelper()
         {
+            /*
+             * Create one instance of guiControllerCommand for each existing public command. 
+             * This instance is later used in every context menu (instances of commands are shared 
+             * amont the existing menus)
+             */
             foreach (List<CommandDescriptor> scopeCommands in PublicCommandsHelper.publicCommandsByScope.Values)
             {
                 foreach (CommandDescriptor commandDescriptor in scopeCommands)

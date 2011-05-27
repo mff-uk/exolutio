@@ -47,11 +47,10 @@ namespace EvoX.Model.PSM
         /// and <see cref="PSM.PSMSchema.ComponentRemoved"/> so that every component added or removed to/from the schema
         /// in the future is correspondingly added/removed from the diagram. 
         /// </summary>
-        /// <param name="psmSchema"></param>
-        /// <param name="bindingOnly"></param>
-        public void LoadSchemaToDiagram(PSMSchema psmSchema, bool bindingOnly = false)
+        public override void LoadSchemaToDiagram(Schema schema, bool bindingOnly = false)
         {
-            PSMSchema = psmSchema;
+            base.LoadSchemaToDiagram(schema, bindingOnly);
+            PSMSchema psmSchema = (PSMSchema)schema;
 
             if (!bindingOnly)
             {

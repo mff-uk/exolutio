@@ -81,8 +81,28 @@ namespace EvoX.View
             }
 
             diagram.Components.CollectionChanged += Components_CollectionChanged;
-            Loading = false; 
+            Loading = false;
+
+            Current.SelectionChanged += Current_SelectionChanged;
+            Current.SelectComponents += Current_SelectComponents;
+
             return withoutViewHelpers;
+        }
+
+        protected virtual void Current_SelectComponents(IEnumerable<Component> components)
+        {
+            
+        }
+
+        protected virtual void Current_SelectionChanged()
+        {
+            
+        }
+
+        public virtual void UnLoadDiagram()
+        {                                        
+            Current.SelectionChanged -= Current_SelectionChanged;
+            Current.SelectComponents -= Current_SelectComponents;
         }
 
         internal void DefferedAddCheck()

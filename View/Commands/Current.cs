@@ -185,6 +185,14 @@ namespace EvoX.View
             Action<Component> handler = ComponentTouched;
             if (handler != null) handler(component);
         }
+
+        public static event Action<IEnumerable<Component>> SelectComponents;
+
+        public static void InvokeSelectComponents(IEnumerable<Component> components)
+        {
+            Action<IEnumerable<Component>> handler = SelectComponents;
+            if (handler != null) handler(components);
+        }
     }
 
     public interface IFilePresenter

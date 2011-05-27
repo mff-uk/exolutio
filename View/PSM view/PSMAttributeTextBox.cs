@@ -15,7 +15,7 @@ namespace EvoX.View
 	/// </summary>
 	public class PSMAttributeTextBox : EditableTextBox
 	{
-		private PSMAttribute property;
+	    public PSMAttribute PSMAttribute { get; private set; }
 
 		//private IControlsAttributes classController;
 
@@ -26,7 +26,7 @@ namespace EvoX.View
 
         public override void SetDisplayedObject(object property, object diagram)
         {
-            this.property = (PSMAttribute) property;
+            this.PSMAttribute = (PSMAttribute) property;
 
             //this.classController = classController;
 
@@ -47,7 +47,7 @@ namespace EvoX.View
 
             #endregion
 
-            this.property.PropertyChanged += OnPropertyChangedEvent;
+            this.PSMAttribute.PropertyChanged += OnPropertyChangedEvent;
 #if SILVERLIGHT
             ContextMenuService.SetContextMenu(this, ContextMenu);
 #else
@@ -68,9 +68,9 @@ namespace EvoX.View
 				type.PropertyChanged -= Type_PropertyChanged;
 			}
 
-			if (property.AttributeType != null)
+			if (PSMAttribute.AttributeType != null)
 			{
-                type = property.AttributeType;
+                type = PSMAttribute.AttributeType;
 				type.PropertyChanged += Type_PropertyChanged;
 			}
 		}
@@ -82,31 +82,31 @@ namespace EvoX.View
 
 		private void RefreshTextContent()
 		{
-            if (property.AttributeType != null)
-                this.Text = string.Format("{0} : {1}", property.Name, property.AttributeType.Name);
+            if (PSMAttribute.AttributeType != null)
+                this.Text = string.Format("{0} : {1}", PSMAttribute.Name, PSMAttribute.AttributeType.Name);
 			else
-				this.Text = property.Name;
+				this.Text = PSMAttribute.Name;
 
             //if (property.Default != null)
             //    this.Text += string.Format(" [{0}]", property.Default);
 
-            if (!String.IsNullOrEmpty(property.GetCardinalityString()) && property.GetCardinalityString() != "1") 
+            if (!String.IsNullOrEmpty(PSMAttribute.GetCardinalityString()) && PSMAttribute.GetCardinalityString() != "1") 
 			{
-                this.Text += String.Format(" {{{0}}}", property.GetCardinalityString());
+                this.Text += String.Format(" {{{0}}}", PSMAttribute.GetCardinalityString());
 			}
 
-            if (!this.property.Element)
+            if (!this.PSMAttribute.Element)
                 this.Text = "@" + this.Text;
             else
                 this.Text = this.Text;
 
-            if (this.property.Interpretation == null)
+            if (this.PSMAttribute.Interpretation == null)
             {
                 this.Background = ViewToolkitResources.NoInterpretationBrush;
             }
             else
             {
-                if (this.property.PSMClass.IsStructuralRepresentative)
+                if (this.PSMAttribute.PSMClass.IsStructuralRepresentative)
                 {
                     this.Background = ViewToolkitResources.StructuralRepresentativeBody;
                 }
@@ -129,7 +129,7 @@ namespace EvoX.View
 
 	    void PSMAttributeTextBox_MouseDown(object sender, MouseButtonEventArgs e)
 	    {
-	        Current.InvokeComponentTouched(property);
+	        Current.InvokeComponentTouched(PSMAttribute);
 	    }
 
 	    private void PSMAttributeTextBox_MMouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)

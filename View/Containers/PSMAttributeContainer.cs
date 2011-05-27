@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -93,6 +94,20 @@ namespace EvoX.View
             : base(container, evoxCanvas, diagram)
         {
 
+        }
+
+        public IEnumerator<PSMAttributeTextBox> GetEnumerator()
+        {
+            foreach (PSMAttributeTextBox attributeTextBox in container.Children)
+            {
+                yield return attributeTextBox;
+            }
+            yield break;
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }

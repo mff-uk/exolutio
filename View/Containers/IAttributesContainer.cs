@@ -8,7 +8,7 @@ namespace EvoX.View
     /// <summary>
     /// Interface for control displaying attributes. 
     /// </summary>
-    public interface IAttributesContainer<TMember, TTextBox> : ITextBoxContainer
+    public interface IAttributesContainer<TMember, TTextBox> : ITextBoxContainer, IEnumerable<TTextBox>
     {
         ///// <summary>
         ///// Reference to <see cref="IControlsAttributes"/>
