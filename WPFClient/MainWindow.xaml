@@ -9,12 +9,6 @@
     <Fluent:RibbonWindow.Resources>
         <ResourceDictionary Source="Resources/MainWindowResources.xaml" />
     </Fluent:RibbonWindow.Resources>
-    <Fluent:RibbonWindow.Title>
-        <MultiBinding Converter="{StaticResource titleConverter}" Mode="OneWay">
-            <Binding Path="ProjectFile" />
-            <Binding Path="HasUnsavedChanges" />
-        </MultiBinding>
-    </Fluent:RibbonWindow.Title>
     <DockPanel LastChildFill="True">
         <Client:EvoXRibbon x:Name="EvoXRibbon" DockPanel.Dock="Top" />
         <ContentControl x:Name="TestContainer">

@@ -23,6 +23,7 @@ using EvoX.Model.PSM;
 using EvoX.ResourceLibrary;
 using EvoX.SupportingClasses;
 using EvoX.ViewToolkit;
+using EvoX.WPFClient.Converters;
 using Component = EvoX.Model.Component;
 
 namespace EvoX.WPFClient
@@ -172,13 +173,18 @@ namespace EvoX.WPFClient
 
         private void BindProject(Project newProject)
         {
-            if (newProject.ProjectFile != null)
-            {
-                ConfigurationManager.Configuration.AddToRecentFiles(newProject.ProjectFile);
-            }
             if (newProject != null)
             {
                 ProjectView.BindToProject(newProject);
+                Binding titleBinding = new Binding();
+                titleBinding.Mode = BindingMode.OneWay;
+                titleBinding.Converter = new MainWindowTitleConverter();
+                titleBinding.Source = newProject;
+                this.SetBinding(TitleProperty, titleBinding);
+                if (newProject.ProjectFile != null)
+                {
+                    ConfigurationManager.Configuration.AddToRecentFiles(newProject.ProjectFile);
+                }
             }
         }
 
@@ -187,6 +193,7 @@ namespace EvoX.WPFClient
             if (unloadedProject != null)
             {
                 ProjectView.UnbindFromProject(unloadedProject);
+                BindingOperations.ClearBinding(this, TitleProperty);
             }
         }
 
