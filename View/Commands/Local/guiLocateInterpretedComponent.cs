@@ -21,18 +21,7 @@ namespace EvoX.View.Commands
         public override void Execute(object parameter)
         {
             PIMComponent pimComponent = ((PSMComponent)ScopeObject).Interpretation;
-            PIMAttribute pimAttribute = pimComponent as PIMAttribute;
-            if (pimAttribute != null)
-            {
-                pimComponent = ((PIMAttribute) pimComponent).PIMClass;
-            }
-
-            Diagram diagram = ModelIterator.GetDiagramForComponent(pimComponent);
-            Current.MainWindow.FocusComponent(diagram, pimComponent);
-            if (pimAttribute != null)
-            {
-                Current.InvokeSelectComponents(new[] {pimAttribute});
-            }
+            Current.MainWindow.FocusComponent(pimComponent);
         }
         
         public override string Text

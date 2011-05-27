@@ -20,7 +20,7 @@
     <Canvas x:Name="wrapCanvas" 
              Focusable="False">
             <ScrollViewer Name="scrollViewer" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Width="300" Height="300" 
-                           Focusable="False">
+                           Focusable="False" x:FieldModifier="public">
             <vt:EvoXCanvas x:FieldModifier="public" x:Name="EvoXCanvas" Focusable="True">
                 <vt:EvoXCanvas.LayoutTransform>
                     <ScaleTransform x:Name="scaleTransform"/>

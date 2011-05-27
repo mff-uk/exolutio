@@ -2,10 +2,15 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:Dialogs="clr-namespace:EvoX.Dialogs;assembly=EvoX.Dialogs" xmlns:PIM="clr-namespace:EvoX.Model.PIM;assembly=EvoX.Model" xmlns:PSM="clr-namespace:EvoX.Model.PSM;assembly=EvoX.Model" xmlns:FormControls="clr-namespace:EvoX.ViewToolkit.FormControls;assembly=EvoX.ViewToolkit" mc:Ignorable="d" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:Dialogs="clr-namespace:EvoX.Dialogs;assembly=EvoX.Dialogs" xmlns:PIM="clr-namespace:EvoX.Model.PIM;assembly=EvoX.Model" xmlns:PSM="clr-namespace:EvoX.Model.PSM;assembly=EvoX.Model" xmlns:FormControls="clr-namespace:EvoX.ViewToolkit.FormControls;assembly=EvoX.ViewToolkit" xmlns:View="clr-namespace:EvoX.View" mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300" Padding="10">
     <Grid>
         <StackPanel>
+            <StackPanel.Resources>
+                <DataTemplate x:Key="derivedComponentTemplate" DataType="{x:Type PSM:PSMComponent}">
+                    <FormControls:LinkLabel Content="{Binding Path=SchemaQualifiedName}" Click="FocusPSMComponent" />
+                </DataTemplate>
+            </StackPanel.Resources>
             <StackPanel Name="nameManager">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -17,12 +22,35 @@
                 </Grid>
             </StackPanel>
 
-            <StackPanel Name="spDerivedComponents">
+            <StackPanel Name="spPIMAttributes">
                 <StackPanel.Resources>
-                    <DataTemplate x:Key="derivedComponentTemplate" DataType="{x:Type PSM:PSMComponent}">                        
-                        <FormControls:LinkLabel Content="{Binding Path=SchemaQualifiedName}" Click="FocusPSMComponent" />
+                    <DataTemplate x:Key="pimAttributeTemplate" DataType="{x:Type PIM:PIMAttribute}">
+                        <StackPanel Orientation="Vertical">
+                        	<StackPanel.Resources>
+                                <View:DerivedAttributeConverter x:Key="convertor" />
+                                <View:DerivedAttributesVisibleConverter x:Key="convertorVisible" />
+                        	</StackPanel.Resources>
+                        	<Label Content="{Binding Path=Name}" Padding="2"  />
+                            <Label Content="Interpreted attributes:" Padding="10,2,2,2" Visibility="{Binding Converter={StaticResource convertorVisible}}"  />
+                            <ListView Name="lvDerivedAttributes" 
+                                      ItemTemplate="{StaticResource derivedComponentTemplate}"
+                                      ItemsSource="{Binding Converter={StaticResource convertor}}"
+                                      Padding="20,0,0,0" Margin="0" BorderThickness="0"
+                                      Focusable="False"
+                                      Background="Transparent" />
+                        </StackPanel>
                     </DataTemplate>
                 </StackPanel.Resources>
+                <Label Content="Attributes: "/>
+                <ListView Name="lvPIMAttributes" 
+                          ItemTemplate ="{StaticResource pimAttributeTemplate}" 
+                          Padding="20,0,0,0" Margin="0" BorderThickness="0" HorizontalContentAlignment="Left"
+                          Focusable="False"
+                          Background="Transparent" 
+                          />
+            </StackPanel>
+            
+            <StackPanel Name="spDerivedComponents">                
                 <Label Content="Interpreted components: "/>
                 <ListView Name="lvDerivedComponents" ItemTemplate ="{StaticResource derivedComponentTemplate}" 
                           Padding="20,0,0,0" Margin="0" BorderThickness="0"

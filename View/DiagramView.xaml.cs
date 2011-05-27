@@ -259,6 +259,21 @@ namespace EvoX.View
                 if (focusComponent)
                 {
                     view.Focus();
+                    double x = 0;
+                    double y = 0;
+                    if (view is INodeComponentViewBase)
+                    {
+                        x = Canvas.GetLeft(((INodeComponentViewBase) view).MainNode);
+                        y = Canvas.GetTop(((INodeComponentViewBase) view).MainNode);
+                    }
+                    if (view is IConnectorViewBase)
+                    {
+                        x = Canvas.GetLeft(((IConnectorViewBase)view).Connector);
+                        y = Canvas.GetTop(((IConnectorViewBase)view).Connector);
+                    }
+                    ScrollViewer scrollViewer = EvoXCanvasWithZoomer.scrollViewer;
+                    scrollViewer.ScrollToHorizontalOffset(x);
+                    scrollViewer.ScrollToVerticalOffset(y);
                 }
             }
             InvokeSelectionChanged();
