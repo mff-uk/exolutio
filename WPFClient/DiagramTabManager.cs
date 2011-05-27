@@ -265,14 +265,17 @@ namespace EvoX.WPFClient
         /// </summary>
         private void DockManager_ActiveTabChanged(object sender, EventArgs eventArgs)
         {
-            DiagramTab diagramTab = dockManager.ActiveDocument as DiagramTab;
-            if (diagramTab != null)
+            if (!MainWindow.CommandsDisabled)
             {
-                Current.ActiveDiagram = diagramTab.DiagramView.Diagram;
-            }
-            else
-            {
-                Current.ActiveDiagram = null;
+                DiagramTab diagramTab = dockManager.ActiveDocument as DiagramTab;
+                if (diagramTab != null)
+                {
+                    Current.ActiveDiagram = diagramTab.DiagramView.Diagram;
+                }
+                else
+                {
+                    Current.ActiveDiagram = null;
+                }
             }
         }
 

@@ -33,7 +33,7 @@ namespace EvoX.View.Commands
         public static guiSampleDocumentCommand CreateSampleDocumentCommand { get; set; }
         public static guiLocateInterpretedComponent LocateInterpretedComponent { get; set; }
         public static guiFindChangesCommand FindChangesCommand { get; set; }
-
+        public static guiModelTreeCommand RenameComponentCommand { get; set; }
 
         #endregion
 
@@ -110,6 +110,13 @@ namespace EvoX.View.Commands
                 OpenDialog = false,
                 Icon = EvoXResourceNames.GetResourceImageSource(EvoXResourceNames.delete2)
             };
+
+            RenameComponentCommand = new guiModelTreeCommand
+            {
+                Text = "Rename...",
+                Icon = EvoXResourceNames.GetResourceImageSource(EvoXResourceNames.pencil)
+            };
+
             #endregion
 
             #region grammar

@@ -158,10 +158,7 @@ namespace EvoX.WPFClient
                     DiagramTabManager.OpenTabsForProjectVersion(Current.Project.LatestVersion);
                 }
             }
-            if (Current.Controller != null)
-            {
-                Current.Controller.ExecutedCommand += ReportDisplay.ExecutedCommand;
-            }
+            Current.ExecutedCommand += ReportDisplay.ExecutedCommand;
         }
 
         public void CurrentProjectVersionChanged(object sender, CurrentProjectVersionChangedEventArgs e)

@@ -18,7 +18,7 @@ namespace EvoX.Controller
             UndoStack = new CommandStack();
             RedoStack = new CommandStack();
             Project = p;
-            ExecutedCommand += new CommandEventHandler(Controller_ExecutedCommand);
+            ExecutedCommand += Controller_ExecutedCommand;
         }
 
         void Controller_ExecutedCommand(CommandBase command, bool isPartOfMacro, CommandBase macroCommand)

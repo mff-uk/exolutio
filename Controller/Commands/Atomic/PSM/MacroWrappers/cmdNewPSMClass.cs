@@ -31,10 +31,16 @@ namespace EvoX.Controller.Commands.Atomic.PSM.MacroWrappers
             }
         }
 
-        public cmdNewPSMClass() { }
+        public cmdNewPSMClass()
+        {
+
+        }
 
         public cmdNewPSMClass(Controller c)
-            : base(c) { }
+            : base(c)
+        {
+            
+        }
 
         public void Set(Guid psmSchemaGuid)
         {
