@@ -45,6 +45,11 @@ namespace EvoX.Controller.Commands.Atomic.PSM
                 ErrorDescription = CommandErrors.CMDERR_CONTENT_MODEL_NOT_EMPTY;
                 return false;
             }
+            if (cm.ParentAssociation != null)
+            {
+                ErrorDescription = CommandErrors.CMDERR_CONTENT_MODEL_NOT_ROOT;
+                return false;
+            }
 
             return true;
         }
