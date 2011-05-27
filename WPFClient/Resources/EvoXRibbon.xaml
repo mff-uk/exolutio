@@ -140,6 +140,10 @@
                 <Fluent:Button Command="{x:Static Commands:EvoXGuiCommands.VerifyModelCommand}"
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
             </Fluent:RibbonGroupBox>
+            <Fluent:RibbonGroupBox Header="Layout">
+                <Fluent:Button Command="{x:Static Commands1:StaticWPFClientCommands.LayoutPIMLeftPSMRight}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
+            </Fluent:RibbonGroupBox>
 
             <!--<Fluent:RibbonGroupBox Header="Edit">
                 <Fluent:Button Header="Undo" />
