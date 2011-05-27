@@ -12,7 +12,7 @@ using Label = EvoX.ViewToolkit.Label;
 
 namespace EvoX.View
 {
-    public class PSMAssociationView : ComponentViewBaseVH<PSMAssociationViewHelper>
+    public class PSMAssociationView : ComponentViewBaseVH<PSMAssociationViewHelper>, IConnectorViewBase
     {
         public PSMAssociation PSMAssociation { get; private set; }
 

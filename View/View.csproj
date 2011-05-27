@@ -136,6 +136,7 @@
       <DependentUpon>FileView.xaml</DependentUpon>
     </Compile>
     <Compile Include="IconConverter.cs" />
+    <Compile Include="INodeComponentViewBase.cs" />
     <Compile Include="PIM view\PIMClassDialog.xaml.cs">
       <DependentUpon>PIMClassDialog.xaml</DependentUpon>
       <SubType>Code</SubType>

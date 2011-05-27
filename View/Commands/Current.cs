@@ -270,6 +270,7 @@ namespace EvoX.View
         bool CommandsDisabled { get; }
         void RefreshMenu();
         void FocusComponent(IEnumerable<PIMDiagram> pimDiagrams, PIMComponent component);
+        void FocusComponent(Component component);
         void DisableCommands();
         void EnableCommands();
     }

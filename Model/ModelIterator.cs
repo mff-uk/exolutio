@@ -331,6 +331,12 @@ namespace EvoX.Model
                 projectVersion = component.Project.SingleVersion;
                 
             }
+
+            if (component is PIMAttribute)
+                component = ((PIMAttribute) component).PIMClass;
+            if (component is PSMAttribute)
+                component = ((PSMAttribute) component).PSMClass;
+
             if (component is PIMComponent)
             {
                 return projectVersion.PIMDiagrams.FirstOrDefault(d => d.PIMComponents.Contains((PIMComponent)component));

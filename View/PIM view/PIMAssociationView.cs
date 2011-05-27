@@ -14,7 +14,7 @@ using Label = EvoX.ViewToolkit.Label;
 
 namespace EvoX.View
 {
-    public class PIMAssociationView : ComponentViewBaseVH<PIMAssociationViewHelper>
+    public class PIMAssociationView : ComponentViewBaseVH<PIMAssociationViewHelper>, IConnectorViewBase
     {
         public PIMAssociation PIMAssociation { get; private set; }
 

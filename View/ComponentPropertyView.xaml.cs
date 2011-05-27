@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -58,6 +59,7 @@ namespace EvoX.View
         public void DisplayComponent(Component component)
         {
             DisplayNamedComponent(component);
+            DisplayAttributes(component as PIMClass);
             DisplayInterpretedComponents(component as PIMComponent);
             DisplayPSMComponent(component as PSMComponent);
             DisplayStructuralRepresentatives(component as PSMClass);
@@ -94,6 +96,20 @@ namespace EvoX.View
             }
         }
 
+        private void DisplayAttributes(PIMClass pimClass)
+        {
+            if (pimClass != null)
+            {
+                lvPIMAttributes.ItemsSource = pimClass.PIMAttributes;
+                spPIMAttributes.Visibility = System.Windows.Visibility.Visible;
+            }
+            else
+            {
+                lvPIMAttributes.ItemsSource = null;
+                spPIMAttributes.Visibility = System.Windows.Visibility.Collapsed;
+            }
+        }
+
         private void DisplayInterpretedComponents(PIMComponent pimComponent)
         {
             if (pimComponent != null)
@@ -124,7 +140,11 @@ namespace EvoX.View
         {
             FrameworkElement linkLabel = (FrameworkElement)sender;
             PSMComponent component = (PSMComponent)linkLabel.DataContext;
-            Current.MainWindow.FocusComponent(component.PSMSchema.PSMDiagram, component);
+            if (component == null)
+            {
+                return;
+            }
+            Current.MainWindow.FocusComponent(component);
         }
 
         private void FocusPIMComponent(object sender, MouseButtonEventArgs e)
@@ -135,8 +155,39 @@ namespace EvoX.View
             {
                 return;
             }
-            IEnumerable<PIMDiagram> pimDiagrams = Current.ProjectVersion.PIMDiagrams.Where(d => d.PIMComponents.Contains(component));
-            Current.MainWindow.FocusComponent(pimDiagrams, component);
+            Current.MainWindow.FocusComponent(component);
+        }
+    }
+
+    public class DerivedAttributeConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value != null && value is PIMAttribute)
+                return ((PIMAttribute)value).GetInterpretedComponents();
+            else
+                return null;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class DerivedAttributesVisibleConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value != null && value is PIMAttribute)
+                return ((PIMAttribute)value).GetInterpretedComponents().Count > 0 ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
+            else
+                return false;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -256,7 +256,25 @@ namespace EvoX.WPFClient
 
         public void FocusComponent(Diagram diagram, Component component)
         {
-            DiagramTabManager.ActivateDiagramWithElement(diagram, component);
+            Component diagramComponent = component;
+            Component subComponent = null;
+            PIMAttribute pimAttribute = component as PIMAttribute;
+            if (pimAttribute != null)
+            {
+                subComponent = pimAttribute;
+                diagramComponent = ((PIMAttribute)component).PIMClass;
+            }
+            PSMAttribute psmAttribute = component as PSMAttribute;
+            if (psmAttribute != null)
+            {
+                subComponent = psmAttribute;
+                diagramComponent = ((PSMAttribute)component).PSMClass;
+            }
+            DiagramTabManager.ActivateDiagramWithElement(diagram, diagramComponent);
+            if (subComponent != null)
+            {
+                Current.InvokeSelectComponents(new[] { subComponent });
+            }
         }
 
         public void FocusComponent(IEnumerable<PIMDiagram> pimDiagrams, PIMComponent component)
@@ -269,6 +287,12 @@ namespace EvoX.WPFClient
             {
                 throw new NotImplementedException("Focus component not implemented for the case where the component is present in zero or more than one diagram.");
             }
+        }
+
+        public void FocusComponent(Component component)
+        {
+            Diagram diagram = ModelIterator.GetDiagramForComponent(component);
+            Current.MainWindow.FocusComponent(diagram, component);
         }
 
         public void DisplayReport(NestedCommandReport finalReport)

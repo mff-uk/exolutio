@@ -10,12 +10,12 @@ namespace EvoX.View.Commands
     [Scope(ScopeAttribute.EScope.PSMClass)]
     public class guiLocateRepresentedPSMClass : guiScopeCommand
     {
-        public override bool CanExecute(object parameter)
+        public override bool CanExecute(object parameter = null)
         {
             return ScopeObject is PSMClass && ((PSMClass)ScopeObject).IsStructuralRepresentative;
         }
 
-        public override void Execute(object parameter)
+        public override void Execute(object parameter = null)
         {
             PSMClass psmClass = ((PSMClass)ScopeObject);
             if (psmClass.IsStructuralRepresentative)
