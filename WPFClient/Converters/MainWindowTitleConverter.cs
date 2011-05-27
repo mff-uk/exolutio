@@ -7,41 +7,33 @@ using System.Windows;
 
 namespace EvoX.WPFClient.Converters
 {
-    public class MainWindowTitleConverter : IMultiValueConverter
+    public class MainWindowTitleConverter : IValueConverter
     {
-        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            string title;
+            Project project = (Project) value;
+            string title; 
 
-            if (values[0] == DependencyProperty.UnsetValue)
+            if (project.ProjectFile == null)
             {
-                title = "EvoX";
+                title = "Untitled.EvoX";
             }
             else
             {
-                FileInfo projectfile = values[0] as FileInfo;
-                bool? hasUnsavedChanges = values[1] as bool?;
-                if (projectfile == null)
-                {
-                    title = "Untitled.EvoX";
-                }
-                else
-                {
-                    title = projectfile.FullName;
-                }
-
-                if (hasUnsavedChanges == true)
-                {
-                    title += "*";
-                }
-
-                title += " - EvoX";
+                title = project.ProjectFile.FullName;
             }
+
+            if (project.HasUnsavedChanges == true)
+            {
+                title += "*";
+            }
+
+            title += " - EvoX";
 
             return title;
         }
 
-        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return new object[0];
         }
