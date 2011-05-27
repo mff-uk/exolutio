@@ -201,16 +201,24 @@ namespace EvoX.View
                 this.Name = PSMClass.Name;
                 
                 Brush header = PSMClass.IsStructuralRepresentative ? ViewToolkitResources.StructuralRepresentativeHeader : ViewToolkitResources.ClassHeader;
+                Brush body = PSMClass.IsStructuralRepresentative ? ViewToolkitResources.StructuralRepresentativeBody : ViewToolkitResources.TransparentBrush;
                 if (PSMClass.Interpretation == null)
                 {
                     header = ViewToolkitResources.NoInterpretationBrush;
                 }
-                Brush body = PSMClass.IsStructuralRepresentative ? ViewToolkitResources.StructuralRepresentativeBody : ViewToolkitResources.TransparentBrush;
 
                 if (headerBorder.Background != header)
+                {
                     headerBorder.Background = header;
+                }
                 if (attributesBorder.Background != body)
+                {
                     attributesBorder.Background = body;
+                    foreach (PSMAttributeTextBox psmAttributeTextBox in attributesContainer)
+                    {
+                        psmAttributeTextBox.RefreshTextContent();
+                    }
+                }
 
                 if (PSMClass.IsStructuralRepresentative)
                 {
