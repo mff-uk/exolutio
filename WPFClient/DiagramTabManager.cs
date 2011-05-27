@@ -163,7 +163,7 @@ namespace EvoX.WPFClient
 
             if (newTab != null)
             {
-                newTab.Title = diagram.Caption;
+                newTab.BindTab(diagram);
                 newTab.DiagramView.LoadDiagram(diagram);
                 newTab.DiagramView.SelectionChanged += SelectedItems_CollectionChanged;
                 ActivePane.Items.Add(newTab);
