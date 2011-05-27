@@ -80,7 +80,7 @@ namespace EvoX.View
 			RefreshTextContent();
 		}
 
-		private void RefreshTextContent()
+		public void RefreshTextContent()
 		{
             if (PSMAttribute.AttributeType != null)
                 this.Text = string.Format("{0} : {1}", PSMAttribute.Name, PSMAttribute.AttributeType.Name);
