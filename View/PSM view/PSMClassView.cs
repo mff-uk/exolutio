@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,7 +14,7 @@ using EvoX.ViewToolkit;
 
 namespace EvoX.View
 {
-    public class PSMClassView : NodeComponentViewBase<PSMClassViewHelper>
+    public class PSMClassView : NodeComponentViewBase<PSMClassViewHelper>, IEnumerable<PSMAttributeTextBox>
     {
         #region inner controls
         private StackPanel stackPanel;
@@ -245,8 +247,28 @@ namespace EvoX.View
                 {
                     border.BorderThickness = new Thickness(0.8);
                     border.BorderBrush = ViewToolkitResources.NodeBorderBrush;
+                    foreach (PSMAttributeTextBox attributeTextBox in attributesContainer)
+                    {
+                        attributeTextBox.Selected = false;
+                    }
                 }
             }
+        }
+
+        public override void RemoveFromDiagram()
+        {
+            attributesContainer.Clear();
+            base.RemoveFromDiagram();
+        }
+
+        public IEnumerator<PSMAttributeTextBox> GetEnumerator()
+        {
+            return attributesContainer.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }

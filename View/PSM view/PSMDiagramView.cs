@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Controls;
 using EvoX.Controller.Commands;
 using EvoX.Model;
@@ -98,6 +99,35 @@ namespace EvoX.View
             ((EvoXContextMenu)EvoXCanvas.ContextMenu).ScopeObject = PSMDiagram.PSMSchema;
             ((EvoXContextMenu)EvoXCanvas.ContextMenu).Diagram = PSMDiagram;            
             return result;
+        }
+
+        protected override void Current_SelectionChanged()
+        {
+            base.Current_SelectionChanged();
+        }
+
+        protected override void Current_SelectComponents(IEnumerable<Component> components)
+        {
+            base.Current_SelectComponents(components);
+
+            foreach (ComponentViewBase componentViewBase in RepresentantsCollection.Values)
+            {
+                PSMClassView psmClassView = componentViewBase as PSMClassView;
+                if (psmClassView != null)
+                {
+                    foreach (PSMAttributeTextBox psmAttributeTextBox in psmClassView)
+                    {
+                        if (components.Contains(psmAttributeTextBox.PSMAttribute))
+                        {
+                            psmAttributeTextBox.Selected = true;
+                        }
+                        else
+                        {
+                            psmAttributeTextBox.Selected = false;
+                        }
+                    }
+                }
+            }
         }
     }
 }

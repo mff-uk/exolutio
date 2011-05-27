@@ -38,9 +38,10 @@ namespace EvoX.Model.PIM
             get { return Components.Cast<PIMComponent>(); }
         }
 
-        public void LoadSchemaToDiagram(PIMSchema pimSchema, bool bindingOnly = false)
+        public override void LoadSchemaToDiagram(Schema schema, bool bindingOnly = false)
         {
-            PIMSchema = pimSchema;
+            base.LoadSchemaToDiagram(schema, bindingOnly);
+            PIMSchema pimSchema = (PIMSchema)schema;
 
             if (!bindingOnly)
             {

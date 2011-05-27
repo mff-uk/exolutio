@@ -24,8 +24,6 @@ namespace EvoX.View
     /// </summary>
     public partial class ComponentPropertyView : UserControl
     {
-
-
         public ComponentPropertyView()
         {
             InitializeComponent();

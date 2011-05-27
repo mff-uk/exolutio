@@ -22,7 +22,6 @@ namespace EvoX.View.Commands
         {
             Current.ActiveDiagramChanged += Current_ActiveDiagramChanged;
             Current.SelectionChanged += delegate { OnCanExecuteChanged(null); };
-
         }
 
         private void Current_ActiveDiagramChanged()

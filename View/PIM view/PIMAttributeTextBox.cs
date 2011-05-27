@@ -15,13 +15,13 @@ namespace EvoX.View
 	/// </summary>
 	public class PIMAttributeTextBox : EditableTextBox
 	{
-		private PIMAttribute property;
+	    public PIMAttribute PIMAttribute { get; private set; }
 
 		//private IControlsAttributes classController;
 
         public override void SetDisplayedObject(object property, object diagram)
         {
-            this.property = (PIMAttribute) property;
+            this.PIMAttribute = (PIMAttribute) property;
 
             //this.classController = classController;
 
@@ -38,7 +38,7 @@ namespace EvoX.View
             MouseDown += PIMAttributeTextBox_MouseDown;
             #endif
 
-            this.property.PropertyChanged += OnPropertyChangedEvent;
+            this.PIMAttribute.PropertyChanged += OnPropertyChangedEvent;
             Background = ViewToolkitResources.TransparentBrush;
             RefreshTextContent();
             BindType();
@@ -60,9 +60,9 @@ namespace EvoX.View
 				type.PropertyChanged -= Type_PropertyChanged;
 			}
 
-			if (property.AttributeType != null)
+			if (PIMAttribute.AttributeType != null)
 			{
-                type = property.AttributeType;
+                type = PIMAttribute.AttributeType;
 				type.PropertyChanged += Type_PropertyChanged;
 			}
 		}
@@ -74,17 +74,17 @@ namespace EvoX.View
 
 		private void RefreshTextContent()
 		{
-            if (property.AttributeType != null)
-                this.Text = string.Format("{0} : {1}", property.Name, property.AttributeType.Name);
+            if (PIMAttribute.AttributeType != null)
+                this.Text = string.Format("{0} : {1}", PIMAttribute.Name, PIMAttribute.AttributeType.Name);
 			else
-				this.Text = property.Name;
+				this.Text = PIMAttribute.Name;
 
             //if (property.Default != null)
             //    this.Text += string.Format(" [{0}]", property.Default);
 
-            if (!String.IsNullOrEmpty(property.GetCardinalityString()) && property.GetCardinalityString() != "1") 
+            if (!String.IsNullOrEmpty(PIMAttribute.GetCardinalityString()) && PIMAttribute.GetCardinalityString() != "1") 
 			{
-                this.Text += String.Format(" {{{0}}}", property.GetCardinalityString());
+                this.Text += String.Format(" {{{0}}}", PIMAttribute.GetCardinalityString());
 			}
 		}
 
@@ -92,7 +92,7 @@ namespace EvoX.View
 
 	    void PIMAttributeTextBox_MouseDown(object sender, MouseButtonEventArgs e)
 	    {
-	        Current.InvokeComponentTouched(property);
+	        Current.InvokeComponentTouched(PIMAttribute);
 	    }
 
 	    private void PIMAttributeTextBox_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)

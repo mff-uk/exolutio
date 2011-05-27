@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Controls;
 using EvoX.Controller.Commands;
 using EvoX.Model;
@@ -63,5 +64,33 @@ namespace EvoX.View
             return withoutViewHelpers;
         }
 
+        protected override void Current_SelectionChanged()
+        {
+            base.Current_SelectionChanged();
+        }
+
+        protected override void Current_SelectComponents(IEnumerable<Component> components)
+        {
+            base.Current_SelectComponents(components);
+
+            foreach (ComponentViewBase componentViewBase in RepresentantsCollection.Values)
+            {
+                PIMClassView pimClassView = componentViewBase as PIMClassView;
+                if (pimClassView != null)
+                {
+                    foreach (PIMAttributeTextBox pimAttributeTextBox in pimClassView)
+                    {
+                        if (components.Contains(pimAttributeTextBox.PIMAttribute))
+                        {
+                            pimAttributeTextBox.Selected = true;
+                        }
+                        else
+                        {
+                            pimAttributeTextBox.Selected = false; 
+                        }
+                    }
+                }
+            }
+        }
     }
 }

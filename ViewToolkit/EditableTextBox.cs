@@ -9,13 +9,14 @@ using System.Windows.Input;
 using System.Windows.Controls;
 using System.Windows.Media;
 using EvoX.ResourceLibrary;
+using EvoX.ViewToolkit.Geometries;
 
 namespace EvoX.ViewToolkit
 {
     /// <summary>
     /// TextBox for displaying and editing Class properties and methods
     /// </summary>
-    public class EditableTextBox : TextBox
+    public class EditableTextBox : TextBox, ISelectable
     {
         Brush originalTextBrush = ViewToolkitResources.BlackBrush;
 
@@ -286,5 +287,45 @@ namespace EvoX.ViewToolkit
             
         }
         #endif
+
+        #region Implementation of ISelectable
+
+        public Rect GetBounds()
+        {
+            return new Rect(0, 0, this.ActualWidth, this.ActualHeight);
+        }
+
+        public bool CanBeDraggedInGroup { get { return false; } }
+
+        private bool selected;
+        public bool Selected
+        {
+            get { return selected; }
+            set
+            {
+                selected = value;
+                if (selected)
+                {
+                    this.BorderBrush = ViewToolkitResources.SelectedBorderBrush;
+                    this.BorderThickness = new Thickness(1);
+                }
+                else
+                {
+                    this.BorderThickness =new Thickness(0);
+                    this.BorderBrush = ViewToolkitResources.TransparentBrush;
+                }
+            }
+        }
+
+        public bool Highlighted { get; set; }
+
+        public event Action SelectedChanged;
+
+        #endregion
+
+        public virtual void UnBindModelView()
+        {
+            
+        }
     }
 }

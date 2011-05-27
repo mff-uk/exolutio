@@ -189,6 +189,13 @@ namespace EvoX.View
 		/// </summary>
 		public void Clear()
 		{
+		    foreach (object o in container.Children)
+		    {
+		        if (o is EditableTextBox)
+		        {
+		            ((EditableTextBox) o).UnBindModelView();
+		        }
+		    }
 			this.container.Children.Clear();
 			ManageBorders();
 		}

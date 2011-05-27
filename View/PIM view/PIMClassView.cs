@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,7 +14,7 @@ using EvoX.ViewToolkit;
 
 namespace EvoX.View
 {
-    public class PIMClassView : NodeComponentViewBase<PIMClassViewHelper>
+    public class PIMClassView : NodeComponentViewBase<PIMClassViewHelper>, IEnumerable<PIMAttributeTextBox>
     {
         #region inner controls
         private StackPanel stackPanel;
@@ -167,6 +169,12 @@ namespace EvoX.View
             }
         }
 
+        protected override void UnBindModelView()
+        {
+            attributesContainer.Clear();
+            base.UnBindModelView();
+        }
+
         /// <summary>
         /// This method is safe to be called repeatedly. 
         /// </summary>
@@ -203,8 +211,27 @@ namespace EvoX.View
                 {
                     border.BorderThickness = new Thickness(0.8);
                     border.BorderBrush = ViewToolkitResources.NodeBorderBrush;
+                    foreach (PIMAttributeTextBox attributeTextBox in attributesContainer)
+                    {
+                        attributeTextBox.Selected = false;
+                    }
                 }
             }
+        }
+
+        public override void RemoveFromDiagram()
+        {
+            base.RemoveFromDiagram();
+        }
+
+        public IEnumerator<PIMAttributeTextBox> GetEnumerator()
+        {
+            return attributesContainer.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }

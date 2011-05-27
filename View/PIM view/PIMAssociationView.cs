@@ -43,11 +43,11 @@ namespace EvoX.View
 
         protected override void UnBindModelView()
         {
-            base.UnBindModelView();
             foreach (PIMAssociationEnd pimAssociationEnd in PIMAssociation.PIMAssociationEnds)
             {
                 pimAssociationEnd.PropertyChanged -= AssociationEnd_PropertyChanged;
             }
+            base.UnBindModelView();
         }
 
         private void AssociationEnd_PropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)

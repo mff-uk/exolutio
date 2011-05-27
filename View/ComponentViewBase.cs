@@ -38,6 +38,7 @@ namespace EvoX.View
         protected override void UnBindModelView()
         {
             ViewHelper.PropertyChanged -= ViewHelper_PropertyChanged;
+            base.UnBindModelView();
         }
     }
 

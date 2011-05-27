@@ -220,13 +220,6 @@ namespace EvoX.View.Commands
             LocateInterpretedComponent = new guiLocateInterpretedComponent();
 
             #endregion
-
-            Current.SelectionChanged += Current_SelectionChanged;
-        }
-
-        private static void Current_SelectionChanged()
-        {
-            AddPIMAttributeCommand.OnCanExecuteChanged(null);
         }
     }
 }

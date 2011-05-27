@@ -163,6 +163,16 @@ namespace EvoX.Model
             SetProjectVersion(context.CurrentProjectVersion);
         }
         #endregion
+
+        public virtual void LoadSchemaToDiagram(Schema schema, bool bindingOnly = false)
+        {
+            Schema = schema;
+        }
+
+        public virtual void UnloadSchemaFromDiagram()
+        {
+            
+        }
     }
 
     public class DiagramEventArgs
