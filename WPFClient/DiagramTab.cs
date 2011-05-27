@@ -1,4 +1,5 @@
 using System;
+using System.Windows.Data;
 using AvalonDock;
 using EvoX.Model;
 using EvoX.View;
@@ -20,5 +21,25 @@ namespace EvoX.WPFClient
 				ContainerPane.Items.MoveCurrentToFirst();
         }
 
+        Binding titleBinding;
+
+        public void BindTab(Diagram diagram)
+        {    
+            titleBinding = new Binding("Caption");
+            titleBinding.Source = diagram;
+            titleBinding.Mode = BindingMode.OneWay;
+            this.SetBinding(TitleProperty, titleBinding);
+        }
+
+        public void UnBindTab()
+        {
+            BindingOperations.ClearBinding(this, TitleProperty);
+        }
+
+        protected override void OnClosed()
+        {
+            UnBindTab();
+            base.OnClosed();
+        }
     }
 }
