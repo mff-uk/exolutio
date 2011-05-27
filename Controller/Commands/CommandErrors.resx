@@ -207,4 +207,7 @@
   <data name="CMDERR_CANNOT_SYNCHRO_PSM_ASSOC" xml:space="preserve">
     <value>PSM associations can be synchronized only if they all contain the same PSM class and their other PSM classes all have the same interpretation</value>
   </data>
+  <data name="CMDERR_CONTENT_MODEL_NOT_ROOT" xml:space="preserve">
+    <value>Content model is not a root.</value>
+  </data>
 </root>

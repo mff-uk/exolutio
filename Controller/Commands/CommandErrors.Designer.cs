@@ -160,6 +160,15 @@ namespace EvoX.Controller.Commands {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Content model is not a root..
+        /// </summary>
+        internal static string CMDERR_CONTENT_MODEL_NOT_ROOT {
+            get {
+                return ResourceManager.GetString("CMDERR_CONTENT_MODEL_NOT_ROOT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cyclic representation would occur..
         /// </summary>
         internal static string CMDERR_CYCLIC_REPR {
