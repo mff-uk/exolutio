@@ -81,18 +81,18 @@ namespace EvoX.WPFClient
         {
             if (ActiveDiagram != diagram && diagram != null)
             {
-                DiagramTab Tab = FindTab(diagram);
-                if (Tab == null)
+                DiagramTab tab = FindTab(diagram);
+                if (tab == null)
                 {
-                    Tab = AddTab(diagram);
+                    tab = AddTab(diagram);
                 }
                 else
                 {
-                    dockManager.ActiveDocument = Tab;
+                    dockManager.ActiveDocument = tab;
                 }
 
-                Tab.BringDocumentHeaderToView(false);
-                return Tab;
+                tab.BringDocumentHeaderToView(false);
+                return tab;
             }
             else
             {
@@ -300,6 +300,7 @@ namespace EvoX.WPFClient
             {
                 documentContent.Close();
             }
+            Current.ActiveDiagram = null;
         }
 
         public void BindToProjectVersion(ProjectVersion projectVersion)

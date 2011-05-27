@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Media;
+using EvoX.Dialogs;
 using EvoX.Model;
 using EvoX.Model.PIM;
 using EvoX.Model.PSM;
@@ -21,12 +22,21 @@ namespace EvoX.View.Commands.Versioning
             }
             else
             {
-                //VersionSelectionDialog dialog = new VersionSelectionDialog();
-                //dialog.VersionedItem = Current.ActiveDiagram;
-                //if (dialog.ShowDialog() == true)
-                //{
-                    
-                //}
+                IEnumerable<PSMSchema> versionedItems =
+                    Current.Project.VersionManager.GetAllVersionsOfItem(Current.ActiveDiagram.Schema).Cast<PSMSchema>();
+                SelectItemsDialog dialog = new SelectItemsDialog();
+                dialog.UseRadioButtons = true;
+                List<PSMSchema> psmSchemata = versionedItems.ToList();
+                psmSchemata.Remove((PSMSchema) Current.ActiveDiagram.Schema);
+                dialog.SetItems(psmSchemata);
+                dialog.ShortMessage = "Select version";
+                dialog.LongMessage = "Select version of the schema you wish to compare";
+                dialog.ShowDialog();
+
+                if (dialog.DialogResult == true && dialog.selectedObjects.Count == 1)
+                {
+                    FindAndDisplayChanges((PSMSchema)dialog.selectedObjects.First(), ((PSMDiagram)Current.ActiveDiagram).PSMSchema);
+                }
             }
         }
 
