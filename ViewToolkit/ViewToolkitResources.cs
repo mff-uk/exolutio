@@ -133,11 +133,11 @@ namespace EvoX.ViewToolkit
             classHeader = new SolidColorBrush(Color.FromArgb(255, 250, 235, 215));
             seaShellBrush = new SolidColorBrush(Color.FromArgb(255, 255, 245, 238));
             canvasBackgroundBrush = whiteBrush;
-            noInterpretationBrush = new SolidColorBrush(Colors.Gray);
+            noInterpretationBrush = new SolidColorBrush(Colors.LightGray);
             goldBrush = new SolidColorBrush(Colors.Yellow);
             navyBrush = new SolidColorBrush(Color.FromArgb(0xFF, 0x00, 0x00, 0x80));
-            structuralRepresentativeHeader = new SolidColorBrush(Color.FromArgb(255, 51, 102, 153));
-            structuralRepresentativeBody = new SolidColorBrush(Color.FromArgb(255, 0, 153, 204));
+            structuralRepresentativeHeader = new SolidColorBrush(Color.FromArgb(255, 153, 216, 232));
+            structuralRepresentativeBody = new SolidColorBrush(Color.FromArgb(255, 200, 233, 241));
             interpretedAttributeBrush = seaShellBrush; 
             ribbonBackstageDimText = new SolidColorBrush(Color.FromArgb(0xFF, 0xa1, 0x6f, 0x89));
             selectedBorderBrush = redBrush;
