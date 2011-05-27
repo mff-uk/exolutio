@@ -91,6 +91,15 @@ namespace EvoX.ViewToolkit
         public EvoXContextMenu()
         {
             this.HorizontalContentAlignment = HorizontalAlignment.Stretch;
+
+            this.Opened += EvoXContextMenu_Opened;
         }
+
+        void EvoXContextMenu_Opened(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        
     }
 }

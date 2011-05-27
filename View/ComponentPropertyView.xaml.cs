@@ -28,10 +28,21 @@ namespace EvoX.View
         {
             InitializeComponent();
 
-            Current.SelectionChanged += new Action(Current_SelectionChanged);
+            Current.SelectionChanged += Current_SelectionChanged;
+            Current.ExecutedCommand += Current_ExecutedCommand;
+        }
+
+        void Current_ExecutedCommand(Controller.Commands.CommandBase command, bool isPartOfMacro, Controller.Commands.CommandBase macroCommand)
+        {
+            UpdateViewForCurrentSelection();
         }
 
         void Current_SelectionChanged()
+        {
+            UpdateViewForCurrentSelection();
+        }
+
+        private void UpdateViewForCurrentSelection()
         {
             if (Current.ActiveDiagramView != null)
             {

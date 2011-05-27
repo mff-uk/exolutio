@@ -82,6 +82,7 @@
     <Compile Include="Commands\Edit\guiRedoCommand.cs" />
     <Compile Include="Commands\Edit\guiUndoCommand.cs" />
     <Compile Include="Commands\EvoXGuiCommands.cs" />
+    <Compile Include="Commands\guiModelTreeCommand.cs" />
     <Compile Include="Commands\Versioning\guiFindChangesCommand.cs" />
     <Compile Include="Commands\guiActiveDiagramCommand.cs" />
     <Compile Include="Commands\Grammar\guiGenerateGrammarCommand.cs" />

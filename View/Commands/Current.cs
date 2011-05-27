@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Xml;
 using System.Xml.Linq;
+using EvoX.Controller;
 using EvoX.Controller.Commands;
 using EvoX.Model;
 using EvoX.Model.PIM;
@@ -28,11 +29,17 @@ namespace EvoX.View
             set
             {
                 CurrentProjectChangedEventArgs e = new CurrentProjectChangedEventArgs(project, value);
-                e.OldController = Controller;
+                if (Controller != null)
+                {
+                    e.OldController = Controller;
+                    Controller.ExecutedCommand -= Current_Controller_ExecutedCommand;
+                }
+                
                 project = value;
                 if (value != null)
                 {
                     Controller = new Controller.Controller(e.NewProject);
+                    Controller.ExecutedCommand += Current_Controller_ExecutedCommand;
                 }
                 else
                 {
@@ -192,6 +199,25 @@ namespace EvoX.View
         {
             Action<IEnumerable<Component>> handler = SelectComponents;
             if (handler != null) handler(components);
+        }
+
+        private static void Current_Controller_ExecutedCommand(CommandBase command, bool ispartofmacro, CommandBase macrocommand)
+        {
+            InvokeExecutedCommand(command, ispartofmacro, macrocommand);   
+        }
+
+
+        /// <summary>
+        /// This event is fired each time a command is executed in the current controller (current project). 
+        /// Bind to this event with caution, the binding survives change of project/controller (e.g. when 
+        /// new project is opened).
+        /// </summary>
+        public static event CommandEventHandler ExecutedCommand;
+
+        public static void InvokeExecutedCommand(CommandBase command, bool ispartofmacro, CommandBase macrocommand)
+        {
+            CommandEventHandler handler = ExecutedCommand;
+            if (handler != null) handler(command, ispartofmacro, macrocommand);
         }
     }
 
