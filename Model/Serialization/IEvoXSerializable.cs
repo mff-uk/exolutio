@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
-using EvoX.Model.Versioning;
-using EvoX.Model.ViewHelper;
-using EvoX.SupportingClasses;
-using EvoX.SupportingClasses.Annotations;
+using Exolutio.Model.Versioning;
+using Exolutio.Model.ViewHelper;
+using Exolutio.SupportingClasses;
+using Exolutio.SupportingClasses.Annotations;
 
-namespace EvoX.Model.Serialization
+namespace Exolutio.Model.Serialization
 {
-    public interface IEvoXSerializable
+    public interface IExolutioSerializable
     {
         void Deserialize(XElement parentNode, SerializationContext context);
 
@@ -19,18 +19,18 @@ namespace EvoX.Model.Serialization
         Project Project { get; }
     }
 
-    public static class IEvoXSerializableExt
+    public static class IExolutioSerializableExt
     {
-        public delegate T CreateComponentDelegate<T>(Project project) where T : IEvoXSerializable;
+        public delegate T CreateComponentDelegate<T>(Project project) where T : IExolutioSerializable;
 
-        public delegate void RegisterComponentDelegate<T>(T member) where T : IEvoXSerializable;
+        public delegate void RegisterComponentDelegate<T>(T member) where T : IExolutioSerializable;
 
         #region deserialization 
 
-        public static void DeserializeWrappedCollection<T>(this IEvoXSerializable component, [NotNull] string collectionNodeName, UndirectCollection<T> collection, CreateComponentDelegate<T> createAction, XElement parentNode, SerializationContext context, bool missingAsEmpty = false)
-            where T : EvoXObject
+        public static void DeserializeWrappedCollection<T>(this IExolutioSerializable component, [NotNull] string collectionNodeName, UndirectCollection<T> collection, CreateComponentDelegate<T> createAction, XElement parentNode, SerializationContext context, bool missingAsEmpty = false)
+            where T : ExolutioObject
         {
-            XElement collectionNode = parentNode.Element(context.EvoXNS + collectionNodeName);
+            XElement collectionNode = parentNode.Element(context.ExolutioNS + collectionNodeName);
 
             if (collectionNode == null && missingAsEmpty)
             {
@@ -70,11 +70,11 @@ namespace EvoX.Model.Serialization
             }
         }
         
-        public static void DeserializeWrappedIDRefCollection<T>(this IEvoXSerializable component, [NotNull] string collectionNodeName,
+        public static void DeserializeWrappedIDRefCollection<T>(this IExolutioSerializable component, [NotNull] string collectionNodeName,
             [NotNull] string idRefAttribute, UndirectCollection<T> idRefCollection,
-            XElement parentNode, SerializationContext context) where T : EvoXObject
+            XElement parentNode, SerializationContext context) where T : ExolutioObject
         {
-            XElement collectionNode = parentNode.Element(context.EvoXNS + collectionNodeName);
+            XElement collectionNode = parentNode.Element(context.ExolutioNS + collectionNodeName);
 
             if (collectionNode == null)
             {
@@ -108,14 +108,14 @@ namespace EvoX.Model.Serialization
             }
         }
 
-        public static void DeserializeFromChildElement(this IEvoXSerializable component, [NotNull]string elementName, XElement parentNode, SerializationContext context)
+        public static void DeserializeFromChildElement(this IExolutioSerializable component, [NotNull]string elementName, XElement parentNode, SerializationContext context)
         {
             if (String.IsNullOrEmpty(elementName))
             {
                 throw new ArgumentNullException("elementName");
             }
 
-            XElement serializedComponentNode = parentNode.Element(context.EvoXNS + elementName);
+            XElement serializedComponentNode = parentNode.Element(context.ExolutioNS + elementName);
             if (serializedComponentNode == null)
             {
                 context.Log.AddErrorFormat("Element '{0}' not found in node {1}.", elementName, parentNode);
@@ -133,7 +133,7 @@ namespace EvoX.Model.Serialization
         /// <param name="parentNode">node where the attribute is looked up</param>
         /// <param name="context">deserialization context</param>
         /// <param name="optional">if set to <c>false</c> (default), error is written into the log when the attribute is not found</param>
-        public static Guid DeserializeIDRef(this IEvoXSerializable component, string attributeName, XElement parentNode, SerializationContext context, bool optional = false)
+        public static Guid DeserializeIDRef(this IExolutioSerializable component, string attributeName, XElement parentNode, SerializationContext context, bool optional = false)
         {
             if (parentNode.Attribute(attributeName) == null)
             {
@@ -174,7 +174,7 @@ namespace EvoX.Model.Serialization
         /// <summary>
         /// Returns ID from the value of Type attribute of <paramref name="parentNode"/>.
         /// </summary>
-        public static Guid DeserializeAttributeType(this IEvoXSerializable component, XElement parentNode, SerializationContext context)
+        public static Guid DeserializeAttributeType(this IExolutioSerializable component, XElement parentNode, SerializationContext context)
         {
             if (parentNode.Attribute("Type") == null)
             {
@@ -183,28 +183,28 @@ namespace EvoX.Model.Serialization
             return component.DeserializeIDRef("Type", parentNode, context);
         }
 
-        public static string DeserializeSimpleValueFromElement(this IEvoXSerializable component, [NotNull]string elementName, XElement parentNode, SerializationContext context)
+        public static string DeserializeSimpleValueFromElement(this IExolutioSerializable component, [NotNull]string elementName, XElement parentNode, SerializationContext context)
         {
-            XElement element = parentNode.Element(context.EvoXNS + elementName);
+            XElement element = parentNode.Element(context.ExolutioNS + elementName);
             return element.Value;
         }
 
-        public static string DeserializeSimpleValueFromCDATA(this IEvoXSerializable component, [NotNull]string elementName, XElement parentNode, SerializationContext context)
+        public static string DeserializeSimpleValueFromCDATA(this IExolutioSerializable component, [NotNull]string elementName, XElement parentNode, SerializationContext context)
         {
-            XElement element = parentNode.Element(context.EvoXNS + elementName);
+            XElement element = parentNode.Element(context.ExolutioNS + elementName);
             XCData cdata = (XCData) element.Nodes().First();
             return cdata.Value;
         }
 
-        public static string DeserializeSimpleValueFromAttribute(this IEvoXSerializable component, [NotNull]string elementName, XElement parentNode, SerializationContext context)
+        public static string DeserializeSimpleValueFromAttribute(this IExolutioSerializable component, [NotNull]string elementName, XElement parentNode, SerializationContext context)
         {
             XAttribute xmlAttribute = parentNode.Attribute(elementName);
             return xmlAttribute.Value;
         }
 
-        public static void DeserializePointsCollection(this IEvoXSerializable component, ObservablePointCollection points, XElement parentNode, SerializationContext context)
+        public static void DeserializePointsCollection(this IExolutioSerializable component, ObservablePointCollection points, XElement parentNode, SerializationContext context)
         {
-            XElement pointsElement = parentNode.Element(context.EvoXNS + "Points");
+            XElement pointsElement = parentNode.Element(context.ExolutioNS + "Points");
 
             foreach (XElement pointElement in pointsElement.Elements())
             {
@@ -218,10 +218,10 @@ namespace EvoX.Model.Serialization
 
         #region serialization
 
-        public static void SerializeIDRef(this IEvoXSerializable component, IEvoXSerializable referencedObject, string attributeName, XElement parentNode, SerializationContext context,
+        public static void SerializeIDRef(this IExolutioSerializable component, IExolutioSerializable referencedObject, string attributeName, XElement parentNode, SerializationContext context,
             bool? outputDisplayAttribute = null, string displayAttributeName = null)
         {
-            XAttribute idRefAttribute = new XAttribute(attributeName, SerializationContext.EncodeValue(((EvoXObject)referencedObject).ID));
+            XAttribute idRefAttribute = new XAttribute(attributeName, SerializationContext.EncodeValue(((ExolutioObject)referencedObject).ID));
             parentNode.Add(idRefAttribute);
 
             if ((!outputDisplayAttribute.HasValue && context.OutputNamesWithIdReferences) ||
@@ -258,13 +258,13 @@ namespace EvoX.Model.Serialization
             }
         }
 
-        public static void SerializeAttributeType(this IEvoXSerializable component, AttributeType attributeType, XElement parentNode, SerializationContext context)
+        public static void SerializeAttributeType(this IExolutioSerializable component, AttributeType attributeType, XElement parentNode, SerializationContext context)
         {
             component.SerializeIDRef(attributeType, "Type", parentNode, context);
         }
 
-        public static void WrapAndSerializeCollection<T>(this IEvoXSerializable component, [NotNull] string collectionElementName, [NotNull] string elementName, ICollection<T> wrappedCollection, XElement parentNode, SerializationContext context, bool skipEmpty = false)
-            where T : IEvoXSerializable
+        public static void WrapAndSerializeCollection<T>(this IExolutioSerializable component, [NotNull] string collectionElementName, [NotNull] string elementName, ICollection<T> wrappedCollection, XElement parentNode, SerializationContext context, bool skipEmpty = false)
+            where T : IExolutioSerializable
         {
             if (String.IsNullOrEmpty(elementName))
             {
@@ -279,7 +279,7 @@ namespace EvoX.Model.Serialization
             if (skipEmpty && (wrappedCollection == null || wrappedCollection.IsEmpty()))
                 return;
 
-            XElement collectionWrappingElement = new XElement(context.EvoXNS + collectionElementName);
+            XElement collectionWrappingElement = new XElement(context.ExolutioNS + collectionElementName);
             parentNode.Add(collectionWrappingElement);
 
             XAttribute countAttribute = new XAttribute("Count", SerializationContext.EncodeValue(wrappedCollection.Count));
@@ -291,8 +291,8 @@ namespace EvoX.Model.Serialization
             }
         }
 
-        public static void WrapAndSerializeIDRefCollection<T>(this IEvoXSerializable component, [NotNull] string collectionElementName, [NotNull] string elementName, [NotNull] string idRefAttribute, ICollection<T> wrappedCollection, XElement parentNode, SerializationContext context)
-            where T : IEvoXSerializable
+        public static void WrapAndSerializeIDRefCollection<T>(this IExolutioSerializable component, [NotNull] string collectionElementName, [NotNull] string elementName, [NotNull] string idRefAttribute, ICollection<T> wrappedCollection, XElement parentNode, SerializationContext context)
+            where T : IExolutioSerializable
         {
             if (String.IsNullOrEmpty(elementName))
             {
@@ -304,7 +304,7 @@ namespace EvoX.Model.Serialization
                 throw new ArgumentNullException("collectionElementName");
             }
 
-            XElement collectionWrappingElement = new XElement(context.EvoXNS + collectionElementName);
+            XElement collectionWrappingElement = new XElement(context.ExolutioNS + collectionElementName);
             parentNode.Add(collectionWrappingElement);
 
             XAttribute countAttribute = new XAttribute("Count", SerializationContext.EncodeValue(wrappedCollection.Count));
@@ -312,55 +312,55 @@ namespace EvoX.Model.Serialization
 
             foreach (T childPsmAssociation in wrappedCollection)
             {
-                XElement memberElement = new XElement(context.EvoXNS + elementName);
+                XElement memberElement = new XElement(context.ExolutioNS + elementName);
                 component.SerializeIDRef(childPsmAssociation, idRefAttribute, memberElement, context);
                 collectionWrappingElement.Add(memberElement);
             }
         }
 
-        public static XElement SerializeToChildElement(this IEvoXSerializable component, [NotNull]string elementName, IEvoXSerializable wrappedComponent, XElement parentNode, SerializationContext context)
+        public static XElement SerializeToChildElement(this IExolutioSerializable component, [NotNull]string elementName, IExolutioSerializable wrappedComponent, XElement parentNode, SerializationContext context)
         {
             if (String.IsNullOrEmpty(elementName))
             {
                 throw new ArgumentNullException("elementName");
             }
 
-            XElement element = new XElement(context.EvoXNS + elementName);
+            XElement element = new XElement(context.ExolutioNS + elementName);
             wrappedComponent.Serialize(element, context);
             parentNode.Add(element);
             return element;
         }
 
-        public static void SerializePointsCollection(this IEvoXSerializable component, IEnumerable<rPoint> points, XElement parentNode, SerializationContext context)
+        public static void SerializePointsCollection(this IExolutioSerializable component, IEnumerable<rPoint> points, XElement parentNode, SerializationContext context)
         {
-            XElement pointsElement = new XElement(context.EvoXNS + "Points");
+            XElement pointsElement = new XElement(context.ExolutioNS + "Points");
             parentNode.Add(pointsElement);
             foreach (rPoint rPoint in points)
             {
-                XElement pointElement = new XElement(context.EvoXNS + "Point");
+                XElement pointElement = new XElement(context.ExolutioNS + "Point");
                 pointsElement.Add(pointElement);
                 component.SerializeSimpleValueToAttribute("X", Math.Floor(rPoint.X), pointElement, context);
                 component.SerializeSimpleValueToAttribute("Y", Math.Floor(rPoint.Y), pointElement, context);
             }
         }
 
-        public static void SerializeSimpleValueToElement(this IEvoXSerializable component, [NotNull] string elementName, object value, XElement parentNode, SerializationContext context)
+        public static void SerializeSimpleValueToElement(this IExolutioSerializable component, [NotNull] string elementName, object value, XElement parentNode, SerializationContext context)
         {
-            XElement xmlElement = new XElement(context.EvoXNS + elementName);
+            XElement xmlElement = new XElement(context.ExolutioNS + elementName);
             XText valueText = new XText(value.ToString());
             xmlElement.Add(valueText);
             parentNode.Add(xmlElement);
         }
 
-        public static void SerializeSimpleValueToCDATA(this IEvoXSerializable component, [NotNull] string elementName, object value, XElement parentNode, SerializationContext context)
+        public static void SerializeSimpleValueToCDATA(this IExolutioSerializable component, [NotNull] string elementName, object value, XElement parentNode, SerializationContext context)
         {
-            XElement xmlElement = new XElement(context.EvoXNS + elementName);
+            XElement xmlElement = new XElement(context.ExolutioNS + elementName);
             XCData xcData = new XCData(value.ToString());
             xmlElement.Add(xcData);
             parentNode.Add(xmlElement);
         }
 
-        public static void SerializeSimpleValueToAttribute(this IEvoXSerializable component, [NotNull] string attributeName, object value, XElement parentNode, SerializationContext context)
+        public static void SerializeSimpleValueToAttribute(this IExolutioSerializable component, [NotNull] string attributeName, object value, XElement parentNode, SerializationContext context)
         {
             XAttribute xmlAttribute = new XAttribute(attributeName, value.ToString());
             parentNode.Add(xmlAttribute);

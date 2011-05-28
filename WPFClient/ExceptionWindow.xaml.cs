@@ -10,9 +10,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using EvoX.SupportingClasses;
+using Exolutio.SupportingClasses;
 
-namespace EvoX.WPFClient
+namespace Exolutio.WPFClient
 {
     /// <summary>
     /// Interaction logic for ExceptionWindow.xaml
@@ -31,7 +31,7 @@ namespace EvoX.WPFClient
         {
             this.exception = exception;
 
-            EvoXException xe = exception as EvoXException;
+            ExolutioException xe = exception as ExolutioException;
 			
             tbExMsg.Content = exception.Message;
 			if (xe != null)
@@ -45,9 +45,9 @@ namespace EvoX.WPFClient
                 }
 				button1.Content = "Ok";
 				button2.Visibility = Visibility.Collapsed;
-                if (xe is EvoX.Controller.Commands.EvoXCommandException)
+                if (xe is Exolutio.Controller.Commands.ExolutioCommandException)
                 {
-                    EvoX.Controller.Commands.EvoXCommandException xec = ((EvoX.Controller.Commands.EvoXCommandException)xe);
+                    Exolutio.Controller.Commands.ExolutioCommandException xec = ((Exolutio.Controller.Commands.ExolutioCommandException)xe);
                     if (xec.Command != null && xec.Command.ErrorDescription != null)
                     {
                         tbExInner.Content = xec.Command.ErrorDescription;

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using EvoX.Model.PIM;
+using Exolutio.Model.PIM;
 
-namespace EvoX.View
+namespace Exolutio.View
 {
     /// <summary>
     /// Interface for control displaying attributes. 

@@ -2,13 +2,13 @@ using System;
 using System.ComponentModel;
 using System.Windows.Controls;
 using System.Windows.Input;
-using EvoX.Controller.Commands;
-using EvoX.Model;
-using EvoX.Model.PSM;
-using EvoX.ResourceLibrary;
-using EvoX.ViewToolkit;
+using Exolutio.Controller.Commands;
+using Exolutio.Model;
+using Exolutio.Model.PSM;
+using Exolutio.ResourceLibrary;
+using Exolutio.ViewToolkit;
 
-namespace EvoX.View
+namespace Exolutio.View
 {
 	/// <summary>
 	/// Textbox displaying attribute
@@ -32,17 +32,17 @@ namespace EvoX.View
 
             #region property context menu
 
-            EvoXContextMenu evoXContextMenu = MenuHelper.GetContextMenu(ScopeAttribute.EScope.PSMAttribute, (Diagram)diagram);
-            evoXContextMenu.ScopeObject = property;
-            evoXContextMenu.Diagram = diagram;
-            ContextMenu = evoXContextMenu;
+            ExolutioContextMenu exolutioContextMenu = MenuHelper.GetContextMenu(ScopeAttribute.EScope.PSMAttribute, (Diagram)diagram);
+            exolutioContextMenu.ScopeObject = property;
+            exolutioContextMenu.Diagram = diagram;
+            ContextMenu = exolutioContextMenu;
 
 //#if SILVERLIGHT
-//            change.Icon = EvoXResourceNames.GetResourceImageSource(EvoXResourceNames.pencil);
-//            remove.Icon = EvoXResourceNames.GetResourceImageSource(EvoXResourceNames.delete2);
+//            change.Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.pencil);
+//            remove.Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.delete2);
 //#else
-//            change.Icon = EvoXResourceNames.GetResourceImageSource(EvoXResourceNames.pencil);
-//            remove.Icon = EvoXResourceNames.GetResourceImageSource(EvoXResourceNames.delete2);
+//            change.Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.pencil);
+//            remove.Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.delete2);
 //#endif
 
             #endregion
@@ -59,7 +59,7 @@ namespace EvoX.View
             BindType();
         }
 
-	    private EvoX.Model.AttributeType type;
+	    private Exolutio.Model.AttributeType type;
 
 		private void BindType()
 		{

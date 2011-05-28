@@ -1,6 +1,6 @@
-using EvoX.Model.PSM.Normalization;
+using Exolutio.Model.PSM.Normalization;
 
-namespace EvoX.View.Commands
+namespace Exolutio.View.Commands
 {
     public abstract class guiActiveDiagramCommand: guiCommandBase
     {

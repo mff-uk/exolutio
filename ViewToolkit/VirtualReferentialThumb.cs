@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Windows;
 
-namespace EvoX.ViewToolkit
+namespace Exolutio.ViewToolkit
 {
     /// <summary>
     /// Implementation of <see cref="IReferentialElement"/> that as no

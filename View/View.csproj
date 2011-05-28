@@ -9,8 +9,8 @@
     <ProjectGuid>{290976CF-1F50-4C90-8247-81F165A18467}</ProjectGuid>
     <OutputType>library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EvoX.View</RootNamespace>
-    <AssemblyName>EvoX.View</AssemblyName>
+    <RootNamespace>Exolutio.View</RootNamespace>
+    <AssemblyName>Exolutio.View</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -81,7 +81,7 @@
     <Compile Include="Commands\CurrentProjectChangedEventArgs.cs" />
     <Compile Include="Commands\Edit\guiRedoCommand.cs" />
     <Compile Include="Commands\Edit\guiUndoCommand.cs" />
-    <Compile Include="Commands\EvoXGuiCommands.cs" />
+    <Compile Include="Commands\GuiCommands.cs" />
     <Compile Include="Commands\guiModelTreeCommand.cs" />
     <Compile Include="Commands\Versioning\guiFindChangesCommand.cs" />
     <Compile Include="Commands\guiActiveDiagramCommand.cs" />
@@ -161,7 +161,7 @@
       <DependentUpon>DiagramView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="EvoXViewException.cs" />
+    <Compile Include="ExolutioViewException.cs" />
     <Compile Include="ComponentViewBase.cs" />
     <Compile Include="NodeComponentViewBase.cs" />
     <Compile Include="PIM view\PIMClassView.cs" />

@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using EvoX.Controller.Commands;
-using EvoX.Controller.Commands.Reflection;
-using EvoX.Model.PIM;
-using EvoX.Model;
-using EvoX.Model.PSM;
-using EvoX.Controller.Commands.Complex.PSM;
+using Exolutio.Controller.Commands;
+using Exolutio.Controller.Commands.Reflection;
+using Exolutio.Model.PIM;
+using Exolutio.Model;
+using Exolutio.Model.PSM;
+using Exolutio.Controller.Commands.Complex.PSM;
 
-namespace EvoX.Controller.Commands.Atomic.PIM
+namespace Exolutio.Controller.Commands.Atomic.PIM
 {
     public class acmdDeletePIMAttribute : StackedCommand
     {

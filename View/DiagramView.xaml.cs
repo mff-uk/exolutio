@@ -13,13 +13,13 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using EvoX.Model;
-using EvoX.Model.PIM;
-using EvoX.Model.ViewHelper;
-using EvoX.ViewToolkit;
-using EvoX.SupportingClasses;
+using Exolutio.Model;
+using Exolutio.Model.PIM;
+using Exolutio.Model.ViewHelper;
+using Exolutio.ViewToolkit;
+using Exolutio.SupportingClasses;
 
-namespace EvoX.View
+namespace Exolutio.View
 {
     /// <summary>
     /// Interaction logic for DiagramView.xaml
@@ -28,7 +28,7 @@ namespace EvoX.View
     {
         public Diagram Diagram { get; private set; }
 
-        public EvoXCanvas EvoXCanvas { get { return EvoXCanvasWithZoomer.EvoXCanvas; } }
+        public ExolutioCanvas ExolutioCanvas { get { return ExolutioCanvasWithZoomer.ExolutioCanvas; } }
 
         public DiagramView()
         {
@@ -37,10 +37,10 @@ namespace EvoX.View
             #if SILVERLIGHT
             #else
             Focusable = false;
-            this.EvoXCanvas.Width = double.NaN;
-            this.EvoXCanvas.Height = double.NaN;
-            this.EvoXCanvas.VerticalAlignment = VerticalAlignment.Stretch;
-            this.EvoXCanvas.HorizontalAlignment = HorizontalAlignment.Stretch;
+            this.ExolutioCanvas.Width = double.NaN;
+            this.ExolutioCanvas.Height = double.NaN;
+            this.ExolutioCanvas.VerticalAlignment = VerticalAlignment.Stretch;
+            this.ExolutioCanvas.HorizontalAlignment = HorizontalAlignment.Stretch;
             #endif
         }
 
@@ -271,7 +271,7 @@ namespace EvoX.View
                         x = Canvas.GetLeft(((IConnectorViewBase)view).Connector);
                         y = Canvas.GetTop(((IConnectorViewBase)view).Connector);
                     }
-                    ScrollViewer scrollViewer = EvoXCanvasWithZoomer.scrollViewer;
+                    ScrollViewer scrollViewer = ExolutioCanvasWithZoomer.scrollViewer;
                     scrollViewer.ScrollToHorizontalOffset(x);
                     scrollViewer.ScrollToVerticalOffset(y);
                 }

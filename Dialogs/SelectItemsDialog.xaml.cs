@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using WpfCheckListBox;
 
-namespace EvoX.Dialogs
+namespace Exolutio.Dialogs
 {
     /// <summary>
     /// Interaction logic for DeleteDependentElements.xaml

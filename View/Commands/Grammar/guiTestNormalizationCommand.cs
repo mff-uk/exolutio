@@ -1,10 +1,10 @@
 ﻿using System;
-using EvoX.Controller.Commands;
-using EvoX.Model;
-using EvoX.Model.PSM;
-using EvoX.ResourceLibrary;
+using Exolutio.Controller.Commands;
+using Exolutio.Model;
+using Exolutio.Model.PSM;
+using Exolutio.ResourceLibrary;
 
-namespace EvoX.View.Commands.Grammar
+namespace Exolutio.View.Commands.Grammar
 {
     public class guiTestNormalizationCommand : guiActiveDiagramCommand
     {
@@ -53,7 +53,7 @@ namespace EvoX.View.Commands.Grammar
 
         public override System.Windows.Media.ImageSource Icon
         {
-            get { return EvoXResourceNames.GetResourceImageSource(EvoXResourceNames.component_preferences); }
+            get { return ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.component_preferences); }
         }
 
     }

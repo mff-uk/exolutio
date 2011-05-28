@@ -8,8 +8,8 @@
     <ProjectGuid>{3FD45349-A060-4098-A8D2-34E5DB5D4296}</ProjectGuid>
     <OutputType>library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EvoX.ViewToolkit</RootNamespace>
-    <AssemblyName>EvoX.ViewToolkit</AssemblyName>
+    <RootNamespace>Exolutio.ViewToolkit</RootNamespace>
+    <AssemblyName>Exolutio.ViewToolkit</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
@@ -61,8 +61,8 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EvoXCanvasWithZoomer.xaml.cs">
-      <DependentUpon>EvoXCanvasWithZoomer.xaml</DependentUpon>
+    <Compile Include="ExolutioCanvasWithZoomer.xaml.cs">
+      <DependentUpon>ExolutioCanvasWithZoomer.xaml</DependentUpon>
     </Compile>
     <Compile Include="FormControls\Class1.cs" />
     <Compile Include="FormControls\LinkLabel.cs" />
@@ -72,11 +72,11 @@
     <Compile Include="ContextMenuItem.cs" />
     <Compile Include="EditableTextBox.cs" />
     <Compile Include="EPlacementCenter.cs" />
-    <Compile Include="EvoXCanvas.cs" />
+    <Compile Include="ExolutioCanvas.cs" />
     <Compile Include="Connector.cs" />
     <Compile Include="DragThumb.cs" />
     <Compile Include="EPlacementKind.cs" />
-    <Compile Include="EvoXCanvasState.cs" />
+    <Compile Include="ExolutioCanvasState.cs" />
     <Compile Include="Geometries\JunctionGeometryData.cs" />
     <Compile Include="Geometries\GeometryHelper.cs" />
     <Compile Include="Geometries\PointExt.cs" />
@@ -126,7 +126,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="EvoXCanvasWithZoomer.xaml">
+    <Page Include="ExolutioCanvasWithZoomer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

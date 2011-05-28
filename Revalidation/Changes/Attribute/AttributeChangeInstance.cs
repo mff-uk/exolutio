@@ -1,7 +1,7 @@
-﻿using EvoX.Model.PSM;
-using Version = EvoX.Model.Versioning.Version;
+﻿using Exolutio.Model.PSM;
+using Version = Exolutio.Model.Versioning.Version;
 
-namespace EvoX.Revalidation.Changes
+namespace Exolutio.Revalidation.Changes
 {
     [ChangePredicateScope(EChangePredicateScope.PSMAttribute)]
     public abstract class AttributeChangeInstance : ChangeInstance, IChangeInstance<PSMAttribute>

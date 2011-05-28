@@ -1,7 +1,7 @@
 ﻿using System;
-using EvoX.Model.PSM;
+using Exolutio.Model.PSM;
 
-namespace EvoX.Controller.Commands.Atomic.PSM
+namespace Exolutio.Controller.Commands.Atomic.PSM
 {
     public class acmdUpdatePSMAttributeDefaultValue : StackedCommand
     {

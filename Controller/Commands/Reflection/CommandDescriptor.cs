@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Remoting;
-using EvoX.Model;
-using EvoX.SupportingClasses.Reflection;
+using Exolutio.Model;
+using Exolutio.SupportingClasses.Reflection;
 
-namespace EvoX.Controller.Commands.Reflection
+namespace Exolutio.Controller.Commands.Reflection
 {
     public class CommandDescriptor
     {
@@ -18,7 +18,7 @@ namespace EvoX.Controller.Commands.Reflection
 
         public PropertyInfo ScopeProperty { get; set; }
         
-        public EvoXObject ScopeObject { get; set; }
+        public ExolutioObject ScopeObject { get; set; }
 
         public string ShortCommandName
         {

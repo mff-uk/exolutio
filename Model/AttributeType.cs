@@ -2,12 +2,12 @@
 using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
-using EvoX.Model.Serialization;
-using EvoX.Model.Versioning;
+using Exolutio.Model.Serialization;
+using Exolutio.Model.Versioning;
 
-namespace EvoX.Model
+namespace Exolutio.Model
 {
-    public class AttributeType : EvoXVersionedObjectNotAPartOfSchema
+    public class AttributeType : ExolutioVersionedObjectNotAPartOfSchema
     {
         public AttributeType(Project p) : base(p) { }
         public AttributeType(Project p, Guid g) : base(p, g) { }
@@ -44,7 +44,7 @@ namespace EvoX.Model
 
         public string XSDDefinition { get; set; }
 
-        #region Implementation of IEvoXSerializable
+        #region Implementation of IExolutioSerializable
 
         public override void Serialize(XElement parentNode, SerializationContext context)
         {
@@ -65,7 +65,7 @@ namespace EvoX.Model
             {
                 XCData xsdDefinitionCData = new XCData(XSDDefinition);
 
-                XElement xsdDefinitionElement = new XElement(context.EvoXNS + "XSDDefinition");
+                XElement xsdDefinitionElement = new XElement(context.ExolutioNS + "XSDDefinition");
                 xsdDefinitionElement.Add(xsdDefinitionCData);
                 parentNode.Add(xsdDefinitionElement);
             }
@@ -78,7 +78,7 @@ namespace EvoX.Model
             this.IsSealed = SerializationContext.DecodeBool(parentNode.Attribute("IsSealed").Value);
             this.Name = SerializationContext.DecodeString(parentNode.Attribute("Name").Value);
             baseTypeGuid = this.DeserializeIDRef("baseTypeID", parentNode, context, true);
-            XElement xsdDefinitionElement = parentNode.Element(context.EvoXNS + "XSDDefinition");
+            XElement xsdDefinitionElement = parentNode.Element(context.ExolutioNS + "XSDDefinition");
             if (xsdDefinitionElement != null)
             {
                 this.XSDDefinition = ((XCData) xsdDefinitionElement.Nodes().First()).Value;
@@ -94,14 +94,14 @@ namespace EvoX.Model
 
         #endregion
 
-        #region Implementation of IEvoXCloneable
+        #region Implementation of IExolutioCloneable
 
-        public override IEvoXCloneable Clone(ProjectVersion projectVersion, ElementCopiesMap createdCopies)
+        public override IExolutioCloneable Clone(ProjectVersion projectVersion, ElementCopiesMap createdCopies)
         {
             return new AttributeType(projectVersion.Project, createdCopies.SuggestGuid(this));
         }
 
-        public override void FillCopy(IEvoXCloneable copyComponent, ProjectVersion projectVersion,
+        public override void FillCopy(IExolutioCloneable copyComponent, ProjectVersion projectVersion,
                                       ElementCopiesMap createdCopies)
         {
             base.FillCopy(copyComponent, projectVersion, createdCopies);

@@ -1,9 +1,9 @@
 using System;
 using System.Windows.Media;
-using EvoX.ResourceLibrary;
-using EvoX.View.Commands.Project;
+using Exolutio.ResourceLibrary;
+using Exolutio.View.Commands.Project;
 
-namespace EvoX.View.Commands.Versioning
+namespace Exolutio.View.Commands.Versioning
 {
     public class guiSaveAsSingleVersionCommand : guiCurrentVersionCommand
     {
@@ -33,7 +33,7 @@ namespace EvoX.View.Commands.Versioning
 
         public override ImageSource Icon
         {
-            get { return EvoXResourceNames.GetResourceImageSource(EvoXResourceNames.Save); }
+            get { return ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.Save); }
         }
 
     }

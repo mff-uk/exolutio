@@ -2,14 +2,14 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using EvoX.Dialogs;
-using EvoX.ResourceLibrary;
+using Exolutio.Dialogs;
+using Exolutio.ResourceLibrary;
 
-namespace EvoX.View.Commands.Project
+namespace Exolutio.View.Commands.Project
 {
     public class guiCloseProjectCommand : guiProjectCommand
     {
-        #region Overrides of EvoXGuiCommandBase
+        #region Overrides of ExolutioGuiCommandBase
 
         public override void Execute(object parameter = null)
         {
@@ -18,16 +18,16 @@ namespace EvoX.View.Commands.Project
             {
                 #if SILVERLIGHT
                 MessageBoxResult r =
-                    EvoXYesNoBox.Show(CommandsResources.guiCloseProjectCommand_Execute_Current_project_is_not_saved, CommandsResources.guiCloseProjectCommand_Execute_Do_you_want_to_save_it_, Current.MainWindow.FloatingWindowHost);
+                    ExolutioYesNoBox.Show(CommandsResources.guiCloseProjectCommand_Execute_Current_project_is_not_saved, CommandsResources.guiCloseProjectCommand_Execute_Do_you_want_to_save_it_, Current.MainWindow.FloatingWindowHost);
 
                 #else
                 MessageBoxResult r =
-                    EvoXYesNoBox.Show(CommandsResources.guiCloseProjectCommand_Execute_Current_project_is_not_saved, CommandsResources.guiCloseProjectCommand_Execute_Do_you_want_to_save_it_);
+                    ExolutioYesNoBox.Show(CommandsResources.guiCloseProjectCommand_Execute_Current_project_is_not_saved, CommandsResources.guiCloseProjectCommand_Execute_Do_you_want_to_save_it_);
 
                 #endif
 
                 if (r == MessageBoxResult.Yes)
-                    EvoXGuiCommands.SaveProjectCommand.Execute();
+                    GuiCommands.SaveProjectCommand.Execute();
                 else
                     if (r == MessageBoxResult.Cancel)
                     {
@@ -64,7 +64,7 @@ namespace EvoX.View.Commands.Project
 
         public override ImageSource Icon
         {
-            get { return EvoXResourceNames.GetResourceImageSource(EvoXResourceNames.cancel); }
+            get { return ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.cancel); }
         }
 
         #endregion

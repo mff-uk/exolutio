@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace EvoX.SupportingClasses.Annotations
+namespace Exolutio.SupportingClasses.Annotations
 {
     /// <summary>
     /// Indicates that marked element should be localized or not.

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using EvoX.Model.OCL.Types;
+using Exolutio.Model.OCL.Types;
 
-namespace EvoX.Model.OCL.AST
+namespace Exolutio.Model.OCL.AST
 {
     /// <summary>
     /// An OperationCallExp refers to an operation defined in a Classifier. The expression may contain a list of argument

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using EvoX.Model.OCL.Types;
+using Exolutio.Model.OCL.Types;
 
-namespace EvoX.Model.OCL.AST
+namespace Exolutio.Model.OCL.AST
 {
     /// <summary>
     /// A TypeExp is an expression used to refer to an existing meta type within an expression. It is used in particular to pass the

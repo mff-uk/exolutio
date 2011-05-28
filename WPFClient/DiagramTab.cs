@@ -1,10 +1,10 @@
 using System;
 using System.Windows.Data;
 using AvalonDock;
-using EvoX.Model;
-using EvoX.View;
+using Exolutio.Model;
+using Exolutio.View;
 
-namespace EvoX.WPFClient
+namespace Exolutio.WPFClient
 {
     public abstract class DiagramTab: DocumentContent
     {

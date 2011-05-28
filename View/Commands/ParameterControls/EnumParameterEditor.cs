@@ -1,8 +1,8 @@
 using System;
 using System.Windows.Controls;
-using EvoX.SupportingClasses;
+using Exolutio.SupportingClasses;
 
-namespace EvoX.View.Commands.ParameterControls
+namespace Exolutio.View.Commands.ParameterControls
 {
     public class EnumParameterEditor : ComboBox, IOperationParameterControl
     {

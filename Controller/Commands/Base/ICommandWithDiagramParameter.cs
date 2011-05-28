@@ -1,6 +1,6 @@
 using System;
 
-namespace EvoX.Controller.Commands
+namespace Exolutio.Controller.Commands
 {
     public interface ICommandWithDiagramParameter
     {

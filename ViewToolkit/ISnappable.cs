@@ -1,4 +1,4 @@
-namespace EvoX.ViewToolkit
+namespace Exolutio.ViewToolkit
 {
     /// <summary>
     /// Interface for controls that can be snapped to another control (ReferentialElement).

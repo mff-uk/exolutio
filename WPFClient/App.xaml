@@ -5,7 +5,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/EvoX.ResourceLibrary;component/Images/Images.xaml" />
+                <ResourceDictionary Source="/Exolutio.ResourceLibrary;component/Images/Images.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/Fluent;Component/Themes/Office2010/Silver.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

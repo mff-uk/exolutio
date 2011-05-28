@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EvoX.Model.Versioning
+namespace Exolutio.Model.Versioning
 {
     public interface IVersionedItem
     {

@@ -1,164 +1,186 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-	<!-- 
-		Microsoft ResX Schema
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
 
-		Version 1.3
-
-		The primary goals of this format is to allow a simple XML format 
-		that is mostly human readable. The generation and parsing of the 
-		various data types are done through the TypeConverter classes 
-		associated with the data types.
-
-		Example:
-
-		... ado.net/XML headers & schema ...
-		<resheader name="resmimetype">text/microsoft-resx</resheader>
-		<resheader name="version">1.3</resheader>
-		<resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
-		<resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
-		<data name="Name1">this is my long string</data>
-		<data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
-		<data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
-			[base64 mime encoded serialized .NET Framework object]
-		</data>
-		<data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-			[base64 mime encoded string representing a byte array form of the .NET Framework object]
-		</data>
-
-		There are any number of "resheader" rows that contain simple 
-		name/value pairs.
-
-		Each data row contains a name, and value. The row also contains a 
-		type or mimetype. Type corresponds to a .NET class that support 
-		text/value conversion through the TypeConverter architecture. 
-		Classes that don't support this are serialized and stored with the 
-		mimetype set.
-
-		The mimetype is used for serialized objects, and tells the 
-		ResXResourceReader how to depersist the object. This is currently not 
-		extensible. For a given mimetype the value must be set accordingly:
-
-		Note - application/x-microsoft.net.object.binary.base64 is the format 
-		that the ResXResourceWriter will generate, however the reader can 
-		read any of the formats listed below.
-
-		mimetype: application/x-microsoft.net.object.binary.base64
-		value   : The object must be serialized with 
-			: System.Serialization.Formatters.Binary.BinaryFormatter
-			: and then encoded with base64 encoding.
-
-		mimetype: application/x-microsoft.net.object.soap.base64
-		value   : The object must be serialized with 
-			: System.Runtime.Serialization.Formatters.Soap.SoapFormatter
-			: and then encoded with base64 encoding.
-
-		mimetype: application/x-microsoft.net.object.bytearray.base64
-		value   : The object must be serialized into a byte array 
-			: using a System.ComponentModel.TypeConverter
-			: and then encoded with base64 encoding.
-	-->
-	
-	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-		<xsd:element name="root" msdata:IsDataSet="true">
-			<xsd:complexType>
-				<xsd:choice maxOccurs="unbounded">
-					<xsd:element name="data">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-							</xsd:sequence>
-							<xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
-							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-						</xsd:complexType>
-					</xsd:element>
-					<xsd:element name="resheader">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-							</xsd:sequence>
-							<xsd:attribute name="name" type="xsd:string" use="required" />
-						</xsd:complexType>
-					</xsd:element>
-				</xsd:choice>
-			</xsd:complexType>
-		</xsd:element>
-	</xsd:schema>
-	<resheader name="resmimetype">
-		<value>text/microsoft-resx</value>
-	</resheader>
-	<resheader name="version">
-		<value>1.3</value>
-	</resheader>
-	<resheader name="reader">
-		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
-	<resheader name="writer">
-		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
-	<data name="guiCloseAppCommand_Text_Close">
-		<value xml:space="preserve">Close</value>
-	</data>
-	<data name="guiCloseAppCommand_ScreenTipText_Closes_EvoX_application">
-		<value xml:space="preserve">Closes EvoX application</value>
-	</data>
-	<data name="guiCloseAppCommand_Execute_Current_project_is_not_saved">
-		<value xml:space="preserve">Current project is not saved</value>
-	</data>
-	<data name="guiCloseAppCommand_Execute_Do_you_want_to_save_it_">
-		<value xml:space="preserve">Do you want to save it?</value>
-	</data>
-	<data name="guiCloseProjectCommand_Text_Close_project">
-		<value xml:space="preserve">Close project</value>
-	</data>
-	<data name="guiCloseProjectCommand_ScreenTipText_Closes_current_project">
-		<value xml:space="preserve">Closes current project</value>
-	</data>
-	<data name="guiCloseProjectCommand_Execute_Current_project_is_not_saved">
-		<value xml:space="preserve">Current project is not saved</value>
-	</data>
-	<data name="guiCloseProjectCommand_Execute_Do_you_want_to_save_it_">
-		<value xml:space="preserve">Do you want to save it?</value>
-	</data>
-	<data name="guiNewProjectCommand_Execute_Current_project_is_not_saved">
-		<value xml:space="preserve">Current project is not saved</value>
-	</data>
-	<data name="guiNewProjectCommand_Execute_Do_you_want_to_save_it_">
-		<value xml:space="preserve">Do you want to save it?</value>
-	</data>
-	<data name="guiNewProjectCommand_Text_New_project">
-		<value xml:space="preserve">New project</value>
-	</data>
-	<data name="guiNewProjectCommand_ScreenTipText_Creates_new_empty_EvoX_project">
-		<value xml:space="preserve">Creates new empty EvoX project</value>
-	</data>
-	<data name="guiNewProjectCommand_Execute_new_project">
-		<value xml:space="preserve">new project</value>
-	</data>
-	<data name="guiOpenProjectCommand_Text_Open_project">
-		<value xml:space="preserve">Open project</value>
-	</data>
-	<data name="guiOpenProjectCommand_ScreenTipText_Opens_new_EvoX_project">
-		<value xml:space="preserve">Opens new EvoX project</value>
-	</data>
-	<data name="guiOpenProjectCommand_Execute_EvoX_files____EvoX____EvoX_XML_files____xml____xml_All_files____________">
-		<value xml:space="preserve">EvoX files (*.EvoX)|*.EvoX|XML files (*.xml)|*.xml|All files (*.*)|*.*||</value>
-	</data>
-	<data name="guiOpenProjectCommand_Execute__EvoX">
-		<value xml:space="preserve">.EvoX</value>
-	</data>
-	<data name="guiSaveAsProjectCommand_Text_Save_as">
-		<value xml:space="preserve">Save as</value>
-	</data>
-	<data name="guiSaveAsProjectCommand_ScreenTipText_Saves_EvoX_project_under_a_given_file_name">
-		<value xml:space="preserve">Saves EvoX project under a given file name</value>
-	</data>
-	<data name="guiSaveProjectCommand_Text_Save_project">
-		<value xml:space="preserve">Save project</value>
-	</data>
-	<data name="guiSaveProjectCommand_ScreenTipText_Saves_changes_made_in_the_project">
-		<value xml:space="preserve">Saves changes made in the project</value>
-	</data>
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="guiCloseAppCommand_Text_Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="guiCloseAppCommand_ScreenTipText_Closes_Exolutio_application" xml:space="preserve">
+    <value>Closes eXolutio application</value>
+  </data>
+  <data name="guiCloseAppCommand_Execute_Current_project_is_not_saved" xml:space="preserve">
+    <value>Current project is not saved</value>
+  </data>
+  <data name="guiCloseAppCommand_Execute_Do_you_want_to_save_it_" xml:space="preserve">
+    <value>Do you want to save it?</value>
+  </data>
+  <data name="guiCloseProjectCommand_Text_Close_project" xml:space="preserve">
+    <value>Close project</value>
+  </data>
+  <data name="guiCloseProjectCommand_ScreenTipText_Closes_current_project" xml:space="preserve">
+    <value>Closes current project</value>
+  </data>
+  <data name="guiCloseProjectCommand_Execute_Current_project_is_not_saved" xml:space="preserve">
+    <value>Current project is not saved</value>
+  </data>
+  <data name="guiCloseProjectCommand_Execute_Do_you_want_to_save_it_" xml:space="preserve">
+    <value>Do you want to save it?</value>
+  </data>
+  <data name="guiNewProjectCommand_Execute_Current_project_is_not_saved" xml:space="preserve">
+    <value>Current project is not saved</value>
+  </data>
+  <data name="guiNewProjectCommand_Execute_Do_you_want_to_save_it_" xml:space="preserve">
+    <value>Do you want to save it?</value>
+  </data>
+  <data name="guiNewProjectCommand_Text_New_project" xml:space="preserve">
+    <value>New project</value>
+  </data>
+  <data name="guiNewProjectCommand_ScreenTipText_Creates_new_empty_Exolutio_project" xml:space="preserve">
+    <value>Creates new empty eXolutio project</value>
+  </data>
+  <data name="guiNewProjectCommand_Execute_new_project" xml:space="preserve">
+    <value>new project</value>
+  </data>
+  <data name="guiOpenProjectCommand_Text_Open_project" xml:space="preserve">
+    <value>Open project</value>
+  </data>
+  <data name="guiOpenProjectCommand_ScreenTipText_Opens_new_Exolutio_project" xml:space="preserve">
+    <value>Opens new eXolutio project</value>
+  </data>
+  <data name="guiOpenProjectCommand_Execute_Exolutio_files____Exolutio____Exolutio_XML_files____xml____xml_All_files____________" xml:space="preserve">
+    <value>eXolutio files (*.eXo)|*.eXo; *.evox|XML files (*.xml)|*.xml|All files (*.*)|*.*||</value>
+  </data>
+  <data name="guiOpenProjectCommand_Execute_Exolutio_Default_Extension" xml:space="preserve">
+    <value>.eXo</value>
+  </data>
+  <data name="guiOpenProjectCommand_Execute_Exolutio_Default_Extension_No_Dot" xml:space="preserve">
+    <value>eXo</value>
+  </data>
+  <data name="guiSaveAsProjectCommand_Text_Save_as" xml:space="preserve">
+    <value>Save as</value>
+  </data>
+  <data name="guiSaveAsProjectCommand_ScreenTipText_Saves_Exolutio_project_under_a_given_file_name" xml:space="preserve">
+    <value>Saves eXolutio project under a given file name</value>
+  </data>
+  <data name="guiSaveProjectCommand_Text_Save_project" xml:space="preserve">
+    <value>Save project</value>
+  </data>
+  <data name="guiSaveProjectCommand_ScreenTipText_Saves_changes_made_in_the_project" xml:space="preserve">
+    <value>Saves changes made in the project</value>
+  </data>
 </root>

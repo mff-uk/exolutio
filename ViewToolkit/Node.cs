@@ -7,17 +7,17 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media.Effects;
-using EvoX.SupportingClasses;
+using Exolutio.SupportingClasses;
 
-namespace EvoX.ViewToolkit
+namespace Exolutio.ViewToolkit
 {
     public class Node : ContentControl, ISelectable, IDraggable
     {
-        private EvoXCanvas evoXCanvas;
-        public EvoXCanvas EvoXCanvas
+        private ExolutioCanvas exolutioCanvas;
+        public ExolutioCanvas ExolutioCanvas
         {
-            get { return evoXCanvas; }
-            set { evoXCanvas = value; }
+            get { return exolutioCanvas; }
+            set { exolutioCanvas = value; }
         }
 
         private double x;
@@ -27,7 +27,7 @@ namespace EvoX.ViewToolkit
             set
             {
                 x = value;
-                if (EvoXCanvas != null)
+                if (ExolutioCanvas != null)
                 {
                     Canvas.SetLeft(this, x);
                     if (dragThumb != null)
@@ -48,7 +48,7 @@ namespace EvoX.ViewToolkit
             set
             {
                 y = value;
-                if (EvoXCanvas != null)
+                if (ExolutioCanvas != null)
                 {
                     Canvas.SetTop(this, y);
                     if (dragThumb != null)
@@ -137,7 +137,7 @@ namespace EvoX.ViewToolkit
 
         public void UpdateCanvasPosition(bool fixRelativePlacement)
         {
-            if (EvoXCanvas != null)
+            if (ExolutioCanvas != null)
             {
                 if (fixRelativePlacement && dragThumb != null)
                 {
@@ -156,7 +156,7 @@ namespace EvoX.ViewToolkit
             this.UpdateCanvasPosition(true);
             if (Draggable)
             {
-                this.dragThumb = new DragThumb(EvoXCanvas, this);
+                this.dragThumb = new DragThumb(ExolutioCanvas, this);
                 dragThumb.Placement = EPlacementKind.AbsoluteCanvas;
                 dragThumb.PositionChanged += InvokePositionChanged;
             }
@@ -233,11 +233,11 @@ namespace EvoX.ViewToolkit
                 selected = value;
                 if (selected)
                 {
-                    EvoXCanvas.SelectedItems.AddIfNotContained(this);
+                    ExolutioCanvas.SelectedItems.AddIfNotContained(this);
                 }
                 else
                 {
-                    EvoXCanvas.SelectedItems.Remove(this);
+                    ExolutioCanvas.SelectedItems.Remove(this);
                 }
                 InvokeSelectedChanged();
             }
@@ -259,7 +259,7 @@ namespace EvoX.ViewToolkit
 
         void Node_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            EvoXCanvas.SelectableItem_PreviewMouseDown(this, e);
+            ExolutioCanvas.SelectableItem_PreviewMouseDown(this, e);
         }
 
         public event Action SelectedChanged;
@@ -276,9 +276,9 @@ namespace EvoX.ViewToolkit
 
         protected virtual void OnPositionChanged()
         {
-            if (EvoXCanvas != null)
+            if (ExolutioCanvas != null)
             {
-                EvoXCanvas.InvokeContentChanged();
+                ExolutioCanvas.InvokeContentChanged();
             }
         }
 

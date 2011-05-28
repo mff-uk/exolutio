@@ -1,5 +1,5 @@
-using EvoX.Model;
-using EvoX.Model.Versioning;
+using Exolutio.Model;
+using Exolutio.Model.Versioning;
 using NUnit.Framework;
 
 namespace Tests.Versioning

@@ -1,11 +1,11 @@
 using System;
 
-namespace EvoX.Controller.Commands
+namespace Exolutio.Controller.Commands
 {
 	/// <summary>
 	/// Thrown when some field of a command is not properly initialized
 	/// </summary>
-	public class CommandNotInitializedException: EvoXCommandException
+	public class CommandNotInitializedException: ExolutioCommandException
 	{
 	    public CommandNotInitializedException(CommandBase command, string argument) : base(command)
 	    {

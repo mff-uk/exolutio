@@ -1,16 +1,16 @@
 ﻿<Fluent:RibbonWindow 
-    x:Class="EvoX.WPFClient.MainWindow"
+    x:Class="Exolutio.WPFClient.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
     xmlns:Fluent="clr-namespace:Fluent;assembly=Fluent" 
-    xmlns:Client="clr-namespace:EvoX.WPFClient" xmlns:EvoXView="clr-namespace:EvoX.View;assembly=EvoX.View" Height="679" Width="771" 
+    xmlns:Client="clr-namespace:Exolutio.WPFClient" xmlns:ExolutioView="clr-namespace:Exolutio.View;assembly=Exolutio.View" Height="679" Width="771" 
     xmlns:ad="clr-namespace:AvalonDock;assembly=AvalonDock"
     AllowDrop="true" Drop="MainWindow_FileDropped" Closing="MainWindow_Closing">
     <Fluent:RibbonWindow.Resources>
         <ResourceDictionary Source="Resources/MainWindowResources.xaml" />
     </Fluent:RibbonWindow.Resources>
     <DockPanel LastChildFill="True">
-        <Client:EvoXRibbon x:Name="EvoXRibbon" DockPanel.Dock="Top" />
+        <Client:ExolutioRibbon x:Name="ExolutioRibbon" DockPanel.Dock="Top" />
         <ContentControl x:Name="TestContainer">
             <ad:DockingManager x:Name="dockManager" >
                 <ad:ResizingPanel Orientation="Horizontal">
@@ -27,17 +27,17 @@
                         <ad:DockablePane ad:ResizingPanel.ResizeHeight="110" x:Name="BottomPane" Padding="0">                            
                             <ad:DockableContent Title="Command Log" x:Name="dcCommandLog" Background="White" >
                                 <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                                    <EvoXView:ReportDisplay x:Name="ReportDisplay" />
+                                    <ExolutioView:ReportDisplay x:Name="ReportDisplay" />
                                 </ScrollViewer>
                             </ad:DockableContent>
                             <ad:DockableContent Title="Project" x:Name="dcProjectView" Background="White" >
-                                <EvoXView:ProjectView x:Name="ProjectView" />
+                                <ExolutioView:ProjectView x:Name="ProjectView" />
                             </ad:DockableContent>
                         </ad:DockablePane>
                     </ad:ResizingPanel>                    
                     <ad:DockablePane ad:ResizingPanel.ResizeWidth="250" x:Name="RightPane" ShowTabs="True" SelectedIndex="0">
                     	<ad:DockableContent Title="Properties" x:Name="dcProperties" >
-                            <EvoXView:ComponentPropertyView x:Name="ComponentPropertyView" />
+                            <ExolutioView:ComponentPropertyView x:Name="ComponentPropertyView" />
                     	</ad:DockableContent>
                     	<ad:DockableContent Title="OCL" x:Name="dcOcl" >
                             <Client:OCLEditor x:Name="OCLEditor" />

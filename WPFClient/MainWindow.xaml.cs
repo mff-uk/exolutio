@@ -14,19 +14,19 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using AvalonDock;
-using EvoX.Controller.Commands;
-using EvoX.View;
-using EvoX.View.Commands;
-using EvoX.Model;
-using EvoX.Model.PIM;
-using EvoX.Model.PSM;
-using EvoX.ResourceLibrary;
-using EvoX.SupportingClasses;
-using EvoX.ViewToolkit;
-using EvoX.WPFClient.Converters;
-using Component = EvoX.Model.Component;
+using Exolutio.Controller.Commands;
+using Exolutio.View;
+using Exolutio.View.Commands;
+using Exolutio.Model;
+using Exolutio.Model.PIM;
+using Exolutio.Model.PSM;
+using Exolutio.ResourceLibrary;
+using Exolutio.SupportingClasses;
+using Exolutio.ViewToolkit;
+using Exolutio.WPFClient.Converters;
+using Component = Exolutio.Model.Component;
 
-namespace EvoX.WPFClient
+namespace Exolutio.WPFClient
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -42,9 +42,9 @@ namespace EvoX.WPFClient
         public MainWindow()
         {
             Current.MainWindow = this;
-            EvoXGuiCommands.Init(this);
+            GuiCommands.Init(this);
             InitializeComponent();
-            this.Icon = EvoXResourceNames.GetResourceImageSource(EvoXResourceNames.EvoXIcon);
+            this.Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.ExolutioIcon);
 
             DiagramTabManager = new DiagramTabManager(this);
             ConfigurationManager.LoadConfiguration();
@@ -53,23 +53,8 @@ namespace EvoX.WPFClient
             dockManager.Loaded += dockManager_Loaded;
             Current.ActiveDiagramChanged += OCLEditor.LoadScriptsForActiveSchema;
             Current.RecentFile += OnRecentFile;
-
-            EvoXRibbon.FillRecent(ConfigurationManager.Configuration.RecentFiles, ConfigurationManager.Configuration.RecentDirectories);
-
-            //Project sampleProject = Tests.TestUtils.CreateSimpleSampleProject();
-            if (!ConfigurationManager.Configuration.RecentFiles.IsEmpty() && ConfigurationManager.Configuration.RecentFiles.First().Exists)
-            {
-                EvoXGuiCommands.OpenProjectCommand.Execute(ConfigurationManager.Configuration.RecentFiles.First().FullName, true, true);
-            }
-            else
-            {
-#if DEBUG
-                Project sampleProject = Tests.TestUtils.CreateSampleProject();
-                Current.Project = sampleProject;
-#else
-                EvoXGuiCommands.NewProjectCommand.Execute();
-#endif
-            }
+            Application.Current.DispatcherUnhandledException += Current_DispatcherUnhandledException;
+            ExolutioRibbon.FillRecent(ConfigurationManager.Configuration.RecentFiles, ConfigurationManager.Configuration.RecentDirectories);
         }
 
         void dockManager_Loaded(object sender, RoutedEventArgs e)
@@ -97,14 +82,27 @@ namespace EvoX.WPFClient
 
         protected void MainWindow_Loaded(object sender, EventArgs e)
         {
-            Application.Current.DispatcherUnhandledException += Current_DispatcherUnhandledException;
+            //Project sampleProject = Tests.TestUtils.CreateSimpleSampleProject();
+            if (!ConfigurationManager.Configuration.RecentFiles.IsEmpty() && ConfigurationManager.Configuration.RecentFiles.First().Exists)
+            {
+                GuiCommands.OpenProjectCommand.Execute(ConfigurationManager.Configuration.RecentFiles.First().FullName, true, true);
+            }
+            else
+            {
+#if DEBUG
+                Project sampleProject = Tests.TestUtils.CreateSampleProject();
+                Current.Project = sampleProject;
+#else
+                ExolutioGuiCommands.NewProjectCommand.Execute();
+#endif
+            }
         }
 
         private void OnRecentFile(FileInfo fileInfo)
         {
             ConfigurationManager.Configuration.AddToRecentFiles(fileInfo);
             ConfigurationManager.SaveConfiguration();
-            EvoXRibbon.FillRecent(ConfigurationManager.Configuration.RecentFiles, ConfigurationManager.Configuration.RecentDirectories);
+            ExolutioRibbon.FillRecent(ConfigurationManager.Configuration.RecentFiles, ConfigurationManager.Configuration.RecentDirectories);
         }
 
 
@@ -120,14 +118,14 @@ namespace EvoX.WPFClient
 
         public void CloseRibbonBackstage()
         {
-            EvoXRibbon.BackStage.IsOpen = false;
+            ExolutioRibbon.BackStage.IsOpen = false;
         }
 
         private void MainWindow_FileDropped(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
-                EvoXGuiCommands.OpenProjectCommand.Execute((string[])e.Data.GetData(DataFormats.FileDrop, true), noOpenFileDialog: true);
+                GuiCommands.OpenProjectCommand.Execute((string[])e.Data.GetData(DataFormats.FileDrop, true), noOpenFileDialog: true);
             }
         }
 
@@ -138,7 +136,7 @@ namespace EvoX.WPFClient
 
         private void MainWindow_Closing(object sender, CancelEventArgs e)
         {
-            EvoXGuiCommands.CloseProjectCommand.Execute(e);
+            GuiCommands.CloseProjectCommand.Execute(e);
             if (!e.Cancel)
             {
                 ConfigurationManager.SaveConfiguration();
@@ -243,7 +241,7 @@ namespace EvoX.WPFClient
             UnBindProjectVersion(Current.ProjectVersion);
             UnBindProject(Current.Project);
             DiagramTabManager.CloseAllTabs();
-            EvoXRibbon.versionGallery.ItemsSource = null;
+            ExolutioRibbon.versionGallery.ItemsSource = null;
         }
 
         static void Current_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
@@ -315,13 +313,13 @@ namespace EvoX.WPFClient
 
         public void DisableCommands()
         {
-            EvoXRibbon.IsEnabled = false;
+            ExolutioRibbon.IsEnabled = false;
             CommandsDisabled = true; 
         }
 
         public void EnableCommands()
         {
-            EvoXRibbon.IsEnabled = true;
+            ExolutioRibbon.IsEnabled = true;
             CommandsDisabled = false; 
         }
     }

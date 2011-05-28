@@ -1,22 +1,22 @@
 using System.Configuration;
 using System.IO;
-using EvoX.Model;
-using EvoX.Model.Serialization;
+using Exolutio.Model;
+using Exolutio.Model.Serialization;
 using NUnit.Framework;
 using System.Collections.Generic;
 
-namespace Tests.EvoXExportTests
+namespace Tests.ExolutioExportTests
 {
     [TestFixture]
-    public class EvoXExportTest
+    public class ExolutioExportTest
     {
         private static string TEST_BASE_DIR
         {
             get
             {
-                if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["EvoXExportTestFilesDirectory"]))
+                if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["ExolutioExportTestFilesDirectory"]))
                     throw new ConfigurationErrorsException("Key EvolutionTestFilesDirectory not found in the configuration file");
-                return ConfigurationManager.AppSettings["EvoXExportTestFilesDirectory"];
+                return ConfigurationManager.AppSettings["ExolutioExportTestFilesDirectory"];
             }
 
         }
@@ -29,7 +29,7 @@ namespace Tests.EvoXExportTests
 
             List<object> ls = new List<object>();
 
-            foreach (FileInfo fileInfo in d.GetFiles("*.EvoX"))
+            foreach (FileInfo fileInfo in d.GetFiles("*.Exolutio"))
             {
                 ls.Add(fileInfo.FullName);
             }
@@ -51,7 +51,7 @@ namespace Tests.EvoXExportTests
             }
         }
 
-        EvoX.Model.Serialization.ProjectSerializationManager projectSerializationManager = new ProjectSerializationManager();
+        Exolutio.Model.Serialization.ProjectSerializationManager projectSerializationManager = new ProjectSerializationManager();
 
         [Test, TestCaseSource("TestFiles")]
         public void Test(string filename)

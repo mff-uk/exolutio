@@ -4,15 +4,15 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using EvoX.Controller.Commands;
-using EvoX.Model;
-using EvoX.Model.PIM;
-using EvoX.Model.ViewHelper;
-using EvoX.ViewToolkit;
-using Component = EvoX.Model.Component;
-using Label = EvoX.ViewToolkit.Label;
+using Exolutio.Controller.Commands;
+using Exolutio.Model;
+using Exolutio.Model.PIM;
+using Exolutio.Model.ViewHelper;
+using Exolutio.ViewToolkit;
+using Component = Exolutio.Model.Component;
+using Label = Exolutio.ViewToolkit.Label;
 
-namespace EvoX.View
+namespace Exolutio.View
 {
     public class PIMAssociationView : ComponentViewBaseVH<PIMAssociationViewHelper>, IConnectorViewBase
     {
@@ -33,12 +33,12 @@ namespace EvoX.View
             {
                 pimAssociationEnd.PropertyChanged += AssociationEnd_PropertyChanged;
             }
-            ((EvoXContextMenu)ContextMenu).ScopeObject = PIMAssociation;
-            ((EvoXContextMenu)ContextMenu).Diagram = DiagramView.Diagram;
-            ((EvoXContextMenu)Connector.StartPoint.ContextMenu).ScopeObject = PIMAssociation.PIMAssociationEnds[0];
-            ((EvoXContextMenu)Connector.StartPoint.ContextMenu).Diagram = DiagramView.Diagram;
-            ((EvoXContextMenu)Connector.EndPoint.ContextMenu).ScopeObject = PIMAssociation.PIMAssociationEnds[1];
-            ((EvoXContextMenu)Connector.EndPoint.ContextMenu).Diagram = DiagramView.Diagram;
+            ((ExolutioContextMenu)ContextMenu).ScopeObject = PIMAssociation;
+            ((ExolutioContextMenu)ContextMenu).Diagram = DiagramView.Diagram;
+            ((ExolutioContextMenu)Connector.StartPoint.ContextMenu).ScopeObject = PIMAssociation.PIMAssociationEnds[0];
+            ((ExolutioContextMenu)Connector.StartPoint.ContextMenu).Diagram = DiagramView.Diagram;
+            ((ExolutioContextMenu)Connector.EndPoint.ContextMenu).ScopeObject = PIMAssociation.PIMAssociationEnds[1];
+            ((ExolutioContextMenu)Connector.EndPoint.ContextMenu).Diagram = DiagramView.Diagram;
         }
 
         protected override void UnBindModelView()
@@ -190,7 +190,7 @@ namespace EvoX.View
             CreatedControls.Add(NameLabel);
             CreatedControls.Add(SourceCardinalityLabel);
             CreatedControls.Add(TargetCardinalityLabel);
-            DiagramView.EvoXCanvas.AddConnector(Connector);
+            DiagramView.ExolutioCanvas.AddConnector(Connector);
             Connector.Connect(SourceClassView.MainNode, TargetClassView.MainNode);
             if (ViewHelper.Points.Count == 0)
             {
@@ -200,19 +200,19 @@ namespace EvoX.View
             {
                 Connector.SetPoints(ViewHelper.Points);
             }
-            DiagramView.EvoXCanvas.AddNode(NameLabel);
-            DiagramView.EvoXCanvas.AddNode(SourceCardinalityLabel);
-            DiagramView.EvoXCanvas.AddNode(TargetCardinalityLabel);
+            DiagramView.ExolutioCanvas.AddNode(NameLabel);
+            DiagramView.ExolutioCanvas.AddNode(SourceCardinalityLabel);
+            DiagramView.ExolutioCanvas.AddNode(TargetCardinalityLabel);
             NameLabel.PlacementCenter = EPlacementCenter.Center;
             Connector.SnapNodeToConnector(NameLabel);
             SourceCardinalityLabel.SnapTo(Connector.StartPoint, true);
             TargetCardinalityLabel.SnapTo(Connector.EndPoint, true);
 
-            EvoXContextMenu associationMenu = MenuHelper.GetContextMenu(ScopeAttribute.EScope.PIMAssociation, DiagramView.Diagram);
+            ExolutioContextMenu associationMenu = MenuHelper.GetContextMenu(ScopeAttribute.EScope.PIMAssociation, DiagramView.Diagram);
             ContextMenu = associationMenu;
-            EvoXContextMenu startPointMenu = MenuHelper.GetContextMenu(ScopeAttribute.EScope.PIMAssociationEnd, DiagramView.Diagram);
+            ExolutioContextMenu startPointMenu = MenuHelper.GetContextMenu(ScopeAttribute.EScope.PIMAssociationEnd, DiagramView.Diagram);
             Connector.StartPoint.ContextMenu = startPointMenu;
-            EvoXContextMenu endPointMenu = MenuHelper.GetContextMenu(ScopeAttribute.EScope.PIMAssociationEnd, DiagramView.Diagram);
+            ExolutioContextMenu endPointMenu = MenuHelper.GetContextMenu(ScopeAttribute.EScope.PIMAssociationEnd, DiagramView.Diagram);
             Connector.EndPoint.ContextMenu = endPointMenu;
 
 #if SILVERLIGHT
@@ -246,8 +246,8 @@ namespace EvoX.View
 //        void Connector_MouseDown(object sender, MouseButtonEventArgs e)
 //#endif
 //        {
-//            DiagramView.EvoXCanvas.SelectedItems.Clear();
-//            DiagramView.EvoXCanvas.SelectedItems.Add(this.Connector);
+//            DiagramView.ExolutioCanvas.SelectedItems.Clear();
+//            DiagramView.ExolutioCanvas.SelectedItems.Add(this.Connector);
 //            DiagramView.SetSelection(ModelComponent);
 //#if SILVERLIGHT
 //#else
@@ -287,10 +287,10 @@ namespace EvoX.View
         public override void RemoveFromDiagram()
         {
             UnBindModelView();
-            DiagramView.EvoXCanvas.RemoveConnector(Connector);
-            DiagramView.EvoXCanvas.RemoveNode(NameLabel);
-            DiagramView.EvoXCanvas.RemoveNode(SourceCardinalityLabel);
-            DiagramView.EvoXCanvas.RemoveNode(TargetCardinalityLabel);
+            DiagramView.ExolutioCanvas.RemoveConnector(Connector);
+            DiagramView.ExolutioCanvas.RemoveNode(NameLabel);
+            DiagramView.ExolutioCanvas.RemoveNode(SourceCardinalityLabel);
+            DiagramView.ExolutioCanvas.RemoveNode(TargetCardinalityLabel);
             base.RemoveFromDiagram();
         }
 

@@ -1,21 +1,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Media;
-using EvoX.Dialogs;
-using EvoX.Model;
-using EvoX.Model.PIM;
-using EvoX.Model.PSM;
-using EvoX.Model.Versioning;
-using EvoX.ResourceLibrary;
-using EvoX.Revalidation;
+using Exolutio.Dialogs;
+using Exolutio.Model;
+using Exolutio.Model.PIM;
+using Exolutio.Model.PSM;
+using Exolutio.Model.Versioning;
+using Exolutio.ResourceLibrary;
+using Exolutio.Revalidation;
 
-namespace EvoX.View.Commands.Versioning
+namespace Exolutio.View.Commands.Versioning
 {
     public class guiFindChangesCommand : guiActiveDiagramCommand
     {
         public override void Execute(object parameter)
         {
-            IEnumerable<EvoXVersionedObject> openedVersions = Current.MainWindow.DiagramTabManager.AnotherOpenedVersions(Current.ActiveDiagram);
+            IEnumerable<ExolutioVersionedObject> openedVersions = Current.MainWindow.DiagramTabManager.AnotherOpenedVersions(Current.ActiveDiagram);
             if (openedVersions!= null && openedVersions.Count() == 1)
             {
                 FindAndDisplayChanges(((PSMDiagram)openedVersions.First()).PSMSchema, ((PSMDiagram)Current.ActiveDiagram).PSMSchema);
@@ -65,7 +65,7 @@ namespace EvoX.View.Commands.Versioning
 
         public override ImageSource Icon
         {
-            get { return EvoXResourceNames.GetResourceImageSource(EvoXResourceNames.magnifier); }
+            get { return ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.magnifier); }
         }
 
     }

@@ -1,4 +1,4 @@
-namespace EvoX.Model.PSM
+namespace Exolutio.Model.PSM
 {
     public interface IPSMSemanticComponent
     {

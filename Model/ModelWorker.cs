@@ -1,8 +1,8 @@
 using System;
-using EvoX.Model.PIM;
-using EvoX.Model.PSM;
+using Exolutio.Model.PIM;
+using Exolutio.Model.PSM;
 
-namespace EvoX.Model
+namespace Exolutio.Model
 {
     public abstract class ModelWorker<TResult>
     {
@@ -120,7 +120,7 @@ namespace EvoX.Model
             return DefaultResult;
         }
 
-        public TResult ProcessComponentOrSchema(EvoXObject @object)
+        public TResult ProcessComponentOrSchema(ExolutioObject @object)
         {
             if (@object is Component)
             {

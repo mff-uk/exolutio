@@ -1,6 +1,6 @@
 using System;
 
-namespace EvoX.SupportingClasses
+namespace Exolutio.SupportingClasses
 {
     /// <summary>
     /// Event with a string argument

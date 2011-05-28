@@ -1,12 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using EvoX.Model;
-using EvoX.Model.PIM;
-using EvoX.Model.PSM;
-using EvoX.Model.Versioning;
+using Exolutio.Model;
+using Exolutio.Model.PIM;
+using Exolutio.Model.PSM;
+using Exolutio.Model.Versioning;
 using NUnit.Framework;
-using Version = EvoX.Model.Versioning.Version;
+using Version = Exolutio.Model.Versioning.Version;
 
 namespace Tests.Versioning
 {
@@ -140,12 +140,12 @@ namespace Tests.Versioning
             #endregion 
         }
 
-        private delegate ICollection<TMember> GetSubcollectionHandler<in TOwner, TMember>(TOwner owner) where TMember : EvoXObject;
-        private delegate TReferred GetReferredItemHandler<in TOwner, out TReferred>(TOwner owner) where TReferred : EvoXObject;
+        private delegate ICollection<TMember> GetSubcollectionHandler<in TOwner, TMember>(TOwner owner) where TMember : ExolutioObject;
+        private delegate TReferred GetReferredItemHandler<in TOwner, out TReferred>(TOwner owner) where TReferred : ExolutioObject;
 
         private static void SubcollectionCheck<TOwner, TMember>(TOwner owner, IVersionedItem other, GetSubcollectionHandler<TOwner, TMember> getSubcollection)
             where TOwner : class, IVersionedItem
-            where TMember : EvoXObject, IVersionedItem
+            where TMember : ExolutioObject, IVersionedItem
         {
             Assert.IsTrue(other is TOwner);
             TOwner otherT = (TOwner) other;
@@ -160,7 +160,7 @@ namespace Tests.Versioning
 
         private static void ReferenceCheck<TOwner, TMember>(TOwner owner, IVersionedItem other, GetReferredItemHandler<TOwner, TMember> getReferredItem)
             where TOwner : class, IVersionedItem
-            where TMember : EvoXObject, IVersionedItem
+            where TMember : ExolutioObject, IVersionedItem
         {
             Assert.IsTrue(other is TOwner);
             TOwner otherT = (TOwner) other;

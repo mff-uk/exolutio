@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace EvoX.SupportingClasses
+namespace Exolutio.SupportingClasses
 {
 
 	public interface IReadOnlyDictionary<TKey, TValue>

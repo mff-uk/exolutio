@@ -8,8 +8,8 @@
     <ProjectGuid>{24FF150D-1CD5-4C80-905D-905CAD663717}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EvoX.XCaseImport</RootNamespace>
-    <AssemblyName>EvoX.XCaseImport</AssemblyName>
+    <RootNamespace>Exolutio.XCaseImport</RootNamespace>
+    <AssemblyName>Exolutio.XCaseImport</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>
@@ -39,8 +39,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EvoXExport">
-      <HintPath>..\ExternalBinaries\XCase\EvoXExport.dll</HintPath>
+    <Reference Include="ExolutioExport, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ExternalBinaries\XCase\ExolutioExport.dll</HintPath>
     </Reference>
     <Reference Include="NUML.Mof2.Collections">
       <HintPath>..\ExternalBinaries\XCase\NUML.Mof2.Collections.dll</HintPath>

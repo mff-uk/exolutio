@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<evox:Project xmlns:evox="http://evox.ms.mff.cuni.cz/" Version="3.0" UsesVersioning="False">
+<evox:Project xmlns:evox="http://www.eXolutio.eu/Project/Serialization//" Version="3.0" UsesVersioning="False">
   <evox:SingleVersion ID="f1215638-f601-4364-ab45-4e1cf2e943cc">
     <evox:AttributeTypes Count="2">
       <evox:AttributeType ID="47b9d71b-cb4a-4fc8-8e93-ca5870e9512c" IsSealed="True" Name="string">

@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using EvoX.Controller.Commands;
-using EvoX.Model.PSM;
-using EvoX.Model;
-using EvoX.Model.PIM;
+using Exolutio.Controller.Commands;
+using Exolutio.Model.PSM;
+using Exolutio.Model;
+using Exolutio.Model.PIM;
 
-namespace EvoX.Controller.Commands.Atomic.PSM
+namespace Exolutio.Controller.Commands.Atomic.PSM
 {
     public class acmdDeletePSMAssociation : StackedCommand
     {
@@ -84,14 +84,14 @@ namespace EvoX.Controller.Commands.Atomic.PSM
                 a.Parent.ChildPSMAssociations.Remove(a);
                 parentGuid = a.Parent;
             }
-            //else throw new EvoXCommandException("Deleted association " + a.ToString() + " had null Parent", this);
+            //else throw new ExolutioCommandException("Deleted association " + a.ToString() + " had null Parent", this);
             if (a.Child != null)
             {
                 a.Child.ParentAssociation = null;
                 childGuid = a.Child;
                 s.Roots.Add(a.Child);
             }
-            //else throw new EvoXCommandException("Deleted association " + a.ToString() + " had null Child", this);
+            //else throw new ExolutioCommandException("Deleted association " + a.ToString() + " had null Child", this);
 
             interpretation = a.Interpretation;
             s.PSMAssociations.Remove(a);

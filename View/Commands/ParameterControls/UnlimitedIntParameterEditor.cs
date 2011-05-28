@@ -1,7 +1,7 @@
 using System.Windows.Controls;
-using EvoX.Model;
+using Exolutio.Model;
 
-namespace EvoX.View.Commands.ParameterControls
+namespace Exolutio.View.Commands.ParameterControls
 {
     public class UnlimitedintParameterEditor : TextBox, IOperationParameterControl<UnlimitedInt>, IOperationParameterControl
     {

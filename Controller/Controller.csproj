@@ -8,8 +8,8 @@
     <ProjectGuid>{71908A36-A760-41AC-BB5A-78BE2A7541DD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EvoX.Controller</RootNamespace>
-    <AssemblyName>EvoX.Controller</AssemblyName>
+    <RootNamespace>Exolutio.Controller</RootNamespace>
+    <AssemblyName>Exolutio.Controller</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>
@@ -185,7 +185,7 @@
     <Compile Include="Commands\Versioning\cmdBranchProjectVersion.cs" />
     <Compile Include="Commands\Versioning\cmdRemoveProjectVersion.cs" />
     <Compile Include="Controller\CommandStack.cs" />
-    <Compile Include="Commands\Base\EvoXCommandException.cs" />
+    <Compile Include="Commands\Base\ExolutioCommandException.cs" />
     <Compile Include="Commands\Base\MacroCommand.cs" />
     <Compile Include="Commands\Base\PublicArgumentAttribute.cs" />
     <Compile Include="Commands\Base\StackedCommand.cs" />

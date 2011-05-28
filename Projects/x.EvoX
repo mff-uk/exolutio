@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<evox:Project xmlns:evox="http://evox.ms.mff.cuni.cz/" Version="3.0" UsesVersioning="False" Name="Adbis">
+<evox:Project xmlns:evox="http://www.eXolutio.eu/Project/Serialization//" Version="3.0" UsesVersioning="False" Name="Adbis">
   <evox:SingleVersion ID="0d5d4b68-b0b5-43c4-866f-9f2d47a0415c">
     <evox:AttributeTypes Count="0" />
     <evox:PIMSchema ID="99774906-8fc2-4826-aca8-c56e714a824b" Caption="PIMSchema">

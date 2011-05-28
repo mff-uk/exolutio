@@ -2,9 +2,9 @@
 using System.ComponentModel;
 using System.Windows.Input;
 using System.Diagnostics;
-using EvoX.Controller;
+using Exolutio.Controller;
 
-namespace EvoX.Controller.Commands
+namespace Exolutio.Controller.Commands
 {
     /// <summary>
     /// Performs "Redo" of the last command on the "Redo" stack. 

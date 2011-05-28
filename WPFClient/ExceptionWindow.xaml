@@ -1,4 +1,4 @@
-﻿<Window x:Class="EvoX.WPFClient.ExceptionWindow"
+﻿<Window x:Class="Exolutio.WPFClient.ExceptionWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     Title="Error in application" Loaded="Window_Loaded" Visibility="Visible" 

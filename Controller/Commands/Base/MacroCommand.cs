@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Text;
 using System.Linq;
-using EvoX.Model;
+using Exolutio.Model;
 
-namespace EvoX.Controller.Commands
+namespace Exolutio.Controller.Commands
 {
 	/// <summary>
     /// Command that consists of other Commands
@@ -113,7 +113,7 @@ namespace EvoX.Controller.Commands
                                     m.CommandOperation();
                                     Commands.Insert(Commands.IndexOf(t), m);
                                 }
-                                else throw new EvoXCommandException(CommandErrors.COMMAND_CANT_EXECUTE, m);
+                                else throw new ExolutioCommandException(CommandErrors.COMMAND_CANT_EXECUTE, m);
                             }
                         }
                     }
@@ -139,7 +139,7 @@ namespace EvoX.Controller.Commands
                                     m.CommandOperation();
                                     Commands.Insert(Commands.IndexOf(t) + 1, m);
                                 }
-                                else throw new EvoXCommandException(CommandErrors.COMMAND_CANT_EXECUTE, m);
+                                else throw new ExolutioCommandException(CommandErrors.COMMAND_CANT_EXECUTE, m);
                             }
                         }
                     }
@@ -147,7 +147,7 @@ namespace EvoX.Controller.Commands
                 }
                 else
                 {
-                    throw new EvoXCommandException(t.ErrorDescription ?? CommandErrors.COMMAND_CANT_EXECUTE, t) { ExceptionTitle = CommandErrors.COMMAND_CANT_EXECUTE };
+                    throw new ExolutioCommandException(t.ErrorDescription ?? CommandErrors.COMMAND_CANT_EXECUTE, t) { ExceptionTitle = CommandErrors.COMMAND_CANT_EXECUTE };
                 }
                 #if DEBUG
 		        FieldsChecker.CheckCommandResults(this);

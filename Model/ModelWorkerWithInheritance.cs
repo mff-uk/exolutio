@@ -1,8 +1,8 @@
 using System;
-using EvoX.Model.PIM;
-using EvoX.Model.PSM;
+using Exolutio.Model.PIM;
+using Exolutio.Model.PSM;
 
-namespace EvoX.Model
+namespace Exolutio.Model
 {
     public abstract class ModelWorkerWithInheritance<TResult, TContext>
     {

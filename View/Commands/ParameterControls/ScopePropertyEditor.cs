@@ -1,14 +1,14 @@
 using System;
 using System.Windows.Controls;
-using EvoX.Controller.Commands.Reflection;
-using EvoX.Model;
-using EvoX.Model.PIM;
-using EvoX.Model.PSM;
+using Exolutio.Controller.Commands.Reflection;
+using Exolutio.Model;
+using Exolutio.Model.PIM;
+using Exolutio.Model.PSM;
 
-namespace EvoX.View.Commands.ParameterControls
+namespace Exolutio.View.Commands.ParameterControls
 {
     public class ScopePropertyEditor : Control,
-        IOperationParameterControl, IOperationParameterControl<Guid>, IOperationParameterControl<EvoXObject>
+        IOperationParameterControl, IOperationParameterControl<Guid>, IOperationParameterControl<ExolutioObject>
     {
         public delegate bool VerifyDelegate(params object[] verifiedObjects);
 
@@ -35,12 +35,12 @@ namespace EvoX.View.Commands.ParameterControls
 
         private Guid valueGuid; 
 
-        public EvoXObject Value
+        public ExolutioObject Value
         {
             get
             {
                 if (valueGuid != Guid.Empty)
-                    return ProjectVersion.Project.TranslateComponent<EvoXObject>(valueGuid);
+                    return ProjectVersion.Project.TranslateComponent<ExolutioObject>(valueGuid);
                 else
                     return null;
             }

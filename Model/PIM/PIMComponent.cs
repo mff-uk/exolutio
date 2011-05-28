@@ -1,8 +1,8 @@
 ﻿using System;
-using EvoX.Model.PSM;
-using EvoX.Model.Versioning;
+using Exolutio.Model.PSM;
+using Exolutio.Model.Versioning;
 
-namespace EvoX.Model.PIM
+namespace Exolutio.Model.PIM
 {
     public abstract class PIMComponent : Component
     {
@@ -17,9 +17,9 @@ namespace EvoX.Model.PIM
 
         public virtual ComponentList<PSMComponent> GetInterpretedComponents() { return new ComponentList<PSMComponent>(); }
         
-        #region Implementation of IEvoXCloneable
+        #region Implementation of IExolutioCloneable
 
-        public override void FillCopy(IEvoXCloneable copyComponent, ProjectVersion projectVersion,
+        public override void FillCopy(IExolutioCloneable copyComponent, ProjectVersion projectVersion,
                                       ElementCopiesMap createdCopies)
         {
             base.FillCopy(copyComponent, projectVersion, createdCopies);

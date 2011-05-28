@@ -1,7 +1,7 @@
 ﻿using System;
-using EvoX.Controller.Commands.Reflection;
+using Exolutio.Controller.Commands.Reflection;
 
-namespace EvoX.View.Commands
+namespace Exolutio.View.Commands
 {
     public interface IOperationParameterControl<TParameterType>
     {

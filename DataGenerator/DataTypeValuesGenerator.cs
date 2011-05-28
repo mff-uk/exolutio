@@ -1,10 +1,10 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
-using EvoX.Model;
-using EvoX.SupportingClasses;
+using Exolutio.Model;
+using Exolutio.SupportingClasses;
 
-namespace EvoX.DataGenerator
+namespace Exolutio.DataGenerator
 {
     public class DataTypeValuesGenerator
     {

@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
-using EvoX.SupportingClasses.Reflection;
+using Exolutio.SupportingClasses.Reflection;
 
-namespace EvoX.Controller.Commands
+namespace Exolutio.Controller.Commands
 {
 	/// <summary>
 	/// Class provides methods to check whether all command's

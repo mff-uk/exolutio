@@ -1,8 +1,8 @@
 ﻿using System.Reflection;
-using EvoX.Model.PIM;
+using Exolutio.Model.PIM;
 using System.Linq;
 
-namespace EvoX.Controller.Commands.Reflection
+namespace Exolutio.Controller.Commands.Reflection
 {
     public class PIMAttributeNeighboringClassParameterConsistency : ParameterConsistency
     {

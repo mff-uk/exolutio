@@ -1,8 +1,8 @@
 using System;
 using System.Reflection;
-using EvoX.SupportingClasses.Reflection;
+using Exolutio.SupportingClasses.Reflection;
 
-namespace EvoX.Controller.Commands.Reflection
+namespace Exolutio.Controller.Commands.Reflection
 {
     [AttributeUsage(AttributeTargets.All, AllowMultiple = false)]
     public class DescriptionAttribute : Attribute

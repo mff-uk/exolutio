@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using EvoX.Model;
-using EvoX.Model.PIM;
-using EvoX.Controller.Commands.Atomic;
-using EvoX.Controller.Commands.Atomic.PIM;
+using Exolutio.Model;
+using Exolutio.Model.PIM;
+using Exolutio.Controller.Commands.Atomic;
+using Exolutio.Controller.Commands.Atomic.PIM;
 
-namespace EvoX.Controller.Commands.Atomic.PIM.MacroWrappers
+namespace Exolutio.Controller.Commands.Atomic.PIM.MacroWrappers
 {
     [PublicCommand("Create new PIM class", PublicCommandAttribute.EPulicCommandCategory.PIM_atomic)]
     public class cmdCreateNewPIMClass : MacroCommand, ICommandWithDiagramParameter
@@ -30,7 +30,7 @@ namespace EvoX.Controller.Commands.Atomic.PIM.MacroWrappers
             set
             {
                 if (!Executed) classGuid = value;
-                else throw new EvoXCommandException("Cannot set ClassGuid after command execution.", this);
+                else throw new ExolutioCommandException("Cannot set ClassGuid after command execution.", this);
             }
         }
         

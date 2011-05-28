@@ -4,10 +4,10 @@ using System.Collections.ObjectModel;
 using System.Xml;
 using System.Linq;
 using System.Xml.Linq;
-using EvoX.Model.Serialization;
-using EvoX.Model.Versioning;
+using Exolutio.Model.Serialization;
+using Exolutio.Model.Versioning;
 
-namespace EvoX.Model.PSM
+namespace Exolutio.Model.PSM
 {
     public class PSMSchema : Schema
     {
@@ -144,7 +144,7 @@ namespace EvoX.Model.PSM
 
         #endregion
 
-        #region Implementation of IEvoXSerializable
+        #region Implementation of IExolutioSerializable
         
         public override void Serialize(XElement parentNode, SerializationContext context)
         {
@@ -168,12 +168,12 @@ namespace EvoX.Model.PSM
             base.Deserialize(parentNode, context);
             context.CurrentSchemaGuid = this;
 
-            if (parentNode.Element(context.EvoXNS + "PSMSchemaReferences") != null)
+            if (parentNode.Element(context.ExolutioNS + "PSMSchemaReferences") != null)
             {
                 this.DeserializeWrappedCollection("PSMSchemaReferences", PSMSchemaReferences, PSMSchemaReference.CreateInstance, parentNode, context);
             }
 
-            if (parentNode.Element(context.EvoXNS + "PSMSchemaClass") != null)
+            if (parentNode.Element(context.ExolutioNS + "PSMSchemaClass") != null)
             {
                 PSMSchemaClass objPSMSchemaClass = new PSMSchemaClass(Project, Guid.Empty);
                 objPSMSchemaClass.DeserializeFromChildElement("PSMSchemaClass", parentNode, context);
@@ -201,14 +201,14 @@ namespace EvoX.Model.PSM
 
         #endregion
 
-        #region Implementation of IEvoXCloneable
+        #region Implementation of IExolutioCloneable
 
-        public override IEvoXCloneable Clone(ProjectVersion projectVersion, ElementCopiesMap createdCopies)
+        public override IExolutioCloneable Clone(ProjectVersion projectVersion, ElementCopiesMap createdCopies)
         {
             return new PSMSchema(projectVersion.Project, createdCopies.SuggestGuid(this));
         }
 
-        public override void FillCopy(IEvoXCloneable copyComponent, ProjectVersion projectVersion,
+        public override void FillCopy(IExolutioCloneable copyComponent, ProjectVersion projectVersion,
                                       ElementCopiesMap createdCopies)
         {
             base.FillCopy(copyComponent, projectVersion, createdCopies);

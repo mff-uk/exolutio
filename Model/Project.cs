@@ -6,22 +6,22 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 using System.Xml.Schema;
-using EvoX.Model.PIM;
-using EvoX.Model.Resources;
-using EvoX.Model.Serialization;
-using EvoX.Model.Versioning;
-using Version = EvoX.Model.Versioning.Version;
+using Exolutio.Model.PIM;
+using Exolutio.Model.Resources;
+using Exolutio.Model.Serialization;
+using Exolutio.Model.Versioning;
+using Version = Exolutio.Model.Versioning.Version;
 using System.Collections.ObjectModel;
 using System.Linq;
 
-namespace EvoX.Model
+namespace Exolutio.Model
 {
     /// <summary>
-    /// EvoX project, encapsulates the respective versions. If versioning is not
+    /// Exolutio project, encapsulates the respective versions. If versioning is not
     /// applied in the project, property SingleVersion contains the only
     /// oldVersion of the project.
     /// </summary>
-    public class Project : IEvoXSerializable, INotifyPropertyChanged
+    public class Project : IExolutioSerializable, INotifyPropertyChanged
     {
         public Project()
         {
@@ -36,7 +36,7 @@ namespace EvoX.Model
 
         }
 
-        Project IEvoXSerializable.Project
+        Project IExolutioSerializable.Project
         {
             get { return this; }
         }
@@ -51,7 +51,7 @@ namespace EvoX.Model
             {
                 if (!UsesVersioning)
                 {
-                    throw new EvoXModelException(Exceptions.Project_ProjectVersions_Can_not_access_ProjectVersions_when_UsesVersioning_is_set_to_false);
+                    throw new ExolutioModelException(Exceptions.Project_ProjectVersions_Can_not_access_ProjectVersions_when_UsesVersioning_is_set_to_false);
                 }
                 return projectVersions;
             }
@@ -92,7 +92,7 @@ namespace EvoX.Model
             {
                 if (UsesVersioning)
                 {
-                    throw new EvoXModelException(Exceptions.Project_SingleVersion_Can_not_access_SingleVersion_when_UsesVersioning_is_set_to_true);
+                    throw new ExolutioModelException(Exceptions.Project_SingleVersion_Can_not_access_SingleVersion_when_UsesVersioning_is_set_to_true);
                 }
                 return singleVersionGuid != Guid.Empty ? TranslateComponent<ProjectVersion>(singleVersionGuid) : null;
             }
@@ -173,11 +173,11 @@ namespace EvoX.Model
 
         public VersionManager VersionManager { get; set; }
 
-        #region IEvoXSerializable Members
+        #region IExolutioSerializable Members
 
         public void Deserialize(XElement parentNode, SerializationContext context)
         {
-            parentNode = (XElement)context.Document.Element(context.EvoXNS + "Project");
+            parentNode = (XElement)context.Document.Element(context.ExolutioNS + "Project");
             UsesVersioning = SerializationContext.DecodeBool(parentNode.Attribute("UsesVersioning").Value);
             if (UsesVersioning)
             {
@@ -185,7 +185,7 @@ namespace EvoX.Model
                 VersionManager.Loading = true; 
                 this.DeserializeWrappedCollection("Versions", VersionManager.Versions, Version.CreateInstance, parentNode, context);
                 this.DeserializeWrappedCollection("ProjectVersions", ProjectVersions, ProjectVersion.CreateInstance, parentNode, context);
-                XElement versionLinksElement = parentNode.Element(context.EvoXNS + "VersionLinks");
+                XElement versionLinksElement = parentNode.Element(context.ExolutioNS + "VersionLinks");
                 if (versionLinksElement != null)
                 {
                     VersionManager.DeserializeVersionLinks(versionLinksElement, context);
@@ -208,8 +208,8 @@ namespace EvoX.Model
 
         public void Serialize(XElement parentNode, SerializationContext context)
         {
-            XElement projectElement = new XElement(context.EvoXNS + "Project");
-            projectElement.Add(new XAttribute(XNamespace.Xmlns + "evox", context.EvoXNS.NamespaceName));
+            XElement projectElement = new XElement(context.ExolutioNS + "Project");
+            projectElement.Add(new XAttribute(XNamespace.Xmlns + SerializationContext.ExolutioPrefix, context.ExolutioNS.NamespaceName));
 
             // version attribute
             XAttribute versionAttribute = new XAttribute("Version", "3.0");
@@ -231,7 +231,7 @@ namespace EvoX.Model
                 this.WrapAndSerializeCollection("Versions", "Version", VersionManager.Versions, projectElement, context);
                 // project versions
                 this.WrapAndSerializeCollection("ProjectVersions", "ProjectVersion", ProjectVersions, projectElement, context);
-                XElement versionLinksElement = new XElement(context.EvoXNS + "VersionLinks");
+                XElement versionLinksElement = new XElement(context.ExolutioNS + "VersionLinks");
                 VersionManager.SerializeVersionLinks(versionLinksElement, context);
                 projectElement.Add(versionLinksElement);
             }
@@ -247,28 +247,28 @@ namespace EvoX.Model
         public readonly ComponentMappingDictionary mappingDictionary = new ComponentMappingDictionary();
 
         public T TranslateComponent<T>(Guid componentId)
-            where T : EvoXObject
+            where T : ExolutioObject
         {
             return mappingDictionary.FindComponent<T>(componentId);
         }
 
-        public EvoXObject TranslateComponent(Guid componentId)
+        public ExolutioObject TranslateComponent(Guid componentId)
         {
             return mappingDictionary.FindComponent(componentId);
         }
 
-        public bool TryTranslateObject(Guid componentId, out EvoXObject evoXObject)
+        public bool TryTranslateObject(Guid componentId, out ExolutioObject exolutioObject)
         {
-            return mappingDictionary.TryGetValue(componentId, out evoXObject);
+            return mappingDictionary.TryGetValue(componentId, out exolutioObject);
         }
 
         public bool VerifyComponentType<T>(Guid componentId)
-            where T : EvoXObject
+            where T : ExolutioObject
         {
             return mappingDictionary.VerifyComponentType<T>(componentId);
         }
 
-        public ReadOnlyCollection<T> TranslateComponentCollection<T>(IEnumerable<Guid> guids) where T : EvoXObject
+        public ReadOnlyCollection<T> TranslateComponentCollection<T>(IEnumerable<Guid> guids) where T : ExolutioObject
         {
             return guids.Select(TranslateComponent<T>).ToList().AsReadOnly();
         }

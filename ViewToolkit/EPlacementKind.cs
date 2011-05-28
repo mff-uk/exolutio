@@ -1,4 +1,4 @@
-namespace EvoX.ViewToolkit
+namespace Exolutio.ViewToolkit
 {
     /// <summary>
     /// Type of placement on the canvas, determines the meaning of 

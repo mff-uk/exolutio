@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Diagnostics;
-using EvoX.Model.PSM;
-using EvoX.Model.ViewHelper;
+using Exolutio.Model.PSM;
+using Exolutio.Model.ViewHelper;
 
-namespace EvoX.View
+namespace Exolutio.View
 {
     /// <summary>
     /// A class for automatic layout of PSM diagrams.

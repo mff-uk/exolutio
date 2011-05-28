@@ -4,13 +4,13 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Xml.Linq;
 using AvalonDock;
-using EvoX.Model;
-using EvoX.Model.PIM;
-using EvoX.Model.PSM;
-using EvoX.SupportingClasses;
-using EvoX.View;
+using Exolutio.Model;
+using Exolutio.Model.PIM;
+using Exolutio.Model.PSM;
+using Exolutio.SupportingClasses;
+using Exolutio.View;
 
-namespace EvoX.WPFClient
+namespace Exolutio.WPFClient
 {
     public class DiagramTabManager : IFilePresenter, IDiagramTabManager
     {
@@ -372,9 +372,9 @@ namespace EvoX.WPFClient
             f.Show(dockManager, true);
         }
 
-        public IEnumerable<EvoXVersionedObject> AnotherOpenedVersions(EvoXVersionedObject item)
+        public IEnumerable<ExolutioVersionedObject> AnotherOpenedVersions(ExolutioVersionedObject item)
         {
-            List<EvoXVersionedObject> result = null;
+            List<ExolutioVersionedObject> result = null;
             if (item is Diagram)
             {
                 foreach (DocumentContent d in MainWindow.dockManager.Documents)
@@ -386,7 +386,7 @@ namespace EvoX.WPFClient
                         {
                             if (result == null)
                             {
-                                result = new List<EvoXVersionedObject>();
+                                result = new List<ExolutioVersionedObject>();
                             }
                             result.Add(diagram);
                         }

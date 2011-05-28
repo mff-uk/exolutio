@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
-using EvoX.Model.PIM;
-using EvoX.Model.Serialization;
-using EvoX.SupportingClasses;
+using Exolutio.Model.PIM;
+using Exolutio.Model.Serialization;
+using Exolutio.SupportingClasses;
 
-namespace EvoX.Model.ViewHelper
+namespace Exolutio.Model.ViewHelper
 {
 	/// <summary>
 	/// View helper for <see cref="XCase.Model.AssociationEnd"/>. Stores position of 
@@ -59,12 +59,12 @@ namespace EvoX.Model.ViewHelper
 			}
 		}
 
-        public override Versioning.IEvoXCloneable Clone(ProjectVersion projectVersion, Versioning.ElementCopiesMap createdCopies)
+        public override Versioning.IExolutioCloneable Clone(ProjectVersion projectVersion, Versioning.ElementCopiesMap createdCopies)
         {
             throw new NotImplementedException("Member PIMAssociationEndViewHelper.Clone not implemented.");
         }
 
-        public override void FillCopy(Versioning.IEvoXCloneable copyComponent, ProjectVersion projectVersion, Versioning.ElementCopiesMap createdCopies)
+        public override void FillCopy(Versioning.IExolutioCloneable copyComponent, ProjectVersion projectVersion, Versioning.ElementCopiesMap createdCopies)
         {
             base.FillCopy(copyComponent, projectVersion, createdCopies);
             PIMAssociationEndViewHelper copyAssociationEndViewHelper = (PIMAssociationEndViewHelper) copyComponent;

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using EvoX.Controller.Commands.Atomic.PIM;
+using Exolutio.Controller.Commands.Atomic.PIM;
 
-namespace EvoX.Controller.Commands.Reflection
+namespace Exolutio.Controller.Commands.Reflection
 {
     public class ConsistentWithAttribute : Attribute
     {

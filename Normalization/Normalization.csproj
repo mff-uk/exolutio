@@ -8,8 +8,8 @@
     <ProjectGuid>{FDD2B4AC-D621-49ED-91D5-80B7F00ED4D5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EvoX.Normalization</RootNamespace>
-    <AssemblyName>EvoX.Normalization</AssemblyName>
+    <RootNamespace>Exolutio.Normalization</RootNamespace>
+    <AssemblyName>Exolutio.Normalization</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>

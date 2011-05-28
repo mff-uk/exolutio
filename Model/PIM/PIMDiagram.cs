@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
-using EvoX.Model.Serialization;
-using EvoX.Model.Versioning;
-using EvoX.Model.ViewHelper;
+using Exolutio.Model.Serialization;
+using Exolutio.Model.Versioning;
+using Exolutio.Model.ViewHelper;
 
-namespace EvoX.Model.PIM
+namespace Exolutio.Model.PIM
 {
     public class PIMDiagram: Diagram
     {
@@ -68,14 +68,14 @@ namespace EvoX.Model.PIM
             }
         }
 
-        #region Implementation of IEvoXCloneable
+        #region Implementation of IExolutioCloneable
 
-        public override IEvoXCloneable Clone(ProjectVersion projectVersion, ElementCopiesMap createdCopies)
+        public override IExolutioCloneable Clone(ProjectVersion projectVersion, ElementCopiesMap createdCopies)
         {
             return new PIMDiagram(projectVersion.Project, createdCopies.SuggestGuid(this));
         }
 
-        public override void FillCopy(IEvoXCloneable copyComponent, ProjectVersion projectVersion,
+        public override void FillCopy(IExolutioCloneable copyComponent, ProjectVersion projectVersion,
                                       ElementCopiesMap createdCopies)
         {
             base.FillCopy(copyComponent, projectVersion, createdCopies);

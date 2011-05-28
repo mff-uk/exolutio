@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using EvoX.Model;
+using Exolutio.Model;
 
-namespace EvoX.Controller.Commands
+namespace Exolutio.Controller.Commands
 {
 	/// <summary>
     /// Abstract command, all other Commands have to inherit from this base class. Prescribes 
@@ -203,7 +203,7 @@ namespace EvoX.Controller.Commands
 			}
             else
 			{
-                throw new EvoXCommandException(CommandErrors.COMMAND_CANT_EXECUTE, this);
+                throw new ExolutioCommandException(CommandErrors.COMMAND_CANT_EXECUTE, this);
 			}
 			#if DEBUG
 			FieldsChecker.CheckCommandResults(this);

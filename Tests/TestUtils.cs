@@ -1,18 +1,18 @@
 using System;
 using System.IO;
 using System.Linq;
-using EvoX.Model;
-using EvoX.Model.Serialization;
+using Exolutio.Model;
+using Exolutio.Model.Serialization;
 #if SILVERLIGHT
 #else 
 using NUnit.Framework;
 using Tests.ModelIntegrity;
-using EvoX.Controller;
+using Exolutio.Controller;
 #endif
 
-using Version = EvoX.Model.Versioning.Version;
-using EvoX.Model.PIM;
-using EvoX.Model.PSM;
+using Version = Exolutio.Model.Versioning.Version;
+using Exolutio.Model.PIM;
+using Exolutio.Model.PSM;
 
 using System.Collections.Generic;
 namespace Tests
@@ -296,14 +296,14 @@ namespace Tests
 
             ModelConsistency.CheckProject(p);
 
-            EvoX.Controller.Commands.Atomic.PIM.MacroWrappers.cmdDeletePIMClass command = new EvoX.Controller.Commands.Atomic.PIM.MacroWrappers.cmdDeletePIMClass(c);
+            Exolutio.Controller.Commands.Atomic.PIM.MacroWrappers.cmdDeletePIMClass command = new Exolutio.Controller.Commands.Atomic.PIM.MacroWrappers.cmdDeletePIMClass(c);
             command.Set(pimcItem);
             command.Execute();
 
-            EvoX.Controller.Commands.UndoCommand undo = new EvoX.Controller.Commands.UndoCommand(c);
+            Exolutio.Controller.Commands.UndoCommand undo = new Exolutio.Controller.Commands.UndoCommand(c);
             undo.Execute();
 
-            EvoX.Controller.Commands.RedoCommand redo = new EvoX.Controller.Commands.RedoCommand(c);
+            Exolutio.Controller.Commands.RedoCommand redo = new Exolutio.Controller.Commands.RedoCommand(c);
             redo.Execute();
 
             /*cmdDeletePSMSchema command = new cmdDeletePSMSchema(c);

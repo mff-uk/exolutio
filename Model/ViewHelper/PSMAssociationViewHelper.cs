@@ -3,12 +3,12 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-using EvoX.Model.PSM;
-using EvoX.Model.Versioning;
-using EvoX.SupportingClasses;
-using EvoX.Model.Serialization;
+using Exolutio.Model.PSM;
+using Exolutio.Model.Versioning;
+using Exolutio.SupportingClasses;
+using Exolutio.Model.Serialization;
 
-namespace EvoX.Model.ViewHelper
+namespace Exolutio.Model.ViewHelper
 {
     /// <summary>
     /// Stores visualization information for Associations 
@@ -56,12 +56,12 @@ namespace EvoX.Model.ViewHelper
         //    get { return points; }
         //}
 
-        public override Versioning.IEvoXCloneable Clone(ProjectVersion projectVersion, Versioning.ElementCopiesMap createdCopies)
+        public override Versioning.IExolutioCloneable Clone(ProjectVersion projectVersion, Versioning.ElementCopiesMap createdCopies)
         {
             return new PSMAssociationViewHelper(projectVersion.Project.TranslateComponent<Diagram>(createdCopies.GetGuidForCopyOf(Diagram)));
         }
 
-        public override void FillCopy(IEvoXCloneable copyComponent, ProjectVersion projectVersion, ElementCopiesMap createdCopies)
+        public override void FillCopy(IExolutioCloneable copyComponent, ProjectVersion projectVersion, ElementCopiesMap createdCopies)
         {
             base.FillCopy(copyComponent, projectVersion, createdCopies);
 

@@ -1,4 +1,4 @@
-namespace EvoX.Revalidation.Changes
+namespace Exolutio.Revalidation.Changes
 {
     public enum EChangePredicateScope
     {

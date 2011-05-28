@@ -1,9 +1,9 @@
 using System.Windows.Media;
-using EvoX.Model;
-using EvoX.Model.Versioning;
-using EvoX.ResourceLibrary;
+using Exolutio.Model;
+using Exolutio.Model.Versioning;
+using Exolutio.ResourceLibrary;
 
-namespace EvoX.View.Commands.Versioning
+namespace Exolutio.View.Commands.Versioning
 {
     public class guiBranchCurrentVersionCommand : guiCurrentVersionCommand
     {
@@ -57,7 +57,7 @@ namespace EvoX.View.Commands.Versioning
         
         public override ImageSource Icon
         {
-            get { return EvoXResourceNames.GetResourceImageSource(EvoXResourceNames.branch_element); }
+            get { return ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.branch_element); }
         }
 
     }

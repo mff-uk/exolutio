@@ -8,8 +8,8 @@
     <ProjectGuid>{2598DE7B-9F5E-46EA-9B81-AE41E0D2D685}</ProjectGuid>
     <OutputType>library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EvoX.ResourceLibrary</RootNamespace>
-    <AssemblyName>EvoX.ResourceLibrary</AssemblyName>
+    <RootNamespace>Exolutio.ResourceLibrary</RootNamespace>
+    <AssemblyName>Exolutio.ResourceLibrary</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>
@@ -40,12 +40,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="EvoXCommonResources.Designer.cs">
-      <DependentUpon>EvoXCommonResources.resx</DependentUpon>
+    <Compile Include="CommonResources.Designer.cs">
+      <DependentUpon>CommonResources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Include="EvoXResourceNames.cs" />
+    <Compile Include="ResourceNames.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -59,10 +59,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="EvoXCommonResources.resx">
+    <EmbeddedResource Include="CommonResources.resx">
       <SubType>Designer</SubType>
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>EvoXCommonResources.Designer.cs</LastGenOutput>
+      <LastGenOutput>CommonResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -128,9 +128,9 @@
     <Resource Include="Images\DistributeObjectsVertical.png" />
     <Resource Include="Images\document_check.png" />
     <Resource Include="Images\error_button.png" />
-    <Resource Include="Images\EvoX.ico" />
-    <Resource Include="Images\EvoX16x16.bmp" />
-    <Resource Include="Images\EvoX16x16.png" />
+    <Resource Include="Images\Exolutio.ico" />
+    <Resource Include="Images\Exolutio16x16.bmp" />
+    <Resource Include="Images\Exolutio16x16.png" />
     <Resource Include="Images\eye.png" />
     <Resource Include="Images\folder.png" />
     <Resource Include="Images\font.png" />

@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics;
-using EvoX.Model;
+using Exolutio.Model;
 using System;
 
-namespace EvoX.Controller.Commands
+namespace Exolutio.Controller.Commands
 {
     /// <summary>
     /// Abstract command, all other Commands with undo/redo semantics that 
@@ -102,7 +102,7 @@ namespace EvoX.Controller.Commands
 #endif
 			if (!CanExecute())
 			{
-                throw new EvoXCommandException(CommandErrors.COMMAND_CANT_EXECUTE, this);
+                throw new ExolutioCommandException(CommandErrors.COMMAND_CANT_EXECUTE, this);
 			}
 
             /*if (Propagate)
@@ -162,7 +162,7 @@ namespace EvoX.Controller.Commands
     		UndoStack.Push(this);
     		if (!CanExecute())
     		{
-                throw new EvoXCommandException(CommandErrors.COMMAND_CANT_EXECUTE, this);
+                throw new ExolutioCommandException(CommandErrors.COMMAND_CANT_EXECUTE, this);
     		}
 			// call the actual executive method
     		RedoOperation();

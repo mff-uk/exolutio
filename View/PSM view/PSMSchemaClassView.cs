@@ -3,13 +3,13 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using EvoX.Controller.Commands;
-using EvoX.Model;
-using EvoX.Model.PSM;
-using EvoX.Model.ViewHelper;
-using EvoX.ViewToolkit;
+using Exolutio.Controller.Commands;
+using Exolutio.Model;
+using Exolutio.Model.PSM;
+using Exolutio.Model.ViewHelper;
+using Exolutio.ViewToolkit;
 
-namespace EvoX.View
+namespace Exolutio.View
 {
     public class PSMSchemaClassView : NodeComponentViewBase<PSMSchemaClassViewHelper>
     {
@@ -36,7 +36,7 @@ namespace EvoX.View
 
         public override PSMSchemaClassViewHelper ViewHelper { get; protected set; }
 
-        protected override void CreateInnerControls(EvoXCanvas canvas)
+        protected override void CreateInnerControls(ExolutioCanvas canvas)
         {
             base.CreateInnerControls(canvas);
             #region main node content components
@@ -112,10 +112,10 @@ namespace EvoX.View
 
             #endregion
 
-            EvoXContextMenu evoXContextMenu = MenuHelper.GetContextMenu(ScopeAttribute.EScope.PSMSchemaClass, this.DiagramView.Diagram);
-            evoXContextMenu.ScopeObject = PSMSchemaClass;
-            evoXContextMenu.Diagram = DiagramView.Diagram;
-            ContextMenu = evoXContextMenu;
+            ExolutioContextMenu exolutioContextMenu = MenuHelper.GetContextMenu(ScopeAttribute.EScope.PSMSchemaClass, this.DiagramView.Diagram);
+            exolutioContextMenu.ScopeObject = PSMSchemaClass;
+            exolutioContextMenu.Diagram = DiagramView.Diagram;
+            ContextMenu = exolutioContextMenu;
 
 #if SILVERLIGHT
             ContextMenuService.SetContextMenu(headerBorder, ContextMenu);

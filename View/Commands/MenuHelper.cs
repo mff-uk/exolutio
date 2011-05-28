@@ -4,15 +4,15 @@ using System.Linq;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
-using EvoX.Controller.Commands;
-using EvoX.Controller.Commands.Reflection;
-using EvoX.Model;
-using EvoX.View.Commands;
-using EvoX.View.Commands.ParameterControls;
-using EvoX.ViewToolkit;
-using EvoX.SupportingClasses;
+using Exolutio.Controller.Commands;
+using Exolutio.Controller.Commands.Reflection;
+using Exolutio.Model;
+using Exolutio.View.Commands;
+using Exolutio.View.Commands.ParameterControls;
+using Exolutio.ViewToolkit;
+using Exolutio.SupportingClasses;
 
-namespace EvoX.View
+namespace Exolutio.View
 {
     public static class MenuHelper
     {
@@ -82,7 +82,7 @@ namespace EvoX.View
         private static ContextMenuItem CreateMenuItem(CommandDescriptor commandDescriptor)
         {
             ContextMenuItem menuItem = new ContextMenuItem(commandDescriptor.CommandDescription);
-            //change.Icon = EvoXResourceNames.GetResourceImageSource(EvoXResourceNames.pencil);
+            //change.Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.pencil);
 
             guiControllerCommand guiCommandForControllerCommand = guiCommandsForControllerCommands[commandDescriptor.CommandType];
             menuItem.Command = guiCommandForControllerCommand;
@@ -98,9 +98,9 @@ namespace EvoX.View
             return menuItem;
         }
 
-        public static EvoXContextMenu GetContextMenu(ScopeAttribute.EScope scope, Diagram diagram)
+        public static ExolutioContextMenu GetContextMenu(ScopeAttribute.EScope scope, Diagram diagram)
         {
-            EvoXContextMenu result = new EvoXContextMenu();
+            ExolutioContextMenu result = new ExolutioContextMenu();
             
             result.Opened += ContextMenu_Opened;
             
@@ -148,7 +148,7 @@ namespace EvoX.View
 #endif
         static void ContextMenu_Opened(object sender, RoutedEventArgs eventArgs)
         {
-            EvoXContextMenu contextMenu = (EvoXContextMenu)sender;
+            ExolutioContextMenu contextMenu = (ExolutioContextMenu)sender;
             if (Current.MainWindow.CommandsDisabled)
             {
                 contextMenu.Visibility = Visibility.Hidden;
@@ -159,7 +159,7 @@ namespace EvoX.View
             }
         }
 
-        private static void PrepareCommandsScope(ItemCollection items, EvoXContextMenu contextMenu)
+        private static void PrepareCommandsScope(ItemCollection items, ExolutioContextMenu contextMenu)
         {
             foreach (ContextMenuItem contextMenuItem in items.OfType <ContextMenuItem>())
             {
@@ -178,7 +178,7 @@ namespace EvoX.View
             }
         }
 
-        private static void PrepareCommandScope(EvoXContextMenu contextMenu, ContextMenuItem contextMenuItem)
+        private static void PrepareCommandScope(ExolutioContextMenu contextMenu, ContextMenuItem contextMenuItem)
         {
             guiControllerCommand guiControllerCommand = contextMenuItem.Command as guiControllerCommand;
             if (guiControllerCommand != null)
@@ -202,11 +202,11 @@ namespace EvoX.View
         public static void SetScopeForCommand(CommandBase controllerCommand, object scopeObject)
         {
             PropertyInfo scopeProperty = PublicCommandsHelper.publicCommandsByType[controllerCommand.GetType()].ScopeProperty;
-            scopeProperty.SetValue(controllerCommand, ((EvoXObject)scopeObject).ID, null);
+            scopeProperty.SetValue(controllerCommand, ((ExolutioObject)scopeObject).ID, null);
             controllerCommand.OnCanExecuteChanged(null, null);
         }
 
-        public static void CreateDialogControlsForCommand(Type commandType, EvoXObject scopeObject, ProjectVersion projectVersion, StackPanel stackPanel, out List<Control> controls)
+        public static void CreateDialogControlsForCommand(Type commandType, ExolutioObject scopeObject, ProjectVersion projectVersion, StackPanel stackPanel, out List<Control> controls)
         {
             CommandDescriptor commandDescriptior = PublicCommandsHelper.GetCommandDescriptor(commandType);
             commandDescriptior.ScopeObject = scopeObject;

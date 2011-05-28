@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Xml.Linq;
-using EvoX.Model;
-using EvoX.Model.Serialization;
+using Exolutio.Model;
+using Exolutio.Model.Serialization;
 
-namespace EvoX.Model.ViewHelper
+namespace Exolutio.Model.ViewHelper
 {
 	/// <summary>
 	/// View helper for positionable elements (elements that 
@@ -113,7 +113,7 @@ namespace EvoX.Model.ViewHelper
 			return new Rect(X, Y, Width, Height);
 		}
 
-        public override void FillCopy(Versioning.IEvoXCloneable copyComponent, ProjectVersion projectVersion, Versioning.ElementCopiesMap createdCopies)
+        public override void FillCopy(Versioning.IExolutioCloneable copyComponent, ProjectVersion projectVersion, Versioning.ElementCopiesMap createdCopies)
         {
  	        base.FillCopy(copyComponent, projectVersion, createdCopies);
             PositionableElementViewHelper copyPositionableElementViewHelper = (PositionableElementViewHelper)copyComponent;

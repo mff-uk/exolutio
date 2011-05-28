@@ -1,21 +1,16 @@
 ﻿using System;
 using System.Xml;
 using System.Xml.Linq;
-using EvoX.Model.PSM;
-using EvoX.SupportingClasses;
+using Exolutio.Model.PSM;
+using Exolutio.SupportingClasses;
 
-namespace EvoX.Model.Serialization
+namespace Exolutio.Model.Serialization
 {
     public class SerializationContext
     {
-        //public static string EvoXNamespace
-        //{
-        //    get { return @"http://evox.ms.mff.cuni.cz/"; }
-        //}
-
-        public static string EvoXPrefix
+        public static string ExolutioPrefix
         {
-            get { return "evox"; }
+            get { return "eXo"; }
         }
 
         public SerializationContext()
@@ -26,7 +21,7 @@ namespace EvoX.Model.Serialization
         
         public XDocument Document { get; set; }
 
-        public XNamespace EvoXNS = @"http://evox.ms.mff.cuni.cz/";
+        public XNamespace ExolutioNS = @"http://www.eXolutio.eu/Project/Serialization/";
 
         public Log Log { get; set; }
 

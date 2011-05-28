@@ -1,8 +1,8 @@
 using System.Windows.Media;
-using EvoX.Model.Versioning;
-using EvoX.ResourceLibrary;
+using Exolutio.Model.Versioning;
+using Exolutio.ResourceLibrary;
 
-namespace EvoX.View.Commands.Versioning
+namespace Exolutio.View.Commands.Versioning
 {
     public class guiRemoveCurrentVersionCommand : guiCurrentVersionCommand
     {
@@ -35,7 +35,7 @@ namespace EvoX.View.Commands.Versioning
         
         public override ImageSource Icon
         {
-            get { return EvoXResourceNames.GetResourceImageSource(EvoXResourceNames.branch_delete); }
+            get { return ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.branch_delete); }
         }
 
     }

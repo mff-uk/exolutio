@@ -1,12 +1,12 @@
 using System;
 using System.Diagnostics;
-using EvoX.Model;
-using EvoX.Model.PSM;
-using EvoX.SupportingClasses;
-using EvoX.Model.Versioning;
-using Version = EvoX.Model.Versioning.Version;
+using Exolutio.Model;
+using Exolutio.Model.PSM;
+using Exolutio.SupportingClasses;
+using Exolutio.Model.Versioning;
+using Version = Exolutio.Model.Versioning.Version;
 
-namespace EvoX.Revalidation.Changes
+namespace Exolutio.Revalidation.Changes
 {
     public abstract class ChangeInstance
     {
@@ -45,7 +45,7 @@ namespace EvoX.Revalidation.Changes
 
         public virtual void Verify()
         {
-            EvoXVersionedObject verifiedElement = Component;
+            ExolutioVersionedObject verifiedElement = Component;
 
             //if (this is ISubelementAditionChange)
             //{

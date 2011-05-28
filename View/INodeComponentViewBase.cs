@@ -1,8 +1,8 @@
-﻿using EvoX.Model;
-using EvoX.Model.ViewHelper;
-using EvoX.ViewToolkit;
+﻿using Exolutio.Model;
+using Exolutio.Model.ViewHelper;
+using Exolutio.ViewToolkit;
 
-namespace EvoX.View
+namespace Exolutio.View
 {
     public interface INodeComponentViewBase
     {

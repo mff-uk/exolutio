@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EvoX.Updater.UpdaterService {
+namespace Exolutio.Updater.UpdaterService {
     using System.Runtime.Serialization;
     using System;
     
@@ -116,23 +116,27 @@ namespace EvoX.Updater.UpdaterService {
         
         // CODEGEN: Generating message contract since element name HelloWorldResult from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/HelloWorld", ReplyAction="*")]
-        EvoX.Updater.UpdaterService.HelloWorldResponse HelloWorld(EvoX.Updater.UpdaterService.HelloWorldRequest request);
+        Exolutio.Updater.UpdaterService.HelloWorldResponse HelloWorld(Exolutio.Updater.UpdaterService.HelloWorldRequest request);
         
-        // CODEGEN: Generating message contract since element name GetVersionResult from namespace http://tempuri.org/ is not marked nillable
+        // CODEGEN: Generating message contract since element name GetExeVersionResult from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetExeVersion", ReplyAction="*")]
+        Exolutio.Updater.UpdaterService.GetExeVersionResponse GetExeVersion(Exolutio.Updater.UpdaterService.GetExeVersionRequest request);
+        
+        // CODEGEN: Generating message contract since element name file from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetVersion", ReplyAction="*")]
-        EvoX.Updater.UpdaterService.GetVersionResponse GetVersion(EvoX.Updater.UpdaterService.GetVersionRequest request);
+        Exolutio.Updater.UpdaterService.GetVersionResponse GetVersion(Exolutio.Updater.UpdaterService.GetVersionRequest request);
         
         // CODEGEN: Generating message contract since element name files from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetVersions", ReplyAction="*")]
-        EvoX.Updater.UpdaterService.GetVersionsResponse GetVersions(EvoX.Updater.UpdaterService.GetVersionsRequest request);
+        Exolutio.Updater.UpdaterService.GetVersionsResponse GetVersions(Exolutio.Updater.UpdaterService.GetVersionsRequest request);
         
         // CODEGEN: Generating message contract since element name files from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/MustReinstal", ReplyAction="*")]
-        EvoX.Updater.UpdaterService.MustReinstalResponse MustReinstal(EvoX.Updater.UpdaterService.MustReinstalRequest request);
+        Exolutio.Updater.UpdaterService.MustReinstalResponse MustReinstal(Exolutio.Updater.UpdaterService.MustReinstalRequest request);
         
         // CODEGEN: Generating message contract since element name GetMsiUriResult from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetMsiUri", ReplyAction="*")]
-        EvoX.Updater.UpdaterService.GetMsiUriResponse GetMsiUri(EvoX.Updater.UpdaterService.GetMsiUriRequest request);
+        Exolutio.Updater.UpdaterService.GetMsiUriResponse GetMsiUri(Exolutio.Updater.UpdaterService.GetMsiUriRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -142,12 +146,12 @@ namespace EvoX.Updater.UpdaterService {
     public partial class HelloWorldRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="HelloWorld", Namespace="http://tempuri.org/", Order=0)]
-        public EvoX.Updater.UpdaterService.HelloWorldRequestBody Body;
+        public Exolutio.Updater.UpdaterService.HelloWorldRequestBody Body;
         
         public HelloWorldRequest() {
         }
         
-        public HelloWorldRequest(EvoX.Updater.UpdaterService.HelloWorldRequestBody Body) {
+        public HelloWorldRequest(Exolutio.Updater.UpdaterService.HelloWorldRequestBody Body) {
             this.Body = Body;
         }
     }
@@ -169,12 +173,12 @@ namespace EvoX.Updater.UpdaterService {
     public partial class HelloWorldResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="HelloWorldResponse", Namespace="http://tempuri.org/", Order=0)]
-        public EvoX.Updater.UpdaterService.HelloWorldResponseBody Body;
+        public Exolutio.Updater.UpdaterService.HelloWorldResponseBody Body;
         
         public HelloWorldResponse() {
         }
         
-        public HelloWorldResponse(EvoX.Updater.UpdaterService.HelloWorldResponseBody Body) {
+        public HelloWorldResponse(Exolutio.Updater.UpdaterService.HelloWorldResponseBody Body) {
             this.Body = Body;
         }
     }
@@ -200,15 +204,15 @@ namespace EvoX.Updater.UpdaterService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class GetVersionRequest {
+    public partial class GetExeVersionRequest {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetVersion", Namespace="http://tempuri.org/", Order=0)]
-        public EvoX.Updater.UpdaterService.GetVersionRequestBody Body;
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetExeVersion", Namespace="http://tempuri.org/", Order=0)]
+        public Exolutio.Updater.UpdaterService.GetExeVersionRequestBody Body;
         
-        public GetVersionRequest() {
+        public GetExeVersionRequest() {
         }
         
-        public GetVersionRequest(EvoX.Updater.UpdaterService.GetVersionRequestBody Body) {
+        public GetExeVersionRequest(Exolutio.Updater.UpdaterService.GetExeVersionRequestBody Body) {
             this.Body = Body;
         }
     }
@@ -217,9 +221,77 @@ namespace EvoX.Updater.UpdaterService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.Runtime.Serialization.DataContractAttribute()]
+    public partial class GetExeVersionRequestBody {
+        
+        public GetExeVersionRequestBody() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetExeVersionResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetExeVersionResponse", Namespace="http://tempuri.org/", Order=0)]
+        public Exolutio.Updater.UpdaterService.GetExeVersionResponseBody Body;
+        
+        public GetExeVersionResponse() {
+        }
+        
+        public GetExeVersionResponse(Exolutio.Updater.UpdaterService.GetExeVersionResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class GetExeVersionResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public Exolutio.Updater.UpdaterService.Version GetExeVersionResult;
+        
+        public GetExeVersionResponseBody() {
+        }
+        
+        public GetExeVersionResponseBody(Exolutio.Updater.UpdaterService.Version GetExeVersionResult) {
+            this.GetExeVersionResult = GetExeVersionResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetVersionRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetVersion", Namespace="http://tempuri.org/", Order=0)]
+        public Exolutio.Updater.UpdaterService.GetVersionRequestBody Body;
+        
+        public GetVersionRequest() {
+        }
+        
+        public GetVersionRequest(Exolutio.Updater.UpdaterService.GetVersionRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
     public partial class GetVersionRequestBody {
         
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string file;
+        
         public GetVersionRequestBody() {
+        }
+        
+        public GetVersionRequestBody(string file) {
+            this.file = file;
         }
     }
     
@@ -230,12 +302,12 @@ namespace EvoX.Updater.UpdaterService {
     public partial class GetVersionResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="GetVersionResponse", Namespace="http://tempuri.org/", Order=0)]
-        public EvoX.Updater.UpdaterService.GetVersionResponseBody Body;
+        public Exolutio.Updater.UpdaterService.GetVersionResponseBody Body;
         
         public GetVersionResponse() {
         }
         
-        public GetVersionResponse(EvoX.Updater.UpdaterService.GetVersionResponseBody Body) {
+        public GetVersionResponse(Exolutio.Updater.UpdaterService.GetVersionResponseBody Body) {
             this.Body = Body;
         }
     }
@@ -247,12 +319,12 @@ namespace EvoX.Updater.UpdaterService {
     public partial class GetVersionResponseBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public EvoX.Updater.UpdaterService.Version GetVersionResult;
+        public Exolutio.Updater.UpdaterService.Version GetVersionResult;
         
         public GetVersionResponseBody() {
         }
         
-        public GetVersionResponseBody(EvoX.Updater.UpdaterService.Version GetVersionResult) {
+        public GetVersionResponseBody(Exolutio.Updater.UpdaterService.Version GetVersionResult) {
             this.GetVersionResult = GetVersionResult;
         }
     }
@@ -264,12 +336,12 @@ namespace EvoX.Updater.UpdaterService {
     public partial class GetVersionsRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="GetVersions", Namespace="http://tempuri.org/", Order=0)]
-        public EvoX.Updater.UpdaterService.GetVersionsRequestBody Body;
+        public Exolutio.Updater.UpdaterService.GetVersionsRequestBody Body;
         
         public GetVersionsRequest() {
         }
         
-        public GetVersionsRequest(EvoX.Updater.UpdaterService.GetVersionsRequestBody Body) {
+        public GetVersionsRequest(Exolutio.Updater.UpdaterService.GetVersionsRequestBody Body) {
             this.Body = Body;
         }
     }
@@ -281,12 +353,12 @@ namespace EvoX.Updater.UpdaterService {
     public partial class GetVersionsRequestBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public EvoX.Updater.UpdaterService.ArrayOfString files;
+        public Exolutio.Updater.UpdaterService.ArrayOfString files;
         
         public GetVersionsRequestBody() {
         }
         
-        public GetVersionsRequestBody(EvoX.Updater.UpdaterService.ArrayOfString files) {
+        public GetVersionsRequestBody(Exolutio.Updater.UpdaterService.ArrayOfString files) {
             this.files = files;
         }
     }
@@ -298,12 +370,12 @@ namespace EvoX.Updater.UpdaterService {
     public partial class GetVersionsResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="GetVersionsResponse", Namespace="http://tempuri.org/", Order=0)]
-        public EvoX.Updater.UpdaterService.GetVersionsResponseBody Body;
+        public Exolutio.Updater.UpdaterService.GetVersionsResponseBody Body;
         
         public GetVersionsResponse() {
         }
         
-        public GetVersionsResponse(EvoX.Updater.UpdaterService.GetVersionsResponseBody Body) {
+        public GetVersionsResponse(Exolutio.Updater.UpdaterService.GetVersionsResponseBody Body) {
             this.Body = Body;
         }
     }
@@ -315,12 +387,12 @@ namespace EvoX.Updater.UpdaterService {
     public partial class GetVersionsResponseBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public EvoX.Updater.UpdaterService.FileWithVersion[] GetVersionsResult;
+        public Exolutio.Updater.UpdaterService.FileWithVersion[] GetVersionsResult;
         
         public GetVersionsResponseBody() {
         }
         
-        public GetVersionsResponseBody(EvoX.Updater.UpdaterService.FileWithVersion[] GetVersionsResult) {
+        public GetVersionsResponseBody(Exolutio.Updater.UpdaterService.FileWithVersion[] GetVersionsResult) {
             this.GetVersionsResult = GetVersionsResult;
         }
     }
@@ -332,12 +404,12 @@ namespace EvoX.Updater.UpdaterService {
     public partial class MustReinstalRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="MustReinstal", Namespace="http://tempuri.org/", Order=0)]
-        public EvoX.Updater.UpdaterService.MustReinstalRequestBody Body;
+        public Exolutio.Updater.UpdaterService.MustReinstalRequestBody Body;
         
         public MustReinstalRequest() {
         }
         
-        public MustReinstalRequest(EvoX.Updater.UpdaterService.MustReinstalRequestBody Body) {
+        public MustReinstalRequest(Exolutio.Updater.UpdaterService.MustReinstalRequestBody Body) {
             this.Body = Body;
         }
     }
@@ -349,15 +421,15 @@ namespace EvoX.Updater.UpdaterService {
     public partial class MustReinstalRequestBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public EvoX.Updater.UpdaterService.ArrayOfString files;
+        public Exolutio.Updater.UpdaterService.ArrayOfString files;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
-        public EvoX.Updater.UpdaterService.ArrayOfString versions;
+        public Exolutio.Updater.UpdaterService.ArrayOfString versions;
         
         public MustReinstalRequestBody() {
         }
         
-        public MustReinstalRequestBody(EvoX.Updater.UpdaterService.ArrayOfString files, EvoX.Updater.UpdaterService.ArrayOfString versions) {
+        public MustReinstalRequestBody(Exolutio.Updater.UpdaterService.ArrayOfString files, Exolutio.Updater.UpdaterService.ArrayOfString versions) {
             this.files = files;
             this.versions = versions;
         }
@@ -370,12 +442,12 @@ namespace EvoX.Updater.UpdaterService {
     public partial class MustReinstalResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="MustReinstalResponse", Namespace="http://tempuri.org/", Order=0)]
-        public EvoX.Updater.UpdaterService.MustReinstalResponseBody Body;
+        public Exolutio.Updater.UpdaterService.MustReinstalResponseBody Body;
         
         public MustReinstalResponse() {
         }
         
-        public MustReinstalResponse(EvoX.Updater.UpdaterService.MustReinstalResponseBody Body) {
+        public MustReinstalResponse(Exolutio.Updater.UpdaterService.MustReinstalResponseBody Body) {
             this.Body = Body;
         }
     }
@@ -404,12 +476,12 @@ namespace EvoX.Updater.UpdaterService {
     public partial class GetMsiUriRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="GetMsiUri", Namespace="http://tempuri.org/", Order=0)]
-        public EvoX.Updater.UpdaterService.GetMsiUriRequestBody Body;
+        public Exolutio.Updater.UpdaterService.GetMsiUriRequestBody Body;
         
         public GetMsiUriRequest() {
         }
         
-        public GetMsiUriRequest(EvoX.Updater.UpdaterService.GetMsiUriRequestBody Body) {
+        public GetMsiUriRequest(Exolutio.Updater.UpdaterService.GetMsiUriRequestBody Body) {
             this.Body = Body;
         }
     }
@@ -431,12 +503,12 @@ namespace EvoX.Updater.UpdaterService {
     public partial class GetMsiUriResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="GetMsiUriResponse", Namespace="http://tempuri.org/", Order=0)]
-        public EvoX.Updater.UpdaterService.GetMsiUriResponseBody Body;
+        public Exolutio.Updater.UpdaterService.GetMsiUriResponseBody Body;
         
         public GetMsiUriResponse() {
         }
         
-        public GetMsiUriResponse(EvoX.Updater.UpdaterService.GetMsiUriResponseBody Body) {
+        public GetMsiUriResponse(Exolutio.Updater.UpdaterService.GetMsiUriResponseBody Body) {
             this.Body = Body;
         }
     }
@@ -459,12 +531,12 @@ namespace EvoX.Updater.UpdaterService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface UpdaterServiceSoapChannel : EvoX.Updater.UpdaterService.UpdaterServiceSoap, System.ServiceModel.IClientChannel {
+    public interface UpdaterServiceSoapChannel : Exolutio.Updater.UpdaterService.UpdaterServiceSoap, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class UpdaterServiceSoapClient : System.ServiceModel.ClientBase<EvoX.Updater.UpdaterService.UpdaterServiceSoap>, EvoX.Updater.UpdaterService.UpdaterServiceSoap {
+    public partial class UpdaterServiceSoapClient : System.ServiceModel.ClientBase<Exolutio.Updater.UpdaterService.UpdaterServiceSoap>, Exolutio.Updater.UpdaterService.UpdaterServiceSoap {
         
         public UpdaterServiceSoapClient() {
         }
@@ -486,65 +558,78 @@ namespace EvoX.Updater.UpdaterService {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        EvoX.Updater.UpdaterService.HelloWorldResponse EvoX.Updater.UpdaterService.UpdaterServiceSoap.HelloWorld(EvoX.Updater.UpdaterService.HelloWorldRequest request) {
+        Exolutio.Updater.UpdaterService.HelloWorldResponse Exolutio.Updater.UpdaterService.UpdaterServiceSoap.HelloWorld(Exolutio.Updater.UpdaterService.HelloWorldRequest request) {
             return base.Channel.HelloWorld(request);
         }
         
         public string HelloWorld() {
-            EvoX.Updater.UpdaterService.HelloWorldRequest inValue = new EvoX.Updater.UpdaterService.HelloWorldRequest();
-            inValue.Body = new EvoX.Updater.UpdaterService.HelloWorldRequestBody();
-            EvoX.Updater.UpdaterService.HelloWorldResponse retVal = ((EvoX.Updater.UpdaterService.UpdaterServiceSoap)(this)).HelloWorld(inValue);
+            Exolutio.Updater.UpdaterService.HelloWorldRequest inValue = new Exolutio.Updater.UpdaterService.HelloWorldRequest();
+            inValue.Body = new Exolutio.Updater.UpdaterService.HelloWorldRequestBody();
+            Exolutio.Updater.UpdaterService.HelloWorldResponse retVal = ((Exolutio.Updater.UpdaterService.UpdaterServiceSoap)(this)).HelloWorld(inValue);
             return retVal.Body.HelloWorldResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        EvoX.Updater.UpdaterService.GetVersionResponse EvoX.Updater.UpdaterService.UpdaterServiceSoap.GetVersion(EvoX.Updater.UpdaterService.GetVersionRequest request) {
+        Exolutio.Updater.UpdaterService.GetExeVersionResponse Exolutio.Updater.UpdaterService.UpdaterServiceSoap.GetExeVersion(Exolutio.Updater.UpdaterService.GetExeVersionRequest request) {
+            return base.Channel.GetExeVersion(request);
+        }
+        
+        public Exolutio.Updater.UpdaterService.Version GetExeVersion() {
+            Exolutio.Updater.UpdaterService.GetExeVersionRequest inValue = new Exolutio.Updater.UpdaterService.GetExeVersionRequest();
+            inValue.Body = new Exolutio.Updater.UpdaterService.GetExeVersionRequestBody();
+            Exolutio.Updater.UpdaterService.GetExeVersionResponse retVal = ((Exolutio.Updater.UpdaterService.UpdaterServiceSoap)(this)).GetExeVersion(inValue);
+            return retVal.Body.GetExeVersionResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Exolutio.Updater.UpdaterService.GetVersionResponse Exolutio.Updater.UpdaterService.UpdaterServiceSoap.GetVersion(Exolutio.Updater.UpdaterService.GetVersionRequest request) {
             return base.Channel.GetVersion(request);
         }
         
-        public EvoX.Updater.UpdaterService.Version GetVersion() {
-            EvoX.Updater.UpdaterService.GetVersionRequest inValue = new EvoX.Updater.UpdaterService.GetVersionRequest();
-            inValue.Body = new EvoX.Updater.UpdaterService.GetVersionRequestBody();
-            EvoX.Updater.UpdaterService.GetVersionResponse retVal = ((EvoX.Updater.UpdaterService.UpdaterServiceSoap)(this)).GetVersion(inValue);
+        public Exolutio.Updater.UpdaterService.Version GetVersion(string file) {
+            Exolutio.Updater.UpdaterService.GetVersionRequest inValue = new Exolutio.Updater.UpdaterService.GetVersionRequest();
+            inValue.Body = new Exolutio.Updater.UpdaterService.GetVersionRequestBody();
+            inValue.Body.file = file;
+            Exolutio.Updater.UpdaterService.GetVersionResponse retVal = ((Exolutio.Updater.UpdaterService.UpdaterServiceSoap)(this)).GetVersion(inValue);
             return retVal.Body.GetVersionResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        EvoX.Updater.UpdaterService.GetVersionsResponse EvoX.Updater.UpdaterService.UpdaterServiceSoap.GetVersions(EvoX.Updater.UpdaterService.GetVersionsRequest request) {
+        Exolutio.Updater.UpdaterService.GetVersionsResponse Exolutio.Updater.UpdaterService.UpdaterServiceSoap.GetVersions(Exolutio.Updater.UpdaterService.GetVersionsRequest request) {
             return base.Channel.GetVersions(request);
         }
         
-        public EvoX.Updater.UpdaterService.FileWithVersion[] GetVersions(EvoX.Updater.UpdaterService.ArrayOfString files) {
-            EvoX.Updater.UpdaterService.GetVersionsRequest inValue = new EvoX.Updater.UpdaterService.GetVersionsRequest();
-            inValue.Body = new EvoX.Updater.UpdaterService.GetVersionsRequestBody();
+        public Exolutio.Updater.UpdaterService.FileWithVersion[] GetVersions(Exolutio.Updater.UpdaterService.ArrayOfString files) {
+            Exolutio.Updater.UpdaterService.GetVersionsRequest inValue = new Exolutio.Updater.UpdaterService.GetVersionsRequest();
+            inValue.Body = new Exolutio.Updater.UpdaterService.GetVersionsRequestBody();
             inValue.Body.files = files;
-            EvoX.Updater.UpdaterService.GetVersionsResponse retVal = ((EvoX.Updater.UpdaterService.UpdaterServiceSoap)(this)).GetVersions(inValue);
+            Exolutio.Updater.UpdaterService.GetVersionsResponse retVal = ((Exolutio.Updater.UpdaterService.UpdaterServiceSoap)(this)).GetVersions(inValue);
             return retVal.Body.GetVersionsResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        EvoX.Updater.UpdaterService.MustReinstalResponse EvoX.Updater.UpdaterService.UpdaterServiceSoap.MustReinstal(EvoX.Updater.UpdaterService.MustReinstalRequest request) {
+        Exolutio.Updater.UpdaterService.MustReinstalResponse Exolutio.Updater.UpdaterService.UpdaterServiceSoap.MustReinstal(Exolutio.Updater.UpdaterService.MustReinstalRequest request) {
             return base.Channel.MustReinstal(request);
         }
         
-        public bool MustReinstal(EvoX.Updater.UpdaterService.ArrayOfString files, EvoX.Updater.UpdaterService.ArrayOfString versions) {
-            EvoX.Updater.UpdaterService.MustReinstalRequest inValue = new EvoX.Updater.UpdaterService.MustReinstalRequest();
-            inValue.Body = new EvoX.Updater.UpdaterService.MustReinstalRequestBody();
+        public bool MustReinstal(Exolutio.Updater.UpdaterService.ArrayOfString files, Exolutio.Updater.UpdaterService.ArrayOfString versions) {
+            Exolutio.Updater.UpdaterService.MustReinstalRequest inValue = new Exolutio.Updater.UpdaterService.MustReinstalRequest();
+            inValue.Body = new Exolutio.Updater.UpdaterService.MustReinstalRequestBody();
             inValue.Body.files = files;
             inValue.Body.versions = versions;
-            EvoX.Updater.UpdaterService.MustReinstalResponse retVal = ((EvoX.Updater.UpdaterService.UpdaterServiceSoap)(this)).MustReinstal(inValue);
+            Exolutio.Updater.UpdaterService.MustReinstalResponse retVal = ((Exolutio.Updater.UpdaterService.UpdaterServiceSoap)(this)).MustReinstal(inValue);
             return retVal.Body.MustReinstalResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        EvoX.Updater.UpdaterService.GetMsiUriResponse EvoX.Updater.UpdaterService.UpdaterServiceSoap.GetMsiUri(EvoX.Updater.UpdaterService.GetMsiUriRequest request) {
+        Exolutio.Updater.UpdaterService.GetMsiUriResponse Exolutio.Updater.UpdaterService.UpdaterServiceSoap.GetMsiUri(Exolutio.Updater.UpdaterService.GetMsiUriRequest request) {
             return base.Channel.GetMsiUri(request);
         }
         
         public string GetMsiUri() {
-            EvoX.Updater.UpdaterService.GetMsiUriRequest inValue = new EvoX.Updater.UpdaterService.GetMsiUriRequest();
-            inValue.Body = new EvoX.Updater.UpdaterService.GetMsiUriRequestBody();
-            EvoX.Updater.UpdaterService.GetMsiUriResponse retVal = ((EvoX.Updater.UpdaterService.UpdaterServiceSoap)(this)).GetMsiUri(inValue);
+            Exolutio.Updater.UpdaterService.GetMsiUriRequest inValue = new Exolutio.Updater.UpdaterService.GetMsiUriRequest();
+            inValue.Body = new Exolutio.Updater.UpdaterService.GetMsiUriRequestBody();
+            Exolutio.Updater.UpdaterService.GetMsiUriResponse retVal = ((Exolutio.Updater.UpdaterService.UpdaterServiceSoap)(this)).GetMsiUri(inValue);
             return retVal.Body.GetMsiUriResult;
         }
     }

@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Xml.Linq;
-using EvoX.Model;
-using EvoX.Model.PSM;
-using Component = EvoX.Model.Component;
+using Exolutio.Model;
+using Exolutio.Model.PSM;
+using Component = Exolutio.Model.Component;
 
-namespace EvoX.Model.ViewHelper
+namespace Exolutio.Model.ViewHelper
 {
 	/// <summary>
 	/// ViewHelper class stores view-specific data for an instance of an element in the diagram
@@ -34,12 +34,12 @@ namespace EvoX.Model.ViewHelper
 	        set { Class = (PSMClass) value; }
 	    }
 
-        public override Versioning.IEvoXCloneable Clone(ProjectVersion projectVersion, Versioning.ElementCopiesMap createdCopies)
+        public override Versioning.IExolutioCloneable Clone(ProjectVersion projectVersion, Versioning.ElementCopiesMap createdCopies)
         {
             return new PSMClassViewHelper(projectVersion.Project.TranslateComponent<Diagram>(createdCopies.GetGuidForCopyOf(Diagram)));
         }
 
-        public override void FillCopy(Versioning.IEvoXCloneable copyComponent, ProjectVersion projectVersion, Versioning.ElementCopiesMap createdCopies)
+        public override void FillCopy(Versioning.IExolutioCloneable copyComponent, ProjectVersion projectVersion, Versioning.ElementCopiesMap createdCopies)
         {
             base.FillCopy(copyComponent, projectVersion, createdCopies);
             PSMClassViewHelper copyPSMClassViewHelper = (PSMClassViewHelper) copyComponent;

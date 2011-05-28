@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace EvoX.SupportingClasses
+namespace Exolutio.SupportingClasses
 {
     public static class IEnumerableRandomExtensions
     {

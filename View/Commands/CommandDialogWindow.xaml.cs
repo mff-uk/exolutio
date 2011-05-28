@@ -11,9 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using EvoX.Model;
+using Exolutio.Model;
 
-namespace EvoX.View.Commands
+namespace Exolutio.View.Commands
 {
     /// <summary>
     /// Interaction logic for CommandDialogWindow.xaml
@@ -66,7 +66,7 @@ namespace EvoX.View.Commands
         private void TrySetSelectedComponent(Component component)
         {
             FrameworkElement findFocusedElement = ViewToolkit.WPFHelpers.FindFocusedElement(spParameters);
-            if (findFocusedElement == null || findFocusedElement is EvoX.View.Commands.ParameterControls.ScopePropertyEditor)
+            if (findFocusedElement == null || findFocusedElement is Exolutio.View.Commands.ParameterControls.ScopePropertyEditor)
             {
                 findFocusedElement = lastFocused;
             }

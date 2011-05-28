@@ -8,8 +8,8 @@
     <ProjectGuid>{1EC12EDD-E854-4493-A821-BB869F7640E3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EvoX.Model.PSM.Grammar</RootNamespace>
-    <AssemblyName>EvoX.Model.PSM.Grammar</AssemblyName>
+    <RootNamespace>Exolutio.Model.PSM.Grammar</RootNamespace>
+    <AssemblyName>Exolutio.Model.PSM.Grammar</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>

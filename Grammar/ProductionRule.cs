@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using EvoX.SupportingClasses;
+using Exolutio.SupportingClasses;
 
-namespace EvoX.Model.PSM.Grammar
+namespace Exolutio.Model.PSM.Grammar
 {
     public class ProductionRule
     {

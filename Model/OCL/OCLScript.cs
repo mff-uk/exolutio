@@ -1,10 +1,10 @@
 using System;
 using System.Xml.Linq;
-using EvoX.Model.Serialization;
-using EvoX.Model.Versioning;
+using Exolutio.Model.Serialization;
+using Exolutio.Model.Versioning;
 
 
-namespace EvoX.Model.OCL
+namespace Exolutio.Model.OCL
 {
     public class OCLScript : Component
     {
@@ -33,7 +33,7 @@ namespace EvoX.Model.OCL
 
         public string Contents { get; set; }
 
-        #region Implementation of IEvoXSerializable
+        #region Implementation of IExolutioSerializable
 
         public override void Serialize(System.Xml.Linq.XElement parentNode, Serialization.SerializationContext context)
         {
@@ -49,14 +49,14 @@ namespace EvoX.Model.OCL
 
         #endregion 
         
-        #region Implementation of IEvoXCloneable
+        #region Implementation of IExolutioCloneable
 
-        public override IEvoXCloneable Clone(ProjectVersion projectVersion, ElementCopiesMap createdCopies)
+        public override IExolutioCloneable Clone(ProjectVersion projectVersion, ElementCopiesMap createdCopies)
         {
             return new OCLScript(projectVersion.Project, createdCopies.SuggestGuid(this));
         }
 
-        public override void FillCopy(IEvoXCloneable copyComponent, ProjectVersion projectVersion,
+        public override void FillCopy(IExolutioCloneable copyComponent, ProjectVersion projectVersion,
                                       ElementCopiesMap createdCopies)
         {
             base.FillCopy(copyComponent, projectVersion, createdCopies);

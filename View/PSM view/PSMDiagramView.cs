@@ -2,14 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Controls;
-using EvoX.Controller.Commands;
-using EvoX.Model;
-using EvoX.Model.PSM;
-using EvoX.Model.ViewHelper;
-using EvoX.ViewToolkit;
-using EvoX.SupportingClasses;
+using Exolutio.Controller.Commands;
+using Exolutio.Model;
+using Exolutio.Model.PSM;
+using Exolutio.Model.ViewHelper;
+using Exolutio.ViewToolkit;
+using Exolutio.SupportingClasses;
 
-namespace EvoX.View
+namespace Exolutio.View
 {
     public class PSMDiagramView : DiagramView
     {
@@ -52,24 +52,24 @@ namespace EvoX.View
 
             LayoutManager = new LayoutManager();
 
-            EvoXCanvas.MouseLeftButtonUp += new System.Windows.Input.MouseButtonEventHandler(EvoXCanvas_MouseLeftButtonUp);
-            EvoXCanvas.Loaded += new System.Windows.RoutedEventHandler(EvoXCanvas_Loaded);
-            EvoXCanvas.ContentChanged += new Action(EvoXCanvas_ContentChanged);
+            ExolutioCanvas.MouseLeftButtonUp += new System.Windows.Input.MouseButtonEventHandler(ExolutioCanvas_MouseLeftButtonUp);
+            ExolutioCanvas.Loaded += new System.Windows.RoutedEventHandler(ExolutioCanvas_Loaded);
+            ExolutioCanvas.ContentChanged += new Action(ExolutioCanvas_ContentChanged);
 
-            EvoXContextMenu diagramMenu = MenuHelper.GetContextMenu(ScopeAttribute.EScope.PSMSchema, this.Diagram);
-            EvoXCanvas.ContextMenu = diagramMenu;
+            ExolutioContextMenu diagramMenu = MenuHelper.GetContextMenu(ScopeAttribute.EScope.PSMSchema, this.Diagram);
+            ExolutioCanvas.ContextMenu = diagramMenu;
 
 #if SILVERLIGHT
-            ContextMenuService.SetContextMenu(EvoXCanvas, diagramMenu);
+            ContextMenuService.SetContextMenu(ExolutioCanvas, diagramMenu);
             MenuHelper.CreateSubmenuForCommandsWithoutScope(diagramMenu);
 #else
             ContextMenuItem otherItemsMenu = new ContextMenuItem("Other operations");
             MenuHelper.CreateSubmenuForCommandsWithoutScope(otherItemsMenu);
-            EvoXCanvas.ContextMenu.Items.Add(otherItemsMenu);
+            ExolutioCanvas.ContextMenu.Items.Add(otherItemsMenu);
 #endif 
         }
 
-        void EvoXCanvas_ContentChanged()
+        void ExolutioCanvas_ContentChanged()
         {
             DoLayout();
         }
@@ -82,12 +82,12 @@ namespace EvoX.View
             }
         }
 
-        void EvoXCanvas_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        void ExolutioCanvas_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
             DoLayout();
         }
 
-        void EvoXCanvas_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        void ExolutioCanvas_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             DoLayout();
         }
@@ -96,8 +96,8 @@ namespace EvoX.View
         {
             IEnumerable<ComponentViewBase> result = base.LoadDiagram(diagram);
             DoLayout();
-            ((EvoXContextMenu)EvoXCanvas.ContextMenu).ScopeObject = PSMDiagram.PSMSchema;
-            ((EvoXContextMenu)EvoXCanvas.ContextMenu).Diagram = PSMDiagram;            
+            ((ExolutioContextMenu)ExolutioCanvas.ContextMenu).ScopeObject = PSMDiagram.PSMSchema;
+            ((ExolutioContextMenu)ExolutioCanvas.ContextMenu).Diagram = PSMDiagram;            
             return result;
         }
 

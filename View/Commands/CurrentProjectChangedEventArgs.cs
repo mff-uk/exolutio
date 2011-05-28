@@ -1,7 +1,7 @@
 ﻿using System;
-using EvoX.Model;
+using Exolutio.Model;
 
-namespace EvoX.View
+namespace Exolutio.View
 {
     public class CurrentProjectChangedEventArgs:EventArgs
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace EvoX.Controller.Commands
+namespace Exolutio.Controller.Commands
 {
 	/// <summary>
 	/// Denotes a property of a command as a result of the command's <see cref="CommandBase.Execute"/> method. 

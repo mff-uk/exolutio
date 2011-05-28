@@ -1,7 +1,7 @@
-﻿<Window x:Class="EvoX.View.PIMClassDialog"
+﻿<Window x:Class="Exolutio.View.PIMClassDialog"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
-        xmlns:Dialogs="clr-namespace:EvoX.Dialogs;assembly=EvoX.Dialogs" 
+        xmlns:Dialogs="clr-namespace:Exolutio.Dialogs;assembly=Exolutio.Dialogs" 
         Title="PIM class: {0}" Height="328" Width="623" 
         WindowStartupLocation="CenterScreen" ShowInTaskbar="False" 
         ResizeMode="NoResize" Topmost="True">

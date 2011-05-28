@@ -3,14 +3,14 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using EvoX.Controller.Commands;
-using EvoX.Model;
-using EvoX.Model.PSM;
-using EvoX.Model.ViewHelper;
-using EvoX.ViewToolkit;
-using Label = EvoX.ViewToolkit.Label;
+using Exolutio.Controller.Commands;
+using Exolutio.Model;
+using Exolutio.Model.PSM;
+using Exolutio.Model.ViewHelper;
+using Exolutio.ViewToolkit;
+using Label = Exolutio.ViewToolkit.Label;
 
-namespace EvoX.View
+namespace Exolutio.View
 {
     public class PSMAssociationView : ComponentViewBaseVH<PSMAssociationViewHelper>, IConnectorViewBase
     {
@@ -32,8 +32,8 @@ namespace EvoX.View
             ContextMenuService.SetContextMenu(NameLabel, ContextMenu);
             ContextMenuService.SetContextMenu(Connector, ContextMenu);
             #endif
-            ((EvoXContextMenu)ContextMenu).ScopeObject = PSMAssociation;
-            ((EvoXContextMenu)ContextMenu).Diagram = DiagramView.Diagram;
+            ((ExolutioContextMenu)ContextMenu).ScopeObject = PSMAssociation;
+            ((ExolutioContextMenu)ContextMenu).Diagram = DiagramView.Diagram;
         }
 
         public override ContextMenu ContextMenu
@@ -81,7 +81,7 @@ namespace EvoX.View
                     Connector.Pen = ViewToolkitResources.SolidBlackPen;
                 }
 
-                DiagramView.EvoXCanvas.InvokeContentChanged();
+                DiagramView.ExolutioCanvas.InvokeContentChanged();
             }
         }
 
@@ -164,7 +164,7 @@ namespace EvoX.View
             CreatedControls.Add(Connector);
             CreatedControls.Add(NameLabel);
             CreatedControls.Add(CardinalityLabel);
-            DiagramView.EvoXCanvas.AddConnector(Connector);
+            DiagramView.ExolutioCanvas.AddConnector(Connector);
             Connector.Connect(SourceClassView.MainNode, TargetClassView.MainNode);
             //if (ViewHelper.Points.Count == 0)
             //{
@@ -174,8 +174,8 @@ namespace EvoX.View
             //{
             //    Connector.SetPoints(ViewHelper.Points);
             //}
-            DiagramView.EvoXCanvas.AddNode(NameLabel);
-            DiagramView.EvoXCanvas.AddNode(CardinalityLabel);
+            DiagramView.ExolutioCanvas.AddNode(NameLabel);
+            DiagramView.ExolutioCanvas.AddNode(CardinalityLabel);
             NameLabel.PlacementCenter = EPlacementCenter.Center;
             Connector.SnapNodeToConnector(NameLabel);
             CardinalityLabel.SnapTo(Connector.EndPoint, true);
@@ -198,8 +198,8 @@ namespace EvoX.View
 //        void Connector_MouseDown(object sender, MouseButtonEventArgs e)
 //#endif
 //        {
-//            DiagramView.EvoXCanvas.SelectedItems.Clear();
-//            DiagramView.EvoXCanvas.SelectedItems.Add(this.Connector);
+//            DiagramView.ExolutioCanvas.SelectedItems.Clear();
+//            DiagramView.ExolutioCanvas.SelectedItems.Add(this.Connector);
 //            DiagramView.SetSelection(ModelComponent);
 //            #if SILVERLIGHT
 //            #else
@@ -239,9 +239,9 @@ namespace EvoX.View
         public override void RemoveFromDiagram()
         {
             UnBindModelView();
-            DiagramView.EvoXCanvas.RemoveConnector(Connector);
-            DiagramView.EvoXCanvas.RemoveNode(NameLabel);
-            DiagramView.EvoXCanvas.RemoveNode(CardinalityLabel);
+            DiagramView.ExolutioCanvas.RemoveConnector(Connector);
+            DiagramView.ExolutioCanvas.RemoveNode(NameLabel);
+            DiagramView.ExolutioCanvas.RemoveNode(CardinalityLabel);
             base.RemoveFromDiagram();
         }
 

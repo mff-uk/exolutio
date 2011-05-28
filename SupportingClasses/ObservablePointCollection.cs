@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Windows;
 
-namespace EvoX.SupportingClasses
+namespace Exolutio.SupportingClasses
 {
 	/// <summary>
 	/// Basically the same as <see cref="Point"/> but is a class, not a struct.
@@ -66,7 +66,7 @@ namespace EvoX.SupportingClasses
 		}
 
 		/// <summary>
-		/// Similar to <see cref="AppendRange(System.Collections.Generic.IEnumerable{EvoX.Model.ViewHelper.rPoint})"/> 
+		/// Similar to <see cref="AppendRange(System.Collections.Generic.IEnumerable{Exolutio.Model.ViewHelper.rPoint})"/> 
 		/// but new instances for points are created and added into the collection instead of the 
 		/// existing rPoints. 
 		/// </summary>

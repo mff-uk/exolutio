@@ -1,8 +1,8 @@
-﻿using EvoX.Model.PSM;
-using EvoX.Model.PSM.Normalization;
-using EvoX.ResourceLibrary;
+﻿using Exolutio.Model.PSM;
+using Exolutio.Model.PSM.Normalization;
+using Exolutio.ResourceLibrary;
 
-namespace EvoX.View.Commands.Grammar
+namespace Exolutio.View.Commands.Grammar
 {
     public class guiNormalizeSchemaCommand : guiActiveDiagramCommand
     {
@@ -34,7 +34,7 @@ namespace EvoX.View.Commands.Grammar
 
         public override System.Windows.Media.ImageSource Icon
         {
-            get { return EvoXResourceNames.GetResourceImageSource(EvoXResourceNames.component_edit); }
+            get { return ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.component_edit); }
         }
     }
 }

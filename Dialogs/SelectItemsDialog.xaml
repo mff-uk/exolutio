@@ -1,11 +1,11 @@
-﻿<Window x:Class="EvoX.Dialogs.SelectItemsDialog"
+﻿<Window x:Class="Exolutio.Dialogs.SelectItemsDialog"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:WpfCheckListBox="clr-namespace:WpfCheckListBox;assembly=WpfCheckListBox"
     Title="Select diagrams" SizeToContent="WidthAndHeight" Width="500" WindowStartupLocation="CenterScreen"
     ResizeMode="NoResize" ShowInTaskbar="False" Topmost="True">
     <Window.Resources>
-        <ResourceDictionary Source="/EvoX.ResourceLibrary;component/Images/Images.xaml" ></ResourceDictionary>
+        <ResourceDictionary Source="/Exolutio.ResourceLibrary;component/Images/Images.xaml" ></ResourceDictionary>
     </Window.Resources>
     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
 

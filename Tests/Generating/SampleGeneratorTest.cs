@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
 using System.Xml.Linq;
-using EvoX.DataGenerator;
-using EvoX.Model;
-using EvoX.Model.PSM;
-using EvoX.Model.Versioning;
+using Exolutio.DataGenerator;
+using Exolutio.Model;
+using Exolutio.Model.PSM;
+using Exolutio.Model.Versioning;
 using NUnit.Framework;
 
 namespace Tests.CodeTests

@@ -8,8 +8,8 @@
     <ProjectGuid>{1768AE4E-0514-4C9E-AF26-02595148FF5C}</ProjectGuid>
     <OutputType>library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EvoX.Dialogs</RootNamespace>
-    <AssemblyName>EvoX.Dialogs</AssemblyName>
+    <RootNamespace>Exolutio.Dialogs</RootNamespace>
+    <AssemblyName>Exolutio.Dialogs</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -67,14 +67,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccessKeyScoper.cs" />
-    <Compile Include="EvoXMsgBox.xaml.cs">
-      <DependentUpon>EvoXMsgBox.xaml</DependentUpon>
+    <Compile Include="ExolutioMessageBox.xaml.cs">
+      <DependentUpon>ExolutioMessageBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ErrorMsgBox.xaml.cs">
-      <DependentUpon>ErrorMsgBox.xaml</DependentUpon>
+    <Compile Include="ExolutioErrorMsgBox.xaml.cs">
+      <DependentUpon>ExolutioErrorMsgBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="InputBox.xaml.cs">
-      <DependentUpon>InputBox.xaml</DependentUpon>
+    <Compile Include="ExolutioInputBox.xaml.cs">
+      <DependentUpon>ExolutioInputBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -89,8 +89,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="EvoXYesNoBox.xaml.cs">
-      <DependentUpon>EvoXYesNoBox.xaml</DependentUpon>
+    <Compile Include="ExolutioYesNoBox.xaml.cs">
+      <DependentUpon>ExolutioYesNoBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="RememberingTextBox.cs" />
     <Compile Include="SelectItemsDialog.xaml.cs">
@@ -107,19 +107,19 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="EvoXMsgBox.xaml">
+    <Page Include="ExolutioMessageBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ErrorMsgBox.xaml">
+    <Page Include="ExolutioErrorMsgBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="InputBox.xaml">
+    <Page Include="ExolutioInputBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="EvoXYesNoBox.xaml">
+    <Page Include="ExolutioYesNoBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

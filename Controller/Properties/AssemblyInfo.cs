@@ -6,11 +6,11 @@ using System.Resources;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Evox: Controller")]
+[assembly: AssemblyTitle("exolutio: Controller")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Evox")]
+[assembly: AssemblyProduct("exolutio")]
 [assembly: AssemblyCopyright("Copyright © 2010 XRG @ MFF UK")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

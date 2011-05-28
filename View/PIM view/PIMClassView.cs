@@ -5,14 +5,14 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using EvoX.Controller.Commands;
-using EvoX.Model;
-using EvoX.Model.PIM;
-using EvoX.Model.ViewHelper;
-using EvoX.SupportingClasses;
-using EvoX.ViewToolkit;
+using Exolutio.Controller.Commands;
+using Exolutio.Model;
+using Exolutio.Model.PIM;
+using Exolutio.Model.ViewHelper;
+using Exolutio.SupportingClasses;
+using Exolutio.ViewToolkit;
 
-namespace EvoX.View
+namespace Exolutio.View
 {
     public class PIMClassView : NodeComponentViewBase<PIMClassViewHelper>, IEnumerable<PIMAttributeTextBox>
     {
@@ -39,7 +39,7 @@ namespace EvoX.View
 
         public override PIMClassViewHelper ViewHelper { get; protected set; }
 
-        protected override void CreateInnerControls(EvoXCanvas canvas)
+        protected override void CreateInnerControls(ExolutioCanvas canvas)
         {
             base.CreateInnerControls(canvas);
             #region main node content components
@@ -115,8 +115,8 @@ namespace EvoX.View
 
             #endregion
 
-            EvoXContextMenu evoXContextMenu = MenuHelper.GetContextMenu(ScopeAttribute.EScope.PIMClass, this.DiagramView.Diagram);
-            ContextMenu = evoXContextMenu;
+            ExolutioContextMenu exolutioContextMenu = MenuHelper.GetContextMenu(ScopeAttribute.EScope.PIMClass, this.DiagramView.Diagram);
+            ContextMenu = exolutioContextMenu;
 
 #if SILVERLIGHT
             ContextMenuService.SetContextMenu(tbClassHeader, ContextMenu);          
@@ -161,8 +161,8 @@ namespace EvoX.View
         protected override void BindModelView()
         {
             base.BindModelView();
-            ((EvoXContextMenu) ContextMenu).ScopeObject = PIMClass;
-            ((EvoXContextMenu) ContextMenu).Diagram = DiagramView.Diagram;
+            ((ExolutioContextMenu) ContextMenu).ScopeObject = PIMClass;
+            ((ExolutioContextMenu) ContextMenu).Diagram = DiagramView.Diagram;
             if (PIMClass != null)
             {
                 attributesContainer.AttributesCollection = PIMClass.PIMAttributes;

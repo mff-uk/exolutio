@@ -2,15 +2,15 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using EvoX.Dialogs;
-using EvoX.Model.Serialization;
-using EvoX.ResourceLibrary;
+using Exolutio.Dialogs;
+using Exolutio.Model.Serialization;
+using Exolutio.ResourceLibrary;
 
-namespace EvoX.View.Commands.Project
+namespace Exolutio.View.Commands.Project
 {
     public class guiNewProjectCommand : guiProjectCommand
 	{
-		#region Overrides of EvoXGuiCommandBase
+		#region Overrides of ExolutioGuiCommandBase
 
 	    public override KeyGesture Gesture
 		{
@@ -24,12 +24,12 @@ namespace EvoX.View.Commands.Project
 
 		public override string ScreenTipText
 		{
-			get { return CommandsResources.guiNewProjectCommand_ScreenTipText_Creates_new_empty_EvoX_project; }
+			get { return CommandsResources.guiNewProjectCommand_ScreenTipText_Creates_new_empty_Exolutio_project; }
 		}
 		
 		public override ImageSource Icon
 		{
-            get { return EvoXResourceNames.GetResourceImageSource(EvoXResourceNames.GenericDocument); }
+            get { return ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.GenericDocument); }
 		}
 
 		#endregion
@@ -39,7 +39,7 @@ namespace EvoX.View.Commands.Project
 			// Close existing project
             if (Current.Project != null)
             {
-                EvoXGuiCommands.CloseProjectCommand.Execute();
+                GuiCommands.CloseProjectCommand.Execute();
             }
 
             ProjectSerializationManager serializationManager = new ProjectSerializationManager();

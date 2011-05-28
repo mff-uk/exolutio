@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Xml;
 using System.Xml.Linq;
-using EvoX.Model.Serialization;
-using EvoX.Model.Versioning;
+using Exolutio.Model.Serialization;
+using Exolutio.Model.Versioning;
 
-namespace EvoX.Model
+namespace Exolutio.Model
 {
-    public abstract class Component : EvoXVersionedObject
+    public abstract class Component : ExolutioVersionedObject
     {
         protected Component(Project p) : base(p) { }
         protected Component(Project p, Guid g) : base(p, g) {}
@@ -41,7 +41,7 @@ namespace EvoX.Model
             get { return Schema.ProjectVersion; }
         }
 
-        #region Implementation of IEvoXSerializable
+        #region Implementation of IExolutioSerializable
 
         public override void Serialize(XElement parentNode, SerializationContext context)
         {
@@ -72,9 +72,9 @@ namespace EvoX.Model
         }
         #endregion
 
-        #region Implementation of IEvoXCloneable
+        #region Implementation of IExolutioCloneable
 
-        public override void FillCopy(IEvoXCloneable copyComponent, ProjectVersion projectVersion,
+        public override void FillCopy(IExolutioCloneable copyComponent, ProjectVersion projectVersion,
                                       ElementCopiesMap createdCopies)
         {
             base.FillCopy(copyComponent, projectVersion, createdCopies);

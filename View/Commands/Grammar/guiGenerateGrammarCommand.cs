@@ -1,8 +1,8 @@
-﻿using EvoX.Model.PSM;
-using EvoX.Model.PSM.Grammar;
-using EvoX.ResourceLibrary;
+﻿using Exolutio.Model.PSM;
+using Exolutio.Model.PSM.Grammar;
+using Exolutio.ResourceLibrary;
 
-namespace EvoX.View.Commands.Grammar
+namespace Exolutio.View.Commands.Grammar
 {
     public class guiGenerateGrammarCommand : guiActiveDiagramCommand
     {   
@@ -11,7 +11,7 @@ namespace EvoX.View.Commands.Grammar
             if (Current.ActiveDiagram != null && Current.ActiveDiagram is PSMDiagram)
             {
                 GrammarGenerator generator = new GrammarGenerator();
-                EvoX.Model.PSM.Grammar.Grammar grammar = generator.GenerateGrammar((PSMSchema) Current.ActiveDiagram.Schema);
+                Exolutio.Model.PSM.Grammar.Grammar grammar = generator.GenerateGrammar((PSMSchema) Current.ActiveDiagram.Schema);
                 
 #if SILVERLIGHT
                 GrammarWindow w = new GrammarWindow();
@@ -39,7 +39,7 @@ namespace EvoX.View.Commands.Grammar
 
         public override System.Windows.Media.ImageSource Icon
         {
-            get { return EvoXResourceNames.GetResourceImageSource(EvoXResourceNames.component_new); }
+            get { return ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.component_new); }
         }
     }
 }

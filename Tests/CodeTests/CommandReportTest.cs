@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
-using EvoX.Controller.Commands;
-using EvoX.Model;
-using EvoX.Model.Versioning;
+using Exolutio.Controller.Commands;
+using Exolutio.Model;
+using Exolutio.Model.Versioning;
 using NUnit.Framework;
 
 namespace Tests.CodeTests

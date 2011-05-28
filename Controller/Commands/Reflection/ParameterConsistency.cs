@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace EvoX.Controller.Commands.Reflection
+namespace Exolutio.Controller.Commands.Reflection
 {
     public abstract class ParameterConsistency
     {

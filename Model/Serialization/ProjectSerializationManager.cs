@@ -5,9 +5,9 @@ using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
-using EvoX.SupportingClasses;
+using Exolutio.SupportingClasses;
 
-namespace EvoX.Model.Serialization
+namespace Exolutio.Model.Serialization
 {
     public class ProjectSerializationManager
     {

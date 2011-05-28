@@ -1,7 +1,7 @@
 using System;
-using EvoX.Model;
+using Exolutio.Model;
 
-namespace EvoX.Controller.Commands.Versioning
+namespace Exolutio.Controller.Commands.Versioning
 {
     public class cmdRemoveProjectVersion : StackedCommand
     {

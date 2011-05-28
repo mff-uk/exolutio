@@ -17,7 +17,7 @@ public class GetFile : IHttpHandler {
 
             string filename = context.Request.QueryString["FileName"];
 
-            string ph = Path.Combine(context.Server.MapPath("EvoXbin"), filename);
+            string ph = Path.Combine(context.Server.MapPath("ExolutioBin"), filename);
 
             if (!File.Exists(ph))
             {

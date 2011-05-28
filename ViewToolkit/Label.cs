@@ -4,7 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace EvoX.ViewToolkit
+namespace Exolutio.ViewToolkit
 {
     public class Label: Node
     {
@@ -82,8 +82,8 @@ namespace EvoX.ViewToolkit
         {
             base.OnMouseDown(e);
 #endif
-            //EvoXCanvas.SelectedItems.Clear();
-            //EvoXCanvas.SelectedItems.Add(this);
+            //ExolutioCanvas.SelectedItems.Clear();
+            //ExolutioCanvas.SelectedItems.Add(this);
 
             //{
             //    DragThumb.OnMouseDown(e);

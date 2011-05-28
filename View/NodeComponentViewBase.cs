@@ -1,10 +1,10 @@
 ﻿using System;
-using EvoX.Model.ViewHelper;
-using EvoX.SupportingClasses;
-using EvoX.ViewToolkit;
+using Exolutio.Model.ViewHelper;
+using Exolutio.SupportingClasses;
+using Exolutio.ViewToolkit;
 using System.Linq;
 
-namespace EvoX.View
+namespace Exolutio.View
 {
     public abstract class NodeComponentViewBase<TViewHelper> : ComponentViewBaseVH<TViewHelper>, INodeComponentViewBase where TViewHelper : ViewHelper
     {
@@ -61,8 +61,8 @@ namespace EvoX.View
             MainNode.PositionChanged += MainNode_PositionChanged;
             MainNode.SelectedChanged += MainNode_SelectedChanged;
             CreatedControls.Add(MainNode);
-            CreateInnerControls(diagramView.EvoXCanvas);
-            diagramView.EvoXCanvas.AddNode(MainNode);
+            CreateInnerControls(diagramView.ExolutioCanvas);
+            diagramView.ExolutioCanvas.AddNode(MainNode);
 
             BindModelView();
         }
@@ -80,7 +80,7 @@ namespace EvoX.View
             }
         }
 
-        protected virtual void CreateInnerControls(EvoXCanvas canvas) { }
+        protected virtual void CreateInnerControls(ExolutioCanvas canvas) { }
 
         public override bool CanRemoveFromDiagram()
         {
@@ -89,13 +89,13 @@ namespace EvoX.View
 
         public override void RemoveFromDiagram()
         {
-            if (MainNode == null || MainNode.EvoXCanvas == null)
+            if (MainNode == null || MainNode.ExolutioCanvas == null)
             {
-                throw new EvoXViewException("Component view is not visualized on a canvas");
+                throw new ExolutioViewException("Component view is not visualized on a canvas");
             }
             MainNode.PositionChanged -= MainNode_PositionChanged;
             UnBindModelView();
-            MainNode.EvoXCanvas.RemoveNode(MainNode);
+            MainNode.ExolutioCanvas.RemoveNode(MainNode);
             base.RemoveFromDiagram();
         }
 

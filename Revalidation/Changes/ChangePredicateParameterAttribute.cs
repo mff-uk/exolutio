@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EvoX.Revalidation.Changes
+namespace Exolutio.Revalidation.Changes
 {
     public class ChangePredicateParameterAttribute : Attribute
     {

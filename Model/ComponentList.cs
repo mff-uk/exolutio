@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using EvoX.SupportingClasses;
+using Exolutio.SupportingClasses;
 
-namespace EvoX.Model
+namespace Exolutio.Model
 {
-    public class ComponentList<TComponent> : EvoXList<TComponent>
+    public class ComponentList<TComponent> : ExolutioList<TComponent>
         where TComponent : Component
     {
     }

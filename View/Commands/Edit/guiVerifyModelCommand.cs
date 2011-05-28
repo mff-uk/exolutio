@@ -1,8 +1,8 @@
 using System;
-using EvoX.Dialogs;
-using EvoX.ResourceLibrary;
+using Exolutio.Dialogs;
+using Exolutio.ResourceLibrary;
 
-namespace EvoX.View.Commands.Edit
+namespace Exolutio.View.Commands.Edit
 {
     public class guiVerifyModelCommand: guiCommandBase
     {
@@ -15,9 +15,9 @@ namespace EvoX.View.Commands.Edit
         {
             Tests.ModelIntegrity.ModelConsistency.CheckProject(Current.Project);
             #if SILVERLIGHT
-            EvoXMsgBox.Show("Verified", "Test passed", "Model consistency checked successfuly.", Current.MainWindow.FloatingWindowHost);
+            ExolutioMsgBox.Show("Verified", "Test passed", "Model consistency checked successfuly.", Current.MainWindow.FloatingWindowHost);
             #else
-            EvoXMsgBox.Show("Verified", "Test passed", "Model consistency checked successfuly.");
+            ExolutioMessageBox.Show("Verified", "Test passed", "Model consistency checked successfuly.");
             #endif
         }
 
@@ -36,7 +36,7 @@ namespace EvoX.View.Commands.Edit
 
         public override System.Windows.Media.ImageSource Icon
         {
-            get { return EvoXResourceNames.GetResourceImageSource(EvoXResourceNames.Validate); }
+            get { return ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.Validate); }
         }
     }
 }

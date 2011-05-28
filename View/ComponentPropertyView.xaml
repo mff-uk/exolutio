@@ -1,8 +1,8 @@
-﻿<UserControl x:Class="EvoX.View.ComponentPropertyView"
+﻿<UserControl x:Class="Exolutio.View.ComponentPropertyView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:Dialogs="clr-namespace:EvoX.Dialogs;assembly=EvoX.Dialogs" xmlns:PIM="clr-namespace:EvoX.Model.PIM;assembly=EvoX.Model" xmlns:PSM="clr-namespace:EvoX.Model.PSM;assembly=EvoX.Model" xmlns:FormControls="clr-namespace:EvoX.ViewToolkit.FormControls;assembly=EvoX.ViewToolkit" xmlns:View="clr-namespace:EvoX.View" mc:Ignorable="d" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:Dialogs="clr-namespace:Exolutio.Dialogs;assembly=Exolutio.Dialogs" xmlns:PIM="clr-namespace:Exolutio.Model.PIM;assembly=Exolutio.Model" xmlns:PSM="clr-namespace:Exolutio.Model.PSM;assembly=Exolutio.Model" xmlns:FormControls="clr-namespace:Exolutio.ViewToolkit.FormControls;assembly=Exolutio.ViewToolkit" xmlns:View="clr-namespace:Exolutio.View" mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300" Padding="10">
     <Grid>
         <StackPanel>

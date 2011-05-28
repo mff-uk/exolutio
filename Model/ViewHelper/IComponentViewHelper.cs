@@ -1,4 +1,4 @@
-﻿namespace EvoX.Model.ViewHelper
+﻿namespace Exolutio.Model.ViewHelper
 {
     public interface IComponentViewHelper
     {

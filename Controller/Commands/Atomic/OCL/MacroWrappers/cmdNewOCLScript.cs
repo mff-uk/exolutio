@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using EvoX.Model;
-using EvoX.Model.PIM;
-using EvoX.Controller.Commands.Atomic;
-using EvoX.Controller.Commands.Atomic.PIM;
-using EvoX.Model.PSM;
+using Exolutio.Model;
+using Exolutio.Model.PIM;
+using Exolutio.Controller.Commands.Atomic;
+using Exolutio.Controller.Commands.Atomic.PIM;
+using Exolutio.Model.PSM;
 
-namespace EvoX.Controller.Commands.Atomic.PIM.MacroWrappers
+namespace Exolutio.Controller.Commands.Atomic.PIM.MacroWrappers
 {
     //[PublicCommand("Create new OCL script", PublicCommandAttribute.EPulicCommandCategory.PIM_atomic)]
     public class cmdCreateNewOCLScript : MacroCommand, ICommandWithDiagramParameter
@@ -33,7 +33,7 @@ namespace EvoX.Controller.Commands.Atomic.PIM.MacroWrappers
             set
             {
                 if (!Executed) oclScriptGuid = value;
-                else throw new EvoXCommandException("Cannot set ClassGuid after command execution.", this);
+                else throw new ExolutioCommandException("Cannot set ClassGuid after command execution.", this);
             }
         }
         

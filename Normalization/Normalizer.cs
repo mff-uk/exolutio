@@ -1,15 +1,15 @@
 using System;
-using EvoX.Controller;
-using EvoX.Controller.Commands;
-using EvoX.Controller.Commands.Atomic;
-using EvoX.Controller.Commands.Atomic.PSM;
-using EvoX.Controller.Commands.Atomic.PSM.MacroWrappers;
-using EvoX.Model;
-using EvoX.Model.PSM;
-using cmdDeletePSMAssociation = EvoX.Controller.Commands.Complex.PSM.cmdDeletePSMAssociation;
-using cmdDeletePSMClass = EvoX.Controller.Commands.Complex.PSM.cmdDeletePSMClass;
+using Exolutio.Controller;
+using Exolutio.Controller.Commands;
+using Exolutio.Controller.Commands.Atomic;
+using Exolutio.Controller.Commands.Atomic.PSM;
+using Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers;
+using Exolutio.Model;
+using Exolutio.Model.PSM;
+using cmdDeletePSMAssociation = Exolutio.Controller.Commands.Complex.PSM.cmdDeletePSMAssociation;
+using cmdDeletePSMClass = Exolutio.Controller.Commands.Complex.PSM.cmdDeletePSMClass;
 
-namespace EvoX.Model.PSM.Normalization
+namespace Exolutio.Model.PSM.Normalization
 {
     public class Normalizer
     {

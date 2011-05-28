@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using System.Reflection;
-using EvoX.Model;
+using Exolutio.Model;
 
-namespace EvoX.Controller.Commands.Reflection
+namespace Exolutio.Controller.Commands.Reflection
 {
     public class SchemaAttributeTypeParameterConsistency : ParameterConsistency
     {

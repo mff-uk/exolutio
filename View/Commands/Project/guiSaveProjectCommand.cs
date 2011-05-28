@@ -1,14 +1,14 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using EvoX.Model.Serialization;
-using EvoX.ResourceLibrary;
+using Exolutio.Model.Serialization;
+using Exolutio.ResourceLibrary;
 
-namespace EvoX.View.Commands.Project
+namespace Exolutio.View.Commands.Project
 {
     public class guiSaveProjectCommand : guiProjectCommand
     {
-        #region Overrides of EvoXGuiCommandBase
+        #region Overrides of ExolutioGuiCommandBase
 
 #if SILVERLIGHT 
 #else
@@ -30,7 +30,7 @@ namespace EvoX.View.Commands.Project
 
         public override ImageSource Icon
         {
-            get { return EvoXResourceNames.GetResourceImageSource(EvoXResourceNames.Save); }
+            get { return ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.Save); }
         }
 
         #endregion
@@ -39,7 +39,7 @@ namespace EvoX.View.Commands.Project
         {
             if (Current.Project.ProjectFile == null)
             {
-                EvoXGuiCommands.SaveAsProjectCommand.Execute();
+                GuiCommands.SaveAsProjectCommand.Execute();
             }
             else
             {

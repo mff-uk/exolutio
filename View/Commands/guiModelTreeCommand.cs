@@ -1,6 +1,6 @@
 using System;
 
-namespace EvoX.View.Commands
+namespace Exolutio.View.Commands
 {
     public class guiModelTreeCommand: guiCommandBase
     {

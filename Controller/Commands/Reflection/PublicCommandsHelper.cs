@@ -1,11 +1,11 @@
 using System;
 using System.Linq;
-using EvoX.SupportingClasses;
+using Exolutio.SupportingClasses;
 using System.Collections.Generic;
 using System.Reflection;
-using EvoX.SupportingClasses.Reflection;
+using Exolutio.SupportingClasses.Reflection;
 
-namespace EvoX.Controller.Commands.Reflection
+namespace Exolutio.Controller.Commands.Reflection
 {
     public static class PublicCommandsHelper
     {
@@ -34,13 +34,13 @@ namespace EvoX.Controller.Commands.Reflection
                         {
                             if (attribute.ComponentType == null)
                             {
-                                throw new EvoXCommandException(
+                                throw new ExolutioCommandException(
                                     "When MandatoryArgument is applied on a property of type System.Guid, property ComponentType must be defined for the attribute.");
                             }
                         }
                         else if (attribute.ComponentType != null)
                         {
-                            throw new EvoXCommandException(
+                            throw new ExolutioCommandException(
                                     "When MandatoryArgument is applied on a property of type other than System.Guid, property ComponentType must not be defined for the attribute.");
                         }
                     }
@@ -86,13 +86,13 @@ namespace EvoX.Controller.Commands.Reflection
                             {
                                 if (publicArgumentAttribute.ComponentType == null)
                                 {
-                                    throw new EvoXCommandException(
+                                    throw new ExolutioCommandException(
                                         "When MandatoryArgument is applied on a property of type System.Guid, property ComponentType must be defined for the attribute.");
                                 }
                             }
                             else if (publicArgumentAttribute.ComponentType != null)
                             {
-                                throw new EvoXCommandException(
+                                throw new ExolutioCommandException(
                                         "When MandatoryArgument is applied on a property of type other than System.Guid, property ComponentType must not be defined for the attribute.");
                             }
                         }

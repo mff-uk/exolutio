@@ -2,13 +2,13 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Xml.Serialization;
-using EvoX.Controller;
-using EvoX.Model;
-using EvoX.Model.PSM;
-using EvoX.Model.PSM.Grammar;
-using EvoX.Model.PSM.Normalization;
-using EvoX.Model.Serialization;
-using EvoX.Model.Versioning;
+using Exolutio.Controller;
+using Exolutio.Model;
+using Exolutio.Model.PSM;
+using Exolutio.Model.PSM.Grammar;
+using Exolutio.Model.PSM.Normalization;
+using Exolutio.Model.Serialization;
+using Exolutio.Model.Versioning;
 using NUnit.Framework;
 using Tests.CodeTests;
 
@@ -21,11 +21,11 @@ namespace Tests.Serialization
         public void TestGenerateGrammar()
         {
             ProjectSerializationManager projectSerializationManager = new ProjectSerializationManager();
-            Project sampleProject = projectSerializationManager.LoadProject(@"..\..\..\EvoXWeb\EvoX\SampleFiles\Figure8.evox");
+            Project sampleProject = projectSerializationManager.LoadProject(@"..\..\..\ExolutioWeb\Exolutio\SampleFiles\Figure8.exolutio");
 
             PSMSchema psmSchema = sampleProject.SingleVersion.PSMSchemas[0];
             GrammarGenerator grammarGenerator = new GrammarGenerator();
-            EvoX.Model.PSM.Grammar.Grammar g = grammarGenerator.GenerateGrammar(psmSchema);
+            Exolutio.Model.PSM.Grammar.Grammar g = grammarGenerator.GenerateGrammar(psmSchema);
 
             System.Diagnostics.Debug.WriteLine("Not normalized grammar: ");
             foreach (ProductionRule productionRule in g.ProductionRules)

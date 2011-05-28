@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EvoX.Model.Serialization {
+namespace Exolutio.Model.Serialization {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace EvoX.Model.Serialization {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EvoX.Model.Serialization.SerializationLogMessages", typeof(SerializationLogMessages).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Exolutio.Model.Serialization.SerializationLogMessages", typeof(SerializationLogMessages).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

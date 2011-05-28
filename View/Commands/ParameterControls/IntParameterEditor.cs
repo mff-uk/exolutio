@@ -1,6 +1,6 @@
 using System.Windows.Controls;
 
-namespace EvoX.View.Commands.ParameterControls
+namespace Exolutio.View.Commands.ParameterControls
 {
     public class IntParameterEditor: TextBox, IOperationParameterControl<uint>, IOperationParameterControl
     {

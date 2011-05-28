@@ -1,15 +1,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
-using EvoX.Controller;
-using EvoX.Controller.Commands;
-using EvoX.Controller.Commands.Complex.PIM;
-using EvoX.Controller.Commands.Reflection;
-using EvoX.Model;
-using EvoX.Model.PSM;
-using EvoX.Model.Serialization;
+using Exolutio.Controller;
+using Exolutio.Controller.Commands;
+using Exolutio.Controller.Commands.Complex.PIM;
+using Exolutio.Controller.Commands.Reflection;
+using Exolutio.Model;
+using Exolutio.Model.PSM;
+using Exolutio.Model.Serialization;
 using NUnit.Framework;
-using EvoX.Controller.Commands.Atomic.PIM;
+using Exolutio.Controller.Commands.Atomic.PIM;
 
 namespace Tests.Serialization
 {

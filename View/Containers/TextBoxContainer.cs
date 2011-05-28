@@ -5,11 +5,11 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using EvoX.Model;
-using EvoX.Model.PSM;
-using EvoX.ViewToolkit;
+using Exolutio.Model;
+using Exolutio.Model.PSM;
+using Exolutio.ViewToolkit;
 
-namespace EvoX.View
+namespace Exolutio.View
 {
 	/// <summary>
 	/// Interface for a container of textboxes. 
@@ -91,7 +91,7 @@ namespace EvoX.View
 		/// <see cref="XCaseCanvas"/> containing the control
 		/// </summary>
 		/// <value><see cref="XCaseCanvas"/></value>
-		internal EvoXCanvas EvoXCanvas { get; set; }
+		internal ExolutioCanvas ExolutioCanvas { get; set; }
 
 		/// <summary>
 		/// Panel where <see cref="EditableTextBox">EditableTextBoxes</see>
@@ -148,14 +148,14 @@ namespace EvoX.View
 		/// <param name="container">Panel where <see cref="EditableTextBox">EditableTextBoxes</see>
 		/// are created</param>
 		/// <param name="xCaseCanvas"><see cref="XCaseCanvas"/> containing the control</param>
-        public TextBoxContainer(Panel container, EvoXCanvas evoXCanvas, Diagram diagram)
+        public TextBoxContainer(Panel container, ExolutioCanvas exolutioCanvas, Diagram diagram)
 		{
 			if (container == null)
 				throw new ArgumentNullException("container");
-			if (evoXCanvas == null)
-                throw new ArgumentNullException("evoXCanvas");
+			if (exolutioCanvas == null)
+                throw new ArgumentNullException("exolutioCanvas");
 			this.container = container;
-			this.EvoXCanvas = evoXCanvas;
+			this.ExolutioCanvas = exolutioCanvas;
 		    this.Diagram = diagram;
 
 		}

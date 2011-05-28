@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-using EvoX.Model.Serialization;
+using Exolutio.Model.Serialization;
 using System.Collections.ObjectModel;
-using EvoX.Model.Versioning;
+using Exolutio.Model.Versioning;
 using System.Linq; 
 
-namespace EvoX.Model.PIM
+namespace Exolutio.Model.PIM
 {
     public class PIMSchema : Schema
     {
@@ -77,7 +77,7 @@ namespace EvoX.Model.PIM
 
         public UndirectCollection<PIMClass> PIMClasses { get; set; }
 
-        #region Implementation of IEvoXSerializable
+        #region Implementation of IExolutioSerializable
 
         public override void Serialize(XElement parentNode, SerializationContext context)
         {
@@ -100,14 +100,14 @@ namespace EvoX.Model.PIM
         }
         #endregion
 
-        #region Implementation of IEvoXCloneable
+        #region Implementation of IExolutioCloneable
 
-        public override IEvoXCloneable Clone(ProjectVersion projectVersion, ElementCopiesMap createdCopies)
+        public override IExolutioCloneable Clone(ProjectVersion projectVersion, ElementCopiesMap createdCopies)
         {
             return new PIMSchema(projectVersion.Project, createdCopies.SuggestGuid(this));
         }
 
-        public override void FillCopy(IEvoXCloneable copyComponent, ProjectVersion projectVersion,
+        public override void FillCopy(IExolutioCloneable copyComponent, ProjectVersion projectVersion,
                                       ElementCopiesMap createdCopies)
         {
             base.FillCopy(copyComponent, projectVersion, createdCopies);

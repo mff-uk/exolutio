@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="EvoX.Model.OCL.Types.VoidType" Collapsed="true">
+  <Class Name="Exolutio.Model.OCL.Types.VoidType" Collapsed="true">
     <Position X="5.25" Y="7.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAIAAA=</HashCode>
@@ -8,14 +8,14 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="EvoX.Model.OCL.Types.VariableDeclaration" Collapsed="true">
+  <Class Name="Exolutio.Model.OCL.Types.VariableDeclaration" Collapsed="true">
     <Position X="23.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAACAAAAAAA=</HashCode>
       <FileName>OCL\Types\VariableDeclaration.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="EvoX.Model.OCL.Types.TupleType" Collapsed="true">
+  <Class Name="Exolutio.Model.OCL.Types.TupleType" Collapsed="true">
     <Position X="7.25" Y="8.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AGAAAAAAAAAAIBAACAAAAAQAAAAAAAAAgQAAAAAIAAA=</HashCode>
@@ -23,35 +23,35 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="EvoX.Model.OCL.Types.AnyType" Collapsed="true">
+  <Class Name="Exolutio.Model.OCL.Types.AnyType" Collapsed="true">
     <Position X="3" Y="7.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>OCL\Types\AnyType.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="EvoX.Model.OCL.Types.AssociationClass" Collapsed="true">
+  <Class Name="Exolutio.Model.OCL.Types.AssociationClass" Collapsed="true">
     <Position X="30.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>OCL\Types\AssociationClass.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="EvoX.Model.OCL.Types.BagType" Collapsed="true">
+  <Class Name="Exolutio.Model.OCL.Types.BagType" Collapsed="true">
     <Position X="16.25" Y="10.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAIAAAACAIAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>OCL\Types\BagType.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="EvoX.Model.OCL.Types.Class" Collapsed="true">
+  <Class Name="Exolutio.Model.OCL.Types.Class" Collapsed="true">
     <Position X="25.25" Y="7.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAg=</HashCode>
       <FileName>OCL\Types\Class.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="EvoX.Model.OCL.Types.Classifier" Collapsed="true">
+  <Class Name="Exolutio.Model.OCL.Types.Classifier" Collapsed="true">
     <Position X="13" Y="4.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>QAAAAACCABAAAAAAAAQAAAAIAAAAAAEAgAAAAAACAAA=</HashCode>
@@ -59,7 +59,7 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="EvoX.Model.OCL.Types.CollectionType" Collapsed="true">
+  <Class Name="Exolutio.Model.OCL.Types.CollectionType" Collapsed="true">
     <Position X="13" Y="8.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAABAAAAAAAIAAEgIAAAASAIAAAAIAAgQAAAAAIAiA=</HashCode>
@@ -67,14 +67,14 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="EvoX.Model.OCL.Types.DataType" Collapsed="true">
+  <Class Name="Exolutio.Model.OCL.Types.DataType" Collapsed="true">
     <Position X="13" Y="7.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>OCL\Types\DataType.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="EvoX.Model.OCL.Types.InvalidType" Collapsed="true">
+  <Class Name="Exolutio.Model.OCL.Types.InvalidType" Collapsed="true">
     <Position X="23" Y="7.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAIAAA=</HashCode>
@@ -82,14 +82,14 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="EvoX.Model.OCL.Types.MessageType" Collapsed="true">
+  <Class Name="Exolutio.Model.OCL.Types.MessageType" Collapsed="true">
     <Position X="27.5" Y="7.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>OCL\Types\MessageType.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="EvoX.Model.OCL.Types.Operation" Collapsed="true">
+  <Class Name="Exolutio.Model.OCL.Types.Operation" Collapsed="true">
     <Position X="6.25" Y="4.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAACAAACAgAAEgAAAAAQIAAAAAIAAAAAAAAIEAAA=</HashCode>
@@ -97,14 +97,14 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="EvoX.Model.OCL.Types.OrderedSetType" Collapsed="true">
+  <Class Name="Exolutio.Model.OCL.Types.OrderedSetType" Collapsed="true">
     <Position X="11.75" Y="10.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAIAAAACAIAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>OCL\Types\OrderedSetType.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="EvoX.Model.OCL.Types.Parameter" Collapsed="true">
+  <Class Name="Exolutio.Model.OCL.Types.Parameter" Collapsed="true">
     <Position X="25.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAACAAAAAgAAAAAAAAAQAAAAFAAAAAQAAAAAAAAA=</HashCode>
@@ -112,14 +112,14 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="EvoX.Model.OCL.Types.PrimitiveType" Collapsed="true">
+  <Class Name="Exolutio.Model.OCL.Types.PrimitiveType" Collapsed="true">
     <Position X="20.25" Y="8.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAIAAAAAAAA=</HashCode>
       <FileName>OCL\Types\PrimitiveType.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="EvoX.Model.OCL.Types.Property" Collapsed="true">
+  <Class Name="Exolutio.Model.OCL.Types.Property" Collapsed="true">
     <Position X="3.75" Y="4.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAACAAAAAgAAAAAAAAAAIAAABAAIAAQACAAAAAAA=</HashCode>
@@ -127,49 +127,49 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="EvoX.Model.OCL.Types.SequenceType" Collapsed="true">
+  <Class Name="Exolutio.Model.OCL.Types.SequenceType" Collapsed="true">
     <Position X="9.5" Y="10.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAIAAAACAIAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>OCL\Types\SequenceType.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="EvoX.Model.OCL.Types.SetType" Collapsed="true">
+  <Class Name="Exolutio.Model.OCL.Types.SetType" Collapsed="true">
     <Position X="14" Y="10.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAIAAAACAIAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>OCL\Types\SetType.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="EvoX.Model.OCL.Types.TemplateParameterType" Collapsed="true">
+  <Class Name="Exolutio.Model.OCL.Types.TemplateParameterType" Collapsed="true">
     <Position X="20.75" Y="7.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>OCL\Types\TemplateParameterType.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="EvoX.Model.OCL.Types.IntegerType" Collapsed="true">
+  <Class Name="Exolutio.Model.OCL.Types.IntegerType" Collapsed="true">
     <Position X="18" Y="10.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAA=</HashCode>
       <FileName>OCL\Types\PrimitiveType\IntegerType.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="EvoX.Model.OCL.Types.UnlimitedNaturalType" Collapsed="true">
+  <Class Name="Exolutio.Model.OCL.Types.UnlimitedNaturalType" Collapsed="true">
     <Position X="22.5" Y="10.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAA=</HashCode>
       <FileName>OCL\Types\PrimitiveType\UnlimitedNaturalType.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="EvoX.Model.OCL.Types.RealType" Collapsed="true">
+  <Class Name="Exolutio.Model.OCL.Types.RealType" Collapsed="true">
     <Position X="20.25" Y="10.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>OCL\Types\PrimitiveType\RealType.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="EvoX.Model.OCL.Types.Namespace" Collapsed="true">
+  <Class Name="Exolutio.Model.OCL.Types.Namespace" Collapsed="true">
     <Position X="15.5" Y="4.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>QAAAAACAAAAAAAAAgAAAAAAIAAAAAAAAAAAAAAAAAAA=</HashCode>
@@ -177,7 +177,7 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="EvoX.Model.OCL.Types.ModelElement" Collapsed="true">
+  <Class Name="Exolutio.Model.OCL.Types.ModelElement" Collapsed="true">
     <Position X="13" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAEgAAAAAQIAAAAAIAAAAAAAAAAAiA=</HashCode>
