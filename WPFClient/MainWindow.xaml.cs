@@ -93,7 +93,7 @@ namespace Exolutio.WPFClient
                 Project sampleProject = Tests.TestUtils.CreateSampleProject();
                 Current.Project = sampleProject;
 #else
-                ExolutioGuiCommands.NewProjectCommand.Execute();
+                GuiCommands.NewProjectCommand.Execute();
 #endif
             }
         }
