@@ -98,7 +98,7 @@ namespace Exolutio.WPFClient
             get { return File.Exists(LayoutFilePath); }
         }
 
-        private static readonly XNamespace exolutioNS = @"http://www.eXolutio.eu/Project/Configuration";
+        private static readonly XNamespace exolutioNS = @"http://www.eXolutio.eu/Project/Configuration/";
 
         public static void LoadConfiguration()
         {
