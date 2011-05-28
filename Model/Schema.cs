@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-using EvoX.Model.OCL;
-using EvoX.Model.Serialization;
-using EvoX.Model.Versioning;
+using Exolutio.Model.OCL;
+using Exolutio.Model.Serialization;
+using Exolutio.Model.Versioning;
 
-namespace EvoX.Model
+namespace Exolutio.Model
 {
-    public abstract class Schema : EvoXVersionedObjectNotAPartOfSchema
+    public abstract class Schema : ExolutioVersionedObjectNotAPartOfSchema
     {
         protected Schema(Project p) : base(p) { InitializeCollections(); }
         protected Schema(Project p, Guid g) : base(p, g) { InitializeCollections(); }
@@ -31,9 +31,9 @@ namespace EvoX.Model
 
         public UndirectCollection<OCLScript> OCLScripts { get; private set; }
 
-        #region Implementation of IEvoXCloneable
+        #region Implementation of IExolutioCloneable
 
-        public override void FillCopy(IEvoXCloneable copyComponent, ProjectVersion projectVersion,
+        public override void FillCopy(IExolutioCloneable copyComponent, ProjectVersion projectVersion,
                                       ElementCopiesMap createdCopies)
         {
             base.FillCopy(copyComponent, projectVersion, createdCopies);
@@ -45,7 +45,7 @@ namespace EvoX.Model
 
         #endregion
 
-        #region Implementation of IEvoXSerializable
+        #region Implementation of IExolutioSerializable
 
         public override void Serialize(XElement parentNode, SerializationContext context)
         {

@@ -1,7 +1,7 @@
 using System;
 using System.Windows.Controls;
 
-namespace EvoX.View.Commands.ParameterControls
+namespace Exolutio.View.Commands.ParameterControls
 {
     public class StringParameterEditor:TextBox, IOperationParameterControl<string>, IOperationParameterControl
     {

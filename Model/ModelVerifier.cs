@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using EvoX.Model.PSM;
-using EvoX.SupportingClasses;
+using Exolutio.Model.PSM;
+using Exolutio.SupportingClasses;
 
-namespace EvoX.Model
+namespace Exolutio.Model
 {
     public class ModelVerifier
     {

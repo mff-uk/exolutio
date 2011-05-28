@@ -8,8 +8,8 @@
     <ProjectGuid>{964C14E5-8280-4666-B4F3-A0FC9ADA7160}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EvoX.Updater</RootNamespace>
-    <AssemblyName>EvoX.Updater</AssemblyName>
+    <RootNamespace>Exolutio.Updater</RootNamespace>
+    <AssemblyName>eXolutio.Updater</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -102,10 +102,10 @@
     </EmbeddedResource>
     <None Include="app.config" />
     <AppDesigner Include="Properties\" />
-    <None Include="Service References\UpdaterService\EvoX.Updater.UpdaterService.FileWithVersion.datasource">
+    <None Include="Service References\UpdaterService\Exolutio.Updater.UpdaterService.FileWithVersion.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\UpdaterService\EvoX.Updater.UpdaterService.Version.datasource">
+    <None Include="Service References\UpdaterService\Exolutio.Updater.UpdaterService.Version.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\UpdaterService\UpdaterService.wsdl" />

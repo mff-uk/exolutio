@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace EvoX.SupportingClasses
+namespace Exolutio.SupportingClasses
 {
 	/// <summary>
 	/// Static methods of this class can check whether a name for a member type is 

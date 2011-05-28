@@ -5,11 +5,11 @@ using System.Diagnostics;
 using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
-using EvoX.Model.Resources;
-using EvoX.Model.Serialization;
-using EvoX.SupportingClasses;
+using Exolutio.Model.Resources;
+using Exolutio.Model.Serialization;
+using Exolutio.SupportingClasses;
 
-namespace EvoX.Model.Versioning
+namespace Exolutio.Model.Versioning
 {
     public class VersionManager
     {
@@ -18,9 +18,9 @@ namespace EvoX.Model.Versioning
         /// </summary>
         private class VersionedItemPivot
         {
-            private readonly EvoXDictionary<Version, IVersionedItem> pivotMapping = new EvoXDictionary<Version, IVersionedItem>();
+            private readonly ExolutioDictionary<Version, IVersionedItem> pivotMapping = new ExolutioDictionary<Version, IVersionedItem>();
 
-            public EvoXDictionary<Version, IVersionedItem> PivotMapping
+            public ExolutioDictionary<Version, IVersionedItem> PivotMapping
             {
                 get { return pivotMapping; }
             }
@@ -53,13 +53,13 @@ namespace EvoX.Model.Versioning
 
         #endregion
 
-        private readonly EvoXDictionary<VersionedItemPivot, List<IVersionedItem>> linkedVersionedItems = new EvoXDictionary<VersionedItemPivot, List<IVersionedItem>>();
+        private readonly ExolutioDictionary<VersionedItemPivot, List<IVersionedItem>> linkedVersionedItems = new ExolutioDictionary<VersionedItemPivot, List<IVersionedItem>>();
         private ReadOnlyDictionary<VersionedItemPivot, List<IVersionedItem>> LinkedVersionedItems
         {
             get { return linkedVersionedItems.AsReadOnly(); }
         }
 
-        private readonly EvoXDictionary<IVersionedItem, VersionedItemPivot> pivotLookupDictionary = new EvoXDictionary<IVersionedItem, VersionedItemPivot>();
+        private readonly ExolutioDictionary<IVersionedItem, VersionedItemPivot> pivotLookupDictionary = new ExolutioDictionary<IVersionedItem, VersionedItemPivot>();
         private ReadOnlyDictionary<IVersionedItem, VersionedItemPivot> PivotLookupDictionary
         {
             get { return pivotLookupDictionary.AsReadOnly(); }
@@ -68,7 +68,7 @@ namespace EvoX.Model.Versioning
         /// <summary>
         /// Creates new verion of the project from the existing version <param name="branchedVersion" />.
         /// The created version is fully integrated into versioning system 
-        /// (dictionaries <see cref="EvoX.Model.Project" />.<see cref="EvoX.Model.Project.ProjectVersions" /> and version links
+        /// (dictionaries <see cref="Exolutio.Model.Project" />.<see cref="Exolutio.Model.Project.ProjectVersions" /> and version links
         /// among <see cref="IVersionedItem"/>s).
         /// </summary>
         /// <param name="branchedVersion">Existing version in the project</param>
@@ -83,9 +83,9 @@ namespace EvoX.Model.Versioning
             newProjectVersion.Version = newVersion;
 
             ElementCopiesMap elementCopiesMap = new ElementCopiesMap(Project, Project);
-            IEnumerable<EvoXObject> allModelItems = ModelIterator.GetAllModelItems(branchedVersion);
-            List<EvoXObject> evoXObjects = allModelItems.ToList();
-            elementCopiesMap.PrepareGuids(evoXObjects);
+            IEnumerable<ExolutioObject> allModelItems = ModelIterator.GetAllModelItems(branchedVersion);
+            List<ExolutioObject> exolutioObjects = allModelItems.ToList();
+            elementCopiesMap.PrepareGuids(exolutioObjects);
             elementCopiesMap.PrepareGuid(branchedVersion);
 
             branchedVersion.FillCopy(newProjectVersion, newProjectVersion, elementCopiesMap);
@@ -113,13 +113,13 @@ namespace EvoX.Model.Versioning
                 version.BranchedFrom = deletedVersion.BranchedFrom;
             }
 
-            List<IVersionedItem> evoXList = deletedVersion.Items.ToList();
-            foreach (IVersionedItem versionedItem in evoXList)
+            List<IVersionedItem> exolutioList = deletedVersion.Items.ToList();
+            foreach (IVersionedItem versionedItem in exolutioList)
             {
                 RemoveVersionedItem(versionedItem);
             }
 
-            foreach (IVersionedItem versionedItem in evoXList)
+            foreach (IVersionedItem versionedItem in exolutioList)
             {
                 Project.mappingDictionary.Remove(versionedItem.ID);
             }
@@ -143,12 +143,12 @@ namespace EvoX.Model.Versioning
         {
             if (version1 != itemVersion1.Version)
             {
-                throw new EvoXModelException(Exceptions.VersionManager_RegisterVersionLink_itemOldVersion_Version_must_point_to_the_same_object_as_oldVersion);
+                throw new ExolutioModelException(Exceptions.VersionManager_RegisterVersionLink_itemOldVersion_Version_must_point_to_the_same_object_as_oldVersion);
             }
 
             if (itemVersion1.GetType() != itemVersion2.GetType())
             {
-                throw new EvoXModelException();
+                throw new ExolutioModelException();
             }
 
             VersionedItemPivot pivot;
@@ -181,7 +181,7 @@ namespace EvoX.Model.Versioning
             {
                 if (pivotLookupDictionary.ContainsKey(item))
                 {
-                    throw new EvoXModelException("Item already added into versioning infrastracture. ");
+                    throw new ExolutioModelException("Item already added into versioning infrastracture. ");
                 }
 
                 VersionedItemPivot pivot = new VersionedItemPivot();
@@ -216,7 +216,7 @@ namespace EvoX.Model.Versioning
                 // there should always be exactly one item fullfiling the condition
                 if (list.Count(item => item.Version == deletedVersion) != 1)
                 {
-                    throw new EvoXModelException("Inconsistent record in version links.");
+                    throw new ExolutioModelException("Inconsistent record in version links.");
                 }
                 // and this item is removed
                 list.RemoveAll(item => item.Version == deletedVersion);
@@ -230,7 +230,7 @@ namespace EvoX.Model.Versioning
             }
         }
 
-        public bool AreItemsLinked(EvoXVersionedObject item1, EvoXVersionedObject item2)
+        public bool AreItemsLinked(ExolutioVersionedObject item1, ExolutioVersionedObject item2)
         {
             return pivotLookupDictionary[item1] == pivotLookupDictionary[item2];
         }
@@ -262,11 +262,11 @@ namespace EvoX.Model.Versioning
         {
             foreach (KeyValuePair<VersionedItemPivot, List<IVersionedItem>> kvp in LinkedVersionedItems)
             {
-                XElement linkedItemsElement = new XElement(context.EvoXNS + "LinkedItems");
+                XElement linkedItemsElement = new XElement(context.ExolutioNS + "LinkedItems");
                 foreach (IVersionedItem versionedItem in kvp.Value)
                 {
-                    XElement linkedItemElement = new XElement(context.EvoXNS + "LinkedItem");
-                    Project.SerializeIDRef((IEvoXSerializable) versionedItem, "itemID", linkedItemElement, context);
+                    XElement linkedItemElement = new XElement(context.ExolutioNS + "LinkedItem");
+                    Project.SerializeIDRef((IExolutioSerializable) versionedItem, "itemID", linkedItemElement, context);
                     Project.SerializeSimpleValueToAttribute("versionNumber", versionedItem.Version.ID, linkedItemElement, context);
                     linkedItemsElement.Add(linkedItemElement);
                 }
@@ -276,12 +276,12 @@ namespace EvoX.Model.Versioning
 
         public void DeserializeVersionLinks(XElement parentNode, SerializationContext context)
         {
-            foreach (XElement linkedItemsElement in parentNode.Elements(context.EvoXNS + "LinkedItems"))
+            foreach (XElement linkedItemsElement in parentNode.Elements(context.ExolutioNS + "LinkedItems"))
             {
                 VersionedItemPivot pivot = new VersionedItemPivot();
 
                 Dictionary<Version, Guid> linkedItemsIds = new Dictionary<Version, Guid>();
-                foreach (XElement linkedItemElement in linkedItemsElement.Elements(context.EvoXNS + "LinkedItem"))
+                foreach (XElement linkedItemElement in linkedItemsElement.Elements(context.ExolutioNS + "LinkedItem"))
                 {
                     Guid id = SerializationContext.DecodeGuid(linkedItemElement.Attribute("itemID").Value);
                     Guid versionId = SerializationContext.DecodeGuid(linkedItemElement.Attribute("versionNumber").Value);
@@ -293,11 +293,11 @@ namespace EvoX.Model.Versioning
                 {
                     foreach (KeyValuePair<Version, Guid> kvp in linkedItemsIds)
                     {
-                        IVersionedItem evoXObject = (IVersionedItem) Project.TranslateComponent(kvp.Value);
-                        pivotLookupDictionary[evoXObject] = pivot;
-                        pivot.PivotMapping.Add(kvp.Key, evoXObject);
+                        IVersionedItem exolutioObject = (IVersionedItem) Project.TranslateComponent(kvp.Value);
+                        pivotLookupDictionary[exolutioObject] = pivot;
+                        pivot.PivotMapping.Add(kvp.Key, exolutioObject);
                         linkedVersionedItems.CreateSubCollectionIfNeeded(pivot);
-                        linkedVersionedItems[pivot].Add(evoXObject);
+                        linkedVersionedItems[pivot].Add(exolutioObject);
                     }
                 }
             }
@@ -314,9 +314,9 @@ namespace EvoX.Model.Versioning
 
             ElementCopiesMap elementCopiesMap = new ElementCopiesMap(Project, separatedProject);
             elementCopiesMap.KeepGuids = keepGuids;
-            IEnumerable<EvoXObject> allModelItems = ModelIterator.GetAllModelItems(projectVersion);
-            List<EvoXObject> evoXObjects = allModelItems.ToList();
-            elementCopiesMap.PrepareGuids(evoXObjects);
+            IEnumerable<ExolutioObject> allModelItems = ModelIterator.GetAllModelItems(projectVersion);
+            List<ExolutioObject> exolutioObjects = allModelItems.ToList();
+            elementCopiesMap.PrepareGuids(exolutioObjects);
             elementCopiesMap.PrepareGuid(projectVersion);
 
             projectVersion.FillCopy(separatedProject.SingleVersion, separatedProject.SingleVersion, elementCopiesMap);
@@ -333,9 +333,9 @@ namespace EvoX.Model.Versioning
 
             ElementCopiesMap elementCopiesMap = new ElementCopiesMap(embededVersion.Project, Project);
             elementCopiesMap.KeepGuids = keepGuids;
-            IEnumerable<EvoXObject> allModelItems = ModelIterator.GetAllModelItems(embededVersion);
-            List<EvoXObject> evoXObjects = allModelItems.ToList();
-            elementCopiesMap.PrepareGuids(evoXObjects);
+            IEnumerable<ExolutioObject> allModelItems = ModelIterator.GetAllModelItems(embededVersion);
+            List<ExolutioObject> exolutioObjects = allModelItems.ToList();
+            elementCopiesMap.PrepareGuids(exolutioObjects);
             elementCopiesMap.PrepareGuid(embededVersion);
 
             Project.ProjectVersions.Add(newProjectVersion);
@@ -349,7 +349,7 @@ namespace EvoX.Model.Versioning
                 {
                     IVersionedItem fromEmbedded = kvp.Key;
                     IVersionedItem newlyCreated = kvp.Value;
-                    EvoXObject previousObject;
+                    ExolutioObject previousObject;
                     if (Project.TryTranslateObject(fromEmbedded.ID, out previousObject) && previousObject is IVersionedItem)
                     {
                         if (Project.mappingDictionary.ContainsKey(previousObject.ID) &&

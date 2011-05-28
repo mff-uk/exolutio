@@ -9,10 +9,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Controls.Primitives;
 using System.Windows.Shapes;
-using EvoX.SupportingClasses;
-using EvoX.ViewToolkit.Geometries;
+using Exolutio.SupportingClasses;
+using Exolutio.ViewToolkit.Geometries;
 
-namespace EvoX.ViewToolkit
+namespace Exolutio.ViewToolkit
 {
 #if SILVERLIGHT
     /// <summary>
@@ -29,7 +29,7 @@ namespace EvoX.ViewToolkit
         /// </summary>
         public Connector Connector { get; set; }
 
-        public EvoXCanvas EvoXCanvas { get { return Connector != null ? Connector.EvoXCanvas : null; } }
+        public ExolutioCanvas ExolutioCanvas { get { return Connector != null ? Connector.ExolutioCanvas : null; } }
 
         /// <summary>
         /// Order of the point in <see cref="Connector"/>
@@ -157,12 +157,12 @@ namespace EvoX.ViewToolkit
         /// <summary>
         /// Initializes a new instance of the <see cref="ConnectorPoint"/> class.
         /// </summary>
-        /// <param name="evoXCanvas">Canvas where the point is created.</param>
-        public ConnectorPoint(EvoXCanvas evoXCanvas)
+        /// <param name="exolutioCanvas">Canvas where the point is created.</param>
+        public ConnectorPoint(ExolutioCanvas exolutioCanvas)
         {
             Width = 0;
             Height = 0;
-            dragThumb = new DragThumb(evoXCanvas, this);
+            dragThumb = new DragThumb(exolutioCanvas, this);
             dragThumb.PositionChanged += InvokePositionChanged;
             dragThumb.FellowTravellersUpdated += AlignFellowTravellers;
             OrderInConnector = -1;
@@ -188,7 +188,7 @@ namespace EvoX.ViewToolkit
 
         void ConnectorPoint_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            dragThumb.EvoXCanvas.SelectableItem_PreviewMouseDown(this, e);
+            dragThumb.ExolutioCanvas.SelectableItem_PreviewMouseDown(this, e);
         }
 
         void AlignFellowTravellers()
@@ -340,11 +340,11 @@ namespace EvoX.ViewToolkit
                 selected = value;
                 if (selected)
                 {
-                    EvoXCanvas.SelectedItems.AddIfNotContained(this);
+                    ExolutioCanvas.SelectedItems.AddIfNotContained(this);
                 }
                 else
                 {
-                    EvoXCanvas.SelectedItems.Remove(this);
+                    ExolutioCanvas.SelectedItems.Remove(this);
                 }
                 InvokeSelectedChanged();
             }

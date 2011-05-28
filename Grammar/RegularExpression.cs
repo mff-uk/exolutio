@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using EvoX.SupportingClasses;
+using Exolutio.SupportingClasses;
 
-namespace EvoX.Model.PSM.Grammar
+namespace Exolutio.Model.PSM.Grammar
 {
     public abstract class RegularExpression
     {
@@ -29,7 +29,7 @@ namespace EvoX.Model.PSM.Grammar
 
         public uint Lower { get; set; }
 
-        public EvoX.Model.UnlimitedInt Upper { get; set; }
+        public Exolutio.Model.UnlimitedInt Upper { get; set; }
 
         public override string ToString()
         {

@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using System.Reflection;
-using EvoX.Model.PSM;
+using Exolutio.Model.PSM;
 
-namespace EvoX.Controller.Commands.Reflection
+namespace Exolutio.Controller.Commands.Reflection
 {
     public class PSMSchemaComponentParameterConsistency : ParameterConsistency
     {

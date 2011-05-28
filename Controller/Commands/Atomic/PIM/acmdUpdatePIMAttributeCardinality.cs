@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using EvoX.Controller.Commands;
-using EvoX.Model.PIM;
-using EvoX.Model;
-using EvoX.Model.PSM;
-using EvoX.Controller.Commands.Atomic.PSM;
+using Exolutio.Controller.Commands;
+using Exolutio.Model.PIM;
+using Exolutio.Model;
+using Exolutio.Model.PSM;
+using Exolutio.Controller.Commands.Atomic.PSM;
 
-namespace EvoX.Controller.Commands.Atomic.PIM
+namespace Exolutio.Controller.Commands.Atomic.PIM
 {
     public class acmdUpdatePIMAttributeCardinality : StackedCommand
     {

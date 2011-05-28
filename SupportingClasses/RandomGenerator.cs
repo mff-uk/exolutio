@@ -1,6 +1,6 @@
 using System;
 
-namespace EvoX.SupportingClasses
+namespace Exolutio.SupportingClasses
 {
     public static class RandomGenerator
     {

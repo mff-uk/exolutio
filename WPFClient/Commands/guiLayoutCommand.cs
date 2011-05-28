@@ -1,10 +1,10 @@
 using System;
-using EvoX.Model.PIM;
-using EvoX.Model.PSM;
-using EvoX.View;
-using EvoX.View.Commands;
+using Exolutio.Model.PIM;
+using Exolutio.Model.PSM;
+using Exolutio.View;
+using Exolutio.View.Commands;
 
-namespace EvoX.WPFClient.Commands
+namespace Exolutio.WPFClient.Commands
 {
     public class guiLayoutCommand : guiCommandBase
     {

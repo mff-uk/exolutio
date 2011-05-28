@@ -1,6 +1,6 @@
 using System;
 
-namespace EvoX.Model
+namespace Exolutio.Model
 {
     public struct UnlimitedInt : IEquatable<UnlimitedInt>, IComparable<UnlimitedInt>, IComparable<uint>
     {

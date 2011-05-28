@@ -1,7 +1,7 @@
 using System.Windows;
-using EvoX.SupportingClasses;
+using Exolutio.SupportingClasses;
 
-namespace EvoX.ViewToolkit.Geometries
+namespace Exolutio.ViewToolkit.Geometries
 {
     public static class PointExt
     {

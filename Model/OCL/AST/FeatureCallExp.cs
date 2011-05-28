@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace EvoX.Model.OCL.AST
+namespace Exolutio.Model.OCL.AST
 {
     /// <summary>
     /// A FeatureCallExp expression is an expression that refers to a feature that is defined for a Classifier in the UML model to

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace EvoX.Model.OCL.Types
+namespace Exolutio.Model.OCL.Types
 {
     /// <summary>
     /// CollectionType describes a list of elements of a particular given type. CollectionType is a concrete metaclass whose

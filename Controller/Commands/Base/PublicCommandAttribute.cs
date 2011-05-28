@@ -1,7 +1,7 @@
 ﻿using System;
-using EvoX.Controller.Commands.Reflection;
+using Exolutio.Controller.Commands.Reflection;
 
-namespace EvoX.Controller.Commands
+namespace Exolutio.Controller.Commands
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
     public class PublicCommandAttribute : Attribute

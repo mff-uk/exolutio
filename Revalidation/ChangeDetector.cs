@@ -1,14 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using EvoX.Model;
-using EvoX.Model.PSM;
-using EvoX.Revalidation.Changes;
+using Exolutio.Model;
+using Exolutio.Model.PSM;
+using Exolutio.Revalidation.Changes;
 using System.Reflection;
-using EvoX.SupportingClasses;
-using Version = EvoX.Model.Versioning.Version;
+using Exolutio.SupportingClasses;
+using Version = Exolutio.Model.Versioning.Version;
 
-namespace EvoX.Revalidation
+namespace Exolutio.Revalidation
 {
     /// <summary>
     /// Holds instances of all change predicates
@@ -94,7 +94,7 @@ namespace EvoX.Revalidation
 
         private static void testConstructs<TPSMComponent>(IEnumerable<TPSMComponent> components, 
             Version oldVersion, Version newVersion, DetectedChangesSet changeSet, EChangePredicateScope scope) 
-            where TPSMComponent : EvoXObject
+            where TPSMComponent : ExolutioObject
         {
             foreach (TPSMComponent component in components)
             {

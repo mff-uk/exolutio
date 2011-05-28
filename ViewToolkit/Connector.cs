@@ -6,10 +6,10 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using EvoX.SupportingClasses;
-using EvoX.ViewToolkit.Geometries;
+using Exolutio.SupportingClasses;
+using Exolutio.ViewToolkit.Geometries;
 
-namespace EvoX.ViewToolkit
+namespace Exolutio.ViewToolkit
 {
     public class Connector : Control, ISelectable
     {
@@ -55,11 +55,11 @@ namespace EvoX.ViewToolkit
                 selected = value;
                 if (selected)
                 {
-                    EvoXCanvas.SelectedItems.AddIfNotContained(this);
+                    ExolutioCanvas.SelectedItems.AddIfNotContained(this);
                 }
                 else
                 {
-                    EvoXCanvas.SelectedItems.Remove(this);
+                    ExolutioCanvas.SelectedItems.Remove(this);
                 }
                 InvalidateVisual();
                 InvokeSelectedChanged();
@@ -84,16 +84,16 @@ namespace EvoX.ViewToolkit
 
         void Connector_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            EvoXCanvas.SelectableItem_PreviewMouseDown(this, e);
+            ExolutioCanvas.SelectableItem_PreviewMouseDown(this, e);
         }
         
         #endregion
 
-        private EvoXCanvas evoXCanvas;
-        public EvoXCanvas EvoXCanvas
+        private ExolutioCanvas exolutioCanvas;
+        public ExolutioCanvas ExolutioCanvas
         {
-            get { return evoXCanvas; }
-            set { evoXCanvas = value; }
+            get { return exolutioCanvas; }
+            set { exolutioCanvas = value; }
         }
 
         private Node startNode;
@@ -299,7 +299,7 @@ namespace EvoX.ViewToolkit
             {
                 foreach (Line line in lines)
                 {
-                    EvoXCanvas.Children.Remove(line);
+                    ExolutioCanvas.Children.Remove(line);
                 }
 
                 lines.Clear();
@@ -321,7 +321,7 @@ namespace EvoX.ViewToolkit
 
                 if (reset)
                 {
-                    EvoXCanvas.Children.Add(l);
+                    ExolutioCanvas.Children.Add(l);
                     Canvas.SetZIndex(l, -1);
                     lines.Add(l);
                     ContextMenuService.SetContextMenu(l, ContextMenu);
@@ -555,7 +555,7 @@ namespace EvoX.ViewToolkit
 #if SILVERLIGHT
             foreach (Line line in lines)
             {
-                EvoXCanvas.Children.Remove(line);
+                ExolutioCanvas.Children.Remove(line);
             }
 
 #endif
@@ -589,8 +589,8 @@ namespace EvoX.ViewToolkit
             }
 #endif
 
-            ConnectorPoint startPoint = new ConnectorPoint(EvoXCanvas) { Placement = EPlacementKind.ParentAutoPos, ParentControl = node1, Connector = this, OrderInConnector = 0 };
-            ConnectorPoint endPoint = new ConnectorPoint(EvoXCanvas) { Placement = EPlacementKind.ParentAutoPos, ParentControl = node2, Connector = this, OrderInConnector = 1 };
+            ConnectorPoint startPoint = new ConnectorPoint(ExolutioCanvas) { Placement = EPlacementKind.ParentAutoPos, ParentControl = node1, Connector = this, OrderInConnector = 0 };
+            ConnectorPoint endPoint = new ConnectorPoint(ExolutioCanvas) { Placement = EPlacementKind.ParentAutoPos, ParentControl = node2, Connector = this, OrderInConnector = 1 };
 
             startPoint.SetPreferedPosition(optimalConnection[0]);
             endPoint.SetPreferedPosition(optimalConnection[1]);

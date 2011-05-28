@@ -1,8 +1,8 @@
 using System;
 using System.Windows.Input;
-using EvoX.View.Commands;
+using Exolutio.View.Commands;
 
-namespace EvoX.View
+namespace Exolutio.View
 {
     public static class KeyGestures
     {

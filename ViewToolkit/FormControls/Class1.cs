@@ -25,7 +25,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Navigation;
 
 
-namespace EvoX.ViewToolkit
+namespace Exolutio.ViewToolkit
 {
     public class WPFHelpers
     {

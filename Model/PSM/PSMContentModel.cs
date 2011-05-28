@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Xml;
 using System.Xml.Linq;
-using EvoX.Model.Serialization;
-using EvoX.Model.Versioning;
+using Exolutio.Model.Serialization;
+using Exolutio.Model.Versioning;
 
-namespace EvoX.Model.PSM
+namespace Exolutio.Model.PSM
 {
     public class PSMContentModel : PSMAssociationMember
     {
@@ -53,7 +53,7 @@ namespace EvoX.Model.PSM
             set { type = value; NotifyPropertyChanged("Type"); }
         }
 
-        #region Implementation of IEvoXSerializable
+        #region Implementation of IExolutioSerializable
 
         public override void Serialize(XElement parentNode, SerializationContext context)
         {
@@ -79,14 +79,14 @@ namespace EvoX.Model.PSM
             return "PSMContentModel: " + Enum.GetName(type.GetType(), type);
         }
         
-        #region Implementation of IEvoXCloneable
+        #region Implementation of IExolutioCloneable
 
-        public override IEvoXCloneable Clone(ProjectVersion projectVersion, ElementCopiesMap createdCopies)
+        public override IExolutioCloneable Clone(ProjectVersion projectVersion, ElementCopiesMap createdCopies)
         {
             return new PSMContentModel(projectVersion.Project, createdCopies.SuggestGuid(this));
         }
 
-        public override void FillCopy(IEvoXCloneable copyComponent, ProjectVersion projectVersion,
+        public override void FillCopy(IExolutioCloneable copyComponent, ProjectVersion projectVersion,
                                       ElementCopiesMap createdCopies)
         {
             base.FillCopy(copyComponent, projectVersion, createdCopies);

@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Xml;
 using System.Xml.Linq;
-using EvoX.DataGenerator;
-using EvoX.Dialogs;
-using EvoX.Model.PSM;
-using EvoX.ResourceLibrary;
-using EvoX.View.Commands.Grammar;
+using Exolutio.DataGenerator;
+using Exolutio.Dialogs;
+using Exolutio.Model.PSM;
+using Exolutio.ResourceLibrary;
+using Exolutio.View.Commands.Grammar;
 
-namespace EvoX.View.Commands
+namespace Exolutio.View.Commands
 {
     public class guiSampleDocumentCommand : guiActiveDiagramCommand
     {
@@ -47,7 +47,7 @@ namespace EvoX.View.Commands
 
         public override System.Windows.Media.ImageSource Icon
         {
-            get { return EvoXResourceNames.GetResourceImageSource(EvoXResourceNames.xmlIcon); }
+            get { return ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.xmlIcon); }
         }
     }
 }

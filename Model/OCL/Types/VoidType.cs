@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 
-namespace EvoX.Model.OCL.Types
+namespace Exolutio.Model.OCL.Types
 {
     /// <summary>
     /// VoidType is the metaclass of the OclVoid type that conforms to all types except the OclInvalid type.

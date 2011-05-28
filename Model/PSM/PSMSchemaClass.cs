@@ -1,7 +1,7 @@
 ﻿using System;
-using EvoX.Model.Versioning;
+using Exolutio.Model.Versioning;
 
-namespace EvoX.Model.PSM
+namespace Exolutio.Model.PSM
 {
     public class PSMSchemaClass : PSMAssociationMember
     {
@@ -27,14 +27,14 @@ namespace EvoX.Model.PSM
             return "PSMSchemaClass: " + Name;
         }
 
-        #region Implementation of IEvoXCloneable
+        #region Implementation of IExolutioCloneable
 
-        public override IEvoXCloneable Clone(ProjectVersion projectVersion, ElementCopiesMap createdCopies)
+        public override IExolutioCloneable Clone(ProjectVersion projectVersion, ElementCopiesMap createdCopies)
         {
             return new PSMSchemaClass(projectVersion.Project, createdCopies.SuggestGuid(this));
         }
 
-        public override void FillCopy(IEvoXCloneable copyComponent, ProjectVersion projectVersion,
+        public override void FillCopy(IExolutioCloneable copyComponent, ProjectVersion projectVersion,
                                       ElementCopiesMap createdCopies)
         {
             base.FillCopy(copyComponent, projectVersion, createdCopies);

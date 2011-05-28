@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
 
-namespace EvoX.ViewToolkit
+namespace Exolutio.ViewToolkit
 {
     public interface ISelectable
     {

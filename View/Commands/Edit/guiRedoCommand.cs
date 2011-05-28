@@ -1,8 +1,8 @@
 using System;
-using EvoX.Controller.Commands;
-using EvoX.ResourceLibrary;
+using Exolutio.Controller.Commands;
+using Exolutio.ResourceLibrary;
 
-namespace EvoX.View.Commands.Edit
+namespace Exolutio.View.Commands.Edit
 {
     public class guiRedoCommand : guiCommandBase
     {
@@ -50,7 +50,7 @@ namespace EvoX.View.Commands.Edit
 
         public override System.Windows.Media.ImageSource Icon
         {
-            get { return EvoXResourceNames.GetResourceImageSource(EvoXResourceNames.redo); }
+            get { return ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.redo); }
         }
 
         public override string Text

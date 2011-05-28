@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace EvoX.ViewToolkit
+namespace Exolutio.ViewToolkit
 {
 	/// <summary>
 	/// This class contains several methods for drawing connectors and 

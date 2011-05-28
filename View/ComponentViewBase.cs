@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Windows.Controls;
-using EvoX.Model;
-using EvoX.Model.ViewHelper;
-using EvoX.ViewToolkit;
-using EvoX.SupportingClasses;
+using Exolutio.Model;
+using Exolutio.Model.ViewHelper;
+using Exolutio.ViewToolkit;
+using Exolutio.SupportingClasses;
 
-namespace EvoX.View
+namespace Exolutio.View
 {
     public abstract class ComponentViewBaseVH<TViewHelper> : ComponentViewBase 
         where TViewHelper : ViewHelper
@@ -195,11 +195,11 @@ namespace EvoX.View
         {
             if (ModelComponent == null)
             {
-                throw new EvoXViewException(string.Format("'{0}'ShowInDiagram can not be called when ModelCompoennt is null", this));
+                throw new ExolutioViewException(string.Format("'{0}'ShowInDiagram can not be called when ModelCompoennt is null", this));
             }
             if (!CanPutInDiagram(diagramView))
             {
-                throw new EvoXViewException(string.Format("Can not put '{0}' to diagram.", this));
+                throw new ExolutioViewException(string.Format("Can not put '{0}' to diagram.", this));
             }
 
             DiagramView = diagramView;
@@ -215,7 +215,7 @@ namespace EvoX.View
         {
             if (!CanRemoveFromDiagram())
             {
-                throw new EvoXViewException(string.Format("Can not remove '{0}' from diagram.", this));
+                throw new ExolutioViewException(string.Format("Can not remove '{0}' from diagram.", this));
             }
             DiagramView.SelectedViews.Remove(this);
             DiagramView.RepresentantsCollection.Remove(ModelComponent);

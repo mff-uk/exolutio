@@ -2,11 +2,11 @@
 
 using System;
 using System.Linq;
-using EvoX.Model;
-using EvoX.Model.PIM;
-using EvoX.Model.PSM;
+using Exolutio.Model;
+using Exolutio.Model.PIM;
+using Exolutio.Model.PSM;
 using NUnit.Framework;
-using EvoX.Model.Versioning;
+using Exolutio.Model.Versioning;
 
 namespace Tests.ModelIntegrity
 {
@@ -21,7 +21,7 @@ namespace Tests.ModelIntegrity
 
 #if SKIP
 #else 
-                Assert.Throws(typeof(EvoXModelException), () =>
+                Assert.Throws(typeof(ExolutioModelException), () =>
                 {
                     if (project.SingleVersion != null)
                     {
@@ -40,7 +40,7 @@ namespace Tests.ModelIntegrity
             {
 #if SKIP
 #else 
-                Assert.Throws(typeof(EvoXModelException), () =>
+                Assert.Throws(typeof(ExolutioModelException), () =>
                                                                      {
                                                                          if (project.ProjectVersions != null)
                                                                          {
@@ -55,7 +55,7 @@ namespace Tests.ModelIntegrity
 
         private static void CheckComponent(Component component)
         {
-            CheckEvoXObject(component);
+            CheckExolutioObject(component);
             Assert.IsNotNull(component.Schema);
             Assert.AreEqual(component.Schema.ProjectVersion, component.ProjectVersion);
             Assert.IsNotNull(component.ProjectVersion);
@@ -78,10 +78,10 @@ namespace Tests.ModelIntegrity
             }
         }
 
-        private static void CheckEvoXObject(EvoXObject evoXObject)
+        private static void CheckExolutioObject(ExolutioObject exolutioObject)
         {
-            Assert.AreNotEqual(evoXObject, Guid.Empty);
-            Assert.IsNotNull(evoXObject.Project);
+            Assert.AreNotEqual(exolutioObject, Guid.Empty);
+            Assert.IsNotNull(exolutioObject.Project);
         }
 
         private static void CheckProjectVersion(ProjectVersion projectVersion)
@@ -101,14 +101,14 @@ namespace Tests.ModelIntegrity
 
         private static void CheckSchema(Schema schema)
         {
-            CheckEvoXObject(schema);
+            CheckExolutioObject(schema);
 
             Assert.IsNotNull(schema.ProjectVersion);
         }
 
         private static void CheckAttributeType(AttributeType attributeType)
         {
-            CheckEvoXObject(attributeType);
+            CheckExolutioObject(attributeType);
             CheckVersionedItem(attributeType);
             Assert.IsTrue(attributeType.Schema == null || attributeType.Schema.ProjectVersion == attributeType.ProjectVersion);
         }
@@ -510,7 +510,7 @@ namespace Tests.ModelIntegrity
 
             foreach (ProjectVersion projectVersion in project.ProjectVersions)
             {
-                foreach (EvoXObject o in ModelIterator.GetAllModelItems(projectVersion))
+                foreach (ExolutioObject o in ModelIterator.GetAllModelItems(projectVersion))
                 {
                     IVersionedItem versionedItem = (o as IVersionedItem);
                     if (versionedItem != null)
@@ -521,9 +521,9 @@ namespace Tests.ModelIntegrity
                 }
             }
 
-            foreach (EvoX.Model.Versioning.Version version in project.VersionManager.Versions)
+            foreach (Exolutio.Model.Versioning.Version version in project.VersionManager.Versions)
             {
-                EvoX.Model.Versioning.Version _v = version;
+                Exolutio.Model.Versioning.Version _v = version;
                 Assert.IsTrue(version.Items.All(i => i.Version == _v));
             }
 

@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 
-[assembly: AssemblyTitle("EvoX: Model")]
+[assembly: AssemblyTitle("Exolutio: Model")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("MFF UK")]
-[assembly: AssemblyProduct("EvoX")]
+[assembly: AssemblyProduct("Exolutio")]
 [assembly: AssemblyCopyright("Copyright © MFF UK 2010")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

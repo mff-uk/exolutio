@@ -1,10 +1,10 @@
 using System;
 using System.IO;
 using System.Windows.Media;
-using EvoX.View;
-using EvoX.View.Commands;
+using Exolutio.View;
+using Exolutio.View.Commands;
 
-namespace EvoX.WPFClient.Commands
+namespace Exolutio.WPFClient.Commands
 {
     public class guiResetWindowLayout : guiCommandBase
     {

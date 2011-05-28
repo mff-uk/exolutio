@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using EvoX.Controller.Commands;
-using EvoX.Model;
-using EvoX.Model.OCL;
+using Exolutio.Controller.Commands;
+using Exolutio.Model;
+using Exolutio.Model.OCL;
 
-namespace EvoX.Controller.Commands.Atomic.PIM
+namespace Exolutio.Controller.Commands.Atomic.PIM
 {
     public class acmdNewOCLScript : StackedCommand
     {
@@ -24,7 +24,7 @@ namespace EvoX.Controller.Commands.Atomic.PIM
             set
             {
                 if (!Executed) oclScriptGuid = value;
-                else throw new EvoXCommandException("Cannot set OCLScriptGuid after command execution.", this);
+                else throw new ExolutioCommandException("Cannot set OCLScriptGuid after command execution.", this);
             }
         }
 

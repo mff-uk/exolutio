@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using EvoX.Model;
-using EvoX.Model.PSM;
-using EvoX.Model.PIM;
-using EvoX.SupportingClasses;
-using EvoX.Translation;
+using Exolutio.Model;
+using Exolutio.Model.PSM;
+using Exolutio.Model.PIM;
+using Exolutio.SupportingClasses;
+using Exolutio.Translation;
 
-namespace EvoX.DataGenerator
+namespace Exolutio.DataGenerator
 {
 	public class NamingSupport
 	{

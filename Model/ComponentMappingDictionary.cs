@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
-using EvoX.Model.Resources;
-using EvoX.SupportingClasses;
+using Exolutio.Model.Resources;
+using Exolutio.SupportingClasses;
 
-namespace EvoX.Model
+namespace Exolutio.Model
 {
     public class ComponentMappingDictionary
     {
-        private EvoXDictionary<Guid, EvoXObject> internalDictionary = new EvoXDictionary<Guid, EvoXObject>();
+        private ExolutioDictionary<Guid, ExolutioObject> internalDictionary = new ExolutioDictionary<Guid, ExolutioObject>();
 
         #region delegations to internal dictionary
 
@@ -17,7 +17,7 @@ namespace EvoX.Model
         /// <returns>
         /// A <see cref="T:System.Collections.Generic.Dictionary`2.KeyCollection"/> containing the keys in the <see cref="T:System.Collections.Generic.Dictionary`2"/>.
         /// </returns>
-        public Dictionary<Guid, EvoXObject>.KeyCollection Keys
+        public Dictionary<Guid, ExolutioObject>.KeyCollection Keys
         {
             get { return internalDictionary.Keys; }
         }
@@ -28,7 +28,7 @@ namespace EvoX.Model
         /// <returns>
         /// A <see cref="T:System.Collections.Generic.Dictionary`2.ValueCollection"/> containing the values in the <see cref="T:System.Collections.Generic.Dictionary`2"/>.
         /// </returns>
-        public Dictionary<Guid, EvoXObject>.ValueCollection Values
+        public Dictionary<Guid, ExolutioObject>.ValueCollection Values
         {
             get { return internalDictionary.Values; }
         }
@@ -51,7 +51,7 @@ namespace EvoX.Model
         /// The value associated with the specified key. If the specified key is not found, a get operation throws a <see cref="T:System.Collections.Generic.KeyNotFoundException"/>, and a set operation creates a new element with the specified key.
         /// </returns>
         /// <param name="key">The key of the value to get or set.</param><exception cref="T:System.ArgumentNullException"><paramref name="key"/> is null.</exception><exception cref="T:System.Collections.Generic.KeyNotFoundException">The property is retrieved and <paramref name="key"/> does not exist in the collection.</exception>
-        public EvoXObject this[Guid key]
+        public ExolutioObject this[Guid key]
         {
             get
             {
@@ -94,7 +94,7 @@ namespace EvoX.Model
         /// true if the <see cref="T:System.Collections.Generic.Dictionary`2"/> contains an element with the specified key; otherwise, false.
         /// </returns>
         /// <param name="key">The key of the value to get.</param><param name="value">When this method returns, contains the value associated with the specified key, if the key is found; otherwise, the default value for the type of the <paramref name="value"/> parameter. This parameter is passed uninitialized.</param><exception cref="T:System.ArgumentNullException"><paramref name="key"/> is null.</exception>
-        public bool TryGetValue(Guid key, out EvoXObject value)
+        public bool TryGetValue(Guid key, out ExolutioObject value)
         {
             TestGuidNonEmpty(key);
             return internalDictionary.TryGetValue(key, out value);
@@ -104,7 +104,7 @@ namespace EvoX.Model
         /// Adds the specified key and value to the dictionary.
         /// </summary>
         /// <param name="key">The key of the element to add.</param><param name="value">The value of the element to add. The value can be null for reference types.</param><exception cref="T:System.ArgumentNullException"><paramref name="key"/> is null.</exception><exception cref="T:System.ArgumentException">An element with the same key already exists in the <see cref="T:System.Collections.Generic.Dictionary`2"/>.</exception>
-        public void Add(Guid key, EvoXObject value)
+        public void Add(Guid key, ExolutioObject value)
         {
             TestGuidNonEmpty(key);
             TestValueNonEmpty(value);
@@ -143,7 +143,7 @@ namespace EvoX.Model
         /// <returns>
         /// A <see cref="T:System.Collections.Generic.Dictionary`2.Enumerator"/> structure for the <see cref="T:System.Collections.Generic.Dictionary`2"/>.
         /// </returns>
-        public Dictionary<Guid, EvoXObject>.Enumerator GetEnumerator()
+        public Dictionary<Guid, ExolutioObject>.Enumerator GetEnumerator()
         {
             return internalDictionary.GetEnumerator();
         }
@@ -154,51 +154,51 @@ namespace EvoX.Model
         {
             if (key == Guid.Empty)
             {
-                throw new EvoXModelException("Key guid must not be empty. ");
+                throw new ExolutioModelException("Key guid must not be empty. ");
             }
         }
 
-        private static void TestValueNonEmpty(EvoXObject component)
+        private static void TestValueNonEmpty(ExolutioObject component)
         {
             if (component == null)
             {
-                throw new EvoXModelException("Component must not be empty. ");
+                throw new ExolutioModelException("Component must not be empty. ");
             }
         }
 
         public T FindComponent<T>(Guid key)
-            where T : EvoXObject
+            where T : ExolutioObject
         {
-            EvoXObject component;
+            ExolutioObject component;
             TestGuidNonEmpty(key);
             TryGetValue(key, out component);
             if (component == null)
             {
-                throw new EvoXModelException(string.Format(Exceptions.Lookup_for_component_of_type___0___failed__key___1___not_found_in_the_component_dictionary_, typeof(T).Name, key));
+                throw new ExolutioModelException(string.Format(Exceptions.Lookup_for_component_of_type___0___failed__key___1___not_found_in_the_component_dictionary_, typeof(T).Name, key));
             }
             return (T)component;
         }
 
-        public EvoXObject FindComponent(Guid key)
+        public ExolutioObject FindComponent(Guid key)
         {
-            EvoXObject component;
+            ExolutioObject component;
             TestGuidNonEmpty(key);
             TryGetValue(key, out component);
             if (component == null)
             {
-                throw new EvoXModelException(string.Format(Exceptions.Lookup_for_component_of_type___0___failed__key___1___not_found_in_the_component_dictionary_, "(not specified)", key));
+                throw new ExolutioModelException(string.Format(Exceptions.Lookup_for_component_of_type___0___failed__key___1___not_found_in_the_component_dictionary_, "(not specified)", key));
             }
             return component;
         }
 
         public bool VerifyComponentType<T>(Guid key)
         {
-            EvoXObject component;
+            ExolutioObject component;
             TestGuidNonEmpty(key);
             TryGetValue(key, out component);
             if (component == null)
             {
-                throw new EvoXModelException(string.Format(Exceptions.Lookup_for_component_of_type___0___failed__key___1___not_found_in_the_component_dictionary_, typeof(T).Name, key));
+                throw new ExolutioModelException(string.Format(Exceptions.Lookup_for_component_of_type___0___failed__key___1___not_found_in_the_component_dictionary_, typeof(T).Name, key));
             }
             if (component is T)
             {

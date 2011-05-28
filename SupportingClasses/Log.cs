@@ -1,9 +1,9 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
-using EvoX.SupportingClasses.Annotations;
+using Exolutio.SupportingClasses.Annotations;
 
-namespace EvoX.SupportingClasses
+namespace Exolutio.SupportingClasses
 {
 	/// <summary>
 	/// Log class 

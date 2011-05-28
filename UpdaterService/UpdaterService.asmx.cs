@@ -30,7 +30,7 @@ namespace UpdaterService
         [WebMethod]
         public Version GetExeVersion()
         {
-            string path = MapBin("EvoX.exe");
+            string path = MapBin("eXolutio.exe");
             AssemblyName name = AssemblyName.GetAssemblyName(path);
             return name.Version;
         }
@@ -46,7 +46,7 @@ namespace UpdaterService
 
         private string MapBin(string filename)
         {
-            return Server.MapPath("EvoXbin/" + filename);
+            return Server.MapPath("ExolutioBin/" + filename);
         }
 
         [Serializable]
@@ -100,7 +100,7 @@ namespace UpdaterService
         [WebMethod]
         public string GetMsiUri()
         {
-            return this.Context.Request.Url.AbsoluteUri.Remove(this.Context.Request.Url.AbsoluteUri.IndexOf("UpdaterService.asmx")) + "GetFile.ashx?filename=EvoX.msi";
+            return this.Context.Request.Url.AbsoluteUri.Remove(this.Context.Request.Url.AbsoluteUri.IndexOf("UpdaterService.asmx")) + "GetFile.ashx?filename=eXolutio.msi";
         }
     }
 }

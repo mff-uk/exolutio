@@ -1,5 +1,5 @@
 using System;
-using EvoX.Model;
+using Exolutio.Model;
 using NUnit.Framework;
 using System.Reflection;
 

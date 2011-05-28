@@ -6,19 +6,19 @@ using System.Windows;
 using System.Windows.Input;
 using System.Xml;
 using System.Xml.Linq;
-using EvoX.Controller;
-using EvoX.Controller.Commands;
-using EvoX.Model;
-using EvoX.Model.PIM;
-using EvoX.SupportingClasses;
-using EvoX.View;
-using Component = EvoX.Model.Component;
+using Exolutio.Controller;
+using Exolutio.Controller.Commands;
+using Exolutio.Model;
+using Exolutio.Model.PIM;
+using Exolutio.SupportingClasses;
+using Exolutio.View;
+using Component = Exolutio.Model.Component;
 
 #if SILVERLIGHT
 using SilverFlow.Controls;
 #endif
 
-namespace EvoX.View
+namespace Exolutio.View
 {
     public static class Current
     {
@@ -133,7 +133,7 @@ namespace EvoX.View
             {
                 if (mainWindow != null)
                 {
-                    throw new EvoXException("MainWindow should be set only once.");
+                    throw new ExolutioException("MainWindow should be set only once.");
                 }
                 mainWindow = value;
                 ProjectChanged += MainWindow.CurrentProjectChanged;
@@ -243,7 +243,7 @@ namespace EvoX.View
 
         void CloseActiveTab();
 
-        IEnumerable<EvoXVersionedObject> AnotherOpenedVersions(EvoXVersionedObject item);
+        IEnumerable<ExolutioVersionedObject> AnotherOpenedVersions(ExolutioVersionedObject item);
     }
 
     public interface IMainWindow
@@ -263,7 +263,7 @@ namespace EvoX.View
         void Close();
         void CloseRibbonBackstage();
         void CloseProject();
-        void FocusComponent(Diagram diagram, EvoX.Model.Component component);
+        void FocusComponent(Diagram diagram, Exolutio.Model.Component component);
         void DisplayReport(NestedCommandReport finalReport);
         IDiagramTabManager DiagramTabManager { get; }
         IFilePresenter FilePresenter { get; }

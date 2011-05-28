@@ -5,7 +5,7 @@ using System.Collections.Specialized;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace EvoX.View
+namespace Exolutio.View
 {
 	/// <summary>
 	/// Interface for control displaying psm attributes. 

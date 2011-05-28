@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Xml;
 using System.Xml.Linq;
-using EvoX.Model.Serialization;
-using EvoX.Model.Versioning;
-using EvoX.Model.ViewHelper;
-using EvoX.SupportingClasses.XML;
+using Exolutio.Model.Serialization;
+using Exolutio.Model.Versioning;
+using Exolutio.Model.ViewHelper;
+using Exolutio.SupportingClasses.XML;
 using System.ComponentModel;
 
-namespace EvoX.Model
+namespace Exolutio.Model
 {
-    public abstract class Diagram : EvoXVersionedObjectNotAPartOfSchema
+    public abstract class Diagram : ExolutioVersionedObjectNotAPartOfSchema
     {
         protected Diagram(Project p) : base(p)
         {
@@ -58,7 +58,7 @@ namespace EvoX.Model
             return Caption;
         }
 
-        #region Overrides of EvoXVersionedObject
+        #region Overrides of ExolutioVersionedObject
 
         private Guid schemaGuid = Guid.Empty;
 
@@ -70,9 +70,9 @@ namespace EvoX.Model
 
         #endregion
 
-        #region Implementation of IEvoXCloneable
+        #region Implementation of IExolutioCloneable
 
-        public override void FillCopy(IEvoXCloneable copyComponent, ProjectVersion projectVersion,
+        public override void FillCopy(IExolutioCloneable copyComponent, ProjectVersion projectVersion,
                                       ElementCopiesMap createdCopies)
         {
             base.FillCopy(copyComponent, projectVersion, createdCopies);
@@ -88,7 +88,7 @@ namespace EvoX.Model
 
         #endregion
 
-        #region Implementation of IEvoXSerializable
+        #region Implementation of IExolutioSerializable
 
         public override void Serialize(XElement parentNode, SerializationContext context)
         {
@@ -99,11 +99,11 @@ namespace EvoX.Model
             XAttribute captionAttribute = new XAttribute("Caption", Caption);
             parentNode.Add(captionAttribute);
 
-            XElement componentsElement = new XElement(context.EvoXNS + "Components");
+            XElement componentsElement = new XElement(context.ExolutioNS + "Components");
             parentNode.Add(componentsElement);
             foreach (KeyValuePair<Component, ViewHelper.ViewHelper> kvp in ViewHelpers)
             {
-                XElement componentElement = new XElement(context.EvoXNS + "Component");
+                XElement componentElement = new XElement(context.ExolutioNS + "Component");
                 componentsElement.Add(componentElement);
 
                 XAttribute typeAttribue = new XAttribute("Type", kvp.Key.GetType().Name);
@@ -118,7 +118,7 @@ namespace EvoX.Model
                     System.Diagnostics.Debug.WriteLine("Without schema {0}", kvp.Key.GetType());
                 }
 
-                XElement viewHelperNode = new XElement(context.EvoXNS + "ViewHelper");
+                XElement viewHelperNode = new XElement(context.ExolutioNS + "ViewHelper");
                 componentElement.Add(viewHelperNode);
                 kvp.Value.Serialize(viewHelperNode, context);
             }
@@ -135,7 +135,7 @@ namespace EvoX.Model
                 Caption = SerializationContext.DecodeString(parentNode.Attribute("Caption").Value);
             }
 
-            foreach (XElement element in parentNode.Element(context.EvoXNS + "Components").Elements())
+            foreach (XElement element in parentNode.Element(context.ExolutioNS + "Components").Elements())
             {
                 Guid componentGuid = this.DeserializeIDRef("componentID", element, context);
 
@@ -152,9 +152,9 @@ namespace EvoX.Model
 
                 ViewHelper.ViewHelper viewHelper = viewHelperFactoryMethods[Project.TranslateComponent(componentGuid).GetType()]();
                 ((IComponentViewHelper)viewHelper).Component = component;
-                if (element.Element(context.EvoXNS + "ViewHelper") != null)
+                if (element.Element(context.ExolutioNS + "ViewHelper") != null)
                 {
-                    viewHelper.Deserialize(element.Element(context.EvoXNS + "ViewHelper"), context);
+                    viewHelper.Deserialize(element.Element(context.ExolutioNS + "ViewHelper"), context);
                     ViewHelpers[component] = viewHelper;
                 }
                 Components.Add(component);

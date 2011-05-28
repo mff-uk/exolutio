@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Controls;
 
-namespace EvoX.Dialogs
+namespace Exolutio.Dialogs
 {
 	/// <summary>
 	/// Textbox that remembers the value with which it was initialized.	

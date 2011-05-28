@@ -2,10 +2,10 @@
 using System.Collections.Specialized;
 using System.Xml;
 using System.Xml.Linq;
-using EvoX.Model.Serialization;
-using EvoX.Model.Versioning;
+using Exolutio.Model.Serialization;
+using Exolutio.Model.Versioning;
 
-namespace EvoX.Model.PSM
+namespace Exolutio.Model.PSM
 {
     public class PSMAssociation : PSMComponent, IHasCardinality, IPSMSemanticComponent
     {
@@ -136,7 +136,7 @@ namespace EvoX.Model.PSM
 
         #endregion
 
-        #region Implementation of IEvoXSerializable
+        #region Implementation of IExolutioSerializable
 
         public override void Serialize(XElement parentNode, SerializationContext context)
         {
@@ -148,7 +148,7 @@ namespace EvoX.Model.PSM
             // but is included in the serialized document for better readability
 
             {
-                XElement associationParentElement = new XElement(context.EvoXNS + "Parent");
+                XElement associationParentElement = new XElement(context.ExolutioNS + "Parent");
                 string nodeTypeValue = string.Empty;
                 if (Parent is PSMClass)
                 {
@@ -169,7 +169,7 @@ namespace EvoX.Model.PSM
             }
 
             {
-                XElement associationChildElement = new XElement(context.EvoXNS + "Child");
+                XElement associationChildElement = new XElement(context.ExolutioNS + "Child");
                 string nodeTypeValue = string.Empty;
                 if (Child is PSMClass)
                 {
@@ -196,7 +196,7 @@ namespace EvoX.Model.PSM
             this.DeserializeCardinality(parentNode, context);
 
             {
-                XElement associationParentNode = parentNode.Element(context.EvoXNS + "Parent");
+                XElement associationParentNode = parentNode.Element(context.ExolutioNS + "Parent");
                 if (associationParentNode == null)
                 {
                     context.Log.AddErrorFormat("'Parent' subelement missing in node {0}", parentNode);
@@ -207,7 +207,7 @@ namespace EvoX.Model.PSM
             }
 
             {
-                XElement associationChildNode = parentNode.Element(context.EvoXNS + "Child");
+                XElement associationChildNode = parentNode.Element(context.ExolutioNS + "Child");
                 if (associationChildNode == null)
                 {
                     context.Log.AddErrorFormat("'Child' subelement missing in node {0}", parentNode);
@@ -234,14 +234,14 @@ namespace EvoX.Model.PSM
             return s;
         }
 
-        #region Implementation of IEvoXCloneable
+        #region Implementation of IExolutioCloneable
 
-        public override IEvoXCloneable Clone(ProjectVersion projectVersion, ElementCopiesMap createdCopies)
+        public override IExolutioCloneable Clone(ProjectVersion projectVersion, ElementCopiesMap createdCopies)
         {
             return new PSMAssociation(projectVersion.Project, createdCopies.SuggestGuid(this));
         }
 
-        public override void FillCopy(IEvoXCloneable copyComponent, ProjectVersion projectVersion,
+        public override void FillCopy(IExolutioCloneable copyComponent, ProjectVersion projectVersion,
                                       ElementCopiesMap createdCopies)
         {
             base.FillCopy(copyComponent, projectVersion, createdCopies);

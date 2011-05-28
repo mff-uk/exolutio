@@ -9,7 +9,7 @@ using System.Windows;
 using System.Windows.Input;
 
 
-namespace EvoX.Updater
+namespace Exolutio.Updater
 {
     /// <summary>
     /// Interaction logic for Window1.xaml
@@ -69,12 +69,12 @@ namespace EvoX.Updater
                         if (File.Exists(files.First().Key))
                             File.Delete(files.First().Key);
                         File.Move(files.First().Value, files.First().Key);
-                        System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo("EvoX.msi");
+                        System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo("Exolutio.msi");
                         info.UseShellExecute = true;
                         this.Dispatcher.Invoke(new Action(this.Close));
                         System.Diagnostics.Process.Start(info);
                     };
-                StartDownloading(new[] { "EvoX.msi" });
+                StartDownloading(new[] { "eXolutio.msi" });
             }
             catch
             {
@@ -154,7 +154,7 @@ namespace EvoX.Updater
                         }
                         foreach (KeyValuePair<string, string> downloadedFile in files)
                         {
-                            if (downloadedFile.Key == "EvoX.Updater.exe")
+                            if (downloadedFile.Key == "eXolutio.Updater.exe")
                                 continue;
                             if (File.Exists(downloadedFile.Key))
                                 File.Delete(downloadedFile.Key);
@@ -369,7 +369,7 @@ namespace EvoX.Updater
                     {
                         try
                         {
-                            if (downloadedFile.Key == "EvoX.Updater.exe")
+                            if (downloadedFile.Key == "eXolutio.Updater.exe")
                                 continue;
                             if (File.Exists(downloadedFile.Key))
                                 File.Delete(downloadedFile.Key);

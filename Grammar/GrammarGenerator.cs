@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Linq;
 
-namespace EvoX.Model.PSM.Grammar
+namespace Exolutio.Model.PSM.Grammar
 {
     public class GrammarGenerator
     {

@@ -1,11 +1,11 @@
 ﻿using System.Linq;
-using EvoX.Controller.Commands;
-using EvoX.Model;
-using EvoX.Model.PIM;
-using EvoX.Model.PSM;
-using EvoX.ResourceLibrary;
+using Exolutio.Controller.Commands;
+using Exolutio.Model;
+using Exolutio.Model.PIM;
+using Exolutio.Model.PSM;
+using Exolutio.ResourceLibrary;
 
-namespace EvoX.View.Commands
+namespace Exolutio.View.Commands
 {
     [Scope(ScopeAttribute.EScope.PSMClass)]
     public class guiLocateRepresentedPSMClass : guiScopeCommand
@@ -39,7 +39,7 @@ namespace EvoX.View.Commands
         {
             get
             {
-                return EvoXResourceNames.GetResourceImageSource(EvoXResourceNames.zoomIn);;
+                return ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.zoomIn);;
             }
         }
     }

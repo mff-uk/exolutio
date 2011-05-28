@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Windows;
 
-namespace EvoX.ViewToolkit
+namespace Exolutio.ViewToolkit
 {
     /// <summary>
     /// Interface for control to which <see cref="DragThumb"/> can be snapped.

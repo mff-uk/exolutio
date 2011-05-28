@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Xml;
 using System.Xml.Linq;
-using EvoX.Model;
-using EvoX.Model.Serialization;
-using EvoX.Model.Versioning;
-using Component = EvoX.Model.Component;
+using Exolutio.Model;
+using Exolutio.Model.Serialization;
+using Exolutio.Model.Versioning;
+using Component = Exolutio.Model.Component;
 
-namespace EvoX.Model.ViewHelper
+namespace Exolutio.Model.ViewHelper
 {
 	/// <summary>
 	/// Stores visualization information of an element on a diagram
 	/// </summary>
-	public abstract class ViewHelper : INotifyPropertyChanged, IEvoXSerializable, IEvoXCloneable
+	public abstract class ViewHelper : INotifyPropertyChanged, IExolutioSerializable, IExolutioCloneable
 	{
         private Diagram diagram;
 
@@ -54,19 +54,19 @@ namespace EvoX.Model.ViewHelper
 			}
 		}
 
-	    public virtual IEvoXCloneable Clone(ProjectVersion projectVersion, ElementCopiesMap createdCopies)
+	    public virtual IExolutioCloneable Clone(ProjectVersion projectVersion, ElementCopiesMap createdCopies)
 	    {
 	        throw new NotImplementedException(string.Format("Clone is not implemented for type {0}.", this.GetType().Name));
 	    }
 
-	    public IEvoXCloneable CreateCopy(ProjectVersion projectVersion, ElementCopiesMap createdCopies)
+	    public IExolutioCloneable CreateCopy(ProjectVersion projectVersion, ElementCopiesMap createdCopies)
         {
-            IEvoXCloneable copyElement = Clone(projectVersion, createdCopies);
+            IExolutioCloneable copyElement = Clone(projectVersion, createdCopies);
             FillCopy(copyElement, projectVersion, createdCopies);
             return copyElement;
         }
 
-	    public virtual void FillCopy(IEvoXCloneable copyComponent, ProjectVersion projectVersion, ElementCopiesMap createdCopies)
+	    public virtual void FillCopy(IExolutioCloneable copyComponent, ProjectVersion projectVersion, ElementCopiesMap createdCopies)
         {
             if (copyComponent == null)
             {
@@ -74,11 +74,11 @@ namespace EvoX.Model.ViewHelper
             }
             if (this.GetType() != copyComponent.GetType())
             {
-                throw new EvoXModelException(string.Format("FillCopy called on objects of different type '{0}' and '{1}'.", this.GetType().FullName, copyComponent.GetType().FullName));
+                throw new ExolutioModelException(string.Format("FillCopy called on objects of different type '{0}' and '{1}'.", this.GetType().FullName, copyComponent.GetType().FullName));
             }
         }
 
-        #region Implementation of IEvoXSerializable
+        #region Implementation of IExolutioSerializable
 
 	    public Project Project
 	    {

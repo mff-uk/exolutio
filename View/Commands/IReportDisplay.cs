@@ -1,7 +1,7 @@
-﻿using EvoX.Controller.Commands;
-using EvoX.SupportingClasses;
+﻿using Exolutio.Controller.Commands;
+using Exolutio.SupportingClasses;
 
-namespace EvoX.View.Commands
+namespace Exolutio.View.Commands
 {
     public interface IReportDisplay
     {

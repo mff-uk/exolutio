@@ -1,7 +1,7 @@
 using System.Windows;
 using System.Windows.Input;
 
-namespace EvoX.Dialogs
+namespace Exolutio.Dialogs
 {
     /// <summary>
     /// Class used to manage generic scoping of access keys

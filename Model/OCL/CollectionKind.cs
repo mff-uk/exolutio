@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace EvoX.Model.OCL
+namespace Exolutio.Model.OCL
 {
     /// <summary>
     /// The CollectionKind enumeration lists the kinds of collections. Its literals are Collection, Set, OrderedSet, Bag, and

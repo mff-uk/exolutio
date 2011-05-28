@@ -8,8 +8,8 @@
     <ProjectGuid>{AA189B65-9AE0-4B5F-9575-AD121B753309}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EvoX.Model</RootNamespace>
-    <AssemblyName>EvoX.Model</AssemblyName>
+    <RootNamespace>Exolutio.Model</RootNamespace>
+    <AssemblyName>Exolutio.Model</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>
@@ -53,10 +53,10 @@
     <Compile Include="ComponentList.cs" />
     <Compile Include="ComponentMappingDictionary.cs" />
     <Compile Include="Diagram.cs" />
-    <Compile Include="EvoXVersionedObject.cs" />
-    <Compile Include="EvoXVersionedObjectNotAPartOfSchema.cs" />
+    <Compile Include="ExolutioVersionedObject.cs" />
+    <Compile Include="ExolutioVersionedObjectNotAPartOfSchema.cs" />
     <Compile Include="ModelWorkerWithInheritance.cs" />
-    <Compile Include="EvoXObject.cs" />
+    <Compile Include="ExolutioObject.cs" />
     <Compile Include="ModelIterator.cs" />
     <Compile Include="ModelVerifier.cs" />
     <Compile Include="ModelWorker.cs" />
@@ -155,7 +155,7 @@
     <Compile Include="Versioning\IVersionedItem.cs" />
     <Compile Include="Versioning\IEvoXCloneable.cs" />
     <Compile Include="Versioning\ElementCopiesMap.cs" />
-    <Compile Include="EvoXModelException.cs" />
+    <Compile Include="ExolutioModelException.cs" />
     <Compile Include="ProjectVersion.cs" />
     <Compile Include="Resources\Exceptions.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -209,7 +209,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Model.cd" />
+    <None Include="Model.cd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="ObjectOwnership.cd" />
     <None Include="OCL\AST\AST.cd" />
     <None Include="OCL\AST\Literal.cd" />

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace EvoX.Model.OCL.AST
+namespace Exolutio.Model.OCL.AST
 {
     /// <summary>
     /// A CallExp is an expression that refers to a feature (operation, property) or to a predefined iterator for collections. Its

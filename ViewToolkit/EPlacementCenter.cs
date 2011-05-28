@@ -1,4 +1,4 @@
-﻿namespace EvoX.ViewToolkit
+﻿namespace Exolutio.ViewToolkit
 {
     public enum EPlacementCenter
     {

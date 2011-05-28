@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
-using EvoX.Model.Serialization;
-using EvoX.Model.Versioning;
+using Exolutio.Model.Serialization;
+using Exolutio.Model.Versioning;
 
-namespace EvoX.Model.ViewHelper
+namespace Exolutio.Model.ViewHelper
 {
 	/// <summary>
 	/// View helper used for labels for connectors, stores position
@@ -25,12 +25,12 @@ namespace EvoX.Model.ViewHelper
 			set { labelVisible = value; NotifyPropertyChanged("LabelVisible"); }
 		}
 
-        public override IEvoXCloneable Clone(ProjectVersion projectVersion, ElementCopiesMap createdCopies)
+        public override IExolutioCloneable Clone(ProjectVersion projectVersion, ElementCopiesMap createdCopies)
         {
             return new LabelViewHelper(projectVersion.Project.TranslateComponent<Diagram>(createdCopies.GetGuidForCopyOf(Diagram)));
         }
 
-        public override void FillCopy(IEvoXCloneable copyComponent, ProjectVersion projectVersion, ElementCopiesMap createdCopies)
+        public override void FillCopy(IExolutioCloneable copyComponent, ProjectVersion projectVersion, ElementCopiesMap createdCopies)
         {
             base.FillCopy(copyComponent, projectVersion, createdCopies);
             LabelViewHelper copyLabelViewHelper = (LabelViewHelper)copyComponent;

@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using EvoX.Model;
-using EvoX.Model.PSM;
-using EvoX.Controller.Commands.Atomic;
-using EvoX.Controller.Commands.Atomic.PSM;
+using Exolutio.Model;
+using Exolutio.Model.PSM;
+using Exolutio.Controller.Commands.Atomic;
+using Exolutio.Controller.Commands.Atomic.PSM;
 using System.Diagnostics;
 
-namespace EvoX.Controller.Commands.Complex.PSM
+namespace Exolutio.Controller.Commands.Complex.PSM
 {
     [PublicCommand("Reconnect PSM association (complex)", PublicCommandAttribute.EPulicCommandCategory.PSM_complex)]
     public class cmdReconnectPSMAssociation : MacroCommand

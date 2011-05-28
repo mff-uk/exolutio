@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using EvoX.Controller.Commands;
-using EvoX.Model;
-using EvoX.Model.PSM;
-using EvoX.Controller.Commands.Atomic.PSM;
-using EvoX.Controller.Commands.Complex.PSM;
-using EvoX.Controller.Commands.Reflection;
+using Exolutio.Controller.Commands;
+using Exolutio.Model;
+using Exolutio.Model.PSM;
+using Exolutio.Controller.Commands.Atomic.PSM;
+using Exolutio.Controller.Commands.Complex.PSM;
+using Exolutio.Controller.Commands.Reflection;
 
-namespace EvoX.Controller.Commands.Atomic.PSM.MacroWrappers
+namespace Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers
 {
     [PublicCommand("Synchronize two PSMAttribute sets", PublicCommandAttribute.EPulicCommandCategory.PSM_atomic)]
     public class cmdSynchroPSMAttributes : MacroCommand

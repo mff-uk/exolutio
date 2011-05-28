@@ -3,20 +3,20 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using EvoX.Dialogs;
-using EvoX.ResourceLibrary;
+using Exolutio.Dialogs;
+using Exolutio.ResourceLibrary;
 
-namespace EvoX.View.Commands.Project
+namespace Exolutio.View.Commands.Project
 {
     public class guiCloseAppCommand : guiProjectCommand
     {
-        #region Overrides of EvoXGuiCommandBase
+        #region Overrides of ExolutioGuiCommandBase
 
         public override void Execute(object parameter = null)
         {
             if (Current.Project != null)
             {
-                EvoXGuiCommands.CloseProjectCommand.Execute();
+                GuiCommands.CloseProjectCommand.Execute();
             }
 
             Current.MainWindow.Close();
@@ -35,7 +35,7 @@ namespace EvoX.View.Commands.Project
 
         public override string ScreenTipText
         {
-            get { return CommandsResources.guiCloseAppCommand_ScreenTipText_Closes_EvoX_application; }
+            get { return CommandsResources.guiCloseAppCommand_ScreenTipText_Closes_Exolutio_application; }
         }
 
         public override bool CanExecute(object parameter = null)
@@ -45,7 +45,7 @@ namespace EvoX.View.Commands.Project
 
         public override ImageSource Icon
         {
-            get { return EvoXResourceNames.GetResourceImageSource(EvoXResourceNames.cancel); }
+            get { return ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.cancel); }
         }
 
         #endregion

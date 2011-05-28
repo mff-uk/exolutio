@@ -2,9 +2,9 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Xml.Serialization;
-using EvoX.Model;
-using EvoX.Model.Serialization;
-using EvoX.Model.Versioning;
+using Exolutio.Model;
+using Exolutio.Model.Serialization;
+using Exolutio.Model.Versioning;
 using NUnit.Framework;
 using Tests.CodeTests;
 

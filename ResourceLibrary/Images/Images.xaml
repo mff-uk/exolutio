@@ -72,8 +72,8 @@
 	<ImageSource x:Key="Validate">document_check.png</ImageSource>
 	<ImageSource x:Key="Warning">warning.png</ImageSource>
 	<ImageSource x:Key="Palette">palette.png</ImageSource>
-    <ImageSource x:Key="X">EvoX16x16.png</ImageSource>
-    <ImageSource x:Key="EvoXIcon">EvoX.ico</ImageSource>
+    <ImageSource x:Key="X">Exolutio16x16.png</ImageSource>
+    <ImageSource x:Key="ExolutioIcon">Exolutio.ico</ImageSource>
     <ImageSource x:Key="xmlIcon">xml_icon.gif</ImageSource>
     <ImageSource x:Key="zoomIn">zoom_in.png</ImageSource>
     <ImageSource x:Key="zoomOut">zoom_out.png</ImageSource>

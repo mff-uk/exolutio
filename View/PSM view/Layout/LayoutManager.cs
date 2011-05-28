@@ -1,4 +1,4 @@
-namespace EvoX.View
+namespace Exolutio.View
 {
     public class LayoutManager
     {
@@ -7,7 +7,7 @@ namespace EvoX.View
             if (psmDiagramView.Diagram != null)
             {
                 VerticalTree.LayoutDiagram(psmDiagramView);
-                psmDiagramView.EvoXCanvas.InvalidateMeasure();
+                psmDiagramView.ExolutioCanvas.InvalidateMeasure();
             }
         }
     }

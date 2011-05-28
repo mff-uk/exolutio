@@ -8,8 +8,8 @@
     <ProjectGuid>{43856BBC-7717-451D-BE51-6EA576C873C2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EvoX.Revalidation</RootNamespace>
-    <AssemblyName>EvoX.Revalidation</AssemblyName>
+    <RootNamespace>Exolutio.Revalidation</RootNamespace>
+    <AssemblyName>Exolutio.Revalidation</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>

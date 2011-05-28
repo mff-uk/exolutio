@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace EvoX.Model.OCL.Types
+namespace Exolutio.Model.OCL.Types
 {
     /// <summary>
     /// OrderedSetType is a collection type that describes a set of elements where each distinct element occurs only once in the

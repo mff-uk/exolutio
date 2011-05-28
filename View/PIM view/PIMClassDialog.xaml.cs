@@ -9,17 +9,17 @@ using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Linq;
-using EvoX.Controller.Commands;
-using EvoX.Controller.Commands.Atomic;
-using EvoX.Controller.Commands.Complex.PIM;
-using EvoX.Dialogs;
-using EvoX.Model.PIM;
-using EvoX.Model;
-using EvoX.Controller;
-using EvoX.SupportingClasses;
-using cmdDeletePIMAttribute = EvoX.Controller.Commands.Atomic.PIM.MacroWrappers.cmdDeletePIMAttribute;
+using Exolutio.Controller.Commands;
+using Exolutio.Controller.Commands.Atomic;
+using Exolutio.Controller.Commands.Complex.PIM;
+using Exolutio.Dialogs;
+using Exolutio.Model.PIM;
+using Exolutio.Model;
+using Exolutio.Controller;
+using Exolutio.SupportingClasses;
+using cmdDeletePIMAttribute = Exolutio.Controller.Commands.Atomic.PIM.MacroWrappers.cmdDeletePIMAttribute;
 
-namespace EvoX.View
+namespace Exolutio.View
 {
     /// <summary>
     /// Interaction logic for PIMClassDialog.xaml
@@ -139,9 +139,9 @@ namespace EvoX.View
             InitializeComponent();
         }
 
-        private EvoX.Controller.Controller controller;
+        private Exolutio.Controller.Controller controller;
 
-        public void Initialize(EvoX.Controller.Controller controller, PIMClass PIMClass)
+        public void Initialize(Exolutio.Controller.Controller controller, PIMClass PIMClass)
         {
             this.controller = controller;
             this.PIMClass = PIMClass;

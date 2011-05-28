@@ -2,13 +2,13 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Media;
-using EvoX.Controller.Commands;
-using EvoX.Model;
-using EvoX.Model.PIM;
-using EvoX.Model.PSM;
-using EvoX.ResourceLibrary;
+using Exolutio.Controller.Commands;
+using Exolutio.Model;
+using Exolutio.Model.PIM;
+using Exolutio.Model.PSM;
+using Exolutio.ResourceLibrary;
 
-namespace EvoX.View.Commands
+namespace Exolutio.View.Commands
 {
     [Scope(ScopeAttribute.EScope.PSMAssociation | ScopeAttribute.EScope.PSMAttribute | ScopeAttribute.EScope.PSMClass)]
     public class guiLocateInterpretedComponent : guiScopeCommand
@@ -38,7 +38,7 @@ namespace EvoX.View.Commands
         {
             get
             {
-                return EvoXResourceNames.GetResourceImageSource(EvoXResourceNames.zoomIn); ;
+                return ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.zoomIn); ;
             }
         }
     }

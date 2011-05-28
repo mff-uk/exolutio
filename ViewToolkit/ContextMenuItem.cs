@@ -5,7 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-namespace EvoX.ViewToolkit
+namespace Exolutio.ViewToolkit
 {
     /// <summary>
     /// Context menu item
@@ -82,20 +82,20 @@ namespace EvoX.ViewToolkit
 
     }
 
-    public class EvoXContextMenu : ContextMenu
+    public class ExolutioContextMenu : ContextMenu
     {
         public object ScopeObject { get; set; }
 
         public object Diagram { get; set; }
 
-        public EvoXContextMenu()
+        public ExolutioContextMenu()
         {
             this.HorizontalContentAlignment = HorizontalAlignment.Stretch;
 
-            this.Opened += EvoXContextMenu_Opened;
+            this.Opened += ExolutioContextMenu_Opened;
         }
 
-        void EvoXContextMenu_Opened(object sender, RoutedEventArgs e)
+        void ExolutioContextMenu_Opened(object sender, RoutedEventArgs e)
         {
             
         }

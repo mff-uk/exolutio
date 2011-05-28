@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace EvoX.Model.OCL.Types
+namespace Exolutio.Model.OCL.Types
 {
     /// <summary>
     /// AnyType is the metaclass of the special type OclAny, which is the type to which all other types conform. OclAny is the

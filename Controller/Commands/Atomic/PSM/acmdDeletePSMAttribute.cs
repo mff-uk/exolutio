@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using EvoX.Controller.Commands;
-using EvoX.Controller.Commands.Reflection;
-using EvoX.Model.PSM;
-using EvoX.Model;
+using Exolutio.Controller.Commands;
+using Exolutio.Controller.Commands.Reflection;
+using Exolutio.Model.PSM;
+using Exolutio.Model;
 
-namespace EvoX.Controller.Commands.Atomic.PSM
+namespace Exolutio.Controller.Commands.Atomic.PSM
 {
     public class acmdDeletePSMAttribute : StackedCommand
     {
@@ -42,7 +42,7 @@ namespace EvoX.Controller.Commands.Atomic.PSM
                 classGuid = a.PSMClass;
                 index = a.PSMClass.PSMAttributes.Remove(a);
             }
-            else throw new EvoXCommandException("Deleted attribute " + a.ToString() + " had null PSMClass", this);
+            else throw new ExolutioCommandException("Deleted attribute " + a.ToString() + " had null PSMClass", this);
             Project.mappingDictionary.Remove(attributeGuid);
         }
 

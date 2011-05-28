@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using EvoX.Model;
-using EvoX.Model.ViewHelper;
-using EvoX.SupportingClasses;
+using Exolutio.Model;
+using Exolutio.Model.ViewHelper;
+using Exolutio.SupportingClasses;
 
-namespace EvoX.View
+namespace Exolutio.View
 {
     public class RepresentantsCollection : ObservableDictionary<Component, ComponentViewBase>
     {

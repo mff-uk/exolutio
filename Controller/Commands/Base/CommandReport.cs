@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
-using EvoX.Model;
-using EvoX.SupportingClasses;
-using EvoX.SupportingClasses.Annotations;
+using Exolutio.Model;
+using Exolutio.SupportingClasses;
+using Exolutio.SupportingClasses.Annotations;
 
-namespace EvoX.Controller.Commands
+namespace Exolutio.Controller.Commands
 {
     [Serializable]
     public abstract class CommandReportBase

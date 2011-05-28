@@ -12,13 +12,13 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using EvoX.Model;
-using EvoX.Model.PIM;
-using EvoX.Model.PSM;
-using EvoX.View.Commands;
-using EvoX.ViewToolkit.FormControls;
+using Exolutio.Model;
+using Exolutio.Model.PIM;
+using Exolutio.Model.PSM;
+using Exolutio.View.Commands;
+using Exolutio.ViewToolkit.FormControls;
 
-namespace EvoX.View
+namespace Exolutio.View
 {
     /// <summary>
     /// Interaction logic for ComponentPropertyView.xaml

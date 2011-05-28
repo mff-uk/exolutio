@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml.Linq;
-using EvoX.SupportingClasses;
+using Exolutio.SupportingClasses;
 
-namespace EvoX.WPFClient
+namespace Exolutio.WPFClient
 {
     public class ConfigStruct
     {
@@ -46,13 +46,13 @@ namespace EvoX.WPFClient
 
     public class ConfigurationManager
     {
-        public const string UserDataFolder = "EvoX";
+        public const string UserDataFolder = "eXolutio";
 
         public const string ConfigFileName = "UserConfig.xml";
 
         public const string LayoutFileName = "Layout.xml";
 
-        private static string EvoXUserDataDir
+        private static string ExolutioUserDataDir
         {
             get
             {
@@ -65,18 +65,18 @@ namespace EvoX.WPFClient
         {
             get
             {
-                string evoXDataDir = EvoXUserDataDir;
-                if (!Directory.Exists(evoXDataDir))
+                string exolutioDataDir = ExolutioUserDataDir;
+                if (!Directory.Exists(exolutioDataDir))
                 {
-                    Directory.CreateDirectory(evoXDataDir);
+                    Directory.CreateDirectory(exolutioDataDir);
                 }
-                return Path.Combine(evoXDataDir, ConfigFileName);
+                return Path.Combine(exolutioDataDir, ConfigFileName);
             }
         }
 
         public static string LayoutFilePath
         {
-            get { return Path.Combine(EvoXUserDataDir, LayoutFileName); }
+            get { return Path.Combine(ExolutioUserDataDir, LayoutFileName); }
         }
 
         private static ConfigStruct configuration;
@@ -98,20 +98,20 @@ namespace EvoX.WPFClient
             get { return File.Exists(LayoutFilePath); }
         }
 
-        private static readonly XNamespace evoXNS = @"http://evox.ms.mff.cuni.cz/";
+        private static readonly XNamespace exolutioNS = @"http://www.eXolutio.eu/Project/Configuration";
 
         public static void LoadConfiguration()
         {
             if (File.Exists(ConfigFilePath))
             {
                 XDocument doc = XDocument.Load(ConfigFilePath);
-                XElement elConfiguration = doc.Element(evoXNS + "Configuration");
+                XElement elConfiguration = doc.Element(exolutioNS + "Configuration");
 
                 {
-                    XElement elRecentFiles = elConfiguration.Element(evoXNS + "RecentFiles");
+                    XElement elRecentFiles = elConfiguration.Element(exolutioNS + "RecentFiles");
                     if (elRecentFiles != null)
                     {
-                        foreach (XElement elFile in elRecentFiles.Elements(evoXNS + "File"))
+                        foreach (XElement elFile in elRecentFiles.Elements(exolutioNS + "File"))
                         {
                             Configuration.AddToRecentFiles(new FileInfo(elFile.Value), false, false);
                         }
@@ -119,10 +119,10 @@ namespace EvoX.WPFClient
                 }
 
                 {
-                    XElement elRecentDirectories = elConfiguration.Element(evoXNS + "RecentDirectories");
+                    XElement elRecentDirectories = elConfiguration.Element(exolutioNS + "RecentDirectories");
                     if (elRecentDirectories != null)
                     {
-                        foreach (XElement elDirectory in elRecentDirectories.Elements(evoXNS + "Directory"))
+                        foreach (XElement elDirectory in elRecentDirectories.Elements(exolutioNS + "Directory"))
                         {
                             Configuration.AddToRecentDirectories(new DirectoryInfo(elDirectory.Value), false);
                         }
@@ -134,24 +134,24 @@ namespace EvoX.WPFClient
         public static void SaveConfiguration()
         {
             XDocument doc = new XDocument(new XDeclaration("1.0", "utf-8", null));
-            XElement elConfiguration = new XElement(evoXNS + "Configuration");
-            elConfiguration.Add(new XAttribute(XNamespace.Xmlns + "evox", evoXNS.NamespaceName));
+            XElement elConfiguration = new XElement(exolutioNS + "Configuration");
+            elConfiguration.Add(new XAttribute(XNamespace.Xmlns + "eXoConf", exolutioNS.NamespaceName));
             doc.Add(elConfiguration);
-            XElement elRecentFiles = new XElement(evoXNS + "RecentFiles");
-            XElement elRecentDirectories = new XElement(evoXNS + "RecentDirectories");
+            XElement elRecentFiles = new XElement(exolutioNS + "RecentFiles");
+            XElement elRecentDirectories = new XElement(exolutioNS + "RecentDirectories");
             elConfiguration.Add(elRecentFiles);
             elConfiguration.Add(elRecentDirectories);
 
             foreach (FileInfo recentFile in Configuration.RecentFiles)
             {
-                XElement xElement = new XElement(evoXNS + "File");
+                XElement xElement = new XElement(exolutioNS + "File");
                 xElement.Value = recentFile.FullName;
                 elRecentFiles.Add(xElement);
             }
 
             foreach (DirectoryInfo recentDirectory in Configuration.RecentDirectories)
             {
-                XElement xElement = new XElement(evoXNS + "Directory");
+                XElement xElement = new XElement(exolutioNS + "Directory");
                 xElement.Value = recentDirectory.FullName;
                 elRecentDirectories.Add(xElement);
             }

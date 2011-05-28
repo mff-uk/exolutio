@@ -1,30 +1,30 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using EvoX.Model.PIM;
-using EvoX.Model.PSM;
+using Exolutio.Model.PIM;
+using Exolutio.Model.PSM;
 using System.Linq;
 
-namespace EvoX.Model
+namespace Exolutio.Model
 {
     public static class ModelIterator
     {
-        public static IEnumerable<EvoXObject> GetAllModelItems(ProjectVersion projectVersion)
+        public static IEnumerable<ExolutioObject> GetAllModelItems(ProjectVersion projectVersion)
         {
-            IEnumerable<EvoXObject> result = projectVersion.AttributeTypes.Cast<EvoXObject>();
+            IEnumerable<ExolutioObject> result = projectVersion.AttributeTypes.Cast<ExolutioObject>();
                 
             result = result.Concat(new[] {projectVersion.PIMSchema});
 
-            result = result.Concat(GetPIMComponents(projectVersion.PIMSchema).Cast<EvoXObject>());
+            result = result.Concat(GetPIMComponents(projectVersion.PIMSchema).Cast<ExolutioObject>());
 
             foreach (PSMSchema psmSchema in projectVersion.PSMSchemas)
             {
-                result = result.Concat(new EvoXObject[] { psmSchema });
-                result = result.Concat(GetPSMComponents(psmSchema).Cast<EvoXObject>());
+                result = result.Concat(new ExolutioObject[] { psmSchema });
+                result = result.Concat(GetPSMComponents(psmSchema).Cast<ExolutioObject>());
             }
 
-            result = result.Concat(projectVersion.PIMDiagrams.Cast<EvoXObject>());
-            result = result.Concat(projectVersion.PSMDiagrams.Cast<EvoXObject>());
+            result = result.Concat(projectVersion.PIMDiagrams.Cast<ExolutioObject>());
+            result = result.Concat(projectVersion.PSMDiagrams.Cast<ExolutioObject>());
 
             return result;
         }

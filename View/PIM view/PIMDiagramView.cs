@@ -2,14 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Controls;
-using EvoX.Controller.Commands;
-using EvoX.Model;
-using EvoX.Model.PIM;
-using EvoX.Model.ViewHelper;
-using EvoX.ViewToolkit;
-using EvoX.SupportingClasses;
+using Exolutio.Controller.Commands;
+using Exolutio.Model;
+using Exolutio.Model.PIM;
+using Exolutio.Model.ViewHelper;
+using Exolutio.ViewToolkit;
+using Exolutio.SupportingClasses;
 
-namespace EvoX.View
+namespace Exolutio.View
 {
     public class PIMDiagramView : DiagramView
     {
@@ -46,19 +46,19 @@ namespace EvoX.View
                     ((PIMClassView)withoutViewHelper).ViewHelper.Y = RandomGenerator.Next(300);
                 }
             }
-            EvoXContextMenu diagramMenu = MenuHelper.GetContextMenu(ScopeAttribute.EScope.PIMDiagram, this.Diagram);
-            EvoXCanvas.ContextMenu = diagramMenu;
+            ExolutioContextMenu diagramMenu = MenuHelper.GetContextMenu(ScopeAttribute.EScope.PIMDiagram, this.Diagram);
+            ExolutioCanvas.ContextMenu = diagramMenu;
 
-            ((EvoXContextMenu)EvoXCanvas.ContextMenu).ScopeObject = PIMDiagram;
-            ((EvoXContextMenu)EvoXCanvas.ContextMenu).Diagram = PIMDiagram;
+            ((ExolutioContextMenu)ExolutioCanvas.ContextMenu).ScopeObject = PIMDiagram;
+            ((ExolutioContextMenu)ExolutioCanvas.ContextMenu).Diagram = PIMDiagram;
 
 #if SILVERLIGHT
-            ContextMenuService.SetContextMenu(EvoXCanvas, diagramMenu);
+            ContextMenuService.SetContextMenu(ExolutioCanvas, diagramMenu);
             MenuHelper.CreateSubmenuForCommandsWithoutScope(diagramMenu);
 #else
             ContextMenuItem otherItemsMenu = new ContextMenuItem("Other operations");
             MenuHelper.CreateSubmenuForCommandsWithoutScope(otherItemsMenu);
-            EvoXCanvas.ContextMenu.Items.Add(otherItemsMenu);
+            ExolutioCanvas.ContextMenu.Items.Add(otherItemsMenu);
 #endif            
             
             return withoutViewHelpers;

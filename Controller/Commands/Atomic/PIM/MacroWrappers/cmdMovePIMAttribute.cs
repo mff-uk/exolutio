@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using EvoX.Controller.Commands;
-using EvoX.Controller.Commands.Reflection;
-using EvoX.Model.PIM;
-using EvoX.Model;
+using Exolutio.Controller.Commands;
+using Exolutio.Controller.Commands.Reflection;
+using Exolutio.Model.PIM;
+using Exolutio.Model;
 
-namespace EvoX.Controller.Commands.Atomic.PIM
+namespace Exolutio.Controller.Commands.Atomic.PIM
 {
     [PublicCommand("Move PIM Attribute to neighboring PIM Class", PublicCommandAttribute.EPulicCommandCategory.PIM_atomic)]
     public class cmdMovePIMAttribute : MacroCommand

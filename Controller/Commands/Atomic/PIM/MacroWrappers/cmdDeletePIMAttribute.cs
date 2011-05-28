@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using EvoX.Model;
-using EvoX.Model.PIM;
-using EvoX.Controller.Commands.Atomic;
-using EvoX.Controller.Commands.Atomic.PIM;
+using Exolutio.Model;
+using Exolutio.Model.PIM;
+using Exolutio.Controller.Commands.Atomic;
+using Exolutio.Controller.Commands.Atomic.PIM;
 
-namespace EvoX.Controller.Commands.Atomic.PIM.MacroWrappers
+namespace Exolutio.Controller.Commands.Atomic.PIM.MacroWrappers
 {
     [PublicCommand("Delete PIM attribute", PublicCommandAttribute.EPulicCommandCategory.PIM_atomic)]
     public class cmdDeletePIMAttribute : MacroCommand

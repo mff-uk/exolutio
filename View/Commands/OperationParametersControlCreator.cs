@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
-using EvoX.Controller.Commands.Reflection;
-using EvoX.Model;
-using EvoX.Model.PIM;
-using EvoX.Model.PSM;
-using EvoX.SupportingClasses;
-using EvoX.SupportingClasses.Reflection;
-using EvoX.View.Commands.ParameterControls;
-using EvoX.ViewToolkit;
+using Exolutio.Controller.Commands.Reflection;
+using Exolutio.Model;
+using Exolutio.Model.PIM;
+using Exolutio.Model.PSM;
+using Exolutio.SupportingClasses;
+using Exolutio.SupportingClasses.Reflection;
+using Exolutio.View.Commands.ParameterControls;
+using Exolutio.ViewToolkit;
 using Label = System.Windows.Controls.Label;
 
-namespace EvoX.View.Commands
+namespace Exolutio.View.Commands
 {
     public static class OperationParametersControlCreator
     {

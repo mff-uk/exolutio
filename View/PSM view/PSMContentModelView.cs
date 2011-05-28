@@ -3,13 +3,13 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using EvoX.Controller.Commands;
-using EvoX.Model;
-using EvoX.Model.PSM;
-using EvoX.Model.ViewHelper;
-using EvoX.ViewToolkit;
+using Exolutio.Controller.Commands;
+using Exolutio.Model;
+using Exolutio.Model.PSM;
+using Exolutio.Model.ViewHelper;
+using Exolutio.ViewToolkit;
 
-namespace EvoX.View
+namespace Exolutio.View
 {
     public class PSMContentModelView : NodeComponentViewBase<PSMContentModelViewHelper>
     {
@@ -35,7 +35,7 @@ namespace EvoX.View
 
         public override PSMContentModelViewHelper ViewHelper { get; protected set; }
 
-        protected override void CreateInnerControls(EvoXCanvas canvas)
+        protected override void CreateInnerControls(ExolutioCanvas canvas)
         {
             base.CreateInnerControls(canvas);
             #region main node content components
@@ -70,8 +70,8 @@ namespace EvoX.View
             
             #endregion
 
-            EvoXContextMenu evoXContextMenu = MenuHelper.GetContextMenu(ScopeAttribute.EScope.PSMContentModel, this.DiagramView.Diagram);
-            ContextMenu = evoXContextMenu;
+            ExolutioContextMenu exolutioContextMenu = MenuHelper.GetContextMenu(ScopeAttribute.EScope.PSMContentModel, this.DiagramView.Diagram);
+            ContextMenu = exolutioContextMenu;
 
 #if SILVERLIGHT
             ContextMenuService.SetContextMenu(tbContentModelHeader, ContextMenu);
@@ -114,7 +114,7 @@ namespace EvoX.View
         protected override void BindModelView()
         {
             base.BindModelView();
-            ((EvoXContextMenu) ContextMenu).ScopeObject = this.ModelComponent;
+            ((ExolutioContextMenu) ContextMenu).ScopeObject = this.ModelComponent;
         }
 
         public override bool Selected

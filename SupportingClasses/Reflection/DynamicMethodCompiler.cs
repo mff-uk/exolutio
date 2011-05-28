@@ -7,7 +7,7 @@ using System;
 using System.Reflection;
 using System.Reflection.Emit;
 
-namespace EvoX.SupportingClasses.Reflection
+namespace Exolutio.SupportingClasses.Reflection
 {
 	public delegate object GetHandler(object source);
 	

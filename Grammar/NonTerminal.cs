@@ -1,4 +1,4 @@
-namespace EvoX.Model.PSM.Grammar
+namespace Exolutio.Model.PSM.Grammar
 {
     public class NonTerminal
     {

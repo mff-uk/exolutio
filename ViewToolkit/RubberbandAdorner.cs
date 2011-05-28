@@ -6,9 +6,9 @@ using System.Collections.Generic;
 using System;
 using System.Windows.Controls;
 using System.Windows.Shapes;
-using EvoX.SupportingClasses;
+using Exolutio.SupportingClasses;
 
-namespace EvoX.ViewToolkit
+namespace Exolutio.ViewToolkit
 {
 	/// <summary>
 	/// This is the adorner used for selecting items in canvas
@@ -19,7 +19,7 @@ namespace EvoX.ViewToolkit
         private Rectangle rubberband;
         private VisualCollection visuals;
         private Canvas adornerCanvas;
-        private readonly EvoXCanvas EvoXCanvas;
+        private readonly ExolutioCanvas ExolutioCanvas;
 
         protected override int VisualChildrenCount
         {
@@ -33,12 +33,12 @@ namespace EvoX.ViewToolkit
 		/// <summary>
 		/// Initializes a new instance of the <see cref="RubberbandAdorner"/> class.
 		/// </summary>
-		/// <param name="EvoXCanvas">The designer canvas.</param>
+		/// <param name="ExolutioCanvas">The designer canvas.</param>
 		/// <param name="dragStartPoint">The drag start point.</param>
-        public RubberbandAdorner(EvoXCanvas EvoXCanvas, Point? dragStartPoint)
-            : base(EvoXCanvas)
+        public RubberbandAdorner(ExolutioCanvas ExolutioCanvas, Point? dragStartPoint)
+            : base(ExolutioCanvas)
         {
-            this.EvoXCanvas = EvoXCanvas;
+            this.ExolutioCanvas = ExolutioCanvas;
             this.startPoint = dragStartPoint;
 			this.endPoint = dragStartPoint;
 
@@ -101,7 +101,7 @@ namespace EvoX.ViewToolkit
             removedFromSelection.Clear();
 
             Rect rubberBand = new Rect(startPoint.Value, endPoint.Value);
-            foreach (UIElement _item in EvoXCanvas.Children)
+            foreach (UIElement _item in ExolutioCanvas.Children)
             {
                 if (_item is ISelectable)
                 {
@@ -128,13 +128,13 @@ namespace EvoX.ViewToolkit
             foreach (ISelectable item in newSelection)
             {
 				item.Selected = true;
-                EvoXCanvas.SelectedItems.AddIfNotContained(item);
+                ExolutioCanvas.SelectedItems.AddIfNotContained(item);
 
             }
             foreach (ISelectable item in removedFromSelection)
             {
 				item.Selected = false; 
-				EvoXCanvas.SelectedItems.Remove(item);
+				ExolutioCanvas.SelectedItems.Remove(item);
             }
         }
 

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using EvoX.Model.OCL.SupportingClasses;
+using Exolutio.Model.OCL.SupportingClasses;
 
-namespace EvoX.Model.OCL.Types
+namespace Exolutio.Model.OCL.Types
 {
     public class OperationCollection:ActionList<Operation>
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 
-namespace EvoX.Model.OCL.AST
+namespace Exolutio.Model.OCL.AST
 {
     /// <summary>
     /// A CollectionLiteralExp represents a reference to collection literal.

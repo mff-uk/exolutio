@@ -5,12 +5,12 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Windows;
 using System.Windows.Controls;
-using EvoX.Model;
-using EvoX.Model.PIM;
-using EvoX.ResourceLibrary;
-using EvoX.ViewToolkit;
+using Exolutio.Model;
+using Exolutio.Model.PIM;
+using Exolutio.ResourceLibrary;
+using Exolutio.ViewToolkit;
 
-namespace EvoX.View
+namespace Exolutio.View
 {
     /// <summary>
     /// Implementation of <see cref="IAttributesContainer"/>, displays attributes
@@ -73,7 +73,7 @@ namespace EvoX.View
                 return new ContextMenuItem[0];
 #else
                 ContextMenuItem addPropertyItem = new ContextMenuItem("Add new attribute...");
-                addPropertyItem.Icon = EvoXResourceNames.GetResourceImageSource(EvoXResourceNames.AddAttributes);
+                addPropertyItem.Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.AddAttributes);
                 //addPropertyItem.Click += delegate
                 //{
                 //    attributeController.AddNewAttribute(null);
@@ -91,9 +91,9 @@ namespace EvoX.View
         /// Creates new instance of <see cref="PIMAttributesContainer" />. 
         /// </summary>
         /// <param name="container">Panel used to display the items</param>
-        /// <param name="evoxCanvas">canvas owning the control</param>
-        public PIMAttributesContainer(Panel container, EvoXCanvas evoxCanvas, Diagram diagram)
-            : base(container, evoxCanvas, diagram)
+        /// <param name="exolutioCanvas">canvas owning the control</param>
+        public PIMAttributesContainer(Panel container, ExolutioCanvas exolutioCanvas, Diagram diagram)
+            : base(container, exolutioCanvas, diagram)
         {
 
         }

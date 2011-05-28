@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace EvoX.SupportingClasses.Reflection
+namespace Exolutio.SupportingClasses.Reflection
 {
     public static class AttributesHelper
     {

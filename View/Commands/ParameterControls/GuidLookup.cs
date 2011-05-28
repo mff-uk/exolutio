@@ -1,16 +1,16 @@
 using System;
 using System.Linq;
 using System.Windows.Controls;
-using EvoX.Controller.Commands.Reflection;
-using EvoX.Model;
-using EvoX.Model.PIM;
-using EvoX.Model.PSM;
-using EvoX.SupportingClasses;
+using Exolutio.Controller.Commands.Reflection;
+using Exolutio.Model;
+using Exolutio.Model.PIM;
+using Exolutio.Model.PSM;
+using Exolutio.SupportingClasses;
 
-namespace EvoX.View.Commands.ParameterControls
+namespace Exolutio.View.Commands.ParameterControls
 {
     public class GuidLookup : ComboBox,
-        IOperationParameterControl, IOperationParameterControl<Guid>, IOperationParameterControl<EvoXObject>,
+        IOperationParameterControl, IOperationParameterControl<Guid>, IOperationParameterControl<ExolutioObject>,
         IOperationParameterControlWithConsistencyCheck
     {
         public delegate bool VerifyDelegate(params object[] verifiedObjects);
@@ -53,13 +53,13 @@ namespace EvoX.View.Commands.ParameterControls
             get { return Value; }
         }
 
-        public EvoXObject Value
+        public ExolutioObject Value
         {
             get
             {
                 Guid guid = (this as IOperationParameterControl<Guid>).Value;
                 if (guid != Guid.Empty)
-                    return ProjectVersion.Project.TranslateComponent<EvoXObject>(guid);
+                    return ProjectVersion.Project.TranslateComponent<ExolutioObject>(guid);
                 else
                     return null;
             }
@@ -143,9 +143,9 @@ namespace EvoX.View.Commands.ParameterControls
                 SelectedIndex = 0;
             }
 
-            if (SuggestedValue != null && SuggestedValue is EvoXObject)
+            if (SuggestedValue != null && SuggestedValue is ExolutioObject)
             {
-                this.SelectedItem = this.Items.FirstOrDefault(i => ((ComboBoxItem)i).Tag.ToString() == ((EvoXObject)SuggestedValue).ID.ToString());
+                this.SelectedItem = this.Items.FirstOrDefault(i => ((ComboBoxItem)i).Tag.ToString() == ((ExolutioObject)SuggestedValue).ID.ToString());
             }
         }
 
@@ -232,9 +232,9 @@ namespace EvoX.View.Commands.ParameterControls
                 //OnSelectionChanged(null);
             }
 
-            if (SuggestedValue != null && SuggestedValue is EvoXObject)
+            if (SuggestedValue != null && SuggestedValue is ExolutioObject)
             {
-                this.SelectedItem = this.Items.FirstOrDefault(i => ((ComboBoxItem)i).Tag.ToString() == ((EvoXObject)SuggestedValue).ID.ToString());
+                this.SelectedItem = this.Items.FirstOrDefault(i => ((ComboBoxItem)i).Tag.ToString() == ((ExolutioObject)SuggestedValue).ID.ToString());
             }
             //OnSelectionChanged(null);
         }

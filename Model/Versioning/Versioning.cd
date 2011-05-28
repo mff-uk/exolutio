@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="EvoX.Model.Project">
+  <Class Name="Exolutio.Model.Project">
     <Position X="5.25" Y="1.75" Width="1.5" />
     <Compartments>
       <Compartment Name="Events" Collapsed="true" />
@@ -17,7 +17,7 @@
     </ShowAsCollectionAssociation>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="EvoX.Model.ProjectVersion">
+  <Class Name="Exolutio.Model.ProjectVersion">
     <Position X="7.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IQAAAgAgAAAAAAABAAABCAAAACAACKAAAAAIAAAAAAA=</HashCode>
@@ -25,7 +25,7 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="EvoX.Model.Versioning.Version" Collapsed="true" BaseTypeListCollapsed="true">
+  <Class Name="Exolutio.Model.Versioning.Version" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="9.75" Y="1.75" Width="1.5" />
     <Compartments>
       <Compartment Name="Events" Collapsed="true" />
@@ -36,13 +36,13 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="EvoX.Model.Versioning.VersionManager">
+  <Class Name="Exolutio.Model.Versioning.VersionManager">
     <Position X="1.5" Y="1.25" Width="2.75" />
     <Compartments>
       <Compartment Name="Nested Types" Collapsed="false" />
     </Compartments>
     <NestedTypes>
-      <Class Name="EvoX.Model.Versioning.VersionManager.VersionedItemPivot">
+      <Class Name="Exolutio.Model.Versioning.VersionManager.VersionedItemPivot">
         <TypeIdentifier>
           <NewMemberFileName>Versioning\VersionManager.cs</NewMemberFileName>
         </TypeIdentifier>
@@ -56,22 +56,22 @@
       <Property Name="Project" />
     </ShowAsAssociation>
   </Class>
-  <Class Name="EvoX.Model.Versioning.IVersionedItemExt" Collapsed="true">
+  <Class Name="Exolutio.Model.Versioning.IVersionedItemExt" Collapsed="true">
     <Position X="12.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Versioning\IVersionedItem.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="EvoX.Model.EvoXObject" Collapsed="true">
+  <Class Name="Exolutio.Model.ExolutioObject" Collapsed="true">
     <Position X="7.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAgIAAAAAAAAAAgAAAAAAAAAAAAAAAAgA=</HashCode>
-      <FileName>EvoXObject.cs</FileName>
+      <FileName>ExolutioObject.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Interface Name="EvoX.Model.Versioning.IVersionedItem" Collapsed="true">
+  <Interface Name="Exolutio.Model.Versioning.IVersionedItem" Collapsed="true">
     <Position X="12.25" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>

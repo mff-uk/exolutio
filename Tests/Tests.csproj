@@ -8,8 +8,8 @@
     <ProjectGuid>{BE439BC5-DF67-4BB8-A84C-8A6B4066F63D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EvoX.Tests</RootNamespace>
-    <AssemblyName>EvoX.Tests</AssemblyName>
+    <RootNamespace>Exolutio.Tests</RootNamespace>
+    <AssemblyName>Exolutio.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>

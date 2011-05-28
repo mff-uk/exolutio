@@ -5,13 +5,13 @@ using System.Linq;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Media;
-using EvoX.Dialogs;
-using EvoX.ResourceLibrary;
-using EvoX.View;
-using EvoX.View.Commands;
-using EvoX.WPFClient;
+using Exolutio.Dialogs;
+using Exolutio.ResourceLibrary;
+using Exolutio.View;
+using Exolutio.View.Commands;
+using Exolutio.WPFClient;
 
-namespace EvoX.WPFClient
+namespace Exolutio.WPFClient
 {
     public class guiCheckForUpdates : guiCommandBase
     {
@@ -28,16 +28,16 @@ namespace EvoX.WPFClient
             }
 
             Dictionary<string, Version> newAvailableVersions;
-            if (updater.AreNewVersionsAvailable(clientVersions, out newAvailableVersions) && EvoXYesNoBox.ShowYesNoCancel("New version available", "New version is available. \r\nDo you wish to update?") == MessageBoxResult.Yes )
+            if (updater.AreNewVersionsAvailable(clientVersions, out newAvailableVersions) && ExolutioYesNoBox.ShowYesNoCancel("New version available", "New version is available. \r\nDo you wish to update?") == MessageBoxResult.Yes )
             {
-                System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo("EvoX.Updater.exe");
+                System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo("Exolutio.Updater.exe");
                 info.UseShellExecute = true;
                 (Current.MainWindow).Close();
                 System.Diagnostics.Process.Start(info);
             }
             else
             {
-                EvoXMsgBox.Show("EvoX Update", "Updates checked", "This is the latest version.");
+                ExolutioMessageBox.Show("Exolutio Update", "Updates checked", "This is the latest version.");
             }
         }
 
@@ -58,7 +58,7 @@ namespace EvoX.WPFClient
 
         //public override ImageSource Icon
         //{
-        //    get { return EvoXResourceNames.GetResourceImageSource(EvoXResourceNames.XXX); }
+        //    get { return ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.XXX); }
         //}
 
     }

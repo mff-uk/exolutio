@@ -1,12 +1,12 @@
-﻿<UserControl x:Class="EvoX.View.ProjectView"
+﻿<UserControl x:Class="Exolutio.View.ProjectView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
-    xmlns:View="clr-namespace:EvoX.View" 
-    xmlns:Model="clr-namespace:EvoX.Model;assembly=EvoX.Model" xmlns:Commands="clr-namespace:EvoX.View.Commands" xmlns:vt="clr-namespace:EvoX.ViewToolkit;assembly=EvoX.ViewToolkit">
+    xmlns:View="clr-namespace:Exolutio.View" 
+    xmlns:Model="clr-namespace:Exolutio.Model;assembly=Exolutio.Model" xmlns:Commands="clr-namespace:Exolutio.View.Commands" xmlns:vt="clr-namespace:Exolutio.ViewToolkit;assembly=Exolutio.ViewToolkit">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/EvoX.ResourceLibrary;component/Images/Images.xaml" ></ResourceDictionary>
+                <ResourceDictionary Source="/Exolutio.ResourceLibrary;component/Images/Images.xaml" ></ResourceDictionary>
                 <ResourceDictionary Source="MenuCommandStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
@@ -16,24 +16,24 @@
         <TreeView Name="projectView"  SelectedItemChanged="OnItemSelected">
             <TreeView.Resources>
                 <ContextMenu x:Key="projectContextMenu">
-                    <MenuItem Command="{x:Static Commands:EvoXGuiCommands.RenameProjectCommand}" Style="{StaticResource ResourceKey=menuItemWithCommand}"  />                    
+                    <MenuItem Command="{x:Static Commands:GuiCommands.RenameProjectCommand}" Style="{StaticResource ResourceKey=menuItemWithCommand}"  />                    
                     <!--<MenuItem Header="Change project's namespace" /> -->
-                    <MenuItem Command="{x:Static Commands:EvoXGuiCommands.AddPSMSchemaCommand}" Style="{StaticResource ResourceKey=menuItemWithCommand}" />
+                    <MenuItem Command="{x:Static Commands:GuiCommands.AddPSMSchemaCommand}" Style="{StaticResource ResourceKey=menuItemWithCommand}" />
                 </ContextMenu>
                 <ContextMenu x:Key="PIMDiagramContextMenu">
                     <!--<MenuItem Header="Add new PIM diagram..." />-->
                 </ContextMenu>
                 <ContextMenu x:Key="PSMDiagramContextMenu">
-                    <MenuItem Command="{x:Static Commands:EvoXGuiCommands.AddPSMSchemaCommand}" Style="{StaticResource ResourceKey=menuItemWithCommand}" />                    
+                    <MenuItem Command="{x:Static Commands:GuiCommands.AddPSMSchemaCommand}" Style="{StaticResource ResourceKey=menuItemWithCommand}" />                    
                 </ContextMenu>
                 <ContextMenu x:Key="memberContextMenuPIM">
                     <!--<MenuItem Header="Rename diagram" />
                     <MenuItem Header="Remove diagram" />-->
                 </ContextMenu>
-                <vt:EvoXContextMenu x:Key="memberContextMenuPSM" Opened="EvoXContextMenu_ContextMenuOpening">
-                    <vt:ContextMenuItem Command="{x:Static Commands:EvoXGuiCommands.RenamePSMSchemaCommand}" Style="{StaticResource ResourceKey=contextMenuItemWithCommand}" />
-                    <vt:ContextMenuItem Command="{x:Static Commands:EvoXGuiCommands.RemovePSMSchemaCommand}" Style="{StaticResource ResourceKey=contextMenuItemWithCommand}" />
-                </vt:EvoXContextMenu>
+                <vt:ExolutioContextMenu x:Key="memberContextMenuPSM" Opened="ExolutioContextMenu_ContextMenuOpening">
+                    <vt:ContextMenuItem Command="{x:Static Commands:GuiCommands.RenamePSMSchemaCommand}" Style="{StaticResource ResourceKey=contextMenuItemWithCommand}" />
+                    <vt:ContextMenuItem Command="{x:Static Commands:GuiCommands.RemovePSMSchemaCommand}" Style="{StaticResource ResourceKey=contextMenuItemWithCommand}" />
+                </vt:ExolutioContextMenu>
       
                 <Style x:Key="projectStyler" TargetType="TextBlock">
                     <Setter Property="Foreground" Value="DarkBlue"/>

@@ -2,13 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using EvoX.Model.PIM;
-using EvoX.Model.PSM;
+using Exolutio.Model.PIM;
+using Exolutio.Model.PSM;
 
-namespace EvoX.Model
+namespace Exolutio.Model
 {
     public class UndirectCollection<TMember> : INotifyCollectionChanged, ICollection<TMember>, IEnumerable
-        where TMember : EvoXObject
+        where TMember : ExolutioObject
     {
         private readonly List<Guid> internalGuidCollection = new List<Guid>();
 
@@ -78,7 +78,7 @@ namespace EvoX.Model
             }
             else
             {
-                throw new EvoXModelException(string.Format("Removed item '{0}' not present in the collection.", member));
+                throw new ExolutioModelException(string.Format("Removed item '{0}' not present in the collection.", member));
             }
         }
 
@@ -118,7 +118,7 @@ namespace EvoX.Model
         {
             if (internalGuidCollection.Contains(member))
             {
-                throw new EvoXModelException(string.Format("Item '{0}' is already present in the collection. ", member));
+                throw new ExolutioModelException(string.Format("Item '{0}' is already present in the collection. ", member));
             }
             internalGuidCollection.Insert(index, member);
             NotifyCollectionChangedEventArgs args =

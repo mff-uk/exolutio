@@ -1,15 +1,15 @@
-﻿<UserControl x:Class="EvoX.View.PIMModelTreeView"
+﻿<UserControl x:Class="Exolutio.View.PIMModelTreeView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:vt="clr-namespace:EvoX.ViewToolkit;assembly=EvoX.ViewToolkit" xmlns:Commands="clr-namespace:EvoX.View.Commands" mc:Ignorable="d" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:vt="clr-namespace:Exolutio.ViewToolkit;assembly=Exolutio.ViewToolkit" xmlns:Commands="clr-namespace:Exolutio.View.Commands" mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
 
     <TreeView Name="navigatorTreeView" BorderThickness="0">
         <TreeView.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>
-                    <ResourceDictionary Source="/EvoX.ResourceLibrary;component/Images/Images.xaml" />
+                    <ResourceDictionary Source="/Exolutio.ResourceLibrary;component/Images/Images.xaml" />
                     <ResourceDictionary Source="../MenuCommandStyles.xaml" />
                         
                     <ResourceDictionary>
@@ -27,11 +27,11 @@
                             -->
                         </ContextMenu>
 
-                        <vt:EvoXContextMenu x:Key="modelClassesContextMenu">
-                            <vt:ContextMenuItem Command="{x:Static Commands:EvoXGuiCommands.RenameComponentCommand}" 
+                        <vt:ExolutioContextMenu x:Key="modelClassesContextMenu">
+                            <vt:ContextMenuItem Command="{x:Static Commands:GuiCommands.RenameComponentCommand}" 
                                                 CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
                                                 Style="{StaticResource ResourceKey=contextMenuItemWithCommand}" />
-                        </vt:EvoXContextMenu>
+                        </vt:ExolutioContextMenu>
 
                         <ContextMenu x:Key="packageContextMenu">
                             <!--

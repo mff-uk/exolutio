@@ -3,11 +3,11 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-using EvoX.Model.PIM;
-using EvoX.SupportingClasses;
-using EvoX.Model.Serialization;
+using Exolutio.Model.PIM;
+using Exolutio.SupportingClasses;
+using Exolutio.Model.Serialization;
 
-namespace EvoX.Model.ViewHelper
+namespace Exolutio.Model.ViewHelper
 {
     /// <summary>
     /// Stores visualization information for Associations 
@@ -32,7 +32,7 @@ namespace EvoX.Model.ViewHelper
             }
         }
 
-        public override Versioning.IEvoXCloneable Clone(ProjectVersion projectVersion, Versioning.ElementCopiesMap createdCopies)
+        public override Versioning.IExolutioCloneable Clone(ProjectVersion projectVersion, Versioning.ElementCopiesMap createdCopies)
         {
             return new PIMAssociationViewHelper(projectVersion.Project.TranslateComponent<Diagram>(createdCopies.GetGuidForCopyOf(Diagram)));
         }
@@ -145,7 +145,7 @@ namespace EvoX.Model.ViewHelper
             }
         }
 
-        public override void FillCopy(Versioning.IEvoXCloneable copyComponent, ProjectVersion projectVersion, Versioning.ElementCopiesMap createdCopies)
+        public override void FillCopy(Versioning.IExolutioCloneable copyComponent, ProjectVersion projectVersion, Versioning.ElementCopiesMap createdCopies)
         {
             base.FillCopy(copyComponent, projectVersion, createdCopies);
             PIMAssociationViewHelper copyAssociationViewHelper = (PIMAssociationViewHelper)copyComponent;
@@ -184,7 +184,7 @@ namespace EvoX.Model.ViewHelper
             MainLabelViewHelper.DeserializeFromChildElement("MainLabelViewHelper", parentNode, context);
 
             int i = 0;
-            foreach (XElement aeElement in parentNode.Element(context.EvoXNS + "AssociationEndsViewHelpers").Elements(context.EvoXNS + "AssociationEndViewHelper"))
+            foreach (XElement aeElement in parentNode.Element(context.ExolutioNS + "AssociationEndsViewHelpers").Elements(context.ExolutioNS + "AssociationEndViewHelper"))
             {
                 AssociationEndsViewHelpers[i++].Deserialize(aeElement, context);
             }

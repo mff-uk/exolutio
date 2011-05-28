@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EvoX.Controller.Commands {
+namespace Exolutio.Controller.Commands {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace EvoX.Controller.Commands {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EvoX.Controller.Commands.CommandErrors", typeof(CommandErrors).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Exolutio.Controller.Commands.CommandErrors", typeof(CommandErrors).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

@@ -1,12 +1,12 @@
 using System;
 using System.Xml;
 using System.Xml.Linq;
-using EvoX.Model.Serialization;
-using EvoX.SupportingClasses;
+using Exolutio.Model.Serialization;
+using Exolutio.SupportingClasses;
 
-namespace EvoX.Model.Versioning
+namespace Exolutio.Model.Versioning
 {
-    public class Version : EvoXObject
+    public class Version : ExolutioObject
     {
         public Version(Project p) : base(p) { }
         public Version(Project p, Guid g) : base(p, g) { }
@@ -44,12 +44,12 @@ namespace EvoX.Model.Versioning
             }
         }
 
-        private readonly EvoXList<IVersionedItem> items = new EvoXList<IVersionedItem>();
+        private readonly ExolutioList<IVersionedItem> items = new ExolutioList<IVersionedItem>();
 
         /// <summary>
         /// Contains items in this version.
         /// </summary>
-        public EvoXList<IVersionedItem> Items
+        public ExolutioList<IVersionedItem> Items
         {
             get { return items; }
         }
@@ -59,7 +59,7 @@ namespace EvoX.Model.Versioning
             return Label;
         }
 
-        #region IEvoXSerializable Members
+        #region IExolutioSerializable Members
 
         public override void Serialize(XElement parentNode, SerializationContext context)
         {
@@ -106,7 +106,7 @@ namespace EvoX.Model.Versioning
         {
             if (psmSchema.Version != this)
             {
-                throw new EvoXModelException();
+                throw new ExolutioModelException();
             }
             NotifyItemAdded(component);
         }
@@ -115,11 +115,11 @@ namespace EvoX.Model.Versioning
         {
             if (item.Version != this)
             {
-                throw new EvoXModelException();
+                throw new ExolutioModelException();
             }
             if (Items.Contains(item))
             {
-                throw new EvoXModelException();
+                throw new ExolutioModelException();
             }
             Items.Add(item);
             Project.VersionManager.AddVersionedItem(item);
@@ -129,7 +129,7 @@ namespace EvoX.Model.Versioning
         {
             if (psmSchema.Version != this)
             {
-                throw new EvoXModelException();
+                throw new ExolutioModelException();
             }
             NotifyItemRemoved(component);
         }
@@ -138,11 +138,11 @@ namespace EvoX.Model.Versioning
         {
             if (item.Version != this)
             {
-                throw new EvoXModelException();
+                throw new ExolutioModelException();
             }
             if (!this.Items.Contains(item))
             {
-                throw new EvoXModelException();
+                throw new ExolutioModelException();
             }
             Items.Remove(item);
             Project.VersionManager.RemoveVersionedItem(item);

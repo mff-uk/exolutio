@@ -5,12 +5,12 @@ using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Schema;
-using EvoX.Model;
-using EvoX.Model.PSM;
-using EvoX.SupportingClasses;
-using EvoX.Translation;
+using Exolutio.Model;
+using Exolutio.Model.PSM;
+using Exolutio.SupportingClasses;
+using Exolutio.Translation;
 
-namespace EvoX.DataGenerator
+namespace Exolutio.DataGenerator
 {
     public class SampleDataGenerator : SchemaTranslator<DataGeneratorContext, object, XDocument>
     {
@@ -633,7 +633,7 @@ namespace EvoX.DataGenerator
                 if (occurrences > 10 && association.Lower > 0)
                 {
                     Log.AddError(string.Format("Association {0} is recursive and causes infinite nesting.", association));
-                    throw new EvoXException(string.Format("Association {0} is recursive and causes infinite nesting.", association));
+                    throw new ExolutioException(string.Format("Association {0} is recursive and causes infinite nesting.", association));
                 }
                 if (MinimalTree)
                     return lower;

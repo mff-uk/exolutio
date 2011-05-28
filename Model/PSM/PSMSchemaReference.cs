@@ -1,10 +1,10 @@
 using System;
 using System.Xml;
 using System.Xml.Linq;
-using EvoX.Model.Serialization;
-using EvoX.Model.Versioning;
+using Exolutio.Model.Serialization;
+using Exolutio.Model.Versioning;
 
-namespace EvoX.Model.PSM
+namespace Exolutio.Model.PSM
 {
     public class PSMSchemaReference : PSMComponent
     {
@@ -56,7 +56,7 @@ namespace EvoX.Model.PSM
             }
         }
 
-        #region IEvoXSerializable Members
+        #region IExolutioSerializable Members
 
         public override void Serialize(XElement parentNode, SerializationContext context)
         {
@@ -72,7 +72,7 @@ namespace EvoX.Model.PSM
 
             //if (!string.IsNullOrEmpty(Namespace))
             //{
-            //    XmlElement namespaceElement = context.Document.CreateElement(SerializationContext.EvoXPrefix, "Namespace", SerializationContext.EvoXNamespace);
+            //    XmlElement namespaceElement = context.Document.CreateElement(SerializationContext.ExolutioPrefix, "Namespace", SerializationContext.ExolutioNamespace);
             //    XmlText namespaceTextNode = context.Document.CreateTextNode(Namespace);
             //    namespaceElement.AppendChild(namespaceTextNode);
             //    parentNode.AppendChild(namespaceElement);
@@ -80,7 +80,7 @@ namespace EvoX.Model.PSM
 
             //if (!string.IsNullOrEmpty(SchemaLocation))
             //{
-            //    XmlElement schemaLocationElement = context.Document.CreateElement(SerializationContext.EvoXPrefix, "SchemaLocation", SerializationContext.EvoXNamespace);
+            //    XmlElement schemaLocationElement = context.Document.CreateElement(SerializationContext.ExolutioPrefix, "SchemaLocation", SerializationContext.ExolutioNamespace);
             //    XmlText schemaLocationTextNode = context.Document.CreateTextNode(Namespace);
             //    schemaLocationElement.AppendChild(schemaLocationTextNode);
             //    parentNode.AppendChild(schemaLocationElement);
@@ -88,7 +88,7 @@ namespace EvoX.Model.PSM
 
             //if (!string.IsNullOrEmpty(NamespacePrefix))
             //{
-            //    XmlElement namespacePrefixElement = context.Document.CreateElement(SerializationContext.EvoXPrefix, "NamespacePrefix", SerializationContext.EvoXNamespace);
+            //    XmlElement namespacePrefixElement = context.Document.CreateElement(SerializationContext.ExolutioPrefix, "NamespacePrefix", SerializationContext.ExolutioNamespace);
             //    XmlText namespacePrefixTextElement = context.Document.CreateTextNode(NamespacePrefix);
             //    namespacePrefixElement.AppendChild(namespacePrefixTextElement);
             //    parentNode.AppendChild(namespacePrefixElement);
@@ -107,7 +107,7 @@ namespace EvoX.Model.PSM
             //    this.ReferenceType = SerializationContext.DecodeSchemaReferenceType(parentNode.Attributes["ReferenceType"].Value);
             //}
 
-            //XmlNodeList nodeList = parentNode.GetElementsByTagName("Namespace", SerializationContext.EvoXNamespace);
+            //XmlNodeList nodeList = parentNode.GetElementsByTagName("Namespace", SerializationContext.ExolutioNamespace);
             //if (nodeList.Count > 0)
             //{
             //    XmlElement namespaceElement = (XmlElement)nodeList[0];
@@ -117,7 +117,7 @@ namespace EvoX.Model.PSM
             //    }
             //}
 
-            //XmlNodeList nodeList2 = parentNode.GetElementsByTagName("SchemaLocation", SerializationContext.EvoXNamespace);
+            //XmlNodeList nodeList2 = parentNode.GetElementsByTagName("SchemaLocation", SerializationContext.ExolutioNamespace);
             //if (nodeList2.Count > 0)
             //{
             //    XmlElement schemaLocationElement = (XmlElement)nodeList2[0];
@@ -127,7 +127,7 @@ namespace EvoX.Model.PSM
             //    }
             //}
 
-            //XmlNodeList nodeList3 = parentNode.GetElementsByTagName("NamespacePrefix", SerializationContext.EvoXNamespace);
+            //XmlNodeList nodeList3 = parentNode.GetElementsByTagName("NamespacePrefix", SerializationContext.ExolutioNamespace);
             //if (nodeList.Count > 0)
             //{
             //    XmlElement namespacePrefixElement = (XmlElement)nodeList[0];
@@ -145,14 +145,14 @@ namespace EvoX.Model.PSM
 
         #endregion
 
-        #region Implementation of IEvoXCloneable
+        #region Implementation of IExolutioCloneable
 
-        public override IEvoXCloneable Clone(ProjectVersion projectVersion, ElementCopiesMap createdCopies)
+        public override IExolutioCloneable Clone(ProjectVersion projectVersion, ElementCopiesMap createdCopies)
         {
             return new PSMSchemaReference(projectVersion.Project, createdCopies.SuggestGuid(this));
         }
 
-        public override void FillCopy(IEvoXCloneable copyComponent, ProjectVersion projectVersion,
+        public override void FillCopy(IExolutioCloneable copyComponent, ProjectVersion projectVersion,
                                       ElementCopiesMap createdCopies)
         {
             base.FillCopy(copyComponent, projectVersion, createdCopies);

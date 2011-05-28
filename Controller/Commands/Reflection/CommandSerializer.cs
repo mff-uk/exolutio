@@ -4,11 +4,11 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.Remoting;
 using System.Xml;
-using EvoX.Model;
-using EvoX.Model.PIM;
-using EvoX.SupportingClasses.Reflection;
+using Exolutio.Model;
+using Exolutio.Model.PIM;
+using Exolutio.SupportingClasses.Reflection;
 
-namespace EvoX.Controller.Commands.Reflection
+namespace Exolutio.Controller.Commands.Reflection
 {
     public class CommandSerializer
     {
@@ -112,9 +112,9 @@ namespace EvoX.Controller.Commands.Reflection
                 propertyElement.Attributes.Append(xmlAttribute);
 
                 object value = parameter.ParameterPropertyInfo.GetValue(commandBase, new object[0]);
-                if (value is EvoXObject)
+                if (value is ExolutioObject)
                 {
-                    XmlText textNode = ownerDocument.CreateTextNode(((EvoXObject)value).ID.ToString());
+                    XmlText textNode = ownerDocument.CreateTextNode(((ExolutioObject)value).ID.ToString());
                     propertyElement.AppendChild(textNode);
                 }
                 else
@@ -162,13 +162,13 @@ namespace EvoX.Controller.Commands.Reflection
             {
                 return stringValue;
             }
-            else if (propertyInfo.PropertyType.IsSubclassOf(typeof(EvoXObject)))
+            else if (propertyInfo.PropertyType.IsSubclassOf(typeof(ExolutioObject)))
             {
                 Guid id = Guid.Parse(stringValue);
                 ConstructorInfo constructorInfo = propertyInfo.PropertyType.GetConstructor(new Type[] { typeof(Project), typeof(Guid) });
                 dummyProject.mappingDictionary.Clear();
-                object evoxObject = constructorInfo.Invoke(new object[] { dummyProject, id });
-                return evoxObject;
+                object exolutioObject = constructorInfo.Invoke(new object[] { dummyProject, id });
+                return exolutioObject;
             }
             else
             {

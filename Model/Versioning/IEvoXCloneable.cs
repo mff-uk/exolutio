@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace EvoX.Model.Versioning
+namespace Exolutio.Model.Versioning
 {
-    public interface IEvoXCloneable
+    public interface IExolutioCloneable
     {
         /// <summary>
         /// Clones the component (creates a component of the same type in the model)
@@ -18,7 +18,7 @@ namespace EvoX.Model.Versioning
         /// not be  implemented for abstract classes (and base.Clone should
         /// never be called in any of the implementations). 
         /// </remarks>
-        IEvoXCloneable Clone(ProjectVersion projectVersion, ElementCopiesMap createdCopies);
+        IExolutioCloneable Clone(ProjectVersion projectVersion, ElementCopiesMap createdCopies);
 
         /// <summary>
         /// Creates the copy of the component in the model in the appropriate
@@ -32,7 +32,7 @@ namespace EvoX.Model.Versioning
         /// <param name="createdCopies">The copies already created in this
         /// copying session.</param>
         /// <returns>Copy of the component</returns>
-        IEvoXCloneable CreateCopy(ProjectVersion projectVersion, ElementCopiesMap createdCopies);
+        IExolutioCloneable CreateCopy(ProjectVersion projectVersion, ElementCopiesMap createdCopies);
 
         /// <summary>
         /// Fills all corresponding properties of 
@@ -51,21 +51,21 @@ namespace EvoX.Model.Versioning
         /// base.FillCopy(copyComponent, projectVersion, createdCopies);
         /// </code>
         /// </remarks>
-        void FillCopy(IEvoXCloneable copyComponent, ProjectVersion projectVersion, ElementCopiesMap createdCopies);
+        void FillCopy(IExolutioCloneable copyComponent, ProjectVersion projectVersion, ElementCopiesMap createdCopies);
 
         Guid ID { get; }
     }
 
-    public static class IEvoXCloneableExt
+    public static class IExolutioCloneableExt
     {
-        public delegate void RegisterComponentDelegate<T>(T member) where T : IEvoXCloneable;
+        public delegate void RegisterComponentDelegate<T>(T member) where T : IExolutioCloneable;
 
         /// <summary>
         /// Registers (already existing) copies of the members of <paramref name="sourceCollection"/> into <paramref name="targetCollection"/>.
         /// </summary>
-        public static void CopyRefCollection<T>(this IEvoXCloneable cloneable, IEnumerable<T> sourceCollection, UndirectCollection<T> targetCollection,
+        public static void CopyRefCollection<T>(this IExolutioCloneable cloneable, IEnumerable<T> sourceCollection, UndirectCollection<T> targetCollection,
             ProjectVersion projectVersion, ElementCopiesMap createdCopies, bool asGuid = false)
-            where T : EvoXObject
+            where T : ExolutioObject
         {
             foreach (T collectionItem in sourceCollection)
             {
@@ -84,8 +84,8 @@ namespace EvoX.Model.Versioning
         /// <summary>
         /// Clones all the members of <paramref name="sourceCollection"/>, calls FillCopy for each cloned member and 
         /// </summary>
-        public static void CopyCollection<T>(this IEvoXCloneable cloneable, UndirectCollection<T> sourceCollection, UndirectCollection<T> targetCollection, ProjectVersion projectVersion, ElementCopiesMap createdCopies)
-            where T : EvoXObject
+        public static void CopyCollection<T>(this IExolutioCloneable cloneable, UndirectCollection<T> sourceCollection, UndirectCollection<T> targetCollection, ProjectVersion projectVersion, ElementCopiesMap createdCopies)
+            where T : ExolutioObject
         {
             foreach (T collectionItem in sourceCollection)
             {
@@ -98,10 +98,10 @@ namespace EvoX.Model.Versioning
         /// <summary>
         /// Clones all the members of <paramref name="sourceCollection"/>, calls FillCopy for each cloned member and 
         /// </summary>
-        public static void CopyDictionary<TKey, TValue>(this IEvoXCloneable cloneable, Dictionary<TKey, TValue> sourceDictionary,
+        public static void CopyDictionary<TKey, TValue>(this IExolutioCloneable cloneable, Dictionary<TKey, TValue> sourceDictionary,
             Dictionary<TKey, TValue> targetDictionary, ProjectVersion projectVersion, ElementCopiesMap createdCopies)
-            where TKey : EvoXObject
-            where TValue: IEvoXCloneable
+            where TKey : ExolutioObject
+            where TValue: IExolutioCloneable
         {
             foreach (KeyValuePair<TKey, TValue> collectionItem in sourceDictionary)
             {
@@ -113,7 +113,7 @@ namespace EvoX.Model.Versioning
         }
 
         public static T CreateTypedCopy<T>(this T ownedObject, ProjectVersion projectVersion, ElementCopiesMap createdCopies)
-            where T : IEvoXCloneable
+            where T : IExolutioCloneable
         {
             return (T) ownedObject.CreateCopy(projectVersion, createdCopies);
         }

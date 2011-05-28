@@ -2,10 +2,10 @@
 using System.ComponentModel;
 using System.Xml;
 using System.Xml.Linq;
-using EvoX.Model.Serialization;
-using EvoX.Model.Versioning;
+using Exolutio.Model.Serialization;
+using Exolutio.Model.Versioning;
 
-namespace EvoX.Model.PSM
+namespace Exolutio.Model.PSM
 {
     public class PSMAttribute : PSMComponent, IHasCardinality, IPSMSemanticComponent
     {
@@ -122,7 +122,7 @@ namespace EvoX.Model.PSM
 
         #endregion
 
-        #region Implementation of IEvoXSerializable
+        #region Implementation of IExolutioSerializable
 
         public override void Serialize(XElement parentNode, Serialization.SerializationContext context)
         {
@@ -180,14 +180,14 @@ namespace EvoX.Model.PSM
                 + PSMClass.Name + '.' + Name + '"') + " " + lower + ".." + upper;
         }
 
-        #region Implementation of IEvoXCloneable
+        #region Implementation of IExolutioCloneable
 
-        public override IEvoXCloneable Clone(ProjectVersion projectVersion, ElementCopiesMap createdCopies)
+        public override IExolutioCloneable Clone(ProjectVersion projectVersion, ElementCopiesMap createdCopies)
         {
             return new PSMAttribute(projectVersion.Project, createdCopies.SuggestGuid(this));
         }
 
-        public override void FillCopy(IEvoXCloneable copyComponent, ProjectVersion projectVersion,
+        public override void FillCopy(IExolutioCloneable copyComponent, ProjectVersion projectVersion,
                                       ElementCopiesMap createdCopies)
         {
             base.FillCopy(copyComponent, projectVersion, createdCopies);

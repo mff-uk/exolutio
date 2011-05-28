@@ -8,8 +8,8 @@
     <ProjectGuid>{809A7BE4-A208-45DB-93E8-811BD9E29ABF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EvoX.DataGenerator</RootNamespace>
-    <AssemblyName>EvoX.DataGenerator</AssemblyName>
+    <RootNamespace>Exolutio.DataGenerator</RootNamespace>
+    <AssemblyName>Exolutio.DataGenerator</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>

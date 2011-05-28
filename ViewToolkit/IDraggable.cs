@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls.Primitives;
 
-namespace EvoX.ViewToolkit
+namespace Exolutio.ViewToolkit
 {
     internal interface IDraggable
     {

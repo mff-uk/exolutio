@@ -1,10 +1,10 @@
 using System;
 using System.Reflection;
-using EvoX.Model;
-using EvoX.Model.PSM;
-using EvoX.Model.Serialization;
-using EvoX.Model.Versioning;
-using EvoX.SupportingClasses;
+using Exolutio.Model;
+using Exolutio.Model.PSM;
+using Exolutio.Model.Serialization;
+using Exolutio.Model.Versioning;
+using Exolutio.SupportingClasses;
 using NUnit.Framework;
 
 namespace Tests.CodeTests
@@ -15,10 +15,10 @@ namespace Tests.CodeTests
         [Test]
         public void TestSerializeDeserializeOverride()
         {
-            Type serializableType = typeof(IEvoXSerializable);
+            Type serializableType = typeof(IExolutioSerializable);
             foreach (Type type in ModelAssembly.GetTypes())
             {
-                if (type.IsAmong(new Type[] { typeof(PSMSchemaClass), typeof(EvoXVersionedObjectNotAPartOfSchema) }))
+                if (type.IsAmong(new Type[] { typeof(PSMSchemaClass), typeof(ExolutioVersionedObjectNotAPartOfSchema) }))
                 {
                     continue;
                 }

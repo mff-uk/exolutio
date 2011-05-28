@@ -2,7 +2,7 @@ using System;
 using System.Windows;
 using System.Windows.Input;
 
-namespace EvoX.ViewToolkit.FormControls
+namespace Exolutio.ViewToolkit.FormControls
 {
     public class LinkLabel: System.Windows.Controls.Label
     {

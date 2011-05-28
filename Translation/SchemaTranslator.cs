@@ -1,8 +1,8 @@
 using System;
-using EvoX.Model.PSM;
-using EvoX.SupportingClasses;
+using Exolutio.Model.PSM;
+using Exolutio.SupportingClasses;
 
-namespace EvoX.Translation
+namespace Exolutio.Translation
 {
     /// <summary>
     /// Abstract class from which classes that translate PSM schema

@@ -2,7 +2,7 @@ using System;
 using System.Windows;
 using System.Windows.Media;
 
-namespace EvoX.ViewToolkit
+namespace Exolutio.ViewToolkit
 {
     public struct Vector
     {

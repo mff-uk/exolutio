@@ -1,7 +1,7 @@
 using System.Linq;
 using System.Collections.Generic;
 
-namespace EvoX.Model.PSM.Grammar
+namespace Exolutio.Model.PSM.Grammar
 {
     public class Grammar
     {
@@ -47,9 +47,9 @@ namespace EvoX.Model.PSM.Grammar
             if (!NonTermialsDictionary.TryGetValue(psmComponent, out nonTerminal))
             {
                 nonTerminal = new NonTerminal(psmComponent);
-                if (!EvoX.SupportingClasses.NameSuggestor<NonTerminal>.IsNameUnique(NonTerminals, nonTerminal.ToString(), n => n.ToString()))
+                if (!Exolutio.SupportingClasses.NameSuggestor<NonTerminal>.IsNameUnique(NonTerminals, nonTerminal.ToString(), n => n.ToString()))
                 {
-                    string name = EvoX.SupportingClasses.NameSuggestor<NonTerminal>.SuggestUniqueName(NonTerminals, nonTerminal.ToString(), n => n.ToString(), true, false);
+                    string name = Exolutio.SupportingClasses.NameSuggestor<NonTerminal>.SuggestUniqueName(NonTerminals, nonTerminal.ToString(), n => n.ToString(), true, false);
                     nonTerminal.UniqueName = name;
                 }
                 NonTermialsDictionary[psmComponent] = nonTerminal;

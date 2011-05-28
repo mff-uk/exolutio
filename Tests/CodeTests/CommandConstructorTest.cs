@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
-using EvoX.Controller;
-using EvoX.Controller.Commands;
-using EvoX.Model;
-using EvoX.Model.Versioning;
-using EvoX.SupportingClasses.Reflection;
+using Exolutio.Controller;
+using Exolutio.Controller.Commands;
+using Exolutio.Model;
+using Exolutio.Model.Versioning;
+using Exolutio.SupportingClasses.Reflection;
 using NUnit.Framework;
 
 namespace Tests.CodeTests

@@ -1,4 +1,4 @@
-namespace EvoX.SupportingClasses
+namespace Exolutio.SupportingClasses
 {
 	public class ComposedKeyBase<T1, T2> 
 	{

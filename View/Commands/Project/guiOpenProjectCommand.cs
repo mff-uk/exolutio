@@ -5,16 +5,17 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using EvoX.Dialogs;
-using EvoX.Model.Serialization;
+using Exolutio.Dialogs;
+using Exolutio.Model;
+using Exolutio.Model.Serialization;
 using Microsoft.Win32;
-using EvoX.ResourceLibrary;
+using Exolutio.ResourceLibrary;
 
-namespace EvoX.View.Commands.Project
+namespace Exolutio.View.Commands.Project
 {
     public class guiOpenProjectCommand : guiProjectCommand
     {
-        #region Overrides of EvoXGuiCommandBase
+        #region Overrides of ExolutioGuiCommandBase
 
         public override KeyGesture Gesture
         {
@@ -28,12 +29,12 @@ namespace EvoX.View.Commands.Project
 
         public override string ScreenTipText
         {
-            get { return CommandsResources.guiOpenProjectCommand_ScreenTipText_Opens_new_EvoX_project; }
+            get { return CommandsResources.guiOpenProjectCommand_ScreenTipText_Opens_new_Exolutio_project; }
         }
 
         public override ImageSource Icon
         {
-            get { return EvoXResourceNames.GetResourceImageSource(EvoXResourceNames.folder); }
+            get { return ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.folder); }
         }
 
         public string InitialDirectory { get; set; }
@@ -45,14 +46,14 @@ namespace EvoX.View.Commands.Project
 #if SILVERLIGHT
             OpenFileDialog dlg = new OpenFileDialog
                                      {
-                                         Filter = CommandsResources.guiOpenProjectCommand_Execute_EvoX_files____EvoX____EvoX_XML_files____xml____xml_All_files____________,
+                                         Filter = CommandsResources.guiOpenProjectCommand_Execute_Exolutio_files____Exolutio____Exolutio_XML_files____xml____xml_All_files____________,
                                          
                                      };
 #else
             OpenFileDialog dlg = new OpenFileDialog
 										{
-											DefaultExt = CommandsResources.guiOpenProjectCommand_Execute__EvoX,
-											Filter = CommandsResources.guiOpenProjectCommand_Execute_EvoX_files____EvoX____EvoX_XML_files____xml____xml_All_files____________,
+											DefaultExt = CommandsResources.guiOpenProjectCommand_Execute_Exolutio_Default_Extension,
+											Filter = CommandsResources.guiOpenProjectCommand_Execute_Exolutio_files____Exolutio____Exolutio_XML_files____xml____xml_All_files____________,
                                             CheckFileExists = true,
                                             CheckPathExists = true
 										};
@@ -103,11 +104,11 @@ namespace EvoX.View.Commands.Project
                 //    deserializator = new XmlDeserializator();
                 //}
 
-                //// First, validates if the file is a valid EvoX XML file
+                //// First, validates if the file is a valid Exolutio XML file
                 //// TODO: it would be better to have two separate schemas rather than one choice schema 
                 //if (!deserializator.ValidateXML(dlg.FileName, ref msg))
                 //{
-                //    Dialogs.ErrMsgBox.Show("File cannot be opened", "Not a valid EvoX XML file");
+                //    Dialogs.ErrMsgBox.Show("File cannot be opened", "Not a valid eXolutio XML file");
                 //    return;
                 //}
 
@@ -120,7 +121,7 @@ namespace EvoX.View.Commands.Project
 			        
                 //    if (projectConverter.CanConvert(v1, v2))
                 //    {
-                //        MessageBoxResult yn = EvoXYesNoBox.Show("Project is obsolete. ", "Project is obsolete and must be converted to a new oldVersion before opening. \r\nDo you want to convert it now? ");
+                //        MessageBoxResult yn = ExolutioYesNoBox.Show("Project is obsolete. ", "Project is obsolete and must be converted to a new oldVersion before opening. \r\nDo you want to convert it now? ");
                 //        if (yn == MessageBoxResult.Yes)
                 //        {
                 //            projectConverter.SetFile(dlg.FileName);
@@ -142,17 +143,29 @@ namespace EvoX.View.Commands.Project
                 // Closes existing project
                 if (Current.Project != null)
                 {
-                    EvoXGuiCommands.CloseProjectCommand.Execute();
+                    GuiCommands.CloseProjectCommand.Execute();
                 }
 
                 ProjectSerializationManager projectSerializationManager = new ProjectSerializationManager();
+			    
+                try
+                {
+                    Current.BusyState = true;
 #if SILVERLIGHT
-                Model.Project project = projectSerializationManager.LoadProjectFromClientFile(selectedFile);
+                    Model.Project project = projectSerializationManager.LoadProjectFromClientFile(selectedFile);
 #else
-                Model.Project project = projectSerializationManager.LoadProject(selectedFile);
+                    Model.Project project = projectSerializationManager.LoadProject(selectedFile);
 #endif
-
-                Current.Project = project;
+                    Current.Project = project;
+			    }
+			    catch (Exception e)
+			    {
+			        throw new ExolutioModelException(string.Format("Failed to load project from the file \r\n'{0}'", selectedFile.FullName), e);
+			    }
+                finally
+                {
+                    Current.BusyState = false; 
+                }
 
 			    ////try
 			    //{
@@ -166,7 +179,7 @@ namespace EvoX.View.Commands.Project
 			    //        // oldHACK (SEVERE) - this should be somewhere else ...
 			    //        p.GetModelController().getUndoStack().ItemsChanged += MainWindow.UndoStack_ItemsChanged;
 			    //        MainWindow.CurrentProject = p;
-			    //        MainWindow.Title = "EvoX editor - " + p.FilePath;
+                //        MainWindow.Title = "eXolutio editor - " + p.FilePath;
 			    //        MainWindow.HasUnsavedChanges = false;
 
 
@@ -194,7 +207,7 @@ namespace EvoX.View.Commands.Project
 			    //        MainWindow.InitializeMainMenu();
 			    //        MainWindow.OpenProjectDiagrams();
 			    //        MainWindow.HasUnsavedChanges = false;
-			    //        MainWindow.Title = "EvoX editor - " + versionManager.FilePath;
+                //        MainWindow.Title = "eXolutio editor - " + versionManager.FilePath;
 
 			    //        #if DEBUG
 			    //        foreach (KeyValuePair<Version, Model.Project> kvp in versionManager.VersionedProjects)
@@ -228,7 +241,7 @@ namespace EvoX.View.Commands.Project
         {
             if (droppedFilePaths.Length > 0)
             {
-                if (droppedFilePaths[0].ToUpper().EndsWith(".EVOX"))
+                if (droppedFilePaths[0].ToUpper().EndsWith(CommandsResources.guiOpenProjectCommand_Execute_Exolutio_Default_Extension_No_Dot))
                 {
                     Execute(fileName: droppedFilePaths[0], noOpenFileDialog: true);
                 }

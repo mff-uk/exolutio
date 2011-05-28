@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using EvoX.SupportingClasses;
+using Exolutio.SupportingClasses;
 
-namespace EvoX.Model.ViewHelper
+namespace Exolutio.Model.ViewHelper
 {
 	/// <summary>
 	/// View helper for elements that are represented as (poly)lines on the diagram . 

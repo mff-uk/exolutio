@@ -12,8 +12,23 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="GetVersion">
+      <s:element name="GetExeVersion">
         <s:complexType />
+      </s:element>
+      <s:element name="GetExeVersionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetExeVersionResult" type="tns:Version" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Version" />
+      <s:element name="GetVersion">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="file" type="s:string" />
+          </s:sequence>
+        </s:complexType>
       </s:element>
       <s:element name="GetVersionResponse">
         <s:complexType>
@@ -22,7 +37,6 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:complexType name="Version" />
       <s:element name="GetVersions">
         <s:complexType>
           <s:sequence>
@@ -86,6 +100,12 @@
   <wsdl:message name="HelloWorldSoapOut">
     <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
   </wsdl:message>
+  <wsdl:message name="GetExeVersionSoapIn">
+    <wsdl:part name="parameters" element="tns:GetExeVersion" />
+  </wsdl:message>
+  <wsdl:message name="GetExeVersionSoapOut">
+    <wsdl:part name="parameters" element="tns:GetExeVersionResponse" />
+  </wsdl:message>
   <wsdl:message name="GetVersionSoapIn">
     <wsdl:part name="parameters" element="tns:GetVersion" />
   </wsdl:message>
@@ -115,6 +135,10 @@
       <wsdl:input message="tns:HelloWorldSoapIn" />
       <wsdl:output message="tns:HelloWorldSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="GetExeVersion">
+      <wsdl:input message="tns:GetExeVersionSoapIn" />
+      <wsdl:output message="tns:GetExeVersionSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="GetVersion">
       <wsdl:input message="tns:GetVersionSoapIn" />
       <wsdl:output message="tns:GetVersionSoapOut" />
@@ -136,6 +160,15 @@
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="HelloWorld">
       <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetExeVersion">
+      <soap:operation soapAction="http://tempuri.org/GetExeVersion" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -184,6 +217,15 @@
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="HelloWorld">
       <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetExeVersion">
+      <soap12:operation soapAction="http://tempuri.org/GetExeVersion" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

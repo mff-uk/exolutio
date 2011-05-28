@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Linq;
-using EvoX.SupportingClasses;
+using Exolutio.SupportingClasses;
 using System.Windows.Controls;
-using EvoX.Model;
-using EvoX.Model.PIM;
+using Exolutio.Model;
+using Exolutio.Model.PIM;
 
-namespace EvoX.View.Commands.ParameterControls
+namespace Exolutio.View.Commands.ParameterControls
 {
     public class PIMSchemaLookup : ComboBox,
                                    IOperationParameterControl, IOperationParameterControl<Guid>, IOperationParameterControl<PIMSchema>
@@ -26,9 +26,9 @@ namespace EvoX.View.Commands.ParameterControls
             listItem.Tag = ProjectVersion.PIMSchema.ID.ToString();
             Items.Add(listItem);
             SelectedIndex = 0;
-            if (SuggestedValue != null && SuggestedValue is EvoXObject)
+            if (SuggestedValue != null && SuggestedValue is ExolutioObject)
             {
-                this.SelectedItem = this.Items.FirstOrDefault(i => ((ListBoxItem)i).Tag.ToString() == ((EvoXObject)SuggestedValue).ID.ToString());
+                this.SelectedItem = this.Items.FirstOrDefault(i => ((ListBoxItem)i).Tag.ToString() == ((ExolutioObject)SuggestedValue).ID.ToString());
             }
         }
 
@@ -37,9 +37,9 @@ namespace EvoX.View.Commands.ParameterControls
         public void SetSuggestedValue(object suggestedValue)
         {
             this.SuggestedValue = suggestedValue;
-            if (SuggestedValue != null && SuggestedValue is EvoXObject)
+            if (SuggestedValue != null && SuggestedValue is ExolutioObject)
             {
-                this.SelectedItem = this.Items.FirstOrDefault(i => ((ListBoxItem)i).Tag.ToString() == ((EvoXObject)SuggestedValue).ID.ToString());
+                this.SelectedItem = this.Items.FirstOrDefault(i => ((ListBoxItem)i).Tag.ToString() == ((ExolutioObject)SuggestedValue).ID.ToString());
             }
         }
 

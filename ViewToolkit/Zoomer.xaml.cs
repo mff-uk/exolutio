@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace EvoX.ViewToolkit
+namespace Exolutio.ViewToolkit
 {
     /// <summary>
     /// Interaction logic for Zoomer.xaml

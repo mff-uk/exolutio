@@ -14,11 +14,11 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml;
 using System.Xml.Schema;
-using EvoX.SupportingClasses;
+using Exolutio.SupportingClasses;
 using ICSharpCode.AvalonEdit.Folding;
 using Microsoft.Win32;
 
-namespace EvoX.View
+namespace Exolutio.View
 {
     /// <summary>
     /// Interaction logic for FileView.xaml

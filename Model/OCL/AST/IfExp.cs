@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace EvoX.Model.OCL.AST
+namespace Exolutio.Model.OCL.AST
 {
     /// <summary>
     /// An IfExp results in one of two alternative expressions depending on the evaluated value of a condition. Note that both the

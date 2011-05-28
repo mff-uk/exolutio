@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EvoX.Model
+namespace Exolutio.Model
 {
     public interface IHasCardinality
     {

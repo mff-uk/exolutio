@@ -3,10 +3,10 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Windows.Input;
 using System.Windows.Media;
-using EvoX.ResourceLibrary;
+using Exolutio.ResourceLibrary;
 using Image = System.Windows.Controls.Image;
 
-namespace EvoX.View.Commands
+namespace Exolutio.View.Commands
 {
 	public abstract class guiCommandBase : ICommand, INotifyPropertyChanged
 	{
@@ -126,8 +126,8 @@ namespace EvoX.View.Commands
         ///// <summary>
         ///// Reference to the active diagram. 
         ///// </summary>
-        ///// <value><see cref="EvoXCanvas"/></value>
-        //public EvoXCanvas ActiveDiagramView
+        ///// <value><see cref="ExolutioCanvas"/></value>
+        //public ExolutioCanvas ActiveDiagramView
         //{
         //    get
         //    {

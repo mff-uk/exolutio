@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
-using EvoX.Model.OCL.Types;
-using EvoX.Model.OCL.TypesTable;
+using Exolutio.Model.OCL.Types;
+using Exolutio.Model.OCL.TypesTable;
 
 namespace Tests.OCL
 {
@@ -187,11 +187,11 @@ namespace Tests.OCL
             Assert.IsFalse(setType.ConformsTo(ordType));
             Assert.IsFalse(setType.ConformsTo(seqType));
 
-            Assert.IsTrue(bagInteger.CollectionKind == EvoX.Model.OCL.CollectionKind.Bag);
-            Assert.IsTrue(collInteger.CollectionKind == EvoX.Model.OCL.CollectionKind.Collection);
-            Assert.IsTrue(setType.CollectionKind == EvoX.Model.OCL.CollectionKind.Set);
-            Assert.IsTrue(seqType.CollectionKind == EvoX.Model.OCL.CollectionKind.Sequence);
-            Assert.IsTrue(ordType.CollectionKind == EvoX.Model.OCL.CollectionKind.OrderedSet);
+            Assert.IsTrue(bagInteger.CollectionKind == Exolutio.Model.OCL.CollectionKind.Bag);
+            Assert.IsTrue(collInteger.CollectionKind == Exolutio.Model.OCL.CollectionKind.Collection);
+            Assert.IsTrue(setType.CollectionKind == Exolutio.Model.OCL.CollectionKind.Set);
+            Assert.IsTrue(seqType.CollectionKind == Exolutio.Model.OCL.CollectionKind.Sequence);
+            Assert.IsTrue(ordType.CollectionKind == Exolutio.Model.OCL.CollectionKind.OrderedSet);
 
 
 

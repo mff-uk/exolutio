@@ -1,7 +1,7 @@
 using System.Text;
 using System.Xml;
 
-namespace EvoX.SupportingClasses.XML
+namespace Exolutio.SupportingClasses.XML
 {
     public class XmlDocumentHelper
     {

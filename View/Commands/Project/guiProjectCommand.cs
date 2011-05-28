@@ -1,4 +1,4 @@
-﻿namespace EvoX.View.Commands.Project
+﻿namespace Exolutio.View.Commands.Project
 {
     /// <summary>
     /// Parent command for all project commands

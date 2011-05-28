@@ -1,4 +1,4 @@
-namespace EvoX.Controller.Commands.Versioning
+namespace Exolutio.Controller.Commands.Versioning
 {
     public class cmdBranchProjectVersion
     {

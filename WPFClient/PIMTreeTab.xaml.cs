@@ -12,10 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using EvoX.SupportingClasses;
-using EvoX.View;
+using Exolutio.SupportingClasses;
+using Exolutio.View;
 
-namespace EvoX.WPFClient
+namespace Exolutio.WPFClient
 {
     /// <summary>
     /// Interaction logic for FileTab.xaml

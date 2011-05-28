@@ -5,14 +5,14 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using EvoX.Controller.Commands;
-using EvoX.Model;
-using EvoX.Model.PSM;
-using EvoX.Model.ViewHelper;
-using EvoX.SupportingClasses;
-using EvoX.ViewToolkit;
+using Exolutio.Controller.Commands;
+using Exolutio.Model;
+using Exolutio.Model.PSM;
+using Exolutio.Model.ViewHelper;
+using Exolutio.SupportingClasses;
+using Exolutio.ViewToolkit;
 
-namespace EvoX.View
+namespace Exolutio.View
 {
     public class PSMClassView : NodeComponentViewBase<PSMClassViewHelper>, IEnumerable<PSMAttributeTextBox>
     {
@@ -58,7 +58,7 @@ namespace EvoX.View
             }
         }
 
-        protected override void CreateInnerControls(EvoXCanvas canvas)
+        protected override void CreateInnerControls(ExolutioCanvas canvas)
         {
             base.CreateInnerControls(canvas);
             #region main node content components
@@ -137,8 +137,8 @@ namespace EvoX.View
 
             #endregion
 
-            EvoXContextMenu evoXContextMenu = MenuHelper.GetContextMenu(ScopeAttribute.EScope.PSMClass, this.DiagramView.Diagram);
-            ContextMenu = evoXContextMenu;
+            ExolutioContextMenu exolutioContextMenu = MenuHelper.GetContextMenu(ScopeAttribute.EScope.PSMClass, this.DiagramView.Diagram);
+            ContextMenu = exolutioContextMenu;
 
 #if SILVERLIGHT
             ContextMenuService.SetContextMenu(headerBorder, ContextMenu);
@@ -182,8 +182,8 @@ namespace EvoX.View
         protected override void BindModelView()
         {
             base.BindModelView();
-            ((EvoXContextMenu)ContextMenu).ScopeObject = PSMClass;
-            ((EvoXContextMenu)ContextMenu).Diagram = DiagramView.Diagram;
+            ((ExolutioContextMenu)ContextMenu).ScopeObject = PSMClass;
+            ((ExolutioContextMenu)ContextMenu).Diagram = DiagramView.Diagram;
             if (PSMClass != null)
             {
                 attributesContainer.AttributesCollection = PSMClass.PSMAttributes;

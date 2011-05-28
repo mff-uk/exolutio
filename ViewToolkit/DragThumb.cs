@@ -6,21 +6,21 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
 using System.Windows.Input;
-using EvoX.SupportingClasses;
-using Vector = EvoX.ViewToolkit.Vector;
+using Exolutio.SupportingClasses;
+using Vector = Exolutio.ViewToolkit.Vector;
 
-namespace EvoX.ViewToolkit
+namespace Exolutio.ViewToolkit
 {
     internal class DragThumb: ISnappable, IReferentialElement
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="DragThumb"/> class.
         /// </summary>
-        /// <param name="evoXCanvas"> where the control is created</param>
+        /// <param name="exolutioCanvas"> where the control is created</param>
         /// <param name="draggedControl">controll actually dragged</param>
-        public DragThumb(EvoXCanvas evoXCanvas, Control draggedControl)
+        public DragThumb(ExolutioCanvas exolutioCanvas, Control draggedControl)
         {
-            EvoXCanvas = evoXCanvas;
+            ExolutioCanvas = exolutioCanvas;
             DraggedControl = draggedControl;
             //Placement = EPlacementKind.AbsoluteCanvas;
         }
@@ -28,8 +28,8 @@ namespace EvoX.ViewToolkit
         /// <summary>
         /// Canvas where the control is placed
         /// </summary>
-        /// <value><see cref="EvoXCanvas"/></value>
-        public EvoX.ViewToolkit.EvoXCanvas EvoXCanvas { get; set; }
+        /// <value><see cref="ExolutioCanvas"/></value>
+        public Exolutio.ViewToolkit.ExolutioCanvas ExolutioCanvas { get; set; }
 
         private Control draggedControl;
         /// <summary>
@@ -308,7 +308,7 @@ namespace EvoX.ViewToolkit
         }
 
         /// <summary>
-        /// Position in the coordinate system of the <see cref="EvoXCanvas"/>.
+        /// Position in the coordinate system of the <see cref="ExolutioCanvas"/>.
         /// The value depends on <see cref="Placement"/>.
         /// </summary>
         /// <seealso cref="Placement"/>
@@ -398,10 +398,10 @@ namespace EvoX.ViewToolkit
             if (e.ChangedButton == MouseButton.Left && Movable && e.ClickCount != 2)
             #endif
             {
-                DragStartPoint = e.GetPosition(EvoXCanvas);
+                DragStartPoint = e.GetPosition(ExolutioCanvas);
                 PrevPoint = DragStartPoint;
-                MousePoint = new Point(e.GetPosition(EvoXCanvas).X - e.GetPosition(DraggedControl).X,
-                                       e.GetPosition(EvoXCanvas).Y - e.GetPosition(DraggedControl).Y);
+                MousePoint = new Point(e.GetPosition(ExolutioCanvas).X - e.GetPosition(DraggedControl).X,
+                                       e.GetPosition(ExolutioCanvas).Y - e.GetPosition(DraggedControl).Y);
                 IsDragging = true;
                 DraggedControl.CaptureMouse();
                 e.Handled = true;
@@ -417,7 +417,7 @@ namespace EvoX.ViewToolkit
         {
             if (IsDragging && Movable)
             {
-                Point newPoint = e.GetPosition(EvoXCanvas);
+                Point newPoint = e.GetPosition(ExolutioCanvas);
                 Vector delta = Vector.SubtractPoints(newPoint,PrevPoint);
                 PrevPoint = newPoint;
                 MousePoint = Vector.AddVector(MousePoint, delta);
@@ -469,7 +469,7 @@ namespace EvoX.ViewToolkit
         /// <returns>Returns true when the control is the only control dragged.</returns>
         private bool DraggingAllone(ISelectable item)
         {
-            return (EvoXCanvas.SelectedItems.Count <= 1 && (item is IDraggable) && (item as IDraggable).DragThumb.AllowDragIfSelectedAlone);
+            return (ExolutioCanvas.SelectedItems.Count <= 1 && (item is IDraggable) && (item as IDraggable).DragThumb.AllowDragIfSelectedAlone);
         }
 
         private Dictionary<DragThumb, rPoint> startPositions;
@@ -485,13 +485,13 @@ namespace EvoX.ViewToolkit
             IsDragged = true; 
 
             if (!(this is ISelectable) ||
-                !EvoXCanvas.SelectedItems.Contains(this as ISelectable))
+                !ExolutioCanvas.SelectedItems.Contains(this as ISelectable))
             {
                 startPositions.Add(this, new rPoint(this.Left, this.Top));
             }
             else
             {
-                foreach (ISelectable item in EvoXCanvas.SelectedItems)
+                foreach (ISelectable item in ExolutioCanvas.SelectedItems)
                 {
                     if (item.CanBeDraggedInGroup || DraggingAllone(item))
                     {
@@ -511,8 +511,8 @@ namespace EvoX.ViewToolkit
 
             //if (this is IAlignable)
             //{
-            //    AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(EvoXCanvas);
-            //    visualAidsAdorner = new VisualAidsAdorner(EvoXCanvas, this);
+            //    AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(ExolutioCanvas);
+            //    visualAidsAdorner = new VisualAidsAdorner(ExolutioCanvas, this);
             //    adornerLayer.Add(visualAidsAdorner);
             //}
 
@@ -526,7 +526,7 @@ namespace EvoX.ViewToolkit
         /// <param name="deltaEventArgs">The <see cref="System.Windows.Controls.Primitives.DragDeltaEventArgs"/> instance containing the event data.</param>
         private void DragDelta(DragDeltaEventArgs deltaEventArgs)
         {
-            IEnumerable<IDraggable> draggedElements = EvoXCanvas.SelectedItems.Where
+            IEnumerable<IDraggable> draggedElements = ExolutioCanvas.SelectedItems.Where
                 (item => item is IDraggable && (item.CanBeDraggedInGroup 
                     || DraggingAllone(item))).Cast<IDraggable>();
             if (draggedElements.Count() > 0)
@@ -551,7 +551,7 @@ namespace EvoX.ViewToolkit
                     UpdatePos(dragThumb);
                 }
                 InvokePositionChanged();
-                EvoXCanvas.InvalidateMeasure();
+                ExolutioCanvas.InvalidateMeasure();
                 //if (visualAidsAdorner != null)
                 //{
                 //    visualAidsAdorner.d = deltaEventArgs;
@@ -570,7 +570,7 @@ namespace EvoX.ViewToolkit
             IsDragged = false;
             //if (visualAidsAdorner != null)
             //{
-            //    AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(EvoXCanvas);
+            //    AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(ExolutioCanvas);
             //    adornerLayer.Remove(visualAidsAdorner);
             //    visualAidsAdorner = null;
             //}
@@ -579,7 +579,7 @@ namespace EvoX.ViewToolkit
             if (DragStartPoint != finalPoint)
             {
                 
-                //DiagramController controller = EvoXCanvas.Controller;
+                //DiagramController controller = ExolutioCanvas.Controller;
 
                 //MacroCommand<DiagramController> moveMacroCommand =
                 //    MacroCommandFactory<DiagramController>.Factory().Create(controller);

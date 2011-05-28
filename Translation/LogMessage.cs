@@ -1,6 +1,6 @@
-using EvoX.Model;
+using Exolutio.Model;
 
-namespace EvoX.Translation
+namespace Exolutio.Translation
 {
 	/// <summary>
 	/// One translation log entry 

@@ -1,6 +1,6 @@
 using System;
 
-namespace EvoX.Controller.Commands
+namespace Exolutio.Controller.Commands
 {
 	/// <summary>
 	/// Denotes property of a command as a command argument that must be specified before

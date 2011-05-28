@@ -1,11 +1,11 @@
 using System.Windows.Media;
-using EvoX.Model;
-using EvoX.Model.PIM;
-using EvoX.Model.PSM;
-using EvoX.Model.Versioning;
-using EvoX.ResourceLibrary;
+using Exolutio.Model;
+using Exolutio.Model.PIM;
+using Exolutio.Model.PSM;
+using Exolutio.Model.Versioning;
+using Exolutio.ResourceLibrary;
 
-namespace EvoX.View.Commands.Versioning
+namespace Exolutio.View.Commands.Versioning
 {
     public class guiAddVersionLinkCommand : guiCommandBase
     {
@@ -31,7 +31,7 @@ namespace EvoX.View.Commands.Versioning
 
         public override ImageSource Icon
         {
-            get { return EvoXResourceNames.GetResourceImageSource(EvoXResourceNames.associate); }
+            get { return ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.associate); }
         }
 
     }

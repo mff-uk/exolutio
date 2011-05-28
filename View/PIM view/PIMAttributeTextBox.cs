@@ -2,13 +2,13 @@ using System;
 using System.ComponentModel;
 using System.Windows.Controls;
 using System.Windows.Input;
-using EvoX.Controller.Commands;
-using EvoX.Model;
-using EvoX.Model.PIM;
-using EvoX.ResourceLibrary;
-using EvoX.ViewToolkit;
+using Exolutio.Controller.Commands;
+using Exolutio.Model;
+using Exolutio.Model.PIM;
+using Exolutio.ResourceLibrary;
+using Exolutio.ViewToolkit;
 
-namespace EvoX.View
+namespace Exolutio.View
 {
 	/// <summary>
 	/// Textbox displaying attribute
@@ -25,10 +25,10 @@ namespace EvoX.View
 
             //this.classController = classController;
 
-            EvoXContextMenu evoXContextMenu = MenuHelper.GetContextMenu(ScopeAttribute.EScope.PIMAttribute, (Diagram) diagram);
-            evoXContextMenu.ScopeObject = property;
-            evoXContextMenu.Diagram = diagram;
-            ContextMenu = evoXContextMenu;
+            ExolutioContextMenu exolutioContextMenu = MenuHelper.GetContextMenu(ScopeAttribute.EScope.PIMAttribute, (Diagram) diagram);
+            exolutioContextMenu.ScopeObject = property;
+            exolutioContextMenu.Diagram = diagram;
+            ContextMenu = exolutioContextMenu;
            
 
             #if SILVERLIGHT
@@ -88,7 +88,7 @@ namespace EvoX.View
 			}
 		}
 
-	    private EvoX.Model.AttributeType type;
+	    private Exolutio.Model.AttributeType type;
 
 	    void PIMAttributeTextBox_MouseDown(object sender, MouseButtonEventArgs e)
 	    {

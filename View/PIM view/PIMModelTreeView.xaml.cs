@@ -12,11 +12,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using EvoX.Model;
-using EvoX.Model.OCL.Types;
-using EvoX.Model.PIM;
+using Exolutio.Model;
+using Exolutio.Model.OCL.Types;
+using Exolutio.Model.PIM;
 
-namespace EvoX.View
+namespace Exolutio.View
 {
     /// <summary>
     /// Interaction logic for PIMModelTreeView.xaml

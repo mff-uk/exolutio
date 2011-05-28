@@ -6,7 +6,7 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
 
-namespace EvoX.View
+namespace Exolutio.View
 {
     #if SILVERLIGHT
     #else

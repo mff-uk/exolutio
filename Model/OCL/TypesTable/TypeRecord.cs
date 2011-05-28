@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using EvoX.Model.OCL.Types;
+using Exolutio.Model.OCL.Types;
 
-namespace EvoX.Model.OCL.TypesTable
+namespace Exolutio.Model.OCL.TypesTable
 {
     class TypeRecord
     {

@@ -1,7 +1,7 @@
 using System;
 using System.Windows.Media;
 
-namespace EvoX.ViewToolkit
+namespace Exolutio.ViewToolkit
 {
     public static class ViewToolkitResources
     {

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using EvoX.Model.OCL.Types;
+using Exolutio.Model.OCL.Types;
 
-namespace EvoX.Model.OCL.AST
+namespace Exolutio.Model.OCL.AST
 {
     /// <summary>
     /// A PropertyCallExpression is a reference to an Attribute of a Classifier defined in a UML model. It evaluates to the value

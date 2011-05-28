@@ -2,17 +2,17 @@
 using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
-using EvoX.Model.PIM;
-using EvoX.Model.PSM;
-using EvoX.Model.Serialization;
+using Exolutio.Model.PIM;
+using Exolutio.Model.PSM;
+using Exolutio.Model.Serialization;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using EvoX.Model.Versioning;
-using Version = EvoX.Model.Versioning.Version;
+using Exolutio.Model.Versioning;
+using Version = Exolutio.Model.Versioning.Version;
 
-namespace EvoX.Model
+namespace Exolutio.Model
 {
-    public class ProjectVersion : EvoXObject
+    public class ProjectVersion : ExolutioObject
     {
         public ProjectVersion(Project p)
             : base(p)
@@ -77,7 +77,7 @@ namespace EvoX.Model
             set { versionGuid = value != null ? value : Guid.Empty; }
         }
 
-        #region IEvoXSerializable Members
+        #region IExolutioSerializable Members
 
         public override void Serialize(XElement parentNode, SerializationContext context)
         {
@@ -141,14 +141,14 @@ namespace EvoX.Model
 
         #endregion
 
-        #region Implementation of IEvoXCloneable
+        #region Implementation of IExolutioCloneable
 
-        public override IEvoXCloneable Clone(ProjectVersion projectVersion, ElementCopiesMap createdCopies)
+        public override IExolutioCloneable Clone(ProjectVersion projectVersion, ElementCopiesMap createdCopies)
         {
             return new ProjectVersion(projectVersion.Project, createdCopies.SuggestGuid(this));
         }
 
-        public override void FillCopy(IEvoXCloneable copyComponent, ProjectVersion projectVersion,
+        public override void FillCopy(IExolutioCloneable copyComponent, ProjectVersion projectVersion,
                                       ElementCopiesMap createdCopies)
         {
             base.FillCopy(copyComponent, projectVersion, createdCopies);

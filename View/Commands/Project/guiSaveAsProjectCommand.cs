@@ -2,15 +2,15 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using EvoX.Model.Serialization;
+using Exolutio.Model.Serialization;
 using Microsoft.Win32;
-using EvoX.ResourceLibrary;
+using Exolutio.ResourceLibrary;
 
-namespace EvoX.View.Commands.Project
+namespace Exolutio.View.Commands.Project
 {
     public class guiSaveAsProjectCommand : guiProjectCommand
     {
-        #region Overrides of EvoXGuiCommandBase
+        #region Overrides of ExolutioGuiCommandBase
 
         public override KeyGesture Gesture
         {
@@ -24,12 +24,12 @@ namespace EvoX.View.Commands.Project
 
         public override string ScreenTipText
         {
-            get { return CommandsResources.guiSaveAsProjectCommand_ScreenTipText_Saves_EvoX_project_under_a_given_file_name; }
+            get { return CommandsResources.guiSaveAsProjectCommand_ScreenTipText_Saves_Exolutio_project_under_a_given_file_name; }
         }
 
         public override ImageSource Icon
         {
-            get { return EvoXResourceNames.GetResourceImageSource(EvoXResourceNames.Save); }
+            get { return ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.Save); }
         }
 
         #endregion
@@ -40,8 +40,8 @@ namespace EvoX.View.Commands.Project
         {
             SaveFileDialog dlg = new SaveFileDialog
             {
-                DefaultExt = CommandsResources.guiOpenProjectCommand_Execute__EvoX,
-                Filter = CommandsResources.guiOpenProjectCommand_Execute_EvoX_files____EvoX____EvoX_XML_files____xml____xml_All_files____________
+                DefaultExt = CommandsResources.guiOpenProjectCommand_Execute_Exolutio_Default_Extension,
+                Filter = CommandsResources.guiOpenProjectCommand_Execute_Exolutio_files____Exolutio____Exolutio_XML_files____xml____xml_All_files____________
             };
 
             bool? result = dlg.ShowDialog();

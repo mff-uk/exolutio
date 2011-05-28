@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using EvoX.Controller.Commands;
-using EvoX.Controller.Commands.Reflection;
-using EvoX.Dialogs;
-using EvoX.Model;
-using EvoX.Model.PIM;
-using EvoX.Model.PSM;
+using Exolutio.Controller.Commands;
+using Exolutio.Controller.Commands.Reflection;
+using Exolutio.Dialogs;
+using Exolutio.Model;
+using Exolutio.Model.PIM;
+using Exolutio.Model.PSM;
 
 #if SILVERLIGHT
 using SilverFlow.Controls;
 #endif
 
-namespace EvoX.View.Commands
+namespace Exolutio.View.Commands
 {
     public class guiControllerCommand : guiCommandBase
     {
@@ -130,7 +130,7 @@ namespace EvoX.View.Commands
             {
                 w = new CommandDialogWindow();
 
-                MenuHelper.CreateDialogControlsForCommand(ControllerCommand.GetType(), (EvoXObject)ScopeObject, ProjectVersion, w.spParameters,
+                MenuHelper.CreateDialogControlsForCommand(ControllerCommand.GetType(), (ExolutioObject)ScopeObject, ProjectVersion, w.spParameters,
                                                           out controls);
                 w.lTitle.Content = ControllerCommandDescription;
                 if (NoScope)
@@ -194,7 +194,7 @@ namespace EvoX.View.Commands
             {
                 if (parameterDescriptor.ParameterPropertyInfo == commandDescriptor.ScopeProperty)
                 {
-                    parameterDescriptor.ParameterValue = ((EvoXObject) this.ScopeObject).ID;
+                    parameterDescriptor.ParameterValue = ((ExolutioObject) this.ScopeObject).ID;
                 }
             }
             CommandSerializer.FillParameters(ControllerCommand, commandDescriptor);
@@ -205,7 +205,7 @@ namespace EvoX.View.Commands
                 ErrorMsgBox.Show("Command can not be executed", ControllerCommand.ErrorDescription,
                                  Current.MainWindow.FloatingWindowHost);
 #else
-                ErrorMsgBox.Show("Command can not be executed", ControllerCommand.ErrorDescription);
+                ExolutioErrorMsgBox.Show("Command can not be executed", ControllerCommand.ErrorDescription);
 #endif
             }
             else

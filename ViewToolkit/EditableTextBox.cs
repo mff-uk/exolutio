@@ -1,5 +1,5 @@
-using EvoX.SupportingClasses;
-using EvoX.ViewToolkit;
+using Exolutio.SupportingClasses;
+using Exolutio.ViewToolkit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,10 +8,10 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Controls;
 using System.Windows.Media;
-using EvoX.ResourceLibrary;
-using EvoX.ViewToolkit.Geometries;
+using Exolutio.ResourceLibrary;
+using Exolutio.ViewToolkit.Geometries;
 
-namespace EvoX.ViewToolkit
+namespace Exolutio.ViewToolkit
 {
     /// <summary>
     /// TextBox for displaying and editing Class properties and methods
@@ -187,7 +187,7 @@ namespace EvoX.ViewToolkit
         //{
         //    ContextMenu = new ContextMenu();
         //    mi_Rename = new ContextMenuItem("Rename");
-        //    mi_Rename.Icon = EvoXResourceNames.GetResourceImageSource(EvoXResourceNames.pencil);
+        //    mi_Rename.Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.pencil);
         //    mi_Rename.Click += mi_Click;
         //    ContextMenu.Items.Add(mi_Rename);
 

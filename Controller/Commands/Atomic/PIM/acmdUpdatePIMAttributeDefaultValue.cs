@@ -1,7 +1,7 @@
 ﻿using System;
-using EvoX.Model.PIM;
+using Exolutio.Model.PIM;
 
-namespace EvoX.Controller.Commands.Atomic.PIM
+namespace Exolutio.Controller.Commands.Atomic.PIM
 {
     public class acmdUpdatePIMAttributeDefaultValue : StackedCommand
     {

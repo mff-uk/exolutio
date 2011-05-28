@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EvoX.View
+namespace Exolutio.View
 {
     public class BusyStateChangedEventArgs:EventArgs
     {

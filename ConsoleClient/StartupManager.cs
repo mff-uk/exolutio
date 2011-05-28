@@ -9,9 +9,9 @@ using System.Text;
 using System.Text.RegularExpressions;
 using CommandLineParser.Arguments;
 using CommandLineParser.Validation;
-using EvoX.Model;
+using Exolutio.Model;
 
-namespace EvoX.WPFClient
+namespace Exolutio.WPFClient
 {
     /// <summary>
     /// Starts the application, handles command line parameters
@@ -19,7 +19,7 @@ namespace EvoX.WPFClient
     [ArgumentGroupCertification("list,help,project", EArgumentGroupCondition.AtLeastOneUsed)]
     public class StartupManager
     {
-        [FileArgument('p', "project", FileMustExist = true, Description = "Input EvoX project filePath", FullDescription = "ARG_INPUT")]
+        [FileArgument('p', "project", FileMustExist = true, Description = "Input eXolutio project filePath", FullDescription = "ARG_INPUT")]
         public FileInfo InputFile { get; set; }
 
         [DirectoryArgument('o', "outputDir", DirectoryMustExist = true, Description = "Output directory", FullDescription = "ARG_OUTPUTDIR")]
@@ -61,9 +61,9 @@ namespace EvoX.WPFClient
 			args = new string[]
 			       	{
 			       		"--project",
-			       		@"D:\Programování\EvoX\Test\ABCCompany.EvoX",
+			       		@"D:\Programování\Exolutio\Test\ABCCompany.Exolutio",
 						//"--outputDir",
-                        //@"D:\Programování\EvoX\Test\cmdoutput\",
+                        //@"D:\Programování\Exolutio\Test\cmdoutput\",
 						//"-d",
                         //"0;1",
                         // "-d",

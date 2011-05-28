@@ -11,11 +11,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using EvoX.Model;
-using EvoX.Model.OCL;
-using EvoX.View;
+using Exolutio.Model;
+using Exolutio.Model.OCL;
+using Exolutio.View;
 
-namespace EvoX.WPFClient
+namespace Exolutio.WPFClient
 {
     /// <summary>
     /// Interaction logic for OCLEditor.xaml

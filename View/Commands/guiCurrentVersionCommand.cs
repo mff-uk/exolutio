@@ -1,4 +1,4 @@
-﻿namespace EvoX.View.Commands
+﻿namespace Exolutio.View.Commands
 {
     public abstract class guiCurrentVersionCommand : guiCommandBase
     {

@@ -1,5 +1,5 @@
 
-namespace EvoX.WPFClient.Commands
+namespace Exolutio.WPFClient.Commands
 {
     public static class StaticWPFClientCommands
     {

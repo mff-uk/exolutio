@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace EvoX.Model.OCL.Types
+namespace Exolutio.Model.OCL.Types
 {
     /// <summary>
     /// TupleType (informally known as record type or struct) combines different types into a single aggregate type. The parts of

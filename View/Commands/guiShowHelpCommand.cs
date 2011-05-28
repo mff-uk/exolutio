@@ -1,7 +1,7 @@
 ﻿using System;
-using EvoX.Dialogs;
+using Exolutio.Dialogs;
 
-namespace EvoX.View.Commands
+namespace Exolutio.View.Commands
 {
     public class guiShowHelpCommand : guiCommandBase
     {

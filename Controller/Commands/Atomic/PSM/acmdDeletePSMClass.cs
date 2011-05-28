@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using EvoX.Model;
-using EvoX.Model.PSM;
+using Exolutio.Model;
+using Exolutio.Model.PSM;
 
-namespace EvoX.Controller.Commands.Atomic.PSM
+namespace Exolutio.Controller.Commands.Atomic.PSM
 {
     public class acmdDeletePSMClass : StackedCommand
     {

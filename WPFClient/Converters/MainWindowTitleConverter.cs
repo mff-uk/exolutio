@@ -2,10 +2,10 @@ using System;
 using System.Globalization;
 using System.IO;
 using System.Windows.Data;
-using EvoX.Model;
+using Exolutio.Model;
 using System.Windows;
 
-namespace EvoX.WPFClient.Converters
+namespace Exolutio.WPFClient.Converters
 {
     public class MainWindowTitleConverter : IValueConverter
     {
@@ -16,7 +16,7 @@ namespace EvoX.WPFClient.Converters
 
             if (project.ProjectFile == null)
             {
-                title = "Untitled.EvoX";
+                title = "Untitled.eXo";
             }
             else
             {
@@ -28,7 +28,7 @@ namespace EvoX.WPFClient.Converters
                 title += "*";
             }
 
-            title += " - EvoX";
+            title += " - eXolutio";
 
             return title;
         }

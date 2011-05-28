@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using EvoX.Model.OCL.Types;
+using Exolutio.Model.OCL.Types;
 
-namespace EvoX.Model.OCL.AST
+namespace Exolutio.Model.OCL.AST
 {
     /// <summary>
     /// Variables are typed elements for passing data in expressions. The variable can be used in expressions where the variable

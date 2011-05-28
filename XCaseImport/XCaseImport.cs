@@ -1,14 +1,14 @@
 using System.IO;
-using EvoX.Model;
+using Exolutio.Model;
 
-namespace EvoX.XCaseImport
+namespace Exolutio.XCaseImport
 {
     public static class XCaseImport
     {
         public static Project LoadXCaseProjectFromFile(string fileName)
         {
-            XCase.Model.EvoXExport.EvoXExport evoxExport = new XCase.Model.EvoXExport.EvoXExport();
-            Project project = evoxExport.ConvertToEvoXProject(fileName);
+            XCase.Model.ExolutioExport.ExolutioExport exolutioExport = new XCase.Model.ExolutioExport.ExolutioExport();
+            Project project = exolutioExport.ConvertToExolutioProject(fileName);
             return project;
         }
     }

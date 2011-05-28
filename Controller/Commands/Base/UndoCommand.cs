@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Windows.Input;
 using System.Diagnostics;
 
-namespace EvoX.Controller.Commands
+namespace Exolutio.Controller.Commands
 {
     /// <summary>
     /// Performs "Undo" of the last command on the "Undo" stack. 

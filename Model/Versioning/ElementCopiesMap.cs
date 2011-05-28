@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using EvoX.Model.PIM;
+using Exolutio.Model.PIM;
 
-namespace EvoX.Model.Versioning
+namespace Exolutio.Model.Versioning
 {
     /// <summary>
     /// Used during creating copies / new versions of multiple components in one session.
@@ -26,12 +26,12 @@ namespace EvoX.Model.Versioning
             TargetProject = targetProject;
         }
 
-        public Guid SuggestGuid(IEvoXCloneable item)
+        public Guid SuggestGuid(IExolutioCloneable item)
         {
             return GetGuidForCopyOf(item);
         }
 
-        public Guid GetGuidForCopyOf(IEvoXCloneable item)
+        public Guid GetGuidForCopyOf(IExolutioCloneable item)
         {
             Guid foundItem;
             if (copyDictionaryGuid.TryGetValue(item.ID, out foundItem))
@@ -46,38 +46,38 @@ namespace EvoX.Model.Versioning
                 //}
                 //else
                 //{
-                throw new EvoXModelException(string.Format("Can not find guid for copy of {0}", item));
+                throw new ExolutioModelException(string.Format("Can not find guid for copy of {0}", item));
                 //}    
             }
         }
 
-        public void PrepareGuids(IEnumerable<EvoXObject> items)
+        public void PrepareGuids(IEnumerable<ExolutioObject> items)
         {
-            foreach (EvoXObject evoXObject in items)
+            foreach (ExolutioObject exolutioObject in items)
             {
-                PrepareGuid(evoXObject);
+                PrepareGuid(exolutioObject);
             }
         }
 
-        public void PrepareGuid(EvoXObject evoXObject)
+        public void PrepareGuid(ExolutioObject exolutioObject)
         {
-            Guid copyGuid = KeepGuids ? evoXObject.ID : Guid.NewGuid();
-            copyDictionaryGuid[evoXObject.ID] = copyGuid;
+            Guid copyGuid = KeepGuids ? exolutioObject.ID : Guid.NewGuid();
+            copyDictionaryGuid[exolutioObject.ID] = copyGuid;
         }
 
         public IEnumerator<KeyValuePair<IVersionedItem, IVersionedItem>> GetEnumerator()
         {
             foreach (KeyValuePair<Guid, Guid> keyValuePair in copyDictionaryGuid)
             {
-                EvoXObject objectKey = SourceProject.TranslateComponent<EvoXObject>(keyValuePair.Key);
+                ExolutioObject objectKey = SourceProject.TranslateComponent<ExolutioObject>(keyValuePair.Key);
                 if (objectKey is ProjectVersion)
                 {
                     continue;
                 }
-                EvoXObject objectValue = TargetProject.TranslateComponent<EvoXObject>(keyValuePair.Value);
+                ExolutioObject objectValue = TargetProject.TranslateComponent<ExolutioObject>(keyValuePair.Value);
                 if (objectKey.GetType() != objectValue.GetType())
                 {
-                    throw new EvoXModelException();
+                    throw new ExolutioModelException();
                 }
                 IVersionedItem keyItem = (IVersionedItem) objectKey;
                 IVersionedItem valueItem = (IVersionedItem) objectValue;
