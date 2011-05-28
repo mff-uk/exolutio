@@ -52,9 +52,9 @@ namespace Exolutio.Controller.Commands.Atomic.PIM
 
         internal override MacroCommand PrePropagation()
         {
-            ReadOnlyCollection<PIMAttribute> aX1 = Project.TranslateComponentCollection<PIMAttribute>(X1);
-            ReadOnlyCollection<PIMAttribute> aX2 = Project.TranslateComponentCollection<PIMAttribute>(X2);
-            if (aX1.Count == 0 || aX2.Count == 0) return null;
+            IEnumerable<PIMAttribute> aX1 = Project.TranslateComponentCollection<PIMAttribute>(X1);
+            IEnumerable<PIMAttribute> aX2 = Project.TranslateComponentCollection<PIMAttribute>(X2);
+            if (aX1.Count() == 0 || aX2.Count() == 0) return null;
 
             MacroCommand command = new MacroCommand(Controller) { CheckFirstOnlyInCanExecute = true };
             command.Report = new CommandReport("Pre-propagation (synchronize PIM attribute sets)");
@@ -101,15 +101,15 @@ namespace Exolutio.Controller.Commands.Atomic.PIM
                         command.Commands.Add(cmdi);
                     }
 
-                    IEnumerable<PSMAttribute> psmAttributesToMove = psmAttributesInSubClasses.Where(a => aX1.Contains(a.Interpretation) || aX2.Contains(a.Interpretation));
+                    IEnumerable<PSMAttribute> psmAttributesToMove = psmAttributesInSubClasses.Where(a => aX1.Contains((PIMAttribute)a.Interpretation) || aX2.Contains((PIMAttribute)a.Interpretation));
 
                     foreach (PSMAttribute a in psmAttributesToMove)
                     {
                         command.Commands.Add(new cmdMovePSMAttribute(Controller) { AttributeGuid = a, ClassGuid = psmClass, Propagate = false });
                     }
 
-                    IEnumerable<Guid> synchroGroup1 = psmAttributesInSubClasses.Union(psmClass.PSMAttributes).Where(a => aX1.Contains(a.Interpretation)).Select<PSMAttribute, Guid>(a => a);
-                    IEnumerable<Guid> synchroGroup2 = psmAttributesInSubClasses.Union(psmClass.PSMAttributes).Where(a => aX2.Contains(a.Interpretation)).Select<PSMAttribute, Guid>(a => a).Union(newAttributesGuid);
+                    IEnumerable<Guid> synchroGroup1 = psmAttributesInSubClasses.Union(psmClass.PSMAttributes).Where(a => aX1.Contains((PIMAttribute)a.Interpretation)).Select<PSMAttribute, Guid>(a => a);
+                    IEnumerable<Guid> synchroGroup2 = psmAttributesInSubClasses.Union(psmClass.PSMAttributes).Where(a => aX2.Contains((PIMAttribute)a.Interpretation)).Select<PSMAttribute, Guid>(a => a).Union(newAttributesGuid);
 
                     command.Commands.Add(new acmdSynchroPSMAttributes(Controller) { X1 = synchroGroup1.ToList(), X2 = synchroGroup2.ToList(), Propagate = false});
                     
@@ -121,7 +121,7 @@ namespace Exolutio.Controller.Commands.Atomic.PIM
                 }
                 
                 //Swap the two lists and do it again
-                ReadOnlyCollection<PIMAttribute> temp = aX1;
+                IEnumerable<PIMAttribute> temp = aX1;
                 aX1 = aX2;
                 aX2 = temp;
             }

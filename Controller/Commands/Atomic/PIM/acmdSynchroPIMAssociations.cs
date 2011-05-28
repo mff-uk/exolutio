@@ -58,9 +58,9 @@ namespace Exolutio.Controller.Commands.Atomic.PIM
 
         internal override MacroCommand PrePropagation()
         {
-            ReadOnlyCollection<PIMAssociation> aX1 = Project.TranslateComponentCollection<PIMAssociation>(X1);
-            ReadOnlyCollection<PIMAssociation> aX2 = Project.TranslateComponentCollection<PIMAssociation>(X2);
-            if (aX1.Count == 0 || aX2.Count == 0 || aX1.Union(aX2).Count() == 1) return null;
+            IEnumerable<PIMAssociation> aX1 = Project.TranslateComponentCollection<PIMAssociation>(X1);
+            IEnumerable<PIMAssociation> aX2 = Project.TranslateComponentCollection<PIMAssociation>(X2);
+            if (aX1.Count() == 0 || aX2.Count() == 0 || aX1.Union(aX2).Count() == 1) return null;
             
             MacroCommand command = new MacroCommand(Controller) { CheckFirstOnlyInCanExecute = true };
             command.Report = new CommandReport("Pre-propagation (synchronize PIM association sets)");
@@ -122,15 +122,15 @@ namespace Exolutio.Controller.Commands.Atomic.PIM
                         newAssociationsGuid.Add(assocGuid);
                     }
 
-                    IEnumerable<PSMAssociation> psmAssociationsToMove = psmAssociationsInSubClasses.Where(a => aX1.Contains(a.Interpretation) || aX2.Contains(a.Interpretation));
+                    IEnumerable<PSMAssociation> psmAssociationsToMove = psmAssociationsInSubClasses.Where(a => aX1.Contains((PIMAssociation)a.Interpretation) || aX2.Contains((PIMAssociation)a.Interpretation));
 
                     foreach (PSMAssociation a in psmAssociationsToMove)
                     {
                         command.Commands.Add(new cmdReconnectPSMAssociation(Controller) { AssociationGuid = a, NewParentGuid = psmClass, Propagate = false });
                     }
 
-                    IEnumerable<Guid> synchroGroup1 = psmAssociationsInSubClasses.Union(psmClass.ChildPSMAssociations).Union(parentEnum).Where(a => aX1.Contains(a.Interpretation)).Select<PSMAssociation, Guid>(a => a);
-                    IEnumerable<Guid> synchroGroup2 = psmAssociationsInSubClasses.Union(psmClass.ChildPSMAssociations).Union(parentEnum).Where(a => aX2.Contains(a.Interpretation)).Select<PSMAssociation, Guid>(a => a).Union(newAssociationsGuid);
+                    IEnumerable<Guid> synchroGroup1 = psmAssociationsInSubClasses.Union(psmClass.ChildPSMAssociations).Union(parentEnum).Where(a => aX1.Contains((PIMAssociation)a.Interpretation)).Select<PSMAssociation, Guid>(a => a);
+                    IEnumerable<Guid> synchroGroup2 = psmAssociationsInSubClasses.Union(psmClass.ChildPSMAssociations).Union(parentEnum).Where(a => aX2.Contains((PIMAssociation)a.Interpretation)).Select<PSMAssociation, Guid>(a => a).Union(newAssociationsGuid);
 
                     command.Commands.Add(new acmdSynchroPSMAssociations(Controller) { X1 = synchroGroup1.ToList(), X2 = synchroGroup2.ToList(), Propagate = false });
 
@@ -142,7 +142,7 @@ namespace Exolutio.Controller.Commands.Atomic.PIM
                 }
 
                 //Swap the two lists and do it again
-                ReadOnlyCollection<PIMAssociation> temp = aX1;
+                IEnumerable<PIMAssociation> temp = aX1;
                 aX1 = aX2;
                 aX2 = temp;
             }

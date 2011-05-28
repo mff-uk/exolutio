@@ -19,9 +19,6 @@ namespace Exolutio.View.Commands
 
         public static guiNewProjectCommand NewProjectCommand { get; set; }
         public static guiOpenProjectCommand OpenProjectCommand { get; set; }
-#if SILVERLIGHT
-        public static guiOpenWebProjectCommand OpenWebProjectCommand { get; set; }
-#endif
         public static guiCloseProjectCommand CloseProjectCommand { get; set; }
         public static guiSaveProjectCommand SaveProjectCommand { get; set; }
         public static guiSaveAsProjectCommand SaveAsProjectCommand { get; set; }
@@ -32,8 +29,13 @@ namespace Exolutio.View.Commands
         public static guiShowHelpCommand HelpCommand { get; set; }
         public static guiSampleDocumentCommand CreateSampleDocumentCommand { get; set; }
         public static guiLocateInterpretedComponent LocateInterpretedComponent { get; set; }
-        public static guiFindChangesCommand FindChangesCommand { get; set; }
         public static guiModelTreeCommand RenameComponentCommand { get; set; }
+
+#if SILVERLIGHT
+        public static guiOpenWebProjectCommand OpenWebProjectCommand { get; set; }
+#else 
+        public static guiFindChangesCommand FindChangesCommand { get; set; }
+#endif
 
         #endregion
 
@@ -133,7 +135,10 @@ namespace Exolutio.View.Commands
             BranchCurrentVersionCommand = new guiBranchCurrentVersionCommand();
             SaveAsSingleVersionCommand = new guiSaveAsSingleVersionCommand();
             RemoveCurrentVersionCommand = new guiRemoveCurrentVersionCommand();
+            #if SILVERLIGHT
+            #else
             FindChangesCommand = new guiFindChangesCommand();
+            #endif
 
             #endregion
 

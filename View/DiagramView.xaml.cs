@@ -28,7 +28,10 @@ namespace Exolutio.View
     {
         public Diagram Diagram { get; private set; }
 
+        #if SILVERLIGHT
+        #else
         public ExolutioCanvas ExolutioCanvas { get { return ExolutioCanvasWithZoomer.ExolutioCanvas; } }
+        #endif
 
         public DiagramView()
         {
@@ -271,9 +274,13 @@ namespace Exolutio.View
                         x = Canvas.GetLeft(((IConnectorViewBase)view).Connector);
                         y = Canvas.GetTop(((IConnectorViewBase)view).Connector);
                     }
+
+                    #if SILVERLIGHT
+                    #else
                     ScrollViewer scrollViewer = ExolutioCanvasWithZoomer.scrollViewer;
                     scrollViewer.ScrollToHorizontalOffset(x);
                     scrollViewer.ScrollToVerticalOffset(y);
+                    #endif
                 }
             }
             InvokeSelectionChanged();

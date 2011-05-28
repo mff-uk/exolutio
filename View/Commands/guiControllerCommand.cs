@@ -202,7 +202,7 @@ namespace Exolutio.View.Commands
             if (!ControllerCommand.CanExecute())
             {
 #if SILVERLIGHT
-                ErrorMsgBox.Show("Command can not be executed", ControllerCommand.ErrorDescription,
+                ExolutioErrorMsgBox.Show("Command can not be executed", ControllerCommand.ErrorDescription,
                                  Current.MainWindow.FloatingWindowHost);
 #else
                 ExolutioErrorMsgBox.Show("Command can not be executed", ControllerCommand.ErrorDescription);

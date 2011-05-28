@@ -72,6 +72,8 @@ namespace Exolutio.View
                 CardinalityLabel.Y = ViewHelper.CardinalityLabelViewHelper.Y;
                 CardinalityLabel.UpdateCanvasPosition(true);
 
+#if SILVERLIGHT
+#else
                 if (PSMAssociation.Interpretation == null)
                 {
                     Connector.Pen = ViewToolkitResources.InterpretedAssociationPen;
@@ -80,6 +82,7 @@ namespace Exolutio.View
                 {
                     Connector.Pen = ViewToolkitResources.SolidBlackPen;
                 }
+#endif
 
                 DiagramView.ExolutioCanvas.InvokeContentChanged();
             }
