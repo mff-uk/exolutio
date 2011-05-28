@@ -151,7 +151,11 @@ namespace Exolutio.View
             ExolutioContextMenu contextMenu = (ExolutioContextMenu)sender;
             if (Current.MainWindow.CommandsDisabled)
             {
-                contextMenu.Visibility = Visibility.Hidden;
+                #if SILVERLIGHT
+                contextMenu.Visibility = Visibility.Collapsed;
+                #else
+                contextMenu.Visibility = System.Windows.Visibility.Hidden;
+                #endif
             }
             else
             {

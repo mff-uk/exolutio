@@ -327,9 +327,10 @@ namespace Exolutio.ViewToolkit
 
         internal void ExolutioCanvas_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            base.OnMouseDown(e);
             #if SILVERLIGHT
             CurrentState.LeftButton = true; 
+            #else 
+            base.OnMouseDown(e);
             #endif
             CurrentState.Canvas_MouseDown(e);
         }
@@ -342,7 +343,12 @@ namespace Exolutio.ViewToolkit
             #endif
             CurrentState.Canvas_MouseUp(e);
 
+
+            #if SILVERLIGHT
+            if (e.OriginalSource == this)
+            #else
             if (e.ChangedButton == MouseButton.Right && e.OriginalSource == this)
+            #endif
             {
                 this.ContextMenu.IsOpen = true;
             }

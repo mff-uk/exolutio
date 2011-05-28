@@ -141,10 +141,10 @@ namespace Exolutio.ViewToolkit
             interpretedAttributeBrush = seaShellBrush; 
             ribbonBackstageDimText = new SolidColorBrush(Color.FromArgb(0xFF, 0xa1, 0x6f, 0x89));
             selectedBorderBrush = redBrush;
-            interpretedAssociationPen = new Pen();
 
 #if SILVERLIGHT
 #else
+            interpretedAssociationPen = new Pen();
             junctionSelectedPen = new Pen(SelectedBorderBrush, 3);
             solidBlackPen = new Pen(blackBrush, 1);
             transparentPen = new Pen(Brushes.Transparent, 10);

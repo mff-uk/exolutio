@@ -9,6 +9,7 @@ using Exolutio.Model.PIM;
 using Exolutio.Controller.Commands.Complex.PIM;
 using System.Collections.ObjectModel;
 using Exolutio.Controller.Commands.Atomic.PIM;
+using Exolutio.SupportingClasses;
 
 namespace Exolutio.Controller.Commands.Atomic.PSM
 {
@@ -33,7 +34,7 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
             }
             else foreach (PSMAssociation a in union)
             {
-                if (d.Contains(a.Parent))
+                if (a.Parent is PSMClass && d.Contains((PSMClass)a.Parent))
                 {
                     if (am == null) am = a.Parent as PSMClass;
                     else if (am != a.Parent) return false;
@@ -43,7 +44,7 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
                         else if (interpretation != a.Child.Interpretation) return false;
                     }
 */                }
-                if (d.Contains(a.Child))
+                if (a.Child is PSMClass && d.Contains((PSMClass)a.Child))
                 {
                     if (am == null) am = a.Child as PSMClass;
                     else if (am != a.Child) return false;

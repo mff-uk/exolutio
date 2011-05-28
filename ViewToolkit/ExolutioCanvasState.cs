@@ -72,16 +72,16 @@ namespace Exolutio.ViewToolkit
             public bool LeftButton { get; set; }
 
             public bool RightButton { get; set; }
+#else 
+            public bool IsMouseLeftButtonDown
+            {
+                get { return Mouse.LeftButton == MouseButtonState.Pressed; }
+            }
 #endif
 
             protected static bool ShiftOrControlPressed
             {
                 get { return (Keyboard.Modifiers & (ModifierKeys.Shift | ModifierKeys.Control)) != ModifierKeys.None; }
-            }
-
-            public bool IsMouseLeftButtonDown
-            {
-                get { return Mouse.LeftButton == MouseButtonState.Pressed; }
             }
 
             /// <summary>

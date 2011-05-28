@@ -21,7 +21,7 @@ namespace Exolutio.Model.Serialization
         
         public XDocument Document { get; set; }
 
-        public XNamespace ExolutioNS = @"http://www.eXolutio.eu/Project/Serialization/";
+        public XNamespace ExolutioNS = @"http://eXolutio.eu/Project/Serialization/";
 
         public Log Log { get; set; }
 
