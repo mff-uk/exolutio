@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Exolutio.Dialogs;
 using Exolutio.View.Commands;
 using Exolutio.View.Commands.Project;
 using Exolutio.ViewToolkit;
@@ -56,7 +57,7 @@ namespace Exolutio.WPFClient
                 b.Tag = recentFile.FullName;
                 b.ToolTip = recentFile.FullName;
                 sp.Children.Add(textBlock);
-                b.Click += delegate { GuiCommands.OpenProjectCommand.Execute(b.Tag.ToString(), false, true); };
+                b.Click += new RoutedEventHandler(recentFile_Click);
                 spBackstageLeftPane.Children.Add(b);
             }
 
@@ -84,15 +85,51 @@ namespace Exolutio.WPFClient
                 b.Tag = recentDirectory.FullName;
                 b.ToolTip = recentDirectory.FullName;
                 sp.Children.Add(textBlock);
-                b.Click += delegate
-                               {
-                                   guiOpenProjectCommand c = new guiOpenProjectCommand();
-                                   c.InitialDirectory = b.Tag.ToString();
-                                   c.Execute(b.Tag.ToString(), false, false);
-                               };
+                b.Click += new RoutedEventHandler(recentDirectory_Click); 
                 spBackstageRightPane.Children.Add(b);
             }
         }
+
+        void recentDirectory_Click(object sender, RoutedEventArgs e)
+        {
+            string directory = ((Control)sender).Tag.ToString();
+            if (Directory.Exists(directory))
+            {
+                guiOpenProjectCommand c = new guiOpenProjectCommand();
+                c.InitialDirectory = ((Control)sender).Tag.ToString();
+                c.Execute(((Control)sender).Tag.ToString(), false, false);
+            }
+            else
+            {
+                if (ExolutioYesNoBox.Show("Directory no longer exists.", "Do you wish to remove the directory from recent directories list?") == MessageBoxResult.Yes)
+                {
+                    ConfigurationManager.Configuration.RecentFiles.RemoveAll(d => d.FullName == directory);
+                    FillRecent(ConfigurationManager.Configuration.RecentFiles,
+                               ConfigurationManager.Configuration.RecentDirectories);
+                }
+            }
+        }
+
+        void recentFile_Click(object sender, RoutedEventArgs e)
+        {
+            string file = ((Control)sender).Tag.ToString();
+            if (File.Exists(file))
+            {
+                GuiCommands.OpenProjectCommand.Execute(file, false, true);
+            }
+            else
+            {
+                if (ExolutioYesNoBox.Show("File no longer exists.", "Do you wish to remove the file from recent files list?") == MessageBoxResult.Yes)
+                {
+                    ConfigurationManager.Configuration.RecentFiles.RemoveAll(f => f.FullName == file);
+                    FillRecent(ConfigurationManager.Configuration.RecentFiles,
+                               ConfigurationManager.Configuration.RecentDirectories);
+                }
+            }
+        }
+
+    
+       
 
     }
 }

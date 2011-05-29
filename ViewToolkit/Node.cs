@@ -100,7 +100,15 @@ namespace Exolutio.ViewToolkit
             InnerGrid.Children.Add(InnerContentControl);
 
             Loaded += delegate { InvokePositionChanged(); };
-            SizeChanged += delegate { InvokePositionChanged(); };
+            SizeChanged += delegate
+                               {
+                                   foreach (Connector connector in Connectors)
+                                   {
+                                       connector.InvalidateGeometry();
+                                   }
+                                   InvokePositionChanged();
+                               };
+
             PositionChanged += OnPositionChanged;
 #if SILVERLIGHT
 #else
