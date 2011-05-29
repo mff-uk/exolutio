@@ -278,8 +278,10 @@ namespace Exolutio.View
                     #if SILVERLIGHT
                     #else
                     ScrollViewer scrollViewer = ExolutioCanvasWithZoomer.scrollViewer;
-                    scrollViewer.ScrollToHorizontalOffset(x);
-                    scrollViewer.ScrollToVerticalOffset(y);
+                    if (!double.IsNaN(x))
+                        scrollViewer.ScrollToHorizontalOffset(x);
+                    if (!double.IsNaN(y))
+                        scrollViewer.ScrollToVerticalOffset(y);
                     #endif
                 }
             }

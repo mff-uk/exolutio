@@ -36,7 +36,7 @@
                         </ad:DockablePane>
                     </ad:ResizingPanel>                    
                     <ad:DockablePane ad:ResizingPanel.ResizeWidth="250" x:Name="RightPane" ShowTabs="True" SelectedIndex="0">
-                    	<ad:DockableContent Title="Properties" x:Name="dcProperties" >
+                    	<ad:DockableContent Title="Properties" x:Name="dcProperties" Background="White">
                             <ExolutioView:ComponentPropertyView x:Name="ComponentPropertyView" />
                     	</ad:DockableContent>
                     	<ad:DockableContent Title="OCL" x:Name="dcOcl" >
