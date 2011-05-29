@@ -1,3 +1,11 @@
+using System;
+using System.ComponentModel;
+using System.IO;
+using System.Linq;
+using System.Windows;
+using Exolutio.SupportingClasses;
+using Exolutio.View.Commands;
+
 namespace Exolutio.WPFClient
 {
     public partial class MainWindow
