@@ -2,15 +2,15 @@
 using System.Windows.Media;
 using SilverFlow.Controls;
 
-namespace EvoX.Dialogs
+namespace Exolutio.Dialogs
 {
-    public partial class EvoXYesNoBox
+    public partial class ExolutioYesNoBox
     {
-        private static EvoXYesNoBox msgBox;
+        private static ExolutioYesNoBox msgBox;
 
         private MessageBoxResult result = MessageBoxResult.Cancel;
 
-        public EvoXYesNoBox()
+        public ExolutioYesNoBox()
         {
             InitializeComponent();
 
@@ -33,7 +33,7 @@ namespace EvoX.Dialogs
         }
 
 #if SILVERLIGHT
-        public EvoXYesNoBox(bool showOk, bool showCancel, bool showYes, bool showNo, FloatingWindowHost host)
+        public ExolutioYesNoBox(bool showOk, bool showCancel, bool showYes, bool showNo, FloatingWindowHost host)
 #else
         public EvoXYesNoBox(bool showOk, bool showCancel, bool showYes, bool showNo)
 #endif
@@ -56,7 +56,7 @@ namespace EvoX.Dialogs
         public static MessageBoxResult Show(string messageText, string messageQuestion)
 #endif
         {
-            msgBox = new EvoXYesNoBox(false, true, true, true, host);           
+            msgBox = new ExolutioYesNoBox(false, true, true, true, host);           
             msgBox.messageText.Text = messageText;
             msgBox.messageQuestion.Text = messageQuestion;
 #if SILVERLIGHT
@@ -74,7 +74,7 @@ namespace EvoX.Dialogs
         public static MessageBoxResult ShowYesNoCancel(string messageText, string messageQuestion)
 #endif
         {
-            msgBox = new EvoXYesNoBox(false, true, true, true, host);
+            msgBox = new ExolutioYesNoBox(false, true, true, true, host);
             msgBox.messageText.Text = messageText;
             msgBox.messageQuestion.Text = messageQuestion;
 #if SILVERLIGHT
@@ -92,7 +92,7 @@ namespace EvoX.Dialogs
         public static MessageBoxResult ShowOKCancel(string messageText, string messageQuestion)
 #endif
         {
-            msgBox = new EvoXYesNoBox(true, true, false, false, host);
+            msgBox = new ExolutioYesNoBox(true, true, false, false, host);
             msgBox.messageText.Text = messageText;
             msgBox.messageQuestion.Text = messageQuestion;
 #if SILVERLIGHT
@@ -110,7 +110,7 @@ namespace EvoX.Dialogs
         public static MessageBoxResult ShowOK(string messageText, string messageQuestion)
 #endif
         {
-            msgBox = new EvoXYesNoBox(true, false, false, false, host);
+            msgBox = new ExolutioYesNoBox(true, false, false, false, host);
             msgBox.messageText.Text = messageText;
             msgBox.messageQuestion.Text = messageQuestion;
 #if SILVERLIGHT

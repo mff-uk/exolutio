@@ -11,7 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using EvoX.SupportingClasses;
+using Exolutio.SupportingClasses;
 
 namespace SilverlightClient
 {
@@ -31,7 +31,7 @@ namespace SilverlightClient
         {
             this.exception = exception;
 
-            EvoXException xe = exception as EvoXException;
+            ExolutioException xe = exception as ExolutioException;
 			
             tbExMsg.Content = exception.Message;
 			if (xe != null)

@@ -9,8 +9,8 @@
     <ProjectTypeGuids>{A1591282-1198-4647-A2B1-27E5FF5F6F3B};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EvoX.ResourceLibrary</RootNamespace>
-    <AssemblyName>EvoX.ResourceLibrary</AssemblyName>
+    <RootNamespace>Exolutio.ResourceLibrary</RootNamespace>
+    <AssemblyName>Exolutio.ResourceLibrary</AssemblyName>
     <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
@@ -59,8 +59,8 @@
     <Reference Include="System.Windows.Browser" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EvoXResourceNames.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourceNames.cs" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\AddAttributes.png" />
@@ -105,9 +105,6 @@
     <Resource Include="Images\error_button.png" />
     <Resource Include="Images\branch_delete.png" />
     <Resource Include="Images\branch_element.png" />
-    <Content Include="Images\EvoX.ico" />
-    <Content Include="Images\EvoX16x16.bmp" />
-    <Resource Include="Images\EvoX16x16.png" />
     <Resource Include="Images\eye.png" />
     <Resource Include="Images\FolderYellow.ico" />
     <Resource Include="Images\folder.png" />
@@ -133,6 +130,9 @@
     <Resource Include="Images\Print.png" />
     <Resource Include="Images\printer.png" />
     <Resource Include="Images\FolderDownload.png" />
+    <Content Include="Images\Exolutio.ico" />
+    <Content Include="Images\Exolutio16x16.bmp" />
+    <Resource Include="Images\Exolutio16x16.png" />
     <Content Include="Images\props.ico" />
     <Resource Include="Images\question_mark.png" />
     <Resource Include="Images\redo.png" />

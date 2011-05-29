@@ -9,10 +9,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
-using EvoX.Model.PSM.Grammar;
-using EvoX.SupportingClasses;
+using Exolutio.Model.PSM.Grammar;
+using Exolutio.SupportingClasses;
 
-namespace EvoX.View.Commands.Grammar
+namespace Exolutio.View.Commands.Grammar
 {
     public partial class GrammarWindow
     {

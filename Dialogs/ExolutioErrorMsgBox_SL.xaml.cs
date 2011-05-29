@@ -2,14 +2,14 @@
 using System.Windows.Media;
 using SilverFlow.Controls;
 
-namespace EvoX.Dialogs
+namespace Exolutio.Dialogs
 {
     /// <summary>
     /// Interaction logic for ErrorMsgBox.xaml
     /// </summary>
-    public partial class ErrorMsgBox 
+    public partial class ExolutioErrorMsgBox 
     {
-        public ErrorMsgBox()
+        public ExolutioErrorMsgBox()
         {
             InitializeComponent();
             #if SILVERLIGHT
@@ -18,7 +18,7 @@ namespace EvoX.Dialogs
             #endif
         }
 
-        private static ErrorMsgBox msgBox;
+        private static ExolutioErrorMsgBox msgBox;
 
 #if SILVERLIGHT
         public static void Show(string messageText, string messageQuestion, FloatingWindowHost host)
@@ -26,7 +26,7 @@ namespace EvoX.Dialogs
         public static void Show(string messageText, string messageQuestion)
 #endif
         {
-            msgBox = new ErrorMsgBox();           
+            msgBox = new ExolutioErrorMsgBox();           
             msgBox.messageText.Text = messageText;
             msgBox.messageQuestion.Text = messageQuestion;
             #if SILVERLIGHT

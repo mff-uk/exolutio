@@ -2,7 +2,7 @@ using System;
 using System.Globalization;
 using System.Windows.Input;
 
-namespace EvoX.View.Commands
+namespace Exolutio.View.Commands
 {
     public class KeyGesture
     {

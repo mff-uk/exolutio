@@ -12,56 +12,17 @@ using Exolutio.View;
 
 namespace Exolutio.WPFClient
 {
-    public class DiagramTabManager : IFilePresenter, IDiagramTabManager
+    public partial class DiagramTabManager : IFilePresenter, IDiagramTabManager
     {
-        public MainWindow MainWindow
-        {
-            get;
-            private set;
-        }
+        public MainWindow MainWindow { get; private set; }
 
-        public DiagramTabManager(MainWindow mainWindow)
-        {
-            MainWindow = mainWindow;
-
-            dockManager.ActiveDocumentChanged += DockManager_ActiveTabChanged;
-            Current.ActiveDiagramChanged += Current_ActiveDiagramChanged;
-        }
-
-        void Current_ActiveDiagramChanged()
-        {
-            ActivateDiagram(Current.ActiveDiagram);
-        }
-
-        private DockingManager dockManager
-        {
-            get
-            {
-                return MainWindow.dockManager;
-            }
-        }
-
-        public DocumentPane ActivePane
-        {
-            get
-            {
-                if (dockManager.ActiveDocument != null && dockManager.ActiveDocument.Parent != null
-                    && dockManager.ActiveDocument.Parent is DocumentPane)
-                {
-                    return (DocumentPane)dockManager.ActiveDocument.Parent;
-                }
-                else
-                {
-                    return dockManager.MainDocumentPane;
-                }
-            }
-        }
-
+        public DockingManager DockManager { get { return MainWindow.dockManager; } }
+        
         public DiagramView ActiveDiagramView
         {
             get
             {
-                return dockManager.ActiveDocument != null && dockManager.ActiveDocument is DiagramTab ? ((DiagramTab)dockManager.ActiveDocument).DiagramView : null;
+                return DockManager.ActiveDocument != null && DockManager.ActiveDocument is DiagramTab ? ((DiagramTab)DockManager.ActiveDocument).DiagramView : null;
             }
         }
 
@@ -73,6 +34,19 @@ namespace Exolutio.WPFClient
             }
         }
 
+        public DiagramTabManager(MainWindow mainWindow)
+        {
+            MainWindow = mainWindow;
+
+            DockManager.ActiveDocumentChanged += DockManager_ActiveTabChanged;
+            Current.ActiveDiagramChanged += Current_ActiveDiagramChanged;
+        }
+
+        void Current_ActiveDiagramChanged()
+        {
+            ActivateDiagram(Current.ActiveDiagram);
+        }
+        
         /// <summary>
         /// Activates a diagram
         /// </summary>
@@ -88,7 +62,7 @@ namespace Exolutio.WPFClient
                 }
                 else
                 {
-                    dockManager.ActiveDocument = tab;
+                    DockManager.ActiveDocument = tab;
                 }
 
                 tab.BringDocumentHeaderToView(false);
@@ -96,7 +70,7 @@ namespace Exolutio.WPFClient
             }
             else
             {
-                return dockManager.ActiveDocument as DiagramTab;
+                return DockManager.ActiveDocument as DiagramTab;
             }
         }
 
@@ -108,25 +82,7 @@ namespace Exolutio.WPFClient
         private void SelectedItems_CollectionChanged()
         {
             Current.InvokeSelectionChanged();
-        }
-
-        /// <summary>
-        /// Activates given diagram and selects given element on it
-        /// </summary>
-        /// <param name="diagram"></param>
-        /// <param name="selectedComponent"></param>
-        public void ActivateDiagramWithElement(Diagram diagram, Component selectedComponent)
-        {
-            DiagramTab tab = ActivateDiagram(diagram);
-            tab.DiagramView.ClearSelection();
-
-            if (selectedComponent != null)
-            {
-                tab.DiagramView.SetSelection(selectedComponent, true);
-            }
-
-            Current.ActiveDiagram = diagram;
-        }
+        }        
 
         /// <summary>
         /// Finds among currently open PanelWindows the one which is associated with given <paramref name="diag"/>
@@ -171,7 +127,7 @@ namespace Exolutio.WPFClient
                 //ActivePane.BringHeaderToFront(newTab);
                 if (newTab.ContainerPane != null)
                 {
-                    dockManager.ActiveDocument = newTab;
+                    DockManager.ActiveDocument = newTab;
                 }
             }
 
@@ -183,81 +139,45 @@ namespace Exolutio.WPFClient
         /// </summary>
         public void CloseActiveTab()
         {
-            if (dockManager.ActiveDocument != null)
+            if (DockManager.ActiveDocument != null)
             {
-                int index = dockManager.MainDocumentPane.Items.IndexOf(dockManager.ActiveDocument);
-                DiagramTab pw = dockManager.ActiveDocument as DiagramTab;
+                int index = DockManager.MainDocumentPane.Items.IndexOf(DockManager.ActiveDocument);
+                DiagramTab pw = DockManager.ActiveDocument as DiagramTab;
                 if (pw != null)
                     RemoveTab(pw);
                 else
                 {
-                    (dockManager.ActiveDocument as DocumentContent).Close();
+                    (DockManager.ActiveDocument as DocumentContent).Close();
                 }
             }
         }
 
-        /// <summary>
-        /// Closes given PanelWindow
-        /// </summary>
-        /// <param name="tab">PanelWindow to be closed</param>
         internal void RemoveTab(DiagramTab tab)
         {
-
             tab.Close();
-            if (dockManager.ActiveDocument == null && dockManager.Documents.Count() > 0)
+            if (DockManager.ActiveDocument == null && DockManager.Documents.Count() > 0)
             {
-                dockManager.ActiveDocument = dockManager.Documents.Last();
+                DockManager.ActiveDocument = DockManager.Documents.Last();
             }
-            //InvokeActiveDiagramChanged(dockManager.ActiveDocument as PanelWindow);
         }
 
         /// <summary>
-        /// Handles double click on a diagram in Projects window - activates/reopens the tab with selected diagram
+        /// Activates given diagram and selects given element on it
         /// </summary>
-        //internal void DiagramDoubleClick(object sender, DiagramDClickArgs arg)
-        //{
-        //    ActivateDiagram(arg.Diagram);
-        //}
+        /// <param name="diagram"></param>
+        /// <param name="selectedComponent"></param>
+        public void ActivateDiagramWithElement(Diagram diagram, Component selectedComponent)
+        {
+            DiagramTab tab = ActivateDiagram(diagram);
+            tab.DiagramView.ClearSelection();
 
-        /// <summary>
-        /// Handles diagram removing event invoked by Projects window
-        /// </summary>
-        //internal void DiagramRemoveHandler(object sender, DiagramDClickArgs arg)
-        //{
-        //    if (arg.Diagram is PIMDiagram)
-        //    {
-        //        RemoveDiagramCommand removeDiagramCommand = (RemoveDiagramCommand)RemoveDiagramCommandFactory.Factory().Create(arg.Diagram.Project.GetModelController());
-        //        removeDiagramCommand.Set(arg.Diagram.Project, arg.Diagram);
-        //        removeDiagramCommand.Execute();
-        //    }
-        //    else if (arg.Diagram is PSMDiagram)
-        //    {
-        //        DiagramTab Tab = FindTab(arg.Diagram);
-        //        if (Tab != null)
-        //        {
-        //            RemovePSMDiagramMacroCommand c = (RemovePSMDiagramMacroCommand)RemovePSMDiagramMacroCommandFactory.Factory().Create(arg.Diagram.Project.GetModelController());
-        //            c.Set(arg.Diagram.Project, arg.Diagram as PSMDiagram, Tab.xCaseDrawComponent.Canvas.Controller);
-        //            if (c.Commands.Count > 0) c.Execute();
-        //        }
-        //        else
-        //        {
-        //            RemovePSMDiagramMacroCommand c = (RemovePSMDiagramMacroCommand)RemovePSMDiagramMacroCommandFactory.Factory().Create(MainWindow.CurrentProject.GetModelController());
-        //            c.Set(arg.Diagram.Project, arg.Diagram as PSMDiagram, new DiagramController(arg.Diagram as PSMDiagram, MainWindow.CurrentProject.GetModelController()));
-        //            if (c.Commands.Count > 0) c.Execute();
-        //        }
+            if (selectedComponent != null)
+            {
+                tab.DiagramView.SetSelection(selectedComponent, true);
+            }
 
-        //    }
-        //    else throw new NotImplementedException("Unknown diagram type");
-        //}
-
-        /// <summary>
-        /// Handles diagram renaming event invoked by Projects window
-        /// </summary>
-        //internal void DiagramRenameHandler(object sender, DiagramRenameArgs arg)
-        //{
-        //    DiagramTab tab = FindTab(arg.Diagram);
-        //    tab.RenameDiagram(arg.NewCaption);
-        //}
+            Current.ActiveDiagram = diagram;
+        }
 
         /// <summary>
         /// Reaction on change of active document.
@@ -267,7 +187,7 @@ namespace Exolutio.WPFClient
         {
             if (!MainWindow.CommandsDisabled)
             {
-                DiagramTab diagramTab = dockManager.ActiveDocument as DiagramTab;
+                DiagramTab diagramTab = DockManager.ActiveDocument as DiagramTab;
                 if (diagramTab != null)
                 {
                     Current.ActiveDiagram = diagramTab.DiagramView.Diagram;
@@ -290,13 +210,12 @@ namespace Exolutio.WPFClient
 
         internal void project_DiagramAdded(object sender, DiagramEventArgs e)
         {
-            AddTab(e.Diagram);
-            //MainWindow.propertiesWindow.BindDiagram(ref MainWindow.dockManager);
+            AddTab(e.Diagram);            
         }
 
         public void CloseAllTabs()
         {
-            foreach (DocumentContent documentContent in dockManager.Documents.ToList())
+            foreach (DocumentContent documentContent in DockManager.Documents.ToList())
             {
                 documentContent.Close();
             }
@@ -369,7 +288,7 @@ namespace Exolutio.WPFClient
             f.DisplayFile(EDisplayedFileType.XML, xmlDocument.ToString());
             f.Title = ActiveDiagram.Caption + "_sample.xml";
 
-            f.Show(dockManager, true);
+            f.Show(DockManager, true);
         }
 
         public IEnumerable<ExolutioVersionedObject> AnotherOpenedVersions(ExolutioVersionedObject item)

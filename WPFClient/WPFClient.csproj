@@ -95,6 +95,8 @@
     <Compile Include="Commands\StaticWPFClientCommands.cs" />
     <Compile Include="ConfigurationManager.cs" />
     <Compile Include="Converters\MainWindowTitleConverter.cs" />
+    <Compile Include="DiagramTabManager_WPF.cs" />
+    <Compile Include="MainWindow_WPF.cs" />
     <Compile Include="PIMTreeTab.xaml.cs">
       <DependentUpon>PIMTreeTab.xaml</DependentUpon>
     </Compile>

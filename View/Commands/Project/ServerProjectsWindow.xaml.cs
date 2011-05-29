@@ -10,13 +10,35 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 
-namespace EvoX.View.Commands.Project
+namespace Exolutio.View.Commands.Project
 {
-    public partial class ServerProjectsWindow
+    public partial class ServerProjectsWindow : SilverFlow.Controls.FloatingWindow
     {
         public ServerProjectsWindow()
         {
             InitializeComponent();
+        }
+
+        protected override void OnOpened()
+        {
+            base.OnOpened();
+            FillProjects();
+        }
+
+        void FillProjects()
+        {
+            lbProjects.Items.Clear();
+            if (lbProjects != null && Projects != null)
+            {
+                foreach (string project in Projects)
+                {
+                    lbProjects.Items.Add(new ListBoxItem() { Content = project });
+                }
+            }
+            else
+            {
+                lbProjects.Items.Add(new ListBoxItem() { Content = "List of projects is being loaded. Please, try again. " });
+            }
         }
 
         public string SelectedProject
@@ -37,18 +59,6 @@ namespace EvoX.View.Commands.Project
             set
             {
                 projects = value;
-                lbProjects.Items.Clear();
-                if (value != null)
-                {
-                    foreach (string project in Projects)
-                    {
-                        lbProjects.Items.Add(new ListBoxItem() { Content = project });
-                    }
-                }
-                else
-                {
-                    lbProjects.Items.Add(new ListBoxItem() { Content = "List of projects is being loaded. Please, try again. " });
-                }
             }
         }
 

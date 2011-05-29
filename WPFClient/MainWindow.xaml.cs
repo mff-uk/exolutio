@@ -53,58 +53,15 @@ namespace Exolutio.WPFClient
             dockManager.Loaded += dockManager_Loaded;
             Current.ActiveDiagramChanged += OCLEditor.LoadScriptsForActiveSchema;
             Current.RecentFile += OnRecentFile;
-            Application.Current.DispatcherUnhandledException += Current_DispatcherUnhandledException;
             ExolutioRibbon.FillRecent(ConfigurationManager.Configuration.RecentFiles, ConfigurationManager.Configuration.RecentDirectories);
-        }
-
-        void dockManager_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (ConfigurationManager.HasStoredLayout)
-            {
-                try
-                {
-                    dockManager.RestoreLayout(ConfigurationManager.LayoutFilePath);
-                }
-                catch (Exception)
-                {
-                    try
-                    {
-                        Commands.StaticWPFClientCommands.ResetWindowLayout.Execute();
-                    }
-                    catch (Exception)
-                    {
-                        
-                    }
-                }
-                
-            }
+            
+            Application.Current.DispatcherUnhandledException += Current_DispatcherUnhandledException;
         }
 
         protected void MainWindow_Loaded(object sender, EventArgs e)
         {
-            //Project sampleProject = Tests.TestUtils.CreateSimpleSampleProject();
-            if (!ConfigurationManager.Configuration.RecentFiles.IsEmpty() && ConfigurationManager.Configuration.RecentFiles.First().Exists)
-            {
-                GuiCommands.OpenProjectCommand.Execute(ConfigurationManager.Configuration.RecentFiles.First().FullName, true, true);
-            }
-            else
-            {
-#if DEBUG
-                Project sampleProject = Tests.TestUtils.CreateSampleProject();
-                Current.Project = sampleProject;
-#else
-                GuiCommands.NewProjectCommand.Execute();
-#endif
-            }
+            OpenStartupProject();            
         }
-
-        private void OnRecentFile(FileInfo fileInfo)
-        {
-            ConfigurationManager.Configuration.AddToRecentFiles(fileInfo);
-            ConfigurationManager.SaveConfiguration();
-            ExolutioRibbon.FillRecent(ConfigurationManager.Configuration.RecentFiles, ConfigurationManager.Configuration.RecentDirectories);
-        }
-
 
         public Diagram ActiveDiagram
         {
@@ -114,35 +71,7 @@ namespace Exolutio.WPFClient
         public DiagramView ActiveDiagramView
         {
             get { return DiagramTabManager != null ? DiagramTabManager.ActiveDiagramView : null; }
-        }
-
-        public void CloseRibbonBackstage()
-        {
-            ExolutioRibbon.BackStage.IsOpen = false;
-        }
-
-        private void MainWindow_FileDropped(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
-            {
-                GuiCommands.OpenProjectCommand.Execute((string[])e.Data.GetData(DataFormats.FileDrop, true), noOpenFileDialog: true);
-            }
-        }
-
-        public void BusyStateChanged(object sender, BusyStateChangedEventArgs e)
-        {
-            this.Cursor = e.IsBusy ? Cursors.Wait : Cursors.Arrow;
-        }
-
-        private void MainWindow_Closing(object sender, CancelEventArgs e)
-        {
-            GuiCommands.CloseProjectCommand.Execute(e);
-            if (!e.Cancel)
-            {
-                ConfigurationManager.SaveConfiguration();
-                dockManager.SaveLayout(ConfigurationManager.LayoutFilePath);
-            }
-        }
+        }        
 
         public void CurrentProjectChanged(object sender, CurrentProjectChangedEventArgs e)
         {
@@ -174,11 +103,13 @@ namespace Exolutio.WPFClient
             if (newProject != null)
             {
                 ProjectView.BindToProject(newProject);
+                #region title binding
                 Binding titleBinding = new Binding();
                 titleBinding.Mode = BindingMode.OneWay;
                 titleBinding.Converter = new MainWindowTitleConverter();
                 titleBinding.Source = newProject;
                 this.SetBinding(TitleProperty, titleBinding);
+                #endregion 
                 if (newProject.ProjectFile != null)
                 {
                     ConfigurationManager.Configuration.AddToRecentFiles(newProject.ProjectFile);
@@ -236,6 +167,17 @@ namespace Exolutio.WPFClient
             
         }
 
+        public void BusyStateChanged(object sender, BusyStateChangedEventArgs e)
+        {
+            this.Cursor = e.IsBusy ? Cursors.Wait : Cursors.Arrow;
+        }
+
+        public void CloseRibbonBackstage()
+        {
+            ExolutioRibbon.BackStage.IsOpen = false;
+        }
+
+
         public void CloseProject()
         {
             UnBindProjectVersion(Current.ProjectVersion);
@@ -258,6 +200,7 @@ namespace Exolutio.WPFClient
             }
         }
 
+        #region focus 
 
         public void FocusComponent(Diagram diagram, Component component)
         {
@@ -300,6 +243,8 @@ namespace Exolutio.WPFClient
             Current.MainWindow.FocusComponent(diagram, component);
         }
 
+        #endregion 
+
         public void DisplayReport(NestedCommandReport finalReport)
         {
             if (ReportDisplay.IsVisible)
@@ -308,6 +253,8 @@ namespace Exolutio.WPFClient
                 ReportDisplay.Update();
             }
         }
+
+        #region enable/disable commands
 
         public bool CommandsDisabled { get; private set; }
 
@@ -320,7 +267,9 @@ namespace Exolutio.WPFClient
         public void EnableCommands()
         {
             ExolutioRibbon.IsEnabled = true;
-            CommandsDisabled = false; 
+            CommandsDisabled = false;
         }
+
+        #endregion
     }
 }

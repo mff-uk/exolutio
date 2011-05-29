@@ -9,18 +9,18 @@ using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Linq;
-using EvoX.Controller.Commands;
-using EvoX.Controller.Commands.Atomic;
-using EvoX.Controller.Commands.Complex.PSM;
-using EvoX.Dialogs;
-using EvoX.Model.PIM;
-using EvoX.Model.PSM;
-using EvoX.Model;
-using EvoX.Controller;
-using EvoX.SupportingClasses;
-using cmdDeletePSMAttribute = EvoX.Controller.Commands.Atomic.PSM.MacroWrappers.cmdDeletePSMAttribute;
+using Exolutio.Controller.Commands;
+using Exolutio.Controller.Commands.Atomic;
+using Exolutio.Controller.Commands.Complex.PSM;
+using Exolutio.Dialogs;
+using Exolutio.Model.PIM;
+using Exolutio.Model.PSM;
+using Exolutio.Model;
+using Exolutio.Controller;
+using Exolutio.SupportingClasses;
+using cmdDeletePSMAttribute = Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers.cmdDeletePSMAttribute;
 
-namespace EvoX.View
+namespace Exolutio.View
 {
     /// <summary>
     /// Interaction logic for PSMClassDialog.xaml
@@ -183,9 +183,9 @@ namespace EvoX.View
             InitializeComponent();
         }
 
-        private EvoX.Controller.Controller controller;
+        private Exolutio.Controller.Controller controller;
 
-        public void Initialize(EvoX.Controller.Controller controller, PSMClass psmClass)
+        public void Initialize(Exolutio.Controller.Controller controller, PSMClass psmClass)
         {
             this.controller = controller;
             this.psmClass = psmClass;

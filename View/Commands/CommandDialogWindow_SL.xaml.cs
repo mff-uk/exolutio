@@ -11,7 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace EvoX.View.Commands
+namespace Exolutio.View.Commands
 {
     /// <summary>
     /// Interaction logic for CommandDialogWindow.xaml

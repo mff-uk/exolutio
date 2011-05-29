@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace EvoX.View.Commands.Project
+namespace Exolutio.View.Commands.Project
 {
     public class guiOpenWebProjectCommand: guiProjectCommand
     {
@@ -32,7 +32,7 @@ namespace EvoX.View.Commands.Project
 
         private void DoExecute(object sender, EventArgs eventArgs)
         {
-            ServerProjectsWindow w = (ServerProjectsWindow) sender;
+            ServerProjectsWindow w = (ServerProjectsWindow)sender;
             if (w.DialogResult == true && !string.IsNullOrEmpty(w.SelectedProject))
             {
                 OpenServerWebProject(w.SelectedProject);

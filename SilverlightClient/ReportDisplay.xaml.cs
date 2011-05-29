@@ -11,9 +11,9 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.Xml;
-using EvoX.Controller.Commands;
-using EvoX.SupportingClasses;
-using EvoX.View.Commands;
+using Exolutio.Controller.Commands;
+using Exolutio.SupportingClasses;
+using Exolutio.View.Commands;
 using OrderedList;
 
 namespace SilverlightClient
