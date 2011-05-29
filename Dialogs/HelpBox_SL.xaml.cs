@@ -2,7 +2,7 @@
 using System.Windows.Input;
 using SilverFlow.Controls;
 
-namespace EvoX.Dialogs
+namespace Exolutio.Dialogs
 {
     /// <summary>
     /// Interaction logic for HelpBox.xaml

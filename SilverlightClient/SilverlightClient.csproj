@@ -64,9 +64,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HtmlTextBlock">
-      <HintPath>..\ExternalBinaries\HtmlTextBlock\HtmlTextBlock.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Expression.Interactions, Version=4.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="mscorlib" />
     <Reference Include="OrderedListClass">
@@ -112,6 +109,7 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MainPage_SL.cs" />
     <Compile Include="PIMDiagramTab.xaml.cs">
       <DependentUpon>PIMDiagramTab.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -124,11 +122,11 @@
     <Compile Include="ReportDisplay.xaml.cs">
       <DependentUpon>ReportDisplay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Resources\EvoXRibbon.xaml.cs">
-      <DependentUpon>EvoXRibbon.xaml</DependentUpon>
+    <Compile Include="Resources\ExolutioRibbon.xaml.cs">
+      <DependentUpon>ExolutioRibbon.xaml</DependentUpon>
     </Compile>
     <Compile Include="ServerCommunication.cs" />
-    <Compile Include="Service References\EvoXServices\Reference.cs">
+    <Compile Include="Service References\ExolutioService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -159,23 +157,29 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resources\EvoXRibbon.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Resources\ExolutioRibbon.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AppManifest.xml" />
-    <None Include="Service References\EvoXServices\ProjectFilesService.disco" />
+    <None Include="Service References\ExolutioService\ProjectFilesService.disco" />
+    <None Include="Service References\ExolutioService\configuration91.svcinfo" />
+    <None Include="Service References\ExolutioService\configuration.svcinfo" />
+    <None Include="Service References\ExolutioService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="ServiceReferences.ClientConfig" />
-    <None Include="Service References\EvoXServices\ProjectFilesService.wsdl" />
-    <None Include="Service References\EvoXServices\SilverlightClient.EvoXServices.GetProjectFileResponse.datasource">
+    <None Include="Service References\ExolutioService\ProjectFilesService.wsdl" />
+    <None Include="Service References\ExolutioService\SilverlightClient.ExolutioService.GetProjectFileResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\EvoXServices\SilverlightClient.EvoXServices.GetProjectFilesResponse.datasource">
+    <None Include="Service References\ExolutioService\SilverlightClient.ExolutioService.GetProjectFilesResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\EvoXServices\SilverlightClient.EvoXServices.HelloWorldResponse.datasource">
+    <None Include="Service References\ExolutioService\SilverlightClient.ExolutioService.HelloWorldResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
   </ItemGroup>
@@ -213,19 +217,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Service References\EvoXServices\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\EvoXServices\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\EvoXServices\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\EvoXServices\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
+    <WCFMetadataStorage Include="Service References\ExolutioService\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

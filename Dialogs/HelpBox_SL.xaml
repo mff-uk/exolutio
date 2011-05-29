@@ -1,4 +1,4 @@
-﻿<my:FloatingWindow x:Class="EvoX.Dialogs.HelpBox"
+﻿<my:FloatingWindow x:Class="Exolutio.Dialogs.HelpBox"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
     xmlns:my="clr-namespace:SilverFlow.Controls;assembly=SilverFlow.Controls" 

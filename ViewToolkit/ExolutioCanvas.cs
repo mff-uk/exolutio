@@ -338,6 +338,7 @@ namespace Exolutio.ViewToolkit
         internal void ExolutioCanvas_MouseUp(object sender, MouseButtonEventArgs e)
         {
             #if SILVERLIGHT
+            bool wasRightButton = CurrentState.RightButton;
             CurrentState.LeftButton = false;
             CurrentState.RightButton = false;
             #endif
@@ -345,7 +346,7 @@ namespace Exolutio.ViewToolkit
 
 
             #if SILVERLIGHT
-            if (e.OriginalSource == this)
+            if (e.OriginalSource == this && wasRightButton)
             #else
             if (e.ChangedButton == MouseButton.Right && e.OriginalSource == this)
             #endif

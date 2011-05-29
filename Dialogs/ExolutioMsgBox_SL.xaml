@@ -1,4 +1,4 @@
-﻿<my:FloatingWindow x:Class="EvoX.Dialogs.EvoXMsgBox"
+﻿<my:FloatingWindow x:Class="Exolutio.Dialogs.ExolutioMsgBox"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:my="clr-namespace:SilverFlow.Controls;assembly=SilverFlow.Controls" 
@@ -7,7 +7,7 @@
     <my:FloatingWindow.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/EvoX.ResourceLibrary;component/Images/Images.xaml" ></ResourceDictionary>
+                <ResourceDictionary Source="/Exolutio.ResourceLibrary;component/Images/Images.xaml" ></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </my:FloatingWindow.Resources>

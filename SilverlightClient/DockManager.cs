@@ -8,15 +8,15 @@ namespace SilverlightClient
 {
     public class DockManager : TabControl
     {
-        public DiagramTab ActiveDocument
+        public TabItem ActiveDocument
         {
-            get { return this.SelectedItem is DiagramTab ? (DiagramTab)this.SelectedItem : null; }
+            get { return this.SelectedItem is TabItem ? (TabItem)this.SelectedItem : null; }
             set { if (value != null) this.SelectedItem = value; }
         }
 
         public IEnumerable<DiagramTab> Documents
         {
-            get { return Items.Cast<DiagramTab>(); }
+            get { return Items.OfType<DiagramTab>(); }
 
         }
     }

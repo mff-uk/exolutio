@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.ServiceModel;
-using EvoX.Model;
-using EvoX.Model.Serialization;
-using EvoX.View;
-using SilverlightClient.EvoXServices;
+using Exolutio.Model;
+using Exolutio.Model.Serialization;
+using Exolutio.View;
+using SilverlightClient.ExolutioService;
 
 namespace SilverlightClient.W
 {
@@ -45,7 +45,7 @@ namespace SilverlightClient.W
             }
             catch
             {
-                
+
             }
         }
 

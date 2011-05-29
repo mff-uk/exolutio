@@ -37,7 +37,7 @@ namespace SilverlightClient
         private void Application_UnhandledException(object sender, ApplicationUnhandledExceptionEventArgs e)
         {
             e.Handled = true;
-            EvoX.View.Current.MainWindow.Current_DispatcherUnhandledException(sender, e);
+            Exolutio.View.Current.MainWindow.Current_DispatcherUnhandledException(sender, e);
         }
 
         private void ReportErrorToDOM(ApplicationUnhandledExceptionEventArgs e)

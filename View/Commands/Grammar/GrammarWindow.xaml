@@ -1,4 +1,4 @@
-﻿<my:FloatingWindow x:Class="EvoX.View.Commands.Grammar.GrammarWindow"
+﻿<my:FloatingWindow x:Class="Exolutio.View.Commands.Grammar.GrammarWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"

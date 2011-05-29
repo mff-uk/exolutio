@@ -6,10 +6,10 @@ using System.Collections.Generic;
 using System;
 using System.Windows.Controls;
 using System.Windows.Shapes;
-using EvoX.ViewToolkit.Geometries;
-using EvoX.SupportingClasses;
+using Exolutio.ViewToolkit.Geometries;
+using Exolutio.SupportingClasses;
 
-namespace EvoX.ViewToolkit
+namespace Exolutio.ViewToolkit
 {
 	/// <summary>
 	/// This is the adorner used for selecting items in canvas
@@ -19,7 +19,7 @@ namespace EvoX.ViewToolkit
         private Point? startPoint, endPoint;
         private Rectangle rubberband;
         //private VisualCollection visuals;
-        private readonly EvoXCanvas EvoXCanvas;
+        private readonly ExolutioCanvas ExolutioCanvas;
 
         //protected override int VisualChildrenCount
         //{
@@ -33,11 +33,11 @@ namespace EvoX.ViewToolkit
 		/// <summary>
 		/// Initializes a new instance of the <see cref="RubberbandAdorner"/> class.
 		/// </summary>
-		/// <param name="EvoXCanvas">The designer canvas.</param>
+		/// <param name="exolutioCanvas">The designer canvas.</param>
 		/// <param name="dragStartPoint">The drag start point.</param>
-        public RubberbandAdorner(EvoXCanvas EvoXCanvas, Point? dragStartPoint)
+        public RubberbandAdorner(ExolutioCanvas exolutioCanvas, Point? dragStartPoint)
         {
-            this.EvoXCanvas = EvoXCanvas;
+            this.ExolutioCanvas = exolutioCanvas;
             this.startPoint = dragStartPoint;
 			this.endPoint = dragStartPoint;
             
@@ -49,7 +49,7 @@ namespace EvoX.ViewToolkit
             this.rubberband.StrokeThickness = 1;
             this.rubberband.StrokeDashArray = new DoubleCollection { 2 };
 
-            this.EvoXCanvas.Children.Add(this.rubberband);
+            this.ExolutioCanvas.Children.Add(this.rubberband);
         }
 
         void rubberband_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -68,7 +68,7 @@ namespace EvoX.ViewToolkit
                 //if (!this.IsMouseCaptured)
                 //    this.CaptureMouse();
 
-                endPoint = e.GetPosition(EvoXCanvas);
+                endPoint = e.GetPosition(ExolutioCanvas);
                 UpdateRubberband();
                 UpdateSelection();
             }
@@ -103,7 +103,7 @@ namespace EvoX.ViewToolkit
             removedFromSelection.Clear();
 
             Rect rubberBand = new Rect(startPoint.Value, endPoint.Value);
-			foreach (UIElement _item in EvoXCanvas.Children)
+			foreach (UIElement _item in ExolutioCanvas.Children)
             {
                 if (_item is ISelectable)
                 {
@@ -130,13 +130,13 @@ namespace EvoX.ViewToolkit
             foreach (ISelectable item in newSelection)
             {
 				item.Selected = true;
-                EvoXCanvas.SelectedItems.AddIfNotContained(item);
+                ExolutioCanvas.SelectedItems.AddIfNotContained(item);
 
             }
             foreach (ISelectable item in removedFromSelection)
             {
 				item.Selected = false; 
-				EvoXCanvas.SelectedItems.Remove(item);
+				ExolutioCanvas.SelectedItems.Remove(item);
             }
         }
 
@@ -194,10 +194,10 @@ namespace EvoX.ViewToolkit
 	    {
 	        if (rubberband != null)
 	        {
-	            EvoXCanvas.Children.Remove(rubberband);
+	            ExolutioCanvas.Children.Remove(rubberband);
 	            rubberband = null;
-	            EvoXCanvas.normalState.adorner = null;
-	            EvoXCanvas.normalState.dragStartPoint = null;
+	            ExolutioCanvas.normalState.adorner = null;
+	            ExolutioCanvas.normalState.dragStartPoint = null;
 	        }
 	    }
     }

@@ -1,7 +1,7 @@
 using System;
 using System.Windows.Input;
 
-namespace EvoX.SupportingClasses
+namespace Exolutio.SupportingClasses
 {
     /// <summary>
     /// Handles double click events for a single control

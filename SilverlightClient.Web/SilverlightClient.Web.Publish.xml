@@ -1,2 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<publishData />
+<publishData>
+  <publishProfile publishUrl="ftps://evox.ms.mff.cuni.cz/SL" deleteExistingFiles="False" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="EvoX SL" publishMethod="FTP" replaceMatchingFiles="True" userName="maly" savePWD="True" userPWD="AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAAUK7PfuXDUqM2Zv4ayHgRgAAAAACAAAAAAAQZgAAAAEAACAAAADcuyVuTApbwDo0HmjD8tijwT2/McGWxgax09N5WUZ9BQAAAAAOgAAAAAIAACAAAAD4BfEefg6EUCR2hT0X0JBe+SweUQJkP5av90zZUrtx5BAAAADcHetiMrs0PcHZ2TvdrHqsQAAAALQRFV7poVYlVGXz8daR4Pm9OAOLPB5Nd19M2/me4e2hBzgDrYk1qBYNs0ij2l8cmLHgKXmN0QzOemJzIrnwKSQ=" SelectedForPublish="True">
+    <file relUrl="SilverlightClientTestPage.aspx" publishTime="12/10/2010 20:17:18" />
+    <file relUrl="bin/SilverlightClient.Web.pdb" publishTime="05/29/2011 08:56:39" />
+    <file relUrl="Silverlight.js" publishTime="12/10/2010 20:17:18" />
+    <file relUrl="ClientBin/SilverlightClient.xap" publishTime="05/29/2011 08:56:49" />
+    <file relUrl="Web.config" publishTime="05/29/2011 09:00:40" />
+    <file relUrl="ProjectFilesService.asmx" publishTime="03/17/2011 22:05:20" />
+    <file relUrl="clientaccesspolicy.xml" publishTime="03/17/2011 23:16:09" />
+    <file relUrl="SilverlightClientTestPage.html" publishTime="12/10/2010 20:17:18" />
+    <file relUrl="bin/SilverlightClient.Web.dll" publishTime="05/29/2011 08:56:39" />
+  </publishProfile>
+</publishData>

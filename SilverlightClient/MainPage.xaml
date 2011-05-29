@@ -8,10 +8,10 @@
     xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk" 
     xmlns:dxdo="http://schemas.devexpress.com/winfx/2008/xaml/docking" xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon" 
     xmlns:sc="clr-namespace:SilverlightClient"
-    xmlns:ev="clr-namespace:EvoX.View;assembly=EvoX.View" 
+    xmlns:ev="clr-namespace:Exolutio.View;assembly=Exolutio.View" 
     xmlns:fv="clr-namespace:SilverFlow.Controls;assembly=SilverFlow.Controls" 
     xmlns:toolkit="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Toolkit"
-    xmlns:windowsToolbar="clr-namespace:Windows.Toolbar.Controls;assembly=Windows.Toolbar" xmlns:Commands="clr-namespace:EvoX.View.Commands;assembly=EvoX.View" xmlns:Resources="clr-namespace:SilverlightClient.Resources">
+    xmlns:windowsToolbar="clr-namespace:Windows.Toolbar.Controls;assembly=Windows.Toolbar" xmlns:Commands="clr-namespace:Exolutio.View.Commands;assembly=Exolutio.View" xmlns:Resources="clr-namespace:SilverlightClient.Resources">
     <toolkit:DockPanel LastChildFill="True">
         <toolkit:DockPanel.Background>
             <LinearGradientBrush>
@@ -20,7 +20,7 @@
             </LinearGradientBrush>
         </toolkit:DockPanel.Background>
     	<toolkit:Expander toolkit:DockPanel.Dock="Top" ExpandDirection="Down" IsExpanded="True" Header="Click to show/hide toolbar">
-            <Resources:EvoXRibbon x:Name="Ribbon"></Resources:EvoXRibbon>
+            <Resources:ExolutioRibbon x:Name="ExolutioRibbon"></Resources:ExolutioRibbon>
         </toolkit:Expander>
     	<Border toolkit:DockPanel.Dock="Bottom" BorderThickness="1">
             <toolkit:Expander  ExpandDirection="Down" Background="White" Header="Click to show/hide report log" IsExpanded="True" BorderBrush="#FF312828">

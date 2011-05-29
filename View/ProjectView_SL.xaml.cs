@@ -8,16 +8,16 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
-using EvoX.Controller;
-using EvoX.Model;
-using EvoX.Controller.Commands;
+using Exolutio.Controller;
+using Exolutio.Model;
+using Exolutio.Controller.Commands;
 using System.Globalization;
-using EvoX.Model.Versioning;
-using EvoX.ViewToolkit;
-using Version=EvoX.Model.Versioning.Version;
-using EvoX.View.Commands;
+using Exolutio.Model.Versioning;
+using Exolutio.ViewToolkit;
+using Version=Exolutio.Model.Versioning.Version;
+using Exolutio.View.Commands;
 
-namespace EvoX.View
+namespace Exolutio.View
 {
     /// <summary>
     /// Interaction logic for ProjectsWindow.xaml
@@ -49,24 +49,31 @@ namespace EvoX.View
 
         public void BindToProject(Project project)
         {
-            project.PropertyChanged += Project_PropertyChanged;
-            if (!project.UsesVersioning)
+            if (projectView != null)
             {
-                projectView.ItemTemplate = (DataTemplate)projectView.Resources["singleVersionProjectTemplate"];
-                projectView.ItemsSource = new[] {project};
-            }
-            else
-            {
-                projectView.ItemsSource = new[] { project };
-                projectView.ItemTemplate = (DataTemplate)projectView.Resources["versionedProjectTemplate"];
+                project.PropertyChanged += Project_PropertyChanged;
+
+                if (!project.UsesVersioning)
+                {
+                    projectView.ItemTemplate = (DataTemplate) projectView.Resources["singleVersionProjectTemplate"];
+                    projectView.ItemsSource = new[] {project};
+                }
+                else
+                {
+                    projectView.ItemsSource = new[] {project};
+                    projectView.ItemTemplate = (DataTemplate) projectView.Resources["versionedProjectTemplate"];
+                }
             }
         }
 
         public void UnbindFromProject(Project project)
         {
-            projectView.ItemsSource = null;
-            projectView.ItemTemplate = null;
-            project.PropertyChanged -= Project_PropertyChanged;
+            if (projectView != null)
+            {
+                projectView.ItemsSource = null;
+                projectView.ItemTemplate = null;
+                project.PropertyChanged -= Project_PropertyChanged;
+            }
         }
 
         private void Project_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -143,11 +150,11 @@ namespace EvoX.View
 
         #endregion
 
-        private void EvoXContextMenu_ContextMenuOpening(object sender, RoutedEventArgs routedEventArgs)
+        private void ExolutioContextMenu_ContextMenuOpening(object sender, RoutedEventArgs routedEventArgs)
         {
-            foreach (ContextMenuItem contextMenuItem in ((EvoXContextMenu)sender).Items)
+            foreach (ContextMenuItem contextMenuItem in ((ExolutioContextMenu)sender).Items)
             {
-                contextMenuItem.ScopeObject = ((EvoXContextMenu) sender).DataContext;
+                contextMenuItem.ScopeObject = ((ExolutioContextMenu) sender).DataContext;
                 if (contextMenuItem.Command is guiControllerCommand)
                 {
                     ((guiControllerCommand) contextMenuItem.Command).ScopeObject = contextMenuItem.ScopeObject;

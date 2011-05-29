@@ -1,6 +1,6 @@
 using System;
 using System.Windows.Controls;
-using EvoX.View;
+using Exolutio.View;
 
 namespace SilverlightClient
 {

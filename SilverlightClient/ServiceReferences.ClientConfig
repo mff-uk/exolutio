@@ -1,5 +1,6 @@
 ﻿<configuration>
     <system.serviceModel>
+       
         <bindings>
             <basicHttpBinding>
                 <binding name="ProjectFilesServiceSoap" maxBufferSize="2147483647"
@@ -9,9 +10,9 @@
             </basicHttpBinding>
         </bindings>
         <client>
-            <endpoint address="http://localhost:29960/ProjectFilesService.asmx"
+            <endpoint address="http://exolutio.eu/SL/ProjectFilesService.asmx"
                 binding="basicHttpBinding" bindingConfiguration="ProjectFilesServiceSoap"
-                contract="EvoXServices.ProjectFilesServiceSoap" name="ProjectFilesServiceSoap" />
+                contract="ExolutioService.ProjectFilesServiceSoap" name="ProjectFilesServiceSoap" />
         </client>
     </system.serviceModel>
 </configuration>
