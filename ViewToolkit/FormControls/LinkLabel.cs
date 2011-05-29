@@ -4,14 +4,16 @@ using System.Windows.Input;
 
 namespace Exolutio.ViewToolkit.FormControls
 {
-    public class LinkLabel: System.Windows.Controls.Label
+    public class LinkLabel: System.Windows.Controls.TextBlock
     {
+        private static TextDecoration textDecorations = new TextDecoration(TextDecorationLocation.Underline, ViewToolkitResources.SolidBlackPen, 2, TextDecorationUnit.Pixel, TextDecorationUnit.Pixel);
+
         public LinkLabel()
         {
-            this.BorderThickness = new Thickness(0,0,0,1);
+            //this.BorderThickness = new Thickness(0,0,0,1);
             this.Margin = new Thickness(0,0,0,3);
             this.Padding = new Thickness(0);
-            this.BorderBrush = ViewToolkitResources.BlackBrush;
+            this.TextDecorations.Add(textDecorations); 
             this.Cursor = Cursors.Hand;
             this.MouseUp += new MouseButtonEventHandler(LinkLabel_MouseUp);
             this.Focusable = false;

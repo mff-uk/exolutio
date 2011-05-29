@@ -4,21 +4,21 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:Dialogs="clr-namespace:Exolutio.Dialogs;assembly=Exolutio.Dialogs" xmlns:PIM="clr-namespace:Exolutio.Model.PIM;assembly=Exolutio.Model" xmlns:PSM="clr-namespace:Exolutio.Model.PSM;assembly=Exolutio.Model" xmlns:FormControls="clr-namespace:Exolutio.ViewToolkit.FormControls;assembly=Exolutio.ViewToolkit" xmlns:View="clr-namespace:Exolutio.View" mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300" Padding="10">
-    <Grid>
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
         <StackPanel>
             <StackPanel.Resources>
                 <DataTemplate x:Key="derivedComponentTemplate" DataType="{x:Type PSM:PSMComponent}">
-                    <FormControls:LinkLabel Content="{Binding Path=SchemaQualifiedName}" Click="FocusPSMComponent" />
+                    <FormControls:LinkLabel ToolTip ="{Binding}" Text="{Binding Path=SchemaQualifiedName}" Click="FocusPSMComponent" />
                 </DataTemplate>
             </StackPanel.Resources>
             <StackPanel Name="nameManager">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="70" />
+                        <ColumnDefinition Width="50" />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
-                    <Label Content="Name:" Grid.Column="0"/>
-                    <Dialogs:RememberingTextBox Grid.Column="1" Name="tbName" />
+                    <TextBlock Text="Name:" Name="lName" FontWeight="Bold" Foreground="DarkBlue" Height="16" VerticalAlignment="Top" Margin="0,5" />
+                    <TextBlock Grid.Column="1" Name="tbName" Text="asdf" FontWeight="Bold" Foreground="#FF903F3F" VerticalAlignment="Center" Margin="0,5" />
                 </Grid>
             </StackPanel>
 
@@ -30,8 +30,8 @@
                                 <View:DerivedAttributeConverter x:Key="convertor" />
                                 <View:DerivedAttributesVisibleConverter x:Key="convertorVisible" />
                         	</StackPanel.Resources>
-                        	<Label Content="{Binding Path=Name}" Padding="2"  />
-                            <Label Content="Interpreted attributes:" Padding="10,2,2,2" Visibility="{Binding Converter={StaticResource convertorVisible}}"  />
+                            <TextBlock Text="{Binding Path=Name}" ToolTip="{Binding}" Padding="2"  />
+                            <TextBlock Text="Interpreted attributes:" Padding="10,2,2,2" Visibility="{Binding Converter={StaticResource convertorVisible}}"  />
                             <ListView Name="lvDerivedAttributes" 
                                       ItemTemplate="{StaticResource derivedComponentTemplate}"
                                       ItemsSource="{Binding Converter={StaticResource convertor}}"
@@ -41,7 +41,7 @@
                         </StackPanel>
                     </DataTemplate>
                 </StackPanel.Resources>
-                <Label Content="Attributes: "/>
+                <TextBlock Text="Attributes: " FontWeight="Bold" Foreground="DarkBlue" Margin="0,5" />
                 <ListView Name="lvPIMAttributes" 
                           ItemTemplate ="{StaticResource pimAttributeTemplate}" 
                           Padding="20,0,0,0" Margin="0" BorderThickness="0" HorizontalContentAlignment="Left"
@@ -51,54 +51,35 @@
             </StackPanel>
             
             <StackPanel Name="spDerivedComponents">                
-                <Label Content="Interpreted components: "/>
+                <TextBlock Text="Interpreted components: " FontWeight="Bold" Foreground="DarkBlue" Margin="0,5" />
                 <ListView Name="lvDerivedComponents" ItemTemplate ="{StaticResource derivedComponentTemplate}" 
                           Padding="20,0,0,0" Margin="0" BorderThickness="0"
                           Focusable="False"
                           Background="Transparent" 
-                          />
-                <!--<ListView ItemTemplate ="{StaticResource derivedComponentTemplate}" 
-                          Padding="20,0,0,0" Margin="0" BorderThickness="0"
-                          Focusable="False"
-                          Background="Transparent" 
-                          >
-                    <ListView.Items>
-                        <ListViewItem>
-                            <FormControls:LinkLabel Content="AAA" />
-                        </ListViewItem>
-                        <ListViewItem>
-                            <FormControls:LinkLabel Content="AAA" />
-                        </ListViewItem>
-                        <ListViewItem>
-                            <FormControls:LinkLabel Content="AAA" />
-                        </ListViewItem>
-                    </ListView.Items>
-                    
-                </ListView>-->
-                
+                          />     
             </StackPanel>
             <StackPanel Name="spPSMComponent">
-                <Label Content="Interpretation (PIM component): "/>
+                <TextBlock Text="Interpretation (PIM component): " FontWeight="Bold" Foreground="DarkBlue" Margin="0,5" />
                 <FormControls:LinkLabel Margin="20,0,0,0" HorizontalAlignment="Left"
                                         Click="FocusPIMComponent" x:Name="lInterpreted" ClipToBounds="True" />                
             </StackPanel>
             <StackPanel Name="spRepresentatives">
                 <StackPanel.Resources>
                     <DataTemplate x:Key="structuralRepresentativeTemplate" DataType="{x:Type PSM:PSMClass}">
-                        <FormControls:LinkLabel Margin="20,0,0,0" Content="{Binding Path=SchemaQualifiedName}" Click="FocusPSMComponent" />
+                        <FormControls:LinkLabel Margin="20,0,0,0" Text="{Binding Path=SchemaQualifiedName}" ToolTip ="{Binding}"  Click="FocusPSMComponent" />
                     </DataTemplate>
                 </StackPanel.Resources>
-                <Label Content="Represented PSM class: "/>
+                <TextBlock Text="Represented PSM class: " FontWeight="Bold" Foreground="DarkBlue" Margin="0,5" />
                 <FormControls:LinkLabel Margin="20,0,0,0" HorizontalAlignment="Left"
-                                        Content="{Binding Path=SchemaQualifiedName}" 
+                                        Text="{Binding Path=SchemaQualifiedName}" ToolTip ="{Binding}"
                                         Click="FocusPSMComponent" x:Name="lRepresentedPSMClass" />
-                <Label Content="Structural representants: "/>
+                <TextBlock Text="Structural representants: " FontWeight="Bold" Foreground="DarkBlue" Margin="0,5" />
                 <ListView Name="lvRepresentatives" ItemTemplate ="{StaticResource structuralRepresentativeTemplate}" 
                           Padding="20,0,0,0" Margin="0" BorderThickness="0"
                           Focusable="False"
                           Background="Transparent" 
                           />
             </StackPanel>
-        </StackPanel>        
-    </Grid>
+        </StackPanel>
+    </ScrollViewer>
 </UserControl>

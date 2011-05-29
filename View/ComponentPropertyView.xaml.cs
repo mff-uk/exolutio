@@ -69,7 +69,25 @@ namespace Exolutio.View
         {
             if (psmComponent != null)
             {
-                lInterpreted.Content = psmComponent.Interpretation != null ? psmComponent.Interpretation.Name : "(none)";
+                if (psmComponent.Interpretation != null)
+                {
+                    if (!string.IsNullOrEmpty(psmComponent.Interpretation.Name))
+                    {
+                        lInterpreted.ToolTip = psmComponent.ToString();
+                        lInterpreted.Text = psmComponent.Interpretation.Name;
+                    }
+                    else
+                    {
+                        lInterpreted.ToolTip = psmComponent.ToString();
+                        lInterpreted.Text = psmComponent.ToString();
+                    }
+                }
+                else
+                {
+                    lInterpreted.ToolTip = string.Empty;
+                    lInterpreted.Text = "(none)";
+
+                }
                 lInterpreted.DataContext = psmComponent.Interpretation;
                 spPSMComponent.Visibility = System.Windows.Visibility.Visible;
             }
@@ -128,11 +146,13 @@ namespace Exolutio.View
         {
             if (component != null)
             {
+                lName.Visibility = System.Windows.Visibility.Visible;
                 tbName.Text = component.Name;
             }
             else
             {
                 tbName.Text = null;
+                lName.Visibility = System.Windows.Visibility.Collapsed;
             }
         }
 
