@@ -131,5 +131,10 @@ namespace Exolutio.ViewToolkit
                 zoomer.Width = this.ActualWidth;
             }
         }
+
+        private void UserControl_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            
+        }
     }
 }

@@ -161,7 +161,7 @@ namespace Exolutio.View
         {
             base.PutInDiagram(diagramView, viewHelper);
 
-            Connector = new Connector();
+            Connector = new Connector() { EndCapStyle = EConnectorCapStyle.Arrow };
             NameLabel = new Label();
             CardinalityLabel = new Label();
             CreatedControls.Add(Connector);

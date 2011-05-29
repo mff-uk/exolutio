@@ -61,6 +61,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EConnectorCapStyle.cs" />
     <Compile Include="ExolutioCanvasWithZoomer.xaml.cs">
       <DependentUpon>ExolutioCanvasWithZoomer.xaml</DependentUpon>
     </Compile>

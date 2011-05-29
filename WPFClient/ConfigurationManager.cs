@@ -12,7 +12,7 @@ namespace Exolutio.WPFClient
 
         private readonly List<DirectoryInfo> recentDirectories = new List<DirectoryInfo>();
 
-        public IEnumerable<FileInfo> RecentFiles
+        public List<FileInfo> RecentFiles
         {
             get { return recentFiles; }
         }

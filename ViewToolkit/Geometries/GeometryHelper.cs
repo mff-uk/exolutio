@@ -257,63 +257,63 @@ namespace Exolutio.ViewToolkit
 
 		#region EndCaps Calculations
 
-        //public static PathFigure CalculateDiamond(PathFigure pathfig, Point pt1, Point pt2, ref Point pt2_shifted)
-        //{
-        //    const double ArrowLength = 15;
-        //    const double ArrowAngle = 40;
+        public static PathFigure CalculateDiamond(PathFigure pathfig, Point pt1, Point pt2, ref Point pt2_shifted)
+        {
+            const double ArrowLength = 15;
+            const double ArrowAngle = 40;
 
-        //    Matrix matx = new Matrix();
-        //    Vector vect = Vector.SubtractPoints(pt1, pt2);
-        //    vect.Normalize();
-        //    vect *= ArrowLength;
+            Matrix matx = new Matrix();
+            Vector vect = Vector.SubtractPoints(pt1, pt2);
+            vect.Normalize();
+            vect *= ArrowLength;
 
-        //    if (!double.IsNaN(vect.X) && !double.IsNaN(vect.Y))
-        //        pt2_shifted = new Point(pt2.X + 2 * vect.X, pt2.Y + 2 * vect.Y);
+            if (!double.IsNaN(vect.X) && !double.IsNaN(vect.Y))
+                pt2_shifted = new Point(pt2.X + 2 * vect.X, pt2.Y + 2 * vect.Y);
 
-        //    PolyLineSegment polyseg = (PolyLineSegment)pathfig.Segments[0];
-        //    polyseg.Points.Clear();
-        //    matx.Rotate(ArrowAngle / 2);
-        //    pathfig.StartPoint = pt2 + vect * 2;
+            PolyLineSegment polyseg = (PolyLineSegment)pathfig.Segments[0];
+            polyseg.Points.Clear();
+            matx.Rotate(ArrowAngle / 2);
+            pathfig.StartPoint = pt2 + vect * 2;
 
-        //    polyseg.Points.Add(pt2 + vect * matx);
-        //    polyseg.Points.Add(pt2);
-        //    matx.Rotate(-ArrowAngle);
-        //    polyseg.Points.Add(pt2 + vect * matx);
-        //    polyseg.Points.Add(pt2 + 2 * vect);
+            polyseg.Points.Add(pt2 + vect * matx);
+            polyseg.Points.Add(pt2);
+            matx.Rotate(-ArrowAngle);
+            polyseg.Points.Add(pt2 + vect * matx);
+            polyseg.Points.Add(pt2 + 2 * vect);
 
-        //    pathfig.IsClosed = false;
-        //    pathfig.IsFilled = true;
+            pathfig.IsClosed = false;
+            pathfig.IsFilled = true;
 
-        //    return pathfig;
-        //}
+            return pathfig;
+        }
 
-        //public static PathFigure CalculateArrow(PathFigure pathfig, Point pt1, Point pt2, bool closed, ref Point pt2_shifted)
-        //{
-        //    const double ArrowLength = 15;
-        //    const double ArrowAngle = 40;
+        public static PathFigure CalculateArrow(PathFigure pathfig, Point pt1, Point pt2, bool closed, ref Point pt2_shifted)
+        {
+            const double ArrowLength = 15;
+            const double ArrowAngle = 40;
 
-        //    Matrix matx = new Matrix();
-        //    Vector vect = Vector.SubtractPoints(pt1, pt2);
-        //    vect.Normalize();
-        //    vect *= ArrowLength;
+            Matrix matx = new Matrix();
+            Vector vect = Vector.SubtractPoints(pt1, pt2);
+            vect.Normalize();
+            vect *= ArrowLength;
 
-        //    if (closed && !double.IsNaN(vect.X) && !double.IsNaN(vect.Y))
-        //        pt2_shifted = new Point(pt2.X + vect.X, pt2.Y + vect.Y);
+            if (closed && !double.IsNaN(vect.X) && !double.IsNaN(vect.Y))
+                pt2_shifted = new Point(pt2.X + vect.X, pt2.Y + vect.Y);
 
-        //    PolyLineSegment polyseg = (PolyLineSegment)pathfig.Segments[0];
-        //    polyseg.Points.Clear();
-        //    matx.Rotate(ArrowAngle / 2);
-        //    pathfig.StartPoint = pt2 + vect * matx;
-        //    polyseg.Points.Add(pt2);
+            PolyLineSegment polyseg = (PolyLineSegment)pathfig.Segments[0];
+            polyseg.Points.Clear();
+            matx.Rotate(ArrowAngle / 2);
+            pathfig.StartPoint = pt2 + vect * matx;
+            polyseg.Points.Add(pt2);
 
-        //    matx.Rotate(-ArrowAngle);
-        //    polyseg.Points.Add(pt2 + vect * matx);
+            matx.Rotate(-ArrowAngle);
+            polyseg.Points.Add(pt2 + vect * matx);
 
-        //    pathfig.IsClosed = closed;
-        //    pathfig.IsFilled = closed;
+            pathfig.IsClosed = closed;
+            pathfig.IsFilled = closed;
 
-        //    return pathfig;
-        //}
+            return pathfig;
+        }
 		
         #endregion
 

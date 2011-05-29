@@ -1,10 +1,10 @@
-namespace XCase.View.Controls
+namespace Exolutio.ViewToolkit
 {
 	/// <summary>
 	/// Type of figure that is drawn at the end 
-	/// of <see cref="XCaseJunction"/>
+	/// of <see cref="Connector"/>
 	/// </summary>
-	public enum EJunctionCapStyle
+	public enum EConnectorCapStyle
 	{
 		/// <summary>
 		/// No ending figure

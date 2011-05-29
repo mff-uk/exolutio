@@ -114,6 +114,10 @@ namespace Exolutio.ViewToolkit
 
         public bool AutoPosModeOnly { get; set; }
 
+        public EConnectorCapStyle StartCapStyle { get; set; }
+        
+        public EConnectorCapStyle EndCapStyle { get; set; }
+
         private Geometry geometry;
 
         private bool sourceMeasureValid = true;
@@ -150,7 +154,7 @@ namespace Exolutio.ViewToolkit
 
             //#region define startFigure
 
-            //if (StartCapStyle != EJunctionCapStyle.Straight)
+            //if (StartCapStyle != EConnectorCapStyle.Straight)
             //{
             //    Point start = StartPoint.CanvasPosition;
             //    Point end = Points[1].CanvasPosition;
@@ -162,21 +166,21 @@ namespace Exolutio.ViewToolkit
 
             //    switch (StartCapStyle)
             //    {
-            //        case EJunctionCapStyle.FullArrow:
-            //        case EJunctionCapStyle.Arrow:
-            //        case EJunctionCapStyle.Triangle:
+            //        case EConnectorCapStyle.FullArrow:
+            //        case EConnectorCapStyle.Arrow:
+            //        case EConnectorCapStyle.Triangle:
             //            Point dummy = new Point();
-            //            if (StartCapStyle == EJunctionCapStyle.Arrow)
-            //                startFigure = JunctionGeometryHelper.CalculateArrow(startFigure, end, start,
-            //                                                                    StartCapStyle != EJunctionCapStyle.Arrow, ref dummy);
+            //            if (StartCapStyle == EConnectorCapStyle.Arrow)
+            //                startFigure = GeometryHelper.CalculateArrow(startFigure, end, start,
+            //                                                                    StartCapStyle != EConnectorCapStyle.Arrow, ref dummy);
             //            else
-            //                startFigure = JunctionGeometryHelper.CalculateArrow(startFigure, end, start,
-            //                                                                    StartCapStyle != EJunctionCapStyle.Arrow,
+            //                startFigure = GeometryHelper.CalculateArrow(startFigure, end, start,
+            //                                                                    StartCapStyle != EConnectorCapStyle.Arrow,
             //                                                                    ref startPointShifted);
             //            break;
-            //        case EJunctionCapStyle.FullDiamond:
-            //        case EJunctionCapStyle.Diamond:
-            //            startFigure = JunctionGeometryHelper.CalculateDiamond(startFigure, end, start, ref startPointShifted);
+            //        case EConnectorCapStyle.FullDiamond:
+            //        case EConnectorCapStyle.Diamond:
+            //            startFigure = GeometryHelper.CalculateDiamond(startFigure, end, start, ref startPointShifted);
             //            break;
             //    }
             //}
@@ -185,7 +189,9 @@ namespace Exolutio.ViewToolkit
 
             //#region define endFigure
 
-            //if (EndCapStyle != EJunctionCapStyle.Straight)
+            #if SILVERLIGHT
+            #else
+            //if (EndCapStyle != EConnectorCapStyle.Straight)
             //{
             //    endFigure = new PathFigure();
             //    Point start = EndPoint.CanvasPosition;
@@ -196,23 +202,24 @@ namespace Exolutio.ViewToolkit
             //    endFigure.Segments.Add(seg);
             //    switch (EndCapStyle)
             //    {
-            //        case EJunctionCapStyle.Arrow:
-            //        case EJunctionCapStyle.FullArrow:
-            //        case EJunctionCapStyle.Triangle:
+            //        case EConnectorCapStyle.Arrow:
+            //        case EConnectorCapStyle.FullArrow:
+            //        case EConnectorCapStyle.Triangle:
             //            Point dummy = new Point();
-            //            if (StartCapStyle == EJunctionCapStyle.Arrow)
-            //                endFigure = JunctionGeometryHelper.CalculateArrow(endFigure, end, start, EndCapStyle != EJunctionCapStyle.Arrow,
+            //            if (EndCapStyle == EConnectorCapStyle.Arrow)
+            //                endFigure = GeometryHelper.CalculateArrow(endFigure, end, start, EndCapStyle != EConnectorCapStyle.Arrow,
             //                                                                  ref dummy);
             //            else
-            //                endFigure = JunctionGeometryHelper.CalculateArrow(endFigure, end, start, EndCapStyle != EJunctionCapStyle.Arrow,
+            //                endFigure = GeometryHelper.CalculateArrow(endFigure, end, start, EndCapStyle != EConnectorCapStyle.Arrow,
             //                                                                  ref endPointShifted);
             //            break;
-            //        case EJunctionCapStyle.Diamond:
-            //        case EJunctionCapStyle.FullDiamond:
-            //            endFigure = JunctionGeometryHelper.CalculateDiamond(endFigure, end, start, ref endPointShifted);
+            //        case EConnectorCapStyle.Diamond:
+            //        case EConnectorCapStyle.FullDiamond:
+            //            endFigure = GeometryHelper.CalculateDiamond(endFigure, end, start, ref endPointShifted);
             //            break;
             //    }
             //}
+            #endif
 
             //#endregion
 
@@ -351,6 +358,16 @@ namespace Exolutio.ViewToolkit
             #region set source junctionEnd position
 
             double angle = StartNode.BoundsAngle;
+
+            if (StartPoint.Placement == EPlacementKind.AbsoluteSubCanvas)
+            {
+                Point snappedStart = StartNode.GetBounds().Normalize().SnapPointToRectangle(StartPoint.Position);
+                if (snappedStart != StartPoint.Position)
+                {
+                    StartPoint.SetPreferedPosition(snappedStart);
+                }
+            }
+            
             if (AutoPosModeOnly && StartPoint.Placement != EPlacementKind.ParentAutoPos)
                 StartPoint.Placement = EPlacementKind.ParentAutoPos;
 
@@ -415,6 +432,16 @@ namespace Exolutio.ViewToolkit
             #endregion
 
             #region set end junctionEnd position
+
+            if (EndPoint.Placement == EPlacementKind.AbsoluteSubCanvas)
+            {
+                Point snappedEnd = EndNode.GetBounds().Normalize().SnapPointToRectangle(EndPoint.Position);
+                if (snappedEnd != EndPoint.Position)
+                {
+                    EndPoint.SetPreferedPosition(snappedEnd);
+                }
+            }
+
 
             angle = EndNode.BoundsAngle;
             if (AutoPosModeOnly && EndPoint.Placement != EPlacementKind.ParentAutoPos)
