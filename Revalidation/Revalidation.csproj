@@ -49,10 +49,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChangeDetector.cs" />
+    <Compile Include="Changes\Association\AssociationChangeInstance.cs" />
     <Compile Include="Changes\Attribute\AttributeChangeInstance.cs" />
-    <Compile Include="Changes\Attribute\ChangePredicateScopeAttribute.cs" />
+    <Compile Include="Changes\ChangePredicateScopeAttribute.cs" />
     <Compile Include="Changes\ChangeInstance.cs" />
     <Compile Include="Changes\ChangePredicateParameterAttribute.cs" />
+    <Compile Include="Changes\Class\ClassChangeInstance.cs" />
+    <Compile Include="Changes\ContentModel\ContentModelChangeInstance.cs" />
     <Compile Include="Changes\EChangeCategory.cs" />
     <Compile Include="Changes\EChangePredicateScope.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -71,11 +74,7 @@
       <Name>SupportingClasses</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Changes\Association\" />
-    <Folder Include="Changes\Class\" />
-    <Folder Include="Changes\ContentModel\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

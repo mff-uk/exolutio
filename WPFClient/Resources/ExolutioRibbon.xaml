@@ -143,6 +143,8 @@
             <Fluent:RibbonGroupBox Header="Layout">
                 <Fluent:Button Command="{x:Static Commands1:StaticWPFClientCommands.LayoutPIMLeftPSMRight}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
+                <Fluent:Button Command="{x:Static Commands1:StaticWPFClientCommands.LayoutByVersions}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
             </Fluent:RibbonGroupBox>
 
             <!--<Fluent:RibbonGroupBox Header="Edit">

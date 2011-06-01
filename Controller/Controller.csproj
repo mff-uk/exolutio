@@ -139,9 +139,11 @@
     <Compile Include="Commands\Complex\PSM\cmdDeletePSMClassAndParent.cs" />
     <Compile Include="Commands\Complex\PSM\cmdDeletePSMAssociationRecursive.cs" />
     <Compile Include="Commands\Complex\PSM\cmdDeletePSMClassRecursive.cs" />
+    <Compile Include="Commands\Complex\PSM\cmdUpdatePSMAssociation.cs" />
     <Compile Include="Commands\Complex\PSM\cmdUpdatePSMAttribute.cs" />
     <Compile Include="Commands\Complex\PSM\cmdMovePSMAttribute.cs" />
     <Compile Include="Commands\Complex\PSM\cmdReconnectPSMAssociation.cs" />
+    <Compile Include="Commands\Atomic\PSM\acmdReorderPSMAttributes.cs" />
     <Compile Include="Commands\Reflection\CommandSerializer.cs" />
     <Compile Include="Commands\Reflection\DescriptionAttribute.cs" />
     <Compile Include="Commands\Reflection\PIMAttributeNeighboringClassParameterConsistency.cs" />
