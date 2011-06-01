@@ -114,9 +114,12 @@ namespace Exolutio.ViewToolkit
 
         public bool AutoPosModeOnly { get; set; }
 
+        #if SILVERLIGHT
+        #else
         public EConnectorCapStyle StartCapStyle { get; set; }
         
         public EConnectorCapStyle EndCapStyle { get; set; }
+        #endif
 
         private Geometry geometry;
 

@@ -73,6 +73,7 @@ namespace Exolutio.View
         {
             base.Current_SelectComponents(components);
 
+            bool clearThis = components.Any(c => c.Schema == this.Diagram.Schema);
             foreach (ComponentViewBase componentViewBase in RepresentantsCollection.Values)
             {
                 PIMClassView pimClassView = componentViewBase as PIMClassView;
@@ -84,7 +85,7 @@ namespace Exolutio.View
                         {
                             pimAttributeTextBox.Selected = true;
                         }
-                        else
+                        else if (clearThis)
                         {
                             pimAttributeTextBox.Selected = false; 
                         }

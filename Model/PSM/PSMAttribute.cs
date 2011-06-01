@@ -40,12 +40,17 @@ namespace Exolutio.Model.PSM
             PSMClass = c;
         }
 
-        private bool element;
-
         public bool Element
         {
             get { return element; }
             set { element = value; NotifyPropertyChanged("Element"); }
+        }
+
+        private bool element;
+
+        public int Index
+        {
+            get { return PSMClass.PSMAttributes.IndexOf(this); }
         }
 
         private Guid psmClassGuid;
@@ -87,6 +92,11 @@ namespace Exolutio.Model.PSM
                 defaultValue = value;
                 NotifyPropertyChanged("DefaultValue");
             }
+        }
+
+        public override string XPath
+        {
+            get { return string.Format("{0}{1}{2}", PSMClass.XPath, Element ? string.Empty : "@", Name); }
         }
 
         #region IHasCardinality Members

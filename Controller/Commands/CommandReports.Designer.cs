@@ -261,6 +261,15 @@ namespace Exolutio.Controller.Commands {
         /// <summary>
         ///   Looks up a localized string similar to Complex: PSM attribute update.
         /// </summary>
+        internal static string COMPLEX_UPDATE_PSM_ASSOCIATION {
+            get {
+                return ResourceManager.GetString("COMPLEX_UPDATE_PSM_ASSOCIATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Complex: PSM attribute update.
+        /// </summary>
         internal static string COMPLEX_UPDATE_PSM_ATTRIBUTE {
             get {
                 return ResourceManager.GetString("COMPLEX_UPDATE_PSM_ATTRIBUTE", resourceCulture);

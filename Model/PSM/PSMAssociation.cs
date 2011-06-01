@@ -100,7 +100,11 @@ namespace Exolutio.Model.PSM
                 return Parent.ChildPSMAssociations.IndexOf(this);
             }
         }
-        
+
+        public override string XPath
+        {
+            get { return string.Format("{0}{1}", Parent.XPath, !string.IsNullOrEmpty(this.Name) ? this.Name + "/" : string.Empty); }
+        }
 
         #region IHasCardinality Members
 

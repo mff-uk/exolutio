@@ -37,6 +37,8 @@ namespace Exolutio.Model.PSM
             }
         }
 
+        public abstract string XPath { get; }
+
         #region Implementation of IExolutioSerializable
 
         public override void Serialize(XElement parentNode, SerializationContext context)

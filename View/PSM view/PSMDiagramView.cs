@@ -110,6 +110,7 @@ namespace Exolutio.View
         {
             base.Current_SelectComponents(components);
 
+            bool clearThis = components.Any(c => c.Schema == this.Diagram.Schema);
             foreach (ComponentViewBase componentViewBase in RepresentantsCollection.Values)
             {
                 PSMClassView psmClassView = componentViewBase as PSMClassView;
@@ -121,7 +122,7 @@ namespace Exolutio.View
                         {
                             psmAttributeTextBox.Selected = true;
                         }
-                        else
+                        else if (clearThis)
                         {
                             psmAttributeTextBox.Selected = false;
                         }

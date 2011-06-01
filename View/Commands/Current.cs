@@ -244,6 +244,7 @@ namespace Exolutio.View
         void CloseActiveTab();
 
         IEnumerable<ExolutioVersionedObject> AnotherOpenedVersions(ExolutioVersionedObject item);
+        DiagramView GetOpenedDiagramView(Diagram diagram);
     }
 
     public interface IMainWindow

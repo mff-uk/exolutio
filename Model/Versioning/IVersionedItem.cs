@@ -21,6 +21,12 @@ namespace Exolutio.Model.Versioning
             return item.ProjectVersion.Project.VersionManager.GetItemInVersion(item, version);
         }
 
+        public static TComponent GetInVersion<TComponent>(this TComponent item, Version version)
+            where TComponent : IVersionedItem
+        {
+            return (TComponent) item.ProjectVersion.Project.VersionManager.GetItemInVersion(item, version);
+        }
+
         public static bool ExistsInVersion(this IVersionedItem item, Version version)
         {
             return item.ProjectVersion.Project.VersionManager.GetItemInVersion(item, version) != null;
