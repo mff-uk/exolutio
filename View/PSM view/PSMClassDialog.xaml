@@ -98,7 +98,7 @@
             </TabItem>
             <TabItem Header="Content (subtree)" Name="tabAssociations" TabIndex="0">
                 <DockPanel>
-                    <DataGrid 
+                    <DataGridDnD:DataGridDnD 
 						Name="gridAssociations" 
 						SelectionMode="Single"
 						Dialogs:AccessKeyScoper.IsAccessKeyScope="True"
@@ -149,7 +149,7 @@
                                 </ContextMenu.Items>-->
                             </ContextMenu>
                         </DataGrid.ContextMenu>
-                    </DataGrid>
+                    </DataGridDnD:DataGridDnD>
                 </DockPanel>
             </TabItem>
             <TabItem Header="Attribute version links" x:Name="tabVersionLinks">                

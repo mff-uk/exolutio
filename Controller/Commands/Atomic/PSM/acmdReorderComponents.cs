@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using Exolutio.Model;
@@ -44,7 +45,6 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
 
             OrderAsInList(ComponentGuids);
 
-
             Report = new CommandReport(CommandReports.Components_reordered);
         }
 
@@ -67,6 +67,8 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
             {
                 OwnerCollection.AddAsGuidSilent(map[attributeGuid]);
             }
+            NotifyCollectionChangedEventArgs e = new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset);
+            OwnerCollection.InvokeCollectionChanged(e);
         }
     }
 }
