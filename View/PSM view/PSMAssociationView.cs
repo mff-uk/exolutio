@@ -161,7 +161,11 @@ namespace Exolutio.View
         {
             base.PutInDiagram(diagramView, viewHelper);
 
+#if SILVERLIGHT
+            Connector = new Connector();
+#else
             Connector = new Connector() { EndCapStyle = EConnectorCapStyle.Arrow };
+#endif
             NameLabel = new Label();
             CardinalityLabel = new Label();
             CreatedControls.Add(Connector);

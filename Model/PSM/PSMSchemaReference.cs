@@ -56,6 +56,11 @@ namespace Exolutio.Model.PSM
             }
         }
 
+        public override string XPath
+        {
+            get { return string.Empty; }
+        }
+
         #region IExolutioSerializable Members
 
         public override void Serialize(XElement parentNode, SerializationContext context)

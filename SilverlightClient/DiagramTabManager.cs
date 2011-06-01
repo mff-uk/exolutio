@@ -164,6 +164,15 @@ namespace SilverlightClient
             Current.ActiveDiagram = diagram;
         }
 
+        public DiagramView GetOpenedDiagramView(Diagram diagram)
+        {
+            DiagramTab diagramTab = FindTab(diagram);
+            if (diagramTab != null)
+            {
+                return diagramTab.DiagramView;
+            }
+            else return null;
+        }
 
         /// <summary>
         /// Reaction on change of active document.

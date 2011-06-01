@@ -160,7 +160,7 @@ namespace Exolutio.View.Commands.Project
 			    }
 			    catch (Exception e)
 			    {
-			        throw new ExolutioModelException(string.Format("Failed to load project from the file \r\n'{0}'", selectedFile.FullName), e);
+                    throw new ExolutioModelException(string.Format("Failed to load project from the file \r\n'{0}'", selectedFile.FullName), e) { ExceptionTitle = "Cannot open project" };
 			    }
                 finally
                 {

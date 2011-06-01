@@ -53,6 +53,11 @@ namespace Exolutio.Model.PSM
             set { type = value; NotifyPropertyChanged("Type"); }
         }
 
+        public override string XPath
+        {
+            get { return ParentAssociation.XPath; }
+        }
+
         #region Implementation of IExolutioSerializable
 
         public override void Serialize(XElement parentNode, SerializationContext context)

@@ -10,7 +10,7 @@ namespace Exolutio.Model
 
         string CardinalityString { get; }
     }
-
+    
     public static class IHasCardinalityExt
     {
         public static string GetCardinalityString(this IHasCardinality cardinalityElement)
@@ -19,6 +19,14 @@ namespace Exolutio.Model
                 return String.Format("{0}..{1}", cardinalityElement.Lower, cardinalityElement.Upper);
             else
                 return cardinalityElement.Lower.ToString();
+        }
+
+        public static string GetCardinalityString(uint lower, UnlimitedInt upper)
+        {
+            if (lower != upper)
+                return String.Format("{0}..{1}", lower, upper);
+            else
+                return lower.ToString();
         }
 
         public static bool HasNondefaultCardinality(this IHasCardinality cardinalityElement)

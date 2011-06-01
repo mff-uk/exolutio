@@ -164,14 +164,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AppManifest.xml" />
-    <None Include="Service References\ExolutioService\ProjectFilesService.disco" />
-    <None Include="Service References\ExolutioService\configuration91.svcinfo" />
-    <None Include="Service References\ExolutioService\configuration.svcinfo" />
-    <None Include="Service References\ExolutioService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <Content Include="ServiceReferences.ClientConfig" />
     <None Include="Service References\ExolutioService\ProjectFilesService.wsdl" />
     <None Include="Service References\ExolutioService\SilverlightClient.ExolutioService.GetProjectFileResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -182,6 +174,7 @@
     <None Include="Service References\ExolutioService\SilverlightClient.ExolutioService.HelloWorldResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <Content Include="ServiceReferences.ClientConfig" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Controller\Controller_SL.csproj">
@@ -218,6 +211,21 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\ExolutioService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ExolutioService\ProjectFilesService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ExolutioService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ExolutioService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ExolutioService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

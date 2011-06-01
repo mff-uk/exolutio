@@ -255,7 +255,9 @@ namespace Exolutio.ViewToolkit
 			return index;
 		}
 
-		#region EndCaps Calculations
+#if SILVERLIGHT
+#else
+        #region EndCaps Calculations
 
         public static PathFigure CalculateDiamond(PathFigure pathfig, Point pt1, Point pt2, ref Point pt2_shifted)
         {
@@ -316,6 +318,8 @@ namespace Exolutio.ViewToolkit
         }
 		
         #endregion
+#endif
+
 
         //public static EJunctionCapStyle GetCap(AggregationKind kind)
         //{

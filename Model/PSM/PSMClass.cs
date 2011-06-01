@@ -124,6 +124,11 @@ namespace Exolutio.Model.PSM
 
         public UndirectCollection<PSMAttribute> PSMAttributes { get; private set; }
 
+        public override string XPath
+        {
+            get { return ParentAssociation.XPath; }
+        }
+
         #region Implementation of IExolutioSerializable
 
         public override void Serialize(XElement parentNode, SerializationContext context)

@@ -27,6 +27,11 @@ namespace Exolutio.Model.PSM
             return "PSMSchemaClass: " + Name;
         }
 
+        public override string XPath
+        {
+            get { return "/"; }
+        }
+
         #region Implementation of IExolutioCloneable
 
         public override IExolutioCloneable Clone(ProjectVersion projectVersion, ElementCopiesMap createdCopies)

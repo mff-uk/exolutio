@@ -258,4 +258,7 @@
   <data name="PSM_ASSOC_SHIFT" xml:space="preserve">
     <value>PSM Association '{0}' shifted '{1}'.</value>
   </data>
+  <data name="COMPLEX_UPDATE_PSM_ASSOCIATION" xml:space="preserve">
+    <value>Complex: PSM attribute update</value>
+  </data>
 </root>
