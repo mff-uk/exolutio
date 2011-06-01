@@ -650,6 +650,7 @@ namespace Exolutio.View
 
                 acmdReorderComponents<PSMAttribute> reorderCommand = new acmdReorderComponents<PSMAttribute>(controller);
                 reorderCommand.ComponentGuids = ordering;
+                reorderCommand.OwnerCollection = psmClass.PSMAttributes;
                 controller.CreatedMacro.Commands.Add(reorderCommand);
             }
 
