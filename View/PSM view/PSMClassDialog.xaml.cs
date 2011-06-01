@@ -18,6 +18,7 @@ using Exolutio.Model.PSM;
 using Exolutio.Model;
 using Exolutio.Controller;
 using Exolutio.SupportingClasses;
+using Exolutio.ViewToolkit;
 using cmdDeletePSMAttribute = Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers.cmdDeletePSMAttribute;
 
 namespace Exolutio.View
@@ -73,6 +74,8 @@ namespace Exolutio.View
                     return RepresentedAttribute == null;
                 }
             }
+
+            public Guid AddedAttributeID { get; set; }
 
             public FakePSMAttribute()
             {
@@ -143,6 +146,102 @@ namespace Exolutio.View
             }
         }
 
+        private class FakePSMAssociation : IEditableObject
+        {
+            public string Name { get; set; }
+            private string multiplicity;
+            public string Multiplicity
+            {
+                get { return multiplicity; }
+                set
+                {
+                    bool isValid;
+                    try
+                    {
+                        isValid = IHasCardinalityExt.IsMultiplicityStringValid(value);
+                    }
+                    catch
+                    {
+                        isValid = false;
+                    }
+                    if (!isValid)
+                        throw new ArgumentException("Multiplicity string is invalid. ");
+                    multiplicity = value;
+                }
+            }
+            
+            public PSMAssociation SourceAssociation { get; set; }
+            public PIMAssociation RepresentedAssociation { get; set; }
+
+            public bool Checked { get; set; }
+
+            public bool IsReadonlyType
+            {
+                get
+                {
+                    return RepresentedAssociation == null;
+                }
+            }
+
+            public FakePSMAssociation()
+            {
+                Multiplicity = "1";
+                Name = "Association";
+            }
+
+            public FakePSMAssociation(PSMAssociation p)
+                : this()
+            {
+                Name = p.Name;
+                Multiplicity = p.GetCardinalityString();
+                SourceAssociation = p;
+                RepresentedAssociation = (PIMAssociation)p.Interpretation;
+                Checked = true;
+            }
+
+            public FakePSMAssociation(PIMAssociation p)
+                : this()
+            {
+                Name = p.Name;                
+                Multiplicity = "1";
+                SourceAssociation = null;
+                RepresentedAssociation = p;
+                Checked = false;
+            }
+
+            public void BeginEdit()
+            {
+                //Checked = true;
+            }
+
+            public void EndEdit()
+            {
+
+            }
+
+            public void CancelEdit()
+            {
+
+            }
+
+            public bool SomethingChanged()
+            {
+                if (SourceAssociation == null)
+                {
+                    return true;
+                }
+                else
+                {
+                    uint lower;
+                    UnlimitedInt upper;
+                    IHasCardinalityExt.ParseMultiplicityString(Multiplicity, out lower, out upper);
+                    return SourceAssociation.Name != Name 
+                           || SourceAssociation.Interpretation != RepresentedAssociation
+                           || SourceAssociation.Lower != lower || SourceAssociation.Upper != upper;
+                }
+            }
+        }
+
         private class FakeAttributeCollection : ListCollectionView
         {
 
@@ -175,26 +274,69 @@ namespace Exolutio.View
             }
         }
 
+        private class FakeAssociationCollection : ListCollectionView
+        {
+
+            public FakeAssociationCollection(IList attributes)
+                : base(attributes)
+            {
+
+            }
+
+            public FakeAssociationCollection(ObservableCollection<FakePSMAssociation> associationList, PSMClass psmClass)
+                : base(associationList)
+            {
+                foreach (PSMAssociation psmAssociation in psmClass.ChildPSMAssociations)
+                {
+                    associationList.Add(new FakePSMAssociation(psmAssociation));
+                }
+
+                bool classEmpty = psmClass.ChildPSMAssociations.Count == 0;
+
+                if (psmClass.Interpretation != null)
+                {
+                    foreach (PIMAssociationEnd associationEnd in ((PIMClass)psmClass.Interpretation).PIMAssociationEnds)
+                    {
+                        PIMAssociation pimAssociation = associationEnd.PIMAssociation;
+                        if (!associationList.Any(p => p.SourceAssociation != null &&
+                            p.SourceAssociation.Interpretation == pimAssociation))
+                        {
+                            associationList.Add(new FakePSMAssociation(pimAssociation) { Checked = false });
+                        }
+                    }
+                }
+            }
+        }
+
         private FakeAttributeCollection fakeAttributes;
+
+        private FakeAssociationCollection fakeAssociations;
 
         public PSMClassDialog()
         {
             InitializeComponent();
+
+            if (!Current.Project.UsesVersioning)
+            {
+                tabVersionLinks.IsEnabled = false;
+                tabVersionLinks.ToolTip = "Disabled in projects not using versioning";
+            }
+
+            tabControl1.Items.CurrentChanging += TabControl_CurrentChanging;
         }
 
-        private Exolutio.Controller.Controller controller;
+        private Controller.Controller controller;
 
-        public void Initialize(Exolutio.Controller.Controller controller, PSMClass psmClass)
+        public void Initialize(Controller.Controller controller, PSMClass psmClass)
         {
             this.controller = controller;
             this.psmClass = psmClass;
 
-            this.Title = string.Format(this.Title, psmClass);
+            this.Title = string.Format("PSM class: {0}", psmClass);
 
             tbName.Text = psmClass.Name;
-            //tbElementLabel.Text = psmClass.ElementName;
-            //cbAbstract.IsChecked = psmClass.IsAbstract;
-            //cbAnyAttribute.IsChecked = psmClass.AllowAnyAttribute;
+
+            #region attributes 
 
             typeColumn.ItemsSource = psmClass.ProjectVersion.AttributeTypes;
             if (psmClass.Interpretation != null)
@@ -211,12 +353,62 @@ namespace Exolutio.View
             fakeAttributesList.CollectionChanged += delegate { UpdateApplyEnabled(); };
             gridAttributes.ItemsSource = fakeAttributesList;
 
+            #endregion
+            
+            #region associatiosn
+
+            if (psmClass.Interpretation != null)
+            {
+                CompositeCollection coll = new CompositeCollection();
+                //coll.Add("(None)");
+                coll.Add(new CollectionContainer { Collection = ((PIMClass)psmClass.Interpretation).PIMAssociationEnds.Select(e => e.PIMAssociation) });
+                interpretationAssociation.ItemsSource = coll;
+            }
+
+            ObservableCollection<FakePSMAssociation> fakeAssociationsList = new ObservableCollection<FakePSMAssociation>();
+
+            fakeAssociations = new FakeAssociationCollection(fakeAssociationsList, psmClass);
+            fakeAssociationsList.CollectionChanged += delegate { UpdateApplyEnabled(); };
+            gridAssociations.ItemsSource = fakeAssociationsList;
+
+            #endregion 
+
             dialogReady = true;
+        }
+
+        private void TabControl_CurrentChanging(object sender, CurrentChangingEventArgs e)
+        {
+            TabItem tab = (TabItem) ((ICollectionView)sender).CurrentItem;
+            if (e.IsCancelable && Current.Project.UsesVersioning)
+            {
+                if (ExolutioYesNoBox.Show("Apply changes", "Click 'Yes' to apply changes. \nClick 'No' to discard changes made in this page.") == MessageBoxResult.Yes)
+                {
+                    if (tab.IsAmong(tabAttributes, tabGeneral))
+                    {
+                        ApplyChanges();
+                    }    
+                }
+                else
+                {
+                    e.Cancel = true;
+                    tabControl1.SelectedItem = tab;
+                }
+            }
+        }
+
+        private void bApply_Click(object sender, RoutedEventArgs e)
+        {
+            bApply.Focus();
+
+            error = false;
+
+            ApplyChanges();
+            
         }
 
         private void bOk_Click(object sender, RoutedEventArgs e)
         {
-            bApply_Click(sender, e);
+            ApplyChanges();
             if (!error)
             {
                 DialogResult = true;
@@ -226,35 +418,137 @@ namespace Exolutio.View
 
         private bool error = false;
 
-        private void bApply_Click(object sender, RoutedEventArgs e)
+        private void ApplyChanges()
         {
-            bApply.Focus();
-
-            error = false;
-
             controller.BeginMacro();
-            //controller.CreatedMacro.Description = string.Format("PSM Classs '{0}' was updated. ", psmClass);
+
+            bool canContinue = ApplyClassChanges();
+            if (canContinue)
+            {
+                canContinue = ApplyAttributeChanges();
+            }
+            if (canContinue)
+            {
+                canContinue = ApplyAssociationChanges();
+            }
+
+            if (!canContinue)
+            {
+                controller.CancelMacro();
+            }
+            else
+            {
+                error = false;
+                CommandBase tmp = (CommandBase)controller.CreatedMacro;
+                controller.CommitMacro();
+            }
+
+            Initialize(controller, psmClass);
+            gridAttributes.Items.Refresh();
+            gridAssociations.Items.Refresh();
+        }
+
+        private bool ApplyClassChanges()
+        {
             if (tbName.ValueChanged)
             {
                 acmdRenameComponent renameCommand = new acmdRenameComponent(controller, psmClass, tbName.Text);
                 controller.CreatedMacro.Commands.Add(renameCommand);
                 tbName.ForgetOldValue();
             }
+            return true; 
+        }
 
-            //if (psmClass.IsAbstract != cbAbstract.IsChecked)
-            //{
-            //    psmClassController.ChangeAbstract(cbAbstract.IsChecked == true);
-            //}
+        private bool ApplyAssociationChanges()
+        {
+            #region check for deleted associations
 
-            //if (psmClass.AllowAnyAttribute != cbAnyAttribute.IsChecked)
-            //{
-            //    psmClassController.ChangeAllowAnyAttributeDefinition(cbAnyAttribute.IsChecked == true);
-            //}
+            foreach (PSMAssociation psmAssociation in psmClass.ChildPSMAssociations)
+            {
+                bool found = false;
+                foreach (FakePSMAssociation fakeAssociation in fakeAssociations)
+                {
+                    if (fakeAssociation.SourceAssociation == psmAssociation && fakeAssociation.Checked)
+                    {
+                        found = true;
+                        break;
+                    }
+                    else if (fakeAssociation.SourceAssociation == psmAssociation && !fakeAssociation.Checked)
+                    {
+                        fakeAssociation.SourceAssociation = null;
+                    }
+                }
+                if (!found)
+                {
+                    cmdDeletePSMAssociation deleteCommand = new cmdDeletePSMAssociation(controller);
+                    deleteCommand.Set(psmAssociation);
+                    controller.CreatedMacro.Commands.Add(deleteCommand);
+                }
+            }
 
+            #endregion
+
+            // check for changes and new associations
+            var modified = from FakePSMAssociation a in fakeAssociations
+                           where a.SourceAssociation != null && a.SomethingChanged()
+                           select a;
+            var added = from FakePSMAssociation a in fakeAssociations where a.SourceAssociation == null select a;
+
+            #region editing exisiting association
+            foreach (FakePSMAssociation modifiedAssociation in modified)
+            {
+                PSMAssociation sourceAssociation = modifiedAssociation.SourceAssociation;
+                uint lower;
+                UnlimitedInt upper;
+                if (
+                    !IHasCardinalityExt.ParseMultiplicityString(modifiedAssociation.Multiplicity, out lower,
+                                                                           out upper))
+                {
+                    error = true;
+                }
+
+                cmdUpdatePSMAssociation updateCommand = new cmdUpdatePSMAssociation(controller);
+                updateCommand.Set(sourceAssociation, modifiedAssociation.Name, lower, upper);
+                updateCommand.InterpretedAssociation = modifiedAssociation.RepresentedAssociation;
+                controller.CreatedMacro.Commands.Add(updateCommand);
+            }
+            #endregion
+
+            #region new association
+            foreach (FakePSMAssociation addedAssociation in added)
+            {
+                if (!string.IsNullOrEmpty(addedAssociation.Name) && addedAssociation.Checked)
+                {
+                    uint lower = 1;
+                    UnlimitedInt upper = 1;
+                    if (!String.IsNullOrEmpty(addedAssociation.Multiplicity))
+                    {
+                        if (!IHasCardinalityExt.ParseMultiplicityString(addedAssociation.Multiplicity, out lower, out upper))
+                        {
+                            error = true;
+                        }
+                    }
+                     
+                    ExolutioMessageBox.Show("Creating new association", addedAssociation.Name, "");
+                    //cmdCreateNewPSMAssociation createNewPsmAssociation = new cmdCreateNewPSMAssociation(controller);
+                    //createNewPsmAssociation.Set(psmClass, addedAssociation.Name, lower, upper);
+                    //if (addedAssociation.RepresentedAssociation != null)
+                    //{
+                    //    createNewPsmAssociation.InterpretedAssociation = addedAssociation.RepresentedAssociation;
+                    //}
+                    //controller.CreatedMacro.Commands.Add(createNewPsmAssociation);
+                    
+                }
+            }
+            #endregion
+
+            return !error;
+        }
+        
+        private bool ApplyAttributeChanges()
+        {
             #region check for deleted attributes
 
-            List<PSMAttribute> removedAttributes = new List<PSMAttribute>();
-            List<FakePSMAttribute> addedAttributes = new List<FakePSMAttribute>();
             foreach (PSMAttribute psmAttribute in psmClass.PSMAttributes)
             {
                 bool found = false;
@@ -272,7 +566,6 @@ namespace Exolutio.View
                 }
                 if (!found)
                 {
-                    removedAttributes.Add(psmAttribute);
                     cmdDeletePSMAttribute deleteCommand = new cmdDeletePSMAttribute(controller);
                     deleteCommand.Set(psmAttribute);
                     controller.CreatedMacro.Commands.Add(deleteCommand);
@@ -281,47 +574,13 @@ namespace Exolutio.View
 
             #endregion
 
-            #region remove dummy entries in fake collection
-
-            List<FakePSMAttribute> toRemove = new List<FakePSMAttribute>();
-            foreach (FakePSMAttribute fakeAttribute in fakeAttributes)
-            {
-                if (String.IsNullOrEmpty(fakeAttribute.Name))
-                {
-                    if (fakeAttribute.SourceAttribute != null)
-                    {
-                        removedAttributes.Add(fakeAttribute.SourceAttribute);
-                        cmdDeletePSMAttribute deleteCommand = new cmdDeletePSMAttribute(controller);
-                        deleteCommand.Set(fakeAttribute.SourceAttribute);
-                        controller.CreatedMacro.Commands.Add(deleteCommand);
-                    }
-                    toRemove.Add(fakeAttribute);
-                }
-            }
-
-            foreach (FakePSMAttribute attribute in toRemove)
-            {
-                fakeAttributes.Remove(attribute);
-            }
-
-            #endregion
-
-            Dictionary<PSMAttribute, string> namesDict = new Dictionary<PSMAttribute, string>();
-            foreach (PSMAttribute a in psmClass.PSMAttributes)
-            {
-                if (!removedAttributes.Contains(a))
-                {
-                    namesDict.Add(a, a.Name);
-                }
-            }
-
             // check for changes and new attributes
             var modified = from FakePSMAttribute a in fakeAttributes
-                           where a.SourceAttribute != null && !removedAttributes.Contains(a.SourceAttribute) && a.SomethingChanged()
+                           where a.SourceAttribute != null && a.SomethingChanged()
                            select a;
             var added = from FakePSMAttribute a in fakeAttributes where a.SourceAttribute == null select a;
 
-            // editing exisiting attribute
+            #region editing exisiting attribute
             foreach (FakePSMAttribute modifiedAttribute in modified)
             {
                 PSMAttribute sourceAttribute = modifiedAttribute.SourceAttribute;
@@ -337,11 +596,10 @@ namespace Exolutio.View
                 updateCommand.Set(sourceAttribute, modifiedAttribute.Type, modifiedAttribute.Name, lower, upper, modifiedAttribute.XFormElement, modifiedAttribute.DefaultValue);
                 updateCommand.InterpretedAttribute = modifiedAttribute.RepresentedAttribute;
                 controller.CreatedMacro.Commands.Add(updateCommand);
-                namesDict[sourceAttribute] = modifiedAttribute.Name;
             }
+            #endregion 
 
-            List<string> names = namesDict.Values.ToList();
-            // new attribute
+            #region new attribute
             foreach (FakePSMAttribute addedAttribute in added)
             {
                 if (!string.IsNullOrEmpty(addedAttribute.Name) && addedAttribute.Checked)
@@ -357,81 +615,45 @@ namespace Exolutio.View
                     }
                     cmdCreateNewPSMAttribute createNewPsmAttribute = new cmdCreateNewPSMAttribute(controller);
                     createNewPsmAttribute.Set(psmClass, addedAttribute.Type, addedAttribute.Name, lower, upper, addedAttribute.XFormElement);
+                    createNewPsmAttribute.AttributeGuid = Guid.NewGuid();
+                    addedAttribute.AddedAttributeID = createNewPsmAttribute.AttributeGuid;
                     if (addedAttribute.RepresentedAttribute != null)
                     {
                         createNewPsmAttribute.InterpretedAttribute = addedAttribute.RepresentedAttribute;
                     }
                     controller.CreatedMacro.Commands.Add(createNewPsmAttribute);
-                    addedAttributes.Add(addedAttribute);
-                    names.Add(addedAttribute.Name);
                 }
             }
+            #endregion
 
-            if (error)
+            #region ordering
+
             {
-                controller.CancelMacro();
-            }
-            else
-            {
-                CommandBase tmp = (CommandBase)controller.CreatedMacro;
-                controller.CommitMacro();
-                if (string.IsNullOrEmpty(tmp.ErrorDescription))
+                List<Guid> ordering = new List<Guid>();
+                foreach (FakePSMAttribute attribute in fakeAttributes)
                 {
-                    foreach (FakePSMAttribute attribute in addedAttributes)
+                    if (attribute.SourceAttribute != null)
                     {
-                        if (attribute.RepresentedAttribute != null)
-                        {
-                            attribute.SourceAttribute = (PSMAttribute)psmClass.PSMAttributes.Where
-                                                                           (property =>
-                                                                            ((PSMAttribute)property).
-                                                                                Interpretation ==
-                                                                            attribute.RepresentedAttribute).
-                                                                           SingleOrDefault();
-                        }
-                        else
-                        {
-                            attribute.SourceAttribute = psmClass.PSMAttributes.Where
-                                (property => property.Name == attribute.Name).SingleOrDefault();
-                        }
-                        //else
-                        //{
-                        //    attribute.SourceAttribute = (PSMAttribute)psmClassController.Class.AllAttributes.Where
-                        //        (property => (property.RepresentedAttribute == attribute.RepresentedAttribute).SingleOrDefault();
-                        //}
-                        //if (attribute.SourceAttribute.RepresentedAttribute != null)
-                        //    attribute.RepresentedAttribute = attribute.SourceAttribute.RepresentedAttribute;
+                        ordering.Add(attribute.SourceAttribute.ID);
+                    } 
+                    else if (attribute.AddedAttributeID != Guid.Empty)
+                    {
+                        ordering.Add(attribute.AddedAttributeID);
                     }
-                    addedAttributes.RemoveAll(attribute => attribute.SourceAttribute == null);
-                    bApply.IsEnabled = false;
-                    dialogReady = true;
-                    error = false;
                 }
-                else
-                {
-                    error = true;
-                }
+
             }
-            gridAttributes.Items.Refresh();
+
+            #endregion 
+
+            return !error;
         }
 
-        private void tbName_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
-        {
-            UpdateApplyEnabled();
-        }
-
-        private void gridAttributes_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
-        {
-            UpdateApplyEnabled();
-        }
-
-        private void gridAttributes_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
-        {
-            UpdateApplyEnabled();
-        }
+        #region update apply enabled
 
         private void UpdateApplyEnabled()
         {
-            int errors = System.Windows.Controls.Validation.GetErrors(gridAttributes).Count;
+            int errors = Validation.GetErrors(gridAttributes).Count + Validation.GetErrors(gridAssociations).Count + Validation.GetErrors(gridVersionLinks).Count;
 
             if (dialogReady && errors == 0)
             {
@@ -446,63 +668,42 @@ namespace Exolutio.View
             }
         }
 
-        private void tbElementLabel_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        private void tbName_TextChanged(object sender, TextChangedEventArgs e)
         {
             UpdateApplyEnabled();
         }
 
-        private void cbAbstract_Checked(object sender, RoutedEventArgs e)
+        private void grid_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
             UpdateApplyEnabled();
         }
 
-        private void gridAttributes_BeginningEdit(object sender, DataGridBeginningEditEventArgs e)
+        private void grid_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
         {
-            //if (e.Column == checkedColumn)
-            //    return;
-
-            if (e.Row != null && e.Row.Item is FakePSMAttribute)
-            {
-                FakePSMAttribute editedAttribute = ((FakePSMAttribute)e.Row.Item);
-                if (!editedAttribute.Checked)
-                {
-                }
-
-                //if (e.Column == typeColumn && editedAttribute.RepresentedAttribute != null)
-                //{
-                //    ErrorMsgBox.Show("Type can be changed only for PIM-less attributes. ", "You can change the represented attribute's type instead. ");
-                //}
-            }
-
+            UpdateApplyEnabled();
         }
 
-        private void SelectAllClick(object sender, RoutedEventArgs e)
+        #endregion
+        
+        private void gridAttributes_InitializingNewItem(object sender, InitializingNewItemEventArgs e)
         {
-            foreach (FakePSMAttribute fakeAttribute in fakeAttributes)
-            {
-                fakeAttribute.Checked = true;
-            }
+            ((FakePSMAttribute)e.NewItem).Checked = true;
         }
 
-        private void DeselectAllClick(object sender, RoutedEventArgs e)
+        private void gridAssociations_InitializingNewItem(object sender, InitializingNewItemEventArgs e)
         {
-            foreach (FakePSMAttribute fakeAttribute in fakeAttributes)
-            {
-                fakeAttribute.Checked = false;
-            }
+            ((FakePSMAssociation)e.NewItem).Checked = true;
         }
 
         #region SINGLE CLICK EDITING
 
         private void DataGridCell_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            DataGridCell cell = sender as DataGridCell;
-            System.Windows.Controls.CheckBox cb = cell.Content as System.Windows.Controls.CheckBox;
+            DataGridCell cell = (DataGridCell)sender;
+            CheckBox cb = cell.Content as CheckBox;
             if (cb != null)
             {
-
-                if (cell != null &&
-                    !cell.IsEditing)
+                if (!cell.IsEditing)
                 {
                     try
                     {
@@ -516,7 +717,7 @@ namespace Exolutio.View
 
                     }
 
-                    DataGrid dataGrid = FindVisualParent<DataGrid>(cell);
+                    DataGrid dataGrid = UIExtensions.FindVisualParent<DataGrid>(cell);
                     if (dataGrid != null)
                     {
                         if (dataGrid.SelectionUnit != DataGridSelectionUnit.FullRow)
@@ -526,24 +727,34 @@ namespace Exolutio.View
                         }
                         else
                         {
-                            DataGridRow row = FindVisualParent<DataGridRow>(cell);
+                            DataGridRow row = UIExtensions.FindVisualParent<DataGridRow>(cell);
 
                             if (row != null && !row.IsSelected)
                             {
                                 row.IsSelected = true;
                             }
 
-                            if (row.Item is FakePSMAttribute)
+                            if (row != null)
                             {
-                                cb.IsChecked = !cb.IsChecked.Value;
-                                if (cell.Column.Header.ToString().Contains("Element"))
+                                cb.IsChecked = cb.IsChecked != false ? false : true;
+                                
+                                if (row.Item is FakePSMAttribute)
                                 {
-                                    ((FakePSMAttribute)row.Item).XFormElement = cb.IsChecked.Value;
+                                    if (cell.Column.Header.ToString().Contains("Element"))
+                                    {
+                                        ((FakePSMAttribute) row.Item).XFormElement = cb.IsChecked.Value;
+                                    }
+                                    else
+                                    {
+                                        ((FakePSMAttribute) row.Item).Checked = cb.IsChecked.Value;
+                                    }
                                 }
-                                else
+                                else if (row.Item is FakePSMAssociation)
                                 {
-                                    ((FakePSMAttribute)row.Item).Checked = cb.IsChecked.Value;
+                                    ((FakePSMAssociation)row.Item).Checked = cb.IsChecked.Value;
                                 }
+
+
                                 UpdateApplyEnabled();
                             }
 
@@ -556,24 +767,6 @@ namespace Exolutio.View
             }
         }
 
-
-        static T FindVisualParent<T>(UIElement element) where T : UIElement
-        {
-            UIElement parent = element;
-            while (parent != null)
-            {
-                T correctlyTyped = parent as T;
-                if (correctlyTyped != null)
-                {
-                    return correctlyTyped;
-                }
-
-                parent = VisualTreeHelper.GetParent(parent) as UIElement;
-            }
-            return null;
-        }
-
         #endregion
-
     }
 }

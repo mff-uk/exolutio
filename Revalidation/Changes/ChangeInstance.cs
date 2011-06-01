@@ -13,7 +13,9 @@ namespace Exolutio.Revalidation.Changes
         public abstract EChangePredicateScope Scope { get; }
 
         public abstract EChangeCategory Category { get; }
-        
+
+        public string Type { get { return this.GetType().Name; } }
+
         protected internal static readonly DispNullFormatProvider DispNullFormatProvider = new DispNullFormatProvider();
 
         public Version OldVersion { get; set; }
@@ -104,6 +106,12 @@ namespace Exolutio.Revalidation.Changes
         protected static bool ExistingTest(PSMComponent candidate, Version oldVersion, Version newVersion)
         {
             return candidate.Version == newVersion && candidate.ExistsInVersion(newVersion) && candidate.ExistsInVersion(oldVersion);
+        }
+
+        protected static bool AreLinked(PSMComponent componentOldVersion, PSMComponent componentNewVersion)
+        {
+            return componentOldVersion != null && componentNewVersion != null &&
+                componentOldVersion.GetInVersion(componentNewVersion.Version) == componentNewVersion;
         }
 
         public static bool TestCandidate(PSMComponent candidate, Version oldVersion, Version newVersion)

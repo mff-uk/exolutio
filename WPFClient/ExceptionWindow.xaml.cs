@@ -53,6 +53,16 @@ namespace Exolutio.WPFClient
                         tbExInner.Content = xec.Command.ErrorDescription;
                     }
                 }
+
+                if (exception.InnerException != null)
+                {
+                    tbExInner.Content = "Inner exception: " + exception.InnerException.Message;
+                    expander1.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    tbExInner.Content = String.Empty;
+                }
 			}
 			else
 			{

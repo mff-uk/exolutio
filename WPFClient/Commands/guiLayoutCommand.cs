@@ -1,4 +1,5 @@
 using System;
+using Exolutio.Model;
 using Exolutio.Model.PIM;
 using Exolutio.Model.PSM;
 using Exolutio.View;
@@ -6,7 +7,7 @@ using Exolutio.View.Commands;
 
 namespace Exolutio.WPFClient.Commands
 {
-    public class guiLayoutCommand : guiCommandBase
+    public class guiLayoutCommand : guiActiveDiagramCommand
     {
         public override void Execute(object parameter)
         {
@@ -34,11 +35,42 @@ namespace Exolutio.WPFClient.Commands
                 }
                 mainWindow.DiagramTabManager.ActivateDiagram(Current.ProjectVersion.PIMDiagrams[0]);
             }
+
+            if (LayoutType == ELayoutType.ByVersions)
+            {
+                int i = 0;
+                bool tabForVersion = false;
+                foreach (ProjectVersion projectVersion in Current.Project.ProjectVersions)
+                {
+                    foreach (PIMDiagram pimDiagram in projectVersion.PIMDiagrams)
+                    {
+                        mainWindow.DiagramTabManager.ActivateDiagram(pimDiagram);
+                        if (i > 0 && !tabForVersion)
+                        {
+                            mainWindow.dockManager.MainDocumentPane.CreateNewVerticalTabGroup();
+                            tabForVersion = true;
+                        }
+                    }
+
+                    foreach (PSMDiagram psmDiagram in projectVersion.PSMDiagrams)
+                    {
+                        mainWindow.DiagramTabManager.ActivateDiagram(psmDiagram);
+                        if (i > 0 && !tabForVersion)
+                        {
+                            mainWindow.dockManager.MainDocumentPane.CreateNewVerticalTabGroup();
+                            tabForVersion = true;
+                        }
+                    }
+
+                    i++;
+                }
+            }
         }
             
         public enum ELayoutType
         {
-            PIMLeftPSMRight
+            PIMLeftPSMRight,
+            ByVersions
         }
 
         public ELayoutType LayoutType { get; set; }
@@ -52,9 +84,14 @@ namespace Exolutio.WPFClient.Commands
         {
             get
             {
-                if (LayoutType == ELayoutType.PIMLeftPSMRight)
+                switch (LayoutType)
                 {
-                    return "PIM left PSM right";
+                    case ELayoutType.PIMLeftPSMRight:
+                        return "PIM left PSM right";
+                        break;
+                    case ELayoutType.ByVersions:
+                        return "Layout by versions";
+                        break;
                 }
                 return String.Empty;
             }
@@ -66,7 +103,11 @@ namespace Exolutio.WPFClient.Commands
 
         public override bool CanExecute(object parameter)
         {
-            return true;
+            if (LayoutType == ELayoutType.ByVersions)
+            {
+                return Current.Project != null && Current.Project.UsesVersioning;
+            }
+            return Current.Project != null;
         }
     }
 }

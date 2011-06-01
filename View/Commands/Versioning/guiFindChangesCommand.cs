@@ -43,8 +43,8 @@ namespace Exolutio.View.Commands.Versioning
         public static void FindAndDisplayChanges(PSMSchema schemaVersion1, PSMSchema schemaVersion2)
         {
             ChangeDetector changeDetector = new ChangeDetector();
-            changeDetector.DetectChanges(schemaVersion1, schemaVersion2);
-
+            DetectedChangesSet detectedChangesSet = changeDetector.DetectChanges(schemaVersion1, schemaVersion2);
+            EvolutionChangesWindow.Show(detectedChangesSet, Current.MainWindow, schemaVersion1.PSMDiagram, schemaVersion2.PSMDiagram);
         }
 
         public override string Text

@@ -56,6 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChangeDetection\ChangeDetectionTest.cs" />
     <Compile Include="CodeTests\CloneCopyTests.cs" />
     <Compile Include="CodeTests\CodeTestBase.cs" />
     <Compile Include="CodeTests\CommandConstructorTest.cs" />
@@ -96,6 +97,10 @@
     <ProjectReference Include="..\Normalization\Normalization.csproj">
       <Project>{FDD2B4AC-D621-49ED-91D5-80B7F00ED4D5}</Project>
       <Name>Normalization</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Revalidation\Revalidation.csproj">
+      <Project>{43856BBC-7717-451D-BE51-6EA576C873C2}</Project>
+      <Name>Revalidation</Name>
     </ProjectReference>
     <ProjectReference Include="..\SupportingClasses\SupportingClasses.csproj">
       <Project>{AE8E2F66-03CF-44A5-8564-A32906F7F041}</Project>

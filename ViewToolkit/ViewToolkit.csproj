@@ -65,7 +65,8 @@
     <Compile Include="ExolutioCanvasWithZoomer.xaml.cs">
       <DependentUpon>ExolutioCanvasWithZoomer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FormControls\Class1.cs" />
+    <Compile Include="FormControls\UIExtensions.cs" />
+    <Compile Include="FormControls\WPFHelpers.cs" />
     <Compile Include="FormControls\LinkLabel.cs" />
     <Compile Include="Zoomer.xaml.cs">
       <DependentUpon>Zoomer.xaml</DependentUpon>

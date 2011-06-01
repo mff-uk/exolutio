@@ -134,6 +134,7 @@ namespace Exolutio.WPFClient
             return newTab;
         }
 
+
         /// <summary>
         /// Closes active PanelWindow
         /// </summary>
@@ -177,6 +178,16 @@ namespace Exolutio.WPFClient
             }
 
             Current.ActiveDiagram = diagram;
+        }
+
+        public DiagramView GetOpenedDiagramView(Diagram diagram)
+        {
+            DiagramTab diagramTab = FindTab(diagram);
+            if (diagramTab != null)
+            {
+                return diagramTab.DiagramView;
+            }
+            else return null;
         }
 
         /// <summary>

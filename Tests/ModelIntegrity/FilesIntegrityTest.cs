@@ -29,7 +29,7 @@ namespace Tests.ExolutioExportTests
 
             List<object> ls = new List<object>();
 
-            foreach (FileInfo fileInfo in d.GetFiles("*.Exolutio"))
+            foreach (FileInfo fileInfo in d.GetFiles("*.EvoX"))
             {
                 ls.Add(fileInfo.FullName);
             }
