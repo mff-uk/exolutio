@@ -13,7 +13,7 @@ namespace Exolutio.View.Commands.Grammar
                 Normalizer normalizer = new Normalizer();
                 normalizer.Controller = Current.Controller;
                 normalizer.NormalizeSchema((PSMSchema) Current.ActiveDiagram.Schema);
-                Current.MainWindow.DisplayReport(normalizer.FinalReport);
+                Current.MainWindow.DisplayReport(normalizer.FinalReport, true);
             }
         }
 

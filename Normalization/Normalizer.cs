@@ -17,7 +17,7 @@ namespace Exolutio.Model.PSM.Normalization
 
         private ModelVerifier modelVerifier { get; set; }
 
-        public NestedCommandReport FinalReport { get; set; }
+        public CommandReportBase FinalReport { get; set; }
 
         public void NormalizeSchema(PSMSchema schema)
         {
@@ -25,18 +25,24 @@ namespace Exolutio.Model.PSM.Normalization
             //Controller.BeginMacro();
             
             FinalReport = new NestedCommandReport();
-                
+
+            bool somethingFound = false;
             while (!modelVerifier.TestSchemaNormalized(schema))
             {
+                somethingFound = true; 
                 StackedCommand command = GetNormalizationCommand(schema);
                 command.Execute();
                 if (command is MacroCommand)
                 {
                     NestedCommandReport commandReport = ((MacroCommand)command).GetReport();
-                    FinalReport.NestedReports.Add(commandReport);
+                    ((NestedCommandReport)FinalReport).NestedReports.Add(commandReport);
                 }
             }
 
+            if (!somethingFound)
+            {
+                FinalReport = new CommandReport("Schema is already normalized. ");
+            }
             //Controller.CommitMacro();
         }
 

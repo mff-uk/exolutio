@@ -18,6 +18,10 @@ namespace Exolutio.View.Commands.Grammar
                 Current.MainWindow.FloatingWindowHost.Add(w);
                 w.DisplayedGrammar = grammar; 
                 w.ShowModal();
+#else 
+                GrammarWindow w = new GrammarWindow();
+                w.DisplayedGrammar = grammar;
+                w.ShowDialog();
 #endif
             }
         }
