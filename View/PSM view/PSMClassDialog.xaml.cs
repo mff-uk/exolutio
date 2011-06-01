@@ -189,6 +189,8 @@ namespace Exolutio.View
                 }
             }
 
+            public Guid AddedAssociationID { get; set; }
+
             public FakePSMAssociation()
             {
                 Multiplicity = "1";
@@ -245,6 +247,11 @@ namespace Exolutio.View
                            || SourceAssociation.Interpretation != RepresentedAssociation
                            || SourceAssociation.Lower != lower || SourceAssociation.Upper != upper;
                 }
+            }
+
+            public override string ToString()
+            {
+                return !string.IsNullOrEmpty(this.Name) ? this.Name : "(unnamed association)";
             }
         }
 
@@ -486,9 +493,23 @@ namespace Exolutio.View
                 }
                 if (!found)
                 {
-                    cmdDeletePSMAssociation deleteCommand = new cmdDeletePSMAssociation(controller);
-                    deleteCommand.Set(psmAssociation);
-                    controller.CreatedMacro.Commands.Add(deleteCommand);
+                    MessageBoxResult result = ExolutioYesNoBox.Show("Cut or delete", string.Format("Click 'Yes' if you want to delete the association '{0}' with the whole subtree.\nClick 'No' if you want to delete the association and make the subtree a new tree. ", psmAssociation));
+                    if (result == MessageBoxResult.No)
+                    {
+                        cmdDeletePSMAssociation deleteCommand = new cmdDeletePSMAssociation(controller);
+                        deleteCommand.Set(psmAssociation);
+                        controller.CreatedMacro.Commands.Add(deleteCommand);
+                    }
+                    else if (result == MessageBoxResult.Yes)
+                    {
+                        cmdDeletePSMAssociationRecursive deleteCommand = new cmdDeletePSMAssociationRecursive(controller);
+                        deleteCommand.Set(psmAssociation);
+                        controller.CreatedMacro.Commands.Add(deleteCommand);
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
             }
 
@@ -547,6 +568,30 @@ namespace Exolutio.View
                 }
             }
             #endregion
+
+            #region ordering
+
+            {
+                List<Guid> ordering = new List<Guid>();
+                foreach (FakePSMAssociation association in fakeAssociations)
+                {
+                    if (association.SourceAssociation != null)
+                    {
+                        ordering.Add(association.SourceAssociation.ID);
+                    }
+                    else if (association.AddedAssociationID != Guid.Empty)
+                    {
+                        ordering.Add(association.AddedAssociationID);
+                    }
+                }
+
+                acmdReorderComponents<PSMAssociation> reorderCommand = new acmdReorderComponents<PSMAssociation>(controller);
+                reorderCommand.ComponentGuids = ordering;
+                reorderCommand.OwnerCollection = psmClass.ChildPSMAssociations;
+                controller.CreatedMacro.Commands.Add(reorderCommand);
+            }
+
+            #endregion 
 
             return !error;
         }
