@@ -265,7 +265,8 @@ namespace Exolutio.View
         void CloseRibbonBackstage();
         void CloseProject();
         void FocusComponent(Diagram diagram, Exolutio.Model.Component component);
-        void DisplayReport(NestedCommandReport finalReport);
+        void DisplayReport(CommandReportBase report, bool showEvenIfNotVisible);
+        void DisplayLog(Log log, bool showEvenIfNotVisible);
         IDiagramTabManager DiagramTabManager { get; }
         IFilePresenter FilePresenter { get; }
         bool CommandsDisabled { get; }

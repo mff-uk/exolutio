@@ -39,6 +39,16 @@ namespace Exolutio.View
             if (!this.IsVisible)
                 return;
             this.DisplayedReport = displayedReport;
+            this.DisplayedLog = null; 
+            Update();
+        }
+
+        public void DisplayLog(Log displayedLog)
+        {
+            if (!this.IsVisible)
+                return;
+            this.DisplayedLog = displayedLog;
+            this.DisplayedReport = null;
             Update();
         }
 

@@ -111,6 +111,10 @@ namespace Exolutio.Model
             {
                 projectFile = value;
                 NotifyPropertyChanged("ProjectFile");
+                if (string.IsNullOrEmpty(Name))
+                {
+                    Name = Path.GetFileNameWithoutExtension(projectFile.Name);
+                }
             }
         }
 

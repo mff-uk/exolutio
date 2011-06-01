@@ -1,5 +1,6 @@
 ﻿using System;
 using Exolutio.Controller.Commands;
+using Exolutio.Dialogs;
 using Exolutio.Model;
 using Exolutio.Model.PSM;
 using Exolutio.ResourceLibrary;
@@ -15,23 +16,16 @@ namespace Exolutio.View.Commands.Grammar
             if (Current.ActiveDiagram != null && Current.ActiveDiagram.Schema is PSMSchema)
             {
                 ModelVerifier verifier = new ModelVerifier();
+
                 if (!verifier.TestSchemaNormalized((PSMSchema)Current.ActiveDiagram.Schema))
                 {
-                    if (ReportDisplay != null)
-                    {
-                        ReportDisplay.DisplayedReport = null;
-                        ReportDisplay.DisplayedLog = verifier.Log;
-                        ReportDisplay.Update();
-                    }
+                    ExolutioMessageBox.Show("Normalization", "Schema is not normalized", "Check command log window for details.");
+                    Current.MainWindow.DisplayLog(verifier.Log, true);
                 }
                 else
                 {
-                    if (ReportDisplay != null)
-                    {
-                        ReportDisplay.DisplayedLog = null;
-                        ReportDisplay.DisplayedReport = new CommandReport("Schema is normalized. ");
-                        ReportDisplay.Update();
-                    }
+                    ExolutioMessageBox.Show("Normalization", "Normalization passed", "Schema is normalized");
+                    Current.MainWindow.DisplayReport(new CommandReport("Schema is normalized. "), true);
                 }
             }
         }

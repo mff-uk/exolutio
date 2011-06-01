@@ -245,14 +245,22 @@ namespace Exolutio.WPFClient
 
         #endregion 
 
-        public void DisplayReport(NestedCommandReport finalReport)
+        public void DisplayReport(CommandReportBase report, bool showEvenIfNotVisible)
         {
-            if (ReportDisplay.IsVisible)
+            if (ReportDisplay.IsVisible || showEvenIfNotVisible)
             {
-                ReportDisplay.DisplayedReport = finalReport;
-                ReportDisplay.Update();
+                ReportDisplay.DisplayReport(report);
             }
         }
+        
+        public void DisplayLog(Log log, bool showEvenIfNotVisible)
+        {
+            if (ReportDisplay.IsVisible || showEvenIfNotVisible)
+            {
+                ReportDisplay.DisplayLog(log);
+            }
+        }
+
 
         #region enable/disable commands
 
