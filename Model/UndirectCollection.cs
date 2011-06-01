@@ -64,7 +64,7 @@ namespace Exolutio.Model
             }
             return index;
         }
-
+        
         public int RemoveChecked(TMember member)
         {
             int index = internalGuidCollection.IndexOf(member);
@@ -103,15 +103,20 @@ namespace Exolutio.Model
         {
             Insert(member, internalGuidCollection.Count);
         }
-
-        internal void AddAsGuid(Guid guid)
+        
+        public void AddAsGuidSilent(Guid guid)
         {
-            InsertAsGuid(guid, internalGuidCollection.Count);
+            InsertAsGuidSilent(guid, internalGuidCollection.Count);
         }
 
-        internal void InsertAsGuid(Guid guid, int index)
+        internal void InsertAsGuidSilent(Guid guid, int index)
         {
             internalGuidCollection.Insert(index, guid);
+        }
+
+        public void RemoveAsGuidSilent(Guid guid)
+        {
+            internalGuidCollection.Remove(guid);
         }
 
         public void Insert(TMember member, int index)

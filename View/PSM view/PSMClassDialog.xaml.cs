@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Linq;
 using Exolutio.Controller.Commands;
 using Exolutio.Controller.Commands.Atomic;
+using Exolutio.Controller.Commands.Atomic.PSM;
 using Exolutio.Controller.Commands.Complex.PSM;
 using Exolutio.Dialogs;
 using Exolutio.Model.PIM;
@@ -143,6 +144,11 @@ namespace Exolutio.View
                            || SourceAttribute.DefaultValue != DefaultValue || SourceAttribute.Interpretation != RepresentedAttribute
                            || SourceAttribute.Lower != lower || SourceAttribute.Upper != upper || XFormElement != SourceAttribute.Element;
                 }
+            }
+
+            public override string ToString()
+            {
+                return !String.IsNullOrEmpty(Name) ? Name : "(unnamed attribute)";
             }
         }
 
@@ -642,6 +648,9 @@ namespace Exolutio.View
                     }
                 }
 
+                acmdReorderComponents<PSMAttribute> reorderCommand = new acmdReorderComponents<PSMAttribute>(controller);
+                reorderCommand.ComponentGuids = ordering;
+                controller.CreatedMacro.Commands.Add(reorderCommand);
             }
 
             #endregion 

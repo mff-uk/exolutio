@@ -76,7 +76,7 @@ namespace Exolutio.Model.Versioning
                 }
                 else
                 {
-                    targetCollection.AddAsGuid(guid);
+                    targetCollection.AddAsGuidSilent(guid);
                 }
             }
         }

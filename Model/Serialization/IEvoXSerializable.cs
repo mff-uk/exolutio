@@ -98,7 +98,7 @@ namespace Exolutio.Model.Serialization
             foreach (XElement xmlElement in collectionNode.Elements())
             {
                 Guid deserializedIdRef = component.DeserializeIDRef(idRefAttribute, xmlElement, context);
-                idRefCollection.AddAsGuid(deserializedIdRef);
+                idRefCollection.AddAsGuidSilent(deserializedIdRef);
                 subelementsCount++;
             }
 
