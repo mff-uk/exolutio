@@ -331,6 +331,15 @@ namespace Exolutio.Controller.Commands {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Components reordered..
+        /// </summary>
+        internal static string Components_reordered {
+            get {
+                return ResourceManager.GetString("Components_reordered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Association &apos;{0}&apos; moved from &apos;{1}&apos; to &apos;{2}&apos;..
         /// </summary>
         internal static string MOVE_PSM_ASSOCIATION {

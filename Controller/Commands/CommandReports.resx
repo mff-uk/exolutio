@@ -261,4 +261,7 @@
   <data name="COMPLEX_UPDATE_PSM_ASSOCIATION" xml:space="preserve">
     <value>Complex: PSM attribute update</value>
   </data>
+	<data name="Components_reordered">
+		<value xml:space="preserve">Components reordered.</value>
+	</data>
 </root>
