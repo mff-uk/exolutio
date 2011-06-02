@@ -9,7 +9,7 @@
 			<Button.Content>_OK</Button.Content>
 		</Button>
 		<Button Height="23" Margin="0,0,105,12" Name="bApply" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="87" IsEnabled="False" TabIndex="3" Click="bApply_Click">Apply</Button>
-        <Button Height="23" HorizontalAlignment="Right" Margin="0,0,12,12" Name="bCancel" VerticalAlignment="Bottom" Width="87" IsCancel="True" TabIndex="4">Cancel</Button>
+        <Button Height="23" HorizontalAlignment="Right" Margin="0,0,12,12" Name="bCancel" VerticalAlignment="Bottom" Width="87" IsCancel="True" TabIndex="4" Click="bCancel_Click">Cancel</Button>
         <TabControl Margin="12,12,12,41" Name="tabControl1" SelectedIndex="1">
             <TabItem Header="General" Name="tabGeneral" TabIndex="0">
                 <TabItem.Resources>
@@ -111,7 +111,7 @@
                         BorderBrush="LightGray" 
                         HorizontalGridLinesBrush="LightGray" 
                         VerticalGridLinesBrush="LightGray" 
-                        CanUserAddRows="False"
+                        CanUserAddRows="True"
                         CanUserDeleteRows="False"
                         RowBackground="Cornsilk">
                         <DataGrid.Resources>
@@ -137,7 +137,7 @@
                         <DataGrid.Columns>
                             <DataGridCheckBoxColumn Header="" x:Name="checkedColumnAssociation" Binding="{Binding Checked}" Width="30">
                             </DataGridCheckBoxColumn>
-                            <DataGridComboBoxColumn Header="Represented association" MinWidth="300" x:Name="interpretationAssociation" SelectedValueBinding="{Binding RepresentedAssociation}" CanUserReorder="False" Width="135" IsReadOnly="false" />
+                            <DataGridComboBoxColumn Header="Represented association" MinWidth="300" x:Name="interpretationAssociation" SelectedValueBinding="{Binding RepresentedPIMAssociation}" CanUserReorder="False" Width="135" IsReadOnly="false" />
                             <DataGridTextColumn Header="Association name" MinWidth="70" x:Name="nameColumnAssociation" Binding="{Binding Name}" CanUserReorder="False" Width="140" IsReadOnly="false" />
                             <DataGridTextColumn Header="Multiplicity" x:Name="multiplicityColumnAssociation" Binding="{Binding Multiplicity,  ValidatesOnExceptions=True}" EditingElementStyle="{StaticResource CellEditStyle}" Width="70" />
                         </DataGrid.Columns>
