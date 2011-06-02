@@ -7,33 +7,34 @@ using System.Windows;
 
 namespace Exolutio.WPFClient.Converters
 {
-    public class MainWindowTitleConverter : IValueConverter
+    public class MainWindowTitleConverter : IMultiValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            Project project = (Project) value;
-            string title; 
+            string result;
+            string title = (string) values[0];
+            bool hasUnsavedChanges = (bool) values[1];
 
-            if (project.ProjectFile == null)
+            if (string.IsNullOrEmpty(title))
             {
-                title = "Untitled.eXo";
+                result = "Untitled.eXo";
             }
             else
             {
-                title = project.ProjectFile.FullName;
+                result = title;
             }
 
-            if (project.HasUnsavedChanges == true)
+            if (hasUnsavedChanges == true)
             {
-                title += "*";
+                result += "*";
             }
 
-            title += " - eXolutio";
+            result += " - eXolutio";
 
-            return title;
+            return result;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
         {
             return new object[0];
         }
