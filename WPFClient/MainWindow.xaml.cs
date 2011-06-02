@@ -104,10 +104,13 @@ namespace Exolutio.WPFClient
             {
                 ProjectView.BindToProject(newProject);
                 #region title binding
-                Binding titleBinding = new Binding();
-                titleBinding.Mode = BindingMode.OneWay;
+                
+                MultiBinding titleBinding = new MultiBinding();
+                titleBinding.Mode = BindingMode.OneWay;                
                 titleBinding.Converter = new MainWindowTitleConverter();
-                titleBinding.Source = newProject;
+                titleBinding.Bindings.Add(new Binding("Name") { Mode=BindingMode.OneWay, Source = newProject});
+                titleBinding.Bindings.Add(new Binding("HasUnsavedChanges") { Mode = BindingMode.OneWay, Source = newProject });
+                
                 this.SetBinding(TitleProperty, titleBinding);
                 #endregion 
                 if (newProject.ProjectFile != null)

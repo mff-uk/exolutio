@@ -75,8 +75,15 @@ namespace Exolutio.Model
         private string name;
         public string Name
         {
-            get { return name; }
-            set { name = value; NotifyPropertyChanged("Name"); }
+            get
+            {
+                return !string.IsNullOrEmpty(name) ? name : (ProjectFile != null ? Path.GetFileNameWithoutExtension(ProjectFile.FullName) : "Untitled");
+            }
+            set
+            {
+                //name = value; 
+                NotifyPropertyChanged("Name");
+            }
         }
 
 
@@ -111,10 +118,7 @@ namespace Exolutio.Model
             {
                 projectFile = value;
                 NotifyPropertyChanged("ProjectFile");
-                if (projectFile != null && string.IsNullOrEmpty(Name))
-                {
-                    Name = Path.GetFileNameWithoutExtension(projectFile.Name);
-                }
+                NotifyPropertyChanged("Name");
             }
         }
 

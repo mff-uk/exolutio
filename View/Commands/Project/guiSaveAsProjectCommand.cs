@@ -66,7 +66,7 @@ namespace Exolutio.View.Commands.Project
                 p.ProjectFile = new FileInfo(Path.GetFullPath(dlg.SafeFileName));
             }
             #else 
-            if (SavedProject == null)
+            if (p != null)
             {
                 p.ProjectFile = new FileInfo(Path.GetFullPath(dlg.FileName));
             }
