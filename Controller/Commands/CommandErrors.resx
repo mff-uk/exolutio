@@ -210,4 +210,10 @@
   <data name="CMDERR_CONTENT_MODEL_NOT_ROOT" xml:space="preserve">
     <value>Content model is not a root.</value>
   </data>
+  <data name="CMDERR_CLASS_NOT_ROOT" xml:space="preserve">
+    <value>Class is not root.</value>
+  </data>
+  <data name="CMDERR_CM_NOT_ROOT" xml:space="preserve">
+    <value>Content model is not root.</value>
+  </data>
 </root>

@@ -9,8 +9,11 @@ using Exolutio.Controller.Commands.Atomic.PSM;
 
 namespace Exolutio.Controller.Commands.Complex.PSM
 {
+    [PublicCommand("Delete PSM association (recursive)", PublicCommandAttribute.EPulicCommandCategory.PSM_atomic)]
     public class cmdDeletePSMAssociationRecursive : MacroCommand
     {
+        [PublicArgument("Deleted PSM association", typeof(PSMAssociation))]
+        [Scope(ScopeAttribute.EScope.PSMAssociation)]
         public Guid AssociationGuid { get; set; }
         
         public cmdDeletePSMAssociationRecursive()
@@ -33,18 +36,13 @@ namespace Exolutio.Controller.Commands.Complex.PSM
         protected override void GenerateSubCommands()
         {
             PSMAssociation association = Project.TranslateComponent<PSMAssociation>(AssociationGuid);
-
-            Commands.Add(new acmdUpdatePSMAssociationCardinality(Controller, association, 1, 1) { Propagate = false });
-            Commands.Add(new acmdRenameComponent(Controller, association, "") { Propagate = false });
+            Commands.Add(new cmdDeletePSMAssociation(Controller) { AssociationGuid = association });
             if (association.Child != null)
             {
-                cmdDeletePSMAssociationMember dam = new cmdDeletePSMAssociationMember(Controller);
+                cmdDeletePSMAssociationMemberRecursive dam = new cmdDeletePSMAssociationMemberRecursive(Controller);
                 dam.Set(association.Child);
                 Commands.Add(dam);
             }
-            if (!(association.Child is PSMContentModel))
-                Commands.Add(new acmdDeletePSMAssociation(Controller, association));
-            
         }
 
         public override bool CanExecute()

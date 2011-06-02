@@ -9,8 +9,11 @@ using Exolutio.Controller.Commands.Atomic.PSM;
 
 namespace Exolutio.Controller.Commands.Complex.PSM
 {
+    [PublicCommand("Delete root PSM class (recursive)", PublicCommandAttribute.EPulicCommandCategory.PSM_atomic)]
     public class cmdDeletePSMClassRecursive : MacroCommand
     {
+        [PublicArgument("PSMClass", typeof(PSMClass))]
+        [Scope(ScopeAttribute.EScope.PSMClass)]
         public Guid ClassGuid { get; set; }
 
         public cmdDeletePSMClassRecursive()
@@ -33,35 +36,23 @@ namespace Exolutio.Controller.Commands.Complex.PSM
         protected override void GenerateSubCommands()
         {
             PSMClass psmClass = Project.TranslateComponent<PSMClass>(ClassGuid);
-            //if (psmClass.ParentAssociation == null)
-            //{
-                foreach (PSMAttribute a in psmClass.PSMAttributes)
-                {
-                    cmdDeletePSMAttribute da = new cmdDeletePSMAttribute(Controller);
-                    da.Set(a);
-                    Commands.Add(da);
-                }
-                foreach (PSMAssociation a in psmClass.ChildPSMAssociations)
-                {
-                    cmdDeletePSMAssociationRecursive da = new cmdDeletePSMAssociationRecursive(Controller);
-                    da.Set(a);
-                    Commands.Add(da);
-                }
-                Commands.Add(new acmdSetPSMClassInterpretation(Controller, ClassGuid, Guid.Empty));
-                Commands.Add(new acmdRenameComponent(Controller, ClassGuid, ""));
-                Commands.Add(new acmdDeletePSMClass(Controller, ClassGuid));
-            /*}
-            else
+            foreach (PSMAssociation a in psmClass.ChildPSMAssociations)
             {
-                cmdDeletePSMAssociation cmddelete = new cmdDeletePSMAssociation(Controller);
-                cmddelete.Set(psmClass.ParentAssociation);
-                Commands.Add(cmddelete);
-            }*/
+                cmdDeletePSMAssociationRecursive da = new cmdDeletePSMAssociationRecursive(Controller);
+                da.Set(a);
+                Commands.Add(da);
+            }
+            Commands.Add(new cmdDeleteRootPSMClass(Controller) { ClassGuid = ClassGuid });
         }
 
         public override bool CanExecute()
         {
             if (ClassGuid == Guid.Empty) return false;
+            if (Project.TranslateComponent<PSMClass>(ClassGuid).ParentAssociation != null)
+            {
+                ErrorDescription = CommandErrors.CMDERR_CLASS_NOT_ROOT;
+                return false;
+            }
             return base.CanExecute();
         }
 

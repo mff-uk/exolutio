@@ -10,42 +10,43 @@ using Exolutio.Controller.Commands.Atomic.PSM;
 namespace Exolutio.Controller.Commands.Complex.PSM
 {
     /// <summary>
-    /// Deletes the subtree rooted in this root content model
+    /// Deletes root PSM content model and its content associations
     /// </summary>
-    [PublicCommand("Delete root PSM content model (recursive)", PublicCommandAttribute.EPulicCommandCategory.PSM_atomic)]
-    public class cmdDeletePSMContentModelRecursive : MacroCommand
+    [PublicCommand("Delete root PSM content model and its content associations (complex)", PublicCommandAttribute.EPulicCommandCategory.PSM_complex)]
+    public class cmdDeleteRootPSMContentModel : MacroCommand
     {
-        [PublicArgument("Content Model", typeof(PSMContentModel))]
+        [PublicArgument("Deleted PSM content model", typeof(PSMContentModel))]
         [Scope(ScopeAttribute.EScope.PSMContentModel)]
         public Guid ContentModelGuid { get; set; }
-        
-        public cmdDeletePSMContentModelRecursive()
+
+        public cmdDeleteRootPSMContentModel()
         {
             CheckFirstOnlyInCanExecute = true;
         }
 
-        public cmdDeletePSMContentModelRecursive(Controller c)
+        public cmdDeleteRootPSMContentModel(Controller c)
             : base(c)
         {
             CheckFirstOnlyInCanExecute = true;
         }
 
-        public void Set(Guid contentModelGuid)
+        public void Set(Guid classGuid)
         {
-            ContentModelGuid = contentModelGuid;
+            ContentModelGuid = classGuid;
             
         }
 
         protected override void GenerateSubCommands()
         {
-            PSMContentModel contentModel = Project.TranslateComponent<PSMContentModel>(ContentModelGuid);
-            foreach (PSMAssociation a in contentModel.ChildPSMAssociations)
+            PSMContentModel psmContentModel = Project.TranslateComponent<PSMContentModel>(ContentModelGuid);
+            foreach (PSMAssociation a in psmContentModel.ChildPSMAssociations)
             {
-                cmdDeletePSMAssociationRecursive da = new cmdDeletePSMAssociationRecursive(Controller);
+                cmdDeletePSMAssociation da = new cmdDeletePSMAssociation(Controller);
                 da.Set(a);
                 Commands.Add(da);
             }
-            Commands.Add(new acmdDeletePSMContentModel(Controller, contentModel));
+
+            Commands.Add(new acmdDeletePSMContentModel(Controller, ContentModelGuid));
         }
 
         public override bool CanExecute()
@@ -62,7 +63,7 @@ namespace Exolutio.Controller.Commands.Complex.PSM
         internal override void CommandOperation()
         {
             base.CommandOperation();
-            Report = new CommandReport(CommandReports.COMPLEX_DELETE_PSM_CM_RECURSIVE);
+            Report = new CommandReport(CommandReports.COMPLEX_DELETE_PSM_CM);
         }
 
     }

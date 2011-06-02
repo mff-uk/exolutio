@@ -299,7 +299,7 @@ namespace Exolutio.Controller.Commands.Atomic.PIM
                             d2.Set(assocGuid);
                             command.Commands.Add(d2);
 
-                            cmdDeletePSMClass d3 = new cmdDeletePSMClass(Controller) { Propagate = false };
+                            cmdDeleteRootPSMClass d3 = new cmdDeleteRootPSMClass(Controller) { Propagate = false };
                             d3.Set(classGuid);
                             command.Commands.Add(d3);
                         }

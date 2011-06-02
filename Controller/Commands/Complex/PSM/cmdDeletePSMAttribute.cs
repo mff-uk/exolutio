@@ -38,6 +38,7 @@ namespace Exolutio.Controller.Commands.Complex.PSM
             Commands.Add(new acmdRenameComponent(Controller, AttributeGuid, "") { Propagate = false });
             Commands.Add(new acmdUpdatePSMAttributeCardinality(Controller, AttributeGuid, 1, 1) { Propagate = false });
             Commands.Add(new acmdUpdatePSMAttributeType(Controller, AttributeGuid, Guid.Empty) { Propagate = false });
+            Commands.Add(new acmdUpdatePSMAttributeXForm(Controller, AttributeGuid, true) { Propagate = false });
             Commands.Add(new acmdSetPSMAttributeInterpretation(Controller, AttributeGuid, Guid.Empty) { Propagate = false });
             Commands.Add(new acmdDeletePSMAttribute(Controller, AttributeGuid));
         }

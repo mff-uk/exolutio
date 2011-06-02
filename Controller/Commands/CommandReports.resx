@@ -267,4 +267,7 @@
   <data name="COMPLEX_NEW_PSM_CLASS_AS_CHILD" xml:space="preserve">
     <value>Complex: Add PSMClass as interpreted child.</value>
   </data>
+  <data name="COMPLEX_DELETE_PSM_CM" xml:space="preserve">
+    <value>Complex: Root Content Model Deletion</value>
+  </data>
 </root>

@@ -142,6 +142,24 @@ namespace Exolutio.Controller.Commands {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Class is not root..
+        /// </summary>
+        internal static string CMDERR_CLASS_NOT_ROOT {
+            get {
+                return ResourceManager.GetString("CMDERR_CLASS_NOT_ROOT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Content model is not root..
+        /// </summary>
+        internal static string CMDERR_CM_NOT_ROOT {
+            get {
+                return ResourceManager.GetString("CMDERR_CM_NOT_ROOT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to CommandNumber should be assigned only once..
         /// </summary>
         internal static string CMDERR_COMMAND_NUMBER_ALTERED {

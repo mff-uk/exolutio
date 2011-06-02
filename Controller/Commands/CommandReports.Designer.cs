@@ -160,6 +160,15 @@ namespace Exolutio.Controller.Commands {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Complex: Root Content Model Deletion.
+        /// </summary>
+        internal static string COMPLEX_DELETE_PSM_CM {
+            get {
+                return ResourceManager.GetString("COMPLEX_DELETE_PSM_CM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Complex: Recursive PSM content model deletion.
         /// </summary>
         internal static string COMPLEX_DELETE_PSM_CM_RECURSIVE {

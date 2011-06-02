@@ -10,18 +10,21 @@ using Exolutio.Controller.Commands.Atomic.PSM;
 namespace Exolutio.Controller.Commands.Complex.PSM
 {
     /// <summary>
-    /// DOES NOT DELETE PARENT PSM ASSOCIATION
+    /// Deletes root PSM class, its attributes and content associations
     /// </summary>
-    public class cmdDeletePSMClass : MacroCommand
+    [PublicCommand("Delete root PSM class, its attributes and content associations (complex)", PublicCommandAttribute.EPulicCommandCategory.PSM_complex)]
+    public class cmdDeleteRootPSMClass : MacroCommand
     {
+        [PublicArgument("Deleted PSM class", typeof(PSMClass))]
+        [Scope(ScopeAttribute.EScope.PSMClass)]
         public Guid ClassGuid { get; set; }
 
-        public cmdDeletePSMClass()
+        public cmdDeleteRootPSMClass()
         {
             CheckFirstOnlyInCanExecute = true;
         }
 
-        public cmdDeletePSMClass(Controller c)
+        public cmdDeleteRootPSMClass(Controller c)
             : base(c)
         {
             CheckFirstOnlyInCanExecute = true;
@@ -49,14 +52,23 @@ namespace Exolutio.Controller.Commands.Complex.PSM
                 Commands.Add(da);
             }
 
-            Commands.Add(new acmdSetPSMClassInterpretation(Controller, ClassGuid, Guid.Empty));
             Commands.Add(new acmdRenameComponent(Controller, ClassGuid, ""));
+            foreach (PSMClass representant in psmClass.Representants)
+            {
+                Commands.Add(new acmdSetRepresentedClass(Controller, representant, Guid.Empty));
+            }
+            Commands.Add(new acmdSetPSMClassInterpretation(Controller, ClassGuid, Guid.Empty));
             Commands.Add(new acmdDeletePSMClass(Controller, ClassGuid));
         }
 
         public override bool CanExecute()
         {
             if (ClassGuid == Guid.Empty) return false;
+            if (Project.TranslateComponent<PSMClass>(ClassGuid).ParentAssociation != null)
+            {
+                ErrorDescription = CommandErrors.CMDERR_CLASS_NOT_ROOT;
+                return false;
+            }
             return base.CanExecute();
         }
 

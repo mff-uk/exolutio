@@ -42,7 +42,7 @@ namespace Exolutio.Controller.Commands.Complex.PSM
                 cmddelete.Set(psmClass.ParentAssociation);
                 Commands.Add(cmddelete);
             }
-            cmdDeletePSMClass c = new cmdDeletePSMClass(Controller) { Propagate = Propagate };
+            cmdDeleteRootPSMClass c = new cmdDeleteRootPSMClass(Controller) { Propagate = Propagate };
             c.Set(ClassGuid);
             Commands.Add(c);
         }
