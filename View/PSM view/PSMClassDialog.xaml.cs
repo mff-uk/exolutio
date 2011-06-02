@@ -622,7 +622,7 @@ namespace Exolutio.View
                 }
                 if (!found)
                 {
-                    cmdDeletePSMAttribute deleteCommand = new cmdDeletePSMAttribute(controller);
+                    Controller.Commands.Complex.PSM.cmdDeletePSMAttribute deleteCommand = new Controller.Commands.Complex.PSM.cmdDeletePSMAttribute(controller);
                     deleteCommand.Set(psmAttribute);
                     controller.CreatedMacro.Commands.Add(deleteCommand);
                 }
