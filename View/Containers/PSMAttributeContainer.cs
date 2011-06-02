@@ -109,5 +109,11 @@ namespace Exolutio.View
         {
             return GetEnumerator();
         }
+
+        public override void AddItem(PSMAttributeTextBox item)
+        {
+            base.AddItem(item);
+            item.Container = this;
+        }
     }
 }

@@ -35,34 +35,6 @@ namespace Exolutio.ViewToolkit
         public bool Focusable { get; set; }
 
 #endif
-
-
-        //private XCaseCanvas xCaseCanvas;
-        //protected XCaseCanvas XCaseCanvas
-        //{
-        //    get
-        //    {
-        //        if (xCaseCanvas == null)
-        //        {
-        //            FrameworkElement c = (FrameworkElement)this.Parent;
-        //            while (!(c is XCaseCanvas) && c.Parent != null)
-        //                c = (FrameworkElement)c.Parent;
-
-        //            if (c is XCaseCanvas)
-        //                xCaseCanvas = (XCaseCanvas)c;
-        //            else if (c.TemplatedParent != null)
-        //            {
-        //                c = (FrameworkElement)c.TemplatedParent;
-        //                if (c is IModelElementRepresentant)
-        //                {
-        //                    xCaseCanvas = ((IModelElementRepresentant)c).XCaseCanvas;
-        //                }
-        //            }
-        //        }
-        //        return xCaseCanvas;
-        //    }
-        //}
-
         public bool CanBeEmpty = false;
 
         private string valueBeforeEdit = null;
@@ -70,7 +42,7 @@ namespace Exolutio.ViewToolkit
         public ContextMenuItem mi_Rename;
 
         bool myeditable;
-
+        
         /// <summary>
         /// Switches between editable and not editable mode
         /// </summary>

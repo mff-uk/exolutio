@@ -166,7 +166,7 @@ namespace Exolutio.View
 		/// Adds one item to <see cref="container"/>.
 		/// </summary>
 		/// <param name="item">adde item.</param>
-		public void AddItem(TTextBox item)
+		public virtual void AddItem(TTextBox item)
 		{
 			if (Visibility == Visibility.Collapsed && container.Children.Count == 0)
 				Visibility = Visibility.Visible;
@@ -175,32 +175,27 @@ namespace Exolutio.View
 		}
 
 		/// <summary>
-		/// Removes item from <see cref="container"/>
-		/// </summary>
-		/// <param name="item">removed item.</param>
-        public void RemoveItem(TTextBox item)
-		{
-			container.Children.Remove(item);
-			ManageBorders();
-		}
-
-		/// <summary>
 		/// Clears the container
 		/// </summary>
-		public void Clear()
+		public virtual void Clear()
 		{
 		    foreach (object o in container.Children)
 		    {
-		        if (o is EditableTextBox)
+                if (o is TTextBox)
 		        {
-		            ((EditableTextBox) o).UnBindModelView();
+                    RemoveItem((TTextBox)o);
 		        }
 		    }
 			this.container.Children.Clear();
 			ManageBorders();
 		}
 
-		private void ManageBorders()
+        public virtual void RemoveItem(TTextBox item)
+        {
+            item.UnBindModelView();
+        }
+
+	    private void ManageBorders()
 		{
 			if (StackContainers != null && StackBorders != null)
 			{
@@ -264,8 +259,8 @@ namespace Exolutio.View
 	    public TTextBox AddAttribute(TMember attribute)
 	    {
             TTextBox t = new TTextBox();
-	        t.SetDisplayedObject(attribute, Diagram); 
-	        AddItem(t);
+	        t.SetDisplayedObject(attribute, Diagram);
+            AddItem(t);
 	        return t;
 	    }
 

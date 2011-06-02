@@ -111,5 +111,11 @@ namespace Exolutio.View
         {
             return GetEnumerator();
         }
+
+        public override void AddItem(PIMAttributeTextBox item)
+        {
+            base.AddItem(item);
+            item.Container = this;
+        }
     }
 }

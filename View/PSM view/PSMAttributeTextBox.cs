@@ -17,7 +17,9 @@ namespace Exolutio.View
 	{
 	    public PSMAttribute PSMAttribute { get; private set; }
 
-		//private IControlsAttributes classController;
+	    public PSMAttributesContainer Container { get; set; }
+
+	    //private IControlsAttributes classController;
 
         public PSMAttributeTextBox()
 		{
@@ -51,7 +53,7 @@ namespace Exolutio.View
 #if SILVERLIGHT
             ContextMenuService.SetContextMenu(this, ContextMenu);
 #else
-            MouseDoubleClick += PSMAttributeTextBox_MMouseDoubleClick;
+            MouseDoubleClick += PSMAttributeTextBox_MouseDoubleClick;
             MouseDown += PSMAttributeTextBox_MouseDown;
 #endif
             Background = ViewToolkitResources.TransparentBrush;
@@ -74,6 +76,15 @@ namespace Exolutio.View
 				type.PropertyChanged += Type_PropertyChanged;
 			}
 		}
+
+        public override void UnBindModelView()
+        {
+            if (type != null)
+            {
+                type.PropertyChanged -= Type_PropertyChanged;
+            }
+            PSMAttribute.PropertyChanged -= OnPropertyChangedEvent;
+        }
 
 		void Type_PropertyChanged(object sender, PropertyChangedEventArgs e)
 		{
@@ -132,10 +143,14 @@ namespace Exolutio.View
 	        Current.InvokeComponentTouched(PSMAttribute);
 	    }
 
-	    private void PSMAttributeTextBox_MMouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+	    private void PSMAttributeTextBox_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
 		{
-            //if (classController != null)
-            //    classController.ShowAttributeDialog(property);
+            if (PSMAttribute != null)
+            {
+                PSMClassDialog d = new PSMClassDialog();
+                d.Initialize(Current.Controller, PSMAttribute.PSMClass, PSMAttribute);
+                d.ShowDialog();
+            }
 		}
 
         #region Versioned element highlighting support
