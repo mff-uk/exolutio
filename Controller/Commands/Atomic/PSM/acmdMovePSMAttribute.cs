@@ -77,6 +77,7 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
             PSMClass oldClass = Project.TranslateComponent<PSMClass>(oldClassGuid);
             PSMClass newClass = Project.TranslateComponent<PSMClass>(newClassGuid);
 
+            if (newClass.RepresentedClass == oldClass || oldClass.RepresentedClass == newClass) return null;
             if (psmAttribute.Interpretation == null) return null;
             
             PSMClass oldIntContext = oldClass.NearestInterpretedClass();
