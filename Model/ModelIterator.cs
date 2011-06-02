@@ -122,6 +122,7 @@ namespace Exolutio.Model
             else //(child is PSMAssociationMember)
             {
                 parentA = (child as PSMAssociationMember).ParentAssociation;
+                if (parentA == null) return false;
                 if (parentA == parent) return true;
 
                 parentM = parentA.Parent;
