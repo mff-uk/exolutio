@@ -132,10 +132,10 @@
     <Compile Include="Commands\Complex\PSM\cmdCreateNewPSMAttribute.cs" />
     <Compile Include="Commands\Complex\PSM\cmdDeletePSMAttribute.cs" />
     <Compile Include="Commands\Complex\PSM\cmdDeletePSMAssociation.cs" />
-    <Compile Include="Commands\Complex\PSM\cmdDeletePSMClass.cs" />
+    <Compile Include="Commands\Complex\PSM\cmdDeleteRootPSMClass.cs" />
     <Compile Include="Commands\Complex\PSM\cmdDeletePSMContentModelRecursive.cs" />
     <Compile Include="Commands\Complex\PSM\cmdDeletePSMSchema.cs" />
-    <Compile Include="Commands\Complex\PSM\cmdDeletePSMAssociationMember.cs" />
+    <Compile Include="Commands\Complex\PSM\cmdDeletePSMAssociationMemberRecursive.cs" />
     <Compile Include="Commands\Complex\PSM\cmdDeletePSMClassAndParent.cs" />
     <Compile Include="Commands\Complex\PSM\cmdDeletePSMAssociationRecursive.cs" />
     <Compile Include="Commands\Complex\PSM\cmdDeletePSMClassRecursive.cs" />
@@ -145,6 +145,7 @@
     <Compile Include="Commands\Complex\PSM\cmdReconnectPSMAssociation.cs" />
     <Compile Include="Commands\Atomic\PSM\acmdReorderComponents.cs" />
     <Compile Include="Commands\Complex\PSM\cmdCreateNewPSMClassAsIntChild.cs" />
+    <Compile Include="Commands\Complex\PSM\cmdDeleteRootPSMContentModel.cs" />
     <Compile Include="Commands\Reflection\CommandSerializer.cs" />
     <Compile Include="Commands\Reflection\DescriptionAttribute.cs" />
     <Compile Include="Commands\Reflection\PIMAttributeNeighboringClassParameterConsistency.cs" />

@@ -36,21 +36,9 @@ namespace Exolutio.Controller.Commands.Complex.PSM
         protected override void GenerateSubCommands()
         {
             PSMSchema schema = Project.TranslateComponent<PSMSchema>(SchemaGuid);
-            foreach (PSMClass c in schema.PSMClasses)
+            foreach (PSMAssociationMember m in schema.Roots)
             {
-                foreach (PSMClass r in c.Representants)
-                {
-                    acmdSetRepresentedClass cr = new acmdSetRepresentedClass(Controller, r, Guid.Empty);
-                    Commands.Add(cr);
-                }
-                cmdDeletePSMClassAndParent dc = new cmdDeletePSMClassAndParent(Controller);
-                dc.Set(c);
-                Commands.Add(dc);
-            }
-            foreach (PSMContentModel c in schema.PSMContentModels)
-            {
-                acmdDeletePSMContentModel dc = new acmdDeletePSMContentModel(Controller, c);
-                Commands.Add(dc);
+                Commands.Add(new cmdDeletePSMAssociationMemberRecursive(Controller) { AssociationMemberGuid = m });
             }
 
             PSMDiagram psmDiagram = schema.ProjectVersion.PSMDiagrams.FirstOrDefault(d => d.PSMSchema == schema);

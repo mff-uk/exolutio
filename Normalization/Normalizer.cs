@@ -7,7 +7,7 @@ using Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers;
 using Exolutio.Model;
 using Exolutio.Model.PSM;
 using cmdDeletePSMAssociation = Exolutio.Controller.Commands.Complex.PSM.cmdDeletePSMAssociation;
-using cmdDeletePSMClass = Exolutio.Controller.Commands.Complex.PSM.cmdDeletePSMClass;
+using cmdDeleteRootPSMClass = Exolutio.Controller.Commands.Complex.PSM.cmdDeleteRootPSMClass;
 
 namespace Exolutio.Model.PSM.Normalization
 {
@@ -81,7 +81,7 @@ namespace Exolutio.Model.PSM.Normalization
             else if (!modelVerifier.TestRootsAreReferenced(schema))
             {
                 PSMClass c = (PSMClass) modelVerifier.LastViolatingComponent;
-                cmdDeletePSMClass command = new cmdDeletePSMClass(Controller);
+                cmdDeleteRootPSMClass command = new cmdDeleteRootPSMClass(Controller);
                 command.Set(c.ID);
                 return command;
             } // (a) Cardinality normalization 

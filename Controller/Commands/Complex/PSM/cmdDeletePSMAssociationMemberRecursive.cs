@@ -9,16 +9,16 @@ using Exolutio.Controller.Commands.Atomic.PSM;
 
 namespace Exolutio.Controller.Commands.Complex.PSM
 {
-    public class cmdDeletePSMAssociationMember : MacroCommand
+    public class cmdDeletePSMAssociationMemberRecursive : MacroCommand
     {
         public Guid AssociationMemberGuid { get; set; }
         
-        public cmdDeletePSMAssociationMember()
+        public cmdDeletePSMAssociationMemberRecursive()
         {
             CheckFirstOnlyInCanExecute = true;
         }
 
-        public cmdDeletePSMAssociationMember(Controller c)
+        public cmdDeletePSMAssociationMemberRecursive(Controller c)
             : base(c)
         {
             CheckFirstOnlyInCanExecute = true;
