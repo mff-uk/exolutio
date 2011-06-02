@@ -87,9 +87,12 @@ namespace Exolutio.Controller.Commands
 		{
             GenerateSubCommands();
             List<CommandBase> list = new List<CommandBase>(Commands);
+            #if DEBUG
+                int counter = 0;
+            #endif
             foreach (CommandBase t in list)
 		    {
-		        Controller.InvokeExecutingCommand(t, true, this);
+                Controller.InvokeExecutingCommand(t, true, this);
                 #if DEBUG 
 		        FieldsChecker.CheckMandatoryArguments(t);
                 #endif
@@ -150,7 +153,8 @@ namespace Exolutio.Controller.Commands
                     throw new ExolutioCommandException(t.ErrorDescription ?? CommandErrors.COMMAND_CANT_EXECUTE, t) { ExceptionTitle = CommandErrors.COMMAND_CANT_EXECUTE };
                 }
                 #if DEBUG
-		        FieldsChecker.CheckCommandResults(this);
+		            FieldsChecker.CheckCommandResults(this);
+                    counter++;
                 #endif
 		        Controller.InvokeExecutedCommand(t, true, this);
 		    }
