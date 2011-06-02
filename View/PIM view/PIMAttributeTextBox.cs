@@ -17,7 +17,9 @@ namespace Exolutio.View
 	{
 	    public PIMAttribute PIMAttribute { get; private set; }
 
-		//private IControlsAttributes classController;
+	    public PIMAttributesContainer Container { get; set; }
+
+	    //private IControlsAttributes classController;
 
         public override void SetDisplayedObject(object property, object diagram)
         {
@@ -67,6 +69,16 @@ namespace Exolutio.View
 			}
 		}
 
+        public override void UnBindModelView()
+        {
+            if (type != null)
+            {
+                type.PropertyChanged -= Type_PropertyChanged;
+            }
+            PIMAttribute.PropertyChanged -= OnPropertyChangedEvent;
+        }
+
+
 		void Type_PropertyChanged(object sender, PropertyChangedEventArgs e)
 		{
 			RefreshTextContent();
@@ -97,8 +109,12 @@ namespace Exolutio.View
 
 	    private void PIMAttributeTextBox_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
 		{
-            //if (classController != null)
-            //    classController.ShowAttributeDialog(property);
+	        if (PIMAttribute != null)
+	        {
+	            PIMClassDialog d = new PIMClassDialog();
+                d.Initialize(Current.Controller, PIMAttribute.PIMClass, PIMAttribute);
+                d.ShowDialog();
+	        }
 		}
 
         

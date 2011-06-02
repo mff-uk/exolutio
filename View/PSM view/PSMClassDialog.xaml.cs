@@ -340,7 +340,7 @@ namespace Exolutio.View
 
         private Controller.Controller controller;
 
-        public void Initialize(Controller.Controller controller, PSMClass psmClass)
+        public void Initialize(Controller.Controller controller, PSMClass psmClass, PSMAttribute initialSelectedAttribute = null)
         {
             this.controller = controller;
             this.psmClass = psmClass;
@@ -385,6 +385,11 @@ namespace Exolutio.View
             gridAssociations.ItemsSource = fakeAssociationsList;
 
             #endregion 
+
+            if (initialSelectedAttribute != null)
+            {
+                gridAttributes.SelectedItem = fakeAttributesList.SingleOrDefault(fa => fa.SourceAttribute == initialSelectedAttribute);
+            }
 
             dialogReady = true;
         }

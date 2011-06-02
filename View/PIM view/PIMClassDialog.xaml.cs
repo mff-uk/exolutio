@@ -29,7 +29,7 @@ namespace Exolutio.View
         private bool dialogReady = false;
 
         public PIMClass PIMClass { get; set; }
-
+        
         private class FakePIMAttribute : IEditableObject
         {
             public string Name { get; set; }
@@ -141,7 +141,7 @@ namespace Exolutio.View
 
         private Exolutio.Controller.Controller controller;
 
-        public void Initialize(Exolutio.Controller.Controller controller, PIMClass PIMClass)
+        public void Initialize(Exolutio.Controller.Controller controller, PIMClass PIMClass, PIMAttribute initialSelectedAttribute = null)
         {
             this.controller = controller;
             this.PIMClass = PIMClass;
@@ -160,6 +160,11 @@ namespace Exolutio.View
             fakeAttributes = new FakeAttributeCollection(fakeAttributesList, PIMClass);
             fakeAttributesList.CollectionChanged += delegate { UpdateApplyEnabled(); };
             gridAttributes.ItemsSource = fakeAttributesList;
+
+            if (initialSelectedAttribute != null)
+            {
+                gridAttributes.SelectedItem = fakeAttributesList.SingleOrDefault(fa => fa.SourceAttribute == initialSelectedAttribute);
+            }
 
             dialogReady = true;
         }
