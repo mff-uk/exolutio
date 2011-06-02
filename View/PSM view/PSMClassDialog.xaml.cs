@@ -351,6 +351,7 @@ namespace Exolutio.View
             }
 
             tabControl1.Items.CurrentChanging += TabControl_CurrentChanging;
+            Current.SelectionChanged += Current_SelectionChanged;
         }
 
         private Controller.Controller controller;
@@ -405,9 +406,7 @@ namespace Exolutio.View
             {
                 gridAttributes.SelectedItem = fakeAttributesList.SingleOrDefault(fa => fa.SourceAttribute == initialSelectedAttribute);
             }
-
-            Current.SelectionChanged += Current_SelectionChanged;
-
+            
             dialogReady = true;
         }
 
@@ -558,7 +557,7 @@ namespace Exolutio.View
             var modified = from FakePSMAssociation a in fakeAssociations
                            where a.SourceAssociation != null && a.SomethingChanged()
                            select a;
-            var added = from FakePSMAssociation a in fakeAssociations where a.SourceAssociation == null select a;
+            var added = from FakePSMAssociation a in fakeAssociations where a.SourceAssociation == null && a.Checked select a;
 
             #region editing exisiting association
             foreach (FakePSMAssociation modifiedAssociation in modified)
@@ -587,7 +586,7 @@ namespace Exolutio.View
                 {
                     continue;
                 }
-                if (!string.IsNullOrEmpty(addedAssociation.Name) && addedAssociation.Checked)
+                if (addedAssociation.Checked)
                 {
                     uint lower = 1;
                     UnlimitedInt upper = 1;
