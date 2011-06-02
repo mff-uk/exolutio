@@ -261,7 +261,10 @@
   <data name="COMPLEX_UPDATE_PSM_ASSOCIATION" xml:space="preserve">
     <value>Complex: PSM attribute update</value>
   </data>
-	<data name="Components_reordered">
-		<value xml:space="preserve">Components reordered.</value>
-	</data>
+  <data name="Components_reordered" xml:space="preserve">
+    <value>Components reordered.</value>
+  </data>
+  <data name="COMPLEX_NEW_PSM_CLASS_AS_CHILD" xml:space="preserve">
+    <value>Complex: Add PSMClass as interpreted child.</value>
+  </data>
 </root>
