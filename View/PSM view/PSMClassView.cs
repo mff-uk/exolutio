@@ -159,12 +159,13 @@ namespace Exolutio.View
         public void OpenPSMClassDialog()
         {
             PSMClassDialog dialog = new PSMClassDialog();
+            dialog.Topmost = true;
             dialog.Initialize(Current.Controller, PSMClass);
             #if SILVERLIGHT
             Current.MainWindow.FloatingWindowHost.Add(dialog);
             dialog.ShowModal();
             #else
-            dialog.ShowDialog();
+            dialog.Show();
             #endif
         }
 

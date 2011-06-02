@@ -21,6 +21,7 @@ using Exolutio.Controller;
 using Exolutio.SupportingClasses;
 using Exolutio.ViewToolkit;
 using cmdDeletePSMAttribute = Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers.cmdDeletePSMAttribute;
+using Component = Exolutio.Model.Component;
 
 namespace Exolutio.View
 {
@@ -177,7 +178,10 @@ namespace Exolutio.View
             }
             
             public PSMAssociation SourceAssociation { get; set; }
-            public PIMAssociation RepresentedAssociation { get; set; }
+            
+            public PIMAssociation RepresentedPIMAssociation { get; set; }
+
+            public PIMAssociationEnd SourcePIMAssociationEnd { get; set; }
 
             public bool Checked { get; set; }
 
@@ -185,7 +189,7 @@ namespace Exolutio.View
             {
                 get
                 {
-                    return RepresentedAssociation == null;
+                    return RepresentedPIMAssociation == null;
                 }
             }
 
@@ -203,7 +207,7 @@ namespace Exolutio.View
                 Name = p.Name;
                 Multiplicity = p.GetCardinalityString();
                 SourceAssociation = p;
-                RepresentedAssociation = (PIMAssociation)p.Interpretation;
+                RepresentedPIMAssociation = (PIMAssociation)p.Interpretation;
                 Checked = true;
             }
 
@@ -213,7 +217,7 @@ namespace Exolutio.View
                 Name = p.Name;                
                 Multiplicity = "1";
                 SourceAssociation = null;
-                RepresentedAssociation = p;
+                RepresentedPIMAssociation = p;
                 Checked = false;
             }
 
@@ -244,7 +248,7 @@ namespace Exolutio.View
                     UnlimitedInt upper;
                     IHasCardinalityExt.ParseMultiplicityString(Multiplicity, out lower, out upper);
                     return SourceAssociation.Name != Name 
-                           || SourceAssociation.Interpretation != RepresentedAssociation
+                           || SourceAssociation.Interpretation != RepresentedPIMAssociation
                            || SourceAssociation.Lower != lower || SourceAssociation.Upper != upper;
                 }
             }
@@ -314,7 +318,18 @@ namespace Exolutio.View
                         if (!associationList.Any(p => p.SourceAssociation != null &&
                             p.SourceAssociation.Interpretation == pimAssociation))
                         {
-                            associationList.Add(new FakePSMAssociation(pimAssociation) { Checked = false });
+                            foreach (PIMAssociationEnd otherEnd in pimAssociation.PIMAssociationEnds)
+                            {
+                                if (otherEnd.PIMClass == psmClass.Interpretation)
+                                {
+                                    continue;
+                                }
+                                associationList.Add(new FakePSMAssociation(pimAssociation) 
+                                    { 
+                                        Checked = false,
+                                        SourcePIMAssociationEnd = otherEnd
+                                    });
+                            }
                         }
                     }
                 }
@@ -391,7 +406,24 @@ namespace Exolutio.View
                 gridAttributes.SelectedItem = fakeAttributesList.SingleOrDefault(fa => fa.SourceAttribute == initialSelectedAttribute);
             }
 
+            Current.SelectionChanged += Current_SelectionChanged;
+
             dialogReady = true;
+        }
+
+        void Current_SelectionChanged()
+        {
+            PSMClass newSelection = Current.ActiveDiagramView.GetSingleSelectedComponentOrNull() as PSMClass;
+            if (newSelection != null)
+            {
+                Initialize(controller, newSelection);
+            }
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+            Current.SelectionChanged -= Current_SelectionChanged;
         }
 
         private void TabControl_CurrentChanging(object sender, CurrentChangingEventArgs e)
@@ -423,6 +455,8 @@ namespace Exolutio.View
             ApplyChanges();
             
         }
+
+        public new bool ? DialogResult { get; set; }
 
         private void bOk_Click(object sender, RoutedEventArgs e)
         {
@@ -541,7 +575,7 @@ namespace Exolutio.View
 
                 cmdUpdatePSMAssociation updateCommand = new cmdUpdatePSMAssociation(controller);
                 updateCommand.Set(sourceAssociation, modifiedAssociation.Name, lower, upper);
-                updateCommand.InterpretedAssociation = modifiedAssociation.RepresentedAssociation;
+                updateCommand.InterpretedAssociation = modifiedAssociation.RepresentedPIMAssociation;
                 controller.CreatedMacro.Commands.Add(updateCommand);
             }
             #endregion
@@ -549,6 +583,10 @@ namespace Exolutio.View
             #region new association
             foreach (FakePSMAssociation addedAssociation in added)
             {
+                if (addedAssociation.RepresentedPIMAssociation == null)
+                {
+                    continue;
+                }
                 if (!string.IsNullOrEmpty(addedAssociation.Name) && addedAssociation.Checked)
                 {
                     uint lower = 1;
@@ -561,15 +599,28 @@ namespace Exolutio.View
                         }
                     }
                      
-                    ExolutioMessageBox.Show("Creating new association", addedAssociation.Name, "");
-                    //cmdCreateNewPSMAssociation createNewPsmAssociation = new cmdCreateNewPSMAssociation(controller);
-                    //createNewPsmAssociation.Set(psmClass, addedAssociation.Name, lower, upper);
-                    //if (addedAssociation.RepresentedAssociation != null)
-                    //{
-                    //    createNewPsmAssociation.InterpretedAssociation = addedAssociation.RepresentedAssociation;
-                    //}
-                    //controller.CreatedMacro.Commands.Add(createNewPsmAssociation);
-                    
+                    //ExolutioMessageBox.Show("Creating new association", addedAssociation.Name, "");
+                    cmdCreateNewPSMClassAsIntChild createNewPsmAssociation = new cmdCreateNewPSMClassAsIntChild(controller);
+                    addedAssociation.AddedAssociationID = Guid.NewGuid();
+
+                    if (addedAssociation.SourcePIMAssociationEnd == null)
+                    {
+                        foreach (PIMAssociationEnd otherEnd in addedAssociation.RepresentedPIMAssociation.PIMAssociationEnds)
+                        {
+                            if (otherEnd.PIMClass == psmClass.Interpretation)
+                            {
+                                continue;
+                            }
+                            addedAssociation.SourcePIMAssociationEnd = otherEnd;
+                        }
+                    }
+
+                    createNewPsmAssociation.Set(psmClass, addedAssociation.SourcePIMAssociationEnd, Guid.Empty, addedAssociation.AddedAssociationID);
+                    controller.CreatedMacro.Commands.Add(createNewPsmAssociation);
+
+                    cmdUpdatePSMAssociation updateCommand = new cmdUpdatePSMAssociation(controller);
+                    updateCommand.Set(addedAssociation.AddedAssociationID, addedAssociation.Name, lower, upper);
+                    controller.CreatedMacro.Commands.Add(updateCommand);
                 }
             }
             #endregion
@@ -828,5 +879,11 @@ namespace Exolutio.View
         }
 
         #endregion
+
+        private void bCancel_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = false;
+            Close();
+        }
     }
 }
