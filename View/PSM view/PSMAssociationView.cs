@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -8,6 +9,7 @@ using Exolutio.Model;
 using Exolutio.Model.PSM;
 using Exolutio.Model.ViewHelper;
 using Exolutio.ViewToolkit;
+using Component = Exolutio.Model.Component;
 using Label = Exolutio.ViewToolkit.Label;
 
 namespace Exolutio.View
@@ -146,10 +148,36 @@ namespace Exolutio.View
 
         public override bool CanPutInDiagram(DiagramView diagramView)
         {
+            if (!diagramView.RepresentantsCollection.ContainsKey(Parent) ||
+                !diagramView.RepresentantsCollection.ContainsKey(Child))
+            {
+                /* 
+                 * since parent and child may change, it is necessary
+                 * to hook to this possible change
+                 */
+                if (!parentChildUpdateBound)
+                {
+                    PSMAssociation.PropertyChanged += PSMAssociation_PropertyChanged_ForParentChildUpdate;
+                    parentChildUpdateBound = true;
+                }
+            }
+
             return base.CanPutInDiagram(diagramView)
                 && diagramView.RepresentantsCollection.ContainsKey(Parent)
                 && diagramView.RepresentantsCollection.ContainsKey(Child);
         }
+
+        bool parentChildUpdateBound = false; 
+
+        private void PSMAssociation_PropertyChanged_ForParentChildUpdate(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName.IsAmong("Child","Parent") 
+                && DiagramView == null && pendingDiagramView != null)
+            {
+                pendingDiagramView.DefferedAddCheck();
+            }
+        }
+
         public override bool CanRemoveFromDiagram()
         {
             bool canRemoveFromDiagram = base.CanRemoveFromDiagram();
@@ -160,7 +188,11 @@ namespace Exolutio.View
         public override void PutInDiagram(DiagramView diagramView, ViewHelper viewHelper)
         {
             base.PutInDiagram(diagramView, viewHelper);
-
+            if (parentChildUpdateBound)
+            {
+                PSMAssociation.PropertyChanged -= PSMAssociation_PropertyChanged_ForParentChildUpdate;
+                parentChildUpdateBound = false;
+            }
 #if SILVERLIGHT
             Connector = new Connector();
 #else

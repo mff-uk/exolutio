@@ -315,6 +315,10 @@ namespace Exolutio.View.Commands
                 ((ICommandWithDiagramParameter)controllerCommand).SchemaGuid = Diagram.Schema.ID;
                 ((ICommandWithDiagramParameter)controllerCommand).DiagramGuid = Diagram.ID;
             }
+            if (controllerCommand is StackedCommand)
+            {
+                ((StackedCommand)controllerCommand).Controller = Current.Controller;
+            }
             ControllerCommand = controllerCommand;
         }
 
