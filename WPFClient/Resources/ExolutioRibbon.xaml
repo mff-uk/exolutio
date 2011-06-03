@@ -151,7 +151,7 @@
             </Fluent:RibbonGroupBox>
         </Fluent:RibbonTabItem>
 
-        <Fluent:RibbonTabItem Header="Modeling" Group="{Binding ElementName=pimGroup}">
+        <Fluent:RibbonTabItem x:Name="tabPIM" Header="Modeling" Group="{Binding ElementName=pimGroup}">
             <Fluent:RibbonGroupBox Header="Create">
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.AddPIMClassCommand}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
@@ -170,7 +170,7 @@
             </Fluent:RibbonGroupBox>
         </Fluent:RibbonTabItem>
 
-        <Fluent:RibbonTabItem Header="Modeling" Group="{Binding ElementName=psmGroup}">
+        <Fluent:RibbonTabItem x:Name="tabPSM" Header="Modeling" Group="{Binding ElementName=psmGroup}">
             <Fluent:RibbonGroupBox Header="Create">
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.AddPSMClassCommand}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
