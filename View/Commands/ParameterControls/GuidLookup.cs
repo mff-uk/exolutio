@@ -130,6 +130,30 @@ namespace Exolutio.View.Commands.ParameterControls
                     }
                 }
             }
+            else if (typeof(PIMDiagram).IsAssignableFrom(componentType))
+            {
+                Items.Clear();
+                foreach (PIMDiagram pimDiagram in ProjectVersion.PIMDiagrams)
+                {
+                    ComboBoxItem pimDiagramItem = new ComboBoxItem();
+                    pimDiagramItem.Content = pimDiagram.ToString();
+                    pimDiagramItem.Tag = pimDiagram.ID.ToString();
+                    Items.Add(pimDiagramItem);
+                    SelectedIndex = 0;
+                }
+            }
+            else if (typeof(PSMDiagram).IsAssignableFrom(componentType))
+            {
+                Items.Clear();
+                foreach (PSMDiagram psmDiagram in ProjectVersion.PSMDiagrams)
+                {
+                    ComboBoxItem pimDiagramItem = new ComboBoxItem();
+                    pimDiagramItem.Content = psmDiagram.ToString();
+                    pimDiagramItem.Tag = psmDiagram.ID.ToString();
+                    Items.Add(pimDiagramItem);
+                    SelectedIndex = 0;
+                }
+            }
             else
             {
                 throw new NotImplementedException(
