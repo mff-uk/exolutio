@@ -286,11 +286,29 @@ namespace Exolutio.Controller.Commands {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Complex: Split PIM association.
+        /// </summary>
+        internal static string COMPLEX_SPLIT_PIM_ASSOCIATION {
+            get {
+                return ResourceManager.GetString("COMPLEX_SPLIT_PIM_ASSOCIATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Complex: Split PIM attribute.
         /// </summary>
         internal static string COMPLEX_SPLIT_PIM_ATTRIBUTE {
             get {
                 return ResourceManager.GetString("COMPLEX_SPLIT_PIM_ATTRIBUTE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Complex: Split PSM association.
+        /// </summary>
+        internal static string COMPLEX_SPLIT_PSM_ASSOCIATION {
+            get {
+                return ResourceManager.GetString("COMPLEX_SPLIT_PSM_ASSOCIATION", resourceCulture);
             }
         }
         

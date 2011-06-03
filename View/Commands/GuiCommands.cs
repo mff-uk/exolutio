@@ -64,6 +64,9 @@ namespace Exolutio.View.Commands
         public static guiControllerCommand AddPSMAttributeCommand { get; set; }
         public static guiControllerCommand AddPSMAssociationCommand { get; set; }
         public static guiControllerCommand AddPSMContentModel { get; set; }
+        public static guiControllerCommand SplitPSMAttributeCommand { get; set; }
+        public static guiControllerCommand AddPSMChildInterpreted { get; set; }
+        public static guiControllerCommand AddPSMChildUnInterpreted { get; set; }
 
         #endregion
 
@@ -198,7 +201,7 @@ namespace Exolutio.View.Commands
                                          ControllerCommandFactoryMethod = CommandFactory<cmdNewPSMContentModel>.Factory,
                                          NoScope = true,
                                          PSMOnly = true,
-                                         Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.ContentContainer)
+                                         Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.ContentChoice)
                                      };
 
 
@@ -219,10 +222,40 @@ namespace Exolutio.View.Commands
                                                NoScope = true,
                                                PSMOnly = true,
                                                OpenDialog = true,
-                                               Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.AddChildren)
+                                               Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.AddChildren),
                                            };
 
-
+            AddPSMChildInterpreted = new guiControllerCommand
+                                            {
+                                                Text = "Add interpreted child",
+                                                ControllerCommandFactoryMethod = CommandFactory<Exolutio.Controller.Commands.Complex.PSM.cmdCreateNewPSMClassAsIntChild>.Factory,
+                                                PSMOnly = true,
+                                                OpenDialog = true,
+                                                Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.AddChildren),
+                                                AcceptedSelectedComponentType = typeof(PSMClass),
+                                                ScopeIsSelectedComponent = true
+                                            };
+            AddPSMChildUnInterpreted = new guiControllerCommand
+                                            {
+                                                Text = "Add uninterpreted child",
+                                                ControllerCommandFactoryMethod = CommandFactory<Exolutio.Controller.Commands.Complex.PSM.cmdCreateNewPSMClassAsUnintChild>.Factory,
+                                                PSMOnly = true,
+                                                OpenDialog = false,
+                                                Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.AddChildren),
+                                                AcceptedSelectedComponentType = typeof(PSMClass),
+                                                ScopeIsSelectedComponent = true
+                                            };
+            
+            SplitPSMAttributeCommand = new guiControllerCommand
+                                            {
+                                                Text = "Split attribute",
+                                                ControllerCommandFactoryMethod = CommandFactory<Exolutio.Controller.Commands.Complex.PSM.cmdSplitPSMAttribute>.Factory,
+                                                PSMOnly = true,
+                                                OpenDialog = false,
+                                                Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.AddAttributes),
+                                                ScopeIsSelectedComponent = true,
+                                                AcceptedSelectedComponentType = typeof(PSMAttribute)
+            };
 
             #endregion
 
