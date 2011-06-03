@@ -114,6 +114,14 @@ namespace Exolutio.Controller.Commands.Reflection
                 return instances[PIMAttributeNeighboringClassParameterConsistency.Key];
             }
 
+            if (consistencyKey == PSMAssociationMemberParameterConsistency.Key)
+            {
+                if (!instances.ContainsKey(PSMAssociationMemberParameterConsistency.Key))
+                {
+                    instances[PSMAssociationMemberParameterConsistency.Key] = new PSMAssociationMemberParameterConsistency();
+                }
+                return instances[PSMAssociationMemberParameterConsistency.Key];
+            }
             throw new ArgumentException(string.Format("Unknown consistency type: {0}.", consistencyKey), "consistencyKey");
         }
     }

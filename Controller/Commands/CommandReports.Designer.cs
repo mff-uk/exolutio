@@ -259,6 +259,24 @@ namespace Exolutio.Controller.Commands {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Complex: Add PSMClass as uninterpreted child..
+        /// </summary>
+        internal static string COMPLEX_NEW_PSM_CLASS_AS_UINT_CHILD {
+            get {
+                return ResourceManager.GetString("COMPLEX_NEW_PSM_CLASS_AS_UINT_CHILD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Complex: Content to Content model.
+        /// </summary>
+        internal static string COMPLEX_NEW_PSM_CM {
+            get {
+                return ResourceManager.GetString("COMPLEX_NEW_PSM_CM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Complex: PSM association reconnect.
         /// </summary>
         internal static string COMPLEX_RECONNECT_PSM_ASSOCIATION {
