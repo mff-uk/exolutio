@@ -120,7 +120,7 @@ namespace Exolutio.View
 
         #region deffered add & remove
 
-        private DiagramView pendingDiagramView;
+        protected DiagramView pendingDiagramView;
         private ViewHelper pendingViewHelper;
 
         public void PutInDiagramDeferred(DiagramView diagramView, Component component, ViewHelper viewHelper)
@@ -167,11 +167,12 @@ namespace Exolutio.View
 
         internal void DeferredAddCheck()
         {
-            if (CanPutInDiagram(pendingDiagramView))
+            if (DiagramView == null && CanPutInDiagram(pendingDiagramView))
             {
                 PutInDiagram(pendingDiagramView, pendingViewHelper);
                 pendingDiagramView.DeferredAddComponents.Remove(this);
                 pendingDiagramView.DefferedAddCheck();
+                pendingDiagramView = null; 
             }
         }
 
