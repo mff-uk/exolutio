@@ -76,7 +76,7 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
             oldParent.ChildPSMAssociations.Insert(psmAssociation, index);
             return OperationResult.OK;
         }
-        internal override MacroCommand PostPropagation()
+        internal override PropagationMacroCommand PostPropagation()
         {
             PSMAssociation psmAssociation = Project.TranslateComponent<PSMAssociation>(associationGuid);
             PSMAssociationMember source = Project.TranslateComponent<PSMAssociationMember>(oldParentGuid);
@@ -88,7 +88,7 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
             if (oldIntContext == null) return null;
             if (oldIntContext.Interpretation == newIntContext.Interpretation) return null;
 
-            MacroCommand command = new MacroCommand(Controller) { CheckFirstOnlyInCanExecute = true };
+            PropagationMacroCommand command = new PropagationMacroCommand(Controller) { CheckFirstOnlyInCanExecute = true };
             command.Report = new CommandReport("Post-propagation (move PSM attribute)");
 
             if (psmAssociation.Interpretation == null)

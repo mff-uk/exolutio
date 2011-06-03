@@ -54,8 +54,8 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
                 return OperationResult.Failed;
             }
         }
-        
-        internal override MacroCommand PostPropagation()
+
+        /*internal override PropagationMacroCommand PostPropagation()
         {
             PSMAttribute attribute = Project.TranslateComponent<PSMAttribute>(componentGuid);
 
@@ -63,12 +63,12 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
 
             PIMAttribute interpretation = attribute.Interpretation as PIMAttribute;
 
-            MacroCommand command = new MacroCommand(Controller);
+            PropagationMacroCommand command = new PropagationMacroCommand(Controller);
 
             acmdUpdatePIMAttributeCardinality d = new acmdUpdatePIMAttributeCardinality(Controller, interpretation, newLower, newUpper) { Propagate = true };
             command.Commands.Add(d);
 
             return command;
-        }
+        }*/
     }
 }

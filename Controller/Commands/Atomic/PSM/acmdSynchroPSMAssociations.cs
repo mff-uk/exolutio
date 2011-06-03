@@ -96,7 +96,7 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
                 String.Concat(Project.TranslateComponentCollection<PSMAssociation>(X2).Select<PSMAssociation, String>(a => a.ToString() + " ")));
         }
 
-        internal override MacroCommand PostPropagation()
+        internal override PropagationMacroCommand PostPropagation()
         {
             ReadOnlyCollection<PSMAssociation> aX1 = Project.TranslateComponentCollection<PSMAssociation>(X1);
             ReadOnlyCollection<PSMAssociation> aX2 = Project.TranslateComponentCollection<PSMAssociation>(X2);
@@ -109,7 +109,7 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
             if (aX1.Any(assoc => assoc.Interpretation == null) && aX2.Any(assoc => assoc.Interpretation == null)) return null;
             C1 = C1_.Interpretation as PIMClass;
 
-            MacroCommand command = new MacroCommand(Controller) { CheckFirstOnlyInCanExecute = true };
+            PropagationMacroCommand command = new PropagationMacroCommand(Controller) { CheckFirstOnlyInCanExecute = true };
             command.Report = new CommandReport("Post-propagation (synchronize PSM association sets)");
 
             //Twice... X1 => X2, X2 => X1

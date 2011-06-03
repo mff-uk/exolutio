@@ -104,7 +104,7 @@ namespace Exolutio.Controller.Commands
                         StackedCommand command = t as StackedCommand;
                         if (command.Propagate)
                         {
-                            MacroCommand m = command.PrePropagation();
+                            PropagationMacroCommand m = command.PrePropagation();
                             if (m != null)
                             {
                                 if (m.Report == null)
@@ -130,7 +130,7 @@ namespace Exolutio.Controller.Commands
                         StackedCommand command = t as StackedCommand;
                         if (command.Propagate)
                         {
-                            MacroCommand m = command.PostPropagation();
+                            PropagationMacroCommand m = command.PostPropagation();
                             if (m != null)
                             {
                                 if (m.Report == null)

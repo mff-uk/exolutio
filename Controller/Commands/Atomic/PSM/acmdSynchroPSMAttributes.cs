@@ -45,13 +45,13 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
                 String.Concat(Project.TranslateComponentCollection<PSMAttribute>(X2).Select<PSMAttribute, String>(a => a.ToString() + " ")));
         }
 
-        internal override MacroCommand PostPropagation()
+        internal override PropagationMacroCommand PostPropagation()
         {
             ReadOnlyCollection<PSMAttribute> aX1 = Project.TranslateComponentCollection<PSMAttribute>(X1);
             ReadOnlyCollection<PSMAttribute> aX2 = Project.TranslateComponentCollection<PSMAttribute>(X2);
             if (aX1.Count == 0 || aX2.Count == 0) return null;
-            
-            MacroCommand command = new MacroCommand(Controller) { CheckFirstOnlyInCanExecute = true };
+
+            PropagationMacroCommand command = new PropagationMacroCommand(Controller) { CheckFirstOnlyInCanExecute = true };
             command.Report = new CommandReport("Post-propagation (synchronize PSM attribute sets)");
             PSMClass psmClass = aX2.First().PSMClass;
 

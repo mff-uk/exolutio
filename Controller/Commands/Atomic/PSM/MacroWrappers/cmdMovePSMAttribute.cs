@@ -8,7 +8,7 @@ using Exolutio.Model;
 
 namespace Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers
 {
-    [PublicCommand("Move PSM attribute", PublicCommandAttribute.EPulicCommandCategory.PSM_atomic)]
+    [PublicCommand("Move PSM attribute (atomic)", PublicCommandAttribute.EPulicCommandCategory.PSM_atomic)]
     public class cmdMovePSMAttribute : MacroCommand
     {
         [PublicArgument("Attribute", typeof(PSMAttribute))]

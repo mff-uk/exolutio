@@ -72,7 +72,7 @@ namespace Exolutio.Controller.Commands.Atomic.PIM
             return OperationResult.OK;
         }
 
-        internal override MacroCommand PrePropagation()
+        internal override PropagationMacroCommand PrePropagation()
         {
             IEnumerable<CommandBase> deleteFromDiagrams =
                 acmdRemoveComponentFromDiagram.CreateCommandsToRemoveFromAllDiagrams(Controller, AssociationGuid);
@@ -80,7 +80,7 @@ namespace Exolutio.Controller.Commands.Atomic.PIM
             List<PSMAssociation> list = Project.TranslateComponent<PIMAssociation>(AssociationGuid).GetInterpretedComponents().Cast<PSMAssociation>().ToList<PSMAssociation>();
             if (list.Count == 0 && deleteFromDiagrams.Count() == 0) return null;
 
-            MacroCommand command = new MacroCommand(Controller);
+            PropagationMacroCommand command = new PropagationMacroCommand(Controller);
             command.Report = new CommandReport("Pre-propagation (delete PIM association)");
 
             command.Commands.AddRange(deleteFromDiagrams);

@@ -55,12 +55,12 @@ namespace Exolutio.Controller.Commands.Atomic.PIM
             }
         }
 
-        internal override MacroCommand PrePropagation()
+        internal override PropagationMacroCommand PrePropagation()
         {
             List<PSMAssociation> list = Project.TranslateComponent<PIMAssociationEnd>(ComponentGuid).PIMAssociation.GetInterpretedComponents().Cast<PSMAssociation>().ToList<PSMAssociation>();
             if (list.Count == 0) return null;
 
-            MacroCommand command = new MacroCommand(Controller);
+            PropagationMacroCommand command = new PropagationMacroCommand(Controller);
             command.Report = new CommandReport("Pre-propagation (update PIM association end cardinality)");
 
             foreach (PSMAssociation a in list)

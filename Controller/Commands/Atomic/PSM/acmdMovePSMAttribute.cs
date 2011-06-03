@@ -71,7 +71,7 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
             return OperationResult.OK;
         }
 
-        internal override MacroCommand PostPropagation()
+        internal override PropagationMacroCommand PostPropagation()
         {
             PSMAttribute psmAttribute = Project.TranslateComponent<PSMAttribute>(attributeGuid);
             PSMClass oldClass = Project.TranslateComponent<PSMClass>(oldClassGuid);
@@ -85,7 +85,7 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
 
             if (oldIntContext == newIntContext) return null;
 
-            MacroCommand command = new MacroCommand(Controller) { CheckFirstOnlyInCanExecute = true };
+            PropagationMacroCommand command = new PropagationMacroCommand(Controller) { CheckFirstOnlyInCanExecute = true };
             command.Report = new CommandReport("Post-propagation (move PSM attribute)");
 
             if (newIntContext == null)
