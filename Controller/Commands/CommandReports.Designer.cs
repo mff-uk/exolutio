@@ -187,6 +187,15 @@ namespace Exolutio.Controller.Commands {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Complex: Derive new PSM root.
+        /// </summary>
+        internal static string COMPLEX_DERIVE_NEW_ROOT {
+            get {
+                return ResourceManager.GetString("COMPLEX_DERIVE_NEW_ROOT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Complex: PSM attribute movement.
         /// </summary>
         internal static string COMPLEX_MOVE_PSM_ATTRIBUTE {

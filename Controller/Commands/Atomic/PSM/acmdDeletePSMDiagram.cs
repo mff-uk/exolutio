@@ -8,37 +8,29 @@ using Exolutio.Model;
 
 namespace Exolutio.Controller.Commands.Atomic.PSM
 {
-    public class acmdNewPSMDiagram : StackedCommand
+    public class acmdDeletePSMDiagram : StackedCommand
     {
         private Guid schemaGuid;
-
-        private Guid diagramGuid;
 
         public Guid SchemaGuid
         {
             get { return schemaGuid; }
-            set
-            {
-                schemaGuid = value;
-            }
+            set { schemaGuid = value; }
         }
 
-        /// <summary>
-        /// If set before execution, creates a new diagram with this GUID.
-        /// After execution contains GUID of the created diagram.
-        /// </summary>
+        private Guid diagramGuid;
+
         public Guid DiagramGuid
         {
             get { return diagramGuid; }
             set
             {
-                if (!Executed) diagramGuid = value;
-                else throw new ExolutioCommandException("Cannot set DiagramGuid after command execution.", this);
+                diagramGuid = value;
             }
         }
 
 
-        public acmdNewPSMDiagram(Controller c)
+        public acmdDeletePSMDiagram(Controller c)
             : base(c)
         { }
 
@@ -49,20 +41,19 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
         
         internal override void CommandOperation()
         {
-            if (DiagramGuid == Guid.Empty) DiagramGuid = Guid.NewGuid();
-
-            PSMSchema psmSchema = Project.TranslateComponent<PSMSchema>(schemaGuid);
-            PSMDiagram diagram = new PSMDiagram(Project, DiagramGuid);
-            diagram.LoadSchemaToDiagram(psmSchema);
-            psmSchema.ProjectVersion.PSMDiagrams.Add(diagram);
-            Report = new CommandReport(CommandReports.PSM_diagram_added, psmSchema);
+            PSMDiagram psmDiagram = Project.TranslateComponent<PSMDiagram>(DiagramGuid);
+            psmDiagram.ProjectVersion.PSMDiagrams.RemoveChecked(psmDiagram);
+            Project.mappingDictionary.Remove(DiagramGuid);
+            Report = new CommandReport(CommandReports.PSM_diagram_removed, psmDiagram);
         }
 
         internal override CommandBase.OperationResult UndoOperation()
         {
-            PSMSchema s = Project.TranslateComponent<PSMSchema>(SchemaGuid);
-            PSMDiagram psmDiagram = Project.TranslateComponent<PSMDiagram>(diagramGuid);
-            s.ProjectVersion.PSMDiagrams.Remove(psmDiagram);
+            PSMSchema psmSchema = Project.TranslateComponent<PSMSchema>(SchemaGuid);
+            PSMDiagram psmDiagram = new PSMDiagram(Project, DiagramGuid);
+            psmDiagram.Schema = psmSchema;
+            psmDiagram.LoadSchemaToDiagram(psmSchema);
+            psmSchema.ProjectVersion.PSMDiagrams.Add(psmDiagram);
             return OperationResult.OK;
         }
     }

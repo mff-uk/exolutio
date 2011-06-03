@@ -52,6 +52,7 @@ namespace Exolutio.View.Commands
         public static guiControllerCommand AddPIMClassCommand { get; set; }
         public static guiControllerCommand AddPIMAttributeCommand { get; set; }
         public static guiControllerCommand AddPIMAssociationCommand { get; set; }
+        public static guiControllerCommand DerivePSMRootCommand { get; set; }
 
         #endregion
 
@@ -176,6 +177,15 @@ namespace Exolutio.View.Commands
                                                Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.assocclass)
                                            };
 
+            DerivePSMRootCommand = new guiControllerCommand
+                                        {
+                                            Text = "Derive new PSM root",
+                                            ControllerCommandFactoryMethod = CommandFactory<Exolutio.Controller.Commands.Complex.PIM.cmdDerivePSMRoot>.Factory,
+                                            PIMOnly = true,
+                                            ScopeIsSelectedComponent = true,
+                                            AcceptedSelectedComponentType = typeof(PIMClass),
+                                            Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.XmlSchema)
+                                        };
             #endregion
 
             #region PSM
