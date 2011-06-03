@@ -129,6 +129,7 @@
     <Compile Include="Commands\Complex\PIM\cmdDeletePIMAttribute.cs" />
     <Compile Include="Commands\Complex\PIM\cmdDeletePIMAssociation.cs" />
     <Compile Include="Commands\Complex\PIM\cmdCreateNewPIMAssociation.cs" />
+    <Compile Include="Commands\Complex\PIM\cmdSplitPIMAttribute.cs" />
     <Compile Include="Commands\Complex\PIM\cmdUpdatePIMAttribute.cs" />
     <Compile Include="Commands\Complex\PSM\cmdCreateNewPSMAttribute.cs" />
     <Compile Include="Commands\Complex\PSM\cmdDeletePSMAttribute.cs" />
@@ -149,6 +150,7 @@
     <Compile Include="Commands\Complex\PSM\cmdDeleteRootPSMContentModel.cs" />
     <Compile Include="Commands\Complex\PSM\cmdCreateNewPSMClassAsUnintChild.cs" />
     <Compile Include="Commands\Complex\PSM\cmdContentToContentModel.cs" />
+    <Compile Include="Commands\Complex\PSM\cmdSplitPSMAttribute.cs" />
     <Compile Include="Commands\Reflection\CommandSerializer.cs" />
     <Compile Include="Commands\Reflection\PSMAssociationMemberParameterConsistency.cs" />
     <Compile Include="Commands\Reflection\DescriptionAttribute.cs" />

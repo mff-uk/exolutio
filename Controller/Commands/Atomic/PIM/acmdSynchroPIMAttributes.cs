@@ -81,10 +81,16 @@ namespace Exolutio.Controller.Commands.Atomic.PIM
                     IEnumerable<PSMAttribute> psmAttributesInSubClasses = psmClass.UnInterpretedSubClasses()
                         .SelectMany<PSMClass, PSMAttribute>(c => c.PSMAttributes);
 
-                    IEnumerable<PIMAttribute> interpretations = psmAttributesInSubClasses
+                    IEnumerable<PSMAttribute> interpretedAttributes = psmAttributesInSubClasses
                         .Union(psmClass.PSMAttributes)
-                        .Where(a => a.Interpretation != null)
+                        .Where(a => a.Interpretation != null);
+
+                    IEnumerable<PSMAttribute> responsibleAttributes = interpretedAttributes
+                        .Where(a => aX1.Contains(a.Interpretation));
+
+                    IEnumerable<PIMAttribute> interpretations = interpretedAttributes
                         .Select(a => a.Interpretation as PIMAttribute);
+                    
                     IEnumerable<PIMAttribute> attributesToPropagate = aX2.Where(a => !interpretations.Contains(a));
 
                     List<Guid> newAttributesGuid = new List<Guid>();
@@ -93,7 +99,7 @@ namespace Exolutio.Controller.Commands.Atomic.PIM
                         cmdCreateNewPSMAttribute c = new cmdCreateNewPSMAttribute(Controller);
                         Guid attrGuid = Guid.NewGuid();
                         c.AttributeGuid = attrGuid;
-                        c.Set(psmClass, a.AttributeType, a.Name, a.Lower, a.Upper, false);
+                        c.Set(psmClass, a.AttributeType, a.Name, a.Lower, a.Upper, responsibleAttributes.First().Element);
                         command.Commands.Add(c);
                         newAttributesGuid.Add(attrGuid);
 
