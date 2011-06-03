@@ -122,20 +122,17 @@
 
         </Fluent:Ribbon.Menu>
 
-        <!--<Fluent:Ribbon.QuickAccessItems>
-			<Fluent:QuickAccessMenuItem>
-				<Fluent:Button Header="Undo" Icon="{StaticResource ResourceKey=undo}" />
-			</Fluent:QuickAccessMenuItem>
-			<Fluent:QuickAccessMenuItem>
-				<Fluent:Button Header="Redo" Icon="{StaticResource ResourceKey=redo}" />
-			</Fluent:QuickAccessMenuItem>
-		</Fluent:Ribbon.QuickAccessItems>-->
+        <Fluent:Ribbon.QuickAccessItems>
+            <Fluent:QuickAccessMenuItem Target="{Binding ElementName=rbSaveProject}" IsChecked="True"/>
+            <Fluent:QuickAccessMenuItem Target="{Binding ElementName=rbUndo}" IsChecked="True"/>
+            <Fluent:QuickAccessMenuItem Target="{Binding ElementName=rbRedo}" IsChecked="True"/>
+		</Fluent:Ribbon.QuickAccessItems>
 
         <Fluent:RibbonTabItem Header="Main">
             <Fluent:RibbonGroupBox Header="Edit">
-                <Fluent:Button Command="{x:Static Commands:GuiCommands.UndoCommand}" 
+                <Fluent:Button x:Name="rbUndo" Command="{x:Static Commands:GuiCommands.UndoCommand}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
-                <Fluent:Button Command="{x:Static Commands:GuiCommands.RedoCommand}"
+                <Fluent:Button x:Name="rbRedo" Command="{x:Static Commands:GuiCommands.RedoCommand}"
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.VerifyModelCommand}"
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
