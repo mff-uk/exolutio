@@ -53,6 +53,8 @@ namespace Exolutio.View.Commands
         public static guiControllerCommand AddPIMAttributeCommand { get; set; }
         public static guiControllerCommand AddPIMAssociationCommand { get; set; }
         public static guiControllerCommand DerivePSMRootCommand { get; set; }
+        public static guiControllerCommand SplitPIMAttributeCommand { get; set; }
+        public static guiControllerCommand SplitPIMAssociationCommand { get; set; }
 
         #endregion
 
@@ -176,6 +178,22 @@ namespace Exolutio.View.Commands
                                                OpenDialog = true,
                                                Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.assocclass)
                                            };
+            SplitPIMAttributeCommand = new guiControllerCommand
+                                        {
+                                            Text = "Split attribute",
+                                            ControllerCommandFactoryMethod = CommandFactory<Exolutio.Controller.Commands.Complex.PIM.cmdSplitPIMAttribute>.Factory,
+                                            PIMOnly = true,
+                                            ScopeIsSelectedComponent = true,
+                                            AcceptedSelectedComponentType = typeof(PIMAttribute)
+                                        };
+            SplitPIMAssociationCommand = new guiControllerCommand
+                                        {
+                                            Text = "Split association",
+                                            ControllerCommandFactoryMethod = CommandFactory<Exolutio.Controller.Commands.Complex.PIM.cmdSplitPIMAssociation>.Factory,
+                                            PIMOnly = true,
+                                            ScopeIsSelectedComponent = true,
+                                            AcceptedSelectedComponentType = typeof(PIMAssociation)
+                                        };
 
             DerivePSMRootCommand = new guiControllerCommand
                                         {

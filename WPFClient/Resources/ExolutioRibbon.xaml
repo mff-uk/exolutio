@@ -15,6 +15,12 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <Fluent:Ribbon x:Name="Ribbon" DockPanel.Dock="Top">
+        <Fluent:Ribbon.ContextualGroups>
+            <Fluent:RibbonContextualTabGroup Header="PIM" Visibility="Visible"
+                x:Name="pimGroup" Background="Blue" BorderBrush="Blue" />
+            <Fluent:RibbonContextualTabGroup Header="PSM" Visibility="Visible"
+                x:Name="psmGroup" Background="Green" BorderBrush="Green" />
+        </Fluent:Ribbon.ContextualGroups>
         <Fluent:Ribbon.Menu>
             <Fluent:Backstage Name="BackStage">
                 <Fluent:BackstageTabControl>
@@ -143,28 +149,29 @@
                 <Fluent:Button Command="{x:Static Commands1:StaticWPFClientCommands.LayoutByVersions}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
             </Fluent:RibbonGroupBox>
-
-            <!--<Fluent:RibbonGroupBox Header="Edit">
-                <Fluent:Button Header="Undo" />
-                <Fluent:Button Header="Redo" />
-            </Fluent:RibbonGroupBox>-->
         </Fluent:RibbonTabItem>
 
-        <Fluent:RibbonTabItem Header="PIM">
-            <Fluent:RibbonGroupBox Header="Components">
+        <Fluent:RibbonTabItem Header="Modeling" Group="{Binding ElementName=pimGroup}">
+            <Fluent:RibbonGroupBox Header="Create">
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.AddPIMClassCommand}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.AddPIMAttributeCommand}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.AddPIMAssociationCommand}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+            </Fluent:RibbonGroupBox>
+            <Fluent:RibbonGroupBox Header="Change">
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.DerivePSMRootCommand}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.SplitPIMAttributeCommand}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.SplitPIMAssociationCommand}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
             </Fluent:RibbonGroupBox>
         </Fluent:RibbonTabItem>
 
-        <Fluent:RibbonTabItem Header="PSM">
-            <Fluent:RibbonGroupBox Header="Components">
+        <Fluent:RibbonTabItem Header="Modeling" Group="{Binding ElementName=psmGroup}">
+            <Fluent:RibbonGroupBox Header="Create">
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.AddPSMClassCommand}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.AddPSMContentModel}" 
@@ -177,12 +184,14 @@
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.AddPSMChildUnInterpreted}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+            </Fluent:RibbonGroupBox>
+            <Fluent:RibbonGroupBox Header="Change">
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.SplitPSMAttributeCommand}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
             </Fluent:RibbonGroupBox>
         </Fluent:RibbonTabItem>
 
-        <Fluent:RibbonTabItem  Header="Translation">
+        <Fluent:RibbonTabItem  Header="Translation" Group="{Binding ElementName=psmGroup}">
             <Fluent:RibbonGroupBox Header="Grammar">
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.TestNormalizationCommand}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
