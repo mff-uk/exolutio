@@ -65,7 +65,7 @@ namespace Exolutio.Controller.Commands.Complex.PSM
 
         internal override void CommandOperation()
         {
-            Report = new CommandReport(CommandReports.COMPLEX_NEW_PSM_CLASS_AS_CHILD);
+            Report = new CommandReport(CommandReports.COMPLEX_NEW_PSM_CLASS_AS_UINT_CHILD);
             base.CommandOperation();
         }
         

@@ -270,4 +270,10 @@
   <data name="COMPLEX_DELETE_PSM_CM" xml:space="preserve">
     <value>Complex: Root Content Model Deletion</value>
   </data>
+  <data name="COMPLEX_NEW_PSM_CLASS_AS_UINT_CHILD" xml:space="preserve">
+    <value>Complex: Add PSMClass as uninterpreted child.</value>
+  </data>
+  <data name="COMPLEX_NEW_PSM_CM" xml:space="preserve">
+    <value>Complex: Content to Content model</value>
+  </data>
 </root>
