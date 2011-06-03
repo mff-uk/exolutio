@@ -30,7 +30,7 @@ namespace Exolutio.View
             /*
              * Create one instance of guiControllerCommand for each existing public command. 
              * This instance is later used in every context menu (instances of commands are shared 
-             * amont the existing menus)
+             * among the existing menus)
              */
             foreach (List<CommandDescriptor> scopeCommands in PublicCommandsHelper.publicCommandsByScope.Values)
             {
@@ -43,6 +43,7 @@ namespace Exolutio.View
                             {
                                 return CommandSerializer.CreateCommandObject(descriptor.CommandType);
                             };
+                    guiC.ControllerCommandType = commandDescriptor.CommandType;
                     guiC.ControllerCommandDescription = commandDescriptor.CommandDescription;
                     guiCommandsForControllerCommands[commandDescriptor.CommandType] = guiC;
                 }
@@ -188,12 +189,7 @@ namespace Exolutio.View
             if (guiControllerCommand != null)
             {
                 guiControllerCommand.Diagram = (Diagram)contextMenu.Diagram;
-                guiControllerCommand.CreateControllerCommand();
-                if (guiControllerCommand.ControllerCommand is StackedCommand)
-                {
-                    ((StackedCommand)guiControllerCommand.ControllerCommand).Controller = Current.Controller;
-                    guiControllerCommand.OnCanExecuteChanged(null);
-                }
+                
                 if (!guiControllerCommand.NoScope)
                 {
                     guiControllerCommand.ScopeObject = contextMenu.ScopeObject;
@@ -205,9 +201,7 @@ namespace Exolutio.View
 
         public static void SetScopeForCommand(CommandBase controllerCommand, object scopeObject)
         {
-            PropertyInfo scopeProperty = PublicCommandsHelper.publicCommandsByType[controllerCommand.GetType()].ScopeProperty;
-            scopeProperty.SetValue(controllerCommand, ((ExolutioObject)scopeObject).ID, null);
-            controllerCommand.OnCanExecuteChanged(null, null);
+            
         }
 
         public static void CreateDialogControlsForCommand(Type commandType, ExolutioObject scopeObject, ProjectVersion projectVersion, StackPanel stackPanel, out List<Control> controls)

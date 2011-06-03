@@ -100,6 +100,7 @@ namespace Exolutio.View.Commands
             RenameProjectCommand = new guiControllerCommand
                                        {
                                            ControllerCommandFactoryMethod = CommandFactory<acmdRenameProject>.Factory,
+                                           ControllerCommandType = typeof(acmdRenameProject),
                                            NoScope = true,
                                            OpenDialog = true,
                                            Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.pencil)
@@ -107,6 +108,7 @@ namespace Exolutio.View.Commands
             RenamePSMSchemaCommand = new guiControllerCommand
                                          {
                                              ControllerCommandFactoryMethod = CommandFactory<acmdRenamePSMSchema>.Factory,
+                                             ControllerCommandType = typeof(acmdRenamePSMSchema),
                                              ScopeObjectConvertor =  guiControllerCommandScopeConvertors.DiagramToSchema,
                                              OpenDialog = true,
                                              Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.pencil)
@@ -114,6 +116,7 @@ namespace Exolutio.View.Commands
             RemovePSMSchemaCommand = new guiControllerCommand
             {
                 ControllerCommandFactoryMethod = CommandFactory<Controller.Commands.Complex.PSM.cmdDeletePSMSchema>.Factory,
+                ControllerCommandType = typeof(Controller.Commands.Complex.PSM.cmdDeletePSMSchema),
                 ScopeObjectConvertor = guiControllerCommandScopeConvertors.DiagramToSchema,
                 OpenDialog = false,
                 Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.delete2)
@@ -154,6 +157,7 @@ namespace Exolutio.View.Commands
                                      {
                                          Text = "Add class",
                                          ControllerCommandFactoryMethod = CommandFactory<cmdCreateNewPIMClass>.Factory,
+                                         ControllerCommandType = typeof(cmdCreateNewPIMClass),
                                          NoScope = true,
                                          PIMOnly = true,
                                          Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.@class)
@@ -163,6 +167,7 @@ namespace Exolutio.View.Commands
                                          {
                                              Text = "Add attribute",
                                              ControllerCommandFactoryMethod = CommandFactory<cmdNewPIMAttribute>.Factory,
+                                             ControllerCommandType = typeof(cmdNewPIMAttribute),
                                              AcceptedSelectedComponentType = typeof(PIMClass),
                                              ScopeIsSelectedComponent = true,
                                              PIMOnly = true,
@@ -173,6 +178,7 @@ namespace Exolutio.View.Commands
                                            {
                                                Text = "Add association",
                                                ControllerCommandFactoryMethod = CommandFactory<cmdNewPIMAssociation>.Factory,
+                                               ControllerCommandType = typeof(cmdNewPIMAssociation),
                                                NoScope = true,
                                                PIMOnly = true,
                                                OpenDialog = true,
@@ -181,7 +187,8 @@ namespace Exolutio.View.Commands
             SplitPIMAttributeCommand = new guiControllerCommand
                                         {
                                             Text = "Split attribute",
-                                            ControllerCommandFactoryMethod = CommandFactory<Exolutio.Controller.Commands.Complex.PIM.cmdSplitPIMAttribute>.Factory,
+                                            ControllerCommandFactoryMethod = CommandFactory<Controller.Commands.Complex.PIM.cmdSplitPIMAttribute>.Factory,
+                                            ControllerCommandType = typeof(Controller.Commands.Complex.PIM.cmdSplitPIMAttribute),
                                             PIMOnly = true,
                                             ScopeIsSelectedComponent = true,
                                             AcceptedSelectedComponentType = typeof(PIMAttribute)
@@ -189,7 +196,8 @@ namespace Exolutio.View.Commands
             SplitPIMAssociationCommand = new guiControllerCommand
                                         {
                                             Text = "Split association",
-                                            ControllerCommandFactoryMethod = CommandFactory<Exolutio.Controller.Commands.Complex.PIM.cmdSplitPIMAssociation>.Factory,
+                                            ControllerCommandFactoryMethod = CommandFactory<Controller.Commands.Complex.PIM.cmdSplitPIMAssociation>.Factory,
+                                            ControllerCommandType = typeof(Controller.Commands.Complex.PIM.cmdSplitPIMAssociation),
                                             PIMOnly = true,
                                             ScopeIsSelectedComponent = true,
                                             AcceptedSelectedComponentType = typeof(PIMAssociation)
@@ -198,7 +206,8 @@ namespace Exolutio.View.Commands
             DerivePSMRootCommand = new guiControllerCommand
                                         {
                                             Text = "Derive new PSM root",
-                                            ControllerCommandFactoryMethod = CommandFactory<Exolutio.Controller.Commands.Complex.PIM.cmdDerivePSMRoot>.Factory,
+                                            ControllerCommandFactoryMethod = CommandFactory<Controller.Commands.Complex.PIM.cmdDerivePSMRoot>.Factory,
+                                            ControllerCommandType = typeof(Controller.Commands.Complex.PIM.cmdDerivePSMRoot),
                                             PIMOnly = true,
                                             ScopeIsSelectedComponent = true,
                                             AcceptedSelectedComponentType = typeof(PIMClass),
@@ -211,6 +220,7 @@ namespace Exolutio.View.Commands
             AddPSMSchemaCommand = new guiControllerCommand
                                       {
                                           ControllerCommandFactoryMethod = CommandFactory<cmdNewPSMSchema>.Factory,
+                                          ControllerCommandType = typeof(cmdNewPSMSchema),
                                           NoScope = true
                                       };
 
@@ -218,6 +228,7 @@ namespace Exolutio.View.Commands
                                      {
                                          Text = "Add class",
                                          ControllerCommandFactoryMethod = CommandFactory<cmdNewPSMClass>.Factory,
+                                         ControllerCommandType = typeof(cmdNewPSMClass),
                                          NoScope = true,
                                          PSMOnly = true,
                                          Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.@class)
@@ -227,6 +238,7 @@ namespace Exolutio.View.Commands
                                      {
                                          Text = "Add content model",
                                          ControllerCommandFactoryMethod = CommandFactory<cmdNewPSMContentModel>.Factory,
+                                         ControllerCommandType = typeof(cmdNewPSMContentModel),
                                          NoScope = true,
                                          PSMOnly = true,
                                          Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.ContentChoice)
@@ -237,6 +249,7 @@ namespace Exolutio.View.Commands
                                          {
                                              Text = "Add attribute",
                                              ControllerCommandFactoryMethod = CommandFactory<cmdCreateNewPSMAttribute>.Factory,
+                                             ControllerCommandType = typeof(cmdCreateNewPSMAttribute),
                                              AcceptedSelectedComponentType = typeof(PSMClass),
                                              ScopeIsSelectedComponent = true,
                                              PSMOnly = true,
@@ -247,6 +260,7 @@ namespace Exolutio.View.Commands
                                            {
                                                Text = "Add association",
                                                ControllerCommandFactoryMethod = CommandFactory<cmdNewPSMAssociation>.Factory,
+                                               ControllerCommandType = typeof(cmdNewPSMAssociation),
                                                NoScope = true,
                                                PSMOnly = true,
                                                OpenDialog = true,
@@ -256,7 +270,8 @@ namespace Exolutio.View.Commands
             AddPSMChildInterpreted = new guiControllerCommand
                                             {
                                                 Text = "Add interpreted child",
-                                                ControllerCommandFactoryMethod = CommandFactory<Exolutio.Controller.Commands.Complex.PSM.cmdCreateNewPSMClassAsIntChild>.Factory,
+                                                ControllerCommandFactoryMethod = CommandFactory<Controller.Commands.Complex.PSM.cmdCreateNewPSMClassAsIntChild>.Factory,
+                                                ControllerCommandType = typeof(Controller.Commands.Complex.PSM.cmdCreateNewPSMClassAsIntChild),
                                                 PSMOnly = true,
                                                 OpenDialog = true,
                                                 Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.AddChildren),
@@ -267,6 +282,7 @@ namespace Exolutio.View.Commands
                                             {
                                                 Text = "Add uninterpreted child",
                                                 ControllerCommandFactoryMethod = CommandFactory<Exolutio.Controller.Commands.Complex.PSM.cmdCreateNewPSMClassAsUnintChild>.Factory,
+                                                ControllerCommandType = typeof(Exolutio.Controller.Commands.Complex.PSM.cmdCreateNewPSMClassAsUnintChild),
                                                 PSMOnly = true,
                                                 OpenDialog = false,
                                                 Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.AddChildren),
@@ -278,6 +294,7 @@ namespace Exolutio.View.Commands
                                             {
                                                 Text = "Split attribute",
                                                 ControllerCommandFactoryMethod = CommandFactory<Exolutio.Controller.Commands.Complex.PSM.cmdSplitPSMAttribute>.Factory,
+                                                ControllerCommandType = typeof(Exolutio.Controller.Commands.Complex.PSM.cmdSplitPSMAttribute),
                                                 PSMOnly = true,
                                                 OpenDialog = false,
                                                 Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.AddAttributes),

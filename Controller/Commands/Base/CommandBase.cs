@@ -120,12 +120,7 @@ namespace Exolutio.Controller.Commands
         /// </summary>
         /// <returns>True if command can be executed</returns>
         public abstract bool CanExecute();
-
-	    public virtual bool CanExecuteWithScope()
-	    {
-	        return true; 
-	    }
-
+        
         /// <summary>
         /// This method should be called each time some
         /// changes occur that affect whether or not the command should execute.
