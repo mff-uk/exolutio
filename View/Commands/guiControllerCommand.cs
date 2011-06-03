@@ -28,7 +28,6 @@ namespace Exolutio.View.Commands
         {
             Diagram = Current.ActiveDiagram;
             ScopeObject = null;
-            ControllerCommand = null;
             OnCanExecuteChanged(null);
         }
 
@@ -36,23 +35,24 @@ namespace Exolutio.View.Commands
 
         public Diagram Diagram { get; set; }
 
-        public delegate CommandBase ControllerCommandFactoryMethodDelegate();
-
-        private ControllerCommandFactoryMethodDelegate controllerCommandFactoryMethod;
-        internal ControllerCommandFactoryMethodDelegate ControllerCommandFactoryMethod
+        private Type controllerCommandType;
+        public Type ControllerCommandType
         {
-            get { return controllerCommandFactoryMethod; }
-            set 
-            { 
-                controllerCommandFactoryMethod = value;
-                if (string.IsNullOrEmpty(Text))
+            private get { return controllerCommandType; }
+            set
+            {
+                controllerCommandType = value;
+                if (string.IsNullOrEmpty(Text) && value != null)
                 {
-                    CommandBase c = controllerCommandFactoryMethod();
-                    CommandDescriptor commandDescriptor = PublicCommandsHelper.GetCommandDescriptor(c.GetType());
+                    CommandDescriptor commandDescriptor = PublicCommandsHelper.GetCommandDescriptor(value);
                     Text = commandDescriptor.CommandDescription;
                 }
             }
         }
+
+        public delegate CommandBase ControllerCommandFactoryMethodDelegate();
+
+        internal ControllerCommandFactoryMethodDelegate ControllerCommandFactoryMethod { get; set; }
 
         private List<Control> controls;
 
@@ -63,16 +63,16 @@ namespace Exolutio.View.Commands
             set
             {
                 if (ScopeObjectConvertor != null)
-                    scopeObject = ScopeObjectConvertor(value); 
-                else 
-                    scopeObject = value; 
+                    scopeObject = ScopeObjectConvertor(value);
+                else
+                    scopeObject = value;
                 OnCanExecuteChanged(null);
             }
         }
 
         public delegate object ScopeObjectConvertorDelegate(object value);
 
-        public ScopeObjectConvertorDelegate ScopeObjectConvertor; 
+        public ScopeObjectConvertorDelegate ScopeObjectConvertor;
 
         public bool NoScope { get; set; }
 
@@ -88,19 +88,15 @@ namespace Exolutio.View.Commands
             if (ScopeIsSelectedComponent && AcceptedSelectedComponentType != null && Current.ActiveDiagramView.IsSelectedComponentOfType(AcceptedSelectedComponentType))
             {
                 ScopeObject = Current.ActiveDiagramView.GetSelectedComponents().First();
-                if (ControllerCommand == null)
-                {
-                    CreateControllerCommand();
-                }
             }
 
             CommandDialogWindow w = null;
             controls = new List<Control>();
 
-            #region substitute scope with diagram 
+            #region substitute scope with diagram
             if (ScopeObject == null && Diagram != null)
             {
-                CommandDescriptor commandDescriptor = PublicCommandsHelper.GetCommandDescriptor(ControllerCommand.GetType());
+                CommandDescriptor commandDescriptor = PublicCommandsHelper.GetCommandDescriptor(ControllerCommandType);
                 if (string.IsNullOrEmpty(ControllerCommandDescription))
                 {
                     ControllerCommandDescription = commandDescriptor.CommandDescription;
@@ -112,25 +108,25 @@ namespace Exolutio.View.Commands
                     if (parameterDescriptor.ParameterPropertyInfo == commandDescriptor.ScopeProperty)
                     {
                         if (parameterDescriptor.ComponentType != null &&
-                            typeof (Diagram).IsAssignableFrom(parameterDescriptor.ComponentType))
+                            typeof(Diagram).IsAssignableFrom(parameterDescriptor.ComponentType))
                         {
                             ScopeObject = Diagram;
                         }
 
-                        if (parameterDescriptor.ComponentType == typeof (PSMSchema) && Diagram is PSMDiagram)
+                        if (parameterDescriptor.ComponentType == typeof(PSMSchema) && Diagram is PSMDiagram)
                         {
                             ScopeObject = Diagram.Schema;
                         }
                     }
                 }
             }
-            #endregion 
+            #endregion
 
             if (OpenDialog)
             {
                 w = new CommandDialogWindow();
 
-                MenuHelper.CreateDialogControlsForCommand(ControllerCommand.GetType(), (ExolutioObject)ScopeObject, ProjectVersion, w.spParameters,
+                MenuHelper.CreateDialogControlsForCommand(ControllerCommandType, (ExolutioObject)ScopeObject, ProjectVersion, w.spParameters,
                                                           out controls);
                 w.lTitle.Content = ControllerCommandDescription;
                 if (NoScope)
@@ -187,16 +183,17 @@ namespace Exolutio.View.Commands
         private void DoExecute()
         {
             CommandDescriptor commandDescriptor =
-                PublicCommandsHelper.GetCommandDescriptor(ControllerCommand.GetType());
+                PublicCommandsHelper.GetCommandDescriptor(ControllerCommandType);
             commandDescriptor.ClearParameterValues();
             OperationParametersControlCreator.ReadParameterValues(commandDescriptor, controls);
             foreach (ParameterDescriptor parameterDescriptor in commandDescriptor.Parameters)
             {
                 if (parameterDescriptor.ParameterPropertyInfo == commandDescriptor.ScopeProperty)
                 {
-                    parameterDescriptor.ParameterValue = ((ExolutioObject) this.ScopeObject).ID;
+                    parameterDescriptor.ParameterValue = ((ExolutioObject)this.ScopeObject).ID;
                 }
             }
+            CreateControllerCommand();
             CommandSerializer.FillParameters(ControllerCommand, commandDescriptor);
             ControllerCommand.CanExecuteChanged -= OnControllerCommandCanExecuteChanged;
             if (!ControllerCommand.CanExecute())
@@ -284,28 +281,22 @@ namespace Exolutio.View.Commands
                 Current.ActiveDiagramView != null &&
                 Current.ActiveDiagramView.IsSelectedComponentOfType(AcceptedSelectedComponentType))
             {
-                if (ControllerCommand == null)
-                {
-                    CreateControllerCommand();
-                    if (Diagram == null)
-                        return false; 
-                    ScopeObject = Current.ActiveDiagramView.GetSelectedComponents().First();
-                }
+                if (Diagram == null)
+                    return false;
+                // this silent assignment does not trigger CanExecuteChanged
+                scopeObject = Current.ActiveDiagramView.GetSelectedComponents().First();
                 return true;
             }
             else
             {
                 if (ScopeIsSelectedComponent)
                 {
+                    // this silent assignment does not trigger CanExecuteChanged
                     scopeObject = null;
-                }
-                if (ControllerCommand == null && Current.ActiveDiagramView != null)
-                {
-                    CreateControllerCommand();
                 }
             }
 
-            return (NoScope || ScopeObject != null) && ControllerCommand != null && ControllerCommand.CanExecuteWithScope();
+            return NoScope || ScopeObject != null;
         }
 
         public void CreateControllerCommand()
@@ -325,7 +316,6 @@ namespace Exolutio.View.Commands
                 ((ICommandWithDiagramParameter)controllerCommand).DiagramGuid = Diagram.ID;
             }
             ControllerCommand = controllerCommand;
-            ControllerCommand.CanExecuteChanged += OnControllerCommandCanExecuteChanged;
         }
 
         private void OnControllerCommandCanExecuteChanged(object sender, EventArgs args)
@@ -342,7 +332,7 @@ namespace Exolutio.View.Commands
             {
                 return ((Diagram)diagram).Schema;
             }
-            else return diagram; 
+            else return diagram;
         }
     }
 }

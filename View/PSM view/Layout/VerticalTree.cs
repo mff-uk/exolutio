@@ -31,24 +31,22 @@ namespace Exolutio.View
         /// <param name="psmDiagramView">The diagram (resp. canvas) to be layouted.</param>
         public static void LayoutDiagram(PSMDiagramView psmDiagramView)
         {
+            Debug.WriteLine("Layouting...");
+            double left = horizontalSpace;
+            foreach (PSMAssociationMember root in psmDiagramView.PSMDiagram.PSMSchema.Roots)
             {
-                Debug.WriteLine("Layouting...");
-                double left = horizontalSpace;
-                foreach (PSMAssociationMember root in psmDiagramView.PSMDiagram.PSMSchema.Roots)
+                if (root.ParentAssociation != null)
                 {
-                    if (root.ParentAssociation != null)
-                    {
-                        continue;
-                    }
-                    left += DrawTree(psmDiagramView, root, verticalSpace/2, left) + horizontalSpace;
+                    continue;
                 }
-
-                //foreach (PSMDiagramReference reference in diagram.DiagramReferences)
-                //{
-                //    left += TreeLayout.DrawTree(psmDiagramView, reference, TreeLayout.verticalSpace/2, left) +
-                //            TreeLayout.horizontalSpace;
-                //}
+                left += DrawTree(psmDiagramView, root, verticalSpace/2, left) + horizontalSpace;
             }
+
+            //foreach (PSMDiagramReference reference in diagram.DiagramReferences)
+            //{
+            //    left += TreeLayout.DrawTree(psmDiagramView, reference, TreeLayout.verticalSpace/2, left) +
+            //            TreeLayout.horizontalSpace;
+            //}
         }
 
         /// <summary>

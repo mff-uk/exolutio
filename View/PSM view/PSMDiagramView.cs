@@ -76,7 +76,7 @@ namespace Exolutio.View
 
         private void DoLayout()
         {
-            if (!this.Loading)
+            if (!this.Loading && this.IsArrangeValid)
             {
                 LayoutManager.DoLayout(this);
             }
