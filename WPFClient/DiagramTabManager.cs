@@ -44,6 +44,23 @@ namespace Exolutio.WPFClient
 
         void Current_ActiveDiagramChanged()
         {
+            if (ActiveDiagram is PIMDiagram)
+            {
+                MainWindow.ExolutioRibbon.pimGroup.Visibility = System.Windows.Visibility.Visible;
+                MainWindow.ExolutioRibbon.psmGroup.Visibility = System.Windows.Visibility.Collapsed;
+                MainWindow.ExolutioRibbon.tabPIM.Focus();
+            }
+            else if (ActiveDiagram is PSMDiagram)
+            {
+                MainWindow.ExolutioRibbon.pimGroup.Visibility = System.Windows.Visibility.Collapsed;
+                MainWindow.ExolutioRibbon.psmGroup.Visibility = System.Windows.Visibility.Visible;
+            }
+            else
+            {
+                MainWindow.ExolutioRibbon.pimGroup.Visibility = System.Windows.Visibility.Collapsed;
+                MainWindow.ExolutioRibbon.psmGroup.Visibility = System.Windows.Visibility.Collapsed;
+            }
+
             ActivateDiagram(Current.ActiveDiagram);
         }
         
@@ -64,7 +81,6 @@ namespace Exolutio.WPFClient
                 {
                     DockManager.ActiveDocument = tab;
                 }
-
                 tab.BringDocumentHeaderToView(false);
                 return tab;
             }
