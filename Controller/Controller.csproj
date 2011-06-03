@@ -147,6 +147,7 @@
     <Compile Include="Commands\Atomic\PSM\acmdReorderComponents.cs" />
     <Compile Include="Commands\Complex\PSM\cmdCreateNewPSMClassAsIntChild.cs" />
     <Compile Include="Commands\Complex\PSM\cmdDeleteRootPSMContentModel.cs" />
+    <Compile Include="Commands\Complex\PSM\cmdCreateNewPSMClassAsUnintChild.cs" />
     <Compile Include="Commands\Reflection\CommandSerializer.cs" />
     <Compile Include="Commands\Reflection\DescriptionAttribute.cs" />
     <Compile Include="Commands\Reflection\PIMAttributeNeighboringClassParameterConsistency.cs" />
