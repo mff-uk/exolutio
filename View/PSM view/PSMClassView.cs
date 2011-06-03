@@ -188,8 +188,47 @@ namespace Exolutio.View
             if (PSMClass != null)
             {
                 attributesContainer.AttributesCollection = PSMClass.PSMAttributes;
+                if (PSMClass.RepresentedClass != null)
+                {
+                    BindToRepresentedClass(PSMClass.RepresentedClass);
+                }
             }
         }
+
+        protected override void  UnBindModelView()
+        {
+            if (representedClass != null)
+            {
+                UnBindFromRepresentedClass();
+            }
+ 	        base.UnBindModelView();
+        }
+
+        #region represented class binding
+        /* This component view must update also when the PSMClass's represented class is updated. 
+         * This piece ensures that (the situation is not covered by standard binding to model) */
+
+        private PSMClass representedClass;
+
+        private void BindToRepresentedClass(PSMClass representedClass)
+        {
+            representedClass.PropertyChanged += RepresentedClass_PropertyChanged;
+            this.representedClass = representedClass;
+            UpdateView();
+        }
+
+        private void UnBindFromRepresentedClass()
+        {
+            representedClass.PropertyChanged -= RepresentedClass_PropertyChanged;
+            this.representedClass = null;
+        }
+
+        void RepresentedClass_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+ 	        UpdateView();
+        }
+
+        #endregion 
 
         /// <summary>
         /// This method is safe to be called repeatedly. 
@@ -206,6 +245,18 @@ namespace Exolutio.View
                 if (PSMClass.Interpretation == null)
                 {
                     header = ViewToolkitResources.NoInterpretationBrush;
+                }
+
+                if (PSMClass.RepresentedClass != representedClass)
+                {
+                    if (representedClass != null)
+                    {
+                        UnBindFromRepresentedClass();
+                    }
+                    if (PSMClass.RepresentedClass != null)
+                    {
+                        BindToRepresentedClass(PSMClass.RepresentedClass);
+                    }
                 }
 
                 if (headerBorder.Background != header)
