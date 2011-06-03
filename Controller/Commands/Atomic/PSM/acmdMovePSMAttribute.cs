@@ -13,6 +13,7 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
     {
         Guid attributeGuid, newClassGuid, oldClassGuid;
         int index;
+        int schemaindex;
 
         public acmdMovePSMAttribute(Controller c, Guid psmAttributeGuid, Guid psmClassGuid)
             : base(c)
@@ -54,6 +55,11 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
             index = oldClass.PSMAttributes.IndexOf(psmAttribute);
 
             oldClass.PSMAttributes.Remove(psmAttribute);
+            if (oldClass.PSMSchema != newClass.PSMSchema)
+            {
+                schemaindex = oldClass.PSMSchema.PSMAttributes.Remove(psmAttribute);
+                newClass.PSMSchema.PSMAttributes.Add(psmAttribute);
+            }
             psmAttribute.PSMClass = newClass;
             newClass.PSMAttributes.Add(psmAttribute);
             Report = new CommandReport(CommandReports.COMPONENT_MOVED, psmAttribute, oldClass, newClass);
@@ -66,6 +72,11 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
             PSMClass newClass = Project.TranslateComponent<PSMClass>(newClassGuid);
 
             newClass.PSMAttributes.Remove(psmAttribute);
+            if (oldClass.PSMSchema != newClass.PSMSchema)
+            {
+                newClass.PSMSchema.PSMAttributes.Remove(psmAttribute);
+                oldClass.PSMSchema.PSMAttributes.Insert(psmAttribute, schemaindex);
+            }
             psmAttribute.PSMClass = oldClass;
             oldClass.PSMAttributes.Insert(psmAttribute, index);
             return OperationResult.OK;
