@@ -7,7 +7,7 @@ using Exolutio.Controller.Commands.Atomic.PIM;
 
 namespace Exolutio.Controller.Commands.Complex.PIM
 {
-    [PublicCommand("Split PIM attribute (complex)", PublicCommandAttribute.EPulicCommandCategory.PSM_complex)]
+    [PublicCommand("Split PIM attribute (complex)", PublicCommandAttribute.EPulicCommandCategory.PIM_complex)]
     public class cmdSplitPIMAttribute : MacroCommand
     {
         [PublicArgument("PIM attribute", typeof(PIMAttribute))]
