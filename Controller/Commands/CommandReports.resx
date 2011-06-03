@@ -276,4 +276,10 @@
   <data name="COMPLEX_NEW_PSM_CM" xml:space="preserve">
     <value>Complex: Content to Content model</value>
   </data>
+  <data name="COMPLEX_SPLIT_PIM_ATTRIBUTE" xml:space="preserve">
+    <value>Complex: Split PIM attribute</value>
+  </data>
+  <data name="COMPLEX_SPLIT_PSM_ATTRIBUTE" xml:space="preserve">
+    <value>Complex: Split PSM attribute</value>
+  </data>
 </root>

@@ -286,6 +286,24 @@ namespace Exolutio.Controller.Commands {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Complex: Split PIM attribute.
+        /// </summary>
+        internal static string COMPLEX_SPLIT_PIM_ATTRIBUTE {
+            get {
+                return ResourceManager.GetString("COMPLEX_SPLIT_PIM_ATTRIBUTE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Complex: Split PSM attribute.
+        /// </summary>
+        internal static string COMPLEX_SPLIT_PSM_ATTRIBUTE {
+            get {
+                return ResourceManager.GetString("COMPLEX_SPLIT_PSM_ATTRIBUTE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Complex: PIM attribute update.
         /// </summary>
         internal static string COMPLEX_UPDATE_PIM_ATTR {
