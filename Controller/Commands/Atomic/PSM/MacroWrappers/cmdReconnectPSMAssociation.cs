@@ -8,7 +8,7 @@ using Exolutio.Model;
 
 namespace Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers
 {
-    [PublicCommand("Reconnect parent PSM association end", PublicCommandAttribute.EPulicCommandCategory.PSM_atomic)]
+    [PublicCommand("Reconnect parent PSM association end (atomic)", PublicCommandAttribute.EPulicCommandCategory.PSM_atomic)]
     public class cmdReconnectPSMAssociation : MacroCommand
     {
         [PublicArgument("Association", typeof(PSMAssociation))]
