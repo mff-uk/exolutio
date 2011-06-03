@@ -39,66 +39,75 @@ namespace Exolutio.Controller.Commands.Complex.PSM
 
         protected override void GenerateSubCommands()
         {
-            List<PSMAssociationMember> intermediateMembers = new List<PSMAssociationMember>();
             PSMAssociation association = Project.TranslateComponent<PSMAssociation>(AssociationGuid);
             PSMAssociationMember source = association.Parent;
             PSMAssociationMember target = Project.TranslateComponent<PSMAssociationMember>(NewParentGuid);
 
-            PSMAssociationMember common = source.GetNearestCommonAncestorAssociationMember(target);
-            Debug.Assert(common != null, "Common Ancestor Class Null");
-            
-            if (common != source)
+            if ((target is PSMClass) && (source is PSMClass)
+                    && ((target as PSMClass).RepresentedClass == source
+                    || (source as PSMClass).RepresentedClass == target))
             {
-                //move up to common PSMAssociationMember
-                PSMAssociationMember parent = source.ParentAssociation.Parent;
-                while (parent != common)
-                {
-                    intermediateMembers.Add(parent);
-                    Debug.Assert(parent.ParentAssociation != null, "Did not find common Association Member");
-                    parent = parent.ParentAssociation.Parent;
-                }
-                intermediateMembers.Add(common);
+                Commands.Add(new acmdReconnectPSMAssociation(Controller, AssociationGuid, target) { Propagate = Propagate });
             }
+            else
+            {
+                List<PSMAssociationMember> intermediateMembers = new List<PSMAssociationMember>();
+                PSMAssociationMember common = source.GetNearestCommonAncestorAssociationMember(target);
+                Debug.Assert(common != null, "Common Ancestor Class Null");
 
-            if (common.IsDescendantFrom(target))
-            {
-                //move up
-                PSMAssociationMember parent = common.ParentAssociation.Parent;
-                while (parent != target) 
+                if (common != source)
                 {
-                    intermediateMembers.Add(parent);
-                    Debug.Assert(parent.ParentAssociation != null, "Did not find common Association Member");
-                    parent = parent.ParentAssociation.Parent;
+                    //move up to common PSMAssociationMember
+                    PSMAssociationMember parent = source.ParentAssociation.Parent;
+                    while (parent != common)
+                    {
+                        intermediateMembers.Add(parent);
+                        Debug.Assert(parent.ParentAssociation != null, "Did not find common Association Member");
+                        parent = parent.ParentAssociation.Parent;
+                    }
+                    intermediateMembers.Add(common);
                 }
-                intermediateMembers.Add(target);
-            }
-            else if (target.IsDescendantFrom(common))
-            {
-                //move down
-                List<PSMAssociationMember> intermediateMembers2 = new List<PSMAssociationMember>();
-                intermediateMembers2.Add(target);
-                PSMAssociationMember parent = target.ParentAssociation.Parent;
-                while (parent != common) 
-                {
-                    intermediateMembers2.Add(parent);
-                    Debug.Assert(parent.ParentAssociation != null, "Did not find common Association Member");
-                    parent = parent.ParentAssociation.Parent;
-                }
-                intermediateMembers2.Reverse();
-                intermediateMembers.AddRange(intermediateMembers2);
-            }
-            else if (target == common)
-            {
-                //nothing
-            }
-            else 
-            {
-                Debug.Assert(false, "error - common association member not reachable?");
-            }
 
-            foreach (PSMAssociationMember psmAssociationMember in intermediateMembers)
-            {
-                Commands.Add(new acmdReconnectPSMAssociation(Controller, AssociationGuid, psmAssociationMember) { Propagate = Propagate });
+                if (common.IsDescendantFrom(target))
+                {
+                    //move up
+                    PSMAssociationMember parent = common.ParentAssociation.Parent;
+                    while (parent != target)
+                    {
+                        intermediateMembers.Add(parent);
+                        Debug.Assert(parent.ParentAssociation != null, "Did not find common Association Member");
+                        parent = parent.ParentAssociation.Parent;
+                    }
+                    intermediateMembers.Add(target);
+                }
+                else if (target.IsDescendantFrom(common))
+                {
+                    //move down
+                    List<PSMAssociationMember> intermediateMembers2 = new List<PSMAssociationMember>();
+                    intermediateMembers2.Add(target);
+                    PSMAssociationMember parent = target.ParentAssociation.Parent;
+                    while (parent != common)
+                    {
+                        intermediateMembers2.Add(parent);
+                        Debug.Assert(parent.ParentAssociation != null, "Did not find common Association Member");
+                        parent = parent.ParentAssociation.Parent;
+                    }
+                    intermediateMembers2.Reverse();
+                    intermediateMembers.AddRange(intermediateMembers2);
+                }
+                else if (target == common)
+                {
+                    //nothing
+                }
+                else
+                {
+                    Debug.Assert(false, "error - common association member not reachable?");
+                }
+
+                foreach (PSMAssociationMember psmAssociationMember in intermediateMembers)
+                {
+                    Commands.Add(new acmdReconnectPSMAssociation(Controller, AssociationGuid, psmAssociationMember) { Propagate = Propagate });
+                }
             }
         }
 
@@ -107,6 +116,10 @@ namespace Exolutio.Controller.Commands.Complex.PSM
             PSMAssociation association = Project.TranslateComponent<PSMAssociation>(AssociationGuid);
             PSMAssociationMember target = Project.TranslateComponent<PSMAssociationMember>(NewParentGuid);
             PSMAssociationMember source = association.Parent;
+            if ((target is PSMClass) && (source is PSMClass)
+                    && ((target as PSMClass).RepresentedClass == source
+                    || (source as PSMClass).RepresentedClass == target)) return true;
+            
             if (source.GetNearestCommonAncestorAssociationMember(target) == null)
             {
                 ErrorDescription = CommandErrors.CMDERR_NO_COMMON_ANCESTOR_ASSOC_MEMBER;
