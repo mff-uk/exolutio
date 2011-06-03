@@ -7,6 +7,7 @@ using Exolutio.Model.PSM;
 using Exolutio.Model;
 using Exolutio.Model.PIM;
 using Exolutio.Controller.Commands.Atomic.PIM;
+using System.Diagnostics;
 
 namespace Exolutio.Controller.Commands.Atomic.PSM
 {
@@ -14,6 +15,7 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
     {
         Guid associationGuid, newParentGuid, oldParentGuid;
         int index;
+        List<Tuple<Guid, int>> schemaIndexes;
 
         public acmdReconnectPSMAssociation(Controller c, Guid psmAssociationGuid, Guid parentGuid)
             : base(c)
@@ -59,6 +61,37 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
 
             index = oldParent.ChildPSMAssociations.IndexOf(psmAssociation);
             oldParent.ChildPSMAssociations.Remove(psmAssociation);
+            if (oldParent.PSMSchema != newParent.PSMSchema)
+            {
+                schemaIndexes = new List<Tuple<Guid, int>>();
+                foreach (PSMComponent c in psmAssociation.GetPSMChildComponentsRecursive(true, true))
+                {
+                    if (c is PSMClass)
+                    {
+                        schemaIndexes.Add(Tuple.Create<Guid, int>(c, oldParent.PSMSchema.PSMClasses.Remove(c as PSMClass)));
+                        newParent.PSMSchema.PSMClasses.Add(c as PSMClass);
+                    }
+                    else if (c is PSMAssociation)
+                    {
+                        schemaIndexes.Add(Tuple.Create<Guid, int>(c, oldParent.PSMSchema.PSMAssociations.Remove(c as PSMAssociation)));
+                        newParent.PSMSchema.PSMAssociations.Add(c as PSMAssociation);
+                    }
+                    else if (c is PSMContentModel)
+                    {
+                        schemaIndexes.Add(Tuple.Create<Guid, int>(c, oldParent.PSMSchema.PSMContentModels.Remove(c as PSMContentModel)));
+                        newParent.PSMSchema.PSMContentModels.Add(c as PSMContentModel);
+                    }
+                    else if (c is PSMAttribute)
+                    {
+                        schemaIndexes.Add(Tuple.Create<Guid, int>(c, oldParent.PSMSchema.PSMAttributes.Remove(c as PSMAttribute)));
+                        newParent.PSMSchema.PSMAttributes.Add(c as PSMAttribute);
+                    }
+                    else
+                    {
+                        Debug.Assert(false, "Unknown type");
+                    }
+                }
+            }
             psmAssociation.Parent = newParent;
             newParent.ChildPSMAssociations.Add(psmAssociation);
 
@@ -72,6 +105,37 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
             PSMAssociationMember newParent = Project.TranslateComponent<PSMAssociationMember>(newParentGuid);
 
             newParent.ChildPSMAssociations.Remove(psmAssociation);
+            if (oldParent.PSMSchema != newParent.PSMSchema)
+            {
+                foreach (Tuple<Guid, int> t in schemaIndexes.Reverse<Tuple<Guid, int>>())
+                {
+                    PSMComponent c = Project.TranslateComponent<PSMComponent>(t.Item1);
+                    if (c is PSMClass)
+                    {
+                        newParent.PSMSchema.PSMClasses.Remove(c as PSMClass);
+                        oldParent.PSMSchema.PSMClasses.Insert(c as PSMClass, t.Item2);
+                    }
+                    else if (c is PSMAssociation)
+                    {
+                        newParent.PSMSchema.PSMAssociations.Remove(c as PSMAssociation);
+                        oldParent.PSMSchema.PSMAssociations.Insert(c as PSMAssociation, t.Item2);
+                    }
+                    else if (c is PSMContentModel)
+                    {
+                        newParent.PSMSchema.PSMContentModels.Remove(c as PSMContentModel);
+                        oldParent.PSMSchema.PSMContentModels.Insert(c as PSMContentModel, t.Item2);
+                    }
+                    else if (c is PSMAttribute)
+                    {
+                        newParent.PSMSchema.PSMAttributes.Remove(c as PSMAttribute);
+                        oldParent.PSMSchema.PSMAttributes.Insert(c as PSMAttribute, t.Item2);
+                    }
+                    else
+                    {
+                        Debug.Assert(false, "Unknown type");
+                    }
+                }
+            }
             psmAssociation.Parent = oldParent;
             oldParent.ChildPSMAssociations.Insert(psmAssociation, index);
             return OperationResult.OK;

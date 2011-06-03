@@ -92,6 +92,29 @@ namespace Exolutio.Model
             return result;
         }
 
+        public static IEnumerable<PSMComponent> GetPSMChildComponentsRecursive(this PSMComponent component, bool returnAttributesForClass = false, bool includeSelf = false)
+        {
+            IEnumerable<PSMComponent> result = new PSMComponent[0];
+            if (includeSelf) result = result.Concat(Enumerable.Repeat(component, 1));
+            if (component is PSMClass && ((PSMClass)component).PSMAttributes.Count > 0 && returnAttributesForClass)
+            {
+                result = result.Concat(((PSMClass)component).PSMAttributes.Cast<PSMComponent>());
+            }
+            if (component is PSMAssociationMember)
+            {
+                foreach (PSMAssociation a in (component as PSMAssociationMember).ChildPSMAssociations)
+                {
+                    result = result.Concat(GetPSMChildComponentsRecursive(a, returnAttributesForClass, true));
+                }
+            }
+            if (component is PSMAssociation)
+            {
+                if ((component as PSMAssociation).Child != null)
+                    result = result.Concat(GetPSMChildComponentsRecursive((component as PSMAssociation).Child, returnAttributesForClass, true));
+            }
+            return result;
+        }
+
         public static bool HasPSMChildren(PSMComponent psmComponent, bool countAttributesAsClassChildren = false)
         {
             if (psmComponent is PSMClass && ((PSMClass)psmComponent).PSMAttributes.Count > 0 && countAttributesAsClassChildren)
