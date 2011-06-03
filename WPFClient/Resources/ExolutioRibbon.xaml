@@ -161,6 +161,8 @@
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.AddPIMAssociationCommand}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.DerivePSMRootCommand}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
             </Fluent:RibbonGroupBox>
         </Fluent:RibbonTabItem>
 

@@ -87,8 +87,8 @@
     <Compile Include="Commands\Atomic\PSM\acmdSetPSMAssociationInterpretation.cs" />
     <Compile Include="Commands\Atomic\PSM\acmdUpdatePSMAttributeDefaultValue.cs" />
     <Compile Include="Commands\Atomic\PSM\acmdUpdatePSMContentModel.cs" />
-    <Compile Include="Commands\Atomic\PSM\acmdNewPSMDiagram.cs" />
     <Compile Include="Commands\Atomic\PSM\acmdDeletePSMDiagram.cs" />
+    <Compile Include="Commands\Atomic\PSM\acmdNewPSMDiagram.cs" />
     <Compile Include="Commands\Atomic\PSM\MacroWrappers\cmdCreateNewPSMAttribute.cs" />
     <Compile Include="Commands\Atomic\PSM\MacroWrappers\cmdUpdatePSMContentModel.cs" />
     <Compile Include="Commands\Atomic\PSM\MacroWrappers\cmdSetRepresentedClass.cs" />
@@ -132,6 +132,7 @@
     <Compile Include="Commands\Complex\PIM\cmdSplitPIMAttribute.cs" />
     <Compile Include="Commands\Complex\PIM\cmdSplitPIMAssociation.cs" />
     <Compile Include="Commands\Complex\PIM\cmdUpdatePIMAttribute.cs" />
+    <Compile Include="Commands\Complex\PIM\cmdDerivePSMRoot.cs" />
     <Compile Include="Commands\Complex\PSM\cmdCreateNewPSMAttribute.cs" />
     <Compile Include="Commands\Complex\PSM\cmdDeletePSMAttribute.cs" />
     <Compile Include="Commands\Complex\PSM\cmdDeletePSMAssociation.cs" />

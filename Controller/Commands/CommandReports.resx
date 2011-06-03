@@ -288,4 +288,7 @@
   <data name="COMPLEX_SPLIT_PSM_ATTRIBUTE" xml:space="preserve">
     <value>Complex: Split PSM attribute</value>
   </data>
+  <data name="COMPLEX_DERIVE_NEW_ROOT" xml:space="preserve">
+    <value>Complex: Derive new PSM root</value>
+  </data>
 </root>
