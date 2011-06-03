@@ -50,13 +50,13 @@ namespace Exolutio.Controller.Commands.Atomic.PIM
             return OperationResult.OK;
         }
 
-        internal override MacroCommand PrePropagation()
+        internal override PropagationMacroCommand PrePropagation()
         {
             IEnumerable<PIMAttribute> aX1 = Project.TranslateComponentCollection<PIMAttribute>(X1);
             IEnumerable<PIMAttribute> aX2 = Project.TranslateComponentCollection<PIMAttribute>(X2);
             if (aX1.Count() == 0 || aX2.Count() == 0) return null;
 
-            MacroCommand command = new MacroCommand(Controller) { CheckFirstOnlyInCanExecute = true };
+            PropagationMacroCommand command = new PropagationMacroCommand(Controller) { CheckFirstOnlyInCanExecute = true };
             command.Report = new CommandReport("Pre-propagation (synchronize PIM attribute sets)");
             PIMClass pimClass = aX2.First().PIMClass;
 

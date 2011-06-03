@@ -68,9 +68,9 @@ namespace Exolutio.Controller.Commands.Atomic.PIM
             return OperationResult.OK;
         }
 
-        internal override MacroCommand PrePropagation()
+        internal override PropagationMacroCommand PrePropagation()
         {
-            MacroCommand command = new MacroCommand(Controller);
+            PropagationMacroCommand command = new PropagationMacroCommand(Controller);
             command.Report = new CommandReport("Pre-propagation (move PIM attribute)");
 
             PIMAttribute attribute = Project.TranslateComponent<PIMAttribute>(attributeGuid);

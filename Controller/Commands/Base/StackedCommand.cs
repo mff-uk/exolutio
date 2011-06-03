@@ -214,7 +214,7 @@ namespace Exolutio.Controller.Commands
         /// Creates a macrocommand containing what needs to be done before command execution
         /// </summary>
         /// <returns></returns>
-        internal virtual MacroCommand PrePropagation()
+        internal virtual PropagationMacroCommand PrePropagation()
         {
             return null;
         }
@@ -223,7 +223,7 @@ namespace Exolutio.Controller.Commands
         /// Creates a macrocommand containing what needs to be done after command execution
         /// </summary>
         /// <returns></returns>
-        internal virtual MacroCommand PostPropagation()
+        internal virtual PropagationMacroCommand PostPropagation()
         {
             return null;
         }

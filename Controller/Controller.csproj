@@ -115,6 +115,7 @@
     <Compile Include="Commands\Atomic\PSM\MacroWrappers\cmdSetPSMAssociationInterpretation.cs" />
     <Compile Include="Commands\Base\CommandReport.cs" />
     <Compile Include="Commands\Base\ICommandWithDiagramParameter.cs" />
+    <Compile Include="Commands\Base\PropagationMacroCommand.cs" />
     <Compile Include="Commands\Base\PublicCommandAttribute.cs" />
     <Compile Include="Commands\Base\ScopeAttribute.cs" />
     <Compile Include="Commands\CommandReports.Designer.cs">

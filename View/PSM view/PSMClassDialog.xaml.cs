@@ -82,7 +82,7 @@ namespace Exolutio.View
             public FakePSMAttribute()
             {
                 Multiplicity = "1";
-                XFormElement = true;
+                XFormElement = false;
                 Name = "Attribute";
             }
 
@@ -112,7 +112,7 @@ namespace Exolutio.View
                 RepresentedAttribute = p;
                 ComesFrom = (PIMClass)p.PIMClass;
                 Checked = false;
-                XFormElement = true;
+                XFormElement = false;
             }
 
             public void BeginEdit()

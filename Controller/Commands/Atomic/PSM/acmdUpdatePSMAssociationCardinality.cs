@@ -49,7 +49,7 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
             return OperationResult.OK;
         }
 
-        internal override MacroCommand PostPropagation()
+        internal override PropagationMacroCommand PostPropagation()
         {
             PSMAssociation association = Project.TranslateComponent<PSMAssociation>(componentGuid);
             PIMAssociation interpretation = association.Interpretation as PIMAssociation;
@@ -57,7 +57,7 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
 
             PIMAssociationEnd e = ((association.Child as PSMClass).Interpretation as PIMClass).PIMAssociationEnds.First<PIMAssociationEnd>(end => end.PIMAssociation == interpretation);
 
-            MacroCommand command = new MacroCommand(Controller);
+            PropagationMacroCommand command = new PropagationMacroCommand(Controller);
 
             acmdUpdatePIMAssociationEndCardinality d = new acmdUpdatePIMAssociationEndCardinality(Controller, e, newLower, newUpper) { Propagate = true };
             command.Commands.Add(d);
