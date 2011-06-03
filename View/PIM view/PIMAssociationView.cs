@@ -167,10 +167,36 @@ namespace Exolutio.View
 
         public override bool CanPutInDiagram(DiagramView diagramView)
         {
+            if (!diagramView.RepresentantsCollection.ContainsKey(SourceClass) ||
+               !diagramView.RepresentantsCollection.ContainsKey(SourceClass))
+            {
+                /* 
+                 * since parent and child may change, it is necessary
+                 * to hook to this possible change
+                 */
+                if (!parentChildUpdateBound)
+                {
+                    PIMAssociation.PropertyChanged += PIMAssociation_PropertyChanged_ForParentChildUpdate;
+                    parentChildUpdateBound = true;
+                }
+            }
+
             return base.CanPutInDiagram(diagramView)
                 && diagramView.RepresentantsCollection.ContainsKey(SourceClass)
                 && diagramView.RepresentantsCollection.ContainsKey(TargetClass);
         }
+
+        bool parentChildUpdateBound = false; 
+
+        private void PIMAssociation_PropertyChanged_ForParentChildUpdate(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName.IsAmong("PIMAssociationEnds")
+                && DiagramView == null && pendingDiagramView != null)
+            {
+                pendingDiagramView.DefferedAddCheck();
+            }
+        }
+
         public override bool CanRemoveFromDiagram()
         {
             bool canRemoveFromDiagram = base.CanRemoveFromDiagram();
