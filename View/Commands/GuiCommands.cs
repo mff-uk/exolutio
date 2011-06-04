@@ -135,7 +135,9 @@ namespace Exolutio.View.Commands
                 Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.note_edit),
                 ControllerCommandFactoryMethod = CommandFactory<acmdRenameComponent>.Factory,
                 ControllerCommandType = typeof(acmdRenameComponent),
-                AcceptedSelectedComponentType = typeof(Component)
+                
+                AcceptedSelectedComponentType = typeof(Component),
+                ScopeIsSelectedComponent = true
             };
 
             #endregion
