@@ -232,7 +232,7 @@ namespace Exolutio.View
         public bool IsSelectedComponentOfType(Type type)
         {
             IEnumerable<Component> isSelectedComponentOfType = GetSelectedComponents();
-            return isSelectedComponentOfType.Count() == 1 && isSelectedComponentOfType.First().GetType().IsAssignableFrom(type);
+            return isSelectedComponentOfType.Count() == 1 && type.IsAssignableFrom(isSelectedComponentOfType.First().GetType());
         }
 
         public void SetSelection(IEnumerable<Component> components)
