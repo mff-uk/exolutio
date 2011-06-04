@@ -170,6 +170,7 @@ namespace Exolutio.View.Commands
 	    public virtual KeyGesture Gesture
 	    {
             get { return null; }
+            set { throw new InvalidOperationException("Gesture is not supposed to be set in this class. Set accessor exists only to be overriden in derived classes. "); }
 	    }
         
 		/// <summary>
@@ -245,7 +246,7 @@ namespace Exolutio.View.Commands
 		/// <summary>
 		/// Holds the key binding.
 		/// </summary>
-		private readonly KeyBinding keyBinding;
+		protected KeyBinding keyBinding;
         #endif	
 		#endregion
 	}
