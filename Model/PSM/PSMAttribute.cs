@@ -57,7 +57,7 @@ namespace Exolutio.Model.PSM
 
         public PSMClass PSMClass
         {
-            get { return psmClassGuid == null ? null : Project.TranslateComponent<PSMClass>(psmClassGuid); }
+            get { return psmClassGuid == Guid.Empty ? null : Project.TranslateComponent<PSMClass>(psmClassGuid); }
             set { psmClassGuid = value; NotifyPropertyChanged("PSMClass"); }
         }
 

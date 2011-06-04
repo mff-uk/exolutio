@@ -113,11 +113,18 @@ namespace Exolutio.View
 
             if (this.PSMAttribute.Interpretation == null)
             {
-                this.Background = ViewToolkitResources.NoInterpretationBrush;
+                if (this.PSMAttribute.PSMClass != null && !this.PSMAttribute.PSMClass.IsStructuralRepresentative)
+                {
+                    this.Background = ViewToolkitResources.NoInterpretationBrush;
+                }
+                else
+                {
+                    this.Background = ViewToolkitResources.StructuralRepresentativeBodyNoInterpretation;
+                }
             }
             else
             {
-                if (this.PSMAttribute.PSMClass.IsStructuralRepresentative)
+                if (this.PSMAttribute.PSMClass != null && this.PSMAttribute.PSMClass.IsStructuralRepresentative)
                 {
                     this.Background = ViewToolkitResources.StructuralRepresentativeBody;
                 }
