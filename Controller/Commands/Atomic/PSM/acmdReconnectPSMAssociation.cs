@@ -152,49 +152,54 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
             PSMClass newIntContext = (target is PSMClass && (target as PSMClass).Interpretation != null) ? (target as PSMClass) : target.NearestInterpretedParentClass();
 
             if (oldIntContext == null) return null;
-            if (oldIntContext.Interpretation == newIntContext.Interpretation) return null;
+            if (newIntContext != null && oldIntContext.Interpretation == newIntContext.Interpretation) return null;
 
             PropagationMacroCommand command = new PropagationMacroCommand(Controller) { CheckFirstOnlyInCanExecute = true };
-            command.Report = new CommandReport("Post-propagation (move PSM attribute)");
+            command.Report = new CommandReport("Post-propagation (reconnect parent PSM association end)");
 
+            if (newIntContext == null)
+            {
+                foreach (PSMAttribute a in psmAssociation.Child.UnInterpretedSubClasses(true)
+                    .SelectMany<PSMClass, PSMAttribute>(c => c.PSMAttributes)
+                    .Where(a => a.Interpretation != null))
+                {
+                    command.Commands.Add(new acmdSetPSMAttributeInterpretation(Controller, a, Guid.Empty));
+                }
+                foreach (PSMAssociation a in psmAssociation.Child.UnInterpretedSubClasses(true)
+                    .SelectMany<PSMClass, PSMAssociation>(c => c.ChildPSMAssociations)
+                    .Where(a => a.Interpretation != null))
+                {
+                    command.Commands.Add(new acmdSetPSMAssociationInterpretation(Controller, a, Guid.Empty));
+                }
+            }
             if (psmAssociation.Interpretation == null)
             {
-                if (newIntContext == null)
+                
+                foreach (PSMAttribute a in psmAssociation.Child.UnInterpretedSubClasses(true)
+                    .SelectMany<PSMClass, PSMAttribute>(c => c.PSMAttributes)
+                    .Where(a => a.Interpretation != null))
                 {
-                    foreach (PSMAttribute a in psmAssociation.Child.UnInterpretedSubClasses(true)
-                        .SelectMany<PSMClass, PSMAttribute>(c => c.PSMAttributes)
-                        .Where(a => a.Interpretation != null))
-                    {
-                        command.Commands.Add(new acmdSetPSMAttributeInterpretation(Controller, a, Guid.Empty));
-                    }
-                    foreach (PSMAssociation a in psmAssociation.Child.UnInterpretedSubClasses(true)
-                        .SelectMany<PSMClass, PSMAssociation>(c => c.ChildPSMAssociations)
-                        .Where(a => a.Interpretation != null))
-                    {
-                        command.Commands.Add(new acmdSetPSMAssociationInterpretation(Controller, a, Guid.Empty));
-                    }
+                    command.Commands.Add(new acmdMovePIMAttribute(Controller, a.Interpretation, newIntContext.Interpretation) { PropagateSource = a });
                 }
-                else
+                foreach (PSMAssociation a in psmAssociation.Child.UnInterpretedSubClasses(true)
+                    .SelectMany<PSMClass, PSMAssociation>(c => c.ChildPSMAssociations)
+                    .Where(a => a.Interpretation != null))
                 {
-                    foreach (PSMAttribute a in psmAssociation.Child.UnInterpretedSubClasses(true)
-                        .SelectMany<PSMClass, PSMAttribute>(c => c.PSMAttributes)
-                        .Where(a => a.Interpretation != null))
-                    {
-                        command.Commands.Add(new acmdMovePIMAttribute(Controller, a.Interpretation, newIntContext.Interpretation) { PropagateSource = a });
-                    }
-                    foreach (PSMAssociation a in psmAssociation.Child.UnInterpretedSubClasses(true)
-                        .SelectMany<PSMClass, PSMAssociation>(c => c.ChildPSMAssociations)
-                        .Where(a => a.Interpretation != null))
-                    {
-                        PIMAssociationEnd e = (a.Interpretation as PIMAssociation).PIMAssociationEnds.First(ae => ae.PIMClass == oldIntContext.Interpretation);
-                        command.Commands.Add(new acmdMoveAssociationEnd(Controller, e, newIntContext.Interpretation) { PropagateSource = a });
-                    }
+                    PIMAssociationEnd e = (a.Interpretation as PIMAssociation).PIMAssociationEnds.First(ae => ae.PIMClass == oldIntContext.Interpretation);
+                    command.Commands.Add(new acmdMoveAssociationEnd(Controller, e, newIntContext.Interpretation) { PropagateSource = a });
                 }
             }
             else
             {
-                PIMAssociationEnd e = (psmAssociation.Interpretation as PIMAssociation).PIMAssociationEnds.First(ae => ae.PIMClass == oldIntContext.Interpretation);
-                command.Commands.Add(new acmdMoveAssociationEnd(Controller, e, newIntContext.Interpretation) { PropagateSource = psmAssociation });
+                if (newIntContext == null)
+                {
+                    command.Commands.Add(new acmdSetPSMAssociationInterpretation(Controller, psmAssociation, Guid.Empty));
+                }
+                else
+                {
+                    PIMAssociationEnd e = (psmAssociation.Interpretation as PIMAssociation).PIMAssociationEnds.First(ae => ae.PIMClass == oldIntContext.Interpretation);
+                    command.Commands.Add(new acmdMoveAssociationEnd(Controller, e, newIntContext.Interpretation) { PropagateSource = psmAssociation });
+                }
             }
             
             return command;
