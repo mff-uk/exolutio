@@ -56,5 +56,11 @@ namespace Exolutio.View
         {
             get { return controlF4; }
         }
+
+        private static readonly KeyGesture f2 = new KeyGesture(Key.F2);
+        public static KeyGesture F2
+        {
+            get { return f2; }
+        }
     }
 }

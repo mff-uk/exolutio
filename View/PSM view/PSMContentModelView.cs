@@ -43,14 +43,13 @@ namespace Exolutio.View
                          {
                              BorderBrush = ViewToolkitResources.NodeBorderBrush,
                              BorderThickness = new Thickness(0.8),
-                             VerticalAlignment = VerticalAlignment.Stretch,
                              Background = ViewToolkitResources.NoInterpretationBrush,
                              Opacity = 0.8,
-                             Padding = new Thickness(5,0,5,0),
+                             Padding = new Thickness(0,0,0,0),
                              CornerRadius = new CornerRadius(15)
                          };
             MainNode.InnerContentControl.Content = border;
-            MainNode.MinWidth = 40;
+            MainNode.MinWidth = 50;
 
             stackPanel = new StackPanel
             {
@@ -62,7 +61,7 @@ namespace Exolutio.View
             {
                 FontWeight = FontWeights.Bold,
                 TextAlignment = TextAlignment.Center,
-                Background = ViewToolkitResources.NoInterpretationBrush,
+                Background = ViewToolkitResources.TransparentBrush,
                 FontSize = 15,
             };
 
