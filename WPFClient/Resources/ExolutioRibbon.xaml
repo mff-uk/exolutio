@@ -18,7 +18,7 @@
         <Fluent:Ribbon.ContextualGroups>
             <Fluent:RibbonContextualTabGroup Header="PIM" Visibility="Visible"
                 x:Name="pimGroup" Background="Blue" BorderBrush="Blue" />
-            <Fluent:RibbonContextualTabGroup Header="PSM" Visibility="Visible"
+            <Fluent:RibbonContextualTabGroup Header="PSM XML" Visibility="Visible"
                 x:Name="psmGroup" Background="Green" BorderBrush="Green" />
         </Fluent:Ribbon.ContextualGroups>
         <Fluent:Ribbon.Menu>
@@ -171,7 +171,7 @@
         </Fluent:RibbonTabItem>
 
         <Fluent:RibbonTabItem x:Name="tabPSM" Header="Modeling" Group="{Binding ElementName=psmGroup}">
-            <Fluent:RibbonGroupBox Header="Create">
+            <Fluent:RibbonGroupBox Header="Atomic">
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.AddPSMClassCommand}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.AddPSMContentModel}" 
@@ -180,10 +180,22 @@
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.AddPSMAssociationCommand}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+            </Fluent:RibbonGroupBox>
+            <Fluent:RibbonGroupBox Header="Create">
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.AddPSMChildInterpreted}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.AddPSMChildUnInterpreted}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+                <Fluent:DropDownButton IsEnabled="{Binding ElementName=rbSequence,Path=IsEnabled}" Header="Content Model" Icon="/Exolutio.ResourceLibrary;component/Images/ContentContainer.png" LargeIcon="/Exolutio.ResourceLibrary;component/Images/ContentContainer.png">
+                    <Fluent:Gallery>
+                        <Fluent:Button x:Name="rbSequence" Command="{x:Static Commands:GuiCommands.CreateSequenceContentModelCommand}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+                        <Fluent:Button Command="{x:Static Commands:GuiCommands.CreateSetContentModelCommand}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+                        <Fluent:Button Command="{x:Static Commands:GuiCommands.CreateChoiceContentModelCommand}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+                    </Fluent:Gallery>
+                </Fluent:DropDownButton>
             </Fluent:RibbonGroupBox>
             <Fluent:RibbonGroupBox Header="Change">
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.SplitPSMAttributeCommand}" 

@@ -65,6 +65,7 @@ namespace Exolutio.Controller.Commands.Complex.PSM
 
             Commands.Add(new acmdNewPSMContentModel(Controller, Type, parent.PSMSchema) { ContentModelGuid = ContentModelGuid });
             Commands.Add(new acmdNewPSMAssociation(Controller, parent, ContentModelGuid, parent.PSMSchema) { AssociationGuid = AssociationGuid });
+            Commands.Add(new acmdRenameComponent(Controller, AssociationGuid, ""));
             foreach (PSMAssociation a in associations)
             {
                 Commands.Add(new acmdReconnectPSMAssociation(Controller, a, ContentModelGuid));
