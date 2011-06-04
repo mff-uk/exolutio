@@ -191,7 +191,7 @@
             </Fluent:RibbonGroupBox>
         </Fluent:RibbonTabItem>
 
-        <Fluent:RibbonTabItem  Header="Translation" Group="{Binding ElementName=psmGroup}">
+        <Fluent:RibbonTabItem x:Name="tabTranslation" Header="Translation" Group="{Binding ElementName=psmGroup}">
             <Fluent:RibbonGroupBox Header="Grammar">
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.TestNormalizationCommand}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
