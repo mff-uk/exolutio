@@ -36,9 +36,11 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
                 return false;
             }
 
+            PSMAssociation psmAssociation = Project.TranslateComponent<PSMAssociation>(associationGuid);
             PSMAssociationMember newParent = Project.TranslateComponent<PSMAssociationMember>(newParentGuid);
             PSMAssociationMember oldParent = Project.TranslateComponent<PSMAssociation>(associationGuid).Parent as PSMAssociationMember;
 
+            if (newParent == psmAssociation.Child) return false;
             //the two parents connected by an association (atomic operation)
             if (newParent.ParentAssociation != null && newParent.ParentAssociation.Parent == oldParent) return true;
             if (oldParent.ParentAssociation != null && oldParent.ParentAssociation.Parent == newParent) return true;
