@@ -90,6 +90,7 @@
     <Compile Include="Commands\Edit\guiUndoCommand.cs" />
     <Compile Include="Commands\GuiCommands.cs" />
     <Compile Include="Commands\guiModelTreeCommand.cs" />
+    <Compile Include="Commands\PSM\guiShiftAssociationCommand.cs" />
     <Compile Include="Commands\PSM\guiCreateContentModelCommand.cs" />
     <Compile Include="Commands\Versioning\EvolutionChangesWindow.xaml.cs">
       <DependentUpon>EvolutionChangesWindow.xaml</DependentUpon>

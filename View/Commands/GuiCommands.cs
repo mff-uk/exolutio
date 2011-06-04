@@ -75,7 +75,8 @@ namespace Exolutio.View.Commands
         public static guiCreateContentModelCommand CreateSequenceContentModelCommand { get; set; }
         public static guiCreateContentModelCommand CreateChoiceContentModelCommand { get; set; }
         public static guiCreateContentModelCommand CreateSetContentModelCommand { get; set; }
-
+        public static guiShiftAssociationCommand ShiftLeft { get; set; }
+        public static guiShiftAssociationCommand ShiftRight { get; set; }
         #endregion
 
         #region versioning
@@ -310,6 +311,8 @@ namespace Exolutio.View.Commands
             CreateSequenceContentModelCommand = new guiCreateContentModelCommand() { Type = PSMContentModelType.Sequence };
             CreateChoiceContentModelCommand = new guiCreateContentModelCommand() { Type = PSMContentModelType.Choice };
             CreateSetContentModelCommand = new guiCreateContentModelCommand() { Type = PSMContentModelType.Set };
+            ShiftLeft = new guiShiftAssociationCommand() { Left = true };
+            ShiftRight = new guiShiftAssociationCommand() { Left = false };
             #endregion
 
             #region other
