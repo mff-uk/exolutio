@@ -10,6 +10,8 @@ using Exolutio.View.Commands.Grammar;
 using Exolutio.View.Commands.Project;
 using Exolutio.View;
 using Exolutio.View.Commands.Versioning;
+using Exolutio.View.Commands.PSM;
+using Exolutio.Controller.Commands.Complex.PSM;
 
 namespace Exolutio.View.Commands
 {
@@ -70,6 +72,9 @@ namespace Exolutio.View.Commands
         public static guiControllerCommand SplitPSMAttributeCommand { get; set; }
         public static guiControllerCommand AddPSMChildInterpreted { get; set; }
         public static guiControllerCommand AddPSMChildUnInterpreted { get; set; }
+        public static guiCreateContentModelCommand CreateSequenceContentModelCommand { get; set; }
+        public static guiCreateContentModelCommand CreateChoiceContentModelCommand { get; set; }
+        public static guiCreateContentModelCommand CreateSetContentModelCommand { get; set; }
 
         #endregion
 
@@ -248,8 +253,8 @@ namespace Exolutio.View.Commands
             AddPSMAttributeCommand = new guiControllerCommand
                                          {
                                              Text = "Add attribute",
-                                             ControllerCommandFactoryMethod = CommandFactory<cmdCreateNewPSMAttribute>.Factory,
-                                             ControllerCommandType = typeof(cmdCreateNewPSMAttribute),
+                                             ControllerCommandFactoryMethod = CommandFactory<Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers.cmdCreateNewPSMAttribute>.Factory,
+                                             ControllerCommandType = typeof(Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers.cmdCreateNewPSMAttribute),
                                              AcceptedSelectedComponentType = typeof(PSMClass),
                                              ScopeIsSelectedComponent = true,
                                              PSMOnly = true,
@@ -294,7 +299,7 @@ namespace Exolutio.View.Commands
                                             {
                                                 Text = "Split attribute",
                                                 ControllerCommandFactoryMethod = CommandFactory<Exolutio.Controller.Commands.Complex.PSM.cmdSplitPSMAttribute>.Factory,
-                                                ControllerCommandType = typeof(Exolutio.Controller.Commands.Complex.PSM.cmdSplitPSMAttribute),
+                                                ControllerCommandType = typeof(cmdSplitPSMAttribute),
                                                 PSMOnly = true,
                                                 OpenDialog = false,
                                                 Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.AddAttributes),
@@ -302,6 +307,9 @@ namespace Exolutio.View.Commands
                                                 AcceptedSelectedComponentType = typeof(PSMAttribute)
             };
 
+            CreateSequenceContentModelCommand = new guiCreateContentModelCommand() { Type = PSMContentModelType.Sequence };
+            CreateChoiceContentModelCommand = new guiCreateContentModelCommand() { Type = PSMContentModelType.Choice };
+            CreateSetContentModelCommand = new guiCreateContentModelCommand() { Type = PSMContentModelType.Set };
             #endregion
 
             #region other

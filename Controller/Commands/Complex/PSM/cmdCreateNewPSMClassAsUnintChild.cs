@@ -54,6 +54,7 @@ namespace Exolutio.Controller.Commands.Complex.PSM
 
             Commands.Add(new acmdNewPSMClass(Controller, parent.PSMSchema) { ClassGuid = ClassGuid });
             Commands.Add(new acmdNewPSMAssociation(Controller, parent, ClassGuid, parent.PSMSchema) { AssociationGuid = AssociationGuid });
+            Commands.Add(new acmdRenameComponent(Controller, AssociationGuid, ""));
         }
 
         public override bool CanExecute()
