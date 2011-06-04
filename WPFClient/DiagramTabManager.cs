@@ -47,14 +47,16 @@ namespace Exolutio.WPFClient
             if (ActiveDiagram is PIMDiagram)
             {
                 MainWindow.ExolutioRibbon.pimGroup.Visibility = System.Windows.Visibility.Visible;
+                if (MainWindow.ExolutioRibbon.tabPSM.IsSelected
+                    || MainWindow.ExolutioRibbon.tabTranslation.IsSelected) 
+                    MainWindow.ExolutioRibbon.tabPIM.IsSelected = true;
                 MainWindow.ExolutioRibbon.psmGroup.Visibility = System.Windows.Visibility.Collapsed;
-                MainWindow.ExolutioRibbon.tabPIM.IsSelected = true;
             }
             else if (ActiveDiagram is PSMDiagram)
             {
-                MainWindow.ExolutioRibbon.pimGroup.Visibility = System.Windows.Visibility.Collapsed;
                 MainWindow.ExolutioRibbon.psmGroup.Visibility = System.Windows.Visibility.Visible;
-                MainWindow.ExolutioRibbon.tabPSM.IsSelected = true;
+                if (MainWindow.ExolutioRibbon.tabPIM.IsSelected) MainWindow.ExolutioRibbon.tabPSM.IsSelected = true;
+                MainWindow.ExolutioRibbon.pimGroup.Visibility = System.Windows.Visibility.Collapsed;
             }
             else
             {
