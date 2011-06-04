@@ -161,6 +161,8 @@
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
             </Fluent:RibbonGroupBox>
             <Fluent:RibbonGroupBox Header="Change">
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.RenameComponentCommand}"
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.DerivePSMRootCommand}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.SplitPIMAttributeCommand}" 
@@ -198,6 +200,8 @@
                 </Fluent:DropDownButton>
             </Fluent:RibbonGroupBox>
             <Fluent:RibbonGroupBox Header="Change">
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.RenameComponentCommand}"
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.SplitPSMAttributeCommand}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
             </Fluent:RibbonGroupBox>

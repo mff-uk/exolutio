@@ -35,7 +35,7 @@ namespace Exolutio.Controller.Commands.Atomic
 
         public override bool CanExecute()
         {
-            return NamedComponentGuid != Guid.Empty && NewName != null;
+            return NamedComponentGuid != Guid.Empty;
         }
         
         internal override void CommandOperation()
