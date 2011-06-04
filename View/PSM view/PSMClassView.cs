@@ -240,13 +240,32 @@ namespace Exolutio.View
             {
                 this.Name = PSMClass.Name;
                 
-                Brush header = PSMClass.IsStructuralRepresentative ? ViewToolkitResources.StructuralRepresentativeHeader : ViewToolkitResources.ClassHeader;
-                Brush body = PSMClass.IsStructuralRepresentative ? ViewToolkitResources.StructuralRepresentativeBody : ViewToolkitResources.TransparentBrush;
-                if (PSMClass.Interpretation == null)
+                Brush header;
+                Brush body;
+
+                if (!PSMClass.IsStructuralRepresentative && PSMClass.Interpretation != null)
+                {
+                    header = ViewToolkitResources.ClassHeader;
+                    body = ViewToolkitResources.TransparentBrush;
+                }
+                else if (PSMClass.IsStructuralRepresentative && PSMClass.Interpretation != null)
+                {
+                    header = ViewToolkitResources.StructuralRepresentativeHeader;
+                    body = ViewToolkitResources.StructuralRepresentativeBody;
+                }
+                else if (PSMClass.IsStructuralRepresentative && PSMClass.Interpretation == null)
+                {
+                    header = ViewToolkitResources.StructuralRepresentativeHeaderNoInterpretation;
+                    body = ViewToolkitResources.StructuralRepresentativeBody;
+                }
+                else //if (!PSMClass.IsStructuralRepresentative && PSMClass.Interpretation == null)
                 {
                     header = ViewToolkitResources.NoInterpretationBrush;
+                    body = ViewToolkitResources.TransparentBrush;
                 }
-
+                
+                
+                #region represented class binding
                 if (PSMClass.RepresentedClass != representedClass)
                 {
                     if (representedClass != null)
@@ -258,6 +277,7 @@ namespace Exolutio.View
                         BindToRepresentedClass(PSMClass.RepresentedClass);
                     }
                 }
+                #endregion 
 
                 if (headerBorder.Background != header)
                 {
@@ -272,6 +292,7 @@ namespace Exolutio.View
                     }
                 }
 
+                #region represented class text
                 if (PSMClass.IsStructuralRepresentative)
                 {
                     tbSRHeader.Visibility = Visibility.Visible;
@@ -283,6 +304,7 @@ namespace Exolutio.View
                     tbSRHeader.Text = String.Empty;
                     tbSRHeader.Visibility = Visibility.Collapsed;
                 }
+                #endregion 
             }
 
             tbClassHeader.Text = Name;

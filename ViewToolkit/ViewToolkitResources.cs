@@ -16,7 +16,9 @@ namespace Exolutio.ViewToolkit
         private static readonly SolidColorBrush goldBrush;
         private static readonly SolidColorBrush noInterpretationBrush;
         private static readonly SolidColorBrush structuralRepresentativeHeader;
+        private static readonly SolidColorBrush structuralRepresentativeHeaderNoInterpretation;
         private static readonly SolidColorBrush structuralRepresentativeBody;
+        private static readonly SolidColorBrush structuralRepresentativeBodyNoInterpretation;
         private static readonly Brush interpretedAttributeBrush;
         private static readonly SolidColorBrush selectedBorderBrush;
         private static readonly SolidColorBrush ribbonBackstageDimText;
@@ -114,7 +116,11 @@ namespace Exolutio.ViewToolkit
 
         public static Brush StructuralRepresentativeBody { get { return structuralRepresentativeBody; } }
 
+        public static Brush StructuralRepresentativeBodyNoInterpretation { get { return structuralRepresentativeBodyNoInterpretation; } }
+
         public static Brush StructuralRepresentativeHeader { get { return structuralRepresentativeHeader; } }
+
+        public static Brush StructuralRepresentativeHeaderNoInterpretation { get { return structuralRepresentativeHeaderNoInterpretation; } }
 
         public static Brush InterpretedAttributeBrush { get { return interpretedAttributeBrush; } }
 
@@ -137,7 +143,9 @@ namespace Exolutio.ViewToolkit
             goldBrush = new SolidColorBrush(Colors.Yellow);
             navyBrush = new SolidColorBrush(Color.FromArgb(0xFF, 0x00, 0x00, 0x80));
             structuralRepresentativeHeader = new SolidColorBrush(Color.FromArgb(255, 153, 216, 232));
+            structuralRepresentativeHeaderNoInterpretation = new SolidColorBrush(Color.FromArgb(255, 185, 216, 232));
             structuralRepresentativeBody = new SolidColorBrush(Color.FromArgb(255, 200, 233, 241));
+            structuralRepresentativeBodyNoInterpretation = new SolidColorBrush(Color.FromArgb(255, 220, 233, 241));
             interpretedAttributeBrush = seaShellBrush; 
             ribbonBackstageDimText = new SolidColorBrush(Color.FromArgb(0xFF, 0xa1, 0x6f, 0x89));
             selectedBorderBrush = redBrush;
