@@ -12,6 +12,7 @@ using Exolutio.View;
 using Exolutio.View.Commands.Versioning;
 using Exolutio.View.Commands.PSM;
 using Exolutio.Controller.Commands.Complex.PSM;
+using Exolutio.Model;
 
 namespace Exolutio.View.Commands
 {
@@ -31,7 +32,7 @@ namespace Exolutio.View.Commands
         public static guiShowHelpCommand HelpCommand { get; set; }
         public static guiSampleDocumentCommand CreateSampleDocumentCommand { get; set; }
         public static guiLocateInterpretedComponent LocateInterpretedComponent { get; set; }
-        public static guiModelTreeCommand RenameComponentCommand { get; set; }
+        public static guiControllerCommand RenameComponentCommand { get; set; }
 
 #if SILVERLIGHT
         public static guiOpenWebProjectCommand OpenWebProjectCommand { get; set; }
@@ -128,10 +129,13 @@ namespace Exolutio.View.Commands
                 Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.delete2)
             };
 
-            RenameComponentCommand = new guiModelTreeCommand
+            RenameComponentCommand = new guiControllerCommand
             {
                 Text = "Rename...",
-                Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.pencil)
+                Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.note_edit),
+                ControllerCommandFactoryMethod = CommandFactory<acmdRenameComponent>.Factory,
+                ControllerCommandType = typeof(acmdRenameComponent),
+                AcceptedSelectedComponentType = typeof(Component)
             };
 
             #endregion
