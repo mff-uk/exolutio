@@ -193,7 +193,7 @@ namespace Exolutio.View
             if (handler != null) handler(component);
         }
 
-        public static event Action<IEnumerable<Component>> SelectComponents;
+        //public static event Action<IEnumerable<Component>> SelectComponents;
 
         private static void Current_Controller_ExecutedCommand(CommandBase command, bool ispartofmacro, CommandBase macrocommand)
         {

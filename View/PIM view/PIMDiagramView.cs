@@ -59,39 +59,9 @@ namespace Exolutio.View
             ContextMenuItem otherItemsMenu = new ContextMenuItem("Other operations");
             MenuHelper.CreateSubmenuForCommandsWithoutScope(otherItemsMenu);
             ExolutioCanvas.ContextMenu.Items.Add(otherItemsMenu);
-#endif            
-            
+#endif
+
             return withoutViewHelpers;
-        }
-
-        protected override void Current_SelectionChanged()
-        {
-            base.Current_SelectionChanged();
-        }
-
-        protected override void Current_SelectComponents(IEnumerable<Component> components)
-        {
-            base.Current_SelectComponents(components);
-
-            bool clearThis = components.Any(c => c.Schema == this.Diagram.Schema);
-            foreach (ComponentViewBase componentViewBase in RepresentantsCollection.Values)
-            {
-                PIMClassView pimClassView = componentViewBase as PIMClassView;
-                if (pimClassView != null)
-                {
-                    foreach (PIMAttributeTextBox pimAttributeTextBox in pimClassView)
-                    {
-                        if (components.Contains(pimAttributeTextBox.PIMAttribute))
-                        {
-                            pimAttributeTextBox.Selected = true;
-                        }
-                        else if (clearThis)
-                        {
-                            pimAttributeTextBox.Selected = false; 
-                        }
-                    }
-                }
-            }
         }
     }
 }

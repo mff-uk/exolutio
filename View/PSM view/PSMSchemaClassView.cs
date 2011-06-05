@@ -16,7 +16,6 @@ namespace Exolutio.View
         #region inner controls
         private StackPanel stackPanel;
         private EditableTextBox tbClassHeader;
-        private PSMAttributesContainer attributesContainer;
         private Border border;
 
         #endregion

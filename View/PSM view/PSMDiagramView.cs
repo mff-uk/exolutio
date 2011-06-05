@@ -112,35 +112,5 @@ namespace Exolutio.View
         {
             DoLayout();
         }
-
-        protected override void Current_SelectionChanged()
-        {
-            base.Current_SelectionChanged();
-        }
-
-        protected override void Current_SelectComponents(IEnumerable<Component> components)
-        {
-            base.Current_SelectComponents(components);
-
-            bool clearThis = components.Any(c => c.Schema == this.Diagram.Schema);
-            foreach (ComponentViewBase componentViewBase in RepresentantsCollection.Values)
-            {
-                PSMClassView psmClassView = componentViewBase as PSMClassView;
-                if (psmClassView != null)
-                {
-                    foreach (PSMAttributeTextBox psmAttributeTextBox in psmClassView)
-                    {
-                        if (components.Contains(psmAttributeTextBox.PSMAttribute))
-                        {
-                            psmAttributeTextBox.Selected = true;
-                        }
-                        else if (clearThis)
-                        {
-                            psmAttributeTextBox.Selected = false;
-                        }
-                    }
-                }
-            }
-        }
     }
 }

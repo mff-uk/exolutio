@@ -88,10 +88,8 @@ namespace Exolutio.WPFClient.Commands
                 {
                     case ELayoutType.PIMLeftPSMRight:
                         return "PIM left PSM right";
-                        break;
                     case ELayoutType.ByVersions:
                         return "Layout by versions";
-                        break;
                 }
                 return String.Empty;
             }

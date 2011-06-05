@@ -276,12 +276,19 @@ namespace Exolutio.ViewToolkit
             set
             {
                 selected = value;
+                InvokeSelectedChanged();
             }
         }
 
         public bool Highlighted { get; set; }
 
         public event Action SelectedChanged;
+
+        public void InvokeSelectedChanged()
+        {
+            Action handler = SelectedChanged;
+            if (handler != null) handler();
+        }
 
         #endregion
 

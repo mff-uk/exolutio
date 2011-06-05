@@ -190,14 +190,6 @@ namespace Exolutio.Updater
         #region fields
         // The thread inside which the download happens
         private Thread thrDownload;
-        // The stream of data retrieved from the web server
-        private Stream strResponse;
-        // The stream of data that we write to the harddrive
-        private FileStream strLocal;
-        // The request to the web server for file information
-        private HttpWebRequest webRequest;
-        // The response from the web server containing information about the file
-        private HttpWebResponse webResponse;
         // The progress of the download in percentage
         private static int PercentProgress;
         #endregion
@@ -322,10 +314,6 @@ namespace Exolutio.Updater
 
         private void bCancel_Click(object sender, RoutedEventArgs e)
         {
-            // Close the web response and the streams
-            webResponse.Close();
-            strResponse.Close();
-            strLocal.Close();
             // Abort the thread that's downloading
             thrDownload.Abort();
             // Set the progress bar back to 0 and the label
@@ -377,10 +365,6 @@ namespace Exolutio.Updater
                         }
                         catch (Exception ex)
                         {
-                            if (strLocal != null)
-                            {
-                                strLocal.Close();
-                            }
                             downloadSuccessfull = null;
                             label1.Dispatcher.Invoke(new Action(() => label1.Content = "Update failed, try running again."));
                             MessageBox.Show("Failed to update file: " + downloadedFile.Key + ", " + ex.Message);
