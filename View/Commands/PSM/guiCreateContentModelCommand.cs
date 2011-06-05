@@ -72,7 +72,18 @@ namespace Exolutio.View.Commands.PSM
 
         public override System.Windows.Media.ImageSource Icon
         {
-            get { return ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.ContentContainer); }
+            get 
+            {
+                switch (Type)
+                {
+                    case PSMContentModelType.Choice:
+                        return ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.ContentChoice);
+                    case PSMContentModelType.Set:
+                        return ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.ContentContainer);
+                    default:
+                        return ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.ContentContainer); 
+                }
+            }
         }
     }
 }
