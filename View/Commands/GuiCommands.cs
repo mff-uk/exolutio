@@ -79,8 +79,8 @@ namespace Exolutio.View.Commands
         public static guiCreateContentModelCommand CreateSequenceContentModelCommand { get; set; }
         public static guiCreateContentModelCommand CreateChoiceContentModelCommand { get; set; }
         public static guiCreateContentModelCommand CreateSetContentModelCommand { get; set; }
-        public static guiShiftAssociationCommand ShiftLeft { get; set; }
-        public static guiShiftAssociationCommand ShiftRight { get; set; }
+        public static guiShiftCommand ShiftLeft { get; set; }
+        public static guiShiftCommand ShiftRight { get; set; }
         public static guiShiftPSMAttributeCommand PSMShiftUp { get; set; }
         public static guiShiftPSMAttributeCommand PSMShiftDown { get; set; }
         public static guiControllerCommand LeaveOutUnintAM { get; set; }
@@ -327,8 +327,8 @@ namespace Exolutio.View.Commands
             CreateSequenceContentModelCommand = new guiCreateContentModelCommand() { Type = PSMContentModelType.Sequence };
             CreateChoiceContentModelCommand = new guiCreateContentModelCommand() { Type = PSMContentModelType.Choice };
             CreateSetContentModelCommand = new guiCreateContentModelCommand() { Type = PSMContentModelType.Set };
-            ShiftLeft = new guiShiftAssociationCommand() { Left = true };
-            ShiftRight = new guiShiftAssociationCommand() { Left = false };
+            ShiftLeft = new guiShiftCommand() { Left = true };
+            ShiftRight = new guiShiftCommand() { Left = false };
             PSMShiftUp = new guiShiftPSMAttributeCommand() { Up = true };
             PSMShiftDown = new guiShiftPSMAttributeCommand() { Up = false };
             LeaveOutUnintAM = new guiControllerCommand()

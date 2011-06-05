@@ -592,6 +592,15 @@ namespace Exolutio.Controller.Commands {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to PSM root &apos;{0}&apos; shifted &apos;{1}&apos;..
+        /// </summary>
+        internal static string SHIFT_PSM_ROOT {
+            get {
+                return ResourceManager.GetString("SHIFT_PSM_ROOT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Structural representant &apos;{0}&apos; changed from &apos;{1}&apos; to &apos;{2}&apos;..
         /// </summary>
         internal static string STRUCTURAL_REPRESENTANT_CHANGED {
