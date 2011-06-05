@@ -84,8 +84,10 @@ namespace Exolutio.View.Commands
         public static guiShiftCommand ShiftRight { get; set; }
         public static guiShiftPSMAttributeCommand PSMShiftUp { get; set; }
         public static guiShiftPSMAttributeCommand PSMShiftDown { get; set; }
-        public static guiControllerCommand LeaveOutUnintAM { get; set; }
+        public static guiLeaveOutUnintAM LeaveOutUnintAM { get; set; }
         public static guiInsertPSMClass InsertPSMClass { get; set; }
+
+        public static guiControllerCommand CutAssociation { get; set; }
         #endregion
 
         #region versioning
@@ -347,19 +349,19 @@ namespace Exolutio.View.Commands
             ShiftRight = new guiShiftCommand() { Left = false };
             PSMShiftUp = new guiShiftPSMAttributeCommand() { Up = true };
             PSMShiftDown = new guiShiftPSMAttributeCommand() { Up = false };
-            LeaveOutUnintAM = new guiControllerCommand()
+            LeaveOutUnintAM = new guiLeaveOutUnintAM();
+            InsertPSMClass = new guiInsertPSMClass();
+            CutAssociation = new guiControllerCommand()
                                             {
-                                                Text = "Leave out",
-                                                ControllerCommandFactoryMethod = CommandFactory<cmdLeaveOutUninterpretedAssociationMember>.Factory,
-                                                ControllerCommandType = typeof(cmdLeaveOutUninterpretedAssociationMember),
+                                                Text = "Cut association",
+                                                ControllerCommandFactoryMethod = CommandFactory<Exolutio.Controller.Commands.Complex.PSM.cmdDeletePSMAssociation>.Factory,
+                                                ControllerCommandType = typeof(Exolutio.Controller.Commands.Complex.PSM.cmdDeletePSMAssociation),
                                                 PSMOnly = true,
                                                 OpenDialog = false,
                                                 ScopeIsSelectedComponent = true,
-                                                AcceptedSelectedComponentType = typeof(PSMAssociationMember),
-                                                Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.RemoveContainer)
+                                                AcceptedSelectedComponentType = typeof(PSMAssociation),
+                                                Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.delete)
                                             };
-            InsertPSMClass = new guiInsertPSMClass();
-            
             #endregion
 
             #region other

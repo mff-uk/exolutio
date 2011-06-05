@@ -80,6 +80,7 @@ namespace Exolutio.Controller.Commands.Complex.PSM
             PSMAssociationMember associationMember = Project.TranslateComponent<PSMAssociationMember>(AssociationMemberGuid);
             if (associationMember.ParentAssociation != null && associationMember.ParentAssociation.Interpretation != null) return false;
             if (associationMember is PSMClass && (associationMember as PSMClass).Interpretation != null) return false;
+            if (associationMember is PSMSchemaClass) return false;
             return base.CanExecute();
         }
 

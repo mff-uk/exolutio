@@ -20,10 +20,10 @@ namespace Exolutio.View.Commands.PSM
           
             IEnumerable<PSMAssociation> selectedAssociations = Current.ActiveDiagramView.GetSelectedComponents()
                 .Where(c => c is PSMAssociation).Cast<PSMAssociation>();
-            if (selectedAssociations.Count() > 0) return true;
+            if (selectedAssociations.Count() > 0 && selectedAssociations.All(a => a.Parent.ChildPSMAssociations.Count > 1)) return true;
             IEnumerable<PSMAssociationMember> selectedRoots = Current.ActiveDiagramView.GetSelectedComponents()
                 .Where(c => c is PSMAssociationMember).Cast<PSMAssociationMember>().Where(am => am.ParentAssociation == null);
-            if (selectedRoots.Count() > 0) return true;
+            if (selectedRoots.Count() > 0 && (Current.ActiveDiagram as PSMDiagram).PSMSchema.Roots.Count > 1) return true;
             return false;
         }
 
