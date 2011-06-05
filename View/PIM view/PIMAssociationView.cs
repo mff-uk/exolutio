@@ -236,10 +236,13 @@ namespace Exolutio.View
 
             ExolutioContextMenu associationMenu = MenuHelper.GetContextMenu(ScopeAttribute.EScope.PIMAssociation, DiagramView.Diagram);
             ContextMenu = associationMenu;
+            NameLabel.ContextMenu = associationMenu;
             ExolutioContextMenu startPointMenu = MenuHelper.GetContextMenu(ScopeAttribute.EScope.PIMAssociationEnd, DiagramView.Diagram);
             Connector.StartPoint.ContextMenu = startPointMenu;
+            SourceCardinalityLabel.ContextMenu = startPointMenu;
             ExolutioContextMenu endPointMenu = MenuHelper.GetContextMenu(ScopeAttribute.EScope.PIMAssociationEnd, DiagramView.Diagram);
             Connector.EndPoint.ContextMenu = endPointMenu;
+            TargetCardinalityLabel.ContextMenu = endPointMenu;
 
 #if SILVERLIGHT
             ContextMenuService.SetContextMenu(Connector, associationMenu);
@@ -249,6 +252,7 @@ namespace Exolutio.View
 #endif
             BindModelView();
 
+            NameLabel.SelectedChanged += new Action(NameLabel_SelectedChanged);
             NameLabel.PositionChanged += NameLabel_PositionChanged;
             SourceCardinalityLabel.PositionChanged += SourceCardinalityLabel_PositionChanged;
             TargetCardinalityLabel.PositionChanged += TargetCardinalityLabel_PositionChanged;
@@ -295,6 +299,14 @@ namespace Exolutio.View
         void TargetCardinalityLabel_PositionChanged()
         {
             ViewHelper.AssociationEndsViewHelpers[1].CardinalityLabelViewHelper.SetPositionSilent(TargetCardinalityLabel.Position);
+        }
+
+        void NameLabel_SelectedChanged()
+        {
+            if (NameLabel.Selected && !this.Selected)
+            {
+                Connector.Selected = true;
+            }
         }
 
         void NameLabel_PositionChanged()

@@ -121,6 +121,12 @@ namespace Exolutio.ViewToolkit
             InvokePositionChanged();
         }
 
+        public void ResetPoint()
+        {
+            Placement = EPlacementKind.ParentAutoPos;
+            Connector.InvalidateGeometry();
+        }
+
         /// <summary>
         /// Moves the point to specified location.
         /// </summary>

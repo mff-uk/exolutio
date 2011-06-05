@@ -469,7 +469,7 @@ namespace Exolutio.ViewToolkit
         /// <returns>Returns true when the control is the only control dragged.</returns>
         private bool DraggingAllone(ISelectable item)
         {
-            return (ExolutioCanvas.SelectedItems.Count <= 1 && (item is IDraggable) && (item as IDraggable).DragThumb.AllowDragIfSelectedAlone);
+            return (ExolutioCanvas.SelectedItems.Where(i => i is IDraggable).Count() <= 1 && ((IDraggable) item).DragThumb.AllowDragIfSelectedAlone);
         }
 
         private Dictionary<DragThumb, rPoint> startPositions;
