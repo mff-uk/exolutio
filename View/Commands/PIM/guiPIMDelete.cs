@@ -15,6 +15,11 @@ namespace Exolutio.View.Commands.PIM
 {
     public class guiPIMDelete : guiSelectionDependentCommand
     {
+        public guiPIMDelete()
+        {
+            Gesture = KeyGestures.Delete;
+        }
+        
         public override bool CanExecute(object parameter)
         {
             if (!(Current.ActiveDiagram is PIMDiagram)) return false;

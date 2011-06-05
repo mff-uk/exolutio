@@ -62,5 +62,12 @@ namespace Exolutio.View
         {
             get { return f2; }
         }
+
+        private static readonly KeyGesture delete = new KeyGesture(Key.Delete);
+        public static KeyGesture Delete
+        {
+            get { return delete; }
+        }
+    
     }
 }
