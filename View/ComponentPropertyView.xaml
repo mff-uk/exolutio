@@ -30,8 +30,8 @@
                                 <View:DerivedAttributeConverter x:Key="convertor" />
                                 <View:DerivedAttributesVisibleConverter x:Key="convertorVisible" />
                         	</StackPanel.Resources>
-                            <TextBlock Text="{Binding Path=Name}" ToolTip="{Binding}" Padding="2"  />
-                            <TextBlock Text="Interpreted attributes:" Padding="10,2,2,2" Visibility="{Binding Converter={StaticResource convertorVisible}}"  />
+                            <TextBlock Text="{Binding Path=Name}" ToolTip="{Binding}" Padding="2" Foreground="#FF903F3F" FontWeight="Bold" />
+                            <TextBlock Text="Interpreted attributes:" Padding="10,2,2,2" Visibility="{Binding Converter={StaticResource convertorVisible}}" Foreground="DarkBlue"  />
                             <ListView Name="lvDerivedAttributes" 
                                       ItemTemplate="{StaticResource derivedComponentTemplate}"
                                       ItemsSource="{Binding Converter={StaticResource convertor}}"
@@ -44,12 +44,12 @@
                 <TextBlock Text="Attributes: " FontWeight="Bold" Foreground="DarkBlue" Margin="0,5" />
                 <ListView Name="lvPIMAttributes" 
                           ItemTemplate ="{StaticResource pimAttributeTemplate}" 
-                          Padding="20,0,0,0" Margin="0" BorderThickness="0" HorizontalContentAlignment="Left"
+                          Padding="10,0,0,0" Margin="0" BorderThickness="0" HorizontalContentAlignment="Left"
                           Focusable="False"
                           Background="Transparent" 
                           />
             </StackPanel>
-            
+
             <StackPanel Name="spDerivedComponents">                
                 <TextBlock Text="Interpreted components: " FontWeight="Bold" Foreground="DarkBlue" Margin="0,5" />
                 <ListView Name="lvDerivedComponents" ItemTemplate ="{StaticResource derivedComponentTemplate}" 
@@ -76,6 +76,30 @@
                 <TextBlock Text="Structural representants: " FontWeight="Bold" Foreground="DarkBlue" Margin="0,5" />
                 <ListView Name="lvRepresentatives" ItemTemplate ="{StaticResource structuralRepresentativeTemplate}" 
                           Padding="20,0,0,0" Margin="0" BorderThickness="0"
+                          Focusable="False"
+                          Background="Transparent" 
+                          />
+            </StackPanel>
+            <StackPanel Name="spPSMAttributes">
+                <StackPanel.Resources>
+                    <DataTemplate x:Key="psmAttributeTemplate" DataType="{x:Type PSM:PSMAttribute}">
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel.Resources>
+                                <View:DerivedAttributeConverter x:Key="convertor" />
+                                <View:DerivedAttributesVisibleConverter x:Key="convertorVisible" />
+                            </StackPanel.Resources>
+                            <TextBlock Text="{Binding Path=Name}" ToolTip="{Binding}" Padding="2" Foreground="#FF903F3F" FontWeight="Bold" />
+                            <TextBlock Text="Interpreted attribute: " Foreground="DarkBlue" Margin="20,0,0,0" />
+                            <FormControls:LinkLabel Margin="40,0,0,0" HorizontalAlignment="Left" ToolTip="{Binding}"
+                                                    DataContext="{Binding Path=Interpretation}"
+                                        Click="FocusPIMComponent" Text="{Binding}" ClipToBounds="True" />
+                        </StackPanel>
+                    </DataTemplate>
+                </StackPanel.Resources>
+                <TextBlock Text="Attributes: " FontWeight="Bold" Foreground="DarkBlue" Margin="0,5" />
+                <ListView Name="lvPSMAttributes" 
+                          ItemTemplate ="{StaticResource psmAttributeTemplate}" 
+                          Padding="10,0,0,0" Margin="0" BorderThickness="0" HorizontalContentAlignment="Left"
                           Focusable="False"
                           Background="Transparent" 
                           />

@@ -60,6 +60,7 @@ namespace Exolutio.View
         {
             DisplayNamedComponent(component);
             DisplayAttributes(component as PIMClass);
+            DisplayAttributes(component as PSMClass);
             DisplayInterpretedComponents(component as PIMComponent);
             DisplayPSMComponent(component as PSMComponent);
             DisplayStructuralRepresentatives(component as PSMClass);
@@ -111,6 +112,20 @@ namespace Exolutio.View
                 spRepresentatives.Visibility = System.Windows.Visibility.Collapsed;
                 lvRepresentatives.ItemsSource = null;
                 lRepresentedPSMClass.DataContext = null;
+            }
+        }
+
+        private void DisplayAttributes(PSMClass psmClass)
+        {
+            if (psmClass != null)
+            {
+                lvPSMAttributes.ItemsSource = psmClass.PSMAttributes;
+                spPSMAttributes.Visibility = System.Windows.Visibility.Visible;
+            }
+            else
+            {
+                lvPSMAttributes.ItemsSource = null;
+                spPSMAttributes.Visibility = System.Windows.Visibility.Collapsed;
             }
         }
 

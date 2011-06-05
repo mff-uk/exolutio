@@ -208,24 +208,7 @@ namespace Exolutio.WPFClient
         public void FocusComponent(Diagram diagram, Component component)
         {
             Component diagramComponent = component;
-            Component subComponent = null;
-            PIMAttribute pimAttribute = component as PIMAttribute;
-            if (pimAttribute != null)
-            {
-                subComponent = pimAttribute;
-                diagramComponent = ((PIMAttribute)component).PIMClass;
-            }
-            PSMAttribute psmAttribute = component as PSMAttribute;
-            if (psmAttribute != null)
-            {
-                subComponent = psmAttribute;
-                diagramComponent = ((PSMAttribute)component).PSMClass;
-            }
             DiagramTabManager.ActivateDiagramWithElement(diagram, diagramComponent);
-            if (subComponent != null)
-            {
-                Current.InvokeSelectComponents(new[] { subComponent });
-            }
         }
 
         public void FocusComponent(IEnumerable<PIMDiagram> pimDiagrams, PIMComponent component)
