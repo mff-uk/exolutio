@@ -82,11 +82,13 @@ namespace Exolutio.View
 
         public override void UnBindModelView()
         {
+            Selected = false; 
             if (type != null)
             {
                 type.PropertyChanged -= Type_PropertyChanged;
             }
             PSMAttribute.PropertyChanged -= OnPropertyChangedEvent;
+            base.UnBindModelView();
         }
 
 		void Type_PropertyChanged(object sender, PropertyChangedEventArgs e)
