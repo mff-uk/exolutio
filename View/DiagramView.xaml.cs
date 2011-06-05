@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Exolutio.Model;
 using Exolutio.Model.PIM;
+using Exolutio.Model.PSM;
 using Exolutio.Model.ViewHelper;
 using Exolutio.ViewToolkit;
 using Exolutio.SupportingClasses;
@@ -282,13 +283,32 @@ namespace Exolutio.View
             ClearSelection(false);
             ComponentViewBase view;
             RepresentantsCollection.TryGetValue(component, out view);
+            bool textboxfound = false;
             if (view == null)
             {
-
+                EditableTextBox t = null;
+                if (component is PIMAttribute)
+                {
+                    view = RepresentantsCollection[((PIMAttribute)component).PIMClass];
+                    t = ((PIMClassView)view).FirstOrDefault(tb => tb.PIMAttribute == component);
+                }
+                if (component is PSMAttribute)
+                {
+                    view = RepresentantsCollection[((PSMAttribute) component).PSMClass];
+                    t = ((PSMClassView) view).FirstOrDefault(tb => tb.PSMAttribute == component);
+                }
+                if (t != null)
+                {
+                    t.Selected = true;
+                    textboxfound = true; 
+                }
             }
             if (view != null)
             {
-                view.Selected = true;
+                if (!textboxfound)
+                {
+                    view.Selected = true;
+                }
                 if (focusComponent)
                 {
                     view.Focus();

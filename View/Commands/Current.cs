@@ -195,12 +195,6 @@ namespace Exolutio.View
 
         public static event Action<IEnumerable<Component>> SelectComponents;
 
-        public static void InvokeSelectComponents(IEnumerable<Component> components)
-        {
-            Action<IEnumerable<Component>> handler = SelectComponents;
-            if (handler != null) handler(components);
-        }
-
         private static void Current_Controller_ExecutedCommand(CommandBase command, bool ispartofmacro, CommandBase macrocommand)
         {
             InvokeExecutedCommand(command, ispartofmacro, macrocommand);   
