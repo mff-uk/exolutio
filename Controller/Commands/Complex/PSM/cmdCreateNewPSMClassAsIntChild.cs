@@ -78,8 +78,9 @@ namespace Exolutio.Controller.Commands.Complex.PSM
             if (ParentPSMClassGuid == Guid.Empty || PIMAssociationEndGuid == Guid.Empty) return false;
             PSMClass parent = Project.TranslateComponent<PSMClass>(ParentPSMClassGuid);
             PIMAssociationEnd associationEnd = Project.TranslateComponent<PIMAssociationEnd>(PIMAssociationEndGuid);
-            if (parent.Interpretation == null) return false;
-            if (!(parent.Interpretation as PIMClass).GetAssociationsWith(associationEnd.PIMClass).Contains(associationEnd.PIMAssociation)) return false;
+            PSMClass nic = parent.NearestInterpretedClass();
+            if (nic == null) return false;
+            if (!(nic.Interpretation as PIMClass).GetAssociationsWith(associationEnd.PIMClass).Contains(associationEnd.PIMAssociation)) return false;
             return true;
         }
 
