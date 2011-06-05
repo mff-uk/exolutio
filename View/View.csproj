@@ -90,6 +90,7 @@
     <Compile Include="Commands\Edit\guiUndoCommand.cs" />
     <Compile Include="Commands\GuiCommands.cs" />
     <Compile Include="Commands\guiModelTreeCommand.cs" />
+    <Compile Include="Commands\PIM\guiAssociate2.cs" />
     <Compile Include="Commands\PIM\guiShiftPIMAttributeCommand.cs" />
     <Compile Include="Commands\PSM\guiInsertPSMClass.cs" />
     <Compile Include="Commands\PSM\guiShiftPSMAttributeCommand.cs" />

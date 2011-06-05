@@ -61,7 +61,7 @@ namespace Exolutio.Model.PIM
 
         #region IHasCardinality Members
 
-        private uint lower;
+        private uint lower = 1;
 
         public uint Lower
         {
@@ -74,7 +74,7 @@ namespace Exolutio.Model.PIM
             }
         }
 
-        private UnlimitedInt upper;
+        private UnlimitedInt upper = 1;
 
         public UnlimitedInt Upper
         {

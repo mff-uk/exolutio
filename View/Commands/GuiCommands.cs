@@ -61,7 +61,7 @@ namespace Exolutio.View.Commands
         public static guiControllerCommand SplitPIMAssociationCommand { get; set; }
         public static guiShiftPIMAttributeCommand PIMShiftUp { get; set; }
         public static guiShiftPIMAttributeCommand PIMShiftDown { get; set; }
-
+        public static guiAssociate2 Associate2 { get; set; }
         #endregion
 
         #region PSM
@@ -235,6 +235,7 @@ namespace Exolutio.View.Commands
                                         };
             PIMShiftUp = new guiShiftPIMAttributeCommand() { Up = true };
             PIMShiftDown = new guiShiftPIMAttributeCommand() { Up = false };
+            Associate2 = new guiAssociate2();
             #endregion
 
             #region PSM
