@@ -196,6 +196,15 @@ namespace Exolutio.Controller.Commands {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Insert PSM class.
+        /// </summary>
+        internal static string COMPLEX_INSERT_PSM_CLASS {
+            get {
+                return ResourceManager.GetString("COMPLEX_INSERT_PSM_CLASS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Leave out uninterpreted association member..
         /// </summary>
         internal static string COMPLEX_LEAVE_OUT_UNINT_AM {
