@@ -198,6 +198,10 @@
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.PIMShiftDown}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
             </Fluent:RibbonGroupBox>
+            <Fluent:RibbonGroupBox Header="Delete">
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.PIMDelete}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+            </Fluent:RibbonGroupBox>
             <Fluent:RibbonGroupBox Header="Alignment">
                 <Fluent:RibbonToolBar>
                     <Fluent:RibbonToolBar.LayoutDefinitions>
