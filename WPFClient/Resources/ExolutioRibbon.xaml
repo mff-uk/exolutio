@@ -199,8 +199,18 @@
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
             </Fluent:RibbonGroupBox>
             <Fluent:RibbonGroupBox Header="Delete">
-                <Fluent:Button Command="{x:Static Commands:GuiCommands.PIMDelete}" 
+                <Fluent:Button x:Name="rbPIMDelete" Command="{x:Static Commands:GuiCommands.PIMDelete}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+                <Fluent:DropDownButton IsEnabled="{Binding ElementName=rbPIMDelete,Path=IsEnabled}" Header="Delete components" Icon="/Exolutio.ResourceLibrary;component/Images/delete.png" LargeIcon="/Exolutio.ResourceLibrary;component/Images/delete.png">
+                    <Fluent:Gallery>
+                        <Fluent:Button Command="{x:Static Commands:GuiCommands.PIMDeleteClass}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+                        <Fluent:Button Command="{x:Static Commands:GuiCommands.PIMDeleteAssociation}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+                        <Fluent:Button Command="{x:Static Commands:GuiCommands.PIMDeleteAttribute}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+                    </Fluent:Gallery>
+                </Fluent:DropDownButton>
             </Fluent:RibbonGroupBox>
             <Fluent:RibbonGroupBox Header="Alignment">
                 <Fluent:RibbonToolBar>

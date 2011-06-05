@@ -67,6 +67,9 @@ namespace Exolutio.View.Commands
         public static guiShiftPIMAttributeCommand PIMShiftDown { get; set; }
         public static guiAssociate2 Associate2 { get; set; }
         public static guiPIMDelete PIMDelete { get; set; }
+        public static guiPIMDeleteClass PIMDeleteClass { get; set; }
+        public static guiPIMDeleteAttribute PIMDeleteAttribute { get; set; }
+        public static guiPIMDeleteAssociation PIMDeleteAssociation { get; set; }
         #endregion
 
         #region PSM
@@ -271,6 +274,9 @@ namespace Exolutio.View.Commands
             PIMShiftDown = new guiShiftPIMAttributeCommand() { Up = false };
             Associate2 = new guiAssociate2();
             PIMDelete = new guiPIMDelete();
+            PIMDeleteAssociation = new guiPIMDeleteAssociation();
+            PIMDeleteAttribute = new guiPIMDeleteAttribute();
+            PIMDeleteClass = new guiPIMDeleteClass();
             #endregion
 
             #region PSM
