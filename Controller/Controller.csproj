@@ -156,6 +156,7 @@
     <Compile Include="Commands\Complex\PSM\cmdContentToContentModel.cs" />
     <Compile Include="Commands\Complex\PSM\cmdSplitPSMAttribute.cs" />
     <Compile Include="Commands\Complex\PSM\cmdSplitPSMAssociation.cs" />
+    <Compile Include="Commands\Complex\PSM\cmdLeaveOutUninterpretedAssociationMember.cs" />
     <Compile Include="Commands\Reflection\CommandSerializer.cs" />
     <Compile Include="Commands\Reflection\PSMAssociationMemberParameterConsistency.cs" />
     <Compile Include="Commands\Reflection\DescriptionAttribute.cs" />

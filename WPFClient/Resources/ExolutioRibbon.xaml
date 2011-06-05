@@ -150,6 +150,25 @@
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
             </Fluent:RibbonGroupBox>
         </Fluent:RibbonTabItem>
+        <Fluent:RibbonTabItem  Header="Versioning">
+            <Fluent:RibbonGroupBox Header="Version">
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.BranchCurrentVersionCommand}"
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.SaveAsSingleVersionCommand}"
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.RemoveCurrentVersionCommand}"
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.FindChangesCommand}"
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
+            </Fluent:RibbonGroupBox>
+            <Fluent:RibbonGroupBox>
+                <Fluent:InRibbonGallery MinItemsInRow="1" MaxItemsInRow="5" Name="versionGallery" Visibility="Collapsed"
+                    ItemWidth="50" ItemHeight="18"                    
+                    ResizeMode="Both">
+                </Fluent:InRibbonGallery>
+
+            </Fluent:RibbonGroupBox>
+        </Fluent:RibbonTabItem>
 
         <Fluent:RibbonTabItem x:Name="tabPIM" Header="Modeling" Group="{Binding ElementName=pimGroup}">
             <Fluent:RibbonGroupBox Header="Create">
@@ -221,6 +240,10 @@
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.PSMShiftDown}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
             </Fluent:RibbonGroupBox>
+            <Fluent:RibbonGroupBox Header="Delete">
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.LeaveOutUnintAM}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+            </Fluent:RibbonGroupBox>
         </Fluent:RibbonTabItem>
 
         <Fluent:RibbonTabItem x:Name="tabTranslation" Header="Translation" Group="{Binding ElementName=psmGroup}">
@@ -241,25 +264,6 @@
             </Fluent:RibbonGroupBox>
         </Fluent:RibbonTabItem>
         
-        <Fluent:RibbonTabItem  Header="Versioning">
-            <Fluent:RibbonGroupBox Header="Version">
-                <Fluent:Button Command="{x:Static Commands:GuiCommands.BranchCurrentVersionCommand}"
-                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
-                <Fluent:Button Command="{x:Static Commands:GuiCommands.SaveAsSingleVersionCommand}"
-                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
-                <Fluent:Button Command="{x:Static Commands:GuiCommands.RemoveCurrentVersionCommand}"
-                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
-                <Fluent:Button Command="{x:Static Commands:GuiCommands.FindChangesCommand}"
-                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
-            </Fluent:RibbonGroupBox>
-            <Fluent:RibbonGroupBox>
-                <Fluent:InRibbonGallery MinItemsInRow="1" MaxItemsInRow="5" Name="versionGallery" Visibility="Collapsed"
-                    ItemWidth="50" ItemHeight="18"                    
-                    ResizeMode="Both">
-                </Fluent:InRibbonGallery>
-
-            </Fluent:RibbonGroupBox>
-        </Fluent:RibbonTabItem>
         <!--
             <Fluent:RibbonTabItem Header="PIM">
                 <Fluent:RibbonGroupBox Header="PIM diagram elements">

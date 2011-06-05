@@ -83,6 +83,7 @@ namespace Exolutio.View.Commands
         public static guiShiftAssociationCommand ShiftRight { get; set; }
         public static guiShiftPSMAttributeCommand PSMShiftUp { get; set; }
         public static guiShiftPSMAttributeCommand PSMShiftDown { get; set; }
+        public static guiControllerCommand LeaveOutUnintAM { get; set; }
         #endregion
 
         #region versioning
@@ -301,7 +302,7 @@ namespace Exolutio.View.Commands
             AddPSMChildUnInterpreted = new guiControllerCommand
                                             {
                                                 Text = "Add uninterpreted child",
-                                                ControllerCommandFactoryMethod = CommandFactory<Exolutio.Controller.Commands.Complex.PSM.cmdCreateNewPSMClassAsUnintChild>.Factory,
+                                                ControllerCommandFactoryMethod = CommandFactory<cmdCreateNewPSMClassAsUnintChild>.Factory,
                                                 ControllerCommandType = typeof(Exolutio.Controller.Commands.Complex.PSM.cmdCreateNewPSMClassAsUnintChild),
                                                 PSMOnly = true,
                                                 OpenDialog = false,
@@ -313,7 +314,7 @@ namespace Exolutio.View.Commands
             SplitPSMAttributeCommand = new guiControllerCommand
                                             {
                                                 Text = "Split attribute",
-                                                ControllerCommandFactoryMethod = CommandFactory<Exolutio.Controller.Commands.Complex.PSM.cmdSplitPSMAttribute>.Factory,
+                                                ControllerCommandFactoryMethod = CommandFactory<cmdSplitPSMAttribute>.Factory,
                                                 ControllerCommandType = typeof(cmdSplitPSMAttribute),
                                                 PSMOnly = true,
                                                 OpenDialog = false,
@@ -329,7 +330,17 @@ namespace Exolutio.View.Commands
             ShiftRight = new guiShiftAssociationCommand() { Left = false };
             PSMShiftUp = new guiShiftPSMAttributeCommand() { Up = true };
             PSMShiftDown = new guiShiftPSMAttributeCommand() { Up = false };
-
+            LeaveOutUnintAM = new guiControllerCommand()
+                                            {
+                                                Text = "Leave out",
+                                                ControllerCommandFactoryMethod = CommandFactory<cmdLeaveOutUninterpretedAssociationMember>.Factory,
+                                                ControllerCommandType = typeof(cmdLeaveOutUninterpretedAssociationMember),
+                                                PSMOnly = true,
+                                                OpenDialog = false,
+                                                ScopeIsSelectedComponent = true,
+                                                AcceptedSelectedComponentType = typeof(PSMAssociationMember),
+                                                Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.RemoveContainer)
+                                            };
             #endregion
 
             #region other
