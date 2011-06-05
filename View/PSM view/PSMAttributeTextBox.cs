@@ -6,14 +6,16 @@ using Exolutio.Controller.Commands;
 using Exolutio.Model;
 using Exolutio.Model.PSM;
 using Exolutio.ResourceLibrary;
+using Exolutio.SupportingClasses;
 using Exolutio.ViewToolkit;
+using Component = Exolutio.Model.Component;
 
 namespace Exolutio.View
 {
 	/// <summary>
 	/// Textbox displaying attribute
 	/// </summary>
-	public class PSMAttributeTextBox : EditableTextBox
+    public class PSMAttributeTextBox : EditableTextBox, IComponentTextBox, ISelectableSubItem
 	{
 	    public PSMAttribute PSMAttribute { get; private set; }
 
@@ -55,6 +57,7 @@ namespace Exolutio.View
 #else
             MouseDoubleClick += PSMAttributeTextBox_MouseDoubleClick;
             MouseDown += PSMAttributeTextBox_MouseDown;
+            PreviewMouseDown += PSMAttributeTextBox_PreviewMouseDown;
 #endif
             Background = ViewToolkitResources.TransparentBrush;
             RefreshTextContent();
@@ -115,25 +118,52 @@ namespace Exolutio.View
             {
                 if (this.PSMAttribute.PSMClass != null && !this.PSMAttribute.PSMClass.IsStructuralRepresentative)
                 {
-                    this.Background = ViewToolkitResources.NoInterpretationBrush;
+                    if (!Selected)
+                    {
+                        this.Background = ViewToolkitResources.NoInterpretationBrush;
+                    }
+                    else
+                    {
+                        this.Background = ViewToolkitResources.NoInterpretationBrushSelected;
+                    }
                 }
                 else
                 {
-                    this.Background = ViewToolkitResources.StructuralRepresentativeBodyNoInterpretation;
+                    if (!Selected)
+                    {
+                        this.Background = ViewToolkitResources.StructuralRepresentativeBodyNoInterpretation;
+                    }
+                    else
+                    {
+                        this.Background = ViewToolkitResources.NoInterpretationBrushSelected;
+                    }
                 }
             }
             else
             {
                 if (this.PSMAttribute.PSMClass != null && this.PSMAttribute.PSMClass.IsStructuralRepresentative)
                 {
-                    this.Background = ViewToolkitResources.StructuralRepresentativeBody;
+                    if (!Selected)
+                    {
+                        this.Background = ViewToolkitResources.StructuralRepresentativeBody;
+                    }
+                    else
+                    {
+                        this.Background = ViewToolkitResources.StructuralRepresentativeBodySelected;
+                    }
                 }
                 else
                 {
-                    this.Background = ViewToolkitResources.InterpretedAttributeBrush;
+                    if (!Selected)
+                    {
+                        this.Background = ViewToolkitResources.InterpretedAttributeBrush;
+                    }
+                    else
+                    {
+                        this.Background = ViewToolkitResources.ClassSelectedAttribute;
+                    }
                 }
             }
-
 		}
 
 	    private void OnPropertyChangedEvent(object sender, PropertyChangedEventArgs e)
@@ -149,6 +179,12 @@ namespace Exolutio.View
 	    {
 	        Current.InvokeComponentTouched(PSMAttribute);
 	    }
+
+        void PSMAttributeTextBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Container.ExolutioCanvas.SelectableItem_PreviewMouseDown(this, e);
+            e.Handled = true;
+        }
 
 	    private void PSMAttributeTextBox_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
 		{
@@ -175,6 +211,37 @@ namespace Exolutio.View
         //    XCaseCanvas.InvokeVersionedElementMouseLeave(this, property);
         //}
 
-        #endregion 
+        #endregion
+
+        public override bool Selected
+        {
+            get
+            {
+                return base.Selected;
+            }
+            set
+            {
+                base.Selected = value;
+                if (value)
+                {
+                    //Background = ViewToolkitResources.ClassSelectedAttribute;
+                    Container.DiagramView.SelectedTextBoxes.AddIfNotContained(this);
+                }
+                else
+                {
+                    //Background = ViewToolkitResources.ClassBody;
+                    Container.DiagramView.SelectedTextBoxes.Remove(this);
+                }
+
+                RefreshTextContent();
+
+                Container.DiagramView.InvokeSelectionChanged();
+            }
+        }
+
+	    public Component Component
+	    {
+	        get { return PSMAttribute; }
+	    }
 	}
 }

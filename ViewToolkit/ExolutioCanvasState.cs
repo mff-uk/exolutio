@@ -79,7 +79,7 @@ namespace Exolutio.ViewToolkit
             }
 #endif
 
-            protected static bool ShiftOrControlPressed
+            public static bool ShiftOrControlPressed
             {
                 get { return (Keyboard.Modifiers & (ModifierKeys.Shift | ModifierKeys.Control)) != ModifierKeys.None; }
             }
@@ -164,6 +164,7 @@ namespace Exolutio.ViewToolkit
                     if (!ShiftOrControlPressed)
                     {
                         Canvas.ClearCanvasSelectedItems();
+                        Canvas.InvokeCanvasSelectionCleared(null);
                     }
                     e.Handled = true;
                 }
@@ -230,6 +231,7 @@ namespace Exolutio.ViewToolkit
                 if (e.OriginalSource == Canvas && !ShiftOrControlPressed)
                 {
                     Canvas.ClearCanvasSelectedItems();
+                    Canvas.InvokeCanvasSelectionCleared(null);
                 }
             }
 
@@ -242,6 +244,11 @@ namespace Exolutio.ViewToolkit
             public override void SelectableItem_PreviewMouseDown(ISelectable item, MouseButtonEventArgs e)
             {
                 //Selection handling
+                if (e.Source is ISelectableSubItem && item != e.Source)
+                {
+                    return;
+                }
+
                 if (ShiftOrControlPressed)
                 {
                     if (item.Selected)
@@ -256,6 +263,7 @@ namespace Exolutio.ViewToolkit
                 else if (!item.Selected)
                 {
                     Canvas.ClearCanvasSelectedItems();
+                    Canvas.InvokeCanvasSelectionCleared(null);
                     item.Selected = true;
                 }
 

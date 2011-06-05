@@ -46,6 +46,23 @@ namespace Exolutio.View.Commands.ParameterControls
         public void SetSuggestedValue(object suggestedValue)
         {
             this.SuggestedValue = suggestedValue;
+            if (this.Items.Count > 0)
+            {
+                foreach (ComboBoxItem item in this.Items)
+                {
+                    string compared = suggestedValue is Guid
+                                          ? suggestedValue.ToString()
+                                          : (suggestedValue is ExolutioObject
+                                                 ? ((ExolutioObject) suggestedValue).ID.ToString()
+                                                 : suggestedValue.ToString());
+                    suggestedValue.ToString();
+                    if (item.Tag.ToString() == compared)
+                    {
+                        SelectedItem = item;
+                        break;
+                    }
+                }
+            }
         }
 
         object IOperationParameterControl.Value

@@ -6,14 +6,16 @@ using Exolutio.Controller.Commands;
 using Exolutio.Model;
 using Exolutio.Model.PIM;
 using Exolutio.ResourceLibrary;
+using Exolutio.SupportingClasses;
 using Exolutio.ViewToolkit;
+using Component = Exolutio.Model.Component;
 
 namespace Exolutio.View
 {
 	/// <summary>
 	/// Textbox displaying attribute
 	/// </summary>
-	public class PIMAttributeTextBox : EditableTextBox
+	public class PIMAttributeTextBox : EditableTextBox, IComponentTextBox, ISelectableSubItem
 	{
 	    public PIMAttribute PIMAttribute { get; private set; }
 
@@ -38,6 +40,7 @@ namespace Exolutio.View
             #else
             MouseDoubleClick += PIMAttributeTextBox_MouseDoubleClick;
             MouseDown += PIMAttributeTextBox_MouseDown;
+            PreviewMouseDown += PIMAttributeTextBox_PreviewMouseDown;
             #endif
 
             this.PIMAttribute.PropertyChanged += OnPropertyChangedEvent;
@@ -105,7 +108,15 @@ namespace Exolutio.View
 	    void PIMAttributeTextBox_MouseDown(object sender, MouseButtonEventArgs e)
 	    {
 	        Current.InvokeComponentTouched(PIMAttribute);
+	        Container.ExolutioCanvas.SelectableItem_PreviewMouseDown(this, e);
+            e.Handled = true;
 	    }
+        
+        void PIMAttributeTextBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Container.ExolutioCanvas.SelectableItem_PreviewMouseDown(this, e);
+            e.Handled = true;
+        }
 
 	    private void PIMAttributeTextBox_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
 		{
@@ -134,5 +145,40 @@ namespace Exolutio.View
         //}
 
         #endregion 
+
+        public override bool Selected
+        {
+            get
+            {
+                return base.Selected;
+            }
+            set
+            {
+                base.Selected = value;
+                if (value)
+                {
+                    Background = ViewToolkitResources.ClassSelectedAttribute;
+                    Container.DiagramView.SelectedTextBoxes.AddIfNotContained(this);
+                }
+                else
+                {
+                    Background = ViewToolkitResources.ClassBody;
+                    Container.DiagramView.SelectedTextBoxes.Remove(this);
+                }
+
+                Container.DiagramView.InvokeSelectionChanged();
+            }
+        }
+
+	    public Component Component
+	    {
+            get { return PIMAttribute; }
+	    }
 	}
+
+    public interface IComponentTextBox
+    {
+        Component Component { get; }
+        bool Selected { get; set; }
+    }
 }

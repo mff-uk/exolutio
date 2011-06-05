@@ -124,7 +124,7 @@
                                 CommandTarget="{Binding Path=Name}" MouseDoubleClick="OnClassDoubleClick"
                                 -->
                                 <Button DockPanel.Dock="Top" BorderThickness="0" Background="Transparent" ClickMode="Press"                                    
-                                    AllowDrop="False" >
+                                    AllowDrop="False" Click="classTemplate_OnClick" >
                                     <!--ContextMenu="{StaticResource classContextMenu}"-->
                                     <Button.Template>
                                         <ControlTemplate>
@@ -178,7 +178,6 @@
                       IsExpanded="True" 
                       Style="{StaticResource mainItemStyler}" 
                       ItemTemplate ="{StaticResource classTemplate}" 
-                      ContextMenu="{StaticResource modelClassesContextMenu}" 
                       Selected="OnPackageSelected" />
         <!--
         <TreeViewItem Name="nestedPackages" Header="Nested Packages" IsExpanded="True" Style="{StaticResource mainItemStyler}" ItemTemplate ="{StaticResource packageTemplate}" ContextMenu="{StaticResource nestedPackagesContextMenu}" Selected="OnPackageSelected" />

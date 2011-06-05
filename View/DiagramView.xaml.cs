@@ -24,33 +24,34 @@ namespace Exolutio.View
     /// <summary>
     /// Interaction logic for DiagramView.xaml
     /// </summary>
-    public partial class DiagramView 
+    public partial class DiagramView
     {
         public Diagram Diagram { get; private set; }
 
-        #if SILVERLIGHT
-        #else
+#if SILVERLIGHT
+#else
         public ExolutioCanvas ExolutioCanvas { get { return ExolutioCanvasWithZoomer.ExolutioCanvas; } }
-        #endif
+#endif
 
         public DiagramView()
         {
             InitializeComponent();
 
-            #if SILVERLIGHT
-            #else
+#if SILVERLIGHT
+#else
             Focusable = false;
             this.ExolutioCanvas.Width = double.NaN;
             this.ExolutioCanvas.Height = double.NaN;
             this.ExolutioCanvas.VerticalAlignment = VerticalAlignment.Stretch;
             this.ExolutioCanvas.HorizontalAlignment = HorizontalAlignment.Stretch;
-            #endif
+#endif
+            ExolutioCanvas.CanvasSelectionCleared += Canvas_CanvasSelectionCleared;
         }
 
         #region Representants, loading diagrams
 
         public bool Loading { get; private set; }
-        private readonly RepresentantsCollection representantsCollection = new RepresentantsCollection(); 
+        private readonly RepresentantsCollection representantsCollection = new RepresentantsCollection();
 
         public RepresentantsCollection RepresentantsCollection
         {
@@ -71,12 +72,11 @@ namespace Exolutio.View
             get { return deferredRemoveComponents; }
         }
 
-
         public virtual IEnumerable<ComponentViewBase> LoadDiagram(Diagram diagram)
         {
-            Loading = true; 
+            Loading = true;
             this.Diagram = diagram;
-            
+
             List<ComponentViewBase> withoutViewHelpers = new List<ComponentViewBase>();
             foreach (Component component in diagram.Components)
             {
@@ -94,16 +94,16 @@ namespace Exolutio.View
 
         protected virtual void Current_SelectComponents(IEnumerable<Component> components)
         {
-            
+
         }
 
         protected virtual void Current_SelectionChanged()
         {
-            
+
         }
 
         public virtual void UnLoadDiagram()
-        {                                        
+        {
             Current.SelectionChanged -= Current_SelectionChanged;
             Current.SelectComponents -= Current_SelectComponents;
         }
@@ -136,7 +136,7 @@ namespace Exolutio.View
             if (viewHelper == null)
             {
                 viewHelper = this.RepresentantsCollection.Registrations[component.GetType()].ViewHelperFactoryMethod();
-                ((IComponentViewHelper) viewHelper).Component = component;
+                ((IComponentViewHelper)viewHelper).Component = component;
                 Diagram.ViewHelpers[component] = viewHelper;
                 if (withoutViewHelpers != null)
                 {
@@ -174,12 +174,12 @@ namespace Exolutio.View
                         CreateItemView(component, null, null);
                     }
                     break;
-                #if SILVERLIGHT
-                #else
+#if SILVERLIGHT
+#else
                 case NotifyCollectionChangedAction.Move:
                     // do nothing
                     break;
-                #endif
+#endif
                 case NotifyCollectionChangedAction.Reset:
                     ClearDiagramView();
                     LoadDiagram(Diagram);
@@ -208,6 +208,13 @@ namespace Exolutio.View
             get { return selectedViews; }
         }
 
+        private readonly IList<IComponentTextBox> selectedTextBoxes = new List<IComponentTextBox>();
+
+        public IList<IComponentTextBox> SelectedTextBoxes
+        {
+            get { return selectedTextBoxes; }
+        }
+
         public event Action SelectionChanged;
 
         public void InvokeSelectionChanged()
@@ -216,13 +223,31 @@ namespace Exolutio.View
             if (handler != null) handler();
         }
 
+        void Canvas_CanvasSelectionCleared(System.ComponentModel.Component obj)
+        {
+            ClearSelection();
+        }
+
         public void ClearSelection(bool invokeSelectionChanged = true)
         {
-            foreach (ComponentViewBase view in SelectedViews.ToArray())
+            if (SelectedViews.Count > 0)
             {
-                view.Selected = false; 
+                foreach (ComponentViewBase view in SelectedViews.ToArray())
+                {
+                    view.Selected = false;
+                }
+                SelectedViews.Clear();
             }
-            SelectedViews.Clear();
+            
+            if (SelectedTextBoxes.Count > 0)
+            {
+                foreach (IComponentTextBox textBox in SelectedTextBoxes.ToArray())
+                {
+                    textBox.Selected = false;
+                }
+                SelectedTextBoxes.Clear();
+            }
+
             if (invokeSelectionChanged)
             {
                 InvokeSelectionChanged();
@@ -242,7 +267,7 @@ namespace Exolutio.View
             {
                 ComponentViewBase componentViewBase = RepresentantsCollection[component];
                 SelectedViews.Add(componentViewBase);
-                componentViewBase.Selected = true; 
+                componentViewBase.Selected = true;
             }
             InvokeSelectionChanged();
         }
@@ -255,7 +280,12 @@ namespace Exolutio.View
         public void SetSelection(Component component, bool focusComponent = false)
         {
             ClearSelection(false);
-            ComponentViewBase view = RepresentantsCollection[component];
+            ComponentViewBase view;
+            RepresentantsCollection.TryGetValue(component, out view);
+            if (view == null)
+            {
+
+            }
             if (view != null)
             {
                 view.Selected = true;
@@ -266,8 +296,8 @@ namespace Exolutio.View
                     double y = 0;
                     if (view is INodeComponentViewBase)
                     {
-                        x = Canvas.GetLeft(((INodeComponentViewBase) view).MainNode);
-                        y = Canvas.GetTop(((INodeComponentViewBase) view).MainNode);
+                        x = Canvas.GetLeft(((INodeComponentViewBase)view).MainNode);
+                        y = Canvas.GetTop(((INodeComponentViewBase)view).MainNode);
                     }
                     if (view is IConnectorViewBase)
                     {
@@ -275,14 +305,14 @@ namespace Exolutio.View
                         y = Canvas.GetTop(((IConnectorViewBase)view).Connector);
                     }
 
-                    #if SILVERLIGHT
-                    #else
+#if SILVERLIGHT
+#else
                     ScrollViewer scrollViewer = ExolutioCanvasWithZoomer.scrollViewer;
                     if (!double.IsNaN(x))
                         scrollViewer.ScrollToHorizontalOffset(x);
                     if (!double.IsNaN(y))
                         scrollViewer.ScrollToVerticalOffset(y);
-                    #endif
+#endif
                 }
             }
             InvokeSelectionChanged();
@@ -290,7 +320,7 @@ namespace Exolutio.View
 
         public IEnumerable<Component> GetSelectedComponents()
         {
-            return SelectedViews.Select(view => view.ModelComponent);
+            return SelectedViews.Select(view => view.ModelComponent).Union(SelectedTextBoxes.Select(t => t.Component));
         }
 
         public Component GetSingleSelectedComponentOrNull()

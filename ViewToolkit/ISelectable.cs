@@ -12,4 +12,10 @@ namespace Exolutio.ViewToolkit
         bool Highlighted { get; set; }
         event Action SelectedChanged;
     }
+
+
+    public interface ISelectableSubItem
+    {
+        
+    }
 }

@@ -43,7 +43,7 @@ namespace Exolutio.View
             border = new Border
                          {
                              BorderBrush = ViewToolkitResources.NodeBorderBrush,
-                             BorderThickness = new Thickness(0.8),
+                             BorderThickness = ViewToolkitResources.Thicknness1,
                              VerticalAlignment = VerticalAlignment.Stretch,
                              Opacity = 0.8
                          };
@@ -58,8 +58,8 @@ namespace Exolutio.View
             Border headerBorder = new Border
             {
                 Background = ViewToolkitResources.NoInterpretationBrush,
-                BorderThickness = new Thickness(0),
-                Padding = new Thickness(2),
+                BorderThickness = ViewToolkitResources.Thicknness0,
+                Padding = ViewToolkitResources.Thicknness2,
                 BorderBrush = ViewToolkitResources.BlackBrush
             };
 
@@ -86,8 +86,6 @@ namespace Exolutio.View
             };
             attributesBorder.Child = attributesSection;
 
-            attributesContainer = new PSMAttributesContainer(attributesSection, canvas, DiagramView.Diagram);
-
             stackPanel.Children.Add(attributesBorder);
             //Border operationsBorder = new Border
             //{
@@ -103,10 +101,10 @@ namespace Exolutio.View
             //operationsBorder.Child = operationsSection;
             //stackPanel.Children.Add(operationsBorder);
 
-            Border[] stackBorders = new Border[] { headerBorder, attributesBorder };
-            ITextBoxContainer[] stackContainers = new ITextBoxContainer[] { attributesContainer };
-            attributesContainer.StackBorders = stackBorders;
-            attributesContainer.StackContainers = stackContainers;
+            //Border[] stackBorders = new Border[] { headerBorder, attributesBorder };
+            //ITextBoxContainer[] stackContainers = new ITextBoxContainer[] { attributesContainer };
+            //attributesContainer.StackBorders = stackBorders;
+            //attributesContainer.StackContainers = stackContainers;
             //classOperations.StackBorders = stackBorders;
             //classOperations.StackContainers = stackContainers;
 
