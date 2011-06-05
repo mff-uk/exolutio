@@ -30,9 +30,9 @@ namespace Exolutio.Controller.Commands.Complex.PSM
             CheckFirstOnlyInCanExecute = true;
         }
 
-        public void Set(Guid classGuid)
+        public void Set(Guid cmGuid)
         {
-            ContentModelGuid = classGuid;
+            ContentModelGuid = cmGuid;
             
         }
 

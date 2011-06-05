@@ -196,6 +196,15 @@ namespace Exolutio.Controller.Commands {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Leave out uninterpreted association member..
+        /// </summary>
+        internal static string COMPLEX_LEAVE_OUT_UNINT_AM {
+            get {
+                return ResourceManager.GetString("COMPLEX_LEAVE_OUT_UNINT_AM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Complex: PSM attribute movement.
         /// </summary>
         internal static string COMPLEX_MOVE_PSM_ATTRIBUTE {

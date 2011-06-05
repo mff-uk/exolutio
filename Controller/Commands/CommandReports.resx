@@ -297,4 +297,7 @@
   <data name="PSM_ATTR_SHIFT" xml:space="preserve">
     <value>PSM attribute '{0}' shifted '{1}'</value>
   </data>
+  <data name="COMPLEX_LEAVE_OUT_UNINT_AM" xml:space="preserve">
+    <value>Leave out uninterpreted association member.</value>
+  </data>
 </root>
