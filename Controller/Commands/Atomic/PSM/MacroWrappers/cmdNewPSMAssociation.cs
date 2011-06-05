@@ -54,7 +54,7 @@ namespace Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers
 
         protected override void GenerateSubCommands()
         {
-            Commands.Add(new acmdNewPSMAssociation(Controller, ParentGuid, ChildGuid, SchemaGuid));
+            Commands.Add(new acmdNewPSMAssociation(Controller, ParentGuid, ChildGuid, SchemaGuid) { AssociationGuid = AssociationGuid } );
         }
 
     }

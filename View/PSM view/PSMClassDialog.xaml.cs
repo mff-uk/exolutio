@@ -10,7 +10,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Linq;
 using Exolutio.Controller.Commands;
-using Exolutio.Controller.Commands.Atomic;
 using Exolutio.Controller.Commands.Atomic.PSM;
 using Exolutio.Controller.Commands.Complex.PSM;
 using Exolutio.Dialogs;
@@ -22,6 +21,7 @@ using Exolutio.SupportingClasses;
 using Exolutio.ViewToolkit;
 using cmdDeletePSMAttribute = Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers.cmdDeletePSMAttribute;
 using Component = Exolutio.Model.Component;
+using Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers;
 
 namespace Exolutio.View
 {
@@ -324,7 +324,7 @@ namespace Exolutio.View
                         {
                             foreach (PIMAssociationEnd otherEnd in pimAssociation.PIMAssociationEnds)
                             {
-                                if (otherEnd.PIMClass == psmClass.Interpretation)
+                                if (otherEnd.PIMClass == nearestInterpretedClass.Interpretation)
                                 {
                                     continue;
                                 }
@@ -510,7 +510,7 @@ namespace Exolutio.View
         {
             if (tbName.ValueChanged)
             {
-                acmdRenameComponent renameCommand = new acmdRenameComponent(controller, psmClass, tbName.Text);
+                Exolutio.Controller.Commands.Atomic.acmdRenameComponent renameCommand = new Exolutio.Controller.Commands.Atomic.acmdRenameComponent(controller, psmClass, tbName.Text);
                 controller.CreatedMacro.Commands.Add(renameCommand);
                 tbName.ForgetOldValue();
             }
@@ -541,7 +541,7 @@ namespace Exolutio.View
                     MessageBoxResult result = ExolutioYesNoBox.Show("Cut or delete", string.Format("Click 'Yes' if you want to delete the association '{0}' with the whole subtree.\nClick 'No' if you want to delete the association and make the subtree a new tree. ", psmAssociation));
                     if (result == MessageBoxResult.No)
                     {
-                        cmdDeletePSMAssociation deleteCommand = new cmdDeletePSMAssociation(controller);
+                        Exolutio.Controller.Commands.Complex.PSM.cmdDeletePSMAssociation deleteCommand = new Exolutio.Controller.Commands.Complex.PSM.cmdDeletePSMAssociation(controller);
                         deleteCommand.Set(psmAssociation);
                         controller.CreatedMacro.Commands.Add(deleteCommand);
                     }
@@ -590,25 +590,38 @@ namespace Exolutio.View
             #region new association
             foreach (FakePSMAssociation addedAssociation in added)
             {
+                uint lower = 1;
+                UnlimitedInt upper = 1;
+                if (!String.IsNullOrEmpty(addedAssociation.Multiplicity))
+                {
+                    if (!IHasCardinalityExt.ParseMultiplicityString(addedAssociation.Multiplicity, out lower, out upper))
+                    {
+                        error = true;
+                        return !error;
+                    }                    
+                }
+
                 if (addedAssociation.RepresentedPIMAssociation == null)
                 {
-                    continue;
+                    cmdNewPSMClass createNewPSMClass = new cmdNewPSMClass(controller);
+                    createNewPSMClass.SchemaGuid = psmClass.Schema;
+                    createNewPSMClass.ClassGuid = Guid.NewGuid();
+                    controller.CreatedMacro.Commands.Add(createNewPSMClass);
+
+                    cmdNewPSMAssociation createNewPSMAssociation = new cmdNewPSMAssociation(controller);
+                    addedAssociation.AddedAssociationID = Guid.NewGuid();
+                    createNewPSMAssociation.AssociationGuid = addedAssociation.AddedAssociationID;
+                    createNewPSMAssociation.Set(psmClass, createNewPSMClass.ClassGuid, psmClass.Schema);
+                    controller.CreatedMacro.Commands.Add(createNewPSMAssociation);
+
+                    cmdUpdatePSMAssociation updateCommand = new cmdUpdatePSMAssociation(controller);
+                    updateCommand.Set(createNewPSMAssociation.AssociationGuid, addedAssociation.Name, lower, upper);
+                    controller.CreatedMacro.Commands.Add(updateCommand);
                 }
-                if (addedAssociation.Checked)
+                else 
                 {
-                    uint lower = 1;
-                    UnlimitedInt upper = 1;
-                    if (!String.IsNullOrEmpty(addedAssociation.Multiplicity))
-                    {
-                        if (!IHasCardinalityExt.ParseMultiplicityString(addedAssociation.Multiplicity, out lower, out upper))
-                        {
-                            error = true;
-                            return !error;
-                        }
-                    }
-                     
                     //ExolutioMessageBox.Show("Creating new association", addedAssociation.Name, "");
-                    cmdCreateNewPSMClassAsIntChild createNewPsmAssociation = new cmdCreateNewPSMClassAsIntChild(controller);
+                    cmdCreateNewPSMClassAsIntChild createNewPSMAssociation = new cmdCreateNewPSMClassAsIntChild(controller);
                     addedAssociation.AddedAssociationID = Guid.NewGuid();
 
                     if (addedAssociation.SourcePIMAssociationEnd == null)
@@ -623,8 +636,8 @@ namespace Exolutio.View
                         }
                     }
 
-                    createNewPsmAssociation.Set(psmClass, addedAssociation.SourcePIMAssociationEnd, Guid.Empty, addedAssociation.AddedAssociationID);
-                    controller.CreatedMacro.Commands.Add(createNewPsmAssociation);
+                    createNewPSMAssociation.Set(psmClass, addedAssociation.SourcePIMAssociationEnd, Guid.Empty, addedAssociation.AddedAssociationID);
+                    controller.CreatedMacro.Commands.Add(createNewPSMAssociation);
 
                     cmdUpdatePSMAssociation updateCommand = new cmdUpdatePSMAssociation(controller);
                     updateCommand.Set(addedAssociation.AddedAssociationID, addedAssociation.Name, lower, upper);
@@ -728,7 +741,7 @@ namespace Exolutio.View
                             error = true;
                         }
                     }
-                    cmdCreateNewPSMAttribute createNewPsmAttribute = new cmdCreateNewPSMAttribute(controller);
+                    Exolutio.Controller.Commands.Complex.PSM.cmdCreateNewPSMAttribute createNewPsmAttribute = new Exolutio.Controller.Commands.Complex.PSM.cmdCreateNewPSMAttribute(controller);
                     createNewPsmAttribute.Set(psmClass, addedAttribute.Type, addedAttribute.Name, lower, upper, addedAttribute.XFormElement);
                     createNewPsmAttribute.AttributeGuid = Guid.NewGuid();
                     addedAttribute.AddedAttributeID = createNewPsmAttribute.AttributeGuid;
