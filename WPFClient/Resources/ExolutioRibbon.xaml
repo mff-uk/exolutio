@@ -301,6 +301,8 @@
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.LeaveOutUnintAM}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.DeletePSMSchema}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
             </Fluent:RibbonGroupBox>
         </Fluent:RibbonTabItem>
 
