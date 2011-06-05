@@ -137,20 +137,20 @@ namespace Exolutio.Model
             if (child is PSMAssociation)
             {
                 parentA = child as PSMAssociation;
-                if (parentA == parent) return true;
-
-                parentM = parentA.Parent;
-                if (parentM == parent) return true;
             }
-            else //(child is PSMAssociationMember)
+            else if (child is PSMAssociationMember)
             {
                 parentA = (child as PSMAssociationMember).ParentAssociation;
-                if (parentA == null) return false;
-                if (parentA == parent) return true;
-
-                parentM = parentA.Parent;
-                if (parentM == parent) return true;
             }
+            else //PSMAttribute
+            {
+                if ((child as PSMAttribute).PSMClass == parent) return true;
+                parentA = (child as PSMAttribute).PSMClass.ParentAssociation;
+            }
+            if (parentA == null) return false;
+            if (parentA == parent) return true;
+            parentM = parentA.Parent;
+            if (parentM == parent) return true;
 
             while (parentA != parent && parentM != null && parentM != parent)
             {
