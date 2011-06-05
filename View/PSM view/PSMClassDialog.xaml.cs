@@ -278,9 +278,11 @@ namespace Exolutio.View
 
                 bool classEmpty = psmClass.PSMAttributes.Count == 0;
 
-                if (psmClass.Interpretation != null)
+                PSMClass nearestInterpretedClass = psmClass.NearestInterpretedClass();
+
+                if (nearestInterpretedClass != null)
                 {
-                    foreach (PIMAttribute attribute in ((PIMClass)psmClass.Interpretation).PIMAttributes)
+                    foreach (PIMAttribute attribute in ((PIMClass)nearestInterpretedClass.Interpretation).PIMAttributes)
                     {
                         if (!attributesList.Any(p => p.SourceAttribute != null && p.SourceAttribute.Interpretation == attribute))
                         {
@@ -309,10 +311,12 @@ namespace Exolutio.View
                 }
 
                 bool classEmpty = psmClass.ChildPSMAssociations.Count == 0;
+                
+                PSMClass nearestInterpretedClass = psmClass.NearestInterpretedClass();
 
-                if (psmClass.Interpretation != null)
+                if (nearestInterpretedClass != null)
                 {
-                    foreach (PIMAssociationEnd associationEnd in ((PIMClass)psmClass.Interpretation).PIMAssociationEnds)
+                    foreach (PIMAssociationEnd associationEnd in ((PIMClass)nearestInterpretedClass.Interpretation).PIMAssociationEnds)
                     {
                         PIMAssociation pimAssociation = associationEnd.PIMAssociation;
                         if (!associationList.Any(p => p.SourceAssociation != null &&
@@ -368,11 +372,14 @@ namespace Exolutio.View
             #region attributes 
 
             typeColumn.ItemsSource = psmClass.ProjectVersion.AttributeTypes;
-            if (psmClass.Interpretation != null)
+
+            PSMClass nearestInterpretedClass = psmClass.NearestInterpretedClass();
+
+            if (nearestInterpretedClass != null)
             {
                 CompositeCollection coll = new CompositeCollection();
                 //coll.Add("(None)");
-                coll.Add(new CollectionContainer { Collection = ((PIMClass)psmClass.Interpretation).PIMAttributes });
+                coll.Add(new CollectionContainer { Collection = ((PIMClass)nearestInterpretedClass.Interpretation).PIMAttributes });
                 interpretationColumn.ItemsSource = coll;
             }
 
@@ -386,11 +393,11 @@ namespace Exolutio.View
             
             #region associatiosn
 
-            if (psmClass.Interpretation != null)
+            if (nearestInterpretedClass != null)
             {
                 CompositeCollection coll = new CompositeCollection();
                 //coll.Add("(None)");
-                coll.Add(new CollectionContainer { Collection = ((PIMClass)psmClass.Interpretation).PIMAssociationEnds.Select(e => e.PIMAssociation) });
+                coll.Add(new CollectionContainer { Collection = ((PIMClass)nearestInterpretedClass.Interpretation).PIMAssociationEnds.Select(e => e.PIMAssociation) });
                 interpretationAssociation.ItemsSource = coll;
             }
 
@@ -570,6 +577,7 @@ namespace Exolutio.View
                                                                            out upper))
                 {
                     error = true;
+                    return !error;
                 }
 
                 cmdUpdatePSMAssociation updateCommand = new cmdUpdatePSMAssociation(controller);
@@ -595,6 +603,7 @@ namespace Exolutio.View
                         if (!IHasCardinalityExt.ParseMultiplicityString(addedAssociation.Multiplicity, out lower, out upper))
                         {
                             error = true;
+                            return !error;
                         }
                     }
                      
