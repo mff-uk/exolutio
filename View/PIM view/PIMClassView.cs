@@ -46,7 +46,7 @@ namespace Exolutio.View
             border = new Border
                          {
                              BorderBrush = ViewToolkitResources.NodeBorderBrush,
-                             BorderThickness = new Thickness(0.8),
+                             BorderThickness = ViewToolkitResources.Thicknness1,
                              VerticalAlignment = VerticalAlignment.Stretch,
                              Opacity = 0.8
                          };
@@ -61,8 +61,8 @@ namespace Exolutio.View
             Border headerBorder = new Border
             {
                 Background = ViewToolkitResources.ClassHeader,
-                BorderThickness = new Thickness(0),
-                Padding = new Thickness(2),
+                BorderThickness = ViewToolkitResources.Thicknness0,
+                Padding = ViewToolkitResources.Thicknness2,
                 BorderBrush = ViewToolkitResources.BlackBrush
             };
 
@@ -89,7 +89,7 @@ namespace Exolutio.View
             };
             attributesBorder.Child = attributesSection;
 
-            attributesContainer = new PIMAttributesContainer(attributesSection, canvas, DiagramView.Diagram);
+            attributesContainer = new PIMAttributesContainer(attributesSection, canvas, DiagramView);
 
             stackPanel.Children.Add(attributesBorder);
             //Border operationsBorder = new Border
@@ -204,12 +204,12 @@ namespace Exolutio.View
                 base.Selected = value;
                 if (value)
                 {
-                    border.BorderThickness = new Thickness(0.8);
+                    border.BorderThickness = ViewToolkitResources.Thicknness1;
                     border.BorderBrush = ViewToolkitResources.RedBrush;
                 }
                 else
                 {
-                    border.BorderThickness = new Thickness(0.8);
+                    border.BorderThickness = ViewToolkitResources.Thicknness1;
                     border.BorderBrush = ViewToolkitResources.NodeBorderBrush;
                     foreach (PIMAttributeTextBox attributeTextBox in attributesContainer)
                     {

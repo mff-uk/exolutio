@@ -14,7 +14,9 @@ using System.Xml;
 using Exolutio.Controller.Commands;
 using Exolutio.SupportingClasses;
 using Exolutio.View.Commands;
+using Exolutio.ViewToolkit;
 using OrderedList;
+using Label = System.Windows.Controls.Label;
 using ListItem = OrderedList.ListItem;
 
 namespace Exolutio.View
@@ -130,7 +132,7 @@ namespace Exolutio.View
                     StackPanel liOuterP = new StackPanel();
                     liOuter.Content = liOuterP;
                     topLevel.P().Children.Add(liOuter);
-                    liOuterP.Children.Add(new Label() { Content = logMessage.MessageText, FontSize = 12, Padding = new Thickness(5)});                    
+                    liOuterP.Children.Add(new Label() { Content = logMessage.MessageText, FontSize = 12, Padding = ViewToolkitResources.Thicknness5 });                    
                     IEnumerable<LogMessage> relatedMessages = DisplayedLog.Where(m => m.RelatedMessage == logMessage);
                     if (relatedMessages.Count() > 0)
                     {
@@ -175,7 +177,7 @@ namespace Exolutio.View
                 sb.Append(string.Format(" "));
             }
 
-            liSP.Children.Add(new Label() { Content = sb.ToString(), FontSize = 12, Padding = new Thickness(5) });
+            liSP.Children.Add(new Label() { Content = sb.ToString(), FontSize = 12, Padding = ViewToolkitResources.Thicknness5 });
 
             if (displayedReport is NestedCommandReport)
             {

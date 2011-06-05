@@ -42,10 +42,10 @@ namespace Exolutio.View
             border = new Border
                          {
                              BorderBrush = ViewToolkitResources.NodeBorderBrush,
-                             BorderThickness = new Thickness(0.8),
+                             BorderThickness = ViewToolkitResources.Thicknness1,
                              Background = ViewToolkitResources.NoInterpretationBrush,
                              Opacity = 0.8,
-                             Padding = new Thickness(0,0,0,0),
+                             Padding = ViewToolkitResources.Thicknness0,
                              CornerRadius = new CornerRadius(15)
                          };
             MainNode.InnerContentControl.Content = border;

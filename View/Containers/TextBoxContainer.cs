@@ -60,7 +60,9 @@ namespace Exolutio.View
 		/// <value><see cref="Int32"/></value>
 		int ItemCount { get; }
 
-	    Diagram Diagram { get;set; }
+	    Diagram Diagram { get; }
+
+        DiagramView DiagramView { get; set; }
 	}
 
 	/// <summary>
@@ -148,7 +150,7 @@ namespace Exolutio.View
 		/// <param name="container">Panel where <see cref="EditableTextBox">EditableTextBoxes</see>
 		/// are created</param>
 		/// <param name="xCaseCanvas"><see cref="XCaseCanvas"/> containing the control</param>
-        public TextBoxContainer(Panel container, ExolutioCanvas exolutioCanvas, Diagram diagram)
+        public TextBoxContainer(Panel container, ExolutioCanvas exolutioCanvas, DiagramView diagramView)
 		{
 			if (container == null)
 				throw new ArgumentNullException("container");
@@ -156,11 +158,13 @@ namespace Exolutio.View
                 throw new ArgumentNullException("exolutioCanvas");
 			this.container = container;
 			this.ExolutioCanvas = exolutioCanvas;
-		    this.Diagram = diagram;
+		    this.DiagramView = diagramView;
 
 		}
 
-	    public Diagram Diagram { get; set; }
+	    public Diagram Diagram { get { return DiagramView.Diagram; } }
+
+	    public DiagramView DiagramView { get; set; }
 
 	    /// <summary>
 		/// Adds one item to <see cref="container"/>.
@@ -207,7 +211,7 @@ namespace Exolutio.View
 				}
 				else
 				{
-					StackBorders[0].BorderThickness = new Thickness(0);
+					StackBorders[0].BorderThickness = ViewToolkitResources.Thicknness0;
 				}
 
 				// for all non-empty containers use bottom border except for the last one
@@ -227,9 +231,9 @@ namespace Exolutio.View
 					}
 					else
 					{
-						StackBorders[i + 1].BorderThickness = new Thickness(0, 0, 0, 0);
+                        StackBorders[i + 1].BorderThickness = ViewToolkitResources.Thicknness0;
 						if (textBoxContainer != StackContainers.First())
-							StackBorders[i + 1].Padding = new Thickness(0);
+                            StackBorders[i + 1].Padding = ViewToolkitResources.Thicknness0;
 					}
 				}
 

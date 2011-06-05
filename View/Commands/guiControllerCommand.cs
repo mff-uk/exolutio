@@ -151,6 +151,24 @@ namespace Exolutio.View.Commands
 
                 MenuHelper.CreateDialogControlsForCommand(ControllerCommandType, (ExolutioObject)ScopeObject, ProjectVersion, w.spParameters,
                                                           out controls);
+
+                if (Diagram != null)
+                {
+                    foreach (Control control in controls)
+                    {
+                        ParameterControls.GuidLookup guidLookup = control as ParameterControls.GuidLookup;
+                        if (guidLookup != null)
+                        {
+                            if (guidLookup.LookedUpType == typeof (PSMSchema) && Diagram is PSMDiagram)
+                            {
+                                guidLookup.SetSuggestedValue(Diagram.Schema);
+                                guidLookup.Tag = "valueSuggested";
+                                break;
+                            }   
+                        }
+                    }
+                }
+
                 w.lTitle.Content = ControllerCommandDescription;
                 if (NoScope)
                 {

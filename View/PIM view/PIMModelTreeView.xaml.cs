@@ -60,7 +60,6 @@ namespace Exolutio.View
             modelClasses.ItemsSource = null;
             //nestedPackages.ItemsSource = null;
             modelClasses.DataContext = null;
-            modelClasses.ContextMenu.DataContext = null;
         }
         
         /// <summary>
@@ -231,6 +230,8 @@ namespace Exolutio.View
             }
         }
 
+        
+
         /// <summary>
         /// Handles displaying of ClassDialog after double click on a class.
         /// </summary>
@@ -276,6 +277,9 @@ namespace Exolutio.View
             //InvokeSelectedClass(((sender as TreeViewItem).DataContext as Property).Class);
             //DeselectAll(navigatorTreeView);
             //(sender as TreeViewItem).IsSelected = true;
+
+            if (sender != null && ((Control)sender).DataContext is Component)
+                Current.InvokeComponentTouched((Component)((Control)sender).DataContext);
         }
 
         /// <summary>
@@ -498,6 +502,12 @@ namespace Exolutio.View
         /// Used for selecting the same class on canvas and in Properties window.
         /// </summary>
         public event EventHandler<ClassEventArgs> NavigatorSelectedClass;
+
+        private void classTemplate_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (sender != null && ((Control)sender).DataContext is Component)
+                Current.InvokeComponentTouched((Component) ((Control) sender).DataContext);
+        }
     }
 
     /// <summary>

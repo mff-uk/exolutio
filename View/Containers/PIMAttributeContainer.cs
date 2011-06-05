@@ -92,7 +92,7 @@ namespace Exolutio.View
         /// </summary>
         /// <param name="container">Panel used to display the items</param>
         /// <param name="exolutioCanvas">canvas owning the control</param>
-        public PIMAttributesContainer(Panel container, ExolutioCanvas exolutioCanvas, Diagram diagram)
+        public PIMAttributesContainer(Panel container, ExolutioCanvas exolutioCanvas, DiagramView diagram)
             : base(container, exolutioCanvas, diagram)
         {
 

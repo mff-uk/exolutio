@@ -102,6 +102,10 @@ namespace Exolutio.View.Commands
                     {
                         continue;
                     }
+                    if (child.Tag != null && child.Tag.Equals("valueSuggested"))
+                    {
+                        continue;
+                    }
                     child.Focus();
                     break;
                 }

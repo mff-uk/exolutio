@@ -124,7 +124,7 @@ namespace Exolutio.ViewToolkit
             IsTabStop = false;
             IsHitTestVisible = true;
             Cursor = Cursors.Arrow;
-            Margin = new Thickness(0, 0, 0, 0);
+            Margin = ViewToolkitResources.Thicknness0;
             KeyDown += ClassTextBox_KeyDown;
             KeyUp += EditableTextBox_KeyUp;
             MouseEnter += ClassTextBox_MouseEnter;
@@ -270,22 +270,12 @@ namespace Exolutio.ViewToolkit
         public bool CanBeDraggedInGroup { get { return false; } }
 
         private bool selected;
-        public bool Selected
+        public virtual bool Selected
         {
             get { return selected; }
             set
             {
                 selected = value;
-                if (selected)
-                {
-                    this.BorderBrush = ViewToolkitResources.SelectedBorderBrush;
-                    this.BorderThickness = new Thickness(1);
-                }
-                else
-                {
-                    this.BorderThickness =new Thickness(0);
-                    this.BorderBrush = ViewToolkitResources.TransparentBrush;
-                }
             }
         }
 

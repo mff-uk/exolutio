@@ -90,8 +90,8 @@ namespace Exolutio.View
         /// </summary>
         /// <param name="container">Panel used to display the items</param>
         /// <param name="exolutioCanvas">canvas owning the control</param>
-        public PSMAttributesContainer(Panel container, ExolutioCanvas exolutioCanvas, Diagram diagram)
-            : base(container, exolutioCanvas, diagram)
+        public PSMAttributesContainer(Panel container, ExolutioCanvas exolutioCanvas, DiagramView diagramView)
+            : base(container, exolutioCanvas, diagramView)
         {
 
         }

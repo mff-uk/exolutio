@@ -29,6 +29,8 @@ namespace Exolutio.ViewToolkit
             //InitializeZooming();
         }
 
+        #region selection
+
         private readonly List<ISelectable> selectedItems = new List<ISelectable>();
         internal IList<ISelectable> SelectedItems
         {
@@ -43,6 +45,17 @@ namespace Exolutio.ViewToolkit
             }
             SelectedItems.Clear();
         }
+
+        public event Action<Component> CanvasSelectionCleared;
+
+        internal void InvokeCanvasSelectionCleared(Component component)
+        {
+            Action<Component> handler = CanvasSelectionCleared;
+            if (handler != null) handler(component);
+        }
+
+        #endregion
+
 
         #region Add/remove objects
 
