@@ -91,6 +91,9 @@
     <Compile Include="Commands\Edit\guiUndoCommand.cs" />
     <Compile Include="Commands\GuiCommands.cs" />
     <Compile Include="Commands\guiModelTreeCommand.cs" />
+    <Compile Include="Commands\PIM\guiPIMDeleteClass.cs" />
+    <Compile Include="Commands\PIM\guiPIMDeleteAttribute.cs" />
+    <Compile Include="Commands\PIM\guiPIMDeleteAssociation.cs" />
     <Compile Include="Commands\PIM\guiPIMDelete.cs" />
     <Compile Include="Commands\PIM\guiAssociate2.cs" />
     <Compile Include="Commands\PIM\guiLocateRepresentedPSMClass.cs" />
