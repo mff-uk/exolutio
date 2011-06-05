@@ -325,9 +325,9 @@ namespace Exolutio.View
 
         public Component GetSingleSelectedComponentOrNull()
         {
-            if (SelectedViews.Select(view => view.ModelComponent).Count() == 1)
+            if (GetSelectedComponents().Count() == 1)
             {
-                return SelectedViews.Select(view => view.ModelComponent).First();
+                return GetSelectedComponents().First();
             }
             return null;
         }
