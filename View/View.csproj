@@ -94,6 +94,7 @@
     <Compile Include="Commands\PIM\guiAssociate2.cs" />
     <Compile Include="Commands\PIM\guiLocateRepresentedPSMClass.cs" />
     <Compile Include="Commands\PIM\guiShiftPIMAttributeCommand.cs" />
+    <Compile Include="Commands\PSM\guiDeletePSMSchema.cs" />
     <Compile Include="Commands\PSM\guiDeletePSMAttribute.cs" />
     <Compile Include="Commands\PSM\guiCutAssociation.cs" />
     <Compile Include="Commands\PSM\guiDeleteSubtree.cs" />

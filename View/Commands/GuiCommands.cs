@@ -90,6 +90,7 @@ namespace Exolutio.View.Commands
         public static guiCutAssociation CutAssociation { get; set; }
         public static guiControllerCommand DeletePSMAttribute { get; set; }
         public static guiDeleteSubtree DeleteSubtree { get; set; }
+        public static guiDeletePSMSchema DeletePSMSchema { get; set; }
         #endregion
 
         #region versioning
@@ -367,6 +368,7 @@ namespace Exolutio.View.Commands
             };
 
             DeleteSubtree = new guiDeleteSubtree();
+            DeletePSMSchema = new guiDeletePSMSchema();
             #endregion
 
             #region other
