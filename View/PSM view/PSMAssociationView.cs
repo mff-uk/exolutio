@@ -29,7 +29,9 @@ namespace Exolutio.View
         protected override void BindModelView()
         {
             base.BindModelView();
-            ContextMenu = MenuHelper.GetContextMenu(ScopeAttribute.EScope.PSMAssociation, this.DiagramView.Diagram);
+            ExolutioContextMenu psmAssociationMenu = MenuHelper.GetContextMenu(ScopeAttribute.EScope.PSMAssociation, this.DiagramView.Diagram);
+            this.ContextMenu = psmAssociationMenu;
+            NameLabel.ContextMenu = psmAssociationMenu;
             #if SILVERLIGHT
             ContextMenuService.SetContextMenu(NameLabel, ContextMenu);
             ContextMenuService.SetContextMenu(Connector, ContextMenu);
@@ -220,6 +222,7 @@ namespace Exolutio.View
             CardinalityLabel.SnapTo(Connector.EndPoint, true);
             BindModelView();
 
+            NameLabel.SelectedChanged += new Action(NameLabel_SelectedChanged);
             NameLabel.PositionChanged += NameLabel_PositionChanged;
             CardinalityLabel.PositionChanged += CardinalityLabel_PositionChanged;
             Connector.SelectedChanged += Connector_SelectedChanged;
@@ -265,6 +268,14 @@ namespace Exolutio.View
         void NameLabel_PositionChanged()
         {
             ViewHelper.MainLabelViewHelper.SetPositionSilent(NameLabel.Position);
+        }
+
+        void NameLabel_SelectedChanged()
+        {
+            if (NameLabel.Selected && !this.Selected)
+            {
+                Connector.Selected = true;
+            }
         }
 
         //void Connector_ConnectorPointMoved(ConnectorPoint point)

@@ -2,8 +2,7 @@ using System;
 
 namespace Exolutio.View.Commands
 {
-    
-    public abstract class guiScopeCommand: guiCommandBase
+    public abstract class guiScopeCommand: guiSelectionDependentCommand
     {
         private object scopeObject;
         public object ScopeObject

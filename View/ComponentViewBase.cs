@@ -236,10 +236,10 @@ namespace Exolutio.View
                 selected = value;
                 foreach (Control createdControl in CreatedControls)
                 {
-                    if (createdControl is ISelectable && ((ISelectable)createdControl).Selected != value)
-                    {
-                        ((ISelectable)createdControl).Selected = value;
-                    }
+                    //if (createdControl is ISelectable && ((ISelectable)createdControl).Selected != value)
+                    //{
+                    //    ((ISelectable)createdControl).Selected = value;
+                    //}
                 }
                 if (value)
                 {
