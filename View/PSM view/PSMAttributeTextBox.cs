@@ -185,7 +185,6 @@ namespace Exolutio.View
         void PSMAttributeTextBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             Container.ExolutioCanvas.SelectableItem_PreviewMouseDown(this, e);
-            e.Handled = true;
         }
 
 	    private void PSMAttributeTextBox_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
