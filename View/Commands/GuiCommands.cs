@@ -78,6 +78,7 @@ namespace Exolutio.View.Commands
         public static guiControllerCommand AddPSMAssociationCommand { get; set; }
         public static guiControllerCommand AddPSMContentModel { get; set; }
         public static guiControllerCommand SplitPSMAttributeCommand { get; set; }
+        public static guiSplitPSMAssociation SplitPSMAssociationCommand { get; set; }
         public static guiControllerCommand AddPSMChildInterpreted { get; set; }
         public static guiControllerCommand AddPSMChildUnInterpreted { get; set; }
         public static guiCreateContentModelCommand CreateSequenceContentModelCommand { get; set; }
@@ -356,7 +357,7 @@ namespace Exolutio.View.Commands
                                                 ScopeIsSelectedComponent = true,
                                                 AcceptedSelectedComponentType = typeof(PSMAttribute)
             };
-
+            SplitPSMAssociationCommand = new guiSplitPSMAssociation();
             CreateSequenceContentModelCommand = new guiCreateContentModelCommand() { Type = PSMContentModelType.Sequence };
             CreateChoiceContentModelCommand = new guiCreateContentModelCommand() { Type = PSMContentModelType.Choice };
             CreateSetContentModelCommand = new guiCreateContentModelCommand() { Type = PSMContentModelType.Set };

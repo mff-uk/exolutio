@@ -292,6 +292,8 @@
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.SplitPSMAttributeCommand}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.SplitPSMAssociationCommand}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
             </Fluent:RibbonGroupBox>
             <Fluent:RibbonGroupBox Header="Shift">
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.ShiftLeft}" 

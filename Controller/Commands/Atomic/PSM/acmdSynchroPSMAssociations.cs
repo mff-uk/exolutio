@@ -145,6 +145,11 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
                         Guid assocEnd2Guid = Guid.NewGuid();
 
                         command.Commands.Add(new acmdNewPIMAssociation(Controller, C1, assocEnd1Guid, pimClassGuid, assocEnd2Guid, C1.PIMSchema) { AssociationGuid = assocGuid });
+                        foreach (PIMDiagram d in Project.SingleVersion.PIMDiagrams.Where(d => d.PIMComponents.Contains(C1)))
+                        {
+                            command.Commands.Add(new acmdAddComponentToDiagram(Controller, assocGuid, d));
+                        }
+                            
                         command.Commands.Add(new acmdRenameComponent(Controller, assocGuid, a.Name));
                         command.Commands.Add(new acmdUpdatePIMAssociationEndCardinality(Controller, assocEnd2Guid, a.Lower, a.Upper));
                         command.Commands.Add(new acmdSetPSMAssociationInterpretation(Controller, a, assocGuid));
