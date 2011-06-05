@@ -20,7 +20,7 @@ namespace Exolutio.View.Commands.PSM
           
             IEnumerable<PSMAttribute> selectedAttributes = Current.ActiveDiagramView.GetSelectedComponents()
                 .Where(c => c is PSMAttribute).Cast<PSMAttribute>();
-            return selectedAttributes.Count() > 0;
+            return selectedAttributes.Count() > 0 && selectedAttributes.All(a => a.PSMClass.PSMAttributes.Count > 1);
         }
 
         public override void Execute(object parameter)

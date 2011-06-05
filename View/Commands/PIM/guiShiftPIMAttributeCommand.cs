@@ -21,7 +21,7 @@ namespace Exolutio.View.Commands.PIM
           
             IEnumerable<PIMAttribute> selectedAttributes = Current.ActiveDiagramView.GetSelectedComponents()
                 .Where(c => c is PIMAttribute).Cast<PIMAttribute>();
-            return selectedAttributes.Count() > 0;
+            return selectedAttributes.Count() > 0 && selectedAttributes.All(a => a.PIMClass.PIMAttributes.Count > 1);
         }
 
         public override void Execute(object parameter)
