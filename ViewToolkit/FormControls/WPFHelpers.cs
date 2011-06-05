@@ -405,7 +405,7 @@ namespace Exolutio.ViewToolkit
                         {
                             meCast.Pause();
                         }
-                        catch (Exception e)
+                        catch
                         {
                         }
                     }
@@ -432,7 +432,7 @@ namespace Exolutio.ViewToolkit
                     {
                         meCast.Play();
                     }
-                    catch (Exception e)
+                    catch
                     {
                     }
                 }

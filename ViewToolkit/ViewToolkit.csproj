@@ -43,8 +43,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="OrderedListClassWPF">
-      <HintPath>..\ExternalBinaries\OrderedList\OrderedListClassWPF.dll</HintPath>
+    <Reference Include="OrderedListWPF">
+      <HintPath>..\ExternalBinaries\OrderedList\OrderedListWPF.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />

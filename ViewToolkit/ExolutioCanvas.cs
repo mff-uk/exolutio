@@ -310,14 +310,12 @@ namespace Exolutio.ViewToolkit
 					case ECanvasState.DraggingConnection:
 				        throw new NotImplementedException("Member ExolutioCanvas.State not implemented.");
 						//CurrentState = draggingConnectionState;
-						break;
 					case ECanvasState.Normal:
 						CurrentState = normalState;
 						break;
 					case ECanvasState.DraggingElement:
                         throw new NotImplementedException("Member ExolutioCanvas.State not implemented.");
 						//CurrentState = draggingElementState;
-						break;
 				}
 				if (CurrentState != null)
 					CurrentState.StateActivated();
