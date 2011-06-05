@@ -35,6 +35,9 @@ namespace Exolutio.View.Commands
         public static guiSampleDocumentCommand CreateSampleDocumentCommand { get; set; }
         public static guiLocateInterpretedComponent LocateInterpretedComponent { get; set; }
         public static guiControllerCommand RenameComponentCommand { get; set; }
+        //public static guiControllerCommand NewPIMSchema { get; set; }
+        public static guiControllerCommand NewPSMSchema { get; set; }
+
 
 #if SILVERLIGHT
         public static guiOpenWebProjectCommand OpenWebProjectCommand { get; set; }
@@ -166,6 +169,15 @@ namespace Exolutio.View.Commands
                 OpenDialog = true,
                 AcceptedSelectedComponentType = typeof(Component),
                 ScopeIsSelectedComponent = true
+            };
+
+            NewPSMSchema = new guiControllerCommand
+            {
+                Text = "New PSM schema",
+                Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.GenericDocument),
+                NoScope = true,
+                ControllerCommandFactoryMethod = CommandFactory<cmdNewPSMSchema>.Factory,
+                ControllerCommandType = typeof(cmdNewPSMSchema)
             };
 
             #endregion

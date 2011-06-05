@@ -140,6 +140,17 @@
             </Fluent:QuickAccessMenuItem>
 		</Fluent:Ribbon.QuickAccessItems>
 
+        <Fluent:RibbonTabItem  Header="Project">
+            <Fluent:RibbonGroupBox Header="Schemas">
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.NewPSMSchema}"
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
+            </Fluent:RibbonGroupBox>
+            <Fluent:RibbonGroupBox Header="Edit">
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.VerifyModelCommand}"
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
+            </Fluent:RibbonGroupBox>
+        </Fluent:RibbonTabItem>
+
         <Fluent:RibbonTabItem  Header="Versioning">
             <Fluent:RibbonGroupBox Header="Version">
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.BranchCurrentVersionCommand}"
@@ -325,10 +336,6 @@
         </Fluent:RibbonTabItem>
 
         <Fluent:RibbonTabItem Header="View">
-            <Fluent:RibbonGroupBox Header="Edit">
-                <Fluent:Button Command="{x:Static Commands:GuiCommands.VerifyModelCommand}"
-                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
-            </Fluent:RibbonGroupBox>
             <Fluent:RibbonGroupBox Header="Layout">
                 <Fluent:Button Command="{x:Static Commands1:StaticWPFClientCommands.LayoutPIMLeftPSMRight}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
