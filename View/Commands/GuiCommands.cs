@@ -88,7 +88,7 @@ namespace Exolutio.View.Commands
         public static guiInsertPSMClass InsertPSMClass { get; set; }
 
         public static guiCutAssociation CutAssociation { get; set; }
-        public static guiControllerCommand DeletePSMAttribute { get; set; }
+        public static guiDeletePSMAttribute DeletePSMAttribute { get; set; }
         public static guiDeleteSubtree DeleteSubtree { get; set; }
         public static guiDeletePSMSchema DeletePSMSchema { get; set; }
         #endregion
@@ -355,18 +355,7 @@ namespace Exolutio.View.Commands
             LeaveOutUnintAM = new guiLeaveOutUnintAM();
             InsertPSMClass = new guiInsertPSMClass();
             CutAssociation = new guiCutAssociation();
-            DeletePSMAttribute = new guiControllerCommand()
-            {
-                Text = "Delete attribute",
-                ControllerCommandFactoryMethod = CommandFactory<Exolutio.Controller.Commands.Complex.PSM.cmdDeletePSMAttribute>.Factory,
-                ControllerCommandType = typeof(Exolutio.Controller.Commands.Complex.PSM.cmdDeletePSMAttribute),
-                PSMOnly = true,
-                OpenDialog = false,
-                ScopeIsSelectedComponent = true,
-                AcceptedSelectedComponentType = typeof(PSMAttribute),
-                Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.delete)
-            };
-
+            DeletePSMAttribute = new guiDeletePSMAttribute();
             DeleteSubtree = new guiDeleteSubtree();
             DeletePSMSchema = new guiDeletePSMSchema();
             #endregion
