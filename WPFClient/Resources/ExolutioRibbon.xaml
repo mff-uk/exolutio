@@ -197,6 +197,62 @@
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.PIMShiftDown}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
             </Fluent:RibbonGroupBox>
+            <Fluent:RibbonGroupBox Header="Alignment">
+                <Fluent:RibbonToolBar>
+                    <Fluent:RibbonToolBar.LayoutDefinitions>
+                        <Fluent:RibbonToolBarLayoutDefinition>
+                            <Fluent:RibbonToolBarRow>
+                                <Fluent:RibbonToolBarControlGroupDefinition>
+                                    <Fluent:RibbonToolBarControlDefinition Target="bAlignLeft"/>
+                                    <Fluent:RibbonToolBarControlDefinition Target="bCenterHorizontally"/>
+                                    <Fluent:RibbonToolBarControlDefinition Target="bAlignRight"/>
+                                </Fluent:RibbonToolBarControlGroupDefinition>
+                            </Fluent:RibbonToolBarRow>
+                            <Fluent:RibbonToolBarRow>
+                                <Fluent:RibbonToolBarControlGroupDefinition>
+                                    <Fluent:RibbonToolBarControlDefinition Target="bAlignTop"/>
+                                    <Fluent:RibbonToolBarControlDefinition Target="bCenterVertically"/>
+                                    <Fluent:RibbonToolBarControlDefinition Target="bAlignBottom"/>
+                                </Fluent:RibbonToolBarControlGroupDefinition>
+                            </Fluent:RibbonToolBarRow>
+                        </Fluent:RibbonToolBarLayoutDefinition>
+                    </Fluent:RibbonToolBar.LayoutDefinitions>
+                    <Separator/>
+                    <Fluent:Button x:Name="bAlignLeft" Command="{x:Static Commands:GuiCommands.AlignLeftCommand}" Header="" SizeDefinition="Middle, Middle, Small"
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
+                    <Fluent:Button x:Name="bAlignTop" Command="{x:Static Commands:GuiCommands.AlignTopCommand}" Header="" SizeDefinition="Middle, Middle, Small"
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+                    <Fluent:Button x:Name="bCenterHorizontally" Command="{x:Static Commands:GuiCommands.CenterHorizontallyCommand}" Header="" SizeDefinition="Middle, Middle, Small"
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+                    <Fluent:Button x:Name="bCenterVertically" Command="{x:Static Commands:GuiCommands.CenterVerticallyCommand}" Header="" SizeDefinition="Middle, Middle, Small"
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+                    <Fluent:Button x:Name="bAlignRight" Command="{x:Static Commands:GuiCommands.AlignRightCommand}" Header="" SizeDefinition="Middle, Middle, Small"
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+                    <Fluent:Button x:Name="bAlignBottom" Command="{x:Static Commands:GuiCommands.AlignBottomCommand}" Header="" SizeDefinition="Middle, Middle, Small"
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+                </Fluent:RibbonToolBar>
+                <Separator />
+                <Fluent:RibbonToolBar>
+                    <Fluent:RibbonToolBar.LayoutDefinitions>
+                        <Fluent:RibbonToolBarLayoutDefinition>
+                            <Fluent:RibbonToolBarRow>
+                                <Fluent:RibbonToolBarControlGroupDefinition>
+                                    <Fluent:RibbonToolBarControlDefinition Target="bDistributeHorizontally"/>
+                                </Fluent:RibbonToolBarControlGroupDefinition>
+                            </Fluent:RibbonToolBarRow>
+                            <Fluent:RibbonToolBarRow>
+                                <Fluent:RibbonToolBarControlGroupDefinition>
+                                    <Fluent:RibbonToolBarControlDefinition Target="bDistributeVertically"/>
+                                </Fluent:RibbonToolBarControlGroupDefinition>
+                            </Fluent:RibbonToolBarRow>
+                        </Fluent:RibbonToolBarLayoutDefinition>
+                    </Fluent:RibbonToolBar.LayoutDefinitions>
+                    <Fluent:Button x:Name="bDistributeHorizontally" Command="{x:Static Commands:GuiCommands.DistributeHorizontallyCommand}"  SizeDefinition="Middle, Middle, Small"
+                                   Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+                    <Fluent:Button x:Name="bDistributeVertically" Command="{x:Static Commands:GuiCommands.DistributeVerticallyCommand}"  SizeDefinition="Middle, Middle, Small"
+                                   Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+                </Fluent:RibbonToolBar>                
+            </Fluent:RibbonGroupBox>
         </Fluent:RibbonTabItem>
 
         <Fluent:RibbonTabItem x:Name="tabPSM" Header="Modeling" Group="{Binding ElementName=psmGroup}">

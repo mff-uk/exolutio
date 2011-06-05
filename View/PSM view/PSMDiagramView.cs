@@ -52,9 +52,9 @@ namespace Exolutio.View
 
             LayoutManager = new LayoutManager();
 
-            ExolutioCanvas.MouseLeftButtonUp += new System.Windows.Input.MouseButtonEventHandler(ExolutioCanvas_MouseLeftButtonUp);
-            ExolutioCanvas.Loaded += new System.Windows.RoutedEventHandler(ExolutioCanvas_Loaded);
-            ExolutioCanvas.ContentChanged += new Action(ExolutioCanvas_ContentChanged);
+            ExolutioCanvas.MouseLeftButtonUp += ExolutioCanvas_MouseLeftButtonUp;
+            ExolutioCanvas.Loaded += ExolutioCanvas_Loaded;
+            ExolutioCanvas.ContentChanged += ExolutioCanvas_ContentChanged;
 
             ExolutioContextMenu diagramMenu = MenuHelper.GetContextMenu(ScopeAttribute.EScope.PSMSchema, this.Diagram);
             ExolutioCanvas.ContextMenu = diagramMenu;
@@ -97,8 +97,20 @@ namespace Exolutio.View
             IEnumerable<ComponentViewBase> result = base.LoadDiagram(diagram);
             DoLayout();
             ((ExolutioContextMenu)ExolutioCanvas.ContextMenu).ScopeObject = PSMDiagram.PSMSchema;
-            ((ExolutioContextMenu)ExolutioCanvas.ContextMenu).Diagram = PSMDiagram;            
+            ((ExolutioContextMenu)ExolutioCanvas.ContextMenu).Diagram = PSMDiagram;
+            ((PSMDiagram)Diagram).PSMSchema.Roots.CollectionChanged += Roots_CollectionChanged;
             return result;
+        }
+
+        public override void UnLoadDiagram()
+        {
+            ((PSMDiagram) Diagram).PSMSchema.Roots.CollectionChanged -= Roots_CollectionChanged;
+            base.UnLoadDiagram();
+        }
+
+        private void Roots_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            DoLayout();
         }
 
         protected override void Current_SelectionChanged()

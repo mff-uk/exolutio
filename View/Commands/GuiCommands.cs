@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Exolutio.Controller.Commands.Atomic;
 using Exolutio.Controller.Commands.Atomic.PIM.MacroWrappers;
 using Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers;
@@ -93,6 +94,20 @@ namespace Exolutio.View.Commands
         public static guiSaveAsSingleVersionCommand SaveAsSingleVersionCommand { get; set; }
         public static guiRemoveCurrentVersionCommand RemoveCurrentVersionCommand { get; set; }
         public static guiVerifyModelCommand VerifyModelCommand { get; set; }
+
+        #endregion
+
+        #region align
+
+        public static guiAlignCommand AlignLeftCommand { get; set; }
+        public static guiAlignCommand AlignRightCommand { get; set; }
+        public static guiAlignCommand AlignTopCommand { get; set; }
+        public static guiAlignCommand AlignBottomCommand { get; set; }
+
+        public static guiAlignCommand CenterVerticallyCommand { get; set; }
+        public static guiAlignCommand CenterHorizontallyCommand { get; set; }
+        public static guiAlignCommand DistributeVerticallyCommand { get; set; }
+        public static guiAlignCommand DistributeHorizontallyCommand { get; set; }
 
         #endregion
 
@@ -351,6 +366,31 @@ namespace Exolutio.View.Commands
 
             VerifyModelCommand = new guiVerifyModelCommand();
             LocateInterpretedComponent = new guiLocateInterpretedComponent();
+
+            #endregion
+
+            #region align
+
+            List<guiAlignCommand> alignCommands = new List<guiAlignCommand>();
+
+            AlignLeftCommand = new guiAlignCommand { Alignment = EAlignment.Left, AllAlignCommands = alignCommands };
+            AlignRightCommand = new guiAlignCommand { Alignment = EAlignment.Right, AllAlignCommands = alignCommands };
+            AlignTopCommand = new guiAlignCommand { Alignment = EAlignment.Top, AllAlignCommands = alignCommands };
+            AlignBottomCommand = new guiAlignCommand { Alignment = EAlignment.Bottom, AllAlignCommands = alignCommands };
+
+            CenterVerticallyCommand = new guiAlignCommand { Alignment = EAlignment.CenterV, AllAlignCommands = alignCommands };
+            CenterHorizontallyCommand = new guiAlignCommand { Alignment = EAlignment.CenterH, AllAlignCommands = alignCommands };
+            DistributeVerticallyCommand = new guiAlignCommand { Alignment = EAlignment.DistributeV, AllAlignCommands = alignCommands };
+            DistributeHorizontallyCommand = new guiAlignCommand { Alignment = EAlignment.DistributeH, AllAlignCommands = alignCommands };
+
+            alignCommands.Add(AlignLeftCommand);
+            alignCommands.Add(AlignRightCommand);
+            alignCommands.Add(AlignTopCommand);
+            alignCommands.Add(AlignBottomCommand);
+            alignCommands.Add(CenterVerticallyCommand);
+            alignCommands.Add(CenterHorizontallyCommand);
+            alignCommands.Add(DistributeVerticallyCommand);
+            alignCommands.Add(DistributeHorizontallyCommand);
 
             #endregion
         }

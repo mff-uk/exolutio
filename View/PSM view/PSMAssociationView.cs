@@ -277,6 +277,10 @@ namespace Exolutio.View
 
         public override void RemoveFromDiagram()
         {
+            if (Selected)
+            {
+                Selected = false;
+            }
             UnBindModelView();
             DiagramView.ExolutioCanvas.RemoveConnector(Connector);
             DiagramView.ExolutioCanvas.RemoveNode(NameLabel);

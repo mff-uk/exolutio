@@ -59,6 +59,16 @@ namespace Exolutio.ViewToolkit
             }
         }
 
+        public double Right
+        {
+            get { return X + this.ActualWidth; }
+        }
+
+        public double Bottom
+        {
+            get { return Y + this.ActualHeight; }
+        }
+
         public Point CanvasPosition
         {
             get { return dragThumb.CanvasPosition; }
