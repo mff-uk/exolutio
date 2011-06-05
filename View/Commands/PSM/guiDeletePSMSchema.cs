@@ -18,9 +18,6 @@ namespace Exolutio.View.Commands.PSM
         {
             if (!(Current.ActiveDiagram is PSMDiagram)) return false;
 
-            Component c = Current.ActiveDiagramView.GetSingleSelectedComponentOrNull();
-            if (!(c is PSMSchemaClass)) return false;
-
             return true;
 
         }
