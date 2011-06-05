@@ -10,7 +10,7 @@ using Exolutio.Controller.Commands.Atomic.PSM;
 
 namespace Exolutio.View.Commands.PSM
 {
-    public class guiShiftAssociationCommand : guiSelectionDependentCommand
+    public class guiShiftCommand : guiSelectionDependentCommand
     {
         public bool Left;
         
@@ -20,7 +20,11 @@ namespace Exolutio.View.Commands.PSM
           
             IEnumerable<PSMAssociation> selectedAssociations = Current.ActiveDiagramView.GetSelectedComponents()
                 .Where(c => c is PSMAssociation).Cast<PSMAssociation>();
-            return selectedAssociations.Count() > 0;
+            if (selectedAssociations.Count() > 0) return true;
+            IEnumerable<PSMAssociationMember> selectedRoots = Current.ActiveDiagramView.GetSelectedComponents()
+                .Where(c => c is PSMAssociationMember).Cast<PSMAssociationMember>().Where(am => am.ParentAssociation == null);
+            if (selectedRoots.Count() > 0) return true;
+            return false;
         }
 
         public override void Execute(object parameter)
@@ -34,6 +38,12 @@ namespace Exolutio.View.Commands.PSM
                 : selectedAssociations.OrderByDescending(a => a.Parent.ChildPSMAssociations.IndexOf(a)))
             {
                 macro.Commands.Add(new acmdShiftPSMAssociation(Current.Controller, a, Left));
+            }
+            IEnumerable<PSMAssociationMember> selectedRoots = Current.ActiveDiagramView.GetSelectedComponents()
+                .Where(c => c is PSMAssociationMember).Cast<PSMAssociationMember>().Where(am => am.ParentAssociation == null);
+            foreach (PSMAssociationMember am in selectedRoots)
+            {
+                macro.Commands.Add(new acmdShiftPSMRoot(Current.Controller, am, Left));
             }
             
             macro.Execute();
@@ -49,7 +59,7 @@ namespace Exolutio.View.Commands.PSM
 
         public override string ScreenTipText
         {
-            get { return "Shift association"; }
+            get { return "Shift"; }
         }
 
         public override System.Windows.Media.ImageSource Icon

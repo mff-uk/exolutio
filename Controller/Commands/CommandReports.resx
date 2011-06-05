@@ -303,4 +303,7 @@
   <data name="COMPLEX_LEAVE_OUT_UNINT_AM" xml:space="preserve">
     <value>Leave out uninterpreted association member.</value>
   </data>
+  <data name="SHIFT_PSM_ROOT" xml:space="preserve">
+    <value>PSM root '{0}' shifted '{1}'.</value>
+  </data>
 </root>

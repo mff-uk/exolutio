@@ -91,6 +91,7 @@
     <Compile Include="Commands\Atomic\PSM\acmdDeletePSMDiagram.cs" />
     <Compile Include="Commands\Atomic\PSM\acmdNewPSMDiagram.cs" />
     <Compile Include="Commands\Atomic\PSM\acmdShiftPSMAttribute.cs" />
+    <Compile Include="Commands\Atomic\PSM\acmdShiftPSMRoot.cs" />
     <Compile Include="Commands\Atomic\PSM\MacroWrappers\cmdCreateNewPSMAttribute.cs" />
     <Compile Include="Commands\Atomic\PSM\MacroWrappers\cmdUpdatePSMContentModel.cs" />
     <Compile Include="Commands\Atomic\PSM\MacroWrappers\cmdSetRepresentedClass.cs" />

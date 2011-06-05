@@ -93,7 +93,7 @@
     <Compile Include="Commands\PIM\guiShiftPIMAttributeCommand.cs" />
     <Compile Include="Commands\PSM\guiInsertPSMClass.cs" />
     <Compile Include="Commands\PSM\guiShiftPSMAttributeCommand.cs" />
-    <Compile Include="Commands\PSM\guiShiftAssociationCommand.cs" />
+    <Compile Include="Commands\PSM\guiShiftCommand.cs" />
     <Compile Include="Commands\PSM\guiCreateContentModelCommand.cs" />
     <Compile Include="Commands\Versioning\EvolutionChangesWindow.xaml.cs">
       <DependentUpon>EvolutionChangesWindow.xaml</DependentUpon>
