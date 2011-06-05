@@ -130,26 +130,16 @@
 
         <Fluent:Ribbon.QuickAccessItems>
             <Fluent:QuickAccessMenuItem Target="{Binding ElementName=rbSaveProject}" IsChecked="True"/>
-            <Fluent:QuickAccessMenuItem Target="{Binding ElementName=rbUndo}" IsChecked="True"/>
-            <Fluent:QuickAccessMenuItem Target="{Binding ElementName=rbRedo}" IsChecked="True"/>
-		</Fluent:Ribbon.QuickAccessItems>
-
-        <Fluent:RibbonTabItem Header="Main">
-            <Fluent:RibbonGroupBox Header="Edit">
+            <Fluent:QuickAccessMenuItem IsChecked="True">
                 <Fluent:Button x:Name="rbUndo" Command="{x:Static Commands:GuiCommands.UndoCommand}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
+            </Fluent:QuickAccessMenuItem>
+            <Fluent:QuickAccessMenuItem IsChecked="True">
                 <Fluent:Button x:Name="rbRedo" Command="{x:Static Commands:GuiCommands.RedoCommand}"
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
-                <Fluent:Button Command="{x:Static Commands:GuiCommands.VerifyModelCommand}"
-                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
-            </Fluent:RibbonGroupBox>
-            <Fluent:RibbonGroupBox Header="Layout">
-                <Fluent:Button Command="{x:Static Commands1:StaticWPFClientCommands.LayoutPIMLeftPSMRight}" 
-                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
-                <Fluent:Button Command="{x:Static Commands1:StaticWPFClientCommands.LayoutByVersions}" 
-                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
-            </Fluent:RibbonGroupBox>
-        </Fluent:RibbonTabItem>
+            </Fluent:QuickAccessMenuItem>
+		</Fluent:Ribbon.QuickAccessItems>
+
         <Fluent:RibbonTabItem  Header="Versioning">
             <Fluent:RibbonGroupBox Header="Version">
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.BranchCurrentVersionCommand}"
@@ -305,6 +295,10 @@
             <Fluent:RibbonGroupBox Header="Delete">
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.CutAssociation}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.DeletePSMAttribute}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.DeleteSubtree}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.LeaveOutUnintAM}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
             </Fluent:RibbonGroupBox>
@@ -327,7 +321,20 @@
 
             </Fluent:RibbonGroupBox>
         </Fluent:RibbonTabItem>
-        
+
+        <Fluent:RibbonTabItem Header="View">
+            <Fluent:RibbonGroupBox Header="Edit">
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.VerifyModelCommand}"
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
+            </Fluent:RibbonGroupBox>
+            <Fluent:RibbonGroupBox Header="Layout">
+                <Fluent:Button Command="{x:Static Commands1:StaticWPFClientCommands.LayoutPIMLeftPSMRight}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
+                <Fluent:Button Command="{x:Static Commands1:StaticWPFClientCommands.LayoutByVersions}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
+            </Fluent:RibbonGroupBox>
+        </Fluent:RibbonTabItem>
+
         <!--
             <Fluent:RibbonTabItem Header="PIM">
                 <Fluent:RibbonGroupBox Header="PIM diagram elements">
