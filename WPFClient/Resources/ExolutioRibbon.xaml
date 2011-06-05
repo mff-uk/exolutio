@@ -221,6 +221,10 @@
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
                         <Fluent:Button Command="{x:Static Commands:GuiCommands.CreateChoiceContentModelCommand}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+                        <Fluent:Button Command="{x:Static Commands:GuiCommands.InsertPSMClass}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+                        <Fluent:Button Command="{x:Static Commands:GuiCommands.LeaveOutUnintAM}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
                     </Fluent:Gallery>
                 </Fluent:DropDownButton>
             </Fluent:RibbonGroupBox>

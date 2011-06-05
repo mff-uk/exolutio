@@ -84,6 +84,7 @@ namespace Exolutio.View.Commands
         public static guiShiftPSMAttributeCommand PSMShiftUp { get; set; }
         public static guiShiftPSMAttributeCommand PSMShiftDown { get; set; }
         public static guiControllerCommand LeaveOutUnintAM { get; set; }
+        public static guiInsertPSMClass InsertPSMClass { get; set; }
         #endregion
 
         #region versioning
@@ -341,6 +342,8 @@ namespace Exolutio.View.Commands
                                                 AcceptedSelectedComponentType = typeof(PSMAssociationMember),
                                                 Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.RemoveContainer)
                                             };
+            InsertPSMClass = new guiInsertPSMClass();
+            
             #endregion
 
             #region other
