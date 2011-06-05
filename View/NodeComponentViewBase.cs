@@ -89,6 +89,10 @@ namespace Exolutio.View
 
         public override void RemoveFromDiagram()
         {
+            if (Selected)
+            {
+                Selected = false;
+            }
             if (MainNode == null || MainNode.ExolutioCanvas == null)
             {
                 throw new ExolutioViewException("Component view is not visualized on a canvas");

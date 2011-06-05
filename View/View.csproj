@@ -77,6 +77,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Commands\Edit\guiAlignCommand.cs" />
     <Compile Include="Commands\guiSelectionDependentCommand.cs" />
     <Compile Include="Commands\CurrentProjectVersionChangedEventArgs.cs" />
     <Compile Include="Commands\Edit\guiVerifyModelCommand.cs" />

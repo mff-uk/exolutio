@@ -17,6 +17,7 @@
                             Title="{Binding Path=Command.ScreenTipTitleDisplay}"
                             Text="{Binding Path=Command.ScreenTipText}"
                             DisableReason="{Binding Path=Command.DisableReason}"
+                            Image="{Binding Path=Command.Icon}"
                             >
                 </Fluent:ScreenTip>
             </Setter.Value>
@@ -35,6 +36,7 @@
                             Title="{Binding Path=Command.ScreenTipTitleDisplay}"
                             Text="{Binding Path=Command.ScreenTipText}"
                             DisableReason="{Binding Path=Command.DisableReason}"
+                            Image="{Binding Path=Command.Icon}"
                             >
                 </Fluent:ScreenTip>
             </Setter.Value>
