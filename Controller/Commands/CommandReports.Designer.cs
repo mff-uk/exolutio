@@ -439,6 +439,15 @@ namespace Exolutio.Controller.Commands {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to PIM attribute &apos;{0}&apos; shifted &apos;{1}&apos;.
+        /// </summary>
+        internal static string PIM_ATTR_SHIFT {
+            get {
+                return ResourceManager.GetString("PIM_ATTR_SHIFT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to PIM attributes &apos;{0}&apos; synchronized with &apos;{1}&apos;.
         /// </summary>
         internal static string PIM_ATTR_SYNCHRO {
@@ -489,6 +498,15 @@ namespace Exolutio.Controller.Commands {
         internal static string PSM_ASSOC_SYNCHRO {
             get {
                 return ResourceManager.GetString("PSM_ASSOC_SYNCHRO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PSM attribute &apos;{0}&apos; shifted &apos;{1}&apos;.
+        /// </summary>
+        internal static string PSM_ATTR_SHIFT {
+            get {
+                return ResourceManager.GetString("PSM_ATTR_SHIFT", resourceCulture);
             }
         }
         

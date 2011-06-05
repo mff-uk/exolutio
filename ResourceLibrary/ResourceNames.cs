@@ -45,6 +45,8 @@ namespace Exolutio.ResourceLibrary
         public const string magnifier = "magnifier";
         public const string navigate_left = "navigate_left";
         public const string navigate_right = "navigate_right";
+        public const string navigate_up = "navigate_up";
+        public const string navigate_down = "navigate_down";
         public const string note_edit = "note_edit";
         public const string OpenFolder = "OpenFolder";
         public const string page = "page";

@@ -90,6 +90,8 @@
     <Compile Include="Commands\Edit\guiUndoCommand.cs" />
     <Compile Include="Commands\GuiCommands.cs" />
     <Compile Include="Commands\guiModelTreeCommand.cs" />
+    <Compile Include="Commands\PIM\guiShiftPIMAttributeCommand.cs" />
+    <Compile Include="Commands\PSM\guiShiftPSMAttributeCommand.cs" />
     <Compile Include="Commands\PSM\guiShiftAssociationCommand.cs" />
     <Compile Include="Commands\PSM\guiCreateContentModelCommand.cs" />
     <Compile Include="Commands\Versioning\EvolutionChangesWindow.xaml.cs">
@@ -317,9 +319,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Commands\PIM\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

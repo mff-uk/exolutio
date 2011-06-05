@@ -38,6 +38,8 @@
     <ImageSource x:Key="magnifier">magnifier.png</ImageSource>
     <ImageSource x:Key="navigate_left">navigate_left.png</ImageSource>
     <ImageSource x:Key="navigate_right">navigate_right.png</ImageSource>
+    <ImageSource x:Key="navigate_up">navigate_up.png</ImageSource>
+    <ImageSource x:Key="navigate_down">navigate_down.png</ImageSource>
     <ImageSource x:Key="note_edit">note_edit.png</ImageSource>
     <ImageSource x:Key="OpenFolder">OpenFolder.png</ImageSource>
     <ImageSource x:Key="page">page.png</ImageSource>

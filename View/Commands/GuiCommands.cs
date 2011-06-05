@@ -13,6 +13,7 @@ using Exolutio.View.Commands.Versioning;
 using Exolutio.View.Commands.PSM;
 using Exolutio.Controller.Commands.Complex.PSM;
 using Exolutio.Model;
+using Exolutio.View.Commands.PIM;
 
 namespace Exolutio.View.Commands
 {
@@ -58,6 +59,8 @@ namespace Exolutio.View.Commands
         public static guiControllerCommand DerivePSMRootCommand { get; set; }
         public static guiControllerCommand SplitPIMAttributeCommand { get; set; }
         public static guiControllerCommand SplitPIMAssociationCommand { get; set; }
+        public static guiShiftPIMAttributeCommand PIMShiftUp { get; set; }
+        public static guiShiftPIMAttributeCommand PIMShiftDown { get; set; }
 
         #endregion
 
@@ -78,6 +81,8 @@ namespace Exolutio.View.Commands
         public static guiCreateContentModelCommand CreateSetContentModelCommand { get; set; }
         public static guiShiftAssociationCommand ShiftLeft { get; set; }
         public static guiShiftAssociationCommand ShiftRight { get; set; }
+        public static guiShiftPSMAttributeCommand PSMShiftUp { get; set; }
+        public static guiShiftPSMAttributeCommand PSMShiftDown { get; set; }
         #endregion
 
         #region versioning
@@ -226,6 +231,8 @@ namespace Exolutio.View.Commands
                                             AcceptedSelectedComponentType = typeof(PIMClass),
                                             Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.XmlSchema)
                                         };
+            PIMShiftUp = new guiShiftPIMAttributeCommand() { Up = true };
+            PIMShiftDown = new guiShiftPIMAttributeCommand() { Up = false };
             #endregion
 
             #region PSM
@@ -320,6 +327,9 @@ namespace Exolutio.View.Commands
             CreateSetContentModelCommand = new guiCreateContentModelCommand() { Type = PSMContentModelType.Set };
             ShiftLeft = new guiShiftAssociationCommand() { Left = true };
             ShiftRight = new guiShiftAssociationCommand() { Left = false };
+            PSMShiftUp = new guiShiftPSMAttributeCommand() { Up = true };
+            PSMShiftDown = new guiShiftPSMAttributeCommand() { Up = false };
+
             #endregion
 
             #region other
