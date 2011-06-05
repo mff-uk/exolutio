@@ -453,6 +453,13 @@ namespace Exolutio.ResourceLibrary {
             }
         }
         
+        public static System.Drawing.Bitmap navigate_down {
+            get {
+                object obj = ResourceManager.GetObject("navigate_down", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         public static System.Drawing.Bitmap navigate_left {
             get {
                 object obj = ResourceManager.GetObject("navigate_left", resourceCulture);
@@ -463,6 +470,13 @@ namespace Exolutio.ResourceLibrary {
         public static System.Drawing.Bitmap navigate_right {
             get {
                 object obj = ResourceManager.GetObject("navigate_right", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        public static System.Drawing.Bitmap navigate_up {
+            get {
+                object obj = ResourceManager.GetObject("navigate_up", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

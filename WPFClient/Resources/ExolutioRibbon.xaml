@@ -170,6 +170,12 @@
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.SplitPIMAssociationCommand}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
             </Fluent:RibbonGroupBox>
+            <Fluent:RibbonGroupBox Header="Shift">
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.PIMShiftUp}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.PIMShiftDown}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+            </Fluent:RibbonGroupBox>
         </Fluent:RibbonTabItem>
 
         <Fluent:RibbonTabItem x:Name="tabPSM" Header="Modeling" Group="{Binding ElementName=psmGroup}">
@@ -209,6 +215,10 @@
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.ShiftLeft}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.ShiftRight}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.PSMShiftUp}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.PSMShiftDown}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
             </Fluent:RibbonGroupBox>
         </Fluent:RibbonTabItem>

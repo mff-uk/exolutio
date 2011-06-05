@@ -291,4 +291,10 @@
   <data name="COMPLEX_DERIVE_NEW_ROOT" xml:space="preserve">
     <value>Complex: Derive new PSM root</value>
   </data>
+  <data name="PIM_ATTR_SHIFT" xml:space="preserve">
+    <value>PIM attribute '{0}' shifted '{1}'</value>
+  </data>
+  <data name="PSM_ATTR_SHIFT" xml:space="preserve">
+    <value>PSM attribute '{0}' shifted '{1}'</value>
+  </data>
 </root>

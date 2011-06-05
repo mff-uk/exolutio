@@ -52,6 +52,7 @@
     <Compile Include="Commands\Atomic\acmdAddComponentToDiagram.cs" />
     <Compile Include="Commands\Atomic\acmdRemoveComponentFromDiagram.cs" />
     <Compile Include="Commands\Atomic\acmdRenameComponent.cs" />
+    <Compile Include="Commands\Atomic\PIM\acmdShiftPIMAttribute.cs" />
     <Compile Include="Commands\Atomic\PSM\acmdRenamePSMSchema.cs" />
     <Compile Include="Commands\Atomic\PIM\acmdDeletePIMClass.cs" />
     <Compile Include="Commands\Atomic\PIM\acmdNewPIMAttribute.cs" />
@@ -89,6 +90,7 @@
     <Compile Include="Commands\Atomic\PSM\acmdUpdatePSMContentModel.cs" />
     <Compile Include="Commands\Atomic\PSM\acmdDeletePSMDiagram.cs" />
     <Compile Include="Commands\Atomic\PSM\acmdNewPSMDiagram.cs" />
+    <Compile Include="Commands\Atomic\PSM\acmdShiftPSMAttribute.cs" />
     <Compile Include="Commands\Atomic\PSM\MacroWrappers\cmdCreateNewPSMAttribute.cs" />
     <Compile Include="Commands\Atomic\PSM\MacroWrappers\cmdUpdatePSMContentModel.cs" />
     <Compile Include="Commands\Atomic\PSM\MacroWrappers\cmdSetRepresentedClass.cs" />
