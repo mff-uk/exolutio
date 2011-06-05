@@ -117,7 +117,6 @@ namespace Exolutio.View
         void PIMAttributeTextBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             Container.ExolutioCanvas.SelectableItem_PreviewMouseDown(this, e);
-            e.Handled = true;
         }
 
 	    private void PIMAttributeTextBox_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
