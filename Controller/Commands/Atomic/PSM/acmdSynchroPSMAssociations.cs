@@ -38,22 +38,12 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
                 {
                     if (am == null) am = a.Parent as PSMAssociationMember;
                     else if (am != a.Parent) return false;
-/*                    if (a.Child.Interpretation != null)
-                    {
-                        if (interpretation == null) interpretation = a.Child.Interpretation as PIMClass;
-                        else if (interpretation != a.Child.Interpretation) return false;
-                    }
-*/                }
+                }
                 if (a.Child is PSMClass && d.Contains((PSMClass)a.Child))
                 {
                     if (am == null) am = a.Child as PSMClass;
                     else if (am != a.Child) return false;
-/*                    if (a.Parent.Interpretation != null)
-                    {
-                        if (interpretation == null) interpretation = a.Parent.Interpretation as PIMClass;
-                        else if (interpretation != a.Parent.Interpretation) return false;
-                    }
-*/                }
+                }
                 if (!(a.Parent is PSMAssociationMember && a.Child is PSMClass)) return false;
                 if (a.Parent is PSMClass || a.Parent is PSMSchemaClass) d.Add(a.Parent as PSMAssociationMember);
                 d.Add(a.Child as PSMClass);
