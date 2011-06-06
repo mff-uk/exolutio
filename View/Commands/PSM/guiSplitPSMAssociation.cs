@@ -50,5 +50,12 @@ namespace Exolutio.View.Commands.PSM
             get { return "Split PSM associations"; }
         }
 
+        public override System.Windows.Media.ImageSource Icon
+        {
+            get
+            {
+                return ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.split_psm_assoc);
+            }
+        }
     }
 }

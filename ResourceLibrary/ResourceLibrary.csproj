@@ -177,6 +177,10 @@
     <Resource Include="Images\navigate_down.png" />
     <Resource Include="Images\navigate_up.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\SplitPIMAssociation.png" />
+    <Resource Include="Images\SplitPSMAssociation.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
