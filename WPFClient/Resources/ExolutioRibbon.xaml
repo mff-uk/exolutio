@@ -199,7 +199,7 @@
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
             </Fluent:RibbonGroupBox>
             <Fluent:RibbonGroupBox Header="Delete">
-                <Fluent:Button x:Name="rbPIMDelete" Command="{x:Static Commands:GuiCommands.PIMDelete}" 
+                <Fluent:Button x:Name="rbPIMDelete" Command="{x:Static Commands:GuiCommands.Delete}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
                 <Fluent:DropDownButton IsEnabled="{Binding ElementName=rbPIMDelete,Path=IsEnabled}" Header="Delete components" Icon="/Exolutio.ResourceLibrary;component/Images/delete.png" LargeIcon="/Exolutio.ResourceLibrary;component/Images/delete.png">
                     <Fluent:Gallery>
@@ -320,13 +320,11 @@
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
             </Fluent:RibbonGroupBox>
             <Fluent:RibbonGroupBox Header="Delete">
-                <Fluent:Button Command="{x:Static Commands:GuiCommands.CutAssociation}" 
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.LeaveOutUnintAM}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
-                <Fluent:Button Command="{x:Static Commands:GuiCommands.DeletePSMAttribute}" 
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.Delete}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.DeleteSubtree}" 
-                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
-                <Fluent:Button Command="{x:Static Commands:GuiCommands.LeaveOutUnintAM}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.DeletePSMSchema}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>

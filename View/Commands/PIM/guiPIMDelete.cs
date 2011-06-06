@@ -15,11 +15,6 @@ namespace Exolutio.View.Commands.PIM
 {
     public class guiPIMDelete : guiSelectionDependentCommand
     {
-        public guiPIMDelete()
-        {
-            Gesture = KeyGestures.Delete;
-        }
-        
         public override bool CanExecute(object parameter)
         {
             if (!(Current.ActiveDiagram is PIMDiagram)) return false;
@@ -38,7 +33,7 @@ namespace Exolutio.View.Commands.PIM
             IEnumerable<PIMClass> selectedClasses = Current.ActiveDiagramView.GetSelectedComponents()
                 .Where(c => c is PIMClass).Cast<PIMClass>();
 
-            MacroCommand macro = new MacroCommand(Current.Controller);
+            MacroCommand macro = new MacroCommand(Current.Controller) { CheckFirstOnlyInCanExecute = true };
             foreach (PIMAssociation a in selectedAssociations)
             {
                 macro.Commands.Add(new Exolutio.Controller.Commands.Complex.PIM.cmdDeletePIMAssociation(Current.Controller) { AssociationGuid = a });

@@ -10,6 +10,7 @@ namespace Exolutio.View.Commands.Edit
         {
             Current.ProjectChanged += Current_ProjectChanged;
             OnCanExecuteChanged(null);
+            Gesture = KeyGestures.ControlZ;
         }
 
         void Current_ProjectChanged(object sender, CurrentProjectChangedEventArgs e)
@@ -62,5 +63,29 @@ namespace Exolutio.View.Commands.Edit
         {
             get { return "Undo last operation"; }
         }
+        
+        private System.Windows.Input.KeyGesture gesture;
+        public override System.Windows.Input.KeyGesture Gesture
+        {
+            get
+            {
+                return gesture;
+            }
+            set
+            {
+                gesture = value;
+                if (keyBinding != null)
+                {
+                    throw new InvalidOperationException("Key binding cannot be defined twice.");
+                }
+                if (gesture != null && Current.MainWindow != null)
+                {
+                    keyBinding = new System.Windows.Input.KeyBinding(this, Gesture);
+                    Current.MainWindow.InputBindings.Add(keyBinding);
+                    Current.MainWindow.CommandBindings.Add(new System.Windows.Input.CommandBinding(this));
+                }
+            }
+        }
+
     }
 }
