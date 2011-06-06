@@ -46,7 +46,21 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
                 ErrorDescription = CommandErrors.CMDERR_CYCLIC_REPR;
                 return false;
             }
-            return true;
+
+            PSMClass representedNIC = representedClass.NearestInterpretedClass();
+            PSMClass representantNIC = representantClass.NearestInterpretedClass();
+            if (representedNIC == null && representantNIC == null) return true;
+            if (representedNIC == null || representantNIC == null)
+            {
+                ErrorDescription = CommandErrors.CMDERR_REPR_DIFFERENT_CONTEXT;
+                return false;
+            }
+            if (representedNIC.Interpretation == representantNIC.Interpretation) return true;
+            else
+            {
+                ErrorDescription = CommandErrors.CMDERR_REPR_DIFFERENT_CONTEXT;
+                return false;
+            }
         }
         
         internal override void CommandOperation()

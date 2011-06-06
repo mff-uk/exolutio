@@ -216,4 +216,7 @@
   <data name="CMDERR_CM_NOT_ROOT" xml:space="preserve">
     <value>Content model is not root.</value>
   </data>
+  <data name="CMDERR_REPR_DIFFERENT_CONTEXT" xml:space="preserve">
+    <value>Represented class has different interpreted context than representant class</value>
+  </data>
 </root>

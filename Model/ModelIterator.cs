@@ -295,6 +295,23 @@ namespace Exolutio.Model
             return list;
         }
         
+        /// <summary>
+        /// Returns a list of PSMClasses which form the content of psmClass. If psmClass is SR of A, A is SR of B, it returns A, B.
+        /// </summary>
+        /// <param name="psmClass"></param>
+        /// <returns></returns>
+        public static IEnumerable<PSMClass> GetSRs(this PSMClass psmClass)
+        {
+            List<PSMClass> srs = new List<PSMClass>();
+
+            if (psmClass.RepresentedClass == null) return srs;
+
+            srs.Add(psmClass.RepresentedClass);
+            srs.AddRange(psmClass.RepresentedClass.GetSRs());
+
+            return srs;
+        }
+
         public static IEnumerable<PSMClass> InterpretedSubClasses(this PSMClass parent)
         {
             List<PSMClass> list = new List<PSMClass>();

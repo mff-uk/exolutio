@@ -43,10 +43,37 @@ namespace Exolutio.Controller.Commands.Complex.PSM
             PSMClass sourceClass = attribute.PSMClass;
             PSMClass targetClass = Project.TranslateComponent<PSMClass>(ClassGuid);
 
-            if (sourceClass.RepresentedClass == targetClass || targetClass.RepresentedClass == sourceClass)
+            if (sourceClass.GetSRs().Contains(targetClass))
             {
-                //move between structural representants
-                Commands.Add(new acmdMovePSMAttribute(Controller, AttributeGuid, targetClass) { Propagate = Propagate });
+                List<PSMClass> intermediateClasses = new List<PSMClass>();
+                PSMClass current = sourceClass;
+
+                while (current != targetClass)
+                {
+                    current = current.RepresentedClass;
+                    intermediateClasses.Add(current);
+                }
+                
+                foreach (PSMClass i in intermediateClasses)
+                {
+                    Commands.Add(new acmdMovePSMAttribute(Controller, AttributeGuid, i) { Propagate = Propagate });
+                }
+            }
+            else if (targetClass.GetSRs().Contains(sourceClass))
+            {
+                List<PSMClass> intermediateClasses = new List<PSMClass>();
+                PSMClass current = targetClass;
+
+                while (current != sourceClass)
+                {
+                    intermediateClasses.Add(current);
+                    current = current.RepresentedClass;
+                }
+
+                foreach (PSMClass i in intermediateClasses.Reverse<PSMClass>())
+                {
+                    Commands.Add(new acmdMovePSMAttribute(Controller, AttributeGuid, i) { Propagate = Propagate });
+                }
             }
             else
             {
@@ -111,7 +138,7 @@ namespace Exolutio.Controller.Commands.Complex.PSM
             PSMAttribute att = Project.TranslateComponent<PSMAttribute>(AttributeGuid);
             PSMClass target = Project.TranslateComponent<PSMClass>(ClassGuid);
             PSMClass source = att.PSMClass;
-            if (source.RepresentedClass == target || target.RepresentedClass == source) return true;
+            if (source.GetSRs().Contains(target) || target.GetSRs().Contains(source)) return true;
             if (source.GetNearestCommonAncestorClass(target) == null)
             {
                 ErrorDescription = CommandErrors.CMDERR_NO_COMMON_ANCESTOR_CLASS;
