@@ -251,7 +251,8 @@ namespace Exolutio.View.Commands
                                             ControllerCommandType = typeof(Controller.Commands.Complex.PIM.cmdSplitPIMAttribute),
                                             PIMOnly = true,
                                             ScopeIsSelectedComponent = true,
-                                            AcceptedSelectedComponentType = typeof(PIMAttribute)
+                                            AcceptedSelectedComponentType = typeof(PIMAttribute),
+                                            Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.AddAttributes)
                                         };
             SplitPIMAssociationCommand = new guiControllerCommand
                                         {
@@ -260,7 +261,8 @@ namespace Exolutio.View.Commands
                                             ControllerCommandType = typeof(Controller.Commands.Complex.PIM.cmdSplitPIMAssociation),
                                             PIMOnly = true,
                                             ScopeIsSelectedComponent = true,
-                                            AcceptedSelectedComponentType = typeof(PIMAssociation)
+                                            AcceptedSelectedComponentType = typeof(PIMAssociation),
+                                            Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.split_pim_assoc)
                                         };
 
             DerivePSMRootCommand = new guiControllerCommand

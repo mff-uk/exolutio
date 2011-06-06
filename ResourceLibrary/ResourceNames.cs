@@ -94,6 +94,9 @@ namespace Exolutio.ResourceLibrary
         public const string component_preferences = "component_preferences";
         public const string branch_delete = "branch_delete";
         public const string branch_element = "branch_element";
+        public const string split_pim_assoc = "split_pim_assoc";
+        public const string split_psm_assoc = "split_psm_assoc";
+        
 
         public static ImageSource GetResourceImageSource(string resourceKey)
         {

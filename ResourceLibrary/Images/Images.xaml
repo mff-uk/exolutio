@@ -87,4 +87,6 @@
     <ImageSource x:Key="component_preferences">component_preferences.png</ImageSource>
     <ImageSource x:Key="branch_element">branch_element.png</ImageSource>
     <ImageSource x:Key="branch_delete">branch_delete.png</ImageSource>
+    <ImageSource x:Key="split_pim_assoc">SplitPIMAssociation.png</ImageSource>
+    <ImageSource x:Key="split_psm_assoc">SplitPSMAssociation.png</ImageSource>
 </ResourceDictionary>
