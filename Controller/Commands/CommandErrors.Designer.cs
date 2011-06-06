@@ -277,6 +277,15 @@ namespace Exolutio.Controller.Commands {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Represented class has different interpreted context than representant class.
+        /// </summary>
+        internal static string CMDERR_REPR_DIFFERENT_CONTEXT {
+            get {
+                return ResourceManager.GetString("CMDERR_REPR_DIFFERENT_CONTEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Represented class cannot be a PSM schema class..
         /// </summary>
         internal static string CMDERR_REPRESENTED_CANNOT_BE_SCHEMACLASS {
