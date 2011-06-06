@@ -320,6 +320,21 @@ namespace Exolutio.Model
             return list;
         }
 
+        public static IEnumerable<PSMAssociationMember> UnInterpretedSubAMs(this PSMAssociationMember parent, bool includeThis = false)
+        {
+            List<PSMAssociationMember> list = new List<PSMAssociationMember>();
+            if (parent is PSMClass && (parent as PSMClass).Interpretation != null) return list;
+            else
+            {
+                if (includeThis) list.Add(parent as PSMAssociationMember);
+                foreach (PSMAssociation a in parent.ChildPSMAssociations)
+                {
+                    if (a.Child != null) list.AddRange(a.Child.UnInterpretedSubAMs(true));
+                }
+            }
+            return list;
+        }
+
         public static IEnumerable<PSMClass> UnInterpretedSubClasses(this PSMClass parent, bool includeThis = false)
         {
             List<PSMClass> list = new List<PSMClass>();

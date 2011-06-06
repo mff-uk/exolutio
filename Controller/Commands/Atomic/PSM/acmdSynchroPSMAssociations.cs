@@ -54,8 +54,8 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
                         else if (interpretation != a.Parent.Interpretation) return false;
                     }
 */                }
-                if (!(a.Parent is PSMClass && a.Child is PSMClass)) return false;
-                d.Add(a.Parent as PSMClass);
+                if (!(a.Parent is PSMAssociationMember && a.Child is PSMClass)) return false;
+                if (a.Parent is PSMClass) d.Add(a.Parent as PSMClass);
                 d.Add(a.Child as PSMClass);
             }
             PSMClass c = am;
