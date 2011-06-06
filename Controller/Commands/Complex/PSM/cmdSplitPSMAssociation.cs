@@ -55,7 +55,28 @@ namespace Exolutio.Controller.Commands.Complex.PSM
             Commands.Add(new acmdNewPSMAssociation(Controller, original.Parent, NewClassGuid, original.PSMSchema) { AssociationGuid = NewAssociationGuid });
             Commands.Add(new acmdRenameComponent(Controller, NewAssociationGuid, original.Name + "2"));
             Commands.Add(new acmdUpdatePSMAssociationCardinality(Controller, NewAssociationGuid, original.Lower, original.Upper));
+            if ((original.Parent is PSMContentModel) || ((original.Parent is PSMClass) && original.Parent.Interpretation == null))
+            {
+                PSMClass nic = original.Parent.NearestInterpretedParentClass();
+                if (nic == null)
+                {
+                    Commands.Add(new cmdReconnectPSMAssociation(Controller) { AssociationGuid = original, NewParentGuid = original.PSMSchema.PSMSchemaClass });
+                    Commands.Add(new cmdReconnectPSMAssociation(Controller) { AssociationGuid = NewAssociationGuid, NewParentGuid = original.PSMSchema.PSMSchemaClass });
+                }
+                else
+                {
+                    Commands.Add(new cmdReconnectPSMAssociation(Controller) { AssociationGuid = original, NewParentGuid = nic });
+                    Commands.Add(new cmdReconnectPSMAssociation(Controller) { AssociationGuid = NewAssociationGuid, NewParentGuid = nic });
+                }
+            }
+            
             Commands.Add(new acmdSynchroPSMAssociations(Controller) { X1 = Enumerable.Repeat(original.ID, 1).ToList(), X2 = Enumerable.Repeat(NewAssociationGuid, 1).ToList() });
+
+            if ((original.Parent is PSMContentModel) || ((original.Parent is PSMClass) && original.Parent.Interpretation == null))
+            {
+                Commands.Add(new cmdReconnectPSMAssociation(Controller) { AssociationGuid = original, NewParentGuid = original.Parent });
+                Commands.Add(new cmdReconnectPSMAssociation(Controller) { AssociationGuid = NewAssociationGuid, NewParentGuid = original.Parent });
+            }
         }
 
         public override bool CanExecute()
