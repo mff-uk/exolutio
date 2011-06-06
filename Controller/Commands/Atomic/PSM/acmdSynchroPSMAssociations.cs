@@ -21,9 +21,9 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
         public acmdSynchroPSMAssociations(Controller c)
             : base(c) { }
 
-        private bool getAmAndInterpretation(ReadOnlyCollection<PSMAssociation> aX1, ReadOnlyCollection<PSMAssociation> aX2, out PIMClass interpretation, out PSMClass am)
+        private bool getAmAndInterpretation(ReadOnlyCollection<PSMAssociation> aX1, ReadOnlyCollection<PSMAssociation> aX2, out PIMClass interpretation, out PSMAssociationMember am)
         {
-            List<PSMClass> d = new List<PSMClass>();
+            List<PSMAssociationMember> d = new List<PSMAssociationMember>();
             am = null;
             interpretation = null;
             IEnumerable<PSMAssociation> union = aX1.Union(aX2);
@@ -34,9 +34,9 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
             }
             else foreach (PSMAssociation a in union)
             {
-                if (a.Parent is PSMClass && d.Contains((PSMClass)a.Parent))
+                if (((a.Parent is PSMClass) || (a.Parent is PSMSchemaClass)) && d.Contains((PSMAssociationMember)a.Parent))
                 {
-                    if (am == null) am = a.Parent as PSMClass;
+                    if (am == null) am = a.Parent as PSMAssociationMember;
                     else if (am != a.Parent) return false;
 /*                    if (a.Child.Interpretation != null)
                     {
@@ -55,10 +55,10 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
                     }
 */                }
                 if (!(a.Parent is PSMAssociationMember && a.Child is PSMClass)) return false;
-                if (a.Parent is PSMClass) d.Add(a.Parent as PSMClass);
+                if (a.Parent is PSMClass || a.Parent is PSMSchemaClass) d.Add(a.Parent as PSMAssociationMember);
                 d.Add(a.Child as PSMClass);
             }
-            PSMClass c = am;
+            PSMAssociationMember c = am;
             d.RemoveAll(a => a == c);
             c = d.FirstOrDefault(cl => cl.Interpretation != null);
             interpretation = c == null ? null : c.Interpretation as PIMClass;
@@ -78,7 +78,7 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
                 return false;
             }
 
-            PSMClass am;
+            PSMAssociationMember am;
             PIMClass interpretation;
             if (!getAmAndInterpretation(aX1, aX2, out interpretation, out am))
             {
@@ -100,13 +100,14 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
         {
             ReadOnlyCollection<PSMAssociation> aX1 = Project.TranslateComponentCollection<PSMAssociation>(X1);
             ReadOnlyCollection<PSMAssociation> aX2 = Project.TranslateComponentCollection<PSMAssociation>(X2);
-            PSMClass C1_;
+            PSMAssociationMember C1_;
             PIMClass C1;
             PIMClass C2;
 
             if (aX1.Count == 0 || aX2.Count == 0 || aX1.Union(aX2).Count() == 1) return null;
             if (!getAmAndInterpretation(aX1, aX2, out C2, out C1_)) return null;
             if (aX1.Any(assoc => assoc.Interpretation == null) && aX2.Any(assoc => assoc.Interpretation == null)) return null;
+            //Here we assume that C1_ is in fact an interpreted PSMClass. If it was a PSMSchemaClass or uninterpreted class, it would have been filtered above.
             C1 = C1_.Interpretation as PIMClass;
 
             PropagationMacroCommand command = new PropagationMacroCommand(Controller) { CheckFirstOnlyInCanExecute = true };
