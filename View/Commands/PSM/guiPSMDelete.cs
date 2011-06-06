@@ -12,13 +12,8 @@ using System.Diagnostics;
 
 namespace Exolutio.View.Commands.PSM
 {
-    public class guiDeleteSubtree : guiSelectionDependentCommand
+    public class guiPSMDelete : guiSelectionDependentCommand
     {
-        public guiDeleteSubtree()
-        {
-            Gesture = KeyGestures.ShiftDelete;
-        }
-        
         public override bool CanExecute(object parameter)
         {
             if (!(Current.ActiveDiagram is PSMDiagram)) return false;
@@ -34,33 +29,26 @@ namespace Exolutio.View.Commands.PSM
         public override void Execute(object parameter)
         {
             IEnumerable<PSMComponent> components = Current.ActiveDiagramView.GetSelectedComponents().Where(c => !(c is PSMSchemaClass)).Cast<PSMComponent>();
-            bool found = true;
-            IEnumerable<PSMComponent> current = components;
-            while (found)
-            {
-                found = false;
-                List<PSMComponent> next = new List<PSMComponent>();
-                foreach (PSMComponent c in current)
-                {
-                    if (current.Any(co => co != c && c.IsDescendantFrom(co))) found = true;
-                    else next.Add(c);
-                }
-                current = next;
-            }
 
-            IEnumerable<PSMAssociation> associations = current.Where(c => c is PSMAssociation).Cast<PSMAssociation>();
-            IEnumerable<PSMAssociationMember> associationMembers = current.Where(c2 => (!(c2 is PSMSchemaClass) && (c2 is PSMAssociationMember))).Cast<PSMAssociationMember>();
-            IEnumerable<PSMAssociationMember> roots = associationMembers.Where(am => am.ParentAssociation == null);
+            IEnumerable<PSMAssociation> associations = components.Where(c => c is PSMAssociation).Cast<PSMAssociation>();
+            IEnumerable<PSMAssociationMember> associationMembers = components.Where(c2 => (!(c2 is PSMSchemaClass) && (c2 is PSMAssociationMember))).Cast<PSMAssociationMember>();
             IEnumerable<PSMAssociation> nonrootAssociations = associationMembers.Where(am => am.ParentAssociation != null).Select(am2 => am2.ParentAssociation);
-            IEnumerable<PSMAttribute> attributes = current.Where(c => c is PSMAttribute).Cast<PSMAttribute>();
+            IEnumerable<PSMAttribute> attributes = components.Where(c => c is PSMAttribute).Cast<PSMAttribute>();
             MacroCommand macro = new MacroCommand(Current.Controller) { CheckFirstOnlyInCanExecute = true };
             foreach (PSMAssociation a in associations.Union(nonrootAssociations))
             {
-                macro.Commands.Add(new cmdDeletePSMAssociationRecursive(Current.Controller) { AssociationGuid = a });
+                macro.Commands.Add(new cmdDeletePSMAssociation(Current.Controller) { AssociationGuid = a });
             }
-            foreach (PSMAssociationMember am in roots)
+            foreach (PSMAssociationMember am in associationMembers)
             {
-                macro.Commands.Add(new cmdDeletePSMAssociationMemberRecursive(Current.Controller) { AssociationMemberGuid = am });
+                if (am is PSMContentModel)
+                {
+                    macro.Commands.Add(new cmdDeleteRootPSMContentModel(Current.Controller) { ContentModelGuid = am });
+                }
+                else
+                {
+                    macro.Commands.Add(new cmdDeleteRootPSMClass(Current.Controller) { ClassGuid = am });
+                }
             }
             foreach (PSMAttribute a in attributes)
             {
@@ -74,20 +62,20 @@ namespace Exolutio.View.Commands.PSM
         {
             get
             {
-                return "Delete subtrees";
+                return "Delete";
             }
         }
 
         public override string ScreenTipText
         {
-            get { return "Delete PSM subtrees"; }
+            get { return "Delete PSM components"; }
         }
 
         public override System.Windows.Media.ImageSource Icon
         {
             get
             {
-                return ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.delete2);
+                return ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.delete);
             }
         }
     }

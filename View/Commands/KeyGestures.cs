@@ -44,6 +44,26 @@ namespace Exolutio.View
             get { return controlX; }
         }
 
+        private static readonly KeyGesture controlY = new KeyGesture(Key.Y, ModifierKeys.Control);
+
+        public static KeyGesture ControlY
+        {
+            get { return controlY; }
+        }
+        private static readonly KeyGesture controlZ = new KeyGesture(Key.Z, ModifierKeys.Control);
+
+        public static KeyGesture ControlZ
+        {
+            get { return controlZ; }
+        }
+
+        private static readonly KeyGesture backspace = new KeyGesture(Key.Back);
+
+        public static KeyGesture Backspace
+        {
+            get { return backspace; }
+        }
+
         private static readonly KeyGesture controlShiftX = new KeyGesture(Key.X, ModifierKeys.Control | ModifierKeys.Shift);
 
         public static KeyGesture ControlShiftX
@@ -68,6 +88,16 @@ namespace Exolutio.View
         {
             get { return delete; }
         }
-    
+
+        private static readonly KeyGesture shiftdelete = new KeyGesture(Key.Delete, ModifierKeys.Shift);
+        public static KeyGesture ShiftDelete
+        {
+            get { return shiftdelete; }
+        }
+        private static readonly KeyGesture controldelete = new KeyGesture(Key.Delete, ModifierKeys.Control);
+        public static KeyGesture ControlDelete
+        {
+            get { return controldelete; }
+        }
     }
 }

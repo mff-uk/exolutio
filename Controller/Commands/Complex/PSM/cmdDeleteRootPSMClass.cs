@@ -57,6 +57,7 @@ namespace Exolutio.Controller.Commands.Complex.PSM
             {
                 Commands.Add(new acmdSetRepresentedClass(Controller, representant, Guid.Empty));
             }
+            Commands.Add(new acmdSetRepresentedClass(Controller, ClassGuid, Guid.Empty));
             Commands.Add(new acmdSetPSMClassInterpretation(Controller, ClassGuid, Guid.Empty));
             Commands.Add(new acmdDeletePSMClass(Controller, ClassGuid));
         }

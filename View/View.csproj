@@ -78,6 +78,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Commands\Edit\guiAlignCommand.cs" />
+    <Compile Include="Commands\Edit\guiDelete.cs" />
     <Compile Include="Commands\guiSelectionDependentCommand.cs" />
     <Compile Include="Commands\CurrentProjectVersionChangedEventArgs.cs" />
     <Compile Include="Commands\Edit\guiVerifyModelCommand.cs" />
@@ -98,6 +99,7 @@
     <Compile Include="Commands\PIM\guiAssociate2.cs" />
     <Compile Include="Commands\PIM\guiLocateRepresentedPSMClass.cs" />
     <Compile Include="Commands\PIM\guiShiftPIMAttributeCommand.cs" />
+    <Compile Include="Commands\PSM\guiPSMDelete.cs" />
     <Compile Include="Commands\PSM\guiSplitPSMAssociation.cs" />
     <Compile Include="Commands\PSM\guiDeletePSMSchema.cs" />
     <Compile Include="Commands\PSM\guiDeletePSMAttribute.cs" />

@@ -31,6 +31,7 @@ namespace Exolutio.View.Commands
         public static guiControllerCommand RenameProjectCommand { get; set; }
         public static guiUndoCommand UndoCommand { get; set; }
         public static guiRedoCommand RedoCommand { get; set; }
+        public static guiDelete Delete { get; set; }
         public static guiShowHelpCommand HelpCommand { get; set; }
         public static guiSampleDocumentCommand CreateSampleDocumentCommand { get; set; }
         public static guiLocateInterpretedComponent LocateInterpretedComponent { get; set; }
@@ -95,8 +96,9 @@ namespace Exolutio.View.Commands
         public static guiLeaveOutUnintAM LeaveOutUnintAM { get; set; }
         public static guiInsertPSMClass InsertPSMClass { get; set; }
 
-        public static guiCutAssociation CutAssociation { get; set; }
-        public static guiDeletePSMAttribute DeletePSMAttribute { get; set; }
+        //public static guiCutAssociation CutAssociation { get; set; }
+        //public static guiDeletePSMAttribute DeletePSMAttribute { get; set; }
+        public static guiPSMDelete PSMDelete { get; set; }
         public static guiDeleteSubtree DeleteSubtree { get; set; }
         public static guiDeletePSMSchema DeletePSMSchema { get; set; }
         #endregion
@@ -138,6 +140,7 @@ namespace Exolutio.View.Commands
 #endif
             UndoCommand = new guiUndoCommand();
             RedoCommand = new guiRedoCommand();
+            Delete = new guiDelete();
             HelpCommand = new guiShowHelpCommand();
             RenameProjectCommand = new guiControllerCommand
                                        {
@@ -375,8 +378,9 @@ namespace Exolutio.View.Commands
             PSMShiftDown = new guiShiftPSMAttributeCommand() { Up = false };
             LeaveOutUnintAM = new guiLeaveOutUnintAM();
             InsertPSMClass = new guiInsertPSMClass();
-            CutAssociation = new guiCutAssociation();
-            DeletePSMAttribute = new guiDeletePSMAttribute();
+            //CutAssociation = new guiCutAssociation();
+            //DeletePSMAttribute = new guiDeletePSMAttribute();
+            PSMDelete = new guiPSMDelete();
             DeleteSubtree = new guiDeleteSubtree();
             DeletePSMSchema = new guiDeletePSMSchema();
             #endregion
