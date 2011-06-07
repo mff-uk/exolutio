@@ -70,40 +70,71 @@ namespace Exolutio.Controller.Commands.Atomic.PIM
             //Twice... X1 => X2, X2 => X1
             for (int i = 0; i < 2; i++)
             {
+                IEnumerable<PSMClass> allPSMClasses = pimClass1.GetInterpretedComponents().Union(pimClass2.GetInterpretedComponents()).Cast<PSMClass>();
                 //Selects psmClasses affected by the synchronization (those which have aX1 counterpart present)
-                IEnumerable<PSMClass> psmClasses = 
-                     pimClass1.GetInterpretedComponents()
-                    .Union(pimClass2.GetInterpretedComponents())
-                    .Cast<PSMClass>()
-                    .Where(c => c.UnInterpretedSubClasses()
-                        .SelectMany<PSMClass, PSMAssociation>(cl => cl.ChildPSMAssociations)
-                        .Union(c.ChildPSMAssociations)
-                        .Union(c.ParentAssociation == null
+                List<PSMClass> psmClasses = new List<PSMClass>();
+                foreach (PSMClass c in allPSMClasses)
+                {
+                    IEnumerable<PSMAssociation> assocs = c.GetContextPSMAssociations();
+                    if (assocs.Union(c.ParentAssociation == null
                                 ? Enumerable.Empty<PSMAssociation>()
                                 : Enumerable.Repeat(c.ParentAssociation, 1))
-                        .Where(a => a.Interpretation != null)
-                        .Select(psma => psma.Interpretation as PIMAssociation)
-                        .Intersect(aX1)
-                        .OrderBy(k => k.ID)
-                        .SequenceEqual(aX1.OrderBy(j => j.ID))
-                        );
+                               .Where(a => a.Interpretation != null)
+                               .Select(psma => psma.Interpretation as PIMAssociation)
+                               .Intersect(aX1)
+                               .OrderBy(k => k.ID)
+                               .SequenceEqual(aX1.OrderBy(j => j.ID)))
+                        psmClasses.Add(c);
+                }
+
+                //Elimination of SRs where C is affected and SR is a SR of C
+                bool found = true;
+                while (found)
+                {
+                    found = false;
+                    List<PSMClass> list = new List<PSMClass>();
+                    foreach (PSMClass psmClass in psmClasses)
+                    {
+                        if (psmClass.RepresentedClass != null 
+                            && psmClasses.Contains(psmClass.RepresentedClass)
+                            && !psmClass.GetContextPSMAssociations(true)
+                                    .Union(psmClass.ParentAssociation == null
+                                        ? Enumerable.Empty<PSMAssociation>()
+                                        : Enumerable.Repeat(psmClass.ParentAssociation, 1))
+                                   .Where(a => a.Interpretation != null)
+                                   .Select(psma => psma.Interpretation as PIMAssociation)
+                                   .Intersect(aX1)
+                                   .OrderBy(k => k.ID)
+                                   .SequenceEqual(aX1.OrderBy(j => j.ID)))
+                        {
+                            found = true;
+                        }
+                        else list.Add(psmClass);
+                    }
+                    psmClasses = list;
+                }
 
                 foreach (PSMClass psmClass in psmClasses)
                 {
-                    IEnumerable<PSMAssociation> psmAssociationsInSubAMs = psmClass.UnInterpretedSubAMs()
-                        .SelectMany<PSMAssociationMember, PSMAssociation>(c => c.ChildPSMAssociations);
-
-                    IEnumerable<PSMAssociation> parentEnum = 
+                    IEnumerable<PSMAssociation> parentEnum =
                         psmClass.ParentAssociation == null
-                        ? Enumerable.Empty<PSMAssociation>() 
+                        ? Enumerable.Empty<PSMAssociation>()
                         : Enumerable.Repeat(psmClass.ParentAssociation, 1);
-                    
-                    IEnumerable<PIMAssociation> interpretations = psmAssociationsInSubAMs
-                        .Union(psmClass.ChildPSMAssociations)
-                        .Union(parentEnum)
-                        .Where(a => a.Interpretation != null)
-                        .Select<PSMAssociation, PIMAssociation>(a => a.Interpretation as PIMAssociation);
-                    IEnumerable<PIMAssociation> associationsToPropagate = aX2.Where<PIMAssociation>(a => !interpretations.Contains(a));
+
+                    IEnumerable<Tuple<PSMAssociation, IEnumerable<ModelIterator.MoveStep>>> associationsAndPaths = psmClass.GetContextPSMAssociationsWithPaths();
+                    IEnumerable<PSMAssociation> associations = associationsAndPaths.Select(t => t.Item1).Union(parentEnum);
+                    IEnumerable<PSMAssociation> interpretedAssociations = associations.Where(a => a.Interpretation != null);
+                    IEnumerable<PSMAssociation> responsibleAssociations = interpretedAssociations.Where(a => aX1.Contains(a.Interpretation));
+                    IEnumerable<PIMAssociation> interpretations = interpretedAssociations.Select(a => a.Interpretation as PIMAssociation);
+                    IEnumerable<PIMAssociation> associationsToPropagate = aX2.Where(a => !interpretations.Contains(a));
+
+                    IEnumerable<PSMAssociation> psmAssociationsToMoveList = interpretedAssociations.Where(a => a.Parent != psmClass && a.Child != psmClass && aX1.Contains((PIMAssociation)a.Interpretation) || aX2.Contains((PIMAssociation)a.Interpretation));
+                    Dictionary<PSMAssociation, IEnumerable<ModelIterator.MoveStep>> psmAssociationsToMove = new Dictionary<PSMAssociation, IEnumerable<ModelIterator.MoveStep>>();
+                    foreach (PSMAssociation t in psmAssociationsToMoveList)
+                    {
+                        Tuple<PSMAssociation, IEnumerable<ModelIterator.MoveStep>> tuple = associationsAndPaths.Single(tup => tup.Item1 == t);
+                        psmAssociationsToMove.Add(tuple.Item1, tuple.Item2);
+                    }
 
                     List<Guid> newAssociationsGuid = new List<Guid>();
                     foreach (PIMAssociation a in associationsToPropagate)
@@ -122,21 +153,28 @@ namespace Exolutio.Controller.Commands.Atomic.PIM
                         newAssociationsGuid.Add(assocGuid);
                     }
 
-                    IEnumerable<PSMAssociation> psmAssociationsToMove = psmAssociationsInSubAMs.Where(a => aX1.Contains((PIMAssociation)a.Interpretation) || aX2.Contains((PIMAssociation)a.Interpretation));
-
-                    foreach (PSMAssociation a in psmAssociationsToMove)
+                    foreach (KeyValuePair<PSMAssociation, IEnumerable<ModelIterator.MoveStep>> kvp in psmAssociationsToMove)
                     {
-                        command.Commands.Add(new cmdReconnectPSMAssociation(Controller) { AssociationGuid = a, NewParentGuid = psmClass, Propagate = false });
+                        foreach (ModelIterator.MoveStep s in kvp.Value)
+                        {
+                            if (s.StepType == ModelIterator.MoveStep.MoveStepType.None) continue;
+                            command.Commands.Add(new acmdReconnectPSMAssociation(Controller, kvp.Key, s.StepTarget) { Propagate = false });
+                        }
                     }
 
-                    IEnumerable<Guid> synchroGroup1 = psmAssociationsInSubAMs.Union(psmClass.ChildPSMAssociations).Union(parentEnum).Where(a => aX1.Contains((PIMAssociation)a.Interpretation)).Select<PSMAssociation, Guid>(a => a);
-                    IEnumerable<Guid> synchroGroup2 = psmAssociationsInSubAMs.Union(psmClass.ChildPSMAssociations).Union(parentEnum).Where(a => aX2.Contains((PIMAssociation)a.Interpretation)).Select<PSMAssociation, Guid>(a => a).Union(newAssociationsGuid);
+                    IEnumerable<Guid> synchroGroup1 = responsibleAssociations.Select<PSMAssociation, Guid>(a => a);
+                    IEnumerable<Guid> synchroGroup2 = associations.Where(a => aX2.Contains((PIMAssociation)a.Interpretation)).Select<PSMAssociation, Guid>(a => a).Union(newAssociationsGuid);
 
                     command.Commands.Add(new acmdSynchroPSMAssociations(Controller) { X1 = synchroGroup1.ToList(), X2 = synchroGroup2.ToList(), Propagate = false });
 
-                    foreach (PSMAssociation a in psmAssociationsToMove)
+                    foreach (KeyValuePair<PSMAssociation, IEnumerable<ModelIterator.MoveStep>> kvp in psmAssociationsToMove)
                     {
-                        command.Commands.Add(new cmdReconnectPSMAssociation(Controller) { AssociationGuid = a, NewParentGuid = a.Parent, Propagate = false });
+                        bool first = true;
+                        foreach (ModelIterator.MoveStep s in kvp.Value.Reverse<ModelIterator.MoveStep>())
+                        {
+                            if (first) first = false;
+                            else command.Commands.Add(new acmdReconnectPSMAssociation(Controller, kvp.Key, s.StepTarget) { Propagate = false });
+                        }
                     }
 
                 }
