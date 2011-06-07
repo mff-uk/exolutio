@@ -63,35 +63,52 @@ namespace Exolutio.Controller.Commands.Atomic.PIM
             //Twice... X1 => X2, X2 => X1
             for (int i = 0; i < 2; i++)
             {
-                IEnumerable<PSMClass> psmClasses =
-                    pimClass.GetInterpretedComponents()
-                    .Cast<PSMClass>()
-                    .Where(c => c.UnInterpretedSubClasses()
-                        .SelectMany(cl => cl.PSMAttributes)
-                        .Union(c.PSMAttributes)
-                        .Where(a => a.Interpretation != null)
-                        .Select(psma => psma.Interpretation as PIMAttribute)
-                        .Intersect(aX1)
-                        .OrderBy(k => k.ID)
-                        .SequenceEqual(aX1.OrderBy(j => j.ID))
-                        );
+                IEnumerable<PSMClass> allPSMClasses = pimClass.GetInterpretedComponents().Cast<PSMClass>();
+                List<PSMClass> psmClasses = new List<PSMClass>();
+                foreach (PSMClass c in allPSMClasses)
+                {
+                    IEnumerable<PSMAttribute> atts = c.GetContextPSMAttributes();
+                    if (atts.Where(a => a.Interpretation != null)
+                            .Select(psma => psma.Interpretation as PIMAttribute)
+                            .Intersect(aX1)
+                            .OrderBy(k => k.ID)
+                            .SequenceEqual(aX1.OrderBy(j => j.ID)))
+                        psmClasses.Add(c);
+                }
+
+                bool found = true;
+                while (found)
+                {
+                    found = false;
+                    List<PSMClass> list = new List<PSMClass>();
+                    foreach (PSMClass psmClass in psmClasses)
+                    {
+                        if (psmClass.RepresentedClass != null && psmClasses.Contains(psmClass.RepresentedClass))
+                        {
+                            found = true;
+                        }
+                        else list.Add(psmClass);
+                    }
+                    psmClasses = list;
+                }
 
                 foreach (PSMClass psmClass in psmClasses)
                 {
-                    IEnumerable<PSMAttribute> psmAttributesInSubClasses = psmClass.UnInterpretedSubClasses()
-                        .SelectMany<PSMClass, PSMAttribute>(c => c.PSMAttributes);
 
-                    IEnumerable<PSMAttribute> interpretedAttributes = psmAttributesInSubClasses
-                        .Union(psmClass.PSMAttributes)
-                        .Where(a => a.Interpretation != null);
-
-                    IEnumerable<PSMAttribute> responsibleAttributes = interpretedAttributes
-                        .Where(a => aX1.Contains(a.Interpretation));
-
-                    IEnumerable<PIMAttribute> interpretations = interpretedAttributes
-                        .Select(a => a.Interpretation as PIMAttribute);
-                    
+                    IEnumerable<Tuple<PSMAttribute, IEnumerable<ModelIterator.MoveStep>>> attributesAndPaths = psmClass.GetContextPSMAttributesWithPaths();
+                    IEnumerable<PSMAttribute> attributes = attributesAndPaths.Select(t => t.Item1);
+                    IEnumerable<PSMAttribute> interpretedAttributes = attributes.Where(a => a.Interpretation != null);
+                    IEnumerable<PSMAttribute> responsibleAttributes = interpretedAttributes.Where(a => aX1.Contains(a.Interpretation));
+                    IEnumerable<PIMAttribute> interpretations = interpretedAttributes.Select(a => a.Interpretation as PIMAttribute);
                     IEnumerable<PIMAttribute> attributesToPropagate = aX2.Where(a => !interpretations.Contains(a));
+                    
+                    IEnumerable<PSMAttribute> attributesToMoveList = interpretedAttributes.Where(a => a.PSMClass != psmClass && (aX1.Contains((PIMAttribute)a.Interpretation) || aX2.Contains((PIMAttribute)a.Interpretation)));
+                    Dictionary<PSMAttribute, IEnumerable<ModelIterator.MoveStep>> psmAttributesToMove = new Dictionary<PSMAttribute, IEnumerable<ModelIterator.MoveStep>>();
+                    foreach (PSMAttribute t in attributesToMoveList)
+                    {
+                        Tuple<PSMAttribute, IEnumerable<ModelIterator.MoveStep>> tuple = attributesAndPaths.Single(tup => tup.Item1 == t);
+                        psmAttributesToMove.Add(tuple.Item1, tuple.Item2);
+                    }
 
                     List<Guid> newAttributesGuid = new List<Guid>();
                     foreach (PIMAttribute a in attributesToPropagate)
@@ -107,23 +124,29 @@ namespace Exolutio.Controller.Commands.Atomic.PIM
                         command.Commands.Add(cmdi);
                     }
 
-                    IEnumerable<PSMAttribute> psmAttributesToMove = psmAttributesInSubClasses.Where(a => aX1.Contains((PIMAttribute)a.Interpretation) || aX2.Contains((PIMAttribute)a.Interpretation));
-
-                    foreach (PSMAttribute a in psmAttributesToMove)
+                    foreach (KeyValuePair<PSMAttribute, IEnumerable<ModelIterator.MoveStep>> kvp in psmAttributesToMove)
                     {
-                        command.Commands.Add(new cmdMovePSMAttribute(Controller) { AttributeGuid = a, ClassGuid = psmClass, Propagate = false });
+                        foreach (ModelIterator.MoveStep s in kvp.Value)
+                        {
+                            if (s.StepType == ModelIterator.MoveStep.MoveStepType.None) continue;
+                            command.Commands.Add(new acmdMovePSMAttribute(Controller, kvp.Key, s.StepTarget) { Propagate = false });
+                        }
                     }
 
-                    IEnumerable<Guid> synchroGroup1 = psmAttributesInSubClasses.Union(psmClass.PSMAttributes).Where(a => aX1.Contains((PIMAttribute)a.Interpretation)).Select<PSMAttribute, Guid>(a => a);
-                    IEnumerable<Guid> synchroGroup2 = psmAttributesInSubClasses.Union(psmClass.PSMAttributes).Where(a => aX2.Contains((PIMAttribute)a.Interpretation)).Select<PSMAttribute, Guid>(a => a).Union(newAttributesGuid);
+                    IEnumerable<Guid> synchroGroup1 = responsibleAttributes.Select<PSMAttribute, Guid>(a => a);
+                    IEnumerable<Guid> synchroGroup2 = attributes.Where(a => aX2.Contains((PIMAttribute)a.Interpretation)).Select<PSMAttribute, Guid>(a => a).Union(newAttributesGuid);
 
                     command.Commands.Add(new acmdSynchroPSMAttributes(Controller) { X1 = synchroGroup1.ToList(), X2 = synchroGroup2.ToList(), Propagate = false});
-                    
-                    foreach (PSMAttribute a in psmAttributesToMove)
-                    {
-                        command.Commands.Add(new cmdMovePSMAttribute(Controller) { AttributeGuid = a, ClassGuid = a.PSMClass, Propagate = false });
-                    }
 
+                    foreach (KeyValuePair<PSMAttribute, IEnumerable<ModelIterator.MoveStep>> kvp in psmAttributesToMove)
+                    {
+                        bool first = true;
+                        foreach (ModelIterator.MoveStep s in kvp.Value.Reverse<ModelIterator.MoveStep>())
+                        {
+                            if (first) first = false;
+                            else command.Commands.Add(new acmdMovePSMAttribute(Controller, kvp.Key, s.StepTarget) { Propagate = false });
+                        }
+                    }
                 }
                 
                 //Swap the two lists and do it again
