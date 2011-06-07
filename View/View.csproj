@@ -77,7 +77,8 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Commands\Edit\guiAlignCommand.cs" />
+    <Compile Include="Commands\View\guiBreakLineCommand.cs" />
+    <Compile Include="Commands\View\guiAlignCommand.cs" />
     <Compile Include="Commands\Edit\guiDelete.cs" />
     <Compile Include="Commands\guiSelectionDependentCommand.cs" />
     <Compile Include="Commands\CurrentProjectVersionChangedEventArgs.cs" />
@@ -152,6 +153,7 @@
     <Compile Include="Commands\Versioning\guiRemoveCurrentVersionCommand.cs" />
     <Compile Include="Commands\Versioning\guiBranchCurrentVersionCommand.cs" />
     <Compile Include="Commands\Versioning\guiSaveAsSingleVersionCommand.cs" />
+    <Compile Include="Commands\View\guiStraightenLineCommand.cs" />
     <Compile Include="ComponentPropertyView.xaml.cs">
       <DependentUpon>ComponentPropertyView.xaml</DependentUpon>
     </Compile>

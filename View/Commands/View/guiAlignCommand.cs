@@ -4,7 +4,7 @@ using System.Linq;
 using Exolutio.ResourceLibrary;
 using Exolutio.ViewToolkit;
 
-namespace Exolutio.View.Commands.Edit
+namespace Exolutio.View.Commands.View
 {
     /// <summary>
     /// Variants of alignment
@@ -247,113 +247,5 @@ namespace Exolutio.View.Commands.Edit
         }
 
         public IEnumerable<guiAlignCommand> AllAlignCommands { get; set; }
-
-        //public override void Execute(object parameter)
-        //{
-        //    CommandBase cmd = CreateMoveCommand(ActiveDiagramView.SelectedItems.OfType<IAlignable>(), Alignment, ActiveDiagramView);
-        //    cmd.Execute();
-
-        //    MainWindow.InvokeDiagramSelectionChanged(null, null);
-        //}
-
-        //public static CommandBase CreateMoveCommand(IEnumerable<IAlignable> affectedObjects, EAlignment alignment, XCaseCanvas diagramView)
-        //{
-        //    MacroCommand<DiagramController> moveMacroCommand =
-        //        MacroCommandFactory<DiagramController>.Factory().Create(diagramView.Controller);
-
-        //    double minTop;
-        //    double maxBottom;
-        //    double distance;
-        //    double offset;
-        //    switch (alignment)
-        //    {
-        //        case EAlignment.Top:
-        //            minTop = affectedObjects.Min(item => item.Top);
-        //            foreach (IAlignable element in affectedObjects)
-        //            {
-        //                MoveNode(null, minTop, element.ViewHelper, diagramView.Controller);
-        //                moveMacroCommand.Commands.Add(cmd);
-        //            }
-        //            break;
-        //        case EAlignment.Bottom:
-        //            maxBottom = affectedObjects.Max(item => item.Bottom);
-        //            foreach (IAlignable element in affectedObjects)
-        //            {
-        //                MoveNode(null, maxBottom - (element.Bottom - element.Top), element.ViewHelper, diagramView.Controller);
-        //                moveMacroCommand.Commands.Add(cmd);
-        //            }
-        //            break;
-        //        case EAlignment.Left:
-        //            double minLeft = affectedObjects.Min(item => item.Left);
-        //            foreach (IAlignable element in affectedObjects)
-        //            {
-        //                MoveNode(minLeft, null, element.ViewHelper, diagramView.Controller);
-        //                moveMacroCommand.Commands.Add(cmd);
-        //            }
-        //            break;
-        //        case EAlignment.Right:
-        //            double maxRight = affectedObjects.Max(item => item.Right);
-        //            foreach (IAlignable element in affectedObjects)
-        //            {
-        //                MoveNode(maxRight - (element.Right - element.Left), null, element.ViewHelper, diagramView.Controller);
-        //                moveMacroCommand.Commands.Add(cmd);
-        //            }
-        //            break;
-        //        case EAlignment.CenterV:
-        //            double centerH = Math.Round(affectedObjects.Average(item => item.Top + (item.Bottom - item.Top) / 2));
-        //            foreach (IAlignable element in affectedObjects)
-        //            {
-        //                MoveNode(null, (centerH - (element.Bottom - element.Top) / 2), element.ViewHelper, diagramView.Controller);
-        //                moveMacroCommand.Commands.Add(cmd);
-        //            }
-        //            break;
-        //        case EAlignment.CenterH:
-        //            double centerV = Math.Round(affectedObjects.Average(item => item.Left + (item.Right - item.Left) / 2));
-        //            foreach (IAlignable element in affectedObjects)
-        //            {
-        //                MoveNode(centerV - (element.Right - element.Left) / 2, null, element.ViewHelper, diagramView.Controller);
-        //                moveMacroCommand.Commands.Add(cmd);
-        //            }
-        //            break;
-        //        case EAlignment.DistributeV:
-        //            minTop = affectedObjects.Min(item => item.Top);
-        //            maxBottom = affectedObjects.Max(item => item.Bottom);
-        //            double sumHeight = affectedObjects.Sum(item => item.Bottom - item.Top);
-
-        //            distance = Math.Max(0, (maxBottom - minTop - sumHeight) / (affectedObjects.Count() - 1));
-        //            offset = minTop;
-
-        //            foreach (IAlignable element in affectedObjects.OrderBy(item => item.Top))
-        //            {
-        //                double delta = offset - element.Top;
-        //                MoveNode(null, element.Top + delta, element.ViewHelper, diagramView.Controller);
-        //                moveMacroCommand.Commands.Add(cmd);
-
-        //                offset = offset + element.Bottom - element.Top + distance;
-        //            }
-
-        //            break;
-        //        case EAlignment.DistributeH:
-        //            minLeft = affectedObjects.Min(item => item.Left);
-        //            maxRight = affectedObjects.Max(item => item.Right);
-        //            double sumWidth = affectedObjects.Sum(item => item.Right - item.Left);
-
-        //            distance = Math.Max(0, (maxRight - minLeft - sumWidth) / (affectedObjects.Count() - 1));
-        //            offset = minLeft;
-
-        //            foreach (IAlignable element in affectedObjects.OrderBy(item => item.Left))
-        //            {
-        //                double delta = offset - element.Left;
-        //                MoveNode(element.Left + delta, null, element.ViewHelper, diagramView.Controller);
-        //                moveMacroCommand.Commands.Add(cmd);
-
-        //                offset = offset + element.Right - element.Left + distance;
-        //            }
-
-        //            break;
-        //    }
-
-        //    return moveMacroCommand;
-        //}
     }
 }

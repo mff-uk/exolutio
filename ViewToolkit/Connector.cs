@@ -127,18 +127,25 @@ namespace Exolutio.ViewToolkit
 
         private bool targetMeasureValid = true;
 
-        public void SetPoints(ObservablePointCollection points)
+        public void SetPoints(ObservablePointCollection desiredPoints)
         {
-            for (int index = 0; index < points.Count; index++)
+            if (desiredPoints.Count < 2)
+                return; 
+
+            if (desiredPoints.Count != this.Points.Count)
             {
-                this.Points[index].Placement = EPlacementKind.AbsoluteSubCanvas;
-                rPoint rPoint = points[index];
-                this.Points[index].SetPreferedPosition(rPoint);
+                for (int index = 1; index < desiredPoints.Count - 1; index++)
+                {
+                    BreakAtPoint(desiredPoints[index]);
+                }
             }
-            for (int index = 0; index < points.Count; index++)
-            {
-                this.Points[index].Placement = EPlacementKind.AbsoluteSubCanvas;
-            }
+
+            this.Points[0].Placement = EPlacementKind.AbsoluteSubCanvas;
+            this.Points[0].SetPreferedPosition(desiredPoints[0]);
+            
+            this.Points[desiredPoints.Count - 1].Placement = EPlacementKind.AbsoluteSubCanvas;
+            this.Points[desiredPoints.Count - 1].SetPreferedPosition(desiredPoints[desiredPoints.Count - 1]);
+
             AdjustEndPoints();
         }
 
@@ -230,7 +237,7 @@ namespace Exolutio.ViewToolkit
 
             PathFigure junctionFigure = new PathFigure { StartPoint = startPointShifted };
             PolyLineSegment segment = new PolyLineSegment();
-            for (int i = 1; i < Points.Count - 1; i++)
+            for (int i = 1; i < Points.Count; i++)
             {
                 segment.Points.Add(Points[i].CanvasPosition);
             }
@@ -298,6 +305,57 @@ namespace Exolutio.ViewToolkit
             //}
         }
 
+        public void BreakAtPoint(Point point)
+        {
+            int index = GeometryHelper.FindHitSegmentIndex(point, this.Points);
+            ConnectorPoint connectorPoint = new ConnectorPoint(ExolutioCanvas);
+            connectorPoint.OrderInConnector = index + 1;
+            connectorPoint.Placement = EPlacementKind.AbsoluteCanvas;
+            connectorPoint.Connector = this;
+            ExolutioCanvas.Children.Add(connectorPoint);
+            connectorPoint.SetPreferedPosition(point);
+            ExolutioContextMenu exolutioContextMenu = new ExolutioContextMenu();
+            ContextMenuItem cStraighten = new ContextMenuItem("Straighten line here");
+            cStraighten.Tag = connectorPoint;
+            cStraighten.Click += delegate(object sender, RoutedEventArgs e)
+                                     {
+                                         ConnectorPoint clickedPoint = (ConnectorPoint) ((ContextMenuItem)sender).Tag;
+                                         StraightenLineAtPoint(clickedPoint);
+                                     };
+            exolutioContextMenu.Items.Add(cStraighten);
+            connectorPoint.ContextMenu = exolutioContextMenu;
+
+            foreach (ConnectorPoint cp in Points)
+            {
+                if (cp.OrderInConnector >= connectorPoint.OrderInConnector)
+                    cp.OrderInConnector++;
+            }
+            this.Points.Insert(connectorPoint.OrderInConnector, connectorPoint);
+            InvokePointsCountChanged();
+            this.InvalidateGeometry();
+        }
+
+        public void StraightenLineAtPoint(ConnectorPoint connectorPoint)
+        {
+            this.Points.Remove(connectorPoint);
+            foreach (ConnectorPoint cp in Points)
+            {
+                if (cp.OrderInConnector > connectorPoint.OrderInConnector)
+                    cp.OrderInConnector--;
+            }
+            ExolutioCanvas.Children.Remove(connectorPoint);
+            InvokePointsCountChanged();
+            this.InvalidateGeometry();
+        }
+        
+        public Point MousePointWhenContextMenuOpened { get; private set; }
+
+        protected override void OnContextMenuOpening(ContextMenuEventArgs e)
+        {
+            MousePointWhenContextMenuOpened = new Point(e.CursorLeft, e.CursorTop);
+            base.OnContextMenuOpening(e);
+        }
+
 #if SILVERLIGHT
 
         List<Line> lines = new List<Line>();
@@ -339,7 +397,6 @@ namespace Exolutio.ViewToolkit
             }
         }
 #endif
-
         /// <summary>
         /// Adjusts the end points position to an optimal position
         /// (when their <see cref="DragThumb.Placement"/> is set 
@@ -568,6 +625,14 @@ namespace Exolutio.ViewToolkit
             if (handler != null) handler(point);
         }
 
+        public event Action PointsCountChanged;
+
+        public void InvokePointsCountChanged()
+        {
+            Action handler = PointsCountChanged;
+            if (handler != null) handler();
+        }
+
         public void AddedToCanvas()
         {
 
@@ -687,6 +752,5 @@ namespace Exolutio.ViewToolkit
         }
 
         #endif
-               
     }
 }

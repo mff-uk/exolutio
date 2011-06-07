@@ -8,6 +8,8 @@ using Exolutio.Controller.Commands;
 using Exolutio.Model;
 using Exolutio.Model.PIM;
 using Exolutio.Model.ViewHelper;
+using Exolutio.SupportingClasses;
+using Exolutio.View.Commands.View;
 using Exolutio.ViewToolkit;
 using Component = Exolutio.Model.Component;
 using Label = Exolutio.ViewToolkit.Label;
@@ -222,7 +224,7 @@ namespace Exolutio.View
             {
                 ViewHelper.Points.AppendRange(Connector.Points.Select(p => (Point)p));
             }
-            else if (ViewHelper.Points.Count == Connector.Points.Count)
+            else if (ViewHelper.Points.Count >= Connector.Points.Count)
             {
                 Connector.SetPoints(ViewHelper.Points);
             }
@@ -235,6 +237,7 @@ namespace Exolutio.View
             TargetCardinalityLabel.SnapTo(Connector.EndPoint, true);
 
             ExolutioContextMenu associationMenu = MenuHelper.GetContextMenu(ScopeAttribute.EScope.PIMAssociation, DiagramView.Diagram);
+            AddConnectorCommands(associationMenu);
             ContextMenu = associationMenu;
             NameLabel.ContextMenu = associationMenu;
             ExolutioContextMenu startPointMenu = MenuHelper.GetContextMenu(ScopeAttribute.EScope.PIMAssociationEnd, DiagramView.Diagram);
@@ -258,6 +261,7 @@ namespace Exolutio.View
             TargetCardinalityLabel.PositionChanged += TargetCardinalityLabel_PositionChanged;
             Connector.SelectedChanged += Connector_SelectedChanged;
             Connector.ConnectorPointMoved += Connector_ConnectorPointMoved;
+            Connector.PointsCountChanged += Connector_PointsCountChanged;
             //Connector.MouseDown += Connector_MouseDown;
             #if SILVERLIGHT
             #else
@@ -314,6 +318,16 @@ namespace Exolutio.View
             ViewHelper.MainLabelViewHelper.SetPositionSilent(NameLabel.Position);
         }
 
+        void Connector_PointsCountChanged()
+        {
+            ViewHelper.Points.Clear();
+
+            foreach (ConnectorPoint connectorPoint in Connector.Points)
+            {
+                ViewHelper.Points.Add(new rPoint(connectorPoint.Position));    
+            }
+        }
+
         void Connector_ConnectorPointMoved(ConnectorPoint point)
         {
             if (ViewHelper.Points.Count > point.OrderInConnector)
@@ -354,6 +368,16 @@ namespace Exolutio.View
         {
             get { return Connector.ContextMenu; }
             set { Connector.ContextMenu = value; }
+        }
+
+        private void AddConnectorCommands(ExolutioContextMenu associationMenu)
+        {
+            guiBreakLineCommand cBreak = new guiBreakLineCommand();
+            cBreak.Connector = Connector;
+            ContextMenuItem miBreak;
+            miBreak = new ContextMenuItem("Break line here");
+            miBreak.Command = cBreak;
+            associationMenu.Items.Add(miBreak);
         }
 #endif
 

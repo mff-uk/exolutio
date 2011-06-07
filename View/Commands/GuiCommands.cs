@@ -15,6 +15,7 @@ using Exolutio.View.Commands.PSM;
 using Exolutio.Controller.Commands.Complex.PSM;
 using Exolutio.Model;
 using Exolutio.View.Commands.PIM;
+using Exolutio.View.Commands.View;
 
 namespace Exolutio.View.Commands
 {
