@@ -9,6 +9,141 @@ namespace Exolutio.Model
 {
     public static class ModelIterator
     {
+        public class MoveStep
+        {
+            public enum MoveStepType
+            {
+                StructuralRepresentant,
+                Subtree,
+                None
+            }
+
+            public MoveStepType StepType;
+            public PSMAssociationMember StepTarget;
+        }
+
+        private static List<PSMClass> visited;
+        
+        public static IEnumerable<Tuple<PSMAttribute, IEnumerable<MoveStep>>> GetContextPSMAttributesWithPaths(this PSMClass psmClass)
+        {
+            visited = new List<PSMClass>();
+            return psmClass.getContextPSMAttributesWithPaths();
+        }
+
+        private static List<Tuple<PSMAttribute, IEnumerable<MoveStep>>> getContextPSMAttributesWithPaths(this PSMClass psmClass)
+        {
+            List<Tuple<PSMAttribute, IEnumerable<MoveStep>>> list = new List<Tuple<PSMAttribute, IEnumerable<MoveStep>>>();
+            if (visited.Contains(psmClass)) return list;
+            else visited.Add(psmClass);
+
+            list.AddRange(psmClass.PSMAttributes.Select(a => new Tuple<PSMAttribute, IEnumerable<MoveStep>>(a, Enumerable.Repeat(new MoveStep() { StepType = MoveStep.MoveStepType.None, StepTarget = psmClass }, 1))));
+            foreach (PSMClass c in psmClass.GetSRs())
+            {
+                list.AddRange(c.getContextPSMAttributesWithPaths()
+                    .Select(t => new Tuple<PSMAttribute, IEnumerable<MoveStep>>(t.Item1, new List<MoveStep>(t.Item2).Concat(Enumerable.Repeat(new MoveStep() { StepType = MoveStep.MoveStepType.StructuralRepresentant, StepTarget = psmClass }, 1))))
+                    );
+            }
+            foreach (PSMClass c in psmClass.UnInterpretedSubClasses())
+            {
+                list.AddRange(c.getContextPSMAttributesWithPaths()
+                    .Select(t => new Tuple<PSMAttribute, IEnumerable<MoveStep>>(t.Item1, new List<MoveStep>(t.Item2).Concat(Enumerable.Repeat(new MoveStep() { StepType = MoveStep.MoveStepType.Subtree, StepTarget = psmClass }, 1))))
+                    );
+            }
+            return list;
+        }
+
+        public static IEnumerable<Tuple<PSMAssociation, IEnumerable<MoveStep>>> GetContextPSMAssociationsWithPaths(this PSMClass psmClass)
+        {
+            visited = new List<PSMClass>();
+            return psmClass.getContextPSMAssociationsWithPaths();
+        }
+
+        private static List<Tuple<PSMAssociation, IEnumerable<MoveStep>>> getContextPSMAssociationsWithPaths(this PSMClass psmClass)
+        {
+            List<Tuple<PSMAssociation, IEnumerable<MoveStep>>> list = new List<Tuple<PSMAssociation, IEnumerable<MoveStep>>>();
+            if (visited.Contains(psmClass)) return list;
+            else visited.Add(psmClass);
+            
+            list.AddRange(psmClass.ChildPSMAssociations.Select(a => new Tuple<PSMAssociation, IEnumerable<MoveStep>>(a, Enumerable.Repeat(new MoveStep() { StepType = MoveStep.MoveStepType.None, StepTarget = psmClass }, 1))));
+            foreach (PSMClass c in psmClass.GetSRs())
+            {
+                list.AddRange(c.getContextPSMAssociationsWithPaths()
+                    .Select(t => new Tuple<PSMAssociation, IEnumerable<MoveStep>>(t.Item1, new List<MoveStep>(t.Item2).Concat(Enumerable.Repeat(new MoveStep() { StepType = MoveStep.MoveStepType.StructuralRepresentant, StepTarget = psmClass }, 1))))
+                    );
+            }
+            foreach (PSMClass c in psmClass.UnInterpretedSubClasses())
+            {
+                list.AddRange(c.getContextPSMAssociationsWithPaths()
+                    .Select(t => new Tuple<PSMAssociation, IEnumerable<MoveStep>>(t.Item1, new List<MoveStep>(t.Item2).Concat(Enumerable.Repeat(new MoveStep() { StepType = MoveStep.MoveStepType.Subtree, StepTarget = psmClass }, 1))))
+                    );
+            }
+            return list;
+        }
+
+        public static IEnumerable<PSMAttribute> GetContextPSMAttributes(this PSMClass psmClass)
+        {
+            visited = new List<PSMClass>();
+            return psmClass.getContextPSMAttributes();
+        }
+        
+        private static IEnumerable<PSMAttribute> getContextPSMAttributes(this PSMClass psmClass)
+        {
+            List<PSMAttribute> list = new List<PSMAttribute>();
+            if (visited.Contains(psmClass)) return list;
+            else visited.Add(psmClass);
+
+            list.AddRange(psmClass.PSMAttributes);
+            foreach (PSMClass c in psmClass.GetSRs().Union(psmClass.UnInterpretedSubClasses()).Where(c => !visited.Contains(c)))
+            {
+                list.AddRange(c.getContextPSMAttributes());
+            }
+            return list;
+        }
+
+        public static IEnumerable<PSMAssociation> GetContextPSMAssociations(this PSMClass psmClass)
+        {
+            visited = new List<PSMClass>();
+            return psmClass.getContextPSMAssociations();
+        }
+
+        private static IEnumerable<PSMAssociation> getContextPSMAssociations(this PSMClass psmClass)
+        {
+            List<PSMAssociation> list = new List<PSMAssociation>();
+            if (visited.Contains(psmClass)) return list;
+            else visited.Add(psmClass);
+
+            list.AddRange(psmClass.ChildPSMAssociations);
+            foreach (PSMClass c in psmClass.GetSRs().Union(psmClass.UnInterpretedSubClasses()).Where(c => !visited.Contains(c)))
+            {
+                list.AddRange(c.getContextPSMAssociations());
+            }
+            return list;
+        }
+
+        public static IEnumerable<PSMAttribute> GetActualPSMAttributes(this PSMClass psmClass)
+        {
+            List<PSMAttribute> list = new List<PSMAttribute>();
+
+            list.AddRange(psmClass.PSMAttributes);
+            foreach (PSMClass c in psmClass.GetSRs())
+            {
+                list.AddRange(c.PSMAttributes);
+            }
+            return list;
+        }
+        
+        public static IEnumerable<PSMAssociation> GetActualChildPSMAssociations(this PSMClass psmClass)
+        {
+            List<PSMAssociation> list = new List<PSMAssociation>();
+
+            list.AddRange(psmClass.ChildPSMAssociations);
+            foreach (PSMClass c in psmClass.GetSRs())
+            {
+                list.AddRange(c.ChildPSMAssociations);
+            }
+            return list;
+        }
+        
         public static IEnumerable<ExolutioObject> GetAllModelItems(ProjectVersion projectVersion)
         {
             IEnumerable<ExolutioObject> result = projectVersion.AttributeTypes.Cast<ExolutioObject>();

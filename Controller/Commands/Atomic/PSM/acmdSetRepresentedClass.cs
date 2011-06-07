@@ -41,7 +41,7 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
                 return false;
             }
 
-            if (representedClass.RepresentedClass == representantClass)
+            if (representedClass.RepresentedClass == representantClass || representedClass == representantClass)
             {
                 ErrorDescription = CommandErrors.CMDERR_CYCLIC_REPR;
                 return false;
