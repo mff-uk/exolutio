@@ -80,42 +80,52 @@ namespace Exolutio.Model
             return list;
         }
 
-        public static IEnumerable<PSMAttribute> GetContextPSMAttributes(this PSMClass psmClass)
+        public static IEnumerable<PSMAttribute> GetContextPSMAttributes(this PSMClass psmClass, bool leaveOutRepresentedClass = false)
         {
             visited = new List<PSMClass>();
-            return psmClass.getContextPSMAttributes();
+            return psmClass.getContextPSMAttributes(leaveOutRepresentedClass);
         }
-        
-        private static IEnumerable<PSMAttribute> getContextPSMAttributes(this PSMClass psmClass)
+
+        private static IEnumerable<PSMAttribute> getContextPSMAttributes(this PSMClass psmClass, bool leaveOutRepresentedClass)
         {
             List<PSMAttribute> list = new List<PSMAttribute>();
             if (visited.Contains(psmClass)) return list;
             else visited.Add(psmClass);
 
             list.AddRange(psmClass.PSMAttributes);
-            foreach (PSMClass c in psmClass.GetSRs().Union(psmClass.UnInterpretedSubClasses()).Where(c => !visited.Contains(c)))
+            
+            IEnumerable<PSMClass> classes;
+            if (leaveOutRepresentedClass) classes = psmClass.UnInterpretedSubClasses();
+            else classes = psmClass.GetSRs().Union(psmClass.UnInterpretedSubClasses());
+            
+            foreach (PSMClass c in classes.Where(c => !visited.Contains(c)))
             {
-                list.AddRange(c.getContextPSMAttributes());
+                list.AddRange(c.getContextPSMAttributes(false));
             }
             return list;
         }
 
-        public static IEnumerable<PSMAssociation> GetContextPSMAssociations(this PSMClass psmClass)
+        public static IEnumerable<PSMAssociation> GetContextPSMAssociations(this PSMClass psmClass, bool leaveOutRepresentedClass = false)
         {
             visited = new List<PSMClass>();
-            return psmClass.getContextPSMAssociations();
+            return psmClass.getContextPSMAssociations(leaveOutRepresentedClass);
         }
 
-        private static IEnumerable<PSMAssociation> getContextPSMAssociations(this PSMClass psmClass)
+        private static IEnumerable<PSMAssociation> getContextPSMAssociations(this PSMClass psmClass, bool leaveOutRepresentedClass)
         {
             List<PSMAssociation> list = new List<PSMAssociation>();
             if (visited.Contains(psmClass)) return list;
             else visited.Add(psmClass);
 
             list.AddRange(psmClass.ChildPSMAssociations);
-            foreach (PSMClass c in psmClass.GetSRs().Union(psmClass.UnInterpretedSubClasses()).Where(c => !visited.Contains(c)))
+
+            IEnumerable<PSMClass> classes;
+            if (leaveOutRepresentedClass) classes = psmClass.UnInterpretedSubClasses();
+            else classes = psmClass.GetSRs().Union(psmClass.UnInterpretedSubClasses());
+
+            foreach (PSMClass c in classes.Where(c => !visited.Contains(c)))
             {
-                list.AddRange(c.getContextPSMAssociations());
+                list.AddRange(c.getContextPSMAssociations(false));
             }
             return list;
         }

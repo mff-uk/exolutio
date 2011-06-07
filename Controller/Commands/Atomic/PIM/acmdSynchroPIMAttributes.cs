@@ -75,7 +75,8 @@ namespace Exolutio.Controller.Commands.Atomic.PIM
                             .SequenceEqual(aX1.OrderBy(j => j.ID)))
                         psmClasses.Add(c);
                 }
-
+                
+                //Elimination of SRs where C is affected and SR is a SR of C
                 bool found = true;
                 while (found)
                 {
@@ -83,7 +84,14 @@ namespace Exolutio.Controller.Commands.Atomic.PIM
                     List<PSMClass> list = new List<PSMClass>();
                     foreach (PSMClass psmClass in psmClasses)
                     {
-                        if (psmClass.RepresentedClass != null && psmClasses.Contains(psmClass.RepresentedClass))
+                        if (psmClass.RepresentedClass != null
+                            && psmClasses.Contains(psmClass.RepresentedClass)
+                            && !psmClass.GetContextPSMAttributes(true)
+                                        .Where(a => a.Interpretation != null)
+                                        .Select(psma => psma.Interpretation as PIMAttribute)
+                                        .Intersect(aX1)
+                                        .OrderBy(k => k.ID)
+                                        .SequenceEqual(aX1.OrderBy(j => j.ID)))
                         {
                             found = true;
                         }
