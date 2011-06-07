@@ -63,8 +63,14 @@ namespace Exolutio.View.Commands
         public static guiControllerCommand AddPIMAttributeCommand { get; set; }
         public static guiControllerCommand AddPIMAssociationCommand { get; set; }
         public static guiControllerCommand DerivePSMRootCommand { get; set; }
-        public static guiControllerCommand SplitPIMAttributeCommand { get; set; }
-        public static guiControllerCommand SplitPIMAssociationCommand { get; set; }
+        public static guiSplitPIMAttribute SplitPIMAttributeCommand { get; set; }
+        public static guiSplitPIMAssociation SplitPIMAssociationCommand { get; set; }
+        public static guiSplitPIMAttribute SplitPIMAttribute3Command { get; set; }
+        public static guiSplitPIMAssociation SplitPIMAssociation3Command { get; set; }
+        public static guiSplitPIMAttribute SplitPIMAttribute4Command { get; set; }
+        public static guiSplitPIMAssociation SplitPIMAssociation4Command { get; set; }
+        public static guiControllerCommand SplitPIMAttributeMoreCommand { get; set; }
+        public static guiControllerCommand SplitPIMAssociationMoreCommand { get; set; }
         public static guiShiftPIMAttributeCommand PIMShiftUp { get; set; }
         public static guiShiftPIMAttributeCommand PIMShiftDown { get; set; }
         public static guiAssociate2 Associate2 { get; set; }
@@ -83,8 +89,14 @@ namespace Exolutio.View.Commands
         public static guiControllerCommand AddPSMAttributeCommand { get; set; }
         public static guiControllerCommand AddPSMAssociationCommand { get; set; }
         public static guiControllerCommand AddPSMContentModel { get; set; }
-        public static guiControllerCommand SplitPSMAttributeCommand { get; set; }
+        public static guiSplitPSMAttribute SplitPSMAttributeCommand { get; set; }
         public static guiSplitPSMAssociation SplitPSMAssociationCommand { get; set; }
+        public static guiSplitPSMAttribute SplitPSMAttribute3Command { get; set; }
+        public static guiSplitPSMAssociation SplitPSMAssociation3Command { get; set; }
+        public static guiSplitPSMAttribute SplitPSMAttribute4Command { get; set; }
+        public static guiSplitPSMAssociation SplitPSMAssociation4Command { get; set; }
+        public static guiControllerCommand SplitPSMAttributeMoreCommand { get; set; }
+        public static guiControllerCommand SplitPSMAssociationMoreCommand { get; set; }
         public static guiControllerCommand AddPSMChildInterpreted { get; set; }
         public static guiControllerCommand AddPSMChildUnInterpreted { get; set; }
         public static guiCreateContentModelCommand CreateSequenceContentModelCommand { get; set; }
@@ -245,27 +257,34 @@ namespace Exolutio.View.Commands
                                                OpenDialog = true,
                                                Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.assocclass)
                                            };
-            SplitPIMAttributeCommand = new guiControllerCommand
-                                        {
-                                            Text = "Split attribute",
-                                            ControllerCommandFactoryMethod = CommandFactory<Controller.Commands.Complex.PIM.cmdSplitPIMAttribute>.Factory,
-                                            ControllerCommandType = typeof(Controller.Commands.Complex.PIM.cmdSplitPIMAttribute),
-                                            PIMOnly = true,
-                                            ScopeIsSelectedComponent = true,
-                                            AcceptedSelectedComponentType = typeof(PIMAttribute),
-                                            Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.AddAttributes)
-                                        };
-            SplitPIMAssociationCommand = new guiControllerCommand
-                                        {
-                                            Text = "Split association",
-                                            ControllerCommandFactoryMethod = CommandFactory<Controller.Commands.Complex.PIM.cmdSplitPIMAssociation>.Factory,
-                                            ControllerCommandType = typeof(Controller.Commands.Complex.PIM.cmdSplitPIMAssociation),
-                                            PIMOnly = true,
-                                            ScopeIsSelectedComponent = true,
-                                            AcceptedSelectedComponentType = typeof(PIMAssociation),
-                                            Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.split_pim_assoc)
-                                        };
-
+            SplitPIMAttributeCommand = new guiSplitPIMAttribute();
+            SplitPIMAssociationCommand = new guiSplitPIMAssociation();
+            SplitPIMAttribute3Command = new guiSplitPIMAttribute() { Count = 3 };
+            SplitPIMAssociation3Command = new guiSplitPIMAssociation() { Count = 3 };
+            SplitPIMAttribute4Command = new guiSplitPIMAttribute() { Count = 4 };
+            SplitPIMAssociation4Command = new guiSplitPIMAssociation() { Count = 4 };
+            SplitPIMAttributeMoreCommand = new guiControllerCommand
+            {
+                Text = "More...",
+                ControllerCommandFactoryMethod = CommandFactory<Controller.Commands.Complex.PIM.cmdSplitPIMAttribute>.Factory,
+                ControllerCommandType = typeof(Controller.Commands.Complex.PIM.cmdSplitPIMAttribute),
+                PIMOnly = true,
+                OpenDialog = true,
+                ScopeIsSelectedComponent = true,
+                AcceptedSelectedComponentType = typeof(PIMAttribute),
+                Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.AddAttributes)
+            };
+            SplitPIMAssociationMoreCommand = new guiControllerCommand
+            {
+                Text = "More...",
+                ControllerCommandFactoryMethod = CommandFactory<Controller.Commands.Complex.PIM.cmdSplitPIMAssociation>.Factory,
+                ControllerCommandType = typeof(Controller.Commands.Complex.PIM.cmdSplitPIMAssociation),
+                PIMOnly = true,
+                OpenDialog = true,
+                ScopeIsSelectedComponent = true,
+                AcceptedSelectedComponentType = typeof(PIMAssociation),
+                Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.split_pim_assoc)
+            };
             DerivePSMRootCommand = new guiControllerCommand
                                         {
                                             Text = "Derive new PSM root",
@@ -359,19 +378,35 @@ namespace Exolutio.View.Commands
                                                 AcceptedSelectedComponentType = typeof(PSMClass),
                                                 ScopeIsSelectedComponent = true
                                             };
-            
-            SplitPSMAttributeCommand = new guiControllerCommand
-                                            {
-                                                Text = "Split attribute",
-                                                ControllerCommandFactoryMethod = CommandFactory<cmdSplitPSMAttribute>.Factory,
-                                                ControllerCommandType = typeof(cmdSplitPSMAttribute),
-                                                PSMOnly = true,
-                                                OpenDialog = false,
-                                                Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.AddAttributes),
-                                                ScopeIsSelectedComponent = true,
-                                                AcceptedSelectedComponentType = typeof(PSMAttribute)
-            };
+
+            SplitPSMAttributeCommand = new guiSplitPSMAttribute();
             SplitPSMAssociationCommand = new guiSplitPSMAssociation();
+            SplitPSMAttribute3Command = new guiSplitPSMAttribute() { Count = 3 };
+            SplitPSMAssociation3Command = new guiSplitPSMAssociation() { Count = 3 };
+            SplitPSMAttribute4Command = new guiSplitPSMAttribute() { Count = 4 };
+            SplitPSMAssociation4Command = new guiSplitPSMAssociation() { Count = 4 };
+            SplitPSMAttributeMoreCommand = new guiControllerCommand
+            {
+                Text = "More...",
+                ControllerCommandFactoryMethod = CommandFactory<cmdSplitPSMAttribute>.Factory,
+                ControllerCommandType = typeof(cmdSplitPSMAttribute),
+                PSMOnly = true,
+                OpenDialog = true,
+                Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.AddAttributes),
+                ScopeIsSelectedComponent = true,
+                AcceptedSelectedComponentType = typeof(PSMAttribute)
+            };
+            SplitPSMAssociationMoreCommand = new guiControllerCommand
+            {
+                Text = "More...",
+                ControllerCommandFactoryMethod = CommandFactory<cmdSplitPSMAttribute>.Factory,
+                ControllerCommandType = typeof(cmdSplitPSMAttribute),
+                PSMOnly = true,
+                OpenDialog = true,
+                Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.split_psm_assoc),
+                ScopeIsSelectedComponent = true,
+                AcceptedSelectedComponentType = typeof(PSMAssociation)
+            };
             CreateSequenceContentModelCommand = new guiCreateContentModelCommand() { Type = PSMContentModelType.Sequence };
             CreateChoiceContentModelCommand = new guiCreateContentModelCommand() { Type = PSMContentModelType.Choice };
             CreateSetContentModelCommand = new guiCreateContentModelCommand() { Type = PSMContentModelType.Set };

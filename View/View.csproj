@@ -77,6 +77,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Commands\PIM\guiSplitPIMAssociation.cs" />
+    <Compile Include="Commands\PIM\guiSplitPIMAttribute.cs" />
+    <Compile Include="Commands\PSM\guiSplitPSMAttribute.cs" />
     <Compile Include="Commands\View\guiBreakLineCommand.cs" />
     <Compile Include="Commands\View\guiAlignCommand.cs" />
     <Compile Include="Commands\Edit\guiDelete.cs" />

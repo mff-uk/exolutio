@@ -187,10 +187,30 @@
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.DerivePSMRootCommand}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
-                <Fluent:Button Command="{x:Static Commands:GuiCommands.SplitPIMAttributeCommand}" 
+                <Fluent:DropDownButton IsEnabled="{Binding ElementName=rbSplitPIMAttribute,Path=IsEnabled}" Header="Split attribute" Icon="/Exolutio.ResourceLibrary;component/Images/AddAttributes.png" LargeIcon="/Exolutio.ResourceLibrary;component/Images/AddAttributes.png">
+                    <Fluent:Gallery>
+                        <Fluent:Button x:Name="rbSplitPIMAttribute" Command="{x:Static Commands:GuiCommands.SplitPIMAttributeCommand}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
-                <Fluent:Button Command="{x:Static Commands:GuiCommands.SplitPIMAssociationCommand}" 
+                        <Fluent:Button Command="{x:Static Commands:GuiCommands.SplitPIMAttribute3Command}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+                        <Fluent:Button Command="{x:Static Commands:GuiCommands.SplitPIMAttribute4Command}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+                        <Fluent:Button Command="{x:Static Commands:GuiCommands.SplitPIMAttributeMoreCommand}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+                    </Fluent:Gallery>
+                </Fluent:DropDownButton>
+                <Fluent:DropDownButton IsEnabled="{Binding ElementName=rbSplitPIMAssociation,Path=IsEnabled}" Header="Split association" Icon="/Exolutio.ResourceLibrary;component/Images/SplitPIMAssociation.png" LargeIcon="/Exolutio.ResourceLibrary;component/Images/SplitPIMAssociation.png">
+                    <Fluent:Gallery>
+                        <Fluent:Button x:Name="rbSplitPIMAssociation" Command="{x:Static Commands:GuiCommands.SplitPIMAssociationCommand}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+                        <Fluent:Button Command="{x:Static Commands:GuiCommands.SplitPIMAssociation3Command}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+                        <Fluent:Button Command="{x:Static Commands:GuiCommands.SplitPIMAssociation4Command}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+                        <Fluent:Button Command="{x:Static Commands:GuiCommands.SplitPIMAssociationMoreCommand}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+                    </Fluent:Gallery>
+                </Fluent:DropDownButton>
             </Fluent:RibbonGroupBox>
             <Fluent:RibbonGroupBox Header="Shift">
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.PIMShiftUp}" 
@@ -304,10 +324,30 @@
             <Fluent:RibbonGroupBox Header="Change">
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.RenameComponentCommand}"
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
-                <Fluent:Button Command="{x:Static Commands:GuiCommands.SplitPSMAttributeCommand}" 
+                <Fluent:DropDownButton IsEnabled="{Binding ElementName=rbSplitPSMAttribute,Path=IsEnabled}" Header="Split attribute" Icon="/Exolutio.ResourceLibrary;component/Images/AddAttributes.png" LargeIcon="/Exolutio.ResourceLibrary;component/Images/AddAttributes.png">
+                    <Fluent:Gallery>
+                        <Fluent:Button x:Name="rbSplitPSMAttribute" Command="{x:Static Commands:GuiCommands.SplitPSMAttributeCommand}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
-                <Fluent:Button Command="{x:Static Commands:GuiCommands.SplitPSMAssociationCommand}" 
+                        <Fluent:Button Command="{x:Static Commands:GuiCommands.SplitPSMAttribute3Command}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+                        <Fluent:Button Command="{x:Static Commands:GuiCommands.SplitPSMAttribute4Command}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+                        <Fluent:Button Command="{x:Static Commands:GuiCommands.SplitPSMAttributeMoreCommand}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+                    </Fluent:Gallery>
+                </Fluent:DropDownButton>
+                <Fluent:DropDownButton IsEnabled="{Binding ElementName=rbSplitPSMAssociation,Path=IsEnabled}" Header="Split association" Icon="/Exolutio.ResourceLibrary;component/Images/SplitPSMAssociation.png" LargeIcon="/Exolutio.ResourceLibrary;component/Images/SplitPSMAssociation.png">
+                    <Fluent:Gallery>
+                        <Fluent:Button x:Name="rbSplitPSMAssociation" Command="{x:Static Commands:GuiCommands.SplitPSMAssociationCommand}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+                        <Fluent:Button Command="{x:Static Commands:GuiCommands.SplitPSMAssociation3Command}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+                        <Fluent:Button Command="{x:Static Commands:GuiCommands.SplitPSMAssociation4Command}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+                        <Fluent:Button Command="{x:Static Commands:GuiCommands.SplitPSMAssociationMoreCommand}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+                    </Fluent:Gallery>
+                </Fluent:DropDownButton>
             </Fluent:RibbonGroupBox>
             <Fluent:RibbonGroupBox Header="Shift">
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.ShiftLeft}" 
