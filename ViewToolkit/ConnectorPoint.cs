@@ -175,7 +175,7 @@ namespace Exolutio.ViewToolkit
             Background = ViewToolkitResources.GoldBrush;
 
             Cursor = Cursors.Hand;
-
+            
             this.SetValue(TemplateProperty, null);
 
 #if SILVERLIGHT
