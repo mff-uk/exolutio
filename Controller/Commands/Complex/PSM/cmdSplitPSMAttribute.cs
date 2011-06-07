@@ -17,8 +17,12 @@ namespace Exolutio.Controller.Commands.Complex.PSM
         [Scope(ScopeAttribute.EScope.PSMAttribute)]
         public Guid PSMAttributeGuid { get; set; }
 
-        public Guid NewAttributeGuid { get; set; }
-        
+        public IEnumerable<Guid> NewGuids { get; set; }
+
+        private uint cnt = 2;
+        [PublicArgument("Count")]
+        public uint Count { get { return cnt; } set { cnt = value; } }
+
         public cmdSplitPSMAttribute()
         {
             CheckFirstOnlyInCanExecute = true;
@@ -30,28 +34,50 @@ namespace Exolutio.Controller.Commands.Complex.PSM
             CheckFirstOnlyInCanExecute = true;
         }
 
-        public void Set(Guid psmAttributeGuid, Guid newAttributeGuid)
+        public void Set(Guid psmAttributeGuid, IEnumerable<Guid> newGuids)
         {
-
             PSMAttributeGuid = psmAttributeGuid;
-            NewAttributeGuid = newAttributeGuid;
+            NewGuids = newGuids;
+        }
+
+        public void Set(Guid psmAttributeGuid, uint count)
+        {
+            PSMAttributeGuid = psmAttributeGuid;
+            Count = count;
         }
 
         protected override void GenerateSubCommands()
         {
-            if (NewAttributeGuid == Guid.Empty) NewAttributeGuid = Guid.NewGuid();
+            if (NewGuids == null)
+            {
+                List<Guid> guids = new List<Guid>();
+                for (int i = 0; i < Count; i++)
+                {
+                    guids.Add(Guid.NewGuid());
+                }
+                NewGuids = guids;
+            }
+            
             PSMAttribute original = Project.TranslateComponent<PSMAttribute>(PSMAttributeGuid);
-            Commands.Add(new acmdNewPSMAttribute(Controller, original.PSMClass, original.PSMSchema) { AttributeGuid = NewAttributeGuid });
-            Commands.Add(new acmdRenameComponent(Controller, NewAttributeGuid, original.Name + "2"));
-            Commands.Add(new acmdUpdatePSMAttributeCardinality(Controller, NewAttributeGuid, original.Lower, original.Upper));
-            Commands.Add(new acmdUpdatePSMAttributeType(Controller, NewAttributeGuid, original.AttributeType));
-            Commands.Add(new acmdUpdatePSMAttributeXForm(Controller, NewAttributeGuid, original.Element));
-            Commands.Add(new acmdSynchroPSMAttributes(Controller) { X1 = Enumerable.Repeat(original.ID, 1).ToList(), X2 = Enumerable.Repeat(NewAttributeGuid, 1).ToList() });
+
+            uint counter = 0;
+            foreach (Guid newAttributeGuid in NewGuids)
+            {
+                counter++;
+                Commands.Add(new acmdNewPSMAttribute(Controller, original.PSMClass, original.PSMSchema) { AttributeGuid = newAttributeGuid });
+                Commands.Add(new acmdRenameComponent(Controller, newAttributeGuid, original.Name + counter));
+                Commands.Add(new acmdUpdatePSMAttributeCardinality(Controller, newAttributeGuid, original.Lower, original.Upper));
+                Commands.Add(new acmdUpdatePSMAttributeType(Controller, newAttributeGuid, original.AttributeType));
+                Commands.Add(new acmdUpdatePSMAttributeXForm(Controller, newAttributeGuid, original.Element));
+            }
+            Commands.Add(new acmdSynchroPSMAttributes(Controller) { X1 = Enumerable.Repeat(original.ID, 1).ToList(), X2 = NewGuids.ToList() });
+            Commands.Add(new cmdDeletePSMAttribute(Controller) { AttributeGuid = original });
         }
 
         public override bool CanExecute()
         {
             if (PSMAttributeGuid == null) return false;
+            if (Count < 2 && NewGuids == null) return false;
             return base.CanExecute();
         }
 

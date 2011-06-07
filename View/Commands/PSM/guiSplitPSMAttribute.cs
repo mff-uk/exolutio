@@ -7,30 +7,30 @@ using Exolutio.Controller.Commands;
 
 namespace Exolutio.View.Commands.PSM
 {
-    public class guiSplitPSMAssociation : guiSelectionDependentCommand
+    public class guiSplitPSMAttribute : guiSelectionDependentCommand
     {
         public uint Count = 2;
-        
+
         public override bool CanExecute(object parameter)
         {
             if (!(Current.ActiveDiagram is PSMDiagram)) return false;
 
-            IEnumerable<PSMAssociation> selectedAssociations = Current.ActiveDiagramView.GetSelectedComponents()
-                .Where(c => c is PSMAssociation).Cast<PSMAssociation>();
+            IEnumerable<PSMAttribute> selectedAttributes = Current.ActiveDiagramView.GetSelectedComponents()
+                .Where(c => c is PSMAttribute).Cast<PSMAttribute>();
 
-            return selectedAssociations.Count() > 0 && selectedAssociations.All(a => a.Child is PSMClass);
+            return selectedAttributes.Count() > 0;
 
         }
 
         public override void Execute(object parameter)
         {
-            IEnumerable<PSMAssociation> selectedAssociations = Current.ActiveDiagramView.GetSelectedComponents()
-                .Where(c => c is PSMAssociation).Cast<PSMAssociation>();
+            IEnumerable<PSMAttribute> selectedAttributes = Current.ActiveDiagramView.GetSelectedComponents()
+                .Where(c => c is PSMAttribute).Cast<PSMAttribute>();
 
             MacroCommand command = new MacroCommand(Current.Controller);
-            foreach (PSMAssociation a in selectedAssociations)
+            foreach (PSMAttribute a in selectedAttributes)
             {
-                command.Commands.Add(new cmdSplitPSMAssociation(Current.Controller) { PSMAssociationGuid = a, Count = Count});
+                command.Commands.Add(new cmdSplitPSMAttribute(Current.Controller) { PSMAttributeGuid = a, Count = Count});
             }
             command.Execute();
         }
@@ -45,14 +45,14 @@ namespace Exolutio.View.Commands.PSM
 
         public override string ScreenTipText
         {
-            get { return "Split PSM associations into " + Count; }
+            get { return "Split PSM attributes into " + Count; }
         }
 
         public override System.Windows.Media.ImageSource Icon
         {
             get
             {
-                return ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.split_psm_assoc);
+                return ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.AddAttributes);
             }
         }
     }
