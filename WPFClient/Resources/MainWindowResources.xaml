@@ -2,10 +2,10 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:Fluent="clr-namespace:Fluent;assembly=Fluent" 
                     xmlns:c="clr-namespace:Exolutio.WPFClient.Converters">
-    <ResourceDictionary.MergedDictionaries>
+    <!--<ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Exolutio.ResourceLibrary;component/Images/Images.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Fluent;Component/Themes/Office2010/Silver.xaml" />
-    </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary.MergedDictionaries>-->
     <Style TargetType="{x:Type Fluent:Button}" x:Key="ribbonBackstageCommandButtonStyle" BasedOn="{StaticResource BackstageButtonStyle }"  >
         <Setter Property="Tag"       Value="{Binding RelativeSource={RelativeSource Self}}" />
         <Setter Property="Header"    Value="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}" />

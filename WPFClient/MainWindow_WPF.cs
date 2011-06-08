@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows;
 using Exolutio.SupportingClasses;
 using Exolutio.View.Commands;
+using System.Windows.Media;
 
 namespace Exolutio.WPFClient
 {
@@ -38,6 +39,7 @@ namespace Exolutio.WPFClient
                 }
 
             }
+            dockManager.MainDocumentPane.Background = Brushes.Transparent;
         }
 
         private void MainWindow_FileDropped(object sender, DragEventArgs e)

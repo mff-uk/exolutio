@@ -16,6 +16,8 @@ using Exolutio.Dialogs;
 using Exolutio.View.Commands;
 using Exolutio.View.Commands.Project;
 using Exolutio.ViewToolkit;
+using System.Windows.Threading;
+using System.Threading;
 
 namespace Exolutio.WPFClient
 {
@@ -126,6 +128,66 @@ namespace Exolutio.WPFClient
                                ConfigurationManager.Configuration.RecentDirectories);
                 }
             }
+        }
+
+        private void OnSilverClick(object sender, RoutedEventArgs e)
+        {
+            Dispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle, (ThreadStart)(() =>
+            {
+                Application.Current.Resources.BeginInit();
+                Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/Fluent;component/Themes/Office2010/Silver.xaml") });
+                Application.Current.Resources.MergedDictionaries.RemoveAt(1);
+                try
+                {
+                    Application.Current.Resources.EndInit();
+                }
+                catch
+                {
+
+                }
+                AvalonDock.ThemeFactory.ChangeTheme("aero.normalcolor");
+                ((this.Parent as DockPanel).Parent as MainWindow).dockManager.MainDocumentPane.Background = Brushes.Transparent;
+            }));
+        }
+
+        private void OnBlackClick(object sender, RoutedEventArgs e)
+        {
+            Dispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle, (ThreadStart)(() =>
+            {
+                Application.Current.Resources.BeginInit();
+                Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/Fluent;component/Themes/Office2010/Black.xaml") });
+                Application.Current.Resources.MergedDictionaries.RemoveAt(1);
+                try
+                {
+                    Application.Current.Resources.EndInit();
+                }
+                catch
+                {
+
+                }
+                AvalonDock.ThemeFactory.ChangeTheme("Classic");
+                ((this.Parent as DockPanel).Parent as MainWindow).dockManager.MainDocumentPane.Background = Brushes.Transparent;
+            }));
+        }
+
+        private void OnBlueClick(object sender, RoutedEventArgs e)
+        {
+            Dispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle, (ThreadStart)(() =>
+            {
+                Application.Current.Resources.BeginInit();
+                Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("pack://application:,,,/Fluent;component/Themes/Office2010/Blue.xaml") });
+                Application.Current.Resources.MergedDictionaries.RemoveAt(1);
+                try
+                {
+                    Application.Current.Resources.EndInit();
+                }
+                catch
+                {
+
+                }
+                AvalonDock.ThemeFactory.ChangeTheme("aero.normalcolor");
+                ((this.Parent as DockPanel).Parent as MainWindow).dockManager.MainDocumentPane.Background = Brushes.Transparent;
+            }));
         }
 
     
