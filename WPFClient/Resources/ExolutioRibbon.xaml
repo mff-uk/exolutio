@@ -140,7 +140,7 @@
             </Fluent:QuickAccessMenuItem>
 		</Fluent:Ribbon.QuickAccessItems>
 
-        <Fluent:RibbonTabItem  Header="Project">
+        <Fluent:RibbonTabItem Header="Project">
             <Fluent:RibbonGroupBox Header="Schemas">
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.NewPSMSchema}"
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
@@ -171,18 +171,18 @@
             </Fluent:RibbonGroupBox>
         </Fluent:RibbonTabItem>
 
-        <Fluent:RibbonTabItem x:Name="tabPIM" Header="Modeling" Group="{Binding ElementName=pimGroup}">
-            <Fluent:RibbonGroupBox Header="Create">
+        <Fluent:RibbonTabItem x:Name="tabPIM" Header="Modeling" Group="{Binding ElementName=pimGroup}" ReduceOrder="rgb_PIMCreate,rgb_PIMCreate">
+            <Fluent:RibbonGroupBox Name="rgbPIM_Create" Header="Create">
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.AddPIMClassCommand}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
-                <Fluent:Button Command="{x:Static Commands:GuiCommands.AddPIMAttributeCommand}" 
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.AddPIMAttributeCommand}"
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
-                <Fluent:Button Command="{x:Static Commands:GuiCommands.AddPIMAssociationCommand}" 
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.AddPIMAssociationCommand}"
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
-                <Fluent:Button Command="{x:Static Commands:GuiCommands.Associate2}" 
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.Associate2}"
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
             </Fluent:RibbonGroupBox>
-            <Fluent:RibbonGroupBox Header="Change">
+            <Fluent:RibbonGroupBox Name="rgbPIM_Change" Header="Change">
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.RenameComponentCommand}"
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.DerivePSMRootCommand}" 
@@ -212,13 +212,13 @@
                     </Fluent:Gallery>
                 </Fluent:DropDownButton>
             </Fluent:RibbonGroupBox>
-            <Fluent:RibbonGroupBox Header="Shift">
+            <Fluent:RibbonGroupBox Name="rgbPIM_Shift" Header="Shift">
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.PIMShiftUp}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.PIMShiftDown}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
             </Fluent:RibbonGroupBox>
-            <Fluent:RibbonGroupBox Header="Delete">
+            <Fluent:RibbonGroupBox Name="rgbPIM_Delete" Header="Delete">
                 <Fluent:Button x:Name="rbPIMDelete" Command="{x:Static Commands:GuiCommands.Delete}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
                 <Fluent:DropDownButton IsEnabled="{Binding ElementName=rbPIMDelete,Path=IsEnabled}" Header="Delete components" Icon="/Exolutio.ResourceLibrary;component/Images/delete.png" LargeIcon="/Exolutio.ResourceLibrary;component/Images/delete.png">
@@ -232,7 +232,7 @@
                     </Fluent:Gallery>
                 </Fluent:DropDownButton>
             </Fluent:RibbonGroupBox>
-            <Fluent:RibbonGroupBox Header="Alignment">
+            <Fluent:RibbonGroupBox Name="rgbPIM_Alignment" Header="Alignment">
                 <Fluent:RibbonToolBar>
                     <Fluent:RibbonToolBar.LayoutDefinitions>
                         <Fluent:RibbonToolBarLayoutDefinition>
@@ -290,18 +290,18 @@
             </Fluent:RibbonGroupBox>
         </Fluent:RibbonTabItem>
 
-        <Fluent:RibbonTabItem x:Name="tabPSM" Header="Modeling" Group="{Binding ElementName=psmGroup}">
-            <Fluent:RibbonGroupBox Header="Atomic">
-                <Fluent:Button Command="{x:Static Commands:GuiCommands.AddPSMClassCommand}" SizeDefinition="Large, Middle, Small"
+        <Fluent:RibbonTabItem x:Name="tabPSM" Header="Modeling" Group="{Binding ElementName=psmGroup}" ReduceOrder="rgbPSM_Atomic,rgbPSM_Atomic,rgbPSM_Shift,rgbPSM_Shift">
+            <Fluent:RibbonGroupBox Name="rgbPSM_Atomic" Header="Atomic">
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.AddPSMClassCommand}"
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
-                <Fluent:Button Command="{x:Static Commands:GuiCommands.AddPSMContentModel}" SizeDefinition="Large, Middle, Small"
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.AddPSMContentModel}"
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
-                <Fluent:Button Command="{x:Static Commands:GuiCommands.AddPSMAttributeCommand}" SizeDefinition="Large, Middle, Small"
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.AddPSMAttributeCommand}"
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
-                <Fluent:Button Command="{x:Static Commands:GuiCommands.AddPSMAssociationCommand}" SizeDefinition="Large, Middle, Small"
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.AddPSMAssociationCommand}"
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
             </Fluent:RibbonGroupBox>
-            <Fluent:RibbonGroupBox Header="Create">
+            <Fluent:RibbonGroupBox Name="rgbPSM_Create" Header="Create">
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.AddPSMChildInterpreted}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.AddPSMChildUnInterpreted}" 
@@ -321,7 +321,7 @@
                     </Fluent:Gallery>
                 </Fluent:DropDownButton>
             </Fluent:RibbonGroupBox>
-            <Fluent:RibbonGroupBox Header="Change">
+            <Fluent:RibbonGroupBox Name="rgbPSM_Change" Header="Change">
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.RenameComponentCommand}"
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
                 <Fluent:DropDownButton IsEnabled="{Binding ElementName=rbSplitPSMAttribute,Path=IsEnabled}" Header="Split attribute" Icon="/Exolutio.ResourceLibrary;component/Images/AddAttributes.png" LargeIcon="/Exolutio.ResourceLibrary;component/Images/AddAttributes.png">
@@ -349,7 +349,7 @@
                     </Fluent:Gallery>
                 </Fluent:DropDownButton>
             </Fluent:RibbonGroupBox>
-            <Fluent:RibbonGroupBox Header="Shift">
+            <Fluent:RibbonGroupBox Name="rgbPSM_Shift" Header="Shift">
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.ShiftLeft}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.ShiftRight}" 
@@ -359,7 +359,7 @@
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.PSMShiftDown}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
             </Fluent:RibbonGroupBox>
-            <Fluent:RibbonGroupBox Header="Delete">
+            <Fluent:RibbonGroupBox Name="rgbPSM_Delete" Header="Delete">
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.LeaveOutUnintAM}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.Delete}" 
@@ -402,81 +402,6 @@
                 <Fluent:Button Click="OnBlueClick" SizeDefinition="Middle">Blue</Fluent:Button>
             </Fluent:RibbonGroupBox>
         </Fluent:RibbonTabItem>
-
-        <!--
-            <Fluent:RibbonTabItem Header="PIM">
-                <Fluent:RibbonGroupBox Header="PIM diagram elements">
-                    <Fluent:Button Header="Class" SizeDefinition="Large"    />
-                    <Fluent:Button Header="Associate" SizeDefinition="Large"/>
-
-                    <Fluent:Button Header="Add attribute" SizeDefinition="Middle, Small"/>
-                    <Fluent:Button Header="Add operation" SizeDefinition="Middle, Small"/>
-                    <Fluent:Button Header="Commentary" SizeDefinition="Middle, Small"/>
-
-                    <Separator />
-
-                    <Fluent:Button Header="Generalization" SizeDefinition="Middle, Small"/>
-                    <Fluent:Button Header="Association" SizeDefinition="Middle, Small"/>
-                    <Fluent:Button Header="Association class" SizeDefinition="Middle, Small"/>
-
-                    <Fluent:Button Header="Aggregation" SizeDefinition="Middle, Small"/>
-                    <Fluent:Button Header="Composition" SizeDefinition="Middle, Small"/>
-                </Fluent:RibbonGroupBox>
-
-                <Fluent:RibbonGroupBox Header="Alignment">
-                    <Fluent:Button Header="Align left" SizeDefinition="Small"/>
-                    <Fluent:Button Header="Align center" SizeDefinition="Small"/>
-                    <Fluent:Button Header="Align right" SizeDefinition="Small"/>
-
-                    <Fluent:Button Header="Align top" SizeDefinition="Small"/>
-                    <Fluent:Button Header="Align middle" SizeDefinition="Small"/>
-                    <Fluent:Button Header="Align bottom" SizeDefinition="Small"/>
-
-                </Fluent:RibbonGroupBox>
-
-                <Fluent:RibbonGroupBox Header="Derive">
-                    <Fluent:Button Header="Derive to new PSM diagram" SizeDefinition="Middle"/>
-                    <Fluent:Button Header="Derive to an existing diagram" SizeDefinition="Middle"/>
-                </Fluent:RibbonGroupBox>
-            </Fluent:RibbonTabItem>
-
-            <Fluent:RibbonTabItem Header="PSM">
-                <Fluent:RibbonGroupBox Header="PSM class">
-                    <Fluent:Button Header="Add children" />
-                    <Fluent:Button Header="Attributes" />
-                </Fluent:RibbonGroupBox>
-
-                <Fluent:RibbonGroupBox Header="PSM diagram elements">
-                    <Fluent:Button Header="Add attribute" SizeDefinition="Middle, Small" />
-                    <Fluent:Button Header="Move out" SizeDefinition="Middle, Small" />
-
-                    <Separator Width="0"></Separator>
-
-                    <Fluent:Button Header="Content choice" SizeDefinition="Middle, Small" />
-                    <Fluent:Button Header="Class union" SizeDefinition="Middle, Small" />
-                    <Fluent:Button Header="Add specializations" SizeDefinition="Middle, Small" />
-
-                    <Fluent:Button Header="Attribute container" SizeDefinition="Middle, Small" />
-                    <Fluent:Button Header="Content container" SizeDefinition="Middle, Small" />
-                    <Fluent:Button Header="Commentary" SizeDefinition="Middle, Small" />
-                </Fluent:RibbonGroupBox>
-
-                <Fluent:RibbonGroupBox Header="References">
-                    <Fluent:Button Header="Add reference" SizeDefinition="Middle, Small" />
-                    <Fluent:Button Header="Remove reference" SizeDefinition="Middle, Small" />
-                </Fluent:RibbonGroupBox>
-
-                <Fluent:RibbonGroupBox Header="Ordering">
-                    <Fluent:Button Header="Move left" SizeDefinition="Middle, Small" />
-                    <Fluent:Button Header="Move right" SizeDefinition="Middle, Small" />
-                </Fluent:RibbonGroupBox>
-            </Fluent:RibbonTabItem>
-
-            <Fluent:RibbonTabItem Header="Extensions">
-            </Fluent:RibbonTabItem>
-
-            <Fluent:RibbonTabItem Header="Evolution">
-            </Fluent:RibbonTabItem>-->
 
     </Fluent:Ribbon>
 </UserControl>
