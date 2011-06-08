@@ -68,7 +68,7 @@ namespace Exolutio.Controller.Commands.Complex.PIM
                 counter++;
                 Guid newAssociationGuid = t.Item1;
                 Guid newAssociationEnd1Guid = t.Item2;
-                Guid newAssociationEnd2Guid = t.Item2;
+                Guid newAssociationEnd2Guid = t.Item3;
 
                 Commands.Add(new acmdNewPIMAssociation(Controller, originalEnd1.PIMClass, newAssociationEnd1Guid, originalEnd2.PIMClass, newAssociationEnd2Guid, original.PIMSchema) { AssociationGuid = newAssociationGuid });
                 Commands.Add(new acmdRenameComponent(Controller, newAssociationGuid, original.Name + counter));
