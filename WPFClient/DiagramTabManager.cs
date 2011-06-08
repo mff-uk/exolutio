@@ -9,6 +9,7 @@ using Exolutio.Model.PIM;
 using Exolutio.Model.PSM;
 using Exolutio.SupportingClasses;
 using Exolutio.View;
+using System.Windows.Media;
 
 namespace Exolutio.WPFClient
 {
@@ -39,6 +40,7 @@ namespace Exolutio.WPFClient
             MainWindow = mainWindow;
 
             DockManager.ActiveDocumentChanged += DockManager_ActiveTabChanged;
+            DockManager.MainDocumentPane.Background = Brushes.Transparent;
             Current.ActiveDiagramChanged += Current_ActiveDiagramChanged;
         }
 

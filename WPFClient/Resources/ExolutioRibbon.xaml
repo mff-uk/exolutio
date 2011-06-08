@@ -292,13 +292,13 @@
 
         <Fluent:RibbonTabItem x:Name="tabPSM" Header="Modeling" Group="{Binding ElementName=psmGroup}">
             <Fluent:RibbonGroupBox Header="Atomic">
-                <Fluent:Button Command="{x:Static Commands:GuiCommands.AddPSMClassCommand}" 
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.AddPSMClassCommand}" SizeDefinition="Large, Middle, Small"
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
-                <Fluent:Button Command="{x:Static Commands:GuiCommands.AddPSMContentModel}" 
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.AddPSMContentModel}" SizeDefinition="Large, Middle, Small"
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
-                <Fluent:Button Command="{x:Static Commands:GuiCommands.AddPSMAttributeCommand}" 
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.AddPSMAttributeCommand}" SizeDefinition="Large, Middle, Small"
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
-                <Fluent:Button Command="{x:Static Commands:GuiCommands.AddPSMAssociationCommand}" 
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.AddPSMAssociationCommand}" SizeDefinition="Large, Middle, Small"
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
             </Fluent:RibbonGroupBox>
             <Fluent:RibbonGroupBox Header="Create">
@@ -395,6 +395,11 @@
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
                 <Fluent:Button Command="{x:Static Commands1:StaticWPFClientCommands.LayoutByVersions}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
+            </Fluent:RibbonGroupBox>
+            <Fluent:RibbonGroupBox Header="Themes">
+                <Fluent:Button Click="OnSilverClick" SizeDefinition="Middle">Silver</Fluent:Button>
+                <Fluent:Button Click="OnBlackClick" SizeDefinition="Middle">Black</Fluent:Button>
+                <Fluent:Button Click="OnBlueClick" SizeDefinition="Middle">Blue</Fluent:Button>
             </Fluent:RibbonGroupBox>
         </Fluent:RibbonTabItem>
 
