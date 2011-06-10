@@ -75,7 +75,7 @@ namespace Exolutio.View.Commands
 		/// <summary>
 		/// Raises the <see cref="CanExecuteChanged"/> event on this command instance.
 		/// </summary>
-		protected void RaiseCanExecuteChanged()
+		protected void InvokeCanExecuteChanged()
 		{
 			if (CanExecuteChanged != null)
 				CanExecuteChanged(this, EventArgs.Empty);

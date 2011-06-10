@@ -173,7 +173,7 @@ namespace Exolutio.View.Commands.View
             }
             foreach (guiAlignCommand command in AllAlignCommands)
             {
-                command.RaiseCanExecuteChanged();
+                command.InvokeCanExecuteChanged();
             }
         }
 

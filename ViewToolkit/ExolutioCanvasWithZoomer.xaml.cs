@@ -124,7 +124,7 @@ namespace Exolutio.ViewToolkit
 
             if (scrollViewer.ComputedVerticalScrollBarVisibility == System.Windows.Visibility.Visible)
             {
-                zoomer.Width = this.ActualWidth - scrollbarSize;
+                zoomer.Width = Math.Max(this.ActualWidth - scrollbarSize, 0);
             }
             else
             {

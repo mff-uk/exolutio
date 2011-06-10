@@ -59,7 +59,7 @@ namespace Exolutio.View
 
         public Log DisplayedLog { get; set; }
 
-        public void ExecutedCommand(CommandBase command, bool ispartofmacro, CommandBase macrocommand)
+        public void ExecutedCommand(CommandBase command, bool ispartofmacro, CommandBase macrocommand, bool isUndo, bool isRedo)
         {
             if (ispartofmacro)
                 return;
@@ -74,19 +74,52 @@ namespace Exolutio.View
             //ClearParamsPanel(true);
             //lCommandResult.Text = string.Format("Operation '{0}' executed succesfully. ", operationHumanFriendlyName);
             //lCommandResult.Visible = true;
+            CommandReportBase finalReport; 
+
             if (command is MacroCommand)
             {
                 NestedCommandReport commandReports = ((MacroCommand) command).GetReport();
+                Type commandType = command.GetType();
+                if (Controller.Commands.Reflection.PublicCommandsHelper.IsPublicCommand(commandType))
+                {
+                    commandReports.Contents = "Executed: " + Controller.Commands.Reflection.PublicCommandsHelper.GetCommandDescriptor(commandType).CommandDescription;    
+                }
+                else
+                {
+                    commandReports.Contents = "Executed: " + commandType.Name;    
+                }
+                
                 //repResult.DataSource = commandReports;
                 //repResult.Visible = true; 
                 //repResult.DataBind();
-                DisplayReport(commandReports);
+                finalReport = commandReports;
+                
             }
             else
             {
                 //reportDisplay.Visible = false;
                 //repResult.Visible = false;
+                if (isUndo || isRedo)
+                {
+                    NestedCommandReport r = new NestedCommandReport();
+                    if (isUndo)
+                    {
+                        r.Contents = "Undone command";
+                    }
+                    else
+                    {
+                        r.Contents = "Redone command";
+                    }
+                    r.NestedReports.Add(command.Report);
+                    finalReport = r;
+                }
+                else
+                {
+                    finalReport = command.Report;
+                }
             }
+
+            DisplayReport(finalReport);
         
             //else
             //{

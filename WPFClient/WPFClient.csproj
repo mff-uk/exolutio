@@ -92,6 +92,7 @@
     <Compile Include="Commands\guiCheckForUpdates.cs" />
     <Compile Include="Commands\guiLayoutCommand.cs" />
     <Compile Include="Commands\guiResetWindowLayout.cs" />
+    <Compile Include="Commands\guiStartFileLogging.cs" />
     <Compile Include="Commands\StaticWPFClientCommands.cs" />
     <Compile Include="ConfigurationManager.cs" />
     <Compile Include="Converters\MainWindowTitleConverter.cs" />

@@ -57,7 +57,7 @@ namespace Exolutio.Controller.Commands
             if (UndoExecuted != null)
 				UndoExecuted(undoneCommand);
 
-            Controller.OnUndoExecuted();
+            Controller.InvokeExecutedCommand(undoneCommand, false, null, true, false);
         }
 
     	private StackedCommand GetUndoneCommand()

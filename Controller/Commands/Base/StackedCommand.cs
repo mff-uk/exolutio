@@ -95,7 +95,7 @@ namespace Exolutio.Controller.Commands
 
 			CommandNumber = getNextCommandNumber();
 			// call notifying method
-			Controller.InvokeExecutingCommand(this, false, null);
+            Controller.InvokeExecutingCommand(this, false, null, false, false);
 			// check mandatory arguments
 #if DEBUG
 			FieldsChecker.CheckMandatoryArguments(this);
@@ -147,7 +147,7 @@ namespace Exolutio.Controller.Commands
 			FieldsChecker.CheckCommandResults(this);
 #endif
 			// call successful notification method
-			Controller.InvokeExecutedCommand(this, false, null);
+			Controller.InvokeExecutedCommand(this, false, null, false, false);
 		}
 
     	/// <summary>

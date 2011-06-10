@@ -12,6 +12,7 @@
     <ImageSource x:Key="branch">branch.png</ImageSource>
     <ImageSource x:Key="BringForward">BringForward.png</ImageSource>
     <ImageSource x:Key="BringToFront">BringToFront.png</ImageSource>
+    <ImageSource x:Key="bullet_ball_red">bullet_ball_red.png</ImageSource>
     <ImageSource x:Key="cancel">cancel.png</ImageSource>
     <ImageSource x:Key="class">class.png</ImageSource>
     <ImageSource x:Key="comment">comment.png</ImageSource>
@@ -36,6 +37,10 @@
     <ImageSource x:Key="Group">Group.png</ImageSource>
     <ImageSource x:Key="help">help.png</ImageSource>
     <ImageSource x:Key="magnifier">magnifier.png</ImageSource>
+    <ImageSource x:Key="media_pause">media_pause.png</ImageSource>
+    <ImageSource x:Key="media_play_green">media_play_green.png</ImageSource>
+    <ImageSource x:Key="media_stop">media_stop.png</ImageSource>
+    <ImageSource x:Key="media_stop_red">media_stop_red.png</ImageSource>
     <ImageSource x:Key="navigate_left">navigate_left.png</ImageSource>
     <ImageSource x:Key="navigate_right">navigate_right.png</ImageSource>
     <ImageSource x:Key="navigate_up">navigate_up.png</ImageSource>

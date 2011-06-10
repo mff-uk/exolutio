@@ -195,12 +195,11 @@ namespace Exolutio.View
 
         //public static event Action<IEnumerable<Component>> SelectComponents;
 
-        private static void Current_Controller_ExecutedCommand(CommandBase command, bool ispartofmacro, CommandBase macrocommand)
+        private static void Current_Controller_ExecutedCommand(CommandBase command, bool ispartofmacro, CommandBase macrocommand, bool isUndo, bool isRedo)
         {
-            InvokeExecutedCommand(command, ispartofmacro, macrocommand);   
+            InvokeExecutedCommand(command, ispartofmacro, macrocommand, isUndo, isRedo);   
         }
-
-
+        
         /// <summary>
         /// This event is fired each time a command is executed in the current controller (current project). 
         /// Bind to this event with caution, the binding survives change of project/controller (e.g. when 
@@ -208,10 +207,10 @@ namespace Exolutio.View
         /// </summary>
         public static event CommandEventHandler ExecutedCommand;
 
-        public static void InvokeExecutedCommand(CommandBase command, bool ispartofmacro, CommandBase macrocommand)
+        public static void InvokeExecutedCommand(CommandBase command, bool isPartOfMacro, CommandBase macroCommand, bool isUndo, bool isRedo)
         {
             CommandEventHandler handler = ExecutedCommand;
-            if (handler != null) handler(command, ispartofmacro, macrocommand);
+            if (handler != null) handler(command, isPartOfMacro, macroCommand, isUndo, isRedo);
         }
     }
 
@@ -258,7 +257,7 @@ namespace Exolutio.View
         void Close();
         void CloseRibbonBackstage();
         void CloseProject();
-        void FocusComponent(Diagram diagram, Exolutio.Model.Component component);
+        void FocusComponent(Diagram diagram, Component component);
         void DisplayReport(CommandReportBase report, bool showEvenIfNotVisible);
         void DisplayLog(Log log, bool showEvenIfNotVisible);
         IDiagramTabManager DiagramTabManager { get; }
