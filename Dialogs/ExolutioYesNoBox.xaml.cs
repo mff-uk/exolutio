@@ -60,6 +60,15 @@ namespace Exolutio.Dialogs
             return msgBox.result;
         }
 
+        public static MessageBoxResult ShowYesNo(string messageText, string messageQuestion)
+        {
+            msgBox = new ExolutioYesNoBox(false, false, true, true);
+            msgBox.messageText.Text = messageText;
+            msgBox.messageQuestion.Text = messageQuestion;
+            msgBox.ShowDialog();
+            return msgBox.result;
+        }
+
         public static MessageBoxResult ShowOKCancel(string messageText, string messageQuestion)
         {
             msgBox = new ExolutioYesNoBox(true, true, false, false);

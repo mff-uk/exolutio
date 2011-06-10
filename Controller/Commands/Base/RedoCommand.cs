@@ -62,7 +62,7 @@ namespace Exolutio.Controller.Commands
             if (RedoExecuted != null)
 				RedoExecuted(redoneCommand);
 
-            Controller.OnRedoExecuted();
+            Controller.InvokeExecutedCommand(redoneCommand, false, null, false, true);
 		}
 
     	private StackedCommand GetRedoneCommand()

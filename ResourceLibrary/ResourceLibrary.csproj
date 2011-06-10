@@ -181,6 +181,15 @@
     <Resource Include="Images\SplitPIMAssociation.png" />
     <Resource Include="Images\SplitPSMAssociation.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\media_pause.png" />
+    <Resource Include="Images\media_play_green.png" />
+    <Resource Include="Images\media_stop.png" />
+    <Resource Include="Images\media_stop_red.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\bullet_ball_red.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -19,6 +19,7 @@ namespace Exolutio.ResourceLibrary
         public const string branch = "branch";
         public const string BringForward = "BringForward";
         public const string BringToFront = "BringToFront";
+        public const string bullet_ball_red = "bullet_ball_red";
         public const string cancel = "cancel";
         public const string @class = "class";
         public const string comment = "comment";
@@ -43,6 +44,10 @@ namespace Exolutio.ResourceLibrary
         public const string Group = "Group";
         public const string help = "help";
         public const string magnifier = "magnifier";
+        public const string media_pause = "media_pause";
+        public const string media_play_green = "media_play_green";
+        public const string media_stop = "media_stop";
+        public const string media_stop_red = "media_stop_red";
         public const string navigate_left = "navigate_left";
         public const string navigate_right = "navigate_right";
         public const string navigate_up = "navigate_up";

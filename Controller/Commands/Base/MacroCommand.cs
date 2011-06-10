@@ -92,7 +92,7 @@ namespace Exolutio.Controller.Commands
             #endif
             foreach (CommandBase t in list)
 		    {
-                Controller.InvokeExecutingCommand(t, true, this);
+                Controller.InvokeExecutingCommand(t, true, this, false, false);
                 #if DEBUG 
 		        FieldsChecker.CheckMandatoryArguments(t);
                 #endif
@@ -156,7 +156,7 @@ namespace Exolutio.Controller.Commands
 		            FieldsChecker.CheckCommandResults(this);
                     counter++;
                 #endif
-		        Controller.InvokeExecutedCommand(t, true, this);
+		        Controller.InvokeExecutedCommand(t, true, this, false, false);
 		    }
 		    CommandsExecuted();
 		}
@@ -168,9 +168,9 @@ namespace Exolutio.Controller.Commands
         {
             foreach (CommandBase t in Commands)
             {
-                Controller.InvokeExecutingCommand(t, true, this);
+                Controller.InvokeExecutingCommand(t, true, this, false, false);
                 t.RedoOperation();
-                Controller.InvokeExecutedCommand(t, true, this);
+                Controller.InvokeExecutedCommand(t, true, this, false, false);
             }
             CommandsExecuted();
         }

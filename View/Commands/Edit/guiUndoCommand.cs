@@ -18,12 +18,10 @@ namespace Exolutio.View.Commands.Edit
             if (e.OldController != null)
             {
                 e.OldController.ExecutedCommand -= Controller_ExecutedCommand;
-                e.OldController.UndoExecuted += Controller_UndoRedoExecuted;
             }
             if (e.NewController != null)
             {
                 e.NewController.ExecutedCommand += Controller_ExecutedCommand;
-                e.NewController.UndoExecuted += Controller_UndoRedoExecuted;
             }
         }
 
@@ -32,7 +30,7 @@ namespace Exolutio.View.Commands.Edit
             OnCanExecuteChanged(null);
         }
 
-        private void Controller_ExecutedCommand(CommandBase command, bool ispartofmacro, CommandBase macrocommand)
+        private void Controller_ExecutedCommand(CommandBase command, bool ispartofmacro, CommandBase macrocommand, bool isUndo, bool isRedo)
         {
             OnCanExecuteChanged(null);
         }

@@ -33,7 +33,7 @@ namespace Exolutio.View
             Current.ExecutedCommand += Current_ExecutedCommand;
         }
 
-        void Current_ExecutedCommand(Controller.Commands.CommandBase command, bool isPartOfMacro, Controller.Commands.CommandBase macroCommand)
+        void Current_ExecutedCommand(Controller.Commands.CommandBase command, bool isPartOfMacro, Controller.Commands.CommandBase macroCommand, bool isUndo, bool isRedo)
         {
             UpdateViewForCurrentSelection();
         }

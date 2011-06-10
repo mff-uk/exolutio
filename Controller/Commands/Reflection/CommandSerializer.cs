@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Remoting;
-using System.Xml;
+using System.Xml.Linq;
 using Exolutio.Model;
 using Exolutio.Model.PIM;
 using Exolutio.SupportingClasses.Reflection;
@@ -83,78 +83,132 @@ namespace Exolutio.Controller.Commands.Reflection
 #if SILVERLIGHT
 #else
         #region XML serialization
-        public void Serialize(CommandBase commandBase, XmlElement parentElement)
+
+        public void Serialize(CommandBase commandBase, bool isUndo, bool isRedo)
         {
-            Type commandType = commandBase.GetType();
-            CommandDescriptor commandParametersDescriptors = PublicCommandsHelper.GetCommandDescriptor(commandType);
-
-            XmlDocument ownerDocument = parentElement.OwnerDocument;
-
-            if (ownerDocument == null)
-            {
-                throw new ArgumentException("Owner document of parentElement must not be null", "parentElement");
-            }
-
-            XmlElement commandElement = ownerDocument.CreateElement(commandType.Name);
-            parentElement.AppendChild(commandElement);
-
-            XmlElement fullNameElement = ownerDocument.CreateElement("FullName");
-            XmlText fullNameTextNode = ownerDocument.CreateTextNode(commandType.FullName);
-            fullNameElement.AppendChild(fullNameTextNode);
-            commandElement.AppendChild(fullNameElement);
-
-            #region operation parameters
-            foreach (ParameterDescriptor parameter in commandParametersDescriptors.Parameters)
-            {
-                XmlElement propertyElement = ownerDocument.CreateElement(parameter.ParameterPropertyName);
-                XmlAttribute xmlAttribute = ownerDocument.CreateAttribute("parameterName");
-                xmlAttribute.Value = parameter.ParameterName;
-                propertyElement.Attributes.Append(xmlAttribute);
-
-                object value = parameter.ParameterPropertyInfo.GetValue(commandBase, new object[0]);
-                if (value is ExolutioObject)
-                {
-                    XmlText textNode = ownerDocument.CreateTextNode(((ExolutioObject)value).ID.ToString());
-                    propertyElement.AppendChild(textNode);
-                }
-                else
-                {
-                    propertyElement.InnerText = value.ToString();
-                }
-                commandElement.AppendChild(propertyElement);
-            }
-            #endregion
+            SerializeRec(commandBase, true, RootElement, isUndo, isRedo);
         }
 
-        public CommandBase DeserializeCommand(XmlElement parentElement)
+        public void SerializeRec(CommandBase command, bool isInitial, XElement parentElement, bool isUndo, bool isRedo)
         {
-            XmlElement fullNameElement = (XmlElement)parentElement.FirstChild;
-            string fullName = fullNameElement.FirstChild.Value;
+            Type commandType = command.GetType();
+            
+            XElement commandElement;
+            commandElement = new XElement(exolutioNS + "Command");
+            if (isInitial)
+            {
+                commandElement.Add(new XAttribute("initial", "true"));
+            }
+            if (isUndo)
+            {
+                commandElement.Add(new XAttribute("undo", "true"));
+            }
+            if (isRedo)
+            {
+                commandElement.Add(new XAttribute("redo", "true"));
+            }
 
-            CommandBase commandObject = CreateCommandObject(fullName);
+            if (command is PropagationMacroCommand)
+            {
+                commandElement.Add(new XAttribute("propagation", "true"));
+            }
+            
+            parentElement.Add(commandElement);
+
+            XAttribute nameAttribute = new XAttribute("Name", commandType.Name);
+            commandElement.Add(nameAttribute);
+
+            XElement fullNameElement = new XElement(exolutioNS + "FullName");
+            fullNameElement.Add(new XText(commandType.FullName));
+            commandElement.Add(fullNameElement);
+
+            if (command.Report != null && !string.IsNullOrEmpty(command.Report.Contents))
+            {
+                XElement report = new XElement(exolutioNS + "Report");
+                report.Add(new XText(command.Report.Contents));
+                commandElement.Add(report);
+            }
+
+            #region operation parameters
+            if (PublicCommandsHelper.IsPublicCommand(commandType))
+            {
+                CommandDescriptor commandParametersDescriptors = PublicCommandsHelper.GetCommandDescriptor(commandType);
+                if (commandParametersDescriptors.Parameters.Count > 0)
+                {
+                    XElement parametersElement = new XElement(exolutioNS + "Parameters");
+                    commandElement.Add(parametersElement);
+                    foreach (ParameterDescriptor parameter in commandParametersDescriptors.Parameters)
+                    {
+                        XElement parameterElement = new XElement(exolutioNS + "Parameter");
+                        parameterElement.Add(new XElement(exolutioNS + "Name", parameter.ParameterName));
+                        parameterElement.Add(new XElement(exolutioNS + "PropertyName", parameter.ParameterPropertyName));
+
+                        object value = parameter.ParameterPropertyInfo.GetValue(command, new object[0]);
+                        if (value is Guid)
+                        {
+                            string idText = value.ToString();
+                            parameterElement.Add(new XElement(exolutioNS + "Value", idText));
+                            if (command is StackedCommand)
+                            {
+                                Project p = ((StackedCommand)command).Controller.Project;
+                                ExolutioObject component;
+                                if (p.TryTranslateObject((Guid)value, out component))
+                                {
+                                    parameterElement.Add(new XElement(exolutioNS + "ValueText", component.ToString()));
+                                }
+                            }
+                        }
+                        else if (value is ExolutioObject)
+                        {
+                            string idText = ((ExolutioObject)value).ID.ToString();
+                            parameterElement.Add(new XElement(exolutioNS + "ValueID", idText));
+                            parameterElement.Add(new XElement(exolutioNS + "ValueText", idText));
+                        }
+                        else
+                        {
+                            string valueText = value.ToString();
+                            parameterElement.Add(new XElement(exolutioNS + "Value", valueText));
+                        }
+                        parametersElement.Add(parameterElement);
+                    }
+                }
+            }
+
+            #endregion
+
+            if (command is MacroCommand && ((MacroCommand)command).Commands.Count > 0)
+            {
+                XElement subCommandsElement = new XElement(exolutioNS + "SubCommands");
+                subCommandsElement.Add(new XAttribute("count", ((MacroCommand)command).Commands.Count));
+                commandElement.Add(subCommandsElement);
+                foreach (CommandBase subCommand in ((MacroCommand)command).Commands)
+                {
+                    SerializeRec(subCommand, false, subCommandsElement, isUndo, isRedo);
+                }
+            }
+        }
+
+        public CommandBase DeserializeCommand(XElement commandElement)
+        {
+            XElement fullNameElement = commandElement.Element(exolutioNS + "FullName");
+            CommandBase commandObject = CreateCommandObject(fullNameElement.Value);
 
             CommandDescriptor commandParametersDescriptors = PublicCommandsHelper.GetCommandDescriptor(commandObject.GetType());
 
-            for (int i = 1; i < parentElement.ChildNodes.Count; i++)
+            foreach (XElement parameterElement in commandElement.Element(exolutioNS + "Parameters").Elements(exolutioNS + "Parameter"))
             {
-                XmlElement element = parentElement.ChildNodes[i] as XmlElement;
-                if (element != null)
-                {
-                    string propertyName = element.Name;
-                    ParameterDescriptor parameter = commandParametersDescriptors.GetParameterByPropertyName(propertyName);
-                    PropertyInfo propertyInfo = parameter.ParameterPropertyInfo;
-                    string stringValue = element.FirstChild.Value;
-                    object value = DeserializePropertyValue(propertyInfo, stringValue);
-                    parameter.ParameterValue = value;
-                }
+                string propertyName = parameterElement.Element(exolutioNS + "PropertyName").Value;
+                ParameterDescriptor parameter = commandParametersDescriptors.GetParameterByPropertyName(propertyName);
+                PropertyInfo propertyInfo = parameter.ParameterPropertyInfo;
+                string stringValue = parameterElement.Element(exolutioNS + "Value").Value;
+                object value = DeserializePropertyValue(propertyInfo, stringValue);
+                parameter.ParameterValue = value;
             }
-
+            
             FillParameters(commandObject, commandParametersDescriptors);
 
             return commandObject;
         }
-
-        private static Project dummyProject = new Project();
 
         private static object DeserializePropertyValue(PropertyInfo propertyInfo, string stringValue)
         {
@@ -164,11 +218,7 @@ namespace Exolutio.Controller.Commands.Reflection
             }
             else if (propertyInfo.PropertyType.IsSubclassOf(typeof(ExolutioObject)))
             {
-                Guid id = Guid.Parse(stringValue);
-                ConstructorInfo constructorInfo = propertyInfo.PropertyType.GetConstructor(new Type[] { typeof(Project), typeof(Guid) });
-                dummyProject.mappingDictionary.Clear();
-                object exolutioObject = constructorInfo.Invoke(new object[] { dummyProject, id });
-                return exolutioObject;
+                throw new NotImplementedException();
             }
             else
             {
@@ -180,38 +230,63 @@ namespace Exolutio.Controller.Commands.Reflection
 
         #endregion
 
-        public List<CommandBase> DeserializeScript(XmlDocument document)
+        public List<CommandBase> DeserializeScript(XDocument document)
         {
-            List<CommandBase> result = new List<CommandBase>();
+            //List<CommandBase> result = new List<CommandBase>();
 
-            XmlElement root = (XmlElement)document.ChildNodes[1];
-            foreach (XmlElement commandNode in root.ChildNodes)
-            {
-                CommandBase command = DeserializeCommand(commandNode);
-                result.Add(command);
-            }
+            //XmlElement root = (XmlElement)document.ChildNodes[1];
+            //foreach (XmlElement commandNode in root.ChildNodes)
+            //{
+            //    CommandBase command = DeserializeCommand(commandNode);
+            //    result.Add(command);
+            //}
 
-            return result;
+            //return result;
+            throw new NotImplementedException("Member CommandSerializer.DeserializeScript not implemented.");
         }
 
-        public void RunScript(Controller controller, XmlDocument document)
+        public void RunScript(Controller controller, XDocument document)
         {
             List<CommandBase> commands = DeserializeScript(document);
             controller.ExecuteCommands(commands);
         }
 
-        public XmlDocument CreateEmptySerializationDocument()
+        private static readonly XNamespace exolutioNS = @"http://eXolutio.eu/Commands/CommandLog/";
+
+        public XDocument SerializationDocument { get; private set; }
+        private XElement RootElement { get; set; }
+
+        public XDocument CreateEmptySerializationDocument()
         {
-            XmlDocument document = new XmlDocument();
-            XmlDeclaration xmlDeclaration = document.CreateXmlDeclaration("1.0", "utf-8", null);
-            document.AppendChild(xmlDeclaration);
-            XmlElement rootElement = document.CreateElement("CommandScript");
-            document.AppendChild(rootElement);
-            return document;
+            SerializationDocument = new XDocument(new XDeclaration("1.0", "utf-8", null));
+            
+            XElement elCommandLog = new XElement(exolutioNS + "CommandLog");
+            elCommandLog.Add(new XAttribute(XNamespace.Xmlns + "eXoLog", exolutioNS.NamespaceName));
+            SerializationDocument.Add(elCommandLog);
+            RootElement = elCommandLog;
+            return SerializationDocument;
         }
 #endif
 
         #endregion
+
+        public IList<CommandBase> DeserializeDocument(string fileName)
+        {
+            List<CommandBase> result = new List<CommandBase>();
+            SerializationDocument = XDocument.Load(fileName);
+            foreach (XElement commandElement in SerializationDocument.Element(exolutioNS + "CommandLog").Elements(exolutioNS + "Command"))
+            {
+                XAttribute initialAttribute = commandElement.Attribute("initial");
+                if (initialAttribute == null || initialAttribute.Value != "true")
+                {
+                    continue;
+                }
+                CommandBase c = DeserializeCommand(commandElement);
+                result.Add(c);
+            }
+
+            return result;
+        }
     }
 
     public static class CommandFactory<TCommand>

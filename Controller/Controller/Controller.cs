@@ -21,7 +21,7 @@ namespace Exolutio.Controller
             ExecutedCommand += Controller_ExecutedCommand;
         }
 
-        void Controller_ExecutedCommand(CommandBase command, bool isPartOfMacro, CommandBase macroCommand)
+        void Controller_ExecutedCommand(CommandBase command, bool isPartOfMacro, CommandBase macroCommand, bool isUndo, bool isRedo)
         {
             Project.HasUnsavedChanges = true; 
         }
@@ -32,11 +32,11 @@ namespace Exolutio.Controller
         /// <param name="commandBase">Either DiagramCommandBase or ModelCommandBase</param>
         /// <param name="isPartOfMacro">Tells whether this command is or is not a part of a <see cref="MacroCommand"/></param>
         /// <param name="macroCommand">References the <see cref="MacroCommand"/> of which this command is a part</param>
-        public void InvokeExecutingCommand(CommandBase commandBase, bool isPartOfMacro, CommandBase macroCommand)
+        public void InvokeExecutingCommand(CommandBase commandBase, bool isPartOfMacro, CommandBase macroCommand, bool isUndo, bool isRedo)
         {
             if (ExecutingCommand != null)
             {
-                ExecutingCommand(commandBase, isPartOfMacro, macroCommand);
+                ExecutingCommand(commandBase, isPartOfMacro, macroCommand, isUndo, isRedo);
             }
         }
 
@@ -46,11 +46,11 @@ namespace Exolutio.Controller
         /// <param name="commandBase">Either DiagramCommandBase or ModelCommandBase</param>
         /// <param name="isPartOfMacro">Tells whether this command is or is not a part of a <see cref="MacroCommand"/></param>
         /// <param name="macroCommand">References the <see cref="MacroCommand"/> of which this command is a part</param>
-        public void InvokeExecutedCommand(CommandBase commandBase, bool isPartOfMacro, CommandBase macroCommand)
+        public void InvokeExecutedCommand(CommandBase commandBase, bool isPartOfMacro, CommandBase macroCommand, bool isUndo, bool isRedo)
         {
             if (ExecutedCommand != null)
             {
-                ExecutedCommand(commandBase, isPartOfMacro, macroCommand);
+                ExecutedCommand(commandBase, isPartOfMacro, macroCommand, isUndo, isRedo);
             }
         }
 
@@ -98,22 +98,6 @@ namespace Exolutio.Controller
         /// </summary>
         public event CommandEventHandler ExecutedCommand;
 
-        public event Action UndoExecuted;
-
-        internal void OnUndoExecuted()
-        {
-            Action handler = UndoExecuted;
-            if (handler != null) handler();
-        }
-
-        public event Action RedoExecuted;
-
-        internal void OnRedoExecuted()
-        {
-            Action handler = RedoExecuted;
-            if (handler != null) handler();
-        }
-
         public void ExecuteCommands(IEnumerable<CommandBase> commands)
         {
             foreach (CommandBase command in commands)
@@ -134,5 +118,5 @@ namespace Exolutio.Controller
     /// <param name="command">Either DiagramCommandBase or ModelCommandBase</param>
     /// <param name="isPartOfMacro">Tells whether this command is or is not a part of a <see cref="MacroCommand"/></param>
     /// <param name="macroCommand">References the <see cref="MacroCommand"/> of which this command is a part</param>
-    public delegate void CommandEventHandler(CommandBase command, bool isPartOfMacro, CommandBase macroCommand);
+    public delegate void CommandEventHandler(CommandBase command, bool isPartOfMacro, CommandBase macroCommand, bool isUndo, bool isRedo);
 }

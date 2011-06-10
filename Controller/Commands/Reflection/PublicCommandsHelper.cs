@@ -193,6 +193,11 @@ namespace Exolutio.Controller.Commands.Reflection
             return publicCommandsByType[commandType];
         }
 
+        public static bool IsPublicCommand(Type commandType)
+        {
+            return publicCommandsByType.ContainsKey(commandType);
+        }
+
         private static int CommandTypeComparer(Type type, Type type1)
         {
             PublicCommandAttribute a1;

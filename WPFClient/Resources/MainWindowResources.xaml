@@ -43,7 +43,30 @@
         </Setter>
         
     </Style>
-    <Style TargetType="{x:Type Fluent:Button}" x:Key="ribbonPaneButtonStyle" >
+    
+    <!-- same as previous style -->
+    <Style TargetType="{x:Type Fluent:ToggleButton}" x:Key="ribbonTabToggleButtonStyle" BasedOn="{StaticResource RibbonToggleButtonStyle}"  >
+        <Setter Property="Tag"       Value="{Binding RelativeSource={RelativeSource Self}}" />
+        <Setter Property="Header"    Value="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}" />
+        <Setter Property="Icon"      Value="{Binding RelativeSource={RelativeSource Self}, Path=Command.Icon}" />
+        <Setter Property="LargeIcon"      Value="{Binding RelativeSource={RelativeSource Self}, Path=Command.Icon}" />
+
+        <Setter Property="ToolTip">
+            <Setter.Value>
+                <Fluent:ScreenTip
+                            DataContext="{Binding Path=PlacementTarget.Tag, RelativeSource={RelativeSource Self}}"
+                            Title="{Binding Path=Command.ScreenTipTitleDisplay}"
+                            Text="{Binding Path=Command.ScreenTipText}"
+                            DisableReason="{Binding Path=Command.DisableReason}"
+                            Image="{Binding Path=Command.Icon}"
+                            >
+                </Fluent:ScreenTip>
+            </Setter.Value>
+        </Setter>
+
+    </Style>
+    
+    <Style TargetType="{x:Type Fluent:ToggleButton}" x:Key="ribbonPaneButtonStyle" >
         <Setter Property="Tag"       Value="{Binding RelativeSource={RelativeSource Self}}" />
         <Setter Property="Header"    Value="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}" />
         <Setter Property="Icon"      Value="{Binding RelativeSource={RelativeSource Self}, Path=Command.Icon}" />
