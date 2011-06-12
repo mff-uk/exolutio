@@ -141,7 +141,19 @@ namespace Exolutio.Model
             }
             return list;
         }
-        
+
+        public static IEnumerable<PSMAttribute> GetPSMAttributesOfRepresentedClasses(this PSMClass psmClass)
+        {
+            List<PSMAttribute> list = new List<PSMAttribute>();
+
+            list.AddRange(psmClass.PSMAttributes);
+            foreach (PSMClass c in psmClass.GetSRs())
+            {
+                list.AddRange(c.PSMAttributes);
+            }
+            return list;
+        }
+
         public static IEnumerable<PSMAssociation> GetActualChildPSMAssociations(this PSMClass psmClass)
         {
             List<PSMAssociation> list = new List<PSMAssociation>();

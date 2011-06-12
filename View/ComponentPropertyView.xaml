@@ -47,7 +47,7 @@
                           Padding="10,0,0,0" Margin="0" BorderThickness="0" HorizontalContentAlignment="Left"
                           Focusable="False"
                           Background="Transparent" 
-                          />
+                          />                
             </StackPanel>
 
             <StackPanel Name="spDerivedComponents">                
@@ -84,11 +84,25 @@
                 <StackPanel.Resources>
                     <DataTemplate x:Key="psmAttributeTemplate" DataType="{x:Type PSM:PSMAttribute}">
                         <StackPanel Orientation="Vertical">
-                            <StackPanel.Resources>
-                                <View:DerivedAttributeConverter x:Key="convertor" />
-                                <View:DerivedAttributesVisibleConverter x:Key="convertorVisible" />
-                            </StackPanel.Resources>
                             <TextBlock Text="{Binding Path=Name}" ToolTip="{Binding}" Padding="2" Foreground="#FF903F3F" FontWeight="Bold" />
+                            <TextBlock Text="Interpreted attribute: " Foreground="DarkBlue" Margin="20,0,0,0" />
+                            <FormControls:LinkLabel Margin="40,0,0,0" HorizontalAlignment="Left" ToolTip="{Binding}"
+                                                    DataContext="{Binding Path=Interpretation}"
+                                        Click="FocusPIMComponent" Text="{Binding}" ClipToBounds="True" />
+                        </StackPanel>
+                    </DataTemplate>
+                    <DataTemplate x:Key="psmInheretedAttributeTemplate" DataType="{x:Type PSM:PSMAttribute}">
+                        <StackPanel Orientation="Vertical">
+                            <FormControls:LinkLabel Margin="40,0,0,0" HorizontalAlignment="Left" ToolTip="{Binding}"
+                                                    DataContext="{Binding}" Foreground="#FF903F3F" FontWeight="Bold"
+                                        Click="FocusPSMComponent" ClipToBounds="True">                            
+                                <FormControls:LinkLabel.Text>
+                                    <MultiBinding StringFormat="{}{0}.{1}">
+                                        <Binding Path="PSMClass.Name"></Binding>
+                                        <Binding Path="Name"></Binding>
+                                    </MultiBinding>        
+                                </FormControls:LinkLabel.Text>
+                            </FormControls:LinkLabel>
                             <TextBlock Text="Interpreted attribute: " Foreground="DarkBlue" Margin="20,0,0,0" />
                             <FormControls:LinkLabel Margin="40,0,0,0" HorizontalAlignment="Left" ToolTip="{Binding}"
                                                     DataContext="{Binding Path=Interpretation}"
@@ -99,6 +113,13 @@
                 <TextBlock Text="Attributes: " FontWeight="Bold" Foreground="DarkBlue" Margin="0,5" />
                 <ListView Name="lvPSMAttributes" 
                           ItemTemplate ="{StaticResource psmAttributeTemplate}" 
+                          Padding="10,0,0,0" Margin="0" BorderThickness="0" HorizontalContentAlignment="Left"
+                          Focusable="False"
+                          Background="Transparent" 
+                          />
+                <TextBlock Text="Attributes from represented class/classes: " FontWeight="Bold" Foreground="DarkBlue" Margin="0,5" Name="lPSMAttributesSRInherited" />
+                <ListView Name="lvPSMAttributesSRInhereted" 
+                          ItemTemplate ="{StaticResource psmInheretedAttributeTemplate}" 
                           Padding="10,0,0,0" Margin="0" BorderThickness="0" HorizontalContentAlignment="Left"
                           Focusable="False"
                           Background="Transparent" 

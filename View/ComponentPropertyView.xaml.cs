@@ -121,6 +121,19 @@ namespace Exolutio.View
             {
                 lvPSMAttributes.ItemsSource = psmClass.PSMAttributes;
                 spPSMAttributes.Visibility = System.Windows.Visibility.Visible;
+
+                if (psmClass.IsStructuralRepresentative)
+                {
+                    lPSMAttributesSRInherited.Visibility = System.Windows.Visibility.Visible;
+                    lvPSMAttributesSRInhereted.Visibility = System.Windows.Visibility.Visible;
+                    lvPSMAttributesSRInhereted.ItemsSource = psmClass.GetPSMAttributesOfRepresentedClasses();
+                }
+                else
+                {
+                    lPSMAttributesSRInherited.Visibility = System.Windows.Visibility.Collapsed;
+                    lvPSMAttributesSRInhereted.Visibility = System.Windows.Visibility.Collapsed;
+                }
+
             }
             else
             {
