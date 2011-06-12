@@ -671,7 +671,16 @@ namespace Exolutio.ViewToolkit
             StartNode = node1;
             EndNode = node2;
 
-            Point[] optimalConnection = GeometryHelper.ComputeOptimalConnection(node1, node2);
+            
+            Point[] optimalConnection;
+            if (node1 != node2)
+            {
+                optimalConnection = GeometryHelper.ComputeOptimalConnection(node1, node2);
+            }
+            else
+            {
+                optimalConnection = GeometryHelper.ComputePointsForSelfAssociation(node1.GetBounds());
+            }
 
 #if SILVERLIGHT
             if (node1.GetBounds().Width == 0)
@@ -687,8 +696,8 @@ namespace Exolutio.ViewToolkit
             ConnectorPoint startPoint = new ConnectorPoint(ExolutioCanvas) { Placement = EPlacementKind.ParentAutoPos, ParentControl = node1, Connector = this, OrderInConnector = 0 };
             ConnectorPoint endPoint = new ConnectorPoint(ExolutioCanvas) { Placement = EPlacementKind.ParentAutoPos, ParentControl = node2, Connector = this, OrderInConnector = 1 };
 
-            startPoint.SetPreferedPosition(optimalConnection[0]);
-            endPoint.SetPreferedPosition(optimalConnection[1]);
+            startPoint.SetPreferedPosition(optimalConnection.First());
+            endPoint.SetPreferedPosition(optimalConnection.Last());
 
             foreach (ConnectorPoint point in Points)
             {
@@ -696,9 +705,13 @@ namespace Exolutio.ViewToolkit
                 {
                     point.ParentControl.InnerConnectorControl.Children.Remove(point);
                 }
-                if (point.OrderInConnector == Points.Count - 1)
+                else if (point.OrderInConnector == Points.Count - 1)
                 {
                     point.ParentControl.InnerConnectorControl.Children.Remove(point);
+                }
+                else
+                {
+                    ExolutioCanvas.Children.Remove(point);
                 }
             }
             points.Clear();
@@ -708,7 +721,14 @@ namespace Exolutio.ViewToolkit
             EndNode.InnerConnectorControl.Children.Add(endPoint);
 
             StartNode.Connectors.Add(this);
-            EndNode.Connectors.Remove(this);
+            // in the case where StartNode == EndNode, the connector is added only once 
+            EndNode.Connectors.AddIfNotContained(this);
+
+            for (int i = 1; i < optimalConnection.Count() - 1; i++)
+            {
+                BreakAtPoint(optimalConnection[i]);        
+            }
+            
 
             InvalidateGeometry();
         }
