@@ -35,6 +35,11 @@ namespace Exolutio.View
             {
                 pimAssociationEnd.PropertyChanged += AssociationEnd_PropertyChanged;
             }
+            BindMenus();
+        }
+
+        private void BindMenus()
+        {
             ((ExolutioContextMenu)ContextMenu).ScopeObject = PIMAssociation;
             ((ExolutioContextMenu)ContextMenu).Diagram = DiagramView.Diagram;
             ((ExolutioContextMenu)Connector.StartPoint.ContextMenu).ScopeObject = PIMAssociation.PIMAssociationEnds[0];
@@ -49,7 +54,18 @@ namespace Exolutio.View
             {
                 pimAssociationEnd.PropertyChanged -= AssociationEnd_PropertyChanged;
             }
+            UnBindMenus();
             base.UnBindModelView();
+        }
+
+        private void UnBindMenus()
+        {
+            ((ExolutioContextMenu)ContextMenu).ScopeObject = null;
+            ((ExolutioContextMenu)ContextMenu).Diagram = null;
+            ((ExolutioContextMenu)Connector.StartPoint.ContextMenu).ScopeObject = null;
+            ((ExolutioContextMenu)Connector.StartPoint.ContextMenu).Diagram = null;
+            ((ExolutioContextMenu)Connector.EndPoint.ContextMenu).ScopeObject = null;
+            ((ExolutioContextMenu)Connector.EndPoint.ContextMenu).Diagram = null;
         }
 
         private void AssociationEnd_PropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
@@ -64,7 +80,10 @@ namespace Exolutio.View
             Node targetNode = ((INodeComponentViewBase)DiagramView.RepresentantsCollection[TargetClass]).MainNode;
             if (sourceNode != Connector.StartNode || targetNode != Connector.EndNode)
             {
-                Connector.Connect(sourceNode, targetNode);
+                UnBindMenus();
+                Connector.Connect(sourceNode, targetNode);                
+                CreateMenus();
+                BindMenus();
             }
             
             // labels, multiplicities
@@ -236,16 +255,7 @@ namespace Exolutio.View
             SourceCardinalityLabel.SnapTo(Connector.StartPoint, true);
             TargetCardinalityLabel.SnapTo(Connector.EndPoint, true);
 
-            ExolutioContextMenu associationMenu = MenuHelper.GetContextMenu(ScopeAttribute.EScope.PIMAssociation, DiagramView.Diagram);
-            AddConnectorCommands(associationMenu);
-            ContextMenu = associationMenu;
-            NameLabel.ContextMenu = associationMenu;
-            ExolutioContextMenu startPointMenu = MenuHelper.GetContextMenu(ScopeAttribute.EScope.PIMAssociationEnd, DiagramView.Diagram);
-            Connector.StartPoint.ContextMenu = startPointMenu;
-            SourceCardinalityLabel.ContextMenu = startPointMenu;
-            ExolutioContextMenu endPointMenu = MenuHelper.GetContextMenu(ScopeAttribute.EScope.PIMAssociationEnd, DiagramView.Diagram);
-            Connector.EndPoint.ContextMenu = endPointMenu;
-            TargetCardinalityLabel.ContextMenu = endPointMenu;
+            CreateMenus();
 
 #if SILVERLIGHT
             ContextMenuService.SetContextMenu(Connector, associationMenu);
@@ -267,6 +277,20 @@ namespace Exolutio.View
             #else
             //Connector.MouseUp += Connector_MouseUp;
             #endif
+        }
+
+        private void CreateMenus()
+        {
+            ExolutioContextMenu associationMenu = MenuHelper.GetContextMenu(ScopeAttribute.EScope.PIMAssociation, DiagramView.Diagram);
+            AddConnectorCommands(associationMenu);
+            ContextMenu = associationMenu;
+            NameLabel.ContextMenu = associationMenu;
+            ExolutioContextMenu startPointMenu = MenuHelper.GetContextMenu(ScopeAttribute.EScope.PIMAssociationEnd, DiagramView.Diagram);
+            Connector.StartPoint.ContextMenu = startPointMenu;
+            SourceCardinalityLabel.ContextMenu = startPointMenu;
+            ExolutioContextMenu endPointMenu = MenuHelper.GetContextMenu(ScopeAttribute.EScope.PIMAssociationEnd, DiagramView.Diagram);
+            Connector.EndPoint.ContextMenu = endPointMenu;
+            TargetCardinalityLabel.ContextMenu = endPointMenu;
         }
 
         void Connector_SelectedChanged()
