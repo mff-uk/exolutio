@@ -140,6 +140,16 @@ namespace Exolutio.ViewToolkit
                 }
             }
 
+            if (StartNode == EndNode)
+            {
+                for (int index = 1; index < desiredPoints.Count - 1; index++)
+                {
+                    Points[index].Placement = EPlacementKind.RelativeCanvas;
+                    Points[index].SnapTo(StartNode, false);
+                    Points[index].SetPreferedPosition(desiredPoints[index]);
+                }
+            }
+
             this.Points[0].Placement = EPlacementKind.AbsoluteSubCanvas;
             this.Points[0].SetPreferedPosition(desiredPoints[0]);
             
@@ -305,7 +315,7 @@ namespace Exolutio.ViewToolkit
             //}
         }
 
-        public void BreakAtPoint(Point point)
+        public ConnectorPoint BreakAtPoint(Point point)
         {
             int index = GeometryHelper.FindHitSegmentIndex(point, this.Points);
             ConnectorPoint connectorPoint = new ConnectorPoint(ExolutioCanvas);
@@ -333,6 +343,7 @@ namespace Exolutio.ViewToolkit
             this.Points.Insert(connectorPoint.OrderInConnector, connectorPoint);
             InvokePointsCountChanged();
             this.InvalidateGeometry();
+            return connectorPoint;
         }
 
         public void StraightenLineAtPoint(ConnectorPoint connectorPoint)
@@ -724,11 +735,15 @@ namespace Exolutio.ViewToolkit
             // in the case where StartNode == EndNode, the connector is added only once 
             EndNode.Connectors.AddIfNotContained(this);
 
-            for (int i = 1; i < optimalConnection.Count() - 1; i++)
+            for (int i = (optimalConnection.Count() - 1) - 1; i >= 1; i--)
             {
-                BreakAtPoint(optimalConnection[i]);        
+                ConnectorPoint newPoint = BreakAtPoint(optimalConnection[i]);
+                if (node1 == node2)
+                {
+                    newPoint.Placement = EPlacementKind.RelativeCanvas;
+                    newPoint.SnapTo(node1, false);
+                }
             }
-            
 
             InvalidateGeometry();
         }

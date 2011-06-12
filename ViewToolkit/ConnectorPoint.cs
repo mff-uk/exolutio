@@ -147,6 +147,11 @@ namespace Exolutio.ViewToolkit
             SetPreferedPosition(preferedPosition.X, preferedPosition.Y);
         }
 
+        public void SnapTo(Node node, bool recalcPosition)
+        {
+            this.dragThumb.SnapTo(node.DragThumb, recalcPosition);
+        }
+
         public void AdjustDrag(ref DragDeltaEventArgs deltaEventArgs)
         {
             if (ParentControl != null)
@@ -196,7 +201,7 @@ namespace Exolutio.ViewToolkit
         {
             dragThumb.ExolutioCanvas.SelectableItem_PreviewMouseDown(this, e);
         }
-
+        
         void AlignFellowTravellers()
         {
             if (NodesInBadPosition())

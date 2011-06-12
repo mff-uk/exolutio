@@ -21,7 +21,7 @@ namespace Exolutio.View.Commands.PIM
           
             IEnumerable<PIMClass> selectedClasses = Current.ActiveDiagramView.GetSelectedComponents()
                 .Where(c => c is PIMClass).Cast<PIMClass>();
-            return selectedClasses.Count() == 2;
+            return selectedClasses.Count() >= 1;
         }
 
         public override void Execute(object parameter)
