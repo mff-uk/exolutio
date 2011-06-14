@@ -44,17 +44,30 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
 
         public override bool CanExecute()
         {
-            if (parentGuid == Guid.Empty
-                || !Project.VerifyComponentType<PSMAssociationMember>(parentGuid)
-                || childGuid == Guid.Empty
+            if (parentGuid == Guid.Empty || childGuid == Guid.Empty || schemaGuid == Guid.Empty) return false;
+            if (!Project.VerifyComponentType<PSMAssociationMember>(parentGuid)
                 || !Project.VerifyComponentType<PSMAssociationMember>(childGuid)
-                || schemaGuid == Guid.Empty
                 || !Project.VerifyComponentType<PSMSchema>(schemaGuid)) return false;
-            if (Project.TranslateComponent<PSMAssociationMember>(childGuid).ParentAssociation != null)
+            PSMAssociationMember parent = Project.TranslateComponent<PSMAssociationMember>(parentGuid);
+            PSMAssociationMember child = Project.TranslateComponent<PSMAssociationMember>(childGuid);
+            
+            if (child.ParentAssociation != null)
             {
                 ErrorDescription = CommandErrors.CMDERR_PARENT_ASSOCIATION_EXISTS;
                 return false;
             }
+
+            /*if (child.Interpretation != null)
+            {
+                if (parent is PSMClass)
+                {
+                    if ((parent as PSMClass).NearestInterpretedClass() != null) return false;
+                }
+                else if (parent.NearestInterpretedParentClass() != null)
+                {
+                    return false;
+                }
+            }*/
             
             return true;
         }
