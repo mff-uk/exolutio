@@ -219,4 +219,7 @@
   <data name="CMDERR_REPR_DIFFERENT_CONTEXT" xml:space="preserve">
     <value>Represented class has different interpreted context than representant class</value>
   </data>
+  <data name="CMDERR_CANNOT_SET_INTERPRETATION_CMDERR_CANNOT_SET_INTERPRETATION_CHILD_NOT_INTERPRETED" xml:space="preserve">
+    <value>Cannot set interpretation. Child is not interpreted.</value>
+  </data>
 </root>
