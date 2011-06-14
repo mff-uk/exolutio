@@ -39,6 +39,12 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
                 return false;
             }
 
+            if (child.Interpretation == null)
+            {
+                ErrorDescription = CommandErrors.CMDERR_CANNOT_SET_INTERPRETATION_CMDERR_CANNOT_SET_INTERPRETATION_CHILD_NOT_INTERPRETED;
+                return false;
+            }
+
             PSMClass intclass = psmAssoc.NearestInterpretedClass();
             if (intclass == null)
             {

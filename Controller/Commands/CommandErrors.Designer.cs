@@ -79,6 +79,16 @@ namespace Exolutio.Controller.Commands {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot set interpretation. Child is not interpreted..
+        /// </summary>
+        internal static string CMDERR_CANNOT_SET_INTERPRETATION_CMDERR_CANNOT_SET_INTERPRETATION_CHILD_NOT_INTERPRETED {
+            get {
+                return ResourceManager.GetString("CMDERR_CANNOT_SET_INTERPRETATION_CMDERR_CANNOT_SET_INTERPRETATION_CHILD_NOT_INTER" +
+                        "PRETED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot set interpretation for this PSM component. It does not belong to any interpreted PSM classes context..
         /// </summary>
         internal static string CMDERR_CANNOT_SET_INTERPRETATION_NO_INTCLASS {
