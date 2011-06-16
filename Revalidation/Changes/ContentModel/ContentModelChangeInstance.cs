@@ -1,4 +1,5 @@
 using System;
+using Exolutio.Model;
 using Exolutio.Model.PSM;
 using Exolutio.Model.Versioning;
 using Version = Exolutio.Model.Versioning.Version;
@@ -29,11 +30,16 @@ namespace Exolutio.Revalidation.Changes
         }
     }
 
-    public class ContentModelAddedInstance : ContentModelChangeInstance
+    public class ContentModelAddedInstance : ContentModelChangeInstance, IAdditionChange
     {
         public ContentModelAddedInstance(PSMComponent component, Version oldVersion, Version newVersion)
             : base(component, oldVersion, newVersion)
         {
+        }
+
+        public Component ComponentNewVersion
+        {
+            get { return PSMContentModel; }
         }
 
         [ChangePredicateParameter]
@@ -61,11 +67,16 @@ namespace Exolutio.Revalidation.Changes
         }
     }
 
-    public class ContentModelRemovedInstance : ContentModelChangeInstance
+    public class ContentModelRemovedInstance : ContentModelChangeInstance, IRemovalChange
     {
         public ContentModelRemovedInstance(PSMComponent component, Version oldVersion, Version newVersion)
             : base(component, oldVersion, newVersion)
         {
+        }
+
+        public Component ComponentOldVersion
+        {
+            get { return PSMContentModel.GetInVersion(OldVersion); }
         }
 
         public override string ToString()
@@ -89,11 +100,21 @@ namespace Exolutio.Revalidation.Changes
         }
     }
 
-    public class ContentModelMovedInstance : ContentModelChangeInstance
+    public class ContentModelMovedInstance : ContentModelChangeInstance, IMigratoryChange
     {
         public ContentModelMovedInstance(PSMComponent component, Version oldVersion, Version newVersion)
             : base(component, oldVersion, newVersion)
         {
+        }
+
+        public Component ComponentOldVersion
+        {
+            get { return PSMContentModel.GetInVersion(OldVersion); }
+        }
+
+        public Component ComponentNewVersion
+        {
+            get { return PSMContentModel; }
         }
 
         public override EChangeCategory Category
@@ -131,11 +152,21 @@ namespace Exolutio.Revalidation.Changes
         }
     }
 
-    public class ContentModelTypeChangedInstance : ContentModelChangeInstance
+    public class ContentModelTypeChangedInstance : ContentModelChangeInstance, ISedentaryChange
     {
         public ContentModelTypeChangedInstance(PSMComponent component, Version oldVersion, Version newVersion)
             : base(component, oldVersion, newVersion)
         {
+        }
+
+        public Component ComponentOldVersion
+        {
+            get { return PSMContentModel.GetInVersion(OldVersion); }
+        }
+
+        public Component ComponentNewVersion
+        {
+            get { return PSMContentModel; }
         }
 
         public override EChangeCategory Category

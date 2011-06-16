@@ -416,11 +416,5 @@ namespace Exolutio.View
                 base.Selected = value;
             }
         }
-
-        public override void Focus()
-        {
-            base.Focus();
-            Connector.Focus();
-        }
     }
 }

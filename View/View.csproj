@@ -80,6 +80,10 @@
     <Compile Include="Commands\PIM\guiSplitPIMAssociation.cs" />
     <Compile Include="Commands\PIM\guiSplitPIMAttribute.cs" />
     <Compile Include="Commands\PSM\guiSplitPSMAttribute.cs" />
+    <Compile Include="Commands\Versioning\guiRevalidation.cs" />
+    <Compile Include="Commands\Versioning\XsltTestWindow.xaml.cs">
+      <DependentUpon>XsltTestWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Commands\View\guiBreakLineCommand.cs" />
     <Compile Include="Commands\View\guiAlignCommand.cs" />
     <Compile Include="Commands\Edit\guiDelete.cs" />
@@ -117,7 +121,7 @@
     <Compile Include="Commands\Versioning\EvolutionChangesWindow.xaml.cs">
       <DependentUpon>EvolutionChangesWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Commands\Versioning\guiFindChangesCommand.cs" />
+    <Compile Include="Commands\Versioning\guiFindChanges.cs" />
     <Compile Include="Commands\guiActiveDiagramCommand.cs" />
     <Compile Include="Commands\Grammar\guiGenerateGrammarCommand.cs" />
     <Compile Include="Commands\Grammar\guiNormalizeSchemaCommand.cs" />
@@ -152,11 +156,14 @@
     <Compile Include="Commands\Project\guiSaveAsProjectCommand.cs" />
     <Compile Include="Commands\Project\guiSaveProjectCommand.cs" />
     <Compile Include="Commands\guiCommandBase.cs" />
-    <Compile Include="Commands\Versioning\guiAddVersionLinkCommand.cs" />
-    <Compile Include="Commands\Versioning\guiRemoveCurrentVersionCommand.cs" />
-    <Compile Include="Commands\Versioning\guiBranchCurrentVersionCommand.cs" />
-    <Compile Include="Commands\Versioning\guiSaveAsSingleVersionCommand.cs" />
+    <Compile Include="Commands\Versioning\guiCreateVersionLink.cs" />
+    <Compile Include="Commands\Versioning\guiRemoveCurrentVersion.cs" />
+    <Compile Include="Commands\Versioning\guiBranchCurrentVersion.cs" />
+    <Compile Include="Commands\Versioning\guiSaveAsSingleVersion.cs" />
     <Compile Include="Commands\View\guiStraightenLineCommand.cs" />
+    <Compile Include="Common view\VersionedElementInfo.xaml.cs">
+      <DependentUpon>VersionedElementInfo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ComponentPropertyView.xaml.cs">
       <DependentUpon>ComponentPropertyView.xaml</DependentUpon>
     </Compile>
@@ -300,6 +307,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Commands\Versioning\EvolutionChangesWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Commands\Versioning\XsltTestWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Common view\VersionedElementInfo.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

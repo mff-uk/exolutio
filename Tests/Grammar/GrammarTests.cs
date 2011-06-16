@@ -21,7 +21,7 @@ namespace Tests.Serialization
         public void TestGenerateGrammar()
         {
             ProjectSerializationManager projectSerializationManager = new ProjectSerializationManager();
-            Project sampleProject = projectSerializationManager.LoadProject(@"..\..\..\ExolutioWeb\Exolutio\SampleFiles\Figure8.exolutio");
+            Project sampleProject = projectSerializationManager.LoadProject(@"..\..\..\Projects\Figure8.eXo");
 
             PSMSchema psmSchema = sampleProject.SingleVersion.PSMSchemas[0];
             GrammarGenerator grammarGenerator = new GrammarGenerator();

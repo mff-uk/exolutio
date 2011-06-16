@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
 using Exolutio.Model.Serialization;
@@ -32,8 +34,7 @@ namespace Exolutio.Model.Versioning
                 }
             }
         }
-
-
+        
         private Guid branchedFromGuid;
         public Version BranchedFrom
         {
@@ -42,6 +43,11 @@ namespace Exolutio.Model.Versioning
             {
                 branchedFromGuid = value != null ? value : Guid.Empty;
             }
+        }
+
+        public IEnumerable<Version> BranchedVersions
+        {
+            get { return Project.VersionManager.Versions.Where(v => v.BranchedFrom == this); }
         }
 
         private readonly ExolutioList<IVersionedItem> items = new ExolutioList<IVersionedItem>();

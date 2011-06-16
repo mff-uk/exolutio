@@ -1,5 +1,8 @@
+using System;
+using Exolutio.Model;
 using Exolutio.Model.PSM;
 using Exolutio.Model.Versioning;
+using Version = Exolutio.Model.Versioning.Version;
 
 namespace Exolutio.Revalidation.Changes
 {
@@ -29,11 +32,16 @@ namespace Exolutio.Revalidation.Changes
 
     }
 
-    public class AssociationAddedInstance : AssociationChangeInstance
+    public class AssociationAddedInstance : AssociationChangeInstance, IAdditionChange
     {
         public AssociationAddedInstance(PSMComponent component, Version oldVersion, Version newVersion)
             : base(component, oldVersion, newVersion)
         {
+        }
+
+        public Component ComponentNewVersion
+        {
+            get { return PSMAssociation; }
         }
 
         [ChangePredicateParameter]
@@ -64,11 +72,16 @@ namespace Exolutio.Revalidation.Changes
         }
     }
 
-    public class AssociationRemovedInstance : AssociationChangeInstance
+    public class AssociationRemovedInstance : AssociationChangeInstance, IRemovalChange
     {
         public AssociationRemovedInstance(PSMComponent component, Version oldVersion, Version newVersion)
             : base(component, oldVersion, newVersion)
         {
+        }
+
+        public Component ComponentOldVersion
+        {
+            get { return PSMAssociation; }
         }
 
         public override string ToString()
@@ -92,44 +105,21 @@ namespace Exolutio.Revalidation.Changes
         }
     }
 
-    public class AssociationRenamedInstance : AssociationChangeInstance
-    {
-        public AssociationRenamedInstance(PSMComponent component, Version oldVersion, Version newVersion)
-            : base(component, oldVersion, newVersion)
-        {
-        }
-
-        public override EChangeCategory Category
-        {
-            get { return EChangeCategory.Sedentary; }
-        }
-
-        public string OldName { get; set; }
-
-        [ChangePredicateParameter]
-        public string NewName { get; set; }
-
-        public override string ToString()
-        {
-            return string.Format("Association '{0}' was renamed from '{1}' to '{2}'.", PSMAssociation, OldName, NewName);
-        }
-
-        public new static bool TestCandidate(PSMComponent candidate, Version oldVersion, Version newVersion)
-        {
-            return ExistingTest(candidate, oldVersion, newVersion) && candidate.Name != candidate.GetInVersion(oldVersion).Name;
-        }
-
-        public new static ChangeInstance CreateInstance(PSMComponent candidate, Version oldVersion, Version newVersion)
-        {
-            return new AssociationRenamedInstance(candidate, oldVersion, newVersion) { OldName = candidate.GetInVersion(oldVersion).Name, NewName = candidate.Name };
-        }
-    }
-
-    public class AssociationMovedInstance : AssociationChangeInstance
+    public class AssociationMovedInstance : AssociationChangeInstance, IMigratoryChange
     {
         public AssociationMovedInstance(PSMComponent component, Version oldVersion, Version newVersion)
             : base(component, oldVersion, newVersion)
         {
+        }
+
+        public Component ComponentOldVersion
+        {
+            get { return PSMAssociation.GetInVersion(OldVersion); }
+        }
+
+        public Component ComponentNewVersion
+        {
+            get { return PSMAssociation; }
         }
 
         public override EChangeCategory Category
@@ -174,11 +164,21 @@ namespace Exolutio.Revalidation.Changes
         }
     }
 
-    public class AssociationIndexChangedInstance : AssociationChangeInstance
+    public class AssociationIndexChangedInstance : AssociationChangeInstance, IMigratoryChange
     {
         public AssociationIndexChangedInstance(PSMComponent component, Version oldVersion, Version newVersion)
             : base(component, oldVersion, newVersion)
         {
+        }
+
+        public Component ComponentOldVersion
+        {
+            get { return PSMAssociation.GetInVersion(OldVersion); }
+        }
+
+        public Component ComponentNewVersion
+        {
+            get { return PSMAssociation; }
         }
 
         public override EChangeCategory Category
@@ -216,6 +216,49 @@ namespace Exolutio.Revalidation.Changes
                 OldIndex = psmAssociationO.Index,
                 NewIndex = psmAssociation.Index
             };
+        }
+    }
+
+    public class AssociationRenamedInstance : AssociationChangeInstance, ISedentaryChange
+    {
+        public AssociationRenamedInstance(PSMComponent component, Version oldVersion, Version newVersion)
+            : base(component, oldVersion, newVersion)
+        {
+        }
+
+        public Component ComponentOldVersion
+        {
+            get { return PSMAssociation.GetInVersion(OldVersion); }
+        }
+
+        public Component ComponentNewVersion
+        {
+            get { return PSMAssociation; }
+        }
+
+        public override EChangeCategory Category
+        {
+            get { return EChangeCategory.Sedentary; }
+        }
+
+        public string OldName { get; set; }
+
+        [ChangePredicateParameter]
+        public string NewName { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("Association '{0}' was renamed from '{1}' to '{2}'.", PSMAssociation, OldName, NewName);
+        }
+
+        public new static bool TestCandidate(PSMComponent candidate, Version oldVersion, Version newVersion)
+        {
+            return ExistingTest(candidate, oldVersion, newVersion) && candidate.Name != candidate.GetInVersion(oldVersion).Name;
+        }
+
+        public new static ChangeInstance CreateInstance(PSMComponent candidate, Version oldVersion, Version newVersion)
+        {
+            return new AssociationRenamedInstance(candidate, oldVersion, newVersion) { OldName = candidate.GetInVersion(oldVersion).Name, NewName = candidate.Name };
         }
     }
 }

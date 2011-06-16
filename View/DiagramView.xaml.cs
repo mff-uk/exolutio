@@ -255,7 +255,7 @@ namespace Exolutio.View
             {
                 ComponentViewBase componentViewBase = RepresentantsCollection[component];
                 SelectedViews.Add(componentViewBase);
-                componentViewBase.Selected = true;
+                componentViewBase.SelectAndSelectCreatedControls();
             }
             InvokeSelectionChanged();
         }
@@ -294,11 +294,11 @@ namespace Exolutio.View
             {
                 if (!textboxfound)
                 {
-                    view.Selected = true;
+                    view.SelectAndSelectCreatedControls();
                 }
                 if (focusComponent)
                 {
-                    view.Focus();
+                    //view.Focus();
                     double x = 0;
                     double y = 0;
                     if (view is INodeComponentViewBase)
@@ -308,8 +308,8 @@ namespace Exolutio.View
                     }
                     if (view is IConnectorViewBase)
                     {
-                        x = Canvas.GetLeft(((IConnectorViewBase)view).Connector);
-                        y = Canvas.GetTop(((IConnectorViewBase)view).Connector);
+                        x = ((IConnectorViewBase)view).Connector.GetBounds().Left;
+                        y = ((IConnectorViewBase)view).Connector.GetBounds().Top;
                     }
 
 #if SILVERLIGHT
@@ -340,5 +340,31 @@ namespace Exolutio.View
         }
 
         #endregion
+
+        private readonly VersionedElementInfo infoWindow = new VersionedElementInfo();
+
+        public void InvokeVersionedElementMouseEnter(object sender, Component component)
+        {
+            if (Current.Project.UsesVersioning &&
+                infoWindow.Component != component && 
+                Keyboard.Modifiers.HasFlag(ModifierKeys.Shift))
+            {
+                infoWindow.Component = component;
+                Point pointToScreen = this.PointToScreen(Mouse.GetPosition(this));
+                infoWindow.Left = pointToScreen.X + 50;
+                infoWindow.Top = pointToScreen.Y + 30;
+                infoWindow.Show();
+            }
+
+        }
+
+        public void InvokeVersionedElementMouseLeave(object sender, Component component)
+        {
+            if (infoWindow.Component == component)
+            {
+                infoWindow.Hide();
+                infoWindow.Component = null;
+            }
+        }
     }
 }

@@ -155,21 +155,21 @@ namespace Exolutio.Controller.Commands
 			}
 		}
 
-        /// <summary>
-        /// Executive function of a command
-        /// </summary>
-        /// <seealso cref="UndoOperation"/>
-        internal virtual void CommandOperation() { }
+	    /// <summary>
+	    /// Executive function of a command
+	    /// </summary>
+	    /// <seealso cref="UndoOperation"/>
+	    internal abstract void CommandOperation();
 
-        /// <summary>
-        /// Undo executive function of a command. Should revert the <see cref="CommandOperation"/> executive 
-        /// function and return the state to the state before <see cref="CommandOperation"/> was execute.
-        /// <returns>returns <see cref="OperationResult.OK"/> if operation succeeded, <see cref="OperationResult.Failed"/> otherwise</returns>
-        /// </summary>
-        /// <remarks>
-        /// <para>If  <see cref="OperationResult.Failed"/> is returned, whole undo stack is invalidated</para>
-        /// </remarks>
-        internal virtual OperationResult UndoOperation() { return OperationResult.OK; }
+	    /// <summary>
+	    /// Undo executive function of a command. Should revert the <see cref="CommandOperation"/> executive 
+	    /// function and return the state to the state before <see cref="CommandOperation"/> was execute.
+	    /// <returns>returns <see cref="OperationResult.OK"/> if operation succeeded, <see cref="OperationResult.Failed"/> otherwise</returns>
+	    /// </summary>
+	    /// <remarks>
+	    /// <para>If  <see cref="OperationResult.Failed"/> is returned, whole undo stack is invalidated</para>
+	    /// </remarks>
+	    internal abstract OperationResult UndoOperation();
 
         /// <summary>
         /// Redo executive function of a command. Should revert the <see cref="UndoOperation"/>.

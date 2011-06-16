@@ -68,12 +68,13 @@ namespace Exolutio.WPFClient
 
             ActivateDiagram(Current.ActiveDiagram);
         }
-        
+
         /// <summary>
         /// Activates a diagram
         /// </summary>
         /// <param name="diagram">Diagram to be activated</param>
-        public DiagramTab ActivateDiagram(Diagram diagram)
+        /// <param name="activateDiagramTab"></param>
+        public DiagramTab ActivateDiagram(Diagram diagram, bool activateDiagramTab = true)
         {
             if (ActiveDiagram != diagram && diagram != null)
             {
@@ -86,7 +87,10 @@ namespace Exolutio.WPFClient
                 {
                     DockManager.ActiveDocument = tab;
                 }
-                tab.BringDocumentHeaderToView(false);
+                if (activateDiagramTab)
+                {
+                    tab.ActivateTab(false);
+                }
                 return tab;
             }
             else
@@ -186,11 +190,9 @@ namespace Exolutio.WPFClient
         /// <summary>
         /// Activates given diagram and selects given element on it
         /// </summary>
-        /// <param name="diagram"></param>
-        /// <param name="selectedComponent"></param>
-        public void ActivateDiagramWithElement(Diagram diagram, Component selectedComponent)
+        public void ActivateDiagramWithElement(Diagram diagram, Component selectedComponent, bool activateDiagramTab = true)
         {
-            DiagramTab tab = ActivateDiagram(diagram);
+            DiagramTab tab = ActivateDiagram(diagram, activateDiagramTab);
             tab.DiagramView.ClearSelection();
 
             if (selectedComponent != null)
@@ -321,6 +323,19 @@ namespace Exolutio.WPFClient
             f.Title = ActiveDiagram.Caption + "_sample.xml";
 
             f.Show(DockManager, true);
+        }
+
+        public IList<DiagramView> GetTopDiagramViews()
+        {
+            List<DiagramView> result = new List<DiagramView>();
+            foreach (DocumentContent d in MainWindow.dockManager.Documents)
+            {
+                if (d is DiagramTab && d.IsActiveInItsGroup())
+                {
+                    result.Add(((DiagramTab) d).DiagramView);
+                }
+            }
+            return result;
         }
 
         public IEnumerable<ExolutioVersionedObject> AnotherOpenedVersions(ExolutioVersionedObject item)

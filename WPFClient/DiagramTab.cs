@@ -11,7 +11,7 @@ namespace Exolutio.WPFClient
         public abstract DiagramView DiagramView { get; }
 
 
-        public void BringDocumentHeaderToView(bool moveToFirst)
+        public void ActivateTab(bool moveToFirst)
         {
             if (ContainerPane != null)
             {

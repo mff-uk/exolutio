@@ -17,14 +17,15 @@
             VerticalGridLinesBrush="LightGray" 
             RowBackground="Cornsilk" 
             CanUserReorderColumns="False" 
+            CanUserResizeColumns="True"
             IsReadOnly="True" 
             SelectionChanged="gridChanges_SelectionChanged"
-            DataGridRow.MouseDoubleClick="GridChanges_OnMouseDoubleClick"
             >
         
             <DataGrid.Columns>
                 <DataGridTextColumn Header="#" />
                 <DataGridTextColumn Header="Location" Binding="{Binding Component.XPath, FallbackValue=undefined, Mode=OneWay}" />
+                <DataGridTextColumn Header="Category" Binding="{Binding Category, Mode=OneWay}" />
                 <DataGridTextColumn Header="Scope" Binding="{Binding Scope, Mode=OneWay}" />
                 <DataGridTextColumn Header="Type" Binding="{Binding ChangeType, Mode=OneWay}" x:Name="colType" />
                 <DataGridTextColumn Header="Description" Width="*" Binding="{Binding ., Mode=OneWay}" />

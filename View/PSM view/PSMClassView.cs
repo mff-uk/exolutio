@@ -2,15 +2,17 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using Exolutio.Controller.Commands;
-using Exolutio.Model;
 using Exolutio.Model.PSM;
 using Exolutio.Model.ViewHelper;
 using Exolutio.SupportingClasses;
 using Exolutio.ViewToolkit;
+using Component = Exolutio.Model.Component;
 
 namespace Exolutio.View
 {
@@ -147,8 +149,20 @@ namespace Exolutio.View
             dc.DoubleClickW += tbClassHeader_MouseDoubleClick;
 #else
             tbClassHeader.MouseDoubleClick += tbClassHeader_MouseDoubleClick;
+            tbClassHeader.MouseEnter += tbClassHeader_MouseEnter;
+            tbClassHeader.MouseLeave += tbClassHeader_MouseLeave;
 #endif
 
+        }
+
+        protected void tbClassHeader_MouseEnter(object sender, MouseEventArgs e)
+        {
+            DiagramView.InvokeVersionedElementMouseEnter(this, PSMClass);
+        }
+
+        protected void tbClassHeader_MouseLeave(object sender, MouseEventArgs e)
+        {
+            DiagramView.InvokeVersionedElementMouseLeave(this, PSMClass);
         }
 
         void tbClassHeader_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -352,5 +366,8 @@ namespace Exolutio.View
         {
             return GetEnumerator();
         }
+
+
+
     }
 }

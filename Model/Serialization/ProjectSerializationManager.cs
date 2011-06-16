@@ -31,6 +31,10 @@ namespace Exolutio.Model.Serialization
         {
             using (FileStream fileStream = projectFile.Open(FileMode.Create, FileAccess.Write))
             {
+                if (project.ProjectFile == null)
+                {
+                    project.ProjectFile = projectFile;
+                }
                 SaveProject(project, fileStream);
             }
             project.ProjectFile = projectFile;
