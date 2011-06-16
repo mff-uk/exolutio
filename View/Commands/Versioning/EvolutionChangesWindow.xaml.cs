@@ -61,25 +61,19 @@ namespace Exolutio.View
 
         private void gridChanges_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            if (gridChanges.SelectedItem != null)
+            {
+                MakeHighlightsForChangeInstance((ChangeInstance) gridChanges.SelectedItem);
+            }
         }
 
-        private void GridChanges_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void MakeHighlightsForChangeInstance(ChangeInstance change)
         {
-            //XsltTestWindow.ShowDialog(Changes, DiagramOldVersion, DiagramNewVersion);
-            DependencyObject source = (DependencyObject)e.OriginalSource;
-            DataGridRow row = source.TryFindParent<DataGridRow>();
-
-            //the user did not click on a row
-            if (row == null) return;
-
-            ChangeInstance change = (ChangeInstance)row.Item;
-
-            if (DiagramView != null)
+            if (DiagramNewVersion != null)
             {
                 if (change.Component.ExistsInVersion(DiagramNewVersion.Version))
                 {
-                    MainWindow.FocusComponent(change.Component);
+                    MainWindow.FocusComponent(change.Component, false);
                 }
                 else
                 {
@@ -91,16 +85,13 @@ namespace Exolutio.View
             {
                 if (change.Component.ExistsInVersion(DiagramOldVersion.Version))
                 {
-                    MainWindow.FocusComponent(change.Component.GetInVersion(DiagramOldVersion.Version));
+                    MainWindow.FocusComponent(change.Component.GetInVersion(DiagramOldVersion.Version), false);
                 }
                 else
                 {
-                    DiagramView.ClearSelection();
+                    DiagramViewOldVersion.ClearSelection();
                 }
             }
-
-            e.Handled = true;
-            this.Focus();
         }
 
         public DiagramView DiagramView { get; set; }

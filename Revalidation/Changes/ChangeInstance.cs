@@ -125,7 +125,7 @@ namespace Exolutio.Revalidation.Changes
         }
     }
 
-    public interface IChangeInstance<TComponent>
+    public interface IChangeInstance<out TComponent>
         where TComponent : PSMComponent
     {
         Version OldVersion { get; set; }
@@ -135,12 +135,25 @@ namespace Exolutio.Revalidation.Changes
         TComponent Component { get; }
     }
 
-    public static class ChangeInstanceExt
+    public interface IAdditionChange
     {
-        public static PSMComponent ComopnentOldVersion<TComponent>(this IChangeInstance<TComponent> changeInstance) 
-            where TComponent : PSMComponent
-        {
-            return (PSMComponent) changeInstance.Component.GetInVersion(changeInstance.OldVersion);
-        }
+        Component ComponentNewVersion { get; }
+    }
+
+    public interface IRemovalChange
+    {
+        Component ComponentOldVersion { get; }
+    }
+
+    public interface ISedentaryChange
+    {
+        Component ComponentOldVersion { get; }
+        Component ComponentNewVersion { get; }
+    }
+
+    public interface IMigratoryChange
+    {
+        Component ComponentOldVersion { get; }
+        Component ComponentNewVersion { get; }
     }
 }

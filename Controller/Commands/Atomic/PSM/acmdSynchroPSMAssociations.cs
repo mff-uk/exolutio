@@ -86,6 +86,11 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
                 String.Concat(Project.TranslateComponentCollection<PSMAssociation>(X2).Select<PSMAssociation, String>(a => a.ToString() + " ")));
         }
 
+        internal override CommandBase.OperationResult UndoOperation()
+        {
+            throw new NotImplementedException("Member acmdSynchroPSMAssociations.UndoOperation not implemented.");
+        }
+
         internal override PropagationMacroCommand PostPropagation()
         {
             ReadOnlyCollection<PSMAssociation> aX1 = Project.TranslateComponentCollection<PSMAssociation>(X1);

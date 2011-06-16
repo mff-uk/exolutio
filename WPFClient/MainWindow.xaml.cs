@@ -204,18 +204,18 @@ namespace Exolutio.WPFClient
         }
 
         #region focus 
-
-        public void FocusComponent(Diagram diagram, Component component)
+        
+        public void FocusComponent(Diagram diagram, Component component, bool activateDiagramTab = true)
         {
             Component diagramComponent = component;
-            DiagramTabManager.ActivateDiagramWithElement(diagram, diagramComponent);
+            DiagramTabManager.ActivateDiagramWithElement(diagram, diagramComponent, activateDiagramTab);
         }
 
-        public void FocusComponent(IEnumerable<PIMDiagram> pimDiagrams, PIMComponent component)
+        public void FocusComponent(IEnumerable<PIMDiagram> pimDiagrams, PIMComponent component, bool activateDiagramTab = true)
         {
             if (pimDiagrams.Count() == 1)
             {
-                DiagramTabManager.ActivateDiagramWithElement(pimDiagrams.First(), component);
+                DiagramTabManager.ActivateDiagramWithElement(pimDiagrams.First(), component, activateDiagramTab);
             }
             else
             {
@@ -223,10 +223,10 @@ namespace Exolutio.WPFClient
             }
         }
 
-        public void FocusComponent(Component component)
+        public void FocusComponent(Component component, bool activateDiagramTab = true)
         {
             Diagram diagram = ModelIterator.GetDiagramForComponent(component);
-            Current.MainWindow.FocusComponent(diagram, component);
+            Current.MainWindow.FocusComponent(diagram, component, activateDiagramTab);
         }
 
         #endregion 
@@ -246,7 +246,6 @@ namespace Exolutio.WPFClient
                 ReportDisplay.DisplayLog(log);
             }
         }
-
 
         #region enable/disable commands
 

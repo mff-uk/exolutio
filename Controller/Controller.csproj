@@ -202,6 +202,8 @@
     <Compile Include="Commands\Reflection\CommandDescriptor.cs" />
     <Compile Include="Commands\Versioning\cmdBranchProjectVersion.cs" />
     <Compile Include="Commands\Versioning\cmdRemoveProjectVersion.cs" />
+    <Compile Include="Commands\Versioning\cmdCreateVersionLink.cs" />
+    <Compile Include="Commands\Versioning\cmdRemoveVersionLink.cs" />
     <Compile Include="Controller\CommandLogger.cs" />
     <Compile Include="Controller\CommandStack.cs" />
     <Compile Include="Commands\Base\ExolutioCommandException.cs" />

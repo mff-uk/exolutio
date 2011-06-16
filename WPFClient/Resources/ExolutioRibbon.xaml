@@ -162,6 +162,12 @@
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.FindChangesCommand}"
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
             </Fluent:RibbonGroupBox>
+            <Fluent:RibbonGroupBox Header="Version links">
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.CreateVersionLinkCommand}"
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.RemoveVersionLinkCommand}"
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />                
+            </Fluent:RibbonGroupBox>
             <Fluent:RibbonGroupBox>
                 <Fluent:InRibbonGallery MinItemsInRow="1" MaxItemsInRow="5" Name="versionGallery" Visibility="Collapsed"
                     ItemWidth="50" ItemHeight="18"                    

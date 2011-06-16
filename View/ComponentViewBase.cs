@@ -8,14 +8,14 @@ using Exolutio.SupportingClasses;
 
 namespace Exolutio.View
 {
-    public abstract class ComponentViewBaseVH<TViewHelper> : ComponentViewBase 
+    public abstract class ComponentViewBaseVH<TViewHelper> : ComponentViewBase
         where TViewHelper : ViewHelper
     {
         public abstract TViewHelper ViewHelper { get; protected set; }
 
         public override void PutInDiagram(DiagramView diagramView, ViewHelper viewHelper)
         {
-            ViewHelper = (TViewHelper) viewHelper;
+            ViewHelper = (TViewHelper)viewHelper;
             base.PutInDiagram(diagramView, viewHelper);
         }
 
@@ -27,7 +27,7 @@ namespace Exolutio.View
             }
         }
 
-        
+
         protected override void BindModelView()
         {
             base.BindModelView();
@@ -52,13 +52,13 @@ namespace Exolutio.View
 
         #region model binding
 
-        private int suspendCounter = 0; 
+        private int suspendCounter = 0;
         public bool IsBindingSuspended { get; private set; }
 
         public void SuspendModelBinding()
         {
             suspendCounter++;
-            IsBindingSuspended = true; 
+            IsBindingSuspended = true;
         }
 
         public void ResumeModelBinding()
@@ -68,7 +68,7 @@ namespace Exolutio.View
                 suspendCounter--;
                 if (suspendCounter == 0)
                 {
-                    IsBindingSuspended = false; 
+                    IsBindingSuspended = false;
                     UpdateView();
                 }
             }
@@ -116,7 +116,7 @@ namespace Exolutio.View
         /// </summary>
         public virtual void UpdateView() { }
 
-        #endregion 
+        #endregion
 
         #region deffered add & remove
 
@@ -172,7 +172,7 @@ namespace Exolutio.View
                 PutInDiagram(pendingDiagramView, pendingViewHelper);
                 pendingDiagramView.DeferredAddComponents.Remove(this);
                 pendingDiagramView.DefferedAddCheck();
-                pendingDiagramView = null; 
+                pendingDiagramView = null;
             }
         }
 
@@ -225,8 +225,6 @@ namespace Exolutio.View
 
         #region select & highlight
 
-        public virtual void Focus() { }
-
         private bool selected;
         public virtual bool Selected
         {
@@ -234,12 +232,15 @@ namespace Exolutio.View
             set
             {
                 selected = value;
-                foreach (Control createdControl in CreatedControls)
+                if (!value)
                 {
-                    //if (createdControl is ISelectable && ((ISelectable)createdControl).Selected != value)
-                    //{
-                    //    ((ISelectable)createdControl).Selected = value;
-                    //}
+                    foreach (Control createdControl in CreatedControls)
+                    {
+                        if (createdControl is ISelectable && ((ISelectable)createdControl).Selected)
+                        {
+                            ((ISelectable)createdControl).Selected = false;
+                        }
+                    }
                 }
                 if (value)
                 {
@@ -251,6 +252,18 @@ namespace Exolutio.View
                 }
                 DiagramView.InvokeSelectionChanged();
             }
+        }
+
+        public void SelectAndSelectCreatedControls()
+        {
+            foreach (Control createdControl in CreatedControls)
+            {
+                if (createdControl is ISelectable && !((ISelectable)createdControl).Selected)
+                {
+                    ((ISelectable)createdControl).Selected = true;
+                }
+            }
+            Selected = true;
         }
 
         private bool highlighted;

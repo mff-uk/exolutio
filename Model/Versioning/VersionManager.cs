@@ -18,9 +18,12 @@ namespace Exolutio.Model.Versioning
         /// </summary>
         private class VersionedItemPivot
         {
-            private readonly ExolutioDictionary<Version, IVersionedItem> pivotMapping = new ExolutioDictionary<Version, IVersionedItem>();
+            private readonly ExolutioDictionary<Guid, Guid> pivotMapping = new ExolutioDictionary<Guid, Guid>();
 
-            public ExolutioDictionary<Version, IVersionedItem> PivotMapping
+            /// <summary>
+            /// Dictionary Key: version guid, Value: versined item guid
+            /// </summary>
+            public ExolutioDictionary<Guid, Guid> PivotMapping
             {
                 get { return pivotMapping; }
             }
@@ -51,20 +54,60 @@ namespace Exolutio.Model.Versioning
             return Versions.First(v => v.Number == number);
         }
 
-        #endregion
-
-        private readonly ExolutioDictionary<VersionedItemPivot, List<IVersionedItem>> linkedVersionedItems = new ExolutioDictionary<VersionedItemPivot, List<IVersionedItem>>();
-        private ReadOnlyDictionary<VersionedItemPivot, List<IVersionedItem>> LinkedVersionedItems
+        public bool AreVersionsLinear
         {
-            get { return linkedVersionedItems.AsReadOnly(); }
+            get
+            {
+                if (Versions.All(v => v.BranchedVersions.Count() <= 1) && Versions.Count(v => v.BranchedFrom == null) == 1)
+                {
+                    Version first = Versions.First(v => v.BranchedFrom == null);
+                    int checkedVersions = 1;
+
+                    Version it = first;
+                    while (it.BranchedVersions.Count() == 1)
+                    {
+                        it = it.BranchedVersions.First();
+                        checkedVersions++;
+                    }
+                    return checkedVersions == Versions.Count();
+                }
+                else
+                {
+                    return false; 
+                }
+            }
         }
 
-        private readonly ExolutioDictionary<IVersionedItem, VersionedItemPivot> pivotLookupDictionary = new ExolutioDictionary<IVersionedItem, VersionedItemPivot>();
-        private ReadOnlyDictionary<IVersionedItem, VersionedItemPivot> PivotLookupDictionary
+        #endregion
+
+        //private readonly ExolutioDictionary<VersionedItemPivot, List<Guid>> linkedVersionedItems = new ExolutioDictionary<VersionedItemPivot, List<Guid>>();
+
+        ///// <summary>
+        ///// Dictionary holds a list of versioned items for each pivot
+        ///// </summary>
+        //private ReadOnlyDictionary<VersionedItemPivot, List<Guid>> LinkedVersionedItems
+        //{
+        //    get { return linkedVersionedItems.AsReadOnly(); }
+        //}
+
+        private readonly ExolutioDictionary<Guid, VersionedItemPivot> pivotLookupDictionary = new ExolutioDictionary<Guid, VersionedItemPivot>();
+
+        /// <summary>
+        /// Dictionary used to lookup pivot (Value) for a versioned item (Key)
+        /// </summary>
+        private ReadOnlyDictionary<Guid, VersionedItemPivot> PivotLookupDictionary
         {
             get { return pivotLookupDictionary.AsReadOnly(); }
         }
-        
+
+        private List<VersionedItemPivot> pivotList = new List<VersionedItemPivot>();
+
+        private List<VersionedItemPivot> PivotList
+        {
+            get { return pivotList; }
+            set { pivotList = value; }
+        }
+
         /// <summary>
         /// Creates new verion of the project from the existing version <param name="branchedVersion" />.
         /// The created version is fully integrated into versioning system 
@@ -125,18 +168,24 @@ namespace Exolutio.Model.Versioning
             }
         }
 
-        public IList<IVersionedItem> GetAllVersionsOfItem(IVersionedItem item)
+        public IEnumerable<IVersionedItem> GetAllVersionsOfItem(IVersionedItem item)
         {
-            VersionedItemPivot pivot = PivotLookupDictionary[item];
-            return LinkedVersionedItems[pivot].AsReadOnly();
+            VersionedItemPivot pivot = PivotLookupDictionary[item.ID];
+            return pivot.PivotMapping.Values.Select(ID => (IVersionedItem)Project.TranslateComponent(ID));
         }
 
         public IVersionedItem GetItemInVersion(IVersionedItem item, Version version)
         {
-            VersionedItemPivot pivot = PivotLookupDictionary[item];
-            IVersionedItem result;
-            pivot.PivotMapping.TryGetValue(version, out result);
-            return result;
+            VersionedItemPivot pivot = PivotLookupDictionary[item.ID];
+            Guid result;
+            if (pivot.PivotMapping.TryGetValue(version, out result))
+            {
+                return (IVersionedItem)Project.TranslateComponent(result);
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public void RegisterVersionLink(Version version1, Version version2, IVersionedItem itemVersion1, IVersionedItem itemVersion2)
@@ -151,25 +200,124 @@ namespace Exolutio.Model.Versioning
                 throw new ExolutioModelException();
             }
 
+            VersionedItemPivot pivot1;
+            VersionedItemPivot pivot2;
+
             VersionedItemPivot pivot;
-            if (!pivotLookupDictionary.TryGetValue(itemVersion1, out pivot))
+
+            pivotLookupDictionary.TryGetValue(itemVersion1.ID, out pivot1);
+            pivotLookupDictionary.TryGetValue(itemVersion2.ID, out pivot2);
+
+            if (pivot1 == null && pivot2 == null) // new pivot is created
             {
                 AddVersionedItem(itemVersion1, true);
-                pivot = pivotLookupDictionary[itemVersion1];
+                pivot = pivotLookupDictionary[itemVersion1.ID];
+                pivotLookupDictionary[itemVersion2.ID] = pivot;
+                pivot.PivotMapping[version2] = itemVersion2.ID;
             }
-            
-            pivotLookupDictionary[itemVersion2] = pivot;
-            linkedVersionedItems.CreateSubCollectionIfNeeded(pivot);
-            linkedVersionedItems[pivot].Add(itemVersion2);
-            pivot.PivotMapping[version2] = itemVersion2;
+            else if (pivot1 == null) //existing pivot is used
+            {
+                pivot = pivot2;
+                pivotLookupDictionary[itemVersion1.ID] = pivot;
+                pivot.PivotMapping[version1] = itemVersion1.ID;
+            }
+            else if (pivot2 == null) //existing pivot is used
+            {
+                pivot = pivot1;
+                pivotLookupDictionary[itemVersion2.ID] = pivot;
+                pivot.PivotMapping[version2] = itemVersion2.ID;
+            }
+            else // in this case the two existing pivots are merged
+            {
+                pivot = new VersionedItemPivot();
+                PivotList.Add(pivot);
+                PivotList.Remove(pivot1);
+                PivotList.Remove(pivot2);
+                foreach (KeyValuePair<Guid, Guid> keyValuePair in pivot1.PivotMapping)
+                {
+                    Guid versionGuid = keyValuePair.Key;
+                    Guid itemGuid = keyValuePair.Value;
+                    pivotLookupDictionary[itemGuid] = pivot;
+                    pivot.PivotMapping[versionGuid] = itemGuid;
+                }
+                foreach (KeyValuePair<Guid, Guid> keyValuePair in pivot2.PivotMapping)
+                {
+                    Guid versionGuid = keyValuePair.Key;
+                    Guid itemGuid = keyValuePair.Value;
+                    pivotLookupDictionary[itemGuid] = pivot;
+                    pivot.PivotMapping[versionGuid] = itemGuid;
+                }
+            }
 #if DEBUG            
             VerifyConsistency();
 #endif
         }
 
-        public void UnregisterVersionLink(IVersionedItem item1, IVersionedItem item2)
+        public void UnregisterVersionLink(IVersionedItem item1, IVersionedItem item2, IEnumerable<IVersionedItem> group1 = null, IEnumerable<IVersionedItem> group2 = null)
         {
-            throw new NotImplementedException("Member VersionManager.UnregisterVersionLink not implemented.");  
+            if (!AreItemsLinked(item1, item2))
+            {
+                throw new ExolutioModelException();
+            }
+
+            VersionedItemPivot pivot;
+            if (!pivotLookupDictionary.TryGetValue(item1.ID, out pivot))
+            {
+                throw new ExolutioModelException();
+            }
+
+            if (group1 == null && group2 == null)
+            {
+                group1 = new List<IVersionedItem>(pivot.PivotMapping.Where(kvp => kvp.Key != item2.Version.ID).
+                                                      Select(kvp => (IVersionedItem)Project.TranslateComponent(kvp.Value)));
+                group2 = new IVersionedItem[] { item2 };
+            }
+
+            if (group1 == null)
+            {
+                group1 = new List<IVersionedItem>(pivot.PivotMapping.Where(kvp => !group2.Contains((IVersionedItem)Project.TranslateComponent(kvp.Value))).
+                                                      Select(kvp => (IVersionedItem)Project.TranslateComponent(kvp.Value)));
+            }
+            if (group2 == null)
+            {
+                group2 = new List<IVersionedItem>(pivot.PivotMapping.Where(kvp => !group1.Contains((IVersionedItem)Project.TranslateComponent(kvp.Value))).
+                                                      Select(kvp => (IVersionedItem)Project.TranslateComponent(kvp.Value)));
+            }
+
+            {
+                VersionedItemPivot pivot1 = new VersionedItemPivot();
+                PivotList.Add(pivot1);
+                foreach (IVersionedItem versionedItem in group1)
+                {
+                    pivot1.PivotMapping[versionedItem.Version.ID] = versionedItem.ID;
+                    pivotLookupDictionary[versionedItem.ID] = pivot1;
+                }
+            }
+
+            {
+                VersionedItemPivot pivot2 = new VersionedItemPivot();
+                PivotList.Add(pivot2);
+                foreach (IVersionedItem versionedItem in group2)
+                {
+                    pivot2.PivotMapping[versionedItem.Version.ID] = versionedItem.ID;
+                    pivotLookupDictionary[versionedItem.ID] = pivot2;
+                }
+            }
+
+            foreach (KeyValuePair<Guid, Guid> keyValuePair in pivot.PivotMapping)
+            {
+                IVersionedItem item = (IVersionedItem) Project.TranslateComponent(keyValuePair.Value);
+                if (!group1.Contains(item) && !group2.Contains(item))
+                {
+                    throw new ExolutioModelException();
+                }
+            }
+
+            PivotList.Remove(pivot);
+
+#if DEBUG
+            VerifyConsistency();
+#endif
         }
 
         /// <summary>
@@ -179,16 +327,15 @@ namespace Exolutio.Model.Versioning
         {
             if ((!Loading && !branching) || addWhenBranchingOrLoading)
             {
-                if (pivotLookupDictionary.ContainsKey(item))
+                if (pivotLookupDictionary.ContainsKey(item.ID))
                 {
                     throw new ExolutioModelException("Item already added into versioning infrastracture. ");
                 }
 
                 VersionedItemPivot pivot = new VersionedItemPivot();
-                pivotLookupDictionary[item] = pivot;
-                pivot.PivotMapping.Add(item.Version, item);
-                linkedVersionedItems.CreateSubCollectionIfNeeded(pivot);
-                linkedVersionedItems[pivot].Add(item);
+                PivotList.Add(pivot);
+                pivotLookupDictionary[item.ID] = pivot;
+                pivot.PivotMapping.Add(item.Version, item.ID);
             }
         }
 
@@ -198,60 +345,49 @@ namespace Exolutio.Model.Versioning
         /// </summary>
         public void RemoveVersionedItem(IVersionedItem removedItem)
         {
-            if (!PivotLookupDictionary.ContainsKey(removedItem) && branching)
+            if (!PivotLookupDictionary.ContainsKey(removedItem.ID) && branching)
             {
                 return;
             }
-            
-            VersionedItemPivot pivot = PivotLookupDictionary[removedItem];
+
+            VersionedItemPivot pivot = PivotLookupDictionary[removedItem.ID];
             Version deletedVersion = removedItem.Version;
 
             // versioned item is going to be removed, thus it is removed from pivot lookup
-            pivotLookupDictionary.Remove(removedItem);
-            List<IVersionedItem> list;
+            pivotLookupDictionary.Remove(removedItem.ID);
+            pivot.PivotMapping.Remove(removedItem.Version.ID);
 
-            // remove version links concerning the items created in the removed version
-            if (LinkedVersionedItems.TryGetValue(pivot, out list))
+            if (pivot.PivotMapping.IsEmpty())
             {
-                // there should always be exactly one item fullfiling the condition
-                if (list.Count(item => item.Version == deletedVersion) != 1)
-                {
-                    throw new ExolutioModelException("Inconsistent record in version links.");
-                }
-                // and this item is removed
-                list.RemoveAll(item => item.Version == deletedVersion);
-            }
-
-            // in the case versinedItem was the only version connected to pivot, 
-            // the pivot is also removed from the dictionary
-            if (list.IsEmpty())
-            {
-                linkedVersionedItems.Remove(pivot);
+                PivotList.Remove(pivot);
             }
         }
 
-        public bool AreItemsLinked(ExolutioVersionedObject item1, ExolutioVersionedObject item2)
+        public bool AreItemsLinked(IVersionedItem item1, IVersionedItem item2)
         {
-            return pivotLookupDictionary[item1] == pivotLookupDictionary[item2];
+            return pivotLookupDictionary[item1.ID] == pivotLookupDictionary[item2.ID];
         }
 
 #if DEBUG
         public void VerifyConsistency()
         {
-            foreach (KeyValuePair<IVersionedItem, VersionedItemPivot> kvp in PivotLookupDictionary)
+            foreach (KeyValuePair<Guid, VersionedItemPivot> kvp in PivotLookupDictionary)
             {
                 VersionedItemPivot pivot = kvp.Value;
-                IVersionedItem versionedItem = kvp.Key;
+                IVersionedItem versionedItem = (IVersionedItem) Project.TranslateComponent(kvp.Key);
 
                 Debug.Assert(pivot.PivotMapping.ContainsKey(versionedItem.Version));
-                Debug.Assert(pivot.PivotMapping[versionedItem.Version] == versionedItem);
+                Debug.Assert(pivot.PivotMapping[versionedItem.Version.ID] == versionedItem.ID);
+            }
 
-                foreach (IVersionedItem item in LinkedVersionedItems[pivot])
+            foreach (VersionedItemPivot pivot in PivotList)
+            {
+                foreach (KeyValuePair<Guid, Guid> itemID in pivot.PivotMapping)
                 {
-                    Debug.Assert(pivot.PivotMapping.ContainsKey(item.Version));
-                    Debug.Assert(pivot.PivotMapping[item.Version] == item);
-
-                }
+                    Version version = Project.TranslateComponent<Version>(itemID.Key);
+                    IVersionedItem linkedItem = (IVersionedItem)Project.TranslateComponent(itemID.Value);
+                    Debug.Assert(PivotLookupDictionary[linkedItem.ID] == pivot);
+                }    
             }
         }
 #endif
@@ -260,11 +396,12 @@ namespace Exolutio.Model.Versioning
 
         public void SerializeVersionLinks(XElement versionLinksElement, SerializationContext context)
         {
-            foreach (KeyValuePair<VersionedItemPivot, List<IVersionedItem>> kvp in LinkedVersionedItems)
+            foreach (VersionedItemPivot pivot in PivotList)
             {
                 XElement linkedItemsElement = new XElement(context.ExolutioNS + "LinkedItems");
-                foreach (IVersionedItem versionedItem in kvp.Value)
+                foreach (Guid versionedItemID in pivot.PivotMapping.Values)
                 {
+                    IVersionedItem versionedItem = (IVersionedItem) Project.TranslateComponent(versionedItemID);
                     XElement linkedItemElement = new XElement(context.ExolutioNS + "LinkedItem");
                     Project.SerializeIDRef((IExolutioSerializable) versionedItem, "itemID", linkedItemElement, context);
                     Project.SerializeSimpleValueToAttribute("versionNumber", versionedItem.Version.ID, linkedItemElement, context);
@@ -279,6 +416,7 @@ namespace Exolutio.Model.Versioning
             foreach (XElement linkedItemsElement in parentNode.Elements(context.ExolutioNS + "LinkedItems"))
             {
                 VersionedItemPivot pivot = new VersionedItemPivot();
+                PivotList.Add(pivot);
 
                 Dictionary<Version, Guid> linkedItemsIds = new Dictionary<Version, Guid>();
                 foreach (XElement linkedItemElement in linkedItemsElement.Elements(context.ExolutioNS + "LinkedItem"))
@@ -294,10 +432,8 @@ namespace Exolutio.Model.Versioning
                     foreach (KeyValuePair<Version, Guid> kvp in linkedItemsIds)
                     {
                         IVersionedItem exolutioObject = (IVersionedItem) Project.TranslateComponent(kvp.Value);
-                        pivotLookupDictionary[exolutioObject] = pivot;
-                        pivot.PivotMapping.Add(kvp.Key, exolutioObject);
-                        linkedVersionedItems.CreateSubCollectionIfNeeded(pivot);
-                        linkedVersionedItems[pivot].Add(exolutioObject);
+                        pivotLookupDictionary[exolutioObject.ID] = pivot;
+                        pivot.PivotMapping.Add(kvp.Key, exolutioObject.ID);
                     }
                 }
             }
@@ -340,9 +476,7 @@ namespace Exolutio.Model.Versioning
 
             Project.ProjectVersions.Add(newProjectVersion);
             embededVersion.FillCopy(newProjectVersion, newProjectVersion, elementCopiesMap);
-
             
-
             if (createVersionLinks)
             {
                 foreach (KeyValuePair<IVersionedItem, IVersionedItem> kvp in elementCopiesMap)

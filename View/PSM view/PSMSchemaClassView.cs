@@ -2,6 +2,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using Exolutio.Controller.Commands;
 using Exolutio.Model;
@@ -118,7 +119,19 @@ namespace Exolutio.View
             ContextMenuService.SetContextMenu(headerBorder, ContextMenu);
 #else
             headerBorder.ContextMenu = ContextMenu;
+            tbClassHeader.MouseEnter += tbClassHeader_MouseEnter;
+            tbClassHeader.MouseLeave += tbClassHeader_MouseLeave;
 #endif
+        }
+
+        protected void tbClassHeader_MouseEnter(object sender, MouseEventArgs e)
+        {
+            DiagramView.InvokeVersionedElementMouseEnter(this, PSMSchemaClass);
+        }
+
+        protected void tbClassHeader_MouseLeave(object sender, MouseEventArgs e)
+        {
+            DiagramView.InvokeVersionedElementMouseLeave(this, PSMSchemaClass);
         }
 
         /// <summary>

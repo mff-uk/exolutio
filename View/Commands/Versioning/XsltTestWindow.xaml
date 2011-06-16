@@ -1,0 +1,107 @@
+﻿<Window x:Class="Exolutio.View.Commands.XsltTestWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        xmlns:avalonEdit="clr-namespace:ICSharpCode.AvalonEdit;assembly=ICSharpCode.AvalonEdit" Title="EvolutionChangesWindow" 
+        Height="976" Width="918" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Exolutio.ResourceLibrary;component/Images/Images.xaml" ></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <DockPanel LastChildFill="True">
+        <ToolBar DockPanel.Dock="Top" Height="32">
+            
+            <Button Margin="0" Padding="5" Click="bXsltFromChanges_Click">XSLT from changes</Button>
+            <Button Click="Button_Click" Margin="0" Padding="0" >
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="{StaticResource xmlIcon}" Height="16" Margin="2"></Image>
+                    <Label Height="Auto" Padding="2">Another sample</Label>
+                </StackPanel>
+            </Button>
+            <Button Click="Button_Click_1" Margin="0" Padding="5">Transform</Button>
+            <Button Margin="0" Padding="0" Click="bValidateOld_Click">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="{StaticResource Validate}" Height="16" Margin="2"></Image>
+                    <Label Height="Auto" Padding="2">Validate Old</Label>
+                </StackPanel>
+            </Button>
+            <Button Margin="0" Padding="0" Click="bValidateNew_Click">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="{StaticResource Validate}" Height="16" Margin="2"></Image>
+                    <Label Height="Auto" Padding="2">Validate New</Label>
+                </StackPanel>
+            </Button>
+            <Button Click="SaveRef_Click" Name="bSaveRef" Margin="0" >
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="{StaticResource Save}" Height="16" Margin="2"></Image>
+                    <Label Height="Auto" Padding="2">Save Input &amp; Output</Label>
+                </StackPanel>
+            </Button>
+            <Button Click="TestOutputCreation_Click" Name="bTestOutputCreation" Margin="0" >
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="{StaticResource Save}" Height="16" Margin="2"></Image>
+                    <Label Height="Auto" Padding="2">AS,T,VO,VN,SIO</Label>
+                </StackPanel>
+            </Button>
+            <Button Click="GenerateOutput_Click" Margin="0" Padding="0" >
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="{StaticResource xmlIcon}" Height="16" Margin="2"></Image>
+                    <Label Height="Auto" Padding="2">Gen. output</Label>
+                </StackPanel>
+            </Button>
+            <StackPanel Name="pXSLT">
+                <Button Click="SaveRefCust_Click" Margin="0" >
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="{StaticResource Save}" Height="16" Margin="2"></Image>
+                        <Label Height="Auto" Padding="2">With custom name</Label>
+                    </StackPanel>
+                </Button>
+                <Button Click="Save_Click" Margin="0" Padding="5">Save XSLT...</Button>
+                <Button Click="Load_Click" Margin="0" Padding="5">Load XSLT...</Button>
+                <Button Margin="0" Padding="5" Click="bXsltBasic_Click">XSLT basic</Button>
+                <ComboBox Height="23" Name="cbXsltList" Width="180" SelectionChanged="cbXsltList_SelectionChanged" />
+            </StackPanel>
+        </ToolBar>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <avalonEdit:TextEditor Name="tbOldDoc" Padding="5"
+                               FontFamily="Consolas" 
+                               FontSize="12"
+                               Background="White"
+                               Language="XML" TextChanged="xmlEdit_TextChanged" />
+            <avalonEdit:TextEditor Grid.Column="1" Grid.Row="0" 
+                               Name="tbNewDoc" Padding="5"
+                               FontFamily="Consolas" 
+                               FontSize="12"
+                               Background="White"
+                               Language="XML" TextChanged="xmlEdit_TextChanged" />
+            <avalonEdit:TextEditor Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" 
+                               Name="tbXslt" Padding="5"
+                               FontFamily="Consolas" 
+                               FontSize="12"
+                               Background="White"
+                               Language="XML" TextChanged="xmlEdit_TextChanged" />
+        </Grid>
+    </DockPanel>
+    <!--<StackPanel Orientation="Vertical">
+    	
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Height="86">
+            <Button Width="151" />
+            <Separator ></Separator>
+            <Button Width="254"></Button>
+        </StackPanel>
+
+        <DockPanel>
+
+        </DockPanel>
+    </StackPanel>-->
+</Window>

@@ -102,11 +102,5 @@ namespace Exolutio.View
             MainNode.ExolutioCanvas.RemoveNode(MainNode);
             base.RemoveFromDiagram();
         }
-
-        public override void Focus()
-        {
-            base.Focus();
-            MainNode.Focus();
-        }
     }
 }

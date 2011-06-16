@@ -207,14 +207,6 @@ namespace Exolutio.View
             CreatedControls.Add(CardinalityLabel);
             DiagramView.ExolutioCanvas.AddConnector(Connector);
             Connector.Connect(SourceClassView.MainNode, TargetClassView.MainNode);
-            //if (ViewHelper.Points.Count == 0)
-            //{
-            //    ViewHelper.Points.AppendRange(Connector.Points.Select(p => (Point)p));
-            //}
-            //else if (ViewHelper.Points.Count == Connector.Points.Count)
-            //{
-            //    Connector.SetPoints(ViewHelper.Points);
-            //}
             DiagramView.ExolutioCanvas.AddNode(NameLabel);
             DiagramView.ExolutioCanvas.AddNode(CardinalityLabel);
             NameLabel.PlacementCenter = EPlacementCenter.Center;
@@ -222,38 +214,23 @@ namespace Exolutio.View
             CardinalityLabel.SnapTo(Connector.EndPoint, true);
             BindModelView();
 
-            NameLabel.SelectedChanged += new Action(NameLabel_SelectedChanged);
+            NameLabel.SelectedChanged += NameLabel_SelectedChanged;
             NameLabel.PositionChanged += NameLabel_PositionChanged;
             CardinalityLabel.PositionChanged += CardinalityLabel_PositionChanged;
             Connector.SelectedChanged += Connector_SelectedChanged;
-            //Connector.MouseDown += Connector_MouseDown;
-            #if SILVERLIGHT
-            #else
-            //Connector.MouseUp += Connector_MouseUp;
-            #endif
-            //Connector.ConnectorPointMoved += Connector_ConnectorPointMoved;
+            Connector.MouseEnter += Connector_MouseEnter;
+            Connector.MouseLeave += Connector_MouseLeave;
         }
 
-//#if SILVERLIGHT
-//        void Connector_MouseDown()
-//#else
-//        void Connector_MouseDown(object sender, MouseButtonEventArgs e)
-//#endif
-//        {
-//            DiagramView.ExolutioCanvas.SelectedItems.Clear();
-//            DiagramView.ExolutioCanvas.SelectedItems.Add(this.Connector);
-//            DiagramView.SetSelection(ModelComponent);
-//            #if SILVERLIGHT
-//            #else
-//            e.Handled = true;
-//            #endif
-//        }
+        private void Connector_MouseEnter(object sender, MouseEventArgs e)
+        {
+            DiagramView.InvokeVersionedElementMouseEnter(this, PSMAssociation);
+        }
 
-//        private void Connector_MouseUp(object sender, MouseButtonEventArgs e)
-//        {
-//            //otherwise MouseUp is catched by DiagramView which clears selection 
-//            e.Handled = true;
-//        }
+        void Connector_MouseLeave(object sender, MouseEventArgs e)
+        {
+            DiagramView.InvokeVersionedElementMouseLeave(this, PSMAssociation);
+        }
 
         void Connector_SelectedChanged()
         {
@@ -309,12 +286,6 @@ namespace Exolutio.View
             {
                 base.Selected = value;
             }
-        }
-
-        public override void Focus()
-        {
-            base.Focus();
-            Connector.Focus();
         }
     }
 }

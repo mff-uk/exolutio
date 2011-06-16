@@ -44,7 +44,7 @@ namespace Exolutio.View.Commands
 #if SILVERLIGHT
         public static guiOpenWebProjectCommand OpenWebProjectCommand { get; set; }
 #else 
-        public static guiFindChangesCommand FindChangesCommand { get; set; }
+        public static guiFindChanges FindChangesCommand { get; set; }
 #endif
 
         #endregion
@@ -118,10 +118,13 @@ namespace Exolutio.View.Commands
 
         #region versioning
 
-        public static guiBranchCurrentVersionCommand BranchCurrentVersionCommand { get; set; }
-        public static guiSaveAsSingleVersionCommand SaveAsSingleVersionCommand { get; set; }
-        public static guiRemoveCurrentVersionCommand RemoveCurrentVersionCommand { get; set; }
+        public static guiBranchCurrentVersion BranchCurrentVersionCommand { get; set; }
+        public static guiSaveAsSingleVersion SaveAsSingleVersionCommand { get; set; }
+        public static guiRemoveCurrentVersion RemoveCurrentVersionCommand { get; set; }
         public static guiVerifyModelCommand VerifyModelCommand { get; set; }
+        public static guiCreateVersionLink CreateVersionLinkCommand { get; set; }
+        public static guiRemoveVersionLink RemoveVersionLinkCommand { get; set; }
+
 
         #endregion
 
@@ -214,12 +217,14 @@ namespace Exolutio.View.Commands
 
             #region versioning
 
-            BranchCurrentVersionCommand = new guiBranchCurrentVersionCommand();
-            SaveAsSingleVersionCommand = new guiSaveAsSingleVersionCommand();
-            RemoveCurrentVersionCommand = new guiRemoveCurrentVersionCommand();
+            BranchCurrentVersionCommand = new guiBranchCurrentVersion();
+            SaveAsSingleVersionCommand = new guiSaveAsSingleVersion();
+            RemoveCurrentVersionCommand = new guiRemoveCurrentVersion();
             #if SILVERLIGHT
             #else
-            FindChangesCommand = new guiFindChangesCommand();
+            FindChangesCommand = new guiFindChanges();
+            CreateVersionLinkCommand = new guiCreateVersionLink();
+            RemoveVersionLinkCommand = new guiRemoveVersionLink();
             #endif
 
             #endregion

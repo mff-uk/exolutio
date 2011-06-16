@@ -244,5 +244,17 @@ namespace Exolutio.View
 	    {
 	        get { return PSMAttribute; }
 	    }
+
+        protected override void OnMouseEnter(MouseEventArgs e)
+        {
+            base.OnMouseEnter(e);
+            Container.DiagramView.InvokeVersionedElementMouseEnter(this, PSMAttribute);
+        }
+
+        protected override void OnMouseLeave(MouseEventArgs e)
+        {
+            base.OnMouseLeave(e);
+            Container.DiagramView.InvokeVersionedElementMouseLeave(this, PSMAttribute);
+        }
 	}
 }

@@ -34,7 +34,6 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
 
         internal override void CommandOperation()
         {
-            base.CommandOperation();
             //PSMClass c = Project.TranslateComponent<PSMAttribute>(ComponentGuids.First()).PSMClass;
             oldOrder = new List<Guid>();
 

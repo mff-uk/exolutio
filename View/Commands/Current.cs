@@ -230,14 +230,13 @@ namespace Exolutio.View
         /// <summary>
         /// Activates given diagram and selects given element on it
         /// </summary>
-        /// <param name="diagram"></param>
-        /// <param name="selectedComponent"></param>
-        void ActivateDiagramWithElement(Diagram diagram, Component selectedComponent);
+        void ActivateDiagramWithElement(Diagram diagram, Component selectedComponent, bool activateDiagramTab = true);
 
         void CloseActiveTab();
 
         IEnumerable<ExolutioVersionedObject> AnotherOpenedVersions(ExolutioVersionedObject item);
         DiagramView GetOpenedDiagramView(Diagram diagram);
+        IList<DiagramView> GetTopDiagramViews();
     }
 
     public interface IMainWindow
@@ -257,15 +256,15 @@ namespace Exolutio.View
         void Close();
         void CloseRibbonBackstage();
         void CloseProject();
-        void FocusComponent(Diagram diagram, Component component);
         void DisplayReport(CommandReportBase report, bool showEvenIfNotVisible);
         void DisplayLog(Log log, bool showEvenIfNotVisible);
         IDiagramTabManager DiagramTabManager { get; }
         IFilePresenter FilePresenter { get; }
         bool CommandsDisabled { get; }
         void RefreshMenu();
-        void FocusComponent(IEnumerable<PIMDiagram> pimDiagrams, PIMComponent component);
-        void FocusComponent(Component component);
+        void FocusComponent(Diagram diagram, Component component, bool activateDiagramTab = true);
+        void FocusComponent(IEnumerable<PIMDiagram> pimDiagrams, PIMComponent component, bool activateDiagramTab = true);
+        void FocusComponent(Component component, bool activateDiagramTab = true);
         void DisableCommands();
         void EnableCommands();
     }

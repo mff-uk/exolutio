@@ -1,4 +1,5 @@
 using System;
+using Exolutio.Model;
 using Exolutio.Model.PSM;
 using Exolutio.Model.Versioning;
 using Version = Exolutio.Model.Versioning.Version;
@@ -31,11 +32,16 @@ namespace Exolutio.Revalidation.Changes
 
     }
 
-    public class ClassAddedInstance : ClassChangeInstance
+    public class ClassAddedInstance : ClassChangeInstance, IAdditionChange
     {
         public ClassAddedInstance(PSMComponent component, Version oldVersion, Version newVersion)
             : base(component, oldVersion, newVersion)
         {
+        }
+
+        public Component ComponentNewVersion
+        {
+            get { return PSMClass; }
         }
 
         [ChangePredicateParameter]
@@ -63,11 +69,16 @@ namespace Exolutio.Revalidation.Changes
         }
     }
 
-    public class ClassRemovedInstance : ClassChangeInstance
+    public class ClassRemovedInstance : ClassChangeInstance, IRemovalChange
     {
         public ClassRemovedInstance(PSMComponent component, Version oldVersion, Version newVersion)
             : base(component, oldVersion, newVersion)
         {
+        }
+
+        public Component ComponentOldVersion
+        {
+            get { return PSMClass; }
         }
 
         public override string ToString()
@@ -91,11 +102,21 @@ namespace Exolutio.Revalidation.Changes
         }
     }
 
-    public class ClassRenamedInstance : ClassChangeInstance
+    public class ClassRenamedInstance : ClassChangeInstance, ISedentaryChange
     {
         public ClassRenamedInstance(PSMComponent component, Version oldVersion, Version newVersion)
             : base(component, oldVersion, newVersion)
         {
+        }
+
+        public Component ComponentOldVersion
+        {
+            get { return PSMClass.GetInVersion(OldVersion); }
+        }
+
+        public Component ComponentNewVersion
+        {
+            get { return PSMClass; }
         }
 
         public override EChangeCategory Category
@@ -124,11 +145,21 @@ namespace Exolutio.Revalidation.Changes
         }
     }
 
-    public class ClassMovedInstance : ClassChangeInstance
+    public class ClassMovedInstance : ClassChangeInstance, IMigratoryChange
     {
         public ClassMovedInstance(PSMComponent component, Version oldVersion, Version newVersion)
             : base(component, oldVersion, newVersion)
         {
+        }
+
+        public Component ComponentOldVersion
+        {
+            get { return PSMClass.GetInVersion(OldVersion); }
+        }
+
+        public Component ComponentNewVersion
+        {
+            get { return PSMClass; }
         }
 
         public override EChangeCategory Category
@@ -166,11 +197,21 @@ namespace Exolutio.Revalidation.Changes
         }
     }
 
-    public class SRIntroducedInstance : ClassChangeInstance
+    public class SRIntroducedInstance : ClassChangeInstance, ISedentaryChange
     {
         public SRIntroducedInstance(PSMComponent component, Version oldVersion, Version newVersion)
             : base(component, oldVersion, newVersion)
         {
+        }
+
+        public Component ComponentOldVersion
+        {
+            get { return PSMClass.GetInVersion(OldVersion); }
+        }
+
+        public Component ComponentNewVersion
+        {
+            get { return PSMClass; }
         }
 
         public override EChangeCategory Category
@@ -203,11 +244,21 @@ namespace Exolutio.Revalidation.Changes
         }
     }
 
-    public class SRRemovedInstance : ClassChangeInstance
+    public class SRRemovedInstance : ClassChangeInstance, ISedentaryChange
     {
         public SRRemovedInstance(PSMComponent component, Version oldVersion, Version newVersion)
             : base(component, oldVersion, newVersion)
         {
+        }
+
+        public Component ComponentOldVersion
+        {
+            get { return PSMClass.GetInVersion(OldVersion); }
+        }
+
+        public Component ComponentNewVersion
+        {
+            get { return PSMClass; }
         }
 
         public override EChangeCategory Category
@@ -236,11 +287,21 @@ namespace Exolutio.Revalidation.Changes
         }
     }
     
-    public class SRChangedInstance : ClassChangeInstance
+    public class SRChangedInstance : ClassChangeInstance, ISedentaryChange
     {
         public SRChangedInstance(PSMComponent component, Version oldVersion, Version newVersion)
             : base(component, oldVersion, newVersion)
         {
+        }
+
+        public Component ComponentOldVersion
+        {
+            get { return PSMClass.GetInVersion(OldVersion); }
+        }
+
+        public Component ComponentNewVersion
+        {
+            get { return PSMClass; }
         }
 
         public override EChangeCategory Category

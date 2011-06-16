@@ -33,11 +33,16 @@ namespace Exolutio.Revalidation.Changes
         
     }
 
-    public class AttributeAddedInstance : AttributeChangeInstance
+    public class AttributeAddedInstance : AttributeChangeInstance, IAdditionChange
     {
         public AttributeAddedInstance(PSMComponent component, Version oldVersion, Version newVersion) 
             : base(component, oldVersion, newVersion)
         {
+        }
+
+        public Component ComponentNewVersion
+        {
+            get { return PSMAttribute; }
         }
 
         [ChangePredicateParameter]
@@ -68,11 +73,16 @@ namespace Exolutio.Revalidation.Changes
         }
     }
 
-    public class AttributeRemovedInstance : AttributeChangeInstance
+    public class AttributeRemovedInstance : AttributeChangeInstance, IRemovalChange
     {
         public AttributeRemovedInstance(PSMComponent component, Version oldVersion, Version newVersion)
             : base(component, oldVersion, newVersion)
         {
+        }
+
+        public Component ComponentOldVersion
+        {
+            get { return PSMAttribute; }
         }
 
         public override string ToString()
@@ -96,10 +106,20 @@ namespace Exolutio.Revalidation.Changes
         }
     }
 
-    public class AttributeRenamedInstance: AttributeChangeInstance
+    public class AttributeRenamedInstance: AttributeChangeInstance, ISedentaryChange
     {
         public AttributeRenamedInstance(PSMComponent component, Version oldVersion, Version newVersion) : base(component, oldVersion, newVersion)
         {
+        }
+
+        public Component ComponentOldVersion
+        {
+            get { return PSMAttribute.GetInVersion(OldVersion); }
+        }
+
+        public Component ComponentNewVersion
+        {
+            get { return PSMAttribute; }
         }
 
         public override EChangeCategory Category
@@ -128,11 +148,21 @@ namespace Exolutio.Revalidation.Changes
         }
     }
 
-    public class AttributeMovedInstance : AttributeChangeInstance
+    public class AttributeMovedInstance : AttributeChangeInstance, IMigratoryChange
     {
         public AttributeMovedInstance(PSMComponent component, Version oldVersion, Version newVersion)
             : base(component, oldVersion, newVersion)
         {
+        }
+
+        public Component ComponentOldVersion
+        {
+            get { return PSMAttribute.GetInVersion(OldVersion); }
+        }
+
+        public Component ComponentNewVersion
+        {
+            get { return PSMAttribute; }
         }
 
         public override EChangeCategory Category
@@ -177,11 +207,21 @@ namespace Exolutio.Revalidation.Changes
         }
     }
 
-    public class AttributeXFormChangedInstance : AttributeChangeInstance
+    public class AttributeXFormChangedInstance : AttributeChangeInstance, ISedentaryChange
     {
         public AttributeXFormChangedInstance(PSMComponent component, Version oldVersion, Version newVersion)
             : base(component, oldVersion, newVersion)
         {
+        }
+
+        public Component ComponentOldVersion
+        {
+            get { return PSMAttribute.GetInVersion(OldVersion); }
+        }
+
+        public Component ComponentNewVersion
+        {
+            get { return PSMAttribute; }
         }
 
         public override EChangeCategory Category
@@ -220,11 +260,21 @@ namespace Exolutio.Revalidation.Changes
         }
     }
 
-    public class AttributeIndexChangedInstance : AttributeChangeInstance
+    public class AttributeIndexChangedInstance : AttributeChangeInstance, IMigratoryChange
     {
         public AttributeIndexChangedInstance(PSMComponent component, Version oldVersion, Version newVersion)
             : base(component, oldVersion, newVersion)
         {
+        }
+
+        public Component ComponentOldVersion
+        {
+            get { return PSMAttribute.GetInVersion(OldVersion); }
+        }
+
+        public Component ComponentNewVersion
+        {
+            get { return PSMAttribute; }
         }
 
         public override EChangeCategory Category
@@ -265,11 +315,21 @@ namespace Exolutio.Revalidation.Changes
         }
     }
 
-    public class AttributeCardinalityChangedInstance : AttributeChangeInstance
+    public class AttributeCardinalityChangedInstance : AttributeChangeInstance, ISedentaryChange
     {
         public AttributeCardinalityChangedInstance(PSMComponent component, Version oldVersion, Version newVersion)
             : base(component, oldVersion, newVersion)
         {
+        }
+
+        public Component ComponentOldVersion
+        {
+            get { return PSMAttribute.GetInVersion(OldVersion); }
+        }
+
+        public Component ComponentNewVersion
+        {
+            get { return PSMAttribute; }
         }
 
         public override EChangeCategory Category
@@ -315,11 +375,21 @@ namespace Exolutio.Revalidation.Changes
         }
     }
 
-    public class AttributeTypeChangedInstance : AttributeChangeInstance
+    public class AttributeTypeChangedInstance : AttributeChangeInstance, ISedentaryChange
     {
         public AttributeTypeChangedInstance(PSMComponent component, Version oldVersion, Version newVersion)
             : base(component, oldVersion, newVersion)
         {
+        }
+
+        public Component ComponentOldVersion
+        {
+            get { return PSMAttribute.GetInVersion(OldVersion); }
+        }
+
+        public Component ComponentNewVersion
+        {
+            get { return PSMAttribute; }
         }
 
         public override EChangeCategory Category
