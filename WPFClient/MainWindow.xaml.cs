@@ -79,11 +79,21 @@ namespace Exolutio.WPFClient
             if (e.NewProject != null)
             {
                 BindProject(e.NewProject);
-                if (Current.Project.LatestVersion.PIMDiagrams.Count > 0)
-                    DiagramTabManager.ActivateDiagram(Current.Project.LatestVersion.PIMDiagrams[0]);
-                if (Current.Project.LatestVersion != null)
+                if (e.NewProject.ProjectFile != null && e.NewProject.ProjectFile.Exists &&
+                    File.Exists(UserFileForProjectFile(e.NewProject.ProjectFile.FullName)))
                 {
-                    DiagramTabManager.OpenTabsForProjectVersion(Current.Project.LatestVersion);
+                    LoadProjectLayout(UserFileForProjectFile(e.NewProject.ProjectFile.FullName));
+                }
+                else
+                {
+                    if (Current.Project.LatestVersion.PIMDiagrams.Count > 0)
+                    {
+                        DiagramTabManager.ActivateDiagram(Current.Project.LatestVersion.PIMDiagrams[0]);
+                    }
+                    if (Current.Project.LatestVersion != null)
+                    {
+                        DiagramTabManager.OpenTabsForProjectVersion(Current.Project.LatestVersion);
+                    }    
                 }
             }
             Current.ExecutedCommand += ReportDisplay.ExecutedCommand;

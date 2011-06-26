@@ -11,7 +11,7 @@ namespace Exolutio.ViewToolkit.FormControls
         public LinkLabel()
         {
             this.Margin = new Thickness(0,0,0,3);
-            this.Padding = ViewToolkitResources.Thicknness0;
+            this.Padding = ViewToolkitResources.Thickness0;
             this.TextDecorations.Add(textDecorations); 
             this.Cursor = Cursors.Hand;
             this.MouseUp += new MouseButtonEventHandler(LinkLabel_MouseUp);

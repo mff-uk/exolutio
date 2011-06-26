@@ -106,7 +106,7 @@ namespace Exolutio.Revalidation.Changes
         }
     }
 
-    public class AttributeRenamedInstance: AttributeChangeInstance, ISedentaryChange
+    public class AttributeRenamedInstance: AttributeChangeInstance, IRenameChange
     {
         public AttributeRenamedInstance(PSMComponent component, Version oldVersion, Version newVersion) : base(component, oldVersion, newVersion)
         {
@@ -315,7 +315,7 @@ namespace Exolutio.Revalidation.Changes
         }
     }
 
-    public class AttributeCardinalityChangedInstance : AttributeChangeInstance, ISedentaryChange
+    public class AttributeCardinalityChangedInstance : AttributeChangeInstance, ICardinalityChange
     {
         public AttributeCardinalityChangedInstance(PSMComponent component, Version oldVersion, Version newVersion)
             : base(component, oldVersion, newVersion)

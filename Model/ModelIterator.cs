@@ -559,5 +559,10 @@ namespace Exolutio.Model
                 return projectVersion.PSMDiagrams.FirstOrDefault(d => d.PSMComponents.Contains((PSMComponent)component));
             }
         }
+
+        public static IEnumerable<PSMAssociationMember> GetLeaves(PSMSchema psmSchema)
+        {
+            return psmSchema.SchemaComponents.OfType<PSMAssociationMember>().Where(m => m.ChildPSMAssociations.Count == 0);
+        }
     }
 }

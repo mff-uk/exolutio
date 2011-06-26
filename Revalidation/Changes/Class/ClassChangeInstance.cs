@@ -102,7 +102,7 @@ namespace Exolutio.Revalidation.Changes
         }
     }
 
-    public class ClassRenamedInstance : ClassChangeInstance, ISedentaryChange
+    public class ClassRenamedInstance : ClassChangeInstance, IRenameChange
     {
         public ClassRenamedInstance(PSMComponent component, Version oldVersion, Version newVersion)
             : base(component, oldVersion, newVersion)

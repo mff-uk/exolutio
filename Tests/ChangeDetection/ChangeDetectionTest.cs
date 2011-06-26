@@ -28,7 +28,7 @@ namespace Tests.ChangeDetection
             Project p = s.LoadProject(Path.Combine(pd.FullName, "Projects", "adbis-branched.eXo"));
             
             ChangeDetector detector = new ChangeDetector();
-            DetectedChangesSet detectedChangesSet = detector.DetectChanges(p.ProjectVersions[0].PSMSchemas[0], p.ProjectVersions[1].PSMSchemas[0]);
+            DetectedChangeInstancesSet detectedChangeInstancesSet = detector.DetectChanges(p.ProjectVersions[0].PSMSchemas[0], p.ProjectVersions[1].PSMSchemas[0]);
         }
     }
 }

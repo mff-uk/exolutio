@@ -62,8 +62,8 @@ namespace Exolutio.View.Commands.Versioning
         public static void Revalidate(PSMSchema schemaVersion1, PSMSchema schemaVersion2)
         {
             ChangeDetector changeDetector = new ChangeDetector();
-            DetectedChangesSet detectedChangesSet = changeDetector.DetectChanges(schemaVersion1, schemaVersion2);
-            XsltTestWindow.ShowDialog(detectedChangesSet,schemaVersion1, schemaVersion2);
+            DetectedChangeInstancesSet detectedChangeInstancesSet = changeDetector.DetectChanges(schemaVersion1, schemaVersion2);
+            XsltTestWindow.ShowDialog(detectedChangeInstancesSet,schemaVersion1, schemaVersion2);
         }
 
     }

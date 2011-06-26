@@ -119,6 +119,7 @@ namespace Exolutio.View
                     ContextMenuItem contextMenuItem = new ContextMenuItem(guiScopeCommand.Text);
                     contextMenuItem.Icon = guiScopeCommand.Icon;
                     contextMenuItem.Command = guiScopeCommand;
+                    contextMenuItem.ToolTip = guiScopeCommand.ScreenTipText;
                     result.Items.Add(contextMenuItem);
                 }
             }

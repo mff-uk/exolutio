@@ -36,6 +36,17 @@ namespace Exolutio.View.Commands.Project
                         return;
                     }
             }
+            else
+            {
+                if (Current.Project != null && Current.Project.ProjectFile != null && Current.Project.ProjectFile.Exists)
+                {
+                    #if SILVERLIGHT
+                    #else
+                    // save layout of project
+                    Current.MainWindow.SaveProjectLayout(Current.MainWindow.UserFileForProjectFile(Current.Project.ProjectFile.FullName));
+                    #endif
+                }
+            }
 
             Current.Project = null;
             Current.MainWindow.CloseProject();

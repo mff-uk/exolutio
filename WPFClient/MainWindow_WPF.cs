@@ -1,9 +1,14 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Windows;
+using System.Xml.Linq;
+using Exolutio.Model;
 using Exolutio.SupportingClasses;
+using Exolutio.View;
 using Exolutio.View.Commands;
 using System.Windows.Media;
 
@@ -18,9 +23,18 @@ namespace Exolutio.WPFClient
             ExolutioRibbon.FillRecent(ConfigurationManager.Configuration.RecentFiles, ConfigurationManager.Configuration.RecentDirectories);
         }
 
+        private bool dockManagerLoaded = false;
+
         void dockManager_Loaded(object sender, RoutedEventArgs e)
         {
-            if (ConfigurationManager.HasStoredLayout)
+            dockManagerLoaded = true;
+
+            if (Current.Project != null && Current.Project.ProjectFile != null &&
+                File.Exists(Current.MainWindow.UserFileForProjectFile(Current.Project.ProjectFile.FullName)))
+            {
+                LoadProjectLayout(Current.MainWindow.UserFileForProjectFile(Current.Project.ProjectFile.FullName));
+            }
+            else if (ConfigurationManager.HasStoredLayout)
             {
                 try
                 {
@@ -37,8 +51,8 @@ namespace Exolutio.WPFClient
 
                     }
                 }
-
             }
+
             dockManager.MainDocumentPane.Background = Brushes.Transparent;
         }
 
@@ -78,5 +92,54 @@ namespace Exolutio.WPFClient
             }
         }
 
+        public void LoadProjectLayout(string filePath)
+        {
+            if (dockManagerLoaded)
+            {
+                XDocument d = XDocument.Load(filePath);
+                List<Guid> diagramIds = new List<Guid>();
+                ExtractDiagramIds((XElement) d.FirstNode, diagramIds);
+                foreach (Guid diagramId in diagramIds)
+                {
+                    Diagram diagram = (Diagram) Current.Project.TranslateComponent(diagramId);
+                    DiagramTabManager.ActivateDiagram(diagram, false);
+                }
+                dockManager.RestoreLayout(filePath);
+            }
+        }
+
+        private static void ExtractDiagramIds(XElement element, List<Guid> diagramIds)
+        {
+            if (element.Name == "DocumentContent")
+            {
+                XAttribute xAttribute = element.Attribute("Name");
+                if (xAttribute != null)
+                {
+                    string strGuid = xAttribute.Value.Replace("_", "-").Substring(1);
+                    diagramIds.Add(new Guid(strGuid));
+                }
+            }
+            foreach (XElement child in element.Elements())
+            {
+                ExtractDiagramIds(child, diagramIds);
+            }
+        }
+
+        public void SaveProjectLayout(string filePath)
+        {
+            try
+            {
+                dockManager.SaveLayout(filePath);
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        public string UserFileForProjectFile(string projectFilePath)
+        {
+            string fileNameWithoutExtension = System.IO.Path.GetFileNameWithoutExtension(projectFilePath);
+            return Path.GetDirectoryName(projectFilePath) + "\\" + fileNameWithoutExtension + ".eXo.user";
+        }
     }
 }

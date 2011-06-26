@@ -1,7 +1,8 @@
 ﻿<Window x:Class="Exolutio.View.Commands.XsltTestWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
-        xmlns:avalonEdit="clr-namespace:ICSharpCode.AvalonEdit;assembly=ICSharpCode.AvalonEdit" Title="EvolutionChangesWindow" 
+        xmlns:avalonEdit="clr-namespace:ICSharpCode.AvalonEdit;assembly=ICSharpCode.AvalonEdit" 
+        Title="EvolutionChangesWindow" 
         Height="976" Width="918" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <ResourceDictionary>
@@ -77,19 +78,19 @@
                                FontFamily="Consolas" 
                                FontSize="12"
                                Background="White"
-                               Language="XML" TextChanged="xmlEdit_TextChanged" />
+                               TextChanged="xmlEdit_TextChanged" />
             <avalonEdit:TextEditor Grid.Column="1" Grid.Row="0" 
                                Name="tbNewDoc" Padding="5"
                                FontFamily="Consolas" 
                                FontSize="12"
                                Background="White"
-                               Language="XML" TextChanged="xmlEdit_TextChanged" />
+                               TextChanged="xmlEdit_TextChanged" />
             <avalonEdit:TextEditor Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" 
                                Name="tbXslt" Padding="5"
                                FontFamily="Consolas" 
                                FontSize="12"
                                Background="White"
-                               Language="XML" TextChanged="xmlEdit_TextChanged" />
+                               TextChanged="xmlEdit_TextChanged" />
         </Grid>
     </DockPanel>
     <!--<StackPanel Orientation="Vertical">

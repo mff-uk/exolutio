@@ -219,7 +219,7 @@ namespace Exolutio.Revalidation.Changes
         }
     }
 
-    public class AssociationRenamedInstance : AssociationChangeInstance, ISedentaryChange
+    public class AssociationRenamedInstance : AssociationChangeInstance, IRenameChange
     {
         public AssociationRenamedInstance(PSMComponent component, Version oldVersion, Version newVersion)
             : base(component, oldVersion, newVersion)
@@ -259,6 +259,66 @@ namespace Exolutio.Revalidation.Changes
         public new static ChangeInstance CreateInstance(PSMComponent candidate, Version oldVersion, Version newVersion)
         {
             return new AssociationRenamedInstance(candidate, oldVersion, newVersion) { OldName = candidate.GetInVersion(oldVersion).Name, NewName = candidate.Name };
+        }
+    }
+
+    public class AssociationCardinalityChangedInstance : AssociationChangeInstance, ICardinalityChange
+    {
+        public AssociationCardinalityChangedInstance(PSMComponent component, Version oldVersion, Version newVersion)
+            : base(component, oldVersion, newVersion)
+        {
+        }
+
+        public Component ComponentOldVersion
+        {
+            get { return PSMAssociation.GetInVersion(OldVersion); }
+        }
+
+        public Component ComponentNewVersion
+        {
+            get { return PSMAssociation; }
+        }
+
+        public override EChangeCategory Category
+        {
+            get { return EChangeCategory.Migratory; }
+        }
+
+        public uint OldLower { get; set; }
+
+        [ChangePredicateParameter]
+        public uint NewLower { get; set; }
+
+        public UnlimitedInt OldUpper { get; set; }
+
+        [ChangePredicateParameter]
+        public UnlimitedInt NewUpper { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("Association '{0}' cardinality changed from '{1}' to '{2}'.", PSMAssociation,
+                IHasCardinalityExt.GetCardinalityString(OldLower, OldUpper),
+                IHasCardinalityExt.GetCardinalityString(NewLower, NewUpper));
+        }
+
+        public new static bool TestCandidate(PSMComponent candidate, Version oldVersion, Version newVersion)
+        {
+            PSMAssociation psmAssociation = (PSMAssociation)candidate;
+            PSMAssociation psmAssociationO = (PSMAssociation)candidate.GetInVersion(oldVersion);
+            return ExistingTest(candidate, oldVersion, newVersion) && (psmAssociation.Lower != psmAssociationO.Lower || psmAssociation.Upper != psmAssociationO.Upper);
+        }
+
+        public new static ChangeInstance CreateInstance(PSMComponent candidate, Version oldVersion, Version newVersion)
+        {
+            PSMAssociation psmAssociation = (PSMAssociation)candidate;
+            PSMAssociation psmAssociationO = (PSMAssociation)candidate.GetInVersion(oldVersion);
+            return new AssociationCardinalityChangedInstance(candidate, oldVersion, newVersion)
+            {
+                OldLower = psmAssociationO.Lower,
+                OldUpper = psmAssociationO.Upper,
+                NewLower = psmAssociation.Lower,
+                NewUpper = psmAssociation.Upper
+            };
         }
     }
 }

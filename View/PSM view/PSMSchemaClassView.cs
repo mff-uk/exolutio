@@ -43,9 +43,9 @@ namespace Exolutio.View
             border = new Border
                          {
                              BorderBrush = ViewToolkitResources.NodeBorderBrush,
-                             BorderThickness = ViewToolkitResources.Thicknness1,
+                             BorderThickness = ViewToolkitResources.Thickness1,
                              VerticalAlignment = VerticalAlignment.Stretch,
-                             Opacity = 0.8
+                             Opacity = ViewToolkitResources.LittleOpaque
                          };
             MainNode.InnerContentControl.Content = border;
 
@@ -58,8 +58,8 @@ namespace Exolutio.View
             Border headerBorder = new Border
             {
                 Background = ViewToolkitResources.NoInterpretationBrush,
-                BorderThickness = ViewToolkitResources.Thicknness0,
-                Padding = ViewToolkitResources.Thicknness2,
+                BorderThickness = ViewToolkitResources.Thickness0,
+                Padding = ViewToolkitResources.Thickness2,
                 BorderBrush = ViewToolkitResources.BlackBrush
             };
 

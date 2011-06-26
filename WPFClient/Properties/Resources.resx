@@ -121,7 +121,7 @@
     <value>&lt;DockingManager version="1.3.0"&gt;
     &lt;ResizingPanel ResizeWidth="*" ResizeHeight="*" EffectiveSize="0,0" Orientation="Horizontal"&gt;
         &lt;DockablePane ResizeWidth="150" ResizeHeight="*" EffectiveSize="150,530" ID="3113003d-57d4-4bbf-9dc1-6fa976640940" Anchor="Left" IsAutoHidden="false"&gt;
-            &lt;DockableContent Name="dcModelNavigator" FloatingWindowSize="250,400" /&gt;
+            &lt;DockableContent Name="navigatorTab" FloatingWindowSize="250,400" /&gt;
         &lt;/DockablePane&gt;
         &lt;ResizingPanel ResizeWidth="*" ResizeHeight="*" EffectiveSize="382,530" Orientation="Vertical"&gt;
             &lt;DocumentPane IsMain="true" ResizeWidth="*" ResizeHeight="*" EffectiveSize="382,414" /&gt;
