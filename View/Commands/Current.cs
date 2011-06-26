@@ -252,6 +252,9 @@ namespace Exolutio.View
 #else
         InputBindingCollection InputBindings { get; }
         CommandBindingCollection CommandBindings { get; }
+        void LoadProjectLayout(string filePath);
+        void SaveProjectLayout(string filePath);
+        string UserFileForProjectFile(string projectFilePath);
 #endif
         void Close();
         void CloseRibbonBackstage();

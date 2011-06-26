@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.IO;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using Exolutio.Model.Serialization;
@@ -48,6 +49,14 @@ namespace Exolutio.View.Commands.Project
                 {
                     (new ProjectSerializationManager()).SaveProject(Current.Project, Current.Project.ProjectFile);
                 }
+#if SILVERLIGHT
+#else
+                // save layout of project
+                if (Current.Project.ProjectFile.Exists)
+                {
+                    Current.MainWindow.SaveProjectLayout(Current.MainWindow.UserFileForProjectFile(Current.Project.ProjectFile.FullName));
+                }
+#endif
             }
 
             Current.MainWindow.CloseRibbonBackstage();

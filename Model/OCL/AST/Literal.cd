@@ -3,21 +3,21 @@
   <Class Name="Exolutio.Model.OCL.AST.BooleanLiteralExp" Collapsed="true">
     <Position X="12.5" Y="5.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAgAAAAAAA=</HashCode>
       <FileName>OCL\AST\Literal\BooleanLiteralExp.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Exolutio.Model.OCL.AST.UnlimitedNaturalLiteralExp" Collapsed="true">
     <Position X="19.5" Y="6.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
       <FileName>OCL\AST\Literal\UnlimitedNaturalLiteralExp.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Exolutio.Model.OCL.AST.CollectionItem" Collapsed="true">
     <Position X="26.25" Y="7" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAQAAAAAAAAA=</HashCode>
       <FileName>OCL\AST\Literal\CollectionItem.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -52,14 +52,14 @@
   <Class Name="Exolutio.Model.OCL.AST.EnumLiteralExp" Collapsed="true">
     <Position X="8.25" Y="4" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAQAAAAAAA=</HashCode>
       <FileName>OCL\AST\Literal\EnumLiteralExp.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Exolutio.Model.OCL.AST.IntegerLiteralExp" Collapsed="true">
     <Position X="21.75" Y="6.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAgAAAAAAA=</HashCode>
       <FileName>OCL\AST\Literal\IntegerLiteralExp.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -101,14 +101,14 @@
   <Class Name="Exolutio.Model.OCL.AST.RealLiteralExp" Collapsed="true">
     <Position X="17.25" Y="6.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAgAAAAAAA=</HashCode>
       <FileName>OCL\AST\Literal\RealLiteralExp.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Exolutio.Model.OCL.AST.StringLiteralExp" Collapsed="true">
     <Position X="15" Y="5.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAgAAAAAAA=</HashCode>
       <FileName>OCL\AST\Literal\StringLiteralExp.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -133,11 +133,11 @@
       <FileName>OCL\AST\TypedElement.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Enum Name="Exolutio.Model.OCL.AST.CollectionKind" Collapsed="true">
+  <Enum Name="Exolutio.Model.OCL.CollectionKind" Collapsed="true">
     <Position X="32.5" Y="4.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAgAAgARAAAAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
-      <FileName>OCL\AST\Literal\CollectionKind.cs</FileName>
+      <FileName>OCL\CollectionKind.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Font Name="Segoe UI" Size="9" />

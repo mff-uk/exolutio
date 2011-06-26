@@ -145,15 +145,28 @@ namespace Exolutio.Revalidation.Changes
         Component ComponentOldVersion { get; }
     }
 
-    public interface ISedentaryChange
+    public interface IExistingComponentChange
     {
         Component ComponentOldVersion { get; }
         Component ComponentNewVersion { get; }
     }
 
-    public interface IMigratoryChange
+    public interface ISedentaryChange : IExistingComponentChange 
     {
-        Component ComponentOldVersion { get; }
-        Component ComponentNewVersion { get; }
+    }
+
+    public interface IRenameChange: ISedentaryChange
+    {
+        
+    }
+
+    public interface ICardinalityChange: ISedentaryChange
+    {
+        
+    }
+
+    public interface IMigratoryChange : IExistingComponentChange
+    {
+       
     }
 }

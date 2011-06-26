@@ -57,6 +57,11 @@ namespace Exolutio.View.Commands.Project
                 projectSerializationManager.SaveProject(p, dlg.OpenFile());
 #else
                 projectSerializationManager.SaveProject(p, dlg.FileName);
+                // save layout of project
+                if (p.ProjectFile.Exists)
+                {
+                    Current.MainWindow.SaveProjectLayout(Current.MainWindow.UserFileForProjectFile(p.ProjectFile.FullName));
+                }
 #endif
             }
 

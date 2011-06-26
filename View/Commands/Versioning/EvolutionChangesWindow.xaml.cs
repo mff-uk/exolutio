@@ -15,7 +15,9 @@ using Exolutio.Model.PSM;
 using Exolutio.Model.Versioning;
 using Exolutio.Revalidation;
 using Exolutio.Revalidation.Changes;
+using Exolutio.Revalidation.XSLT;
 using Exolutio.ViewToolkit;
+using Exolutio.SupportingClasses;
 
 namespace Exolutio.View
 {
@@ -31,14 +33,14 @@ namespace Exolutio.View
 
         public IMainWindow MainWindow { get; private set; }
 
-        public static bool? Show(DetectedChangesSet changes, IMainWindow MainWindow, PSMDiagram diagramOldVersion, PSMDiagram diagramNewVersion)
+        public static bool? Show(DetectedChangeInstancesSet changeInstances, IMainWindow MainWindow, PSMDiagram diagramOldVersion, PSMDiagram diagramNewVersion)
         {
             EvolutionChangesWindow evolutionChangesWindow = new EvolutionChangesWindow();
-            evolutionChangesWindow.Changes = changes;
+            evolutionChangesWindow.ChangeInstances = changeInstances;
             evolutionChangesWindow.MainWindow = MainWindow;
 
             List<ChangeInstance> changesList = new List<ChangeInstance>();
-            foreach (KeyValuePair<Type, List<ChangeInstance>> keyValuePair in changes)
+            foreach (KeyValuePair<Type, List<ChangeInstance>> keyValuePair in changeInstances)
             {
                 changesList.AddRange(keyValuePair.Value);
             }
@@ -49,11 +51,16 @@ namespace Exolutio.View
             evolutionChangesWindow.DiagramView = MainWindow.DiagramTabManager.GetOpenedDiagramView(diagramNewVersion);
             evolutionChangesWindow.DiagramViewOldVersion = MainWindow.DiagramTabManager.GetOpenedDiagramView(diagramOldVersion);
             evolutionChangesWindow.Topmost = true;
+
+            evolutionChangesWindow.lRed.Content = changeInstances.RedNodes.ConcatWithSeparator(", ");
+            evolutionChangesWindow.lBlue.Content = changeInstances.BlueNodes.ConcatWithSeparator(", ");
+            evolutionChangesWindow.lGreen.Content = changeInstances.GreenNodes.ConcatWithSeparator(", ");
+            
             evolutionChangesWindow.Show();
             return true;
         }
 
-        protected DetectedChangesSet Changes { get; set; }
+        protected DetectedChangeInstancesSet ChangeInstances { get; set; }
 
         protected PSMDiagram DiagramOldVersion { get; set; }
 

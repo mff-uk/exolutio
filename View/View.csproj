@@ -52,9 +52,11 @@
     <Reference Include="OrderedListWPF">
       <HintPath>..\ExternalBinaries\OrderedList\OrderedListWPF.dll</HintPath>
     </Reference>
+    <Reference Include="ReachFramework" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Printing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -160,6 +162,7 @@
     <Compile Include="Commands\Versioning\guiRemoveCurrentVersion.cs" />
     <Compile Include="Commands\Versioning\guiBranchCurrentVersion.cs" />
     <Compile Include="Commands\Versioning\guiSaveAsSingleVersion.cs" />
+    <Compile Include="Commands\View\guiImageExportCommand.cs" />
     <Compile Include="Commands\View\guiStraightenLineCommand.cs" />
     <Compile Include="Common view\VersionedElementInfo.xaml.cs">
       <DependentUpon>VersionedElementInfo.xaml</DependentUpon>
@@ -178,6 +181,7 @@
       <DependentUpon>FileView.xaml</DependentUpon>
     </Compile>
     <Compile Include="IconConverter.cs" />
+    <Compile Include="ImageExporter.cs" />
     <Compile Include="INodeComponentViewBase.cs" />
     <Compile Include="PIM view\PIMClassDialog.xaml.cs">
       <DependentUpon>PIMClassDialog.xaml</DependentUpon>

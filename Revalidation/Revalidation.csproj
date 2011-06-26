@@ -68,6 +68,7 @@
     <Compile Include="Changes\EChangePredicateScope.cs" />
     <Compile Include="DocumentValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="XSLT\RevalidationNodeInfo.cs" />
     <Compile Include="XSLT\XPathExpr.cs" />
     <Compile Include="XSLT\XDocumentXsltExtensions.cs" />
     <Compile Include="XSLT\XsltRevalidationScriptGenerator.cs" />

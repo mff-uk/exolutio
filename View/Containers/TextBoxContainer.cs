@@ -211,7 +211,7 @@ namespace Exolutio.View
 				}
 				else
 				{
-					StackBorders[0].BorderThickness = ViewToolkitResources.Thicknness0;
+					StackBorders[0].BorderThickness = ViewToolkitResources.Thickness0;
 				}
 
 				// for all non-empty containers use bottom border except for the last one
@@ -231,9 +231,9 @@ namespace Exolutio.View
 					}
 					else
 					{
-                        StackBorders[i + 1].BorderThickness = ViewToolkitResources.Thicknness0;
+                        StackBorders[i + 1].BorderThickness = ViewToolkitResources.Thickness0;
 						if (textBoxContainer != StackContainers.First())
-                            StackBorders[i + 1].Padding = ViewToolkitResources.Thicknness0;
+                            StackBorders[i + 1].Padding = ViewToolkitResources.Thickness0;
 					}
 				}
 

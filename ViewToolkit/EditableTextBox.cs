@@ -124,7 +124,7 @@ namespace Exolutio.ViewToolkit
             IsTabStop = false;
             IsHitTestVisible = true;
             Cursor = Cursors.Arrow;
-            Margin = ViewToolkitResources.Thicknness0;
+            Margin = ViewToolkitResources.Thickness0;
             KeyDown += ClassTextBox_KeyDown;
             KeyUp += EditableTextBox_KeyUp;
             MouseEnter += ClassTextBox_MouseEnter;

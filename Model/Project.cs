@@ -132,7 +132,7 @@ namespace Exolutio.Model
                 NotifyPropertyChanged("HasUnsavedChanges");
             }
         }
-        
+
         public ProjectVersion LatestVersion
         {
             get { return UsesVersioning ? ProjectVersions.Last() : SingleVersion; }

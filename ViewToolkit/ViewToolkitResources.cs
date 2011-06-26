@@ -28,10 +28,10 @@ namespace Exolutio.ViewToolkit
         private static readonly SolidColorBrush ribbonBackstageDimText;
         private static readonly SolidColorBrush navyBrush;
         private static readonly SolidColorBrush greyBrush;
-        private static readonly Thickness thicnkees0;
-        private static readonly Thickness thicnkees1;
-        private static readonly Thickness thicnkees2;
-        private static readonly Thickness thicnkees5;
+        private static readonly Thickness thickness0;
+        private static readonly Thickness thickness1;
+        private static readonly Thickness thickness2;
+        private static readonly Thickness thickness5;
 
 #if SILVERLIGHT
         
@@ -144,13 +144,15 @@ namespace Exolutio.ViewToolkit
 
         public static Brush NavyBrush { get { return navyBrush; } }
 
-        public static Thickness Thicknness0 { get { return thicnkees0; } }
+        public static Thickness Thickness0 { get { return thickness0; } }
         
-        public static Thickness Thicknness1 { get { return thicnkees1; } }
+        public static Thickness Thickness1 { get { return thickness1; } }
 
-        public static Thickness Thicknness2 { get { return thicnkees2; } }
+        public static Thickness Thickness2 { get { return thickness2; } }
 
-        public static Thickness Thicknness5 { get { return thicnkees5; } }
+        public static Thickness Thickness5 { get { return thickness5; } }
+        
+        public static double LittleOpaque { get { return 0.8; } }
 
         static ViewToolkitResources()
         {
@@ -176,10 +178,10 @@ namespace Exolutio.ViewToolkit
             interpretedAttributeBrush = seaShellBrush; 
             ribbonBackstageDimText = new SolidColorBrush(Color.FromArgb(0xFF, 0xa1, 0x6f, 0x89));
             selectedBorderBrush = redBrush;
-            thicnkees0 = new Thickness(0);
-            thicnkees1 = new Thickness(1);
-            thicnkees2 = new Thickness(2);
-            thicnkees5 = new Thickness(5);
+            thickness0 = new Thickness(0);
+            thickness1 = new Thickness(1);
+            thickness2 = new Thickness(2);
+            thickness5 = new Thickness(5);
 #if SILVERLIGHT
 #else
             interpretedAssociationPen = new Pen();

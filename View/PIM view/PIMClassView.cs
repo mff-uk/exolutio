@@ -46,9 +46,9 @@ namespace Exolutio.View
             border = new Border
                          {
                              BorderBrush = ViewToolkitResources.NodeBorderBrush,
-                             BorderThickness = ViewToolkitResources.Thicknness1,
+                             BorderThickness = ViewToolkitResources.Thickness1,
                              VerticalAlignment = VerticalAlignment.Stretch,
-                             Opacity = 0.8
+                             Opacity = ViewToolkitResources.LittleOpaque
                          };
             MainNode.InnerContentControl.Content = border;
 
@@ -61,8 +61,8 @@ namespace Exolutio.View
             Border headerBorder = new Border
             {
                 Background = ViewToolkitResources.ClassHeader,
-                BorderThickness = ViewToolkitResources.Thicknness0,
-                Padding = ViewToolkitResources.Thicknness2,
+                BorderThickness = ViewToolkitResources.Thickness0,
+                Padding = ViewToolkitResources.Thickness2,
                 BorderBrush = ViewToolkitResources.BlackBrush
             };
 
@@ -204,12 +204,12 @@ namespace Exolutio.View
                 base.Selected = value;
                 if (value)
                 {
-                    border.BorderThickness = ViewToolkitResources.Thicknness1;
+                    border.BorderThickness = ViewToolkitResources.Thickness1;
                     border.BorderBrush = ViewToolkitResources.RedBrush;
                 }
                 else
                 {
-                    border.BorderThickness = ViewToolkitResources.Thicknness1;
+                    border.BorderThickness = ViewToolkitResources.Thickness1;
                     border.BorderBrush = ViewToolkitResources.NodeBorderBrush;
                     foreach (PIMAttributeTextBox attributeTextBox in attributesContainer)
                     {

@@ -84,12 +84,13 @@
         </Setter>
 
     </Style>
+    
     <c:MainWindowTitleConverter x:Key="titleConverter"/>
 
     <Style x:Key="BackStageStyle" TargetType="{x:Type Button}">
-        <Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
+        <!--<Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
         <Setter Property="Background" Value="{StaticResource ButtonNormalBackground}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource ButtonNormalBorder}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource ButtonNormalBorder}"/>-->
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>

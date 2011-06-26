@@ -165,7 +165,7 @@ namespace Exolutio.View
                     StackPanel liOuterP = new StackPanel();
                     liOuter.Content = liOuterP;
                     topLevel.P().Children.Add(liOuter);
-                    liOuterP.Children.Add(new Label() { Content = logMessage.MessageText, FontSize = 12, Padding = ViewToolkitResources.Thicknness5 });                    
+                    liOuterP.Children.Add(new Label() { Content = logMessage.MessageText, FontSize = 12, Padding = ViewToolkitResources.Thickness5 });                    
                     IEnumerable<LogMessage> relatedMessages = DisplayedLog.Where(m => m.RelatedMessage == logMessage);
                     if (relatedMessages.Count() > 0)
                     {
@@ -210,7 +210,7 @@ namespace Exolutio.View
                 sb.Append(string.Format(" "));
             }
 
-            liSP.Children.Add(new Label() { Content = sb.ToString(), FontSize = 12, Padding = ViewToolkitResources.Thicknness5 });
+            liSP.Children.Add(new Label() { Content = sb.ToString(), FontSize = 12, Padding = ViewToolkitResources.Thickness5 });
 
             if (displayedReport is NestedCommandReport)
             {

@@ -64,10 +64,10 @@ namespace Exolutio.WPFClient.Properties {
         ///   Looks up a localized string similar to &lt;DockingManager version=&quot;1.3.0&quot;&gt;
         ///    &lt;ResizingPanel ResizeWidth=&quot;*&quot; ResizeHeight=&quot;*&quot; EffectiveSize=&quot;0,0&quot; Orientation=&quot;Horizontal&quot;&gt;
         ///        &lt;DockablePane ResizeWidth=&quot;150&quot; ResizeHeight=&quot;*&quot; EffectiveSize=&quot;150,530&quot; ID=&quot;3113003d-57d4-4bbf-9dc1-6fa976640940&quot; Anchor=&quot;Left&quot; IsAutoHidden=&quot;false&quot;&gt;
-        ///            &lt;DockableContent Name=&quot;dcModelNavigator&quot; FloatingWindowSize=&quot;250,400&quot; /&gt;
+        ///            &lt;DockableContent Name=&quot;navigatorTab&quot; FloatingWindowSize=&quot;250,400&quot; /&gt;
         ///        &lt;/DockablePane&gt;
         ///        &lt;ResizingPanel ResizeWidth=&quot;*&quot; ResizeHeight=&quot;*&quot; EffectiveSize=&quot;382,530&quot; Orientation=&quot;Vertical&quot;&gt;
-        ///    [rest of string was truncated]&quot;;.
+        ///        [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string defaultLayout {
             get {

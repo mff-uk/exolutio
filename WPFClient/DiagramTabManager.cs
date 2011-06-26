@@ -147,6 +147,7 @@ namespace Exolutio.WPFClient
                 newTab.BindTab(diagram);
                 newTab.DiagramView.LoadDiagram(diagram);
                 newTab.DiagramView.SelectionChanged += SelectedItems_CollectionChanged;
+                newTab.Name = "D" + diagram.ID.ToString().Replace("-", "_");
                 ActivePane.Items.Add(newTab);
                 ActivePane.UpdateLayout();
                 //ActivePane.BringHeaderToFront(newTab);

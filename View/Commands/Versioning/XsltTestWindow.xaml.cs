@@ -37,6 +37,21 @@ namespace Exolutio.View.Commands
         {
             InitializeComponent();
 
+            foldingManager = FoldingManager.Install(tbOldDoc.TextArea);
+            foldingManager = FoldingManager.Install(tbNewDoc.TextArea);
+            foldingManager = FoldingManager.Install(tbXslt.TextArea);
+
+            tbOldDoc.SyntaxHighlighting = ICSharpCode.AvalonEdit.Highlighting.HighlightingManager.Instance.GetDefinition("XML");
+            tbOldDoc.ShowLineNumbers = true;
+
+            tbNewDoc.SyntaxHighlighting = ICSharpCode.AvalonEdit.Highlighting.HighlightingManager.Instance.GetDefinition("XML");
+            tbNewDoc.ShowLineNumbers = true;
+
+            tbXslt.SyntaxHighlighting = ICSharpCode.AvalonEdit.Highlighting.HighlightingManager.Instance.GetDefinition("XML");
+            tbXslt.ShowLineNumbers = true;
+
+            foldingStrategy = new XmlFoldingStrategy();
+
             if (Directory.Exists(BASE_DIR))
             {
                 FileInfo[] fileInfos = (new DirectoryInfo(BASE_DIR)).GetFiles("*.xslt");
@@ -56,25 +71,10 @@ namespace Exolutio.View.Commands
 #endif
         }
 
-        private XsltTestWindow(DetectedChangesSet changes)
+        private XsltTestWindow(DetectedChangeInstancesSet changeInstances)
             : this()
         {
-            Changes = changes; 
-
-            foldingManager = FoldingManager.Install(tbOldDoc.TextArea);
-            foldingManager = FoldingManager.Install(tbNewDoc.TextArea);
-            foldingManager = FoldingManager.Install(tbXslt.TextArea);
-
-            tbOldDoc.SyntaxHighlighting = ICSharpCode.AvalonEdit.Highlighting.HighlightingManager.Instance.GetDefinition("XML");
-            tbOldDoc.ShowLineNumbers = true;
-
-            tbNewDoc.SyntaxHighlighting = ICSharpCode.AvalonEdit.Highlighting.HighlightingManager.Instance.GetDefinition("XML");
-            tbNewDoc.ShowLineNumbers = true;
-
-            tbXslt.SyntaxHighlighting = ICSharpCode.AvalonEdit.Highlighting.HighlightingManager.Instance.GetDefinition("XML");
-            tbXslt.ShowLineNumbers = true;
-
-            foldingStrategy = new XmlFoldingStrategy();
+            ChangeInstances = changeInstances; 
         }
 
         private PSMSchema schemaVersion1;
@@ -133,9 +133,9 @@ namespace Exolutio.View.Commands
 
 #if DEBUG
 #if SAVE_DOC_FOR_TEST
-        const string SAVE_DIR = @"D:\Programování\Exolutio\XSLTTest\";
-        const string SAVE_DOCUMENT = @"D:\Programování\Exolutio\XSLTTest\LastInput.xml";
-        const string SAVE_STYLESHEET = @"D:\Programování\Exolutio\XSLTTest\LastStylesheet.xslt";
+        const string SAVE_DIR = @"D:\Programování\EVOXSVN\XSLTTest\";
+        const string SAVE_DOCUMENT = @"D:\Programování\EVOXSVN\XSLTTest\LastInput.xml";
+        const string SAVE_STYLESHEET = @"D:\Programování\EVOXSVN\XSLTTest\LastStylesheet.xslt";
 #endif 
 #endif 
         public static string XDocumentToString(XDocument doc)
@@ -168,7 +168,7 @@ namespace Exolutio.View.Commands
 #if SAVE_DOC_FOR_TEST
             int si = sampleDoc.IndexOf("xmlns:xsi=\"");
             int ei = sampleDoc.IndexOf("\"", si + "xmlns:xsi=\"".Length) + 1;
-            string text = sampleDoc.Remove(si, ei - si);
+            string text = si != -1 ? sampleDoc.Remove(si, ei - si) : sampleDoc;
             si = text.IndexOf("xmlns=\"");
             ei = text.IndexOf("\"", si + "xmlns=\"".Length) + 1;
             string xmlns = text.Substring(si, ei - si);
@@ -178,9 +178,9 @@ namespace Exolutio.View.Commands
 #endif
         }
 
-        public static bool? ShowDialog(DetectedChangesSet changes, PSMSchema activeDiagramOldVersion, PSMSchema activeDiagramNewVersion)
+        public static bool? ShowDialog(DetectedChangeInstancesSet changeInstances, PSMSchema activeDiagramOldVersion, PSMSchema activeDiagramNewVersion)
         {
-            XsltTestWindow xsltTestWindow = new XsltTestWindow(changes);
+            XsltTestWindow xsltTestWindow = new XsltTestWindow(changeInstances);
             xsltTestWindow.SchemaVersion1 = activeDiagramOldVersion;
             xsltTestWindow.SchemaVersion2 = activeDiagramNewVersion;
             
@@ -189,7 +189,7 @@ namespace Exolutio.View.Commands
             return true;
         }
 
-        protected DetectedChangesSet Changes { get; private set; }
+        protected DetectedChangeInstancesSet ChangeInstances { get; private set; }
 
         private readonly XmlFoldingStrategy foldingStrategy;
         private readonly FoldingManager foldingManager;
@@ -252,7 +252,7 @@ namespace Exolutio.View.Commands
 
         private void xmlEdit_TextChanged(object sender, EventArgs e)
         {
-            //UpdateFolding();
+            UpdateFolding();
         }
 
         private void Save_Click(object sender, RoutedEventArgs e)
@@ -304,6 +304,7 @@ namespace Exolutio.View.Commands
                 tbXslt.Text = File.ReadAllText(filename);
             else 
                 tbXslt.Text = File.ReadAllText(BASE_DIR + filename);
+            UpdateFolding();
         }
 
         private void bXsltBasic_Click(object sender, RoutedEventArgs e)
@@ -322,8 +323,8 @@ namespace Exolutio.View.Commands
         
         private void bXsltFromChanges_Click(object sender, RoutedEventArgs e)
         {
-            XsltRevalidationScriptGenerator xsltTemplateGenerator = new XsltRevalidationScriptGenerator(schemaVersion2);
-            string xslt = xsltTemplateGenerator.Generate(Changes, schemaVersion1.Version, schemaVersion2.Version);
+            XsltRevalidationScriptGenerator xsltTemplateGenerator = new XsltRevalidationScriptGenerator();
+            string xslt = xsltTemplateGenerator.Generate(schemaVersion1, schemaVersion2, ChangeInstances);
             tbXslt.Text = xslt;
             #if DEBUG
             #if SAVE_DOC_FOR_TEST
