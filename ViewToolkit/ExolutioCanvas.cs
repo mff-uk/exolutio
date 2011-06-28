@@ -366,9 +366,18 @@ namespace Exolutio.ViewToolkit
             }
         }
 
+        private System.Windows.Controls.Label mouseLabel; 
+
         internal void ExolutioCanvas_MouseMove(object sender, MouseEventArgs e)
         {
             CurrentState.Canvas_MouseMove(e);
+
+            if (mouseLabel == null)
+            {
+                mouseLabel = new System.Windows.Controls.Label();
+                this.Children.Add(mouseLabel);
+            }
+            mouseLabel.Content = string.Format("{0}, {1}", Mouse.GetPosition(this).X, Mouse.GetPosition(this).Y);
 
             //ShowHideZoomer(e);
         }

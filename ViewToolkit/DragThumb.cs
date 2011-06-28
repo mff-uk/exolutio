@@ -467,9 +467,9 @@ namespace Exolutio.ViewToolkit
         /// </summary>
         /// <param name="item">item.</param>
         /// <returns>Returns true when the control is the only control dragged.</returns>
-        private bool DraggingAllone(ISelectable item)
+        public bool DraggingAllone(ISelectable item)
         {
-            return (ExolutioCanvas.SelectedItems.Where(i => i is IDraggable).Count() <= 1 && ((IDraggable) item).DragThumb.AllowDragIfSelectedAlone);
+            return (ExolutioCanvas.SelectedItems.Where(i => i is IDraggable).Count() <= 1 && item is IDraggable && ((IDraggable) item).DragThumb.AllowDragIfSelectedAlone);
         }
 
         private Dictionary<DragThumb, rPoint> startPositions;
@@ -484,8 +484,8 @@ namespace Exolutio.ViewToolkit
             startPositions = new Dictionary<DragThumb, rPoint>();
             IsDragged = true; 
 
-            if (!(this is ISelectable) ||
-                !ExolutioCanvas.SelectedItems.Contains(this as ISelectable))
+            if (!(this.DraggedControl is ISelectable) ||
+                !ExolutioCanvas.SelectedItems.Contains(this.DraggedControl as ISelectable))
             {
                 startPositions.Add(this, new rPoint(this.Left, this.Top));
             }
@@ -495,7 +495,7 @@ namespace Exolutio.ViewToolkit
                 {
                     if (item.CanBeDraggedInGroup || DraggingAllone(item))
                     {
-                        DragThumb thumb = item as DragThumb;
+                        DragThumb thumb = ((IDraggable)item).DragThumb;
                         if (thumb != null)
                         {
                             startPositions.Add(thumb, new rPoint(thumb.Position) { tag = thumb.Placement });
@@ -653,9 +653,7 @@ namespace Exolutio.ViewToolkit
                     Dropped();
             }
         }
-
         
-
         #region snapy - zatim neimplementovano
         /// <summary>
         /// AdjustDrag is called when DragThumb is dragged via mouse upon its canvas. Inheriting classes are free

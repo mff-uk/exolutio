@@ -14,7 +14,14 @@ namespace Exolutio.ViewToolkit
 	{
         public static Rect GetFirstElementBounds(Connector connector)
         {
-            return connector.StartNode.GetBounds();
+            if (connector.StartPoint.Disconnected)
+            {
+                return connector.StartPoint.GetBounds();    
+            }
+            else
+            {
+                return connector.StartNode.GetBounds();    
+            }
         }
 
         public static Rect GetFirstButOneElementBounds(Connector connector)
@@ -29,7 +36,14 @@ namespace Exolutio.ViewToolkit
 
         public static Rect GetLastElementBounds(Connector connector)
         {
-            return connector.EndNode != null ? (connector.EndNode).GetBounds() : connector.EndPoint.GetBounds();
+            if (connector.EndNode == null || connector.EndPoint.Disconnected)
+            {
+                return connector.EndPoint.GetBounds();
+            }
+            else
+            {
+                return connector.EndNode.GetBounds();
+            }
         }
 
 		public static Point RectangleRectangleCenterIntersection(Rect rect, Rect rect2, bool relative, double angle)

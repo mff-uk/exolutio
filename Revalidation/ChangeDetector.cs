@@ -160,7 +160,7 @@ namespace Exolutio.Revalidation
                     if (!changeInstances.RedNodes.Contains(m.ParentAssociation.Parent)
                         && !changeInstances.BlueNodes.Contains(m.ParentAssociation.Parent))
                     {
-                        changeInstances.BlueNodes.Add(m);
+                        changeInstances.BlueNodes.Add(m.ParentAssociation.Parent);
                         if (!(m.ParentAssociation.Parent is PSMSchemaClass))
                         {
                             toDo.Enqueue(m.ParentAssociation.Parent);
