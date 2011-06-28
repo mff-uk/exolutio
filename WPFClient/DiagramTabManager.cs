@@ -232,6 +232,10 @@ namespace Exolutio.WPFClient
                     Current.ActiveDiagram = null;
                 }
             }
+            else
+            {
+                Current.InvokeSelectionChanged();
+            }
         }
 
         internal void project_DiagramRemoved(object sender, DiagramEventArgs e)
