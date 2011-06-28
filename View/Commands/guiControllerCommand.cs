@@ -114,6 +114,7 @@ namespace Exolutio.View.Commands
             }
 
             CommandDialogWindow w = null;
+            dialogOpened = false;
             controls = new List<Control>();
 
             #region substitute scope with diagram
@@ -199,6 +200,7 @@ namespace Exolutio.View.Commands
                 w.Show();
                 w.Closed += w_Closed;
 #endif
+                dialogOpened = true;
             }
             else
             {
@@ -211,8 +213,11 @@ namespace Exolutio.View.Commands
             //}
         }
 
+        private bool dialogOpened;
+
         void w_Closed(object sender, EventArgs e)
         {
+            dialogOpened = false; 
             bool? dialogResult = ((CommandDialogWindow)sender).DialogResult;
             if (dialogResult == true)
             {
@@ -302,6 +307,13 @@ namespace Exolutio.View.Commands
 
         public override bool CanExecute(object parameter)
         {
+            if (dialogOpened)
+            {
+                /* the command dialog is already opened, we do not want to change 
+                   scopeObject now, which is what this method does later */
+                return true; 
+            }
+
             if (PIMOnly)
             {
                 if (Current.ActiveDiagram == null || !(Current.ActiveDiagram.Schema is PIMSchema))
