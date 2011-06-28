@@ -43,7 +43,7 @@ namespace Exolutio.ViewToolkit
 
         public bool CanBeDraggedInGroup
         {
-            get { throw new NotImplementedException(); }
+            get { return false; }
         }
 
         private bool selected;
@@ -103,13 +103,13 @@ namespace Exolutio.ViewToolkit
         public Node StartNode
         {
             get { return startNode; }
-            private set { startNode = value; }
+            internal set { startNode = value; }
         }
 
         public Node EndNode
         {
             get { return endNode; }
-            private set { endNode = value; }
+            internal set { endNode = value; }
         }
 
         public bool AutoPosModeOnly { get; set; }
@@ -136,7 +136,7 @@ namespace Exolutio.ViewToolkit
             {
                 for (int index = 1; index < desiredPoints.Count - 1; index++)
                 {
-                    BreakAtPoint(desiredPoints[index]);
+                    BreakAtPoint(desiredPoints[index], index - 1);
                 }
             }
 
@@ -315,11 +315,14 @@ namespace Exolutio.ViewToolkit
             //}
         }
 
-        public ConnectorPoint BreakAtPoint(Point point)
+        public ConnectorPoint BreakAtPoint(Point point, int ? brokenSegment = null)
         {
-            int index = GeometryHelper.FindHitSegmentIndex(point, this.Points);
+            if (brokenSegment == null)
+            {
+                brokenSegment = GeometryHelper.FindHitSegmentIndex(point, this.Points);
+            }
             ConnectorPoint connectorPoint = new ConnectorPoint(ExolutioCanvas);
-            connectorPoint.OrderInConnector = index + 1;
+            connectorPoint.OrderInConnector = brokenSegment.Value + 1;
             connectorPoint.Placement = EPlacementKind.AbsoluteCanvas;
             connectorPoint.Connector = this;
             ExolutioCanvas.Children.Add(connectorPoint);
@@ -416,19 +419,24 @@ namespace Exolutio.ViewToolkit
         public bool AdjustEndPoints()
         {
 #if SILVERLIGHT
-            if (!sourceMeasureValid)
+            if (StartNode != null && !sourceMeasureValid)
                 sourceMeasureValid = StartNode.GetBounds().Width != 0;
-            if (!targetMeasureValid)
+            if (EndNode != null && !targetMeasureValid)
                 targetMeasureValid = EndNode.GetBounds().Width != 0;
 #endif
+            // StartNode and EndNode now can be null to allow disconnected connector points
+            if (StartNode != null && !StartNode.IsMeasureValid)
+                return false;
+            if (EndNode != null && !EndNode.IsMeasureValid)
+                return false;
 
-            if (StartNode == null || !StartNode.IsMeasureValid || EndNode == null || !EndNode.IsMeasureValid || StartPoint == null || EndPoint == null ||
+            if (StartPoint == null || EndPoint == null ||
                 !targetMeasureValid || !sourceMeasureValid)
                 return false;
 
             #region set source junctionEnd position
 
-            double angle = StartNode.BoundsAngle;
+            double angle = StartNode != null ? StartNode.BoundsAngle : 0;
 
             if (StartPoint.Placement == EPlacementKind.AbsoluteSubCanvas)
             {
@@ -442,8 +450,9 @@ namespace Exolutio.ViewToolkit
             if (AutoPosModeOnly && StartPoint.Placement != EPlacementKind.ParentAutoPos)
                 StartPoint.Placement = EPlacementKind.ParentAutoPos;
 
-            if (StartNode.IsMeasureValid /*&& (viewHelperPointsCollection == null || Points.Count == viewHelperPointsCollection.Count)*/
-                /*&& (StartPoint.Placement == EPlacementKind.ParentAutoPos || viewHelperPointsCollection == null || viewHelperPointsCollection.PointsInvalid)*/)
+            // Condition removed to allow disconnected connector points
+            //if (StartNode.IsMeasureValid /*&& (viewHelperPointsCollection == null || Points.Count == viewHelperPointsCollection.Count)*/
+            //    /*&& (StartPoint.Placement == EPlacementKind.ParentAutoPos || viewHelperPointsCollection == null || viewHelperPointsCollection.PointsInvalid)*/)
             {
                 Rect r1 = GeometryHelper.GetFirstElementBounds(this);
                 Rect r2 = GeometryHelper.GetFirstButOneElementBounds(this);
@@ -514,12 +523,13 @@ namespace Exolutio.ViewToolkit
             }
 
 
-            angle = EndNode.BoundsAngle;
+            angle = EndNode != null ? EndNode.BoundsAngle : 0;
             if (AutoPosModeOnly && EndPoint.Placement != EPlacementKind.ParentAutoPos)
                 EndPoint.Placement = EPlacementKind.ParentAutoPos;
 
-            if (EndNode.IsMeasureValid /*&& (viewHelperPointsCollection == null || Points.Count == viewHelperPointsCollection.Count)*/
-                /*&& (EndPoint.Placement == EPlacementKind.ParentAutoPos || viewHelperPointsCollection == null || viewHelperPointsCollection.PointsInvalid)*/)
+            // Condition removed to allow disconnected connector points
+            //if (EndNode.IsMeasureValid /*&& (viewHelperPointsCollection == null || Points.Count == viewHelperPointsCollection.Count)*/
+            //    /*&& (EndPoint.Placement == EPlacementKind.ParentAutoPos || viewHelperPointsCollection == null || viewHelperPointsCollection.PointsInvalid)*/)
             {
                 Rect r1 = GeometryHelper.GetLastElementBounds(this);
                 Rect r2 = GeometryHelper.GetLastButOneElementBounds(this);

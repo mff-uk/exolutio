@@ -1,12 +1,37 @@
+using System;
 using System.Collections.Generic;
 using Exolutio.Model;
 using Exolutio.Model.PSM;
 
 namespace Exolutio.Revalidation.XSLT
 {
-    public struct RevalidationNodeInfo
+    public class RevalidationNodeInfo
     {
+        public RevalidationNodeInfo(PSMComponent psmComponent)
+        {
+            Node = psmComponent;
+
+            DetermineRequiredTemplates();
+        }
+
+        private void DetermineRequiredTemplates()
+        {
+            /*
+             * Attribute template is required
+             * for class: 
+             *  1) when it has attributes 
+             *  2) when it has child class connected via association 
+             *    not having and the child class requires attributes 
+             * for content model: 
+             *  2)
+             */
+        }
+
         public PSMComponent Node { get; set; }
+
+        public bool AttributeTemplateRequired { get; private set; }
+        
+        public bool ElementTemplateRequired { get; private set; }
 
         public Template ProcessAttributesTemplate { get; set; }
 

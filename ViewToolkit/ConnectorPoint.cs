@@ -63,6 +63,15 @@ namespace Exolutio.ViewToolkit
             set { dragThumb.Y = value; }
         }
 
+        private bool allowDisconnect = true;
+        public bool AllowDisconnect
+        {
+            get { return allowDisconnect; }
+            set { allowDisconnect = value; }
+        }
+
+        public bool Disconnected { get; set; }
+
         public Point Position
         {
             get
@@ -161,8 +170,49 @@ namespace Exolutio.ViewToolkit
                 Point p = new Point(CanvasPosition.X + deltaEventArgs.HorizontalChange, CanvasPosition.Y + deltaEventArgs.VerticalChange);
                 Point snapped = bounds.SnapPointToRectangle(p);
 
-                deltaEventArgs = new DragDeltaEventArgs(snapped.X - CanvasPosition.X, snapped.Y - CanvasPosition.Y);
+                if (AllowDisconnect && !Disconnected && dragThumb.DraggingAllone(this))
+                {
+                    Vector diff = Vector.SubtractPoints(Mouse.GetPosition(this.ExolutioCanvas), CanvasPosition);
+                    if (diff.Length < 20)
+                    {
+                        deltaEventArgs = new DragDeltaEventArgs(snapped.X - CanvasPosition.X, snapped.Y - CanvasPosition.Y);
+                    }
+                    else
+                    {
+                        DisconnectPoint();
+                        deltaEventArgs = new DragDeltaEventArgs(0, 0);
+                    }
+                }
+                else if (!Disconnected)
+                {
+                    deltaEventArgs = new DragDeltaEventArgs(snapped.X - CanvasPosition.X, snapped.Y - CanvasPosition.Y);
+                }
+
+                if (Keyboard.Modifiers.HasFlag(ModifierKeys.Shift))
+                {
+                    
+                }
             }
+        }
+
+        private void DisconnectPoint()
+        {
+            this.Disconnected = true;
+            Point mousePos = Mouse.GetPosition(this.ExolutioCanvas);
+            this.ParentControl.InnerConnectorControl.Children.Remove(this);
+            this.ParentControl.Connectors.Remove(this.Connector);
+            if (this.Connector.StartPoint == this)
+            {
+                this.Connector.StartNode = null;
+            }
+            if (this.Connector.EndPoint == this)
+            {
+                this.Connector.EndNode = null;
+            }
+            this.ParentControl = null;
+            this.ExolutioCanvas.Children.Add(this);
+            this.Placement = EPlacementKind.AbsoluteCanvas;
+            this.dragThumb.Position = mousePos;
         }
 
         /// <summary>
@@ -339,7 +389,7 @@ namespace Exolutio.ViewToolkit
 
         public bool CanBeDraggedInGroup
         {
-            get { return false; }
+            get { return true; }
         }
 
         private bool selected;

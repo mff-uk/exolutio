@@ -324,7 +324,8 @@ namespace Exolutio.View.Commands
         private void bXsltFromChanges_Click(object sender, RoutedEventArgs e)
         {
             XsltRevalidationScriptGenerator xsltTemplateGenerator = new XsltRevalidationScriptGenerator();
-            string xslt = xsltTemplateGenerator.Generate(schemaVersion1, schemaVersion2, ChangeInstances);
+            string xslt = null;
+            //string xslt = xsltTemplateGenerator.Initialize(schemaVersion1, schemaVersion2, ChangeInstances);
             tbXslt.Text = xslt;
             #if DEBUG
             #if SAVE_DOC_FOR_TEST

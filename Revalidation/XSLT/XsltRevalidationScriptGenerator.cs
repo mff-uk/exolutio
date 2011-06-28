@@ -12,10 +12,11 @@ namespace Exolutio.Revalidation.XSLT
 {
     public class XsltRevalidationScriptGenerator
     {
+        Dictionary<PSMAssociationMember, RevalidationNodeInfo> nodeInfos = new Dictionary<PSMAssociationMember, RevalidationNodeInfo>();
+
         public XsltRevalidationScriptGenerator()
         {
-
-
+           
         }
 
         public PSMSchema PSMSchema1 { get; private set; }
@@ -28,21 +29,26 @@ namespace Exolutio.Revalidation.XSLT
 
         public DetectedChangeInstancesSet DetectedChangeInstances { get; private set; }
 
-
-        public string Generate(PSMSchema psmSchema1, PSMSchema psmSchema2, DetectedChangeInstancesSet changeInstances)
+        public void Initialize(PSMSchema psmSchema1, PSMSchema psmSchema2, DetectedChangeInstancesSet changeInstances)
         {
             this.PSMSchema2 = psmSchema2;
             this.PSMSchema1 = psmSchema1;
             DetectedChangeInstances = changeInstances;
-            return string.Empty;
-
+            nodeInfos.Clear();
         }
 
-        
-
-        private void CleanUp()
+        public void Genearte()
         {
+            foreach (PSMComponent psmComponent in DetectedChangeInstances.RedNodes)
+            {
+                nodeInfos[(PSMAssociationMember) psmComponent] = new RevalidationNodeInfo(psmComponent);
 
+                //if (AttributeTemplateRequired)
+                {
+                    
+                }
+            }
         }
+
     }
 }
