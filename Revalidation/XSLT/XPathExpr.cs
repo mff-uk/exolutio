@@ -37,6 +37,10 @@ namespace Exolutio.Revalidation.XSLT
 
         public XPathExpr AppendPredicate(string predicate)
         {
+            if (predicate == null)
+            {
+                return new XPathExpr(_expr);
+            }
             string res;
             if (predicate.StartsWith("[") && predicate.EndsWith("]"))
             {
@@ -105,7 +109,7 @@ namespace Exolutio.Revalidation.XSLT
         /// <summary>
         /// Returns "$cg" XPath expression
         /// </summary>
-        public static XPathExpr CurrentGroupVariableExpr
+        public static XPathExpr CurrentInstanceVariableExpr
         {
             get
             {
@@ -115,7 +119,7 @@ namespace Exolutio.Revalidation.XSLT
 
         public XPathExpr NoCurrentGroup()
         {
-            return new XPathExpr(this._expr.Replace("/" + CurrentGroupVariableExpr, String.Empty));
+            return new XPathExpr(this._expr.Replace("/" + CurrentInstanceVariableExpr, String.Empty));
         }
 
         #region equality members

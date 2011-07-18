@@ -52,9 +52,9 @@ namespace Exolutio.View
             evolutionChangesWindow.DiagramViewOldVersion = MainWindow.DiagramTabManager.GetOpenedDiagramView(diagramOldVersion);
             evolutionChangesWindow.Topmost = true;
 
-            evolutionChangesWindow.lRed.Content = changeInstances.RedNodes.ConcatWithSeparator(", ");
-            evolutionChangesWindow.lBlue.Content = changeInstances.BlueNodes.ConcatWithSeparator(", ");
-            evolutionChangesWindow.lGreen.Content = changeInstances.GreenNodes.ConcatWithSeparator(", ");
+            evolutionChangesWindow.lRed.Text = changeInstances.RedNodes.ConcatWithSeparator(", ");
+            evolutionChangesWindow.lBlue.Text = changeInstances.BlueNodes.ConcatWithSeparator(", ");
+            evolutionChangesWindow.lGreen.Text = changeInstances.GreenNodes.ConcatWithSeparator(", ");
             
             evolutionChangesWindow.Show();
             return true;

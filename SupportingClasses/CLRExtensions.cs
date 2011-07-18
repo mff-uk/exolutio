@@ -26,5 +26,13 @@ namespace System
         {
             return values.Contains(item.GetType());
         }
+
+        public static bool DownCastSatisfies<T>(this object item, Func<T, bool> predicate)
+        {
+            if (!(item is T))
+                return false;
+
+            return predicate((T) item);
+        }
     }
 }

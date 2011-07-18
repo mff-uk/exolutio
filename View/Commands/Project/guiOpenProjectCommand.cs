@@ -241,7 +241,7 @@ namespace Exolutio.View.Commands.Project
         {
             if (droppedFilePaths.Length > 0)
             {
-                if (droppedFilePaths[0].ToUpper().EndsWith(CommandsResources.guiOpenProjectCommand_Execute_Exolutio_Default_Extension_No_Dot))
+                if (droppedFilePaths[0].ToUpper().EndsWith(CommandsResources.guiOpenProjectCommand_Execute_Exolutio_Default_Extension_No_Dot.ToUpper()))
                 {
                     Execute(fileName: droppedFilePaths[0], noOpenFileDialog: true);
                 }

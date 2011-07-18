@@ -294,6 +294,16 @@ namespace Exolutio.Revalidation.Changes
         [ChangePredicateParameter]
         public UnlimitedInt NewUpper { get; set; }
 
+        public bool RequiresCreation
+        {
+            get { return NewLower > OldLower; }
+        }
+
+        public bool RequiresDeletion
+        {
+            get { return NewUpper > OldUpper; }
+        }
+
         public override string ToString()
         {
             return string.Format("Association '{0}' cardinality changed from '{1}' to '{2}'.", PSMAssociation,

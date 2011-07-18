@@ -29,7 +29,7 @@ namespace Exolutio.Model.PSM
 
         public override string XPath
         {
-            get { return "/"; }
+            get { return String.Empty; }
         }
 
         #region Implementation of IExolutioCloneable

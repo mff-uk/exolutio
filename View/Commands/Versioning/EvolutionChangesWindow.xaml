@@ -13,13 +13,13 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Grid.Row="0" Content="Red nodes:"/>
-            <Label Grid.Row="1" Content="Blue nodes:"/>
-            <Label Grid.Row="2" Content="Green nodes:"/>
-            
-            <Label Grid.Row="0" Grid.Column="1" Name="lRed"/>
-            <Label Grid.Row="1" Grid.Column="1" Name="lBlue"/>
-            <Label Grid.Row="2" Grid.Column="1" Name="lGreen"/>
+            <Label Grid.Row="0" Content="Red nodes:" HorizontalAlignment="Left" VerticalAlignment="Top" />
+            <Label Grid.Row="1" Content="Blue nodes:" HorizontalAlignment="Left" VerticalAlignment="Top" />
+            <Label Grid.Row="2" Content="Green nodes:" HorizontalAlignment="Left" VerticalAlignment="Top" />
+
+            <TextBlock Grid.Row="0" Grid.Column="1" TextWrapping="Wrap" Name="lRed" HorizontalAlignment="Left" VerticalAlignment="Top" />
+            <TextBlock Grid.Row="1" Grid.Column="1" TextWrapping="Wrap" Name="lBlue" HorizontalAlignment="Left" VerticalAlignment="Top" />
+            <TextBlock Grid.Row="2" Grid.Column="1" TextWrapping="Wrap" Name="lGreen" HorizontalAlignment="Left" VerticalAlignment="Top" />
         </Grid>
         <DataGrid 
 			Name="gridChanges" 

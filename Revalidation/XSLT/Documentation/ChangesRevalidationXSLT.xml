@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Revalidation>
+  <XSLT>
+    <Attribute>
+      <AttributeXFormChanged>
+        <remarks>
+          <p>
+            There are two possible changes: e => a and a => e
+          </p>
+          <p>
+            Parent node must be invalidated (new element is added for a => e, element is removed for e => a)
+          </p>
+          <p>
+            All the changes from e => a, where the changed attribute is a green node (remember, AttributeXFormChanged only
+            invalidates the parent node) are processed in one template called "Element to attribute conversion template",
+            which looks like this:
+
+            <code lang="xml" title="Element to attribute conversion template">
+            <![CDATA[
+              <xsl:template match="amount" priority="0">
+                <xsl:attribute name="{name()}">
+                  <xsl:value-of select="." />
+                </xsl:attribute>
+              </xsl:template>
+            ]]>
+            </code>
+          </p>
+          <p>
+            Changes from a => e are treated simlarly by another template
+            <code lang="xml" title="Element to attribute conversion template">
+            <![CDATA[
+              <!--Attribute to element conversion template-->
+              <xsl:template match="@id" priority="0">
+                <xsl:element name="{name()}">
+                  <xsl:value-of select="." />
+                </xsl:element>
+              </xsl:template>
+            ]]>
+            </code>
+          </p>       
+        
+          TODO: are there situations, where xsl:attribute must be used inside generating single reference? 
+        
+        
+        </remarks>
+      </AttributeXFormChanged>
+
+      <AttributeRenamed>
+        <p>!!!TODO!!!, zjistit, jak se to chova, prozkouset vsechny dalsi zmeny atributu</p>
+      </AttributeRenamed>
+    </Attribute>
+  </XSLT>
+</Revalidation>

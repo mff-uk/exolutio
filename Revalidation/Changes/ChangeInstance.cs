@@ -162,7 +162,8 @@ namespace Exolutio.Revalidation.Changes
 
     public interface ICardinalityChange: ISedentaryChange
     {
-        
+        bool RequiresCreation { get; }
+        bool RequiresDeletion { get; }
     }
 
     public interface IMigratoryChange : IExistingComponentChange

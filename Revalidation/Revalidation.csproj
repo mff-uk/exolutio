@@ -29,6 +29,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\Exolutio.Revalidation.XML</DocumentationFile>
+    <NoWarn>1591</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -72,6 +74,7 @@
     <Compile Include="XSLT\TemplateNamingSupport.cs" />
     <Compile Include="XSLT\XPathExpr.cs" />
     <Compile Include="XSLT\XDocumentXsltExtensions.cs" />
+    <Compile Include="XSLT\XPathExprGenerator.cs" />
     <Compile Include="XSLT\XsltRevalidationScriptGenerator.cs" />
     <Compile Include="XSLT\XsltProcessing.cs" />
   </ItemGroup>
@@ -89,7 +92,9 @@
       <Name>SupportingClasses</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="XSLT\Documentation\ChangesRevalidationXSLT.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

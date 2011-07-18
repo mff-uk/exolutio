@@ -229,7 +229,10 @@ namespace Exolutio.View
 
         void Connector_MouseLeave(object sender, MouseEventArgs e)
         {
-            DiagramView.InvokeVersionedElementMouseLeave(this, PSMAssociation);
+            if (DiagramView != null)
+            {
+                DiagramView.InvokeVersionedElementMouseLeave(this, PSMAssociation);
+            }
         }
 
         void Connector_SelectedChanged()

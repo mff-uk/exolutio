@@ -28,6 +28,114 @@ namespace Exolutio.Revalidation
         private readonly List<PSMComponent> greenNodes = new List<PSMComponent>();
 
         public List<PSMComponent> GreenNodes { get { return greenNodes; } }
+
+        private readonly List<PSMComponent> addedNodes = new List<PSMComponent>();
+
+        public List<PSMComponent> AddedNodes { get { return addedNodes; } }
+
+        private readonly List<PSMAttribute> convertedAttributesAE = new List<PSMAttribute>();
+
+        public List<PSMAttribute> ConvertedAttributesAE { get { return convertedAttributesAE; } }
+
+        private readonly List<PSMAttribute> convertedAttributesEA = new List<PSMAttribute>();
+
+        public List<PSMAttribute> ConvertedAttributesEA { get { return convertedAttributesEA; } }
+
+        public bool IsAddedNode(PSMComponent component)
+        {
+            return AddedNodes.Contains(component);
+        }
+
+        public bool IsGroupNode(PSMComponent psmComponent)
+        {
+            return psmComponent.DownCastSatisfies<PSMClass>(psmClass => 
+                       psmClass.GetInVersion(OldVersion) != null 
+                       && psmClass.GetInVersion(OldVersion).ParentAssociation != null
+                       && !psmClass.GetInVersion(OldVersion).ParentAssociation.IsNamed) || 
+                   psmComponent.DownCastSatisfies<PSMClass>(psmClass => 
+                       IsAddedNode(psmClass) && psmClass.ParentAssociation != null && !psmClass.ParentAssociation.IsNamed);
+        }
+
+        //private readonly List<PSMComponent> removedNodes = new List<PSMComponent>();
+
+        //public List<PSMComponent> RemovedNodes { get { return removedNodes; } }
+        
+        public IEnumerable<PSMComponent> AllNodes { get { return RedNodes.Union(BlueNodes).Union(GreenNodes); } }
+
+        public Version OldVersion { get; set; }
+
+        public Version NewVersion { get; set; }
+
+        public bool ExistsCardinalityChange(PSMComponent component)
+        {
+            bool dummy;
+            return ExistsCardinalityChange(component, out dummy, out dummy);
+        }
+
+        public bool ExistsCardinalityChangeRequiringCreation(PSMComponent component)
+        {
+            bool requiresCreation, dummy2;
+            return ExistsCardinalityChange(component, out requiresCreation, out dummy2);
+        }
+
+        public bool ExistsCardinalityChangeRequiringDeletion(PSMComponent component)
+        {
+            bool dummy1, requiresDeletion;
+            return ExistsCardinalityChange(component, out dummy1, out requiresDeletion);
+        }
+
+        private bool ExistsCardinalityChange(PSMComponent component, out bool requiresCreation, out bool requiresDeletion)
+        {
+            bool result = false;
+            requiresCreation = false;
+            requiresDeletion = false; 
+
+            if (component is PSMAttribute)
+            {
+                requiresCreation = this.ContainsKey(typeof (AttributeCardinalityChangedInstance)) &&
+                       this[typeof (AttributeCardinalityChangedInstance)].Cast<AttributeCardinalityChangedInstance>().
+                           Any(ci => ci.PSMAttribute == component && ci.RequiresCreation);
+
+                result |= this.ContainsKey(typeof (AttributeCardinalityChangedInstance)) &&
+                       this[typeof (AttributeCardinalityChangedInstance)].Cast<AttributeCardinalityChangedInstance>().
+                           Any(ci => ci.PSMAttribute == component);
+            }
+
+            if (component is PSMAssociationMember && ((PSMAssociationMember)component).ParentAssociation != null)
+            {
+                requiresCreation = this.ContainsKey(typeof(AssociationCardinalityChangedInstance)) &&
+                       this[typeof(AssociationCardinalityChangedInstance)].Cast<AssociationCardinalityChangedInstance>().
+                           Any(ci => ci.PSMAssociation == ((PSMAssociationMember)component).ParentAssociation && ci.RequiresCreation);
+
+                result |= this.ContainsKey(typeof(AssociationCardinalityChangedInstance)) &&
+                       this[typeof(AssociationCardinalityChangedInstance)].Cast<AssociationCardinalityChangedInstance>().
+                           Any(ci => ci.PSMAssociation == ((PSMAssociationMember)component).ParentAssociation);
+            }
+
+            if (component is PSMAttribute)
+            {
+                requiresDeletion = this.ContainsKey(typeof(AttributeCardinalityChangedInstance)) &&
+                       this[typeof(AttributeCardinalityChangedInstance)].Cast<AttributeCardinalityChangedInstance>().
+                           Any(ci => ci.PSMAttribute == component && ci.RequiresDeletion);
+
+                result |= this.ContainsKey(typeof(AttributeCardinalityChangedInstance)) &&
+                       this[typeof(AttributeCardinalityChangedInstance)].Cast<AttributeCardinalityChangedInstance>().
+                           Any(ci => ci.PSMAttribute == component);
+            }
+
+            if (component is PSMAssociationMember && ((PSMAssociationMember)component).ParentAssociation != null)
+            {
+                requiresDeletion = this.ContainsKey(typeof(AssociationCardinalityChangedInstance)) &&
+                       this[typeof(AssociationCardinalityChangedInstance)].Cast<AssociationCardinalityChangedInstance>().
+                           Any(ci => ci.PSMAssociation == ((PSMAssociationMember)component).ParentAssociation && ci.RequiresDeletion);
+                
+                result |= this.ContainsKey(typeof(AssociationCardinalityChangedInstance)) &&
+                       this[typeof(AssociationCardinalityChangedInstance)].Cast<AssociationCardinalityChangedInstance>().
+                           Any(ci => ci.PSMAssociation == ((PSMAssociationMember)component).ParentAssociation);
+            }
+
+            return result;
+        }
     }
 
     public class ChangeDetector
@@ -72,7 +180,9 @@ namespace Exolutio.Revalidation
             Debug.Assert(oldVersion != newVersion);
 
             DetectedChangeInstancesSet changeInstancesSet = new DetectedChangeInstancesSet();
-
+            changeInstancesSet.OldVersion = oldVersion;
+            changeInstancesSet.NewVersion = newVersion;
+            
             #region attributes 
 
             testConstructs(schema1.PSMAttributes, oldVersion, newVersion, changeInstancesSet, EChangePredicateScope.PSMAttribute);
@@ -148,7 +258,7 @@ namespace Exolutio.Revalidation
             {
                 if (!changeInstances.RedNodes.Contains(psmAttribute.PSMClass))
                 {
-                    changeInstances.RedNodes.AddIfNotContained(psmAttribute.PSMClass);
+                    changeInstances.BlueNodes.AddIfNotContained(psmAttribute.PSMClass);
                 }
             }
 
@@ -171,6 +281,14 @@ namespace Exolutio.Revalidation
 
             changeInstances.GreenNodes.AddRange(psmSchema.SchemaComponents.Where(c => !(c is PSMAssociation) && !(c is PSMSchemaClass) &&
                 !changeInstances.RedNodes.Contains(c) && !changeInstances.BlueNodes.Contains(c)).Cast<PSMComponent>());
+
+            foreach (PSMComponent psmComponent in changeInstances.AllNodes)
+            {
+                if (!psmComponent.ExistsInVersion(changeInstances.OldVersion))
+                {
+                    changeInstances.AddedNodes.Add(psmComponent);
+                }
+            }
 
             #endregion
         }
@@ -204,21 +322,31 @@ namespace Exolutio.Revalidation
                     {
                         if (changeInstance is IRenameChange)
                         {
-                            changeInstances.RedNodes.AddIfNotContained(node);
+                            
+                            AssociationRenamedInstance associationRenamedInstance
+                                = changeInstance as AssociationRenamedInstance;
 
+                            AttributeRenamedInstance attributeRenamedInstance
+                                = changeInstance as AttributeRenamedInstance;
+
+                            if (attributeRenamedInstance != null)
                             {
+                                changeInstances.RedNodes.AddIfNotContained(attributeRenamedInstance.PSMAttribute);
+                            }
+
+                            if (associationRenamedInstance != null)
+                            {
+                                changeInstances.RedNodes.AddIfNotContained(associationRenamedInstance.PSMAssociation.Child);
                                 /*
                                  * again for technical reasons (in order to process the whole instance 
-                                 * by the node template), the parent must be invalidated as well 
+                                 * by the node template), the parent must be invalidated as well in
+                                 * the case the name of the association was empty in the old version
                                  */
-                                AssociationRenamedInstance associationRenamedInstance
-                                    = changeInstance as AssociationRenamedInstance;
-                                if (associationRenamedInstance != null
-                                    && !associationRenamedInstance.ComponentOldVersion.IsNamed)
+                                if (!associationRenamedInstance.ComponentOldVersion.IsNamed)
                                 {
                                     FormerParentAsRedNode(changeInstances.RedNodes, changeInstance);
                                 }
-                            }
+                            }                            
                         }
                         if (changeInstance is ICardinalityChange)
                         {
@@ -240,6 +368,17 @@ namespace Exolutio.Revalidation
                         if (changeInstance is AttributeXFormChangedInstance)
                         {
                             FormerParentAsRedNode(changeInstances.RedNodes, changeInstance);
+                            /*
+                             * A to E and E to A convertor templates will be used for green nodes 
+                             */ 
+                            if (((AttributeXFormChangedInstance)changeInstance).NewXFormElement)
+                            {
+                                changeInstances.ConvertedAttributesAE.Add((PSMAttribute) changeInstance.Component);
+                            }
+                            else
+                            {
+                                changeInstances.ConvertedAttributesEA.Add((PSMAttribute) changeInstance.Component);
+                            }
                         }
                         if (changeInstance is AttributeTypeChangedInstance)
                         {
