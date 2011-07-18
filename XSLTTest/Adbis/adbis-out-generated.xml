@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<purchase>
+  <purchase-date>Nam</purchase-date>
+  <customer-info>
+    <customer>
+      <customer-no>Suspendisse</customer-no>
+      <delivery-address>
+        <zip>erat</zip>
+        <city>mi</city>
+        <street>bibendum</street>
+      </delivery-address>
+      <emails>
+        <email>id</email>
+        <email>Vestibulum</email>
+        <email>blandit</email>
+        <email>blandit</email>
+        <email>tempor</email>
+        <email>blandit</email>
+      </emails>
+    </customer>
+  </customer-info>
+  <items>
+    <item>
+      <product>
+        <code>In</code>
+        <subcode>malesuada</subcode>
+        <title>id</title>
+      </product>
+      <qty>
+        <amount>interdum</amount>
+        <unit-price>quam</unit-price>
+      </qty>
+    </item>
+    <item>
+      <product>
+        <code>congue</code>
+        <subcode>Vivamus</subcode>
+        <title>Curabitur</title>
+      </product>
+      <qty>
+        <amount>venenatis</amount>
+        <unit-price>consectetur</unit-price>
+      </qty>
+    </item>
+  </items>
+</purchase>

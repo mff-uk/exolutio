@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<purchase-request purchase-date="1.1.2010" id="w">
+    <amount>1</amount>
+    <amount>2</amount>
+    <amount>3</amount>
+</purchase-request>
