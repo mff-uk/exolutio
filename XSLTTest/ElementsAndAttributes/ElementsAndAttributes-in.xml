@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<purchase-request purchase-date="1990-05-01">
+    <customer-info>
+        <customer customer-no="3">
+            <email>e1</email> 
+            <email>e2</email>
+        </customer>            
+        <address>
+            <postcode>p</postcode>
+            <city>c</city>
+            <street>s</street>
+        </address>
+    </customer-info>
+    <assistant emp-no="-6"/>
+    <item>
+        <product code="-3" subcode="-3">
+            <title>blandit</title>
+            <weight>-10</weight>
+            <size>8</size>
+        </product>
+        <item-info>
+            <amount>-5</amount>
+            <unit-price>3.0</unit-price>
+        </item-info>
+    </item>
+    <item>
+        <product code="-9" subcode="3">
+            <title>tincidunt</title>
+            <weight>-3</weight>
+            <size>1</size>
+        </product>
+        <item-info>
+            <amount>3</amount>
+            <unit-price>-9.41</unit-price>
+        </item-info>
+    </item>
+    <item>
+        <product code="-5" subcode="3">
+            <title>ut</title>
+            <weight>8</weight>
+            <size>-10</size>
+        </product>
+        <item-info>
+            <amount>5</amount>
+            <unit-price>-9.13</unit-price>
+        </item-info>
+    </item>
+</purchase-request>
