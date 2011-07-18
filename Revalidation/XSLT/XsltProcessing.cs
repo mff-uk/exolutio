@@ -38,11 +38,11 @@ namespace Exolutio.Revalidation.XSLT
 
             int si = document.IndexOf("xmlns:xsi=\"");
             int ei = document.IndexOf("\"", si + "xmlns:xsi=\"".Length) + 1;
-            string text = document.Remove(si, ei - si);
+            string text = si != - 1 ? document.Remove(si, ei - si) : document;
             si = text.IndexOf("xmlns=\"");
             ei = text.IndexOf("\"", si + "xmlns=\"".Length) + 1;
-            string xmlns = text.Substring(si, ei - si);
-            text = text.Remove(si, ei - si);
+            string xmlns = si != -1 ? text.Substring(si, ei - si) : string.Empty;
+            text = si != -1 ? text.Remove(si, ei - si) : text;
 
             string tmpDoc = tmpDir + "tmp.xml";
 
@@ -76,8 +76,8 @@ namespace Exolutio.Revalidation.XSLT
                     pos = pos1;
                 else
                     pos = Math.Min(pos1, pos2);
-                outputBuilder.Insert(pos,
-                                     Environment.NewLine + " xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" " + xmlns);
+                //outputBuilder.Insert(pos,
+                //                     Environment.NewLine + " xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" " + xmlns);
 
                 StringReader outputReader = new StringReader(outputBuilder.ToString());
                 XDocument d = XDocument.Load(outputReader);

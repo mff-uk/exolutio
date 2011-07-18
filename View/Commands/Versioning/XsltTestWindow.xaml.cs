@@ -135,7 +135,7 @@ namespace Exolutio.View.Commands
 #if SAVE_DOC_FOR_TEST
         const string SAVE_DIR = @"D:\Programování\EVOXSVN\XSLTTest\";
         const string SAVE_DOCUMENT = @"D:\Programování\EVOXSVN\XSLTTest\LastInput.xml";
-        const string SAVE_STYLESHEET = @"D:\Programování\EVOXSVN\XSLTTest\LastStylesheet.xslt";
+        public const string SAVE_STYLESHEET = @"D:\Programování\EVOXSVN\XSLTTest\LastStylesheet.xslt";
 #endif 
 #endif 
         public static string XDocumentToString(XDocument doc)
@@ -325,7 +325,18 @@ namespace Exolutio.View.Commands
         {
             XsltRevalidationScriptGenerator xsltTemplateGenerator = new XsltRevalidationScriptGenerator();
             string xslt = null;
-            //string xslt = xsltTemplateGenerator.Initialize(schemaVersion1, schemaVersion2, ChangeInstances);
+            
+            xsltTemplateGenerator.Initialize(SchemaVersion1, SchemaVersion2, ChangeInstances);
+            xsltTemplateGenerator.GenerateTemplateStructure();
+
+            XDocument revalidationStylesheet = xsltTemplateGenerator.GetRevalidationStylesheet();
+            StringBuilder sb = new StringBuilder();
+            using (TextWriter tw = new StringWriter(sb))
+            {
+                revalidationStylesheet.Save(tw);
+            }
+            xslt = sb.ToString();
+
             tbXslt.Text = xslt;
             #if DEBUG
             #if SAVE_DOC_FOR_TEST

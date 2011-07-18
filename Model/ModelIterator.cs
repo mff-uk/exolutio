@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Exolutio.Model.PIM;
 using Exolutio.Model.PSM;
+using Exolutio.Model.Versioning;
 using System.Linq;
+using Version = Exolutio.Model.Versioning.Version;
 
 namespace Exolutio.Model
 {
@@ -235,7 +237,7 @@ namespace Exolutio.Model
             return null;
         }
 
-        public static IEnumerable<PSMComponent> GetPSMChildren(PSMComponent component, bool returnAttributesForClass = false)
+        public static IEnumerable<PSMComponent> GetPSMChildren(PSMComponent component, bool returnAttributesForClass = false, bool returnChildAssociationsForAssociationMembers = false)
         {
             IEnumerable<PSMComponent> result = new PSMComponent[0];
             if (component is PSMClass && ((PSMClass)component).PSMAttributes.Count > 0 && returnAttributesForClass)
@@ -244,7 +246,18 @@ namespace Exolutio.Model
             }
             if (component is PSMAssociationMember && ((PSMAssociationMember)component).ChildPSMAssociations.Count > 0)
             {
-                result = result.Concat(((PSMAssociationMember)component).ChildPSMAssociations.Select(association => association.Child).Cast<PSMComponent>());
+                if (returnChildAssociationsForAssociationMembers)
+                {
+                    result = result.Concat(((PSMAssociationMember)component).ChildPSMAssociations);
+                }
+                else
+                {
+                    result = result.Concat(((PSMAssociationMember)component).ChildPSMAssociations.Select(association => association.Child).Cast<PSMComponent>());    
+                }
+            }
+            if (component is PSMAssociation)
+            {
+                result = result.Concat(new PSMComponent[]{ ((PSMAssociation) component).Child });
             }
             return result;
         }
@@ -324,6 +337,27 @@ namespace Exolutio.Model
             return false;
         }
 
+        public static PSMAssociationMember GetNearestCommonAncestor(this PSMComponent component1, PSMComponent component2)
+        {
+            PSMAssociationMember am1;
+            if (component1 is PSMAttribute)
+                am1 = ((PSMAttribute)component1).PSMClass;
+            else if (component1 is PSMAssociationMember)
+                am1 = (PSMAssociationMember)component1;
+            else
+                throw new NotImplementedException();
+
+            PSMAssociationMember am2;
+            if (component2 is PSMAttribute)
+                am2 = ((PSMAttribute)component2).PSMClass;
+            else if (component2 is PSMAssociationMember)
+                am2 = (PSMAssociationMember)component2;
+            else
+                throw new NotImplementedException();
+
+            return GetNearestCommonAncestorAssociationMember(am1, am2);
+        }
+
         public static PSMAssociationMember GetNearestCommonAncestorAssociationMember(this PSMAssociationMember component1, PSMAssociationMember component2)
         {
             IEnumerable<PSMAssociationMember> path1 = component1.GetPathToRoot();
@@ -369,6 +403,27 @@ namespace Exolutio.Model
             }
 
             return path;
+        }
+
+        public static PSMComponent GetFirstAncestorOrSelfExistingInVersion(this PSMComponent start, Version version)
+        {
+            if (start.ExistsInVersion(version))
+            {
+                return start;
+            }
+            if (start is PSMAttribute)
+            {
+                start = ((PSMAttribute) start).PSMClass;
+            }
+            List<PSMAssociationMember> psmAssociationMembers = GetPathToRoot((PSMAssociationMember) start);
+            foreach (PSMAssociationMember psmAssociationMember in psmAssociationMembers)
+            {
+                if (psmAssociationMember.ExistsInVersion(version))
+                {
+                    return psmAssociationMember;
+                }
+            }
+            return null;
         }
 
         public static List<PSMClass> GetClassPathToRoot(this PSMAssociationMember start)
@@ -563,6 +618,36 @@ namespace Exolutio.Model
         public static IEnumerable<PSMAssociationMember> GetLeaves(PSMSchema psmSchema)
         {
             return psmSchema.SchemaComponents.OfType<PSMAssociationMember>().Where(m => m.ChildPSMAssociations.Count == 0);
+        }
+
+        public static IEnumerable<PSMComponent> OrderBFS(IList<PSMComponent> psmComponents)
+        {
+            IList<PSMComponent> result = new List<PSMComponent>();
+            if (psmComponents.Count > 0)
+            {
+                foreach (PSMAssociationMember root in psmComponents.First().PSMSchema.Roots)
+                {
+                    Queue<PSMComponent> queue = new Queue<PSMComponent>();
+                    queue.Enqueue(root);
+
+                    while (queue.Count > 0)
+                    {
+                        PSMComponent psmComponent = queue.Dequeue();
+
+                        if (psmComponents.Contains(psmComponent))
+                        {
+                            result.Add(psmComponent);
+                        }
+
+                        IEnumerable<PSMComponent> psmChildren = GetPSMChildren(psmComponent, true);
+                        foreach (PSMComponent psmChild in psmChildren)
+                        {
+                            queue.Enqueue(psmChild);
+                        }
+                    }
+                }
+            }
+            return result; 
         }
     }
 }

@@ -207,6 +207,10 @@ namespace Exolutio.Revalidation.Changes
         }
     }
 
+    /// <summary>
+    /// Change of xfrom function. 
+    /// </summary>
+    /// <include file='XSLT\Documentation\ChangesRevalidationXSLT.xml' path='Revalidation/XSLT/Attribute/AttributeXFormChanged/*'/>
     public class AttributeXFormChangedInstance : AttributeChangeInstance, ISedentaryChange
     {
         public AttributeXFormChangedInstance(PSMComponent component, Version oldVersion, Version newVersion)
@@ -346,6 +350,16 @@ namespace Exolutio.Revalidation.Changes
 
         [ChangePredicateParameter]
         public UnlimitedInt NewUpper { get; set; }
+
+        public bool RequiresCreation
+        {
+            get { return NewLower > OldLower; }
+        }
+
+        public bool RequiresDeletion
+        {
+            get { return NewUpper > OldUpper; }
+        }
 
         public override string ToString()
         {

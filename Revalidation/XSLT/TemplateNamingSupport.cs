@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Exolutio.Model.PSM;
 using System.Linq;
 
@@ -23,40 +24,77 @@ namespace Exolutio.Revalidation.XSLT
         /// Names for nodes in the schema class tree start with "ROOT", other names start with "TOP"
         /// </para>
         /// </summary>
-        /// <param name="node"></param>
         /// <returns></returns>
-        public string SuggestName(PSMAssociationMember node)
+        public string SuggestName(PSMComponent node, bool elementsTemplate, bool attributesTemplate)
         {
+            string result;
             if (PSMSchema.TopClasses.Contains(node))
             {
-                return "TOP-" + node.Name; 
+                result = "TOP-" + node.Name; 
             }
             else if (PSMSchema.Roots.Contains(node))
             {
-                return "ROOT" + node.Name;
+                result = "ROOT" + node.Name;
             }
             else
             {
                 if (node is PSMContentModel)
                 {
                     PSMContentModel cm = (PSMContentModel) node;
+                    string distinguisher = string.Empty;
+                    if (!cm.ParentAssociation.IsNamed)
+                    {
+                        List<PSMContentModel> withSiblings = Model.ModelIterator.GetPSMChildren(cm.ParentAssociation.Parent).OfType<PSMContentModel>().ToList();
+                        if (withSiblings.Count(s => s.Type == cm.Type && !s.IsNamed) > 1)
+                        {
+                            distinguisher = (withSiblings.Where(c => c.Type == cm.Type).ToList().IndexOf(cm) + 1).ToString();
+                        }
+                    }
+                    else
+                    {
+                        distinguisher = cm.ParentAssociation.Name;
+                    }
                     switch (cm.Type)
                     {
                         case PSMContentModelType.Sequence:
-                            return SuggestName(node.ParentAssociation.Parent) + "-" + "SEQ";
+                            result = SuggestName(cm.ParentAssociation.Parent, false, false) + "-" + "SEQ" + (!String.IsNullOrEmpty(distinguisher) ? distinguisher : string.Empty);
+                            break;
                         case PSMContentModelType.Choice:
-                            return SuggestName(node.ParentAssociation.Parent) + "-" + "CH";
+                            result = SuggestName(cm.ParentAssociation.Parent, false, false) + "-" + "CH" + (!String.IsNullOrEmpty(distinguisher) ? distinguisher : string.Empty);
+                            break;
                         case PSMContentModelType.Set:
-                            return SuggestName(node.ParentAssociation.Parent) + "-" + "SET";
+                            result = SuggestName(cm.ParentAssociation.Parent, false, false) + "-" + "SET" + (!String.IsNullOrEmpty(distinguisher) ? distinguisher : string.Empty);
+                            break;
                         default:
                             throw new ArgumentOutOfRangeException();
                     }
                 }
+                else if (node is PSMClass)
+                {
+                    PSMClass psmClass = (PSMClass)node;
+                    result = SuggestName(psmClass.ParentAssociation.Parent, false, false) + "-" + node.Name;
+                }
+                else if (node is PSMAttribute)
+                {
+                    PSMAttribute psmAttribute = (PSMAttribute)node;
+                    result = SuggestName(psmAttribute.PSMClass, false, false) + "-" + psmAttribute.Name;
+                }
                 else
                 {
-                    return SuggestName(node.ParentAssociation.Parent) + "-" + node.Name;
+                    throw new ArgumentOutOfRangeException();
+
                 }
             }
+
+            if (elementsTemplate)
+            {
+                return result + "-ELM";
+            }
+            if (attributesTemplate)
+            {
+                return result + "-ATT";
+            }
+            return result;
         }
     }
 }

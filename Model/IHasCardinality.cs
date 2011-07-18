@@ -1,4 +1,5 @@
 ﻿using System;
+using Exolutio.Model.PSM;
 
 namespace Exolutio.Model
 {
@@ -107,5 +108,41 @@ namespace Exolutio.Model
         {
             return !lower.HasValue || lower <= upper;
         }
-	}
+
+        public static uint GetLowerCardinality(PSMComponent psmComponent)
+        {
+            if (psmComponent is PSMAttribute)
+            {
+                return ((PSMAttribute)psmComponent).Lower;
+            }
+            else if (psmComponent is PSMAssociation)
+            {
+                return ((PSMAssociation)psmComponent).Lower;
+            }
+            else if (psmComponent is PSMAssociationMember && ((PSMAssociationMember)psmComponent).ParentAssociation != null)
+            {
+                return ((PSMAssociationMember)psmComponent).ParentAssociation.Lower;
+            }
+            else
+                return 1; 
+        }
+
+        public static UnlimitedInt GetUpperCardinality(PSMComponent psmComponent)
+        {
+            if (psmComponent is PSMAttribute)
+            {
+                return ((PSMAttribute)psmComponent).Upper;
+            }
+            else if (psmComponent is PSMAssociation)
+            {
+                return ((PSMAssociation)psmComponent).Upper;
+            }
+            else if (psmComponent is PSMAssociationMember && ((PSMAssociationMember)psmComponent).ParentAssociation != null)
+            {
+                return ((PSMAssociationMember)psmComponent).ParentAssociation.Upper;
+            }
+            else
+                return 1;
+        }
+    }
 }

@@ -96,7 +96,7 @@ namespace Exolutio.Model.PSM
 
         public override string XPath
         {
-            get { return string.Format("{0}{1}{2}", PSMClass.XPath, Element ? string.Empty : "@", Name); }
+            get { return string.Format("{0}/{1}{2}", PSMClass.XPath, Element ? string.Empty : "@", Name); }
         }
 
         #region IHasCardinality Members

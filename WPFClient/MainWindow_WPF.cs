@@ -11,6 +11,8 @@ using Exolutio.SupportingClasses;
 using Exolutio.View;
 using Exolutio.View.Commands;
 using System.Windows.Media;
+using DataFormats = System.Windows.DataFormats;
+using DragEventArgs = System.Windows.DragEventArgs;
 
 namespace Exolutio.WPFClient
 {
@@ -54,6 +56,18 @@ namespace Exolutio.WPFClient
             }
 
             dockManager.MainDocumentPane.Background = Brushes.Transparent;
+
+            if (Environment.MachineName.Contains("TRUPIK"))
+            {
+                if (System.Windows.Forms.Screen.AllScreens.Length > 1)
+                {
+                    this.WindowState = WindowState.Normal;
+                    this.Left = System.Windows.Forms.Screen.AllScreens[0].Bounds.X;
+                    this.Top = System.Windows.Forms.Screen.AllScreens[0].Bounds.Y;
+                    this.Width = System.Windows.Forms.Screen.AllScreens[0].Bounds.Width;
+                    this.Height = System.Windows.Forms.Screen.AllScreens[0].Bounds.Height;
+                }
+            }
         }
 
         private void MainWindow_FileDropped(object sender, DragEventArgs e)
@@ -99,12 +113,17 @@ namespace Exolutio.WPFClient
                 XDocument d = XDocument.Load(filePath);
                 List<Guid> diagramIds = new List<Guid>();
                 ExtractDiagramIds((XElement) d.FirstNode, diagramIds);
+                Diagram diagram = null;
                 foreach (Guid diagramId in diagramIds)
                 {
-                    Diagram diagram = (Diagram) Current.Project.TranslateComponent(diagramId);
+                    diagram = (Diagram) Current.Project.TranslateComponent(diagramId);
                     DiagramTabManager.ActivateDiagram(diagram, false);
                 }
                 dockManager.RestoreLayout(filePath);
+                if (diagram != null)
+                {
+                    DiagramTabManager.ActivateDiagram(diagram, true);
+                }
             }
         }
 
