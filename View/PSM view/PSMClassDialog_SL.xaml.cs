@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Linq;
 using Exolutio.Controller.Commands;
 using Exolutio.Controller.Commands.Atomic;
+using Exolutio.Controller.Commands.Atomic.PSM;
 using Exolutio.Controller.Commands.Complex.PSM;
 using Exolutio.Dialogs;
 using Exolutio.Model.PIM;
@@ -18,7 +19,11 @@ using Exolutio.Model.PSM;
 using Exolutio.Model;
 using Exolutio.Controller;
 using Exolutio.SupportingClasses;
+using Exolutio.ViewToolkit;
 using cmdDeletePSMAttribute = Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers.cmdDeletePSMAttribute;
+using Component = Exolutio.Model.Component;
+using Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers;
+using cmdCreateNewPSMAttribute = Exolutio.Controller.Commands.Complex.PSM.cmdCreateNewPSMAttribute;
 
 namespace Exolutio.View
 {
@@ -74,10 +79,11 @@ namespace Exolutio.View
                 }
             }
 
+            public Guid AddedAttributeID { get; set; }
             public FakePSMAttribute()
             {
                 Multiplicity = "1";
-                XFormElement = true;
+                XFormElement = false;
                 Name = "Attribute";
             }
 
@@ -107,7 +113,7 @@ namespace Exolutio.View
                 RepresentedAttribute = p;
                 ComesFrom = (PIMClass)p.PIMClass;
                 Checked = false;
-                XFormElement = true;
+                XFormElement = false;
             }
 
             public void BeginEdit()

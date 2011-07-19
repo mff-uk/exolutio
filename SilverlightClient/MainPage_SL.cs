@@ -1,3 +1,4 @@
+using System.IO;
 using System.Windows;
 using Exolutio.View;
 using Exolutio.View.Commands;
@@ -90,5 +91,16 @@ namespace SilverlightClient
         //    DiagramTabManager.OpenTabsForCurrentProject();
 
         //}
+        public void LoadProjectLayout(string filePath)
+        {
+            
+
+        }
+
+        public string UserFileForProjectFile(string projectFilePath)
+        {
+            string fileNameWithoutExtension = System.IO.Path.GetFileNameWithoutExtension(projectFilePath);
+            return Path.GetDirectoryName(projectFilePath) + "\\" + fileNameWithoutExtension + ".eXo.user";
+        }
     }
 }

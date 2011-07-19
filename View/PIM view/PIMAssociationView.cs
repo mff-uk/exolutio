@@ -258,10 +258,10 @@ namespace Exolutio.View
             CreateMenus();
 
 #if SILVERLIGHT
-            ContextMenuService.SetContextMenu(Connector, associationMenu);
-            ContextMenuService.SetContextMenu(NameLabel, associationMenu);
-            ContextMenuService.SetContextMenu(Connector.StartPoint, startPointMenu);
-            ContextMenuService.SetContextMenu(Connector.EndPoint, endPointMenu);
+            //ContextMenuService.SetContextMenu(Connector, associationMenu);
+            //ContextMenuService.SetContextMenu(NameLabel, associationMenu);
+            //ContextMenuService.SetContextMenu(Connector.StartPoint, startPointMenu);
+            //ContextMenuService.SetContextMenu(Connector.EndPoint, endPointMenu);
 #endif
             BindModelView();
 
@@ -393,7 +393,7 @@ namespace Exolutio.View
             get { return Connector.ContextMenu; }
             set { Connector.ContextMenu = value; }
         }
-
+#endif
         private void AddConnectorCommands(ExolutioContextMenu associationMenu)
         {
             guiBreakLineCommand cBreak = new guiBreakLineCommand();
@@ -403,7 +403,6 @@ namespace Exolutio.View
             miBreak.Command = cBreak;
             associationMenu.Items.Add(miBreak);
         }
-#endif
 
         public override bool Selected
         {

@@ -248,7 +248,7 @@ namespace Exolutio.Model
             {
                 if (returnChildAssociationsForAssociationMembers)
                 {
-                    result = result.Concat(((PSMAssociationMember)component).ChildPSMAssociations);
+                    result = result.Concat(((PSMAssociationMember)component).ChildPSMAssociations.Cast<PSMComponent>());
                 }
                 else
                 {

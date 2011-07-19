@@ -13,6 +13,12 @@ namespace Exolutio.View.Commands
         {
             
         }
+        
+        public KeyGesture(Key key)
+            : this()
+        {
+            Key = key;
+        }
 
         public KeyGesture(Key key, ModifierKeys control) : this()
         {

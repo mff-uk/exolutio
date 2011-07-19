@@ -164,7 +164,7 @@ namespace Exolutio.ViewToolkit
                     if (!ShiftOrControlPressed)
                     {
                         Canvas.ClearCanvasSelectedItems();
-                        Canvas.InvokeCanvasSelectionCleared(null);
+                        Canvas.InvokeCanvasSelectionCleared();
                     }
                     e.Handled = true;
                 }
@@ -231,7 +231,7 @@ namespace Exolutio.ViewToolkit
                 if (e.OriginalSource == Canvas && !ShiftOrControlPressed)
                 {
                     Canvas.ClearCanvasSelectedItems();
-                    Canvas.InvokeCanvasSelectionCleared(null);
+                    Canvas.InvokeCanvasSelectionCleared();
                 }
             }
 
@@ -244,7 +244,11 @@ namespace Exolutio.ViewToolkit
             public override void SelectableItem_PreviewMouseDown(ISelectable item, MouseButtonEventArgs e)
             {
                 //Selection handling
+                #if SILVERLIGHT
+                if (e.OriginalSource is ISelectableSubItem && item != e.OriginalSource)
+                #else
                 if (e.Source is ISelectableSubItem && item != e.Source)
+                #endif
                 {
                     return;
                 }
@@ -263,7 +267,7 @@ namespace Exolutio.ViewToolkit
                 else if (!item.Selected)
                 {
                     Canvas.ClearCanvasSelectedItems();
-                    Canvas.InvokeCanvasSelectionCleared(null);
+                    Canvas.InvokeCanvasSelectionCleared();
                     item.Selected = true;
                 }
 

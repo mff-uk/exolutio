@@ -211,7 +211,7 @@ namespace Exolutio.View
             if (handler != null) handler();
         }
 
-        void Canvas_CanvasSelectionCleared(System.ComponentModel.Component obj)
+        void Canvas_CanvasSelectionCleared()
         {
             ClearSelection();
         }
@@ -341,10 +341,15 @@ namespace Exolutio.View
 
         #endregion
 
+        #if SILVERLIGHT
+        #else
         private readonly VersionedElementInfo infoWindow = new VersionedElementInfo();
+        #endif
 
         public void InvokeVersionedElementMouseEnter(object sender, Component component)
         {
+            #if SILVERLIGHT
+            #else
             if (Current.Project.UsesVersioning &&
                 infoWindow.Component != component && 
                 Keyboard.Modifiers.HasFlag(ModifierKeys.Shift))
@@ -355,16 +360,19 @@ namespace Exolutio.View
                 infoWindow.Top = pointToScreen.Y + 30;
                 infoWindow.Show();
             }
-
+            #endif
         }
 
         public void InvokeVersionedElementMouseLeave(object sender, Component component)
         {
+            #if SILVERLIGHT
+            #else
             if (infoWindow.Component == component)
             {
                 infoWindow.Hide();
                 infoWindow.Component = null;
             }
+            #endif
         }
     }
 }

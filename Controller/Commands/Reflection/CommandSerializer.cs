@@ -78,12 +78,6 @@ namespace Exolutio.Controller.Commands.Reflection
 
         #endregion
 
-        #region script serialization
-
-#if SILVERLIGHT
-#else
-        #region XML serialization
-
         public void Serialize(CommandBase commandBase, bool isUndo, bool isRedo)
         {
             SerializeRec(commandBase, true, RootElement, isUndo, isRedo);
@@ -228,8 +222,6 @@ namespace Exolutio.Controller.Commands.Reflection
             }
         }
 
-        #endregion
-
         public List<CommandBase> DeserializeScript(XDocument document)
         {
             //List<CommandBase> result = new List<CommandBase>();
@@ -266,9 +258,6 @@ namespace Exolutio.Controller.Commands.Reflection
             RootElement = elCommandLog;
             return SerializationDocument;
         }
-#endif
-
-        #endregion
 
         public IList<CommandBase> DeserializeDocument(string fileName)
         {

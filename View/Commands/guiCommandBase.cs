@@ -170,7 +170,13 @@ namespace Exolutio.View.Commands
 	    public virtual KeyGesture Gesture
 	    {
             get { return null; }
-            set { throw new InvalidOperationException("Gesture is not supposed to be set in this class. Set accessor exists only to be overriden in derived classes. "); }
+            set
+            {
+                #if SILVERLIGHT
+                #else
+                throw new InvalidOperationException("Gesture is not supposed to be set in this class. Set accessor exists only to be overriden in derived classes. ");
+                #endif
+            }
 	    }
         
 		/// <summary>

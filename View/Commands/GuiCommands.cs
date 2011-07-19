@@ -122,9 +122,13 @@ namespace Exolutio.View.Commands
         public static guiSaveAsSingleVersion SaveAsSingleVersionCommand { get; set; }
         public static guiRemoveCurrentVersion RemoveCurrentVersionCommand { get; set; }
         public static guiVerifyModelCommand VerifyModelCommand { get; set; }
+
+        #if SILVERLIGHT
+        #else
         public static guiCreateVersionLink CreateVersionLinkCommand { get; set; }
         public static guiRemoveVersionLink RemoveVersionLinkCommand { get; set; }
         public static guiRevalidation RevalidationCommand { get; set; }
+        #endif
 
         #endregion
 

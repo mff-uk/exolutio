@@ -119,12 +119,15 @@ namespace Exolutio.View
 
 	    private void PIMAttributeTextBox_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
 		{
-	        if (PIMAttribute != null)
+            #if SILVERLIGHT
+            #else
+            if (PIMAttribute != null)
 	        {
 	            PIMClassDialog d = new PIMClassDialog();
                 d.Initialize(Current.Controller, PIMAttribute.PIMClass, PIMAttribute);
                 d.ShowDialog();
 	        }
+            #endif
 		}
 
         

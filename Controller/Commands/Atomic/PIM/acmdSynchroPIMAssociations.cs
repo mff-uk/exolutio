@@ -124,7 +124,7 @@ namespace Exolutio.Controller.Commands.Atomic.PIM
                     IEnumerable<Tuple<PSMAssociation, IEnumerable<ModelIterator.MoveStep>>> associationsAndPaths = psmClass.GetContextPSMAssociationsWithPaths();
                     IEnumerable<PSMAssociation> associations = associationsAndPaths.Select(t => t.Item1).Union(parentEnum);
                     IEnumerable<PSMAssociation> interpretedAssociations = associations.Where(a => a.Interpretation != null);
-                    IEnumerable<PSMAssociation> responsibleAssociations = interpretedAssociations.Where(a => aX1.Contains(a.Interpretation));
+                    IEnumerable<PSMAssociation> responsibleAssociations = interpretedAssociations.Where(a => aX1.Contains(a.Interpretation as PIMAssociation));
                     IEnumerable<PIMAssociation> interpretations = interpretedAssociations.Select(a => a.Interpretation as PIMAssociation);
                     IEnumerable<PIMAssociation> associationsToPropagate = aX2.Where(a => !interpretations.Contains(a));
 

@@ -106,7 +106,7 @@ namespace Exolutio.Controller.Commands.Atomic.PIM
                     IEnumerable<Tuple<PSMAttribute, IEnumerable<ModelIterator.MoveStep>>> attributesAndPaths = psmClass.GetContextPSMAttributesWithPaths();
                     IEnumerable<PSMAttribute> attributes = attributesAndPaths.Select(t => t.Item1);
                     IEnumerable<PSMAttribute> interpretedAttributes = attributes.Where(a => a.Interpretation != null);
-                    IEnumerable<PSMAttribute> responsibleAttributes = interpretedAttributes.Where(a => aX1.Contains(a.Interpretation));
+                    IEnumerable<PSMAttribute> responsibleAttributes = interpretedAttributes.Where(a => aX1.Contains(a.Interpretation as PIMAttribute));
                     IEnumerable<PIMAttribute> interpretations = interpretedAttributes.Select(a => a.Interpretation as PIMAttribute);
                     IEnumerable<PIMAttribute> attributesToPropagate = aX2.Where(a => !interpretations.Contains(a));
                     

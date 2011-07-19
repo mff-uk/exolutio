@@ -63,7 +63,11 @@ namespace Exolutio.ViewToolkit
             set { dragThumb.Y = value; }
         }
 
+        #if SILVERLIGHT
+        private bool allowDisconnect = false;
+        #else
         private bool allowDisconnect = true;
+        #endif
         public bool AllowDisconnect
         {
             get { return allowDisconnect; }
@@ -172,7 +176,7 @@ namespace Exolutio.ViewToolkit
 
                 if (AllowDisconnect && !Disconnected && dragThumb.DraggingAllone(this))
                 {
-                    Vector diff = Vector.SubtractPoints(Mouse.GetPosition(this.ExolutioCanvas), CanvasPosition);
+                    Vector diff = Vector.SubtractPoints(ExolutioCanvas.GetMousePosition(), CanvasPosition);
                     if (diff.Length < 20)
                     {
                         deltaEventArgs = new DragDeltaEventArgs(snapped.X - CanvasPosition.X, snapped.Y - CanvasPosition.Y);
@@ -198,7 +202,7 @@ namespace Exolutio.ViewToolkit
         private void DisconnectPoint()
         {
             this.Disconnected = true;
-            Point mousePos = Mouse.GetPosition(this.ExolutioCanvas);
+            Point mousePos = ExolutioCanvas.GetMousePosition();
             this.ParentControl.InnerConnectorControl.Children.Remove(this);
             this.ParentControl.Connectors.Remove(this.Connector);
             if (this.Connector.StartPoint == this)

@@ -189,14 +189,17 @@ namespace Exolutio.View
 
 	    private void PSMAttributeTextBox_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
 		{
+            #if SILVERLIGHT
+            #else
             if (PSMAttribute != null)
             {
                 PSMClassDialog d = new PSMClassDialog();
-                d.Topmost = true;
+                dialog.Topmost = true;
                 d.Initialize(Current.Controller, PSMAttribute.PSMClass, PSMAttribute);
                 d.Show();
             }
-		}
+        #endif
+        }
 
         #region Versioned element highlighting support
 
