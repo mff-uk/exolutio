@@ -51,6 +51,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
+    <Reference Include="OrderedListClass">
+      <HintPath>..\ExternalBinaries\OrderedList\OrderedListClass.dll</HintPath>
+    </Reference>
     <Reference Include="SilverFlow.Controls">
       <HintPath>..\ExternalBinaries\FloatingWindowControl\SilverFlow.Controls.dll</HintPath>
     </Reference>
@@ -79,13 +82,10 @@
     <Compile Include="Commands\Current.cs" />
     <Compile Include="Commands\CurrentProjectChangedEventArgs.cs" />
     <Compile Include="Commands\CurrentProjectVersionChangedEventArgs.cs" />
+    <Compile Include="Commands\Edit\guiDelete.cs" />
     <Compile Include="Commands\Edit\guiRedoCommand.cs" />
     <Compile Include="Commands\Edit\guiUndoCommand.cs" />
     <Compile Include="Commands\Edit\guiVerifyModelCommand.cs" />
-    <Compile Include="Commands\Grammar\GrammarWindow.xaml.cs">
-      <DependentUpon>GrammarWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Commands\Grammar\guiGenerateGrammarCommand.cs" />
     <Compile Include="Commands\Grammar\guiNormalizeSchemaCommand.cs" />
     <Compile Include="Commands\Grammar\guiSampleDocumentCommand.cs">
@@ -97,6 +97,7 @@
     <Compile Include="Commands\GuiCommands.cs" />
     <Compile Include="Commands\guiCurrentVersionCommand.cs" />
     <Compile Include="Commands\guiModelTreeCommand.cs" />
+    <Compile Include="Commands\guiSelectionDependentCommand.cs" />
     <Compile Include="Commands\guiShowHelpCommand.cs" />
     <Compile Include="Commands\IReportDisplay.cs" />
     <Compile Include="Commands\guiControllerCommand.cs" />
@@ -120,6 +121,15 @@
     <Compile Include="Commands\ParameterControls\ScopePropertyEditor.cs" />
     <Compile Include="Commands\ParameterControls\StringParameterEditor.cs" />
     <Compile Include="Commands\ParameterControls\UnlimitedIntParameterEditor.cs" />
+    <Compile Include="Commands\PIM\guiAssociate2.cs" />
+    <Compile Include="Commands\PIM\guiLocateRepresentedPSMClass.cs" />
+    <Compile Include="Commands\PIM\guiPIMDelete.cs" />
+    <Compile Include="Commands\PIM\guiPIMDeleteAssociation.cs" />
+    <Compile Include="Commands\PIM\guiPIMDeleteAttribute.cs" />
+    <Compile Include="Commands\PIM\guiPIMDeleteClass.cs" />
+    <Compile Include="Commands\PIM\guiShiftPIMAttributeCommand.cs" />
+    <Compile Include="Commands\PIM\guiSplitPIMAssociation.cs" />
+    <Compile Include="Commands\PIM\guiSplitPIMAttribute.cs" />
     <Compile Include="Commands\Project\guiCloseAppCommand.cs" />
     <Compile Include="Commands\Project\guiCloseProjectCommand.cs" />
     <Compile Include="Commands\Project\guiNewProjectCommand.cs" />
@@ -131,9 +141,24 @@
     <Compile Include="Commands\Project\ServerProjectsWindow.xaml.cs">
       <DependentUpon>ServerProjectsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Commands\Versioning\guiBranchCurrentVersionCommand.cs" />
-    <Compile Include="Commands\Versioning\guiRemoveCurrentVersionCommand.cs" />
-    <Compile Include="Commands\Versioning\guiSaveAsSingleVersionCommand.cs" />
+    <Compile Include="Commands\PSM\guiCreateContentModelCommand.cs" />
+    <Compile Include="Commands\PSM\guiCutAssociation.cs" />
+    <Compile Include="Commands\PSM\guiDeletePSMAttribute.cs" />
+    <Compile Include="Commands\PSM\guiDeletePSMSchema.cs" />
+    <Compile Include="Commands\PSM\guiDeleteSubtree.cs" />
+    <Compile Include="Commands\PSM\guiInsertPSMClass.cs" />
+    <Compile Include="Commands\PSM\guiLeaveOutUnintAM.cs" />
+    <Compile Include="Commands\PSM\guiPSMDelete.cs" />
+    <Compile Include="Commands\PSM\guiShiftCommand.cs" />
+    <Compile Include="Commands\PSM\guiShiftPSMAttributeCommand.cs" />
+    <Compile Include="Commands\PSM\guiSplitPSMAssociation.cs" />
+    <Compile Include="Commands\PSM\guiSplitPSMAttribute.cs" />
+    <Compile Include="Commands\Versioning\guiBranchCurrentVersion.cs" />
+    <Compile Include="Commands\Versioning\guiRemoveCurrentVersion.cs" />
+    <Compile Include="Commands\Versioning\guiSaveAsSingleVersion.cs" />
+    <Compile Include="Commands\View\guiAlignCommand.cs" />
+    <Compile Include="Commands\View\guiBreakLineCommand.cs" />
+    <Compile Include="Commands\View\guiStraightenLineCommand.cs" />
     <Compile Include="DiagramView.xaml.cs">
       <DependentUpon>DiagramView_SL.xaml</DependentUpon>
     </Compile>
@@ -145,6 +170,9 @@
     </Compile>
     <Compile Include="PSM view\PSMClassDialog_SL.xaml.cs">
       <DependentUpon>PSMClassDialog_SL.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Commands\Grammar\GrammarWindow.xaml.cs">
+      <DependentUpon>GrammarWindow_SL.xaml</DependentUpon>
     </Compile>
     <Compile Include="ComponentViewBase.cs" />
     <Compile Include="Containers\IAttributesContainer.cs" />
@@ -165,6 +193,9 @@
     <Compile Include="PSM view\PSMContentModelView.cs" />
     <Compile Include="PSM view\PSMDiagramView.cs" />
     <Compile Include="PSM view\PSMSchemaClassView.cs" />
+    <Compile Include="ReportDisplay.xaml.cs">
+      <DependentUpon>ReportDisplay.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RepresentantsCollection.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -172,9 +203,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Commands\Grammar\GrammarWindow.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Commands\Grammar\GrammarWindow_SL.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Commands\Project\ServerProjectsWindow.xaml">
       <SubType>Designer</SubType>
@@ -193,6 +224,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="PSM view\PSMClassDialog_SL.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ReportDisplay.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -46,12 +46,12 @@ namespace Exolutio.ViewToolkit
             SelectedItems.Clear();
         }
 
-        public event Action<Component> CanvasSelectionCleared;
+        public event Action CanvasSelectionCleared;
 
-        internal void InvokeCanvasSelectionCleared(Component component)
+        internal void InvokeCanvasSelectionCleared()
         {
-            Action<Component> handler = CanvasSelectionCleared;
-            if (handler != null) handler(component);
+            Action handler = CanvasSelectionCleared;
+            if (handler != null) handler();
         }
 
         #endregion
@@ -366,12 +366,21 @@ namespace Exolutio.ViewToolkit
             }
         }
 
-        private System.Windows.Controls.Label mouseLabel; 
+  
 
         internal void ExolutioCanvas_MouseMove(object sender, MouseEventArgs e)
         {
             CurrentState.Canvas_MouseMove(e);
+            mousePosition = e.GetPosition(this);
+#if SILVERLIGHT
+        }
 
+        /// <summary>
+        /// In silverlight, we keep track of mouse position via MouseMove event, since 
+        /// Mouse class from WPF is not available. 
+        /// </summary>
+        private Point mousePosition; 
+#else      
             if (mouseLabel == null)
             {
                 mouseLabel = new System.Windows.Controls.Label();
@@ -380,6 +389,18 @@ namespace Exolutio.ViewToolkit
             mouseLabel.Content = string.Format("{0}, {1}", Mouse.GetPosition(this).X, Mouse.GetPosition(this).Y);
 
             //ShowHideZoomer(e);
+        }
+      
+        private System.Windows.Controls.Label mouseLabel; 
+#endif
+
+        public Point GetMousePosition()
+        {
+            #if SILVERLIGHT
+            return mousePosition;
+            #else
+            return Mouse.GetPosition(this);
+            #endif
         }
 
         public void SelectableItem_PreviewMouseDown(ISelectable item, MouseButtonEventArgs e)

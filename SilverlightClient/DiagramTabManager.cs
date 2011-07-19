@@ -22,7 +22,7 @@ namespace SilverlightClient
         {
             get
             {
-                return DockManager.ActiveDocument != null ? ((DiagramTab)DockManager.ActiveDocument).DiagramView : null;
+                return DockManager.ActiveDocument != null && DockManager.ActiveDocument is DiagramTab ? ((DiagramTab)DockManager.ActiveDocument).DiagramView : null;
             }
         }
 
@@ -55,7 +55,8 @@ namespace SilverlightClient
         /// Activates a diagram
         /// </summary>
         /// <param name="diagram">Diagram to be activated</param>
-        public DiagramTab ActivateDiagram(Diagram diagram)
+        /// <param name="activateDiagramTab"></param>
+        public DiagramTab ActivateDiagram(Diagram diagram, bool activateDiagramTab = true)
         {
             if (ActiveDiagram != diagram && diagram != null)
             {
@@ -68,8 +69,10 @@ namespace SilverlightClient
                 {
                     DockManager.ActiveDocument = tab;
                 }
-
-                tab.BringDocumentHeaderToView(false);
+                if (activateDiagramTab)
+                {
+                	tab.BringDocumentHeaderToView(false);
+				}
                 return tab;
             }
             else
@@ -151,14 +154,14 @@ namespace SilverlightClient
         /// </summary>
         /// <param name="diagram"></param>
         /// <param name="selectedComponent"></param>
-        public void ActivateDiagramWithElement(Diagram diagram, Component selectedComponent)
+        public void ActivateDiagramWithElement(Diagram diagram, Component selectedComponent, bool activateDiagramTab = true)
         {
-            DiagramTab tab = ActivateDiagram(diagram);
+            DiagramTab tab = ActivateDiagram(diagram, activateDiagramTab);
             tab.DiagramView.ClearSelection();
 
             if (selectedComponent != null)
             {
-                tab.DiagramView.SetSelection(selectedComponent);
+                tab.DiagramView.SetSelection(selectedComponent, true);
             }
 
             Current.ActiveDiagram = diagram;
@@ -191,6 +194,10 @@ namespace SilverlightClient
                 {
                     Current.ActiveDiagram = null;
                 }
+            }
+            else
+            {
+                Current.InvokeSelectionChanged();
             }
         }
 
@@ -264,13 +271,13 @@ namespace SilverlightClient
 
         public void OpenTabsForProjectVersion(ProjectVersion projectVersion)
         {
-            foreach (PIMDiagram pimDiagram in Current.Project.LatestVersion.PIMDiagrams)
+            foreach (PIMDiagram pimDiagram in projectVersion.PIMDiagrams)
             {
                 if (FindTab(pimDiagram) == null)
                     AddTab(pimDiagram);
             }
 
-            foreach (PSMDiagram psmDiagram in Current.Project.LatestVersion.PSMDiagrams)
+            foreach (PSMDiagram psmDiagram in projectVersion.PSMDiagrams)
             {
                 if (FindTab(psmDiagram) == null)
                     AddTab(psmDiagram);
@@ -283,6 +290,15 @@ namespace SilverlightClient
             throw new NotImplementedException();
         }
 
+        public IList<DiagramView> GetTopDiagramViews()
+        {
+            List<DiagramView> result = new List<DiagramView>();
+            if (ActiveDiagramView != null)
+            {
+                result.Add(ActiveDiagramView);
+            }
+            return result;
+        }
         public IEnumerable<ExolutioVersionedObject> AnotherOpenedVersions(ExolutioVersionedObject item)
         {
             List<ExolutioVersionedObject> result = null;

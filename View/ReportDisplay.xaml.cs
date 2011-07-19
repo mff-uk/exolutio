@@ -35,6 +35,13 @@ namespace Exolutio.View
             OrderedList.OrderedList orderedList = RenderContents();
             this.Content = orderedList;
         }
+        
+        #if SILVERLIGHT
+        public bool IsVisible
+        {
+            get { return true; }
+        }
+        #endif
 
         public void DisplayReport(CommandReportBase displayedReport)
         {

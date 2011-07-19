@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Windows;
@@ -14,6 +15,7 @@ using Exolutio.Controller.Commands;
 using Exolutio.Model.PIM;
 using Exolutio.Model.PSM;
 using Exolutio.Model.Serialization;
+using Exolutio.SupportingClasses;
 using Exolutio.View;
 using Exolutio.View.Commands;
 using SilverFlow.Controls;
@@ -45,24 +47,16 @@ namespace SilverlightClient
             this.Loaded += MainWindow_Loaded;
             //Current.ActiveDiagramChanged += Current_ActiveDiagramChanged;
 
-            
-            
-            
             ServerCommunication.ServerProjectListLoaded += ServerCommunication_ServerProjectListLoaded;
             ServerCommunication.GetServerProjects();
         }
 
         
 
-        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        protected void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             OpenStartupProject();
         }
-
-        //public void Current_ActiveDiagramChanged()
-        //{
-        //    ExolutioRibbon.PIMMode = Current.ActiveDiagram != null && Current.ActiveDiagram is PIMDiagram;
-        //}
 
         public Diagram ActiveDiagram
         {
@@ -80,11 +74,21 @@ namespace SilverlightClient
             if (e.NewProject != null)
             {
                 BindProject(e.NewProject);
-                if (Current.Project.LatestVersion.PIMDiagrams.Count > 0)
-                    DiagramTabManager.ActivateDiagram(Current.Project.LatestVersion.PIMDiagrams[0]);
-                if (Current.Project.LatestVersion != null)
+                if (e.NewProject.ProjectFile != null && e.NewProject.ProjectFile.Exists &&
+                    File.Exists(UserFileForProjectFile(e.NewProject.ProjectFile.FullName)))
                 {
-                    DiagramTabManager.OpenTabsForProjectVersion(Current.Project.LatestVersion);
+                    LoadProjectLayout(UserFileForProjectFile(e.NewProject.ProjectFile.FullName));
+                }
+                else
+                {
+                    if (Current.Project.LatestVersion.PIMDiagrams.Count > 0)
+                    {
+                        DiagramTabManager.ActivateDiagram(Current.Project.LatestVersion.PIMDiagrams[0]);
+                    }
+                    if (Current.Project.LatestVersion != null)
+                    {
+                        DiagramTabManager.OpenTabsForProjectVersion(Current.Project.LatestVersion);
+                    }    
                 }
             }
             Current.ExecutedCommand += ReportDisplay.ExecutedCommand;
@@ -199,35 +203,18 @@ namespace SilverlightClient
         }
 
         #region focus
-        
-        public void FocusComponent(Diagram diagram, Component component)
+
+        public void FocusComponent(Diagram diagram, Component component, bool activateDiagramTab = true)
         {
             Component diagramComponent = component;
-            Component subComponent = null;
-            PIMAttribute pimAttribute = component as PIMAttribute;
-            if (pimAttribute != null)
-            {
-                subComponent = pimAttribute;
-                diagramComponent = ((PIMAttribute)component).PIMClass;
-            }
-            PSMAttribute psmAttribute = component as PSMAttribute;
-            if (psmAttribute != null)
-            {
-                subComponent = psmAttribute;
-                diagramComponent = ((PSMAttribute)component).PSMClass;
-            }
-            DiagramTabManager.ActivateDiagramWithElement(diagram, diagramComponent);
-            if (subComponent != null)
-            {
-                Current.InvokeSelectComponents(new[] { subComponent });
-            }
+            DiagramTabManager.ActivateDiagramWithElement(diagram, diagramComponent, activateDiagramTab);
         }
 
-        public void FocusComponent(IEnumerable<PIMDiagram> pimDiagrams, PIMComponent component)
+        public void FocusComponent(IEnumerable<PIMDiagram> pimDiagrams, PIMComponent component, bool activateDiagramTab = true)
         {
             if (pimDiagrams.Count() == 1)
             {
-                DiagramTabManager.ActivateDiagramWithElement(pimDiagrams.First(), component);
+                DiagramTabManager.ActivateDiagramWithElement(pimDiagrams.First(), component, activateDiagramTab);
             }
             else
             {
@@ -235,20 +222,26 @@ namespace SilverlightClient
             }
         }
 
-        public void FocusComponent(Component component)
+        public void FocusComponent(Component component, bool activateDiagramTab = true)
         {
             Diagram diagram = ModelIterator.GetDiagramForComponent(component);
-            Current.MainWindow.FocusComponent(diagram, component);
+            Current.MainWindow.FocusComponent(diagram, component, activateDiagramTab);
         }
         
         #endregion
 
-        public void DisplayReport(NestedCommandReport finalReport)
+        public void DisplayReport(CommandReportBase report, bool showEvenIfNotVisible)
         {
-            if (ReportDisplay.Visibility == Visibility.Visible)
+            if (ReportDisplay.IsVisible || showEvenIfNotVisible)
             {
-                ReportDisplay.DisplayedReport = finalReport;
-                ReportDisplay.Update();
+                ReportDisplay.DisplayReport(report);
+            }
+        }
+        public void DisplayLog(Log log, bool showEvenIfNotVisible)
+        {
+            if (ReportDisplay.IsVisible || showEvenIfNotVisible)
+            {
+                ReportDisplay.DisplayLog(log);
             }
         }
 

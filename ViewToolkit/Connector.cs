@@ -364,11 +364,14 @@ namespace Exolutio.ViewToolkit
         
         public Point MousePointWhenContextMenuOpened { get; private set; }
 
+#if SILVERLIGHT
+#else
         protected override void OnContextMenuOpening(ContextMenuEventArgs e)
         {
             MousePointWhenContextMenuOpened = new Point(e.CursorLeft, e.CursorTop);
             base.OnContextMenuOpening(e);
         }
+#endif
 
 #if SILVERLIGHT
 

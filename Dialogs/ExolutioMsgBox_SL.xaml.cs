@@ -7,9 +7,9 @@ namespace Exolutio.Dialogs
     /// <summary>
     /// Interaction logic for ExolutioMsgBox.xaml
     /// </summary>
-    public partial class ExolutioMsgBox
+    public partial class ExolutioMessageBox
     {
-        public ExolutioMsgBox()
+        public ExolutioMessageBox()
         {
             InitializeComponent();
 
@@ -22,7 +22,7 @@ namespace Exolutio.Dialogs
 #if SILVERLIGHT
         public static void Show(string windowTitle, string textTitle, string textSubtitle, FloatingWindowHost host)
         {
-            ExolutioMsgBox msgBox = new ExolutioMsgBox();
+            ExolutioMessageBox msgBox = new ExolutioMessageBox();
             msgBox.Title = windowTitle;
             msgBox.messageText.Text = textTitle;
             msgBox.messageQuestion.Text = textSubtitle;
@@ -33,7 +33,7 @@ namespace Exolutio.Dialogs
 #else
         public static void Show(string windowTitle, string textTitle, string textSubtitle)
         {
-            EvoXMsgBox msgBox = new EvoXMsgBox();
+            ExolutioMessageBox msgBox = new ExolutioMessageBox();
             msgBox.Title = windowTitle;
             msgBox.messageText.Text = textTitle;
             msgBox.messageQuestion.Text = textSubtitle;
@@ -45,7 +45,11 @@ namespace Exolutio.Dialogs
 
         private void buttonOK_Click(object sender, RoutedEventArgs e)
         {
+            #if SILVERLIGHT
             this.Close();
+            #else
+            this.Close();
+            #endif
         }
     }
 }

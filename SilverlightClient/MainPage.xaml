@@ -27,7 +27,7 @@
                 <sdk:TabControl Padding="5"  Height="146" >     
                     <sdk:TabItem Header="Command Log">
                         <ScrollViewer Padding="0" BorderThickness="0">
-                            <sc:ReportDisplay x:Name="ReportDisplay"></sc:ReportDisplay>
+                            <ev:ReportDisplay x:Name="ReportDisplay"></ev:ReportDisplay>
                         </ScrollViewer>
                     </sdk:TabItem>
                     <sdk:TabItem Header="Project ">

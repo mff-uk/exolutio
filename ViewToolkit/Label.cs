@@ -71,6 +71,20 @@ namespace Exolutio.ViewToolkit
         }
         #endif
 
+        #if SILVERLIGHT
+        public ContextMenu ContextMenu
+        {
+            get
+            {
+                return ContextMenuService.GetContextMenu(this);
+            }
+            set
+            {
+                ContextMenuService.SetContextMenu(this, value);
+            }
+        }
+        #endif
+
         #region mouse events redirected to drag thumb
 #if SILVERLIGHT
         protected override void  OnMouseLeftButtonDown(MouseButtonEventArgs e)

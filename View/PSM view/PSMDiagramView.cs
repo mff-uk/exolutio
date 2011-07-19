@@ -76,7 +76,12 @@ namespace Exolutio.View
 
         private void DoLayout()
         {
-            if (!this.Loading && this.IsArrangeValid)
+            if (!this.Loading 
+                #if SILVERLIGHT
+                #else
+                && this.IsArrangeValid
+                #endif
+                )
             {
                 LayoutManager.DoLayout(this);
             }

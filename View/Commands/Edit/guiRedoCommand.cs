@@ -1,6 +1,7 @@
 using System;
 using Exolutio.Controller.Commands;
 using Exolutio.ResourceLibrary;
+using System.Windows.Input;
 
 namespace Exolutio.View.Commands.Edit
 {
@@ -62,8 +63,10 @@ namespace Exolutio.View.Commands.Edit
             get { return "Redo last undone operation"; }
         }
 
-        private System.Windows.Input.KeyGesture gesture;
-        public override System.Windows.Input.KeyGesture Gesture
+        #if SILVERLIGHT
+        #else
+        private KeyGesture gesture;
+        public override KeyGesture Gesture
         {
             get
             {
@@ -84,6 +87,7 @@ namespace Exolutio.View.Commands.Edit
                 }
             }
         }
+        #endif
 
     }
 }

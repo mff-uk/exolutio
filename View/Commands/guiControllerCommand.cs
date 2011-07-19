@@ -31,8 +31,10 @@ namespace Exolutio.View.Commands
             OnCanExecuteChanged(null);
         }
 
-        private System.Windows.Input.KeyGesture gesture; 
-        public override System.Windows.Input.KeyGesture Gesture
+        #if SILVERLIGHT
+        #else
+        private KeyGesture gesture;
+        public override KeyGesture Gesture
         {
             get
             {
@@ -53,6 +55,7 @@ namespace Exolutio.View.Commands
                 }
             }
         }
+        #endif
 
         public CommandBase ControllerCommand { get; set; }
 

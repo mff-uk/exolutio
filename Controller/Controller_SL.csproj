@@ -57,6 +57,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Net" />
     <Reference Include="System.Windows.Browser" />
+    <Reference Include="System.Xml.Linq, Version=2.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\Atomic\acmdAddComponentToDiagram.cs" />
@@ -65,6 +66,7 @@
     <Compile Include="Commands\Atomic\PIM\acmdDeletePIMClass.cs" />
     <Compile Include="Commands\Atomic\PIM\acmdNewPIMAttribute.cs" />
     <Compile Include="Commands\Atomic\PIM\acmdDeletePIMAttribute.cs" />
+    <Compile Include="Commands\Atomic\PIM\acmdShiftPIMAttribute.cs" />
     <Compile Include="Commands\Atomic\PIM\acmdUpdatePIMAttributeCardinality.cs" />
     <Compile Include="Commands\Atomic\PIM\acmdUpdatePIMAttributeDefaultValue.cs" />
     <Compile Include="Commands\Atomic\PIM\acmdUpdatePIMAttributeType.cs" />
@@ -91,6 +93,9 @@
     <Compile Include="Commands\Atomic\PSM\acmdDeletePSMDiagram.cs" />
     <Compile Include="Commands\Atomic\PSM\acmdNewPSMDiagram.cs" />
     <Compile Include="Commands\Atomic\PSM\acmdRenamePSMSchema.cs" />
+    <Compile Include="Commands\Atomic\PSM\acmdReorderComponents.cs" />
+    <Compile Include="Commands\Atomic\PSM\acmdShiftPSMAttribute.cs" />
+    <Compile Include="Commands\Atomic\PSM\acmdShiftPSMRoot.cs" />
     <Compile Include="Commands\Atomic\PSM\acmdUpdatePSMAssociationCardinality.cs" />
     <Compile Include="Commands\Atomic\PSM\acmdUpdatePSMAttributeCardinality.cs" />
     <Compile Include="Commands\Atomic\PSM\acmdSetRepresentedClass.cs" />
@@ -126,6 +131,7 @@
     <Compile Include="Commands\Base\CommandReport.cs" />
     <Compile Include="Commands\Base\ExolutioCommandException.cs" />
     <Compile Include="Commands\Base\ICommandWithDiagramParameter.cs" />
+    <Compile Include="Commands\Base\PropagationMacroCommand.cs" />
     <Compile Include="Commands\Base\PublicArgumentAttribute.cs" />
     <Compile Include="Commands\Base\PublicCommandAttribute.cs" />
     <Compile Include="Commands\Base\ScopeAttribute.cs" />
@@ -145,19 +151,31 @@
     <Compile Include="Commands\Complex\PIM\cmdDeletePIMAttribute.cs" />
     <Compile Include="Commands\Complex\PIM\cmdDeletePIMAssociation.cs" />
     <Compile Include="Commands\Complex\PIM\cmdCreateNewPIMAssociation.cs" />
+    <Compile Include="Commands\Complex\PIM\cmdDerivePSMRoot.cs" />
+    <Compile Include="Commands\Complex\PIM\cmdSplitPIMAssociation.cs" />
+    <Compile Include="Commands\Complex\PIM\cmdSplitPIMAttribute.cs" />
     <Compile Include="Commands\Complex\PIM\cmdUpdatePIMAttribute.cs" />
+    <Compile Include="Commands\Complex\PSM\cmdContentToContentModel.cs" />
     <Compile Include="Commands\Complex\PSM\cmdCreateNewPSMAttribute.cs" />
+    <Compile Include="Commands\Complex\PSM\cmdCreateNewPSMClassAsIntChild.cs" />
+    <Compile Include="Commands\Complex\PSM\cmdCreateNewPSMClassAsUnintChild.cs" />
+    <Compile Include="Commands\Complex\PSM\cmdDeletePSMAssociationMemberRecursive.cs" />
     <Compile Include="Commands\Complex\PSM\cmdDeletePSMAttribute.cs" />
     <Compile Include="Commands\Complex\PSM\cmdDeletePSMAssociation.cs" />
-    <Compile Include="Commands\Complex\PSM\cmdDeletePSMClass.cs" />
     <Compile Include="Commands\Complex\PSM\cmdDeletePSMContentModelRecursive.cs" />
     <Compile Include="Commands\Complex\PSM\cmdDeletePSMSchema.cs" />
-    <Compile Include="Commands\Complex\PSM\cmdDeletePSMAssociationMember.cs" />
     <Compile Include="Commands\Complex\PSM\cmdDeletePSMClassAndParent.cs" />
     <Compile Include="Commands\Complex\PSM\cmdDeletePSMAssociationRecursive.cs" />
     <Compile Include="Commands\Complex\PSM\cmdDeletePSMClassRecursive.cs" />
+    <Compile Include="Commands\Complex\PSM\cmdDeleteRootPSMClass.cs" />
+    <Compile Include="Commands\Complex\PSM\cmdDeleteRootPSMContentModel.cs" />
+    <Compile Include="Commands\Complex\PSM\cmdInsertPSMClass.cs" />
+    <Compile Include="Commands\Complex\PSM\cmdLeaveOutUninterpretedAssociationMember.cs" />
     <Compile Include="Commands\Complex\PSM\cmdMovePSMAttribute.cs" />
     <Compile Include="Commands\Complex\PSM\cmdReconnectPSMAssociation.cs" />
+    <Compile Include="Commands\Complex\PSM\cmdSplitPSMAssociation.cs" />
+    <Compile Include="Commands\Complex\PSM\cmdSplitPSMAttribute.cs" />
+    <Compile Include="Commands\Complex\PSM\cmdUpdatePSMAssociation.cs" />
     <Compile Include="Commands\Complex\PSM\cmdUpdatePSMAttribute.cs" />
     <Compile Include="Commands\Reflection\CommandDescriptor.cs" />
     <Compile Include="Commands\Reflection\CommandSerializer.cs" />
@@ -165,6 +183,7 @@
     <Compile Include="Commands\Reflection\PIMAttributeNeighboringClassParameterConsistency.cs" />
     <Compile Include="Commands\Reflection\PIMAttributeOtherClassParameterConsistency.cs" />
     <Compile Include="Commands\Reflection\InterpretationConsistency.cs" />
+    <Compile Include="Commands\Reflection\PSMAssociationMemberParameterConsistency.cs" />
     <Compile Include="Commands\Reflection\PublicCommandsHelper.cs" />
     <Compile Include="Commands\Reflection\SchemaAttributeTypeParameterConsistency.cs" />
     <Compile Include="Commands\Reflection\SchemaComponentParameterConsistency.cs" />

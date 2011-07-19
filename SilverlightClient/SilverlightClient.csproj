@@ -119,9 +119,6 @@
       <DependentUpon>PSMDiagramTab.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ReportDisplay.xaml.cs">
-      <DependentUpon>ReportDisplay.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Resources\ExolutioRibbon.xaml.cs">
       <DependentUpon>ExolutioRibbon.xaml</DependentUpon>
     </Compile>
@@ -150,10 +147,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PSMDiagramTab.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ReportDisplay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
