@@ -173,6 +173,7 @@ namespace Exolutio.Model
             foreach (IVersionedItem versionedItem in ModelIterator.GetAllModelItems(firstProjectVersion).OfType<IVersionedItem>())
             {
                 firstVersion.Items.Add(versionedItem);
+                VersionManager.AddVersionedItem(versionedItem);
             }
 
             /* Now listeners to the change of "UsesVersioning" can be notified */

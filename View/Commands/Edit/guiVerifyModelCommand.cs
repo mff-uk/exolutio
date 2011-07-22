@@ -15,7 +15,7 @@ namespace Exolutio.View.Commands.Edit
         {
             Tests.ModelIntegrity.ModelConsistency.CheckProject(Current.Project);
             #if SILVERLIGHT
-            ExolutioMessageBox.Show("Verified", "Test passed", "Model consistency checked successfuly.", Current.MainWindow.FloatingWindowHost);
+            ExolutioMessageBox.Show("Verified", "Test passed", "Model consistency checked successfuly.");
             #else
             ExolutioMessageBox.Show("Verified", "Test passed", "Model consistency checked successfuly.");
             #endif

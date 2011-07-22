@@ -18,7 +18,7 @@ namespace Exolutio.View.Commands.Project
             {
                 #if SILVERLIGHT
                 MessageBoxResult r =
-                    ExolutioYesNoBox.Show(CommandsResources.guiCloseProjectCommand_Execute_Current_project_is_not_saved, CommandsResources.guiCloseProjectCommand_Execute_Do_you_want_to_save_it_, Current.MainWindow.FloatingWindowHost);
+                    ExolutioYesNoBox.Show(CommandsResources.guiCloseProjectCommand_Execute_Current_project_is_not_saved, CommandsResources.guiCloseProjectCommand_Execute_Do_you_want_to_save_it_);
 
                 #else
                 MessageBoxResult r =

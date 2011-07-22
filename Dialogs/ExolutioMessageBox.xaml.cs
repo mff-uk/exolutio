@@ -6,7 +6,7 @@ namespace Exolutio.Dialogs
     /// <summary>
     /// Interaction logic for ExolutioMessageBox.xaml
     /// </summary>
-    public partial class ExolutioMessageBox : Window
+    public partial class ExolutioMessageBox
     {
         public ExolutioMessageBox()
         {
@@ -27,7 +27,7 @@ namespace Exolutio.Dialogs
 
         private void buttonOK_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            this.CloseWindow();
         }
     }
 }

@@ -101,7 +101,7 @@ namespace Exolutio.WPFClient
 
         void IDiagramTabManager.ActivateDiagram(Diagram diagram)
         {
-            ActivateDiagram(diagram);
+            this.ActivateDiagram(diagram);
         }
 
         private void SelectedItems_CollectionChanged()
@@ -115,7 +115,7 @@ namespace Exolutio.WPFClient
         /// </summary>
         private DiagramTab FindTab(Diagram diag)
         {
-            foreach (DiagramTab tab in MainWindow.dockManager.Documents)
+            foreach (DiagramTab tab in DockManager.Documents)
             {
                 if (tab.DiagramView.Diagram == diag)
                 {
@@ -373,13 +373,5 @@ namespace Exolutio.WPFClient
                 return new Diagram[0];
             }
         }
-    }
-
-    public static class AvalonDockExtension
-    {
-        public static bool IsActiveInItsGroup(this ManagedContent managedContent)
-        {
-            return managedContent.ContainerPane.SelectedItem == managedContent;
-        }
-    }
+    }    
 }

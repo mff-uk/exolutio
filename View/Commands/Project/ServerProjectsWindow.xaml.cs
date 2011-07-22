@@ -12,7 +12,7 @@ using System.Windows.Shapes;
 
 namespace Exolutio.View.Commands.Project
 {
-    public partial class ServerProjectsWindow : SilverFlow.Controls.FloatingWindow
+    public partial class ServerProjectsWindow 
     {
         public ServerProjectsWindow()
         {
@@ -65,13 +65,13 @@ namespace Exolutio.View.Commands.Project
         private void bOK_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = true;
-            Close();
+            CloseWindow();
         }
 
         private void bCancel_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = false;
-            Close();
+            CloseWindow();
         }
 
         public DateTime _lastClick = DateTime.Now;
@@ -98,7 +98,7 @@ namespace Exolutio.View.Commands.Project
                     Math.Abs(_clickPosition.Y - position.Y) < 4)
                 {
                     DialogResult = true;
-                    Close();
+                    CloseWindow();
                 }
 
 

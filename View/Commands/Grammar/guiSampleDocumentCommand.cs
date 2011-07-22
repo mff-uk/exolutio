@@ -25,8 +25,7 @@ namespace Exolutio.View.Commands
 #if SILVERLIGHT
 
             HelpBox helpBox = new HelpBox();
-            Current.MainWindow.FloatingWindowHost.Add(helpBox);
-            helpBox.ShowModal();
+            helpBox.ShowDialog();
 #else
 #endif
         }

@@ -20,7 +20,7 @@ namespace Exolutio.View.Commands.Grammar
                 if (!verifier.TestSchemaNormalized((PSMSchema)Current.ActiveDiagram.Schema))
                 {
                     #if SILVERLIGHT
-                    ExolutioMessageBox.Show("Normalization", "Schema is not normalized", "Check command log window for details.", Current.MainWindow.FloatingWindowHost);
+                    ExolutioMessageBox.Show("Normalization", "Schema is not normalized", "Check command log window for details.");
                     #else
                     ExolutioMessageBox.Show("Normalization", "Schema is not normalized", "Check command log window for details.");
                     #endif
@@ -29,7 +29,7 @@ namespace Exolutio.View.Commands.Grammar
                 else
                 {
                     #if SILVERLIGHT
-                    ExolutioMessageBox.Show("Normalization", "Normalization passed", "Schema is normalized", Current.MainWindow.FloatingWindowHost);
+                    ExolutioMessageBox.Show("Normalization", "Normalization passed", "Schema is normalized");
                     #else
                     ExolutioMessageBox.Show("Normalization", "Normalization passed", "Schema is normalized");
                     #endif

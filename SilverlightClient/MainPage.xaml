@@ -38,11 +38,14 @@
                 </sdk:TabControl>
             </toolkit:Expander>
         </Border>
-    	<fv:FloatingWindowHost x:Name="floatingWindowHost" Background="Azure" SizeChanged="floatingWindowHost_SizeChanged">
+    	<!--ContentControl Background="Azure" SizeChanged="floatingWindowHost_SizeChanged">
             <sc:DockManager x:Name="DockManager"  >
 
             </sc:DockManager>
-        </fv:FloatingWindowHost>
+        </ContentControl>-->
+            <sc:DockManager x:Name="DockManager"  >
+
+            </sc:DockManager>
     </toolkit:DockPanel>
     <!--<Grid x:Name="LayoutRoot">
         <Grid.Background>

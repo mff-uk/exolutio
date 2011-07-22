@@ -1,8 +1,10 @@
-﻿<my:FloatingWindow xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk"  xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"  x:Class="Exolutio.View.PSMClassDialog"
+﻿<Controls3:GenericNonblockingDialog xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk"  xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"  x:Class="Exolutio.View.PSMClassDialog"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
     xmlns:Dialogs="clr-namespace:Exolutio.Dialogs;assembly=Exolutio.Dialogs" 
-    xmlns:toolkit="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Toolkit" xmlns:Controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls" xmlns:Controls1="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Data.Input" xmlns:Controls2="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit" xmlns:my="clr-namespace:SilverFlow.Controls;assembly=SilverFlow.Controls" Height="328" Width="623">
+    xmlns:toolkit="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Toolkit" xmlns:Controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls" xmlns:Controls1="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Data.Input" xmlns:Controls2="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit" xmlns:my="clr-namespace:SilverFlow.Controls;assembly=SilverFlow.Controls"
+    xmlns:Controls3="clr-namespace:System.Windows.Controls;assembly=Exolutio.Dialogs"
+    Height="328" Width="623">
     <Grid>
         <Button Height="23" Margin="0,0,198,12" Name="bOk" VerticalAlignment="Bottom" Click="bOk_Click" HorizontalAlignment="Right" Width="87" TabIndex="2">
 			<Button.Content>_OK</Button.Content>
@@ -87,4 +89,4 @@
             </Controls:TabItem>
         </Controls:TabControl>
     </Grid>
-</my:FloatingWindow>
+</Controls3:GenericNonblockingDialog>

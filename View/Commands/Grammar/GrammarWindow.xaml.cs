@@ -56,13 +56,13 @@ namespace Exolutio.View.Commands.Grammar
         private void bOK_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = true;
-            Close();
+            CloseWindow();
         }
 
         private void bCancel_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult = false; 
-            Close();
+            DialogResult = false;
+            CloseWindow();
         }
     }
 }

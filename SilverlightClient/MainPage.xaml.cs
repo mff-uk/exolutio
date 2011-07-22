@@ -18,7 +18,6 @@ using Exolutio.Model.Serialization;
 using Exolutio.SupportingClasses;
 using Exolutio.View;
 using Exolutio.View.Commands;
-using SilverFlow.Controls;
 using SilverlightClient.ExolutioService;
 using SilverlightClient.W;
 using Tests;
@@ -47,8 +46,11 @@ namespace SilverlightClient
             this.Loaded += MainWindow_Loaded;
             //Current.ActiveDiagramChanged += Current_ActiveDiagramChanged;
 
+            #if DEBUG
+            #else
             ServerCommunication.ServerProjectListLoaded += ServerCommunication_ServerProjectListLoaded;
             ServerCommunication.GetServerProjects();
+            #endif
         }
 
         
@@ -198,8 +200,7 @@ namespace SilverlightClient
                 return;
             }
             ExceptionWindow w = new ExceptionWindow(e.ExceptionObject);
-            floatingWindowHost.Add(w);
-            w.ShowModal();
+            w.ShowDialog();
         }
 
         #region focus

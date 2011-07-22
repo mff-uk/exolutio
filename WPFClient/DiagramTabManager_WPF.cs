@@ -20,4 +20,12 @@ namespace Exolutio.WPFClient
             }
         }
     }
+	
+	public static class AvalonDockExtension
+    {
+        public static bool IsActiveInItsGroup(this ManagedContent managedContent)
+        {
+            return managedContent.ContainerPane.SelectedItem == managedContent;
+        }
+    }
 }

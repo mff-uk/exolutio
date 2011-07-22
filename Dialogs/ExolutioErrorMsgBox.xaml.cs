@@ -6,7 +6,7 @@ namespace Exolutio.Dialogs
     /// <summary>
     /// Interaction logic for ExolutioErrorMsgBox.xaml
     /// </summary>
-    public partial class ExolutioErrorMsgBox : Window
+    public partial class ExolutioErrorMsgBox
     {
         public ExolutioErrorMsgBox()
         {
@@ -28,7 +28,7 @@ namespace Exolutio.Dialogs
 
         private void buttonOK_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            this.CloseWindow();
         }
     }
 }

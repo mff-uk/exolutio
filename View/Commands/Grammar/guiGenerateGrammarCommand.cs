@@ -15,9 +15,8 @@ namespace Exolutio.View.Commands.Grammar
                 
 #if SILVERLIGHT
                 GrammarWindow w = new GrammarWindow();
-                Current.MainWindow.FloatingWindowHost.Add(w);
                 w.DisplayedGrammar = grammar; 
-                w.ShowModal();
+                w.ShowDialog();
 #else 
                 GrammarWindow w = new GrammarWindow();
                 w.DisplayedGrammar = grammar;

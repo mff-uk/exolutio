@@ -14,10 +14,6 @@ using Exolutio.SupportingClasses;
 using Exolutio.View;
 using Component = Exolutio.Model.Component;
 
-#if SILVERLIGHT
-using SilverFlow.Controls;
-#endif
-
 namespace Exolutio.View
 {
     public static class Current
@@ -247,7 +243,6 @@ namespace Exolutio.View
         Diagram ActiveDiagram { get; }
         DiagramView ActiveDiagramView { get; }
 #if SILVERLIGHT
-        FloatingWindowHost FloatingWindowHost { get; }
         void Current_DispatcherUnhandledException(object sender, ApplicationUnhandledExceptionEventArgs e);
 #else
         InputBindingCollection InputBindings { get; }
