@@ -79,8 +79,8 @@ namespace SilverlightClient
 
         private void button1_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult = true; 
-            Close();
+            DialogResult = true;
+            CloseWindow();
         }
     }
 }

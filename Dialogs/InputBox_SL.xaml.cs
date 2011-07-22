@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using System.Windows.Input;
-using SilverFlow.Controls;
 
 namespace Exolutio.Dialogs
 {
@@ -19,11 +18,7 @@ namespace Exolutio.Dialogs
             InitializeComponent();
         }
 
-#if SILVERLIGHT
-        public static bool? Show(string inputBoxText, string defaultText, out string resultString, FloatingWindowHost host)
-#else
-        public static bool ? Show(string inputBoxText, string defaultText, out string resultString)
-#endif
+        public static bool? Show(string inputBoxText, string defaultText, out string resultString)
         {
         	newInputBox = new InputBox();
             newInputBox.Title = inputBoxText;
@@ -31,8 +26,7 @@ namespace Exolutio.Dialogs
             newInputBox.textBox1.SelectAll();
             newInputBox.textBox1.Focus();
 #if SILVERLIGHT
-            host.Add(newInputBox);
-            newInputBox.ShowModal();
+            newInputBox.ShowDialog();
             bool? dialog = newInputBox.DialogResult;
 #else
             bool? dialog = newInputBox.ShowDialog();
@@ -42,14 +36,13 @@ namespace Exolutio.Dialogs
         	return dialog;
         }
 
-        public static bool? Show(string inputBoxText, out string resultString, FloatingWindowHost host)
+        public static bool? Show(string inputBoxText, out string resultString)
         {
             newInputBox = new InputBox();
             newInputBox.Title = inputBoxText;
             newInputBox.textBox1.Focus();
             #if SILVERLIGHT
-            host.Add(newInputBox);
-            newInputBox.ShowModal();
+            newInputBox.ShowDialog();
 		    bool? dialog = newInputBox.DialogResult;
             #else
             bool? dialog = newInputBox.ShowDialog();
@@ -62,14 +55,14 @@ namespace Exolutio.Dialogs
         private void buttonOK_Click(object sender, RoutedEventArgs e)
         {
             returnString = textBox1.Text;
-        	DialogResult = true; 
-            newInputBox.Close();
+        	DialogResult = true;
+            newInputBox.CloseWindow();
         }
 
         private void buttonCancel_Click(object sender, RoutedEventArgs e)
         {
             returnString = string.Empty;
-            newInputBox.Close();
+            newInputBox.CloseWindow();
         }
 
         protected override void OnKeyUp(KeyEventArgs e)

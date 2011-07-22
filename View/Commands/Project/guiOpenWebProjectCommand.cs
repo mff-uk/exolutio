@@ -26,8 +26,7 @@ namespace Exolutio.View.Commands.Project
             ServerProjectsWindow w = new ServerProjectsWindow();
             w.Projects = ServerProjectList;
             w.Closed += DoExecute;
-            Current.MainWindow.FloatingWindowHost.Add(w);
-            w.ShowModal();
+            w.ShowDialog();
         }
 
         private void DoExecute(object sender, EventArgs eventArgs)

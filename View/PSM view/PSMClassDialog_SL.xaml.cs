@@ -245,7 +245,7 @@ namespace Exolutio.View
             if (!error)
             {
                 DialogResult = true;
-                Close();
+                CloseWindow();
             }
         }
 

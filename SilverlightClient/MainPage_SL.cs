@@ -2,7 +2,6 @@ using System.IO;
 using System.Windows;
 using Exolutio.View;
 using Exolutio.View.Commands;
-using SilverFlow.Controls;
 using SilverlightClient.ExolutioService;
 using SilverlightClient.W;
 
@@ -49,18 +48,16 @@ namespace SilverlightClient
         
         private void OpenStartupProject()
         {
+            #if DEBUG
+            #else
             ServerCommunication.LoadWebFile("web-project.evox");
-        }
-
-        FloatingWindowHost IMainWindow.FloatingWindowHost
-        {
-            get { return floatingWindowHost; }
+            #endif
         }
 
         private void floatingWindowHost_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            DockManager.Width = floatingWindowHost.ActualWidth - 0;
-            DockManager.Height = floatingWindowHost.ActualHeight - 0;
+            //DockManager.Width = floatingWindowHost.ActualWidth - 0;
+            //DockManager.Height = floatingWindowHost.ActualHeight - 0;
         }
 
         public void Close()

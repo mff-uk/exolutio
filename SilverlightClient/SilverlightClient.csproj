@@ -69,9 +69,6 @@
     <Reference Include="OrderedListClass">
       <HintPath>..\ExternalBinaries\OrderedList\OrderedListClass.dll</HintPath>
     </Reference>
-    <Reference Include="SilverFlow.Controls">
-      <HintPath>..\ExternalBinaries\FloatingWindowControl\SilverFlow.Controls.dll</HintPath>
-    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceModel.Web" />
@@ -173,6 +170,10 @@
     <ProjectReference Include="..\Controller\Controller_SL.csproj">
       <Project>{9D89860A-FDDF-4ADB-AABC-169957FCCE44}</Project>
       <Name>Controller_SL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dialogs\Dialogs_SL.csproj">
+      <Project>{D543946A-DCEA-453C-8892-4BF9FD2692F4}</Project>
+      <Name>Dialogs_SL</Name>
     </ProjectReference>
     <ProjectReference Include="..\Model\Model_SL.csproj">
       <Project>{5CE90201-BCA7-4877-8EDE-853A81E88DB1}</Project>

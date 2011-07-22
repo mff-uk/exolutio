@@ -163,7 +163,7 @@
     <value>Opens new eXolutio project</value>
   </data>
   <data name="guiOpenProjectCommand_Execute_Exolutio_files____Exolutio____Exolutio_XML_files____xml____xml_All_files____________" xml:space="preserve">
-    <value>eXolutio files (*.eXo)|*.eXo; *.evox|XML files (*.xml)|*.xml|All files (*.*)|*.*||</value>
+    <value>eXolutio files (*.eXo)|*.eXo; *.evox|XML files (*.xml)|*.xml|XCase files (*.XCase)|*.XCase|All files (*.*)|*.*</value>
   </data>
   <data name="guiOpenProjectCommand_Execute_Exolutio_Default_Extension" xml:space="preserve">
     <value>.eXo</value>

@@ -194,7 +194,7 @@ namespace Exolutio.View
             if (PSMAttribute != null)
             {
                 PSMClassDialog d = new PSMClassDialog();
-                dialog.Topmost = true;
+                d.Topmost = true;
                 d.Initialize(Current.Controller, PSMAttribute.PSMClass, PSMAttribute);
                 d.Show();
             }

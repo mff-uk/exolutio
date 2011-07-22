@@ -78,6 +78,18 @@ namespace Exolutio.WPFClient
             CloseProject();
             if (e.NewProject != null)
             {
+                if (e.NewProject.UsesVersioning)
+                {
+                    foreach (ProjectVersion projectVersion in e.NewProject.ProjectVersions)
+                    {
+                        projectVersion.CreateDiagramsForSchemas();
+                    }
+                }
+                else
+                {
+                    e.NewProject.SingleVersion.CreateDiagramsForSchemas();
+                }
+
                 BindProject(e.NewProject);
                 if (e.NewProject.ProjectFile != null && e.NewProject.ProjectFile.Exists &&
                     File.Exists(UserFileForProjectFile(e.NewProject.ProjectFile.FullName)))
@@ -141,23 +153,6 @@ namespace Exolutio.WPFClient
 
         private void BindProjectVersion(ProjectVersion projectVersion)
         {
-            if (projectVersion.PIMDiagrams.Count == 0)
-            {
-                PIMDiagram pimDiagram = new PIMDiagram(projectVersion.Project);
-                projectVersion.PIMDiagrams.Add(pimDiagram);
-                pimDiagram.LoadSchemaToDiagram(projectVersion.PIMSchema);
-            }
-
-            if (projectVersion.PSMDiagrams.Count == 0)
-            {
-                foreach (PSMSchema psmSchema in projectVersion.PSMSchemas)
-                {
-                    PSMDiagram psmDiagram = new PSMDiagram(projectVersion.Project);
-                    projectVersion.PSMDiagrams.Add(psmDiagram);
-                    psmDiagram.LoadSchemaToDiagram(psmSchema);
-                }
-            }
-
             DiagramTabManager.BindToProjectVersion(projectVersion);
             if (DiagramTabManager.ActiveDiagram == null)
             {

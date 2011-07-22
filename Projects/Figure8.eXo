@@ -101,169 +101,132 @@
       </evox:PIMAssociations>
     </evox:PIMSchema>
     <evox:PSMSchemas Count="1">
-      <evox:PSMSchema ID="519f5a48-4fc5-46ce-9926-c39ef269be51" Caption="PSMSchema 1">
-        <evox:PSMSchemaClass ID="8abb5cb8-5436-40c9-b9c6-259ad4e7355a" Name="PSMSchemaClass1">
-          <evox:ChildPSMAssociations Count="1">
-            <evox:ChildPSMAssociation childPSMAssociationID="05ea568a-07d1-4d5b-8c8c-82a367b92094" childPSMAssociation="PSMAssociation from PSMSchemaClass: PSMSchemaClass1 to PSMClass: *Purchase*" />
+      <evox:PSMSchema ID="f94b9516-01ce-4405-a142-6685d605586b" Caption="PSMSchema 1">
+        <evox:PSMSchemaClass ID="c28f34b5-2f9a-4223-b05f-f1015446eeb2" Name="PurchaseSchema">
+          <evox:ChildPSMAssociations Count="3">
+            <evox:ChildPSMAssociation childPSMAssociationID="fdbcb4d8-11cc-45fc-9b64-1e593d57ef9e" childPSMAssociation="PSMAssociation from PSMSchemaClass: PurchaseSchema to PSMClass: *Purchase*" />
+            <evox:ChildPSMAssociation childPSMAssociationID="eaaa8cf8-4767-4a7e-855a-b2077b0acf51" childPSMAssociation="PSMAssociation from PSMSchemaClass: PurchaseSchema to PSMClass: *Address1*" />
+            <evox:ChildPSMAssociation childPSMAssociationID="c25594ad-8959-412e-9c6f-737a09239567" childPSMAssociation="PSMAssociation from PSMSchemaClass: PurchaseSchema to PSMContentModel: Choice" />
           </evox:ChildPSMAssociations>
         </evox:PSMSchemaClass>
         <evox:Roots Count="2">
-          <evox:Root rootID="8abb5cb8-5436-40c9-b9c6-259ad4e7355a" root="PSMSchemaClass: PSMSchemaClass1" />
-          <evox:Root rootID="300e69cf-f9c6-432a-b01b-033ca206f0ce" root="PSMClass: *Address*" />
+          <evox:Root rootID="c28f34b5-2f9a-4223-b05f-f1015446eeb2" root="PSMSchemaClass: PurchaseSchema" />
+          <evox:Root rootID="17c1e48b-a307-42f2-9735-18a739e054c6" root="PSMClass: *Address2*" />
         </evox:Roots>
-        <evox:PSMClasses Count="11">
-          <evox:PSMClass ID="300e69cf-f9c6-432a-b01b-033ca206f0ce" Name="Address" InterpretationID="e0e35339-2748-4673-a42b-df5f8070a568" Interpretation="PIMClass: *Address*">
-            <evox:ChildPSMAssociations Count="0" />
-            <evox:PSMAttributes Count="3">
-              <evox:PSMAttribute ID="fdbeced6-9ec5-4b75-b818-7a50183f59b6" Name="street" InterpretationID="166950c1-1bbb-45ce-8a41-758767cad406" Interpretation="PIMAttribute: *Address.street* 1..1" Element="True" psmClassID="300e69cf-f9c6-432a-b01b-033ca206f0ce" />
-              <evox:PSMAttribute ID="ce6258db-0394-4bbd-911c-a50862e1d7b2" Name="city" InterpretationID="fc9260a9-c55a-46e1-ab16-6eb62b4e2ed8" Interpretation="PIMAttribute: *Address.city* 1..1" Element="True" psmClassID="300e69cf-f9c6-432a-b01b-033ca206f0ce" />
-              <evox:PSMAttribute ID="59452933-5a23-4d0a-a183-d8d2459ec8ba" Name="country" InterpretationID="325db7ec-abec-4f20-8437-69fb1523e9a2" Interpretation="PIMAttribute: *Address.country* 1..1" Element="False" psmClassID="300e69cf-f9c6-432a-b01b-033ca206f0ce" />
-            </evox:PSMAttributes>
-          </evox:PSMClass>
-          <evox:PSMClass ID="690cead2-ab9a-40bd-84cd-122c8bb9672e" Name="Purchase" InterpretationID="39ed8b6e-d4c5-43b5-a446-81d03778dc4d" Interpretation="PIMClass: *Purchase*" parentAssociationID="05ea568a-07d1-4d5b-8c8c-82a367b92094" parentAssociation="PSMAssociation from PSMSchemaClass: PSMSchemaClass1 to PSMClass: *Purchase*">
-            <evox:ChildPSMAssociations Count="4">
-              <evox:ChildPSMAssociation childPSMAssociationID="a2d859a9-8f9e-4a5a-97b8-995293b45641" childPSMAssociation="PSMAssociation from PSMClass: *Purchase* to PSMClass: *BillAddress*" />
-              <evox:ChildPSMAssociation childPSMAssociationID="1dbccb92-c1ef-45c9-993f-305bf16a08f9" childPSMAssociation="PSMAssociation from PSMClass: *Purchase* to PSMClass: *ShipAddress*" />
-              <evox:ChildPSMAssociation childPSMAssociationID="69ba2734-4e7e-43b1-9d8b-278ea0dcfc9b" childPSMAssociation="PSMAssociation from PSMClass: *Purchase* to PSMClass: *Customer*" />
-              <evox:ChildPSMAssociation childPSMAssociationID="81a2b91c-059c-4be4-b21d-878f93d988b5" childPSMAssociation="PSMAssociation from PSMClass: *Purchase* to PSMClass: *Items*" />
-            </evox:ChildPSMAssociations>
-            <evox:PSMAttributes Count="3">
-              <evox:PSMAttribute ID="1338b85b-8c50-4bb1-be37-92fc1bef329f" Name="code" InterpretationID="f9fa4e31-dfa6-46df-8f27-7b47625784ab" Interpretation="PIMAttribute: *Purchase.code* 1..1" Element="False" psmClassID="690cead2-ab9a-40bd-84cd-122c8bb9672e" />
-              <evox:PSMAttribute ID="d9cee057-217f-4cbc-8bf1-146a5b69223f" Name="create-date" InterpretationID="4ad4d4c1-1f27-42aa-b29b-6bd505feeaf2" Interpretation="PIMAttribute: *Purchase.create-date* 1..1" Element="True" psmClassID="690cead2-ab9a-40bd-84cd-122c8bb9672e" />
-              <evox:PSMAttribute ID="9ba06a41-fb3d-4ad0-9005-855f05c382af" Name="version" Element="False" psmClassID="690cead2-ab9a-40bd-84cd-122c8bb9672e" />
-            </evox:PSMAttributes>
-          </evox:PSMClass>
-          <evox:PSMClass ID="1e4260fc-569f-4b17-8ddd-f5c094e989fe" Name="BillAddress" InterpretationID="e0e35339-2748-4673-a42b-df5f8070a568" Interpretation="PIMClass: *Address*" parentAssociationID="a2d859a9-8f9e-4a5a-97b8-995293b45641" parentAssociation="PSMAssociation from PSMClass: *Purchase* to PSMClass: *BillAddress*">
-            <evox:ChildPSMAssociations Count="0" />
-            <evox:RepresentedClass representedPSMClassId="300e69cf-f9c6-432a-b01b-033ca206f0ce" displayName="PSMClass: *Address*" />
-            <evox:PSMAttributes Count="0" />
-          </evox:PSMClass>
-          <evox:PSMClass ID="6a74888f-6bf1-4f5a-b592-94ec79f23eab" Name="ShipAddress" InterpretationID="e0e35339-2748-4673-a42b-df5f8070a568" Interpretation="PIMClass: *Address*" parentAssociationID="1dbccb92-c1ef-45c9-993f-305bf16a08f9" parentAssociation="PSMAssociation from PSMClass: *Purchase* to PSMClass: *ShipAddress*">
-            <evox:ChildPSMAssociations Count="0" />
-            <evox:RepresentedClass representedPSMClassId="300e69cf-f9c6-432a-b01b-033ca206f0ce" displayName="PSMClass: *Address*" />
-            <evox:PSMAttributes Count="0" />
-          </evox:PSMClass>
-          <evox:PSMClass ID="16e13305-d7c9-4bae-8b6b-6c9c89f23a0a" Name="Customer" InterpretationID="05206754-2921-4401-89d9-cafabb21e9a9" Interpretation="PIMClass: *Customer*" parentAssociationID="69ba2734-4e7e-43b1-9d8b-278ea0dcfc9b" parentAssociation="PSMAssociation from PSMClass: *Purchase* to PSMClass: *Customer*">
+        <evox:PSMClasses Count="7">
+          <evox:PSMClass ID="883ede52-309e-4d30-ab1f-2b11df58431e" Name="Purchase" InterpretationID="39ed8b6e-d4c5-43b5-a446-81d03778dc4d" Interpretation="PIMClass: *Purchase*" parentAssociationID="fdbcb4d8-11cc-45fc-9b64-1e593d57ef9e" parentAssociation="PSMAssociation from PSMSchemaClass: PurchaseSchema to PSMClass: *Purchase*">
             <evox:ChildPSMAssociations Count="1">
-              <evox:ChildPSMAssociation childPSMAssociationID="5176daa0-0de2-4ed5-91bb-caa5b211b6f4" childPSMAssociation="PSMAssociation from PSMClass: *Customer* to PSMClass: *Contact*" />
+              <evox:ChildPSMAssociation childPSMAssociationID="2bcc84c7-00fa-4cbb-8430-adfa787a48ca" childPSMAssociation="PSMAssociation from PSMClass: *Purchase* to PSMContentModel: Set" />
             </evox:ChildPSMAssociations>
             <evox:PSMAttributes Count="1">
-              <evox:PSMAttribute ID="51bd53e3-4d34-4931-99ed-1ac1ddd18464" Name="name" InterpretationID="39ed89ce-380c-4931-adfe-2daf97452719" Interpretation="PIMAttribute: *Customer.name* 1..1" Element="True" psmClassID="16e13305-d7c9-4bae-8b6b-6c9c89f23a0a" />
+              <evox:PSMAttribute ID="91b701cb-3aae-4dbb-a959-d42037f579a5" Name="code" InterpretationID="f9fa4e31-dfa6-46df-8f27-7b47625784ab" Interpretation="PIMAttribute: *Purchase.code* 1..1" Type="47b9d71b-cb4a-4fc8-8e93-ca5870e9512c" displayName="AttributeType: string" Element="False" psmClassID="883ede52-309e-4d30-ab1f-2b11df58431e" />
             </evox:PSMAttributes>
           </evox:PSMClass>
-          <evox:PSMClass ID="f549a330-b998-40e1-b46b-0b40a3ce5c5d" Name="Items" parentAssociationID="81a2b91c-059c-4be4-b21d-878f93d988b5" parentAssociation="PSMAssociation from PSMClass: *Purchase* to PSMClass: *Items*">
-            <evox:ChildPSMAssociations Count="1">
-              <evox:ChildPSMAssociation childPSMAssociationID="708e76a0-48cc-49e5-a045-9ddfd46720bc" childPSMAssociation="PSMAssociation from PSMClass: *Items* to PSMClass: *Item*" />
-            </evox:ChildPSMAssociations>
-            <evox:PSMAttributes Count="0" />
-          </evox:PSMClass>
-          <evox:PSMClass ID="c3ab2da9-8c0e-409f-988c-e97c8618281e" Name="Contact" parentAssociationID="5176daa0-0de2-4ed5-91bb-caa5b211b6f4" parentAssociation="PSMAssociation from PSMClass: *Customer* to PSMClass: *Contact*">
+          <evox:PSMClass ID="2ae46a50-d265-4f75-9ece-aa01f9e8b08d" Name="Address" InterpretationID="e0e35339-2748-4673-a42b-df5f8070a568" Interpretation="PIMClass: *Address*" parentAssociationID="d17383a1-9e4e-4c24-a957-5ea26ed0944c" parentAssociation="PSMAssociation from PSMContentModel: Choice to PSMClass: *Address*">
             <evox:ChildPSMAssociations Count="0" />
             <evox:PSMAttributes Count="2">
-              <evox:PSMAttribute ID="3a695bb7-4ea2-481d-a13f-7e3c97529369" Name="email" InterpretationID="cb40f011-6c56-4b90-98ff-6449f82fe695" Interpretation="PIMAttribute: *Customer.email* 1..*" Upper="*" Element="True" psmClassID="c3ab2da9-8c0e-409f-988c-e97c8618281e" />
-              <evox:PSMAttribute ID="25f14596-cd47-4e8c-b55a-c18ebc1674b1" Name="phone" InterpretationID="cb1c67d0-e8eb-4e55-9784-9602bcb39581" Interpretation="PIMAttribute: *Customer.phone* 0..*" Lower="0" Upper="*" Element="True" psmClassID="c3ab2da9-8c0e-409f-988c-e97c8618281e" />
+              <evox:PSMAttribute ID="0b6f69ff-e776-49f4-b08c-d533f9c113c3" Name="city" InterpretationID="fc9260a9-c55a-46e1-ab16-6eb62b4e2ed8" Interpretation="PIMAttribute: *Address.city* 1..1" Type="47b9d71b-cb4a-4fc8-8e93-ca5870e9512c" displayName="AttributeType: string" Element="True" psmClassID="2ae46a50-d265-4f75-9ece-aa01f9e8b08d" />
+              <evox:PSMAttribute ID="a3cda863-e47f-4cfa-9f59-4f50f83edd4a" Name="country" InterpretationID="325db7ec-abec-4f20-8437-69fb1523e9a2" Interpretation="PIMAttribute: *Address.country* 1..1" Type="47b9d71b-cb4a-4fc8-8e93-ca5870e9512c" displayName="AttributeType: string" Element="True" psmClassID="2ae46a50-d265-4f75-9ece-aa01f9e8b08d" />
             </evox:PSMAttributes>
           </evox:PSMClass>
-          <evox:PSMClass ID="2802253c-b773-4578-bca1-2b873585ddbf" Name="Item" InterpretationID="2dd9cf35-b24b-4d2c-b0f7-a8857af05bd6" Interpretation="PIMClass: *Item*" parentAssociationID="708e76a0-48cc-49e5-a045-9ddfd46720bc" parentAssociation="PSMAssociation from PSMClass: *Items* to PSMClass: *Item*">
-            <evox:ChildPSMAssociations Count="1">
-              <evox:ChildPSMAssociation childPSMAssociationID="1ba45ec1-47ed-4fed-80e4-811941c879e9" childPSMAssociation="PSMAssociation from PSMClass: *Item* to PSMContentModel: Choice" />
-            </evox:ChildPSMAssociations>
+          <evox:PSMClass ID="5a4c267e-5028-466e-bc19-931a5d46e787" Name="Customer" InterpretationID="05206754-2921-4401-89d9-cafabb21e9a9" Interpretation="PIMClass: *Customer*" parentAssociationID="497dac77-3ed1-4c31-82bd-f98fe3ef46e1" parentAssociation="PSMAssociation from PSMContentModel: Choice to PSMClass: *Customer*">
+            <evox:ChildPSMAssociations Count="0" />
+            <evox:PSMAttributes Count="1">
+              <evox:PSMAttribute ID="76b865dc-03e8-4d6f-aa6f-53d683cdc4db" Name="login" Type="47b9d71b-cb4a-4fc8-8e93-ca5870e9512c" displayName="AttributeType: string" Element="True" psmClassID="5a4c267e-5028-466e-bc19-931a5d46e787" />
+            </evox:PSMAttributes>
+          </evox:PSMClass>
+          <evox:PSMClass ID="f35566ea-49c9-47df-8e72-056adb7841e9" Name="ShipAddr" InterpretationID="e0e35339-2748-4673-a42b-df5f8070a568" Interpretation="PIMClass: *Address*" parentAssociationID="954e463b-a0d2-4a3f-9737-b4875a7a91f3" parentAssociation="PSMAssociation from PSMContentModel: Set to PSMClass: *ShipAddr*">
+            <evox:ChildPSMAssociations Count="0" />
+            <evox:RepresentedClass representedPSMClassId="2ae46a50-d265-4f75-9ece-aa01f9e8b08d" displayName="PSMClass: *Address*" />
+            <evox:PSMAttributes Count="1">
+              <evox:PSMAttribute ID="7ecba8a0-5166-471f-b6b8-3768f81c9a2a" Name="gps" InterpretationID="835055a9-5c87-4215-a89d-5541b835c194" Interpretation="PIMAttribute: *Address.gps* 1..1" Type="47b9d71b-cb4a-4fc8-8e93-ca5870e9512c" displayName="AttributeType: string" Element="True" psmClassID="f35566ea-49c9-47df-8e72-056adb7841e9" />
+            </evox:PSMAttributes>
+          </evox:PSMClass>
+          <evox:PSMClass ID="c8f06bdd-ae64-4f1a-981c-f58d77dfd4c8" Name="BillAddr" InterpretationID="e0e35339-2748-4673-a42b-df5f8070a568" Interpretation="PIMClass: *Address*" parentAssociationID="7d79b779-890a-4e40-b22f-4db64e8b6151" parentAssociation="PSMAssociation from PSMContentModel: Set to PSMClass: *BillAddr*">
+            <evox:ChildPSMAssociations Count="0" />
+            <evox:RepresentedClass representedPSMClassId="2ae46a50-d265-4f75-9ece-aa01f9e8b08d" displayName="PSMClass: *Address*" />
             <evox:PSMAttributes Count="0" />
           </evox:PSMClass>
-          <evox:PSMClass ID="0c5fa901-6611-4fa0-b4c9-b0055cbcdccd" Name="Product" InterpretationID="a361b602-dba0-4cd6-a485-9b4a2d1d05fb" Interpretation="PIMClass: *Product*" parentAssociationID="d87f9daa-b188-4254-9ebb-254f23af3d49" parentAssociation="PSMAssociation from PSMContentModel: Choice to PSMClass: *Product*">
+          <evox:PSMClass ID="c033116d-3975-4ce7-8d8d-a818456c9cba" Name="Address1" InterpretationID="e0e35339-2748-4673-a42b-df5f8070a568" Interpretation="PIMClass: *Address*" parentAssociationID="eaaa8cf8-4767-4a7e-855a-b2077b0acf51" parentAssociation="PSMAssociation from PSMSchemaClass: PurchaseSchema to PSMClass: *Address1*">
             <evox:ChildPSMAssociations Count="0" />
             <evox:PSMAttributes Count="1">
-              <evox:PSMAttribute ID="e26f938f-8a8e-40d0-bd0a-ed971e53eb6a" Name="code" InterpretationID="b890d9e8-e78b-4ecd-a83f-650a05429df0" Interpretation="PIMAttribute: *Product.title* 1..1" Element="True" psmClassID="0c5fa901-6611-4fa0-b4c9-b0055cbcdccd" />
+              <evox:PSMAttribute ID="153b5aae-a785-4b54-8a64-e57668c116b1" Name="country" InterpretationID="325db7ec-abec-4f20-8437-69fb1523e9a2" Interpretation="PIMAttribute: *Address.country* 1..1" Type="47b9d71b-cb4a-4fc8-8e93-ca5870e9512c" displayName="AttributeType: string" Element="True" psmClassID="c033116d-3975-4ce7-8d8d-a818456c9cba" />
             </evox:PSMAttributes>
           </evox:PSMClass>
-          <evox:PSMClass ID="b2c4b905-0d18-4987-b831-f966b174cf1e" Name="ItemTester" parentAssociationID="206bb209-2de3-4743-a238-6ef2cf40855f" parentAssociation="PSMAssociation from PSMContentModel: Choice to PSMClass: *ItemTester*">
+          <evox:PSMClass ID="17c1e48b-a307-42f2-9735-18a739e054c6" Name="Address2" InterpretationID="e0e35339-2748-4673-a42b-df5f8070a568" Interpretation="PIMClass: *Address*">
             <evox:ChildPSMAssociations Count="0" />
             <evox:PSMAttributes Count="1">
-              <evox:PSMAttribute ID="5d3b1751-cab0-4606-915a-c648b62858f3" Name="tester" InterpretationID="7de9cef9-a768-4b58-8598-4e6ddf40955a" Interpretation="PIMAttribute: *Item.tester* 1..1" Element="False" psmClassID="b2c4b905-0d18-4987-b831-f966b174cf1e" />
-            </evox:PSMAttributes>
-          </evox:PSMClass>
-          <evox:PSMClass ID="3a2a1984-5026-4f4f-aa17-a4bca8cc3335" Name="ItemPricing" parentAssociationID="f24c2138-63e1-478d-ab7c-7d114297e004" parentAssociation="PSMAssociation from PSMContentModel: Choice to PSMClass: *ItemPricing*">
-            <evox:ChildPSMAssociations Count="0" />
-            <evox:PSMAttributes Count="2">
-              <evox:PSMAttribute ID="9dd76bcb-6e73-4bae-a6eb-65d3489e6a4f" Name="price" InterpretationID="f45a3691-edef-44b9-a0cd-b5802c76f52a" Interpretation="PIMAttribute: *Item.itemprice* 1..1" Element="True" psmClassID="3a2a1984-5026-4f4f-aa17-a4bca8cc3335" />
-              <evox:PSMAttribute ID="43aa8835-3465-44b8-9cb1-ae5df89f732d" Name="amount" InterpretationID="82174c7a-a5de-4ce3-8e69-79175f86e32e" Interpretation="PIMAttribute: *Item.amount* 1..1" Element="True" psmClassID="3a2a1984-5026-4f4f-aa17-a4bca8cc3335" />
+              <evox:PSMAttribute ID="2b8ba2bc-ba7b-4442-972e-2f8e24612ea4" Name="country" InterpretationID="325db7ec-abec-4f20-8437-69fb1523e9a2" Interpretation="PIMAttribute: *Address.country* 1..1" Type="47b9d71b-cb4a-4fc8-8e93-ca5870e9512c" displayName="AttributeType: string" Element="True" psmClassID="17c1e48b-a307-42f2-9735-18a739e054c6" />
             </evox:PSMAttributes>
           </evox:PSMClass>
         </evox:PSMClasses>
-        <evox:PSMAssociations Count="11">
-          <evox:PSMAssociation ID="05ea568a-07d1-4d5b-8c8c-82a367b92094" Name="purchase">
-            <evox:Parent NodeType="PSMSchemaClass" parentID="8abb5cb8-5436-40c9-b9c6-259ad4e7355a" parent="PSMSchemaClass: PSMSchemaClass1" />
-            <evox:Child NodeType="PSMClass" childID="690cead2-ab9a-40bd-84cd-122c8bb9672e" child="PSMClass: *Purchase*" />
+        <evox:PSMAssociations Count="8">
+          <evox:PSMAssociation ID="fdbcb4d8-11cc-45fc-9b64-1e593d57ef9e" Name="purchase" Upper="*">
+            <evox:Parent NodeType="PSMSchemaClass" parentID="c28f34b5-2f9a-4223-b05f-f1015446eeb2" parent="PSMSchemaClass: PurchaseSchema" />
+            <evox:Child NodeType="PSMClass" childID="883ede52-309e-4d30-ab1f-2b11df58431e" child="PSMClass: *Purchase*" />
           </evox:PSMAssociation>
-          <evox:PSMAssociation ID="a2d859a9-8f9e-4a5a-97b8-995293b45641" Name="bill-to" InterpretationID="85e3e23e-bbc2-4ecd-928b-f34fc4124255" Interpretation="PIMAssociation *bill-to*: PIMClass: *Purchase*, PIMClass: *Address*">
-            <evox:Parent NodeType="PSMClass" parentID="690cead2-ab9a-40bd-84cd-122c8bb9672e" parent="PSMClass: *Purchase*" />
-            <evox:Child NodeType="PSMClass" childID="1e4260fc-569f-4b17-8ddd-f5c094e989fe" child="PSMClass: *BillAddress*" />
+          <evox:PSMAssociation ID="2bcc84c7-00fa-4cbb-8430-adfa787a48ca" Name="address">
+            <evox:Parent NodeType="PSMClass" parentID="883ede52-309e-4d30-ab1f-2b11df58431e" parent="PSMClass: *Purchase*" />
+            <evox:Child NodeType="PSMContentModel" childID="dfbd5772-1fed-484a-883e-6ae02110319e" child="PSMContentModel: Set" />
           </evox:PSMAssociation>
-          <evox:PSMAssociation ID="1dbccb92-c1ef-45c9-993f-305bf16a08f9" Name="ship-to" InterpretationID="471c8a28-7677-41d0-ade6-640ab63435c1" Interpretation="PIMAssociation *ship-to*: PIMClass: *Purchase*, PIMClass: *Address*" Lower="0">
-            <evox:Parent NodeType="PSMClass" parentID="690cead2-ab9a-40bd-84cd-122c8bb9672e" parent="PSMClass: *Purchase*" />
-            <evox:Child NodeType="PSMClass" childID="6a74888f-6bf1-4f5a-b592-94ec79f23eab" child="PSMClass: *ShipAddress*" />
+          <evox:PSMAssociation ID="954e463b-a0d2-4a3f-9737-b4875a7a91f3" Name="ship">
+            <evox:Parent NodeType="PSMContentModel" parentID="dfbd5772-1fed-484a-883e-6ae02110319e" parent="PSMContentModel: Set" />
+            <evox:Child NodeType="PSMClass" childID="f35566ea-49c9-47df-8e72-056adb7841e9" child="PSMClass: *ShipAddr*" />
           </evox:PSMAssociation>
-          <evox:PSMAssociation ID="69ba2734-4e7e-43b1-9d8b-278ea0dcfc9b" Name="cust" InterpretationID="8046206d-133a-44f3-8e2a-3bae49ca2649" Interpretation="PIMAssociation *makes*: PIMClass: *Purchase*, PIMClass: *Customer*">
-            <evox:Parent NodeType="PSMClass" parentID="690cead2-ab9a-40bd-84cd-122c8bb9672e" parent="PSMClass: *Purchase*" />
-            <evox:Child NodeType="PSMClass" childID="16e13305-d7c9-4bae-8b6b-6c9c89f23a0a" child="PSMClass: *Customer*" />
+          <evox:PSMAssociation ID="7d79b779-890a-4e40-b22f-4db64e8b6151" Name="bill">
+            <evox:Parent NodeType="PSMContentModel" parentID="dfbd5772-1fed-484a-883e-6ae02110319e" parent="PSMContentModel: Set" />
+            <evox:Child NodeType="PSMClass" childID="c8f06bdd-ae64-4f1a-981c-f58d77dfd4c8" child="PSMClass: *BillAddr*" />
           </evox:PSMAssociation>
-          <evox:PSMAssociation ID="81a2b91c-059c-4be4-b21d-878f93d988b5" Name="items">
-            <evox:Parent NodeType="PSMClass" parentID="690cead2-ab9a-40bd-84cd-122c8bb9672e" parent="PSMClass: *Purchase*" />
-            <evox:Child NodeType="PSMClass" childID="f549a330-b998-40e1-b46b-0b40a3ce5c5d" child="PSMClass: *Items*" />
+          <evox:PSMAssociation ID="eaaa8cf8-4767-4a7e-855a-b2077b0acf51" Name="">
+            <evox:Parent NodeType="PSMSchemaClass" parentID="c28f34b5-2f9a-4223-b05f-f1015446eeb2" parent="PSMSchemaClass: PurchaseSchema" />
+            <evox:Child NodeType="PSMClass" childID="c033116d-3975-4ce7-8d8d-a818456c9cba" child="PSMClass: *Address1*" />
           </evox:PSMAssociation>
-          <evox:PSMAssociation ID="5176daa0-0de2-4ed5-91bb-caa5b211b6f4" Name="">
-            <evox:Parent NodeType="PSMClass" parentID="16e13305-d7c9-4bae-8b6b-6c9c89f23a0a" parent="PSMClass: *Customer*" />
-            <evox:Child NodeType="PSMClass" childID="c3ab2da9-8c0e-409f-988c-e97c8618281e" child="PSMClass: *Contact*" />
+          <evox:PSMAssociation ID="c25594ad-8959-412e-9c6f-737a09239567" Name="">
+            <evox:Parent NodeType="PSMSchemaClass" parentID="c28f34b5-2f9a-4223-b05f-f1015446eeb2" parent="PSMSchemaClass: PurchaseSchema" />
+            <evox:Child NodeType="PSMContentModel" childID="0e1da2bc-de0b-4ba9-9114-ab2aad8e3bb0" child="PSMContentModel: Choice" />
           </evox:PSMAssociation>
-          <evox:PSMAssociation ID="708e76a0-48cc-49e5-a045-9ddfd46720bc" Name="item" InterpretationID="07ac6212-36bb-4d18-878e-58587f834155" Interpretation="PIMAssociation **: PIMClass: *Item*, PIMClass: *Purchase*" Upper="*">
-            <evox:Parent NodeType="PSMClass" parentID="f549a330-b998-40e1-b46b-0b40a3ce5c5d" parent="PSMClass: *Items*" />
-            <evox:Child NodeType="PSMClass" childID="2802253c-b773-4578-bca1-2b873585ddbf" child="PSMClass: *Item*" />
+          <evox:PSMAssociation ID="d17383a1-9e4e-4c24-a957-5ea26ed0944c" Name="address">
+            <evox:Parent NodeType="PSMContentModel" parentID="0e1da2bc-de0b-4ba9-9114-ab2aad8e3bb0" parent="PSMContentModel: Choice" />
+            <evox:Child NodeType="PSMClass" childID="2ae46a50-d265-4f75-9ece-aa01f9e8b08d" child="PSMClass: *Address*" />
           </evox:PSMAssociation>
-          <evox:PSMAssociation ID="1ba45ec1-47ed-4fed-80e4-811941c879e9" Name="">
-            <evox:Parent NodeType="PSMClass" parentID="2802253c-b773-4578-bca1-2b873585ddbf" parent="PSMClass: *Item*" />
-            <evox:Child NodeType="PSMContentModel" childID="835b68af-937d-4912-94fb-203340b2feaa" child="PSMContentModel: Choice" />
-          </evox:PSMAssociation>
-          <evox:PSMAssociation ID="d87f9daa-b188-4254-9ebb-254f23af3d49" Name="" InterpretationID="b2557fbf-0ee0-4171-a3cc-211a53537c66" Interpretation="PIMAssociation **: PIMClass: *Product*, PIMClass: *Item*">
-            <evox:Parent NodeType="PSMContentModel" parentID="835b68af-937d-4912-94fb-203340b2feaa" parent="PSMContentModel: Choice" />
-            <evox:Child NodeType="PSMClass" childID="0c5fa901-6611-4fa0-b4c9-b0055cbcdccd" child="PSMClass: *Product*" />
-          </evox:PSMAssociation>
-          <evox:PSMAssociation ID="206bb209-2de3-4743-a238-6ef2cf40855f" Name="">
-            <evox:Parent NodeType="PSMContentModel" parentID="835b68af-937d-4912-94fb-203340b2feaa" parent="PSMContentModel: Choice" />
-            <evox:Child NodeType="PSMClass" childID="b2c4b905-0d18-4987-b831-f966b174cf1e" child="PSMClass: *ItemTester*" />
-          </evox:PSMAssociation>
-          <evox:PSMAssociation ID="f24c2138-63e1-478d-ab7c-7d114297e004" Name="">
-            <evox:Parent NodeType="PSMContentModel" parentID="835b68af-937d-4912-94fb-203340b2feaa" parent="PSMContentModel: Choice" />
-            <evox:Child NodeType="PSMClass" childID="3a2a1984-5026-4f4f-aa17-a4bca8cc3335" child="PSMClass: *ItemPricing*" />
+          <evox:PSMAssociation ID="497dac77-3ed1-4c31-82bd-f98fe3ef46e1" Name="customer">
+            <evox:Parent NodeType="PSMContentModel" parentID="0e1da2bc-de0b-4ba9-9114-ab2aad8e3bb0" parent="PSMContentModel: Choice" />
+            <evox:Child NodeType="PSMClass" childID="5a4c267e-5028-466e-bc19-931a5d46e787" child="PSMClass: *Customer*" />
           </evox:PSMAssociation>
         </evox:PSMAssociations>
-        <evox:PSMContentModels Count="1">
-          <evox:PSMContentModel ID="835b68af-937d-4912-94fb-203340b2feaa" Name="" parentAssociationID="1ba45ec1-47ed-4fed-80e4-811941c879e9" parentAssociation="PSMAssociation from PSMClass: *Item* to PSMContentModel: Choice" Type="Choice">
-            <evox:ChildPSMAssociations Count="3">
-              <evox:ChildPSMAssociation childPSMAssociationID="d87f9daa-b188-4254-9ebb-254f23af3d49" childPSMAssociation="PSMAssociation from PSMContentModel: Choice to PSMClass: *Product*" />
-              <evox:ChildPSMAssociation childPSMAssociationID="206bb209-2de3-4743-a238-6ef2cf40855f" childPSMAssociation="PSMAssociation from PSMContentModel: Choice to PSMClass: *ItemTester*" />
-              <evox:ChildPSMAssociation childPSMAssociationID="f24c2138-63e1-478d-ab7c-7d114297e004" childPSMAssociation="PSMAssociation from PSMContentModel: Choice to PSMClass: *ItemPricing*" />
+        <evox:PSMContentModels Count="2">
+          <evox:PSMContentModel ID="dfbd5772-1fed-484a-883e-6ae02110319e" Name="defaultname" parentAssociationID="2bcc84c7-00fa-4cbb-8430-adfa787a48ca" parentAssociation="PSMAssociation from PSMClass: *Purchase* to PSMContentModel: Set" Type="Set">
+            <evox:ChildPSMAssociations Count="2">
+              <evox:ChildPSMAssociation childPSMAssociationID="954e463b-a0d2-4a3f-9737-b4875a7a91f3" childPSMAssociation="PSMAssociation from PSMContentModel: Set to PSMClass: *ShipAddr*" />
+              <evox:ChildPSMAssociation childPSMAssociationID="7d79b779-890a-4e40-b22f-4db64e8b6151" childPSMAssociation="PSMAssociation from PSMContentModel: Set to PSMClass: *BillAddr*" />
+            </evox:ChildPSMAssociations>
+          </evox:PSMContentModel>
+          <evox:PSMContentModel ID="0e1da2bc-de0b-4ba9-9114-ab2aad8e3bb0" Name="defaultname" parentAssociationID="c25594ad-8959-412e-9c6f-737a09239567" parentAssociation="PSMAssociation from PSMSchemaClass: PurchaseSchema to PSMContentModel: Choice" Type="Choice">
+            <evox:ChildPSMAssociations Count="2">
+              <evox:ChildPSMAssociation childPSMAssociationID="d17383a1-9e4e-4c24-a957-5ea26ed0944c" childPSMAssociation="PSMAssociation from PSMContentModel: Choice to PSMClass: *Address*" />
+              <evox:ChildPSMAssociation childPSMAssociationID="497dac77-3ed1-4c31-82bd-f98fe3ef46e1" childPSMAssociation="PSMAssociation from PSMContentModel: Choice to PSMClass: *Customer*" />
             </evox:ChildPSMAssociations>
           </evox:PSMContentModel>
         </evox:PSMContentModels>
       </evox:PSMSchema>
     </evox:PSMSchemas>
     <evox:PIMDiagrams Count="1">
-      <evox:PIMDiagram ID="b34d00d3-2604-4d94-9e92-ab9ebc40af6b" schemaID="003b5057-d7d8-4d75-a349-1fd219f3ecfb" schema="PIMSchema" Caption="PIMSchema">
+      <evox:PIMDiagram ID="e1235c6f-cdd0-427f-9edd-15b9e97a2fbf" schemaID="003b5057-d7d8-4d75-a349-1fd219f3ecfb" schema="PIMSchema" Caption="PIMSchema">
         <evox:Components>
           <evox:Component Type="PIMClass" componentID="a361b602-dba0-4cd6-a485-9b4a2d1d05fb" component="PIMClass: *Product*">
-            <evox:ViewHelper X="76" Y="56" Width="NaN" Height="NaN" />
+            <evox:ViewHelper X="283" Y="81" Width="NaN" Height="NaN" />
           </evox:Component>
           <evox:Component Type="PIMClass" componentID="05206754-2921-4401-89d9-cafabb21e9a9" component="PIMClass: *Customer*">
-            <evox:ViewHelper X="159" Y="131" Width="NaN" Height="NaN" />
+            <evox:ViewHelper X="375" Y="176" Width="NaN" Height="NaN" />
           </evox:Component>
           <evox:Component Type="PIMClass" componentID="39ed8b6e-d4c5-43b5-a446-81d03778dc4d" component="PIMClass: *Purchase*">
-            <evox:ViewHelper X="17" Y="229" Width="NaN" Height="NaN" />
+            <evox:ViewHelper X="52" Y="247" Width="NaN" Height="NaN" />
           </evox:Component>
           <evox:Component Type="PIMClass" componentID="2dd9cf35-b24b-4d2c-b0f7-a8857af05bd6" component="PIMClass: *Item*">
-            <evox:ViewHelper X="184" Y="16" Width="NaN" Height="NaN" />
+            <evox:ViewHelper X="100" Y="86" Width="NaN" Height="NaN" />
           </evox:Component>
           <evox:Component Type="PIMClass" componentID="e0e35339-2748-4673-a42b-df5f8070a568" component="PIMClass: *Address*">
-            <evox:ViewHelper X="205" Y="33" Width="NaN" Height="NaN" />
+            <evox:ViewHelper X="287" Y="289" Width="NaN" Height="NaN" />
           </evox:Component>
           <evox:Component Type="PIMAssociation" componentID="b2557fbf-0ee0-4171-a3cc-211a53537c66" component="PIMAssociation **: PIMClass: *Product*, PIMClass: *Item*">
             <evox:ViewHelper>
@@ -273,19 +236,19 @@
               </evox:MainLabelViewHelper>
               <evox:AssociationEndsViewHelpers Count="2">
                 <evox:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="ba7703a5-6bb6-427d-b546-79ba527c3eaf" AssociationEnd="PIMAssociationEnd: ** 0..0 C: Product A:  ">
-                  <evox:CardinalityLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                  <evox:CardinalityLabelViewHelper X="-20" Y="-7,5" Width="NaN" Height="NaN">
                     <evox:LabelVisible>True</evox:LabelVisible>
                   </evox:CardinalityLabelViewHelper>
                   <evox:RoleLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
                     <evox:LabelVisible>True</evox:LabelVisible>
                   </evox:RoleLabelViewHelper>
                   <evox:Points>
-                    <evox:Point X="77" Y="17" />
-                    <evox:Point X="0" Y="47" />
+                    <evox:Point X="0" Y="30" />
+                    <evox:Point X="63" Y="33" />
                   </evox:Points>
                 </evox:AssociationEndViewHelper>
                 <evox:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="a17c951c-5d39-406b-bac7-46f66f9f9227" AssociationEnd="PIMAssociationEnd: ** 0..* C: Item A:  ">
-                  <evox:CardinalityLabelViewHelper X="-33" Y="-8" Width="NaN" Height="NaN">
+                  <evox:CardinalityLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
                     <evox:LabelVisible>True</evox:LabelVisible>
                   </evox:CardinalityLabelViewHelper>
                   <evox:RoleLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
@@ -311,12 +274,12 @@
                     <evox:LabelVisible>True</evox:LabelVisible>
                   </evox:RoleLabelViewHelper>
                   <evox:Points>
-                    <evox:Point X="4" Y="75" />
-                    <evox:Point X="69" Y="0" />
+                    <evox:Point X="23" Y="72" />
+                    <evox:Point X="49" Y="0" />
                   </evox:Points>
                 </evox:AssociationEndViewHelper>
                 <evox:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="37194b31-28e1-4196-a750-bca078072ed4" AssociationEnd="PIMAssociationEnd: ** 1..* C: Purchase A:  ">
-                  <evox:CardinalityLabelViewHelper X="-40" Y="-20" Width="NaN" Height="NaN">
+                  <evox:CardinalityLabelViewHelper X="-40" Y="-19" Width="NaN" Height="NaN">
                     <evox:LabelVisible>True</evox:LabelVisible>
                   </evox:CardinalityLabelViewHelper>
                   <evox:RoleLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
@@ -342,12 +305,12 @@
                     <evox:LabelVisible>True</evox:LabelVisible>
                   </evox:RoleLabelViewHelper>
                   <evox:Points>
-                    <evox:Point X="84" Y="8" />
-                    <evox:Point X="0" Y="66" />
+                    <evox:Point X="83" Y="26" />
+                    <evox:Point X="0" Y="45" />
                   </evox:Points>
                 </evox:AssociationEndViewHelper>
                 <evox:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="5b39fb21-37e2-4a31-bd57-fb3f784fa749" AssociationEnd="PIMAssociationEnd: ** 0..0 C: Customer A: makes ">
-                  <evox:CardinalityLabelViewHelper X="-20" Y="-8" Width="NaN" Height="NaN">
+                  <evox:CardinalityLabelViewHelper X="-20" Y="-7,5" Width="NaN" Height="NaN">
                     <evox:LabelVisible>True</evox:LabelVisible>
                   </evox:CardinalityLabelViewHelper>
                   <evox:RoleLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
@@ -373,12 +336,12 @@
                     <evox:LabelVisible>True</evox:LabelVisible>
                   </evox:RoleLabelViewHelper>
                   <evox:Points>
-                    <evox:Point X="78" Y="0" />
-                    <evox:Point X="0" Y="83" />
+                    <evox:Point X="83" Y="44" />
+                    <evox:Point X="0" Y="35" />
                   </evox:Points>
                 </evox:AssociationEndViewHelper>
                 <evox:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="da9923de-6d90-4e36-9e22-3a071178b7f4" AssociationEnd="PIMAssociationEnd: ** 0..1 C: Address A: ship-to ">
-                  <evox:CardinalityLabelViewHelper X="-34" Y="-8" Width="NaN" Height="NaN">
+                  <evox:CardinalityLabelViewHelper X="-34" Y="-7,5" Width="NaN" Height="NaN">
                     <evox:LabelVisible>True</evox:LabelVisible>
                   </evox:CardinalityLabelViewHelper>
                   <evox:RoleLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
@@ -404,12 +367,12 @@
                     <evox:LabelVisible>True</evox:LabelVisible>
                   </evox:RoleLabelViewHelper>
                   <evox:Points>
-                    <evox:Point X="78" Y="0" />
-                    <evox:Point X="0" Y="83" />
+                    <evox:Point X="83" Y="44" />
+                    <evox:Point X="0" Y="35" />
                   </evox:Points>
                 </evox:AssociationEndViewHelper>
                 <evox:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="abbd4d2b-1e7e-4dcb-94c5-10b46b80c6be" AssociationEnd="PIMAssociationEnd: ** 0..0 C: Address A: bill-to ">
-                  <evox:CardinalityLabelViewHelper X="-20" Y="-8" Width="NaN" Height="NaN">
+                  <evox:CardinalityLabelViewHelper X="-20" Y="-7,5" Width="NaN" Height="NaN">
                     <evox:LabelVisible>True</evox:LabelVisible>
                   </evox:CardinalityLabelViewHelper>
                   <evox:RoleLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
@@ -424,48 +387,49 @@
       </evox:PIMDiagram>
     </evox:PIMDiagrams>
     <evox:PSMDiagrams Count="1">
-      <evox:PSMDiagram ID="f6fbca25-4de9-4b85-b05a-6d294fd33e96" schemaID="519f5a48-4fc5-46ce-9926-c39ef269be51" schema="PSMSchema 1" Caption="PSMSchema 1">
+      <evox:PSMDiagram ID="8be3151b-535d-4963-830d-bcd7c89a235d" schemaID="f94b9516-01ce-4405-a142-6685d605586b" schema="PSMSchema 1" Caption="PSMSchema 1">
         <evox:Components>
-          <evox:Component Type="PSMSchemaClass" componentID="8abb5cb8-5436-40c9-b9c6-259ad4e7355a" component="PSMSchemaClass: PSMSchemaClass1">
+          <evox:Component Type="PSMSchemaClass" componentID="c28f34b5-2f9a-4223-b05f-f1015446eeb2" component="PSMSchemaClass: PurchaseSchema">
             <evox:ViewHelper />
           </evox:Component>
-          <evox:Component Type="PSMClass" componentID="300e69cf-f9c6-432a-b01b-033ca206f0ce" component="PSMClass: *Address*">
+          <evox:Component Type="PSMClass" componentID="883ede52-309e-4d30-ab1f-2b11df58431e" component="PSMClass: *Purchase*">
             <evox:ViewHelper />
           </evox:Component>
-          <evox:Component Type="PSMClass" componentID="690cead2-ab9a-40bd-84cd-122c8bb9672e" component="PSMClass: *Purchase*">
+          <evox:Component Type="PSMClass" componentID="2ae46a50-d265-4f75-9ece-aa01f9e8b08d" component="PSMClass: *Address*">
             <evox:ViewHelper />
           </evox:Component>
-          <evox:Component Type="PSMClass" componentID="1e4260fc-569f-4b17-8ddd-f5c094e989fe" component="PSMClass: *BillAddress*">
+          <evox:Component Type="PSMClass" componentID="5a4c267e-5028-466e-bc19-931a5d46e787" component="PSMClass: *Customer*">
             <evox:ViewHelper />
           </evox:Component>
-          <evox:Component Type="PSMClass" componentID="6a74888f-6bf1-4f5a-b592-94ec79f23eab" component="PSMClass: *ShipAddress*">
+          <evox:Component Type="PSMClass" componentID="f35566ea-49c9-47df-8e72-056adb7841e9" component="PSMClass: *ShipAddr*">
             <evox:ViewHelper />
           </evox:Component>
-          <evox:Component Type="PSMClass" componentID="16e13305-d7c9-4bae-8b6b-6c9c89f23a0a" component="PSMClass: *Customer*">
+          <evox:Component Type="PSMClass" componentID="c8f06bdd-ae64-4f1a-981c-f58d77dfd4c8" component="PSMClass: *BillAddr*">
             <evox:ViewHelper />
           </evox:Component>
-          <evox:Component Type="PSMClass" componentID="f549a330-b998-40e1-b46b-0b40a3ce5c5d" component="PSMClass: *Items*">
+          <evox:Component Type="PSMClass" componentID="c033116d-3975-4ce7-8d8d-a818456c9cba" component="PSMClass: *Address1*">
             <evox:ViewHelper />
           </evox:Component>
-          <evox:Component Type="PSMClass" componentID="c3ab2da9-8c0e-409f-988c-e97c8618281e" component="PSMClass: *Contact*">
+          <evox:Component Type="PSMClass" componentID="17c1e48b-a307-42f2-9735-18a739e054c6" component="PSMClass: *Address2*">
             <evox:ViewHelper />
           </evox:Component>
-          <evox:Component Type="PSMClass" componentID="2802253c-b773-4578-bca1-2b873585ddbf" component="PSMClass: *Item*">
+          <evox:Component Type="PSMContentModel" componentID="dfbd5772-1fed-484a-883e-6ae02110319e" component="PSMContentModel: Set">
             <evox:ViewHelper />
           </evox:Component>
-          <evox:Component Type="PSMClass" componentID="0c5fa901-6611-4fa0-b4c9-b0055cbcdccd" component="PSMClass: *Product*">
+          <evox:Component Type="PSMContentModel" componentID="0e1da2bc-de0b-4ba9-9114-ab2aad8e3bb0" component="PSMContentModel: Choice">
             <evox:ViewHelper />
           </evox:Component>
-          <evox:Component Type="PSMClass" componentID="b2c4b905-0d18-4987-b831-f966b174cf1e" component="PSMClass: *ItemTester*">
-            <evox:ViewHelper />
+          <evox:Component Type="PSMAssociation" componentID="fdbcb4d8-11cc-45fc-9b64-1e593d57ef9e" component="PSMAssociation from PSMSchemaClass: PurchaseSchema to PSMClass: *Purchase*">
+            <evox:ViewHelper>
+              <evox:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                <evox:LabelVisible>True</evox:LabelVisible>
+              </evox:MainLabelViewHelper>
+              <evox:CardinalityLabelViewHelper X="-40" Y="-19" Width="NaN" Height="NaN">
+                <evox:LabelVisible>True</evox:LabelVisible>
+              </evox:CardinalityLabelViewHelper>
+            </evox:ViewHelper>
           </evox:Component>
-          <evox:Component Type="PSMClass" componentID="3a2a1984-5026-4f4f-aa17-a4bca8cc3335" component="PSMClass: *ItemPricing*">
-            <evox:ViewHelper />
-          </evox:Component>
-          <evox:Component Type="PSMContentModel" componentID="835b68af-937d-4912-94fb-203340b2feaa" component="PSMContentModel: Choice">
-            <evox:ViewHelper />
-          </evox:Component>
-          <evox:Component Type="PSMAssociation" componentID="05ea568a-07d1-4d5b-8c8c-82a367b92094" component="PSMAssociation from PSMSchemaClass: PSMSchemaClass1 to PSMClass: *Purchase*">
+          <evox:Component Type="PSMAssociation" componentID="2bcc84c7-00fa-4cbb-8430-adfa787a48ca" component="PSMAssociation from PSMClass: *Purchase* to PSMContentModel: Set">
             <evox:ViewHelper>
               <evox:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
                 <evox:LabelVisible>True</evox:LabelVisible>
@@ -475,27 +439,7 @@
               </evox:CardinalityLabelViewHelper>
             </evox:ViewHelper>
           </evox:Component>
-          <evox:Component Type="PSMAssociation" componentID="a2d859a9-8f9e-4a5a-97b8-995293b45641" component="PSMAssociation from PSMClass: *Purchase* to PSMClass: *BillAddress*">
-            <evox:ViewHelper>
-              <evox:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
-                <evox:LabelVisible>True</evox:LabelVisible>
-              </evox:MainLabelViewHelper>
-              <evox:CardinalityLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
-                <evox:LabelVisible>True</evox:LabelVisible>
-              </evox:CardinalityLabelViewHelper>
-            </evox:ViewHelper>
-          </evox:Component>
-          <evox:Component Type="PSMAssociation" componentID="1dbccb92-c1ef-45c9-993f-305bf16a08f9" component="PSMAssociation from PSMClass: *Purchase* to PSMClass: *ShipAddress*">
-            <evox:ViewHelper>
-              <evox:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
-                <evox:LabelVisible>True</evox:LabelVisible>
-              </evox:MainLabelViewHelper>
-              <evox:CardinalityLabelViewHelper X="-40" Y="-20" Width="NaN" Height="NaN">
-                <evox:LabelVisible>True</evox:LabelVisible>
-              </evox:CardinalityLabelViewHelper>
-            </evox:ViewHelper>
-          </evox:Component>
-          <evox:Component Type="PSMAssociation" componentID="69ba2734-4e7e-43b1-9d8b-278ea0dcfc9b" component="PSMAssociation from PSMClass: *Purchase* to PSMClass: *Customer*">
+          <evox:Component Type="PSMAssociation" componentID="954e463b-a0d2-4a3f-9737-b4875a7a91f3" component="PSMAssociation from PSMContentModel: Set to PSMClass: *ShipAddr*">
             <evox:ViewHelper>
               <evox:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
                 <evox:LabelVisible>True</evox:LabelVisible>
@@ -505,7 +449,7 @@
               </evox:CardinalityLabelViewHelper>
             </evox:ViewHelper>
           </evox:Component>
-          <evox:Component Type="PSMAssociation" componentID="81a2b91c-059c-4be4-b21d-878f93d988b5" component="PSMAssociation from PSMClass: *Purchase* to PSMClass: *Items*">
+          <evox:Component Type="PSMAssociation" componentID="7d79b779-890a-4e40-b22f-4db64e8b6151" component="PSMAssociation from PSMContentModel: Set to PSMClass: *BillAddr*">
             <evox:ViewHelper>
               <evox:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
                 <evox:LabelVisible>True</evox:LabelVisible>
@@ -515,7 +459,7 @@
               </evox:CardinalityLabelViewHelper>
             </evox:ViewHelper>
           </evox:Component>
-          <evox:Component Type="PSMAssociation" componentID="5176daa0-0de2-4ed5-91bb-caa5b211b6f4" component="PSMAssociation from PSMClass: *Customer* to PSMClass: *Contact*">
+          <evox:Component Type="PSMAssociation" componentID="eaaa8cf8-4767-4a7e-855a-b2077b0acf51" component="PSMAssociation from PSMSchemaClass: PurchaseSchema to PSMClass: *Address1*">
             <evox:ViewHelper>
               <evox:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
                 <evox:LabelVisible>True</evox:LabelVisible>
@@ -525,17 +469,7 @@
               </evox:CardinalityLabelViewHelper>
             </evox:ViewHelper>
           </evox:Component>
-          <evox:Component Type="PSMAssociation" componentID="708e76a0-48cc-49e5-a045-9ddfd46720bc" component="PSMAssociation from PSMClass: *Items* to PSMClass: *Item*">
-            <evox:ViewHelper>
-              <evox:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
-                <evox:LabelVisible>True</evox:LabelVisible>
-              </evox:MainLabelViewHelper>
-              <evox:CardinalityLabelViewHelper X="-40" Y="-20" Width="NaN" Height="NaN">
-                <evox:LabelVisible>True</evox:LabelVisible>
-              </evox:CardinalityLabelViewHelper>
-            </evox:ViewHelper>
-          </evox:Component>
-          <evox:Component Type="PSMAssociation" componentID="1ba45ec1-47ed-4fed-80e4-811941c879e9" component="PSMAssociation from PSMClass: *Item* to PSMContentModel: Choice">
+          <evox:Component Type="PSMAssociation" componentID="c25594ad-8959-412e-9c6f-737a09239567" component="PSMAssociation from PSMSchemaClass: PurchaseSchema to PSMContentModel: Choice">
             <evox:ViewHelper>
               <evox:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
                 <evox:LabelVisible>True</evox:LabelVisible>
@@ -545,17 +479,7 @@
               </evox:CardinalityLabelViewHelper>
             </evox:ViewHelper>
           </evox:Component>
-          <evox:Component Type="PSMAssociation" componentID="d87f9daa-b188-4254-9ebb-254f23af3d49" component="PSMAssociation from PSMContentModel: Choice to PSMClass: *Product*">
-            <evox:ViewHelper>
-              <evox:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
-                <evox:LabelVisible>True</evox:LabelVisible>
-              </evox:MainLabelViewHelper>
-              <evox:CardinalityLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
-                <evox:LabelVisible>True</evox:LabelVisible>
-              </evox:CardinalityLabelViewHelper>
-            </evox:ViewHelper>
-          </evox:Component>
-          <evox:Component Type="PSMAssociation" componentID="206bb209-2de3-4743-a238-6ef2cf40855f" component="PSMAssociation from PSMContentModel: Choice to PSMClass: *ItemTester*">
+          <evox:Component Type="PSMAssociation" componentID="d17383a1-9e4e-4c24-a957-5ea26ed0944c" component="PSMAssociation from PSMContentModel: Choice to PSMClass: *Address*">
             <evox:ViewHelper>
               <evox:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
                 <evox:LabelVisible>True</evox:LabelVisible>
@@ -565,7 +489,7 @@
               </evox:CardinalityLabelViewHelper>
             </evox:ViewHelper>
           </evox:Component>
-          <evox:Component Type="PSMAssociation" componentID="f24c2138-63e1-478d-ab7c-7d114297e004" component="PSMAssociation from PSMContentModel: Choice to PSMClass: *ItemPricing*">
+          <evox:Component Type="PSMAssociation" componentID="497dac77-3ed1-4c31-82bd-f98fe3ef46e1" component="PSMAssociation from PSMContentModel: Choice to PSMClass: *Customer*">
             <evox:ViewHelper>
               <evox:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
                 <evox:LabelVisible>True</evox:LabelVisible>

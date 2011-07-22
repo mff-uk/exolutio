@@ -8,7 +8,6 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Exolutio.ResourceLibrary;component/Images/Images.xaml" />
-                <ResourceDictionary Source="/SilverFlow.Controls;component/Themes/generic.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <Style TargetType="evt:EditableTextBox" x:Key="NoReadonlyStyle">

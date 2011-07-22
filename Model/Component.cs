@@ -49,7 +49,7 @@ namespace Exolutio.Model
 
             // serialize all values of Name, incl. null and empty (both as "")
             {
-                XAttribute nameAttribute = new XAttribute("Name", SerializationContext.EncodeValue(Name));
+                XAttribute nameAttribute = new XAttribute("Name", SerializationContext.EncodeValue(Name, true));
                 parentNode.Add(nameAttribute);
             }
         }

@@ -47,9 +47,9 @@ namespace Exolutio.Model.Serialization
             return i.ToString();
         }
 
-        public static string EncodeValue(string s)
+        public static string EncodeValue(string s, bool nullAsEmpty = false)
         {
-            return s;
+            return (s != null || !nullAsEmpty) ? s : string.Empty;
         }
 
         public static string EncodeValue(bool b)

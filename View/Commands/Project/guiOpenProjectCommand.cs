@@ -151,13 +151,22 @@ namespace Exolutio.View.Commands.Project
                 try
                 {
                     Current.BusyState = true;
+
+                    if (selectedFile.Extension.ToUpper().Contains("XCASE"))
+                    {
+                        Current.Project =
+                            XCaseImport.XCaseImport.LoadXCaseProjectFromFile(selectedFile.FullName);
+                    }
+                    else
+                    {
 #if SILVERLIGHT
-                    Model.Project project = projectSerializationManager.LoadProjectFromClientFile(selectedFile);
+                        Model.Project project = projectSerializationManager.LoadProjectFromClientFile(selectedFile);
 #else
-                    Model.Project project = projectSerializationManager.LoadProject(selectedFile);
+                        Model.Project project = projectSerializationManager.LoadProject(selectedFile);
 #endif
-                    Current.Project = project;
-			    }
+                        Current.Project = project;
+                    }
+                }
 			    catch (Exception e)
 			    {
                     throw new ExolutioModelException(string.Format("Failed to load project from the file \r\n'{0}'", selectedFile.FullName), e) { ExceptionTitle = "Cannot open project" };

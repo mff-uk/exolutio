@@ -371,8 +371,8 @@ namespace Exolutio.ViewToolkit
         internal void ExolutioCanvas_MouseMove(object sender, MouseEventArgs e)
         {
             CurrentState.Canvas_MouseMove(e);
-            mousePosition = e.GetPosition(this);
 #if SILVERLIGHT
+            mousePosition = e.GetPosition(this);
         }
 
         /// <summary>
@@ -380,7 +380,7 @@ namespace Exolutio.ViewToolkit
         /// Mouse class from WPF is not available. 
         /// </summary>
         private Point mousePosition; 
-#else      
+#else
             if (mouseLabel == null)
             {
                 mouseLabel = new System.Windows.Controls.Label();

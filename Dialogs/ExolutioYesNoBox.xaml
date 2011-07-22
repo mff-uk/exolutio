@@ -1,17 +1,17 @@
-﻿<Window x:Class="Exolutio.Dialogs.ExolutioYesNoBox"
+﻿<Controls:GenericNonblockingDialog x:Class="Exolutio.Dialogs.ExolutioYesNoBox"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-	Title="Exolutio" WindowStartupLocation="CenterScreen" SizeToContent="WidthAndHeight"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Controls="clr-namespace:System.Windows.Controls"
+    Title="Exolutio" WindowStartupLocation="CenterScreen" SizeToContent="WidthAndHeight"
     ResizeMode="NoResize" 
     ShowInTaskbar="False" Topmost="True"
     >
-    <Window.Resources>
+    <Controls:GenericNonblockingDialog.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Exolutio.ResourceLibrary;component/Images/Images.xaml" ></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-    </Window.Resources>
+    </Controls:GenericNonblockingDialog.Resources>
     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
         <StackPanel Margin="10" Name="stackPanel1">
             <Grid>
@@ -24,11 +24,11 @@
             </Grid>
             <TextBlock Name="messageQuestion" Text="Message" Width="auto" Margin="10,10,0,0"/>
             <StackPanel Orientation="Horizontal" Name="canvas1" HorizontalAlignment="Center" Margin="5,20,0,5">
-                <Button Height="23" Name="bYes" Width="60" Margin="0,0,5,0" IsDefault="True" Click="buttonYes_Click">Yes</Button>
-                <Button Height="23" Width="60" Margin="0,0,5,0" Name="bNo" IsCancel="True" Click="buttonNo_Click">No</Button>
-                <Button Height="23" Width="60" Margin="0,0,5,0" Name="bOk" IsDefault="True" Visibility="Collapsed" Click="buttonOk_Click">OK</Button>
-                <Button Height="23" Width="60" Margin="0,0,5,0" Name="bStorno" IsCancel="True" Click="buttonStorno_Click">Cancel</Button>
+                <Controls:DialogButton Height="23" x:Name="bYes" Width="60" Margin="0,0,5,0" IsDefault="True" Click="buttonYes_Click">Yes</Controls:DialogButton>
+                <Controls:DialogButton Height="23" Width="60" Margin="0,0,5,0" x:Name="bNo" IsCancel="True" Click="buttonNo_Click">No</Controls:DialogButton>
+                <Controls:DialogButton Height="23" Width="60" Margin="0,0,5,0" x:Name="bOk" IsDefault="True" Visibility="Collapsed" Click="buttonOk_Click">OK</Controls:DialogButton>
+                <Controls:DialogButton Height="23" Width="60" Margin="0,0,5,0" x:Name="bStorno" IsCancel="True" Click="buttonStorno_Click">Cancel</Controls:DialogButton>
             </StackPanel>
         </StackPanel>
     </ScrollViewer>
-</Window>
+</Controls:GenericNonblockingDialog>

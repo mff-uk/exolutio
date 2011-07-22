@@ -284,13 +284,27 @@ namespace Exolutio.View
             ExolutioContextMenu associationMenu = MenuHelper.GetContextMenu(ScopeAttribute.EScope.PIMAssociation, DiagramView.Diagram);
             AddConnectorCommands(associationMenu);
             ContextMenu = associationMenu;
-            NameLabel.ContextMenu = associationMenu;
+            
             ExolutioContextMenu startPointMenu = MenuHelper.GetContextMenu(ScopeAttribute.EScope.PIMAssociationEnd, DiagramView.Diagram);
             Connector.StartPoint.ContextMenu = startPointMenu;
-            SourceCardinalityLabel.ContextMenu = startPointMenu;
+            
             ExolutioContextMenu endPointMenu = MenuHelper.GetContextMenu(ScopeAttribute.EScope.PIMAssociationEnd, DiagramView.Diagram);
             Connector.EndPoint.ContextMenu = endPointMenu;
+
+            #if SILVERLIGHT
+            // for some reason the menus can not be shared and have to be created again
+            associationMenu = MenuHelper.GetContextMenu(ScopeAttribute.EScope.PIMAssociation, DiagramView.Diagram);
+            AddConnectorCommands(associationMenu);
+            NameLabel.ContextMenu = associationMenu;
+            startPointMenu = MenuHelper.GetContextMenu(ScopeAttribute.EScope.PIMAssociationEnd, DiagramView.Diagram);
+            SourceCardinalityLabel.ContextMenu = startPointMenu;
+            endPointMenu = MenuHelper.GetContextMenu(ScopeAttribute.EScope.PIMAssociationEnd, DiagramView.Diagram);
             TargetCardinalityLabel.ContextMenu = endPointMenu;
+            #else
+            NameLabel.ContextMenu = associationMenu;
+            SourceCardinalityLabel.ContextMenu = startPointMenu;
+            TargetCardinalityLabel.ContextMenu = endPointMenu;
+            #endif
         }
 
         void Connector_SelectedChanged()

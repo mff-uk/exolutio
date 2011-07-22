@@ -34,7 +34,14 @@ namespace Exolutio.WPFClient
             if (Current.Project != null && Current.Project.ProjectFile != null &&
                 File.Exists(Current.MainWindow.UserFileForProjectFile(Current.Project.ProjectFile.FullName)))
             {
-                LoadProjectLayout(Current.MainWindow.UserFileForProjectFile(Current.Project.ProjectFile.FullName));
+                try
+                {
+                    LoadProjectLayout(Current.MainWindow.UserFileForProjectFile(Current.Project.ProjectFile.FullName));
+                }
+                catch
+                {
+                    
+                }
             }
             else if (ConfigurationManager.HasStoredLayout)
             {

@@ -11,7 +11,8 @@ using Exolutio.Model.PIM;
 using Exolutio.Model.PSM;
 
 #if SILVERLIGHT
-using SilverFlow.Controls;
+#else
+using System.Windows.Input;
 #endif
 
 namespace Exolutio.View.Commands
@@ -152,7 +153,6 @@ namespace Exolutio.View.Commands
             if (OpenDialog)
             {
                 w = new CommandDialogWindow();
-
                 MenuHelper.CreateDialogControlsForCommand(ControllerCommandType, (ExolutioObject)ScopeObject, ProjectVersion, w.spParameters,
                                                           out controls);
 
@@ -189,9 +189,9 @@ namespace Exolutio.View.Commands
             if (!dialogOk)
             {
 #if SILVERLIGHT
-                Current.MainWindow.FloatingWindowHost.Add(w);
+                //Current.MainWindow.FloatingWindowHost.Add(w);
                 w.Closed += new EventHandler(w_Closed);
-                w.ShowModal();
+                w.Show();
 #else
                 w.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                 //w.ShowDialog();
@@ -248,8 +248,7 @@ namespace Exolutio.View.Commands
             if (!ControllerCommand.CanExecute())
             {
 #if SILVERLIGHT
-                ExolutioErrorMsgBox.Show("Command can not be executed", ControllerCommand.ErrorDescription,
-                                 Current.MainWindow.FloatingWindowHost);
+                ExolutioErrorMsgBox.Show("Command can not be executed", ControllerCommand.ErrorDescription);
 #else
                 ExolutioErrorMsgBox.Show("Command can not be executed", ControllerCommand.ErrorDescription);
 #endif

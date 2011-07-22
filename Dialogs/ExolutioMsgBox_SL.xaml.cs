@@ -20,13 +20,12 @@ namespace Exolutio.Dialogs
         }
 
 #if SILVERLIGHT
-        public static void Show(string windowTitle, string textTitle, string textSubtitle, FloatingWindowHost host)
+        public static void Show(string windowTitle, string textTitle, string textSubtitle)
         {
             ExolutioMessageBox msgBox = new ExolutioMessageBox();
             msgBox.Title = windowTitle;
             msgBox.messageText.Text = textTitle;
             msgBox.messageQuestion.Text = textSubtitle;
-            host.Add(msgBox);
             msgBox.ShowModal();
             return;
         }

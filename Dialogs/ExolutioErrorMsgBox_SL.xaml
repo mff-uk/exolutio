@@ -1,15 +1,15 @@
-﻿<my:FloatingWindow x:Class="Exolutio.Dialogs.ExolutioErrorMsgBox"
+﻿<Controls:GenericNonblockingDialog x:Class="Exolutio.Dialogs.ExolutioErrorMsgBox"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:my="clr-namespace:SilverFlow.Controls;assembly=SilverFlow.Controls"
-	Title="EvoX Error">
-    <my:FloatingWindow.Resources>
+    xmlns:Controls="clr-namespace:System.Windows.Controls" Title="EvoX Error">
+    <Controls:GenericNonblockingDialog.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Exolutio.ResourceLibrary;component/Images/Images.xaml" ></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-    </my:FloatingWindow.Resources>
+    </Controls:GenericNonblockingDialog.Resources>
     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
         <StackPanel Margin="10" Name="stackPanel1">
             <Grid>
@@ -26,5 +26,5 @@
             </StackPanel>
         </StackPanel>
     </ScrollViewer>
-</my:FloatingWindow>
+</Controls:GenericNonblockingDialog>
 

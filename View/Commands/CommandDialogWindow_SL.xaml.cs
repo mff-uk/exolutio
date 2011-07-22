@@ -26,14 +26,12 @@ namespace Exolutio.View.Commands
 
         private void bOK_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult = true;
-            Close();
+            Close(true);
         }
 
         private void bCancel_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult = false; 
-            Close();
+            Close(false);
         }
     }
 }

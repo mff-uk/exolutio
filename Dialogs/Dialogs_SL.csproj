@@ -50,19 +50,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FloatingWindowControl">
-      <HintPath>..\ExternalBinaries\FloatingWindowControl\FloatingWindowControl.dll</HintPath>
-    </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="OrderedListClass">
       <HintPath>..\ExternalBinaries\OrderedList\OrderedListClass.dll</HintPath>
     </Reference>
-    <Reference Include="SilverFlow.Controls">
-      <HintPath>..\ExternalBinaries\FloatingWindowControl\SilverFlow.Controls.dll</HintPath>
-    </Reference>
     <Reference Include="System.Windows" />
     <Reference Include="system" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Controls, Version=2.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Windows.Controls.Data.Input, Version=2.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
@@ -70,17 +65,18 @@
     <Reference Include="System.Windows.Browser" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExolutioMsgBox_SL.xaml.cs">
-      <DependentUpon>ExolutioMsgBox_SL.xaml</DependentUpon>
+    <Compile Include="ExolutioErrorMsgBox.xaml.cs">
+      <DependentUpon>ExolutioErrorMsgBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ExolutioMessageBox.xaml.cs">
+      <DependentUpon>ExolutioMessageBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ExolutioYesNoBox.xaml.cs">
+      <DependentUpon>ExolutioYesNoBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GenericNonblockingDialog.cs" />
     <Compile Include="HelpBox_SL.xaml.cs">
       <DependentUpon>HelpBox_SL.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ExolutioErrorMsgBox_SL.xaml.cs">
-      <DependentUpon>ExolutioErrorMsgBox_SL.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ExolutioYesNoBox_SL.xaml.cs">
-      <DependentUpon>ExolutioYesNoBox_SL.xaml</DependentUpon>
     </Compile>
     <Compile Include="InputBox_SL.xaml.cs">
       <DependentUpon>InputBox_SL.xaml</DependentUpon>
@@ -89,19 +85,19 @@
     <Compile Include="RememberingTextBox.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="ExolutioMsgBox_SL.xaml">
+    <Page Include="ExolutioErrorMsgBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ExolutioMessageBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ExolutioYesNoBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="HelpBox_SL.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="ExolutioErrorMsgBox_SL.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="ExolutioYesNoBox_SL.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

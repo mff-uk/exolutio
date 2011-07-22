@@ -431,7 +431,15 @@ namespace Exolutio.ViewToolkit
 #if SILVERLIGHT
         public ContextMenu ContextMenu
         {
-            get; set;
+            get { return ContextMenuService.GetContextMenu(this); }
+            set
+            {
+                ContextMenuService.SetContextMenu(this, value);
+                if (this.Content != null)
+                {
+                    ContextMenuService.SetContextMenu((DependencyObject) this.Content, value);
+                }
+            }
         }
 #endif
 

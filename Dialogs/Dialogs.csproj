@@ -76,6 +76,7 @@
     <Compile Include="ExolutioInputBox.xaml.cs">
       <DependentUpon>ExolutioInputBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GenericNonblockingDialog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

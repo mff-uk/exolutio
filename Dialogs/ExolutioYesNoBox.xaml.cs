@@ -3,7 +3,7 @@ using System.Windows.Media;
 
 namespace Exolutio.Dialogs
 {
-    public partial class ExolutioYesNoBox : Window
+    public partial class ExolutioYesNoBox
     {
         private static ExolutioYesNoBox msgBox;
 
@@ -90,26 +90,26 @@ namespace Exolutio.Dialogs
         private void buttonNo_Click(object sender, RoutedEventArgs e)
         {
             result = MessageBoxResult.No;
-            msgBox.Close();
+            msgBox.CloseWindow();
         }
 
         private void buttonYes_Click(object sender, RoutedEventArgs e)
         {
             result = MessageBoxResult.Yes;
-            msgBox.Close();
+            msgBox.CloseWindow();
         }
 
         private void buttonStorno_Click(object sender, RoutedEventArgs e)
         {
             result = MessageBoxResult.Cancel;
-            msgBox.Close();
+            msgBox.CloseWindow();
         }
 
 
         private void buttonOk_Click(object sender, RoutedEventArgs e)
         {
             result = MessageBoxResult.OK;
-            msgBox.Close();
+            msgBox.CloseWindow();
         }
     }
 }

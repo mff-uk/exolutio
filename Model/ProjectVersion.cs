@@ -77,6 +77,47 @@ namespace Exolutio.Model
             set { versionGuid = value != null ? value : Guid.Empty; }
         }
 
+        public void CreateDiagramsForSchemas()
+        {
+            if (PIMDiagrams.Count == 0)
+            {
+                PIMDiagram pimDiagram = new PIMDiagram(Project);
+                PIMDiagrams.Add(pimDiagram);
+                pimDiagram.LoadSchemaToDiagram(PIMSchema);
+            }
+
+            if (PSMDiagrams.Count == 0)
+            {
+                foreach (PSMSchema psmSchema in PSMSchemas)
+                {
+                    PSMDiagram psmDiagram = new PSMDiagram(Project);
+                    PSMDiagrams.Add(psmDiagram);
+                    psmDiagram.LoadSchemaToDiagram(psmSchema);
+                }
+            }
+            
+            if (Project.UsesVersioning)
+            {
+                // Create version links between diagrams where schemas are linked
+                foreach (ProjectVersion otherVersion in Project.ProjectVersions)
+                {
+                    if (otherVersion == this)
+                        continue;
+                    foreach (Diagram diagramFromOtherVersion in otherVersion.Diagrams)
+                    {
+                        foreach (Diagram diagramFromThisVersion in Diagrams)
+                        {
+                            if (Project.VersionManager.AreItemsLinked(diagramFromOtherVersion.Schema, diagramFromThisVersion.Schema)
+                                && !Project.VersionManager.AreItemsLinked(diagramFromOtherVersion, diagramFromThisVersion))
+                            {
+                                Project.VersionManager.RegisterVersionLink(this.Version, otherVersion.Version, diagramFromThisVersion, diagramFromOtherVersion);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         #region IExolutioSerializable Members
 
         public override void Serialize(XElement parentNode, SerializationContext context)

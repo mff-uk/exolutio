@@ -39,10 +39,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ExolutioExport, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ExternalBinaries\XCase\ExolutioExport.dll</HintPath>
-    </Reference>
     <Reference Include="NUML.Mof2.Collections">
       <HintPath>..\ExternalBinaries\XCase\NUML.Mof2.Collections.dll</HintPath>
     </Reference>
@@ -59,6 +55,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="XCase.ExolutioExport">
+      <HintPath>..\ExternalBinaries\XCase\XCase.ExolutioExport.dll</HintPath>
+    </Reference>
     <Reference Include="XCase.Model">
       <HintPath>..\ExternalBinaries\XCase\XCase.Model.dll</HintPath>
     </Reference>

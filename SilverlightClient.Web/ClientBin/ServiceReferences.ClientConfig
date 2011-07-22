@@ -9,7 +9,7 @@
             </basicHttpBinding>
         </bindings>
         <client>
-            <endpoint address="http://www.eXolutio.eu/Project/Serialization/SL/ProjectFilesService.asmx"
+            <endpoint address="http://exolutio.com/SL/ProjectFilesService.asmx"
                 binding="basicHttpBinding" bindingConfiguration="ProjectFilesServiceSoap"
                 contract="EvoXServices.ProjectFilesServiceSoap" name="ProjectFilesServiceSoap" />
         </client>

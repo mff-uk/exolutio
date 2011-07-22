@@ -212,8 +212,8 @@
         </options>
     </meta>
     <projectTree name="eXolutioOutputs.xpr">
+        <folder path="Adbis/"/>
         <folder path="ElementsAndAttributes/"/>
-        <folder path="ElementsOnly/"/>
         <folder path="Groups/"/>
         <file name="DesiredStylesheet.xsl"/>
         <file name="LastStylesheet.xslt"/>

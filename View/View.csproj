@@ -300,6 +300,10 @@
       <Project>{3FD45349-A060-4098-A8D2-34E5DB5D4296}</Project>
       <Name>ViewToolkit</Name>
     </ProjectReference>
+    <ProjectReference Include="..\XCaseImport\XCaseImport.csproj">
+      <Project>{24FF150D-1CD5-4C80-905D-905CAD663717}</Project>
+      <Name>XCaseImport</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Page Include="Commands\CommandDialogWindow.xaml">

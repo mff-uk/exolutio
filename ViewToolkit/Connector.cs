@@ -365,6 +365,10 @@ namespace Exolutio.ViewToolkit
         public Point MousePointWhenContextMenuOpened { get; private set; }
 
 #if SILVERLIGHT
+        private void ContextMenu_Opened(object sender, RoutedEventArgs routedEventArgs)
+        {
+            MousePointWhenContextMenuOpened = ExolutioCanvas.GetMousePosition();
+        }
 #else
         protected override void OnContextMenuOpening(ContextMenuEventArgs e)
         {
@@ -781,13 +785,23 @@ namespace Exolutio.ViewToolkit
             get { return contextMenu; }
             set
             {
+                if (contextMenu != null)
+                    contextMenu.Opened -= ContextMenu_Opened;
                 contextMenu = value;
-                foreach (Line line in lines)
-                {
-                    ContextMenuService.SetContextMenu(line, ContextMenu);
-                }
+                if (contextMenu != null)
+                    contextMenu.Opened += ContextMenu_Opened;
+                SetMenuForLines();
             }
         }
+
+        private void SetMenuForLines()
+        {
+            foreach (Line line in lines)
+            {
+                ContextMenuService.SetContextMenu(line, ContextMenu);
+            }
+        }
+
 #endif
 
         #if SILVERLIGHT
