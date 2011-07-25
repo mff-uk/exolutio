@@ -66,7 +66,7 @@ namespace Exolutio.ViewToolkit
         #if SILVERLIGHT
         private bool allowDisconnect = false;
         #else
-        private bool allowDisconnect = true;
+        private bool allowDisconnect = false;
         #endif
         public bool AllowDisconnect
         {
