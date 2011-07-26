@@ -95,7 +95,8 @@ namespace Exolutio.Model.PSM.Grammar
                     }
                     if (token is AttributeTypeToken)
                     {
-                        tokenE.Add(new XText(((AttributeTypeToken)token).AttributeType.Name));
+                        AttributeType type = ((AttributeTypeToken)token).AttributeType;
+                        tokenE.Add(new XText(type != null ? type.Name : "unknownType"));
                     }
                     rightE.Add(tokenE);
                 }
