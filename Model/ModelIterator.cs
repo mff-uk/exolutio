@@ -722,5 +722,22 @@ namespace Exolutio.Model
 
             }
         }
+
+        public static void ExpandGroupNode(PSMComponent node, ref List<PSMComponent> result, Func<PSMComponent, bool> groupNodeTest)
+        {
+            if (groupNodeTest(node))
+            {
+                foreach (PSMComponent groupMember in GetPSMChildren(node, true, false))
+                {
+                    ExpandGroupNode(groupMember, ref result, groupNodeTest);
+                }
+            }
+            else
+            {
+                result.Add(node);
+            }
+        }
+
+        
     }
 }
