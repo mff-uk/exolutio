@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="purchase-request" type="Purchase" />
+  <xs:complexType name="Purchase">
+    <xs:sequence>
+      <xs:sequence>
+        <xs:element name="customer" type="Customer" />
+      </xs:sequence>
+      <xs:element name="assistant" type="SalesAssistant" minOccurs="0" />
+      <xs:sequence>
+        <xs:element name="item" type="Item" maxOccurs="5" />
+      </xs:sequence>
+    </xs:sequence>
+    <xs:attribute name="purchase-date" />
+  </xs:complexType>
+  <xs:complexType name="SalesAssistant">
+    <xs:sequence>
+      <xs:element name="emp-no" />
+      <xs:element name="name" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Customer">
+    <xs:sequence>
+      <xs:element name="delivery-address" type="Address" minOccurs="0" />
+      <xs:element name="emails" type="CustEmail" />
+    </xs:sequence>
+    <xs:attribute name="customer-no" />
+  </xs:complexType>
+  <xs:complexType name="Item">
+    <xs:sequence>
+      <xs:element name="product" type="Product" />
+      <xs:element name="item-info" type="ItemI" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Address">
+    <xs:sequence>
+      <xs:element name="postcode" />
+      <xs:element name="city" />
+      <xs:element name="street" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CustEmail">
+    <xs:sequence>
+      <xs:element name="email" maxOccurs="5" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Product">
+    <xs:sequence />
+    <xs:attribute name="code" />
+    <xs:attribute name="subcode" />
+    <xs:attribute name="title" />
+  </xs:complexType>
+  <xs:complexType name="ItemI">
+    <xs:sequence>
+      <xs:element name="amount" />
+      <xs:element name="unit-price" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
