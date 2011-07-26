@@ -10,6 +10,7 @@ using Exolutio.Controller;
 using Exolutio.Controller.Commands;
 using Exolutio.Model;
 using Exolutio.Model.PIM;
+using Exolutio.Model.PSM;
 using Exolutio.SupportingClasses;
 using Exolutio.View;
 using Component = Exolutio.Model.Component;
@@ -212,7 +213,7 @@ namespace Exolutio.View
 
     public interface IFilePresenter
     {
-        void DisplaySampleFile(XDocument xmlDocument);
+        void DisplayFile(XDocument xmlDocument, EDisplayedFileType fileType, string fileName = null, Log log = null, PSMSchema validationSchema = null);
     }
 
     public interface IDiagramTabManager

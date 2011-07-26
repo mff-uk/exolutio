@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 using Exolutio.Model.PSM.Grammar;
 using Exolutio.SupportingClasses;
 
@@ -51,6 +52,11 @@ namespace Exolutio.View.Commands.Grammar
             }
             string productionRules = grammar.ProductionRules.ConcatWithSeparator(", " + Environment.NewLine);
             tbProductionRules.Text = productionRules; 
+
+            GrammarXMLGenerator xmlGenerator = new GrammarXMLGenerator();
+            XDocument xmlRepresentation = xmlGenerator.TranslateRTGtoXML(grammar);
+
+            fileView.DisplayFile(EDisplayedFileType.XML, xmlRepresentation.ToString());
         }
 
         private void bOK_Click(object sender, RoutedEventArgs e)

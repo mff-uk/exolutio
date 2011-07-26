@@ -28,10 +28,7 @@ namespace Exolutio.DataGenerator
 
         public XNamespace ProjectNamespace
         {
-            get
-            {
-                return Schema.XMLNamespaceOrDefaultNamespace;
-            }
+            get { return null; }
         }
 
         public SampleDataGenerator()
@@ -79,13 +76,14 @@ namespace Exolutio.DataGenerator
             {
                 throw new Exception();
             }
-            if (association.IsNamed)
+            if (association.IsNamed && !(association.Child is PSMContentModel))
             {                
                 string elementName = namingSupport.NormalizeTypeName(association);
 
                 for (int i = 0; i < count; i++)
                 {
-                    XElement xmlElement = new XElement(ProjectNamespace + elementName);
+                    //XElement xmlElement = new XElement(ProjectNamespace + elementName);
+                    XElement xmlElement = new XElement(elementName);
                     if (context.RootCreated)
                     {
                         context.CurrentElement.Add(xmlElement);
@@ -143,9 +141,7 @@ namespace Exolutio.DataGenerator
             //{
             //    TranslateAncestors(psmClass, context);
             //}
-
-            TranslateAttributes(psmClass.PSMAttributes, context);
-
+                       
             if (psmClass.IsStructuralRepresentative)
             {
                 context.TranslatingRepresentedClass = true;
@@ -153,6 +149,7 @@ namespace Exolutio.DataGenerator
                 context.TranslatingRepresentedClass = false;
             }
 
+            TranslateAttributes(psmClass.PSMAttributes, context);
             TranslateContent(psmClass, context);
 
             return null;
@@ -515,7 +512,8 @@ namespace Exolutio.DataGenerator
                     
                     if (attribute.Element)
                     {
-                        XElement element = new XElement(ProjectNamespace + attributeName);
+                        //XElement element = new XElement(ProjectNamespace + attributeName);
+                        XElement element = new XElement(attributeName);
                         XText text = new XText(value);
                         context.CurrentElement.Add(element);
                         element.Add(text);

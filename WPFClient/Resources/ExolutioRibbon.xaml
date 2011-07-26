@@ -395,7 +395,8 @@
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
             </Fluent:RibbonGroupBox>
             <Fluent:RibbonGroupBox Header="XSD">
-
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.GenerateXsdCommand}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
             </Fluent:RibbonGroupBox>
         </Fluent:RibbonTabItem>
 

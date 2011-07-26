@@ -167,7 +167,7 @@ namespace Exolutio.Revalidation.XSLT
 
         public XDocument GetRevalidationStylesheet()
         {
-            XDocument doc = new XDocument(new XDeclaration("2.0", "utf-8", null));
+            XDocument doc = new XDocument(new XDeclaration("1.0", "utf-8", null));
             XElement xslStylesheet = doc.XslStylesheet("2.0");
             XElement outputElement = new XElement(XDocumentXsltExtensions.XSLT_NAMESPACE + "output");
             outputElement.Add(new XAttribute("method", "xml"));

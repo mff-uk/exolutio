@@ -5,6 +5,7 @@ using Exolutio.DataGenerator;
 using Exolutio.Dialogs;
 using Exolutio.Model.PSM;
 using Exolutio.ResourceLibrary;
+using Exolutio.SupportingClasses;
 using Exolutio.View.Commands.Grammar;
 
 namespace Exolutio.View.Commands
@@ -20,14 +21,7 @@ namespace Exolutio.View.Commands
         {
             SampleDataGenerator g = new SampleDataGenerator();
             XDocument xmlDocument = g.Translate((PSMSchema) Current.ActiveDiagram.Schema);
-            Current.MainWindow.FilePresenter.DisplaySampleFile(xmlDocument);
-
-#if SILVERLIGHT
-
-            HelpBox helpBox = new HelpBox();
-            helpBox.ShowDialog();
-#else
-#endif
+            Current.MainWindow.FilePresenter.DisplayFile(xmlDocument, EDisplayedFileType.XML, Current.ActiveDiagram.Caption + "_sample.xml", g.Log, (PSMSchema) Current.ActiveDiagram.Schema);
         }
 
         public override string Text

@@ -1,4 +1,4 @@
-﻿//#define SAVE_DOC_FOR_TEST
+﻿#define SAVE_DOC_FOR_TEST
 //#define AUTOCREATE_SAMPLES
 using System;
 using System.Collections.Generic;

@@ -126,6 +126,14 @@ namespace Exolutio.Model.PSM
             get { return ModelIterator.GetChildNodes(PSMSchemaClass).OfType<PSMClass>(); }
         }
 
+        /// <summary>
+        /// Returns schema class, classes and content models
+        /// </summary>
+        public IEnumerable<PSMAssociationMember> PSMNodes
+        {
+            get { return new PSMAssociationMember[] {PSMSchemaClass}.Concat(PSMClasses).Concat(PSMContentModels); }
+        }
+
         public void RegisterPSMSchemaClass(PSMSchemaClass psmSchemaClass)
         {
             psmSchemaClass.Schema = this; 

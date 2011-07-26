@@ -34,14 +34,7 @@ namespace Exolutio.WPFClient
             if (Current.Project != null && Current.Project.ProjectFile != null &&
                 File.Exists(Current.MainWindow.UserFileForProjectFile(Current.Project.ProjectFile.FullName)))
             {
-                try
-                {
-                    LoadProjectLayout(Current.MainWindow.UserFileForProjectFile(Current.Project.ProjectFile.FullName));
-                }
-                catch
-                {
-                    
-                }
+                LoadProjectLayout(Current.MainWindow.UserFileForProjectFile(Current.Project.ProjectFile.FullName));
             }
             else if (ConfigurationManager.HasStoredLayout)
             {
@@ -69,10 +62,10 @@ namespace Exolutio.WPFClient
                 if (System.Windows.Forms.Screen.AllScreens.Length > 1)
                 {
                     this.WindowState = WindowState.Normal;
-                    this.Left = System.Windows.Forms.Screen.AllScreens[0].Bounds.X;
-                    this.Top = System.Windows.Forms.Screen.AllScreens[0].Bounds.Y;
-                    this.Width = System.Windows.Forms.Screen.AllScreens[0].Bounds.Width;
-                    this.Height = System.Windows.Forms.Screen.AllScreens[0].Bounds.Height;
+                    this.Left = System.Windows.Forms.Screen.AllScreens[1].Bounds.X;
+                    this.Top = System.Windows.Forms.Screen.AllScreens[1].Bounds.Y;
+                    this.Width = System.Windows.Forms.Screen.AllScreens[1].Bounds.Width;
+                    this.Height = System.Windows.Forms.Screen.AllScreens[1].Bounds.Height;
                 }
             }
         }
@@ -117,19 +110,26 @@ namespace Exolutio.WPFClient
         {
             if (dockManagerLoaded)
             {
-                XDocument d = XDocument.Load(filePath);
-                List<Guid> diagramIds = new List<Guid>();
-                ExtractDiagramIds((XElement) d.FirstNode, diagramIds);
-                Diagram diagram = null;
-                foreach (Guid diagramId in diagramIds)
+                try
                 {
-                    diagram = (Diagram) Current.Project.TranslateComponent(diagramId);
-                    DiagramTabManager.ActivateDiagram(diagram, false);
+                    XDocument d = XDocument.Load(filePath);
+                    List<Guid> diagramIds = new List<Guid>();
+                    ExtractDiagramIds((XElement) d.FirstNode, diagramIds);
+                    Diagram diagram = null;
+                    foreach (Guid diagramId in diagramIds)
+                    {
+                        diagram = (Diagram) Current.Project.TranslateComponent(diagramId);
+                        DiagramTabManager.ActivateDiagram(diagram, false);
+                    }
+                    dockManager.RestoreLayout(filePath);
+                    if (diagram != null)
+                    {
+                        DiagramTabManager.ActivateDiagram(diagram, true);
+                    }
                 }
-                dockManager.RestoreLayout(filePath);
-                if (diagram != null)
+                catch 
                 {
-                    DiagramTabManager.ActivateDiagram(diagram, true);
+                    
                 }
             }
         }

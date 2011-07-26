@@ -5,6 +5,7 @@ using Exolutio.Model.PIM;
 using Exolutio.Model.PSM;
 using Exolutio.Model.Versioning;
 using System.Linq;
+using Exolutio.SupportingClasses;
 using Version = Exolutio.Model.Versioning.Version;
 
 namespace Exolutio.Model
@@ -648,6 +649,78 @@ namespace Exolutio.Model
                 }
             }
             return result; 
+        }
+
+        public static IList<PSMClass> GetReferencingStructuralRepresentatives(this PSMClass node, bool transitive)
+        {
+            if (!transitive)
+            {
+                return GetReferencingStructuralRepresentatives(node);
+            }
+
+            Queue<PSMClass> todo = new Queue<PSMClass>();
+            List<PSMClass> result = new List<PSMClass>();
+
+            todo.Enqueue(node);
+            while (todo.Count > 0)
+            {
+                PSMClass member = todo.Dequeue();
+                if (!result.Contains(member))
+                {
+                    result.Add(member);
+                    foreach (PSMClass representative in GetReferencingStructuralRepresentatives(member))
+                    {
+                        todo.Enqueue(representative);    
+                    }
+                }
+            }
+
+            result.Remove(node);
+            return result;  
+        }
+
+        private static IList<PSMClass> GetReferencingStructuralRepresentatives(PSMClass node)
+        {
+            PIMClass pim = (PIMClass) node.Interpretation;
+            List<PSMClass> result = new List<PSMClass>();
+            if (pim != null)
+            {
+                foreach (PSMSchema psmSchema in node.ProjectVersion.PSMSchemas)
+                {
+                    foreach (PSMClass psmClass in psmSchema.PSMClasses)
+                    {
+                        if (psmClass.IsStructuralRepresentative &&
+                            psmClass.RepresentedClass == node)
+                        {
+                            result.Add(psmClass);
+                        }
+                    }
+                }
+            }
+            return result; 
+        }
+
+        public static bool PropagatesToChoice(this PSMAssociationMember node)
+        {
+            if (node is PSMContentModel && ((PSMContentModel)node).Type.IsAmong(PSMContentModelType.Choice, PSMContentModelType.Set))
+                return true; 
+
+            if (node.ParentAssociation == null)
+            {
+                return false;
+            }
+            else
+            {
+                if (node.ParentAssociation.IsNamed)
+                {
+                    return false; 
+                }
+                else
+                {
+                    return PropagatesToChoice((PSMAssociationMember) GetPSMParent(node));
+                }
+
+            }
         }
     }
 }

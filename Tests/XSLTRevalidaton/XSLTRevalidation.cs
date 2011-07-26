@@ -75,7 +75,7 @@ namespace Tests.XSLTRevalidaton
         private ProjectSerializationManager serializationManager = new ProjectSerializationManager();
 
         [Test, TestCaseSource("TestDirectories")]
-        public void TestCommandResult(object directory)
+        public void TestRevalidation(object directory)
         {
             DirectoryInfo testDir = new DirectoryInfo(directory.ToString());
 

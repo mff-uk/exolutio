@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:avalonEdit="clr-namespace:ICSharpCode.AvalonEdit;assembly=ICSharpCode.AvalonEdit" 
              xmlns:Dialogs="clr-namespace:Exolutio.Dialogs;assembly=Exolutio.Dialogs" mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="600" d:DesignWidth="800">
     <Grid>
         <avalonEdit:TextEditor Name="tbDocument" Padding="5" Background="White" 
                                    Dialogs:AccessKeyScoper.IsAccessKeyScope="True" 

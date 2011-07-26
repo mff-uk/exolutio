@@ -76,6 +76,7 @@
     <Compile Include="TestUtils.cs" />
     <Compile Include="Versioning\BranchTest.cs" />
     <Compile Include="Versioning\SeparateEmbedTests.cs" />
+    <Compile Include="XSDTranslation\XSDTranslation.cs" />
     <Compile Include="XSLTRevalidaton\XSLTRevalidation.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -4,7 +4,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:Controls="clr-namespace:System.Windows.Controls;assembly=Exolutio.Dialogs"
-    Title="Generated grammar"                                   
+                                   xmlns:View="clr-namespace:Exolutio.View" Title="Generated grammar"                                   
     mc:Ignorable="d" Height="368" Width="547">
     <Grid>
         <Grid.RowDefinitions>
@@ -16,18 +16,28 @@
         <Button Content="OK" Grid.Row="4" Margin="0,0,93,12" Name="bOK" Height="23" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Click="bOK_Click" />
         <Button Content="Cancel" Grid.Row="4" Margin="0,0,12,12" Name="bCancel" Height="23" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Click="bCancel_Click" />
         <Border Grid.Row="2" Margin="0,0,0,0" Padding="5" Background="White">
-            <ScrollViewer>
-                <StackPanel Name="spContent">
-                    <Controls:DialogLabel Content="Termimnals:" FontSize="13" FontWeight="Bold"></Controls:DialogLabel>
-                    <TextBlock Name="tbTerminals" />
-                    <Controls:DialogLabel Content="Non-terminals:" FontSize="13" FontWeight="Bold"></Controls:DialogLabel>
-                    <TextBlock Name="tbNonTerminals" />
-                    <Controls:DialogLabel Content="Initial non-terminals:" FontSize="13" FontWeight="Bold"></Controls:DialogLabel>
-                    <TextBlock Name="tbInitialNonTerminals" />
-                    <Controls:DialogLabel Content="Production rules:" FontSize="13" FontWeight="Bold"></Controls:DialogLabel>
-                    <TextBlock Name="tbProductionRules" />
-                </StackPanel>
-            </ScrollViewer>
+            <TabControl>
+                <TabItem Header="Grammar">
+                    <ScrollViewer>
+                        <StackPanel Name="spContent">
+                            <Controls:DialogLabel Content="Termimnals:" FontSize="13" FontWeight="Bold"></Controls:DialogLabel>
+                            <TextBlock Name="tbTerminals" />
+                            <Controls:DialogLabel Content="Non-terminals:" FontSize="13" FontWeight="Bold"></Controls:DialogLabel>
+                            <TextBlock Name="tbNonTerminals" />
+                            <Controls:DialogLabel Content="Initial non-terminals:" FontSize="13" FontWeight="Bold"></Controls:DialogLabel>
+                            <TextBlock Name="tbInitialNonTerminals" />
+                            <Controls:DialogLabel Content="Production rules:" FontSize="13" FontWeight="Bold"></Controls:DialogLabel>
+                            <TextBlock Name="tbProductionRules" />
+                        </StackPanel>
+                    </ScrollViewer>
+                </TabItem>                
+                <TabItem Header="Grammar as XML">
+                    <View:FileView x:Name="fileView">
+                        
+                    </View:FileView>
+                </TabItem>
+            </TabControl>
+            
         </Border>
         <Controls:DialogLabel Content="Generated grammar:" Height="28" HorizontalAlignment="Left" Margin="12,7,0,0" Name="lTitle" VerticalAlignment="Top" Width="374" FontSize="12" FontWeight="SemiBold" />
     </Grid>

@@ -79,6 +79,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Commands\Grammar\guiGenerateXSDCommand.cs" />
     <Compile Include="Commands\PIM\guiSplitPIMAssociation.cs" />
     <Compile Include="Commands\PIM\guiSplitPIMAttribute.cs" />
     <Compile Include="Commands\PSM\guiSplitPSMAttribute.cs" />
