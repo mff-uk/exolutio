@@ -50,11 +50,15 @@
   <ItemGroup>
     <Compile Include="Grammar.cs" />
     <Compile Include="GrammarGenerator.cs" />
+    <Compile Include="GrammarXMLGenerator.cs" />
     <Compile Include="NonTerminal.cs" />
     <Compile Include="ProductionRule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegularExpression.cs" />
     <Compile Include="Terminal.cs" />
+    <Compile Include="XSDTranslation\NamingSupport.cs" />
+    <Compile Include="XSDTranslation\XDocumentXSDExtensions.cs" />
+    <Compile Include="XSDTranslation\XsdSchemaGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Model\Model.csproj">

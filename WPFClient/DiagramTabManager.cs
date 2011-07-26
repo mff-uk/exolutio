@@ -174,7 +174,7 @@ namespace Exolutio.WPFClient
                     RemoveTab(pw);
                 else
                 {
-                    (DockManager.ActiveDocument as DocumentContent).Close();
+                    DockManager.ActiveDocument.Close();
                 }
             }
         }
@@ -321,12 +321,11 @@ namespace Exolutio.WPFClient
             }
         }
 
-        public void DisplaySampleFile(XDocument xmlDocument)
+        public void DisplayFile(XDocument xmlDocument, EDisplayedFileType fileType, string fileName = null, Log log = null, PSMSchema validationSchema = null)
         {
             FileTab f = new FileTab();
-            f.DisplayFile(EDisplayedFileType.XML, xmlDocument.ToString());
-            f.Title = ActiveDiagram.Caption + "_sample.xml";
-
+            f.DisplayFile(fileType, xmlDocument.ToString(), fileName, log, validationSchema);
+            f.FloatingWindowSize = new System.Windows.Size(800, 600);
             f.Show(DockManager, true);
         }
 

@@ -39,7 +39,7 @@ namespace Exolutio.View
 
         private EDisplayedFileType displayedFileType;
 
-        private EDisplayedFileType DisplayedFileType
+        public EDisplayedFileType DisplayedFileType
         {
             get { return displayedFileType; }
             set { displayedFileType = value; }

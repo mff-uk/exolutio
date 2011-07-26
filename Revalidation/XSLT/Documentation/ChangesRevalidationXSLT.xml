@@ -1,6 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Revalidation>
   <XSLT>
+    <Groups>
+      <remarks>
+        Associations without names cause problems when implementing revalidation via XSLT. 
+        
+        We want to follow the basic pattern one template = one red node. Each red node with parent association without name will
+        is a group node. 
+        
+        Group nodes do not have one wrapping elements, that is why the template can not be matching templates, but have to be named 
+        templates. Group template have one variable containing the instance of the group (it will be a sequence of attribute and 
+        element nodes).
+        
+        Group template must be called explicitly (it is a named template). This complicates the basic approach: when there is a green
+        node having a red group node in its content, using 'apply-templates' will not work, because apply-templates never calls 
+        named template (and group template is a named template).     
+        
+        The rule to solve this: mark every parent node of a red group node red as well. 
+      </remarks>      
+    </Groups>
     <Attribute>
       <AttributeXFormChanged>
         <remarks>

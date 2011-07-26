@@ -54,6 +54,7 @@ namespace Exolutio.View.Commands
         public static guiNormalizeSchemaCommand NormalizeSchemaCommandCommand { get; set; }
         public static guiTestNormalizationCommand TestNormalizationCommand { get; set; }
         public static guiGenerateGrammarCommand GenerateGrammarCommand { get; set; }
+        public static guiGenerateXsdCommand GenerateXsdCommand { get; set; }
 
         #endregion
 
@@ -215,6 +216,7 @@ namespace Exolutio.View.Commands
             NormalizeSchemaCommandCommand = new guiNormalizeSchemaCommand();
             TestNormalizationCommand = new guiTestNormalizationCommand();
             GenerateGrammarCommand = new guiGenerateGrammarCommand();
+            GenerateXsdCommand = new guiGenerateXsdCommand();
             CreateSampleDocumentCommand = new guiSampleDocumentCommand();
 
             #endregion

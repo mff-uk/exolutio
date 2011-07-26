@@ -13,15 +13,9 @@ namespace Exolutio.View.Commands.Grammar
                 GrammarGenerator generator = new GrammarGenerator();
                 Exolutio.Model.PSM.Grammar.Grammar grammar = generator.GenerateGrammar((PSMSchema) Current.ActiveDiagram.Schema);
                 
-#if SILVERLIGHT
-                GrammarWindow w = new GrammarWindow();
-                w.DisplayedGrammar = grammar; 
-                w.ShowDialog();
-#else 
                 GrammarWindow w = new GrammarWindow();
                 w.DisplayedGrammar = grammar;
                 w.ShowDialog();
-#endif
             }
         }
 

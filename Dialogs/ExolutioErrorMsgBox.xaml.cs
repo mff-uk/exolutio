@@ -17,11 +17,16 @@ namespace Exolutio.Dialogs
 
         private static ExolutioErrorMsgBox msgBox;
 
-        public static void Show(string messageText, string messageQuestion)
+        /// <summary>
+        /// Shows error message box
+        /// </summary>
+        /// <param name="messageText">Bold text</param>
+        /// <param name="additionalText">additional text</param>
+        public static void Show(string messageText, string additionalText)
         {
             msgBox = new ExolutioErrorMsgBox();           
             msgBox.messageText.Text = messageText;
-            msgBox.messageQuestion.Text = messageQuestion;
+            msgBox.messageQuestion.Text = additionalText;
             msgBox.ShowDialog();
             return;
         }

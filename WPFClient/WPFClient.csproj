@@ -208,6 +208,10 @@
       <Project>{1768AE4E-0514-4C9E-AF26-02595148FF5C}</Project>
       <Name>Dialogs</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Grammar\Grammar.csproj">
+      <Project>{1EC12EDD-E854-4493-A821-BB869F7640E3}</Project>
+      <Name>Grammar</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{AA189B65-9AE0-4B5F-9575-AD121B753309}</Project>
       <Name>Model</Name>
