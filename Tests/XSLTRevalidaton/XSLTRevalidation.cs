@@ -44,15 +44,22 @@ namespace Tests.XSLTRevalidaton
 
         private void ScanDirectoryRecursive(DirectoryInfo dir, ref List<DirectoryInfo> directories)
         {
-            DirectoryInfo[] subDirectories = dir.GetDirectories();
+            DirectoryInfo[] subDirectories = dir.GetDirectories("*");
+            int count = 0;
             if (subDirectories.Length > 0)
             {
                 foreach (DirectoryInfo subDirectory in subDirectories)
                 {
+                    if (subDirectory.Name.ToUpper().Contains("SVN"))
+                    {
+                        continue;
+                    }
+                    count++;
                     ScanDirectoryRecursive(subDirectory, ref directories);
                 }
             }
-            else
+
+            if (count == 0)
             {
                 directories.Add(dir);
             }
