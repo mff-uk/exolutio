@@ -220,7 +220,7 @@ namespace Exolutio.Revalidation.XSLT
                 if (processNodeTemplate.GroupNodeTemplate)
                 {
                     // group nodes have current instance parameter, even when they are for "existing" nodes
-                    parameters = new XDocumentXsltExtensions.TemplateParameter[] { XDocumentXsltExtensions.CreateCurrentInstanceParameterDeclaration() };
+                    parameters = new[] { XDocumentXsltExtensions.CreateCurrentInstanceParameterDeclaration() };
                 }
                 templateElement = xslStylesheet.XslNamedTemplate(processNodeTemplate.Name, parameters);
             }
@@ -390,7 +390,8 @@ namespace Exolutio.Revalidation.XSLT
 
         private void GenSingleReference(XElement templateElement, Template callingTemplate, TemplateReference reference, string condition)
         {
-            RevalidationNodeInfo calledNodeInfo = nodeInfos.ContainsKey(reference.ReferencedNode) ? nodeInfos[reference.ReferencedNode] : null;
+            RevalidationNodeInfo calledNodeInfo;
+            nodeInfos.TryGetValue(reference.ReferencedNode, out calledNodeInfo);
 
             // TODO: tests whether attributes/elements templates are required in called template
 
@@ -408,8 +409,9 @@ namespace Exolutio.Revalidation.XSLT
             }
             else
             {
-                // 18.7. Condition removed, xform changes are handled separately, hopefully, <xsl:attribute will not appear as a refernce anymore (it can be in top level template probably) 
-                XPathExpr relativeXPath = context.GetRelativeXPath(reference.ReferencedNode, !DetectedChangeInstances.IsAddedNode(reference.CallingNode)).AppendPredicate(condition);
+                IEnumerable<PSMComponent> expandedReference = ExpandIfGroupNode(reference);
+                XPathExpr relativeXPath = context.GetRelativeXPath(expandedReference, !DetectedChangeInstances.IsAddedNode(reference.CallingNode)).AppendPredicate(condition);
+                #region 18.7. Condition removed, xform changes are handled separately, hopefully, <xsl:attribute will not appear as a refernce anymore (it can be in top level template probably)
                 //if (reference.ReferencedNode is PSMAttribute && reference.ReferencedNode.ExistsInVersion(OldVersion)
                 //    && !((PSMAttribute)reference.ReferencedNode).Element
                 //    && ((PSMAttribute)reference.ReferencedNode.GetInVersion(OldVersion)).Element)
@@ -419,10 +421,27 @@ namespace Exolutio.Revalidation.XSLT
                 //    xslAttribute.XslValueOf(relativeXPath);
                 //}
                 //else
-                {                    
-                    templateElement.XslApplyTemplates(relativeXPath);
-                }
+                //{
+                //    templateElement.XslApplyTemplates(relativeXPath);
+                //}
+                #endregion
+                
+                templateElement.XslApplyTemplates(relativeXPath);                
             }
+        }
+
+        private IEnumerable<PSMComponent> ExpandIfGroupNode(TemplateReference reference)
+        {
+            List<PSMComponent> result = new List<PSMComponent>(); 
+            if (reference.ReferencesGroupNode)
+            {
+                ModelIterator.ExpandGroupNode(reference.ReferencedNode, ref result, DetectedChangeInstances.IsGroupNode);
+            }
+            else
+            {
+                result.Add(reference.ReferencedNode);
+            }
+            return result;
         }
 
         #region green and blue templates 
@@ -617,6 +636,12 @@ namespace Exolutio.Revalidation.XSLT
                     return new XPathExpr(closestExistingTargetNode.XPath);
                 }
             }
+        }
+
+        public XPathExpr GetRelativeXPath(IEnumerable<PSMComponent> expandedReference, bool useCurrentInstanceVariable)
+        {
+            IEnumerable<XPathExpr> result = from component in expandedReference select GetRelativeXPath(component, useCurrentInstanceVariable);
+            return XPathExpr.ConcatWithOrOperator(result);
         }
     }
 }

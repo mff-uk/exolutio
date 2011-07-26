@@ -33,18 +33,18 @@ namespace Exolutio.Model.PSM.Grammar.XSDTranslation
                 nodeInfo.Node = node;
                 nodeInfos[node] = nodeInfo;
 
-                if (node is PSMClass && node.ParentAssociation != null && node.ParentAssociation.IsNamed)
+                if (node.DownCastSatisfies<PSMClass>(c => c.ParentAssociation != null && c.ParentAssociation.IsNamed))
                 {
                     nodeInfo.ComplexTypeRequired = true;
-                    nodeInfo.ComplexTypeName = NamingSupport.SuggestName((PSMClass) node, complexType: true);
+                    nodeInfo.ComplexTypeName = NamingSupport.SuggestName(node, complexType: true);
                 }
 
-                if (node is PSMClass && ((PSMClass) node).HasStructuralRepresentatives)
+                if (node.DownCastSatisfies<PSMClass>(c => c.HasStructuralRepresentatives))
                 {
                     nodeInfo.GroupsRequired = true; 
                 }
 
-                if (node is PSMClass && (node.ParentAssociation == null || !node.ParentAssociation.IsNamed))
+                if (node.DownCastSatisfies<PSMClass>(c => c.ParentAssociation == null || !c.ParentAssociation.IsNamed))
                 {
                     nodeInfo.GroupsRequired = true;
                 }
@@ -54,7 +54,7 @@ namespace Exolutio.Model.PSM.Grammar.XSDTranslation
 
                 if (nodeInfo.DefinesElements && nodeInfo.GroupsRequired)
                 {
-                    nodeInfo.ContentGroupName = NamingSupport.SuggestName((PSMClass)node, contentGroup: true);
+                    nodeInfo.ContentGroupName = NamingSupport.SuggestName(node, contentGroup: true);
                 }
 
                 // find all structural representatives of a class
@@ -234,9 +234,8 @@ namespace Exolutio.Model.PSM.Grammar.XSDTranslation
         private static bool ContentIsSet(PSMComponent component)
         {
             return component.DownCastSatisfies<PSMClass>(psmClass =>
-                   psmClass.ChildPSMAssociations.Count > 0 
-                   && psmClass.ChildPSMAssociations.First().Child is PSMContentModel 
-                   && ((PSMContentModel)psmClass.ChildPSMAssociations.First().Child).Type == PSMContentModelType.Set);
+                   psmClass.ChildPSMAssociations.Count > 0
+                   && psmClass.ChildPSMAssociations.First().Child.DownCastSatisfies<PSMContentModel>(cm => cm.Type == PSMContentModelType.Set));
         }
 
         private int CountContentForSet(PSMClass psmClass)
