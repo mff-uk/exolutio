@@ -214,11 +214,7 @@
     </meta>
     <projectTree name="eXolutioOutputs.xpr">
         <folder path="../XSDTest/"/>
-        <folder path="Adbis/"/>
-        <folder path="ElementsAndAttributes/"/>
-        <folder path="Groups/"/>
-        <file name="DesiredSchema.xsd"/>
-        <file name="DesiredStylesheet.xsl"/>
+        <folder path="."/>
         <file name="LastSchema.xsd"/>
         <file name="LastStylesheet.xslt"/>
     </projectTree>
