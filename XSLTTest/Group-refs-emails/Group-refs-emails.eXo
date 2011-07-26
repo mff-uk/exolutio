@@ -1,0 +1,280 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<eXo:Project xmlns:eXo="http://eXolutio.eu/Project/Serialization/" Version="3.0" UsesVersioning="True" Name="MultiplicityAC">
+  <eXo:Versions Count="2">
+    <eXo:Version ID="63c64c90-43bb-4401-b7d5-3c222833a0e8" Label="v1" Number="1" />
+    <eXo:Version ID="6bc27e6b-3fd0-46d6-bf64-18da76f23ed2" Label="v2" Number="2" branchedFromVerID="63c64c90-43bb-4401-b7d5-3c222833a0e8" branchedFromVer="v1" />
+  </eXo:Versions>
+  <eXo:ProjectVersions Count="2">
+    <eXo:ProjectVersion ID="b6ff1dda-a02e-480f-8810-fbf87c0862f8" versionID="63c64c90-43bb-4401-b7d5-3c222833a0e8" version="v1">
+      <eXo:AttributeTypes Count="0" />
+      <eXo:PIMSchema ID="53d3e05a-50c7-4c0c-b571-cba8c18499df" Caption="PIMSchema">
+        <eXo:PIMClasses Count="1">
+          <eXo:PIMClass ID="f8f0ee06-4cbb-45f8-bb55-6840e1125199" Name="Person">
+            <eXo:PIMAttributes Count="1">
+              <eXo:PIMAttribute ID="ce905e5d-f59f-407c-9ffe-2329ea72bdfc" Name="email" Lower="0" Upper="4" pimClassID="f8f0ee06-4cbb-45f8-bb55-6840e1125199" />
+            </eXo:PIMAttributes>
+            <eXo:PIMAssociationEnds Count="0" />
+          </eXo:PIMClass>
+        </eXo:PIMClasses>
+        <eXo:PIMAssociations Count="0" />
+      </eXo:PIMSchema>
+      <eXo:PSMSchemas Count="1">
+        <eXo:PSMSchema ID="b8448ee7-535d-431b-8e89-99379f91a3f9" Caption="PSM Diagram1 v1">
+          <eXo:PSMSchemaClass ID="a8d6403d-b191-4a4b-bc99-802fa98c2571" Name="PSM Diagram1 v1">
+            <eXo:ChildPSMAssociations Count="1">
+              <eXo:ChildPSMAssociation childPSMAssociationID="2c86edaf-80cb-42f8-b644-7fef8234dc92" childPSMAssociation="PSMAssociation from PSMSchemaClass: PSM Diagram1 v1 to PSMClass: *Person*" />
+            </eXo:ChildPSMAssociations>
+          </eXo:PSMSchemaClass>
+          <eXo:Roots Count="1">
+            <eXo:Root rootID="a8d6403d-b191-4a4b-bc99-802fa98c2571" root="PSMSchemaClass: PSM Diagram1 v1" />
+          </eXo:Roots>
+          <eXo:PSMClasses Count="2">
+            <eXo:PSMClass ID="6177fc09-fa09-495c-879c-8ea39dfc68f1" Name="Person" InterpretationID="f8f0ee06-4cbb-45f8-bb55-6840e1125199" Interpretation="PIMClass: *Person*" parentAssociationID="2c86edaf-80cb-42f8-b644-7fef8234dc92" parentAssociation="PSMAssociation from PSMSchemaClass: PSM Diagram1 v1 to PSMClass: *Person*">
+              <eXo:ChildPSMAssociations Count="1">
+                <eXo:ChildPSMAssociation childPSMAssociationID="c12ac6ca-66d7-49bb-99ec-7166f13df09b" childPSMAssociation="PSMAssociation from PSMClass: *Person* to PSMClass: *Person*" />
+              </eXo:ChildPSMAssociations>
+              <eXo:PSMAttributes Count="0" />
+            </eXo:PSMClass>
+            <eXo:PSMClass ID="6816cef4-51f7-47e0-b136-7bc72fe19ae2" Name="Person" InterpretationID="f8f0ee06-4cbb-45f8-bb55-6840e1125199" Interpretation="PIMClass: *Person*" parentAssociationID="c12ac6ca-66d7-49bb-99ec-7166f13df09b" parentAssociation="PSMAssociation from PSMClass: *Person* to PSMClass: *Person*">
+              <eXo:ChildPSMAssociations Count="0" />
+              <eXo:PSMAttributes Count="1">
+                <eXo:PSMAttribute ID="96f7fe57-3def-4977-b3f0-73872353d56a" Name="email" InterpretationID="ce905e5d-f59f-407c-9ffe-2329ea72bdfc" Interpretation="PIMAttribute: *Person.email* 0..4" Lower="0" Upper="4" Element="True" psmClassID="6816cef4-51f7-47e0-b136-7bc72fe19ae2" />
+              </eXo:PSMAttributes>
+            </eXo:PSMClass>
+          </eXo:PSMClasses>
+          <eXo:PSMAssociations Count="2">
+            <eXo:PSMAssociation ID="2c86edaf-80cb-42f8-b644-7fef8234dc92" Name="Person">
+              <eXo:Parent NodeType="PSMSchemaClass" parentID="a8d6403d-b191-4a4b-bc99-802fa98c2571" parent="PSMSchemaClass: PSM Diagram1 v1" />
+              <eXo:Child NodeType="PSMClass" childID="6177fc09-fa09-495c-879c-8ea39dfc68f1" child="PSMClass: *Person*" />
+            </eXo:PSMAssociation>
+            <eXo:PSMAssociation ID="c12ac6ca-66d7-49bb-99ec-7166f13df09b" Name="">
+              <eXo:Parent NodeType="PSMClass" parentID="6177fc09-fa09-495c-879c-8ea39dfc68f1" parent="PSMClass: *Person*" />
+              <eXo:Child NodeType="PSMClass" childID="6816cef4-51f7-47e0-b136-7bc72fe19ae2" child="PSMClass: *Person*" />
+            </eXo:PSMAssociation>
+          </eXo:PSMAssociations>
+          <eXo:PSMContentModels Count="0" />
+        </eXo:PSMSchema>
+      </eXo:PSMSchemas>
+      <eXo:PIMDiagrams Count="1">
+        <eXo:PIMDiagram ID="143de8f9-57ff-46b0-b3b0-499fb74a2e8b" schemaID="53d3e05a-50c7-4c0c-b571-cba8c18499df" schema="PIMSchema" Caption="PIMSchema">
+          <eXo:Components>
+            <eXo:Component Type="PIMClass" componentID="f8f0ee06-4cbb-45f8-bb55-6840e1125199" component="PIMClass: *Person*">
+              <eXo:ViewHelper X="282" Y="228" Width="NaN" Height="NaN" />
+            </eXo:Component>
+          </eXo:Components>
+        </eXo:PIMDiagram>
+      </eXo:PIMDiagrams>
+      <eXo:PSMDiagrams Count="1">
+        <eXo:PSMDiagram ID="8e4bdb2b-be30-4c37-a401-dd7c1f3a364c" schemaID="b8448ee7-535d-431b-8e89-99379f91a3f9" schema="PSM Diagram1 v1" Caption="PSM Diagram1 v1">
+          <eXo:Components>
+            <eXo:Component Type="PSMSchemaClass" componentID="a8d6403d-b191-4a4b-bc99-802fa98c2571" component="PSMSchemaClass: PSM Diagram1 v1">
+              <eXo:ViewHelper />
+            </eXo:Component>
+            <eXo:Component Type="PSMClass" componentID="6177fc09-fa09-495c-879c-8ea39dfc68f1" component="PSMClass: *Person*">
+              <eXo:ViewHelper />
+            </eXo:Component>
+            <eXo:Component Type="PSMClass" componentID="6816cef4-51f7-47e0-b136-7bc72fe19ae2" component="PSMClass: *Person*">
+              <eXo:ViewHelper />
+            </eXo:Component>
+            <eXo:Component Type="PSMAssociation" componentID="2c86edaf-80cb-42f8-b644-7fef8234dc92" component="PSMAssociation from PSMSchemaClass: PSM Diagram1 v1 to PSMClass: *Person*">
+              <eXo:ViewHelper>
+                <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                  <eXo:LabelVisible>True</eXo:LabelVisible>
+                </eXo:MainLabelViewHelper>
+                <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
+                  <eXo:LabelVisible>True</eXo:LabelVisible>
+                </eXo:CardinalityLabelViewHelper>
+              </eXo:ViewHelper>
+            </eXo:Component>
+            <eXo:Component Type="PSMAssociation" componentID="c12ac6ca-66d7-49bb-99ec-7166f13df09b" component="PSMAssociation from PSMClass: *Person* to PSMClass: *Person*">
+              <eXo:ViewHelper>
+                <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                  <eXo:LabelVisible>True</eXo:LabelVisible>
+                </eXo:MainLabelViewHelper>
+                <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
+                  <eXo:LabelVisible>True</eXo:LabelVisible>
+                </eXo:CardinalityLabelViewHelper>
+              </eXo:ViewHelper>
+            </eXo:Component>
+          </eXo:Components>
+        </eXo:PSMDiagram>
+      </eXo:PSMDiagrams>
+    </eXo:ProjectVersion>
+    <eXo:ProjectVersion ID="74ff3a8b-4902-41ad-ada2-e27adf098fad" versionID="6bc27e6b-3fd0-46d6-bf64-18da76f23ed2" version="v2">
+      <eXo:AttributeTypes Count="0" />
+      <eXo:PIMSchema ID="4fb77596-8ed1-4e89-ad07-eb2184dde8a4" Caption="PIMSchema">
+        <eXo:PIMClasses Count="1">
+          <eXo:PIMClass ID="bc635e84-85cb-4292-ba7f-74f242eda223" Name="Person">
+            <eXo:PIMAttributes Count="1">
+              <eXo:PIMAttribute ID="cb8df2f9-003c-4690-ba83-a5abc105748c" Name="email" Lower="0" Upper="4" pimClassID="bc635e84-85cb-4292-ba7f-74f242eda223" />
+            </eXo:PIMAttributes>
+            <eXo:PIMAssociationEnds Count="0" />
+          </eXo:PIMClass>
+        </eXo:PIMClasses>
+        <eXo:PIMAssociations Count="0" />
+      </eXo:PIMSchema>
+      <eXo:PSMSchemas Count="1">
+        <eXo:PSMSchema ID="a63e9747-8bcf-4d9e-8cab-06560a0943e5" Caption="PSM Diagram1 v2">
+          <eXo:PSMSchemaClass ID="196762df-b073-4d62-bd72-ead87457338b" Name="PSM Diagram1 v2">
+            <eXo:ChildPSMAssociations Count="1">
+              <eXo:ChildPSMAssociation childPSMAssociationID="1b393753-46af-43f7-ae86-1b47ebbf8f9c" childPSMAssociation="PSMAssociation from PSMSchemaClass: PSM Diagram1 v2 to PSMClass: *Person*" />
+            </eXo:ChildPSMAssociations>
+          </eXo:PSMSchemaClass>
+          <eXo:Roots Count="1">
+            <eXo:Root rootID="196762df-b073-4d62-bd72-ead87457338b" root="PSMSchemaClass: PSM Diagram1 v2" />
+          </eXo:Roots>
+          <eXo:PSMClasses Count="3">
+            <eXo:PSMClass ID="022ea6fd-cabe-42af-820e-ceeeb6460488" Name="Person" InterpretationID="bc635e84-85cb-4292-ba7f-74f242eda223" Interpretation="PIMClass: *Person*" parentAssociationID="1b393753-46af-43f7-ae86-1b47ebbf8f9c" parentAssociation="PSMAssociation from PSMSchemaClass: PSM Diagram1 v2 to PSMClass: *Person*">
+              <eXo:ChildPSMAssociations Count="1">
+                <eXo:ChildPSMAssociation childPSMAssociationID="eaa0cf06-8ea3-45c3-9aec-0ae31cbf4e95" childPSMAssociation="PSMAssociation from PSMClass: *Person* to PSMClass: *wrapper*" />
+              </eXo:ChildPSMAssociations>
+              <eXo:PSMAttributes Count="0" />
+            </eXo:PSMClass>
+            <eXo:PSMClass ID="c9716c8c-8758-425e-8353-750400a9096a" Name="Person" InterpretationID="bc635e84-85cb-4292-ba7f-74f242eda223" Interpretation="PIMClass: *Person*" parentAssociationID="7cfeb4b6-f5c6-4603-91fa-26bd4fed825d" parentAssociation="PSMAssociation from PSMClass: *wrapper* to PSMClass: *Person*">
+              <eXo:ChildPSMAssociations Count="0" />
+              <eXo:PSMAttributes Count="1">
+                <eXo:PSMAttribute ID="d669f448-c40f-4de3-856b-0ec27236e3c1" Name="email" InterpretationID="cb8df2f9-003c-4690-ba83-a5abc105748c" Interpretation="PIMAttribute: *Person.email* 0..4" Lower="0" Upper="4" Element="True" psmClassID="c9716c8c-8758-425e-8353-750400a9096a" />
+              </eXo:PSMAttributes>
+            </eXo:PSMClass>
+            <eXo:PSMClass ID="1ffa1b73-df5e-40d6-9594-793066509600" Name="wrapper" parentAssociationID="eaa0cf06-8ea3-45c3-9aec-0ae31cbf4e95" parentAssociation="PSMAssociation from PSMClass: *Person* to PSMClass: *wrapper*">
+              <eXo:ChildPSMAssociations Count="1">
+                <eXo:ChildPSMAssociation childPSMAssociationID="7cfeb4b6-f5c6-4603-91fa-26bd4fed825d" childPSMAssociation="PSMAssociation from PSMClass: *wrapper* to PSMClass: *Person*" />
+              </eXo:ChildPSMAssociations>
+              <eXo:PSMAttributes Count="0" />
+            </eXo:PSMClass>
+          </eXo:PSMClasses>
+          <eXo:PSMAssociations Count="3">
+            <eXo:PSMAssociation ID="1b393753-46af-43f7-ae86-1b47ebbf8f9c" Name="Person">
+              <eXo:Parent NodeType="PSMSchemaClass" parentID="196762df-b073-4d62-bd72-ead87457338b" parent="PSMSchemaClass: PSM Diagram1 v2" />
+              <eXo:Child NodeType="PSMClass" childID="022ea6fd-cabe-42af-820e-ceeeb6460488" child="PSMClass: *Person*" />
+            </eXo:PSMAssociation>
+            <eXo:PSMAssociation ID="7cfeb4b6-f5c6-4603-91fa-26bd4fed825d" Name="">
+              <eXo:Parent NodeType="PSMClass" parentID="1ffa1b73-df5e-40d6-9594-793066509600" parent="PSMClass: *wrapper*" />
+              <eXo:Child NodeType="PSMClass" childID="c9716c8c-8758-425e-8353-750400a9096a" child="PSMClass: *Person*" />
+            </eXo:PSMAssociation>
+            <eXo:PSMAssociation ID="eaa0cf06-8ea3-45c3-9aec-0ae31cbf4e95" Name="emails">
+              <eXo:Parent NodeType="PSMClass" parentID="022ea6fd-cabe-42af-820e-ceeeb6460488" parent="PSMClass: *Person*" />
+              <eXo:Child NodeType="PSMClass" childID="1ffa1b73-df5e-40d6-9594-793066509600" child="PSMClass: *wrapper*" />
+            </eXo:PSMAssociation>
+          </eXo:PSMAssociations>
+          <eXo:PSMContentModels Count="0" />
+        </eXo:PSMSchema>
+      </eXo:PSMSchemas>
+      <eXo:PIMDiagrams Count="1">
+        <eXo:PIMDiagram ID="7260a9aa-052e-470d-883b-10f32e4cfda6" schemaID="4fb77596-8ed1-4e89-ad07-eb2184dde8a4" schema="PIMSchema" Caption="PIMSchema">
+          <eXo:Components>
+            <eXo:Component Type="PIMClass" componentID="bc635e84-85cb-4292-ba7f-74f242eda223" component="PIMClass: *Person*">
+              <eXo:ViewHelper X="272" Y="206" Width="NaN" Height="NaN" />
+            </eXo:Component>
+          </eXo:Components>
+        </eXo:PIMDiagram>
+      </eXo:PIMDiagrams>
+      <eXo:PSMDiagrams Count="1">
+        <eXo:PSMDiagram ID="cd27adbe-a296-4f22-9d1e-8f3af9383ba6" schemaID="a63e9747-8bcf-4d9e-8cab-06560a0943e5" schema="PSM Diagram1 v2" Caption="PSM Diagram1 v2">
+          <eXo:Components>
+            <eXo:Component Type="PSMSchemaClass" componentID="196762df-b073-4d62-bd72-ead87457338b" component="PSMSchemaClass: PSM Diagram1 v2">
+              <eXo:ViewHelper />
+            </eXo:Component>
+            <eXo:Component Type="PSMClass" componentID="022ea6fd-cabe-42af-820e-ceeeb6460488" component="PSMClass: *Person*">
+              <eXo:ViewHelper />
+            </eXo:Component>
+            <eXo:Component Type="PSMClass" componentID="c9716c8c-8758-425e-8353-750400a9096a" component="PSMClass: *Person*">
+              <eXo:ViewHelper />
+            </eXo:Component>
+            <eXo:Component Type="PSMAssociation" componentID="1b393753-46af-43f7-ae86-1b47ebbf8f9c" component="PSMAssociation from PSMSchemaClass: PSM Diagram1 v2 to PSMClass: *Person*">
+              <eXo:ViewHelper>
+                <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                  <eXo:LabelVisible>True</eXo:LabelVisible>
+                </eXo:MainLabelViewHelper>
+                <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
+                  <eXo:LabelVisible>True</eXo:LabelVisible>
+                </eXo:CardinalityLabelViewHelper>
+              </eXo:ViewHelper>
+            </eXo:Component>
+            <eXo:Component Type="PSMAssociation" componentID="7cfeb4b6-f5c6-4603-91fa-26bd4fed825d" component="PSMAssociation from PSMClass: *wrapper* to PSMClass: *Person*">
+              <eXo:ViewHelper>
+                <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                  <eXo:LabelVisible>True</eXo:LabelVisible>
+                </eXo:MainLabelViewHelper>
+                <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
+                  <eXo:LabelVisible>True</eXo:LabelVisible>
+                </eXo:CardinalityLabelViewHelper>
+              </eXo:ViewHelper>
+            </eXo:Component>
+            <eXo:Component Type="PSMClass" componentID="1ffa1b73-df5e-40d6-9594-793066509600" component="PSMClass: *wrapper*">
+              <eXo:ViewHelper />
+            </eXo:Component>
+            <eXo:Component Type="PSMAssociation" componentID="eaa0cf06-8ea3-45c3-9aec-0ae31cbf4e95" component="PSMAssociation from PSMClass: *Person* to PSMClass: *wrapper*">
+              <eXo:ViewHelper>
+                <eXo:MainLabelViewHelper X="0" Y="-2" Width="NaN" Height="NaN">
+                  <eXo:LabelVisible>True</eXo:LabelVisible>
+                </eXo:MainLabelViewHelper>
+                <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
+                  <eXo:LabelVisible>True</eXo:LabelVisible>
+                </eXo:CardinalityLabelViewHelper>
+              </eXo:ViewHelper>
+            </eXo:Component>
+          </eXo:Components>
+        </eXo:PSMDiagram>
+      </eXo:PSMDiagrams>
+    </eXo:ProjectVersion>
+  </eXo:ProjectVersions>
+  <eXo:VersionLinks>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="c12ac6ca-66d7-49bb-99ec-7166f13df09b" item="PSMAssociation from PSMClass: *Person* to PSMClass: *Person*" versionNumber="63c64c90-43bb-4401-b7d5-3c222833a0e8" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="7cfeb4b6-f5c6-4603-91fa-26bd4fed825d" item="PSMAssociation from PSMClass: *wrapper* to PSMClass: *Person*" versionNumber="6bc27e6b-3fd0-46d6-bf64-18da76f23ed2" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="f8f0ee06-4cbb-45f8-bb55-6840e1125199" item="PIMClass: *Person*" versionNumber="63c64c90-43bb-4401-b7d5-3c222833a0e8" />
+      <eXo:LinkedItem itemID="bc635e84-85cb-4292-ba7f-74f242eda223" item="PIMClass: *Person*" versionNumber="6bc27e6b-3fd0-46d6-bf64-18da76f23ed2" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="ce905e5d-f59f-407c-9ffe-2329ea72bdfc" item="PIMAttribute: *Person.email* 0..4" versionNumber="63c64c90-43bb-4401-b7d5-3c222833a0e8" />
+      <eXo:LinkedItem itemID="cb8df2f9-003c-4690-ba83-a5abc105748c" item="PIMAttribute: *Person.email* 0..4" versionNumber="6bc27e6b-3fd0-46d6-bf64-18da76f23ed2" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="6177fc09-fa09-495c-879c-8ea39dfc68f1" item="PSMClass: *Person*" versionNumber="63c64c90-43bb-4401-b7d5-3c222833a0e8" />
+      <eXo:LinkedItem itemID="022ea6fd-cabe-42af-820e-ceeeb6460488" item="PSMClass: *Person*" versionNumber="6bc27e6b-3fd0-46d6-bf64-18da76f23ed2" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="6816cef4-51f7-47e0-b136-7bc72fe19ae2" item="PSMClass: *Person*" versionNumber="63c64c90-43bb-4401-b7d5-3c222833a0e8" />
+      <eXo:LinkedItem itemID="c9716c8c-8758-425e-8353-750400a9096a" item="PSMClass: *Person*" versionNumber="6bc27e6b-3fd0-46d6-bf64-18da76f23ed2" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="96f7fe57-3def-4977-b3f0-73872353d56a" item="PSMAttribute: *Person.email* 0..4" versionNumber="63c64c90-43bb-4401-b7d5-3c222833a0e8" />
+      <eXo:LinkedItem itemID="d669f448-c40f-4de3-856b-0ec27236e3c1" item="PSMAttribute: *Person.email* 0..4" versionNumber="6bc27e6b-3fd0-46d6-bf64-18da76f23ed2" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="53d3e05a-50c7-4c0c-b571-cba8c18499df" item="PIMSchema" versionNumber="63c64c90-43bb-4401-b7d5-3c222833a0e8" />
+      <eXo:LinkedItem itemID="4fb77596-8ed1-4e89-ad07-eb2184dde8a4" item="PIMSchema" versionNumber="6bc27e6b-3fd0-46d6-bf64-18da76f23ed2" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="b8448ee7-535d-431b-8e89-99379f91a3f9" item="PSM Diagram1 v1" versionNumber="63c64c90-43bb-4401-b7d5-3c222833a0e8" />
+      <eXo:LinkedItem itemID="a63e9747-8bcf-4d9e-8cab-06560a0943e5" item="PSM Diagram1 v2" versionNumber="6bc27e6b-3fd0-46d6-bf64-18da76f23ed2" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="a8d6403d-b191-4a4b-bc99-802fa98c2571" item="PSMSchemaClass: PSM Diagram1 v1" versionNumber="63c64c90-43bb-4401-b7d5-3c222833a0e8" />
+      <eXo:LinkedItem itemID="196762df-b073-4d62-bd72-ead87457338b" item="PSMSchemaClass: PSM Diagram1 v2" versionNumber="6bc27e6b-3fd0-46d6-bf64-18da76f23ed2" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="2c86edaf-80cb-42f8-b644-7fef8234dc92" item="PSMAssociation from PSMSchemaClass: PSM Diagram1 v1 to PSMClass: *Person*" versionNumber="63c64c90-43bb-4401-b7d5-3c222833a0e8" />
+      <eXo:LinkedItem itemID="1b393753-46af-43f7-ae86-1b47ebbf8f9c" item="PSMAssociation from PSMSchemaClass: PSM Diagram1 v2 to PSMClass: *Person*" versionNumber="6bc27e6b-3fd0-46d6-bf64-18da76f23ed2" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="7260a9aa-052e-470d-883b-10f32e4cfda6" item="PIMSchema" versionNumber="6bc27e6b-3fd0-46d6-bf64-18da76f23ed2" />
+      <eXo:LinkedItem itemID="143de8f9-57ff-46b0-b3b0-499fb74a2e8b" item="PIMSchema" versionNumber="63c64c90-43bb-4401-b7d5-3c222833a0e8" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="cd27adbe-a296-4f22-9d1e-8f3af9383ba6" item="PSM Diagram1 v2" versionNumber="6bc27e6b-3fd0-46d6-bf64-18da76f23ed2" />
+      <eXo:LinkedItem itemID="8e4bdb2b-be30-4c37-a401-dd7c1f3a364c" item="PSM Diagram1 v1" versionNumber="63c64c90-43bb-4401-b7d5-3c222833a0e8" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="1ffa1b73-df5e-40d6-9594-793066509600" item="PSMClass: *wrapper*" versionNumber="6bc27e6b-3fd0-46d6-bf64-18da76f23ed2" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="eaa0cf06-8ea3-45c3-9aec-0ae31cbf4e95" item="PSMAssociation from PSMClass: *Person* to PSMClass: *wrapper*" versionNumber="6bc27e6b-3fd0-46d6-bf64-18da76f23ed2" />
+    </eXo:LinkedItems>
+  </eXo:VersionLinks>
+</eXo:Project>

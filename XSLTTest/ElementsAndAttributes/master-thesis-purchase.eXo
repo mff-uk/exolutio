@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<eXo:Project xmlns:eXo="http://eXolutio.eu/Project/Serialization/" Version="3.0" UsesVersioning="True" Name="purchase-MT-branched">
+<eXo:Project xmlns:eXo="http://eXolutio.eu/Project/Serialization/" Version="3.0" UsesVersioning="True" Name="master-thesis-purchase">
   <eXo:Versions Count="2">
     <eXo:Version ID="8c371095-3670-436e-a30d-fcbb4082fd18" Label="v1" Number="1" />
     <eXo:Version ID="67ef21ef-01c4-434f-af75-b301b0f78f1b" Label="v2" Number="0" branchedFromVerID="8c371095-3670-436e-a30d-fcbb4082fd18" branchedFromVer="v1" />
@@ -114,10 +114,10 @@
           <eXo:Roots Count="1">
             <eXo:Root rootID="12b46b5a-909d-4114-bff6-321ab93dcce7" root="PSMSchemaClass: PurchaseSchema" />
           </eXo:Roots>
-          <eXo:PSMClasses Count="7">
+          <eXo:PSMClasses Count="8">
             <eXo:PSMClass ID="98924b8c-0b8d-41e0-ae70-81ae6e6ebb82" Name="Purchase" InterpretationID="e1fd2d62-e099-4347-939f-98060ccc40ac" Interpretation="PIMClass: *Purchase*" parentAssociationID="1a55ce6c-9a35-42bc-b8d6-cc144b077229" parentAssociation="PSMAssociation from PSMSchemaClass: PurchaseSchema to PSMClass: *Purchase*">
               <eXo:ChildPSMAssociations Count="3">
-                <eXo:ChildPSMAssociation childPSMAssociationID="03d4e12b-5abb-4b5e-ba6e-80cb29260959" childPSMAssociation="PSMAssociation from PSMClass: *Purchase* to PSMContentModel: Sequence" />
+                <eXo:ChildPSMAssociation childPSMAssociationID="369565c7-4686-4145-946e-39eaf89165a4" childPSMAssociation="PSMAssociation from PSMClass: *Purchase* to PSMClass: *CustomerInfo*" />
                 <eXo:ChildPSMAssociation childPSMAssociationID="017e54a7-a64a-422f-9ed6-624ab3e68817" childPSMAssociation="PSMAssociation from PSMClass: *Purchase* to PSMClass: *SalesAssistant*" />
                 <eXo:ChildPSMAssociation childPSMAssociationID="17e172de-53c4-403e-b5e6-5b189b50cf59" childPSMAssociation="PSMAssociation from PSMClass: *Purchase* to PSMClass: *Item*" />
               </eXo:ChildPSMAssociations>
@@ -125,14 +125,14 @@
                 <eXo:PSMAttribute ID="56e7e939-8b92-418b-b171-ccdd3ab4fc48" Name="purchase-date" InterpretationID="cc063f5b-4be9-45f8-afeb-f646996c8d82" Interpretation="PIMAttribute: *Purchase.purchase-date* 1..1" Element="False" psmClassID="98924b8c-0b8d-41e0-ae70-81ae6e6ebb82" />
               </eXo:PSMAttributes>
             </eXo:PSMClass>
-            <eXo:PSMClass ID="befabe86-5fb6-4a1e-9e8e-5f697eb8f768" Name="Customer" InterpretationID="0a10051a-2097-4edb-be73-fc763af91664" Interpretation="PIMClass: *Customer*" parentAssociationID="762c6dbb-c55f-41c0-9b90-a88256502750" parentAssociation="PSMAssociation from PSMContentModel: Sequence to PSMClass: *Customer*">
+            <eXo:PSMClass ID="befabe86-5fb6-4a1e-9e8e-5f697eb8f768" Name="Customer" InterpretationID="0a10051a-2097-4edb-be73-fc763af91664" Interpretation="PIMClass: *Customer*" parentAssociationID="762c6dbb-c55f-41c0-9b90-a88256502750" parentAssociation="PSMAssociation from PSMClass: *CustomerInfo* to PSMClass: *Customer*">
               <eXo:ChildPSMAssociations Count="0" />
               <eXo:PSMAttributes Count="2">
                 <eXo:PSMAttribute ID="e2fb5ff3-02f5-451f-9111-ea848b1d17e7" Name="customer-no" InterpretationID="81affa44-6cdb-4de4-a980-b1ca08a3781f" Interpretation="PIMAttribute: *Customer.customer-no* 1..1" Element="False" psmClassID="befabe86-5fb6-4a1e-9e8e-5f697eb8f768" />
                 <eXo:PSMAttribute ID="ea645dd4-a6a7-42a2-932d-26a48fc3a3ba" Name="email" InterpretationID="93f0e8bd-dfd2-4bcf-b646-2763ad1b5ba7" Interpretation="PIMAttribute: *Customer.email* 0..*" Lower="0" Upper="*" Element="True" psmClassID="befabe86-5fb6-4a1e-9e8e-5f697eb8f768" />
               </eXo:PSMAttributes>
             </eXo:PSMClass>
-            <eXo:PSMClass ID="ba691363-1919-463d-be48-9e4b070913ab" Name="Address" InterpretationID="b20c256f-9403-43da-810c-d651637b42c8" Interpretation="PIMClass: *Address*" parentAssociationID="4db45707-7a32-4a29-9c7b-8a82eb729e73" parentAssociation="PSMAssociation from PSMContentModel: Sequence to PSMClass: *Address*">
+            <eXo:PSMClass ID="ba691363-1919-463d-be48-9e4b070913ab" Name="Address" InterpretationID="b20c256f-9403-43da-810c-d651637b42c8" Interpretation="PIMClass: *Address*" parentAssociationID="4db45707-7a32-4a29-9c7b-8a82eb729e73" parentAssociation="PSMAssociation from PSMClass: *CustomerInfo* to PSMClass: *Address*">
               <eXo:ChildPSMAssociations Count="0" />
               <eXo:PSMAttributes Count="3">
                 <eXo:PSMAttribute ID="4ba9ea43-5129-42ee-83f5-59a60acab365" Name="postcode" InterpretationID="eedc3ca2-7cf0-4112-aecf-fc23cf0db500" Interpretation="PIMAttribute: *Address.postcode* 1..1" Element="True" psmClassID="ba691363-1919-463d-be48-9e4b070913ab" />
@@ -170,6 +170,13 @@
                 <eXo:PSMAttribute ID="10d4058a-272d-4c01-a68f-7a92fa1aa457" Name="emp-no" InterpretationID="a4d1479f-b491-4047-ae31-60e9813adea4" Interpretation="PIMAttribute: *SalesAssistant.emp-no* 1..1" Element="False" psmClassID="168fdac3-3e13-42d5-9262-40a5cf25a9a7" />
               </eXo:PSMAttributes>
             </eXo:PSMClass>
+            <eXo:PSMClass ID="6c6d84b9-351a-4064-b141-13f80024a2eb" Name="CustomerInfo" parentAssociationID="369565c7-4686-4145-946e-39eaf89165a4" parentAssociation="PSMAssociation from PSMClass: *Purchase* to PSMClass: *CustomerInfo*">
+              <eXo:ChildPSMAssociations Count="2">
+                <eXo:ChildPSMAssociation childPSMAssociationID="762c6dbb-c55f-41c0-9b90-a88256502750" childPSMAssociation="PSMAssociation from PSMClass: *CustomerInfo* to PSMClass: *Customer*" />
+                <eXo:ChildPSMAssociation childPSMAssociationID="4db45707-7a32-4a29-9c7b-8a82eb729e73" childPSMAssociation="PSMAssociation from PSMClass: *CustomerInfo* to PSMClass: *Address*" />
+              </eXo:ChildPSMAssociations>
+              <eXo:PSMAttributes Count="0" />
+            </eXo:PSMClass>
           </eXo:PSMClasses>
           <eXo:PSMAssociations Count="8">
             <eXo:PSMAssociation ID="1a55ce6c-9a35-42bc-b8d6-cc144b077229" Name="purchase-request">
@@ -177,7 +184,7 @@
               <eXo:Child NodeType="PSMClass" childID="98924b8c-0b8d-41e0-ae70-81ae6e6ebb82" child="PSMClass: *Purchase*" />
             </eXo:PSMAssociation>
             <eXo:PSMAssociation ID="762c6dbb-c55f-41c0-9b90-a88256502750" Name="customer" InterpretationID="e735e3f2-e774-45c1-b560-4fe7e5e7d43c" Interpretation="PIMAssociation **: PIMClass: *Purchase*, PIMClass: *Customer*">
-              <eXo:Parent NodeType="PSMContentModel" parentID="4a3abcd0-4ead-4082-92cd-7980be2cfc3b" parent="PSMContentModel: Sequence" />
+              <eXo:Parent NodeType="PSMClass" parentID="6c6d84b9-351a-4064-b141-13f80024a2eb" parent="PSMClass: *CustomerInfo*" />
               <eXo:Child NodeType="PSMClass" childID="befabe86-5fb6-4a1e-9e8e-5f697eb8f768" child="PSMClass: *Customer*" />
             </eXo:PSMAssociation>
             <eXo:PSMAssociation ID="17e172de-53c4-403e-b5e6-5b189b50cf59" Name="item" InterpretationID="650fc179-e8aa-4cee-b0d3-58761e8d533e" Interpretation="PIMAssociation **: PIMClass: *Purchase*, PIMClass: *Item*" Lower="0" Upper="*">
@@ -193,26 +200,19 @@
               <eXo:Child NodeType="PSMClass" childID="608337e4-1e93-4bdb-b01c-8863c2101547" child="PSMClass: *Product*" />
             </eXo:PSMAssociation>
             <eXo:PSMAssociation ID="4db45707-7a32-4a29-9c7b-8a82eb729e73" Name="address" InterpretationID="b1d8669f-3f76-40fc-89e2-052fd1475ee1" Interpretation="PIMAssociation **: PIMClass: *Purchase*, PIMClass: *Address*" Lower="0">
-              <eXo:Parent NodeType="PSMContentModel" parentID="4a3abcd0-4ead-4082-92cd-7980be2cfc3b" parent="PSMContentModel: Sequence" />
+              <eXo:Parent NodeType="PSMClass" parentID="6c6d84b9-351a-4064-b141-13f80024a2eb" parent="PSMClass: *CustomerInfo*" />
               <eXo:Child NodeType="PSMClass" childID="ba691363-1919-463d-be48-9e4b070913ab" child="PSMClass: *Address*" />
             </eXo:PSMAssociation>
             <eXo:PSMAssociation ID="017e54a7-a64a-422f-9ed6-624ab3e68817" Name="assistant" InterpretationID="ed2f865d-430b-4030-b0e2-7867fd592e0f" Interpretation="PIMAssociation *defaultname*: PIMClass: *SalesAssistant*, PIMClass: *Purchase*" Lower="0">
               <eXo:Parent NodeType="PSMClass" parentID="98924b8c-0b8d-41e0-ae70-81ae6e6ebb82" parent="PSMClass: *Purchase*" />
               <eXo:Child NodeType="PSMClass" childID="168fdac3-3e13-42d5-9262-40a5cf25a9a7" child="PSMClass: *SalesAssistant*" />
             </eXo:PSMAssociation>
-            <eXo:PSMAssociation ID="03d4e12b-5abb-4b5e-ba6e-80cb29260959" Name="customer-info">
+            <eXo:PSMAssociation ID="369565c7-4686-4145-946e-39eaf89165a4" Name="customer-info">
               <eXo:Parent NodeType="PSMClass" parentID="98924b8c-0b8d-41e0-ae70-81ae6e6ebb82" parent="PSMClass: *Purchase*" />
-              <eXo:Child NodeType="PSMContentModel" childID="4a3abcd0-4ead-4082-92cd-7980be2cfc3b" child="PSMContentModel: Sequence" />
+              <eXo:Child NodeType="PSMClass" childID="6c6d84b9-351a-4064-b141-13f80024a2eb" child="PSMClass: *CustomerInfo*" />
             </eXo:PSMAssociation>
           </eXo:PSMAssociations>
-          <eXo:PSMContentModels Count="1">
-            <eXo:PSMContentModel ID="4a3abcd0-4ead-4082-92cd-7980be2cfc3b" Name="defaultname" parentAssociationID="03d4e12b-5abb-4b5e-ba6e-80cb29260959" parentAssociation="PSMAssociation from PSMClass: *Purchase* to PSMContentModel: Sequence" Type="Sequence">
-              <eXo:ChildPSMAssociations Count="2">
-                <eXo:ChildPSMAssociation childPSMAssociationID="762c6dbb-c55f-41c0-9b90-a88256502750" childPSMAssociation="PSMAssociation from PSMContentModel: Sequence to PSMClass: *Customer*" />
-                <eXo:ChildPSMAssociation childPSMAssociationID="4db45707-7a32-4a29-9c7b-8a82eb729e73" childPSMAssociation="PSMAssociation from PSMContentModel: Sequence to PSMClass: *Address*" />
-              </eXo:ChildPSMAssociations>
-            </eXo:PSMContentModel>
-          </eXo:PSMContentModels>
+          <eXo:PSMContentModels Count="0" />
         </eXo:PSMSchema>
       </eXo:PSMSchemas>
       <eXo:PIMDiagrams Count="1">
@@ -425,7 +425,7 @@
                 </eXo:CardinalityLabelViewHelper>
               </eXo:ViewHelper>
             </eXo:Component>
-            <eXo:Component Type="PSMAssociation" componentID="762c6dbb-c55f-41c0-9b90-a88256502750" component="PSMAssociation from PSMContentModel: Sequence to PSMClass: *Customer*">
+            <eXo:Component Type="PSMAssociation" componentID="762c6dbb-c55f-41c0-9b90-a88256502750" component="PSMAssociation from PSMClass: *CustomerInfo* to PSMClass: *Customer*">
               <eXo:ViewHelper>
                 <eXo:MainLabelViewHelper X="-11" Y="0" Width="NaN" Height="NaN">
                   <eXo:LabelVisible>True</eXo:LabelVisible>
@@ -440,7 +440,7 @@
             </eXo:Component>
             <eXo:Component Type="PSMAssociation" componentID="17e172de-53c4-403e-b5e6-5b189b50cf59" component="PSMAssociation from PSMClass: *Purchase* to PSMClass: *Item*">
               <eXo:ViewHelper>
-                <eXo:MainLabelViewHelper X="3" Y="-1" Width="NaN" Height="NaN">
+                <eXo:MainLabelViewHelper X="7" Y="-18" Width="NaN" Height="NaN">
                   <eXo:LabelVisible>True</eXo:LabelVisible>
                 </eXo:MainLabelViewHelper>
                 <eXo:CardinalityLabelViewHelper X="-8" Y="-28" Width="NaN" Height="NaN">
@@ -468,7 +468,7 @@
                 </eXo:CardinalityLabelViewHelper>
               </eXo:ViewHelper>
             </eXo:Component>
-            <eXo:Component Type="PSMAssociation" componentID="4db45707-7a32-4a29-9c7b-8a82eb729e73" component="PSMAssociation from PSMContentModel: Sequence to PSMClass: *Address*">
+            <eXo:Component Type="PSMAssociation" componentID="4db45707-7a32-4a29-9c7b-8a82eb729e73" component="PSMAssociation from PSMClass: *CustomerInfo* to PSMClass: *Address*">
               <eXo:ViewHelper>
                 <eXo:MainLabelViewHelper X="12" Y="0" Width="NaN" Height="NaN">
                   <eXo:LabelVisible>True</eXo:LabelVisible>
@@ -491,12 +491,12 @@
                 </eXo:CardinalityLabelViewHelper>
               </eXo:ViewHelper>
             </eXo:Component>
-            <eXo:Component Type="PSMContentModel" componentID="4a3abcd0-4ead-4082-92cd-7980be2cfc3b" component="PSMContentModel: Sequence">
+            <eXo:Component Type="PSMClass" componentID="6c6d84b9-351a-4064-b141-13f80024a2eb" component="PSMClass: *CustomerInfo*">
               <eXo:ViewHelper />
             </eXo:Component>
-            <eXo:Component Type="PSMAssociation" componentID="03d4e12b-5abb-4b5e-ba6e-80cb29260959" component="PSMAssociation from PSMClass: *Purchase* to PSMContentModel: Sequence">
+            <eXo:Component Type="PSMAssociation" componentID="369565c7-4686-4145-946e-39eaf89165a4" component="PSMAssociation from PSMClass: *Purchase* to PSMClass: *CustomerInfo*">
               <eXo:ViewHelper>
-                <eXo:MainLabelViewHelper X="-34" Y="-5" Width="NaN" Height="NaN">
+                <eXo:MainLabelViewHelper X="-38" Y="-5" Width="NaN" Height="NaN">
                   <eXo:LabelVisible>True</eXo:LabelVisible>
                 </eXo:MainLabelViewHelper>
                 <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
@@ -617,18 +617,18 @@
           <eXo:Roots Count="1">
             <eXo:Root rootID="e87000bd-e125-42ad-aa63-09bf3c5c8c8b" root="PSMSchemaClass: PurchaseSchema" />
           </eXo:Roots>
-          <eXo:PSMClasses Count="8">
+          <eXo:PSMClasses Count="10">
             <eXo:PSMClass ID="60427630-f9f2-4214-a47d-cf77429fe898" Name="Purchase" InterpretationID="68984b6d-42ce-4831-9424-8a6c7bc3bb28" Interpretation="PIMClass: *Purchase*" parentAssociationID="753ad5d9-dcd6-4b7e-ba40-4975cada9929" parentAssociation="PSMAssociation from PSMSchemaClass: PurchaseSchema to PSMClass: *Purchase*">
               <eXo:ChildPSMAssociations Count="3">
-                <eXo:ChildPSMAssociation childPSMAssociationID="d293cee1-d3ee-4161-bd2a-2385187770c8" childPSMAssociation="PSMAssociation from PSMClass: *Purchase* to PSMContentModel: Sequence" />
+                <eXo:ChildPSMAssociation childPSMAssociationID="497f431a-82f9-4dfa-aa62-5aa26811b26d" childPSMAssociation="PSMAssociation from PSMClass: *Purchase* to PSMClass: *CustomerInfo*" />
                 <eXo:ChildPSMAssociation childPSMAssociationID="169aa32e-501e-4ea0-91e0-b36de3d4a54d" childPSMAssociation="PSMAssociation from PSMClass: *Purchase* to PSMClass: *SalesAssistant*" />
-                <eXo:ChildPSMAssociation childPSMAssociationID="6b65b3cc-5865-4834-9528-ec400fb0e197" childPSMAssociation="PSMAssociation from PSMClass: *Purchase* to PSMContentModel: Sequence" />
+                <eXo:ChildPSMAssociation childPSMAssociationID="938b3920-503c-4823-b2f0-bbb2a49b85a7" childPSMAssociation="PSMAssociation from PSMClass: *Purchase* to PSMClass: *Items*" />
               </eXo:ChildPSMAssociations>
               <eXo:PSMAttributes Count="1">
                 <eXo:PSMAttribute ID="ce0327b6-28b3-4c49-bd1b-a5042437fde8" Name="purchase-date" InterpretationID="2b780e3c-ed30-40bf-b137-b0a34992a24a" Interpretation="PIMAttribute: *Purchase.purchase-date* 1..1" Element="False" psmClassID="60427630-f9f2-4214-a47d-cf77429fe898" />
               </eXo:PSMAttributes>
             </eXo:PSMClass>
-            <eXo:PSMClass ID="ccefce39-18d3-49ec-9f23-2e2fe4b0f0c2" Name="Customer" InterpretationID="bb683d67-ef20-47c5-a7f8-bf46a5e3db4f" Interpretation="PIMClass: *Customer*" parentAssociationID="7af9ac24-4b04-447c-8b44-6d6bf2e4b55f" parentAssociation="PSMAssociation from PSMContentModel: Sequence to PSMClass: *Customer*">
+            <eXo:PSMClass ID="ccefce39-18d3-49ec-9f23-2e2fe4b0f0c2" Name="Customer" InterpretationID="bb683d67-ef20-47c5-a7f8-bf46a5e3db4f" Interpretation="PIMClass: *Customer*" parentAssociationID="7af9ac24-4b04-447c-8b44-6d6bf2e4b55f" parentAssociation="PSMAssociation from PSMClass: *CustomerInfo* to PSMClass: *Customer*">
               <eXo:ChildPSMAssociations Count="2">
                 <eXo:ChildPSMAssociation childPSMAssociationID="aaac5e0f-c5d1-4d12-93e3-00d1c93b9cf2" childPSMAssociation="PSMAssociation from PSMClass: *Customer* to PSMClass: *Address*" />
                 <eXo:ChildPSMAssociation childPSMAssociationID="fc4b4eba-5b8c-4d4b-a663-9865463db22e" childPSMAssociation="PSMAssociation from PSMClass: *Customer* to PSMClass: *CustEmail*" />
@@ -660,7 +660,7 @@
                 <eXo:PSMAttribute ID="a43c7123-0e70-4e00-b490-b8a3e42b034a" Name="unit-price" InterpretationID="dfd59dee-dcd0-4336-a5db-cc8a8bd2cd18" Interpretation="PIMAttribute: *Item.unit-price* 1..1" Element="True" psmClassID="f7274fe9-1bd9-4b83-917a-08a8d6454144" />
               </eXo:PSMAttributes>
             </eXo:PSMClass>
-            <eXo:PSMClass ID="d5bd4300-c1f4-4d3b-81a5-d776cbd90f3e" Name="Item" InterpretationID="23f0a06a-1c15-43e9-bcd1-ffcbced4d91a" Interpretation="PIMClass: *Item*" parentAssociationID="f33ea798-0ce9-4ece-b81f-a684e52bde57" parentAssociation="PSMAssociation from PSMContentModel: Sequence to PSMClass: *Item*">
+            <eXo:PSMClass ID="d5bd4300-c1f4-4d3b-81a5-d776cbd90f3e" Name="Item" InterpretationID="23f0a06a-1c15-43e9-bcd1-ffcbced4d91a" Interpretation="PIMClass: *Item*" parentAssociationID="f33ea798-0ce9-4ece-b81f-a684e52bde57" parentAssociation="PSMAssociation from PSMClass: *Items* to PSMClass: *Item*">
               <eXo:ChildPSMAssociations Count="2">
                 <eXo:ChildPSMAssociation childPSMAssociationID="2515c210-caf2-409b-9b27-01de30ca92d7" childPSMAssociation="PSMAssociation from PSMClass: *Item* to PSMClass: *Product*" />
                 <eXo:ChildPSMAssociation childPSMAssociationID="29025526-6f4c-4268-8cf8-60c6826eb8a7" childPSMAssociation="PSMAssociation from PSMClass: *Item* to PSMClass: *ItemI*" />
@@ -680,6 +680,18 @@
                 <eXo:PSMAttribute ID="f34ecbe0-3d73-4e20-8983-06dee17a0a86" Name="email" InterpretationID="02b94f7d-040e-46c5-8109-e1dabd257a45" Interpretation="PIMAttribute: *Customer.email* 0..*" Upper="5" Element="True" psmClassID="8b439660-4166-4d0b-9e3a-8dc8b1e567fd" />
               </eXo:PSMAttributes>
             </eXo:PSMClass>
+            <eXo:PSMClass ID="7308f7b4-b05f-4f3d-b25d-05f128678739" Name="CustomerInfo" parentAssociationID="497f431a-82f9-4dfa-aa62-5aa26811b26d" parentAssociation="PSMAssociation from PSMClass: *Purchase* to PSMClass: *CustomerInfo*">
+              <eXo:ChildPSMAssociations Count="1">
+                <eXo:ChildPSMAssociation childPSMAssociationID="7af9ac24-4b04-447c-8b44-6d6bf2e4b55f" childPSMAssociation="PSMAssociation from PSMClass: *CustomerInfo* to PSMClass: *Customer*" />
+              </eXo:ChildPSMAssociations>
+              <eXo:PSMAttributes Count="0" />
+            </eXo:PSMClass>
+            <eXo:PSMClass ID="78cdcbf4-c5ee-4bd4-b6f8-fffbec6c5ef5" Name="Items" parentAssociationID="938b3920-503c-4823-b2f0-bbb2a49b85a7" parentAssociation="PSMAssociation from PSMClass: *Purchase* to PSMClass: *Items*">
+              <eXo:ChildPSMAssociations Count="1">
+                <eXo:ChildPSMAssociation childPSMAssociationID="f33ea798-0ce9-4ece-b81f-a684e52bde57" childPSMAssociation="PSMAssociation from PSMClass: *Items* to PSMClass: *Item*" />
+              </eXo:ChildPSMAssociations>
+              <eXo:PSMAttributes Count="0" />
+            </eXo:PSMClass>
           </eXo:PSMClasses>
           <eXo:PSMAssociations Count="10">
             <eXo:PSMAssociation ID="753ad5d9-dcd6-4b7e-ba40-4975cada9929" Name="purchase-request">
@@ -687,11 +699,11 @@
               <eXo:Child NodeType="PSMClass" childID="60427630-f9f2-4214-a47d-cf77429fe898" child="PSMClass: *Purchase*" />
             </eXo:PSMAssociation>
             <eXo:PSMAssociation ID="7af9ac24-4b04-447c-8b44-6d6bf2e4b55f" Name="customer" InterpretationID="dc2af217-5b31-4b44-9a98-c91f34bb1bb1" Interpretation="PIMAssociation **: PIMClass: *Purchase*, PIMClass: *Customer*">
-              <eXo:Parent NodeType="PSMContentModel" parentID="249e240f-b5ad-452d-8000-194402f27fa4" parent="PSMContentModel: Sequence" />
+              <eXo:Parent NodeType="PSMClass" parentID="7308f7b4-b05f-4f3d-b25d-05f128678739" parent="PSMClass: *CustomerInfo*" />
               <eXo:Child NodeType="PSMClass" childID="ccefce39-18d3-49ec-9f23-2e2fe4b0f0c2" child="PSMClass: *Customer*" />
             </eXo:PSMAssociation>
             <eXo:PSMAssociation ID="f33ea798-0ce9-4ece-b81f-a684e52bde57" Name="item" InterpretationID="79b11b58-4a6c-4294-9f36-3ba7eeb12fd5" Interpretation="PIMAssociation **: PIMClass: *Purchase*, PIMClass: *Item*" Upper="5">
-              <eXo:Parent NodeType="PSMContentModel" parentID="0657e131-2968-45cf-a6cc-929d2102cd15" parent="PSMContentModel: Sequence" />
+              <eXo:Parent NodeType="PSMClass" parentID="78cdcbf4-c5ee-4bd4-b6f8-fffbec6c5ef5" parent="PSMClass: *Items*" />
               <eXo:Child NodeType="PSMClass" childID="d5bd4300-c1f4-4d3b-81a5-d776cbd90f3e" child="PSMClass: *Item*" />
             </eXo:PSMAssociation>
             <eXo:PSMAssociation ID="29025526-6f4c-4268-8cf8-60c6826eb8a7" Name="item-info">
@@ -710,31 +722,20 @@
               <eXo:Parent NodeType="PSMClass" parentID="60427630-f9f2-4214-a47d-cf77429fe898" parent="PSMClass: *Purchase*" />
               <eXo:Child NodeType="PSMClass" childID="62012e40-551d-4ac3-96e6-de16f9f40aef" child="PSMClass: *SalesAssistant*" />
             </eXo:PSMAssociation>
-            <eXo:PSMAssociation ID="6b65b3cc-5865-4834-9528-ec400fb0e197" Name="items">
-              <eXo:Parent NodeType="PSMClass" parentID="60427630-f9f2-4214-a47d-cf77429fe898" parent="PSMClass: *Purchase*" />
-              <eXo:Child NodeType="PSMContentModel" childID="0657e131-2968-45cf-a6cc-929d2102cd15" child="PSMContentModel: Sequence" />
-            </eXo:PSMAssociation>
-            <eXo:PSMAssociation ID="d293cee1-d3ee-4161-bd2a-2385187770c8" Name="customer-info">
-              <eXo:Parent NodeType="PSMClass" parentID="60427630-f9f2-4214-a47d-cf77429fe898" parent="PSMClass: *Purchase*" />
-              <eXo:Child NodeType="PSMContentModel" childID="249e240f-b5ad-452d-8000-194402f27fa4" child="PSMContentModel: Sequence" />
-            </eXo:PSMAssociation>
             <eXo:PSMAssociation ID="fc4b4eba-5b8c-4d4b-a663-9865463db22e" Name="emails">
               <eXo:Parent NodeType="PSMClass" parentID="ccefce39-18d3-49ec-9f23-2e2fe4b0f0c2" parent="PSMClass: *Customer*" />
               <eXo:Child NodeType="PSMClass" childID="8b439660-4166-4d0b-9e3a-8dc8b1e567fd" child="PSMClass: *CustEmail*" />
             </eXo:PSMAssociation>
+            <eXo:PSMAssociation ID="497f431a-82f9-4dfa-aa62-5aa26811b26d" Name="customer-info">
+              <eXo:Parent NodeType="PSMClass" parentID="60427630-f9f2-4214-a47d-cf77429fe898" parent="PSMClass: *Purchase*" />
+              <eXo:Child NodeType="PSMClass" childID="7308f7b4-b05f-4f3d-b25d-05f128678739" child="PSMClass: *CustomerInfo*" />
+            </eXo:PSMAssociation>
+            <eXo:PSMAssociation ID="938b3920-503c-4823-b2f0-bbb2a49b85a7" Name="items">
+              <eXo:Parent NodeType="PSMClass" parentID="60427630-f9f2-4214-a47d-cf77429fe898" parent="PSMClass: *Purchase*" />
+              <eXo:Child NodeType="PSMClass" childID="78cdcbf4-c5ee-4bd4-b6f8-fffbec6c5ef5" child="PSMClass: *Items*" />
+            </eXo:PSMAssociation>
           </eXo:PSMAssociations>
-          <eXo:PSMContentModels Count="2">
-            <eXo:PSMContentModel ID="0657e131-2968-45cf-a6cc-929d2102cd15" Name="defaultname" parentAssociationID="6b65b3cc-5865-4834-9528-ec400fb0e197" parentAssociation="PSMAssociation from PSMClass: *Purchase* to PSMContentModel: Sequence" Type="Sequence">
-              <eXo:ChildPSMAssociations Count="1">
-                <eXo:ChildPSMAssociation childPSMAssociationID="f33ea798-0ce9-4ece-b81f-a684e52bde57" childPSMAssociation="PSMAssociation from PSMContentModel: Sequence to PSMClass: *Item*" />
-              </eXo:ChildPSMAssociations>
-            </eXo:PSMContentModel>
-            <eXo:PSMContentModel ID="249e240f-b5ad-452d-8000-194402f27fa4" Name="defaultname" parentAssociationID="d293cee1-d3ee-4161-bd2a-2385187770c8" parentAssociation="PSMAssociation from PSMClass: *Purchase* to PSMContentModel: Sequence" Type="Sequence">
-              <eXo:ChildPSMAssociations Count="1">
-                <eXo:ChildPSMAssociation childPSMAssociationID="7af9ac24-4b04-447c-8b44-6d6bf2e4b55f" childPSMAssociation="PSMAssociation from PSMContentModel: Sequence to PSMClass: *Customer*" />
-              </eXo:ChildPSMAssociations>
-            </eXo:PSMContentModel>
-          </eXo:PSMContentModels>
+          <eXo:PSMContentModels Count="0" />
         </eXo:PSMSchema>
       </eXo:PSMSchemas>
       <eXo:PIMDiagrams Count="1">
@@ -950,7 +951,7 @@
             <eXo:Component Type="PSMClass" componentID="8b439660-4166-4d0b-9e3a-8dc8b1e567fd" component="PSMClass: *CustEmail*">
               <eXo:ViewHelper />
             </eXo:Component>
-            <eXo:Component Type="PSMAssociation" componentID="7af9ac24-4b04-447c-8b44-6d6bf2e4b55f" component="PSMAssociation from PSMContentModel: Sequence to PSMClass: *Customer*">
+            <eXo:Component Type="PSMAssociation" componentID="7af9ac24-4b04-447c-8b44-6d6bf2e4b55f" component="PSMAssociation from PSMClass: *CustomerInfo* to PSMClass: *Customer*">
               <eXo:ViewHelper>
                 <eXo:MainLabelViewHelper X="-11" Y="0" Width="NaN" Height="NaN">
                   <eXo:LabelVisible>True</eXo:LabelVisible>
@@ -973,9 +974,9 @@
             <eXo:Component Type="PSMClass" componentID="d5bd4300-c1f4-4d3b-81a5-d776cbd90f3e" component="PSMClass: *Item*">
               <eXo:ViewHelper />
             </eXo:Component>
-            <eXo:Component Type="PSMAssociation" componentID="f33ea798-0ce9-4ece-b81f-a684e52bde57" component="PSMAssociation from PSMContentModel: Sequence to PSMClass: *Item*">
+            <eXo:Component Type="PSMAssociation" componentID="f33ea798-0ce9-4ece-b81f-a684e52bde57" component="PSMAssociation from PSMClass: *Items* to PSMClass: *Item*">
               <eXo:ViewHelper>
-                <eXo:MainLabelViewHelper X="10" Y="-3" Width="NaN" Height="NaN">
+                <eXo:MainLabelViewHelper X="22" Y="-2" Width="NaN" Height="NaN">
                   <eXo:LabelVisible>True</eXo:LabelVisible>
                 </eXo:MainLabelViewHelper>
                 <eXo:CardinalityLabelViewHelper X="-41" Y="-20" Width="NaN" Height="NaN">
@@ -1026,12 +1027,12 @@
                 </eXo:CardinalityLabelViewHelper>
               </eXo:ViewHelper>
             </eXo:Component>
-            <eXo:Component Type="PSMContentModel" componentID="0657e131-2968-45cf-a6cc-929d2102cd15" component="PSMContentModel: Sequence">
+            <eXo:Component Type="PSMClass" componentID="7308f7b4-b05f-4f3d-b25d-05f128678739" component="PSMClass: *CustomerInfo*">
               <eXo:ViewHelper />
             </eXo:Component>
-            <eXo:Component Type="PSMAssociation" componentID="6b65b3cc-5865-4834-9528-ec400fb0e197" component="PSMAssociation from PSMClass: *Purchase* to PSMContentModel: Sequence">
+            <eXo:Component Type="PSMAssociation" componentID="497f431a-82f9-4dfa-aa62-5aa26811b26d" component="PSMAssociation from PSMClass: *Purchase* to PSMClass: *CustomerInfo*">
               <eXo:ViewHelper>
-                <eXo:MainLabelViewHelper X="6" Y="-17" Width="NaN" Height="NaN">
+                <eXo:MainLabelViewHelper X="-38" Y="-11" Width="NaN" Height="NaN">
                   <eXo:LabelVisible>True</eXo:LabelVisible>
                 </eXo:MainLabelViewHelper>
                 <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
@@ -1039,12 +1040,12 @@
                 </eXo:CardinalityLabelViewHelper>
               </eXo:ViewHelper>
             </eXo:Component>
-            <eXo:Component Type="PSMContentModel" componentID="249e240f-b5ad-452d-8000-194402f27fa4" component="PSMContentModel: Sequence">
+            <eXo:Component Type="PSMClass" componentID="78cdcbf4-c5ee-4bd4-b6f8-fffbec6c5ef5" component="PSMClass: *Items*">
               <eXo:ViewHelper />
             </eXo:Component>
-            <eXo:Component Type="PSMAssociation" componentID="d293cee1-d3ee-4161-bd2a-2385187770c8" component="PSMAssociation from PSMClass: *Purchase* to PSMContentModel: Sequence">
+            <eXo:Component Type="PSMAssociation" componentID="938b3920-503c-4823-b2f0-bbb2a49b85a7" component="PSMAssociation from PSMClass: *Purchase* to PSMClass: *Items*">
               <eXo:ViewHelper>
-                <eXo:MainLabelViewHelper X="-84" Y="-1" Width="NaN" Height="NaN">
+                <eXo:MainLabelViewHelper X="36" Y="-14" Width="NaN" Height="NaN">
                   <eXo:LabelVisible>True</eXo:LabelVisible>
                 </eXo:MainLabelViewHelper>
                 <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
@@ -1243,12 +1244,8 @@
       <eXo:LinkedItem itemID="753ad5d9-dcd6-4b7e-ba40-4975cada9929" item="PSMAssociation from PSMSchemaClass: PurchaseSchema to PSMClass: *Purchase*" versionNumber="67ef21ef-01c4-434f-af75-b301b0f78f1b" />
     </eXo:LinkedItems>
     <eXo:LinkedItems>
-      <eXo:LinkedItem itemID="762c6dbb-c55f-41c0-9b90-a88256502750" item="PSMAssociation from PSMContentModel: Sequence to PSMClass: *Customer*" versionNumber="8c371095-3670-436e-a30d-fcbb4082fd18" />
-      <eXo:LinkedItem itemID="7af9ac24-4b04-447c-8b44-6d6bf2e4b55f" item="PSMAssociation from PSMContentModel: Sequence to PSMClass: *Customer*" versionNumber="67ef21ef-01c4-434f-af75-b301b0f78f1b" />
-    </eXo:LinkedItems>
-    <eXo:LinkedItems>
-      <eXo:LinkedItem itemID="17e172de-53c4-403e-b5e6-5b189b50cf59" item="PSMAssociation from PSMClass: *Purchase* to PSMClass: *Item*" versionNumber="8c371095-3670-436e-a30d-fcbb4082fd18" />
-      <eXo:LinkedItem itemID="f33ea798-0ce9-4ece-b81f-a684e52bde57" item="PSMAssociation from PSMContentModel: Sequence to PSMClass: *Item*" versionNumber="67ef21ef-01c4-434f-af75-b301b0f78f1b" />
+      <eXo:LinkedItem itemID="762c6dbb-c55f-41c0-9b90-a88256502750" item="PSMAssociation from PSMClass: *CustomerInfo* to PSMClass: *Customer*" versionNumber="8c371095-3670-436e-a30d-fcbb4082fd18" />
+      <eXo:LinkedItem itemID="7af9ac24-4b04-447c-8b44-6d6bf2e4b55f" item="PSMAssociation from PSMClass: *CustomerInfo* to PSMClass: *Customer*" versionNumber="67ef21ef-01c4-434f-af75-b301b0f78f1b" />
     </eXo:LinkedItems>
     <eXo:LinkedItems>
       <eXo:LinkedItem itemID="70fb022e-ffad-4a0e-973e-caaef9c11315" item="PSMAssociation from PSMClass: *Item* to PSMClass: *ItemI*" versionNumber="8c371095-3670-436e-a30d-fcbb4082fd18" />
@@ -1259,7 +1256,7 @@
       <eXo:LinkedItem itemID="2515c210-caf2-409b-9b27-01de30ca92d7" item="PSMAssociation from PSMClass: *Item* to PSMClass: *Product*" versionNumber="67ef21ef-01c4-434f-af75-b301b0f78f1b" />
     </eXo:LinkedItems>
     <eXo:LinkedItems>
-      <eXo:LinkedItem itemID="4db45707-7a32-4a29-9c7b-8a82eb729e73" item="PSMAssociation from PSMContentModel: Sequence to PSMClass: *Address*" versionNumber="8c371095-3670-436e-a30d-fcbb4082fd18" />
+      <eXo:LinkedItem itemID="4db45707-7a32-4a29-9c7b-8a82eb729e73" item="PSMAssociation from PSMClass: *CustomerInfo* to PSMClass: *Address*" versionNumber="8c371095-3670-436e-a30d-fcbb4082fd18" />
       <eXo:LinkedItem itemID="aaac5e0f-c5d1-4d12-93e3-00d1c93b9cf2" item="PSMAssociation from PSMClass: *Customer* to PSMClass: *Address*" versionNumber="67ef21ef-01c4-434f-af75-b301b0f78f1b" />
     </eXo:LinkedItems>
     <eXo:LinkedItems>
@@ -1336,24 +1333,28 @@
       <eXo:LinkedItem itemID="ec879578-5047-4840-81a3-cd6aa00209b4" item="PSMAttribute: *SalesAssistant.name* 1..1" versionNumber="67ef21ef-01c4-434f-af75-b301b0f78f1b" />
     </eXo:LinkedItems>
     <eXo:LinkedItems>
-      <eXo:LinkedItem itemID="0657e131-2968-45cf-a6cc-929d2102cd15" item="PSMContentModel: Sequence" versionNumber="67ef21ef-01c4-434f-af75-b301b0f78f1b" />
-    </eXo:LinkedItems>
-    <eXo:LinkedItems>
-      <eXo:LinkedItem itemID="6b65b3cc-5865-4834-9528-ec400fb0e197" item="PSMAssociation from PSMClass: *Purchase* to PSMContentModel: Sequence" versionNumber="67ef21ef-01c4-434f-af75-b301b0f78f1b" />
-    </eXo:LinkedItems>
-    <eXo:LinkedItems>
-      <eXo:LinkedItem itemID="03d4e12b-5abb-4b5e-ba6e-80cb29260959" item="PSMAssociation from PSMClass: *Purchase* to PSMContentModel: Sequence" versionNumber="8c371095-3670-436e-a30d-fcbb4082fd18" />
-      <eXo:LinkedItem itemID="d293cee1-d3ee-4161-bd2a-2385187770c8" item="PSMAssociation from PSMClass: *Purchase* to PSMContentModel: Sequence" versionNumber="67ef21ef-01c4-434f-af75-b301b0f78f1b" />
-    </eXo:LinkedItems>
-    <eXo:LinkedItems>
-      <eXo:LinkedItem itemID="4a3abcd0-4ead-4082-92cd-7980be2cfc3b" item="PSMContentModel: Sequence" versionNumber="8c371095-3670-436e-a30d-fcbb4082fd18" />
-      <eXo:LinkedItem itemID="249e240f-b5ad-452d-8000-194402f27fa4" item="PSMContentModel: Sequence" versionNumber="67ef21ef-01c4-434f-af75-b301b0f78f1b" />
-    </eXo:LinkedItems>
-    <eXo:LinkedItems>
       <eXo:LinkedItem itemID="8b439660-4166-4d0b-9e3a-8dc8b1e567fd" item="PSMClass: *CustEmail*" versionNumber="67ef21ef-01c4-434f-af75-b301b0f78f1b" />
     </eXo:LinkedItems>
     <eXo:LinkedItems>
       <eXo:LinkedItem itemID="fc4b4eba-5b8c-4d4b-a663-9865463db22e" item="PSMAssociation from PSMClass: *Customer* to PSMClass: *CustEmail*" versionNumber="67ef21ef-01c4-434f-af75-b301b0f78f1b" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="78cdcbf4-c5ee-4bd4-b6f8-fffbec6c5ef5" item="PSMClass: *Items*" versionNumber="67ef21ef-01c4-434f-af75-b301b0f78f1b" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="938b3920-503c-4823-b2f0-bbb2a49b85a7" item="PSMAssociation from PSMClass: *Purchase* to PSMClass: *Items*" versionNumber="67ef21ef-01c4-434f-af75-b301b0f78f1b" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="6c6d84b9-351a-4064-b141-13f80024a2eb" item="PSMClass: *CustomerInfo*" versionNumber="8c371095-3670-436e-a30d-fcbb4082fd18" />
+      <eXo:LinkedItem itemID="7308f7b4-b05f-4f3d-b25d-05f128678739" item="PSMClass: *CustomerInfo*" versionNumber="67ef21ef-01c4-434f-af75-b301b0f78f1b" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="369565c7-4686-4145-946e-39eaf89165a4" item="PSMAssociation from PSMClass: *Purchase* to PSMClass: *CustomerInfo*" versionNumber="8c371095-3670-436e-a30d-fcbb4082fd18" />
+      <eXo:LinkedItem itemID="497f431a-82f9-4dfa-aa62-5aa26811b26d" item="PSMAssociation from PSMClass: *Purchase* to PSMClass: *CustomerInfo*" versionNumber="67ef21ef-01c4-434f-af75-b301b0f78f1b" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="17e172de-53c4-403e-b5e6-5b189b50cf59" item="PSMAssociation from PSMClass: *Purchase* to PSMClass: *Item*" versionNumber="8c371095-3670-436e-a30d-fcbb4082fd18" />
+      <eXo:LinkedItem itemID="f33ea798-0ce9-4ece-b81f-a684e52bde57" item="PSMAssociation from PSMClass: *Items* to PSMClass: *Item*" versionNumber="67ef21ef-01c4-434f-af75-b301b0f78f1b" />
     </eXo:LinkedItems>
   </eXo:VersionLinks>
 </eXo:Project>
