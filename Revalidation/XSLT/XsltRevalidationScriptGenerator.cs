@@ -605,6 +605,10 @@ namespace Exolutio.Revalidation.XSLT
 
                 return result;
             }
+            else if (targetNodeAbsoluteXPath == currentNodeAbsoluteXPath)
+            {
+                return new XPathExpr(".");
+            }
             else
             {
                 // find the uppermost common node
