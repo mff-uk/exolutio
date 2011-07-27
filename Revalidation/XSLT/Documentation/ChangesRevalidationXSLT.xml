@@ -65,6 +65,10 @@
 
       <AttributeRenamed>
         <p>!!!TODO!!!, zjistit, jak se to chova, prozkouset vsechny dalsi zmeny atributu</p>
+        <p>The general rule for rename is: mark node red, which results in generating a 
+        match template T for the attribute node. This will be called from the parent node 
+        (which will be blue, unless marked red due to other detected changes) and 
+        the template T will create the node with the appropriate name. </p>
       </AttributeRenamed>
     </Attribute>
   </XSLT>

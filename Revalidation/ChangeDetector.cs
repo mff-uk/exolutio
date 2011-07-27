@@ -254,11 +254,17 @@ namespace Exolutio.Revalidation
                 }
             }
 
+            foreach (PSMAssociationMember redNode in changeInstances.RedNodes.OfType<PSMAssociationMember>())
+            {
+                toDo.Enqueue(redNode);
+            }
+
             foreach (PSMAttribute psmAttribute in changeInstances.RedNodes.OfType<PSMAttribute>())
             {
                 if (!changeInstances.RedNodes.Contains(psmAttribute.PSMClass))
                 {
                     changeInstances.BlueNodes.AddIfNotContained(psmAttribute.PSMClass);
+                    toDo.Enqueue(psmAttribute.PSMClass);
                 }
             }
 
