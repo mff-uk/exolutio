@@ -318,7 +318,7 @@ namespace Exolutio.Model.PSM.Grammar.XSDTranslation
 
                         if (!psmAssociation.IsNamed && childInfo.GroupsRequired && childInfo.DefinesElements)                        
                         {
-                            element.XsdGroupRef(childInfo.ContentGroupName);
+                            element = element.XsdGroupRef(childInfo.ContentGroupName);
                         }
                         
                         if (childInfo.Node is PSMContentModel)
