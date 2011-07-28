@@ -1201,12 +1201,11 @@
             <eXo:ChildPSMAssociation childPSMAssociationID="2b157dcf-f231-4c5a-a30d-bfca7f275f1a" childPSMAssociation="PSMAssociation from PSMSchemaClass: DASTA to PSMClass: *Zprava*" />
           </eXo:ChildPSMAssociations>
         </eXo:PSMSchemaClass>
-        <eXo:Roots Count="3">
+        <eXo:Roots Count="2">
           <eXo:Root rootID="5f3ab9bb-063e-4e9b-b247-1af3f5dc4722" root="PSMClass: *DASTA-SCHEMA*" />
           <eXo:Root rootID="d72f7509-79d8-406d-971a-3a110f3738c8" root="PSMClass: *Adresa*" />
-          <eXo:Root rootID="a02fca17-37b9-4bc2-989f-1f44ea17f730" root="PSMClass: *defaultname*" />
         </eXo:Roots>
-        <eXo:PSMClasses Count="34">
+        <eXo:PSMClasses Count="33">
           <eXo:PSMClass ID="5f3ab9bb-063e-4e9b-b247-1af3f5dc4722" Name="DASTA-SCHEMA">
             <eXo:ChildPSMAssociations Count="1">
               <eXo:ChildPSMAssociation childPSMAssociationID="2d4be4f2-98db-4eb3-be85-90762edac635" childPSMAssociation="PSMAssociation from PSMClass: *DASTA-SCHEMA* to PSMSchemaClass: DASTA" />
@@ -1306,7 +1305,7 @@
             <eXo:PSMAttributes Count="0" />
           </eXo:PSMClass>
           <eXo:PSMClass ID="db4778fc-234d-42d9-9ccf-3ef540870bde" Name="Pacient" InterpretationID="65b05ede-0add-4137-8bb0-d72200a48ae8" Interpretation="PIMClass: *Pacient*" parentAssociationID="f1a7e94e-ea52-4f5e-9d4d-4b289530a3f5" parentAssociation="PSMAssociation from PSMClass: *Zprava* to PSMClass: *Pacient*">
-            <eXo:ChildPSMAssociations Count="9">
+            <eXo:ChildPSMAssociations Count="8">
               <eXo:ChildPSMAssociation childPSMAssociationID="b5a04df0-88de-4bec-81d9-975a7bfd9564" childPSMAssociation="PSMAssociation from PSMClass: *Pacient* to PSMClass: *Osoba*" />
               <eXo:ChildPSMAssociation childPSMAssociationID="4897e9ce-d8fa-4f74-bc01-d6f6d37146e5" childPSMAssociation="PSMAssociation from PSMClass: *Pacient* to PSMClass: *PacientData*" />
               <eXo:ChildPSMAssociation childPSMAssociationID="2bf4eb00-064a-489c-81a0-c1b9dfdac295" childPSMAssociation="PSMAssociation from PSMClass: *Pacient* to PSMClass: *Registrace*" />
@@ -1314,7 +1313,6 @@
               <eXo:ChildPSMAssociation childPSMAssociationID="e4db30c0-1c8a-414a-85c7-2e831944237d" childPSMAssociation="PSMAssociation from PSMClass: *Pacient* to PSMClass: *PribuzenskyVztah*" />
               <eXo:ChildPSMAssociation childPSMAssociationID="d49a5402-0ea4-4c41-b39a-083a67027821" childPSMAssociation="PSMAssociation from PSMClass: *Pacient* to PSMClass: *Praktik*" />
               <eXo:ChildPSMAssociation childPSMAssociationID="4b7b3c4b-c273-4414-84f7-101a073cde01" childPSMAssociation="PSMAssociation from PSMClass: *Pacient* to PSMClass: *Fyziologie*" />
-              <eXo:ChildPSMAssociation childPSMAssociationID="24ac7780-e031-41f8-9181-56a88637c764" childPSMAssociation="PSMAssociation from PSMClass: *Pacient* to PSMClass: *defaultname*" />
               <eXo:ChildPSMAssociation childPSMAssociationID="0e6739c9-77db-4822-b82a-8eae025a4831" childPSMAssociation="PSMAssociation from PSMClass: *Pacient* to PSMClass: *PojistnaSmlouva*" />
             </eXo:ChildPSMAssociations>
             <eXo:PSMAttributes Count="2">
@@ -1456,12 +1454,8 @@
             <eXo:RepresentedClass representedPSMClassId="d72f7509-79d8-406d-971a-3a110f3738c8" displayName="PSMClass: *Adresa*" />
             <eXo:PSMAttributes Count="0" />
           </eXo:PSMClass>
-          <eXo:PSMClass ID="a02fca17-37b9-4bc2-989f-1f44ea17f730" Name="defaultname">
-            <eXo:ChildPSMAssociations Count="0" />
-            <eXo:PSMAttributes Count="0" />
-          </eXo:PSMClass>
         </eXo:PSMClasses>
-        <eXo:PSMAssociations Count="33">
+        <eXo:PSMAssociations Count="32">
           <eXo:PSMAssociation ID="2d4be4f2-98db-4eb3-be85-90762edac635" Name="dasta">
             <eXo:Parent NodeType="PSMClass" parentID="5f3ab9bb-063e-4e9b-b247-1af3f5dc4722" parent="PSMClass: *DASTA-SCHEMA*" />
             <eXo:Child NodeType="PSMSchemaClass" childID="35514b36-4c2b-4ca5-b75c-2e630466f03b" child="PSMSchemaClass: DASTA" />
@@ -1581,10 +1575,6 @@
           <eXo:PSMAssociation ID="97e71a39-981c-4bde-82eb-44826aae5f3c" Name="" InterpretationID="c38e562a-8395-4b1a-aca8-a0d4d64b8637" Interpretation="PIMAssociation **: PIMClass: *PojistnaSmlouva*, PIMClass: *Pojistovna*">
             <eXo:Parent NodeType="PSMClass" parentID="79619be5-bcd7-4f0c-b363-dd13c1f0b887" parent="PSMClass: *PojistnaSmlouva*" />
             <eXo:Child NodeType="PSMClass" childID="5fc30b92-1348-4f86-be47-3e63061a4b92" child="PSMClass: *Pojistovna*" />
-          </eXo:PSMAssociation>
-          <eXo:PSMAssociation ID="24ac7780-e031-41f8-9181-56a88637c764" Name="pv">
-            <eXo:Parent NodeType="PSMClass" parentID="db4778fc-234d-42d9-9ccf-3ef540870bde" parent="PSMClass: *Pacient*" />
-            <eXo:Child NodeType="PSMClass" childID="a02fca17-37b9-4bc2-989f-1f44ea17f730" child="PSMClass: *defaultname*" />
           </eXo:PSMAssociation>
           <eXo:PSMAssociation ID="76b6a7eb-6b0d-4613-bb62-bc3472a260ba" Name="a" InterpretationID="f2572054-cb76-4576-add4-a47d7c145951" Interpretation="PIMAssociation **: PIMClass: *Pojistovna*, PIMClass: *Adresa*">
             <eXo:Parent NodeType="PSMClass" parentID="5fc30b92-1348-4f86-be47-3e63061a4b92" parent="PSMClass: *Pojistovna*" />
@@ -4911,19 +4901,6 @@
               </eXo:CardinalityLabelViewHelper>
             </eXo:ViewHelper>
           </eXo:Component>
-          <eXo:Component Type="PSMClass" componentID="a02fca17-37b9-4bc2-989f-1f44ea17f730" component="PSMClass: *defaultname*">
-            <eXo:ViewHelper />
-          </eXo:Component>
-          <eXo:Component Type="PSMAssociation" componentID="24ac7780-e031-41f8-9181-56a88637c764" component="PSMAssociation from PSMClass: *Pacient* to PSMClass: *defaultname*">
-            <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
-                <eXo:LabelVisible>True</eXo:LabelVisible>
-              </eXo:MainLabelViewHelper>
-              <eXo:CardinalityLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
-                <eXo:LabelVisible>True</eXo:LabelVisible>
-              </eXo:CardinalityLabelViewHelper>
-            </eXo:ViewHelper>
-          </eXo:Component>
           <eXo:Component Type="PSMClass" componentID="bce2ca9c-b720-40fd-8d74-cc2413070e8e" component="PSMClass: *AdresaPojistovny*">
             <eXo:ViewHelper />
           </eXo:Component>
@@ -5151,7 +5128,7 @@
               <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
-              <eXo:CardinalityLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:CardinalityLabelViewHelper>
             </eXo:ViewHelper>
