@@ -139,7 +139,7 @@ namespace Exolutio.Model.PSM.Grammar.XSDTranslation
         {
             if (psmAttribute.AttributeType == null)
             {
-                return;
+                
             }
             else
             {

@@ -132,8 +132,12 @@ namespace Exolutio.Revalidation.XSLT
                         }
                     }
 
-                    // not a root class => node template (wrapping template)
-                    if (!(psmComponent is PSMClass && PSMSchemaNewVersion.Roots.Contains((PSMClass)psmComponent)))
+                    /* not a root class 
+                       and not a group node given with association given a name in the new version
+                       => node template (wrapping template)
+                    */
+                    if (!(psmComponent is PSMClass && (PSMSchemaNewVersion.Roots.Contains((PSMClass)psmComponent) || DetectedChangeInstances.IsGroupNode(psmComponent)))
+                        || (DetectedChangeInstances.IsGroupNode(psmComponent) && (((PSMClass)psmComponent).ParentAssociation != null && ((PSMClass)psmComponent).ParentAssociation.IsNamed)))
                     {
                         // TODO: unnamed associations - group clases
                         Template processNodeTemplate = new Template();
@@ -265,7 +269,7 @@ namespace Exolutio.Revalidation.XSLT
                 if (!DetectedChangeInstances.IsAddedNode(psmComponent))
                 {
                     XPathExpr currentInstanceCall = processNodeTemplate.GroupNodeTemplate ? new XPathExpr("$ci") : new XPathExpr("./(* | @*)");
-                    parameters = new XDocumentXsltExtensions.TemplateParameter[] { XDocumentXsltExtensions.CreateCurrentInstanceParameterCall(currentInstanceCall) };
+                    parameters = new[] { XDocumentXsltExtensions.CreateCurrentInstanceParameterCall(currentInstanceCall) };
                 }
 
                 contentElement.XslCallTemplate(nodeInfo.ProcessAttributesTemplate.Name, parameters);
@@ -278,7 +282,7 @@ namespace Exolutio.Revalidation.XSLT
                 if (!DetectedChangeInstances.IsAddedNode(psmComponent))
                 {
                     XPathExpr currentInstanceCall = processNodeTemplate.GroupNodeTemplate ? new XPathExpr("$ci") : new XPathExpr("./(* | @*)");
-                    parameters = new XDocumentXsltExtensions.TemplateParameter[] { XDocumentXsltExtensions.CreateCurrentInstanceParameterCall(currentInstanceCall) };
+                    parameters = new[] { XDocumentXsltExtensions.CreateCurrentInstanceParameterCall(currentInstanceCall) };
                 }
 
                 contentElement.XslCallTemplate(nodeInfo.ProcessElementsTemplate.Name, parameters);
@@ -351,9 +355,23 @@ namespace Exolutio.Revalidation.XSLT
         }
 
         private void GenGroupNodeSingleReference(XElement callingElement, Template callingTemplate, TemplateReference reference)
-        {
+        {            
             RevalidationNodeInfo calledNodeInfo = nodeInfos[reference.ReferencedNode];
-            callingElement.XslCallTemplate(calledNodeInfo.ProcessNodeTemplate.Name, XDocumentXsltExtensions.CreateCurrentInstanceParameterCall("current-group()"));    
+            if (calledNodeInfo.ProcessNodeTemplate != null)
+            {
+                callingElement.XslCallTemplate(calledNodeInfo.ProcessNodeTemplate.Name, XDocumentXsltExtensions.CreateCurrentInstanceParameterCall("current-group()"));
+            }
+            else
+            {
+                if (callingTemplate.AttributesTemplate && calledNodeInfo.ProcessAttributesTemplate != null)
+                {
+                    callingElement.XslCallTemplate(calledNodeInfo.ProcessAttributesTemplate.Name, XDocumentXsltExtensions.CreateCurrentInstanceParameterCall("current-group()"));
+                }
+                if (callingTemplate.ElementsTemplate && calledNodeInfo.ProcessElementsTemplate != null)
+                {
+                    callingElement.XslCallTemplate(calledNodeInfo.ProcessElementsTemplate.Name, XDocumentXsltExtensions.CreateCurrentInstanceParameterCall("current-group()"));
+                }
+            }
         }
 
         private void GenCardinalityReference(XElement templateElement, Template callingTemplate, TemplateReference reference)

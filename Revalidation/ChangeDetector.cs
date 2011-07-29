@@ -403,13 +403,20 @@ namespace Exolutio.Revalidation
                     }
                 }
             }
+
+            /* parent node of every red group node is marked red */
+            List<PSMComponent> redNodesCopy = changeInstances.RedNodes.ToList();
+            foreach (PSMComponent c in redNodesCopy)
+            {
+                if (changeInstances.IsGroupNode(c))
+                {
+                    CurrentParentAsRedNode(changeInstances.RedNodes, c);
+                }
+            }
         }
 
-        private void CurrentParentAsRedNode(List<PSMComponent> redNodes, ChangeInstance changeInstance)
+        private void CurrentParentAsRedNode(List<PSMComponent> redNodes, PSMComponent componentNewVersion)
         {
-            PSMComponent componentNewVersion = changeInstance is IExistingComponentChange ?
-                (PSMComponent)((IExistingComponentChange)changeInstance).ComponentNewVersion :
-                (PSMComponent)((IAdditionChange)changeInstance).ComponentNewVersion;
             PSMComponent currentParent =
                 componentNewVersion is PSMAssociation ? ((PSMAssociation)componentNewVersion).Parent : ModelIterator.GetPSMParent(componentNewVersion, true);
 
@@ -417,6 +424,14 @@ namespace Exolutio.Revalidation
             {
                 redNodes.AddIfNotContained(currentParent);
             }
+        }
+
+        private void CurrentParentAsRedNode(List<PSMComponent> redNodes, ChangeInstance changeInstance)
+        {
+            PSMComponent componentNewVersion = changeInstance is IExistingComponentChange ?
+                (PSMComponent)((IExistingComponentChange)changeInstance).ComponentNewVersion :
+                (PSMComponent)((IAdditionChange)changeInstance).ComponentNewVersion;
+            CurrentParentAsRedNode(redNodes, componentNewVersion);
         }
 
         private void FormerParentAsRedNode(List<PSMComponent> redNodes, ChangeInstance changeInstance)

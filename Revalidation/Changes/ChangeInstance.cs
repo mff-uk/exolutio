@@ -41,7 +41,7 @@ namespace Exolutio.Revalidation.Changes
         {
             get
             {
-                return GetType().Name.Replace("Change", string.Empty);
+                return GetType().Name.Replace("Instance", string.Empty);
             }
         }
 

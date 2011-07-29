@@ -11,7 +11,7 @@
         <xs:element name="item" type="Item" maxOccurs="5" />
       </xs:sequence>
     </xs:sequence>
-    <xs:attribute name="purchase-date" />
+    <xs:attribute name="purchase-date" use="required" />
   </xs:complexType>
   <xs:complexType name="SalesAssistant">
     <xs:sequence>
@@ -24,7 +24,7 @@
       <xs:element name="delivery-address" type="Address" minOccurs="0" />
       <xs:element name="emails" type="CustEmail" />
     </xs:sequence>
-    <xs:attribute name="customer-no" />
+    <xs:attribute name="customer-no" use="required" />
   </xs:complexType>
   <xs:complexType name="Item">
     <xs:sequence>
@@ -46,9 +46,9 @@
   </xs:complexType>
   <xs:complexType name="Product">
     <xs:sequence />
-    <xs:attribute name="code" />
-    <xs:attribute name="subcode" />
-    <xs:attribute name="title" />
+    <xs:attribute name="code" use="required" />
+    <xs:attribute name="subcode" use="required" />
+    <xs:attribute name="title" use="required" />
   </xs:complexType>
   <xs:complexType name="ItemI">
     <xs:sequence>
