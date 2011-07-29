@@ -2,24 +2,28 @@
     <ResizingPanel ResizeWidth="*" ResizeHeight="*" EffectiveSize="0,0" Orientation="Horizontal">
         <ResizingPanel ResizeWidth="*" ResizeHeight="*" EffectiveSize="1420,722" Orientation="Vertical">
             <DocumentPaneResizingPanel ResizeWidth="*" ResizeHeight="*" EffectiveSize="1420,722" Orientation="Horizontal">
-                <DocumentPane IsMain="true" ResizeWidth="0.334913721313243*" ResizeHeight="*" EffectiveSize="471.558519609046,722">
+                <DocumentPane IsMain="true" ResizeWidth="0.338403579469732*" ResizeHeight="*" EffectiveSize="476.472239893382,722">
                     <DocumentContent Name="D0acd6029_d74e_4a6b_bb35_422262646772" />
                 </DocumentPane>
-                <DocumentPane ResizeWidth="0.465909090909091*" ResizeHeight="*" EffectiveSize="656,722">
-                    <DocumentContent Name="D4ec55c06_645a_42e8_8eea_7dfafc2c50eb" />
+                <DocumentPane SelectedIndex="1" ResizeWidth="0.470900397802995*" ResizeHeight="*" EffectiveSize="663.027760106618,722">
+                    <DocumentContent Name="D1c7f6502_3a32_4ec7_93f3_4611426f87ff" />
+                    <DocumentContent Name="Dac357043_fd7b_4201_bfdd_7c19f85090b3" />
                 </DocumentPane>
-                <DocumentPaneResizingPanel ResizeWidth="0.199177187777666*" ResizeHeight="*" EffectiveSize="280.441480390954,722" Orientation="Vertical">
-                    <DocumentPane ResizeWidth="0.396290050590219*" ResizeHeight="0.656424581005587*" EffectiveSize="280,283.743676222597">
+                <DocumentPaneResizingPanel ResizeWidth="0.190696022727273*" ResizeHeight="*" EffectiveSize="268.5,722" Orientation="Vertical">
+                    <DocumentPane ResizeWidth="0.396290050590219*" ResizeHeight="0.656424581005587*" EffectiveSize="268,283.743676222597">
                         <DocumentContent Name="Dc96b75a9_0972_48b2_9266_cc2d761aba70" />
                     </DocumentPane>
-                    <DocumentPaneResizingPanel ResizeWidth="0.603709949409781*" ResizeHeight="*" EffectiveSize="280,432.256323777403" Orientation="Horizontal">
-                        <DocumentPane ResizeWidth="0.436031418402396*" ResizeHeight="*" EffectiveSize="116.856420131842,432">
+                    <DocumentPaneResizingPanel ResizeWidth="0.603709949409781*" ResizeHeight="*" EffectiveSize="268,432.256323777403" Orientation="Horizontal">
+                        <DocumentPane ResizeWidth="0.366141732283465*" ResizeHeight="*" EffectiveSize="91.5354330708661,432">
+                            <DocumentContent Name="D4ec55c06_645a_42e8_8eea_7dfafc2c50eb" />
+                        </DocumentPane>
+                        <DocumentPane ResizeWidth="0.262635131773376*" ResizeHeight="*" EffectiveSize="65.6587829433441,432">
                             <DocumentContent Name="D02cb70f7_fda4_45a4_947d_da940ce26b18" />
                         </DocumentPane>
-                        <DocumentPane ResizeWidth="0.462271388890778*" ResizeHeight="*" EffectiveSize="123.888732222729,432">
+                        <DocumentPane ResizeWidth="0.275755117017568*" ResizeHeight="*" EffectiveSize="68.9387792543919,432">
                             <DocumentContent Name="D2ed717cf_4e3b_41ec_8d2c_ad51d6688f32" />
                         </DocumentPane>
-                        <DocumentPane ResizeWidth="0.101697192706826*" ResizeHeight="*" EffectiveSize="27.2548476454294,432">
+                        <DocumentPane ResizeWidth="0.0954680189255915*" ResizeHeight="*" EffectiveSize="23.8670047313979,432">
                             <DocumentContent Name="Daf98636f_f286_417e_a247_08aff52d6df7" />
                         </DocumentPane>
                     </DocumentPaneResizingPanel>
