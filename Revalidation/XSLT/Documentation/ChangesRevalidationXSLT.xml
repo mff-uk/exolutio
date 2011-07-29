@@ -1,22 +1,54 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Revalidation>
   <XSLT>
+    <GeneralPrinciples>
+      <TopLevelTemplates>
+        Each red node => top level template.
+        Existing node => matching template
+        Added node => named tamplate
+
+        Exceptions: 
+        <obsolete>group nodes always have named template, even when they are existing nodes.</obsolete>
+        <update>group nodes do not have this kind of 'top level' template</update>
+
+        Each top level template (called node wrapping template) calls its attribute template and
+        elements template (these have ATT and ELM postfixes in their names). We have these separately,
+        so that they can be called from structural representatives.
+
+        Each ATT/ELM template have parameter 'ci' (short for current instance) filled by the calling template to contain
+        the corresponding XML fragment. When ATT/ELM template is called from the wrapping template,
+        simple expression "./(* | @*)" is used to supply the value for 'ci' attribute.
+      
+        Additionally: group nodes do not have wrapping template, but they have ATT and ELM templates, which are called 
+        from their parent node's template (which is always a red node, see <a href="#mark-group-parents-red" />).
+      </TopLevelTemplates>
+      <TemplateReferences>
+        This section describes how templates call each other. 
+        
+        Exception: group nodes. Group nodes do not have wrapping templates. Since group can define both attributes
+        and elements and both propagate upwards, the attribute template and elemente template must be called separately
+        from the parent node's template (and possibly other templates may be called between them). 
+        
+        When a node C has two groups in its content G1 and G2, the order of calls from C will be
+        G1-ATT, G2-Att, G1-ELM, G2-ELM.   
+      </TemplateReferences>
+    </GeneralPrinciples>
     <Groups>
       <remarks>
-        Associations without names cause problems when implementing revalidation via XSLT. 
-        
+        Associations without names cause problems when implementing revalidation via XSLT.
+
         We want to follow the basic pattern one template = one red node. Each red node with parent association without name will
-        is a group node. 
-        
-        Group nodes do not have one wrapping elements, that is why the template can not be matching templates, but have to be named 
-        templates. Group template have one variable containing the instance of the group (it will be a sequence of attribute and 
+        is a group node.
+
+        Group nodes do not have one wrapping elements, that is why the template can not be matching templates, but have to be named
+        templates. Group template have one variable containing the instance of the group (it will be a sequence of attribute and
         element nodes).
-        
+
         Group template must be called explicitly (it is a named template). This complicates the basic approach: when there is a green
-        node having a red group node in its content, using 'apply-templates' will not work, because apply-templates never calls 
-        named template (and group template is a named template).     
-        
-        The rule to solve this: mark every parent node of a red group node red as well. 
+        node having a red group node in its content, using 'apply-templates' will not work, because apply-templates never calls
+        named template (and group template is a named template).
+
+        rule to solve this: <a id="mark-group-parents-red">mark every parent node of a red group node red as well. </a>
       </remarks>      
     </Groups>
     <Attribute>

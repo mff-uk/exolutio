@@ -1,5 +1,4 @@
-﻿//#define SAVE_DOC_FOR_TEST
-
+﻿using System;
 using System.Xml.Linq;
 using Exolutio.Model.PSM;
 using Exolutio.Model.PSM.Grammar;
@@ -20,12 +19,12 @@ namespace Exolutio.View.Commands.Grammar
                 schemaGenerator.GenerateXSDStructure();
                 XDocument xmlSchemaDocument = schemaGenerator.GetXsd();
                 
-                #if SAVE_DOC_FOR_TEST
-                xmlSchemaDocument.Save(@"D:\Programování\EVOXSVN\XSLTTest\LastSchema.xsd");
+                if (Environment.MachineName.Contains("TRUPIK"))
+                {
+                    xmlSchemaDocument.Save(@"D:\Programování\EVOXSVN\XSLTTest\LastSchema.xsd");
+                }
+
                 Current.MainWindow.FilePresenter.DisplayFile(xmlSchemaDocument, EDisplayedFileType.XSD, Current.ActiveDiagram.Caption + ".xsd", schemaGenerator.Log);
-                #else
-                Current.MainWindow.FilePresenter.DisplayFile(xmlSchemaDocument, EDisplayedFileType.XSD, Current.ActiveDiagram.Caption + ".xsd", schemaGenerator.Log);
-                #endif
             }
         }
 

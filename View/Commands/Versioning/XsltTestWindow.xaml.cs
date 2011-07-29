@@ -1,6 +1,4 @@
-﻿//#define SAVE_DOC_FOR_TEST
-//#define AUTOCREATE_SAMPLES
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -131,13 +129,11 @@ namespace Exolutio.View.Commands
             UpdateFolding();
         }
 
-#if DEBUG
-#if SAVE_DOC_FOR_TEST
         const string SAVE_DIR = @"D:\Programování\EVOXSVN\XSLTTest\";
         const string SAVE_DOCUMENT = @"D:\Programování\EVOXSVN\XSLTTest\LastInput.xml";
+        
         public const string SAVE_STYLESHEET = @"D:\Programování\EVOXSVN\XSLTTest\LastStylesheet.xslt";
-#endif 
-#endif 
+
         public static string XDocumentToString(XDocument doc)
         {
             StringBuilder sb = new StringBuilder();
@@ -164,8 +160,6 @@ namespace Exolutio.View.Commands
 
         private static void SaveOutput(string sampleDoc)
         {
-#if DEBUG
-#if SAVE_DOC_FOR_TEST
             int si = sampleDoc.IndexOf("xmlns:xsi=\"");
             int ei = sampleDoc.IndexOf("\"", si + "xmlns:xsi=\"".Length) + 1;
             string text = si != -1 ? sampleDoc.Remove(si, ei - si) : sampleDoc;
@@ -174,8 +168,6 @@ namespace Exolutio.View.Commands
             string xmlns = text.Substring(si, ei - si);
             text = text.Remove(si, ei - si);
             File.WriteAllText(SAVE_DOCUMENT, text.Replace("utf-16", "utf-8"), Encoding.UTF8);
-#endif
-#endif
         }
 
         public static bool? ShowDialog(DetectedChangeInstancesSet changeInstances, PSMSchema activeDiagramOldVersion, PSMSchema activeDiagramNewVersion)
@@ -234,8 +226,6 @@ namespace Exolutio.View.Commands
             string outDoc = XsltProcessing.Transform(tbOldDoc.Text, tbXslt.Text, BASE_DIR);
             tbNewDoc.Text = outDoc;
 
-#if DEBUG
-#if SAVE_DOC_FOR_TEST
             int si = outDoc.IndexOf("xmlns:xsi=\"");
             int ei = outDoc.IndexOf("\"", si + "xmlns:xsi=\"".Length) + 1;
             string text = outDoc.Remove(si, ei - si);
@@ -243,9 +233,11 @@ namespace Exolutio.View.Commands
             ei = text.IndexOf("\"", si + "xmlns=\"".Length) + 1;
             string xmlns = text.Substring(si, ei - si);
             text = text.Remove(si, ei - si);
-            File.WriteAllText(SAVE_DOCUMENT.Replace("LastInput", "LastOutput"), text.Replace("utf-16", "utf-8"), Encoding.UTF8);
-#endif
-#endif
+
+            if (Environment.MachineName.Contains("TRUPIK"))
+            {
+                File.WriteAllText(SAVE_DOCUMENT.Replace("LastInput", "LastOutput"), text.Replace("utf-16", "utf-8"), Encoding.UTF8);
+            }
         }
 
         
@@ -338,15 +330,20 @@ namespace Exolutio.View.Commands
             xslt = sb.ToString();
 
             tbXslt.Text = xslt;
-            #if DEBUG
-            #if SAVE_DOC_FOR_TEST
-            File.WriteAllText(SAVE_STYLESHEET, xslt);
+            if (Environment.MachineName.Contains("TRUPIK"))
+            {
+                File.WriteAllText(SAVE_STYLESHEET, xslt);
+            }
+
             string dir = Path.GetDirectoryName(schemaVersion2.Project.ProjectFile.FullName) + "\\" + Path.GetFileNameWithoutExtension(schemaVersion2.Project.ProjectFile.FullName) + "-out";
             if (!Directory.Exists(dir))
                 Directory.CreateDirectory(dir);
-            File.WriteAllText(dir + "\\last-stylesheet.xslt", xslt);
-            #endif
-            #endif
+            
+            if (Environment.MachineName.Contains("TRUPIK"))
+            {
+                File.WriteAllText(dir + "\\last-stylesheet.xslt", xslt);
+            }
+
             UpdateFolding();
         }
 
