@@ -275,7 +275,7 @@
         <eXo:PIMClass ID="ab01fbca-bbff-4ff5-9c59-41619e5face2" Name="Diagnoza">
           <eXo:PIMAttributes Count="4">
             <eXo:PIMAttribute ID="34ea8f3e-9b54-4891-9e7e-b8a055a35a13" Name="typ" pimClassID="ab01fbca-bbff-4ff5-9c59-41619e5face2" />
-            <eXo:PIMAttribute ID="e4d86f30-dcf9-4e5d-a10a-f0c864efeae9" Name="kód" pimClassID="ab01fbca-bbff-4ff5-9c59-41619e5face2" />
+            <eXo:PIMAttribute ID="e4d86f30-dcf9-4e5d-a10a-f0c864efeae9" Name="kód" Upper="*" pimClassID="ab01fbca-bbff-4ff5-9c59-41619e5face2" />
             <eXo:PIMAttribute ID="fcb6201c-cea4-4af3-b15d-95247011e28e" Name="datum_zjisteni" pimClassID="ab01fbca-bbff-4ff5-9c59-41619e5face2" />
             <eXo:PIMAttribute ID="334007a0-1339-47fe-acba-990ee102e0cf" Name="specifikace" pimClassID="ab01fbca-bbff-4ff5-9c59-41619e5face2" />
           </eXo:PIMAttributes>
@@ -1194,7 +1194,7 @@
         </eXo:PIMAssociation>
       </eXo:PIMAssociations>
     </eXo:PIMSchema>
-    <eXo:PSMSchemas Count="3">
+    <eXo:PSMSchemas Count="5">
       <eXo:PSMSchema ID="5de6b74d-8c4e-44c4-be88-9aee84cc9ea0" Caption="Zprava_Template">
         <eXo:PSMSchemaClass ID="35514b36-4c2b-4ca5-b75c-2e630466f03b" Name="DASTA" parentAssociationID="2d4be4f2-98db-4eb3-be85-90762edac635" parentAssociation="PSMAssociation from PSMClass: *DASTA-SCHEMA* to PSMSchemaClass: DASTA">
           <eXo:ChildPSMAssociations Count="1">
@@ -1860,6 +1860,239 @@
           <eXo:PSMAssociation ID="2460b40f-19b2-4cbe-9072-cc1c3a549694" Name="">
             <eXo:Parent NodeType="PSMClass" parentID="78cdaa5e-24d0-4dea-8358-0b5c4de23a9e" parent="PSMClass: *PodaniLeku*" />
             <eXo:Child NodeType="PSMClass" childID="3aa7e920-82e8-4449-858d-f4bae315ed8d" child="PSMClass: *PodaniLekuData*" />
+          </eXo:PSMAssociation>
+        </eXo:PSMAssociations>
+        <eXo:PSMContentModels Count="0" />
+      </eXo:PSMSchema>
+      <eXo:PSMSchema ID="aa0c51b0-95a9-44d8-addb-ad81c8aa1335" Caption="Zprava_Diagnozy">
+        <eXo:PSMSchemaClass ID="cb248386-d5e6-4698-83e9-e431b0bb3f02" Name="DASTA-DIAGNOZY">
+          <eXo:ChildPSMAssociations Count="1">
+            <eXo:ChildPSMAssociation childPSMAssociationID="188280f5-80c9-4d9b-8a37-6fd2e1868b64" childPSMAssociation="PSMAssociation from PSMSchemaClass: DASTA-DIAGNOZY to PSMClass: *DASTA*" />
+          </eXo:ChildPSMAssociations>
+        </eXo:PSMSchemaClass>
+        <eXo:Roots Count="1">
+          <eXo:Root rootID="cb248386-d5e6-4698-83e9-e431b0bb3f02" root="PSMSchemaClass: DASTA-DIAGNOZY" />
+        </eXo:Roots>
+        <eXo:PSMClasses Count="7">
+          <eXo:PSMClass ID="79641bcd-352a-4f1b-b654-894a627c0ef6" Name="DASTA" parentAssociationID="188280f5-80c9-4d9b-8a37-6fd2e1868b64" parentAssociation="PSMAssociation from PSMSchemaClass: DASTA-DIAGNOZY to PSMClass: *DASTA*">
+            <eXo:ChildPSMAssociations Count="1">
+              <eXo:ChildPSMAssociation childPSMAssociationID="2dc201d9-37cb-40b8-ab03-f2f9441ba6dc" childPSMAssociation="PSMAssociation from PSMClass: *DASTA* to PSMClass: *Zprava*" />
+            </eXo:ChildPSMAssociations>
+            <eXo:PSMAttributes Count="0" />
+          </eXo:PSMClass>
+          <eXo:PSMClass ID="b5b24f01-52f5-4d19-a1f2-7ef83e177f04" Name="Zprava" InterpretationID="b3742ec5-e6ca-4785-9105-1aaa5371c8dd" Interpretation="PIMClass: *Zprava*" parentAssociationID="2dc201d9-37cb-40b8-ab03-f2f9441ba6dc" parentAssociation="PSMAssociation from PSMClass: *DASTA* to PSMClass: *Zprava*">
+            <eXo:ChildPSMAssociations Count="1">
+              <eXo:ChildPSMAssociation childPSMAssociationID="3ef7133e-160f-4f29-963c-eaa50a605aec" childPSMAssociation="PSMAssociation from PSMClass: *Zprava* to PSMClass: *Pacient*" />
+            </eXo:ChildPSMAssociations>
+            <eXo:PSMAttributes Count="0" />
+          </eXo:PSMClass>
+          <eXo:PSMClass ID="a47b9f7f-56dd-4c9b-9623-44f98a4526a0" Name="Pacient" InterpretationID="65b05ede-0add-4137-8bb0-d72200a48ae8" Interpretation="PIMClass: *Pacient*" parentAssociationID="3ef7133e-160f-4f29-963c-eaa50a605aec" parentAssociation="PSMAssociation from PSMClass: *Zprava* to PSMClass: *Pacient*">
+            <eXo:ChildPSMAssociations Count="1">
+              <eXo:ChildPSMAssociation childPSMAssociationID="014b384e-b52a-421d-814d-b478f798de10" childPSMAssociation="PSMAssociation from PSMClass: *Pacient* to PSMClass: *Diagnozy*" />
+            </eXo:ChildPSMAssociations>
+            <eXo:PSMAttributes Count="1">
+              <eXo:PSMAttribute ID="8342ae92-c452-4230-88ca-bc99a978c883" Name="id_pac" InterpretationID="63cea20e-e748-4ef1-9fa5-e7ab14661a99" Interpretation="PIMAttribute: *Pacient.identifikator* 1..1" Element="False" psmClassID="a47b9f7f-56dd-4c9b-9623-44f98a4526a0" />
+            </eXo:PSMAttributes>
+          </eXo:PSMClass>
+          <eXo:PSMClass ID="b5c35d3c-996d-474c-995f-b0bda1e8402b" Name="Diagnozy" parentAssociationID="014b384e-b52a-421d-814d-b478f798de10" parentAssociation="PSMAssociation from PSMClass: *Pacient* to PSMClass: *Diagnozy*">
+            <eXo:ChildPSMAssociations Count="1">
+              <eXo:ChildPSMAssociation childPSMAssociationID="60171b5b-8c3c-497d-a9c0-43ea821e4c8e" childPSMAssociation="PSMAssociation from PSMClass: *Diagnozy* to PSMClass: *Diagnoza*" />
+            </eXo:ChildPSMAssociations>
+            <eXo:PSMAttributes Count="0" />
+          </eXo:PSMClass>
+          <eXo:PSMClass ID="9f50c03b-288f-4acb-8eab-c7de58ae435f" Name="Diagnoza" InterpretationID="ab01fbca-bbff-4ff5-9c59-41619e5face2" Interpretation="PIMClass: *Diagnoza*" parentAssociationID="60171b5b-8c3c-497d-a9c0-43ea821e4c8e" parentAssociation="PSMAssociation from PSMClass: *Diagnozy* to PSMClass: *Diagnoza*">
+            <eXo:ChildPSMAssociations Count="1">
+              <eXo:ChildPSMAssociation childPSMAssociationID="be52b9d0-dbe6-4cc9-a408-88b5754e02b5" childPSMAssociation="PSMAssociation from PSMClass: *Diagnoza* to PSMClass: *Lekar*" />
+            </eXo:ChildPSMAssociations>
+            <eXo:PSMAttributes Count="4">
+              <eXo:PSMAttribute ID="acdcba38-b7c2-4e69-b20f-cb04edff77fe" Name="typ_dg" InterpretationID="34ea8f3e-9b54-4891-9e7e-b8a055a35a13" Interpretation="PIMAttribute: *Diagnoza.typ* 1..1" Element="False" psmClassID="9f50c03b-288f-4acb-8eab-c7de58ae435f" />
+              <eXo:PSMAttribute ID="f76f815e-fcfa-4c08-9556-cc19834c8d07" Name="diag" InterpretationID="e4d86f30-dcf9-4e5d-a10a-f0c864efeae9" Interpretation="PIMAttribute: *Diagnoza.kód* 1..*" Upper="*" Element="True" psmClassID="9f50c03b-288f-4acb-8eab-c7de58ae435f" />
+              <eXo:PSMAttribute ID="c820facb-017d-4d7c-a30b-65854dbab1f5" Name="dat_du" InterpretationID="fcb6201c-cea4-4af3-b15d-95247011e28e" Interpretation="PIMAttribute: *Diagnoza.datum_zjisteni* 1..1" Element="True" psmClassID="9f50c03b-288f-4acb-8eab-c7de58ae435f" />
+              <eXo:PSMAttribute ID="c34b41a8-75aa-401a-bb87-48b72305a156" Name="spec_dg" InterpretationID="334007a0-1339-47fe-acba-990ee102e0cf" Interpretation="PIMAttribute: *Diagnoza.specifikace* 1..1" Element="True" psmClassID="9f50c03b-288f-4acb-8eab-c7de58ae435f" />
+            </eXo:PSMAttributes>
+          </eXo:PSMClass>
+          <eXo:PSMClass ID="28847ca0-dee1-430d-9a6e-e71d88ca30e9" Name="Lekar" InterpretationID="50098a78-a426-45db-87f2-12316942e537" Interpretation="PIMClass: *Lekar*" parentAssociationID="be52b9d0-dbe6-4cc9-a408-88b5754e02b5" parentAssociation="PSMAssociation from PSMClass: *Diagnoza* to PSMClass: *Lekar*">
+            <eXo:ChildPSMAssociations Count="1">
+              <eXo:ChildPSMAssociation childPSMAssociationID="6426b890-6573-41e7-9ab2-936e543c855d" childPSMAssociation="PSMAssociation from PSMClass: *Lekar* to PSMClass: *Osoba*" />
+            </eXo:ChildPSMAssociations>
+            <eXo:PSMAttributes Count="0" />
+          </eXo:PSMClass>
+          <eXo:PSMClass ID="dc6c523a-cb5e-4ec7-9408-b53adaad29dc" Name="Osoba" InterpretationID="30f2f9f1-548d-4d80-8410-fdbc031aef81" Interpretation="PIMClass: *Osoba*" parentAssociationID="6426b890-6573-41e7-9ab2-936e543c855d" parentAssociation="PSMAssociation from PSMClass: *Lekar* to PSMClass: *Osoba*">
+            <eXo:ChildPSMAssociations Count="0" />
+            <eXo:PSMAttributes Count="5">
+              <eXo:PSMAttribute ID="dcc26901-0c49-485b-afb9-f2f7854c2cd7" Name="jmeno" InterpretationID="2973fdf2-11f4-4fde-a1e4-dbdd10a5cfb8" Interpretation="PIMAttribute: *Osoba.jmeno* 1..1" Element="True" psmClassID="dc6c523a-cb5e-4ec7-9408-b53adaad29dc" />
+              <eXo:PSMAttribute ID="29522964-c5bb-43a5-be8f-9ca04a9bf7b3" Name="prijmeni" InterpretationID="f805cf9b-13f9-480b-bdc0-b1f933d682ba" Interpretation="PIMAttribute: *Osoba.prijmeni* 1..1" Element="True" psmClassID="dc6c523a-cb5e-4ec7-9408-b53adaad29dc" />
+              <eXo:PSMAttribute ID="106254fa-f877-4b3a-a35b-ffd17ddd5bee" Name="titul_pred" InterpretationID="3d18e55c-070e-4427-be52-63c7252fd75a" Interpretation="PIMAttribute: *Osoba.titul_pred* 1..1" Element="True" psmClassID="dc6c523a-cb5e-4ec7-9408-b53adaad29dc" />
+              <eXo:PSMAttribute ID="5093e816-419b-4391-81c8-bd1f64794e54" Name="titul_za" InterpretationID="e274e617-9f34-41b6-9e73-1cfe70cca977" Interpretation="PIMAttribute: *Osoba.titul_za* 1..1" Element="True" psmClassID="dc6c523a-cb5e-4ec7-9408-b53adaad29dc" />
+              <eXo:PSMAttribute ID="fabd976d-e4c5-4bef-82de-8c4d4b20c86e" Name="odbornost" InterpretationID="139261de-0f5b-46f9-911e-d6208dd6e1ff" Interpretation="PIMAttribute: *Osoba.odbornost* 1..1" Lower="0" Element="False" psmClassID="dc6c523a-cb5e-4ec7-9408-b53adaad29dc" />
+            </eXo:PSMAttributes>
+          </eXo:PSMClass>
+        </eXo:PSMClasses>
+        <eXo:PSMAssociations Count="7">
+          <eXo:PSMAssociation ID="188280f5-80c9-4d9b-8a37-6fd2e1868b64" Name="defaultname">
+            <eXo:Parent NodeType="PSMSchemaClass" parentID="cb248386-d5e6-4698-83e9-e431b0bb3f02" parent="PSMSchemaClass: DASTA-DIAGNOZY" />
+            <eXo:Child NodeType="PSMClass" childID="79641bcd-352a-4f1b-b654-894a627c0ef6" child="PSMClass: *DASTA*" />
+          </eXo:PSMAssociation>
+          <eXo:PSMAssociation ID="2dc201d9-37cb-40b8-ab03-f2f9441ba6dc" Name="is">
+            <eXo:Parent NodeType="PSMClass" parentID="79641bcd-352a-4f1b-b654-894a627c0ef6" parent="PSMClass: *DASTA*" />
+            <eXo:Child NodeType="PSMClass" childID="b5b24f01-52f5-4d19-a1f2-7ef83e177f04" child="PSMClass: *Zprava*" />
+          </eXo:PSMAssociation>
+          <eXo:PSMAssociation ID="3ef7133e-160f-4f29-963c-eaa50a605aec" Name="ip" InterpretationID="09c487be-7ceb-4da6-b4fc-1a01344570ce" Interpretation="PIMAssociation **: PIMClass: *Zprava*, PIMClass: *Pacient*">
+            <eXo:Parent NodeType="PSMClass" parentID="b5b24f01-52f5-4d19-a1f2-7ef83e177f04" parent="PSMClass: *Zprava*" />
+            <eXo:Child NodeType="PSMClass" childID="a47b9f7f-56dd-4c9b-9623-44f98a4526a0" child="PSMClass: *Pacient*" />
+          </eXo:PSMAssociation>
+          <eXo:PSMAssociation ID="014b384e-b52a-421d-814d-b478f798de10" Name="dg">
+            <eXo:Parent NodeType="PSMClass" parentID="a47b9f7f-56dd-4c9b-9623-44f98a4526a0" parent="PSMClass: *Pacient*" />
+            <eXo:Child NodeType="PSMClass" childID="b5c35d3c-996d-474c-995f-b0bda1e8402b" child="PSMClass: *Diagnozy*" />
+          </eXo:PSMAssociation>
+          <eXo:PSMAssociation ID="60171b5b-8c3c-497d-a9c0-43ea821e4c8e" Name="dgz" InterpretationID="81205edc-684f-4cfd-aca2-1f396a4e1a9e" Interpretation="PIMAssociation **: PIMClass: *Diagnoza*, PIMClass: *Pacient*">
+            <eXo:Parent NodeType="PSMClass" parentID="b5c35d3c-996d-474c-995f-b0bda1e8402b" parent="PSMClass: *Diagnozy*" />
+            <eXo:Child NodeType="PSMClass" childID="9f50c03b-288f-4acb-8eab-c7de58ae435f" child="PSMClass: *Diagnoza*" />
+          </eXo:PSMAssociation>
+          <eXo:PSMAssociation ID="be52b9d0-dbe6-4cc9-a408-88b5754e02b5" Name="autor" InterpretationID="5010d3eb-386a-48f1-a201-ad1595aab3c7" Interpretation="PIMAssociation **: PIMClass: *Lekar*, PIMClass: *Diagnoza*" Lower="0">
+            <eXo:Parent NodeType="PSMClass" parentID="9f50c03b-288f-4acb-8eab-c7de58ae435f" parent="PSMClass: *Diagnoza*" />
+            <eXo:Child NodeType="PSMClass" childID="28847ca0-dee1-430d-9a6e-e71d88ca30e9" child="PSMClass: *Lekar*" />
+          </eXo:PSMAssociation>
+          <eXo:PSMAssociation ID="6426b890-6573-41e7-9ab2-936e543c855d" Name="" InterpretationID="f7c5b713-1ed2-4f9a-8e83-3dc17301f06d" Interpretation="PIMAssociation *&lt;&lt;inheritance&gt;&gt;*: PIMClass: *Lekar*, PIMClass: *Osoba*">
+            <eXo:Parent NodeType="PSMClass" parentID="28847ca0-dee1-430d-9a6e-e71d88ca30e9" parent="PSMClass: *Lekar*" />
+            <eXo:Child NodeType="PSMClass" childID="dc6c523a-cb5e-4ec7-9408-b53adaad29dc" child="PSMClass: *Osoba*" />
+          </eXo:PSMAssociation>
+        </eXo:PSMAssociations>
+        <eXo:PSMContentModels Count="0" />
+      </eXo:PSMSchema>
+      <eXo:PSMSchema ID="03a99482-6696-4bfe-a402-89f3767e9c78" Caption="Zprava_Vydane_Leky">
+        <eXo:PSMSchemaClass ID="1bc69925-4b39-4151-968b-5a704994e5e1" Name="DASTA-VYDANE-LEKY">
+          <eXo:ChildPSMAssociations Count="1">
+            <eXo:ChildPSMAssociation childPSMAssociationID="fb3b7f5f-e701-4773-a3e4-a747a954145a" childPSMAssociation="PSMAssociation from PSMSchemaClass: DASTA-VYDANE-LEKY to PSMClass: *DASTA*" />
+          </eXo:ChildPSMAssociations>
+        </eXo:PSMSchemaClass>
+        <eXo:Roots Count="1">
+          <eXo:Root rootID="1bc69925-4b39-4151-968b-5a704994e5e1" root="PSMSchemaClass: DASTA-VYDANE-LEKY" />
+        </eXo:Roots>
+        <eXo:PSMClasses Count="11">
+          <eXo:PSMClass ID="0195d1b5-4ac9-4923-9f3d-5aae5d39c0f2" Name="DASTA" parentAssociationID="fb3b7f5f-e701-4773-a3e4-a747a954145a" parentAssociation="PSMAssociation from PSMSchemaClass: DASTA-VYDANE-LEKY to PSMClass: *DASTA*">
+            <eXo:ChildPSMAssociations Count="1">
+              <eXo:ChildPSMAssociation childPSMAssociationID="c2b21506-f1f1-49f7-bc4a-b1659824dba0" childPSMAssociation="PSMAssociation from PSMClass: *DASTA* to PSMClass: *Zprava*" />
+            </eXo:ChildPSMAssociations>
+            <eXo:PSMAttributes Count="0" />
+          </eXo:PSMClass>
+          <eXo:PSMClass ID="23c4b30c-dbd1-45cd-ae77-126b86cc3572" Name="Pacient" InterpretationID="65b05ede-0add-4137-8bb0-d72200a48ae8" Interpretation="PIMClass: *Pacient*" parentAssociationID="eb6aef99-55be-4558-bd9d-d5856924dff0" parentAssociation="PSMAssociation from PSMClass: *Zprava* to PSMClass: *Pacient*">
+            <eXo:ChildPSMAssociations Count="1">
+              <eXo:ChildPSMAssociation childPSMAssociationID="2afbd1b4-51d2-4c35-91df-e04434fcacdd" childPSMAssociation="PSMAssociation from PSMClass: *Pacient* to PSMClass: *VydaneLeky*" />
+            </eXo:ChildPSMAssociations>
+            <eXo:PSMAttributes Count="1">
+              <eXo:PSMAttribute ID="fb868b9d-bf99-479c-a9bf-81fe78c52351" Name="ic_pac" InterpretationID="63cea20e-e748-4ef1-9fa5-e7ab14661a99" Interpretation="PIMAttribute: *Pacient.identifikator* 1..1" Element="False" psmClassID="23c4b30c-dbd1-45cd-ae77-126b86cc3572" />
+            </eXo:PSMAttributes>
+          </eXo:PSMClass>
+          <eXo:PSMClass ID="1da329f4-caeb-47b2-a5c6-bffa6c4087d0" Name="Zprava" InterpretationID="b3742ec5-e6ca-4785-9105-1aaa5371c8dd" Interpretation="PIMClass: *Zprava*" parentAssociationID="c2b21506-f1f1-49f7-bc4a-b1659824dba0" parentAssociation="PSMAssociation from PSMClass: *DASTA* to PSMClass: *Zprava*">
+            <eXo:ChildPSMAssociations Count="1">
+              <eXo:ChildPSMAssociation childPSMAssociationID="eb6aef99-55be-4558-bd9d-d5856924dff0" childPSMAssociation="PSMAssociation from PSMClass: *Zprava* to PSMClass: *Pacient*" />
+            </eXo:ChildPSMAssociations>
+            <eXo:PSMAttributes Count="0" />
+          </eXo:PSMClass>
+          <eXo:PSMClass ID="f440b89a-c12e-42e6-af5a-2013f3006124" Name="VydejLeku" InterpretationID="6fa82d01-d2ab-42de-8f3b-4a9c975453be" Interpretation="PIMClass: *VydejLeku*" parentAssociationID="9137d9ec-0aeb-468d-a2ea-3e5e63298198" parentAssociation="PSMAssociation from PSMClass: *VydaneLeky* to PSMClass: *VydejLeku*">
+            <eXo:ChildPSMAssociations Count="6">
+              <eXo:ChildPSMAssociation childPSMAssociationID="7eb304f7-3b3b-4344-a3b0-90d7b756dfea" childPSMAssociation="PSMAssociation from PSMClass: *VydejLeku* to PSMClass: *LekNazev*" />
+              <eXo:ChildPSMAssociation childPSMAssociationID="1bec134e-95b4-4745-b577-401421112c71" childPSMAssociation="PSMAssociation from PSMClass: *VydejLeku* to PSMClass: *PocetBaleni*" />
+              <eXo:ChildPSMAssociation childPSMAssociationID="b9283673-7c7d-4a36-bee8-660d966aa178" childPSMAssociation="PSMAssociation from PSMClass: *VydejLeku* to PSMClass: *LekKod*" />
+              <eXo:ChildPSMAssociation childPSMAssociationID="6c078aa3-8908-41f2-a14a-9c3a1c77915b" childPSMAssociation="PSMAssociation from PSMClass: *VydejLeku* to PSMClass: *VydejLekuData1*" />
+              <eXo:ChildPSMAssociation childPSMAssociationID="df124c9d-eec0-4b15-831f-4da455b6cf21" childPSMAssociation="PSMAssociation from PSMClass: *VydejLeku* to PSMClass: *VydejLekuData2*" />
+              <eXo:ChildPSMAssociation childPSMAssociationID="b5b9c8ed-dce4-4112-8953-3c6135a4c731" childPSMAssociation="PSMAssociation from PSMClass: *VydejLeku* to PSMClass: *Lekar*" />
+            </eXo:ChildPSMAssociations>
+            <eXo:PSMAttributes Count="0" />
+          </eXo:PSMClass>
+          <eXo:PSMClass ID="e609c76f-755e-4481-a4fc-227f0c525bab" Name="VydaneLeky" parentAssociationID="2afbd1b4-51d2-4c35-91df-e04434fcacdd" parentAssociation="PSMAssociation from PSMClass: *Pacient* to PSMClass: *VydaneLeky*">
+            <eXo:ChildPSMAssociations Count="1">
+              <eXo:ChildPSMAssociation childPSMAssociationID="9137d9ec-0aeb-468d-a2ea-3e5e63298198" childPSMAssociation="PSMAssociation from PSMClass: *VydaneLeky* to PSMClass: *VydejLeku*" />
+            </eXo:ChildPSMAssociations>
+            <eXo:PSMAttributes Count="0" />
+          </eXo:PSMClass>
+          <eXo:PSMClass ID="e1a5e3fb-3a87-4451-bdc2-c1db5ca261e8" Name="LekNazev" InterpretationID="14c44d84-e8c5-4eaa-89be-b7913aec3804" Interpretation="PIMClass: *Lek*" parentAssociationID="7eb304f7-3b3b-4344-a3b0-90d7b756dfea" parentAssociation="PSMAssociation from PSMClass: *VydejLeku* to PSMClass: *LekNazev*">
+            <eXo:ChildPSMAssociations Count="0" />
+            <eXo:PSMAttributes Count="1">
+              <eXo:PSMAttribute ID="2d777b54-f82d-4bcc-82f8-60eee1777a47" Name="nazev_lek" InterpretationID="349a9124-2b1d-4ddc-af3a-57eacf5334a9" Interpretation="PIMAttribute: *Lek.nazev* 1..1" Element="False" psmClassID="e1a5e3fb-3a87-4451-bdc2-c1db5ca261e8" />
+            </eXo:PSMAttributes>
+          </eXo:PSMClass>
+          <eXo:PSMClass ID="b26872b9-a752-48a8-b3b9-7758f09edb7c" Name="PocetBaleni" parentAssociationID="1bec134e-95b4-4745-b577-401421112c71" parentAssociation="PSMAssociation from PSMClass: *VydejLeku* to PSMClass: *PocetBaleni*">
+            <eXo:ChildPSMAssociations Count="0" />
+            <eXo:PSMAttributes Count="1">
+              <eXo:PSMAttribute ID="5f9dfa1b-bc2a-4e98-8794-41237cc26c53" Name="poc_bal" InterpretationID="1612c36e-60ba-4380-831b-997114c60a6f" Interpretation="PIMAttribute: *VydejLeku.pocet_baleni* 1..1" Element="False" psmClassID="b26872b9-a752-48a8-b3b9-7758f09edb7c" />
+            </eXo:PSMAttributes>
+          </eXo:PSMClass>
+          <eXo:PSMClass ID="f13cdbcd-2c53-4bc5-be65-17cbf1a9c3c0" Name="LekKod" InterpretationID="14c44d84-e8c5-4eaa-89be-b7913aec3804" Interpretation="PIMClass: *Lek*" parentAssociationID="b9283673-7c7d-4a36-bee8-660d966aa178" parentAssociation="PSMAssociation from PSMClass: *VydejLeku* to PSMClass: *LekKod*">
+            <eXo:ChildPSMAssociations Count="0" />
+            <eXo:PSMAttributes Count="2">
+              <eXo:PSMAttribute ID="8a97e40f-b48b-4707-a94c-ea94c891831a" Name="gene_lek" InterpretationID="0573d1a3-2028-45e7-b94c-84d1bb6bd58e" Interpretation="PIMAttribute: *Lek.genericky_nazev* 1..1" Lower="0" Element="False" psmClassID="f13cdbcd-2c53-4bc5-be65-17cbf1a9c3c0" />
+              <eXo:PSMAttribute ID="2e923147-5307-4556-a6b2-5fc8fdca5633" Name="kod_lek" InterpretationID="1d2cb677-8724-4afc-9c2b-df42434b321f" Interpretation="PIMAttribute: *Lek.kod* 1..1" Lower="0" Element="False" psmClassID="f13cdbcd-2c53-4bc5-be65-17cbf1a9c3c0" />
+            </eXo:PSMAttributes>
+          </eXo:PSMClass>
+          <eXo:PSMClass ID="65a0b908-80da-4951-8e06-e7a3279b25f2" Name="VydejLekuData1" parentAssociationID="6c078aa3-8908-41f2-a14a-9c3a1c77915b" parentAssociation="PSMAssociation from PSMClass: *VydejLeku* to PSMClass: *VydejLekuData1*">
+            <eXo:ChildPSMAssociations Count="0" />
+            <eXo:PSMAttributes Count="3">
+              <eXo:PSMAttribute ID="876ff75b-8ead-48f3-bf1c-37e6d9a52e74" Name="kod_pdk" InterpretationID="af13b116-8741-4482-9d0e-5668a1383b0b" Interpretation="PIMAttribute: *VydejLeku.kod_pdk* 1..1" Lower="0" Element="False" psmClassID="65a0b908-80da-4951-8e06-e7a3279b25f2" />
+              <eXo:PSMAttribute ID="1ac1fa09-313e-4f72-82f6-8245be5dbe5e" Name="id_dok_is" InterpretationID="edaaf52b-4690-485c-87cf-715fa57d39cc" Interpretation="PIMAttribute: *VydejLeku.identifikace_dokladu* 1..1" Lower="0" Element="False" psmClassID="65a0b908-80da-4951-8e06-e7a3279b25f2" />
+              <eXo:PSMAttribute ID="bd9b8ad1-8e4d-4984-9b53-ae5b858574f3" Name="cena" InterpretationID="80068900-1e2f-4725-abed-467b775e5c58" Interpretation="PIMAttribute: *VydejLeku.celkova_cena* 1..1" Lower="0" Element="False" psmClassID="65a0b908-80da-4951-8e06-e7a3279b25f2" />
+            </eXo:PSMAttributes>
+          </eXo:PSMClass>
+          <eXo:PSMClass ID="010dfde6-f471-4c7c-9cc3-c7c704404251" Name="VydejLekuData2" parentAssociationID="df124c9d-eec0-4b15-831f-4da455b6cf21" parentAssociation="PSMAssociation from PSMClass: *VydejLeku* to PSMClass: *VydejLekuData2*">
+            <eXo:ChildPSMAssociations Count="0" />
+            <eXo:PSMAttributes Count="3">
+              <eXo:PSMAttribute ID="0772308f-cd03-4bf9-a5b1-6e1d64ff126e" Name="dat_du" InterpretationID="b2eb0173-6f51-46eb-97aa-c629376de470" Interpretation="PIMAttribute: *VydejLeku.datum_vydani* 1..1" Lower="0" Element="True" psmClassID="010dfde6-f471-4c7c-9cc3-c7c704404251" />
+              <eXo:PSMAttribute ID="9c60ce47-2747-49af-9b69-220bd1675e08" Name="rozpis_v" InterpretationID="8ab27209-bf21-4292-aeee-e11c8e4116fa" Interpretation="PIMAttribute: *VydejLeku.davkovani_leku* 1..1" Lower="0" Element="True" psmClassID="010dfde6-f471-4c7c-9cc3-c7c704404251" />
+              <eXo:PSMAttribute ID="e6e1be54-653b-4efd-9ec6-46d15cfcd432" Name="pozn" InterpretationID="f16c7e2d-5bae-47a2-86da-641d5278231b" Interpretation="PIMAttribute: *VydejLeku.poznamka_k_vydeji* 1..1" Lower="0" Element="True" psmClassID="010dfde6-f471-4c7c-9cc3-c7c704404251" />
+            </eXo:PSMAttributes>
+          </eXo:PSMClass>
+          <eXo:PSMClass ID="22b22dd6-c716-463c-9344-59cbaefb762b" Name="Lekar" InterpretationID="50098a78-a426-45db-87f2-12316942e537" Interpretation="PIMClass: *Lekar*" parentAssociationID="b5b9c8ed-dce4-4112-8953-3c6135a4c731" parentAssociation="PSMAssociation from PSMClass: *VydejLeku* to PSMClass: *Lekar*">
+            <eXo:ChildPSMAssociations Count="0" />
+            <eXo:PSMAttributes Count="1">
+              <eXo:PSMAttribute ID="ba86ebac-1618-43c7-a1c8-990f09f74a84" Name="icl" InterpretationID="ada332e9-f046-4670-a15a-9aa56f2f30b0" Interpretation="PIMAttribute: *Lekar.icl* 1..1" Element="False" psmClassID="22b22dd6-c716-463c-9344-59cbaefb762b" />
+            </eXo:PSMAttributes>
+          </eXo:PSMClass>
+        </eXo:PSMClasses>
+        <eXo:PSMAssociations Count="11">
+          <eXo:PSMAssociation ID="fb3b7f5f-e701-4773-a3e4-a747a954145a" Name="defaultname">
+            <eXo:Parent NodeType="PSMSchemaClass" parentID="1bc69925-4b39-4151-968b-5a704994e5e1" parent="PSMSchemaClass: DASTA-VYDANE-LEKY" />
+            <eXo:Child NodeType="PSMClass" childID="0195d1b5-4ac9-4923-9f3d-5aae5d39c0f2" child="PSMClass: *DASTA*" />
+          </eXo:PSMAssociation>
+          <eXo:PSMAssociation ID="c2b21506-f1f1-49f7-bc4a-b1659824dba0" Name="is">
+            <eXo:Parent NodeType="PSMClass" parentID="0195d1b5-4ac9-4923-9f3d-5aae5d39c0f2" parent="PSMClass: *DASTA*" />
+            <eXo:Child NodeType="PSMClass" childID="1da329f4-caeb-47b2-a5c6-bffa6c4087d0" child="PSMClass: *Zprava*" />
+          </eXo:PSMAssociation>
+          <eXo:PSMAssociation ID="eb6aef99-55be-4558-bd9d-d5856924dff0" Name="ip" InterpretationID="09c487be-7ceb-4da6-b4fc-1a01344570ce" Interpretation="PIMAssociation **: PIMClass: *Zprava*, PIMClass: *Pacient*">
+            <eXo:Parent NodeType="PSMClass" parentID="1da329f4-caeb-47b2-a5c6-bffa6c4087d0" parent="PSMClass: *Zprava*" />
+            <eXo:Child NodeType="PSMClass" childID="23c4b30c-dbd1-45cd-ae77-126b86cc3572" child="PSMClass: *Pacient*" />
+          </eXo:PSMAssociation>
+          <eXo:PSMAssociation ID="9137d9ec-0aeb-468d-a2ea-3e5e63298198" Name="lek_v" InterpretationID="56147937-8ae8-4e6d-85c2-f13416d8cc1d" Interpretation="PIMAssociation **: PIMClass: *VydejLeku*, PIMClass: *Pacient*" Lower="0" Upper="*">
+            <eXo:Parent NodeType="PSMClass" parentID="e609c76f-755e-4481-a4fc-227f0c525bab" parent="PSMClass: *VydaneLeky*" />
+            <eXo:Child NodeType="PSMClass" childID="f440b89a-c12e-42e6-af5a-2013f3006124" child="PSMClass: *VydejLeku*" />
+          </eXo:PSMAssociation>
+          <eXo:PSMAssociation ID="2afbd1b4-51d2-4c35-91df-e04434fcacdd" Name="lek">
+            <eXo:Parent NodeType="PSMClass" parentID="23c4b30c-dbd1-45cd-ae77-126b86cc3572" parent="PSMClass: *Pacient*" />
+            <eXo:Child NodeType="PSMClass" childID="e609c76f-755e-4481-a4fc-227f0c525bab" child="PSMClass: *VydaneLeky*" />
+          </eXo:PSMAssociation>
+          <eXo:PSMAssociation ID="7eb304f7-3b3b-4344-a3b0-90d7b756dfea" Name="" InterpretationID="8c680911-22f0-4e0f-9b8d-af16ac31e0c3" Interpretation="PIMAssociation **: PIMClass: *Lek*, PIMClass: *VydejLeku*">
+            <eXo:Parent NodeType="PSMClass" parentID="f440b89a-c12e-42e6-af5a-2013f3006124" parent="PSMClass: *VydejLeku*" />
+            <eXo:Child NodeType="PSMClass" childID="e1a5e3fb-3a87-4451-bdc2-c1db5ca261e8" child="PSMClass: *LekNazev*" />
+          </eXo:PSMAssociation>
+          <eXo:PSMAssociation ID="1bec134e-95b4-4745-b577-401421112c71" Name="">
+            <eXo:Parent NodeType="PSMClass" parentID="f440b89a-c12e-42e6-af5a-2013f3006124" parent="PSMClass: *VydejLeku*" />
+            <eXo:Child NodeType="PSMClass" childID="b26872b9-a752-48a8-b3b9-7758f09edb7c" child="PSMClass: *PocetBaleni*" />
+          </eXo:PSMAssociation>
+          <eXo:PSMAssociation ID="b9283673-7c7d-4a36-bee8-660d966aa178" Name="" InterpretationID="8c680911-22f0-4e0f-9b8d-af16ac31e0c3" Interpretation="PIMAssociation **: PIMClass: *Lek*, PIMClass: *VydejLeku*">
+            <eXo:Parent NodeType="PSMClass" parentID="f440b89a-c12e-42e6-af5a-2013f3006124" parent="PSMClass: *VydejLeku*" />
+            <eXo:Child NodeType="PSMClass" childID="f13cdbcd-2c53-4bc5-be65-17cbf1a9c3c0" child="PSMClass: *LekKod*" />
+          </eXo:PSMAssociation>
+          <eXo:PSMAssociation ID="6c078aa3-8908-41f2-a14a-9c3a1c77915b" Name="">
+            <eXo:Parent NodeType="PSMClass" parentID="f440b89a-c12e-42e6-af5a-2013f3006124" parent="PSMClass: *VydejLeku*" />
+            <eXo:Child NodeType="PSMClass" childID="65a0b908-80da-4951-8e06-e7a3279b25f2" child="PSMClass: *VydejLekuData1*" />
+          </eXo:PSMAssociation>
+          <eXo:PSMAssociation ID="df124c9d-eec0-4b15-831f-4da455b6cf21" Name="">
+            <eXo:Parent NodeType="PSMClass" parentID="f440b89a-c12e-42e6-af5a-2013f3006124" parent="PSMClass: *VydejLeku*" />
+            <eXo:Child NodeType="PSMClass" childID="010dfde6-f471-4c7c-9cc3-c7c704404251" child="PSMClass: *VydejLekuData2*" />
+          </eXo:PSMAssociation>
+          <eXo:PSMAssociation ID="b5b9c8ed-dce4-4112-8953-3c6135a4c731" Name="" InterpretationID="9c32147b-9a15-4168-b7d4-433d957c4333" Interpretation="PIMAssociation **: PIMClass: *Lekar*, PIMClass: *VydejLeku*">
+            <eXo:Parent NodeType="PSMClass" parentID="f440b89a-c12e-42e6-af5a-2013f3006124" parent="PSMClass: *VydejLeku*" />
+            <eXo:Child NodeType="PSMClass" childID="22b22dd6-c716-463c-9344-59cbaefb762b" child="PSMClass: *Lekar*" />
           </eXo:PSMAssociation>
         </eXo:PSMAssociations>
         <eXo:PSMContentModels Count="0" />
@@ -4499,7 +4732,7 @@
         </eXo:Components>
       </eXo:PIMDiagram>
     </eXo:PIMDiagrams>
-    <eXo:PSMDiagrams Count="3">
+    <eXo:PSMDiagrams Count="5">
       <eXo:PSMDiagram ID="c96b75a9-0972-48b2-9266-cc2d761aba70" schemaID="5de6b74d-8c4e-44c4-be88-9aee84cc9ea0" schema="Zprava_Template" Caption="Zprava_Template">
         <eXo:Components>
           <eXo:Component Type="PSMSchemaClass" componentID="35514b36-4c2b-4ca5-b75c-2e630466f03b" component="PSMSchemaClass: DASTA">
@@ -5207,6 +5440,254 @@
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:CardinalityLabelViewHelper>
+            </eXo:ViewHelper>
+          </eXo:Component>
+        </eXo:Components>
+      </eXo:PSMDiagram>
+      <eXo:PSMDiagram ID="af98636f-f286-417e-a247-08aff52d6df7" schemaID="aa0c51b0-95a9-44d8-addb-ad81c8aa1335" schema="Zprava_Diagnozy" Caption="Zprava_Diagnozy">
+        <eXo:Components>
+          <eXo:Component Type="PSMSchemaClass" componentID="cb248386-d5e6-4698-83e9-e431b0bb3f02" component="PSMSchemaClass: DASTA-DIAGNOZY">
+            <eXo:ViewHelper />
+          </eXo:Component>
+          <eXo:Component Type="PSMClass" componentID="79641bcd-352a-4f1b-b654-894a627c0ef6" component="PSMClass: *DASTA*">
+            <eXo:ViewHelper />
+          </eXo:Component>
+          <eXo:Component Type="PSMClass" componentID="b5b24f01-52f5-4d19-a1f2-7ef83e177f04" component="PSMClass: *Zprava*">
+            <eXo:ViewHelper />
+          </eXo:Component>
+          <eXo:Component Type="PSMClass" componentID="a47b9f7f-56dd-4c9b-9623-44f98a4526a0" component="PSMClass: *Pacient*">
+            <eXo:ViewHelper />
+          </eXo:Component>
+          <eXo:Component Type="PSMAssociation" componentID="188280f5-80c9-4d9b-8a37-6fd2e1868b64" component="PSMAssociation from PSMSchemaClass: DASTA-DIAGNOZY to PSMClass: *DASTA*">
+            <eXo:ViewHelper>
+              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:MainLabelViewHelper>
+              <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:CardinalityLabelViewHelper>
+            </eXo:ViewHelper>
+          </eXo:Component>
+          <eXo:Component Type="PSMAssociation" componentID="2dc201d9-37cb-40b8-ab03-f2f9441ba6dc" component="PSMAssociation from PSMClass: *DASTA* to PSMClass: *Zprava*">
+            <eXo:ViewHelper>
+              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:MainLabelViewHelper>
+              <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:CardinalityLabelViewHelper>
+            </eXo:ViewHelper>
+          </eXo:Component>
+          <eXo:Component Type="PSMAssociation" componentID="3ef7133e-160f-4f29-963c-eaa50a605aec" component="PSMAssociation from PSMClass: *Zprava* to PSMClass: *Pacient*">
+            <eXo:ViewHelper>
+              <eXo:MainLabelViewHelper X="0" Y="1" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:MainLabelViewHelper>
+              <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:CardinalityLabelViewHelper>
+            </eXo:ViewHelper>
+          </eXo:Component>
+          <eXo:Component Type="PSMClass" componentID="b5c35d3c-996d-474c-995f-b0bda1e8402b" component="PSMClass: *Diagnozy*">
+            <eXo:ViewHelper />
+          </eXo:Component>
+          <eXo:Component Type="PSMAssociation" componentID="014b384e-b52a-421d-814d-b478f798de10" component="PSMAssociation from PSMClass: *Pacient* to PSMClass: *Diagnozy*">
+            <eXo:ViewHelper>
+              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:MainLabelViewHelper>
+              <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:CardinalityLabelViewHelper>
+            </eXo:ViewHelper>
+          </eXo:Component>
+          <eXo:Component Type="PSMClass" componentID="9f50c03b-288f-4acb-8eab-c7de58ae435f" component="PSMClass: *Diagnoza*">
+            <eXo:ViewHelper />
+          </eXo:Component>
+          <eXo:Component Type="PSMAssociation" componentID="60171b5b-8c3c-497d-a9c0-43ea821e4c8e" component="PSMAssociation from PSMClass: *Diagnozy* to PSMClass: *Diagnoza*">
+            <eXo:ViewHelper>
+              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:MainLabelViewHelper>
+              <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:CardinalityLabelViewHelper>
+            </eXo:ViewHelper>
+          </eXo:Component>
+          <eXo:Component Type="PSMClass" componentID="28847ca0-dee1-430d-9a6e-e71d88ca30e9" component="PSMClass: *Lekar*">
+            <eXo:ViewHelper />
+          </eXo:Component>
+          <eXo:Component Type="PSMAssociation" componentID="be52b9d0-dbe6-4cc9-a408-88b5754e02b5" component="PSMAssociation from PSMClass: *Diagnoza* to PSMClass: *Lekar*">
+            <eXo:ViewHelper>
+              <eXo:MainLabelViewHelper X="0" Y="-4" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:MainLabelViewHelper>
+              <eXo:CardinalityLabelViewHelper X="-43" Y="-18" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:CardinalityLabelViewHelper>
+            </eXo:ViewHelper>
+          </eXo:Component>
+          <eXo:Component Type="PSMClass" componentID="dc6c523a-cb5e-4ec7-9408-b53adaad29dc" component="PSMClass: *Osoba*">
+            <eXo:ViewHelper />
+          </eXo:Component>
+          <eXo:Component Type="PSMAssociation" componentID="6426b890-6573-41e7-9ab2-936e543c855d" component="PSMAssociation from PSMClass: *Lekar* to PSMClass: *Osoba*">
+            <eXo:ViewHelper>
+              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:MainLabelViewHelper>
+              <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:CardinalityLabelViewHelper>
+            </eXo:ViewHelper>
+          </eXo:Component>
+        </eXo:Components>
+      </eXo:PSMDiagram>
+      <eXo:PSMDiagram ID="4ec55c06-645a-42e8-8eea-7dfafc2c50eb" schemaID="03a99482-6696-4bfe-a402-89f3767e9c78" schema="Zprava_Vydane_Leky" Caption="Zprava_Vydane_Leky">
+        <eXo:Components>
+          <eXo:Component Type="PSMSchemaClass" componentID="1bc69925-4b39-4151-968b-5a704994e5e1" component="PSMSchemaClass: DASTA-VYDANE-LEKY">
+            <eXo:ViewHelper />
+          </eXo:Component>
+          <eXo:Component Type="PSMClass" componentID="0195d1b5-4ac9-4923-9f3d-5aae5d39c0f2" component="PSMClass: *DASTA*">
+            <eXo:ViewHelper />
+          </eXo:Component>
+          <eXo:Component Type="PSMClass" componentID="23c4b30c-dbd1-45cd-ae77-126b86cc3572" component="PSMClass: *Pacient*">
+            <eXo:ViewHelper />
+          </eXo:Component>
+          <eXo:Component Type="PSMClass" componentID="1da329f4-caeb-47b2-a5c6-bffa6c4087d0" component="PSMClass: *Zprava*">
+            <eXo:ViewHelper />
+          </eXo:Component>
+          <eXo:Component Type="PSMAssociation" componentID="fb3b7f5f-e701-4773-a3e4-a747a954145a" component="PSMAssociation from PSMSchemaClass: DASTA-VYDANE-LEKY to PSMClass: *DASTA*">
+            <eXo:ViewHelper>
+              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:MainLabelViewHelper>
+              <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:CardinalityLabelViewHelper>
+            </eXo:ViewHelper>
+          </eXo:Component>
+          <eXo:Component Type="PSMAssociation" componentID="c2b21506-f1f1-49f7-bc4a-b1659824dba0" component="PSMAssociation from PSMClass: *DASTA* to PSMClass: *Zprava*">
+            <eXo:ViewHelper>
+              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:MainLabelViewHelper>
+              <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:CardinalityLabelViewHelper>
+            </eXo:ViewHelper>
+          </eXo:Component>
+          <eXo:Component Type="PSMAssociation" componentID="eb6aef99-55be-4558-bd9d-d5856924dff0" component="PSMAssociation from PSMClass: *Zprava* to PSMClass: *Pacient*">
+            <eXo:ViewHelper>
+              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:MainLabelViewHelper>
+              <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:CardinalityLabelViewHelper>
+            </eXo:ViewHelper>
+          </eXo:Component>
+          <eXo:Component Type="PSMClass" componentID="f440b89a-c12e-42e6-af5a-2013f3006124" component="PSMClass: *VydejLeku*">
+            <eXo:ViewHelper />
+          </eXo:Component>
+          <eXo:Component Type="PSMAssociation" componentID="9137d9ec-0aeb-468d-a2ea-3e5e63298198" component="PSMAssociation from PSMClass: *VydaneLeky* to PSMClass: *VydejLeku*">
+            <eXo:ViewHelper>
+              <eXo:MainLabelViewHelper X="-1" Y="-4" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:MainLabelViewHelper>
+              <eXo:CardinalityLabelViewHelper X="-76" Y="-17" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:CardinalityLabelViewHelper>
+            </eXo:ViewHelper>
+          </eXo:Component>
+          <eXo:Component Type="PSMClass" componentID="e609c76f-755e-4481-a4fc-227f0c525bab" component="PSMClass: *VydaneLeky*">
+            <eXo:ViewHelper />
+          </eXo:Component>
+          <eXo:Component Type="PSMAssociation" componentID="2afbd1b4-51d2-4c35-91df-e04434fcacdd" component="PSMAssociation from PSMClass: *Pacient* to PSMClass: *VydaneLeky*">
+            <eXo:ViewHelper>
+              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:MainLabelViewHelper>
+              <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:CardinalityLabelViewHelper>
+            </eXo:ViewHelper>
+          </eXo:Component>
+          <eXo:Component Type="PSMClass" componentID="e1a5e3fb-3a87-4451-bdc2-c1db5ca261e8" component="PSMClass: *LekNazev*">
+            <eXo:ViewHelper />
+          </eXo:Component>
+          <eXo:Component Type="PSMAssociation" componentID="7eb304f7-3b3b-4344-a3b0-90d7b756dfea" component="PSMAssociation from PSMClass: *VydejLeku* to PSMClass: *LekNazev*">
+            <eXo:ViewHelper>
+              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:MainLabelViewHelper>
+              <eXo:CardinalityLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:CardinalityLabelViewHelper>
+            </eXo:ViewHelper>
+          </eXo:Component>
+          <eXo:Component Type="PSMClass" componentID="b26872b9-a752-48a8-b3b9-7758f09edb7c" component="PSMClass: *PocetBaleni*">
+            <eXo:ViewHelper />
+          </eXo:Component>
+          <eXo:Component Type="PSMAssociation" componentID="1bec134e-95b4-4745-b577-401421112c71" component="PSMAssociation from PSMClass: *VydejLeku* to PSMClass: *PocetBaleni*">
+            <eXo:ViewHelper>
+              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:MainLabelViewHelper>
+              <eXo:CardinalityLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:CardinalityLabelViewHelper>
+            </eXo:ViewHelper>
+          </eXo:Component>
+          <eXo:Component Type="PSMClass" componentID="f13cdbcd-2c53-4bc5-be65-17cbf1a9c3c0" component="PSMClass: *LekKod*">
+            <eXo:ViewHelper />
+          </eXo:Component>
+          <eXo:Component Type="PSMAssociation" componentID="b9283673-7c7d-4a36-bee8-660d966aa178" component="PSMAssociation from PSMClass: *VydejLeku* to PSMClass: *LekKod*">
+            <eXo:ViewHelper>
+              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:MainLabelViewHelper>
+              <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:CardinalityLabelViewHelper>
+            </eXo:ViewHelper>
+          </eXo:Component>
+          <eXo:Component Type="PSMClass" componentID="65a0b908-80da-4951-8e06-e7a3279b25f2" component="PSMClass: *VydejLekuData1*">
+            <eXo:ViewHelper />
+          </eXo:Component>
+          <eXo:Component Type="PSMAssociation" componentID="6c078aa3-8908-41f2-a14a-9c3a1c77915b" component="PSMAssociation from PSMClass: *VydejLeku* to PSMClass: *VydejLekuData1*">
+            <eXo:ViewHelper>
+              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:MainLabelViewHelper>
+              <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:CardinalityLabelViewHelper>
+            </eXo:ViewHelper>
+          </eXo:Component>
+          <eXo:Component Type="PSMClass" componentID="010dfde6-f471-4c7c-9cc3-c7c704404251" component="PSMClass: *VydejLekuData2*">
+            <eXo:ViewHelper />
+          </eXo:Component>
+          <eXo:Component Type="PSMAssociation" componentID="df124c9d-eec0-4b15-831f-4da455b6cf21" component="PSMAssociation from PSMClass: *VydejLeku* to PSMClass: *VydejLekuData2*">
+            <eXo:ViewHelper>
+              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:MainLabelViewHelper>
+              <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:CardinalityLabelViewHelper>
+            </eXo:ViewHelper>
+          </eXo:Component>
+          <eXo:Component Type="PSMClass" componentID="22b22dd6-c716-463c-9344-59cbaefb762b" component="PSMClass: *Lekar*">
+            <eXo:ViewHelper />
+          </eXo:Component>
+          <eXo:Component Type="PSMAssociation" componentID="b5b9c8ed-dce4-4112-8953-3c6135a4c731" component="PSMAssociation from PSMClass: *VydejLeku* to PSMClass: *Lekar*">
+            <eXo:ViewHelper>
+              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:MainLabelViewHelper>
+              <eXo:CardinalityLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:CardinalityLabelViewHelper>
             </eXo:ViewHelper>
