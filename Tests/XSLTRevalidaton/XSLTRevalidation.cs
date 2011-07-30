@@ -100,7 +100,10 @@ namespace Tests.XSLTRevalidaton
 
             foreach (FileInfo stylesheetFile in stylesheetFiles)
             {
-                if (stylesheetFile.Name.Contains("DesiredStylesheet") || stylesheetFile.Name.Contains("LastStylesheet") || stylesheetFile.Name.Contains("generated"))
+                if (stylesheetFile.Name.Contains("DesiredStylesheet") 
+                    || stylesheetFile.Name.Contains("LastStylesheet") 
+                    || stylesheetFile.Name.Contains("generated")
+                    || stylesheetFile.Name.Contains("last-working"))
                 {
                     continue;
                 }
@@ -211,7 +214,11 @@ namespace Tests.XSLTRevalidaton
                 Assert.Inconclusive(inconclusiveMessage.ToString());
             }
 
+            string lastWorkingStylesheetFile = testDir.FullName + "/" + testDir.Name + "-last-working.xslt";
+            testGeneratedStylesheet.Save(lastWorkingStylesheetFile);
+
             Console.WriteLine("Test succeeded. ");
+
         }
     }
 }

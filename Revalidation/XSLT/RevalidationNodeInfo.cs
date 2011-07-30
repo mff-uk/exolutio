@@ -53,8 +53,8 @@ namespace Exolutio.Revalidation.XSLT
              *  3)
              */
 
-            bool _aReq = true; 
-            bool _eReq = true; 
+            bool _aReq = false; 
+            bool _eReq = false; 
             
             if (node is PSMClass)
             {
@@ -92,7 +92,7 @@ namespace Exolutio.Revalidation.XSLT
                 else
                 {
                     bool dummy;
-                    foreach (PSMAssociation psmAssociation in (((PSMAssociationMember)node).ChildPSMAssociations))
+                    foreach (PSMAssociation psmAssociation in (((PSMAssociationMember)node).ChildPSMAssociations).Where(a => !a.IsNamed))
                     {
                         DetermineRequiredTemplates(psmAssociation.Child, out _aReq, out dummy);
                         if (_aReq)

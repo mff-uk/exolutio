@@ -51,11 +51,17 @@ namespace Exolutio.Revalidation.XSLT
         {
             context = new GeneratorContext() { OldVersion = OldVersion, NewVersion = NewVersion};
             namingSupport = new TemplateNamingSupport() {PSMSchema = PSMSchemaNewVersion};
-
+            
+            // pregenerate 
             foreach (PSMComponent psmComponent in DetectedChangeInstances.RedNodes)
             {
                 RevalidationNodeInfo nodeInfo = new RevalidationNodeInfo(psmComponent);
                 nodeInfos[psmComponent] = nodeInfo;
+            }
+
+            foreach (PSMComponent psmComponent in DetectedChangeInstances.RedNodes)
+            {
+                RevalidationNodeInfo nodeInfo = nodeInfos[psmComponent];
 
                 context.CurrentNode = psmComponent;
                 
@@ -114,9 +120,23 @@ namespace Exolutio.Revalidation.XSLT
 
                             if (childComponent is PSMAssociationMember)
                             {
-                                // TODO: !!!!! temporary - this prevents from calling attributes of nested classes without named associations
-                                //processAttributesTemplate.References.Add(reference);
-                                processElementsTemplate.References.Add(reference);
+                                if (nodeInfos.ContainsKey(childComponent))
+                                {
+                                    // TODO: verify the conditions
+                                    RevalidationNodeInfo childNodeInfo = nodeInfos[childComponent];
+                                    if (childNodeInfo.AttributeTemplateRequired && 
+                                        childComponent.DownCastSatisfies<PSMClass>(c => !c.ParentAssociation.IsNamed))
+                                        processAttributesTemplate.References.Add(reference);
+                                    if (childNodeInfo.ElementTemplateRequired ||
+                                        childComponent.DownCastSatisfies<PSMClass>(c => c.ParentAssociation.IsNamed))
+                                        processElementsTemplate.References.Add(reference);
+                                }
+                                else
+                                {
+                                    // TODO: can adding attribute calls be really left out??
+                                    //processAttributesTemplate.References.Add(reference);
+                                    processElementsTemplate.References.Add(reference);
+                                }
                             }
                             
                         }
@@ -183,7 +203,7 @@ namespace Exolutio.Revalidation.XSLT
                 context.CurrentNode = psmComponent;
                 RevalidationNodeInfo nodeInfo = nodeInfos[psmComponent];
 
-                if (nodeInfo.ElementTemplateRequired)
+                //if (nodeInfo.ElementTemplateRequired)
                 {
                     if (nodeInfo.ProcessNodeTemplate != null)
                     {

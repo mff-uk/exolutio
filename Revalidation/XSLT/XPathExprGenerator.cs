@@ -38,7 +38,7 @@ namespace Exolutio.Revalidation.XSLT
                 if (component is PSMAssociationMember)
                 {
                     PSMAssociationMember associationMember = (PSMAssociationMember) component;
-                    if (associationMember.IsNamed)
+                    if (associationMember.ParentAssociation.IsNamed)
                     {
                         groupMembers.Add(associationMember);
                     }
@@ -54,12 +54,14 @@ namespace Exolutio.Revalidation.XSLT
         {
             List<PSMComponent> groupMembers = new List<PSMComponent>();
             AddGroupMembersRecursive(component, ref groupMembers);
+            List<PSMComponent> oldMembers = new List<PSMComponent>();
+            AddGroupMembersRecursive(component.GetInVersion(context.OldVersion), ref oldMembers);
 
             List<XPathExpr> result = new List<XPathExpr>();
 
-            foreach (PSMComponent psmComponent in groupMembers)
+            foreach (PSMComponent psmComponent in oldMembers)
             {
-                if (!psmComponent.ExistsInVersion(context.OldVersion))
+                if (!psmComponent.ExistsInVersion(context.NewVersion))
                 {
                     continue;
                 }

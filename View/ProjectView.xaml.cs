@@ -62,18 +62,21 @@ namespace Exolutio.View
             }
         }
 
-        public void UnbindFromProject(Project project)
+        public void UnbindFromProject()
         {
+            if (projectView.ItemsSource is Project)
+            {
+                (projectView.ItemsSource as Project).PropertyChanged -= Project_PropertyChanged;
+            }
             projectView.ItemsSource = null;
             projectView.ItemTemplate = null;
-            project.PropertyChanged -= Project_PropertyChanged;
         }
 
         private void Project_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "UsesVersioning")
             {
-                UnbindFromProject((Project) sender);
+                UnbindFromProject();
                 BindToProject((Project) sender);
             }
         }
