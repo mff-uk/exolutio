@@ -75,6 +75,11 @@ namespace Exolutio.View.Commands.Versioning
             if (Environment.MachineName.Contains("TRUPIK"))
             {
                 revalidationStylesheet.Save(XsltTestWindow.SAVE_STYLESHEET);
+                if (schemaVersion1.Project.ProjectFile != null)
+                {
+                    string ls = string.Format("{0}\\{1}", schemaVersion1.Project.ProjectFile.Directory.FullName, "LastStylesheet.xslt");
+                    revalidationStylesheet.Save(ls);
+                }
             }
             else
             {

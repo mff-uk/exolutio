@@ -142,13 +142,10 @@ namespace Exolutio.WPFClient
             }
         }
 
-        private void UnBindProject(Project unloadedProject)
+        private void UnBindProject()
         {
-            if (unloadedProject != null)
-            {
-                ProjectView.UnbindFromProject(unloadedProject);
-                BindingOperations.ClearBinding(this, TitleProperty);
-            }
+            ProjectView.UnbindFromProject();
+            BindingOperations.ClearBinding(this, TitleProperty);
         }
 
         private void BindProjectVersion(ProjectVersion projectVersion)
@@ -189,7 +186,7 @@ namespace Exolutio.WPFClient
         public void CloseProject()
         {
             UnBindProjectVersion(Current.ProjectVersion);
-            UnBindProject(Current.Project);
+            UnBindProject();
             DiagramTabManager.CloseAllTabs();
             ExolutioRibbon.versionGallery.ItemsSource = null;
         }

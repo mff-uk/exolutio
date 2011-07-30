@@ -277,7 +277,7 @@ namespace Exolutio.Model.PSM.Grammar.XSDTranslation
                     string attributeName = NamingSupport.SuggestName(psmAttribute, attribute: true);
                     if (psmAttribute.Element && !attributeReferences)
                     {
-                        XElement attributeElement = parentElement.XsdAttributeAsElement(attributeName, psmAttribute);                        
+                        parentElement.XsdAttributeAsElement(attributeName, psmAttribute);                        
                     }
                     if (!psmAttribute.Element && attributeReferences)
                     {

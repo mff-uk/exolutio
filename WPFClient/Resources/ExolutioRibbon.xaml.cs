@@ -105,7 +105,7 @@ namespace Exolutio.WPFClient
             {
                 if (ExolutioYesNoBox.Show("Directory no longer exists.", "Do you wish to remove the directory from recent directories list?") == MessageBoxResult.Yes)
                 {
-                    ConfigurationManager.Configuration.RecentFiles.RemoveAll(d => d.FullName == directory);
+                    ConfigurationManager.Configuration.RecentDirectories.RemoveAll(d => d.FullName == directory);
                     FillRecent(ConfigurationManager.Configuration.RecentFiles,
                                ConfigurationManager.Configuration.RecentDirectories);
                 }

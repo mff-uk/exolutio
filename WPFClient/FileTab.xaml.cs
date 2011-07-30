@@ -86,12 +86,30 @@ namespace Exolutio.WPFClient
 
         public void bSave_Click(object sender, RoutedEventArgs e)
         {
+            string defaultExt;
+            string filter;
+            if (fileView.DisplayedFileType == EDisplayedFileType.XSD)
+            {
+                defaultExt = "xsd";
+                filter = "XML Schema files (*.xsd)|*.xsd|XML files (*.xml)|*.xml|All files (*.*)|*.*";
+            }
+            else if (fileView.DisplayedFileType == EDisplayedFileType.XML)
+            {
+                defaultExt = "xml";
+                filter = "XML files (*.xml)|*.xml|All files (*.*)|*.*";
+            }
+            else
+            {
+                defaultExt = null;
+                filter = "XML files (*.xml)|*.xml|All files (*.*)|*.*";
+            }
+
             SaveFileDialog sfd = new SaveFileDialog
             {
                 AddExtension = true,
-                DefaultExt = "xsd",
+                DefaultExt = defaultExt,
                 FileName = FileName,
-                Filter = "XML Schema files (*.xsd)|*.xsd|All files (*.*)|*.*||"
+                Filter = filter
             };
             if (sfd.ShowDialog() == true)
             {

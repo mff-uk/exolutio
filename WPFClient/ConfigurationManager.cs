@@ -17,7 +17,7 @@ namespace Exolutio.WPFClient
             get { return recentFiles; }
         }
 
-        public IEnumerable<DirectoryInfo> RecentDirectories
+        public List<DirectoryInfo> RecentDirectories
         {
             get { return recentDirectories; }
         }
