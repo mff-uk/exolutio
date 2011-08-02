@@ -21,5 +21,15 @@ namespace Exolutio.Model.OCL.AST
             set;
             get;
         }
+
+        public override Types.Classifier Type {
+            get {
+                return First.Type.CommonSuperType(Last.Type);
+            }
+
+            protected set {
+                throw new InvalidOperationException();
+            }
+        }
     }
 }

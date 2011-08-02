@@ -40,6 +40,13 @@ namespace Exolutio.Model.OCL.Types
             return Data.Zip(other.Data, (a, b) => a.Type == b.Type).All(a => a);
         }
 
+        public bool HasMatchingSignature(IEnumerable<Classifier> parTypes){
+            if (parTypes.Count() != Count) {
+                return false;
+            }
+            return Data.Zip(parTypes, (a, b) => b.ConformsTo(a.Type)).All(a => a);
+        }
+
         public override int GetHashCode()
         {
             return Data.Sum(a => a.Type.GetHashCode());
