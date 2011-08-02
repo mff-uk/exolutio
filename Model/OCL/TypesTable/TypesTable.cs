@@ -5,25 +5,21 @@ using System.Linq;
 using System.Text;
 using Exolutio.Model.OCL.Types;
 
-namespace Exolutio.Model.OCL.TypesTable
-{
-    public class TypesTable
-    {
+namespace Exolutio.Model.OCL.TypesTable {
+    public class TypesTable {
         private Dictionary<Classifier, TypeRecord> table = new Dictionary<Classifier, TypeRecord>();
         private List<TypeRecord> matrix = new List<TypeRecord>();
         private BitArray markingTemp = null;
         private int[] distanceTemp = null;
 
-        public bool RegisterType(Classifier type)
-        {
+        public bool RegisterType(Classifier type) {
             if (type == null)
                 throw new NullReferenceException("Type is null.");
 
             TypeRecord newTypeRecord = CreateTypeRecord(type);
             type.TypeTable = this;
 
-            if (type is ICompositeType)
-            {
+            if (type is ICompositeType) {
                 RegisterCompositeType(type as ICompositeType);
             }
 
@@ -35,16 +31,13 @@ namespace Exolutio.Model.OCL.TypesTable
             return true;
         }
 
-        public void RegisterCompositeType(ICompositeType composit)
-        {
+        public void RegisterCompositeType(ICompositeType composit) {
             composit.RegistredComposite(this);
         }
 
-        private TypeRecord CreateTypeRecord(Classifier type)
-        {
+        private TypeRecord CreateTypeRecord(Classifier type) {
             if (table.ContainsKey(type))
                 return null;
-
             TypeRecord newTypeRecord = new TypeRecord();
             newTypeRecord.Type = type;
             newTypeRecord.MatrixIndex = matrix.Count;
@@ -55,10 +48,8 @@ namespace Exolutio.Model.OCL.TypesTable
             return newTypeRecord;
         }
 
-        private void CreateEdgeForRecord(TypeRecord rec)
-        {
-            foreach (TypeRecord old in matrix)
-            {
+        private void CreateEdgeForRecord(TypeRecord rec) {
+            foreach (TypeRecord old in matrix) {
                 if (rec.Type.ConformsToRegister(old.Type))
                     rec.EdgesIndex.Add(old.MatrixIndex);
                 if (old.Type.ConformsToRegister(rec.Type))
@@ -68,8 +59,7 @@ namespace Exolutio.Model.OCL.TypesTable
 
 
 
-        public bool ConformsTo(Classifier left, Classifier right)
-        {
+        public bool ConformsTo(Classifier left, Classifier right) {
             if (left is ICompositeType || right is IConformsToComposite)
                 return ResolveComposite(left, right);
 
@@ -82,8 +72,7 @@ namespace Exolutio.Model.OCL.TypesTable
             Queue<int> toFind = new Queue<int>();
             toFind.Enqueue(leftIndex);
 
-            while (toFind.Count > 0)
-            {
+            while (toFind.Count > 0) {
                 int actIndex = toFind.Dequeue();
                 if (markingTemp[actIndex])
                     continue;
@@ -92,8 +81,7 @@ namespace Exolutio.Model.OCL.TypesTable
                 if (actIndex == rightIndex)
                     return true;
 
-                foreach (int newIndex in matrix[actIndex].EdgesIndex)
-                {
+                foreach (int newIndex in matrix[actIndex].EdgesIndex) {
                     if (markingTemp[newIndex] == false)
                         toFind.Enqueue(newIndex);
                 }
@@ -103,19 +91,16 @@ namespace Exolutio.Model.OCL.TypesTable
 
         }
 
-        public bool ResolveComposite(Classifier left, Classifier right)
-        {
+        public bool ResolveComposite(Classifier left, Classifier right) {
             //left or right must be composite
-            if (left is ICompositeType)
-            {
+            if (left is ICompositeType) {
                 ICompositeType leftComposite = left as ICompositeType;
                 if (right is ICompositeType)
                     return leftComposite.ConformsToComposite(right);
                 else
                     return leftComposite.ConformsToSimple(right);
             }
-            else
-            {
+            else {
                 // right must be composite
                 if (left is IConformsToComposite)
                     return ((IConformsToComposite)left).ConformsToComposite(right);
@@ -124,22 +109,20 @@ namespace Exolutio.Model.OCL.TypesTable
             }
         }
 
-        private void PrepareMarkingTemp()
-        {
-            if (markingTemp == null)
-            {
+        private void PrepareMarkingTemp() {
+            if (markingTemp == null) {
                 markingTemp = new BitArray(matrix.Count);
                 return;
             }
-
-            if (markingTemp.Length != matrix.Count)
+            if (markingTemp.Length != matrix.Count) {
                 markingTemp = new BitArray(matrix.Count);//default value is False
-            else
+            }
+            else {
                 markingTemp.SetAll(false);
+            }
         }
 
-        public Classifier CommonSuperType(Classifier typeA, Classifier typeB)
-        {
+        public Classifier CommonSuperType(Classifier typeA, Classifier typeB) {
             PrepareDistanceTemp();
             PrepareMarkingTemp();
 
@@ -148,8 +131,7 @@ namespace Exolutio.Model.OCL.TypesTable
             Queue<Tuple<int, int>> toFindFromA = new Queue<Tuple<int, int>>();
             toFindFromA.Enqueue(new Tuple<int, int>(typeAIndex, 0));
             //marking distance from TypeA
-            while (toFindFromA.Count > 0)
-            {
+            while (toFindFromA.Count > 0) {
                 Tuple<int, int> act = toFindFromA.Dequeue();
                 int actIndex = act.Item1;
                 int actDistanc = act.Item2;
@@ -169,8 +151,7 @@ namespace Exolutio.Model.OCL.TypesTable
             Queue<Tuple<int, int>> toFindFromB = new Queue<Tuple<int, int>>();
             toFindFromB.Enqueue(new Tuple<int, int>(typeBIndex, 0));
             //find the shortiest cast path from A,B to C
-            while (toFindFromB.Count > 0)
-            {
+            while (toFindFromB.Count > 0) {
                 Tuple<int, int> act = toFindFromB.Dequeue();
                 int actIndex = act.Item1;
                 int actDistanc = act.Item2;
@@ -180,8 +161,7 @@ namespace Exolutio.Model.OCL.TypesTable
                 else
                     markingTemp[actIndex] = true;
 
-                if (minDistance > distanceTemp[actIndex] + actDistanc && distanceTemp[actIndex]< Int32.MaxValue)
-                {
+                if (minDistance > distanceTemp[actIndex] + actDistanc && distanceTemp[actIndex] < Int32.MaxValue) {
                     minDistance = distanceTemp[actIndex];
                     commonSuperType = matrix[actIndex].Type;
                 }
@@ -194,8 +174,7 @@ namespace Exolutio.Model.OCL.TypesTable
             return commonSuperType;
         }
 
-        private void PrepareDistanceTemp()
-        {
+        private void PrepareDistanceTemp() {
             if (distanceTemp == null)
                 distanceTemp = new int[matrix.Count];
 

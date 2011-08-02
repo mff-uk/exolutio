@@ -87,6 +87,7 @@ namespace Exolutio.Model.OCL.Types
 
         }
 
+        #region Opreration from spec chap.: 8.8.8
         public virtual Classifier CommonSuperType(Classifier other)
         {
             Classifier realThis = this;
@@ -99,6 +100,17 @@ namespace Exolutio.Model.OCL.Types
 
             return TypeTable.CommonSuperType(realThis, other);
         }
+
+        public virtual Property LookupProperty(string name) {
+            return Properties[name];
+        }
+
+        public virtual Operation LookupOperation(string name,IEnumerable<Classifier> parameterTypes) {
+            return Operations[name].LookupOperation(parameterTypes);
+        }
+
+
+        #endregion
 
 
         //Ignore: isFinalSpecialization, much associations, much operations

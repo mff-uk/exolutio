@@ -60,6 +60,7 @@
     <Compile Include="ModelIterator.cs" />
     <Compile Include="ModelVerifier.cs" />
     <Compile Include="ModelWorker.cs" />
+    <Compile Include="OCL\Environment.cs" />
     <Compile Include="OCL\SupportingClasses\ActionDictionary.cs" />
     <Compile Include="OCL\SupportingClasses\ActionList.cs" />
     <Compile Include="OCL\TypesTable\TypeRecord.cs" />
