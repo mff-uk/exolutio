@@ -15,7 +15,8 @@ namespace Exolutio.Revalidation.XSLT
 
             bool attributeRequired;
             bool elementRequired;
-            DetermineRequiredTemplates(Node, out attributeRequired, out elementRequired);
+            bool wrapTemplateRequired;
+            DetermineRequiredTemplates(Node, out attributeRequired, out elementRequired, out wrapTemplateRequired);
             AttributeTemplateRequired = attributeRequired;
             ElementTemplateRequired = elementRequired;
         }
@@ -38,8 +39,10 @@ namespace Exolutio.Revalidation.XSLT
 
         public Template CreateElementsTemplate { get; set; }
 
-        private static void DetermineRequiredTemplates(PSMComponent node, out bool attributeRequired, out bool elementRequired)
+        public static void DetermineRequiredTemplates(PSMComponent node, out bool attributeRequired, out bool elementRequired, out bool wrapTemplateRequired)
         {
+            wrapTemplateRequired = node.DownCastSatisfies<PSMClass>(c => c.ParentAssociation != null && c.ParentAssociation.IsNamed);
+
             /*
              * Attribute template is required
              * for class: 
@@ -64,7 +67,7 @@ namespace Exolutio.Revalidation.XSLT
                 if (psmClass.IsStructuralRepresentative)
                 {
                     bool repA, repE;
-                    DetermineRequiredTemplates(psmClass.RepresentedClass, out repA, out repE);
+                    DetermineRequiredTemplates(psmClass.RepresentedClass, out repA, out repE, out wrapTemplateRequired);
                     if (repA)
                         _aReq = true;
                     if (repE)
@@ -94,7 +97,7 @@ namespace Exolutio.Revalidation.XSLT
                     bool dummy;
                     foreach (PSMAssociation psmAssociation in (((PSMAssociationMember)node).ChildPSMAssociations).Where(a => !a.IsNamed))
                     {
-                        DetermineRequiredTemplates(psmAssociation.Child, out _aReq, out dummy);
+                        DetermineRequiredTemplates(psmAssociation.Child, out _aReq, out dummy, out wrapTemplateRequired);
                         if (_aReq)
                         {
                             break;
@@ -120,7 +123,7 @@ namespace Exolutio.Revalidation.XSLT
                             _eReq = true;
                             break;
                         }
-                        DetermineRequiredTemplates(psmAssociation.Child, out dummy, out _eReq);
+                        DetermineRequiredTemplates(psmAssociation.Child, out dummy, out _eReq, out wrapTemplateRequired);
                         if (_eReq)
                         {
                             break;
@@ -157,6 +160,8 @@ namespace Exolutio.Revalidation.XSLT
         public bool AttributesTemplate { get; set; }
 
         public bool GroupNodeTemplate { get; set; }
+
+        public bool HasCurrentInstanceParameter { get; set; }
 
         /// <summary>
         /// Empty for <see cref="Node"/>s of type PSMAttribute.
@@ -197,6 +202,14 @@ namespace Exolutio.Revalidation.XSLT
         public bool ReferencesAddedNode { get; set; }
 
         public bool ReferencesGroupNode { get; set; }
+
+        public bool ReferencesInlinedNode { get { return ReferencesGroupNode || ReferencesContentModel; } }
+
+        public bool ReferencesContentModel
+        {
+            get { return (ReferencedNode is PSMContentModel); }
+        }
+
 
         public string CardinalityString
         {

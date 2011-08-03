@@ -74,7 +74,7 @@ namespace Exolutio.Model
         {
             if (!this.IsInfinity && other.IsInfinity)
                 return -1;
-            if (this.IsInfinity && other.IsInfinity)
+            if (this.IsInfinity && !other.IsInfinity)
                 return 1;
             if (this.IsInfinity && other.IsInfinity)
                 return 0;

@@ -49,6 +49,10 @@ namespace Exolutio.Revalidation.XSLT
                     {
                         param.AddAttributeWithValue("as", parameter.Type);
                     }
+                    if (!XPathExpr.IsNullOrEmpty(parameter.DefaultValue))
+                    {
+                        param.AddAttributeWithValue("select", parameter.DefaultValue);
+                    }
                 }
             }
             return templateElement;
@@ -221,6 +225,7 @@ namespace Exolutio.Revalidation.XSLT
             public string Name { get; set; }
             public XPathExpr Value { get; set; }
             public string Type { get; set; }
+            public XPathExpr DefaultValue { get; set; }
 
             public TemplateParameter(string name, XPathExpr value)
                 : this()

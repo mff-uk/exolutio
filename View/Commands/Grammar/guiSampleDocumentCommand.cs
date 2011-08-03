@@ -21,7 +21,17 @@ namespace Exolutio.View.Commands
         {
             SampleDataGenerator g = new SampleDataGenerator();
             XDocument xmlDocument = g.Translate((PSMSchema) Current.ActiveDiagram.Schema);
-            Current.MainWindow.FilePresenter.DisplayFile(xmlDocument, EDisplayedFileType.XML, Current.ActiveDiagram.Caption + "_sample.xml", g.Log, (PSMSchema) Current.ActiveDiagram.Schema);
+            FilePresenterButton[] additionalButtons = new [] { new FilePresenterButton() { Text = "Generate another file", Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.xmlIcon), UpdateFileContentAction = GenerateAnotherFile} };
+            Current.MainWindow.FilePresenter.DisplayFile(xmlDocument, EDisplayedFileType.XML, Current.ActiveDiagram.Caption + "_sample.xml", g.Log, (PSMSchema) Current.ActiveDiagram.Schema, additionalButtons);
+
+
+        }
+
+        private void GenerateAnotherFile(IFilePresenterTab filetab)
+        {
+            SampleDataGenerator g = new SampleDataGenerator();
+            XDocument xmlDocument = g.Translate(filetab.ValidationSchema);
+            filetab.SetDocumentText(xmlDocument.ToString());
         }
 
         public override string Text

@@ -321,11 +321,15 @@ namespace Exolutio.WPFClient
             }
         }
 
-        public void DisplayFile(XDocument xmlDocument, EDisplayedFileType fileType, string fileName = null, Log log = null, PSMSchema validationSchema = null)
+        public void DisplayFile(XDocument xmlDocument, EDisplayedFileType fileType, string fileName = null, Log log = null, PSMSchema validationSchema = null, FilePresenterButton[] additionalActions = null)
         {
             FileTab f = new FileTab();
             f.DisplayFile(fileType, xmlDocument.ToString(), fileName, log, validationSchema);
             f.FloatingWindowSize = new System.Windows.Size(800, 600);
+            if (additionalActions != null)
+            {
+                f.CreateAdditionalActionsButtons(additionalActions);
+            }
             f.Show(DockManager, true);
         }
 

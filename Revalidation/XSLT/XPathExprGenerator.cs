@@ -24,7 +24,14 @@ namespace Exolutio.Revalidation.XSLT
                 result.Add(context.GetRelativeXPath(psmComponent, useCurrentInstanceVariable));
             }
 
-            return XPathExpr.ConcatWithOrOperator(result);
+            if (result.Count == 0)
+            {
+                return new XPathExpr("()");
+            }
+            else
+            {
+                return XPathExpr.ConcatWithOrOperator(result);
+            }
         }
          
         private static void AddGroupMembersRecursive(PSMComponent referencedNode, ref List<PSMComponent> groupMembers)
@@ -65,7 +72,11 @@ namespace Exolutio.Revalidation.XSLT
                 {
                     continue;
                 }
-                result.Add(context.GetRelativeXPath(psmComponent, false));
+
+                PSMComponent comp = psmComponent.GetFirstAncestorOrSelfExistingInVersion(context.OldVersion).GetInVersion(context.OldVersion);
+                int lastIndexOf = comp.XPath.LastIndexOf("/");
+                string expression = lastIndexOf > -1 ? comp.XPath.Substring(lastIndexOf + 1) : comp.XPath;
+                result.Add(new XPathExpr(expression));
             }
 
 

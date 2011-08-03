@@ -14,6 +14,7 @@ using Exolutio.Model.PSM;
 using Exolutio.SupportingClasses;
 using Exolutio.View;
 using Component = Exolutio.Model.Component;
+using System.Windows.Media;
 
 namespace Exolutio.View
 {
@@ -213,8 +214,27 @@ namespace Exolutio.View
 
     public interface IFilePresenter
     {
-        void DisplayFile(XDocument xmlDocument, EDisplayedFileType fileType, string fileName = null, Log log = null, PSMSchema validationSchema = null);
+        void DisplayFile(XDocument xmlDocument, EDisplayedFileType fileType, string fileName = null, Log log = null, PSMSchema validationSchema = null, FilePresenterButton[] additionalActions = null);
     }
+
+    public struct FilePresenterButton
+    {
+        public ImageSource Icon { get; set; }
+
+        public string Text { get; set; }
+
+        public UpdateFileContent UpdateFileContentAction;
+    }
+
+    public interface IFilePresenterTab
+    {
+        string FileName { get; set; }
+        PSMSchema ValidationSchema { get; set; }
+        string GetDocumentText();
+        void SetDocumentText(string text);
+    }
+
+    public delegate void UpdateFileContent(IFilePresenterTab fileTab);
 
     public interface IDiagramTabManager
     {

@@ -23,6 +23,8 @@ namespace Exolutio.Revalidation.XSLT
 
         readonly Dictionary<PSMComponent, RevalidationNodeInfo> nodeInfos = new Dictionary<PSMComponent, RevalidationNodeInfo>();
         
+        readonly List<PSMComponent> componentsRequireingInstanceGenerators = new List<PSMComponent>();
+
         public PSMSchema PSMSchemaOldVersion { get; private set; }
 
         public Version OldVersion { get { return PSMSchemaOldVersion.Version; } }
@@ -43,6 +45,7 @@ namespace Exolutio.Revalidation.XSLT
             this.PSMSchemaOldVersion = psmSchemaOldVersion;
             DetectedChangeInstances = changeInstances;
             nodeInfos.Clear();
+            componentsRequireingInstanceGenerators.Clear();
         }
 
         #endregion 
@@ -65,7 +68,7 @@ namespace Exolutio.Revalidation.XSLT
 
                 context.CurrentNode = psmComponent;
                 
-                if (nodeInfo.ElementTemplateRequired || nodeInfo.AttributeTemplateRequired)
+                if (nodeInfo.ElementTemplateRequired || nodeInfo.AttributeTemplateRequired || psmComponent.DownCastSatisfies<PSMClass>(c => c.IsNamed))
                 {
                     if (!(psmComponent is PSMAttribute))
                     {
@@ -98,6 +101,8 @@ namespace Exolutio.Revalidation.XSLT
                                     ReferencesGroupNode = DetectedChangeInstances.IsGroupNode(childComponent)
                                 };
                                 processAttributesTemplate.References.Add(attributeReference);
+                                if (attributeReference.CreationRequired || attributeReference.ReferencesAddedNode)
+                                    componentsRequireingInstanceGenerators.AddIfNotContained(childComponent);
                             }
 
                             TemplateReference reference = new TemplateReference
@@ -112,6 +117,8 @@ namespace Exolutio.Revalidation.XSLT
                                 ReferencesAddedNode = DetectedChangeInstances.AddedNodes.Contains(childComponent),
                                 ReferencesGroupNode = DetectedChangeInstances.IsGroupNode(childComponent)
                             };
+                            if (reference.CreationRequired || (childComponent is PSMAttribute && reference.ReferencesAddedNode))
+                                componentsRequireingInstanceGenerators.AddIfNotContained(childComponent);
 
                             if (childComponent is PSMAttribute && ((PSMAttribute)childComponent).Element)
                             {
@@ -122,7 +129,6 @@ namespace Exolutio.Revalidation.XSLT
                             {
                                 if (nodeInfos.ContainsKey(childComponent))
                                 {
-                                    // TODO: verify the conditions
                                     RevalidationNodeInfo childNodeInfo = nodeInfos[childComponent];
                                     if (childNodeInfo.AttributeTemplateRequired && 
                                         childComponent.DownCastSatisfies<PSMClass>(c => !c.ParentAssociation.IsNamed))
@@ -152,14 +158,24 @@ namespace Exolutio.Revalidation.XSLT
                         }
                     }
 
+                    bool generateWrappingTemplate = true; 
                     /* not a root class 
                        and not a group node given with association given a name in the new version
+                       and not an added attribute
+                       and not a content model 
                        => node template (wrapping template)
                     */
-                    if (!(psmComponent is PSMClass && (PSMSchemaNewVersion.Roots.Contains((PSMClass)psmComponent) || DetectedChangeInstances.IsGroupNode(psmComponent)))
-                        || (DetectedChangeInstances.IsGroupNode(psmComponent) && (((PSMClass)psmComponent).ParentAssociation != null && ((PSMClass)psmComponent).ParentAssociation.IsNamed)))
+                    if (psmComponent is PSMClass && PSMSchemaNewVersion.Roots.Contains((PSMClass)psmComponent))
+                        generateWrappingTemplate = false;
+                    if (DetectedChangeInstances.IsGroupNode(psmComponent) && psmComponent.DownCastSatisfies<PSMClass>(g => g.ParentAssociation == null || !g.ParentAssociation.IsNamed))
+                        generateWrappingTemplate = false;
+                    if (psmComponent.DownCastSatisfies<PSMAttribute>(a => DetectedChangeInstances.IsAddedNode(a)))
+                        generateWrappingTemplate = false;
+                    if (psmComponent is PSMContentModel)
+                        generateWrappingTemplate = false; 
+
+                    if (generateWrappingTemplate)
                     {
-                        // TODO: unnamed associations - group clases
                         Template processNodeTemplate = new Template();
                         nodeInfo.ProcessNodeTemplate = processNodeTemplate;
                         processNodeTemplate.WrapNodeName = psmComponent is PSMAttribute ? psmComponent.Name : ((PSMAssociationMember)psmComponent).ParentAssociation.Name;
@@ -202,24 +218,20 @@ namespace Exolutio.Revalidation.XSLT
             {
                 context.CurrentNode = psmComponent;
                 RevalidationNodeInfo nodeInfo = nodeInfos[psmComponent];
-
-                //if (nodeInfo.ElementTemplateRequired)
+                if (nodeInfo.ProcessNodeTemplate != null)
                 {
-                    if (nodeInfo.ProcessNodeTemplate != null)
-                    {
-                        GenNodeTemplate(psmComponent, xslStylesheet);
-                    }
-                    if (nodeInfo.ProcessAttributesTemplate != null)
-                    {
-                        GenProcessTemplate(psmComponent, nodeInfo.ProcessAttributesTemplate, xslStylesheet);
-                    }
-                    if (nodeInfo.ProcessElementsTemplate != null)
-                    {
-                        GenProcessTemplate(psmComponent, nodeInfo.ProcessElementsTemplate, xslStylesheet);
-                    }
+                    GenWrappingNodeTemplate(psmComponent, xslStylesheet);
+                }
+                if (nodeInfo.ProcessAttributesTemplate != null)
+                {
+                    GenProcessTemplate(psmComponent, nodeInfo.ProcessAttributesTemplate, xslStylesheet);
+                }
+                if (nodeInfo.ProcessElementsTemplate != null)
+                {
+                    GenProcessTemplate(psmComponent, nodeInfo.ProcessElementsTemplate, xslStylesheet);
                 }
             }
-
+            GenInstanceGenerators(xslStylesheet);
             GenXFormConvertorTemplateEtoA(xslStylesheet);
             GenXFormConvertorTemplateAtoE(xslStylesheet);
             GenBlueNodesTemplate(xslStylesheet);
@@ -228,7 +240,7 @@ namespace Exolutio.Revalidation.XSLT
             return doc;
         }
 
-        private void GenNodeTemplate(PSMComponent psmComponent, XElement xslStylesheet)
+        private void GenWrappingNodeTemplate(PSMComponent psmComponent, XElement xslStylesheet)
         {
             RevalidationNodeInfo nodeInfo = nodeInfos[psmComponent];
             Template processNodeTemplate = nodeInfo.ProcessNodeTemplate;
@@ -245,6 +257,7 @@ namespace Exolutio.Revalidation.XSLT
                 {
                     // group nodes have current instance parameter, even when they are for "existing" nodes
                     parameters = new[] { XDocumentXsltExtensions.CreateCurrentInstanceParameterDeclaration() };
+                    processNodeTemplate.HasCurrentInstanceParameter = true; 
                 }
                 templateElement = xslStylesheet.XslNamedTemplate(processNodeTemplate.Name, parameters);
             }
@@ -271,15 +284,8 @@ namespace Exolutio.Revalidation.XSLT
             // add value for attributes 
             if (psmComponent is PSMAttribute)
             {
-                if (DetectedChangeInstances.IsAddedNode(psmComponent))
-                {
-                    contentElement.Add(new XText("###"));
-                }
-                else
-                {
-                    XPathExpr relativePath = context.GetRelativeXPath(psmComponent, false);
-                    contentElement.XslValueOf(relativePath);
-                }
+                XPathExpr relativePath = context.GetRelativeXPath(psmComponent, false);
+                contentElement.XslValueOf(relativePath);
             }
 
             // subtree processing (attributes)
@@ -313,130 +319,125 @@ namespace Exolutio.Revalidation.XSLT
         private void GenProcessTemplate(PSMComponent psmComponent, Template processTemplate,  XElement xslStylesheet)
         {
             XDocumentXsltExtensions.TemplateParameter[] parameters = null;
-            if (!DetectedChangeInstances.IsAddedNode(psmComponent))
+            if (!DetectedChangeInstances.IsAddedNode(psmComponent) || DetectedChangeInstances.IsInlinedNode(psmComponent))
             {
-                parameters = new XDocumentXsltExtensions.TemplateParameter[] { XDocumentXsltExtensions.CreateCurrentInstanceParameterDeclaration() };
+                parameters = new[] { XDocumentXsltExtensions.CreateCurrentInstanceParameterDeclaration() };
+                processTemplate.HasCurrentInstanceParameter = true; 
             }
             XElement templateElement = xslStylesheet.XslNamedTemplate(processTemplate.Name, parameters);
-            foreach (TemplateReference templateReference in processTemplate.References)
+            if (psmComponent.DownCastSatisfies<PSMContentModel>(cm => cm.Type == PSMContentModelType.Choice))
             {
-                if (templateReference.ReferencesRedNode && templateReference.ReferencesGroupNode)
-                {
-                    GenGroupNodeCardinalityReference(templateElement, processTemplate, templateReference);
-                }
-                else if (templateReference.Lower > 1 || DetectedChangeInstances.ExistsCardinalityChange(psmComponent))
-                {
-                    GenCardinalityReference(templateElement, processTemplate, templateReference);
-                }
-                else
-                {
-                    GenSingleReference(templateElement, processTemplate, templateReference, null);
-                }
-            }
-        }
-
-        private void GenGroupNodeCardinalityReference(XElement templateElement, Template callingTemplate, TemplateReference reference)
-        {
-            bool useCurrentInstanceVariable = !DetectedChangeInstances.IsAddedNode(reference.CallingNode);
-
-            if (!DetectedChangeInstances.IsAddedNode(reference.ReferencedNode))
-            {
-                // process existing
-                XElement xslForEachGroup = templateElement.XslForEachGroup(XPathExprGenerator.GetGroupMembers(context, reference.ReferencedNode, useCurrentInstanceVariable));
-                xslForEachGroup.Add(XPathExprGenerator.GetGroupDistinguisher(context, reference.ReferencedNode));
-                if (!reference.DeletionRequired)
-                {
-                    GenGroupNodeSingleReference(xslForEachGroup, callingTemplate, reference);
-                }
-                else
-                {
-                    XElement xslIf = xslForEachGroup.XslIf(new XPathExpr(string.Format("position() leq {0}", reference.Upper)));
-                    GenGroupNodeSingleReference(xslIf, callingTemplate, reference);
-                }
-            }
-            if (DetectedChangeInstances.IsAddedNode(reference.ReferencedNode) || reference.CreationRequired)
-            {
-                XPathExpr countExpr;
-                if (!DetectedChangeInstances.IsAddedNode(reference.ReferencedNode))
-                {
-                    XPathExpr existing = context.GetRelativeXPath(reference.ReferencedNode, useCurrentInstanceVariable).Append(
-                        "/" + XPathExprGenerator.GetGroupDistinguisher(context, reference.ReferencedNode).Value);
-                    
-                    countExpr = new XPathExpr(string.Format("{0} - count({1})", reference.Lower, existing));
-                }
-                else
-                {
-                    countExpr = new XPathExpr(string.Format("{0}", reference.Lower));
-                }
-
-                // instance generator
-                templateElement.XslCallTemplate(namingSupport.SuggestName(reference.ReferencedNode, false, false) + "-IG", new XDocumentXsltExtensions.TemplateParameter("count", countExpr));
-            }
-        }
-
-        private void GenGroupNodeSingleReference(XElement callingElement, Template callingTemplate, TemplateReference reference)
-        {            
-            RevalidationNodeInfo calledNodeInfo = nodeInfos[reference.ReferencedNode];
-            if (calledNodeInfo.ProcessNodeTemplate != null)
-            {
-                callingElement.XslCallTemplate(calledNodeInfo.ProcessNodeTemplate.Name, XDocumentXsltExtensions.CreateCurrentInstanceParameterCall("current-group()"));
+                GenChoiceTemplate(processTemplate, templateElement);
             }
             else
             {
-                if (callingTemplate.AttributesTemplate && calledNodeInfo.ProcessAttributesTemplate != null)
+                foreach (TemplateReference templateReference in processTemplate.References)
                 {
-                    callingElement.XslCallTemplate(calledNodeInfo.ProcessAttributesTemplate.Name, XDocumentXsltExtensions.CreateCurrentInstanceParameterCall("current-group()"));
+                    CreateReference(processTemplate, templateElement, templateReference);
                 }
-                if (callingTemplate.ElementsTemplate && calledNodeInfo.ProcessElementsTemplate != null)
-                {
-                    callingElement.XslCallTemplate(calledNodeInfo.ProcessElementsTemplate.Name, XDocumentXsltExtensions.CreateCurrentInstanceParameterCall("current-group()"));
-                }
+            }
+        }
+
+        private void GenChoiceTemplate(Template processTemplate, XElement templateElement)
+        {
+            XElement xslChoose = templateElement.XslChoose();
+            foreach (TemplateReference templateReference in processTemplate.References)
+            {
+                XPathExpr test = context.GetRelativeXPath(ExpandIfInlinedNode(templateReference), processTemplate.HasCurrentInstanceParameter);
+                XElement xslWhen = xslChoose.XslWhen(test);
+                CreateReference(processTemplate, xslWhen, templateReference);
+            }
+        }
+
+        private void CreateReference(Template processTemplate, XElement templateElement, TemplateReference templateReference)
+        {
+            GenReferenceWithConditionMethod singleReference;
+            GenReferenceMethod cardinalityReference;
+
+            if (templateReference.ReferencesRedNode && templateReference.ReferencesGroupNode)
+            {
+                singleReference = GenGroupNodeSingleReference;
+                cardinalityReference = GenGroupNodeCardinalityReference;
+            }
+            else if (templateReference.ReferencesRedNode && templateReference.ReferencesContentModel)
+            {
+                singleReference = GenCMSingleReference;
+                cardinalityReference = GenCMCardinalityReference;
+            }
+            else
+            {
+                singleReference = GenSingleReference;
+                cardinalityReference = GenCardinalityReference;
+            }
+
+            if (templateReference.Lower > 1 ||
+                DetectedChangeInstances.ExistsCardinalityChange(templateReference.ReferencedNode)
+                || (templateReference.ReferencesInlinedNode && templateReference.ReferencedNode.ExistsInVersion(OldVersion)
+                    && IHasCardinalityExt.GetUpperCardinality(templateReference.ReferencedNode.GetInVersion(OldVersion)) > 1))
+            {
+                cardinalityReference(templateElement, processTemplate, templateReference);
+            }
+            else
+            {
+                singleReference(templateElement, processTemplate, templateReference);
             }
         }
 
         private void GenCardinalityReference(XElement templateElement, Template callingTemplate, TemplateReference reference)
         {
+            // process existing
             if (!DetectedChangeInstances.IsAddedNode(reference.ReferencedNode))
             {
                 if (!reference.DeletionRequired)
                 {
-                    GenSingleReference(templateElement, callingTemplate, reference, null);
+                    GenSingleReference(templateElement, callingTemplate, reference);
                 }
                 else
                 {
-                    GenSingleReference(templateElement, callingTemplate, reference, string.Format("position() leq {0}", reference.Upper));
+                    GenSingleReference(templateElement, callingTemplate, reference, string.Format("position() le {0}", reference.Upper));
                 }
             }
 
-            if (DetectedChangeInstances.IsAddedNode(reference.ReferencedNode) || reference.CreationRequired)
+            // added node 
+            if (DetectedChangeInstances.IsAddedNode(reference.ReferencedNode))
             {
-                XPathExpr countExpr;
-                if (!DetectedChangeInstances.IsAddedNode(reference.ReferencedNode))
+                if (reference.Lower == 1)
                 {
-                    XPathExpr existing = context.GetRelativeXPath(reference.ReferencedNode, !DetectedChangeInstances.IsAddedNode(reference.CallingNode));
-                    countExpr = new XPathExpr(string.Format("{0} - count({1})", reference.Lower, existing));
+                    GenSingleReference(templateElement, callingTemplate, reference);
                 }
-                else
+                if (reference.Lower > 1)
                 {
-                    countExpr = new XPathExpr(string.Format("{0}", reference.Lower));
+                    XElement xslForEach = templateElement.XslForEach(new XPathExpr("1 to {0}", reference.Lower));
+                    GenSingleReference(xslForEach, callingTemplate, reference);
                 }
+            }
 
-                // instance generator
-                templateElement.XslCallTemplate(namingSupport.SuggestName(reference.ReferencedNode, false, false) + "-IG", new XDocumentXsltExtensions.TemplateParameter("count", countExpr));
+            // create new with instance generator
+            if (reference.CreationRequired)
+            {
+                Debug.Assert(!DetectedChangeInstances.IsAddedNode(reference.ReferencedNode));
+                XPathExpr existing = context.GetRelativeXPath(reference.ReferencedNode, !DetectedChangeInstances.IsAddedNode(reference.CallingNode));
+                XPathExpr countExpr = new XPathExpr(string.Format("{0} - count({1})", reference.Lower, existing));
+                templateElement.XslCallTemplate(namingSupport.SuggestNameForInstanceGenerator(reference.ReferencedNode, callingTemplate, reference), 
+                                                new XDocumentXsltExtensions.TemplateParameter("count", countExpr));
             }
         }
 
-        private void GenSingleReference(XElement templateElement, Template callingTemplate, TemplateReference reference, string condition)
+        private void GenSingleReference(XElement templateElement, Template callingTemplate, TemplateReference reference, string condition = null)
         {
             RevalidationNodeInfo calledNodeInfo;
             nodeInfos.TryGetValue(reference.ReferencedNode, out calledNodeInfo);
 
-            // TODO: tests whether attributes/elements templates are required in called template
-
             if (DetectedChangeInstances.IsAddedNode(reference.ReferencedNode))
             {
                 Debug.Assert(calledNodeInfo != null);
-                if (callingTemplate.ElementsTemplate || calledNodeInfo.Node is PSMAttribute)
+                if (calledNodeInfo.Node.DownCastSatisfies<PSMAttribute>(a => a.Lower > 0))
+                {
+                    IEnumerable<XDocumentXsltExtensions.TemplateParameter> parameters = ((PSMAttribute)reference.ReferencedNode).Lower > 1 ? 
+                        new[] { new XDocumentXsltExtensions.TemplateParameter("count", new XPathExpr(((PSMAttribute)reference.ReferencedNode).Lower.ToString()))} : null;
+                    templateElement.XslCallTemplate(namingSupport.SuggestNameForInstanceGenerator(calledNodeInfo.Node), parameters);    
+                }
+                else if (callingTemplate.ElementsTemplate)
                 {
                     templateElement.XslCallTemplate(calledNodeInfo.ProcessNodeTemplate.Name);    
                 }
@@ -447,33 +448,129 @@ namespace Exolutio.Revalidation.XSLT
             }
             else
             {
-                IEnumerable<PSMComponent> expandedReference = ExpandIfGroupNode(reference);
+                IEnumerable<PSMComponent> expandedReference = ExpandIfInlinedNode(reference);
                 XPathExpr relativeXPath = context.GetRelativeXPath(expandedReference, !DetectedChangeInstances.IsAddedNode(reference.CallingNode)).AppendPredicate(condition);
-                #region 18.7. Condition removed, xform changes are handled separately, hopefully, <xsl:attribute will not appear as a refernce anymore (it can be in top level template probably)
-                //if (reference.ReferencedNode is PSMAttribute && reference.ReferencedNode.ExistsInVersion(OldVersion)
-                //    && !((PSMAttribute)reference.ReferencedNode).Element
-                //    && ((PSMAttribute)reference.ReferencedNode.GetInVersion(OldVersion)).Element)
-                //{
-                //    // attribute xform changed from 'e' to 'a' -> must create xml attribute explicitly
-                //    XElement xslAttribute = templateElement.XslAttribute(reference.ReferencedNode.Name);
-                //    xslAttribute.XslValueOf(relativeXPath);
-                //}
-                //else
-                //{
-                //    templateElement.XslApplyTemplates(relativeXPath);
-                //}
-                #endregion
-                
                 templateElement.XslApplyTemplates(relativeXPath);                
             }
         }
 
-        private IEnumerable<PSMComponent> ExpandIfGroupNode(TemplateReference reference)
+        private void GenGroupNodeCardinalityReference(XElement templateElement, Template callingTemplate, TemplateReference reference)
+        {
+            if (!DetectedChangeInstances.IsAddedNode(reference.ReferencedNode))
+            {
+                // process existing
+                XElement xslForEachGroup = templateElement.XslForEachGroup(XPathExprGenerator.GetGroupMembers(context, reference.ReferencedNode, callingTemplate.HasCurrentInstanceParameter));
+                xslForEachGroup.Add(XPathExprGenerator.GetGroupDistinguisher(context, reference.ReferencedNode));
+                if (!reference.DeletionRequired)
+                {
+                    GenGroupNodeSingleReference(xslForEachGroup, callingTemplate, reference, "current-group()");
+                }
+                else
+                {
+                    XElement xslIf = xslForEachGroup.XslIf(new XPathExpr(string.Format("position() le {0}", reference.Upper)));
+                    GenGroupNodeSingleReference(xslIf, callingTemplate, reference, "current-group()");
+                }
+            }
+            //added node 
+            if (DetectedChangeInstances.IsAddedNode(reference.ReferencedNode))
+            {
+                if (reference.Lower == 1)
+                {
+                    GenGroupNodeSingleReference(templateElement, callingTemplate, reference);
+                }
+                if (reference.Lower > 1)
+                {
+                    XElement xslForEach = templateElement.XslForEach(new XPathExpr("1 to {0}", reference.Lower));
+                    GenGroupNodeSingleReference(xslForEach, callingTemplate, reference);
+                }
+            }
+            // create new with instance generator
+            if (reference.CreationRequired)
+            {
+                XPathExpr existing = context.GetRelativeXPath(reference.ReferencedNode, callingTemplate.HasCurrentInstanceParameter).Append(
+                        XPathExprGenerator.GetGroupDistinguisher(context, reference.ReferencedNode).Value);
+                XPathExpr countExpr = new XPathExpr(string.Format("{0} - count({1})", reference.Lower, existing));
+                templateElement.XslCallTemplate(namingSupport.SuggestNameForInstanceGenerator(reference.ReferencedNode, callingTemplate, reference), 
+                    new XDocumentXsltExtensions.TemplateParameter("count", countExpr));
+            }
+        }
+
+        private void GenGroupNodeSingleReference(XElement callingElement, Template callingTemplate, TemplateReference reference, string condition = null)
+        {            
+            RevalidationNodeInfo calledNodeInfo = nodeInfos[reference.ReferencedNode];
+
+            XPathExpr ci = condition == null ? XPathExprGenerator.GetGroupMembers(context, reference.ReferencedNode, callingTemplate.HasCurrentInstanceParameter) 
+                : new XPathExpr(condition);
+
+            if (calledNodeInfo.ProcessNodeTemplate != null)
+            {
+                callingElement.XslCallTemplate(calledNodeInfo.ProcessNodeTemplate.Name, XDocumentXsltExtensions.CreateCurrentInstanceParameterCall(ci));
+            }
+            else
+            {
+                if (callingTemplate.AttributesTemplate && calledNodeInfo.ProcessAttributesTemplate != null)
+                {
+                    callingElement.XslCallTemplate(calledNodeInfo.ProcessAttributesTemplate.Name, XDocumentXsltExtensions.CreateCurrentInstanceParameterCall(ci));
+                }
+                if (callingTemplate.ElementsTemplate && calledNodeInfo.ProcessElementsTemplate != null)
+                {
+                    callingElement.XslCallTemplate(calledNodeInfo.ProcessElementsTemplate.Name, XDocumentXsltExtensions.CreateCurrentInstanceParameterCall(ci));
+                }
+            }
+        }
+
+        private void GenCMCardinalityReference(XElement templateElement, Template callingTemplate, TemplateReference reference)
+        {
+            if (!DetectedChangeInstances.IsAddedNode(reference.ReferencedNode))
+            {
+                // process existing
+                XElement xslForEachGroup = templateElement.XslForEachGroup(XPathExprGenerator.GetGroupMembers(context, reference.ReferencedNode, callingTemplate.HasCurrentInstanceParameter));
+                xslForEachGroup.Add(XPathExprGenerator.GetGroupDistinguisher(context, reference.ReferencedNode));
+                if (!reference.DeletionRequired)
+                {
+                    GenCMSingleReference(xslForEachGroup, callingTemplate, reference, "current-group()");
+                }
+                else
+                {
+                    XElement xslIf = xslForEachGroup.XslIf(new XPathExpr(string.Format("position() le {0}", reference.Upper)));
+                    GenCMSingleReference(xslIf, callingTemplate, reference, "current-group()");
+                }
+            }
+            //added node 
+            if (DetectedChangeInstances.IsAddedNode(reference.ReferencedNode))
+            {
+                if (reference.Lower == 1)
+                {
+                    GenCMSingleReference(templateElement, callingTemplate, reference);
+                }
+                if (reference.Lower > 1)
+                {
+                    XElement xslForEach = templateElement.XslForEach(new XPathExpr("1 to {0}", reference.Lower));
+                    GenCMSingleReference(xslForEach, callingTemplate, reference);
+                }
+            }
+            // create new with instance generator
+            if (reference.CreationRequired)
+            {
+                XPathExpr existing = context.GetRelativeXPath(reference.ReferencedNode, callingTemplate.HasCurrentInstanceParameter).Append(
+                        XPathExprGenerator.GetGroupDistinguisher(context, reference.ReferencedNode).Value);
+                XPathExpr countExpr = new XPathExpr(string.Format("{0} - count({1})", reference.Lower, existing));
+                templateElement.XslCallTemplate(namingSupport.SuggestNameForInstanceGenerator(reference.ReferencedNode, callingTemplate, reference),
+                    new XDocumentXsltExtensions.TemplateParameter("count", countExpr));
+            }
+        }
+
+        private void GenCMSingleReference(XElement callingElement, Template callingTemplate, TemplateReference reference, string condition = null)
+        {
+            
+        }
+
+        private IEnumerable<PSMComponent> ExpandIfInlinedNode(TemplateReference reference)
         {
             List<PSMComponent> result = new List<PSMComponent>(); 
-            if (reference.ReferencesGroupNode)
+            if (reference.ReferencesInlinedNode)
             {
-                ModelIterator.ExpandGroupNode(reference.ReferencedNode, ref result, DetectedChangeInstances.IsGroupNode);
+                ModelIterator.ExpandInlinedNode(reference.ReferencedNode, ref result, DetectedChangeInstances.IsInlinedNode);
             }
             else
             {
@@ -481,6 +578,148 @@ namespace Exolutio.Revalidation.XSLT
             }
             return result;
         }
+
+        #region instance generators
+
+        private void GenInstanceGenerators(XElement xslStylesheet)
+        {
+            List<PSMComponent> componentsRequireingInstanceGeneratorsTransitive =
+                AddComponentsReferencedFromInstanceGenerators(componentsRequireingInstanceGenerators);
+
+            XDocumentXsltExtensions.TemplateParameter countParameter = new XDocumentXsltExtensions.TemplateParameter("count", null) { DefaultValue = new XPathExpr("1"), Type="item()" };
+
+            if (!componentsRequireingInstanceGeneratorsTransitive.IsEmpty())
+            {
+                xslStylesheet.Add(new XComment(" Instance generators "));
+            }
+
+            foreach (PSMComponent component in componentsRequireingInstanceGeneratorsTransitive)
+            {
+                bool attributeTemplateRequired, elementTemplateRequired, wrapTemplateRequired;
+                RevalidationNodeInfo.DetermineRequiredTemplates(component, out attributeTemplateRequired, out elementTemplateRequired, out wrapTemplateRequired);
+                
+                if (wrapTemplateRequired)
+                {
+                    string name = namingSupport.SuggestNameForInstanceGenerator(component, wrappingTemplate:true);
+                    XElement templateElement = xslStylesheet.XslNamedTemplate(name, countParameter);
+                    XElement xslForEach = templateElement.XslForEach(new XPathExpr("1 to $count"));                    
+                    XElement wrapNode = new XElement(((PSMClass)component).ParentAssociation.Name);
+                    if (attributeTemplateRequired)
+                    {
+                        wrapNode.XslCallTemplate(namingSupport.SuggestNameForInstanceGenerator(component, attributesTemplate:true));
+                    }
+                    if (elementTemplateRequired)
+                    {
+                        wrapNode.XslCallTemplate(namingSupport.SuggestNameForInstanceGenerator(component, elementsTemplate:true));
+                    }
+                    xslForEach.Add(wrapNode);
+                }
+                
+                if (attributeTemplateRequired)
+                {
+                    string name = namingSupport.SuggestNameForInstanceGenerator(component, attributesTemplate:true);
+                    XElement templateElement = xslStylesheet.XslNamedTemplate(name, countParameter);
+                    XElement xslForEach = templateElement.XslForEach(new XPathExpr("1 to $count"));
+                    if (component is PSMAttribute)
+                    {
+                        XElement attribute = xslForEach.XslAttribute(component.Name);
+                        attribute.Add(new XText(component.Name));
+                        attribute.XslValueOf(new XPathExpr("current()"));                        
+                    }
+                    else
+                    {
+                        List<PSMComponent> children = ModelIterator.GetPSMChildren(component, true).ToList();
+                        foreach (PSMComponent child in children)
+                        {
+                            bool dummy, definesAttributes;
+                            RevalidationNodeInfo.DetermineRequiredTemplates(child, out definesAttributes, out dummy, out dummy);
+                            if (definesAttributes)
+                            {
+                                if (componentsRequireingInstanceGeneratorsTransitive.Contains(child))
+                                {
+                                    xslForEach.XslCallTemplate(namingSupport.SuggestNameForInstanceGenerator(child, attributesTemplate: true));
+                                }
+                                else
+                                {
+                                    Debug.Assert(child is PSMAttribute);
+                                    XElement attribute = xslForEach.XslAttribute(child.Name);
+                                    attribute.Add(new XText(child.Name));                                    
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if (elementTemplateRequired)
+                {
+                    string name = namingSupport.SuggestNameForInstanceGenerator(component, elementsTemplate: true);
+                    XElement templateElement = xslStylesheet.XslNamedTemplate(name, countParameter);
+                    XElement xslForEach = templateElement.XslForEach(new XPathExpr("1 to $count"));
+                    if (component is PSMAttribute)
+                    {
+                        XElement wrapNode = new XElement(component.Name);
+                        wrapNode.Add(new XText(component.Name));
+                        wrapNode.XslValueOf(new XPathExpr("current()"));
+                        xslForEach.Add(wrapNode);
+                    }
+                    else
+                    {
+                        List<PSMComponent> children = ModelIterator.GetPSMChildren(component, true).ToList();
+                        foreach (PSMComponent child in children)
+                        {
+                            bool dummy, definesElements;
+                            RevalidationNodeInfo.DetermineRequiredTemplates(child, out dummy, out definesElements, out dummy);
+                            if (definesElements || (child is PSMClass && ((PSMClass)child).ParentAssociation.IsNamed))
+                            {
+                                if (componentsRequireingInstanceGeneratorsTransitive.Contains(child))
+                                {
+                                    if (child is PSMClass && ((PSMClass)child).ParentAssociation.IsNamed)
+                                    {
+                                        xslForEach.XslCallTemplate(namingSupport.SuggestNameForInstanceGenerator(child, wrappingTemplate: true));
+                                    }
+                                    else
+                                    {
+                                        xslForEach.XslCallTemplate(namingSupport.SuggestNameForInstanceGenerator(child, elementsTemplate: true));                                        
+                                    }
+                                }
+                                else
+                                {
+                                    Debug.Assert(child is PSMAttribute);
+                                    XElement wrapNode = new XElement(child.Name);
+                                    wrapNode.Add(new XText(child.Name));                                    
+                                    xslForEach.Add(wrapNode);
+                                }
+                            }
+                        }                        
+                    }
+                }
+            }
+        }
+
+        private List<PSMComponent> AddComponentsReferencedFromInstanceGenerators(IEnumerable<PSMComponent> psmComponents)
+        {
+            List<PSMComponent> result = new List<PSMComponent>();
+            Queue<PSMComponent> toDo = new Queue<PSMComponent>();
+            toDo.EnqueueRange(psmComponents);
+
+            while (!toDo.IsEmpty())
+            {
+                PSMComponent component = toDo.Dequeue();
+                result.Add(component);
+                foreach (PSMComponent child in ModelIterator.GetPSMChildren(component, true))
+                {
+                    toDo.EnqueueIfNotContained(child);
+                }
+
+            }
+
+            // (!(component is PSMAttribute) || (((PSMAttribute)component).Lower > 1 || componentsRequireingInstanceGenerators.Contains(component)))
+            result.RemoveAll(c => c.DownCastSatisfies<PSMAttribute>(a => a.Lower == 1 && !psmComponents.Contains(a)));
+
+            return result;
+        }
+
+        #endregion
 
         #region green and blue templates 
 
@@ -580,7 +819,12 @@ namespace Exolutio.Revalidation.XSLT
         }
 
         #endregion
+
+        
     }
+
+    public delegate void GenReferenceMethod(XElement templateElement, Template callingTemplate, TemplateReference reference);
+    public delegate void GenReferenceWithConditionMethod(XElement templateElement, Template callingTemplate, TemplateReference reference, string condition = null);
 
     public class GeneratorContext
     {
