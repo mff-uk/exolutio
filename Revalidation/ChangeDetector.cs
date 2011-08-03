@@ -56,6 +56,11 @@ namespace Exolutio.Revalidation
                        IsAddedNode(psmClass) && psmClass.ParentAssociation != null && !psmClass.ParentAssociation.IsNamed);
         }
 
+        public bool IsInlinedNode(PSMComponent psmComponent)
+        {
+            return IsGroupNode(psmComponent) || psmComponent is PSMContentModel;
+        }
+
         //private readonly List<PSMComponent> removedNodes = new List<PSMComponent>();
 
         //public List<PSMComponent> RemovedNodes { get { return removedNodes; } }
@@ -75,13 +80,15 @@ namespace Exolutio.Revalidation
         public bool ExistsCardinalityChangeRequiringCreation(PSMComponent component)
         {
             bool requiresCreation, dummy2;
-            return ExistsCardinalityChange(component, out requiresCreation, out dummy2);
+            ExistsCardinalityChange(component, out requiresCreation, out dummy2);
+            return requiresCreation;
         }
 
         public bool ExistsCardinalityChangeRequiringDeletion(PSMComponent component)
         {
             bool dummy1, requiresDeletion;
-            return ExistsCardinalityChange(component, out dummy1, out requiresDeletion);
+            ExistsCardinalityChange(component, out dummy1, out requiresDeletion);
+            return requiresDeletion;
         }
 
         private bool ExistsCardinalityChange(PSMComponent component, out bool requiresCreation, out bool requiresDeletion)
@@ -404,11 +411,11 @@ namespace Exolutio.Revalidation
                 }
             }
 
-            /* parent node of every red group node is marked red */
+            /* parent node of every red inlined node is marked red */
             List<PSMComponent> redNodesCopy = changeInstances.RedNodes.ToList();
             foreach (PSMComponent c in redNodesCopy)
             {
-                if (changeInstances.IsGroupNode(c))
+                if (changeInstances.IsInlinedNode(c))
                 {
                     CurrentParentAsRedNode(changeInstances.RedNodes, c);
                 }

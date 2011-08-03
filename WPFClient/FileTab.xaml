@@ -13,7 +13,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <ToolBar>
+        <ToolBar x:Name="MainToolBar">
             <Button Click="bSave_Click" Name="bSave">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="{StaticResource Save}" Height="16" Margin="2"></Image>

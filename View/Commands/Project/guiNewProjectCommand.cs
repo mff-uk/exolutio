@@ -42,9 +42,12 @@ namespace Exolutio.View.Commands.Project
                 GuiCommands.CloseProjectCommand.Execute();
             }
 
-            ProjectSerializationManager serializationManager = new ProjectSerializationManager();
-		    Current.Project = serializationManager.CreateEmptyProject();
-            Current.MainWindow.CloseRibbonBackstage();
+            if (Current.Project == null)
+            {
+                ProjectSerializationManager serializationManager = new ProjectSerializationManager();
+                Current.Project = serializationManager.CreateEmptyProject();
+                Current.MainWindow.CloseRibbonBackstage();
+            }
 		}
 
 		public override bool CanExecute(object parameter = null)

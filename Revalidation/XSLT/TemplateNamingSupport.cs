@@ -45,7 +45,7 @@ namespace Exolutio.Revalidation.XSLT
                     if (!cm.ParentAssociation.IsNamed)
                     {
                         List<PSMContentModel> withSiblings = Model.ModelIterator.GetPSMChildren(cm.ParentAssociation.Parent).OfType<PSMContentModel>().ToList();
-                        if (withSiblings.Count(s => s.Type == cm.Type && !s.IsNamed) > 1)
+                        if (withSiblings.Count(s => s.Type == cm.Type) > 1)
                         {
                             distinguisher = (withSiblings.Where(c => c.Type == cm.Type).ToList().IndexOf(cm) + 1).ToString();
                         }
@@ -93,6 +93,48 @@ namespace Exolutio.Revalidation.XSLT
             if (attributesTemplate)
             {
                 return result + "-ATT";
+            }
+            return result;
+        }
+
+        public string SuggestNameForInstanceGenerator(PSMComponent node, bool wrappingTemplate = false, bool attributesTemplate = false, bool elementsTemplate = false)
+        {
+            if (wrappingTemplate || node is PSMAttribute)
+            {
+                return SuggestName(node, false, false) + "-IG";
+            }
+            if (attributesTemplate)
+            {
+                return SuggestName(node, false, true) + "-IG";
+            }
+            if (elementsTemplate)
+            {
+                return SuggestName(node, true, false) + "-IG";
+            }
+            throw new InvalidOperationException();
+        }
+
+        public string SuggestNameForInstanceGenerator(PSMComponent node, Template callingTemplate, TemplateReference reference)
+        {
+            string result;
+            if (callingTemplate.AttributesTemplate)
+            {
+                result = SuggestNameForInstanceGenerator(node, attributesTemplate: true);
+            }
+            else if (callingTemplate.ElementsTemplate)
+            {
+                if (reference.ReferencesGroupNode)
+                {
+                    result = SuggestNameForInstanceGenerator(node, elementsTemplate: true);
+                }
+                else
+                {
+                    result = SuggestNameForInstanceGenerator(node, wrappingTemplate: true);
+                }
+            }
+            else
+            {
+                throw new InvalidOperationException();
             }
             return result;
         }

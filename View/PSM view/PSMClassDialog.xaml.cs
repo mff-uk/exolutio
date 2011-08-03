@@ -419,10 +419,17 @@ namespace Exolutio.View
 
         void Current_SelectionChanged()
         {
-            PSMClass newSelection = Current.ActiveDiagramView.GetSingleSelectedComponentOrNull() as PSMClass;
-            if (newSelection != null)
+            if (Current.ActiveDiagramView is PSMDiagramView)
             {
-                Initialize(controller, newSelection);
+                PSMClass newSelection = Current.ActiveDiagramView.GetSingleSelectedComponentOrNull() as PSMClass;
+                if (newSelection != null)
+                {
+                    Initialize(controller, newSelection);
+                }
+            }
+            else
+            {
+                this.Close();
             }
         }
 

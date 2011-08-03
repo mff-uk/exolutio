@@ -24,22 +24,23 @@ using Exolutio.ResourceLibrary;
 using Exolutio.SupportingClasses;
 using Exolutio.View;
 using Microsoft.Win32;
+using Label = Exolutio.ViewToolkit.Label;
 
 namespace Exolutio.WPFClient
 {
     /// <summary>
     /// Interaction logic for FileTab.xaml
     /// </summary>
-    public partial class FileTab 
+    public partial class FileTab : IFilePresenterTab
     {
         public FileTab()
         {
             InitializeComponent();
         }
 
-        protected string FileName { get; set; }
+        public string FileName { get; set; }
 
-        protected PSMSchema ValidationSchema { get; set; }
+        public PSMSchema ValidationSchema { get; set; }
 
         public void DisplayFile(EDisplayedFileType displayedFileType, Stream fileContents, string fileName = null, Log log = null, PSMSchema validationSchema = null)
         {
@@ -82,6 +83,11 @@ namespace Exolutio.WPFClient
         public string GetDocumentText()
         {
             return fileView.FileContents;
+        }
+
+        public void SetDocumentText(string text)
+        {
+            fileView.FileContents = text;
         }
 
         public void bSave_Click(object sender, RoutedEventArgs e)
@@ -306,6 +312,21 @@ namespace Exolutio.WPFClient
             isValidAgainstSchema = false;
         }
 
-        #endregion 
+        #endregion
+
+        public void CreateAdditionalActionsButtons(FilePresenterButton[] additionalActions)
+        {
+            foreach (FilePresenterButton filePresenterButton in additionalActions)
+            {
+                Button b = new Button();
+                StackPanel stackPanel = new StackPanel();
+                stackPanel.Orientation = Orientation.Horizontal;
+                b.Content = stackPanel;
+                stackPanel.Children.Add(new Image() {Source = filePresenterButton.Icon});
+                stackPanel.Children.Add(new System.Windows.Controls.Label() {Content = filePresenterButton.Text});
+                b.Click += delegate { filePresenterButton.UpdateFileContentAction(this); };
+                MainToolBar.Items.Add(b);
+            }
+        }
     }
 }

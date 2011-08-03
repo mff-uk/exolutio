@@ -124,6 +124,28 @@ namespace Exolutio.SupportingClasses
             return items.Concat(moreItems);
         }
 
+        public static void EnqueueRange<T>(this Queue<T> queue, IEnumerable<T> values)
+        {
+            foreach (T value in values)
+            {
+                queue.Enqueue(value);
+            }
+        }
+
+        public static void EnqueueIfNotContained<T>(this Queue<T> queue, T item)
+        {
+            if (!queue.Contains(item))
+            {
+                queue.Enqueue(item);
+            }
+        }
+
+        public static bool IsEmpty<T>(this Queue<T> queue)
+        {
+            return queue.Count == 0;
+        }
+
+
         #if SILVERLIGHT
         public static void RemoveAll<TValue>(this List<TValue> list, Func<TValue, bool> predicate)
         {

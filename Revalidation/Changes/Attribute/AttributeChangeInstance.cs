@@ -358,7 +358,7 @@ namespace Exolutio.Revalidation.Changes
 
         public bool RequiresDeletion
         {
-            get { return NewUpper > OldUpper; }
+            get { return NewUpper < OldUpper; }
         }
 
         public override string ToString()

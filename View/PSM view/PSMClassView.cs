@@ -177,7 +177,7 @@ namespace Exolutio.View
             PSMClassDialog dialog = new PSMClassDialog();
             dialog.Topmost = true;
             dialog.Initialize(Current.Controller, PSMClass);
-            dialog.ShowDialog();
+            dialog.Show();
             #endif
         }
 
