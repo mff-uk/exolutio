@@ -1,0 +1,1013 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<eXoLog:CommandLog xmlns:eXoLog="http://eXolutio.eu/Commands/CommandLog/">
+  <eXoLog:Command initial="true" Name="cmdNewPSMSchema">
+    <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers.cmdNewPSMSchema</eXoLog:FullName>
+    <eXoLog:SubCommands count="2">
+      <eXoLog:Command Name="acmdNewPSMSchema">
+        <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PSM.acmdNewPSMSchema</eXoLog:FullName>
+        <eXoLog:Report>'PSMSchema 4' was added to the PSM.</eXoLog:Report>
+      </eXoLog:Command>
+      <eXoLog:Command Name="acmdNewPSMDiagram">
+        <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PSM.acmdNewPSMDiagram</eXoLog:FullName>
+        <eXoLog:Report>'PSMSchema 4' was added to the PSM.</eXoLog:Report>
+      </eXoLog:Command>
+    </eXoLog:SubCommands>
+  </eXoLog:Command>
+  <eXoLog:Command initial="true" Name="acmdRenameComponent">
+    <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.acmdRenameComponent</eXoLog:FullName>
+    <eXoLog:Report>Component 'PSMSchemaClass: DASTA-DIAGNOZY' renamed from 'defaultname' to 'DASTA-DIAGNOZY'.</eXoLog:Report>
+    <eXoLog:Parameters>
+      <eXoLog:Parameter>
+        <eXoLog:Name>Component</eXoLog:Name>
+        <eXoLog:PropertyName>NamedComponentGuid</eXoLog:PropertyName>
+        <eXoLog:Value>cb248386-d5e6-4698-83e9-e431b0bb3f02</eXoLog:Value>
+        <eXoLog:ValueText>PSMSchemaClass: DASTA-DIAGNOZY</eXoLog:ValueText>
+      </eXoLog:Parameter>
+      <eXoLog:Parameter>
+        <eXoLog:Name>New name</eXoLog:Name>
+        <eXoLog:PropertyName>NewName</eXoLog:PropertyName>
+        <eXoLog:Value>DASTA-DIAGNOZY</eXoLog:Value>
+      </eXoLog:Parameter>
+    </eXoLog:Parameters>
+  </eXoLog:Command>
+  <eXoLog:Command initial="true" Name="acmdRenamePSMSchema">
+    <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.acmdRenamePSMSchema</eXoLog:FullName>
+    <eXoLog:Report>PSMSchema 'Zprava_Diagnozy' renamed from 'PSMSchema 4' to 'Zprava_Diagnozy'.</eXoLog:Report>
+    <eXoLog:Parameters>
+      <eXoLog:Parameter>
+        <eXoLog:Name>Schema</eXoLog:Name>
+        <eXoLog:PropertyName>SchemaGuid</eXoLog:PropertyName>
+        <eXoLog:Value>aa0c51b0-95a9-44d8-addb-ad81c8aa1335</eXoLog:Value>
+        <eXoLog:ValueText>Zprava_Diagnozy</eXoLog:ValueText>
+      </eXoLog:Parameter>
+      <eXoLog:Parameter>
+        <eXoLog:Name>New name</eXoLog:Name>
+        <eXoLog:PropertyName>NewName</eXoLog:PropertyName>
+        <eXoLog:Value>Zprava_Diagnozy</eXoLog:Value>
+      </eXoLog:Parameter>
+    </eXoLog:Parameters>
+  </eXoLog:Command>
+  <eXoLog:Command initial="true" Name="cmdNewPSMClass">
+    <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers.cmdNewPSMClass</eXoLog:FullName>
+    <eXoLog:Parameters>
+      <eXoLog:Parameter>
+        <eXoLog:Name>Schema</eXoLog:Name>
+        <eXoLog:PropertyName>SchemaGuid</eXoLog:PropertyName>
+        <eXoLog:Value>aa0c51b0-95a9-44d8-addb-ad81c8aa1335</eXoLog:Value>
+        <eXoLog:ValueText>Zprava_Diagnozy</eXoLog:ValueText>
+      </eXoLog:Parameter>
+    </eXoLog:Parameters>
+    <eXoLog:SubCommands count="1">
+      <eXoLog:Command Name="acmdNewPSMClass">
+        <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PSM.acmdNewPSMClass</eXoLog:FullName>
+        <eXoLog:Report>'PSMClass: "defaultname"' was added to the PSM.</eXoLog:Report>
+      </eXoLog:Command>
+    </eXoLog:SubCommands>
+  </eXoLog:Command>
+  <eXoLog:Command initial="true" Name="cmdNewPSMClass">
+    <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers.cmdNewPSMClass</eXoLog:FullName>
+    <eXoLog:Parameters>
+      <eXoLog:Parameter>
+        <eXoLog:Name>Schema</eXoLog:Name>
+        <eXoLog:PropertyName>SchemaGuid</eXoLog:PropertyName>
+        <eXoLog:Value>aa0c51b0-95a9-44d8-addb-ad81c8aa1335</eXoLog:Value>
+        <eXoLog:ValueText>Zprava_Diagnozy</eXoLog:ValueText>
+      </eXoLog:Parameter>
+    </eXoLog:Parameters>
+    <eXoLog:SubCommands count="1">
+      <eXoLog:Command Name="acmdNewPSMClass">
+        <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PSM.acmdNewPSMClass</eXoLog:FullName>
+        <eXoLog:Report>'PSMClass: "defaultname"' was added to the PSM.</eXoLog:Report>
+      </eXoLog:Command>
+    </eXoLog:SubCommands>
+  </eXoLog:Command>
+  <eXoLog:Command initial="true" Name="cmdNewPSMClass">
+    <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers.cmdNewPSMClass</eXoLog:FullName>
+    <eXoLog:Parameters>
+      <eXoLog:Parameter>
+        <eXoLog:Name>Schema</eXoLog:Name>
+        <eXoLog:PropertyName>SchemaGuid</eXoLog:PropertyName>
+        <eXoLog:Value>aa0c51b0-95a9-44d8-addb-ad81c8aa1335</eXoLog:Value>
+        <eXoLog:ValueText>Zprava_Diagnozy</eXoLog:ValueText>
+      </eXoLog:Parameter>
+    </eXoLog:Parameters>
+    <eXoLog:SubCommands count="1">
+      <eXoLog:Command Name="acmdNewPSMClass">
+        <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PSM.acmdNewPSMClass</eXoLog:FullName>
+        <eXoLog:Report>'PSMClass: "defaultname"' was added to the PSM.</eXoLog:Report>
+      </eXoLog:Command>
+    </eXoLog:SubCommands>
+  </eXoLog:Command>
+  <eXoLog:Command initial="true" Name="acmdRenameComponent">
+    <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.acmdRenameComponent</eXoLog:FullName>
+    <eXoLog:Report>Component 'PSMClass: "DASTA"' renamed from 'defaultname' to 'DASTA'.</eXoLog:Report>
+    <eXoLog:Parameters>
+      <eXoLog:Parameter>
+        <eXoLog:Name>Component</eXoLog:Name>
+        <eXoLog:PropertyName>NamedComponentGuid</eXoLog:PropertyName>
+        <eXoLog:Value>79641bcd-352a-4f1b-b654-894a627c0ef6</eXoLog:Value>
+        <eXoLog:ValueText>PSMClass: "DASTA"</eXoLog:ValueText>
+      </eXoLog:Parameter>
+      <eXoLog:Parameter>
+        <eXoLog:Name>New name</eXoLog:Name>
+        <eXoLog:PropertyName>NewName</eXoLog:PropertyName>
+        <eXoLog:Value>DASTA</eXoLog:Value>
+      </eXoLog:Parameter>
+    </eXoLog:Parameters>
+  </eXoLog:Command>
+  <eXoLog:Command initial="true" Name="acmdRenameComponent">
+    <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.acmdRenameComponent</eXoLog:FullName>
+    <eXoLog:Report>Component 'PSMClass: "Zprava"' renamed from 'defaultname' to 'Zprava'.</eXoLog:Report>
+    <eXoLog:Parameters>
+      <eXoLog:Parameter>
+        <eXoLog:Name>Component</eXoLog:Name>
+        <eXoLog:PropertyName>NamedComponentGuid</eXoLog:PropertyName>
+        <eXoLog:Value>b5b24f01-52f5-4d19-a1f2-7ef83e177f04</eXoLog:Value>
+        <eXoLog:ValueText>PSMClass: "Zprava"</eXoLog:ValueText>
+      </eXoLog:Parameter>
+      <eXoLog:Parameter>
+        <eXoLog:Name>New name</eXoLog:Name>
+        <eXoLog:PropertyName>NewName</eXoLog:PropertyName>
+        <eXoLog:Value>Zprava</eXoLog:Value>
+      </eXoLog:Parameter>
+    </eXoLog:Parameters>
+  </eXoLog:Command>
+  <eXoLog:Command initial="true" Name="acmdRenameComponent">
+    <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.acmdRenameComponent</eXoLog:FullName>
+    <eXoLog:Report>Component 'PSMClass: "Pacient"' renamed from 'defaultname' to 'Pacient'.</eXoLog:Report>
+    <eXoLog:Parameters>
+      <eXoLog:Parameter>
+        <eXoLog:Name>Component</eXoLog:Name>
+        <eXoLog:PropertyName>NamedComponentGuid</eXoLog:PropertyName>
+        <eXoLog:Value>a47b9f7f-56dd-4c9b-9623-44f98a4526a0</eXoLog:Value>
+        <eXoLog:ValueText>PSMClass: "Pacient"</eXoLog:ValueText>
+      </eXoLog:Parameter>
+      <eXoLog:Parameter>
+        <eXoLog:Name>New name</eXoLog:Name>
+        <eXoLog:PropertyName>NewName</eXoLog:PropertyName>
+        <eXoLog:Value>Pacient</eXoLog:Value>
+      </eXoLog:Parameter>
+    </eXoLog:Parameters>
+  </eXoLog:Command>
+  <eXoLog:Command initial="true" Name="cmdNewPSMAssociation">
+    <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers.cmdNewPSMAssociation</eXoLog:FullName>
+    <eXoLog:Parameters>
+      <eXoLog:Parameter>
+        <eXoLog:Name>Schema</eXoLog:Name>
+        <eXoLog:PropertyName>SchemaGuid</eXoLog:PropertyName>
+        <eXoLog:Value>aa0c51b0-95a9-44d8-addb-ad81c8aa1335</eXoLog:Value>
+        <eXoLog:ValueText>Zprava_Diagnozy</eXoLog:ValueText>
+      </eXoLog:Parameter>
+      <eXoLog:Parameter>
+        <eXoLog:Name>Parent class or content model</eXoLog:Name>
+        <eXoLog:PropertyName>ParentGuid</eXoLog:PropertyName>
+        <eXoLog:Value>cb248386-d5e6-4698-83e9-e431b0bb3f02</eXoLog:Value>
+        <eXoLog:ValueText>PSMSchemaClass: DASTA-DIAGNOZY</eXoLog:ValueText>
+      </eXoLog:Parameter>
+      <eXoLog:Parameter>
+        <eXoLog:Name>Child class or content model</eXoLog:Name>
+        <eXoLog:PropertyName>ChildGuid</eXoLog:PropertyName>
+        <eXoLog:Value>79641bcd-352a-4f1b-b654-894a627c0ef6</eXoLog:Value>
+        <eXoLog:ValueText>PSMClass: "DASTA"</eXoLog:ValueText>
+      </eXoLog:Parameter>
+    </eXoLog:Parameters>
+    <eXoLog:SubCommands count="1">
+      <eXoLog:Command Name="acmdNewPSMAssociation">
+        <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PSM.acmdNewPSMAssociation</eXoLog:FullName>
+        <eXoLog:Report>'PSMAssociation from PSMSchemaClass: DASTA-DIAGNOZY to PSMClass: "DASTA"' was added to the PSM.</eXoLog:Report>
+      </eXoLog:Command>
+    </eXoLog:SubCommands>
+  </eXoLog:Command>
+  <eXoLog:Command initial="true" Name="cmdNewPSMAssociation">
+    <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers.cmdNewPSMAssociation</eXoLog:FullName>
+    <eXoLog:Parameters>
+      <eXoLog:Parameter>
+        <eXoLog:Name>Schema</eXoLog:Name>
+        <eXoLog:PropertyName>SchemaGuid</eXoLog:PropertyName>
+        <eXoLog:Value>aa0c51b0-95a9-44d8-addb-ad81c8aa1335</eXoLog:Value>
+        <eXoLog:ValueText>Zprava_Diagnozy</eXoLog:ValueText>
+      </eXoLog:Parameter>
+      <eXoLog:Parameter>
+        <eXoLog:Name>Parent class or content model</eXoLog:Name>
+        <eXoLog:PropertyName>ParentGuid</eXoLog:PropertyName>
+        <eXoLog:Value>79641bcd-352a-4f1b-b654-894a627c0ef6</eXoLog:Value>
+        <eXoLog:ValueText>PSMClass: "DASTA"</eXoLog:ValueText>
+      </eXoLog:Parameter>
+      <eXoLog:Parameter>
+        <eXoLog:Name>Child class or content model</eXoLog:Name>
+        <eXoLog:PropertyName>ChildGuid</eXoLog:PropertyName>
+        <eXoLog:Value>b5b24f01-52f5-4d19-a1f2-7ef83e177f04</eXoLog:Value>
+        <eXoLog:ValueText>PSMClass: "Zprava"</eXoLog:ValueText>
+      </eXoLog:Parameter>
+    </eXoLog:Parameters>
+    <eXoLog:SubCommands count="1">
+      <eXoLog:Command Name="acmdNewPSMAssociation">
+        <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PSM.acmdNewPSMAssociation</eXoLog:FullName>
+        <eXoLog:Report>'PSMAssociation from PSMClass: "DASTA" to PSMClass: "Zprava"' was added to the PSM.</eXoLog:Report>
+      </eXoLog:Command>
+    </eXoLog:SubCommands>
+  </eXoLog:Command>
+  <eXoLog:Command initial="true" Name="cmdNewPSMAssociation">
+    <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers.cmdNewPSMAssociation</eXoLog:FullName>
+    <eXoLog:Parameters>
+      <eXoLog:Parameter>
+        <eXoLog:Name>Schema</eXoLog:Name>
+        <eXoLog:PropertyName>SchemaGuid</eXoLog:PropertyName>
+        <eXoLog:Value>aa0c51b0-95a9-44d8-addb-ad81c8aa1335</eXoLog:Value>
+        <eXoLog:ValueText>Zprava_Diagnozy</eXoLog:ValueText>
+      </eXoLog:Parameter>
+      <eXoLog:Parameter>
+        <eXoLog:Name>Parent class or content model</eXoLog:Name>
+        <eXoLog:PropertyName>ParentGuid</eXoLog:PropertyName>
+        <eXoLog:Value>b5b24f01-52f5-4d19-a1f2-7ef83e177f04</eXoLog:Value>
+        <eXoLog:ValueText>PSMClass: "Zprava"</eXoLog:ValueText>
+      </eXoLog:Parameter>
+      <eXoLog:Parameter>
+        <eXoLog:Name>Child class or content model</eXoLog:Name>
+        <eXoLog:PropertyName>ChildGuid</eXoLog:PropertyName>
+        <eXoLog:Value>a47b9f7f-56dd-4c9b-9623-44f98a4526a0</eXoLog:Value>
+        <eXoLog:ValueText>PSMClass: "Pacient"</eXoLog:ValueText>
+      </eXoLog:Parameter>
+    </eXoLog:Parameters>
+    <eXoLog:SubCommands count="1">
+      <eXoLog:Command Name="acmdNewPSMAssociation">
+        <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PSM.acmdNewPSMAssociation</eXoLog:FullName>
+        <eXoLog:Report>'PSMAssociation from PSMClass: "Zprava" to PSMClass: "Pacient"' was added to the PSM.</eXoLog:Report>
+      </eXoLog:Command>
+    </eXoLog:SubCommands>
+  </eXoLog:Command>
+  <eXoLog:Command initial="true" Name="cmdSetPSMClassInterpretation">
+    <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers.cmdSetPSMClassInterpretation</eXoLog:FullName>
+    <eXoLog:Parameters>
+      <eXoLog:Parameter>
+        <eXoLog:Name>PSM component</eXoLog:Name>
+        <eXoLog:PropertyName>PSMComponentGuid</eXoLog:PropertyName>
+        <eXoLog:Value>b5b24f01-52f5-4d19-a1f2-7ef83e177f04</eXoLog:Value>
+        <eXoLog:ValueText>PSMClass: "Zprava"</eXoLog:ValueText>
+      </eXoLog:Parameter>
+      <eXoLog:Parameter>
+        <eXoLog:Name>Interpretation</eXoLog:Name>
+        <eXoLog:PropertyName>PIMComponentGuid</eXoLog:PropertyName>
+        <eXoLog:Value>b3742ec5-e6ca-4785-9105-1aaa5371c8dd</eXoLog:Value>
+        <eXoLog:ValueText>PIMClass: "Zprava"</eXoLog:ValueText>
+      </eXoLog:Parameter>
+    </eXoLog:Parameters>
+    <eXoLog:SubCommands count="1">
+      <eXoLog:Command Name="acmdSetPSMClassInterpretation">
+        <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PSM.acmdSetPSMClassInterpretation</eXoLog:FullName>
+        <eXoLog:Report>Interpretation of 'PSMClass: "Zprava"' changed from '(null)' to 'PIMClass: "Zprava"'</eXoLog:Report>
+      </eXoLog:Command>
+    </eXoLog:SubCommands>
+  </eXoLog:Command>
+  <eXoLog:Command initial="true" Name="cmdSetPSMClassInterpretation">
+    <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers.cmdSetPSMClassInterpretation</eXoLog:FullName>
+    <eXoLog:Parameters>
+      <eXoLog:Parameter>
+        <eXoLog:Name>PSM component</eXoLog:Name>
+        <eXoLog:PropertyName>PSMComponentGuid</eXoLog:PropertyName>
+        <eXoLog:Value>a47b9f7f-56dd-4c9b-9623-44f98a4526a0</eXoLog:Value>
+        <eXoLog:ValueText>PSMClass: "Pacient"</eXoLog:ValueText>
+      </eXoLog:Parameter>
+      <eXoLog:Parameter>
+        <eXoLog:Name>Interpretation</eXoLog:Name>
+        <eXoLog:PropertyName>PIMComponentGuid</eXoLog:PropertyName>
+        <eXoLog:Value>65b05ede-0add-4137-8bb0-d72200a48ae8</eXoLog:Value>
+        <eXoLog:ValueText>PIMClass: "Pacient"</eXoLog:ValueText>
+      </eXoLog:Parameter>
+    </eXoLog:Parameters>
+    <eXoLog:SubCommands count="1">
+      <eXoLog:Command Name="acmdSetPSMClassInterpretation">
+        <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PSM.acmdSetPSMClassInterpretation</eXoLog:FullName>
+        <eXoLog:Report>Interpretation of 'PSMClass: "Pacient"' changed from '(null)' to 'PIMClass: "Pacient"'</eXoLog:Report>
+      </eXoLog:Command>
+    </eXoLog:SubCommands>
+  </eXoLog:Command>
+  <eXoLog:Command initial="true" Name="cmdSetPSMAssociationInterpretation">
+    <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers.cmdSetPSMAssociationInterpretation</eXoLog:FullName>
+    <eXoLog:Parameters>
+      <eXoLog:Parameter>
+        <eXoLog:Name>PSM association</eXoLog:Name>
+        <eXoLog:PropertyName>PSMComponentGuid</eXoLog:PropertyName>
+        <eXoLog:Value>3ef7133e-160f-4f29-963c-eaa50a605aec</eXoLog:Value>
+        <eXoLog:ValueText>PSMAssociation from PSMClass: "Zprava" to PSMClass: "Pacient"</eXoLog:ValueText>
+      </eXoLog:Parameter>
+      <eXoLog:Parameter>
+        <eXoLog:Name>Interpretation</eXoLog:Name>
+        <eXoLog:PropertyName>PIMComponentGuid</eXoLog:PropertyName>
+        <eXoLog:Value>09c487be-7ceb-4da6-b4fc-1a01344570ce</eXoLog:Value>
+        <eXoLog:ValueText>PIMAssociation "": PIMClass: "Zprava", PIMClass: "Pacient"</eXoLog:ValueText>
+      </eXoLog:Parameter>
+    </eXoLog:Parameters>
+    <eXoLog:SubCommands count="1">
+      <eXoLog:Command Name="acmdSetPSMAssociationInterpretation">
+        <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PSM.acmdSetPSMAssociationInterpretation</eXoLog:FullName>
+        <eXoLog:Report>Interpretation of 'PSMAssociation from PSMClass: "Zprava" to PSMClass: "Pacient"' changed from '(null)' to 'PIMAssociation "": PIMClass: "Zprava", PIMClass: "Pacient"'</eXoLog:Report>
+      </eXoLog:Command>
+    </eXoLog:SubCommands>
+  </eXoLog:Command>
+  <eXoLog:Command initial="true" Name="acmdRenameComponent">
+    <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.acmdRenameComponent</eXoLog:FullName>
+    <eXoLog:Report>Component 'PSMAssociation from PSMClass: "Zprava" to PSMClass: "Pacient"' renamed from 'defaultname' to 'ip'.</eXoLog:Report>
+    <eXoLog:Parameters>
+      <eXoLog:Parameter>
+        <eXoLog:Name>Component</eXoLog:Name>
+        <eXoLog:PropertyName>NamedComponentGuid</eXoLog:PropertyName>
+        <eXoLog:Value>3ef7133e-160f-4f29-963c-eaa50a605aec</eXoLog:Value>
+        <eXoLog:ValueText>PSMAssociation from PSMClass: "Zprava" to PSMClass: "Pacient"</eXoLog:ValueText>
+      </eXoLog:Parameter>
+      <eXoLog:Parameter>
+        <eXoLog:Name>New name</eXoLog:Name>
+        <eXoLog:PropertyName>NewName</eXoLog:PropertyName>
+        <eXoLog:Value>ip</eXoLog:Value>
+      </eXoLog:Parameter>
+    </eXoLog:Parameters>
+  </eXoLog:Command>
+  <eXoLog:Command initial="true" Name="acmdRenameComponent">
+    <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.acmdRenameComponent</eXoLog:FullName>
+    <eXoLog:Report>Component 'PSMAssociation from PSMClass: "DASTA" to PSMClass: "Zprava"' renamed from 'defaultname' to 'is'.</eXoLog:Report>
+    <eXoLog:Parameters>
+      <eXoLog:Parameter>
+        <eXoLog:Name>Component</eXoLog:Name>
+        <eXoLog:PropertyName>NamedComponentGuid</eXoLog:PropertyName>
+        <eXoLog:Value>2dc201d9-37cb-40b8-ab03-f2f9441ba6dc</eXoLog:Value>
+        <eXoLog:ValueText>PSMAssociation from PSMClass: "DASTA" to PSMClass: "Zprava"</eXoLog:ValueText>
+      </eXoLog:Parameter>
+      <eXoLog:Parameter>
+        <eXoLog:Name>New name</eXoLog:Name>
+        <eXoLog:PropertyName>NewName</eXoLog:PropertyName>
+        <eXoLog:Value>is</eXoLog:Value>
+      </eXoLog:Parameter>
+    </eXoLog:Parameters>
+  </eXoLog:Command>
+  <eXoLog:Command initial="true" Name="cmdCreateNewPSMAttribute">
+    <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers.cmdCreateNewPSMAttribute</eXoLog:FullName>
+    <eXoLog:Parameters>
+      <eXoLog:Parameter>
+        <eXoLog:Name>PSMClass</eXoLog:Name>
+        <eXoLog:PropertyName>PSMClassGuid</eXoLog:PropertyName>
+        <eXoLog:Value>a47b9f7f-56dd-4c9b-9623-44f98a4526a0</eXoLog:Value>
+        <eXoLog:ValueText>PSMClass: "Pacient"</eXoLog:ValueText>
+      </eXoLog:Parameter>
+    </eXoLog:Parameters>
+    <eXoLog:SubCommands count="1">
+      <eXoLog:Command Name="acmdNewPSMAttribute">
+        <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PSM.acmdNewPSMAttribute</eXoLog:FullName>
+        <eXoLog:Report>'PSMAttribute: "Pacient.defaultname" 1..1' was added to the PSM.</eXoLog:Report>
+      </eXoLog:Command>
+    </eXoLog:SubCommands>
+  </eXoLog:Command>
+  <eXoLog:Command initial="true" Name="cmdSetPSMAttributeInterpretation">
+    <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers.cmdSetPSMAttributeInterpretation</eXoLog:FullName>
+    <eXoLog:Parameters>
+      <eXoLog:Parameter>
+        <eXoLog:Name>PSM attribute</eXoLog:Name>
+        <eXoLog:PropertyName>PSMComponentGuid</eXoLog:PropertyName>
+        <eXoLog:Value>8342ae92-c452-4230-88ca-bc99a978c883</eXoLog:Value>
+        <eXoLog:ValueText>PSMAttribute: "Pacient.defaultname" 1..1</eXoLog:ValueText>
+      </eXoLog:Parameter>
+      <eXoLog:Parameter>
+        <eXoLog:Name>Interpretation</eXoLog:Name>
+        <eXoLog:PropertyName>PIMComponentGuid</eXoLog:PropertyName>
+        <eXoLog:Value>63cea20e-e748-4ef1-9fa5-e7ab14661a99</eXoLog:Value>
+        <eXoLog:ValueText>PIMAttribute: "Pacient.identifikator" 1..1</eXoLog:ValueText>
+      </eXoLog:Parameter>
+    </eXoLog:Parameters>
+    <eXoLog:SubCommands count="1">
+      <eXoLog:Command Name="acmdSetPSMAttributeInterpretation">
+        <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PSM.acmdSetPSMAttributeInterpretation</eXoLog:FullName>
+        <eXoLog:Report>Interpretation of 'PSMAttribute: "Pacient.defaultname" 1..1' changed from '(null)' to 'PIMAttribute: "Pacient.identifikator" 1..1'</eXoLog:Report>
+      </eXoLog:Command>
+    </eXoLog:SubCommands>
+  </eXoLog:Command>
+  <eXoLog:Command initial="true" Name="MacroCommand">
+    <eXoLog:FullName>Exolutio.Controller.Commands.MacroCommand</eXoLog:FullName>
+    <eXoLog:SubCommands count="3">
+      <eXoLog:Command Name="cmdUpdatePSMAttribute">
+        <eXoLog:FullName>Exolutio.Controller.Commands.Complex.PSM.cmdUpdatePSMAttribute</eXoLog:FullName>
+        <eXoLog:Report>Complex: PSM attribute update</eXoLog:Report>
+        <eXoLog:Parameters>
+          <eXoLog:Parameter>
+            <eXoLog:Name>Name</eXoLog:Name>
+            <eXoLog:PropertyName>Name</eXoLog:PropertyName>
+            <eXoLog:Value>id_pac</eXoLog:Value>
+          </eXoLog:Parameter>
+        </eXoLog:Parameters>
+      </eXoLog:Command>
+    </eXoLog:SubCommands>
+  </eXoLog:Command>
+  <eXoLog:Command initial="true" Name="cmdCreateNewPSMClassAsUnintChild">
+    <eXoLog:FullName>Exolutio.Controller.Commands.Complex.PSM.cmdCreateNewPSMClassAsUnintChild</eXoLog:FullName>
+    <eXoLog:Report>Complex: Add PSMClass as uninterpreted child.</eXoLog:Report>
+    <eXoLog:Parameters>
+      <eXoLog:Parameter>
+        <eXoLog:Name>Parent PSM class</eXoLog:Name>
+        <eXoLog:PropertyName>ParentPSMClassGuid</eXoLog:PropertyName>
+        <eXoLog:Value>a47b9f7f-56dd-4c9b-9623-44f98a4526a0</eXoLog:Value>
+        <eXoLog:ValueText>PSMClass: "Pacient"</eXoLog:ValueText>
+      </eXoLog:Parameter>
+    </eXoLog:Parameters>
+    <eXoLog:SubCommands count="3">
+      <eXoLog:Command Name="acmdNewPSMClass">
+        <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PSM.acmdNewPSMClass</eXoLog:FullName>
+        <eXoLog:Report>'PSMClass: "defaultname"' was added to the PSM.</eXoLog:Report>
+      </eXoLog:Command>
+      <eXoLog:Command Name="acmdNewPSMAssociation">
+        <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PSM.acmdNewPSMAssociation</eXoLog:FullName>
+        <eXoLog:Report>'PSMAssociation from PSMClass: "Pacient" to PSMClass: "defaultname"' was added to the PSM.</eXoLog:Report>
+      </eXoLog:Command>
+      <eXoLog:Command Name="acmdRenameComponent">
+        <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.acmdRenameComponent</eXoLog:FullName>
+        <eXoLog:Report>Component 'PSMAssociation from PSMClass: "Pacient" to PSMClass: "defaultname"' renamed from 'defaultname' to '(null)'.</eXoLog:Report>
+        <eXoLog:Parameters>
+          <eXoLog:Parameter>
+            <eXoLog:Name>Component</eXoLog:Name>
+            <eXoLog:PropertyName>NamedComponentGuid</eXoLog:PropertyName>
+            <eXoLog:Value>014b384e-b52a-421d-814d-b478f798de10</eXoLog:Value>
+            <eXoLog:ValueText>PSMAssociation from PSMClass: "Pacient" to PSMClass: "defaultname"</eXoLog:ValueText>
+          </eXoLog:Parameter>
+          <eXoLog:Parameter>
+            <eXoLog:Name>New name</eXoLog:Name>
+            <eXoLog:PropertyName>NewName</eXoLog:PropertyName>
+            <eXoLog:Value></eXoLog:Value>
+          </eXoLog:Parameter>
+        </eXoLog:Parameters>
+      </eXoLog:Command>
+    </eXoLog:SubCommands>
+  </eXoLog:Command>
+  <eXoLog:Command initial="true" Name="acmdRenameComponent">
+    <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.acmdRenameComponent</eXoLog:FullName>
+    <eXoLog:Report>Component 'PSMClass: "Diagnozy"' renamed from 'defaultname' to 'Diagnozy'.</eXoLog:Report>
+    <eXoLog:Parameters>
+      <eXoLog:Parameter>
+        <eXoLog:Name>Component</eXoLog:Name>
+        <eXoLog:PropertyName>NamedComponentGuid</eXoLog:PropertyName>
+        <eXoLog:Value>b5c35d3c-996d-474c-995f-b0bda1e8402b</eXoLog:Value>
+        <eXoLog:ValueText>PSMClass: "Diagnozy"</eXoLog:ValueText>
+      </eXoLog:Parameter>
+      <eXoLog:Parameter>
+        <eXoLog:Name>New name</eXoLog:Name>
+        <eXoLog:PropertyName>NewName</eXoLog:PropertyName>
+        <eXoLog:Value>Diagnozy</eXoLog:Value>
+      </eXoLog:Parameter>
+    </eXoLog:Parameters>
+  </eXoLog:Command>
+  <eXoLog:Command initial="true" Name="acmdRenameComponent">
+    <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.acmdRenameComponent</eXoLog:FullName>
+    <eXoLog:Report>Component 'PSMAssociation from PSMClass: "Pacient" to PSMClass: "Diagnozy"' renamed from '(null)' to 'diagnozy'.</eXoLog:Report>
+    <eXoLog:Parameters>
+      <eXoLog:Parameter>
+        <eXoLog:Name>Component</eXoLog:Name>
+        <eXoLog:PropertyName>NamedComponentGuid</eXoLog:PropertyName>
+        <eXoLog:Value>014b384e-b52a-421d-814d-b478f798de10</eXoLog:Value>
+        <eXoLog:ValueText>PSMAssociation from PSMClass: "Pacient" to PSMClass: "Diagnozy"</eXoLog:ValueText>
+      </eXoLog:Parameter>
+      <eXoLog:Parameter>
+        <eXoLog:Name>New name</eXoLog:Name>
+        <eXoLog:PropertyName>NewName</eXoLog:PropertyName>
+        <eXoLog:Value>diagnozy</eXoLog:Value>
+      </eXoLog:Parameter>
+    </eXoLog:Parameters>
+  </eXoLog:Command>
+  <eXoLog:Command initial="true" Name="cmdCreateNewPSMClassAsIntChild">
+    <eXoLog:FullName>Exolutio.Controller.Commands.Complex.PSM.cmdCreateNewPSMClassAsIntChild</eXoLog:FullName>
+    <eXoLog:Report>Complex: Add PSMClass as interpreted child.</eXoLog:Report>
+    <eXoLog:Parameters>
+      <eXoLog:Parameter>
+        <eXoLog:Name>Parent PSM class</eXoLog:Name>
+        <eXoLog:PropertyName>ParentPSMClassGuid</eXoLog:PropertyName>
+        <eXoLog:Value>b5c35d3c-996d-474c-995f-b0bda1e8402b</eXoLog:Value>
+        <eXoLog:ValueText>PSMClass: "Diagnozy"</eXoLog:ValueText>
+      </eXoLog:Parameter>
+      <eXoLog:Parameter>
+        <eXoLog:Name>PIM association end</eXoLog:Name>
+        <eXoLog:PropertyName>PIMAssociationEndGuid</eXoLog:PropertyName>
+        <eXoLog:Value>a0d9c43c-b226-4a7e-a2ae-7e2c3b188c5d</eXoLog:Value>
+        <eXoLog:ValueText>PIMAssociationEnd: "" 0..* C: Diagnoza A:  </eXoLog:ValueText>
+      </eXoLog:Parameter>
+    </eXoLog:Parameters>
+    <eXoLog:SubCommands count="13">
+      <eXoLog:Command Name="acmdNewPSMClass">
+        <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PSM.acmdNewPSMClass</eXoLog:FullName>
+        <eXoLog:Report>'PSMClass: "defaultname"' was added to the PSM.</eXoLog:Report>
+      </eXoLog:Command>
+      <eXoLog:Command Name="acmdRenameComponent">
+        <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.acmdRenameComponent</eXoLog:FullName>
+        <eXoLog:Report>Component 'PSMClass: "Diagnoza"' renamed from 'defaultname' to 'Diagnoza'.</eXoLog:Report>
+        <eXoLog:Parameters>
+          <eXoLog:Parameter>
+            <eXoLog:Name>Component</eXoLog:Name>
+            <eXoLog:PropertyName>NamedComponentGuid</eXoLog:PropertyName>
+            <eXoLog:Value>9f50c03b-288f-4acb-8eab-c7de58ae435f</eXoLog:Value>
+            <eXoLog:ValueText>PSMClass: "Diagnoza"</eXoLog:ValueText>
+          </eXoLog:Parameter>
+          <eXoLog:Parameter>
+            <eXoLog:Name>New name</eXoLog:Name>
+            <eXoLog:PropertyName>NewName</eXoLog:PropertyName>
+            <eXoLog:Value>Diagnoza</eXoLog:Value>
+          </eXoLog:Parameter>
+        </eXoLog:Parameters>
+      </eXoLog:Command>
+      <eXoLog:Command Name="acmdSetPSMClassInterpretation">
+        <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PSM.acmdSetPSMClassInterpretation</eXoLog:FullName>
+        <eXoLog:Report>Interpretation of 'PSMClass: "Diagnoza"' changed from '(null)' to 'PIMClass: "Diagnoza"'</eXoLog:Report>
+      </eXoLog:Command>
+      <eXoLog:Command Name="acmdNewPSMAssociation">
+        <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PSM.acmdNewPSMAssociation</eXoLog:FullName>
+        <eXoLog:Report>'PSMAssociation from PSMClass: "Diagnozy" to PSMClass: "Diagnoza"' was added to the PSM.</eXoLog:Report>
+      </eXoLog:Command>
+      <eXoLog:Command Name="acmdSetPSMAssociationInterpretation">
+        <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PSM.acmdSetPSMAssociationInterpretation</eXoLog:FullName>
+        <eXoLog:Report>Interpretation of 'PSMAssociation from PSMClass: "Diagnozy" to PSMClass: "Diagnoza"' changed from '(null)' to 'PIMAssociation "": PIMClass: "Diagnoza", PIMClass: "Pacient"'</eXoLog:Report>
+      </eXoLog:Command>
+      <eXoLog:Command Name="cmdCreateNewPSMAttribute">
+        <eXoLog:FullName>Exolutio.Controller.Commands.Complex.PSM.cmdCreateNewPSMAttribute</eXoLog:FullName>
+        <eXoLog:Report>Complex: PSM attribute creation</eXoLog:Report>
+        <eXoLog:Parameters>
+          <eXoLog:Parameter>
+            <eXoLog:Name>Name</eXoLog:Name>
+            <eXoLog:PropertyName>Name</eXoLog:PropertyName>
+            <eXoLog:Value>typ</eXoLog:Value>
+          </eXoLog:Parameter>
+          <eXoLog:Parameter>
+            <eXoLog:Name>Lower</eXoLog:Name>
+            <eXoLog:PropertyName>Lower</eXoLog:PropertyName>
+            <eXoLog:Value>1</eXoLog:Value>
+          </eXoLog:Parameter>
+          <eXoLog:Parameter>
+            <eXoLog:Name>Upper</eXoLog:Name>
+            <eXoLog:PropertyName>Upper</eXoLog:PropertyName>
+            <eXoLog:Value>1</eXoLog:Value>
+          </eXoLog:Parameter>
+        </eXoLog:Parameters>
+      </eXoLog:Command>
+    </eXoLog:SubCommands>
+  </eXoLog:Command>
+  <eXoLog:Command initial="true" Name="MacroCommand">
+    <eXoLog:FullName>Exolutio.Controller.Commands.MacroCommand</eXoLog:FullName>
+    <eXoLog:SubCommands count="6">
+      <eXoLog:Command Name="cmdUpdatePSMAttribute">
+        <eXoLog:FullName>Exolutio.Controller.Commands.Complex.PSM.cmdUpdatePSMAttribute</eXoLog:FullName>
+        <eXoLog:Report>Complex: PSM attribute update</eXoLog:Report>
+        <eXoLog:Parameters>
+          <eXoLog:Parameter>
+            <eXoLog:Name>Name</eXoLog:Name>
+            <eXoLog:PropertyName>Name</eXoLog:PropertyName>
+            <eXoLog:Value>typ_dg</eXoLog:Value>
+          </eXoLog:Parameter>
+        </eXoLog:Parameters>
+      </eXoLog:Command>
+    </eXoLog:SubCommands>
+  </eXoLog:Command>
+  <eXoLog:Command initial="true" Name="cmdUpdatePIMAttributeCardinality">
+    <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PIM.MacroWrappers.cmdUpdatePIMAttributeCardinality</eXoLog:FullName>
+    <eXoLog:Parameters>
+      <eXoLog:Parameter>
+        <eXoLog:Name>PIMAttribute</eXoLog:Name>
+        <eXoLog:PropertyName>ComponentGuid</eXoLog:PropertyName>
+        <eXoLog:Value>e4d86f30-dcf9-4e5d-a10a-f0c864efeae9</eXoLog:Value>
+        <eXoLog:ValueText>PIMAttribute: "Diagnoza.kód" 1..*</eXoLog:ValueText>
+      </eXoLog:Parameter>
+      <eXoLog:Parameter>
+        <eXoLog:Name>New lower</eXoLog:Name>
+        <eXoLog:PropertyName>NewLower</eXoLog:PropertyName>
+        <eXoLog:Value>1</eXoLog:Value>
+      </eXoLog:Parameter>
+      <eXoLog:Parameter>
+        <eXoLog:Name>New upper</eXoLog:Name>
+        <eXoLog:PropertyName>NewUpper</eXoLog:PropertyName>
+        <eXoLog:Value>*</eXoLog:Value>
+      </eXoLog:Parameter>
+    </eXoLog:Parameters>
+    <eXoLog:SubCommands count="1">
+      <eXoLog:Command Name="acmdUpdatePIMAttributeCardinality">
+        <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PIM.acmdUpdatePIMAttributeCardinality</eXoLog:FullName>
+        <eXoLog:Report>Cardinality of 'PIMAttribute: "Diagnoza.kód" 1..*' changed from '1' to '1..*'.</eXoLog:Report>
+      </eXoLog:Command>
+    </eXoLog:SubCommands>
+  </eXoLog:Command>
+  <eXoLog:Command initial="true" Name="MacroCommand">
+    <eXoLog:FullName>Exolutio.Controller.Commands.MacroCommand</eXoLog:FullName>
+    <eXoLog:SubCommands count="3">
+      <eXoLog:Command Name="cmdUpdatePSMAttribute">
+        <eXoLog:FullName>Exolutio.Controller.Commands.Complex.PSM.cmdUpdatePSMAttribute</eXoLog:FullName>
+        <eXoLog:Report>Complex: PSM attribute update</eXoLog:Report>
+        <eXoLog:Parameters>
+          <eXoLog:Parameter>
+            <eXoLog:Name>Name</eXoLog:Name>
+            <eXoLog:PropertyName>Name</eXoLog:PropertyName>
+            <eXoLog:Value>diag</eXoLog:Value>
+          </eXoLog:Parameter>
+        </eXoLog:Parameters>
+      </eXoLog:Command>
+    </eXoLog:SubCommands>
+  </eXoLog:Command>
+  <eXoLog:Command initial="true" Name="acmdRenameComponent">
+    <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.acmdRenameComponent</eXoLog:FullName>
+    <eXoLog:Report>Component 'PSMAssociation from PSMClass: "Pacient" to PSMClass: "Diagnozy"' renamed from 'diagnozy' to 'dg'.</eXoLog:Report>
+    <eXoLog:Parameters>
+      <eXoLog:Parameter>
+        <eXoLog:Name>Component</eXoLog:Name>
+        <eXoLog:PropertyName>NamedComponentGuid</eXoLog:PropertyName>
+        <eXoLog:Value>014b384e-b52a-421d-814d-b478f798de10</eXoLog:Value>
+        <eXoLog:ValueText>PSMAssociation from PSMClass: "Pacient" to PSMClass: "Diagnozy"</eXoLog:ValueText>
+      </eXoLog:Parameter>
+      <eXoLog:Parameter>
+        <eXoLog:Name>New name</eXoLog:Name>
+        <eXoLog:PropertyName>NewName</eXoLog:PropertyName>
+        <eXoLog:Value>dg</eXoLog:Value>
+      </eXoLog:Parameter>
+    </eXoLog:Parameters>
+  </eXoLog:Command>
+  <eXoLog:Command initial="true" Name="acmdRenameComponent">
+    <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.acmdRenameComponent</eXoLog:FullName>
+    <eXoLog:Report>Component 'PSMAssociation from PSMClass: "Diagnozy" to PSMClass: "Diagnoza"' renamed from 'defaultname' to 'dgz'.</eXoLog:Report>
+    <eXoLog:Parameters>
+      <eXoLog:Parameter>
+        <eXoLog:Name>Component</eXoLog:Name>
+        <eXoLog:PropertyName>NamedComponentGuid</eXoLog:PropertyName>
+        <eXoLog:Value>60171b5b-8c3c-497d-a9c0-43ea821e4c8e</eXoLog:Value>
+        <eXoLog:ValueText>PSMAssociation from PSMClass: "Diagnozy" to PSMClass: "Diagnoza"</eXoLog:ValueText>
+      </eXoLog:Parameter>
+      <eXoLog:Parameter>
+        <eXoLog:Name>New name</eXoLog:Name>
+        <eXoLog:PropertyName>NewName</eXoLog:PropertyName>
+        <eXoLog:Value>dgz</eXoLog:Value>
+      </eXoLog:Parameter>
+    </eXoLog:Parameters>
+  </eXoLog:Command>
+  <eXoLog:Command initial="true" Name="cmdCreateNewPSMClassAsIntChild">
+    <eXoLog:FullName>Exolutio.Controller.Commands.Complex.PSM.cmdCreateNewPSMClassAsIntChild</eXoLog:FullName>
+    <eXoLog:Report>Complex: Add PSMClass as interpreted child.</eXoLog:Report>
+    <eXoLog:Parameters>
+      <eXoLog:Parameter>
+        <eXoLog:Name>Parent PSM class</eXoLog:Name>
+        <eXoLog:PropertyName>ParentPSMClassGuid</eXoLog:PropertyName>
+        <eXoLog:Value>9f50c03b-288f-4acb-8eab-c7de58ae435f</eXoLog:Value>
+        <eXoLog:ValueText>PSMClass: "Diagnoza"</eXoLog:ValueText>
+      </eXoLog:Parameter>
+      <eXoLog:Parameter>
+        <eXoLog:Name>PIM association end</eXoLog:Name>
+        <eXoLog:PropertyName>PIMAssociationEndGuid</eXoLog:PropertyName>
+        <eXoLog:Value>809a5818-c037-4a5a-a138-c3e1f61371cc</eXoLog:Value>
+        <eXoLog:ValueText>PIMAssociationEnd: "" 1..1 C: Lekar A:  </eXoLog:ValueText>
+      </eXoLog:Parameter>
+    </eXoLog:Parameters>
+    <eXoLog:SubCommands count="7">
+      <eXoLog:Command Name="acmdNewPSMClass">
+        <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PSM.acmdNewPSMClass</eXoLog:FullName>
+        <eXoLog:Report>'PSMClass: "defaultname"' was added to the PSM.</eXoLog:Report>
+      </eXoLog:Command>
+      <eXoLog:Command Name="acmdRenameComponent">
+        <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.acmdRenameComponent</eXoLog:FullName>
+        <eXoLog:Report>Component 'PSMClass: "Lekar"' renamed from 'defaultname' to 'Lekar'.</eXoLog:Report>
+        <eXoLog:Parameters>
+          <eXoLog:Parameter>
+            <eXoLog:Name>Component</eXoLog:Name>
+            <eXoLog:PropertyName>NamedComponentGuid</eXoLog:PropertyName>
+            <eXoLog:Value>28847ca0-dee1-430d-9a6e-e71d88ca30e9</eXoLog:Value>
+            <eXoLog:ValueText>PSMClass: "Lekar"</eXoLog:ValueText>
+          </eXoLog:Parameter>
+          <eXoLog:Parameter>
+            <eXoLog:Name>New name</eXoLog:Name>
+            <eXoLog:PropertyName>NewName</eXoLog:PropertyName>
+            <eXoLog:Value>Lekar</eXoLog:Value>
+          </eXoLog:Parameter>
+        </eXoLog:Parameters>
+      </eXoLog:Command>
+      <eXoLog:Command Name="acmdSetPSMClassInterpretation">
+        <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PSM.acmdSetPSMClassInterpretation</eXoLog:FullName>
+        <eXoLog:Report>Interpretation of 'PSMClass: "Lekar"' changed from '(null)' to 'PIMClass: "Lekar"'</eXoLog:Report>
+      </eXoLog:Command>
+      <eXoLog:Command Name="acmdNewPSMAssociation">
+        <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PSM.acmdNewPSMAssociation</eXoLog:FullName>
+        <eXoLog:Report>'PSMAssociation from PSMClass: "Diagnoza" to PSMClass: "Lekar"' was added to the PSM.</eXoLog:Report>
+      </eXoLog:Command>
+      <eXoLog:Command Name="acmdSetPSMAssociationInterpretation">
+        <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PSM.acmdSetPSMAssociationInterpretation</eXoLog:FullName>
+        <eXoLog:Report>Interpretation of 'PSMAssociation from PSMClass: "Diagnoza" to PSMClass: "Lekar"' changed from '(null)' to 'PIMAssociation "": PIMClass: "Lekar", PIMClass: "Diagnoza"'</eXoLog:Report>
+      </eXoLog:Command>
+      <eXoLog:Command Name="cmdCreateNewPSMAttribute">
+        <eXoLog:FullName>Exolutio.Controller.Commands.Complex.PSM.cmdCreateNewPSMAttribute</eXoLog:FullName>
+        <eXoLog:Report>Complex: PSM attribute creation</eXoLog:Report>
+        <eXoLog:Parameters>
+          <eXoLog:Parameter>
+            <eXoLog:Name>Name</eXoLog:Name>
+            <eXoLog:PropertyName>Name</eXoLog:PropertyName>
+            <eXoLog:Value>icl</eXoLog:Value>
+          </eXoLog:Parameter>
+          <eXoLog:Parameter>
+            <eXoLog:Name>Lower</eXoLog:Name>
+            <eXoLog:PropertyName>Lower</eXoLog:PropertyName>
+            <eXoLog:Value>1</eXoLog:Value>
+          </eXoLog:Parameter>
+          <eXoLog:Parameter>
+            <eXoLog:Name>Upper</eXoLog:Name>
+            <eXoLog:PropertyName>Upper</eXoLog:PropertyName>
+            <eXoLog:Value>1</eXoLog:Value>
+          </eXoLog:Parameter>
+        </eXoLog:Parameters>
+      </eXoLog:Command>
+    </eXoLog:SubCommands>
+  </eXoLog:Command>
+  <eXoLog:Command initial="true" Name="cmdCreateNewPSMClassAsIntChild">
+    <eXoLog:FullName>Exolutio.Controller.Commands.Complex.PSM.cmdCreateNewPSMClassAsIntChild</eXoLog:FullName>
+    <eXoLog:Report>Complex: Add PSMClass as interpreted child.</eXoLog:Report>
+    <eXoLog:Parameters>
+      <eXoLog:Parameter>
+        <eXoLog:Name>Parent PSM class</eXoLog:Name>
+        <eXoLog:PropertyName>ParentPSMClassGuid</eXoLog:PropertyName>
+        <eXoLog:Value>28847ca0-dee1-430d-9a6e-e71d88ca30e9</eXoLog:Value>
+        <eXoLog:ValueText>PSMClass: "Lekar"</eXoLog:ValueText>
+      </eXoLog:Parameter>
+      <eXoLog:Parameter>
+        <eXoLog:Name>PIM association end</eXoLog:Name>
+        <eXoLog:PropertyName>PIMAssociationEndGuid</eXoLog:PropertyName>
+        <eXoLog:Value>cf22347b-d369-414c-ac51-7057395d795b</eXoLog:Value>
+        <eXoLog:ValueText>PIMAssociationEnd: "defaultname" 1..1 C: Osoba A: &lt;&lt;inheritance&gt;&gt; </eXoLog:ValueText>
+      </eXoLog:Parameter>
+    </eXoLog:Parameters>
+    <eXoLog:SubCommands count="17">
+      <eXoLog:Command Name="acmdNewPSMClass">
+        <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PSM.acmdNewPSMClass</eXoLog:FullName>
+        <eXoLog:Report>'PSMClass: "defaultname"' was added to the PSM.</eXoLog:Report>
+      </eXoLog:Command>
+      <eXoLog:Command Name="acmdRenameComponent">
+        <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.acmdRenameComponent</eXoLog:FullName>
+        <eXoLog:Report>Component 'PSMClass: "Osoba"' renamed from 'defaultname' to 'Osoba'.</eXoLog:Report>
+        <eXoLog:Parameters>
+          <eXoLog:Parameter>
+            <eXoLog:Name>Component</eXoLog:Name>
+            <eXoLog:PropertyName>NamedComponentGuid</eXoLog:PropertyName>
+            <eXoLog:Value>dc6c523a-cb5e-4ec7-9408-b53adaad29dc</eXoLog:Value>
+            <eXoLog:ValueText>PSMClass: "Osoba"</eXoLog:ValueText>
+          </eXoLog:Parameter>
+          <eXoLog:Parameter>
+            <eXoLog:Name>New name</eXoLog:Name>
+            <eXoLog:PropertyName>NewName</eXoLog:PropertyName>
+            <eXoLog:Value>Osoba</eXoLog:Value>
+          </eXoLog:Parameter>
+        </eXoLog:Parameters>
+      </eXoLog:Command>
+      <eXoLog:Command Name="acmdSetPSMClassInterpretation">
+        <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PSM.acmdSetPSMClassInterpretation</eXoLog:FullName>
+        <eXoLog:Report>Interpretation of 'PSMClass: "Osoba"' changed from '(null)' to 'PIMClass: "Osoba"'</eXoLog:Report>
+      </eXoLog:Command>
+      <eXoLog:Command Name="acmdNewPSMAssociation">
+        <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PSM.acmdNewPSMAssociation</eXoLog:FullName>
+        <eXoLog:Report>'PSMAssociation from PSMClass: "Lekar" to PSMClass: "Osoba"' was added to the PSM.</eXoLog:Report>
+      </eXoLog:Command>
+      <eXoLog:Command Name="acmdSetPSMAssociationInterpretation">
+        <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PSM.acmdSetPSMAssociationInterpretation</eXoLog:FullName>
+        <eXoLog:Report>Interpretation of 'PSMAssociation from PSMClass: "Lekar" to PSMClass: "Osoba"' changed from '(null)' to 'PIMAssociation "&lt;&lt;inheritance&gt;&gt;": PIMClass: "Lekar", PIMClass: "Osoba"'</eXoLog:Report>
+      </eXoLog:Command>
+      <eXoLog:Command Name="cmdCreateNewPSMAttribute">
+        <eXoLog:FullName>Exolutio.Controller.Commands.Complex.PSM.cmdCreateNewPSMAttribute</eXoLog:FullName>
+        <eXoLog:Report>Complex: PSM attribute creation</eXoLog:Report>
+        <eXoLog:Parameters>
+          <eXoLog:Parameter>
+            <eXoLog:Name>Name</eXoLog:Name>
+            <eXoLog:PropertyName>Name</eXoLog:PropertyName>
+            <eXoLog:Value>jmeno</eXoLog:Value>
+          </eXoLog:Parameter>
+          <eXoLog:Parameter>
+            <eXoLog:Name>Lower</eXoLog:Name>
+            <eXoLog:PropertyName>Lower</eXoLog:PropertyName>
+            <eXoLog:Value>1</eXoLog:Value>
+          </eXoLog:Parameter>
+          <eXoLog:Parameter>
+            <eXoLog:Name>Upper</eXoLog:Name>
+            <eXoLog:PropertyName>Upper</eXoLog:PropertyName>
+            <eXoLog:Value>1</eXoLog:Value>
+          </eXoLog:Parameter>
+        </eXoLog:Parameters>
+      </eXoLog:Command>
+    </eXoLog:SubCommands>
+  </eXoLog:Command>
+  <eXoLog:Command initial="true" Name="cmdDeletePSMAttribute">
+    <eXoLog:FullName>Exolutio.Controller.Commands.Complex.PSM.cmdDeletePSMAttribute</eXoLog:FullName>
+    <eXoLog:Report>Complex: PSM attribute deletion</eXoLog:Report>
+    <eXoLog:Parameters>
+      <eXoLog:Parameter>
+        <eXoLog:Name>Deleted PSM attribute</eXoLog:Name>
+        <eXoLog:PropertyName>AttributeGuid</eXoLog:PropertyName>
+        <eXoLog:Value>2fcc5754-1fc3-4689-af6b-5404aa9c74de</eXoLog:Value>
+      </eXoLog:Parameter>
+    </eXoLog:Parameters>
+    <eXoLog:SubCommands count="6">
+      <eXoLog:Command Name="acmdRenameComponent">
+        <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.acmdRenameComponent</eXoLog:FullName>
+        <eXoLog:Report>Component 'PSMAttribute: "Lekar." 1..1' renamed from 'icl' to '(null)'.</eXoLog:Report>
+        <eXoLog:Parameters>
+          <eXoLog:Parameter>
+            <eXoLog:Name>Component</eXoLog:Name>
+            <eXoLog:PropertyName>NamedComponentGuid</eXoLog:PropertyName>
+            <eXoLog:Value>2fcc5754-1fc3-4689-af6b-5404aa9c74de</eXoLog:Value>
+          </eXoLog:Parameter>
+          <eXoLog:Parameter>
+            <eXoLog:Name>New name</eXoLog:Name>
+            <eXoLog:PropertyName>NewName</eXoLog:PropertyName>
+            <eXoLog:Value></eXoLog:Value>
+          </eXoLog:Parameter>
+        </eXoLog:Parameters>
+      </eXoLog:Command>
+      <eXoLog:Command Name="acmdUpdatePSMAttributeCardinality">
+        <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PSM.acmdUpdatePSMAttributeCardinality</eXoLog:FullName>
+        <eXoLog:Report>Cardinality of 'PSMAttribute: "Lekar." 1..1' changed from '1' to '1'.</eXoLog:Report>
+      </eXoLog:Command>
+      <eXoLog:Command Name="acmdUpdatePSMAttributeType">
+        <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PSM.acmdUpdatePSMAttributeType</eXoLog:FullName>
+        <eXoLog:Report>Type of 'PSMAttribute: "Lekar." 1..1' changed from '(null)' to '(null)'.</eXoLog:Report>
+      </eXoLog:Command>
+      <eXoLog:Command Name="acmdUpdatePSMAttributeXForm">
+        <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PSM.acmdUpdatePSMAttributeXForm</eXoLog:FullName>
+        <eXoLog:Report>XML form of PSMAttribute: "Lekar." 1..1 changed from attribute to element.</eXoLog:Report>
+      </eXoLog:Command>
+      <eXoLog:Command Name="acmdSetPSMAttributeInterpretation">
+        <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PSM.acmdSetPSMAttributeInterpretation</eXoLog:FullName>
+        <eXoLog:Report>Interpretation of 'PSMAttribute: "Lekar." 1..1' changed from 'PIMAttribute: "Lekar.icl" 1..1' to '(null)'</eXoLog:Report>
+      </eXoLog:Command>
+      <eXoLog:Command Name="acmdDeletePSMAttribute">
+        <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PSM.acmdDeletePSMAttribute</eXoLog:FullName>
+        <eXoLog:Report>'PSMAttribute: "Lekar." 1..1' deleted from the PSM.</eXoLog:Report>
+      </eXoLog:Command>
+    </eXoLog:SubCommands>
+  </eXoLog:Command>
+  <eXoLog:Command initial="true" Name="MacroCommand">
+    <eXoLog:FullName>Exolutio.Controller.Commands.MacroCommand</eXoLog:FullName>
+    <eXoLog:SubCommands count="8">
+      <eXoLog:Command Name="cmdDeletePSMAttribute">
+        <eXoLog:FullName>Exolutio.Controller.Commands.Complex.PSM.cmdDeletePSMAttribute</eXoLog:FullName>
+        <eXoLog:Report>Complex: PSM attribute deletion</eXoLog:Report>
+        <eXoLog:Parameters>
+          <eXoLog:Parameter>
+            <eXoLog:Name>Deleted PSM attribute</eXoLog:Name>
+            <eXoLog:PropertyName>AttributeGuid</eXoLog:PropertyName>
+            <eXoLog:Value>79dc5f2f-6cf7-4bec-ac26-e97cab587961</eXoLog:Value>
+          </eXoLog:Parameter>
+        </eXoLog:Parameters>
+        <eXoLog:SubCommands count="6">
+          <eXoLog:Command Name="acmdRenameComponent">
+            <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.acmdRenameComponent</eXoLog:FullName>
+            <eXoLog:Report>Component 'PSMAttribute: "Osoba." 1..1' renamed from 'funkce' to '(null)'.</eXoLog:Report>
+            <eXoLog:Parameters>
+              <eXoLog:Parameter>
+                <eXoLog:Name>Component</eXoLog:Name>
+                <eXoLog:PropertyName>NamedComponentGuid</eXoLog:PropertyName>
+                <eXoLog:Value>79dc5f2f-6cf7-4bec-ac26-e97cab587961</eXoLog:Value>
+              </eXoLog:Parameter>
+              <eXoLog:Parameter>
+                <eXoLog:Name>New name</eXoLog:Name>
+                <eXoLog:PropertyName>NewName</eXoLog:PropertyName>
+                <eXoLog:Value></eXoLog:Value>
+              </eXoLog:Parameter>
+            </eXoLog:Parameters>
+          </eXoLog:Command>
+          <eXoLog:Command Name="acmdUpdatePSMAttributeCardinality">
+            <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PSM.acmdUpdatePSMAttributeCardinality</eXoLog:FullName>
+            <eXoLog:Report>Cardinality of 'PSMAttribute: "Osoba." 1..1' changed from '1' to '1'.</eXoLog:Report>
+          </eXoLog:Command>
+          <eXoLog:Command Name="acmdUpdatePSMAttributeType">
+            <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PSM.acmdUpdatePSMAttributeType</eXoLog:FullName>
+            <eXoLog:Report>Type of 'PSMAttribute: "Osoba." 1..1' changed from '(null)' to '(null)'.</eXoLog:Report>
+          </eXoLog:Command>
+          <eXoLog:Command Name="acmdUpdatePSMAttributeXForm">
+            <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PSM.acmdUpdatePSMAttributeXForm</eXoLog:FullName>
+            <eXoLog:Report>XML form of PSMAttribute: "Osoba." 1..1 changed from attribute to element.</eXoLog:Report>
+          </eXoLog:Command>
+          <eXoLog:Command Name="acmdSetPSMAttributeInterpretation">
+            <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PSM.acmdSetPSMAttributeInterpretation</eXoLog:FullName>
+            <eXoLog:Report>Interpretation of 'PSMAttribute: "Osoba." 1..1' changed from 'PIMAttribute: "Osoba.funkce" 1..1' to '(null)'</eXoLog:Report>
+          </eXoLog:Command>
+          <eXoLog:Command Name="acmdDeletePSMAttribute">
+            <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PSM.acmdDeletePSMAttribute</eXoLog:FullName>
+            <eXoLog:Report>'PSMAttribute: "Osoba." 1..1' deleted from the PSM.</eXoLog:Report>
+          </eXoLog:Command>
+        </eXoLog:SubCommands>
+      </eXoLog:Command>
+      <eXoLog:Command Name="cmdUpdatePSMAttribute">
+        <eXoLog:FullName>Exolutio.Controller.Commands.Complex.PSM.cmdUpdatePSMAttribute</eXoLog:FullName>
+        <eXoLog:Report>Complex: PSM attribute update</eXoLog:Report>
+        <eXoLog:Parameters>
+          <eXoLog:Parameter>
+            <eXoLog:Name>Name</eXoLog:Name>
+            <eXoLog:PropertyName>Name</eXoLog:PropertyName>
+            <eXoLog:Value>jmeno</eXoLog:Value>
+          </eXoLog:Parameter>
+        </eXoLog:Parameters>
+      </eXoLog:Command>
+    </eXoLog:SubCommands>
+  </eXoLog:Command>
+  <eXoLog:Command initial="true" Name="cmdUpdatePSMAssociation">
+    <eXoLog:FullName>Exolutio.Controller.Commands.Complex.PSM.cmdUpdatePSMAssociation</eXoLog:FullName>
+    <eXoLog:Report>Complex: PSM attribute update</eXoLog:Report>
+    <eXoLog:Parameters>
+      <eXoLog:Parameter>
+        <eXoLog:Name>Name</eXoLog:Name>
+        <eXoLog:PropertyName>Name</eXoLog:PropertyName>
+        <eXoLog:Value>autor</eXoLog:Value>
+      </eXoLog:Parameter>
+      <eXoLog:Parameter>
+        <eXoLog:Name>Lower</eXoLog:Name>
+        <eXoLog:PropertyName>Lower</eXoLog:PropertyName>
+        <eXoLog:Value>0</eXoLog:Value>
+      </eXoLog:Parameter>
+      <eXoLog:Parameter>
+        <eXoLog:Name>Upper</eXoLog:Name>
+        <eXoLog:PropertyName>Upper</eXoLog:PropertyName>
+        <eXoLog:Value>1</eXoLog:Value>
+      </eXoLog:Parameter>
+      <eXoLog:Parameter>
+        <eXoLog:Name>Updated association</eXoLog:Name>
+        <eXoLog:PropertyName>AssociationGuid</eXoLog:PropertyName>
+        <eXoLog:Value>be52b9d0-dbe6-4cc9-a408-88b5754e02b5</eXoLog:Value>
+        <eXoLog:ValueText>PSMAssociation from PSMClass: "Diagnoza" to PSMClass: "Lekar"</eXoLog:ValueText>
+      </eXoLog:Parameter>
+    </eXoLog:Parameters>
+    <eXoLog:SubCommands count="2">
+      <eXoLog:Command Name="acmdRenameComponent">
+        <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.acmdRenameComponent</eXoLog:FullName>
+        <eXoLog:Report>Component 'PSMAssociation from PSMClass: "Diagnoza" to PSMClass: "Lekar"' renamed from 'defaultname' to 'autor'.</eXoLog:Report>
+        <eXoLog:Parameters>
+          <eXoLog:Parameter>
+            <eXoLog:Name>Component</eXoLog:Name>
+            <eXoLog:PropertyName>NamedComponentGuid</eXoLog:PropertyName>
+            <eXoLog:Value>be52b9d0-dbe6-4cc9-a408-88b5754e02b5</eXoLog:Value>
+            <eXoLog:ValueText>PSMAssociation from PSMClass: "Diagnoza" to PSMClass: "Lekar"</eXoLog:ValueText>
+          </eXoLog:Parameter>
+          <eXoLog:Parameter>
+            <eXoLog:Name>New name</eXoLog:Name>
+            <eXoLog:PropertyName>NewName</eXoLog:PropertyName>
+            <eXoLog:Value>autor</eXoLog:Value>
+          </eXoLog:Parameter>
+        </eXoLog:Parameters>
+      </eXoLog:Command>
+      <eXoLog:Command Name="acmdUpdatePSMAssociationCardinality">
+        <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PSM.acmdUpdatePSMAssociationCardinality</eXoLog:FullName>
+        <eXoLog:Report>Cardinality of 'PSMAssociation from PSMClass: "Diagnoza" to PSMClass: "Lekar"' changed from '1' to '0..1'.</eXoLog:Report>
+      </eXoLog:Command>
+    </eXoLog:SubCommands>
+  </eXoLog:Command>
+  <eXoLog:Command initial="true" Name="cmdUpdatePSMAssociation">
+    <eXoLog:FullName>Exolutio.Controller.Commands.Complex.PSM.cmdUpdatePSMAssociation</eXoLog:FullName>
+    <eXoLog:Report>Complex: PSM attribute update</eXoLog:Report>
+    <eXoLog:Parameters>
+      <eXoLog:Parameter>
+        <eXoLog:Name>Name</eXoLog:Name>
+        <eXoLog:PropertyName>Name</eXoLog:PropertyName>
+        <eXoLog:Value></eXoLog:Value>
+      </eXoLog:Parameter>
+      <eXoLog:Parameter>
+        <eXoLog:Name>Lower</eXoLog:Name>
+        <eXoLog:PropertyName>Lower</eXoLog:PropertyName>
+        <eXoLog:Value>1</eXoLog:Value>
+      </eXoLog:Parameter>
+      <eXoLog:Parameter>
+        <eXoLog:Name>Upper</eXoLog:Name>
+        <eXoLog:PropertyName>Upper</eXoLog:PropertyName>
+        <eXoLog:Value>1</eXoLog:Value>
+      </eXoLog:Parameter>
+      <eXoLog:Parameter>
+        <eXoLog:Name>Updated association</eXoLog:Name>
+        <eXoLog:PropertyName>AssociationGuid</eXoLog:PropertyName>
+        <eXoLog:Value>6426b890-6573-41e7-9ab2-936e543c855d</eXoLog:Value>
+        <eXoLog:ValueText>PSMAssociation from PSMClass: "Lekar" to PSMClass: "Osoba"</eXoLog:ValueText>
+      </eXoLog:Parameter>
+    </eXoLog:Parameters>
+    <eXoLog:SubCommands count="2">
+      <eXoLog:Command Name="acmdRenameComponent">
+        <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.acmdRenameComponent</eXoLog:FullName>
+        <eXoLog:Report>Component 'PSMAssociation from PSMClass: "Lekar" to PSMClass: "Osoba"' renamed from 'defaultname' to '(null)'.</eXoLog:Report>
+        <eXoLog:Parameters>
+          <eXoLog:Parameter>
+            <eXoLog:Name>Component</eXoLog:Name>
+            <eXoLog:PropertyName>NamedComponentGuid</eXoLog:PropertyName>
+            <eXoLog:Value>6426b890-6573-41e7-9ab2-936e543c855d</eXoLog:Value>
+            <eXoLog:ValueText>PSMAssociation from PSMClass: "Lekar" to PSMClass: "Osoba"</eXoLog:ValueText>
+          </eXoLog:Parameter>
+          <eXoLog:Parameter>
+            <eXoLog:Name>New name</eXoLog:Name>
+            <eXoLog:PropertyName>NewName</eXoLog:PropertyName>
+            <eXoLog:Value></eXoLog:Value>
+          </eXoLog:Parameter>
+        </eXoLog:Parameters>
+      </eXoLog:Command>
+      <eXoLog:Command Name="acmdUpdatePSMAssociationCardinality">
+        <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PSM.acmdUpdatePSMAssociationCardinality</eXoLog:FullName>
+        <eXoLog:Report>Cardinality of 'PSMAssociation from PSMClass: "Lekar" to PSMClass: "Osoba"' changed from '1' to '1'.</eXoLog:Report>
+      </eXoLog:Command>
+    </eXoLog:SubCommands>
+  </eXoLog:Command>
+  <eXoLog:Command initial="true" Name="cmdNewPSMSchema">
+    <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers.cmdNewPSMSchema</eXoLog:FullName>
+    <eXoLog:SubCommands count="2">
+      <eXoLog:Command Name="acmdNewPSMSchema">
+        <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PSM.acmdNewPSMSchema</eXoLog:FullName>
+        <eXoLog:Report>'PSMSchema 5' was added to the PSM.</eXoLog:Report>
+      </eXoLog:Command>
+      <eXoLog:Command Name="acmdNewPSMDiagram">
+        <eXoLog:FullName>Exolutio.Controller.Commands.Atomic.PSM.acmdNewPSMDiagram</eXoLog:FullName>
+        <eXoLog:Report>'PSMSchema 5' was added to the PSM.</eXoLog:Report>
+      </eXoLog:Command>
+    </eXoLog:SubCommands>
+  </eXoLog:Command>
+</eXoLog:CommandLog>
