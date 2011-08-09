@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Controls;
 using Exolutio.Controller.Commands.Reflection;
@@ -220,15 +221,43 @@ namespace Exolutio.View.Commands.ParameterControls
 
                 if (LookedUpType == typeof(AttributeType))
                 {
-                    foreach (AttributeType schemaComponent in schema.ProjectVersion.AttributeTypes)
+                    if (superiorObject is PIMSchema || superiorObject is PIMComponent)
                     {
-                        if (ConsistencyChecker == null || superiorObjectGuid == Guid.Empty ||
-                            ConsistencyChecker.VerifyConsistency(superiorObject, schemaComponent))
+                        foreach (AttributeType schemaComponent in schema.ProjectVersion.GetAvailablePIMTypes())
                         {
-                            ComboBoxItem listItem = new ComboBoxItem();
-                            listItem.Content = schemaComponent.ToString();
-                            listItem.Tag = schemaComponent.ID.ToString();
-                            Items.Add(listItem);
+                            if (ConsistencyChecker == null || superiorObjectGuid == Guid.Empty ||
+                                ConsistencyChecker.VerifyConsistency(superiorObject, schemaComponent))
+                            {
+                                ComboBoxItem listItem = new ComboBoxItem();
+                                listItem.Content = schemaComponent.ToString();
+                                listItem.Tag = schemaComponent.ID.ToString();
+                                Items.Add(listItem);
+                            }
+                        }
+                    }
+
+                    if (superiorObject is PSMSchema || superiorObject is PSMComponent)
+                    {
+                        IEnumerable<AttributeType> types;
+                        if (superiorObject is PSMSchema)
+                        {
+                            types = ((PSMSchema)superiorObject).GetAvailablePSMTypes();
+                        }
+                        else
+                        {
+                            types = ((PSMComponent)superiorObject).PSMSchema.GetAvailablePSMTypes();
+                        }
+
+                        foreach (AttributeType schemaComponent in types)
+                        {
+                            if (ConsistencyChecker == null || superiorObjectGuid == Guid.Empty ||
+                                ConsistencyChecker.VerifyConsistency(superiorObject, schemaComponent))
+                            {
+                                ComboBoxItem listItem = new ComboBoxItem();
+                                listItem.Content = schemaComponent.ToString();
+                                listItem.Tag = schemaComponent.ID.ToString();
+                                Items.Add(listItem);
+                            }
                         }
                     }
                 }

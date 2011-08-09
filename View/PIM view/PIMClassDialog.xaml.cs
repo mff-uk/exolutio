@@ -137,6 +137,15 @@ namespace Exolutio.View
         public PIMClassDialog()
         {
             InitializeComponent();
+
+            Current.SelectionChanged += Current_SelectionChanged;
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+
+            Current.SelectionChanged -= Current_SelectionChanged;
         }
 
         private Exolutio.Controller.Controller controller;
@@ -153,7 +162,7 @@ namespace Exolutio.View
             //cbAbstract.IsChecked = PIMClass.IsAbstract;
             //cbAnyAttribute.IsChecked = PIMClass.AllowAnyAttribute;
 
-            typeColumn.ItemsSource = PIMClass.ProjectVersion.AttributeTypes;
+            typeColumn.ItemsSource = PIMClass.ProjectVersion.GetAvailablePIMTypes();
             
             ObservableCollection<FakePIMAttribute> fakeAttributesList = new ObservableCollection<FakePIMAttribute>();
 
@@ -167,6 +176,7 @@ namespace Exolutio.View
             }
 
             dialogReady = true;
+            bApply.IsEnabled = false;
         }
 
         private void bOk_Click(object sender, RoutedEventArgs e)
@@ -174,7 +184,6 @@ namespace Exolutio.View
             bApply_Click(sender, e);
             if (!error)
             {
-                DialogResult = true;
                 Close();
             }
         }
@@ -503,5 +512,46 @@ namespace Exolutio.View
             ((FakePIMAttribute) e.NewItem).Checked = true;
         }
 
+        void Current_SelectionChanged()
+        {
+            if (bApply.IsEnabled)
+            {
+                if (ExolutioYesNoBox.Show("Changes not applied", "Apply performed changes?") == MessageBoxResult.Yes)
+                {
+                    bApply_Click(null, null);
+                }
+                bApply.IsEnabled = false;
+            }
+            if (Current.ActiveDiagramView is PIMDiagramView)
+            {
+                PIMClass newSelection = Current.ActiveDiagramView.GetSingleSelectedComponentOrNull() as PIMClass;
+                if (newSelection != null)
+                {
+                    Initialize(controller, newSelection);
+                }
+                else
+                {
+                    PIMAttribute a = Current.ActiveDiagramView.GetSingleSelectedComponentOrNull() as PIMAttribute;
+                    if (a != null)
+                    {
+                        Initialize(controller, a.PIMClass, a);
+                    }
+                }
+            }
+            else
+            {
+                this.Close();
+            }
+        }
+
+        private void bCancel_OnClick(object sender, RoutedEventArgs e)
+        {
+            this.Close(false);
+        }
+
+        private void gridAttributes_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

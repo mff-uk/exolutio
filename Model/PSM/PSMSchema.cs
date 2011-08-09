@@ -37,6 +37,8 @@ namespace Exolutio.Model.PSM
             PSMContentModels.MemberAdded += RegisterPSMComponent;
             PSMContentModels.MemberRemoved += UnregisterPSMComponent;
 
+            PSMSchemaDefinedTypes = new UndirectCollection<AttributeType>(Project);
+
             Roots = new UndirectCollection<PSMAssociationMember>(Project);
         }
 
@@ -100,6 +102,13 @@ namespace Exolutio.Model.PSM
         public UndirectCollection<PSMContentModel> PSMContentModels { get; private  set; }
 
         public UndirectCollection<PSMAssociationMember> Roots { get; private set; }
+
+        public UndirectCollection<AttributeType> PSMSchemaDefinedTypes { get; private set; }
+
+        public IEnumerable<AttributeType> GetAvailablePSMTypes()
+        {
+            return PSMSchemaDefinedTypes.Concat(Project.PSMBuiltInTypes);
+        }
 
         #region schema class
 
@@ -169,6 +178,7 @@ namespace Exolutio.Model.PSM
             this.WrapAndSerializeCollection("PSMClasses", "PSMClass", PSMClasses, parentNode, context);
             this.WrapAndSerializeCollection("PSMAssociations", "PSMAssociation", PSMAssociations, parentNode, context);
             this.WrapAndSerializeCollection("PSMContentModels", "PSMContentModel", PSMContentModels, parentNode, context);
+            this.WrapAndSerializeCollection("PSMSchemaDefinedTypes", "AttributeType", PSMSchemaDefinedTypes, parentNode, context, true);
         }
 
         public override void Deserialize(XElement parentNode, SerializationContext context)
@@ -192,6 +202,7 @@ namespace Exolutio.Model.PSM
             this.DeserializeWrappedCollection("PSMClasses", PSMClasses, PSMClass.CreateInstance, parentNode, context);
             this.DeserializeWrappedCollection("PSMAssociations", PSMAssociations, PSMAssociation.CreateInstance, parentNode, context);
             this.DeserializeWrappedCollection("PSMContentModels", PSMContentModels, PSMContentModel.CreateInstance, parentNode, context);
+            this.DeserializeWrappedCollection("PSMSchemaDefinedTypes", PSMSchemaDefinedTypes, AttributeType.CreateInstance, parentNode, context, true);
 
             foreach (PSMAssociation psmAssociation in PSMAssociations)
             {

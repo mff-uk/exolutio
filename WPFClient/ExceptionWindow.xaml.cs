@@ -38,7 +38,10 @@ namespace Exolutio.WPFClient
 			{
 				tbExInner.Content = String.Empty;
 				expander1.Visibility = Visibility.Collapsed;
-				textBlock1.Content = xe.ExceptionTitle;
+                if (xe.ExceptionTitle != null)
+                {
+                    textBlock1.Content = xe.ExceptionTitle;
+                }
                 if (!string.IsNullOrEmpty(xe.ExceptionTitle))
                 {
                     this.Title = xe.ExceptionTitle;
@@ -47,6 +50,10 @@ namespace Exolutio.WPFClient
 				button2.Visibility = Visibility.Collapsed;
                 if (xe is Exolutio.Controller.Commands.ExolutioCommandException)
                 {
+                    if (string.IsNullOrEmpty(xe.ExceptionTitle))
+                    {
+                        textBlock1.Content = "Operation can not continue.";
+                    }
                     Exolutio.Controller.Commands.ExolutioCommandException xec = ((Exolutio.Controller.Commands.ExolutioCommandException)xe);
                     if (xec.Command != null && xec.Command.ErrorDescription != null)
                     {
@@ -58,10 +65,6 @@ namespace Exolutio.WPFClient
                 {
                     tbExInner.Content = "Inner exception: " + exception.InnerException.Message;
                     expander1.Visibility = Visibility.Visible;
-                }
-                else
-                {
-                    tbExInner.Content = String.Empty;
                 }
 			}
 			else

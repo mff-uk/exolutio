@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
+using Exolutio.Controller.Commands;
 using Exolutio.Controller.Commands.Reflection;
 using Exolutio.Model;
 using Exolutio.Model.PIM;
@@ -333,7 +334,17 @@ namespace Exolutio.View.Commands
                     while (InputHierarchy.ContainsKey(componentType))
                     {
                         InputHierarchyStruct inputHierarchyStruct = InputHierarchy[componentType];
-                        topLevelType = inputHierarchyStruct.SuperiorType;
+                        Type superiorType = inputHierarchyStruct.SuperiorType;
+                        if (superiorType == typeof(Schema) && (commandDescriptior.Scope | ScopeAttribute.EScope.PIM) != ScopeAttribute.EScope.None)
+                        {
+                            superiorType = typeof (PSMSchema);
+                        }
+                        if (superiorType == typeof(Schema) && (commandDescriptior.Scope | ScopeAttribute.EScope.PSM) != ScopeAttribute.EScope.None)
+                        {
+                            superiorType = typeof (PSMSchema);
+                        }
+                        
+                        topLevelType = superiorType;
 
                         // label
                         Label label = new Label();
@@ -349,7 +360,7 @@ namespace Exolutio.View.Commands
                         superiorPropertyEditor.Name = string.Format("glParam{0}_op{2}_guid_{1}sup{3}", index,
                                                                     parameterProperty.Name,
                                                                     commandDescriptior.ShortCommandName, supCount);
-                        superiorPropertyEditor.LookedUpType = inputHierarchyStruct.SuperiorType;
+                        superiorPropertyEditor.LookedUpType = superiorType;
                         superiorPropertyEditor.ProjectVersion = projectVersion;
                         superiorPropertyEditor.InitControl();
                         controlsForProperty.Insert(1, superiorPropertyEditor);
@@ -366,7 +377,7 @@ namespace Exolutio.View.Commands
                         // prepare for next cycle
                         supCount++;
                         dependentPropertyEditor = superiorPropertyEditor;
-                        componentType = inputHierarchyStruct.SuperiorType;
+                        componentType = superiorType;
                     }
 
                     if (superiorPropertyEditor != null)

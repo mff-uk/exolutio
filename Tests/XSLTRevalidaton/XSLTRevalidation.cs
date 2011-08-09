@@ -12,6 +12,7 @@ using Exolutio.Model.PSM;
 using Exolutio.Model.Serialization;
 using Exolutio.Revalidation;
 using Exolutio.Revalidation.XSLT;
+using Exolutio.SupportingClasses.XML;
 using NUnit.Framework;
 using Tests.CodeTests;
 
@@ -135,17 +136,22 @@ namespace Tests.XSLTRevalidaton
 
             if (referenceStylesheet != null)
             {
-                string referenceStylesheetText = File.ReadAllText(referenceStylesheet.FullName);
+                XDocument xdRefStylesheet = XDocument.Load(referenceStylesheet.FullName);
+                xdRefStylesheet.RemoveComments();
+                string  referenceStylesheetText = xdRefStylesheet.ToString();
+                XDocument xdGenStylesheet = XDocument.Load(testGeneratedStylesheetFile);
+                xdGenStylesheet.RemoveComments();
+                generatedStylesheetText = xdGenStylesheet.ToString();
                 
                 if (generatedStylesheetText != referenceStylesheetText)
                 {
-                    string message = string.Format("Generated stylesheet {0} differs from reference stylesheet {1}.", referenceStylesheet.Name, testDir.Name + ".xslt");
+                    string message = string.Format("Generated stylesheet for {1} differs from reference stylesheet {0}.", referenceStylesheet.Name, testDir.Name);
                     Console.WriteLine(message);
                     inconclusiveMessage.AppendLine(message);
                 }
                 else
                 {
-                    string message = string.Format("Generated stylesheet {0} is identical to reference stylesheet {1}.", referenceStylesheet.Name, testDir.Name + ".xslt");
+                    string message = string.Format("Generated stylesheet for {1} is identical to reference stylesheet {0}.", referenceStylesheet.Name, testDir.Name);
                     Console.WriteLine(message);
                 }
             }

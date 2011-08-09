@@ -143,8 +143,9 @@ namespace Exolutio.View
             //dialog.ShowModal();
 #else
             PIMClassDialog dialog = new PIMClassDialog();
+            dialog.Topmost = true;
             dialog.Initialize(Current.Controller, PIMClass);
-            dialog.ShowDialog();
+            dialog.Show();
 #endif
         }
 

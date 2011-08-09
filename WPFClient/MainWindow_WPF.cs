@@ -62,10 +62,10 @@ namespace Exolutio.WPFClient
                 if (System.Windows.Forms.Screen.AllScreens.Length > 1)
                 {
                     this.WindowState = WindowState.Normal;
-                    this.Left = System.Windows.Forms.Screen.AllScreens[1].Bounds.X;
-                    this.Top = System.Windows.Forms.Screen.AllScreens[1].Bounds.Y;
-                    this.Width = System.Windows.Forms.Screen.AllScreens[1].Bounds.Width;
-                    this.Height = System.Windows.Forms.Screen.AllScreens[1].Bounds.Height;
+                    this.Left = System.Windows.Forms.Screen.AllScreens[0].Bounds.X;
+                    this.Top = System.Windows.Forms.Screen.AllScreens[0].Bounds.Y;
+                    this.Width = System.Windows.Forms.Screen.AllScreens[0].Bounds.Width;
+                    this.Height = System.Windows.Forms.Screen.AllScreens[0].Bounds.Height;
                 }
             }
         }

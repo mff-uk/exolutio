@@ -171,7 +171,7 @@ namespace Exolutio.Model
         
         public static IEnumerable<ExolutioObject> GetAllModelItems(ProjectVersion projectVersion)
         {
-            IEnumerable<ExolutioObject> result = projectVersion.AttributeTypes.Cast<ExolutioObject>();
+            IEnumerable<ExolutioObject> result = projectVersion.PIMAttributeTypes.Cast<ExolutioObject>();
                 
             result = result.Concat(new[] {projectVersion.PIMSchema});
 
@@ -723,13 +723,13 @@ namespace Exolutio.Model
             }
         }
 
-        public static void ExpandInlinedNode(PSMComponent node, ref List<PSMComponent> result, Func<PSMComponent, bool> groupNodeTest)
+        public static void ExpandInlinedNode(PSMComponent node, ref List<PSMComponent> result, Func<PSMComponent, bool> groupNodeTest, int ? maxRecursion = null)
         {
-            if (groupNodeTest(node))
+            if (groupNodeTest(node) && (!maxRecursion.HasValue || maxRecursion.Value > 0))
             {
                 foreach (PSMComponent groupMember in GetPSMChildren(node, true, false))
                 {
-                    ExpandInlinedNode(groupMember, ref result, groupNodeTest);
+                    ExpandInlinedNode(groupMember, ref result, groupNodeTest, maxRecursion.HasValue ? maxRecursion.Value - 1 : (int?) null );
                 }
             }
             else

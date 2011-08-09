@@ -79,6 +79,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Commands\Edit\guiOpenAttributeTypesDialogCommand.cs" />
     <Compile Include="Commands\Grammar\guiGenerateXSDCommand.cs" />
     <Compile Include="Commands\PIM\guiSplitPIMAssociation.cs" />
     <Compile Include="Commands\PIM\guiSplitPIMAttribute.cs" />
@@ -184,6 +185,9 @@
     <Compile Include="IconConverter.cs" />
     <Compile Include="ImageExporter.cs" />
     <Compile Include="INodeComponentViewBase.cs" />
+    <Compile Include="PIM view\AttributeTypeDialog.xaml.cs">
+      <DependentUpon>AttributeTypeDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PIM view\PIMClassDialog.xaml.cs">
       <DependentUpon>PIMClassDialog.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -342,6 +346,10 @@
     <Page Include="MenuCommandStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PIM view\AttributeTypeDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="PIM view\PIMClassDialog.xaml">
       <SubType>Designer</SubType>
