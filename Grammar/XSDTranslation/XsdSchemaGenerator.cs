@@ -140,6 +140,8 @@ namespace Exolutio.Model.PSM.Grammar.XSDTranslation
 
         Dictionary<PSMComponent, XsdNodeTranslationInfo> nodeInfos = new Dictionary<PSMComponent, XsdNodeTranslationInfo>(); 
 
+        private List<AttributeType> usedNonDefaultAttributTypes = new List<AttributeType>();
+
         public XDocument GetXsd()
         {
             XDocument doc = new XDocument(new XDeclaration("1.0", "utf-8", null));
@@ -158,7 +160,17 @@ namespace Exolutio.Model.PSM.Grammar.XSDTranslation
                 }
             }
 
+            AddSimpleTypes(xsdSchema);
+
             return doc;
+        }
+
+        private void AddSimpleTypes(XElement xsdSchema)
+        {
+            foreach (AttributeType attributType in usedNonDefaultAttributTypes)
+            {
+                xsdSchema.XsdSimpleType(attributType.Name, attributType.BaseType.Name, attributType.XSDDefinition);
+            }
         }
 
         private void AddGlobalElements(XElement parentElement)
@@ -286,6 +298,17 @@ namespace Exolutio.Model.PSM.Grammar.XSDTranslation
                     if (psmAttribute.AttributeType == null)
                     {
                         Log.AddWarningFormat("Type of attribute '{0}' is not specified. ", psmAttribute);
+                    }
+                    else if (!psmAttribute.AttributeType.IsSealed)
+                    {
+                        if (psmAttribute.AttributeType.BaseType == Guid.Empty || string.IsNullOrEmpty(psmAttribute.AttributeType.XSDDefinition))
+                        {
+                            Log.AddWarningFormat("Can not translate type of attribute '{0}' - '{1}'. Define base type and XSD definition via Data Type Manager.", psmAttribute, psmAttribute.AttributeType);
+                        }
+                        else
+                        {
+                            usedNonDefaultAttributTypes.AddIfNotContained(psmAttribute.AttributeType);
+                        }
                     }
                 }
             }

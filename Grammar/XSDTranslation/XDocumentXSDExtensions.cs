@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Xml;
 using System.Xml.Linq;
 
 namespace Exolutio.Model.PSM.Grammar.XSDTranslation
@@ -294,6 +295,27 @@ namespace Exolutio.Model.PSM.Grammar.XSDTranslation
             import.AddAttributeWithValue("schemaLocation", schemaLocation);
             import.AddAttributeWithValue("namespace", @namespace);
             return import; 
+        }
+
+        public static XElement XsdSimpleType(this XElement parentElement, string name, string restrictionBase, string facets)
+        {
+            XElement simpleType = parentElement.XsdGenericElement("simpleType");
+            simpleType.AddAttributeWithValue("name", name);
+            XElement restriction = simpleType.XsdGenericElement("restriction");
+            restriction.AddAttributeWithValue("base", restrictionBase);
+
+            facets = "<foo xmlns:xs=\"" + XSD_NAMESPACE + "\">" + facets + "</foo>";
+            using (System.IO.StringReader sr = new System.IO.StringReader(facets))
+            {
+                XElement e = XElement.Load(sr);
+
+                foreach (XElement xElement in e.Elements())
+                {
+                    restriction.Add(xElement);
+                }
+            }
+            
+            return simpleType;
         }
     }
 }

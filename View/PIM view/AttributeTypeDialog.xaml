@@ -4,7 +4,7 @@
         xmlns:Dialogs="clr-namespace:Exolutio.Dialogs;assembly=Exolutio.Dialogs"
         xmlns:Controls="clr-namespace:System.Windows.Controls;assembly=Exolutio.Dialogs" Title="Data Type Manager" Height="328" Width="623" 
         WindowStartupLocation="CenterScreen" ShowInTaskbar="False" 
-        ResizeMode="NoResize" Topmost="True">
+        Topmost="True">
     <Grid>
         <Button Height="23" Margin="0,0,198,12" Name="bOk" VerticalAlignment="Bottom" IsDefault="True" Click="bOk_Click" HorizontalAlignment="Right" Width="87" TabIndex="2">
 			<Button.Content>_OK</Button.Content>
@@ -22,13 +22,15 @@
                         BeginningEdit="gridAttributeTypes_BeginningEdit"
                         CellEditEnding="gridAttributeTypes_CellEditEnding" 
                         RowEditEnding="gridAttributeTypes_RowEditEnding" 
+                        CanUserResizeColumns="True"
                         
                         AlternatingRowBackground="Beige" 
                         Background="Cornsilk" 
                         BorderBrush="LightGray" 
                         HorizontalGridLinesBrush="LightGray" 
                         VerticalGridLinesBrush="LightGray" 
-                        RowBackground="Cornsilk" InitializingNewItem="gridPIMAttributeTypes_InitializingNewItem">
+                        RowBackground="Cornsilk" 
+                        InitializingNewItem="gridPIMAttributeTypes_InitializingNewItem">
                         <DataGrid.Resources>
                             <!--
                               SINGLE CLICK EDITING
@@ -59,7 +61,7 @@
                         <DataGrid.Columns>
                             <DataGridCheckBoxColumn Header="" x:Name="checkedColumnPIM" ToolTipService.ToolTip="Uncheck to delete the type" Binding="{Binding Checked}" Width="30" />
                             <DataGridCheckBoxColumn Header="Sealed" x:Name="isSealedPIM" Binding="{Binding IsSealed}" Width="50" />
-                            <DataGridTextColumn Header="Type name" MinWidth="200" x:Name="nameColumnPIM" Binding="{Binding Name}" CanUserReorder="False" Width="100" IsReadOnly="false" />
+                            <DataGridTextColumn Header="Type name" MinWidth="120" x:Name="nameColumnPIM" Binding="{Binding Name}" CanUserReorder="False" Width="100" IsReadOnly="false" />
                             <DataGridComboBoxColumn Header="Base type" MinWidth="200" x:Name="baseTypeColumnPIM" SelectedValueBinding="{Binding BaseType}" Width="80"  />                            
 						</DataGrid.Columns>                        
 					</DataGrid>
@@ -79,13 +81,14 @@
                         BeginningEdit="gridAttributeTypes_BeginningEdit"
                         CellEditEnding="gridAttributeTypes_CellEditEnding" 
                         RowEditEnding="gridAttributeTypes_RowEditEnding" 
-                        
+                        CanUserResizeColumns="True"
                         AlternatingRowBackground="Beige" 
                         Background="Cornsilk" 
                         BorderBrush="LightGray" 
                         HorizontalGridLinesBrush="LightGray" 
                         VerticalGridLinesBrush="LightGray" 
-                        RowBackground="Cornsilk" InitializingNewItem="gridPSMAttributeTypes_InitializingNewItem">
+                        RowBackground="Cornsilk" 
+                        InitializingNewItem="gridPSMAttributeTypes_InitializingNewItem">
                         <DataGrid.Resources>
                             <!--
                               SINGLE CLICK EDITING
@@ -117,9 +120,9 @@
                         <DataGrid.Columns>
                             <DataGridCheckBoxColumn Header="" ToolTipService.ToolTip="Uncheck to delete the type" x:Name="checkedColumnPSM" Binding="{Binding Checked}" Width="30"  />
                             <DataGridCheckBoxColumn Header="Sealed" x:Name="isSealedPSM" Binding="{Binding IsSealed}" Width="50" />
-                            <DataGridTextColumn Header="Type name" MinWidth="200" x:Name="nameColumnPSM" Binding="{Binding Name}" CanUserReorder="False" Width="100" IsReadOnly="false" />
+                            <DataGridTextColumn Header="Type name" MinWidth="120" x:Name="nameColumnPSM" Binding="{Binding Name}" CanUserReorder="False" Width="100" IsReadOnly="false" />
                             <DataGridComboBoxColumn Header="Base type" MinWidth="200" x:Name="baseTypeColumnPSM" SelectedValueBinding="{Binding BaseType}" Width="80"  />
-                            <DataGridTextColumn Header="XSD definition" x:Name="defaultValueColumn" Binding="{Binding DefaultValue}" Width="*" />                            
+                            <DataGridTextColumn Header="XSD definition" x:Name="defaultValueColumn" Binding="{Binding XSDDefinition}" Width="*" />                            
                         </DataGrid.Columns>                        
                     </DataGrid>
                 </DockPanel>
