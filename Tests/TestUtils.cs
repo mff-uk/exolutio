@@ -37,7 +37,7 @@ namespace Tests
             a.PIMAssociationEnds[1].Upper = UnlimitedInt.Infinity;
 
             AttributeType stringType = new AttributeType(p) { Name = "string", IsSealed = true, XSDDefinition = "string" };
-            p.SingleVersion.AttributeTypes.Add(stringType);
+            p.SingleVersion.PIMAttributeTypes.Add(stringType);
             #if SILVERLIGHT
             #else
             ModelConsistency.CheckProject(p);
@@ -54,7 +54,7 @@ namespace Tests
             PIMSchema sPIM = new PIMSchema(p);
 
 	        AttributeType stringType = new AttributeType(p) {Name = "string", IsSealed = true, XSDDefinition = "string"};
-            p.SingleVersion.AttributeTypes.Add(stringType);
+            p.SingleVersion.PIMAttributeTypes.Add(stringType);
 
             p.SingleVersion.PIMSchema = sPIM;
             PIMClass pimcProduct = new PIMClass(p, sPIM) { Name = "Product" };
@@ -184,7 +184,7 @@ namespace Tests
             PIMSchema sPIM = new PIMSchema(p);
 
             AttributeType stringType = new AttributeType(p) { Name = "string", IsSealed = true, XSDDefinition = "string" };
-            p.SingleVersion.AttributeTypes.Add(stringType);
+            p.SingleVersion.PIMAttributeTypes.Add(stringType);
 
             p.SingleVersion.PIMSchema = sPIM;
             PIMClass pimcProduct = new PIMClass(p, sPIM) { Name = "Product" };

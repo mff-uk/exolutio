@@ -198,6 +198,7 @@
     <Compile Include="ProjectView.xaml.cs">
       <DependentUpon>ProjectView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PSM view\Layout\VerticalTreeRightAngles.cs" />
     <Compile Include="PSM view\PSMClassDialog.xaml.cs">
       <DependentUpon>PSMClassDialog.xaml</DependentUpon>
     </Compile>

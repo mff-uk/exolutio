@@ -103,6 +103,8 @@ namespace Exolutio.ViewToolkit
             get { return dragThumb.CanvasPosition; }
         }
 
+        public bool IsInvisible { get; set; }
+
         public static implicit operator Point(ConnectorPoint p)
         {
             return p.Position;
@@ -319,7 +321,10 @@ namespace Exolutio.ViewToolkit
         protected override void OnRender(DrawingContext drawingContext)
         {
             base.OnRender(drawingContext);
-            drawingContext.DrawEllipse(Background, null, new Point(0, 0), radius, radius);
+            if (!IsInvisible)
+            {
+                drawingContext.DrawEllipse(Background, null, new Point(0, 0), radius, radius);
+            }
         }
 #endif
 
