@@ -47,13 +47,14 @@ namespace Exolutio.Controller.Commands.Atomic
             return true; 
         }
 
-        public void Set(Guid projectVersionGuid, string name, string xsdDefinition, bool isSealed, Guid baseType)
+        public void Set(Guid projectVersionGuid, Guid psmSchemaGuid, string name, string xsdDefinition, bool isSealed, Guid baseType)
         {
             ProjectVersionGuid = projectVersionGuid;
             Name = name;
             XSDDefinition = xsdDefinition;
             IsSealed = isSealed;
             BaseTypeGuid = baseType;
+            PSMSchemaGuid = psmSchemaGuid;
         }
 
         internal override void CommandOperation()

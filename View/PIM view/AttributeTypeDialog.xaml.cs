@@ -146,6 +146,10 @@ namespace Exolutio.View
                 fakePSMAttributeTypesList.CollectionChanged += delegate { UpdateApplyEnabled(); };
                 gridPSMAttributeTypes.ItemsSource = fakePSMAttributeTypesList;
             }
+            else
+            {
+                PSMSchema = null;
+            }
 
             dialogReady = true;
             bApply.IsEnabled = false;
@@ -178,11 +182,11 @@ namespace Exolutio.View
 
             controller.BeginMacro();
 
-            var addedPIMAttributes = Process(projectVersion.GetAvailablePIMTypes(), projectVersion, controller, fakePIMAttributeTypes);
+            var addedPIMAttributes = Process(projectVersion.GetAvailablePIMTypes(), projectVersion, PSMSchema, controller, fakePIMAttributeTypes);
             List<FakeAttributeType> addedPSMAttributes;
             if (fakePSMAttributeTypes != null)
             {
-                addedPSMAttributes = Process(PSMSchema.GetAvailablePSMTypes(), projectVersion, controller, fakePSMAttributeTypes);
+                addedPSMAttributes = Process(PSMSchema.GetAvailablePSMTypes(), projectVersion, PSMSchema, controller, fakePSMAttributeTypes);
             }
             else
             {
@@ -230,7 +234,7 @@ namespace Exolutio.View
         }
 
         private static List<FakeAttributeType> Process(IEnumerable<AttributeType> startingSet, 
-            ProjectVersion projectVersion, Controller.Controller controller,
+            ProjectVersion projectVersion, PSMSchema psmSchema, Controller.Controller controller,
             FakeAttributeTypeCollection fakeSet) 
         {
             #region check for deleted attributes
@@ -321,7 +325,7 @@ namespace Exolutio.View
                 if (!string.IsNullOrEmpty(addedAttribute.Name) && addedAttribute.Checked)
                 {
                     acmdNewAttributeType createNewcommand = new acmdNewAttributeType(controller);
-                    createNewcommand.Set(projectVersion.ID, addedAttribute.Name, addedAttribute.XSDDefinition, false, addedAttribute.BaseType);
+                    createNewcommand.Set(projectVersion.ID, psmSchema.ID, addedAttribute.Name, addedAttribute.XSDDefinition, false, addedAttribute.BaseType);
                     controller.CreatedMacro.Commands.Add(createNewcommand);
                     addedAttributes.Add(addedAttribute);
                     names.Add(addedAttribute.Name);
