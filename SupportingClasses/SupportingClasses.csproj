@@ -73,6 +73,7 @@
     <Compile Include="Reflection\DynamicMethodCompiler.cs" />
     <Compile Include="Reflection\MemberInfoExt.cs" />
     <Compile Include="StringEvent.cs" />
+    <Compile Include="XML\XDocumentHelper.cs" />
     <Compile Include="XML\XmlDocumentHelper.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

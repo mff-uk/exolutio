@@ -39,7 +39,7 @@ namespace Exolutio.View.Commands
         public static guiControllerCommand RenameComponentCommand { get; set; }
         //public static guiControllerCommand NewPIMSchema { get; set; }
         public static guiControllerCommand NewPSMSchema { get; set; }
-
+        public static guiOpenAttributeTypesDialogCommand OpenAttributeTypesDialog { get; set; }
 
 #if SILVERLIGHT
         public static guiOpenWebProjectCommand OpenWebProjectCommand { get; set; }
@@ -208,6 +208,8 @@ namespace Exolutio.View.Commands
                 ControllerCommandFactoryMethod = CommandFactory<cmdNewPSMSchema>.Factory,
                 ControllerCommandType = typeof(cmdNewPSMSchema)
             };
+
+            OpenAttributeTypesDialog = new guiOpenAttributeTypesDialogCommand();
 
             #endregion
 

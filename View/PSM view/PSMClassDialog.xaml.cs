@@ -371,7 +371,7 @@ namespace Exolutio.View
 
             #region attributes 
 
-            typeColumn.ItemsSource = psmClass.ProjectVersion.AttributeTypes;
+            typeColumn.ItemsSource = psmClass.PSMSchema.GetAvailablePSMTypes();
 
             PSMClass nearestInterpretedClass = psmClass.NearestInterpretedClass();
 

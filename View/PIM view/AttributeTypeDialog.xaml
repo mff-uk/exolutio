@@ -1,0 +1,129 @@
+﻿<Controls:GenericNonblockingDialog x:Class="Exolutio.View.AttributeTypeDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        xmlns:Dialogs="clr-namespace:Exolutio.Dialogs;assembly=Exolutio.Dialogs"
+        xmlns:Controls="clr-namespace:System.Windows.Controls;assembly=Exolutio.Dialogs" Title="Data Type Manager" Height="328" Width="623" 
+        WindowStartupLocation="CenterScreen" ShowInTaskbar="False" 
+        ResizeMode="NoResize" Topmost="True">
+    <Grid>
+        <Button Height="23" Margin="0,0,198,12" Name="bOk" VerticalAlignment="Bottom" IsDefault="True" Click="bOk_Click" HorizontalAlignment="Right" Width="87" TabIndex="2">
+			<Button.Content>_OK</Button.Content>
+		</Button>
+		<Button Height="23" Margin="0,0,105,12" Name="bApply" VerticalAlignment="Bottom" Click="bApply_Click" HorizontalAlignment="Right" Width="87" IsEnabled="False" TabIndex="3">Apply</Button>
+        <Controls:DialogButton Height="23" HorizontalAlignment="Right" Margin="0,0,12,12" Click="bCancel_OnClick" Name="bCancel" VerticalAlignment="Bottom" Width="87" IsCancel="True" TabIndex="4">Cancel</Controls:DialogButton>
+        <TabControl Margin="12,12,12,41" Name="tabControl1" SelectedIndex="0">
+            <TabItem Header="PIM data types" Name="tabPIMAttributeTypes" TabIndex="0">
+                <DockPanel>
+					<DataGrid 
+						Name="gridPIMAttributeTypes" 
+						SelectionMode="Single"
+						Dialogs:AccessKeyScoper.IsAccessKeyScope="True"
+						AutoGenerateColumns="False" 
+                        BeginningEdit="gridAttributeTypes_BeginningEdit"
+                        CellEditEnding="gridAttributeTypes_CellEditEnding" 
+                        RowEditEnding="gridAttributeTypes_RowEditEnding" 
+                        
+                        AlternatingRowBackground="Beige" 
+                        Background="Cornsilk" 
+                        BorderBrush="LightGray" 
+                        HorizontalGridLinesBrush="LightGray" 
+                        VerticalGridLinesBrush="LightGray" 
+                        RowBackground="Cornsilk" InitializingNewItem="gridPIMAttributeTypes_InitializingNewItem">
+                        <DataGrid.Resources>
+                            <!--
+                              SINGLE CLICK EDITING
+                            -->
+                            <Style TargetType="{x:Type DataGridCell}">
+                                <EventSetter Event="PreviewMouseLeftButtonDown" Handler="DataGridCell_PreviewMouseLeftButtonDown"></EventSetter>
+                            </Style>
+                            <Style x:Key="CellEditStyle" TargetType="{x:Type TextBox}">
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="Padding" Value="0"/>
+                                <Style.Triggers>
+                                    <Trigger Property="Validation.HasError" Value="true">
+                                        <Setter Property="ToolTip"
+                                            Value="{Binding RelativeSource={RelativeSource Self},
+                                            Path=(Validation.Errors)[0].ErrorContent}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                            
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="ToolTip" Value="{Binding Column.(ToolTipService.ToolTip), RelativeSource={RelativeSource Self}}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.Resources>
+                        <DataGrid.Columns>
+                            <DataGridCheckBoxColumn Header="" x:Name="checkedColumnPIM" ToolTipService.ToolTip="Uncheck to delete the type" Binding="{Binding Checked}" Width="30" />
+                            <DataGridCheckBoxColumn Header="Sealed" x:Name="isSealedPIM" Binding="{Binding IsSealed}" Width="50" />
+                            <DataGridTextColumn Header="Type name" MinWidth="200" x:Name="nameColumnPIM" Binding="{Binding Name}" CanUserReorder="False" Width="100" IsReadOnly="false" />
+                            <DataGridComboBoxColumn Header="Base type" MinWidth="200" x:Name="baseTypeColumnPIM" SelectedValueBinding="{Binding BaseType}" Width="80"  />                            
+						</DataGrid.Columns>                        
+					</DataGrid>
+                </DockPanel>
+            </TabItem>
+            <TabItem Header="PSM data types" Name="tabAttributeTypes" TabIndex="0">
+                <DockPanel>
+                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Background="Cornsilk" Height="35" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                        <Controls:DialogLabel Content="PSM schema:" Height="25"></Controls:DialogLabel>
+                        <ComboBox Name="cbPSMSchema" SelectedValuePath="Name" Width="200" Height="25" SelectionChanged="cbPSMSchema_SelectionChanged" />
+                    </StackPanel>
+                    <DataGrid 
+						Name="gridPSMAttributeTypes" 
+						SelectionMode="Single"
+						Dialogs:AccessKeyScoper.IsAccessKeyScope="True"
+						AutoGenerateColumns="False" 
+                        BeginningEdit="gridAttributeTypes_BeginningEdit"
+                        CellEditEnding="gridAttributeTypes_CellEditEnding" 
+                        RowEditEnding="gridAttributeTypes_RowEditEnding" 
+                        
+                        AlternatingRowBackground="Beige" 
+                        Background="Cornsilk" 
+                        BorderBrush="LightGray" 
+                        HorizontalGridLinesBrush="LightGray" 
+                        VerticalGridLinesBrush="LightGray" 
+                        RowBackground="Cornsilk" InitializingNewItem="gridPSMAttributeTypes_InitializingNewItem">
+                        <DataGrid.Resources>
+                            <!--
+                              SINGLE CLICK EDITING
+                            -->
+                            <Style TargetType="{x:Type DataGridCell}">
+                                <EventSetter Event="PreviewMouseLeftButtonDown" Handler="DataGridCell_PreviewMouseLeftButtonDown"></EventSetter>
+                            </Style>
+                            <Style x:Key="CellEditStyle" TargetType="{x:Type TextBox}">
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="Padding" Value="0"/>
+                                <Style.Triggers>
+                                    <Trigger Property="Validation.HasError" Value="true">
+                                        <Setter Property="ToolTip"
+                                            Value="{Binding RelativeSource={RelativeSource Self},
+                                            Path=(Validation.Errors)[0].ErrorContent}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="ToolTip" Value="{Binding Column.(ToolTipService.ToolTip), RelativeSource={RelativeSource Self}}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+
+                        </DataGrid.Resources>
+                        <DataGrid.Columns>
+                            <DataGridCheckBoxColumn Header="" ToolTipService.ToolTip="Uncheck to delete the type" x:Name="checkedColumnPSM" Binding="{Binding Checked}" Width="30"  />
+                            <DataGridCheckBoxColumn Header="Sealed" x:Name="isSealedPSM" Binding="{Binding IsSealed}" Width="50" />
+                            <DataGridTextColumn Header="Type name" MinWidth="200" x:Name="nameColumnPSM" Binding="{Binding Name}" CanUserReorder="False" Width="100" IsReadOnly="false" />
+                            <DataGridComboBoxColumn Header="Base type" MinWidth="200" x:Name="baseTypeColumnPSM" SelectedValueBinding="{Binding BaseType}" Width="80"  />
+                            <DataGridTextColumn Header="XSD definition" x:Name="defaultValueColumn" Binding="{Binding DefaultValue}" Width="*" />                            
+                        </DataGrid.Columns>                        
+                    </DataGrid>
+                </DockPanel>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Controls:GenericNonblockingDialog>

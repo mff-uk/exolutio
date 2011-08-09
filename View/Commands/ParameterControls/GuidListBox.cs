@@ -200,7 +200,7 @@ namespace Exolutio.View.Commands.ParameterControls
 
                 if (LookedUpType == typeof(AttributeType))
                 {
-                    foreach (AttributeType schemaComponent in schema.ProjectVersion.AttributeTypes)
+                    foreach (AttributeType schemaComponent in schema.ProjectVersion.PIMAttributeTypes)
                     {
                         if (ConsistencyChecker == null || superiorObjectGuid == Guid.Empty ||
                             ConsistencyChecker.VerifyConsistency(superiorObject, schemaComponent))

@@ -278,6 +278,8 @@ namespace Exolutio.Controller.Commands.Reflection
         }
     }
 
+    public delegate CommandBase ControllerCommandFactoryMethodDelegate();
+
     public static class CommandFactory<TCommand>
         where TCommand : CommandBase, new()
     {

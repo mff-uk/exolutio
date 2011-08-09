@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
@@ -38,17 +39,18 @@ namespace Exolutio.Model
             PSMDiagrams.MemberAdded += member => member.SetProjectVersion(this);
             PSMDiagrams.MemberRemoved += member => member.SetProjectVersion(null);
 
-            AttributeTypes = new UndirectCollection<AttributeType>(Project);
-            AttributeTypes.MemberAdded += type => type.SetProjectVersion(this);
-            AttributeTypes.MemberRemoved += type => type.SetProjectVersion(null);
+            PIMAttributeTypes = new UndirectCollection<AttributeType>(Project);
+            PIMAttributeTypes.MemberAdded += type => type.SetProjectVersion(this);
+            PIMAttributeTypes.MemberRemoved += type => type.SetProjectVersion(null);
+        }
+        
+        public UndirectCollection<AttributeType> PIMAttributeTypes { get; private set; }
 
-            
+        public IEnumerable<AttributeType> GetAvailablePIMTypes()
+        {
+            return PIMAttributeTypes.Concat(Project.PIMBuiltInTypes);
         }
 
-        
-
-        public UndirectCollection<AttributeType> AttributeTypes { get; private set; }
-        
         private Guid pimSchemaGuid;
         public PIMSchema PIMSchema
         {
@@ -68,6 +70,7 @@ namespace Exolutio.Model
         }
 
         private Guid versionGuid;
+
         public Version Version
         {
             get
@@ -128,7 +131,7 @@ namespace Exolutio.Model
                 this.SerializeIDRef(Version, "versionID", parentNode, context);
             }
 
-            this.WrapAndSerializeCollection("AttributeTypes", "AttributeType", AttributeTypes, parentNode, context);
+            this.WrapAndSerializeCollection("PIMAttributeTypes", "AttributeType", PIMAttributeTypes, parentNode, context);
 
             this.SerializeToChildElement("PIMSchema", PIMSchema, parentNode, context);
 
@@ -160,7 +163,7 @@ namespace Exolutio.Model
                 }
             }
 
-            this.DeserializeWrappedCollection("AttributeTypes", AttributeTypes, AttributeType.CreateInstance, parentNode, context);
+            this.DeserializeWrappedCollection("PIMAttributeTypes", PIMAttributeTypes, AttributeType.CreateInstance, parentNode, context, true);
 
             PIMSchema objPIMSchema = new PIMSchema(Project, Guid.Empty);
             objPIMSchema.DeserializeFromChildElement("PIMSchema", parentNode, context);
@@ -197,7 +200,7 @@ namespace Exolutio.Model
             ProjectVersion copyProjectVersion = (ProjectVersion)copyComponent;
             copyProjectVersion.versionGuid = projectVersion.versionGuid;
 
-            this.CopyCollection(AttributeTypes, copyProjectVersion.AttributeTypes, projectVersion, createdCopies);
+            this.CopyCollection(PIMAttributeTypes, copyProjectVersion.PIMAttributeTypes, projectVersion, createdCopies);
             copyProjectVersion.PIMSchema = PIMSchema.CreateTypedCopy(projectVersion, createdCopies);
             this.CopyCollection(PSMSchemas, copyProjectVersion.PSMSchemas, projectVersion, createdCopies);
             this.CopyCollection(PIMDiagrams, copyProjectVersion.PIMDiagrams, projectVersion, createdCopies);

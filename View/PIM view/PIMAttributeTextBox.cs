@@ -125,7 +125,8 @@ namespace Exolutio.View
 	        {
 	            PIMClassDialog d = new PIMClassDialog();
                 d.Initialize(Current.Controller, PIMAttribute.PIMClass, PIMAttribute);
-                d.ShowDialog();
+	            d.Topmost = true; 
+                d.Show();
 	        }
             #endif
 		}

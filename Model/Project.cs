@@ -26,6 +26,7 @@ namespace Exolutio.Model
         public Project()
         {
             InitializeCollections();
+            LoadBuiltInTypes();
         }
 
         private void InitializeCollections()
@@ -33,7 +34,47 @@ namespace Exolutio.Model
             projectVersions = new UndirectCollection<ProjectVersion>(this);
             projectVersions.MemberAdded += delegate { NotifyPropertyChanged("ProjectVersions"); };
             projectVersions.MemberRemoved += delegate { NotifyPropertyChanged("ProjectVersions"); };
+            pimBuiltInTypes = new UndirectCollection<AttributeType>(this);
+            psmBuiltInTypes = new UndirectCollection<AttributeType>(this);
+        }
 
+        private void LoadBuiltInTypes()
+        {
+            XNamespace pimBuiltInTypesNS = @"http://eXolutio.eu/Project/PIM/built-in-types/";
+            XNamespace psmBuiltInTypesNS = @"http://eXolutio.eu/Project/PSM/built-in-types/";
+            using (StringReader reader = new StringReader(Properties.Resources.PIM_built_in_types))
+            {
+                XDocument xbuiltInTypes = XDocument.Load(reader);
+                IEnumerable<XElement> types =
+                    xbuiltInTypes.Element(pimBuiltInTypesNS + "Project").Element(pimBuiltInTypesNS + "AttributeTypes").
+                        Elements(pimBuiltInTypesNS + "AttributeType");
+
+                SerializationContext context = new SerializationContext();
+
+                foreach (XElement type in types)
+                {
+                    AttributeType attributeType = new AttributeType(this, Guid.Empty);
+                    attributeType.Deserialize(type, context);
+                    pimBuiltInTypes.Add(attributeType);
+                }
+            }
+
+            using (StringReader reader = new StringReader(Properties.Resources.PSM_built_in_types))
+            {
+                XDocument xbuiltInTypes = XDocument.Load(reader);
+                IEnumerable<XElement> types =
+                    xbuiltInTypes.Element(psmBuiltInTypesNS + "Project").Element(psmBuiltInTypesNS + "AttributeTypes").
+                        Elements(psmBuiltInTypesNS + "AttributeType");
+
+                SerializationContext context = new SerializationContext();
+
+                foreach (XElement type in types)
+                {
+                    AttributeType attributeType = new AttributeType(this, Guid.Empty);
+                    attributeType.Deserialize(type, context);
+                    psmBuiltInTypes.Add(attributeType);
+                }
+            }
         }
 
         Project IExolutioSerializable.Project
@@ -77,7 +118,7 @@ namespace Exolutio.Model
         {
             get
             {
-                return !string.IsNullOrEmpty(name) ? name : (ProjectFile != null ? Path.GetFileNameWithoutExtension(ProjectFile.FullName) : "Untitled");
+                return !String.IsNullOrEmpty(name) ? name : (ProjectFile != null ? Path.GetFileNameWithoutExtension(ProjectFile.FullName) : "Untitled");
             }
             set
             {
@@ -182,6 +223,29 @@ namespace Exolutio.Model
 
         public VersionManager VersionManager { get; set; }
 
+        private UndirectCollection<AttributeType> pimBuiltInTypes;
+
+        public UndirectCollection<AttributeType> PIMBuiltInTypes
+        {
+            get
+            {
+                
+                return pimBuiltInTypes;
+            }
+        }
+
+        private UndirectCollection<AttributeType> psmBuiltInTypes;
+
+        public UndirectCollection<AttributeType> PSMBuiltInTypes
+        {
+            get
+            {
+
+                return psmBuiltInTypes;
+            }
+        }
+
+
         #region IExolutioSerializable Members
 
         public void Deserialize(XElement parentNode, SerializationContext context)
@@ -228,7 +292,7 @@ namespace Exolutio.Model
             XAttribute usesVersioningAttribute = new XAttribute("UsesVersioning", SerializationContext.EncodeValue(UsesVersioning));
             projectElement.Add(usesVersioningAttribute);
 
-            if (!string.IsNullOrEmpty(Name))
+            if (!String.IsNullOrEmpty(Name))
             {
                 XAttribute nameAttribute = new XAttribute("Name", SerializationContext.EncodeValue(Name));
                 projectElement.Add(nameAttribute);

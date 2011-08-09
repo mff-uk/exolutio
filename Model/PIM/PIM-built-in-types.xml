@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<eXo:Project xmlns:eXo="http://eXolutio.eu/Project/PIM/built-in-types/">
+  <eXo:AttributeTypes>
+    <eXo:AttributeType Name="Boolean" IsSealed="True" ID="1CE3B950-194D-42c9-AEEB-A9CEC5E5505A" />
+    <eXo:AttributeType Name="Integer" IsSealed="True" ID="DC49D35C-FEAF-4e9e-9C22-267208D61A77" />
+    <eXo:AttributeType Name="Real" IsSealed="True" ID="4B229CAA-8808-4bac-9DE1-BC10AA05F6C6" />
+    <eXo:AttributeType Name="String" IsSealed="True" ID="5D84C73E-74CD-4acc-BD44-E465272FB37A" />
+    <eXo:AttributeType Name="Date" IsSealed="True" ID="2601D7EB-80B5-4f8e-AE3A-47362F0AF0D9" />
+  </eXo:AttributeTypes>
+</eXo:Project>

@@ -77,7 +77,7 @@ namespace Exolutio.View.Commands
             }
         }
 
-        public delegate CommandBase ControllerCommandFactoryMethodDelegate();
+        
 
         internal ControllerCommandFactoryMethodDelegate ControllerCommandFactoryMethod { get; set; }
 

@@ -13,8 +13,16 @@ namespace Exolutio.Controller.Commands.Reflection
             Schema schema = (Schema) superordinateObject;
             AttributeType attributeType = (AttributeType)candidate;
 
-            return schema.ProjectVersion.AttributeTypes.Contains(attributeType) &&
-                   attributeType.Schema == null || attributeType.Schema == schema;
+            if (schema is Model.PIM.PIMSchema)
+            {
+                return schema.ProjectVersion.GetAvailablePIMTypes().Contains(attributeType) &&
+                       attributeType.Schema == null || attributeType.Schema == schema;
+            }
+            else
+            {
+                return ((Model.PSM.PSMSchema)schema).GetAvailablePSMTypes().Contains(attributeType) &&
+                       attributeType.Schema == null || attributeType.Schema == schema;
+            }
         }
     }
 }

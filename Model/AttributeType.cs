@@ -50,11 +50,11 @@ namespace Exolutio.Model
         {
             base.Serialize(parentNode, context);
 
-            XAttribute isSealedAttribute = new XAttribute("IsSealed", SerializationContext.EncodeValue(IsSealed));
-            parentNode.Add(isSealedAttribute);
-
             XAttribute nameAttribute = new XAttribute("Name", SerializationContext.EncodeValue(Name));
             parentNode.Add(nameAttribute);
+
+            XAttribute isSealedAttribute = new XAttribute("IsSealed", SerializationContext.EncodeValue(IsSealed));
+            parentNode.Add(isSealedAttribute);
 
             if (BaseType != null)
             {

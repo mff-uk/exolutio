@@ -145,6 +145,10 @@
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.NewPSMSchema}"
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
             </Fluent:RibbonGroupBox>
+            <Fluent:RibbonGroupBox Header="Types"> 
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.OpenAttributeTypesDialog}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
+            </Fluent:RibbonGroupBox>
             <Fluent:RibbonGroupBox Header="Edit">
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.VerifyModelCommand}"
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />

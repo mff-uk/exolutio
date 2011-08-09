@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<eXo:Project xmlns:eXo="http://eXolutio.eu/Project/PSM/built-in-types/">
+  <eXo:AttributeTypes>
+    <eXo:AttributeType Name="duration" IsSealed="True" ID="CB7AB121-4845-4175-84F6-06E08B0F21F9" XSDDefinition="xs:duration" />
+    <eXo:AttributeType Name="dateTime" IsSealed="True" ID="CF33518B-C155-4d3b-B102-AA65954C82B8" XSDDefinition="xs:dateTime" />
+    <eXo:AttributeType Name="time" IsSealed="True" ID="1D62B9EE-0763-4a89-90F7-B086868E81F3 " XSDDefinition="xs:time" />
+    <eXo:AttributeType Name="date" IsSealed="True" ID="BFD5B6AB-988A-429b-A22F-42073BA29DAB" XSDDefinition="xs:date" />
+    <eXo:AttributeType Name="gYearMonth" IsSealed="True" ID="3409A02B-D9D3-4a5c-8811-44609AAEA921" XSDDefinition="xs:gYearMonth" />
+    <eXo:AttributeType Name="gYear" IsSealed="True" ID="FC6C7E9A-2297-42cc-BCA5-AE1198DFBF48" XSDDefinition="xs:gYear" />
+    <eXo:AttributeType Name="gMonthDay" IsSealed="True" ID="BBBA4308-4F00-425c-AAA4-0AD7C139A843" XSDDefinition="xs:gMonthDay" />
+    <eXo:AttributeType Name="gDay" IsSealed="True" ID="1685AD23-BD0A-4d52-A89D-D20ACC032403" XSDDefinition="xs:gDay" />
+    <eXo:AttributeType Name="gMonth" IsSealed="True" ID="275067A5-BBA6-46e1-B247-6CF824B7CE81" XSDDefinition="xs:gMonth" />
+    <eXo:AttributeType Name="boolean" IsSealed="True" ID="34B78259-BED9-4eb9-B770-20B4DB5C30BB" XSDDefinition="xs:boolean" />
+    <eXo:AttributeType Name="base64Binary" IsSealed="True" ID="0CBEB3C8-843D-4316-8966-024670BF5447" XSDDefinition="xs:base64Binary" />
+    <eXo:AttributeType Name="hexBinary" IsSealed="True" ID="16B934A8-79A3-4450-8329-756FCF53107E" XSDDefinition="xs:hexBinary" />
+    <eXo:AttributeType Name="float" IsSealed="True" ID="2C7D5BB5-2AB4-4c54-B1CE-FC6F29970BBC" XSDDefinition="xs:float" />
+    <eXo:AttributeType Name="double" IsSealed="True" ID="F600D6AC-7CF7-4c61-948C-8EF40501C434" XSDDefinition="xs:double" />
+    <eXo:AttributeType Name="anyURI" IsSealed="True" ID="BC2DD6A0-AC6A-4fed-8C74-F34FC76974FD" XSDDefinition="xs:anyURI" />
+    <eXo:AttributeType Name="QName" IsSealed="True" ID="DCBA2EAA-230B-464b-B9FF-DAE80112231B" XSDDefinition="xs:QName" />
+    <eXo:AttributeType Name="NOTATION" IsSealed="True" ID="AA94B56C-7BE7-4d30-A588-F58EE86B136F" XSDDefinition="xs:NOTATION" />
+    <eXo:AttributeType Name="string" IsSealed="True" ID="E06BC2C1-0BA6-4c8f-A892-93DB94B544BB" XSDDefinition="xs:string" />
+    <eXo:AttributeType Name="decimal" IsSealed="True" ID="97772CA0-C38E-43f4-8E30-5EF2113340C1" XSDDefinition="xs:decimal" />
+    <eXo:AttributeType Name="normalizedString" baseType="string" baseTypeID="E06BC2C1-0BA6-4c8f-A892-93DB94B544BB" IsSealed="True" ID="7059EF2A-FFA1-4335-AD73-91081C5DE4F7" XSDDefinition="xs:normalizedString" />
+    <eXo:AttributeType Name="token" baseType="normalizedString" baseTypeID="7059EF2A-FFA1-4335-AD73-91081C5DE4F7" IsSealed="True" ID="8750390E-CBC0-4be5-A5B1-411655E888BF" XSDDefinition="xs:token" />
+    <eXo:AttributeType Name="language" baseType="token" baseTypeID="8750390E-CBC0-4be5-A5B1-411655E888BF" IsSealed="True" ID="6291F1D1-A6E7-46e7-90AE-1BA138993C72" XSDDefinition="xs:language" />
+    <eXo:AttributeType Name="Name" baseType="token" baseTypeID="8750390E-CBC0-4be5-A5B1-411655E888BF" IsSealed="True" ID="FA63D57F-F091-49b9-847C-2641675D47B2" XSDDefinition="xs:Name" />
+    <eXo:AttributeType Name="NMTOKEN" baseType="token" baseTypeID="8750390E-CBC0-4be5-A5B1-411655E888BF" IsSealed="True" ID="10E1D9C7-A7A4-41f6-A662-86FA82BAEA74" XSDDefinition="xs:NMTOKEN" />
+    <eXo:AttributeType Name="NCName" baseType="Name" baseTypeID="FA63D57F-F091-49b9-847C-2641675D47B2" IsSealed="True" ID="E63966DE-01F1-4c0a-800C-33491E914E63" XSDDefinition="xs:NCName" />
+    <eXo:AttributeType Name="ID" baseType="NCName" baseTypeID="E63966DE-01F1-4c0a-800C-33491E914E63" IsSealed="True" ID="1C07AE96-EDE7-4361-8BFC-3E7F12DD7D0F" XSDDefinition="xs:ID" />
+    <eXo:AttributeType Name="IDREF" baseType="NCName" baseTypeID="E63966DE-01F1-4c0a-800C-33491E914E63" IsSealed="True" ID="E93425B0-77AF-442c-93EB-E9C3BB784C7C" XSDDefinition="xs:IDREF" />
+    <eXo:AttributeType Name="ENTITY" baseType="NCName" baseTypeID="E63966DE-01F1-4c0a-800C-33491E914E63" IsSealed="True" ID="784FC816-456C-49c4-AB56-FE297998DCEF" XSDDefinition="xs:ENTITY" />
+    <eXo:AttributeType Name="integer" baseType="decimal" baseTypeID="97772CA0-C38E-43f4-8E30-5EF2113340C1" IsSealed="True" ID="CC8FB2F9-34EB-445f-80FC-ACF8AB017CD1" XSDDefinition="xs:integer" />
+    <eXo:AttributeType Name="nonPositiveIntegeer" baseType="integer" baseTypeID="CC8FB2F9-34EB-445f-80FC-ACF8AB017CD1" IsSealed="True" ID="1BEE3085-8972-40f8-9628-592513DED670" XSDDefinition="xs:nonPositiveIntegeer" />
+    <eXo:AttributeType Name="negativeInteger" baseType="nonPositiveIntegeer" baseTypeID="1BEE3085-8972-40f8-9628-592513DED670" IsSealed="True" ID="5501C47C-BE85-4d97-9B6D-206037DC8388" XSDDefinition="xs:negativeInteger" />
+    <eXo:AttributeType Name="long" baseType="integer" baseTypeID="CC8FB2F9-34EB-445f-80FC-ACF8AB017CD1" IsSealed="True" ID="351FB174-0281-4740-B688-E574489EE5EC" XSDDefinition="xs:long" />
+    <eXo:AttributeType Name="int" baseType="long" baseTypeID="351FB174-0281-4740-B688-E574489EE5EC" IsSealed="True" ID="A0EA9686-88C7-4cf0-85D2-DE03785BF998" XSDDefinition="xs:int" />
+    <eXo:AttributeType Name="short" baseType="int" baseTypeID="A0EA9686-88C7-4cf0-85D2-DE03785BF998" IsSealed="True" ID="A4285B8F-0FF1-4fcc-B3AD-5E992808A12A" XSDDefinition="xs:short" />
+    <eXo:AttributeType Name="byte" baseType="short" baseTypeID="A4285B8F-0FF1-4fcc-B3AD-5E992808A12A" IsSealed="True" ID="2A604D2A-E298-423e-9CF1-70DBFB29F279" XSDDefinition="xs:byte" />
+    <eXo:AttributeType Name="nonNegativeInteger" baseType="integer" baseTypeID="CC8FB2F9-34EB-445f-80FC-ACF8AB017CD1" IsSealed="True" ID="4BE2EF00-19FF-4844-81D4-80130EF47602" XSDDefinition="xs:nonNegativeInteger" />
+    <eXo:AttributeType Name="unsignedLong" baseType="nonNegativeInteger" baseTypeID="4BE2EF00-19FF-4844-81D4-80130EF47602" IsSealed="True" ID="A810BDD5-33FB-4091-A493-7930CAC0F660" XSDDefinition="xs:unsignedLong" />
+    <eXo:AttributeType Name="positiveInteger" baseType="nonNegativeInteger" baseTypeID="4BE2EF00-19FF-4844-81D4-80130EF47602" IsSealed="True" ID="EC089ADC-8E36-481d-9C18-E41335D5AEBB" XSDDefinition="xs:positiveInteger" />
+    <eXo:AttributeType Name="unsignedInt" baseType="unsignedLong" baseTypeID="A810BDD5-33FB-4091-A493-7930CAC0F660" IsSealed="True" ID="BB892398-2ED9-4a16-94E4-DEDF57C35066" XSDDefinition="xs:unsignedInt" />
+    <eXo:AttributeType Name="unsignedShort" baseType="unsignedInt" baseTypeID="BB892398-2ED9-4a16-94E4-DEDF57C35066" IsSealed="True" ID="4EF3A8AE-7740-465a-8148-CFB4112D7262" XSDDefinition="xs:unsignedShort" />
+    <eXo:AttributeType Name="unsignedByte" baseType="unsignedShort" baseTypeID="4EF3A8AE-7740-465a-8148-CFB4112D7262" IsSealed="True" ID="DC5593C6-C302-4b1a-A2EF-F79BC28BE41C" XSDDefinition="xs:unsignedByte" />
+  </eXo:AttributeTypes>
+</eXo:Project>

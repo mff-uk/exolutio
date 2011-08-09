@@ -10,7 +10,9 @@ namespace System.Windows.Controls
         #endif
     {
          
-
+        /// <summary>
+        /// Closes eXolutio dialog window. 
+        /// </summary>
         public void CloseWindow()
         {
             #if SILVERLIGHT
@@ -23,6 +25,9 @@ namespace System.Windows.Controls
             #endif
         }
 
+        /// <summary>
+        /// Closes eXolutio dialog window. 
+        /// </summary>
         public void Close(bool? result)
         {
             this.DialogResult = result;

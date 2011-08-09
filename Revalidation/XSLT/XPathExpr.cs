@@ -80,7 +80,12 @@ namespace Exolutio.Revalidation.XSLT
 
         public XPathExpr Append(string step)
         {
-            return new XPathExpr(this._expr + step);
+            if (this._expr != ".")
+            {
+                return new XPathExpr(this._expr + step);
+            }
+            else
+                return new XPathExpr(step);
         }
 
         public static bool IsNullOrEmpty(XPathExpr expr)

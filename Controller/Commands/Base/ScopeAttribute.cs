@@ -19,7 +19,9 @@ namespace Exolutio.Controller.Commands
             PSMContentModel = 128,
             PSMSchema = 256,
             PSMAttribute = 512,
-            PSMSchemaClass = 1024
+            PSMSchemaClass = 1024,
+            PIM = PIMAttribute | PIMAssociationEnd | PIMAssociation | PIMClass | PIMDiagram,
+            PSM = PSMAttribute | PSMAssociation | PSMClass | PSMSchema | PSMSchemaClass | PSMContentModel
         }
 
         public EScope Scope { get; set; }

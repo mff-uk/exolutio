@@ -14,6 +14,7 @@ using Exolutio.Model.PSM.Grammar.XSDTranslation;
 using Exolutio.Model.Serialization;
 using Exolutio.Revalidation;
 using Exolutio.Revalidation.XSLT;
+using Exolutio.SupportingClasses.XML;
 using NUnit.Framework;
 using Tests.CodeTests;
 
@@ -138,7 +139,7 @@ namespace Tests.XSDTranslation
                 XDocument testGeneratedXSD = generator.GetXsd();
 
                 // remove comments
-                RemoveComments(testGeneratedXSD);
+                testGeneratedXSD.RemoveComments();
 
                 string testGeneratedXSDfile = testDir.FullName + "/" + testDir.Name + "-generated.xsd";
                 using (XmlWriter w = XmlWriter.Create(testGeneratedXSDfile, new XmlWriterSettings() {NewLineChars = "\n", Indent = true, IndentChars = "  "}))
@@ -155,7 +156,7 @@ namespace Tests.XSDTranslation
                 if (referenceXSD != null)
                 {
                     XDocument refXSDDocument = XDocument.Load(referenceXSD.FullName);
-                    RemoveComments(refXSDDocument);
+                    refXSDDocument.RemoveComments();
                     StringBuilder refBuilder = new StringBuilder();
                     using (XmlWriter w = XmlWriter.Create(refBuilder, new XmlWriterSettings() { NewLineChars = "\n", Indent = true, IndentChars = "  " }))
                     {
@@ -198,12 +199,5 @@ namespace Tests.XSDTranslation
             Console.WriteLine("Test succeeded. ");
         }
 
-        private static void RemoveComments(XDocument testGeneratedXSD)
-        {
-            foreach (XComment descendantNode in testGeneratedXSD.DescendantNodes().OfType<XComment>().ToList())
-            {
-                descendantNode.Remove();
-            }
-        }
     }
 }

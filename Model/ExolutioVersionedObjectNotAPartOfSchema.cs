@@ -22,7 +22,7 @@ namespace Exolutio.Model
             }
         }
 
-        protected internal void SetProjectVersion(ProjectVersion projectVersion)
+        public void SetProjectVersion(ProjectVersion projectVersion)
         {
             ProjectVersion oldVersion = null;
             if (projectVersionGuid != Guid.Empty)
