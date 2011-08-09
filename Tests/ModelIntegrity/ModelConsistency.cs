@@ -86,7 +86,7 @@ namespace Tests.ModelIntegrity
 
         private static void CheckProjectVersion(ProjectVersion projectVersion)
         {
-            foreach (AttributeType attributeType in projectVersion.AttributeTypes)
+            foreach (AttributeType attributeType in projectVersion.PIMAttributeTypes)
             {
                 CheckAttributeType(attributeType);
             }

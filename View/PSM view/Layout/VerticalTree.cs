@@ -13,7 +13,7 @@ namespace Exolutio.View
     /// These diagrams have strictly tree structure where also the order of children is important,
     /// that's why user layouting is not supported and fixed automatic layout performed.
     /// </summary>
-    static public class VerticalTree
+    public class VerticalTree
     {
         /// <summary>
         /// Space on canvas between two neighbouring subtrees.
@@ -29,7 +29,7 @@ namespace Exolutio.View
         /// Completely performs layouting of a PSM diagram.
         /// </summary>
         /// <param name="psmDiagramView">The diagram (resp. canvas) to be layouted.</param>
-        public static void LayoutDiagram(PSMDiagramView psmDiagramView)
+        public virtual void LayoutDiagram(PSMDiagramView psmDiagramView)
         {
             Debug.WriteLine("Layouting...");
             double left = horizontalSpace;
@@ -57,7 +57,7 @@ namespace Exolutio.View
         /// <param name="top">Location of the upper border of the root's children</param>
         /// <param name="left">Location of the left border of the entire subtree</param>
         /// <returns>Width of the subtree (root not included)</returns>
-        private static double DrawSubtree(PSMDiagramView psmDiagramView, PSMComponent root, double top, double left)
+        protected virtual double DrawSubtree(PSMDiagramView psmDiagramView, PSMComponent root, double top, double left)
         {
             double right = left;
             
@@ -85,7 +85,7 @@ namespace Exolutio.View
         /// <param name="top">Location of the upper border of the root</param>
         /// <param name="left">Location of the left border of the entire subtree</param>
         /// <returns>Width of the subtree (root included)</returns>
-        private static double DrawTree(PSMDiagramView psmDiagramView, PSMComponent root, double top, double left)
+        protected virtual double DrawTree(PSMDiagramView psmDiagramView, PSMComponent root, double top, double left)
         {
             if (!psmDiagramView.RepresentantsCollection.IsElementPresent(root)) return -horizontalSpace;
             INodeComponentViewBase element = (psmDiagramView.RepresentantsCollection[root] as INodeComponentViewBase);

@@ -288,7 +288,7 @@ namespace Exolutio.ViewToolkit
             return GetBounds().GetCenter();
         }
 
-        private Point GetVirtualCenterPosition()
+        public Point GetVirtualCenterPosition()
         {
             Point p = FindClosestPoint(
                 new Point((StartPoint.CanvasPosition.X + EndPoint.CanvasPosition.X) / 2,
