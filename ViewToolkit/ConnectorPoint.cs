@@ -171,9 +171,12 @@ namespace Exolutio.ViewToolkit
         {
             if (ParentControl != null)
             {
+                #region disconnecting points
+
                 Rect bounds = ParentControl.GetBounds();
 
-                Point p = new Point(CanvasPosition.X + deltaEventArgs.HorizontalChange, CanvasPosition.Y + deltaEventArgs.VerticalChange);
+                Point p = new Point(CanvasPosition.X + deltaEventArgs.HorizontalChange,
+                                    CanvasPosition.Y + deltaEventArgs.VerticalChange);
                 Point snapped = bounds.SnapPointToRectangle(p);
 
                 if (AllowDisconnect && !Disconnected && dragThumb.DraggingAllone(this))
@@ -181,7 +184,8 @@ namespace Exolutio.ViewToolkit
                     Vector diff = Vector.SubtractPoints(ExolutioCanvas.GetMousePosition(), CanvasPosition);
                     if (diff.Length < 20)
                     {
-                        deltaEventArgs = new DragDeltaEventArgs(snapped.X - CanvasPosition.X, snapped.Y - CanvasPosition.Y);
+                        deltaEventArgs = new DragDeltaEventArgs(snapped.X - CanvasPosition.X,
+                                                                snapped.Y - CanvasPosition.Y);
                     }
                     else
                     {
@@ -194,11 +198,54 @@ namespace Exolutio.ViewToolkit
                     deltaEventArgs = new DragDeltaEventArgs(snapped.X - CanvasPosition.X, snapped.Y - CanvasPosition.Y);
                 }
 
-                if (Keyboard.Modifiers.HasFlag(ModifierKeys.Shift))
-                {
-                    
-                }
+                #endregion
             }
+            else
+            {
+                #region snapping of break points
+
+                if (!Disconnected && this.OrderInConnector > 0 && this.OrderInConnector < Connector.Points.Count - 1)
+                {
+                    ConnectorPoint rightNeighbour = Connector.Points.ElementAtOrDefault(OrderInConnector + 1);
+                    ConnectorPoint leftNeighbour = Connector.Points.ElementAtOrDefault(OrderInConnector - 1);
+
+                    const double SNAP_RATIO = 14;
+
+                    foreach (ConnectorPoint neighbour in new[] {leftNeighbour, rightNeighbour})
+                    {
+                        bool isEndPoint = neighbour == Connector.StartPoint || neighbour == Connector.EndPoint;
+                        if (neighbour != null &&
+                            (!isEndPoint || neighbour.Placement == EPlacementKind.AbsoluteSubCanvas))
+                        {
+                            double nx = neighbour.CanvasPosition.X;
+                            double ny = neighbour.CanvasPosition.Y;
+                            double deltax = deltaEventArgs.HorizontalChange;
+                            double deltay = deltaEventArgs.VerticalChange;
+                            double diff;
+                            if (ShouldSnap(dragThumb.MousePoint.Y, ny, SNAP_RATIO, out diff))
+                            {
+                                ShouldSnap(CanvasPosition.Y + deltaEventArgs.VerticalChange, ny, SNAP_RATIO, out diff);
+                                deltay += diff;
+                                deltaEventArgs = new DragDeltaEventArgs(deltax, deltay);
+                            }
+                            else if (ShouldSnap(dragThumb.MousePoint.X, nx, SNAP_RATIO, out diff))
+                            {
+                                ShouldSnap(CanvasPosition.X + deltaEventArgs.HorizontalChange, nx, SNAP_RATIO, out diff);
+                                deltax += diff;
+                                deltaEventArgs = new DragDeltaEventArgs(deltax, deltay);
+                            }
+                        }
+                    }
+                }
+
+                #endregion
+            }
+        }
+
+        protected static bool ShouldSnap(double point, double refPoint, double ratio, out double diff)
+        {
+            diff = refPoint - point;
+            return Math.Abs(diff) < ratio;
         }
 
         private void DisconnectPoint()
