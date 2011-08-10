@@ -117,6 +117,8 @@ namespace Exolutio.ViewToolkit
         /// </summary>
         public class NormalState : ExolutioCanvasState
         {
+            public bool SelectConnectorsViaDrag { get; set; }
+
             /// <summary>
             /// Creates new instance of <see cref="NormalState"/>
             /// </summary>

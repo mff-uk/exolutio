@@ -106,7 +106,12 @@ namespace Exolutio.ViewToolkit
                 if (_item is ISelectable)
                 {
                     ISelectable item = (ISelectable)_item;
-                    
+
+                    if ((item is Connector || item is Label) && !ExolutioCanvas.normalState.SelectConnectorsViaDrag)
+                    {
+                        continue;
+                    }
+
                     Rect itemBounds = item.GetBounds();
                     if (rubberBand.IntersectsWith(itemBounds))
                     {
