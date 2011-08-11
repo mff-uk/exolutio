@@ -33,6 +33,8 @@ namespace System.Windows.Controls
             this.DialogResult = result;
             CloseWindow();
         }
+        
+
         #if SILVERLIGHT
 
         public new void Show()
@@ -57,7 +59,12 @@ namespace System.Windows.Controls
 
         public object Icon { set; get; }
         
+        #else
+
+        public new bool? DialogResult { get; set; }
+
         #endif
+
         public object FindResource(string resourceKey)
         {
             return null;
