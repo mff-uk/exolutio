@@ -58,8 +58,20 @@ namespace Exolutio.View
 
             public string DefaultValue { get; set; }
 
-            public PIMAttribute SourceAttribute { get; set; }
-            
+            private PIMAttribute sourceAttribute;
+            public PIMAttribute SourceAttribute
+            {
+                get { return sourceAttribute; }
+                set
+                {
+                    if (sourceAttribute == null)
+                    {
+                        CopyValues(value);
+                    }
+                    sourceAttribute = value;
+                }
+            }
+
             public bool Checked { get; set; }
 
             public FakePIMAttribute()
@@ -68,15 +80,20 @@ namespace Exolutio.View
                 Name = "Attribute";
             }
 
-            public FakePIMAttribute(PIMAttribute p)
+            public FakePIMAttribute(PIMAttribute a)
                 : this()
             {
-                Name = p.Name;
-                Type = p.AttributeType;
-                Multiplicity = p.GetCardinalityString();
-                DefaultValue = p.DefaultValue;
-                SourceAttribute = p;
+                CopyValues(a);
+                SourceAttribute = a;
                 Checked = true;
+            }
+
+            private void CopyValues(PIMAttribute a)
+            {
+                Name = a.Name;
+                Type = a.AttributeType;
+                Multiplicity = a.GetCardinalityString();
+                DefaultValue = a.DefaultValue;
             }
 
 
@@ -134,6 +151,8 @@ namespace Exolutio.View
 
         private FakeAttributeCollection fakeAttributes;
 
+        private ObservableCollection<FakePIMAttribute> fakeAttributesList;
+
         public PIMClassDialog()
         {
             InitializeComponent();
@@ -164,7 +183,7 @@ namespace Exolutio.View
 
             typeColumn.ItemsSource = PIMClass.ProjectVersion.GetAvailablePIMTypes();
             
-            ObservableCollection<FakePIMAttribute> fakeAttributesList = new ObservableCollection<FakePIMAttribute>();
+            fakeAttributesList = new ObservableCollection<FakePIMAttribute>();
 
             fakeAttributes = new FakeAttributeCollection(fakeAttributesList, PIMClass);
             fakeAttributesList.CollectionChanged += delegate { UpdateApplyEnabled(); };
