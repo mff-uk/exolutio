@@ -174,36 +174,36 @@ namespace Exolutio.ViewToolkit
 
             //#region define startFigure
 
-            //if (StartCapStyle != EConnectorCapStyle.Straight)
-            //{
-            //    Point start = StartPoint.CanvasPosition;
-            //    Point end = Points[1].CanvasPosition;
+            if (StartCapStyle != EConnectorCapStyle.Straight)
+            {
+                Point start = StartPoint.CanvasPosition;
+                Point end = Points[1].CanvasPosition;
 
-            //    startFigure = new PathFigure { StartPoint = start };
-            //    PolyLineSegment seg = new PolyLineSegment();
-            //    seg.Points.Add(end);
-            //    startFigure.Segments.Add(seg);
+                startFigure = new PathFigure { StartPoint = start };
+                PolyLineSegment seg = new PolyLineSegment();
+                seg.Points.Add(end);
+                startFigure.Segments.Add(seg);
 
-            //    switch (StartCapStyle)
-            //    {
-            //        case EConnectorCapStyle.FullArrow:
-            //        case EConnectorCapStyle.Arrow:
-            //        case EConnectorCapStyle.Triangle:
-            //            Point dummy = new Point();
-            //            if (StartCapStyle == EConnectorCapStyle.Arrow)
-            //                startFigure = GeometryHelper.CalculateArrow(startFigure, end, start,
-            //                                                                    StartCapStyle != EConnectorCapStyle.Arrow, ref dummy);
-            //            else
-            //                startFigure = GeometryHelper.CalculateArrow(startFigure, end, start,
-            //                                                                    StartCapStyle != EConnectorCapStyle.Arrow,
-            //                                                                    ref startPointShifted);
-            //            break;
-            //        case EConnectorCapStyle.FullDiamond:
-            //        case EConnectorCapStyle.Diamond:
-            //            startFigure = GeometryHelper.CalculateDiamond(startFigure, end, start, ref startPointShifted);
-            //            break;
-            //    }
-            //}
+                switch (StartCapStyle)
+                {
+                    case EConnectorCapStyle.FullArrow:
+                    case EConnectorCapStyle.Arrow:
+                    case EConnectorCapStyle.Triangle:
+                        Point dummy = new Point();
+                        if (StartCapStyle == EConnectorCapStyle.Arrow)
+                            startFigure = GeometryHelper.CalculateArrow(startFigure, end, start,
+                                                                                StartCapStyle != EConnectorCapStyle.Arrow, ref dummy);
+                        else
+                            startFigure = GeometryHelper.CalculateArrow(startFigure, end, start,
+                                                                                StartCapStyle != EConnectorCapStyle.Arrow,
+                                                                                ref endPointShifted);
+                        break;
+                    case EConnectorCapStyle.FullDiamond:
+                    case EConnectorCapStyle.Diamond:
+                        startFigure = GeometryHelper.CalculateDiamond(startFigure, end, start, ref startPointShifted);
+                        break;
+                }
+            }
 
             //#endregion
 
@@ -211,43 +211,49 @@ namespace Exolutio.ViewToolkit
 
             #if SILVERLIGHT
             #else
-            //if (EndCapStyle != EConnectorCapStyle.Straight)
-            //{
-            //    endFigure = new PathFigure();
-            //    Point start = EndPoint.CanvasPosition;
-            //    Point end = Points[Points.Count - 2].CanvasPosition;
+            if (EndCapStyle != EConnectorCapStyle.Straight)
+            {
+                endFigure = new PathFigure();
+                Point start = EndPoint.CanvasPosition;
+                Point end = Points[Points.Count - 2].CanvasPosition;
 
-            //    PolyLineSegment seg = new PolyLineSegment();
-            //    seg.Points.Add(end);
-            //    endFigure.Segments.Add(seg);
-            //    switch (EndCapStyle)
-            //    {
-            //        case EConnectorCapStyle.Arrow:
-            //        case EConnectorCapStyle.FullArrow:
-            //        case EConnectorCapStyle.Triangle:
-            //            Point dummy = new Point();
-            //            if (EndCapStyle == EConnectorCapStyle.Arrow)
-            //                endFigure = GeometryHelper.CalculateArrow(endFigure, end, start, EndCapStyle != EConnectorCapStyle.Arrow,
-            //                                                                  ref dummy);
-            //            else
-            //                endFigure = GeometryHelper.CalculateArrow(endFigure, end, start, EndCapStyle != EConnectorCapStyle.Arrow,
-            //                                                                  ref endPointShifted);
-            //            break;
-            //        case EConnectorCapStyle.Diamond:
-            //        case EConnectorCapStyle.FullDiamond:
-            //            endFigure = GeometryHelper.CalculateDiamond(endFigure, end, start, ref endPointShifted);
-            //            break;
-            //    }
-            //}
+                PolyLineSegment seg = new PolyLineSegment();
+                seg.Points.Add(end);
+                endFigure.Segments.Add(seg);
+                switch (EndCapStyle)
+                {
+                    case EConnectorCapStyle.Arrow:
+                    case EConnectorCapStyle.FullArrow:
+                    case EConnectorCapStyle.Triangle:
+                        Point dummy = new Point();
+                        if (EndCapStyle == EConnectorCapStyle.Arrow)
+                            endFigure = GeometryHelper.CalculateArrow(endFigure, end, start, EndCapStyle != EConnectorCapStyle.Arrow,
+                                                                              ref dummy);
+                        else
+                            endFigure = GeometryHelper.CalculateArrow(endFigure, end, start, EndCapStyle != EConnectorCapStyle.Arrow,
+                                                                              ref endPointShifted);
+                        break;
+                    case EConnectorCapStyle.Diamond:
+                    case EConnectorCapStyle.FullDiamond:
+                        endFigure = GeometryHelper.CalculateDiamond(endFigure, end, start, ref endPointShifted);
+                        break;
+                }
+            }
             #endif
 
             //#endregion
 
             #region create junctionFigure
 
+            if (StartCapStyle == EConnectorCapStyle.FullArrow || StartCapStyle == EConnectorCapStyle.FullDiamond
+                || EndCapStyle == EConnectorCapStyle.FullDiamond || EndCapStyle == EConnectorCapStyle.FullArrow)
+                Fill = Brushes.Black;
+            else
+                Fill = Brushes.White;
+
             PathFigure junctionFigure = new PathFigure { StartPoint = startPointShifted };
             PolyLineSegment segment = new PolyLineSegment();
-            for (int i = 1; i < Points.Count; i++)
+            for (int i = 1; i < Points.Count - 1; i++)
             {
                 segment.Points.Add(Points[i].CanvasPosition);
             }
@@ -262,10 +268,11 @@ namespace Exolutio.ViewToolkit
             #endregion
 
             if (startFigure != null) path.Figures.Add(startFigure);
+            path.Figures.Add(junctionFigure);
             if (endFigure != null) path.Figures.Add(endFigure);
 
             path.FillRule = FillRule.Nonzero;
-            path.Figures.Add(junctionFigure);
+            
 
             geometry = path;
             InvalidateVisual();

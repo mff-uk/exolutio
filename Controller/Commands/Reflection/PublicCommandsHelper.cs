@@ -64,6 +64,11 @@ namespace Exolutio.Controller.Commands.Reflection
                 publicCommandsByScope = new Dictionary<ScopeAttribute.EScope, List<CommandDescriptor>>();
                 publicCommandsByType = new Dictionary<Type, CommandDescriptor>();
 
+                foreach (ScopeAttribute.EScope scope in Enum.GetValues(typeof(ScopeAttribute.EScope)))
+                {
+                    publicCommandsByScope.CreateSubCollectionIfNeeded(scope);
+                }
+
                 foreach (Type commandType in publicCommandsTypes)
                 {
                     PublicCommandAttribute a;
@@ -104,7 +109,6 @@ namespace Exolutio.Controller.Commands.Reflection
                             commandDescriptor.Scope = scopeAttribute.Scope;
                             ParameterDescriptor scopeParameter = commandDescriptor.Parameters.First(p => p.ParameterPropertyInfo == commandDescriptor.ScopeProperty);
                             scopeParameter.IsScopeParamater = true;
-                            publicCommandsByScope.CreateSubCollectionIfNeeded(scopeAttribute.Scope);
 #if SILVERLIGHT
                             foreach (ScopeAttribute.EScope scope in EnumHelper.GetValues(typeof(ScopeAttribute.EScope)))
 #else 

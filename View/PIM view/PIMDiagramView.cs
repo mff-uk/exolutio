@@ -28,6 +28,13 @@ namespace Exolutio.View
                 typeof(PIMAssociation),
                 typeof(ConnectionViewHelper),
                 typeof(PIMAssociationView)));
+
+            this.RepresentantsCollection.Registrations.Add(typeof(PIMGeneralization), new RepresentantsCollection.RegistrationClass(
+                () => new PIMGeneralizationView(),
+                () => new PIMGeneralizationViewHelper(this.Diagram),
+                typeof(PIMGeneralization),
+                typeof(ConnectionViewHelper),
+                typeof(PIMGeneralizationView)));
         }
 
         public PIMDiagram PIMDiagram

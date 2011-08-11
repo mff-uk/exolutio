@@ -29,8 +29,9 @@ namespace Exolutio.Model.PIM
 
         public override void AddFactoryMethods()
         {
-            viewHelperFactoryMethods[typeof(PIMClass)] = delegate { return new PIMClassViewHelper(this); };
-            viewHelperFactoryMethods[typeof(PIMAssociation)] = delegate { return new PIMAssociationViewHelper(this); };
+            viewHelperFactoryMethods[typeof(PIMClass)] = () => new PIMClassViewHelper(this);
+            viewHelperFactoryMethods[typeof(PIMAssociation)] = () => new PIMAssociationViewHelper(this);
+            viewHelperFactoryMethods[typeof(PIMGeneralization)] = () => new PIMGeneralizationViewHelper(this);
         }
 
         public IEnumerable<PIMComponent> PIMComponents

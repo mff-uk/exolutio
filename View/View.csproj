@@ -188,6 +188,7 @@
     <Compile Include="PIM view\AttributeTypeDialog.xaml.cs">
       <DependentUpon>AttributeTypeDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PIM view\PIMGeneralizationView.cs" />
     <Compile Include="PIM view\PIMClassDialog.xaml.cs">
       <DependentUpon>PIMClassDialog.xaml</DependentUpon>
       <SubType>Code</SubType>

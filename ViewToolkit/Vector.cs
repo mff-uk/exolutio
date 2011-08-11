@@ -57,8 +57,9 @@ namespace Exolutio.ViewToolkit
 
         public void Normalize()
         {
-            X = X/Length;
-            Y = Y/Length;
+            double l = Length;
+            X = X/l;
+            Y = Y/l;
         }
     }
 }
