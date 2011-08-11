@@ -313,7 +313,7 @@ namespace Exolutio.View
                 AttributeType sourceAttributeType = modifiedAttribute.SourceAttributeType;
 
                 acmdUpdateAttributeType updateCommand = new acmdUpdateAttributeType(controller, sourceAttributeType);
-                updateCommand.Set(modifiedAttribute.Name, modifiedAttribute.XSDDefinition, false, modifiedAttribute.BaseType);
+                updateCommand.Set(modifiedAttribute.Name, modifiedAttribute.XSDDefinition, false, modifiedAttribute.BaseType ?? Guid.Empty);
                 controller.CreatedMacro.Commands.Add(updateCommand);
                 namesDict[sourceAttributeType] = modifiedAttribute.Name;
             }
@@ -325,7 +325,8 @@ namespace Exolutio.View
                 if (!string.IsNullOrEmpty(addedAttribute.Name) && addedAttribute.Checked)
                 {
                     acmdNewAttributeType createNewcommand = new acmdNewAttributeType(controller);
-                    createNewcommand.Set(projectVersion.ID, psmSchema.ID, addedAttribute.Name, addedAttribute.XSDDefinition, false, addedAttribute.BaseType);
+                    createNewcommand.Set(projectVersion.ID, psmSchema ?? Guid.Empty, addedAttribute.Name, addedAttribute.XSDDefinition, false, 
+                        addedAttribute.BaseType ?? Guid.Empty);
                     controller.CreatedMacro.Commands.Add(createNewcommand);
                     addedAttributes.Add(addedAttribute);
                     names.Add(addedAttribute.Name);
