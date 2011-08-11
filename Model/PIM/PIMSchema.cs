@@ -37,6 +37,10 @@ namespace Exolutio.Model.PIM
             PIMClasses = new UndirectCollection<PIMClass>(Project);
             PIMClasses.MemberAdded += RegisterPIMComponent;
             PIMClasses.MemberRemoved += UnregisterPIMComponent;
+
+            PIMGeneralizations = new UndirectCollection<PIMGeneralization>(Project);
+            PIMGeneralizations.MemberAdded += RegisterPIMComponent;
+            PIMGeneralizations.MemberRemoved += UnregisterPIMComponent;
         }
 
         #region generic component registration
@@ -77,12 +81,15 @@ namespace Exolutio.Model.PIM
 
         public UndirectCollection<PIMClass> PIMClasses { get; set; }
 
+        public UndirectCollection<PIMGeneralization> PIMGeneralizations { get; set; }
+
         #region Implementation of IExolutioSerializable
 
         public override void Serialize(XElement parentNode, SerializationContext context)
         {
             base.Serialize(parentNode, context);
             this.WrapAndSerializeCollection("PIMClasses", "PIMClass", PIMClasses, parentNode, context);
+            this.WrapAndSerializeCollection("PIMGeneralizations", "PIMGeneralization", PIMGeneralizations, parentNode, context);
             this.WrapAndSerializeCollection("PIMAssociations", "PIMAssociation", PIMAssociations, parentNode, context);
             base.SerializeRemaining(parentNode, context);
         }
@@ -93,6 +100,7 @@ namespace Exolutio.Model.PIM
             context.CurrentSchemaGuid = this;
 
             this.DeserializeWrappedCollection("PIMClasses", PIMClasses, PIMClass.CreateInstance, parentNode, context);
+            this.DeserializeWrappedCollection("PIMGeneralizations", PIMGeneralizations, PIMGeneralization.CreateInstance, parentNode, context);
             this.DeserializeWrappedCollection("PIMAssociations", PIMAssociations, PIMAssociation.CreateInstance, parentNode, context);
 
             context.CurrentSchemaGuid = Guid.Empty;
@@ -116,6 +124,7 @@ namespace Exolutio.Model.PIM
             copyPIMSchema.SetProjectVersion(projectVersion);
 
             this.CopyCollection(PIMClasses, copyPIMSchema.PIMClasses, projectVersion, createdCopies);
+            this.CopyCollection(PIMGeneralizations, copyPIMSchema.PIMGeneralizations, projectVersion, createdCopies);
             this.CopyCollection(PIMAssociations, copyPIMSchema.PIMAssociations, projectVersion, createdCopies);
             this.CopyRefCollection(PIMAttributes, copyPIMSchema.PIMAttributes, projectVersion, createdCopies);
             this.CopyRefCollection(PIMAssociationEnds, copyPIMSchema.PIMAssociationEnds, projectVersion, createdCopies);

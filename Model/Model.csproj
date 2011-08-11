@@ -139,6 +139,7 @@
     <Compile Include="OCL\Types\TupleType.cs" />
     <Compile Include="OCL\Types\VariableDeclaration.cs" />
     <Compile Include="OCL\Types\VoidType.cs" />
+    <Compile Include="PIM\PIMGeneralization.cs" />
     <Compile Include="PIM\PIMDiagram.cs" />
     <Compile Include="PSM\IPSMSemanticComponent.cs" />
     <Compile Include="PSM\PSMContentModelType.cs" />

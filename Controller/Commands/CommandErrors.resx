@@ -222,4 +222,10 @@
   <data name="CMDERR_CANNOT_SET_INTERPRETATION_CMDERR_CANNOT_SET_INTERPRETATION_CHILD_NOT_INTERPRETED" xml:space="preserve">
     <value>Cannot set interpretation. Child is not interpreted.</value>
   </data>
+  <data name="CMDERR_NO_MULTIPLE_INHERITANCE" xml:space="preserve">
+    <value>The specific class already has a general class. Multiple inheritance is not allowed.</value>
+  </data>
+  <data name="CMDERR_NO_SELF_INHERITANCE" xml:space="preserve">
+    <value>The general class must be different from the specific class.</value>
+  </data>
 </root>
