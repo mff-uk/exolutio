@@ -45,6 +45,7 @@ namespace Exolutio.Model.PIM
         {
             PIMAssociationEnds = new UndirectCollection<PIMAssociationEnd>(Project);
             PIMAttributes = new UndirectCollection<PIMAttribute>(Project);
+            GeneralizationsAsGeneral = new UndirectCollection<PIMGeneralization>(Project);
         }
 
         #endregion
@@ -53,6 +54,15 @@ namespace Exolutio.Model.PIM
 
         public UndirectCollection<PIMAttribute> PIMAttributes { get; private set; }
 
+        public UndirectCollection<PIMGeneralization> GeneralizationsAsGeneral { get; private set; }
+
+        private Guid generalizationAsSpecificGuid;
+        public PIMGeneralization GeneralizationAsSpecific
+        {
+            get { return generalizationAsSpecificGuid == Guid.Empty ? null : Project.TranslateComponent<PIMGeneralization>(generalizationAsSpecificGuid); }
+            set { generalizationAsSpecificGuid = value == null ? Guid.Empty : value; NotifyPropertyChanged("GeneralizationAsSpecific"); }
+        }
+        
         public override ComponentList<PSMComponent> GetInterpretedComponents()
         {
             ComponentList<PSMComponent> list = new ComponentList<PSMComponent>();
@@ -72,6 +82,9 @@ namespace Exolutio.Model.PIM
         {
             base.Serialize(parentNode, context);
             this.WrapAndSerializeCollection("PIMAttributes", "PIMAttribute", PIMAttributes, parentNode, context);
+            this.WrapAndSerializeIDRefCollection("GeneralizationAsGeneral", "PIMGeneralization", "pimGeneralizationsAsGeneralID", GeneralizationsAsGeneral,
+                                                 parentNode, context);
+            if (GeneralizationAsSpecific != null) this.SerializeIDRef(GeneralizationAsSpecific, "pimGeneralizationAsSpecificID", parentNode, context);
             this.WrapAndSerializeIDRefCollection("PIMAssociationEnds", "PIMAssociationEnd", "pimAssociationEndID", PIMAssociationEnds,
                                                  parentNode, context);
         }
@@ -80,6 +93,8 @@ namespace Exolutio.Model.PIM
         {
             base.Deserialize(parentNode, context);
             this.DeserializeWrappedCollection("PIMAttributes", PIMAttributes, PIMAttribute.CreateInstance, parentNode, context);
+            this.DeserializeWrappedIDRefCollection("GeneralizationsAsGeneral", "pimGeneralizationsAsGeneralID", GeneralizationsAsGeneral, parentNode, context);
+            generalizationAsSpecificGuid = this.DeserializeIDRef("pimGeneralizationAsSpecificID", parentNode, context, true);
             this.DeserializeWrappedIDRefCollection("PIMAssociationEnds", "pimAssociationEndID", PIMAssociationEnds, parentNode, context);
         }
 
@@ -104,6 +119,8 @@ namespace Exolutio.Model.PIM
 
             PIMClass copyPIMClass = (PIMClass)copyComponent;
             this.CopyCollection(PIMAttributes, copyPIMClass.PIMAttributes, projectVersion, createdCopies);
+            this.CopyRefCollection(GeneralizationsAsGeneral, copyPIMClass.GeneralizationsAsGeneral, projectVersion, createdCopies, true);
+            copyPIMClass.generalizationAsSpecificGuid = createdCopies.GetGuidForCopyOf(GeneralizationAsSpecific);
             this.CopyRefCollection(PIMAssociationEnds, copyPIMClass.PIMAssociationEnds, projectVersion, createdCopies, true);
         }
 

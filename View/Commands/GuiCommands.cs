@@ -63,6 +63,7 @@ namespace Exolutio.View.Commands
         public static guiControllerCommand AddPIMClassCommand { get; set; }
         public static guiControllerCommand AddPIMAttributeCommand { get; set; }
         public static guiControllerCommand AddPIMAssociationCommand { get; set; }
+        public static guiControllerCommand AddPIMGeneralizationCommand { get; set; }
         public static guiControllerCommand DerivePSMRootCommand { get; set; }
         public static guiSplitPIMAttribute SplitPIMAttributeCommand { get; set; }
         public static guiSplitPIMAssociation SplitPIMAssociationCommand { get; set; }
@@ -271,6 +272,16 @@ namespace Exolutio.View.Commands
                                                OpenDialog = true,
                                                Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.assocclass)
                                            };
+            AddPIMGeneralizationCommand = new guiControllerCommand
+            {
+                Text = "Add generalization",
+                ControllerCommandFactoryMethod = CommandFactory<cmdNewPIMGeneralization>.Factory,
+                ControllerCommandType = typeof(cmdNewPIMGeneralization),
+                NoScope = true,
+                PIMOnly = true,
+                OpenDialog = true,
+                Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.generalize)
+            };
             SplitPIMAttributeCommand = new guiSplitPIMAttribute();
             SplitPIMAssociationCommand = new guiSplitPIMAssociation();
             SplitPIMAttribute3Command = new guiSplitPIMAttribute() { Count = 3 };
