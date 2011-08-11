@@ -189,11 +189,12 @@ namespace Exolutio.View
         }
 
         private bool error = false;
+        private bool applyButtonPressed;
 
         private void bApply_Click(object sender, RoutedEventArgs e)
         {
             bApply.Focus();
-
+            applyButtonPressed = true; 
             error = false;
 
             controller.BeginMacro();
@@ -352,6 +353,7 @@ namespace Exolutio.View
                 }
             }
             gridAttributes.Items.Refresh();
+            applyButtonPressed = false; 
         }
 
         private void tbName_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
@@ -514,7 +516,7 @@ namespace Exolutio.View
 
         void Current_SelectionChanged()
         {
-            if (bApply.IsEnabled)
+            if (bApply.IsEnabled && !applyButtonPressed)
             {
                 if (ExolutioYesNoBox.Show("Changes not applied", "Apply performed changes?") == MessageBoxResult.Yes)
                 {
