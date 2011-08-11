@@ -31,6 +31,8 @@ namespace Exolutio.View
         private void DrawAssociation(PSMAssociationView psmAssociationView)
         {
             Connector connector = psmAssociationView.Connector;
+            if (connector.StartNode == null || connector.EndNode == null)
+                return; 
             double y = (int) (connector.StartNode.CanvasPosition.Y + connector.StartNode.ActualHeight/2);
             double x = (int) (connector.EndNode.CanvasPosition.X + connector.EndNode.ActualWidth/2);
             bool movelabel = false; 
