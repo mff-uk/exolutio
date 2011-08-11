@@ -189,7 +189,7 @@ namespace Exolutio.View
         public override bool CanPutInDiagram(DiagramView diagramView)
         {
             if (!diagramView.RepresentantsCollection.ContainsKey(SourceClass) ||
-               !diagramView.RepresentantsCollection.ContainsKey(SourceClass))
+               !diagramView.RepresentantsCollection.ContainsKey(TargetClass))
             {
                 /* 
                  * since parent and child may change, it is necessary
