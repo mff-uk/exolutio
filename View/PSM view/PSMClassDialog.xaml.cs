@@ -104,8 +104,7 @@ namespace Exolutio.View
             public FakePSMAttribute(PIMAttribute p)
                 : this()
             {
-                Name = p.Name;
-                Type = p.AttributeType;
+                Name = p.Name;                
                 Multiplicity = p.GetCardinalityString();
                 DefaultValue = p.DefaultValue;
                 SourceAttribute = null;
