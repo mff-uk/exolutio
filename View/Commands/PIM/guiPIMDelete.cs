@@ -32,6 +32,8 @@ namespace Exolutio.View.Commands.PIM
                 .Where(c => c is PIMAttribute).Cast<PIMAttribute>();
             IEnumerable<PIMClass> selectedClasses = Current.ActiveDiagramView.GetSelectedComponents()
                 .Where(c => c is PIMClass).Cast<PIMClass>();
+            IEnumerable<PIMGeneralization> selectedGeneralizations = Current.ActiveDiagramView.GetSelectedComponents()
+                .Where(c => c is PIMGeneralization).Cast<PIMGeneralization>();
 
             MacroCommand macro = new MacroCommand(Current.Controller) { CheckFirstOnlyInCanExecute = true };
             foreach (PIMAssociation a in selectedAssociations)
@@ -41,6 +43,10 @@ namespace Exolutio.View.Commands.PIM
             foreach (PIMAttribute a in selectedAttributes)
             {
                 macro.Commands.Add(new Exolutio.Controller.Commands.Complex.PIM.cmdDeletePIMAttribute(Current.Controller) { AttributeGuid = a });
+            }
+            foreach (PIMGeneralization g in selectedGeneralizations)
+            {
+                macro.Commands.Add(new Exolutio.Controller.Commands.Atomic.PIM.acmdDeletePIMGeneralization(Current.Controller, g));
             }
             foreach (PIMClass c in selectedClasses)
             {

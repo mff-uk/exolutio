@@ -50,6 +50,7 @@ namespace Exolutio.Controller.Commands.Atomic.PIM
                 && Project.VerifyComponentType<PIMSchema>(schemaGuid))
             {
                 PIMClass specific = Project.TranslateComponent<PIMClass>(specificClassGuid);
+                PIMClass general = Project.TranslateComponent<PIMClass>(generalClassGuid);
                 if (specific.GeneralizationAsSpecific != null)
                 {
                     ErrorDescription = CommandErrors.CMDERR_NO_MULTIPLE_INHERITANCE;
@@ -58,6 +59,11 @@ namespace Exolutio.Controller.Commands.Atomic.PIM
                 else if (specificClassGuid == generalClassGuid)
                 {
                     ErrorDescription = CommandErrors.CMDERR_NO_SELF_INHERITANCE;
+                    return false;
+                }
+                else if (general.GetGeneralClasses().Contains(specific))
+                {
+                    ErrorDescription = CommandErrors.CMDERR_CYCLIC_INHERITANCE;
                     return false;
                 }
                 else return true;

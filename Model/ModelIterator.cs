@@ -211,6 +211,7 @@ namespace Exolutio.Model
             result = result.Concat(pimSchema.PIMAttributes.Cast<PIMComponent>());
             result = result.Concat(pimSchema.PIMAssociations.Cast<PIMComponent>());
             result = result.Concat(pimSchema.PIMAssociationEnds.Cast<PIMComponent>());
+            result = result.Concat(pimSchema.PIMGeneralizations.Cast<PIMComponent>());
             return result;
         }
 
@@ -523,6 +524,24 @@ namespace Exolutio.Model
             srs.AddRange(psmClass.RepresentedClass.GetSRs());
 
             return srs;
+        }
+
+        /// <summary>
+        /// Returns a list of PIMClasses more general than pimClass. If pimClass has a general class A, A has a general class B, it returns A, B.
+        /// </summary>
+        /// <param name="pimClass"></param>
+        /// <returns></returns>
+        public static IEnumerable<PIMClass> GetGeneralClasses(this PIMClass pimClass)
+        {
+            List<PIMClass> general = new List<PIMClass>();
+
+            if (pimClass.GeneralizationAsSpecific == null) return general;
+
+            PIMClass generalClass = pimClass.GeneralizationAsSpecific.General;
+            general.Add(generalClass);
+            general.AddRange(generalClass.GetGeneralClasses());
+
+            return general;
         }
 
         public static IEnumerable<PSMClass> InterpretedSubClasses(this PSMClass parent)

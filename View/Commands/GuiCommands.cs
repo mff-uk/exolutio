@@ -80,6 +80,7 @@ namespace Exolutio.View.Commands
         public static guiPIMDeleteClass PIMDeleteClass { get; set; }
         public static guiPIMDeleteAttribute PIMDeleteAttribute { get; set; }
         public static guiPIMDeleteAssociation PIMDeleteAssociation { get; set; }
+        public static guiPIMDeleteGeneralization PIMDeleteGeneralization { get; set; }
         #endregion
 
         #region PSM
@@ -327,6 +328,7 @@ namespace Exolutio.View.Commands
             PIMDeleteAssociation = new guiPIMDeleteAssociation();
             PIMDeleteAttribute = new guiPIMDeleteAttribute();
             PIMDeleteClass = new guiPIMDeleteClass();
+            PIMDeleteGeneralization = new guiPIMDeleteGeneralization();
             #endregion
 
             #region PSM

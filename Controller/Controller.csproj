@@ -57,7 +57,9 @@
     <Compile Include="Commands\Atomic\acmdUpdateAttributeType.cs" />
     <Compile Include="Commands\Atomic\PIM\acmdShiftPIMAttribute.cs" />
     <Compile Include="Commands\Atomic\PIM\acmdNewPIMGeneralization.cs" />
+    <Compile Include="Commands\Atomic\PIM\acmdDeletePIMGeneralization.cs" />
     <Compile Include="Commands\Atomic\PIM\MacroWrappers\cmdNewPIMGeneralization.cs" />
+    <Compile Include="Commands\Atomic\PIM\MacroWrappers\cmdDeletePIMGeneralization.cs" />
     <Compile Include="Commands\Atomic\PSM\acmdRenamePSMSchema.cs" />
     <Compile Include="Commands\Atomic\PIM\acmdDeletePIMClass.cs" />
     <Compile Include="Commands\Atomic\PIM\acmdNewPIMAttribute.cs" />
