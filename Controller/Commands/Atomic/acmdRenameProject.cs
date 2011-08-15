@@ -8,10 +8,8 @@ using Exolutio.Model;
 
 namespace Exolutio.Controller.Commands.Atomic
 {
-    [PublicCommand("Rename project", PublicCommandAttribute.EPulicCommandCategory.Common_atomic)]
-    public class acmdRenameProject : StackedCommand
+    internal class acmdRenameProject : StackedCommand
     {
-        [PublicArgument("New name", ModifiedPropertyName = "Name")] 
         public string NewName { get; set; }
         
         private string oldname;

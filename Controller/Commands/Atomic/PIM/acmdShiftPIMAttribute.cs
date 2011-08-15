@@ -8,7 +8,7 @@ using Exolutio.Model.PIM;
 
 namespace Exolutio.Controller.Commands.Atomic.PIM
 {
-    public class acmdShiftPIMAttribute : StackedCommand
+    internal class acmdShiftPIMAttribute : StackedCommand
     {
         Guid attributeGuid = Guid.Empty;
         bool up = true;

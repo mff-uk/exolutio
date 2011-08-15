@@ -46,7 +46,7 @@ namespace Exolutio.View.Commands.PIM
             }
             foreach (PIMGeneralization g in selectedGeneralizations)
             {
-                macro.Commands.Add(new Exolutio.Controller.Commands.Atomic.PIM.acmdDeletePIMGeneralization(Current.Controller, g));
+                macro.Commands.Add(new Exolutio.Controller.Commands.Complex.PIM.cmdDeletePIMGeneralization(Current.Controller) { GeneralizationGuid = g });
             }
             foreach (PIMClass c in selectedClasses)
             {

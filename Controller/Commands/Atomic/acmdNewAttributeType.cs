@@ -8,7 +8,7 @@ using Exolutio.Model;
 
 namespace Exolutio.Controller.Commands.Atomic
 {
-    public class acmdNewAttributeType : StackedCommand
+    internal class acmdNewAttributeType : StackedCommand
     {
         public Guid AttributeTypeGuid { get; set; }
 
@@ -25,29 +25,11 @@ namespace Exolutio.Controller.Commands.Atomic
         //optional
         public Guid PSMSchemaGuid { get; set; }
 
-        public acmdNewAttributeType(Controller c)
+        public acmdNewAttributeType()
+        { }
+
+        public acmdNewAttributeType(Controller c, Guid projectVersionGuid, Guid psmSchemaGuid, string name, string xsdDefinition, bool isSealed, Guid baseType)
             : base(c)
-        {
-
-        }
-
-        public void Set(Guid projectVersionGuid, Guid attributeTypeGuid, Guid baseAttributeType, Guid psmSchemaGuid, string name, string xsdImplementation, bool isSealed)
-        {
-            AttributeTypeGuid = attributeTypeGuid;
-            BaseTypeGuid = baseAttributeType;
-            Name = name;
-            XSDDefinition = xsdImplementation;
-            PSMSchemaGuid = psmSchemaGuid;
-            ProjectVersionGuid = projectVersionGuid;
-            IsSealed = isSealed;
-        }
-
-        public override bool CanExecute()
-        {
-            return true; 
-        }
-
-        public void Set(Guid projectVersionGuid, Guid psmSchemaGuid, string name, string xsdDefinition, bool isSealed, Guid baseType)
         {
             ProjectVersionGuid = projectVersionGuid;
             Name = name;
@@ -55,6 +37,11 @@ namespace Exolutio.Controller.Commands.Atomic
             IsSealed = isSealed;
             BaseTypeGuid = baseType;
             PSMSchemaGuid = psmSchemaGuid;
+        }
+
+        public override bool CanExecute()
+        {
+            return true; 
         }
 
         internal override void CommandOperation()

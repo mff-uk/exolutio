@@ -10,7 +10,7 @@ using Exolutio.Model;
 
 namespace Exolutio.Controller.Commands.Atomic.PSM
 {
-    public class acmdSetRepresentedClass : StackedCommand
+    internal class acmdSetRepresentedClass : StackedCommand
     {
         Guid representant, represented, oldRepresented;
 

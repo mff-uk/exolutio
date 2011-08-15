@@ -6,7 +6,7 @@ using System.Linq;
 using System.Collections.Generic;
 using Exolutio.Controller.Commands.Complex.PSM;
 using Exolutio.Controller.Commands;
-using Exolutio.Controller.Commands.Atomic.PSM;
+using Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers;
 
 namespace Exolutio.View.Commands.PSM
 {
@@ -37,13 +37,13 @@ namespace Exolutio.View.Commands.PSM
                 ? selectedAssociations.OrderBy(a => a.Parent.ChildPSMAssociations.IndexOf(a))
                 : selectedAssociations.OrderByDescending(a => a.Parent.ChildPSMAssociations.IndexOf(a)))
             {
-                macro.Commands.Add(new acmdShiftPSMAssociation(Current.Controller, a, Left));
+                macro.Commands.Add(new cmdShiftPSMAssociation(Current.Controller) { AssociationGuid = a, Left = Left });
             }
             IEnumerable<PSMAssociationMember> selectedRoots = Current.ActiveDiagramView.GetSelectedComponents()
                 .Where(c => c is PSMAssociationMember).Cast<PSMAssociationMember>().Where(am => am.ParentAssociation == null);
             foreach (PSMAssociationMember am in selectedRoots)
             {
-                macro.Commands.Add(new acmdShiftPSMRoot(Current.Controller, am, Left));
+                macro.Commands.Add(new cmdShiftPSMRoot(Current.Controller) { RootGuid = am, Left = Left });
             }
             
             macro.Execute();

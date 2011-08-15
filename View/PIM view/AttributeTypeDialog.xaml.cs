@@ -10,7 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Linq;
 using Exolutio.Controller.Commands;
-using Exolutio.Controller.Commands.Atomic;
+//using Exolutio.Controller.Commands.Atomic.MacroWrappers;
 using Exolutio.Controller.Commands.Complex.PIM;
 using Exolutio.Controller.Commands.Reflection;
 using Exolutio.Dialogs;
@@ -20,6 +20,7 @@ using Exolutio.Controller;
 using Exolutio.Model.PSM;
 using Exolutio.SupportingClasses;
 using cmdDeletePIMAttribute = Exolutio.Controller.Commands.Atomic.PIM.MacroWrappers.cmdDeletePIMAttribute;
+using Exolutio.Controller.Commands.Atomic.MacroWrappers;
 
 namespace Exolutio.View
 {
@@ -259,7 +260,7 @@ namespace Exolutio.View
                 if (!found)
                 {
                     removedAttributeTypes.Add(pimAttributeType);
-                    acmdDeleteAttributeType deleteCommand = new acmdDeleteAttributeType(controller, pimAttributeType);
+                    cmdDeleteAttributeType deleteCommand = new cmdDeleteAttributeType(controller) { AttributeTypeGuid = pimAttributeType };
                     controller.CreatedMacro.Commands.Add(deleteCommand);
                 }
             }
@@ -276,7 +277,7 @@ namespace Exolutio.View
                     if (fakePIMAttributeType.SourceAttributeType != null)
                     {
                         removedAttributeTypes.Add(fakePIMAttributeType.SourceAttributeType);
-                        acmdDeleteAttributeType deleteCommand = new acmdDeleteAttributeType(controller, fakePIMAttributeType.SourceAttributeType);
+                        cmdDeleteAttributeType deleteCommand = new cmdDeleteAttributeType(controller) { AttributeTypeGuid = fakePIMAttributeType.SourceAttributeType };
                         controller.CreatedMacro.Commands.Add(deleteCommand);
                     }
                     toRemovePIM.Add(fakePIMAttributeType);
@@ -312,8 +313,12 @@ namespace Exolutio.View
             {
                 AttributeType sourceAttributeType = modifiedAttribute.SourceAttributeType;
 
-                acmdUpdateAttributeType updateCommand = new acmdUpdateAttributeType(controller, sourceAttributeType);
-                updateCommand.Set(modifiedAttribute.Name, modifiedAttribute.XSDDefinition, false, modifiedAttribute.BaseType ?? Guid.Empty);
+                cmdUpdateAttributeType updateCommand = new cmdUpdateAttributeType(controller) 
+                      { AttributeTypeGuid = sourceAttributeType, 
+                        NewName = modifiedAttribute.Name, 
+                        NewXSDDefinition = modifiedAttribute.XSDDefinition, 
+                        NewIsSealed = false, 
+                        NewBaseType = modifiedAttribute.BaseType ?? Guid.Empty };
                 controller.CreatedMacro.Commands.Add(updateCommand);
                 namesDict[sourceAttributeType] = modifiedAttribute.Name;
             }
@@ -324,9 +329,16 @@ namespace Exolutio.View
             {
                 if (!string.IsNullOrEmpty(addedAttribute.Name) && addedAttribute.Checked)
                 {
-                    acmdNewAttributeType createNewcommand = new acmdNewAttributeType(controller);
-                    createNewcommand.Set(projectVersion.ID, psmSchema ?? Guid.Empty, addedAttribute.Name, addedAttribute.XSDDefinition, false, 
-                        addedAttribute.BaseType ?? Guid.Empty);
+                    cmdNewAttributeType createNewcommand = new cmdNewAttributeType(controller)
+                          {
+                              ProjectVersionGuid = projectVersion.ID,
+                              PSMSchemaGuid = psmSchema ?? Guid.Empty,
+                              Name = addedAttribute.Name,
+                              XSDDefinition = addedAttribute.XSDDefinition,
+                              IsSealed = false,
+                              BaseTypeGuid = addedAttribute.BaseType ?? Guid.Empty
+                          };
+                            
                     controller.CreatedMacro.Commands.Add(createNewcommand);
                     addedAttributes.Add(addedAttribute);
                     names.Add(addedAttribute.Name);

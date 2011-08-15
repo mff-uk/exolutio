@@ -11,7 +11,7 @@ using Exolutio.Controller.Commands.Complex.PSM;
 
 namespace Exolutio.Controller.Commands.Atomic.PIM
 {
-    public class acmdDeletePIMAttribute : StackedCommand
+    internal class acmdDeletePIMAttribute : StackedCommand
     {
         private Guid schemaGuid;
 

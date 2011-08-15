@@ -8,7 +8,7 @@ using Exolutio.Model;
 
 namespace Exolutio.Controller.Commands.Atomic.PSM
 {
-    public class acmdUpdatePSMAttributeType : StackedCommand
+    internal class acmdUpdatePSMAttributeType : StackedCommand
     {
         Guid attributeGuid, newTypeGuid, oldTypeGuid;
         public acmdUpdatePSMAttributeType(Controller c, Guid psmAttributeGuid, Guid typeGuid)

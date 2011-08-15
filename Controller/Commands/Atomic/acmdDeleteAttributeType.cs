@@ -9,7 +9,7 @@ using Exolutio.Model;
 
 namespace Exolutio.Controller.Commands.Atomic
 {
-    public class acmdDeleteAttributeType : StackedCommand
+    internal class acmdDeleteAttributeType : StackedCommand
     {
         public Guid AttributeTypeGuid { get; set; }
 
@@ -30,9 +30,10 @@ namespace Exolutio.Controller.Commands.Atomic
             get { return Controller.Project.TranslateComponent<AttributeType>(AttributeTypeGuid); }
         }
 
-        public acmdDeleteAttributeType(Controller c, Guid attributeTypeGuid)
+        public acmdDeleteAttributeType(Controller c, Guid ownerPSMSchemaGuid, Guid attributeTypeGuid)
             : base(c)
         {
+            OwnerPSMSchemaGuid = ownerPSMSchemaGuid;
             AttributeTypeGuid = attributeTypeGuid;
         }
 

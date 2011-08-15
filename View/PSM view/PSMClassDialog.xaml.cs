@@ -516,7 +516,7 @@ namespace Exolutio.View
         {
             if (tbName.ValueChanged)
             {
-                Exolutio.Controller.Commands.Atomic.acmdRenameComponent renameCommand = new Exolutio.Controller.Commands.Atomic.acmdRenameComponent(controller, psmClass, tbName.Text);
+                Exolutio.Controller.Commands.Atomic.MacroWrappers.cmdRenameComponent renameCommand = new Exolutio.Controller.Commands.Atomic.MacroWrappers.cmdRenameComponent(controller) { ComponentGuid = psmClass, NewName = tbName.Text };
                 controller.CreatedMacro.Commands.Add(renameCommand);
                 tbName.ForgetOldValue();
             }
@@ -668,9 +668,7 @@ namespace Exolutio.View
                     }
                 }
 
-                acmdReorderComponents<PSMAssociation> reorderCommand = new acmdReorderComponents<PSMAssociation>(controller);
-                reorderCommand.ComponentGuids = ordering;
-                reorderCommand.OwnerCollection = psmClass.ChildPSMAssociations;
+                cmdReorderComponents<PSMAssociation> reorderCommand = new cmdReorderComponents<PSMAssociation>(controller) { ComponentGuids = ordering, OwnerCollection = psmClass.ChildPSMAssociations };
                 controller.CreatedMacro.Commands.Add(reorderCommand);
             }
 
@@ -776,9 +774,7 @@ namespace Exolutio.View
                     }
                 }
 
-                acmdReorderComponents<PSMAttribute> reorderCommand = new acmdReorderComponents<PSMAttribute>(controller);
-                reorderCommand.ComponentGuids = ordering;
-                reorderCommand.OwnerCollection = psmClass.PSMAttributes;
+                cmdReorderComponents<PSMAttribute> reorderCommand = new cmdReorderComponents<PSMAttribute>(controller) { ComponentGuids = ordering, OwnerCollection = psmClass.PSMAttributes };
                 controller.CreatedMacro.Commands.Add(reorderCommand);
             }
 

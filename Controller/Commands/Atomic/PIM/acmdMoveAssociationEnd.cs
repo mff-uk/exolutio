@@ -12,7 +12,7 @@ using System.Diagnostics;
 
 namespace Exolutio.Controller.Commands.Atomic.PIM
 {
-    public class acmdMoveAssociationEnd : StackedCommand
+    internal class acmdMoveAssociationEnd : StackedCommand
     {
         Guid associationEndGuid, newClassGuid, oldClassGuid;
 

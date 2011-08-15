@@ -3,7 +3,7 @@ using Exolutio.Model.PSM;
 
 namespace Exolutio.Controller.Commands.Atomic.PSM
 {
-    public class acmdUpdatePSMAttributeDefaultValue : StackedCommand
+    internal class acmdUpdatePSMAttributeDefaultValue : StackedCommand
     {
         Guid attributeGuid;
         string newDefaultValue, oldDefaultValue;

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Collections.Generic;
 using Exolutio.Controller.Commands.Complex.PSM;
 using Exolutio.Controller.Commands;
-using Exolutio.Controller.Commands.Atomic.PSM;
+using Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers;
 
 namespace Exolutio.View.Commands.PSM
 {
@@ -33,7 +33,7 @@ namespace Exolutio.View.Commands.PSM
                 ? selectedAttributes.OrderBy(a => a.PSMClass.PSMAttributes.IndexOf(a))
                 : selectedAttributes.OrderByDescending(a => a.PSMClass.PSMAttributes.IndexOf(a)))
             {
-                macro.Commands.Add(new acmdShiftPSMAttribute(Current.Controller, a, Up));
+                macro.Commands.Add(new cmdShiftPSMAttribute(Current.Controller) { AttributeGuid = a, Up = Up });
             }
             
             macro.Execute();

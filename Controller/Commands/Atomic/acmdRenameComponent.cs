@@ -8,8 +8,8 @@ using Exolutio.Model;
 
 namespace Exolutio.Controller.Commands.Atomic
 {
-    [PublicCommand("Rename component", PublicCommandAttribute.EPulicCommandCategory.Common_atomic)]
-    public class acmdRenameComponent : StackedCommand
+    //[PublicCommand("Rename component", PublicCommandAttribute.EPulicCommandCategory.Common_atomic)]
+    internal class acmdRenameComponent : StackedCommand
     {
         [PublicArgument("Component", typeof(Component))]
         [Scope(ScopeAttribute.EScope.PIMAssociation | ScopeAttribute.EScope.PIMClass | ScopeAttribute.EScope.PIMAttribute

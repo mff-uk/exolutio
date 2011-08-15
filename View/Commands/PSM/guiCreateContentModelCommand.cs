@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using Exolutio.Controller.Commands.Complex.PSM;
 using Exolutio.Controller.Commands;
 using Exolutio.Controller.Commands.Atomic.PSM;
+using Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers;
 
 namespace Exolutio.View.Commands.PSM
 {
@@ -42,7 +43,7 @@ namespace Exolutio.View.Commands.PSM
                 MacroCommand macro = new MacroCommand(Current.Controller);
                 foreach (PSMContentModel cm in selectedContentModels)
                 {
-                    macro.Commands.Add(new acmdUpdatePSMContentModel(Current.Controller, cm, Type));
+                    macro.Commands.Add(new cmdUpdatePSMContentModel(Current.Controller) { CmodelGuid = cm, Type = Type });
                 }
                 macro.Execute();
             }

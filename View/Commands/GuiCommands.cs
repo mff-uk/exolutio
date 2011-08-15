@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Exolutio.Controller.Commands.Atomic;
+using Exolutio.Controller.Commands.Atomic.MacroWrappers;
 using Exolutio.Controller.Commands.Atomic.PIM.MacroWrappers;
 using Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers;
 using Exolutio.Controller.Commands.Reflection;
@@ -167,16 +167,16 @@ namespace Exolutio.View.Commands
             HelpCommand = new guiShowHelpCommand();
             RenameProjectCommand = new guiControllerCommand
                                        {
-                                           ControllerCommandFactoryMethod = CommandFactory<acmdRenameProject>.Factory,
-                                           ControllerCommandType = typeof(acmdRenameProject),
+                                           ControllerCommandFactoryMethod = CommandFactory<cmdRenameProject>.Factory,
+                                           ControllerCommandType = typeof(cmdRenameProject),
                                            NoScope = true,
                                            OpenDialog = true,
                                            Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.pencil)
                                        };
             RenamePSMSchemaCommand = new guiControllerCommand
                                          {
-                                             ControllerCommandFactoryMethod = CommandFactory<acmdRenamePSMSchema>.Factory,
-                                             ControllerCommandType = typeof(acmdRenamePSMSchema),
+                                             ControllerCommandFactoryMethod = CommandFactory<cmdRenamePSMSchema>.Factory,
+                                             ControllerCommandType = typeof(cmdRenamePSMSchema),
                                              ScopeObjectConvertor =  guiControllerCommandScopeConvertors.DiagramToSchema,
                                              OpenDialog = true,
                                              Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.pencil)
@@ -194,8 +194,8 @@ namespace Exolutio.View.Commands
             {
                 Text = "Rename...",
                 Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.note_edit),
-                ControllerCommandFactoryMethod = CommandFactory<acmdRenameComponent>.Factory,
-                ControllerCommandType = typeof(acmdRenameComponent),
+                ControllerCommandFactoryMethod = CommandFactory<cmdRenameComponent>.Factory,
+                ControllerCommandType = typeof(cmdRenameComponent),
                 Gesture = KeyGestures.F2,
                 OpenDialog = true,
                 AcceptedSelectedComponentType = typeof(Component),

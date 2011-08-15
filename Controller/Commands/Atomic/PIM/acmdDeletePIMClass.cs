@@ -9,7 +9,7 @@ using Exolutio.Controller.Commands.Complex.PSM;
 
 namespace Exolutio.Controller.Commands.Atomic.PIM
 {
-    public class acmdDeletePIMClass : StackedCommand
+    internal class acmdDeletePIMClass : StackedCommand
     {
         Guid deletedClassGuid, schemaGuid;
         
@@ -59,17 +59,12 @@ namespace Exolutio.Controller.Commands.Atomic.PIM
 
         internal override PropagationMacroCommand PrePropagation()
         {
-            IEnumerable<CommandBase> deleteFromDiagrams =
-                acmdRemoveComponentFromDiagram.CreateCommandsToRemoveFromAllDiagrams(Controller, deletedClassGuid);
-
             List<PSMClass> list = Project.TranslateComponent<PIMClass>(deletedClassGuid).GetInterpretedComponents().Cast<PSMClass>().ToList<PSMClass>();
-            if (list.Count == 0 && deleteFromDiagrams.Count() == 0) return null;
+            if (list.Count == 0) return null;
 
             PropagationMacroCommand command = new PropagationMacroCommand(Controller);
             command.Report = new CommandReport("Pre-propagation (delete PIM class)");
             
-            command.Commands.AddRange(deleteFromDiagrams);
-
             if (list.Count > 0)
             {
                 List<PSMClass> list2 = new List<PSMClass>(list);

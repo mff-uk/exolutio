@@ -11,7 +11,7 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
     /// <summary>
     /// Atomic operation that deletes the content model and moves its associations to a parent PSMAssociationMember
     /// </summary>
-    public class acmdDeletePSMContentModel : StackedCommand
+    internal class acmdDeletePSMContentModel : StackedCommand
     {
         private Guid schemaGuid;
 

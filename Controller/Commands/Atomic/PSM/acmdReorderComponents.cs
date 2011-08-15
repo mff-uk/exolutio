@@ -8,17 +8,18 @@ using Exolutio.Model.PSM;
 
 namespace Exolutio.Controller.Commands.Atomic.PSM
 {
-    public class acmdReorderComponents<TComponentType> : StackedCommand where TComponentType : ExolutioObject
+    internal class acmdReorderComponents<TComponentType> : StackedCommand where TComponentType : ExolutioObject
     {
         public acmdReorderComponents()
         {
             
         }
 
-        public acmdReorderComponents(Controller c)
+        public acmdReorderComponents(Controller c, UndirectCollection<TComponentType> ownerCollection, List<Guid> componentGuids)
             : base(c)
         {
-            
+            ComponentGuids = componentGuids;
+            OwnerCollection = ownerCollection;
         }
 
         public UndirectCollection<TComponentType> OwnerCollection { get; set; }

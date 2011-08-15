@@ -8,7 +8,7 @@ using Exolutio.Model;
 
 namespace Exolutio.Controller.Commands.Atomic.PSM
 {
-    public class acmdShiftPSMAttribute : StackedCommand
+    internal class acmdShiftPSMAttribute : StackedCommand
     {
         Guid attributeGuid = Guid.Empty;
         bool up = true;

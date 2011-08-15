@@ -8,7 +8,7 @@ using Exolutio.Model;
 
 namespace Exolutio.Controller.Commands.Atomic
 {
-    public class acmdAddComponentToDiagram : StackedCommand
+    internal class acmdAddComponentToDiagram : StackedCommand
     {
         [PublicArgument("Component", typeof(Component))]
         public Guid ComponentGuid { get; set; }

@@ -10,7 +10,7 @@ using Exolutio.Model;
 
 namespace Exolutio.Controller.Commands.Atomic.PSM
 {
-    public abstract class acmdSetInterpretation : StackedCommand
+    internal abstract class acmdSetInterpretation : StackedCommand
     {
         protected Guid PSMComponentGuid;
 

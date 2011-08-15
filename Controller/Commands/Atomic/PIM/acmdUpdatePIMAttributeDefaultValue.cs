@@ -3,7 +3,7 @@ using Exolutio.Model.PIM;
 
 namespace Exolutio.Controller.Commands.Atomic.PIM
 {
-    public class acmdUpdatePIMAttributeDefaultValue : StackedCommand
+    internal class acmdUpdatePIMAttributeDefaultValue : StackedCommand
     {
         Guid attributeGuid;
         string newDefaultValue, oldDefaultValue;

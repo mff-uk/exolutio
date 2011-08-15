@@ -10,14 +10,14 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Linq;
 using Exolutio.Controller.Commands;
-using Exolutio.Controller.Commands.Atomic;
+using Exolutio.Controller.Commands.Atomic.MacroWrappers;
 using Exolutio.Controller.Commands.Complex.PIM;
 using Exolutio.Dialogs;
 using Exolutio.Model.PIM;
 using Exolutio.Model;
 using Exolutio.Controller;
 using Exolutio.SupportingClasses;
-using cmdDeletePIMAttribute = Exolutio.Controller.Commands.Atomic.PIM.MacroWrappers.cmdDeletePIMAttribute;
+using cmdDeletePIMAttribute = Exolutio.Controller.Commands.Complex.PIM.cmdDeletePIMAttribute;
 
 namespace Exolutio.View
 {
@@ -220,7 +220,7 @@ namespace Exolutio.View
             //controller.CreatedMacro.Description = string.Format("PIM Classs '{0}' was updated. ", PIMClass);
             if (tbName.ValueChanged)
             {
-                acmdRenameComponent renameCommand = new acmdRenameComponent(controller, PIMClass, tbName.Text);
+                cmdRenameComponent renameCommand = new cmdRenameComponent(controller) { ComponentGuid = PIMClass, NewName = tbName.Text };
                 controller.CreatedMacro.Commands.Add(renameCommand);
                 tbName.ForgetOldValue();
             }
