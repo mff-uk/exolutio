@@ -225,6 +225,9 @@
   <data name="CMDERR_NO_MULTIPLE_INHERITANCE" xml:space="preserve">
     <value>The specific class already has a general class. Multiple inheritance is not allowed.</value>
   </data>
+  <data name="CMDERR_CYCLIC_INHERITANCE" xml:space="preserve">
+    <value>The generalization relations cannot form a cycle.</value>
+  </data>
   <data name="CMDERR_NO_SELF_INHERITANCE" xml:space="preserve">
     <value>The general class must be different from the specific class.</value>
   </data>

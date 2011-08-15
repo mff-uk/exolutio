@@ -197,6 +197,15 @@ namespace Exolutio.Controller.Commands {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The generalization relations cannot form a cycle..
+        /// </summary>
+        internal static string CMDERR_CYCLIC_INHERITANCE {
+            get {
+                return ResourceManager.GetString("CMDERR_CYCLIC_INHERITANCE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cyclic representation would occur..
         /// </summary>
         internal static string CMDERR_CYCLIC_REPR {

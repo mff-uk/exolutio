@@ -243,6 +243,8 @@
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
                         <Fluent:Button Command="{x:Static Commands:GuiCommands.PIMDeleteAssociation}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+                        <Fluent:Button Command="{x:Static Commands:GuiCommands.PIMDeleteGeneralization}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
                         <Fluent:Button Command="{x:Static Commands:GuiCommands.PIMDeleteAttribute}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
                     </Fluent:Gallery>
