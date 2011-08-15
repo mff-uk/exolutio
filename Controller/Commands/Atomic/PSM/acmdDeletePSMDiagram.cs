@@ -8,7 +8,7 @@ using Exolutio.Model;
 
 namespace Exolutio.Controller.Commands.Atomic.PSM
 {
-    public class acmdDeletePSMDiagram : StackedCommand
+    internal class acmdDeletePSMDiagram : StackedCommand
     {
         private Guid schemaGuid;
 

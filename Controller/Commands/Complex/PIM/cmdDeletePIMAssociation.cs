@@ -42,6 +42,7 @@ namespace Exolutio.Controller.Commands.Complex.PIM
                 Commands.Add(new acmdUpdatePIMAssociationEndCardinality(Controller, e, 1, 1) { Propagate = false });
             }
             Commands.Add(new acmdRenameComponent(Controller, a, "") { Propagate = false });
+            Commands.AddRange(acmdRemoveComponentFromDiagram.CreateCommandsToRemoveFromAllDiagrams(Controller, AssociationGuid));
             Commands.Add(new acmdDeletePIMAssociation(Controller, a));
         }
 

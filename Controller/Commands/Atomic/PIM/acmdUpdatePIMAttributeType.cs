@@ -10,7 +10,7 @@ using Exolutio.Controller.Commands.Atomic.PSM;
 
 namespace Exolutio.Controller.Commands.Atomic.PIM
 {
-    public class acmdUpdatePIMAttributeType : StackedCommand
+    internal class acmdUpdatePIMAttributeType : StackedCommand
     {
         Guid attributeGuid, newTypeGuid, oldTypeGuid;
 

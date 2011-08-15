@@ -10,7 +10,7 @@ using Exolutio.Model;
 
 namespace Exolutio.Controller.Commands.Atomic.PSM
 {
-    public class acmdSetPSMAssociationInterpretation : acmdSetInterpretation
+    internal class acmdSetPSMAssociationInterpretation : acmdSetInterpretation
     {
         public acmdSetPSMAssociationInterpretation(Controller c, Guid interpretedPSMComponentGuid, Guid pimInterpretationGuid)
             : base(c, interpretedPSMComponentGuid, pimInterpretationGuid)

@@ -56,6 +56,7 @@ namespace Exolutio.Controller.Commands.Complex.PIM
             }
 
             Commands.Add(new acmdRenameComponent(Controller, ClassGuid, ""));
+            Commands.AddRange(acmdRemoveComponentFromDiagram.CreateCommandsToRemoveFromAllDiagrams(Controller, ClassGuid));
             Commands.Add(new acmdDeletePIMClass(Controller, ClassGuid));
         }
 

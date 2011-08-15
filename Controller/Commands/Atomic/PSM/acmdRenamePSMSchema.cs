@@ -8,14 +8,10 @@ using Exolutio.Model;
 
 namespace Exolutio.Controller.Commands.Atomic
 {
-    [PublicCommand("Rename PSM schema", PublicCommandAttribute.EPulicCommandCategory.PSM_atomic)]
-    public class acmdRenamePSMSchema : StackedCommand
+    internal class acmdRenamePSMSchema : StackedCommand
     {
-        [PublicArgument("Schema", typeof(PSMSchema))]
-        [Scope(ScopeAttribute.EScope.PSMSchema)]
         public Guid SchemaGuid { get; set; }
 
-        [PublicArgument("New name", ModifiedPropertyName = "Name")]
         public string NewName { get; set; }
 
         private string oldName;
@@ -25,9 +21,10 @@ namespace Exolutio.Controller.Commands.Atomic
 
         }
 
-        public acmdRenamePSMSchema(Controller c, string name)
+        public acmdRenamePSMSchema(Controller c, Guid schemaGuid, string name)
             : base(c)
         {
+            SchemaGuid = schemaGuid;
             NewName = name;
         }
 

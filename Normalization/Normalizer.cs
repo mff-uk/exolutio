@@ -1,7 +1,7 @@
 using System;
 using Exolutio.Controller;
 using Exolutio.Controller.Commands;
-using Exolutio.Controller.Commands.Atomic;
+using Exolutio.Controller.Commands.Atomic.MacroWrappers;
 using Exolutio.Controller.Commands.Atomic.PSM;
 using Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers;
 using Exolutio.Model;
@@ -95,7 +95,7 @@ namespace Exolutio.Model.PSM.Normalization
             else if (!modelVerifier.TestContentModelsAssociationNames(schema))
             {
                 PSMAssociation a = (PSMAssociation)modelVerifier.LastViolatingComponent;
-                acmdRenameComponent command = new acmdRenameComponent(Controller, a.ID, String.Empty);
+                cmdRenameComponent command = new cmdRenameComponent(Controller) { ComponentGuid = a.ID, NewName = String.Empty };
                 return command;
             }
             else

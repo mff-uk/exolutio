@@ -8,7 +8,7 @@ using Exolutio.Model;
 
 namespace Exolutio.Controller.Commands.Atomic
 {
-    public class acmdUpdateAttributeType : StackedCommand
+    internal class acmdUpdateAttributeType : StackedCommand
     {
         public Guid AttributeTypeGuid { get; set; }
 
@@ -30,18 +30,14 @@ namespace Exolutio.Controller.Commands.Atomic
             
         }
 
-        public acmdUpdateAttributeType(Controller c, Guid attributeTypeGuid)
+        public acmdUpdateAttributeType(Controller c, Guid attributeTypeGuid, string newName, string newXSDDefinition, bool isSealed, Guid newBaseType)
             : base(c)
         {
             AttributeTypeGuid = attributeTypeGuid;
-        }
-
-        public void Set(string name, string xsdDefinition, bool isSealed, Guid baseType)
-        {
-            NewName = name;
-            NewXSDDefinition = xsdDefinition;
+            NewName = newName;
+            NewXSDDefinition = newXSDDefinition;
             NewIsSealed = isSealed;
-            NewBaseType = baseType;
+            NewBaseType = newBaseType;
         }
 
         public override bool CanExecute()

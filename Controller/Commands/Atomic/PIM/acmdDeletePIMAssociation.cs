@@ -11,7 +11,7 @@ using Exolutio.Controller.Commands.Complex.PSM;
 
 namespace Exolutio.Controller.Commands.Atomic.PIM
 {
-    public class acmdDeletePIMAssociation : StackedCommand
+    internal class acmdDeletePIMAssociation : StackedCommand
     {
         public Guid AssociationGuid { get; set; }
 
@@ -74,16 +74,12 @@ namespace Exolutio.Controller.Commands.Atomic.PIM
 
         internal override PropagationMacroCommand PrePropagation()
         {
-            IEnumerable<CommandBase> deleteFromDiagrams =
-                acmdRemoveComponentFromDiagram.CreateCommandsToRemoveFromAllDiagrams(Controller, AssociationGuid);
             
             List<PSMAssociation> list = Project.TranslateComponent<PIMAssociation>(AssociationGuid).GetInterpretedComponents().Cast<PSMAssociation>().ToList<PSMAssociation>();
-            if (list.Count == 0 && deleteFromDiagrams.Count() == 0) return null;
+            if (list.Count == 0) return null;
 
             PropagationMacroCommand command = new PropagationMacroCommand(Controller);
             command.Report = new CommandReport("Pre-propagation (delete PIM association)");
-
-            command.Commands.AddRange(deleteFromDiagrams);
 
             if (list.Count > 0)
             {

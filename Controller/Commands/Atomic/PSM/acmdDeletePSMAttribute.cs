@@ -9,7 +9,7 @@ using Exolutio.Model;
 
 namespace Exolutio.Controller.Commands.Atomic.PSM
 {
-    public class acmdDeletePSMAttribute : StackedCommand
+    internal class acmdDeletePSMAttribute : StackedCommand
     {
         private Guid schemaGuid;
 

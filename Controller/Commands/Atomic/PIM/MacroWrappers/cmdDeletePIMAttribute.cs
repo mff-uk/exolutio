@@ -9,7 +9,8 @@ using Exolutio.Controller.Commands.Atomic.PIM;
 
 namespace Exolutio.Controller.Commands.Atomic.PIM.MacroWrappers
 {
-    [PublicCommand("Delete PIM attribute", PublicCommandAttribute.EPulicCommandCategory.PIM_atomic)]
+    [Obsolete("Atomic operation wrapper deprecated by an appropriate complex operation")]
+    //[PublicCommand("Delete PIM attribute", PublicCommandAttribute.EPulicCommandCategory.PIM_atomic)]
     public class cmdDeletePIMAttribute : MacroCommand
     {
         [PublicArgument("Deleted attribute", typeof(PIMAttribute))]

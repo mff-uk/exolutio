@@ -12,7 +12,7 @@ using Exolutio.Controller.Commands.Atomic.PIM;
 
 namespace Exolutio.Controller.Commands.Atomic.PSM
 {
-    public class acmdSynchroPSMAttributes : StackedCommand
+    internal class acmdSynchroPSMAttributes : StackedCommand
     {
         public List<Guid> X1 = new List<Guid>();
         public List<Guid> X2 = new List<Guid>();

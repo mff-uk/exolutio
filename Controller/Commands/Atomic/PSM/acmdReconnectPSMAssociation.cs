@@ -11,7 +11,7 @@ using System.Diagnostics;
 
 namespace Exolutio.Controller.Commands.Atomic.PSM
 {
-    public class acmdReconnectPSMAssociation : StackedCommand
+    internal class acmdReconnectPSMAssociation : StackedCommand
     {
         Guid associationGuid, newParentGuid, oldParentGuid;
         int index;

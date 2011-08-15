@@ -6,7 +6,7 @@ using System.Linq;
 using System.Collections.Generic;
 using Exolutio.Controller.Commands.Complex.PSM;
 using Exolutio.Controller.Commands;
-using Exolutio.Controller.Commands.Atomic.PIM;
+using Exolutio.Controller.Commands.Atomic.PIM.MacroWrappers;
 using Exolutio.Model.PIM;
 
 namespace Exolutio.View.Commands.PIM
@@ -34,7 +34,7 @@ namespace Exolutio.View.Commands.PIM
                 ? selectedAttributes.OrderBy(a => a.PIMClass.PIMAttributes.IndexOf(a))
                 : selectedAttributes.OrderByDescending(a => a.PIMClass.PIMAttributes.IndexOf(a)))
             {
-                macro.Commands.Add(new acmdShiftPIMAttribute(Current.Controller, a, Up));
+                macro.Commands.Add(new cmdShiftPIMAttribute(Current.Controller) { AttributeGuid = a, Up = Up });
             }
             
             macro.Execute();

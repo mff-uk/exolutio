@@ -9,7 +9,8 @@ using Exolutio.Controller.Commands.Atomic.PIM;
 
 namespace Exolutio.Controller.Commands.Atomic.PIM.MacroWrappers
 {
-    [PublicCommand("Delete PIM association", PublicCommandAttribute.EPulicCommandCategory.PIM_atomic)]
+    [Obsolete("Atomic operation wrapper deprecated by an appropriate complex operation")]
+    //[PublicCommand("Delete PIM association", PublicCommandAttribute.EPulicCommandCategory.PIM_atomic)]
     public class cmdDeletePIMAssociation : MacroCommand
     {
         [PublicArgument("Deleted association", typeof(PIMAssociation))]
@@ -35,8 +36,8 @@ namespace Exolutio.Controller.Commands.Atomic.PIM.MacroWrappers
 
         protected override void GenerateSubCommands()
         {
-            PIMAssociation a = Project.TranslateComponent<PIMAssociation>(AssociationGuid);
-            Commands.Add(new acmdDeletePIMAssociation(Controller, a));
+            Commands.AddRange(acmdRemoveComponentFromDiagram.CreateCommandsToRemoveFromAllDiagrams(Controller, AssociationGuid));
+            Commands.Add(new acmdDeletePIMAssociation(Controller, AssociationGuid));
         }        
     }
 }
