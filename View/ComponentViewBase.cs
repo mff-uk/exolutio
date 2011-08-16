@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Windows;
 using System.Windows.Controls;
 using Exolutio.Model;
 using Exolutio.Model.ViewHelper;
@@ -8,9 +9,19 @@ using Exolutio.SupportingClasses;
 
 namespace Exolutio.View
 {
-    public abstract class ComponentViewBaseVH<TViewHelper> : ComponentViewBase
+    public interface IComponentViewBaseVH
+    {
+        ViewHelper ViewHelper { get; }
+    }
+
+    public abstract class ComponentViewBaseVH<TViewHelper> : ComponentViewBase, IComponentViewBaseVH
         where TViewHelper : ViewHelper
     {
+        ViewHelper IComponentViewBaseVH.ViewHelper
+        {
+            get { return ViewHelper; }
+        }
+
         public abstract TViewHelper ViewHelper { get; protected set; }
 
         public override void PutInDiagram(DiagramView diagramView, ViewHelper viewHelper)
@@ -23,7 +34,7 @@ namespace Exolutio.View
         {
             if (!IsBindingSuspended)
             {
-                UpdateView();
+                UpdateView(e.PropertyName);
             }
         }
 
@@ -78,7 +89,7 @@ namespace Exolutio.View
         {
             if (!IsBindingSuspended)
             {
-                UpdateView();
+                UpdateView(e.PropertyName);
             }
         }
 
@@ -114,7 +125,8 @@ namespace Exolutio.View
         /// <summary>
         /// This method is safe to be called repeatedly. 
         /// </summary>
-        public virtual void UpdateView() { }
+        /// <param name="propertyName"></param>
+        public virtual void UpdateView(string propertyName = null) { }
 
         #endregion
 
@@ -288,6 +300,37 @@ namespace Exolutio.View
         }
 
         #endregion
+
+        #region hiding controls 
+
+        public void HideAllControls()
+        {
+            foreach (Control createdControl in CreatedControls)
+            {
+                createdControl.Visibility = Visibility.Hidden;
+                if (createdControl is Connector)
+                {
+                    ((Connector)createdControl).HideAllPoints();
+                }
+            }
+            DiagramView.ExolutioCanvas.InvokeContentChanged();
+        }
+
+        public void UnHideAllControls()
+        {
+            foreach (Control createdControl in CreatedControls)
+            {
+                createdControl.Visibility = Visibility.Visible;
+                if (createdControl is Connector)
+                {
+                    ((Connector)createdControl).UnHideAllPoints();
+                }
+            }
+            UpdateView();
+            DiagramView.ExolutioCanvas.InvokeContentChanged();
+        }
+
+        #endregion 
 
         public virtual ContextMenu ContextMenu
         {

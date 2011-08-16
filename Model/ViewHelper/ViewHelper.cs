@@ -76,6 +76,11 @@ namespace Exolutio.Model.ViewHelper
             {
                 throw new ExolutioModelException(string.Format("FillCopy called on objects of different type '{0}' and '{1}'.", this.GetType().FullName, copyComponent.GetType().FullName));
             }
+
+            //if (this is IFoldableComponentViewHelper)
+            //{
+            //    ((IFoldableComponentViewHelper) copyComponent).IsFolded = ((IFoldableComponentViewHelper) this).IsFolded;
+            //}
         }
 
         #region Implementation of IExolutioSerializable
@@ -87,12 +92,19 @@ namespace Exolutio.Model.ViewHelper
 
         public virtual void Serialize(XElement parentNode, SerializationContext context)
         {
-
+            //if (this is IFoldableComponentViewHelper)
+            //{
+            //    this.SerializeSimpleValueToElement("IsFolded", ((IFoldableComponentViewHelper)this).IsFolded, parentNode, context);
+            //}
         }
 
         public virtual void Deserialize(XElement parentNode, SerializationContext context)
         {
-            
+            //if (this is IFoldableComponentViewHelper)
+            //{
+            //    string isFoldedStr = this.DeserializeSimpleValueFromElement("IsFolded", parentNode, context, true);
+            //    ((IFoldableComponentViewHelper) this).IsFolded = !string.IsNullOrEmpty(isFoldedStr) && bool.Parse(isFoldedStr);
+            //}
         }
 
 	    #endregion

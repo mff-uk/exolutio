@@ -96,7 +96,7 @@ namespace Exolutio.ViewToolkit
             set { dragThumb.Placement = value; }
         }
 
-        internal Canvas InnerConnectorControl { get; private set; }
+        public Canvas InnerConnectorControl { get; private set; }
         public ContentControl InnerContentControl { get; private set; }
         protected Grid InnerGrid { get; private set; }
 

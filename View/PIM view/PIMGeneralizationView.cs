@@ -52,9 +52,9 @@ namespace Exolutio.View
             ((ExolutioContextMenu)ContextMenu).Diagram = null;
         }
 
-        public override void UpdateView()
+        public override void UpdateView(string propertyName = null)
         {
-            base.UpdateView();
+            base.UpdateView(propertyName);
             Node sourceNode = ((INodeComponentViewBase)DiagramView.RepresentantsCollection[SpecificClass]).MainNode;
             Node targetNode = ((INodeComponentViewBase)DiagramView.RepresentantsCollection[GeneralClass]).MainNode;
             if (sourceNode != Connector.StartNode || targetNode != Connector.EndNode)

@@ -73,9 +73,9 @@ namespace Exolutio.View
             UpdateView();
         }
 
-        public override void UpdateView()
+        public override void UpdateView(string propertyName = null)
         {
-            base.UpdateView();
+            base.UpdateView(propertyName);
             Node sourceNode = ((INodeComponentViewBase)DiagramView.RepresentantsCollection[SourceClass]).MainNode;
             Node targetNode = ((INodeComponentViewBase)DiagramView.RepresentantsCollection[TargetClass]).MainNode;
             if (sourceNode != Connector.StartNode || targetNode != Connector.EndNode)
