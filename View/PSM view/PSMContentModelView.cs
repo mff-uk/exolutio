@@ -17,6 +17,7 @@ namespace Exolutio.View
         private StackPanel stackPanel;
         private EditableTextBox tbContentModelHeader;
         private Border border;
+        private FoldingButton foldingButton;
 
         #endregion
 
@@ -38,6 +39,12 @@ namespace Exolutio.View
         protected override void CreateInnerControls(ExolutioCanvas canvas)
         {
             base.CreateInnerControls(canvas);
+
+            foldingButton = new FoldingButton();
+            MainNode.InnerConnectorControl.Children.Add(foldingButton);
+            Canvas.SetBottom(foldingButton, -15);
+            foldingButton.Click += delegate { this.ViewHelper.IsFolded = !this.ViewHelper.IsFolded; };
+            
             #region main node content components
             border = new Border
                          {
@@ -86,9 +93,10 @@ namespace Exolutio.View
         /// <summary>
         /// This method is safe to be called repeatedly. 
         /// </summary>
-        public override void UpdateView()
+        /// <param name="propertyName"></param>
+        public override void UpdateView(string propertyName = null)
         {
-            base.UpdateView();
+            base.UpdateView(propertyName);
             if (PSMContentModel != null)
             {
                 switch (PSMContentModel.Type)
@@ -104,6 +112,12 @@ namespace Exolutio.View
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();
+                }
+
+                if (foldingButton.Folded != ViewHelper.IsFolded)
+                {
+                    foldingButton.Folded = ViewHelper.IsFolded;
+                    FoldingHelper.FoldChildrenRecursive(PSMContentModel, DiagramView, ViewHelper.IsFolded ? EFoldingAction.Fold : EFoldingAction.Unfold);
                 }
             }
 

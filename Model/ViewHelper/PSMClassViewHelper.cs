@@ -14,7 +14,7 @@ namespace Exolutio.Model.ViewHelper
 	/// are not part of the UML model itself, but need to be saved and loaded to reconstruct a 
 	/// previously saved diagram. 
 	/// </summary>
-	public class PSMClassViewHelper : ViewHelper, IComponentViewHelper
+    public class PSMClassViewHelper : ViewHelper, IComponentViewHelper, IFoldableComponentViewHelper
 	{
 	    public PSMClassViewHelper(Diagram diagram)
 	        : base(diagram)
@@ -54,5 +54,17 @@ namespace Exolutio.Model.ViewHelper
         {
             base.Deserialize(parentNode, context);
         }
+
+	    public bool CanFold()
+	    {
+	        return !IsFolded;
+	    }
+
+	    private bool isFolded;
+	    public bool IsFolded
+	    {
+	        get { return isFolded; }
+	        set { isFolded = value; NotifyPropertyChanged("IsFolded");}
+	    }
 	}
 }

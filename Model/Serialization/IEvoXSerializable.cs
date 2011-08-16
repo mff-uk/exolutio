@@ -183,10 +183,13 @@ namespace Exolutio.Model.Serialization
             return component.DeserializeIDRef("Type", parentNode, context);
         }
 
-        public static string DeserializeSimpleValueFromElement(this IExolutioSerializable component, [NotNull]string elementName, XElement parentNode, SerializationContext context)
+        public static string DeserializeSimpleValueFromElement(this IExolutioSerializable component, [NotNull]string elementName, XElement parentNode, SerializationContext context, bool optional = false)
         {
             XElement element = parentNode.Element(context.ExolutioNS + elementName);
-            return element.Value;
+            if (element == null && optional)
+                return null;
+            else 
+                return element.Value;
         }
 
         public static string DeserializeSimpleValueFromCDATA(this IExolutioSerializable component, [NotNull]string elementName, XElement parentNode, SerializationContext context)

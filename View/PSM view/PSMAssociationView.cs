@@ -53,9 +53,9 @@ namespace Exolutio.View
             }
         }
 
-        public override void UpdateView()
+        public override void UpdateView(string propertyName = null)
         {
-            base.UpdateView();
+            base.UpdateView(propertyName);
             if (DiagramView != null)
             {
                 Node parentNode = ((INodeComponentViewBase) DiagramView.RepresentantsCollection[Parent]).MainNode;

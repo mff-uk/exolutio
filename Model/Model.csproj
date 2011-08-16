@@ -191,6 +191,7 @@
     <Compile Include="AttributeType.cs" />
     <Compile Include="Versioning\Version.cs" />
     <Compile Include="Versioning\VersionManager.cs" />
+    <Compile Include="ViewHelper\IFoldableComponentViewHelper.cs" />
     <Compile Include="ViewHelper\PIMGeneralizationViewHelper.cs" />
     <Compile Include="ViewHelper\PSMSchemaClassViewHelper.cs" />
     <Compile Include="ViewHelper\PSMContentModelViewHelper.cs" />

@@ -681,6 +681,10 @@ namespace Exolutio.ViewToolkit
                 {
                     connectorPoint.ParentControl.InnerConnectorControl.Children.Remove(connectorPoint);
                 }
+                else
+                {
+                    connectorPoint.ExolutioCanvas.Children.Remove(connectorPoint);   
+                }
             }
 #if SILVERLIGHT
             foreach (Line line in lines)
@@ -821,5 +825,25 @@ namespace Exolutio.ViewToolkit
         }
 
         #endif
+
+        #region Hide/show points 
+
+        public void HideAllPoints()
+        {
+            foreach (ConnectorPoint connectorPoint in Points)
+            {
+                connectorPoint.Visibility = Visibility.Hidden;
+            }    
+        }
+
+        public void UnHideAllPoints()
+        {
+            foreach (ConnectorPoint connectorPoint in Points)
+            {
+                connectorPoint.Visibility = Visibility.Visible;
+            }    
+        }
+
+        #endregion 
     }
 }

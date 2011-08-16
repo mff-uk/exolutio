@@ -32,7 +32,8 @@ namespace Exolutio.View
         /// <summary>
         /// This method is safe to be called repeatedly. 
         /// </summary>
-        void UpdateView();
+        /// <param name="propertyName"></param>
+        void UpdateView(string propertyName);
 
         void PutInDiagramDeferred(DiagramView diagramView, Component component, ViewHelper viewHelper);
         void RemoveFromDiagramDeferred();

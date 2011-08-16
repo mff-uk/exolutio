@@ -179,9 +179,10 @@ namespace Exolutio.View
         /// <summary>
         /// This method is safe to be called repeatedly. 
         /// </summary>
-        public override void UpdateView()
+        /// <param name="propertyName"></param>
+        public override void UpdateView(string propertyName = null)
         {
-            base.UpdateView();
+            base.UpdateView(propertyName);
             if (PIMClass != null)
             {
                 tbClassHeader.Text = PIMClass.Name;

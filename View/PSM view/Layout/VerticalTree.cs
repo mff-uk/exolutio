@@ -63,6 +63,15 @@ namespace Exolutio.View
             
             if (root is PSMAssociationMember)
             {
+                ComponentViewBase componentView = psmDiagramView.RepresentantsCollection[root];
+                if (componentView is IComponentViewBaseVH && ((IComponentViewBaseVH)componentView).ViewHelper is IFoldableComponentViewHelper)
+                {
+                    if (((IFoldableComponentViewHelper)((IComponentViewBaseVH)componentView).ViewHelper).IsFolded)
+                    {
+                        return right - left;
+                    }
+                }
+
                 PSMAssociationMember rootAM = (PSMAssociationMember) root;
                 if (rootAM.ChildPSMAssociations.Count > 0)
                 {
