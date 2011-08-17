@@ -10,7 +10,7 @@ using Exolutio.Controller.Commands.Atomic.PSM;
 namespace Exolutio.Controller.Commands.Complex.PSM
 {
     [PublicCommand("Delete root PSM class (recursive)", PublicCommandAttribute.EPulicCommandCategory.PSM_atomic)]
-    public class cmdDeletePSMClassRecursive : MacroCommand
+    public class cmdDeletePSMClassRecursive : ComposedCommand
     {
         [PublicArgument("PSMClass", typeof(PSMClass))]
         [Scope(ScopeAttribute.EScope.PSMClass)]

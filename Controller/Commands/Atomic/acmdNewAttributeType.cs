@@ -8,7 +8,7 @@ using Exolutio.Model;
 
 namespace Exolutio.Controller.Commands.Atomic
 {
-    internal class acmdNewAttributeType : StackedCommand
+    internal class acmdNewAttributeType : AtomicCommand
     {
         public Guid AttributeTypeGuid { get; set; }
 

@@ -11,7 +11,7 @@ using System.Diagnostics;
 namespace Exolutio.Controller.Commands.Complex.PSM
 {
     [PublicCommand("Reconnect PSM association (complex)", PublicCommandAttribute.EPulicCommandCategory.PSM_complex)]
-    public class cmdReconnectPSMAssociation : MacroCommand
+    public class cmdReconnectPSMAssociation : ComposedCommand
     {
         [PublicArgument("Association", typeof(PSMAssociation))]
         [Scope(ScopeAttribute.EScope.PSMAssociation)]

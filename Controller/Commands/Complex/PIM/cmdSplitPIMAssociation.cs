@@ -11,7 +11,7 @@ using Exolutio.Controller.Commands.Atomic.PIM;
 namespace Exolutio.Controller.Commands.Complex.PIM
 {
     [PublicCommand("Split PIM association (complex)", PublicCommandAttribute.EPulicCommandCategory.PIM_complex)]
-    public class cmdSplitPIMAssociation : MacroCommand
+    public class cmdSplitPIMAssociation : ComposedCommand
     {
         [PublicArgument("PIM association", typeof(PIMAssociation))]
         [Scope(ScopeAttribute.EScope.PIMAssociation)]

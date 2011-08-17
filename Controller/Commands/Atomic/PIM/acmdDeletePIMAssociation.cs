@@ -11,7 +11,7 @@ using Exolutio.Controller.Commands.Complex.PSM;
 
 namespace Exolutio.Controller.Commands.Atomic.PIM
 {
-    internal class acmdDeletePIMAssociation : StackedCommand
+    internal class acmdDeletePIMAssociation : AtomicCommand
     {
         public Guid AssociationGuid { get; set; }
 

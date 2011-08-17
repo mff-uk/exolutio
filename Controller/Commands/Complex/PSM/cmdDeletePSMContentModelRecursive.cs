@@ -13,7 +13,7 @@ namespace Exolutio.Controller.Commands.Complex.PSM
     /// Deletes the subtree rooted in this root content model
     /// </summary>
     [PublicCommand("Delete root PSM content model (recursive)", PublicCommandAttribute.EPulicCommandCategory.PSM_atomic)]
-    public class cmdDeletePSMContentModelRecursive : MacroCommand
+    public class cmdDeletePSMContentModelRecursive : ComposedCommand
     {
         [PublicArgument("Content Model", typeof(PSMContentModel))]
         [Scope(ScopeAttribute.EScope.PSMContentModel)]

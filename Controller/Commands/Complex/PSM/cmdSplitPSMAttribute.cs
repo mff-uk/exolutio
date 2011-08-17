@@ -11,7 +11,7 @@ using Exolutio.Controller.Commands.Atomic.PSM;
 namespace Exolutio.Controller.Commands.Complex.PSM
 {
     [PublicCommand("Split PSM attribute (complex)", PublicCommandAttribute.EPulicCommandCategory.PSM_complex)]
-    public class cmdSplitPSMAttribute : MacroCommand
+    public class cmdSplitPSMAttribute : ComposedCommand
     {
         [PublicArgument("PSM attribute", typeof(PSMAttribute))]
         [Scope(ScopeAttribute.EScope.PSMAttribute)]

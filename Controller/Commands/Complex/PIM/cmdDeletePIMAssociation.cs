@@ -10,7 +10,7 @@ using Exolutio.Controller.Commands.Atomic.PIM;
 namespace Exolutio.Controller.Commands.Complex.PIM
 {
     [PublicCommand("Delete PIM association (complex)", PublicCommandAttribute.EPulicCommandCategory.PIM_complex)]
-    public class cmdDeletePIMAssociation : MacroCommand
+    public class cmdDeletePIMAssociation : ComposedCommand
     {
         [PublicArgument("Deleted association", typeof(PIMAssociation))]
         [Scope(ScopeAttribute.EScope.PIMAssociation)]

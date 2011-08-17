@@ -11,7 +11,7 @@ using System.Diagnostics;
 namespace Exolutio.Controller.Commands.Complex.PSM
 {
     [PublicCommand("Move PSM attribute (complex)", PublicCommandAttribute.EPulicCommandCategory.PSM_complex)]
-    public class cmdMovePSMAttribute : MacroCommand
+    public class cmdMovePSMAttribute : ComposedCommand
     {
         [PublicArgument("Moved PSM attribute", typeof(PSMAttribute))]
         [Scope(ScopeAttribute.EScope.PSMAttribute)]

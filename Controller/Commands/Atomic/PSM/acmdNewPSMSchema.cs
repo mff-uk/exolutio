@@ -8,7 +8,7 @@ using Exolutio.Model;
 
 namespace Exolutio.Controller.Commands.Atomic.PSM
 {
-    internal class acmdNewPSMSchema : StackedCommand
+    internal class acmdNewPSMSchema : AtomicCommand
     {
         private Guid schemaGuid;
 

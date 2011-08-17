@@ -10,7 +10,7 @@ using Exolutio.Controller.Commands.Atomic.PSM;
 namespace Exolutio.Controller.Commands.Complex.PSM
 {
     [PublicCommand("Delete PSM association (recursive)", PublicCommandAttribute.EPulicCommandCategory.PSM_atomic)]
-    public class cmdDeletePSMAssociationRecursive : MacroCommand
+    public class cmdDeletePSMAssociationRecursive : ComposedCommand
     {
         [PublicArgument("Deleted PSM association", typeof(PSMAssociation))]
         [Scope(ScopeAttribute.EScope.PSMAssociation)]

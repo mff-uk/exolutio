@@ -12,7 +12,7 @@ using Exolutio.Controller.Commands.Reflection;
 namespace Exolutio.Controller.Commands.Complex.PSM
 {
     [PublicCommand("Add selected associations to content model (complex)", PublicCommandAttribute.EPulicCommandCategory.PSM_complex)]
-    public class cmdContentToContentModel : MacroCommand
+    public class cmdContentToContentModel : ComposedCommand
     {
         [PublicArgument("Parent PSM Association Member", typeof(PSMAssociationMember))]
         [Scope(ScopeAttribute.EScope.PSMClass | ScopeAttribute.EScope.PSMContentModel | ScopeAttribute.EScope.PSMSchemaClass)]

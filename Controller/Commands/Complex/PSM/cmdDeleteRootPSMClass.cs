@@ -13,7 +13,7 @@ namespace Exolutio.Controller.Commands.Complex.PSM
     /// Deletes root PSM class, its attributes and content associations
     /// </summary>
     [PublicCommand("Delete root PSM class, its attributes and content associations (complex)", PublicCommandAttribute.EPulicCommandCategory.PSM_complex)]
-    public class cmdDeleteRootPSMClass : MacroCommand
+    public class cmdDeleteRootPSMClass : ComposedCommand
     {
         [PublicArgument("Deleted PSM class", typeof(PSMClass))]
         [Scope(ScopeAttribute.EScope.PSMClass)]

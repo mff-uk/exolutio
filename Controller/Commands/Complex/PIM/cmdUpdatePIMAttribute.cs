@@ -10,7 +10,7 @@ using Exolutio.Controller.Commands.Atomic.PIM;
 namespace Exolutio.Controller.Commands.Complex.PIM
 {
     [PublicCommand("Update PIM attribute (complex)", PublicCommandAttribute.EPulicCommandCategory.PIM_complex)]
-    public class cmdUpdatePIMAttribute : MacroCommand
+    public class cmdUpdatePIMAttribute : ComposedCommand
     {
         [PublicArgument("Name", ModifiedPropertyName = "Name")]
         public string Name { get; set; }

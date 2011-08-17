@@ -10,7 +10,7 @@ using Exolutio.Controller.Commands.Atomic.PSM;
 
 namespace Exolutio.Controller.Commands.Atomic.PIM
 {
-    internal class acmdUpdatePIMAttributeCardinality : StackedCommand
+    internal class acmdUpdatePIMAttributeCardinality : AtomicCommand
     {
         Guid ComponentGuid;
         uint oldLower, newLower;

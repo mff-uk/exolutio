@@ -11,7 +11,7 @@ using Exolutio.Controller.Commands.Atomic.PSM;
 namespace Exolutio.Controller.Commands.Complex.PSM
 {
     [PublicCommand("Add PSM class as interpreted child (complex)", PublicCommandAttribute.EPulicCommandCategory.PSM_complex)]
-    public class cmdCreateNewPSMClassAsIntChild : MacroCommand
+    public class cmdCreateNewPSMClassAsIntChild : ComposedCommand
     {
         [PublicArgument("Parent PSM class", typeof(PSMClass))]
         [Scope(ScopeAttribute.EScope.PSMClass)]

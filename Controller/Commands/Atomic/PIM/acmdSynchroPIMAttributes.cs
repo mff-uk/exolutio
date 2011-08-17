@@ -12,7 +12,7 @@ using System.Collections.ObjectModel;
 
 namespace Exolutio.Controller.Commands.Atomic.PIM
 {
-    internal class acmdSynchroPIMAttributes : StackedCommand
+    internal class acmdSynchroPIMAttributes : AtomicCommand
     {
         public List<Guid> X1 = new List<Guid>();
         public List<Guid> X2 = new List<Guid>();
