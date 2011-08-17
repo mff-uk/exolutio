@@ -10,7 +10,7 @@ using Exolutio.Controller.Commands.Atomic.PIM;
 namespace Exolutio.Controller.Commands.Complex.PIM
 {
     [PublicCommand("Delete PIM generalization", PublicCommandAttribute.EPulicCommandCategory.PIM_atomic)]
-    public class cmdDeletePIMGeneralization : MacroCommand
+    public class cmdDeletePIMGeneralization : ComposedCommand
     {
         [PublicArgument("Deleted generalization", typeof(PIMGeneralization))]
         [Scope(ScopeAttribute.EScope.PIMGeneralization)]

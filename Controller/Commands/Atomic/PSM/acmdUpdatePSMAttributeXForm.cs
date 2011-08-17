@@ -8,7 +8,7 @@ using Exolutio.Model;
 
 namespace Exolutio.Controller.Commands.Atomic.PSM
 {
-    internal class acmdUpdatePSMAttributeXForm : StackedCommand
+    internal class acmdUpdatePSMAttributeXForm : AtomicCommand
     {
         Guid attributeGuid;
         bool newForm, oldForm;

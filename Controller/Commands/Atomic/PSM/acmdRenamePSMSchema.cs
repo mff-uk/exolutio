@@ -8,7 +8,7 @@ using Exolutio.Model;
 
 namespace Exolutio.Controller.Commands.Atomic
 {
-    internal class acmdRenamePSMSchema : StackedCommand
+    internal class acmdRenamePSMSchema : AtomicCommand
     {
         public Guid SchemaGuid { get; set; }
 

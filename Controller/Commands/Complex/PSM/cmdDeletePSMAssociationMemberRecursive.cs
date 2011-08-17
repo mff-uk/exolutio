@@ -9,7 +9,7 @@ using Exolutio.Controller.Commands.Atomic.PSM;
 
 namespace Exolutio.Controller.Commands.Complex.PSM
 {
-    public class cmdDeletePSMAssociationMemberRecursive : MacroCommand
+    public class cmdDeletePSMAssociationMemberRecursive : ComposedCommand
     {
         public Guid AssociationMemberGuid { get; set; }
         

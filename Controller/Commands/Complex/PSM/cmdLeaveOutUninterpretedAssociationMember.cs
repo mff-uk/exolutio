@@ -14,7 +14,7 @@ namespace Exolutio.Controller.Commands.Complex.PSM
     /// Leaves out content model or uninterpreted class
     /// </summary>
     [PublicCommand("Leave out uninterpreted association member (complex)", PublicCommandAttribute.EPulicCommandCategory.PSM_complex)]
-    public class cmdLeaveOutUninterpretedAssociationMember : MacroCommand
+    public class cmdLeaveOutUninterpretedAssociationMember : ComposedCommand
     {
         [PublicArgument("Left out PSM content model or uninterpreted class", typeof(PSMAssociationMember))]
         [Scope(ScopeAttribute.EScope.PSMContentModel | ScopeAttribute.EScope.PSMClass)]

@@ -10,7 +10,7 @@ using Exolutio.Controller.Commands.Atomic.PIM;
 namespace Exolutio.Controller.Commands.Complex.PIM
 {
     [PublicCommand("Create new PIM association (complex)", PublicCommandAttribute.EPulicCommandCategory.PIM_complex)]
-    public class cmdCreateNewPIMAssociation : MacroCommand, ICommandWithDiagramParameter
+    public class cmdCreateNewPIMAssociation : ComposedCommand, ICommandWithDiagramParameter
     {
         public Guid SchemaGuid { get; set; }
 

@@ -11,7 +11,7 @@ using Exolutio.Controller.Commands.Atomic.PSM;
 namespace Exolutio.Controller.Commands.Complex.PSM
 {
     [PublicCommand("Create new PSM attribute (complex)", PublicCommandAttribute.EPulicCommandCategory.PSM_complex)]
-    public class cmdCreateNewPSMAttribute : MacroCommand
+    public class cmdCreateNewPSMAttribute : ComposedCommand
     {
         [PublicArgument("Name", SuggestedValue = "newAttribute")]
         public string Name { get; set; }

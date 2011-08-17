@@ -9,7 +9,7 @@ using Exolutio.Model;
 
 namespace Exolutio.Controller.Commands.Atomic
 {
-    internal class acmdDeleteAttributeType : StackedCommand
+    internal class acmdDeleteAttributeType : AtomicCommand
     {
         public Guid AttributeTypeGuid { get; set; }
 

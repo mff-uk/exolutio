@@ -8,7 +8,7 @@ using Exolutio.Model.PSM;
 namespace Exolutio.Controller.Commands.Complex.PIM
 {
     [PublicCommand("Derive new PSM root (complex)", PublicCommandAttribute.EPulicCommandCategory.PIM_complex)]
-    public class cmdDerivePSMRoot : MacroCommand
+    public class cmdDerivePSMRoot : ComposedCommand
     {
         [PublicArgument("PSM schema", typeof(PSMSchema), AllowNullInput = true)]
         public Guid SchemaGuid { get; set; }

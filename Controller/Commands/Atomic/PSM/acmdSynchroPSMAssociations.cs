@@ -13,7 +13,7 @@ using Exolutio.SupportingClasses;
 
 namespace Exolutio.Controller.Commands.Atomic.PSM
 {
-    internal class acmdSynchroPSMAssociations : StackedCommand
+    internal class acmdSynchroPSMAssociations : AtomicCommand
     {
         public List<Guid> X1 = new List<Guid>();
         public List<Guid> X2 = new List<Guid>();

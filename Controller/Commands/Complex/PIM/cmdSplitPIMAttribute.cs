@@ -9,7 +9,7 @@ using System.Collections.Generic;
 namespace Exolutio.Controller.Commands.Complex.PIM
 {
     [PublicCommand("Split PIM attribute (complex)", PublicCommandAttribute.EPulicCommandCategory.PIM_complex)]
-    public class cmdSplitPIMAttribute : MacroCommand
+    public class cmdSplitPIMAttribute : ComposedCommand
     {
         [PublicArgument("PIM attribute", typeof(PIMAttribute))]
         [Scope(ScopeAttribute.EScope.PIMAttribute)]

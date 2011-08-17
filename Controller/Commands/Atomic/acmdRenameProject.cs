@@ -8,7 +8,7 @@ using Exolutio.Model;
 
 namespace Exolutio.Controller.Commands.Atomic
 {
-    internal class acmdRenameProject : StackedCommand
+    internal class acmdRenameProject : AtomicCommand
     {
         public string NewName { get; set; }
         

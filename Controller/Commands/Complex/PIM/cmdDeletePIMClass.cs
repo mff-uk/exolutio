@@ -9,7 +9,7 @@ using Exolutio.Controller.Commands.Atomic.PIM;
 namespace Exolutio.Controller.Commands.Complex.PIM
 {
     [PublicCommand("Delete PIM class (complex)", PublicCommandAttribute.EPulicCommandCategory.PIM_complex)]
-    public class cmdDeletePIMClass : MacroCommand
+    public class cmdDeletePIMClass : ComposedCommand
     {
         [PublicArgument("Deleted class", typeof(PIMClass))]
         [Scope(ScopeAttribute.EScope.PIMClass)]

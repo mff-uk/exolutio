@@ -8,7 +8,7 @@ using Exolutio.Model;
 
 namespace Exolutio.Controller.Commands.Atomic
 {
-    internal class acmdRemoveComponentFromDiagram : StackedCommand
+    internal class acmdRemoveComponentFromDiagram : AtomicCommand
     {
         [PublicArgument("Component", typeof(Component))]
         public Guid ComponentGuid { get; set; }

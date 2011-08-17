@@ -10,7 +10,7 @@ using Exolutio.Controller.Commands.Atomic.PIM;
 namespace Exolutio.Controller.Commands.Complex.PIM
 {
     [PublicCommand("Delete PIM attribute (complex)", PublicCommandAttribute.EPulicCommandCategory.PIM_complex)]
-    public class cmdDeletePIMAttribute : MacroCommand
+    public class cmdDeletePIMAttribute : ComposedCommand
     {
         [PublicArgument("Deleted attribute", typeof(PIMAttribute))]
         [Scope(ScopeAttribute.EScope.PIMAttribute)]

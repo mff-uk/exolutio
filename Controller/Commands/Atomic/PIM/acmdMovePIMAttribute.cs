@@ -12,7 +12,7 @@ using Exolutio.Controller.Commands.Atomic.PSM;
 
 namespace Exolutio.Controller.Commands.Atomic.PIM
 {
-    internal class acmdMovePIMAttribute : StackedCommand
+    internal class acmdMovePIMAttribute : AtomicCommand
     {
         Guid attributeGuid, newClassGuid, oldClassGuid;
         int index;

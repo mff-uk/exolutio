@@ -8,7 +8,7 @@ using Exolutio.Model;
 
 namespace Exolutio.Controller.Commands.Atomic.PIM
 {
-    internal class acmdNewPIMClass : StackedCommand
+    internal class acmdNewPIMClass : AtomicCommand
     {
         private Guid schemaGuid;
 

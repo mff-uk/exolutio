@@ -9,7 +9,7 @@ using Exolutio.Model;
 namespace Exolutio.Controller.Commands.Atomic
 {
     //[PublicCommand("Rename component", PublicCommandAttribute.EPulicCommandCategory.Common_atomic)]
-    internal class acmdRenameComponent : StackedCommand
+    internal class acmdRenameComponent : AtomicCommand
     {
         [PublicArgument("Component", typeof(Component))]
         [Scope(ScopeAttribute.EScope.PIMAssociation | ScopeAttribute.EScope.PIMClass | ScopeAttribute.EScope.PIMAttribute

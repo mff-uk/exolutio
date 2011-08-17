@@ -10,7 +10,7 @@ using Exolutio.Controller.Commands.Atomic.PSM;
 namespace Exolutio.Controller.Commands.Complex.PSM
 {
     [PublicCommand("Delete PSM schema (complex)", PublicCommandAttribute.EPulicCommandCategory.PSM_complex)]
-    public class cmdDeletePSMSchema : MacroCommand
+    public class cmdDeletePSMSchema : ComposedCommand
     {
         [PublicArgument("Deleted PSM schema", typeof(PSMSchema))]
         [Scope(ScopeAttribute.EScope.PSMSchema)]
