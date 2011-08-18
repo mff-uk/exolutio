@@ -71,12 +71,13 @@ namespace Exolutio.View
 
         void ExolutioCanvas_ContentChanged()
         {
-            DoLayout();
+            DoLayout();            
         }
 
         private void DoLayout()
         {
-            if (!this.Loading 
+            if (!this.Loading &&
+                !this.SuspendBindingInChildren
                 #if SILVERLIGHT
                 #else
                 && this.IsArrangeValid

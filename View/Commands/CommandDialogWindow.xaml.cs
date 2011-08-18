@@ -107,6 +107,10 @@ namespace Exolutio.View.Commands
                         continue;
                     }
                     child.Focus();
+                    if (child is TextBox)
+                    {
+                        ((TextBox)child).SelectAll();
+                    }
                     break;
                 }
             }

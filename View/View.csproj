@@ -81,6 +81,7 @@
     </Compile>
     <Compile Include="Commands\Edit\guiOpenAttributeTypesDialogCommand.cs" />
     <Compile Include="Commands\Grammar\guiGenerateXSDCommand.cs" />
+    <Compile Include="Commands\Local\guiSelectNextCommand.cs" />
     <Compile Include="Commands\PIM\guiPIMDeleteGeneralization.cs" />
     <Compile Include="Commands\PIM\guiSplitPIMAssociation.cs" />
     <Compile Include="Commands\PIM\guiSplitPIMAttribute.cs" />

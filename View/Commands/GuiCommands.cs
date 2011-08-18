@@ -149,6 +149,13 @@ namespace Exolutio.View.Commands
 
         #endregion
 
+        #region traversing
+
+        public static guiSelectNextCommand SelectNextCommand { get; set; }
+        public static guiSelectNextCommand SelectPrevCommand { get; set; }
+        
+        #endregion
+        
         public static void Init(IMainWindow mainWindow)
         {
             #region project
@@ -481,6 +488,13 @@ namespace Exolutio.View.Commands
             alignCommands.Add(DistributeHorizontallyCommand);
 
             #endregion
+
+            #region traversing
+
+            SelectNextCommand = new guiSelectNextCommand();
+            SelectPrevCommand = new guiSelectNextCommand();
+
+            #endregion 
         }
     }
 }

@@ -121,7 +121,7 @@ namespace Exolutio.ViewToolkit
         public EConnectorCapStyle EndCapStyle { get; set; }
         #endif
 
-        private Geometry geometry;
+        private PathGeometry geometry;
 
         private bool sourceMeasureValid = true;
 
@@ -159,20 +159,21 @@ namespace Exolutio.ViewToolkit
             AdjustEndPoints();
         }
 
-        public void InvalidateGeometry()
+        public void InvalidateGeometry( )
         {
             bool valid = AdjustEndPoints();
             if (!valid)
                 return;
 
+            Point startPointShifted = StartPoint.CanvasPosition;
+            Point endPointShifted = EndPoint.CanvasPosition;
+            
             PathGeometry path = new PathGeometry();
 
             PathFigure startFigure = null;
             PathFigure endFigure = null;
-            Point startPointShifted = StartPoint.CanvasPosition;
-            Point endPointShifted = EndPoint.CanvasPosition;
-
-            //#region define startFigure
+            
+            #region define startFigure
 
             if (StartCapStyle != EConnectorCapStyle.Straight)
             {
@@ -205,9 +206,9 @@ namespace Exolutio.ViewToolkit
                 }
             }
 
-            //#endregion
+            #endregion
 
-            //#region define endFigure
+            #region define endFigure
 
             #if SILVERLIGHT
             #else
@@ -240,8 +241,8 @@ namespace Exolutio.ViewToolkit
                 }
             }
             #endif
-
-            //#endregion
+           
+            #endregion
 
             #region create junctionFigure
 
