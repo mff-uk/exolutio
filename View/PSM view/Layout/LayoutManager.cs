@@ -12,13 +12,17 @@ namespace Exolutio.View
             verticalTreeRightAngles = new VerticalTreeRightAngles();
         }
 
+        bool layouting = false; 
+
         public void DoLayout(PSMDiagramView psmDiagramView)
         {
-            if (psmDiagramView.Diagram != null)
+            if (psmDiagramView.Diagram != null && !layouting)
             {
+                layouting = true; 
                 //verticalTree.LayoutDiagram(psmDiagramView);
                 verticalTreeRightAngles.LayoutDiagram(psmDiagramView);
                 psmDiagramView.ExolutioCanvas.InvalidateMeasure();
+                layouting = false;
             }
         }
     }

@@ -10,7 +10,7 @@ using Exolutio.Controller.Commands.Atomic.PSM;
 namespace Exolutio.Controller.Commands.Complex.PSM
 {
     [PublicCommand("Update PSM attribute (complex)", PublicCommandAttribute.EPulicCommandCategory.PSM_complex)]
-    public class cmdUpdatePSMAttribute : MacroCommand
+    public class cmdUpdatePSMAttribute : ComposedCommand
     {
         [PublicArgument("Name", ModifiedPropertyName = "Name")]
         public string Name { get; set; }
