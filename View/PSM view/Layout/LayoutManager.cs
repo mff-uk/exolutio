@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 namespace Exolutio.View
 {
     public class LayoutManager
@@ -16,6 +18,7 @@ namespace Exolutio.View
 
         public void DoLayout(PSMDiagramView psmDiagramView)
         {
+            Stopwatch stopwatch = Stopwatch.StartNew();
             if (psmDiagramView.Diagram != null && !layouting)
             {
                 layouting = true; 
@@ -23,6 +26,8 @@ namespace Exolutio.View
                 verticalTreeRightAngles.LayoutDiagram(psmDiagramView);
                 psmDiagramView.ExolutioCanvas.InvalidateMeasure();
                 layouting = false;
+                stopwatch.Stop();
+                Debug.WriteLine("Layouting {0} took {1}.", psmDiagramView.Diagram, stopwatch.Elapsed);
             }
         }
     }

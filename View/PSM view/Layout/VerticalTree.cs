@@ -31,7 +31,6 @@ namespace Exolutio.View
         /// <param name="psmDiagramView">The diagram (resp. canvas) to be layouted.</param>
         public virtual void LayoutDiagram(PSMDiagramView psmDiagramView)
         {
-            Debug.WriteLine("Layouting...");
             double left = horizontalSpace;
             foreach (PSMAssociationMember root in psmDiagramView.PSMDiagram.PSMSchema.Roots)
             {

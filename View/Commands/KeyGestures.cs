@@ -99,5 +99,17 @@ namespace Exolutio.View
         {
             get { return controldelete; }
         }
+
+        private static readonly KeyGesture tab = new KeyGesture(Key.Tab);
+        public static KeyGesture Tab
+        {
+            get { return tab; }
+        }
+
+        private static readonly KeyGesture shiftTab = new KeyGesture(Key.Tab, ModifierKeys.Shift);
+        public static KeyGesture ShiftTab
+        {
+            get { return shiftTab; }
+        }
     }
 }

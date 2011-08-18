@@ -78,6 +78,7 @@ namespace Exolutio.WPFClient
 
         public void LoadScriptsForActiveSchema()
         {
+            DisplayedScript = null;
             textBox1.Clear();
             if (CurrentSchema != null)
             {

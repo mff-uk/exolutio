@@ -64,7 +64,20 @@ namespace Exolutio.View
         #region model binding
 
         private int suspendCounter = 0;
-        public bool IsBindingSuspended { get; private set; }
+        
+        private bool isBindingSuspended;
+        
+        public bool IsBindingSuspended
+        {
+            get
+            {
+                return isBindingSuspended || DiagramView.Loading || DiagramView.SuspendBindingInChildren;
+            }
+            private set
+            {
+                isBindingSuspended = value;
+            }
+        }
 
         public void SuspendModelBinding()
         {

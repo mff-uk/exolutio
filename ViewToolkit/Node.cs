@@ -110,20 +110,21 @@ namespace Exolutio.ViewToolkit
             InnerGrid.Children.Add(InnerContentControl);
 
             Loaded += delegate { InvokePositionChanged(); };
-            SizeChanged += delegate
-                               {
-                                   foreach (Connector connector in Connectors)
-                                   {
-                                       connector.InvalidateGeometry();
-                                   }
-                                   InvokePositionChanged();
-                               };
-
-            PositionChanged += OnPositionChanged;
+            SizeChanged += this_SizeChanged;
+            PositionChanged += this_PositionChanged;
 #if SILVERLIGHT
 #else
             PreviewMouseDown += Node_PreviewMouseDown;
 #endif
+        }
+
+        private void this_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            foreach (Connector connector in Connectors)
+            {
+                connector.InvalidateGeometry();
+            }
+            //InvokePositionChanged();
         }
 
 
@@ -292,7 +293,7 @@ namespace Exolutio.ViewToolkit
 
         public event Action PositionChanged;
 
-        protected virtual void OnPositionChanged()
+        protected virtual void this_PositionChanged()
         {
             if (ExolutioCanvas != null)
             {

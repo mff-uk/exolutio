@@ -145,7 +145,8 @@ namespace Exolutio.WPFClient
             if (newTab != null)
             {
                 newTab.BindTab(diagram);
-                newTab.DiagramView.LoadDiagram(diagram);
+                newTab.DiagramView.SuspendBindingInChildren = true; 
+                newTab.DiagramView.LoadDiagram(diagram);                
                 newTab.DiagramView.SelectionChanged += SelectedItems_CollectionChanged;
                 newTab.Name = "D" + diagram.ID.ToString().Replace("-", "_");
                 ActivePane.Items.Add(newTab);
@@ -154,7 +155,8 @@ namespace Exolutio.WPFClient
                 if (newTab.ContainerPane != null)
                 {
                     DockManager.ActiveDocument = newTab;
-                }
+                } 
+                newTab.DiagramView.SuspendBindingInChildren = false; 
             }
 
             return newTab;

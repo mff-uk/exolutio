@@ -53,6 +53,14 @@ namespace Exolutio.View
         #region Representants, loading diagrams
 
         public bool Loading { get; private set; }
+
+        private bool suspendBindingInChildren;
+        public bool SuspendBindingInChildren
+        {
+            get { return suspendBindingInChildren; }
+            set { suspendBindingInChildren = value; }
+        }
+
         private readonly RepresentantsCollection representantsCollection = new RepresentantsCollection();
 
         public RepresentantsCollection RepresentantsCollection
