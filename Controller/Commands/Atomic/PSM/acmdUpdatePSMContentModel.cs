@@ -11,7 +11,7 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
     /// <summary>
     /// Atomic operation that updates the content model's type
     /// </summary>
-    internal class acmdUpdatePSMContentModel : StackedCommand
+    internal class acmdUpdatePSMContentModel : AtomicCommand
     {
         private Guid cmodelGuid;
         private PSMContentModelType oldtype, newtype;

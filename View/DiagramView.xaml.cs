@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -75,6 +76,7 @@ namespace Exolutio.View
 
         public virtual IEnumerable<ComponentViewBase> LoadDiagram(Diagram diagram)
         {
+            Stopwatch stopwatch = Stopwatch.StartNew();
             Loading = true;
             this.Diagram = diagram;
 
@@ -86,7 +88,9 @@ namespace Exolutio.View
 
             diagram.Components.CollectionChanged += Components_CollectionChanged;
             Loading = false;
-            
+
+            stopwatch.Stop();
+            Debug.WriteLine("Loading {0} took {1}.", diagram, stopwatch.Elapsed);
             return withoutViewHelpers;
         }
 
