@@ -96,7 +96,7 @@ namespace Exolutio.Model.OCL.Types
     //        bool isFirst = true;
     //        foreach (var property in Data)
     //        {
-    //            nameBuilder.AppendFormat("{0}:{1}", property.QualifiedName, property.Type.QualifiedName);
+    //            nameBuilder.AppendFormat("{0}:{1}", property.QualifiedName, property.Element.QualifiedName);
 
     //            if (isFirst == false)
     //                nameBuilder.Append(",");
