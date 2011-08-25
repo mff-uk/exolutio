@@ -14,7 +14,7 @@ namespace Exolutio.Model.OCL.AST
         /// <summary>
         /// The result value of the source expression is the instance that performs the property call.
         /// </summary>
-        OclExpression Source
+        public virtual OclExpression Source
         {
             get;
             set;

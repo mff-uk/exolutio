@@ -29,5 +29,14 @@ namespace Exolutio.Model.OCL.AST
             get;
             set;
         }
+
+        public override Types.Classifier Type {
+            get {
+                return InExpression.Type;
+            }
+            protected set {
+               
+            }
+        }
     }
 }
