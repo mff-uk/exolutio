@@ -41,5 +41,14 @@ namespace Exolutio.Model.OCL.AST
             get;
             set;
         }
+
+        public override Types.Classifier Type {
+            get {
+                return ThenExpression.Type.CommonSuperType(ElseExpression.Type);
+            }
+            protected set {
+               
+            }
+        }
     }
 }

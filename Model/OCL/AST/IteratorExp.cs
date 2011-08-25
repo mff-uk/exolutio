@@ -14,6 +14,6 @@ namespace Exolutio.Model.OCL.AST
     /// </summary>
     public class IteratorExp : LoopExp
     {
-
+        
     }
 }

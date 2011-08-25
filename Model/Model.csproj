@@ -40,6 +40,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr3.Runtime">
+      <HintPath>..\ExternalBinaries\Antlr\Antlr3.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -60,6 +63,13 @@
     <Compile Include="ModelIterator.cs" />
     <Compile Include="ModelVerifier.cs" />
     <Compile Include="ModelWorker.cs" />
+    <Compile Include="OCL\Compiler\Compiler.cs" />
+    <Compile Include="OCL\Compiler\Error.cs" />
+    <Compile Include="OCL\Compiler\ErrorItem.cs" />
+    <Compile Include="OCL\Compiler\OCLLexer.cs" />
+    <Compile Include="OCL\Compiler\OCLLexerService.cs" />
+    <Compile Include="OCL\Compiler\OCLParser.cs" />
+    <Compile Include="OCL\Compiler\OCLParserSevrice.cs" />
     <Compile Include="OCL\Environment.cs" />
     <Compile Include="OCL\SupportingClasses\ActionDictionary.cs" />
     <Compile Include="OCL\SupportingClasses\ActionList.cs" />
@@ -219,7 +229,7 @@
     <None Include="ObjectOwnership.cd" />
     <None Include="OCL\AST\AST.cd" />
     <None Include="OCL\AST\Literal.cd" />
-    <None Include="OCL\Grammar\ocl.g" />
+    <None Include="OCL\Grammar\OCL.g3" />
     <None Include="OCL\Types\TypeSystem.cd" />
     <None Include="Versioning\Versioning.cd" />
   </ItemGroup>

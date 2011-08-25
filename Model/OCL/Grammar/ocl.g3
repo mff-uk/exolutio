@@ -1,5 +1,8 @@
-grammar ocl;
+grammar OCL;
 
+
+@lexer::namespace{Exolutio.Model.OCL.Compiler}
+@parser::namespace{Exolutio.Model.OCL.Compiler}
 
 oclExpression
 	:logicalImpliesExpression
@@ -271,15 +274,15 @@ StringLiteralExp //20
 NESTED_ML_COMMENT
     :   '/*' 
         (options {greedy=false;} : NESTED_ML_COMMENT | . )* 
-        '*/' {$channel=HIDDEN;}
+        '*/' {$channel=Hidden;}
     ;
 
 LINE_COMMENT
-	:'--'  ~('\n'|'\r')* (('\r'? '\n')|EOF) {$channel=HIDDEN;}
+	:'--'  ~('\n'|'\r')* (('\r'? '\n')|EOF) {$channel=Hidden;}
 	;
 	
 WS
-    :   WhiteSpaceChar {$channel=HIDDEN;}
+    :   WhiteSpaceChar {$channel=Hidden;}
     ;
 	
 	
