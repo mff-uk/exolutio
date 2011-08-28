@@ -10,9 +10,9 @@ namespace Exolutio.Model.PSM
 {
     public abstract class PSMComponent : Component
     {
-        protected PSMComponent(Project p) : base(p) { }
-        
-        protected PSMComponent(Project p, Guid g) : base(p, g) { }
+        protected PSMComponent(Project p) : base(p) { InitializeCollections(); }
+
+        protected PSMComponent(Project p, Guid g) : base(p, g) { InitializeCollections(); }
 
         public PSMSchema PSMSchema
         {
@@ -38,9 +38,14 @@ namespace Exolutio.Model.PSM
             }
         }
 
-        public List<Guid> UsedGeneralizations = new List<Guid>();
+        public UndirectCollection<PIMGeneralization> UsedGeneralizations { get; private set; }
 
         public abstract string XPath { get; }
+
+        private void InitializeCollections()
+        {
+            UsedGeneralizations = new UndirectCollection<PIMGeneralization>(Project);
+        }
 
         #region Implementation of IExolutioSerializable
 
@@ -51,12 +56,15 @@ namespace Exolutio.Model.PSM
             {
                 this.SerializeIDRef(Interpretation, "InterpretationID", parentNode, context);
             }
+            this.WrapAndSerializeIDRefCollection("UsedGeneralizations", "PIMGeneralization", "usedGeneralizationsID", UsedGeneralizations,
+                                     parentNode, context);
         }
 
         public override void Deserialize(XElement parentNode, SerializationContext context)
         {
             base.Deserialize(parentNode, context);
             interpretationGuid = this.DeserializeIDRef("InterpretationID", parentNode, context, true);
+            this.DeserializeWrappedIDRefCollection("UsedGeneralizations", "usedGeneralizationsID", UsedGeneralizations, parentNode, context);
         }
         #endregion
 

@@ -52,9 +52,26 @@ namespace Exolutio.Controller.Commands.Atomic.PIM
             return OperationResult.OK;
         }
 
-        /*internal override PropagationMacroCommand PrePropagation()
+        internal override PropagationMacroCommand PrePropagation()
         {
+            PIMGeneralization g = Project.TranslateComponent<PIMGeneralization>(deletedGeneralizationGuid);
+            IEnumerable<PSMAttribute> atts = Project.LatestVersion.PSMSchemas.SelectMany(s => s.PSMAttributes).Where(att => att.UsedGeneralizations.Contains(g));
+            IEnumerable<PSMAssociation> assocs = Project.LatestVersion.PSMSchemas.SelectMany(s => s.PSMAssociations).Where(assoc => assoc.UsedGeneralizations.Contains(g));
             
-        }*/
+            PropagationMacroCommand command = new PropagationMacroCommand(Controller);
+            command.Report = new CommandReport("Pre-propagation (delete PIM generalization)");
+
+            foreach (PSMAttribute a in atts)
+            {
+                command.Commands.Add(new cmdDeletePSMAttribute(Controller) { AttributeGuid = a });
+            }
+
+            foreach (PSMAssociation a in assocs)
+            {
+                command.Commands.Add(new cmdDeletePSMAssociation(Controller) { AssociationGuid = a });
+            }
+            
+            return command;
+        }
     }
 }
