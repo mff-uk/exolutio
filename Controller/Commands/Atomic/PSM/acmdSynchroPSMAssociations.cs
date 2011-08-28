@@ -148,7 +148,7 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
                             
                         command.Commands.Add(new acmdRenameComponent(Controller, assocGuid, a.Name));
                         command.Commands.Add(new acmdUpdatePIMAssociationEndCardinality(Controller, assocEnd2Guid, a.Lower, a.Upper));
-                        command.Commands.Add(new acmdSetPSMAssociationInterpretation(Controller, a, assocGuid));
+                        command.Commands.Add(new acmdSetPSMAssociationInterpretation(Controller, a, assocEnd2Guid, assocGuid));
                         newAssociations.Add(assocGuid);
                     }
 

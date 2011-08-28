@@ -57,7 +57,7 @@ namespace Exolutio.Model.PSM
                 this.SerializeIDRef(Interpretation, "InterpretationID", parentNode, context);
             }
             this.WrapAndSerializeIDRefCollection("UsedGeneralizations", "PIMGeneralization", "usedGeneralizationsID", UsedGeneralizations,
-                                     parentNode, context);
+                                         parentNode, context);
         }
 
         public override void Deserialize(XElement parentNode, SerializationContext context)

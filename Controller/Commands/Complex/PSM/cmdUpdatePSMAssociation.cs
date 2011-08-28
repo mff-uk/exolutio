@@ -27,6 +27,8 @@ namespace Exolutio.Controller.Commands.Complex.PSM
 
         public Guid InterpretedAssociation { get; set; }
 
+        public Guid ChildAssociationEnd { get; set; }
+
         public cmdUpdatePSMAssociation()
         {
             CheckFirstOnlyInCanExecute = true;
@@ -50,9 +52,9 @@ namespace Exolutio.Controller.Commands.Complex.PSM
         {
             Commands.Add(new acmdRenameComponent(Controller, AssociationGuid, Name) { Propagate = false });
             Commands.Add(new acmdUpdatePSMAssociationCardinality(Controller, AssociationGuid, Lower, Upper) { Propagate = false });
-            if (InterpretedAssociation != Guid.Empty)
+            if (InterpretedAssociation != Guid.Empty && ChildAssociationEnd != Guid.Empty)
             {
-                Commands.Add(new acmdSetPSMAssociationInterpretation(Controller, AssociationGuid, InterpretedAssociation) { Propagate = false });
+                Commands.Add(new acmdSetPSMAssociationInterpretation(Controller, AssociationGuid, ChildAssociationEnd, InterpretedAssociation) { Propagate = false });
             }
         }
 

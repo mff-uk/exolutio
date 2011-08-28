@@ -61,9 +61,34 @@ namespace Exolutio.View
             DisplayNamedComponent(component);
             DisplayAttributes(component as PIMClass);
             DisplayAttributes(component as PSMClass);
+            DisplayPSMAssociation(component as PSMAssociation);
             DisplayInterpretedComponents(component as PIMComponent);
             DisplayPSMComponent(component as PSMComponent);
             DisplayStructuralRepresentatives(component as PSMClass);
+        }
+
+        private void DisplayPSMAssociation(PSMAssociation psmAssociation)
+        {
+            if (psmAssociation != null)
+            {
+                if (psmAssociation.InterpretedAssociationEnd != null)
+                {
+                    lInterpretedAssocEnd.Text = psmAssociation.InterpretedAssociationEnd.ToString();
+                    lInterpretedAssocEnd.ToolTip = psmAssociation.InterpretedAssociationEnd.ToString();
+                }
+                else
+                {
+                    lInterpretedAssocEnd.ToolTip = string.Empty;
+                    lInterpretedAssocEnd.Text = "(none)";
+                }
+                lInterpretedAssocEnd.DataContext = psmAssociation.Interpretation;
+                spPSMAssociation.Visibility = System.Windows.Visibility.Visible;
+            }
+            else
+            {
+                spPSMAssociation.DataContext = null;
+                spPSMAssociation.Visibility = System.Windows.Visibility.Hidden;
+            }
         }
 
         private void DisplayPSMComponent(PSMComponent psmComponent)
