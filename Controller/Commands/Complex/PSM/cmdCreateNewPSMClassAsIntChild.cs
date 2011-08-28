@@ -61,7 +61,7 @@ namespace Exolutio.Controller.Commands.Complex.PSM
             Commands.Add(new acmdRenameComponent(Controller, ClassGuid, associationEnd.PIMClass.Name));
             Commands.Add(new acmdSetPSMClassInterpretation(Controller, ClassGuid, associationEnd.PIMClass));
             Commands.Add(new acmdNewPSMAssociation(Controller, parent, ClassGuid, parent.PSMSchema) { AssociationGuid = AssociationGuid });
-            Commands.Add(new acmdSetPSMAssociationInterpretation(Controller, AssociationGuid, associationEnd.PIMAssociation));
+            Commands.Add(new acmdSetPSMAssociationInterpretation(Controller, AssociationGuid, associationEnd, associationEnd.PIMAssociation));
             foreach (PIMAttribute a in associationEnd.PIMClass.PIMAttributes)
             {
                 Guid attrGuid = Guid.NewGuid();

@@ -149,7 +149,7 @@ namespace Exolutio.Controller.Commands.Atomic.PIM
                         command.Commands.Add(new acmdRenameComponent(Controller, assocGuid, a.Name));
                         PIMAssociationEnd e = a.PIMAssociationEnds.First(ae => ae.PIMClass != psmClass.Interpretation);
                         command.Commands.Add(new acmdUpdatePSMAssociationCardinality(Controller, assocGuid, e.Lower, e.Upper));
-                        command.Commands.Add(new acmdSetPSMAssociationInterpretation(Controller, assocGuid, a));
+                        command.Commands.Add(new acmdSetPSMAssociationInterpretation(Controller, assocGuid, e, a));
                         newAssociationsGuid.Add(assocGuid);
                     }
 

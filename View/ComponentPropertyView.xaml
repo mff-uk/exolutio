@@ -63,6 +63,11 @@
                 <FormControls:LinkLabel Margin="20,0,0,0" HorizontalAlignment="Left"
                                         Click="FocusPIMComponent" x:Name="lInterpreted" ClipToBounds="True" />                
             </StackPanel>
+            <StackPanel Name="spPSMAssociation">
+                <TextBlock Text="Child association end interpretation: " FontWeight="Bold" Foreground="DarkBlue" Margin="0,5" />
+                <FormControls:LinkLabel Margin="20,0,0,0" HorizontalAlignment="Left"
+                                        Click="FocusPIMComponent" x:Name="lInterpretedAssocEnd" ClipToBounds="True" />
+            </StackPanel>
             <StackPanel Name="spRepresentatives">
                 <StackPanel.Resources>
                     <DataTemplate x:Key="structuralRepresentativeTemplate" DataType="{x:Type PSM:PSMClass}">

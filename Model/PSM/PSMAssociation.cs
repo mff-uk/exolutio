@@ -4,6 +4,7 @@ using System.Xml;
 using System.Xml.Linq;
 using Exolutio.Model.Serialization;
 using Exolutio.Model.Versioning;
+using Exolutio.Model.PIM;
 
 namespace Exolutio.Model.PSM
 {
@@ -93,6 +94,14 @@ namespace Exolutio.Model.PSM
             set { childGuid = value; NotifyPropertyChanged("Child"); }
         }
 
+        private Guid interpretedAssociationEnd;
+        
+        public PIMAssociationEnd InterpretedAssociationEnd
+        {
+            get { return interpretedAssociationEnd == Guid.Empty ? null : Project.TranslateComponent<PIMAssociationEnd>(interpretedAssociationEnd); }
+            set { interpretedAssociationEnd = value; NotifyPropertyChanged("InterpretedAssociationEnd"); }
+        }
+        
         public int Index
         {
             get
@@ -191,6 +200,11 @@ namespace Exolutio.Model.PSM
                 associationChildElement.Add(nodeTypeAttribute);
                 this.SerializeIDRef(Child, "childID", associationChildElement, context);
                 parentNode.Add(associationChildElement);
+                if (InterpretedAssociationEnd != null)
+                {
+                    this.SerializeIDRef(InterpretedAssociationEnd, "interpretedAssociationEndID", associationChildElement, context);
+                }
+
             }
         }
 
@@ -219,6 +233,8 @@ namespace Exolutio.Model.PSM
                 }
 
                 childGuid = this.DeserializeIDRef("childID", associationChildNode, context);
+                //TODO: convert projects and mark as non-optional
+                interpretedAssociationEnd = this.DeserializeIDRef("interpretedAssociationEndID", associationChildNode, context, true);
             }
         }
         public static PSMAssociation CreateInstance(Project project)

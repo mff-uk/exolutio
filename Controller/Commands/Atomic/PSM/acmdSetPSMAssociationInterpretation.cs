@@ -12,9 +12,15 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
 {
     internal class acmdSetPSMAssociationInterpretation : acmdSetInterpretation
     {
-        public acmdSetPSMAssociationInterpretation(Controller c, Guid interpretedPSMComponentGuid, Guid pimInterpretationGuid)
-            : base(c, interpretedPSMComponentGuid, pimInterpretationGuid)
-        { }
+        protected Guid childAssociationEnd;
+
+        protected Guid oldChildAssociationEnd;
+        
+        public acmdSetPSMAssociationInterpretation(Controller c, Guid interpretedAssociationGuid, Guid childAssocEnd, Guid pimInterpretationGuid)
+            : base(c, interpretedAssociationGuid, pimInterpretationGuid)
+        {
+            childAssociationEnd = childAssocEnd;
+        }
 
         public override bool CanExecute()
         {
@@ -64,22 +70,54 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
         {
             PSMAssociation c = Project.TranslateComponent<PSMAssociation>(PSMComponentGuid);
             PIMAssociation oldInterpretation = c.Interpretation as PIMAssociation;
+            PIMAssociationEnd childAE = Project.TranslateComponent<PIMAssociationEnd>(childAssociationEnd);
             if (c.UsedGeneralizations.Count > 0) oldUsedGeneralizations.AddRange(c.UsedGeneralizations.Select(g => g.ID));
-            if (c.Interpretation == null) oldPimComponentGuid = Guid.Empty;
-            else oldPimComponentGuid = c.Interpretation;
+            if (c.Interpretation == null)
+            {
+                oldPimComponentGuid = Guid.Empty;
+                oldChildAssociationEnd = Guid.Empty;
+            }
+            else
+            {
+                oldPimComponentGuid = c.Interpretation;
+                oldChildAssociationEnd = c.InterpretedAssociationEnd;
+            }
             if (PIMComponentGuid != Guid.Empty)
             {
                 c.Interpretation = Project.TranslateComponent<PIMAssociation>(PIMComponentGuid);
-                
+                c.InterpretedAssociationEnd = childAE;
                 //TODO: Work with ordered image to get it easily
                 //c.UsedGeneralizations = (c.NearestInterpretedClass().Interpretation as PIMClass).GetGeneralizationPathTo((c.Interpretation as PIMAttribute).PIMClass).Select(x => x.ID).ToList();
             }
             else
             {
                 c.Interpretation = null;
+                c.InterpretedAssociationEnd = null;
                 c.UsedGeneralizations.Clear();
             }
             Report = new CommandReport(CommandReports.SET_INTERPRETATION, c, oldInterpretation, c.Interpretation);
+        }
+
+        internal override CommandBase.OperationResult UndoOperation()
+        {
+            PSMAssociation c = Project.TranslateComponent<PSMAssociation>(PSMComponentGuid);
+            if (oldPimComponentGuid == Guid.Empty)
+            {
+                c.Interpretation = null;
+                c.InterpretedAssociationEnd = null;
+            }
+            else
+            {
+                c.Interpretation = Project.TranslateComponent<PIMAssociation>(oldPimComponentGuid);
+                c.InterpretedAssociationEnd = Project.TranslateComponent<PIMAssociationEnd>(oldChildAssociationEnd);
+            }
+
+            c.UsedGeneralizations.Clear();
+            foreach (Guid g in oldUsedGeneralizations)
+            {
+                c.UsedGeneralizations.AddAsGuidSilent(g);
+            }
+            return OperationResult.OK;
         }
     }
 }

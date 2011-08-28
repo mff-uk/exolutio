@@ -89,7 +89,9 @@ namespace Exolutio.View
                 Type commandType = command.GetType();
                 if (Controller.Commands.Reflection.PublicCommandsHelper.IsPublicCommand(commandType))
                 {
-                    commandReports.Contents = "Executed: " + Controller.Commands.Reflection.PublicCommandsHelper.GetCommandDescriptor(commandType).CommandDescription;    
+                    if (command.Report == null)
+                        commandReports.Contents = "Executed: " + Controller.Commands.Reflection.PublicCommandsHelper.GetCommandDescriptor(commandType).CommandDescription;
+                    else commandReports.Contents = command.Report.Contents;
                 }
                 else
                 {

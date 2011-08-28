@@ -115,7 +115,7 @@ namespace Exolutio.Controller.Commands.Atomic.PIM
                             command.Commands.Add(new acmdNewPSMAssociation(Controller, intclass, classGuid2, psmAssociation.Schema) { AssociationGuid = assocGuid2 });
                             command.Commands.Add(new acmdRenameComponent(Controller, assocGuid2, psmAssociation.Interpretation.Name) { Propagate = false });
                             command.Commands.Add(new acmdUpdatePSMAssociationCardinality(Controller, assocGuid2, psmAssociation.Lower, psmAssociation.Upper) { Propagate = false });
-                            command.Commands.Add(new acmdSetPSMAssociationInterpretation(Controller, assocGuid2, psmAssociation.Interpretation) { ForceExecute = true });
+                            command.Commands.Add(new acmdSetPSMAssociationInterpretation(Controller, assocGuid2, psmAssociation.InterpretedAssociationEnd, psmAssociation.Interpretation) { ForceExecute = true });
 
                             if (psmAssociation.Parent != intclass)
                             {
@@ -152,7 +152,7 @@ namespace Exolutio.Controller.Commands.Atomic.PIM
                             command.Commands.Add(new acmdNewPSMAssociation(Controller, intclass, classGuid2, psmAssociation.Schema) { AssociationGuid = assocGuid2 });
                             command.Commands.Add(new acmdRenameComponent(Controller, assocGuid2, psmAssociation.Interpretation.Name) { Propagate = false });
                             command.Commands.Add(new acmdUpdatePSMAssociationCardinality(Controller, assocGuid2, psmAssociation.Lower, psmAssociation.Upper) { Propagate = false });
-                            command.Commands.Add(new acmdSetPSMAssociationInterpretation(Controller, assocGuid2, psmAssociation.Interpretation) { ForceExecute = true });
+                            command.Commands.Add(new acmdSetPSMAssociationInterpretation(Controller, assocGuid2, psmAssociation.InterpretedAssociationEnd, psmAssociation.Interpretation) { ForceExecute = true });
 
                             if (psmAssociation.Parent != intclass)
                             {
@@ -186,7 +186,7 @@ namespace Exolutio.Controller.Commands.Atomic.PIM
                             command.Commands.Add(new acmdRenameComponent(Controller, assocGuid, association.Name) { Propagate = false });
                             PIMAssociationEnd e = targetClass.PIMAssociationEnds.Single<PIMAssociationEnd>(aend => aend.PIMAssociation == association);
                             command.Commands.Add(new acmdUpdatePSMAssociationCardinality(Controller, assocGuid, e.Lower, e.Upper) { Propagate = false });
-                            command.Commands.Add(new acmdSetPSMAssociationInterpretation(Controller, assocGuid, association) { ForceExecute = true });
+                            command.Commands.Add(new acmdSetPSMAssociationInterpretation(Controller, assocGuid, e, association) { ForceExecute = true });
 
                             Guid classGuid2 = Guid.NewGuid();
                             Guid assocGuid2 = Guid.NewGuid();
@@ -198,7 +198,7 @@ namespace Exolutio.Controller.Commands.Atomic.PIM
                             command.Commands.Add(new acmdNewPSMAssociation(Controller, intclass, classGuid2, psmAssociation.Schema) { AssociationGuid = assocGuid2 });
                             command.Commands.Add(new acmdRenameComponent(Controller, assocGuid2, psmAssociation.Interpretation.Name) { Propagate = false });
                             command.Commands.Add(new acmdUpdatePSMAssociationCardinality(Controller, assocGuid2, psmAssociation.Lower, psmAssociation.Upper) { Propagate = false });
-                            command.Commands.Add(new acmdSetPSMAssociationInterpretation(Controller, assocGuid2, psmAssociation.Interpretation) { ForceExecute = true });
+                            command.Commands.Add(new acmdSetPSMAssociationInterpretation(Controller, assocGuid2, psmAssociation.InterpretedAssociationEnd, psmAssociation.Interpretation) { ForceExecute = true });
 
                             if (psmAssociation.Parent != intclass)
                             {
@@ -258,7 +258,7 @@ namespace Exolutio.Controller.Commands.Atomic.PIM
                             command.Commands.Add(new acmdRenameComponent(Controller, assocGuid, association.Name) { Propagate = false });
                             PIMAssociationEnd e = targetClass.PIMAssociationEnds.Single(aend => aend.PIMAssociation == association);
                             command.Commands.Add(new acmdUpdatePSMAssociationCardinality(Controller, assocGuid, e.Lower, e.Upper) { Propagate = false });
-                            command.Commands.Add(new acmdSetPSMAssociationInterpretation(Controller, assocGuid, association) { ForceExecute = true });
+                            command.Commands.Add(new acmdSetPSMAssociationInterpretation(Controller, assocGuid, e, association) { ForceExecute = true });
                             children.Add(classGuid, assocGuid);
                         }
 
@@ -278,7 +278,7 @@ namespace Exolutio.Controller.Commands.Atomic.PIM
                             command.Commands.Add(new acmdRenameComponent(Controller, assocGuid, psmAssociation.Interpretation.Name) { Propagate = false });
                             PIMAssociationEnd e1 = (psmAssociation.Interpretation as PIMAssociation).PIMAssociationEnds.Single(aend => aend.PIMClass == intclass.Interpretation);
                             command.Commands.Add(new acmdUpdatePSMAssociationCardinality(Controller, assocGuid, e1.Lower, e1.Upper) { Propagate = false });
-                            command.Commands.Add(new acmdSetPSMAssociationInterpretation(Controller, assocGuid, psmAssociation.Interpretation) { ForceExecute = true });
+                            command.Commands.Add(new acmdSetPSMAssociationInterpretation(Controller, assocGuid, e1, psmAssociation.Interpretation) { ForceExecute = true });
                             acmdSynchroPSMAssociations s = new acmdSynchroPSMAssociations(Controller) { Propagate = false, ForceExecute = true };
                             s.X1.Add(psmAssociation);
                             s.X2.Add(assocGuid);
@@ -302,7 +302,7 @@ namespace Exolutio.Controller.Commands.Atomic.PIM
                             command.Commands.Add(new acmdRenameComponent(Controller, assocGuid3, association.Name) { Propagate = false });
                             PIMAssociationEnd e2 = association.PIMAssociationEnds.Single(aend => aend.PIMClass == sourceClass);
                             command.Commands.Add(new acmdUpdatePSMAssociationCardinality(Controller, assocGuid3, e2.Lower, e2.Upper) { Propagate = false });
-                            command.Commands.Add(new acmdSetPSMAssociationInterpretation(Controller, assocGuid3, association) { ForceExecute = true });
+                            command.Commands.Add(new acmdSetPSMAssociationInterpretation(Controller, assocGuid3, e2, association) { ForceExecute = true });
 
                             acmdSynchroPSMAssociations s2 = new acmdSynchroPSMAssociations(Controller) { Propagate = false };
                             s2.X1.Add(p.Value);
@@ -318,7 +318,7 @@ namespace Exolutio.Controller.Commands.Atomic.PIM
                             command.Commands.Add(new acmdNewPSMAssociation(Controller, psmAssociation.Parent, p.Key, psmAssociation.PSMSchema) { AssociationGuid = assocGuid4 });
                             command.Commands.Add(new acmdRenameComponent(Controller, assocGuid4, psmAssociation.Interpretation.Name) { Propagate = false });
                             command.Commands.Add(new acmdUpdatePSMAssociationCardinality(Controller, assocGuid4, assocEnd.Lower, assocEnd.Upper) { Propagate = false });
-                            command.Commands.Add(new acmdSetPSMAssociationInterpretation(Controller, assocGuid4, psmAssociation.Interpretation) { ForceExecute = true });
+                            command.Commands.Add(new acmdSetPSMAssociationInterpretation(Controller, assocGuid4, assocEnd, psmAssociation.Interpretation) { ForceExecute = true });
 
                             acmdSynchroPSMAssociations s3 = new acmdSynchroPSMAssociations(Controller) { Propagate = false };
                             s3.X1.Add(assocGuid);

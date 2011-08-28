@@ -169,7 +169,7 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
                     .SelectMany<PSMClass, PSMAssociation>(c => c.ChildPSMAssociations)
                     .Where(a => a.Interpretation != null))
                 {
-                    command.Commands.Add(new acmdSetPSMAssociationInterpretation(Controller, a, Guid.Empty));
+                    command.Commands.Add(new acmdSetPSMAssociationInterpretation(Controller, a, Guid.Empty, Guid.Empty));
                 }
             }
             if (psmAssociation.Interpretation == null)
@@ -193,7 +193,7 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
             {
                 if (newIntContext == null)
                 {
-                    command.Commands.Add(new acmdSetPSMAssociationInterpretation(Controller, psmAssociation, Guid.Empty));
+                    command.Commands.Add(new acmdSetPSMAssociationInterpretation(Controller, psmAssociation, Guid.Empty, Guid.Empty));
                 }
                 else
                 {

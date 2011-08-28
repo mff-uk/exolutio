@@ -39,7 +39,7 @@ namespace Exolutio.Controller.Commands.Complex.PSM
 
             Commands.Add(new acmdUpdatePSMAssociationCardinality(Controller, association, 1, 1) { Propagate = false });
             Commands.Add(new acmdRenameComponent(Controller, association, "") { Propagate = false });
-            Commands.Add(new acmdSetPSMAssociationInterpretation(Controller, association, Guid.Empty));
+            Commands.Add(new acmdSetPSMAssociationInterpretation(Controller, association, Guid.Empty, Guid.Empty));
             if (association.Child != null && !(association.Child is PSMClass && (association.Child as PSMClass).Interpretation != null))
             {
                 /*RESOLVE POTENTIAL PROBLEMS WITH INTERPRETED ATTRIBUTES IN UNINTERPRETED SUBCLASSES*/
@@ -59,7 +59,7 @@ namespace Exolutio.Controller.Commands.Complex.PSM
                   .Where<PSMAssociation>(assoc => assoc.Interpretation != null)
                 )
                 {
-                    Commands.Add(new acmdSetPSMAssociationInterpretation(Controller, a, Guid.Empty) { Propagate = false });
+                    Commands.Add(new acmdSetPSMAssociationInterpretation(Controller, a, Guid.Empty, Guid.Empty) { Propagate = false });
                 }
             }
             Commands.Add(new acmdDeletePSMAssociation(Controller, association));

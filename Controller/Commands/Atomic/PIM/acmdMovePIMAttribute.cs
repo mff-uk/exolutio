@@ -211,7 +211,7 @@ namespace Exolutio.Controller.Commands.Atomic.PIM
                         acmdUpdatePSMAssociationCardinality carda = new acmdUpdatePSMAssociationCardinality(Controller, naGuid, e.Lower, e.Upper) { Propagate = false };
                         command.Commands.Add(carda);
 
-                        acmdSetInterpretation ia = new acmdSetPSMAssociationInterpretation(Controller, naGuid, association);
+                        acmdSetInterpretation ia = new acmdSetPSMAssociationInterpretation(Controller, naGuid, e, association);
                         command.Commands.Add(ia);
 
                         acmdMovePSMAttribute m = new acmdMovePSMAttribute(Controller, attrGuid, ncGuid) { Propagate = false };
