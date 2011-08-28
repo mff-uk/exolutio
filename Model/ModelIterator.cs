@@ -497,7 +497,7 @@ namespace Exolutio.Model
             return attribute.PSMClass.NearestInterpretedClass();
         }
 
-        private static IEnumerable<PSMClass> InterpretedSubClasses(this PSMAssociationMember parent)
+        private static List<PSMClass> InterpretedSubClasses(this PSMAssociationMember parent)
         {
             List<PSMClass> list = new List<PSMClass>();
             if (parent is PSMClass && (parent as PSMClass).Interpretation != null) list.Add(parent as PSMClass);
@@ -514,7 +514,7 @@ namespace Exolutio.Model
         /// </summary>
         /// <param name="psmClass"></param>
         /// <returns></returns>
-        public static IEnumerable<PSMClass> GetSRs(this PSMClass psmClass)
+        public static List<PSMClass> GetSRs(this PSMClass psmClass)
         {
             List<PSMClass> srs = new List<PSMClass>();
 
@@ -531,7 +531,7 @@ namespace Exolutio.Model
         /// </summary>
         /// <param name="pimClass"></param>
         /// <returns></returns>
-        public static IEnumerable<PIMClass> GetGeneralClasses(this PIMClass pimClass)
+        public static List<PIMClass> GetGeneralClasses(this PIMClass pimClass)
         {
             List<PIMClass> general = new List<PIMClass>();
 
@@ -544,7 +544,19 @@ namespace Exolutio.Model
             return general;
         }
 
-        public static IEnumerable<PSMClass> InterpretedSubClasses(this PSMClass parent)
+        public static List<PIMGeneralization> GetGeneralizationPathTo(this PIMClass specific, PIMClass general)
+        {
+            List<PIMGeneralization> list = new List<PIMGeneralization>();
+
+            if (specific.GeneralizationAsSpecific == null || specific == general) return list;
+
+            list.Add(specific.GeneralizationAsSpecific);
+            list.AddRange(specific.GeneralizationAsSpecific.General.GetGeneralizationPathTo(general));
+
+            return list;
+        }
+
+        public static List<PSMClass> InterpretedSubClasses(this PSMClass parent)
         {
             List<PSMClass> list = new List<PSMClass>();
             foreach (PSMAssociation a in parent.ChildPSMAssociations)
@@ -554,7 +566,7 @@ namespace Exolutio.Model
             return list;
         }
 
-        public static IEnumerable<PSMClass> UnInterpretedSubClasses(this PSMAssociationMember parent, bool includeThis = false)
+        public static List<PSMClass> UnInterpretedSubClasses(this PSMAssociationMember parent, bool includeThis = false)
         {
             List<PSMClass> list = new List<PSMClass>();
             if (parent is PSMClass && (parent as PSMClass).Interpretation != null) return list;
@@ -569,7 +581,7 @@ namespace Exolutio.Model
             return list;
         }
 
-        public static IEnumerable<PSMAssociationMember> UnInterpretedSubAMs(this PSMAssociationMember parent, bool includeThis = false)
+        public static List<PSMAssociationMember> UnInterpretedSubAMs(this PSMAssociationMember parent, bool includeThis = false)
         {
             List<PSMAssociationMember> list = new List<PSMAssociationMember>();
             if (parent is PSMClass && (parent as PSMClass).Interpretation != null) return list;
@@ -584,7 +596,7 @@ namespace Exolutio.Model
             return list;
         }
 
-        public static IEnumerable<PSMClass> UnInterpretedSubClasses(this PSMClass parent, bool includeThis = false)
+        public static List<PSMClass> UnInterpretedSubClasses(this PSMClass parent, bool includeThis = false)
         {
             List<PSMClass> list = new List<PSMClass>();
             if (includeThis && parent.Interpretation == null) list.Add(parent as PSMClass);
@@ -593,6 +605,17 @@ namespace Exolutio.Model
                 if (a.Child != null) list.AddRange(a.Child.UnInterpretedSubClasses(true));
             }
             return list;
+        }
+
+        public static IEnumerable<PIMAssociation> GetAssociationsWithIncludeInherited(this PIMClass class1, PIMClass class2)
+        {
+            List<PIMAssociation> list1 = new List<PIMAssociation>();
+            List<PIMAssociation> list2 = new List<PIMAssociation>();
+            list1.AddRange(class1.PIMAssociationEnds.Select(ae => ae.PIMAssociation));
+            list2.AddRange(class2.PIMAssociationEnds.Select(ae => ae.PIMAssociation));
+            list1.AddRange(class1.GetGeneralClasses().SelectMany(gc => gc.PIMAssociationEnds.Select(ae => ae.PIMAssociation)));
+            list2.AddRange(class2.GetGeneralClasses().SelectMany(gc => gc.PIMAssociationEnds.Select(ae => ae.PIMAssociation)));
+            return list1.Intersect(list2);
         }
 
         public static IEnumerable<PIMAssociation> GetAssociationsWith(this PIMClass class1, PIMClass class2)

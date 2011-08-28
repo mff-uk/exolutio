@@ -178,7 +178,7 @@
     <value>Cannot set interpretation for a PSM association, whose child is not a PSM class.</value>
   </data>
   <data name="CMDERR_CANNOT_SET_INTERPRETATION_CLASSES_DONT_MATCH" xml:space="preserve">
-    <value>Cannot set interpretation for this PSM attribute. The PIM class of the suggested PIM attribute is not the same as the PIMClass, which is an interpretation of the PSM attribute's context class.</value>
+    <value>Cannot set interpretation for this PSM attribute. The PIM class of the suggested PIM attribute is not the same as the PIMClass which is an interpretation of the PSM attribute's context class. It is not its more general class either.</value>
   </data>
   <data name="CMDERR_CANNOT_SET_INTERPRETATION_NO_INTCLASS" xml:space="preserve">
     <value>Cannot set interpretation for this PSM component. It does not belong to any interpreted PSM classes context.</value>

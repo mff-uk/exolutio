@@ -37,12 +37,32 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
             }
             PIMClass pimClass2 = niClass.Interpretation as PIMClass;
 
-            if (pimClass1 != pimClass2)
+            if (pimClass1 != pimClass2 && !pimClass2.GetGeneralClasses().Contains(pimClass1))
             {
                 ErrorDescription = CommandErrors.CMDERR_CANNOT_SET_INTERPRETATION_CLASSES_DONT_MATCH;
                 return false;
             }
             return true;
+        }
+        
+        internal override void CommandOperation()
+        {
+            PSMAttribute c = Project.TranslateComponent<PSMAttribute>(PSMComponentGuid);
+            PIMAttribute oldInterpretation = c.Interpretation as PIMAttribute;
+            oldUsedGeneralizations = c.UsedGeneralizations;
+            if (c.Interpretation == null) oldPimComponentGuid = Guid.Empty;
+            else oldPimComponentGuid = c.Interpretation;
+            if (PIMComponentGuid != Guid.Empty)
+            {
+                c.Interpretation = Project.TranslateComponent<PIMAttribute>(PIMComponentGuid);
+                c.UsedGeneralizations = (c.NearestInterpretedClass().Interpretation as PIMClass).GetGeneralizationPathTo((c.Interpretation as PIMAttribute).PIMClass).Select(x => x.ID).ToList();
+            }
+            else
+            {
+                c.Interpretation = null;
+                c.UsedGeneralizations = new List<Guid>();
+            }
+            Report = new CommandReport(CommandReports.SET_INTERPRETATION, c, oldInterpretation, c.Interpretation);
         }
     }
 }

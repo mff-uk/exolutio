@@ -4,6 +4,7 @@ using System.Xml.Linq;
 using Exolutio.Model.PIM;
 using Exolutio.Model.Serialization;
 using Exolutio.Model.Versioning;
+using System.Collections.Generic;
 
 namespace Exolutio.Model.PSM
 {
@@ -36,6 +37,8 @@ namespace Exolutio.Model.PSM
                 interpretationGuid = value == null ? Guid.Empty : value; NotifyPropertyChanged("Interpretation");
             }
         }
+
+        public List<Guid> UsedGeneralizations = new List<Guid>();
 
         public abstract string XPath { get; }
 
