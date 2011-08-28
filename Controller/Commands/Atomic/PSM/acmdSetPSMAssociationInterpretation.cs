@@ -64,7 +64,7 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
         {
             PSMAssociation c = Project.TranslateComponent<PSMAssociation>(PSMComponentGuid);
             PIMAssociation oldInterpretation = c.Interpretation as PIMAssociation;
-            oldUsedGeneralizations = c.UsedGeneralizations;
+            if (c.UsedGeneralizations.Count > 0) oldUsedGeneralizations.AddRange(c.UsedGeneralizations.Select(g => g.ID));
             if (c.Interpretation == null) oldPimComponentGuid = Guid.Empty;
             else oldPimComponentGuid = c.Interpretation;
             if (PIMComponentGuid != Guid.Empty)
@@ -77,7 +77,7 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
             else
             {
                 c.Interpretation = null;
-                c.UsedGeneralizations = new List<Guid>();
+                c.UsedGeneralizations.Clear();
             }
             Report = new CommandReport(CommandReports.SET_INTERPRETATION, c, oldInterpretation, c.Interpretation);
         }

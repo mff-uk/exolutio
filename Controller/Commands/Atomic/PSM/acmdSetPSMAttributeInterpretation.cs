@@ -49,18 +49,22 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
         {
             PSMAttribute c = Project.TranslateComponent<PSMAttribute>(PSMComponentGuid);
             PIMAttribute oldInterpretation = c.Interpretation as PIMAttribute;
-            oldUsedGeneralizations = c.UsedGeneralizations;
+            if (c.UsedGeneralizations.Count > 0) oldUsedGeneralizations.AddRange(c.UsedGeneralizations.Select(g => g.ID));
             if (c.Interpretation == null) oldPimComponentGuid = Guid.Empty;
             else oldPimComponentGuid = c.Interpretation;
             if (PIMComponentGuid != Guid.Empty)
             {
                 c.Interpretation = Project.TranslateComponent<PIMAttribute>(PIMComponentGuid);
-                c.UsedGeneralizations = (c.NearestInterpretedClass().Interpretation as PIMClass).GetGeneralizationPathTo((c.Interpretation as PIMAttribute).PIMClass).Select(x => x.ID).ToList();
+                c.UsedGeneralizations.Clear();
+                foreach (PIMGeneralization g in (c.NearestInterpretedClass().Interpretation as PIMClass).GetGeneralizationPathTo((c.Interpretation as PIMAttribute).PIMClass))
+                {
+                    c.UsedGeneralizations.Add(g);
+                }
             }
             else
             {
                 c.Interpretation = null;
-                c.UsedGeneralizations = new List<Guid>();
+                c.UsedGeneralizations.Clear();
             }
             Report = new CommandReport(CommandReports.SET_INTERPRETATION, c, oldInterpretation, c.Interpretation);
         }

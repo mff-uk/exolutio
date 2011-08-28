@@ -23,7 +23,7 @@ namespace Exolutio.Model
 
         public void Clear()
         {
-            throw new NotImplementedException();
+            internalGuidCollection.Clear();
         }
 
         public bool Contains(TMember item)

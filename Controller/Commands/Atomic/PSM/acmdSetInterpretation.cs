@@ -18,7 +18,7 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
 
         protected Guid oldPimComponentGuid;
 
-        protected List<Guid> oldUsedGeneralizations;
+        protected List<Guid> oldUsedGeneralizations = new List<Guid>();
 
         public acmdSetInterpretation(Controller c, Guid interpretedPSMComponentGuid, Guid pimInterpretationGuid)
             : base(c)
@@ -44,7 +44,12 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
             PSMComponent c = Project.TranslateComponent<PSMComponent>(PSMComponentGuid);
             if (oldPimComponentGuid == Guid.Empty) c.Interpretation = null;
             else c.Interpretation = Project.TranslateComponent<PIMComponent>(oldPimComponentGuid);
-            c.UsedGeneralizations = oldUsedGeneralizations; 
+            
+            c.UsedGeneralizations.Clear();
+            foreach (Guid g in oldUsedGeneralizations)
+            {
+                c.UsedGeneralizations.AddAsGuidSilent(g);
+            }
             return OperationResult.OK;
         }
     }
