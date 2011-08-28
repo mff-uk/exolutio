@@ -70,7 +70,7 @@ namespace Exolutio.Controller.Commands {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot set interpretation for this PSM attribute. The PIM class of the suggested PIM attribute is not the same as the PIMClass, which is an interpretation of the PSM attribute&apos;s context class..
+        ///   Looks up a localized string similar to Cannot set interpretation for this PSM attribute. The PIM class of the suggested PIM attribute is not the same as the PIMClass which is an interpretation of the PSM attribute&apos;s context class. It is not its more general class either..
         /// </summary>
         internal static string CMDERR_CANNOT_SET_INTERPRETATION_CLASSES_DONT_MATCH {
             get {

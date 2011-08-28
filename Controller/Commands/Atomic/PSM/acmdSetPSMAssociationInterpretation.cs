@@ -52,12 +52,34 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
                 return false;
             }
 
-            if (!(child.Interpretation as PIMClass).GetAssociationsWith(intclass.Interpretation as PIMClass).Contains<PIMAssociation>(pimAssoc))
+            if (!(child.Interpretation as PIMClass).GetAssociationsWithIncludeInherited(intclass.Interpretation as PIMClass).Contains<PIMAssociation>(pimAssoc))
             {
                 ErrorDescription = CommandErrors.CMDERR_NO_COMMON_INTERPRETED_ASSOCIATION;
                 return false;
             }
             return true;            
+        }
+
+        internal override void CommandOperation()
+        {
+            PSMAssociation c = Project.TranslateComponent<PSMAssociation>(PSMComponentGuid);
+            PIMAssociation oldInterpretation = c.Interpretation as PIMAssociation;
+            oldUsedGeneralizations = c.UsedGeneralizations;
+            if (c.Interpretation == null) oldPimComponentGuid = Guid.Empty;
+            else oldPimComponentGuid = c.Interpretation;
+            if (PIMComponentGuid != Guid.Empty)
+            {
+                c.Interpretation = Project.TranslateComponent<PIMAssociation>(PIMComponentGuid);
+                
+                //TODO: Work with ordered image to get it easily
+                //c.UsedGeneralizations = (c.NearestInterpretedClass().Interpretation as PIMClass).GetGeneralizationPathTo((c.Interpretation as PIMAttribute).PIMClass).Select(x => x.ID).ToList();
+            }
+            else
+            {
+                c.Interpretation = null;
+                c.UsedGeneralizations = new List<Guid>();
+            }
+            Report = new CommandReport(CommandReports.SET_INTERPRETATION, c, oldInterpretation, c.Interpretation);
         }
     }
 }
