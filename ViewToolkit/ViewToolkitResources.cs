@@ -14,6 +14,7 @@ namespace Exolutio.ViewToolkit
         private static readonly SolidColorBrush transparentBrush;
         private static readonly SolidColorBrush seaShellBrush;
         private static readonly SolidColorBrush classSelectedAttribute;
+        private static readonly SolidColorBrush classSelectedOperation;
         private static readonly SolidColorBrush classHeader;
         private static readonly SolidColorBrush goldBrush;
         private static readonly SolidColorBrush noInterpretationBrush;
@@ -123,6 +124,11 @@ namespace Exolutio.ViewToolkit
             get { return classSelectedAttribute; }
         }
 
+        public static Brush ClassSelectedOperation
+        {
+            get { return classSelectedOperation; }
+        }
+
         public static Brush ClassHeader { get { return classHeader; } }
 
         public static Brush NoInterpretationBrush { get { return noInterpretationBrush; } }
@@ -165,6 +171,7 @@ namespace Exolutio.ViewToolkit
             classHeader = new SolidColorBrush(Color.FromArgb(255, 250, 235, 215));
             seaShellBrush = new SolidColorBrush(Color.FromArgb(255, 255, 245, 238));
             classSelectedAttribute = new SolidColorBrush(Color.FromArgb(255, 255, 204, 153));
+            classSelectedOperation = new SolidColorBrush(Color.FromArgb(255, 255, 204, 153));
             canvasBackgroundBrush = whiteBrush;
             noInterpretationBrush = new SolidColorBrush(Colors.LightGray);
             noInterpretationBrushSelected = new SolidColorBrush(Color.FromArgb(255, 221, 221, 221));

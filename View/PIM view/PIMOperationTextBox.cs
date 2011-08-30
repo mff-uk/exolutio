@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using System.Text;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Exolutio.Controller.Commands;
@@ -13,23 +14,21 @@ using Component = Exolutio.Model.Component;
 namespace Exolutio.View
 {
     /// <summary>
-    /// Textbox displaying attribute
+    /// Textbox displaying operation
     /// </summary>
-    public class PIMAttributeTextBox : EditableTextBox, IComponentTextBox, ISelectableSubItem
+    public class PIMOperationTextBox : EditableTextBox, IComponentTextBox, ISelectableSubItem
     {
-        public PIMAttribute PIMAttribute { get; private set; }
+        public PIMOperation PIMOperation { get; private set; }
 
-        public PIMAttributesContainer Container { get; set; }
-
-        //private IControlsAttributes classController;
+        public PIMOperationsContainer Container { get; set; }
 
         public override void SetDisplayedObject(object property, object diagram)
         {
-            this.PIMAttribute = (PIMAttribute)property;
+            this.PIMOperation = (PIMOperation)property;
 
             //this.classController = classController;
 
-            ExolutioContextMenu exolutioContextMenu = MenuHelper.GetContextMenu(ScopeAttribute.EScope.PIMAttribute, (Diagram)diagram);
+            ExolutioContextMenu exolutioContextMenu = MenuHelper.GetContextMenu(ScopeAttribute.EScope.PIMOperation, (Diagram)diagram);
             exolutioContextMenu.ScopeObject = property;
             exolutioContextMenu.Diagram = diagram;
             ContextMenu = exolutioContextMenu;
@@ -38,12 +37,12 @@ namespace Exolutio.View
 #if SILVERLIGHT
             ContextMenuService.SetContextMenu(this, ContextMenu);
 #else
-            MouseDoubleClick += PIMAttributeTextBox_MouseDoubleClick;
-            MouseDown += PIMAttributeTextBox_MouseDown;
-            PreviewMouseDown += PIMAttributeTextBox_PreviewMouseDown;
+            MouseDoubleClick += PIMOperationTextBox_MouseDoubleClick;
+            MouseDown += PIMOperationTextBox_MouseDown;
+            PreviewMouseDown += PIMOperationTextBox_PreviewMouseDown;
 #endif
 
-            this.PIMAttribute.PropertyChanged += OnPropertyChangedEvent;
+            this.PIMOperation.PropertyChanged += OnPropertyChangedEvent;
             Background = ViewToolkitResources.TransparentBrush;
             RefreshTextContent();
             BindType();
@@ -65,9 +64,9 @@ namespace Exolutio.View
                 type.PropertyChanged -= Type_PropertyChanged;
             }
 
-            if (PIMAttribute.AttributeType != null)
+            if (PIMOperation.ResultType != null)
             {
-                type = PIMAttribute.AttributeType;
+                type = PIMOperation.ResultType;
                 type.PropertyChanged += Type_PropertyChanged;
             }
         }
@@ -79,7 +78,7 @@ namespace Exolutio.View
             {
                 type.PropertyChanged -= Type_PropertyChanged;
             }
-            PIMAttribute.PropertyChanged -= OnPropertyChangedEvent;
+            PIMOperation.PropertyChanged -= OnPropertyChangedEvent;
             base.UnBindModelView();
         }
 
@@ -89,42 +88,68 @@ namespace Exolutio.View
             RefreshTextContent();
         }
 
+        private StringBuilder textBuilder;
+        
         private void RefreshTextContent()
         {
-            if (PIMAttribute.AttributeType != null)
-                this.Text = string.Format("{0} : {1}", PIMAttribute.Name, PIMAttribute.AttributeType.Name);
-            else
-                this.Text = PIMAttribute.Name;
-
-            //if (property.Default != null)
-            //    this.Text += string.Format(" [{0}]", property.Default);
-
-            if (!String.IsNullOrEmpty(PIMAttribute.GetCardinalityString()) && PIMAttribute.GetCardinalityString() != "1")
+            if (PIMOperation.Parameters.Count != 0 || PIMOperation.ResultType != null)
             {
-                this.Text += String.Format(" {{{0}}}", PIMAttribute.GetCardinalityString());
+                if (textBuilder == null)
+                {
+                    textBuilder = new StringBuilder(Name);
+                }
+                else
+                {
+                    textBuilder.Clear();
+                }
+                textBuilder.Append(PIMOperation.Name);
+                textBuilder.Append("(");
+                if (PIMOperation.Parameters.Count > 0)
+                {                    
+                    foreach (PIMOperationParameter parameter in PIMOperation.Parameters)
+                    {
+                        textBuilder.Append(parameter.Name);
+                        if (parameter.Type != null)
+                        {
+                            textBuilder.Append(":");
+                            textBuilder.Append(parameter.Type.ToString());
+                        }
+                    }
+                }
+                textBuilder.Append(")");
+                if (PIMOperation.ResultType != null)
+                {
+                    textBuilder.Append(":");
+                    textBuilder.Append(PIMOperation.ResultType.ToString());
+                }
+                this.Text = textBuilder.ToString();
+            }
+            else
+            {
+                this.Text = string.Format("{0}()", PIMOperation.Name);
             }
         }
 
         private Exolutio.Model.AttributeType type;
 
-        void PIMAttributeTextBox_MouseDown(object sender, MouseButtonEventArgs e)
+        void PIMOperationTextBox_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Current.InvokeComponentTouched(PIMAttribute);
+            Current.InvokeComponentTouched(PIMOperation);
         }
 
-        void PIMAttributeTextBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        void PIMOperationTextBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             Container.ExolutioCanvas.SelectableItem_PreviewMouseDown(this, e);
         }
 
-        private void PIMAttributeTextBox_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void PIMOperationTextBox_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
 #if SILVERLIGHT
 #else
-            if (PIMAttribute != null)
+            if (PIMOperation != null)
             {
                 PIMClassDialog d = new PIMClassDialog();
-                d.Initialize(Current.Controller, PIMAttribute.PIMClass, PIMAttribute);
+                d.Initialize(Current.Controller, PIMOperation.PIMClass);
                 d.Topmost = true;
                 d.Show();
             }
@@ -175,7 +200,7 @@ namespace Exolutio.View
 
         public Component Component
         {
-            get { return PIMAttribute; }
+            get { return PIMOperation; }
         }
     }
 }

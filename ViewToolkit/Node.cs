@@ -147,6 +147,11 @@ namespace Exolutio.ViewToolkit
             DragThumb.SnapTo(referentialElement, recalcPosition);
         }
 
+        public void UnSnap()
+        {
+            DragThumb.UnsnapElement(DragThumb);
+        }
+
         private readonly List<Connector> connectors = new List<Connector>();
 
         public List<Connector> Connectors

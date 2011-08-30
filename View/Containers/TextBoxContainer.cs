@@ -256,42 +256,41 @@ namespace Exolutio.View
 		}
 
 	    /// <summary>
-	    /// Adds visualization of <paramref name="attribute"/> to the control
+	    /// Adds visualization of <paramref name="member"/> to the control
 	    /// </summary>
-	    /// <param name="attribute">visualized attribute</param>
+	    /// <param name="member">visualized attribute</param>
 	    /// <returns>Control displaying the attribute</returns>
-	    public TTextBox AddAttribute(TMember attribute)
+	    public TTextBox AddMember(TMember member)
 	    {
             TTextBox t = new TTextBox();
-	        t.SetDisplayedObject(attribute, Diagram);
+	        t.SetDisplayedObject(member, Diagram);
             AddItem(t);
 	        return t;
 	    }
 
 	    /// <summary>
-	    /// Removes visualization of <paramref name="attribute"/>/
+	    /// Removes visualization of <paramref name="member"/>/
 	    /// </summary>
-	    /// <param name="attribute">remoed attribute</param>
-        public void RemoveAttribute(TMember attribute)
+	    /// <param name="member">removed member</param>
+        public void RemoveMember(TMember member)
 	    {
-	        //attributeController.RemoveAttribute(attribute);
 	        throw new NotImplementedException("Member AttributesContainer.RemoveAttribute not implemented.");   
 	    }
 
-        public abstract ICollection<TMember> AttributesCollection { get; set; }
+        public abstract ICollection<TMember> Collection { get; set; }
 
 	    /// <summary>
 	    /// Reflects changs in <see cref="IAttributesContainer.AttributesCollection"/>.
 	    /// </summary>
 	    /// <param name="sender">sender of the event</param>
 	    /// <param name="e">event arguments</param>
-	    public void attributesCollection_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+	    public void Collection_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
 	    {
 	        Clear();
 
-            foreach (TMember attribute in AttributesCollection)
+            foreach (TMember attribute in Collection)
 	        {
-	            AddAttribute(attribute);
+	            AddMember(attribute);
 	        }
 	    }
 	}

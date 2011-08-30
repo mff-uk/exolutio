@@ -14,7 +14,7 @@ namespace Exolutio.Controller.Commands.Atomic.MacroWrappers
     public class cmdRenameComponent : MacroCommand
     {
         [PublicArgument("Component", typeof(Component))]
-        [Scope(ScopeAttribute.EScope.PIMAssociation | ScopeAttribute.EScope.PIMClass | ScopeAttribute.EScope.PIMAttribute
+        [Scope(ScopeAttribute.EScope.PIMAssociation | ScopeAttribute.EScope.PIMClass | ScopeAttribute.EScope.PIMAttribute | ScopeAttribute.EScope.PIMAssociationEnd
              | ScopeAttribute.EScope.PSMAttribute | ScopeAttribute.EScope.PSMClass | ScopeAttribute.EScope.PSMAssociation | ScopeAttribute.EScope.PSMSchemaClass)]
         public Guid ComponentGuid { get; set; }
 

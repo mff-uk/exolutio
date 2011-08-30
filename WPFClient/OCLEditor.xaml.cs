@@ -102,11 +102,15 @@ namespace Exolutio.WPFClient
 
         private bool updatesBlocked = false; 
 
-        private void textBox1_TextChanged(object sender, TextChangedEventArgs e)
+        private void textBox1_KeyUp(object sender, KeyEventArgs e)
         {
             if (DisplayedScript != null && !updatesBlocked)
             {
-                DisplayedScript.Contents = textBox1.Text;
+                if (DisplayedScript.Contents != textBox1.Text)
+                {
+                    DisplayedScript.Contents = textBox1.Text;
+                    DisplayedScript.Project.HasUnsavedChanges = true;
+                }
             }
         }
     }

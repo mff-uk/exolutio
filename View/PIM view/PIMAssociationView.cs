@@ -87,21 +87,46 @@ namespace Exolutio.View
             }
             
             // labels, multiplicities
-            NameLabel.Text = PIMAssociation.Name;
+            AssociationName = PIMAssociation.Name;
             SourceCardinality = PIMAssociation.PIMAssociationEnds[0].GetCardinalityString();
             TargetCardinality = PIMAssociation.PIMAssociationEnds[1].GetCardinalityString();
+            SourceRole = PIMAssociation.PIMAssociationEnds[0].Name;
+            TargetRole = PIMAssociation.PIMAssociationEnds[1].Name;
 
-            NameLabel.X = ViewHelper.MainLabelViewHelper.X;
-            NameLabel.Y = ViewHelper.MainLabelViewHelper.Y;
-            NameLabel.UpdateCanvasPosition(true);
+            if (NameLabel != null)
+            {
+                NameLabel.X = ViewHelper.MainLabelViewHelper.X;
+                NameLabel.Y = ViewHelper.MainLabelViewHelper.Y;
+                NameLabel.UpdateCanvasPosition(true);
+            }
 
-            SourceCardinalityLabel.X = ViewHelper.AssociationEndsViewHelpers[0].CardinalityLabelViewHelper.X;
-            SourceCardinalityLabel.Y = ViewHelper.AssociationEndsViewHelpers[0].CardinalityLabelViewHelper.Y;
-            SourceCardinalityLabel.UpdateCanvasPosition(true);
+            if (SourceCardinalityLabel != null)
+            {
+                SourceCardinalityLabel.X = ViewHelper.AssociationEndsViewHelpers[0].CardinalityLabelViewHelper.X;
+                SourceCardinalityLabel.Y = ViewHelper.AssociationEndsViewHelpers[0].CardinalityLabelViewHelper.Y;
+                SourceCardinalityLabel.UpdateCanvasPosition(true);
+            }
 
-            TargetCardinalityLabel.X = ViewHelper.AssociationEndsViewHelpers[1].CardinalityLabelViewHelper.X;
-            TargetCardinalityLabel.Y = ViewHelper.AssociationEndsViewHelpers[1].CardinalityLabelViewHelper.Y;
-            TargetCardinalityLabel.UpdateCanvasPosition(true);
+            if (TargetCardinalityLabel != null)
+            {
+                TargetCardinalityLabel.X = ViewHelper.AssociationEndsViewHelpers[1].CardinalityLabelViewHelper.X;
+                TargetCardinalityLabel.Y = ViewHelper.AssociationEndsViewHelpers[1].CardinalityLabelViewHelper.Y;
+                TargetCardinalityLabel.UpdateCanvasPosition(true);
+            }
+
+            if (SourceRoleLabel != null)
+            {
+                SourceRoleLabel.X = ViewHelper.AssociationEndsViewHelpers[0].RoleLabelViewHelper.X;
+                SourceRoleLabel.Y = ViewHelper.AssociationEndsViewHelpers[0].RoleLabelViewHelper.Y;
+                SourceRoleLabel.UpdateCanvasPosition(true);
+            }
+
+            if (TargetRoleLabel != null)
+            {
+                TargetRoleLabel.X = ViewHelper.AssociationEndsViewHelpers[1].RoleLabelViewHelper.X;
+                TargetRoleLabel.Y = ViewHelper.AssociationEndsViewHelpers[1].RoleLabelViewHelper.Y;
+                TargetRoleLabel.UpdateCanvasPosition(true);
+            }
         }
 
         public Connector Connector { get; private set; }
@@ -137,9 +162,49 @@ namespace Exolutio.View
             get { return PIMAssociation.PIMClasses[1]; }
         }
 
-        public Label NameLabel { get; private set; }
-        public Label SourceCardinalityLabel { get; private set; }
-        public Label TargetCardinalityLabel { get; private set; }
+        #region label properties
+
+        private Label nameLabel;
+
+        public Label NameLabel
+        {
+            get { return nameLabel; }
+            private set { nameLabel = value; }
+        }
+
+        private Label sourceCardinalityLabel;
+
+        public Label SourceCardinalityLabel
+        {
+            get { return sourceCardinalityLabel; }
+            private set { sourceCardinalityLabel = value; }
+        }
+
+        private Label sourceRoleLabel;
+
+        public Label SourceRoleLabel
+        {
+            get { return sourceRoleLabel; }
+            private set { sourceRoleLabel = value; }
+        }
+
+        private Label targetCardinalityLabel;
+
+        public Label TargetCardinalityLabel
+        {
+            get { return targetCardinalityLabel; }
+            private set { targetCardinalityLabel = value; }
+        }
+
+        private Label targetRoleLabel;
+
+        public Label TargetRoleLabel
+        {
+            get { return targetRoleLabel; }
+            private set { targetRoleLabel = value; }
+        }
+
+        #endregion
 
         private string associationName;
         public string AssociationName
@@ -148,6 +213,8 @@ namespace Exolutio.View
             set
             {
                 associationName = value;
+                NameLabel = CreateOrRemoveLabel(ref nameLabel, ViewHelper.MainLabelViewHelper, value, null, NameLabel_SelectedChanged, NameLabel_PositionChanged, associationMenu,
+                    null, Connector, EPlacementCenter.Center);
                 if (NameLabel != null)
                 {
                     NameLabel.Text = value;
@@ -163,6 +230,7 @@ namespace Exolutio.View
             set
             {
                 sourceCardinality = value;
+                SourceCardinalityLabel = CreateOrRemoveLabel(ref sourceCardinalityLabel, ViewHelper.AssociationEndsViewHelpers[0].CardinalityLabelViewHelper, null, value, null, SourceCardinalityLabel_PositionChanged, startPointMenu, Connector.StartPoint);
                 if (SourceCardinalityLabel != null)
                 {
                     SourceCardinalityLabel.Text = value;
@@ -178,10 +246,43 @@ namespace Exolutio.View
             set
             {
                 targetCardinality = value;
+                TargetCardinalityLabel = CreateOrRemoveLabel(ref targetCardinalityLabel, ViewHelper.AssociationEndsViewHelpers[1].CardinalityLabelViewHelper, null, value, null, TargetCardinalityLabel_PositionChanged, endPointMenu, Connector.EndPoint);
                 if (TargetCardinalityLabel != null)
                 {
                     TargetCardinalityLabel.Text = value;
                     TargetCardinalityLabel.Visibility = !string.IsNullOrEmpty(value) && value != "1" ? Visibility.Visible : Visibility.Collapsed;
+                }
+            }
+        }
+
+        private string sourceRole;
+        public string SourceRole
+        {
+            get { return sourceRole; }
+            set
+            {
+                sourceRole = value;
+                SourceRoleLabel = CreateOrRemoveLabel(ref sourceRoleLabel, ViewHelper.AssociationEndsViewHelpers[0].RoleLabelViewHelper, value, null, null, SourceRoleLabel_PositionChanged, startPointMenu, Connector.StartPoint);
+                if (SourceRoleLabel != null)
+                {
+                    SourceRoleLabel.Text = value;
+                    SourceRoleLabel.Visibility = !string.IsNullOrEmpty(value) && value != "1" ? Visibility.Visible : Visibility.Collapsed;
+                }
+            }
+        }
+
+        private string targetRole;
+        public string TargetRole
+        {
+            get { return targetRole; }
+            set
+            {
+                targetRole = value;
+                TargetRoleLabel = CreateOrRemoveLabel(ref targetRoleLabel, ViewHelper.AssociationEndsViewHelpers[1].RoleLabelViewHelper, value, null, null, TargetRoleLabel_PositionChanged, endPointMenu, Connector.EndPoint);
+                if (TargetRoleLabel != null)
+                {
+                    TargetRoleLabel.Text = value;
+                    TargetRoleLabel.Visibility = !string.IsNullOrEmpty(value) && value != "1" ? Visibility.Visible : Visibility.Collapsed;
                 }
             }
         }
@@ -207,7 +308,10 @@ namespace Exolutio.View
                 && diagramView.RepresentantsCollection.ContainsKey(TargetClass);
         }
 
-        bool parentChildUpdateBound = false; 
+        bool parentChildUpdateBound = false;
+        private ExolutioContextMenu associationMenu;
+        private ExolutioContextMenu startPointMenu;
+        private ExolutioContextMenu endPointMenu;
 
         private void PIMAssociation_PropertyChanged_ForParentChildUpdate(object sender, PropertyChangedEventArgs e)
         {
@@ -225,18 +329,67 @@ namespace Exolutio.View
             // && labels already removed
         }
 
+        private Label CreateOrRemoveLabel(ref Label currentLabel, LabelViewHelper viewHelper, string name, string cardinality, Action selectedChanged, Action positionChanged, ContextMenu contextMenu, ConnectorPoint snapPoint = null, Connector snapConnector = null, EPlacementCenter placementCenter = EPlacementCenter.TopLeftCorner)
+        {
+            if (string.IsNullOrEmpty(name) && (cardinality == "1" || string.IsNullOrEmpty(cardinality)))
+            {
+                if (currentLabel != null)
+                {
+                    if (selectedChanged != null)
+                        currentLabel.SelectedChanged -= selectedChanged;
+                    if (positionChanged != null)
+                        currentLabel.PositionChanged -= positionChanged;                    
+                    if (snapPoint != null)
+                        currentLabel.UnSnap();
+                    if (snapConnector != null)
+                        currentLabel.UnSnap();
+                    CreatedControls.Remove(currentLabel);
+                    DiagramView.ExolutioCanvas.RemoveNode(currentLabel);
+                }
+                return null;
+            }
+            
+            if (currentLabel == null)
+            {
+                Point tmpPosition = viewHelper.Position;
+                currentLabel = new Label();                
+                CreatedControls.Add(currentLabel);
+                DiagramView.ExolutioCanvas.AddNode(currentLabel);
+                currentLabel.PlacementCenter = placementCenter;
+                if (snapPoint != null)
+                    currentLabel.SnapTo(snapPoint, true);
+                if (snapConnector != null)
+                    snapConnector.SnapNodeToConnector(currentLabel);
+                currentLabel.X = viewHelper.X;
+                currentLabel.Y = viewHelper.Y;
+                if (selectedChanged != null)
+                    currentLabel.SelectedChanged += selectedChanged;
+                if (positionChanged != null)
+                    currentLabel.PositionChanged += positionChanged;
+                currentLabel.ContextMenu = contextMenu;
+                //UpdateView();
+                //viewHelper.SetPositionSilent(tmpPosition.X, tmpPosition.Y);
+                //currentLabel.X = 
+            }
+            return currentLabel;
+        }
+
         public override void PutInDiagram(DiagramView diagramView, ViewHelper viewHelper)
         {
             base.PutInDiagram(diagramView, viewHelper);
 
             Connector = new Connector();
-            NameLabel = new Label();
-            SourceCardinalityLabel = new Label();
-            TargetCardinalityLabel = new Label();
+            ////NameLabel = new Label();
+            ////SourceCardinalityLabel = new Label();
+            ////SourceRoleLabel = new Label();
+            ////TargetCardinalityLabel = new Label();
+            ////TargetRoleLabel = new Label();
             CreatedControls.Add(Connector);
-            CreatedControls.Add(NameLabel);
-            CreatedControls.Add(SourceCardinalityLabel);
-            CreatedControls.Add(TargetCardinalityLabel);
+            ////CreatedControls.Add(NameLabel);
+            ////CreatedControls.Add(SourceCardinalityLabel);
+            ////CreatedControls.Add(SourceRoleLabel);
+            ////CreatedControls.Add(TargetCardinalityLabel);
+            ////CreatedControls.Add(TargetRoleLabel);
             DiagramView.ExolutioCanvas.AddConnector(Connector);
             Connector.Connect(SourceClassView.MainNode, TargetClassView.MainNode);
             if (ViewHelper.Points.Count == 0)
@@ -247,28 +400,29 @@ namespace Exolutio.View
             {
                 Connector.SetPoints(ViewHelper.Points);
             }
-            DiagramView.ExolutioCanvas.AddNode(NameLabel);
-            DiagramView.ExolutioCanvas.AddNode(SourceCardinalityLabel);
-            DiagramView.ExolutioCanvas.AddNode(TargetCardinalityLabel);
-            NameLabel.PlacementCenter = EPlacementCenter.Center;
-            Connector.SnapNodeToConnector(NameLabel);
-            SourceCardinalityLabel.SnapTo(Connector.StartPoint, true);
-            TargetCardinalityLabel.SnapTo(Connector.EndPoint, true);
+            ////DiagramView.ExolutioCanvas.AddNode(NameLabel);
+            ////DiagramView.ExolutioCanvas.AddNode(SourceCardinalityLabel);
+            ////DiagramView.ExolutioCanvas.AddNode(SourceRoleLabel);
+            ////DiagramView.ExolutioCanvas.AddNode(TargetCardinalityLabel);
+            ////DiagramView.ExolutioCanvas.AddNode(TargetRoleLabel);
+            ////NameLabel.PlacementCenter = EPlacementCenter.Center;
+            ////Connector.SnapNodeToConnector(NameLabel);
+            ////SourceCardinalityLabel.SnapTo(Connector.StartPoint, true);
+            ////SourceRoleLabel.SnapTo(Connector.StartPoint, true);
+            ////TargetCardinalityLabel.SnapTo(Connector.EndPoint, true);
+            ////TargetRoleLabel.SnapTo(Connector.EndPoint, true);
 
             CreateMenus();
 
-#if SILVERLIGHT
-            //ContextMenuService.SetContextMenu(Connector, associationMenu);
-            //ContextMenuService.SetContextMenu(NameLabel, associationMenu);
-            //ContextMenuService.SetContextMenu(Connector.StartPoint, startPointMenu);
-            //ContextMenuService.SetContextMenu(Connector.EndPoint, endPointMenu);
-#endif
             BindModelView();
 
-            NameLabel.SelectedChanged += new Action(NameLabel_SelectedChanged);
-            NameLabel.PositionChanged += NameLabel_PositionChanged;
-            SourceCardinalityLabel.PositionChanged += SourceCardinalityLabel_PositionChanged;
-            TargetCardinalityLabel.PositionChanged += TargetCardinalityLabel_PositionChanged;
+            ////NameLabel.SelectedChanged += NameLabel_SelectedChanged;
+            ////NameLabel.PositionChanged += NameLabel_PositionChanged;
+            ////SourceCardinalityLabel.PositionChanged += SourceCardinalityLabel_PositionChanged;
+            ////SourceRoleLabel.PositionChanged += SourceRoleLabel_PositionChanged;
+            ////TargetCardinalityLabel.PositionChanged += TargetCardinalityLabel_PositionChanged;
+            ////SourceRoleLabel.PositionChanged += TargetRoleLabel_PositionChanged;
+            
             Connector.SelectedChanged += Connector_SelectedChanged;
             Connector.ConnectorPointMoved += Connector_ConnectorPointMoved;
             Connector.PointsCountChanged += Connector_PointsCountChanged;
@@ -281,14 +435,14 @@ namespace Exolutio.View
 
         private void CreateMenus()
         {
-            ExolutioContextMenu associationMenu = MenuHelper.GetContextMenu(ScopeAttribute.EScope.PIMAssociation, DiagramView.Diagram);
+            associationMenu = MenuHelper.GetContextMenu(ScopeAttribute.EScope.PIMAssociation, DiagramView.Diagram);
             AddConnectorCommands(associationMenu);
             ContextMenu = associationMenu;
             
-            ExolutioContextMenu startPointMenu = MenuHelper.GetContextMenu(ScopeAttribute.EScope.PIMAssociationEnd, DiagramView.Diagram);
+            startPointMenu = MenuHelper.GetContextMenu(ScopeAttribute.EScope.PIMAssociationEnd, DiagramView.Diagram);
             Connector.StartPoint.ContextMenu = startPointMenu;
             
-            ExolutioContextMenu endPointMenu = MenuHelper.GetContextMenu(ScopeAttribute.EScope.PIMAssociationEnd, DiagramView.Diagram);
+            endPointMenu = MenuHelper.GetContextMenu(ScopeAttribute.EScope.PIMAssociationEnd, DiagramView.Diagram);
             Connector.EndPoint.ContextMenu = endPointMenu;
 
             #if SILVERLIGHT
@@ -301,9 +455,9 @@ namespace Exolutio.View
             endPointMenu = MenuHelper.GetContextMenu(ScopeAttribute.EScope.PIMAssociationEnd, DiagramView.Diagram);
             TargetCardinalityLabel.ContextMenu = endPointMenu;
             #else
-            NameLabel.ContextMenu = associationMenu;
-            SourceCardinalityLabel.ContextMenu = startPointMenu;
-            TargetCardinalityLabel.ContextMenu = endPointMenu;
+            //NameLabel.ContextMenu = associationMenu;
+            //SourceCardinalityLabel.ContextMenu = startPointMenu;
+            //TargetCardinalityLabel.ContextMenu = endPointMenu;
             #endif
         }
 
@@ -311,27 +465,6 @@ namespace Exolutio.View
         {
             this.Selected = Connector.Selected;
         }
-
-//#if SILVERLIGHT
-//        void Connector_MouseDown()
-//#else
-//        void Connector_MouseDown(object sender, MouseButtonEventArgs e)
-//#endif
-//        {
-//            DiagramView.ExolutioCanvas.SelectedItems.Clear();
-//            DiagramView.ExolutioCanvas.SelectedItems.Add(this.Connector);
-//            DiagramView.SetSelection(ModelComponent);
-//#if SILVERLIGHT
-//#else
-//            e.Handled = true;
-//#endif
-//        }
-        
-//        private void Connector_MouseUp(object sender, MouseButtonEventArgs e)
-//        {
-//            //otherwise MouseUp is catched by DiagramView which clears selection 
-//            e.Handled = true;
-//        }
         
         private void SourceCardinalityLabel_PositionChanged()
         {
@@ -341,6 +474,16 @@ namespace Exolutio.View
         void TargetCardinalityLabel_PositionChanged()
         {
             ViewHelper.AssociationEndsViewHelpers[1].CardinalityLabelViewHelper.SetPositionSilent(TargetCardinalityLabel.Position);
+        }
+
+        private void SourceRoleLabel_PositionChanged()
+        {
+            ViewHelper.AssociationEndsViewHelpers[0].RoleLabelViewHelper.SetPositionSilent(SourceRoleLabel.Position);
+        }
+
+        void TargetRoleLabel_PositionChanged()
+        {
+            ViewHelper.AssociationEndsViewHelpers[1].RoleLabelViewHelper.SetPositionSilent(TargetRoleLabel.Position);
         }
 
         void NameLabel_SelectedChanged()
@@ -382,9 +525,16 @@ namespace Exolutio.View
             }
             UnBindModelView();
             DiagramView.ExolutioCanvas.RemoveConnector(Connector);
+            if (NameLabel != null)
             DiagramView.ExolutioCanvas.RemoveNode(NameLabel);
+            if (SourceCardinalityLabel != null)
             DiagramView.ExolutioCanvas.RemoveNode(SourceCardinalityLabel);
+            if (TargetCardinalityLabel != null)
             DiagramView.ExolutioCanvas.RemoveNode(TargetCardinalityLabel);
+            if (SourceRoleLabel != null)
+            DiagramView.ExolutioCanvas.RemoveNode(SourceRoleLabel);
+            if (TargetRoleLabel != null)
+            DiagramView.ExolutioCanvas.RemoveNode(TargetRoleLabel);
             base.RemoveFromDiagram();
         }
 

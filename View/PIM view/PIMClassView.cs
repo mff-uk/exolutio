@@ -14,12 +14,13 @@ using Exolutio.ViewToolkit;
 
 namespace Exolutio.View
 {
-    public class PIMClassView : NodeComponentViewBase<PIMClassViewHelper>, IEnumerable<PIMAttributeTextBox>
+    public class PIMClassView : NodeComponentViewBase<PIMClassViewHelper>
     {
         #region inner controls
         private StackPanel stackPanel;
         private EditableTextBox tbClassHeader;
         private PIMAttributesContainer attributesContainer;
+        private PIMOperationsContainer operationsContainer;
         private Border border;
 
         #endregion
@@ -83,35 +84,34 @@ namespace Exolutio.View
                 Visibility = Visibility.Collapsed,
                 Background = ViewToolkitResources.ClassBody
             };
+            Border operationsBorder = new Border
+            {
+                BorderBrush = ViewToolkitResources.BlackBrush,
+                Visibility = Visibility.Collapsed,
+                Background = ViewToolkitResources.ClassBody
+            };
             StackPanel attributesSection = new StackPanel
             {
                 Background = ViewToolkitResources.ClassBody
             };
+            StackPanel operationsSection = new StackPanel
+            {
+                Background = ViewToolkitResources.ClassBody
+            };
             attributesBorder.Child = attributesSection;
-
+            operationsBorder.Child = operationsSection;
             attributesContainer = new PIMAttributesContainer(attributesSection, canvas, DiagramView);
+            operationsContainer = new PIMOperationsContainer(operationsSection, canvas, DiagramView);
 
             stackPanel.Children.Add(attributesBorder);
-            //Border operationsBorder = new Border
-            //{
-            //    BorderBrush = ViewToolkitResources.BlackBrush,
-            //    Visibility = Visibility.Collapsed,
-            //    Background = ViewToolkitResources.SeaShellBrush
-            //};
+            stackPanel.Children.Add(operationsBorder);
 
-            //StackPanel operationsSection = new StackPanel
-            //{
-            //    Background = ViewToolkitResources.SeaShellBrush
-            //};
-            //operationsBorder.Child = operationsSection;
-            //stackPanel.Children.Add(operationsBorder);
-
-            Border[] stackBorders = new Border[] { headerBorder, attributesBorder };
-            ITextBoxContainer[] stackContainers = new ITextBoxContainer[] { attributesContainer };
+            Border[] stackBorders = new Border[] { headerBorder, attributesBorder, operationsBorder };
+            ITextBoxContainer[] stackContainers = new ITextBoxContainer[] { attributesContainer, operationsContainer };
             attributesContainer.StackBorders = stackBorders;
             attributesContainer.StackContainers = stackContainers;
-            //classOperations.StackBorders = stackBorders;
-            //classOperations.StackContainers = stackContainers;
+            operationsContainer.StackBorders = stackBorders;
+            operationsContainer.StackContainers = stackContainers;
 
             #endregion
 
@@ -166,13 +166,15 @@ namespace Exolutio.View
             ((ExolutioContextMenu) ContextMenu).Diagram = DiagramView.Diagram;
             if (PIMClass != null)
             {
-                attributesContainer.AttributesCollection = PIMClass.PIMAttributes;
+                attributesContainer.Collection = PIMClass.PIMAttributes;
+                operationsContainer.Collection = PIMClass.PIMOperations;
             }
         }
 
         protected override void UnBindModelView()
         {
             attributesContainer.Clear();
+            operationsContainer.Clear();
             base.UnBindModelView();
         }
 
@@ -217,6 +219,10 @@ namespace Exolutio.View
                     {
                         attributeTextBox.Selected = false;
                     }
+                    foreach (PIMOperationTextBox operationTextBox in operationsContainer)
+                    {
+                        operationTextBox.Selected = false;
+                    }
                 }
             }
         }
@@ -226,14 +232,14 @@ namespace Exolutio.View
             base.RemoveFromDiagram();
         }
 
-        public IEnumerator<PIMAttributeTextBox> GetEnumerator()
+        public IEnumerable<PIMAttributeTextBox> AttributeTextBoxes
         {
-            return attributesContainer.GetEnumerator();
+            get { return attributesContainer; }
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
+        public IEnumerable<PIMOperationTextBox> OperationTextBoxes
         {
-            return GetEnumerator();
+            get { return operationsContainer; }
         }
     }
 }

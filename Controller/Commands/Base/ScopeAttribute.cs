@@ -21,7 +21,8 @@ namespace Exolutio.Controller.Commands
             PSMAttribute = 512,
             PSMSchemaClass = 1024,
             PIMGeneralization = 2048,
-            PIM = PIMAttribute | PIMAssociationEnd | PIMAssociation | PIMClass | PIMDiagram | PIMGeneralization,
+            PIMOperation = 4096,
+            PIM = PIMAttribute | PIMAssociationEnd | PIMAssociation | PIMClass | PIMDiagram | PIMGeneralization | PIMOperation,
             PSM = PSMAttribute | PSMAssociation | PSMClass | PSMSchema | PSMSchemaClass | PSMContentModel
         }
 

@@ -167,10 +167,13 @@ namespace Exolutio.View.Commands.Project
                         Current.Project = project;
                     }
                 }
-			    catch (Exception e)
+                #if DEBUG
+                #else
+                catch (Exception e)
 			    {
                     throw new ExolutioModelException(string.Format("Failed to load project from the file \r\n'{0}'", selectedFile.FullName), e) { ExceptionTitle = "Cannot open project" };
 			    }
+                #endif
                 finally
                 {
                     Current.BusyState = false; 

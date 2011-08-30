@@ -205,7 +205,7 @@ namespace Exolutio.View
             ((ExolutioContextMenu)ContextMenu).Diagram = DiagramView.Diagram;
             if (PSMClass != null)
             {
-                attributesContainer.AttributesCollection = PSMClass.PSMAttributes;
+                attributesContainer.Collection = PSMClass.PSMAttributes;
                 if (PSMClass.RepresentedClass != null)
                 {
                     BindToRepresentedClass(PSMClass.RepresentedClass);

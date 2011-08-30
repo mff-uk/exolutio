@@ -61,6 +61,11 @@ namespace Exolutio.Model
                 this.SerializeIDRef(BaseType, "baseTypeID", parentNode, context);
             }
 
+            if (Component != null)
+            {
+                this.SerializeIDRef(Component, "componentId", parentNode, context);
+            }
+
             if (XSDDefinition != null)
             {
                 XCData xsdDefinitionCData = new XCData(XSDDefinition);
@@ -78,6 +83,8 @@ namespace Exolutio.Model
             this.IsSealed = SerializationContext.DecodeBool(parentNode.Attribute("IsSealed").Value);
             this.Name = SerializationContext.DecodeString(parentNode.Attribute("Name").Value);
             baseTypeGuid = this.DeserializeIDRef("baseTypeID", parentNode, context, true);
+            componentGuid = this.DeserializeIDRef("componentId", parentNode, context, true);
+
             XElement xsdDefinitionElement = parentNode.Element(context.ExolutioNS + "XSDDefinition");
             if (xsdDefinitionElement != null)
             {
@@ -118,6 +125,10 @@ namespace Exolutio.Model
             {
                 copyAttributeType.schemaGuid = createdCopies.GetGuidForCopyOf(Schema);
             }
+            if (Component != null)
+            {
+                copyAttributeType.componentGuid = createdCopies.GetGuidForCopyOf(Component);
+            }
             copyAttributeType.SetProjectVersion(projectVersion);
         }
 
@@ -134,6 +145,25 @@ namespace Exolutio.Model
             {
                 schemaGuid = value != null ? value : Guid.Empty;
                 
+            }
+        }
+
+        public bool IsModelType
+        {
+            get { return componentGuid != Guid.Empty; }
+        }
+
+        private Guid componentGuid;
+        
+        public Component Component
+        {
+            get
+            {
+                return componentGuid == Guid.Empty ? null : Project.TranslateComponent<Component>(componentGuid);
+            }
+            set
+            {
+                componentGuid = value != null ? value : Guid.Empty;
             }
         }
 

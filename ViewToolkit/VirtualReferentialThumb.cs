@@ -37,7 +37,7 @@ namespace Exolutio.ViewToolkit
         /// <summary>
         /// Updates positiosn of <see cref="FellowTravellers"/>
         /// </summary>
-        private void FellowTravellersUpdate()
+        public void FellowTravellersUpdate()
         {
             if (FellowTravellers != null)
             {
