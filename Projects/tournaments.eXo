@@ -1,0 +1,636 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<eXo:Project xmlns:eXo="http://eXolutio.eu/Project/Serialization/" Version="3.0" UsesVersioning="False" Name="tournaments">
+  <eXo:SingleVersion ID="355ec43b-a8a3-40db-8d29-7707630b6702">
+    <eXo:PIMAttributeTypes Count="3">
+      <eXo:AttributeType ID="b46fab0a-0554-4225-a932-6d6f1c706c43" Name="MatchStatus" IsSealed="False" />
+      <eXo:AttributeType ID="e3459e52-d48e-47ca-82b6-ad7374cd5a0e" Name="Player" IsSealed="False" componentId="06298e91-d009-4005-8a15-6d4e15d9df5e" displayName="PIMClass: *Player*" />
+      <eXo:AttributeType ID="bc694e1d-d1e7-4ac6-8e1f-071255a6bc71" Name="Tournament" IsSealed="False" componentId="1e014a11-c043-423c-b4a6-5d0553ac31bd" displayName="PIMClass: *Tournament*" />
+    </eXo:PIMAttributeTypes>
+    <eXo:PIMSchema ID="049cb593-8ee0-48a6-a597-fb9500ec3f00" Caption="PIMSchema">
+      <eXo:PIMClasses Count="7">
+        <eXo:PIMClass ID="836e8961-7cac-4732-8679-abf778d6a68d" Name="TournamentForm">
+          <eXo:PIMAttributes Count="0" />
+          <eXo:PIMOperations Count="1">
+            <eXo:PIMOperation ID="c247ad01-fc80-4ddb-a06f-4e125124c1e8" Name="applyForTournament" pimClassID="836e8961-7cac-4732-8679-abf778d6a68d" />
+          </eXo:PIMOperations>
+          <eXo:GeneralizationAsGeneral Count="0" />
+          <eXo:PIMAssociationEnds Count="1">
+            <eXo:PIMAssociationEnd pimAssociationEndID="c1bd5fc2-1c75-4701-b15d-6cb4b50a280e" pimAssociationEnd="PIMAssociationEnd: ** 1..1 C: TournamentForm A:  " />
+          </eXo:PIMAssociationEnds>
+        </eXo:PIMClass>
+        <eXo:PIMClass ID="2c95f723-f908-4c13-817d-cf26d54a9837" Name="TournamentControl">
+          <eXo:PIMAttributes Count="0" />
+          <eXo:PIMOperations Count="1">
+            <eXo:PIMOperation ID="29181676-7051-4fb4-ba3a-128e1d75500a" Name="selectSponsors" pimClassID="2c95f723-f908-4c13-817d-cf26d54a9837">
+              <eXo:Parameters Count="1">
+                <eXo:Parameter Name="advertisers" />
+              </eXo:Parameters>
+            </eXo:PIMOperation>
+          </eXo:PIMOperations>
+          <eXo:GeneralizationAsGeneral Count="0" />
+          <eXo:PIMAssociationEnds Count="4">
+            <eXo:PIMAssociationEnd pimAssociationEndID="b10ea74d-e97b-41db-b738-51b6936898bf" pimAssociationEnd="PIMAssociationEnd: ** 1..1 C: TournamentControl A:  " />
+            <eXo:PIMAssociationEnd pimAssociationEndID="8470b785-8d6e-4543-bbea-a042c0d55db5" pimAssociationEnd="PIMAssociationEnd: ** 1..1 C: TournamentControl A:  " />
+            <eXo:PIMAssociationEnd pimAssociationEndID="57d3098c-0605-4604-9d6a-8d29284182a7" pimAssociationEnd="PIMAssociationEnd: ** 0..* C: TournamentControl A:  " />
+            <eXo:PIMAssociationEnd pimAssociationEndID="26090e42-604b-4de4-947d-9455da0a8ae2" pimAssociationEnd="PIMAssociationEnd: ** 0..* C: TournamentControl A:  " />
+          </eXo:PIMAssociationEnds>
+        </eXo:PIMClass>
+        <eXo:PIMClass ID="06298e91-d009-4005-8a15-6d4e15d9df5e" Name="Player">
+          <eXo:PIMAttributes Count="2">
+            <eXo:PIMAttribute ID="8bf6ab2d-8b47-41a0-ad94-f4164ce36fbd" Name="name" Type="5d84c73e-74cd-4acc-bd44-e465272fb37a" displayName="AttributeType: String" pimClassID="06298e91-d009-4005-8a15-6d4e15d9df5e" />
+            <eXo:PIMAttribute ID="ba9b697f-cb0d-4b3d-9877-49dfb701a926" Name="email" Type="5d84c73e-74cd-4acc-bd44-e465272fb37a" displayName="AttributeType: String" pimClassID="06298e91-d009-4005-8a15-6d4e15d9df5e" />
+          </eXo:PIMAttributes>
+          <eXo:PIMOperations Count="0" />
+          <eXo:GeneralizationAsGeneral Count="0" />
+          <eXo:PIMAssociationEnds Count="4">
+            <eXo:PIMAssociationEnd pimAssociationEndID="a070d791-db95-4eea-a31f-5f349d0008ec" pimAssociationEnd="PIMAssociationEnd: ** 0..* C: Player A:  " />
+            <eXo:PIMAssociationEnd pimAssociationEndID="70ccf73e-da14-4c2a-9ada-eadbcb3be6b1" pimAssociationEnd="PIMAssociationEnd: *players* 0..* C: Player A:  " />
+            <eXo:PIMAssociationEnd pimAssociationEndID="a05e0731-c5e7-48d1-bf8c-6db7ab9107fe" pimAssociationEnd="PIMAssociationEnd: ** 0..* C: Player A:  " />
+            <eXo:PIMAssociationEnd pimAssociationEndID="51000991-5b2f-49cc-ad73-1bdc7a799717" pimAssociationEnd="PIMAssociationEnd: *players* 0..* C: Player A:  " />
+          </eXo:PIMAssociationEnds>
+        </eXo:PIMClass>
+        <eXo:PIMClass ID="1e014a11-c043-423c-b4a6-5d0553ac31bd" Name="Tournament">
+          <eXo:PIMAttributes Count="5">
+            <eXo:PIMAttribute ID="8f18c308-691f-48d3-82e5-c58e18ac9fc5" Name="name" Type="5d84c73e-74cd-4acc-bd44-e465272fb37a" displayName="AttributeType: String" pimClassID="1e014a11-c043-423c-b4a6-5d0553ac31bd" />
+            <eXo:PIMAttribute ID="a18a531c-368e-4851-9579-55087d59f5c2" Name="start" Type="2601d7eb-80b5-4f8e-ae3a-47362f0af0d9" displayName="AttributeType: Date" pimClassID="1e014a11-c043-423c-b4a6-5d0553ac31bd" />
+            <eXo:PIMAttribute ID="ed86c6f3-8c7b-4e14-a22b-f63d17f1a582" Name="end" Type="2601d7eb-80b5-4f8e-ae3a-47362f0af0d9" displayName="AttributeType: Date" pimClassID="1e014a11-c043-423c-b4a6-5d0553ac31bd" />
+            <eXo:PIMAttribute ID="724c304d-2fa7-466b-8a72-acada67f6103" Name="maxNumPlayers" Type="dc49d35c-feaf-4e9e-9c22-267208d61a77" displayName="AttributeType: Integer" pimClassID="1e014a11-c043-423c-b4a6-5d0553ac31bd" />
+            <eXo:PIMAttribute ID="3c4a7302-d900-4ccd-9993-5de6bb2fb0e5" Name="advertised" Type="1ce3b950-194d-42c9-aeeb-a9cec5e5505a" displayName="AttributeType: Boolean" pimClassID="1e014a11-c043-423c-b4a6-5d0553ac31bd" />
+          </eXo:PIMAttributes>
+          <eXo:PIMOperations Count="5">
+            <eXo:PIMOperation ID="9c761dca-f1b3-48ff-8cf8-2deb34ff1e00" Name="getMaxNumPlayers" pimClassID="1e014a11-c043-423c-b4a6-5d0553ac31bd">
+              <eXo:Parameters Count="1">
+                <eXo:Parameter Name="p" Type="dc49d35c-feaf-4e9e-9c22-267208d61a77" displayName="AttributeType: Integer" />
+              </eXo:Parameters>
+            </eXo:PIMOperation>
+            <eXo:PIMOperation ID="3d0086c5-02d1-48d6-b072-dde715f14110" Name="acceptPlayer" pimClassID="1e014a11-c043-423c-b4a6-5d0553ac31bd">
+              <eXo:Parameters Count="1">
+                <eXo:Parameter Name="p" Type="e3459e52-d48e-47ca-82b6-ad7374cd5a0e" displayName="AttributeType: Player" />
+              </eXo:Parameters>
+            </eXo:PIMOperation>
+            <eXo:PIMOperation ID="f7358cbc-3c90-4a84-b4cc-6069644294d0" Name="removePlayer" pimClassID="1e014a11-c043-423c-b4a6-5d0553ac31bd">
+              <eXo:Parameters Count="1">
+                <eXo:Parameter Name="p" Type="e3459e52-d48e-47ca-82b6-ad7374cd5a0e" displayName="AttributeType: Player" />
+              </eXo:Parameters>
+            </eXo:PIMOperation>
+            <eXo:PIMOperation ID="a6b96abd-129b-4d80-b26b-80bc7c46714f" Name="isPlayerAccepted" pimClassID="1e014a11-c043-423c-b4a6-5d0553ac31bd">
+              <eXo:Parameters Count="1">
+                <eXo:Parameter Name="p" Type="e3459e52-d48e-47ca-82b6-ad7374cd5a0e" displayName="AttributeType: Player" />
+              </eXo:Parameters>
+            </eXo:PIMOperation>
+            <eXo:PIMOperation ID="ebbbac10-3b10-42da-a089-c061ceca3afc" Name="overlap" pimClassID="1e014a11-c043-423c-b4a6-5d0553ac31bd">
+              <eXo:Parameters Count="1">
+                <eXo:Parameter Name="t" Type="bc694e1d-d1e7-4ac6-8e1f-071255a6bc71" displayName="AttributeType: Tournament" />
+              </eXo:Parameters>
+            </eXo:PIMOperation>
+          </eXo:PIMOperations>
+          <eXo:GeneralizationAsGeneral Count="0" />
+          <eXo:PIMAssociationEnds Count="5">
+            <eXo:PIMAssociationEnd pimAssociationEndID="f8ebf0bb-027b-477d-bacc-ea55ae052cc1" pimAssociationEnd="PIMAssociationEnd: ** 1..1 C: Tournament A:  " />
+            <eXo:PIMAssociationEnd pimAssociationEndID="5b6f9a82-a378-4515-a158-b66d1338af1e" pimAssociationEnd="PIMAssociationEnd: ** 0..* C: Tournament A:  " />
+            <eXo:PIMAssociationEnd pimAssociationEndID="53003995-f8cb-4698-85b1-eee86385c8ed" pimAssociationEnd="PIMAssociationEnd: ** 1..1 C: Tournament A:  " />
+            <eXo:PIMAssociationEnd pimAssociationEndID="0688533e-d366-4d29-aece-977e2912f8e9" pimAssociationEnd="PIMAssociationEnd: ** 0..* C: Tournament A:  " />
+            <eXo:PIMAssociationEnd pimAssociationEndID="71bcda29-6a38-49af-922d-a0f927d0e456" pimAssociationEnd="PIMAssociationEnd: *tournaments* 0..* C: Tournament A:  " />
+          </eXo:PIMAssociationEnds>
+        </eXo:PIMClass>
+        <eXo:PIMClass ID="3ab2660d-9b3a-4e77-bb8d-57dd7c155aa7" Name="Advertiser">
+          <eXo:PIMAttributes Count="0" />
+          <eXo:PIMOperations Count="0" />
+          <eXo:GeneralizationAsGeneral Count="0" />
+          <eXo:PIMAssociationEnds Count="2">
+            <eXo:PIMAssociationEnd pimAssociationEndID="8d08c084-79a9-4ed1-81d4-e794876c5db0" pimAssociationEnd="PIMAssociationEnd: *sponsors* 0..* C: Advertiser A:  " />
+            <eXo:PIMAssociationEnd pimAssociationEndID="bc609302-5723-4f11-ae8f-84164a9d30c3" pimAssociationEnd="PIMAssociationEnd: ** 0..* C: Advertiser A:  " />
+          </eXo:PIMAssociationEnds>
+        </eXo:PIMClass>
+        <eXo:PIMClass ID="609302e3-1aab-42e4-939c-78f1cfc04b3f" Name="Match">
+          <eXo:PIMAttributes Count="2">
+            <eXo:PIMAttribute ID="010328e7-d3cb-47a9-88b4-715a0b15a711" Name="start" Type="2601d7eb-80b5-4f8e-ae3a-47362f0af0d9" displayName="AttributeType: Date" pimClassID="609302e3-1aab-42e4-939c-78f1cfc04b3f" />
+            <eXo:PIMAttribute ID="8b26a9e6-5e7a-43ca-b83e-10bd6d2196c4" Name="status" Type="b46fab0a-0554-4225-a932-6d6f1c706c43" displayName="AttributeType: MatchStatus" pimClassID="609302e3-1aab-42e4-939c-78f1cfc04b3f" />
+          </eXo:PIMAttributes>
+          <eXo:PIMOperations Count="0" />
+          <eXo:GeneralizationAsGeneral Count="0" />
+          <eXo:PIMAssociationEnds Count="2">
+            <eXo:PIMAssociationEnd pimAssociationEndID="096f4623-f864-4b60-95b2-7a55542e8d13" pimAssociationEnd="PIMAssociationEnd: *matches* 0..* C: Match A:  " />
+            <eXo:PIMAssociationEnd pimAssociationEndID="fc0e52dd-bafb-425f-8504-9c2b05d82209" pimAssociationEnd="PIMAssociationEnd: *matches* 0..* C: Match A:  " />
+          </eXo:PIMAssociationEnds>
+        </eXo:PIMClass>
+        <eXo:PIMClass ID="3e279515-9b51-44b0-86f5-2fb35705ff03" Name="League">
+          <eXo:PIMAttributes Count="2">
+            <eXo:PIMAttribute ID="d7a30956-d9ab-46f5-9fec-4ca544a57fa9" Name="start" Type="2601d7eb-80b5-4f8e-ae3a-47362f0af0d9" displayName="AttributeType: Date" pimClassID="3e279515-9b51-44b0-86f5-2fb35705ff03" />
+            <eXo:PIMAttribute ID="20442593-9c7f-423a-a799-fc83b9779faf" Name="end" Type="2601d7eb-80b5-4f8e-ae3a-47362f0af0d9" displayName="AttributeType: Date" pimClassID="3e279515-9b51-44b0-86f5-2fb35705ff03" />
+          </eXo:PIMAttributes>
+          <eXo:PIMOperations Count="1">
+            <eXo:PIMOperation ID="d74a87ea-1b02-40ea-a104-4973e2d84c28" Name="getActivePlayers" pimClassID="3e279515-9b51-44b0-86f5-2fb35705ff03" />
+          </eXo:PIMOperations>
+          <eXo:GeneralizationAsGeneral Count="0" />
+          <eXo:PIMAssociationEnds Count="2">
+            <eXo:PIMAssociationEnd pimAssociationEndID="69d01064-00b4-43bd-b496-bca2aa1383cc" pimAssociationEnd="PIMAssociationEnd: ** 0..* C: League A:  " />
+            <eXo:PIMAssociationEnd pimAssociationEndID="1520b138-f547-4adb-8cbc-d95e950b6bcd" pimAssociationEnd="PIMAssociationEnd: ** 1..1 C: League A:  " />
+          </eXo:PIMAssociationEnds>
+        </eXo:PIMClass>
+      </eXo:PIMClasses>
+      <eXo:PIMGeneralizations Count="0" />
+      <eXo:PIMAssociations Count="10">
+        <eXo:PIMAssociation ID="71bfb6dd-1526-425a-a260-5d6d47f35b71" Name="">
+          <eXo:PIMAssociationEnds Count="2">
+            <eXo:PIMAssociationEnd ID="b10ea74d-e97b-41db-b738-51b6936898bf" Name="" refPIMClassID="2c95f723-f908-4c13-817d-cf26d54a9837" refPIMClass="PIMClass: *TournamentControl*" refPIMAssociationID="71bfb6dd-1526-425a-a260-5d6d47f35b71" refPIMAssociation="PIMAssociation **: PIMClass: *TournamentControl*, PIMClass: *TournamentForm*" />
+            <eXo:PIMAssociationEnd ID="c1bd5fc2-1c75-4701-b15d-6cb4b50a280e" Name="" refPIMClassID="836e8961-7cac-4732-8679-abf778d6a68d" refPIMClass="PIMClass: *TournamentForm*" refPIMAssociationID="71bfb6dd-1526-425a-a260-5d6d47f35b71" refPIMAssociation="PIMAssociation **: PIMClass: *TournamentControl*, PIMClass: *TournamentForm*" />
+          </eXo:PIMAssociationEnds>
+        </eXo:PIMAssociation>
+        <eXo:PIMAssociation ID="c51ddd1e-bf89-459c-b880-b3ade1f0b5f3" Name="">
+          <eXo:PIMAssociationEnds Count="2">
+            <eXo:PIMAssociationEnd ID="8470b785-8d6e-4543-bbea-a042c0d55db5" Name="" refPIMClassID="2c95f723-f908-4c13-817d-cf26d54a9837" refPIMClass="PIMClass: *TournamentControl*" refPIMAssociationID="c51ddd1e-bf89-459c-b880-b3ade1f0b5f3" refPIMAssociation="PIMAssociation **: PIMClass: *TournamentControl*, PIMClass: *Tournament*" />
+            <eXo:PIMAssociationEnd ID="f8ebf0bb-027b-477d-bacc-ea55ae052cc1" Name="" refPIMClassID="1e014a11-c043-423c-b4a6-5d0553ac31bd" refPIMClass="PIMClass: *Tournament*" refPIMAssociationID="c51ddd1e-bf89-459c-b880-b3ade1f0b5f3" refPIMAssociation="PIMAssociation **: PIMClass: *TournamentControl*, PIMClass: *Tournament*" />
+          </eXo:PIMAssociationEnds>
+        </eXo:PIMAssociation>
+        <eXo:PIMAssociation ID="56a2d487-7a51-469c-8f1a-0b26bb41d8b5" Name="">
+          <eXo:PIMAssociationEnds Count="2">
+            <eXo:PIMAssociationEnd ID="5b6f9a82-a378-4515-a158-b66d1338af1e" Name="" refPIMClassID="1e014a11-c043-423c-b4a6-5d0553ac31bd" refPIMClass="PIMClass: *Tournament*" refPIMAssociationID="56a2d487-7a51-469c-8f1a-0b26bb41d8b5" refPIMAssociation="PIMAssociation **: PIMClass: *Tournament*, PIMClass: *Advertiser*" Lower="0" Upper="*" />
+            <eXo:PIMAssociationEnd ID="8d08c084-79a9-4ed1-81d4-e794876c5db0" Name="sponsors" refPIMClassID="3ab2660d-9b3a-4e77-bb8d-57dd7c155aa7" refPIMClass="PIMClass: *Advertiser*" refPIMAssociationID="56a2d487-7a51-469c-8f1a-0b26bb41d8b5" refPIMAssociation="PIMAssociation **: PIMClass: *Tournament*, PIMClass: *Advertiser*" Lower="0" Upper="*" />
+          </eXo:PIMAssociationEnds>
+        </eXo:PIMAssociation>
+        <eXo:PIMAssociation ID="48d1e284-442f-4777-88b5-483c8b8acdfe" Name="">
+          <eXo:PIMAssociationEnds Count="2">
+            <eXo:PIMAssociationEnd ID="096f4623-f864-4b60-95b2-7a55542e8d13" Name="matches" refPIMClassID="609302e3-1aab-42e4-939c-78f1cfc04b3f" refPIMClass="PIMClass: *Match*" refPIMAssociationID="48d1e284-442f-4777-88b5-483c8b8acdfe" refPIMAssociation="PIMAssociation **: PIMClass: *Match*, PIMClass: *Tournament*" Lower="0" Upper="*" />
+            <eXo:PIMAssociationEnd ID="53003995-f8cb-4698-85b1-eee86385c8ed" Name="" refPIMClassID="1e014a11-c043-423c-b4a6-5d0553ac31bd" refPIMClass="PIMClass: *Tournament*" refPIMAssociationID="48d1e284-442f-4777-88b5-483c8b8acdfe" refPIMAssociation="PIMAssociation **: PIMClass: *Match*, PIMClass: *Tournament*" />
+          </eXo:PIMAssociationEnds>
+        </eXo:PIMAssociation>
+        <eXo:PIMAssociation ID="096f7e38-d280-48b3-97e5-0cebb3a3b691" Name="">
+          <eXo:PIMAssociationEnds Count="2">
+            <eXo:PIMAssociationEnd ID="a070d791-db95-4eea-a31f-5f349d0008ec" Name="" refPIMClassID="06298e91-d009-4005-8a15-6d4e15d9df5e" refPIMClass="PIMClass: *Player*" refPIMAssociationID="096f7e38-d280-48b3-97e5-0cebb3a3b691" refPIMAssociation="PIMAssociation **: PIMClass: *Player*, PIMClass: *Match*" Lower="0" Upper="*" />
+            <eXo:PIMAssociationEnd ID="fc0e52dd-bafb-425f-8504-9c2b05d82209" Name="matches" refPIMClassID="609302e3-1aab-42e4-939c-78f1cfc04b3f" refPIMClass="PIMClass: *Match*" refPIMAssociationID="096f7e38-d280-48b3-97e5-0cebb3a3b691" refPIMAssociation="PIMAssociation **: PIMClass: *Player*, PIMClass: *Match*" Lower="0" Upper="*" />
+          </eXo:PIMAssociationEnds>
+        </eXo:PIMAssociation>
+        <eXo:PIMAssociation ID="bfa88fc9-6446-4ba3-9e11-4fe6a55630f0" Name="">
+          <eXo:PIMAssociationEnds Count="2">
+            <eXo:PIMAssociationEnd ID="70ccf73e-da14-4c2a-9ada-eadbcb3be6b1" Name="players" refPIMClassID="06298e91-d009-4005-8a15-6d4e15d9df5e" refPIMClass="PIMClass: *Player*" refPIMAssociationID="bfa88fc9-6446-4ba3-9e11-4fe6a55630f0" refPIMAssociation="PIMAssociation **: PIMClass: *Player*, PIMClass: *Tournament*" Lower="0" Upper="*" />
+            <eXo:PIMAssociationEnd ID="0688533e-d366-4d29-aece-977e2912f8e9" Name="" refPIMClassID="1e014a11-c043-423c-b4a6-5d0553ac31bd" refPIMClass="PIMClass: *Tournament*" refPIMAssociationID="bfa88fc9-6446-4ba3-9e11-4fe6a55630f0" refPIMAssociation="PIMAssociation **: PIMClass: *Player*, PIMClass: *Tournament*" Lower="0" Upper="*" />
+          </eXo:PIMAssociationEnds>
+        </eXo:PIMAssociation>
+        <eXo:PIMAssociation ID="c64702e4-5bf4-44d0-93e8-3e088b93f1d9" Name="">
+          <eXo:PIMAssociationEnds Count="2">
+            <eXo:PIMAssociationEnd ID="57d3098c-0605-4604-9d6a-8d29284182a7" Name="" refPIMClassID="2c95f723-f908-4c13-817d-cf26d54a9837" refPIMClass="PIMClass: *TournamentControl*" refPIMAssociationID="c64702e4-5bf4-44d0-93e8-3e088b93f1d9" refPIMAssociation="PIMAssociation **: PIMClass: *TournamentControl*, PIMClass: *Player*" Lower="0" Upper="*" />
+            <eXo:PIMAssociationEnd ID="a05e0731-c5e7-48d1-bf8c-6db7ab9107fe" Name="" refPIMClassID="06298e91-d009-4005-8a15-6d4e15d9df5e" refPIMClass="PIMClass: *Player*" refPIMAssociationID="c64702e4-5bf4-44d0-93e8-3e088b93f1d9" refPIMAssociation="PIMAssociation **: PIMClass: *TournamentControl*, PIMClass: *Player*" Lower="0" Upper="*" />
+          </eXo:PIMAssociationEnds>
+        </eXo:PIMAssociation>
+        <eXo:PIMAssociation ID="41fe0eea-f6d7-4e9a-9fcc-ced0f5c56277" Name="">
+          <eXo:PIMAssociationEnds Count="2">
+            <eXo:PIMAssociationEnd ID="26090e42-604b-4de4-947d-9455da0a8ae2" Name="" refPIMClassID="2c95f723-f908-4c13-817d-cf26d54a9837" refPIMClass="PIMClass: *TournamentControl*" refPIMAssociationID="41fe0eea-f6d7-4e9a-9fcc-ced0f5c56277" refPIMAssociation="PIMAssociation **: PIMClass: *TournamentControl*, PIMClass: *Advertiser*" Lower="0" Upper="*" />
+            <eXo:PIMAssociationEnd ID="bc609302-5723-4f11-ae8f-84164a9d30c3" Name="" refPIMClassID="3ab2660d-9b3a-4e77-bb8d-57dd7c155aa7" refPIMClass="PIMClass: *Advertiser*" refPIMAssociationID="41fe0eea-f6d7-4e9a-9fcc-ced0f5c56277" refPIMAssociation="PIMAssociation **: PIMClass: *TournamentControl*, PIMClass: *Advertiser*" Lower="0" Upper="*" />
+          </eXo:PIMAssociationEnds>
+        </eXo:PIMAssociation>
+        <eXo:PIMAssociation ID="f51c3165-9475-4d22-95b9-b1c6e6a5a8eb" Name="">
+          <eXo:PIMAssociationEnds Count="2">
+            <eXo:PIMAssociationEnd ID="69d01064-00b4-43bd-b496-bca2aa1383cc" Name="" refPIMClassID="3e279515-9b51-44b0-86f5-2fb35705ff03" refPIMClass="PIMClass: *League*" refPIMAssociationID="f51c3165-9475-4d22-95b9-b1c6e6a5a8eb" refPIMAssociation="PIMAssociation **: PIMClass: *League*, PIMClass: *Player*" Lower="0" Upper="*" />
+            <eXo:PIMAssociationEnd ID="51000991-5b2f-49cc-ad73-1bdc7a799717" Name="players" refPIMClassID="06298e91-d009-4005-8a15-6d4e15d9df5e" refPIMClass="PIMClass: *Player*" refPIMAssociationID="f51c3165-9475-4d22-95b9-b1c6e6a5a8eb" refPIMAssociation="PIMAssociation **: PIMClass: *League*, PIMClass: *Player*" Lower="0" Upper="*" />
+          </eXo:PIMAssociationEnds>
+        </eXo:PIMAssociation>
+        <eXo:PIMAssociation ID="bf487109-1943-44c2-9ce3-efb76120b5b8" Name="">
+          <eXo:PIMAssociationEnds Count="2">
+            <eXo:PIMAssociationEnd ID="71bcda29-6a38-49af-922d-a0f927d0e456" Name="tournaments" refPIMClassID="1e014a11-c043-423c-b4a6-5d0553ac31bd" refPIMClass="PIMClass: *Tournament*" refPIMAssociationID="bf487109-1943-44c2-9ce3-efb76120b5b8" refPIMAssociation="PIMAssociation **: PIMClass: *Tournament*, PIMClass: *League*" Lower="0" Upper="*" />
+            <eXo:PIMAssociationEnd ID="1520b138-f547-4adb-8cbc-d95e950b6bcd" Name="" refPIMClassID="3e279515-9b51-44b0-86f5-2fb35705ff03" refPIMClass="PIMClass: *League*" refPIMAssociationID="bf487109-1943-44c2-9ce3-efb76120b5b8" refPIMAssociation="PIMAssociation **: PIMClass: *Tournament*, PIMClass: *League*" />
+          </eXo:PIMAssociationEnds>
+        </eXo:PIMAssociation>
+      </eXo:PIMAssociations>
+      <eXo:OCLScripts Count="3">
+        <eXo:OCLScript ID="c9c736eb-3985-4683-83b7-8748121496e8" Name="">
+          <eXo:Contents><![CDATA[/* methods pre and post conditions */
+
+context Tournament::acceptPlayer(p)
+pre: not isPlayerAccepted(p)
+
+context Tournament::acceptPlayer(p)
+pre: getNumPlayers() < getMaxNumPlayers()
+
+context Tournament::acceptPlayer(p)
+post: isPlayerAccepted(p)
+
+context Tournament::acceptPlayer(p)
+post: getNumPlayers() = getNumPlayers()@pre + 1
+
+context Tournament::removePlayer(p)
+pre: isPlayerAccepted(p)
+
+context Tournament::removePlayer(p)
+post: not isPlayerAccepted(p)
+
+context Tournament::removePlayer(p)
+post: getNumPlayers() = getNumPlayers()@pre - 1
+
+context Tournament::acceptPlayer(p)
+pre: league.players->includes(p)
+
+context League::getActivePlayers
+post: result = tournaments.players->asSet()]]></eXo:Contents>
+        </eXo:OCLScript>
+        <eXo:OCLScript ID="627fce62-3ce6-4981-b826-27a7450e4904" Name="defaultname">
+          <eXo:Contents><![CDATA[/* more complex invariants, integrity, forall construct */
+
+/* All Matches in a Tournament occur
+within the Tournament’s time frame */
+
+context Tournament
+inv:
+matches->forAll(m:Match |
+m.start.after(t.start) and
+m.end.before(t.end))
+
+/* Each Tournament conducts at
+least one Match on the first
+day of the Tournament */
+
+context Tournament
+inv: matches->exists(m:Match | m.start.equals(start))
+
+/* No Player can take part in two or
+more Tournaments that overlap */
+
+context TournamentControl
+inv: tournament.players->forAll(p|
+p.tournaments->forAll(t|
+t <> tournament implies
+not t.overlap(tournament)))
+
+/* A match can only involve players who are
+accepted in the tournament */
+
+context Match
+inv: players->forAll(p|
+p.tournaments->exists(t|
+t.matches->includes(self)))
+
+]]></eXo:Contents>
+        </eXo:OCLScript>
+        <eXo:OCLScript ID="252ed172-ba2d-41fa-afde-b2332b35f90e" Name="defaultname">
+          <eXo:Contents><![CDATA[/* other pre and post conditions */
+
+context TournamentControl::selectSponsors(advertisers)
+pre: interestedSponsors->notEmpty and
+tournament.sponsors->isEmpty
+
+context TournamentControl::selectSponsors(advertisers)
+post: tournament.sponsors.equals(advertisers)
+
+context TournamentControl::advertiseTournament()
+pre: tournament.sponsors->isEmpty and not
+tournament.advertised
+
+context TournamentControl::advertiseTournament()
+post: tournament.advertised
+
+context TournamentControl::acceptPlayer(p)
+pre: tournament.advertised and
+interestedPlayers->includes(p) and
+not isPlayerOverbooked(p)
+
+context TournamentControl::acceptPlayer(p)
+post: tournament.players->includes(p)]]></eXo:Contents>
+        </eXo:OCLScript>
+      </eXo:OCLScripts>
+    </eXo:PIMSchema>
+    <eXo:PSMSchemas Count="0" />
+    <eXo:PIMDiagrams Count="1">
+      <eXo:PIMDiagram ID="cce58d2e-d961-4e91-8baa-4887bf078a1f" schemaID="049cb593-8ee0-48a6-a597-fb9500ec3f00" schema="PIMSchema" Caption="PIMSchema">
+        <eXo:Components>
+          <eXo:Component Type="PIMClass" componentID="836e8961-7cac-4732-8679-abf778d6a68d" component="PIMClass: *TournamentForm*">
+            <eXo:ViewHelper X="54" Y="28" Width="NaN" Height="NaN" />
+          </eXo:Component>
+          <eXo:Component Type="PIMClass" componentID="2c95f723-f908-4c13-817d-cf26d54a9837" component="PIMClass: *TournamentControl*">
+            <eXo:ViewHelper X="309" Y="70" Width="NaN" Height="NaN" />
+          </eXo:Component>
+          <eXo:Component Type="PIMClass" componentID="06298e91-d009-4005-8a15-6d4e15d9df5e" component="PIMClass: *Player*">
+            <eXo:ViewHelper X="17" Y="164" Width="NaN" Height="NaN" />
+          </eXo:Component>
+          <eXo:Component Type="PIMClass" componentID="1e014a11-c043-423c-b4a6-5d0553ac31bd" component="PIMClass: *Tournament*">
+            <eXo:ViewHelper X="336" Y="146" Width="NaN" Height="NaN" />
+          </eXo:Component>
+          <eXo:Component Type="PIMClass" componentID="3ab2660d-9b3a-4e77-bb8d-57dd7c155aa7" component="PIMClass: *Advertiser*">
+            <eXo:ViewHelper X="490" Y="364" Width="NaN" Height="NaN" />
+          </eXo:Component>
+          <eXo:Component Type="PIMClass" componentID="609302e3-1aab-42e4-939c-78f1cfc04b3f" component="PIMClass: *Match*">
+            <eXo:ViewHelper X="151" Y="233" Width="NaN" Height="NaN" />
+          </eXo:Component>
+          <eXo:Component Type="PIMAssociation" componentID="71bfb6dd-1526-425a-a260-5d6d47f35b71" component="PIMAssociation **: PIMClass: *TournamentControl*, PIMClass: *TournamentForm*">
+            <eXo:ViewHelper>
+              <eXo:UseDiamond>False</eXo:UseDiamond>
+              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:MainLabelViewHelper>
+              <eXo:AssociationEndsViewHelpers Count="2">
+                <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="b10ea74d-e97b-41db-b738-51b6936898bf" AssociationEnd="PIMAssociationEnd: ** 1..1 C: TournamentControl A:  ">
+                  <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
+                    <eXo:LabelVisible>True</eXo:LabelVisible>
+                  </eXo:CardinalityLabelViewHelper>
+                  <eXo:RoleLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
+                    <eXo:LabelVisible>True</eXo:LabelVisible>
+                  </eXo:RoleLabelViewHelper>
+                  <eXo:Points>
+                    <eXo:Point X="78" Y="0" />
+                    <eXo:Point X="388" Y="50" />
+                    <eXo:Point X="142" Y="21" />
+                  </eXo:Points>
+                </eXo:AssociationEndViewHelper>
+                <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="c1bd5fc2-1c75-4701-b15d-6cb4b50a280e" AssociationEnd="PIMAssociationEnd: ** 1..1 C: TournamentForm A:  ">
+                  <eXo:CardinalityLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                    <eXo:LabelVisible>True</eXo:LabelVisible>
+                  </eXo:CardinalityLabelViewHelper>
+                  <eXo:RoleLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                    <eXo:LabelVisible>True</eXo:LabelVisible>
+                  </eXo:RoleLabelViewHelper>
+                  <eXo:Points />
+                </eXo:AssociationEndViewHelper>
+              </eXo:AssociationEndsViewHelpers>
+            </eXo:ViewHelper>
+          </eXo:Component>
+          <eXo:Component Type="PIMAssociation" componentID="c51ddd1e-bf89-459c-b880-b3ade1f0b5f3" component="PIMAssociation **: PIMClass: *TournamentControl*, PIMClass: *Tournament*">
+            <eXo:ViewHelper>
+              <eXo:UseDiamond>False</eXo:UseDiamond>
+              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:MainLabelViewHelper>
+              <eXo:AssociationEndsViewHelpers Count="2">
+                <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="8470b785-8d6e-4543-bbea-a042c0d55db5" AssociationEnd="PIMAssociationEnd: ** 1..1 C: TournamentControl A:  ">
+                  <eXo:CardinalityLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                    <eXo:LabelVisible>True</eXo:LabelVisible>
+                  </eXo:CardinalityLabelViewHelper>
+                  <eXo:RoleLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                    <eXo:LabelVisible>True</eXo:LabelVisible>
+                  </eXo:RoleLabelViewHelper>
+                  <eXo:Points>
+                    <eXo:Point X="83" Y="43" />
+                    <eXo:Point X="77" Y="0" />
+                  </eXo:Points>
+                </eXo:AssociationEndViewHelper>
+                <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="f8ebf0bb-027b-477d-bacc-ea55ae052cc1" AssociationEnd="PIMAssociationEnd: ** 1..1 C: Tournament A:  ">
+                  <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
+                    <eXo:LabelVisible>True</eXo:LabelVisible>
+                  </eXo:CardinalityLabelViewHelper>
+                  <eXo:RoleLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
+                    <eXo:LabelVisible>True</eXo:LabelVisible>
+                  </eXo:RoleLabelViewHelper>
+                  <eXo:Points />
+                </eXo:AssociationEndViewHelper>
+              </eXo:AssociationEndsViewHelpers>
+            </eXo:ViewHelper>
+          </eXo:Component>
+          <eXo:Component Type="PIMAssociation" componentID="56a2d487-7a51-469c-8f1a-0b26bb41d8b5" component="PIMAssociation **: PIMClass: *Tournament*, PIMClass: *Advertiser*">
+            <eXo:ViewHelper>
+              <eXo:UseDiamond>False</eXo:UseDiamond>
+              <eXo:MainLabelViewHelper X="-11" Y="-4" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:MainLabelViewHelper>
+              <eXo:AssociationEndsViewHelpers Count="2">
+                <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="5b6f9a82-a378-4515-a158-b66d1338af1e" AssociationEnd="PIMAssociationEnd: ** 0..* C: Tournament A:  ">
+                  <eXo:CardinalityLabelViewHelper X="5" Y="4" Width="NaN" Height="NaN">
+                    <eXo:LabelVisible>True</eXo:LabelVisible>
+                  </eXo:CardinalityLabelViewHelper>
+                  <eXo:RoleLabelViewHelper X="-40" Y="20" Width="NaN" Height="NaN">
+                    <eXo:LabelVisible>True</eXo:LabelVisible>
+                  </eXo:RoleLabelViewHelper>
+                  <eXo:Points>
+                    <eXo:Point X="161" Y="188" />
+                    <eXo:Point X="8" Y="0" />
+                  </eXo:Points>
+                </eXo:AssociationEndViewHelper>
+                <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="8d08c084-79a9-4ed1-81d4-e794876c5db0" AssociationEnd="PIMAssociationEnd: *sponsors* 0..* C: Advertiser A:  ">
+                  <eXo:CardinalityLabelViewHelper X="-41" Y="-9" Width="NaN" Height="NaN">
+                    <eXo:LabelVisible>True</eXo:LabelVisible>
+                  </eXo:CardinalityLabelViewHelper>
+                  <eXo:RoleLabelViewHelper X="-68" Y="-25" Width="NaN" Height="NaN">
+                    <eXo:LabelVisible>True</eXo:LabelVisible>
+                  </eXo:RoleLabelViewHelper>
+                  <eXo:Points />
+                </eXo:AssociationEndViewHelper>
+              </eXo:AssociationEndsViewHelpers>
+            </eXo:ViewHelper>
+          </eXo:Component>
+          <eXo:Component Type="PIMAssociation" componentID="48d1e284-442f-4777-88b5-483c8b8acdfe" component="PIMAssociation **: PIMClass: *Match*, PIMClass: *Tournament*">
+            <eXo:ViewHelper>
+              <eXo:UseDiamond>False</eXo:UseDiamond>
+              <eXo:MainLabelViewHelper X="-2" Y="-4" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:MainLabelViewHelper>
+              <eXo:AssociationEndsViewHelpers Count="2">
+                <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="096f4623-f864-4b60-95b2-7a55542e8d13" AssociationEnd="PIMAssociationEnd: *matches* 0..* C: Match A:  ">
+                  <eXo:CardinalityLabelViewHelper X="0" Y="-26" Width="NaN" Height="NaN">
+                    <eXo:LabelVisible>True</eXo:LabelVisible>
+                  </eXo:CardinalityLabelViewHelper>
+                  <eXo:RoleLabelViewHelper X="-26" Y="-45" Width="NaN" Height="NaN">
+                    <eXo:LabelVisible>True</eXo:LabelVisible>
+                  </eXo:RoleLabelViewHelper>
+                  <eXo:Points>
+                    <eXo:Point X="121" Y="23" />
+                    <eXo:Point X="0" Y="69" />
+                  </eXo:Points>
+                </eXo:AssociationEndViewHelper>
+                <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="53003995-f8cb-4698-85b1-eee86385c8ed" AssociationEnd="PIMAssociationEnd: ** 1..1 C: Tournament A:  ">
+                  <eXo:CardinalityLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                    <eXo:LabelVisible>True</eXo:LabelVisible>
+                  </eXo:CardinalityLabelViewHelper>
+                  <eXo:RoleLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                    <eXo:LabelVisible>True</eXo:LabelVisible>
+                  </eXo:RoleLabelViewHelper>
+                  <eXo:Points />
+                </eXo:AssociationEndViewHelper>
+              </eXo:AssociationEndsViewHelpers>
+            </eXo:ViewHelper>
+          </eXo:Component>
+          <eXo:Component Type="PIMAssociation" componentID="096f7e38-d280-48b3-97e5-0cebb3a3b691" component="PIMAssociation **: PIMClass: *Player*, PIMClass: *Match*">
+            <eXo:ViewHelper>
+              <eXo:UseDiamond>False</eXo:UseDiamond>
+              <eXo:MainLabelViewHelper X="15" Y="-9" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:MainLabelViewHelper>
+              <eXo:AssociationEndsViewHelpers Count="2">
+                <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="a070d791-db95-4eea-a31f-5f349d0008ec" AssociationEnd="PIMAssociationEnd: ** 0..* C: Player A:  ">
+                  <eXo:CardinalityLabelViewHelper X="6" Y="-18" Width="NaN" Height="NaN">
+                    <eXo:LabelVisible>True</eXo:LabelVisible>
+                  </eXo:CardinalityLabelViewHelper>
+                  <eXo:RoleLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                    <eXo:LabelVisible>True</eXo:LabelVisible>
+                  </eXo:RoleLabelViewHelper>
+                  <eXo:Points>
+                    <eXo:Point X="82" Y="47" />
+                    <eXo:Point X="0" Y="2" />
+                  </eXo:Points>
+                </eXo:AssociationEndViewHelper>
+                <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="fc0e52dd-bafb-425f-8504-9c2b05d82209" AssociationEnd="PIMAssociationEnd: *matches* 0..* C: Match A:  ">
+                  <eXo:CardinalityLabelViewHelper X="-33" Y="-16" Width="NaN" Height="NaN">
+                    <eXo:LabelVisible>True</eXo:LabelVisible>
+                  </eXo:CardinalityLabelViewHelper>
+                  <eXo:RoleLabelViewHelper X="-59" Y="0" Width="NaN" Height="NaN">
+                    <eXo:LabelVisible>True</eXo:LabelVisible>
+                  </eXo:RoleLabelViewHelper>
+                  <eXo:Points />
+                </eXo:AssociationEndViewHelper>
+              </eXo:AssociationEndsViewHelpers>
+            </eXo:ViewHelper>
+          </eXo:Component>
+          <eXo:Component Type="PIMAssociation" componentID="bfa88fc9-6446-4ba3-9e11-4fe6a55630f0" component="PIMAssociation **: PIMClass: *Player*, PIMClass: *Tournament*">
+            <eXo:ViewHelper>
+              <eXo:UseDiamond>False</eXo:UseDiamond>
+              <eXo:MainLabelViewHelper X="-22" Y="-16" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:MainLabelViewHelper>
+              <eXo:AssociationEndsViewHelpers Count="2">
+                <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="70ccf73e-da14-4c2a-9ada-eadbcb3be6b1" AssociationEnd="PIMAssociationEnd: *players* 0..* C: Player A:  ">
+                  <eXo:CardinalityLabelViewHelper X="3" Y="-23" Width="NaN" Height="NaN">
+                    <eXo:LabelVisible>True</eXo:LabelVisible>
+                  </eXo:CardinalityLabelViewHelper>
+                  <eXo:RoleLabelViewHelper X="2" Y="-41" Width="NaN" Height="NaN">
+                    <eXo:LabelVisible>True</eXo:LabelVisible>
+                  </eXo:RoleLabelViewHelper>
+                  <eXo:Points>
+                    <eXo:Point X="82" Y="11" />
+                    <eXo:Point X="0" Y="30" />
+                  </eXo:Points>
+                </eXo:AssociationEndViewHelper>
+                <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="0688533e-d366-4d29-aece-977e2912f8e9" AssociationEnd="PIMAssociationEnd: ** 0..* C: Tournament A:  ">
+                  <eXo:CardinalityLabelViewHelper X="-37" Y="-18" Width="NaN" Height="NaN">
+                    <eXo:LabelVisible>True</eXo:LabelVisible>
+                  </eXo:CardinalityLabelViewHelper>
+                  <eXo:RoleLabelViewHelper X="-58" Y="-47" Width="NaN" Height="NaN">
+                    <eXo:LabelVisible>True</eXo:LabelVisible>
+                  </eXo:RoleLabelViewHelper>
+                  <eXo:Points />
+                </eXo:AssociationEndViewHelper>
+              </eXo:AssociationEndsViewHelpers>
+            </eXo:ViewHelper>
+          </eXo:Component>
+          <eXo:Component Type="PIMAssociation" componentID="c64702e4-5bf4-44d0-93e8-3e088b93f1d9" component="PIMAssociation **: PIMClass: *TournamentControl*, PIMClass: *Player*">
+            <eXo:ViewHelper>
+              <eXo:UseDiamond>False</eXo:UseDiamond>
+              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:MainLabelViewHelper>
+              <eXo:AssociationEndsViewHelpers Count="2">
+                <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="57d3098c-0605-4604-9d6a-8d29284182a7" AssociationEnd="PIMAssociationEnd: ** 0..* C: TournamentControl A:  ">
+                  <eXo:CardinalityLabelViewHelper X="-38" Y="-23" Width="NaN" Height="NaN">
+                    <eXo:LabelVisible>True</eXo:LabelVisible>
+                  </eXo:CardinalityLabelViewHelper>
+                  <eXo:RoleLabelViewHelper X="0" Y="8" Width="NaN" Height="NaN">
+                    <eXo:LabelVisible>True</eXo:LabelVisible>
+                  </eXo:RoleLabelViewHelper>
+                  <eXo:Points>
+                    <eXo:Point X="0" Y="26" />
+                    <eXo:Point X="68" Y="95" />
+                    <eXo:Point X="51" Y="0" />
+                  </eXo:Points>
+                </eXo:AssociationEndViewHelper>
+                <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="a05e0731-c5e7-48d1-bf8c-6db7ab9107fe" AssociationEnd="PIMAssociationEnd: ** 0..* C: Player A:  ">
+                  <eXo:CardinalityLabelViewHelper X="-40" Y="-24" Width="NaN" Height="NaN">
+                    <eXo:LabelVisible>True</eXo:LabelVisible>
+                  </eXo:CardinalityLabelViewHelper>
+                  <eXo:RoleLabelViewHelper X="-40" Y="-20" Width="NaN" Height="NaN">
+                    <eXo:LabelVisible>True</eXo:LabelVisible>
+                  </eXo:RoleLabelViewHelper>
+                  <eXo:Points />
+                </eXo:AssociationEndViewHelper>
+              </eXo:AssociationEndsViewHelpers>
+            </eXo:ViewHelper>
+          </eXo:Component>
+          <eXo:Component Type="PIMAssociation" componentID="41fe0eea-f6d7-4e9a-9fcc-ced0f5c56277" component="PIMAssociation **: PIMClass: *TournamentControl*, PIMClass: *Advertiser*">
+            <eXo:ViewHelper>
+              <eXo:UseDiamond>False</eXo:UseDiamond>
+              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:MainLabelViewHelper>
+              <eXo:AssociationEndsViewHelpers Count="2">
+                <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="26090e42-604b-4de4-947d-9455da0a8ae2" AssociationEnd="PIMAssociationEnd: ** 0..* C: TournamentControl A:  ">
+                  <eXo:CardinalityLabelViewHelper X="2" Y="-26" Width="NaN" Height="NaN">
+                    <eXo:LabelVisible>True</eXo:LabelVisible>
+                  </eXo:CardinalityLabelViewHelper>
+                  <eXo:RoleLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                    <eXo:LabelVisible>True</eXo:LabelVisible>
+                  </eXo:RoleLabelViewHelper>
+                  <eXo:Points>
+                    <eXo:Point X="156" Y="32" />
+                    <eXo:Point X="616" Y="102" />
+                    <eXo:Point X="616" Y="377" />
+                    <eXo:Point X="94" Y="13" />
+                  </eXo:Points>
+                </eXo:AssociationEndViewHelper>
+                <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="bc609302-5723-4f11-ae8f-84164a9d30c3" AssociationEnd="PIMAssociationEnd: ** 0..* C: Advertiser A:  ">
+                  <eXo:CardinalityLabelViewHelper X="-2" Y="-31" Width="NaN" Height="NaN">
+                    <eXo:LabelVisible>True</eXo:LabelVisible>
+                  </eXo:CardinalityLabelViewHelper>
+                  <eXo:RoleLabelViewHelper X="-40" Y="-20" Width="NaN" Height="NaN">
+                    <eXo:LabelVisible>True</eXo:LabelVisible>
+                  </eXo:RoleLabelViewHelper>
+                  <eXo:Points />
+                </eXo:AssociationEndViewHelper>
+              </eXo:AssociationEndsViewHelpers>
+            </eXo:ViewHelper>
+          </eXo:Component>
+          <eXo:Component Type="PIMClass" componentID="3e279515-9b51-44b0-86f5-2fb35705ff03" component="PIMClass: *League*">
+            <eXo:ViewHelper X="49" Y="316" Width="NaN" Height="NaN" />
+          </eXo:Component>
+          <eXo:Component Type="PIMAssociation" componentID="f51c3165-9475-4d22-95b9-b1c6e6a5a8eb" component="PIMAssociation **: PIMClass: *League*, PIMClass: *Player*">
+            <eXo:ViewHelper>
+              <eXo:UseDiamond>False</eXo:UseDiamond>
+              <eXo:MainLabelViewHelper X="-2" Y="3" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:MainLabelViewHelper>
+              <eXo:AssociationEndsViewHelpers Count="2">
+                <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="69d01064-00b4-43bd-b496-bca2aa1383cc" AssociationEnd="PIMAssociationEnd: ** 0..* C: League A:  ">
+                  <eXo:CardinalityLabelViewHelper X="-40" Y="-20" Width="NaN" Height="NaN">
+                    <eXo:LabelVisible>True</eXo:LabelVisible>
+                  </eXo:CardinalityLabelViewHelper>
+                  <eXo:RoleLabelViewHelper X="-40" Y="-20" Width="NaN" Height="NaN">
+                    <eXo:LabelVisible>True</eXo:LabelVisible>
+                  </eXo:RoleLabelViewHelper>
+                  <eXo:Points>
+                    <eXo:Point X="17" Y="0" />
+                    <eXo:Point X="49" Y="59" />
+                  </eXo:Points>
+                </eXo:AssociationEndViewHelper>
+                <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="51000991-5b2f-49cc-ad73-1bdc7a799717" AssociationEnd="PIMAssociationEnd: *players* 0..* C: Player A:  ">
+                  <eXo:CardinalityLabelViewHelper X="-40" Y="4" Width="NaN" Height="NaN">
+                    <eXo:LabelVisible>True</eXo:LabelVisible>
+                  </eXo:CardinalityLabelViewHelper>
+                  <eXo:RoleLabelViewHelper X="-55" Y="18" Width="NaN" Height="NaN">
+                    <eXo:LabelVisible>True</eXo:LabelVisible>
+                  </eXo:RoleLabelViewHelper>
+                  <eXo:Points />
+                </eXo:AssociationEndViewHelper>
+              </eXo:AssociationEndsViewHelpers>
+            </eXo:ViewHelper>
+          </eXo:Component>
+          <eXo:Component Type="PIMAssociation" componentID="bf487109-1943-44c2-9ce3-efb76120b5b8" component="PIMAssociation **: PIMClass: *Tournament*, PIMClass: *League*">
+            <eXo:ViewHelper>
+              <eXo:UseDiamond>False</eXo:UseDiamond>
+              <eXo:MainLabelViewHelper X="5" Y="-2" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:MainLabelViewHelper>
+              <eXo:AssociationEndsViewHelpers Count="2">
+                <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="71bcda29-6a38-49af-922d-a0f927d0e456" AssociationEnd="PIMAssociationEnd: *tournaments* 0..* C: Tournament A:  ">
+                  <eXo:CardinalityLabelViewHelper X="-40" Y="4" Width="NaN" Height="NaN">
+                    <eXo:LabelVisible>True</eXo:LabelVisible>
+                  </eXo:CardinalityLabelViewHelper>
+                  <eXo:RoleLabelViewHelper X="-84" Y="21" Width="NaN" Height="NaN">
+                    <eXo:LabelVisible>True</eXo:LabelVisible>
+                  </eXo:RoleLabelViewHelper>
+                  <eXo:Points>
+                    <eXo:Point X="19" Y="188" />
+                    <eXo:Point X="355" Y="361" />
+                    <eXo:Point X="109" Y="45" />
+                  </eXo:Points>
+                </eXo:AssociationEndViewHelper>
+                <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="1520b138-f547-4adb-8cbc-d95e950b6bcd" AssociationEnd="PIMAssociationEnd: ** 1..1 C: League A:  ">
+                  <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
+                    <eXo:LabelVisible>True</eXo:LabelVisible>
+                  </eXo:CardinalityLabelViewHelper>
+                  <eXo:RoleLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
+                    <eXo:LabelVisible>True</eXo:LabelVisible>
+                  </eXo:RoleLabelViewHelper>
+                  <eXo:Points />
+                </eXo:AssociationEndViewHelper>
+              </eXo:AssociationEndsViewHelpers>
+            </eXo:ViewHelper>
+          </eXo:Component>
+        </eXo:Components>
+      </eXo:PIMDiagram>
+    </eXo:PIMDiagrams>
+    <eXo:PSMDiagrams Count="0" />
+  </eXo:SingleVersion>
+</eXo:Project>
