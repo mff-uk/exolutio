@@ -12,6 +12,6 @@
             <Label Content="Scripts:" Margin="3" />
             <ComboBox Height="23" Name="cbScripts" Width="136" SelectionChanged="cbScripts_SelectionChanged" Margin="3" />
         </StackPanel>
-        <TextBox Name="textBox1" AcceptsReturn="True" TextChanged="textBox1_TextChanged" />
+        <TextBox Name="textBox1" AcceptsReturn="True" KeyUp="textBox1_KeyUp" />
     </DockPanel>
 </UserControl>

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
@@ -19,6 +20,7 @@ namespace Exolutio.Model.Serialization
         Project Project { get; }
     }
 
+    [Localizable(false)]
     public static class IExolutioSerializableExt
     {
         public delegate T CreateComponentDelegate<T>(Project project) where T : IExolutioSerializable;
@@ -174,13 +176,13 @@ namespace Exolutio.Model.Serialization
         /// <summary>
         /// Returns ID from the value of Type attribute of <paramref name="parentNode"/>.
         /// </summary>
-        public static Guid DeserializeAttributeType(this IExolutioSerializable component, XElement parentNode, SerializationContext context)
+        public static Guid DeserializeAttributeType(this IExolutioSerializable component, XElement parentNode, SerializationContext context, string attributeName = "Type", bool optional = false)
         {
-            if (parentNode.Attribute("Type") == null)
+            if (parentNode.Attribute(attributeName) == null)
             {
                 return Guid.Empty;
             }
-            return component.DeserializeIDRef("Type", parentNode, context);
+            return component.DeserializeIDRef(attributeName, parentNode, context, optional);
         }
 
         public static string DeserializeSimpleValueFromElement(this IExolutioSerializable component, [NotNull]string elementName, XElement parentNode, SerializationContext context, bool optional = false)
@@ -261,9 +263,9 @@ namespace Exolutio.Model.Serialization
             }
         }
 
-        public static void SerializeAttributeType(this IExolutioSerializable component, AttributeType attributeType, XElement parentNode, SerializationContext context)
+        public static void SerializeAttributeType(this IExolutioSerializable component, AttributeType attributeType, XElement parentNode, SerializationContext context, string attributeName = "Type")
         {
-            component.SerializeIDRef(attributeType, "Type", parentNode, context);
+            component.SerializeIDRef(attributeType, attributeName, parentNode, context);
         }
 
         public static void WrapAndSerializeCollection<T>(this IExolutioSerializable component, [NotNull] string collectionElementName, [NotNull] string elementName, ICollection<T> wrappedCollection, XElement parentNode, SerializationContext context, bool skipEmpty = false)

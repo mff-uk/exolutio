@@ -115,6 +115,11 @@ namespace Exolutio.ViewToolkit
             get { return dragThumb.FellowTravellers; }
         }
 
+        public void FellowTravellersUpdate()
+        {
+            dragThumb.FellowTravellersUpdate();
+        }
+
         /// <summary>
         /// Node that owns this Point.
         /// </summary>

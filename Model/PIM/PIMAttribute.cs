@@ -145,7 +145,7 @@ namespace Exolutio.Model.PIM
 
             if (AttributeType != null)
             {
-                this.SerializeAttributeType(AttributeType, parentNode, context);
+                this.SerializeAttributeType(AttributeType, parentNode, context, "Type");
             }
 
             if (!String.IsNullOrEmpty(DefaultValue))

@@ -339,11 +339,11 @@ namespace Exolutio.ViewToolkit
 
         private readonly IList<ISnappable> fellowTravellers = new List<ISnappable>();
         public IList<ISnappable> FellowTravellers { get { return fellowTravellers; } }
-
+        
         /// <summary>
-        /// Updates positiosn of <see cref="FellowTravellers"/>
+        /// Updates positions of <see cref="FellowTravellers"/>
         /// </summary>
-        private void FellowTravellersUpdate()
+        public void FellowTravellersUpdate()
         {
             if (FellowTravellers != null)
             {
@@ -704,6 +704,7 @@ namespace Exolutio.ViewToolkit
                 this.y = !double.IsNaN(y) ? y : 0;
             }
             UpdatePos(this);
+            referentialElement.FellowTravellersUpdate();
         }
 
         /// <summary>
@@ -713,12 +714,14 @@ namespace Exolutio.ViewToolkit
         public static void UnsnapElement(ISnappable element)
         {
             element.ReferentialElement.FellowTravellers.Remove(element);
+            element.ReferentialElement.FellowTravellersUpdate();
             element.ReferentialElement = null;
             if (element is DragThumb)
             {
                 ((DragThumb)element).Placement = EPlacementKind.AbsoluteCanvas;
                 UpdatePos(element);
             }
+            
         }
 
         private IReferentialElement referentialElement;

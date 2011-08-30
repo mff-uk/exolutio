@@ -17,5 +17,7 @@ namespace Exolutio.ViewToolkit
         /// List of controls that were snapped to this element
         /// </summary>
         IList<ISnappable> FellowTravellers { get; }
+
+        void FellowTravellersUpdate();
     }
 }

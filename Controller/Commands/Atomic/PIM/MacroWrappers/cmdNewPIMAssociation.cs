@@ -40,7 +40,6 @@ namespace Exolutio.Controller.Commands.Atomic.PIM.MacroWrappers
             PIMClassGuid1 = pimClassGuid1;
             PIMClassGuid2 = pimClassGuid2;
             SchemaGuid = schemaGuid;
-            
         }
 
         protected override void GenerateSubCommands()
@@ -53,6 +52,10 @@ namespace Exolutio.Controller.Commands.Atomic.PIM.MacroWrappers
             {
                 Commands.Add(new acmdAddComponentToDiagram(Controller, AssociationGuid, DiagramGuid));
             }
+            acmdRenameComponent r1 = new acmdRenameComponent(Controller, AssociationEnd1Guid, null);
+            acmdRenameComponent r2 = new acmdRenameComponent(Controller, AssociationEnd2Guid, null);
+            Commands.Add(r1);
+            Commands.Add(r2);
         }
 
     }

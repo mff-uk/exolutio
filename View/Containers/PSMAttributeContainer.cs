@@ -13,50 +13,33 @@ using Exolutio.ViewToolkit;
 namespace Exolutio.View
 {
     /// <summary>
-    /// Implementation of <see cref="IAttributesContainer"/>, displays attributes
+    /// Implementation of <see cref="IAttributesContainer{PSMAttribute,PSMAttributeTextBox}"/>, displays attributes
     /// using <see cref="PIMAttributeTextBox">AttributeTextBoxes</see>.
     /// </summary>
     public class PSMAttributesContainer : TextBoxContainer<PSMAttribute, PSMAttributeTextBox>, IAttributesContainer<PSMAttribute, PSMAttributeTextBox>
     {
-        //private IControlsAttributes attributeController;
-
-        /// <summary>
-        /// Reference to <see cref="IControlsAttributes"/>
-        /// </summary>
-        //public IControlsAttributes AttributeController
-        //{
-        //    get
-        //    {
-        //        return attributeController;
-        //    }
-        //    set
-        //    {
-        //        attributeController = value;
-        //    }
-        //}
-
-        private ICollection<PSMAttribute> attributesCollection;
+        private ICollection<PSMAttribute> collection;
 
         ICollection<PSMAttribute> IAttributesContainer<PSMAttribute, PSMAttributeTextBox>.AttributesCollection
         {
-            get { return AttributesCollection; }
+            get { return Collection; }
         }
 
         /// <summary>
         /// Visualized collection 
         /// </summary>
-        public override ICollection<PSMAttribute> AttributesCollection
+        public override ICollection<PSMAttribute> Collection
         {
             get
             {
-                return attributesCollection;
+                return collection;
             }
             set 
             {
-                attributesCollection = value;
-                ((INotifyCollectionChanged)attributesCollection).CollectionChanged += attributesCollection_CollectionChanged;
-                attributesCollection_CollectionChanged(null, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
-                this.container.Visibility = attributesCollection.Count > 0 ? Visibility.Visible : Visibility.Collapsed;            
+                collection = value;
+                ((INotifyCollectionChanged)collection).CollectionChanged += Collection_CollectionChanged;
+                Collection_CollectionChanged(null, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+                this.container.Visibility = collection.Count > 0 ? Visibility.Visible : Visibility.Collapsed;            
             }
         }
 
@@ -66,22 +49,8 @@ namespace Exolutio.View
         internal IEnumerable<ContextMenuItem> PropertiesMenuItems
         {
             get
-            {          
-#if SILVERLIGHT
+            {  
                 return new ContextMenuItem[0];
-#else
-                ContextMenuItem addPropertyItem = new ContextMenuItem("Add new attribute...");
-                addPropertyItem.Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.AddAttributes);
-                //addPropertyItem.Click += delegate
-                //{
-                //    attributeController.AddNewAttribute(null);
-                //};
-
-                return new ContextMenuItem[]
-				       	{
-				       		addPropertyItem
-				       	};
-#endif
             }
         }
 

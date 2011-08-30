@@ -175,6 +175,8 @@
     <Compile Include="ComponentPropertyView.xaml.cs">
       <DependentUpon>ComponentPropertyView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Containers\IOperationsContainer.cs" />
+    <Compile Include="Containers\PIMOperationsContainer.cs" />
     <Compile Include="Containers\PSMAttributeContainer.cs" />
     <Compile Include="Containers\IAttributesContainer.cs" />
     <Compile Include="Containers\PIMAttributeContainer.cs">
@@ -191,6 +193,8 @@
     <Compile Include="PIM view\AttributeTypeDialog.xaml.cs">
       <DependentUpon>AttributeTypeDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PIM view\IComponentTextBox.cs" />
+    <Compile Include="PIM view\PIMOperationTextBox.cs" />
     <Compile Include="PIM view\PIMGeneralizationView.cs" />
     <Compile Include="PIM view\PIMClassDialog.xaml.cs">
       <DependentUpon>PIMClassDialog.xaml</DependentUpon>

@@ -13,14 +13,14 @@ using Exolutio.ViewToolkit;
 namespace Exolutio.View
 {
     /// <summary>
-    /// Implementation of <see cref="IAttributesContainer{PIMAttribute,PIMAttributeTextBox}"/>, displays attributes
-    /// using <see cref="PIMAttributeTextBox">AttributeTextBoxes</see>.
+    /// Implementation of <see cref="IOperationsContainer{PIMOperation, PIMOperationTextBox}"/>, displays operations
+    /// using <see cref="PIMOperationTextBox">OperationTextBoxes</see>.
     /// </summary>
-    public class PIMAttributesContainer : TextBoxContainer<PIMAttribute, PIMAttributeTextBox>, IAttributesContainer<PIMAttribute, PIMAttributeTextBox>
+    public class PIMOperationsContainer : TextBoxContainer<PIMOperation, PIMOperationTextBox>, IOperationsContainer<PIMOperation, PIMOperationTextBox>
     {
-        private ICollection<PIMAttribute> collection;
+        private ICollection<PIMOperation> operationsCollection;
 
-        ICollection<PIMAttribute> IAttributesContainer<PIMAttribute, PIMAttributeTextBox>.AttributesCollection
+        ICollection<PIMOperation> IOperationsContainer<PIMOperation, PIMOperationTextBox>.OperationsCollection
         {
             get { return Collection; }
         }
@@ -28,22 +28,20 @@ namespace Exolutio.View
         /// <summary>
         /// Visualized collection 
         /// </summary>
-        public override ICollection<PIMAttribute> Collection
+        public override ICollection<PIMOperation> Collection
         {
             get
             {
-                return collection;
+                return operationsCollection;
             }
             set 
             { 
-                collection = value;
-                ((INotifyCollectionChanged)collection).CollectionChanged += Collection_CollectionChanged;
+                operationsCollection = value;
+                ((INotifyCollectionChanged)operationsCollection).CollectionChanged += Collection_CollectionChanged;
                 Collection_CollectionChanged(null, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
-                this.container.Visibility = collection.Count > 0 ? Visibility.Visible : Visibility.Collapsed;            
+                this.container.Visibility = operationsCollection.Count > 0 ? Visibility.Visible : Visibility.Collapsed;            
             }
         }
-
-
 
         /// <summary>
         /// Returns context menu items for operations provided by the control.
@@ -57,21 +55,21 @@ namespace Exolutio.View
         }
 
         /// <summary>
-        /// Creates new instance of <see cref="PIMAttributesContainer" />. 
+        /// Creates new instance of <see cref="PIMOperationsContainer" />. 
         /// </summary>
         /// <param name="container">Panel used to display the items</param>
         /// <param name="exolutioCanvas">canvas owning the control</param>
-        public PIMAttributesContainer(Panel container, ExolutioCanvas exolutioCanvas, DiagramView diagram)
+        public PIMOperationsContainer(Panel container, ExolutioCanvas exolutioCanvas, DiagramView diagram)
             : base(container, exolutioCanvas, diagram)
         {
 
         }
 
-        public IEnumerator<PIMAttributeTextBox> GetEnumerator()
+        public IEnumerator<PIMOperationTextBox> GetEnumerator()
         {
-            foreach (PIMAttributeTextBox attributeTextBox in container.Children)
+            foreach (PIMOperationTextBox operationTextBox in container.Children)
             {
-                yield return attributeTextBox;
+                yield return operationTextBox;
             }
             yield break;
         }
@@ -81,7 +79,7 @@ namespace Exolutio.View
             return GetEnumerator();
         }
 
-        public override void AddItem(PIMAttributeTextBox item)
+        public override void AddItem(PIMOperationTextBox item)
         {
             base.AddItem(item);
             item.Container = this;

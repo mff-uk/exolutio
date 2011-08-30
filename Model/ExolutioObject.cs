@@ -53,7 +53,8 @@ namespace Exolutio.Model
         }
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected void NotifyPropertyChanged(string propertyName)
+        [Localizable(false)]
+        protected internal void NotifyPropertyChanged(string propertyName)
         {
             PropertyChangedEventHandler tmp = PropertyChanged; 
             if (tmp != null)
