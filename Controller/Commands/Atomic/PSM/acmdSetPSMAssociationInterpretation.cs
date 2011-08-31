@@ -70,7 +70,7 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
         {
             PSMAssociation c = Project.TranslateComponent<PSMAssociation>(PSMComponentGuid);
             PIMAssociation oldInterpretation = c.Interpretation as PIMAssociation;
-            PIMAssociationEnd childAE = Project.TranslateComponent<PIMAssociationEnd>(childAssociationEnd);
+            PIMAssociationEnd childAE = childAssociationEnd == Guid.Empty ? null : Project.TranslateComponent<PIMAssociationEnd>(childAssociationEnd);
             if (c.UsedGeneralizations.Count > 0) oldUsedGeneralizations.AddRange(c.UsedGeneralizations.Select(g => g.ID));
             if (c.Interpretation == null)
             {
