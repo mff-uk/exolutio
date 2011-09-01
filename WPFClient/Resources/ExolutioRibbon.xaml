@@ -125,7 +125,6 @@
                     </Fluent:BackstageTabItem>
                 </Fluent:BackstageTabControl>
             </Fluent:Backstage>
-
         </Fluent:Ribbon.Menu>
 
         <Fluent:Ribbon.QuickAccessItems>
@@ -152,6 +151,9 @@
             <Fluent:RibbonGroupBox Header="Edit">
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.VerifyModelCommand}"
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
+                <Fluent:ToggleButton Command="{x:Static ClientCommands:StaticWPFClientCommands.guiSnapshotMode}"
+                                     CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                               Style="{StaticResource ResourceKey=ribbonTabToggleButtonStyle}" />
             </Fluent:RibbonGroupBox>
         </Fluent:RibbonTabItem>
 

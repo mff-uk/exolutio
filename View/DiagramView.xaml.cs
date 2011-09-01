@@ -48,6 +48,7 @@ namespace Exolutio.View
             this.ExolutioCanvas.HorizontalAlignment = HorizontalAlignment.Stretch;
 #endif
             ExolutioCanvas.CanvasSelectionCleared += Canvas_CanvasSelectionCleared;
+            ExolutioCanvas.ScreenShotView += Canvas_ScreenShotView;
         }
 
         #region Representants, loading diagrams
@@ -228,6 +229,24 @@ namespace Exolutio.View
             ClearSelection();
         }
 
+        private void Canvas_ScreenShotView()
+        {
+            foreach (ComponentViewBase componentView in RepresentantsCollection.Values)
+            {
+                if (componentView is IChangesInScreenShotView)
+                {
+                    if (ExolutioCanvas.InScreenshotView)
+                    {
+                        ((IChangesInScreenShotView)componentView).EnterScreenShotView();
+                    }
+                    else
+                    {
+                        ((IChangesInScreenShotView)componentView).ExitScreenShotView();
+                    }
+                }
+            }
+        }
+
         public void ClearSelection(bool invokeSelectionChanged = true)
         {
             if (SelectedViews.Count > 0)
@@ -238,7 +257,7 @@ namespace Exolutio.View
                 }
                 SelectedViews.Clear();
             }
-            
+
             if (SelectedTextBoxes.Count > 0)
             {
                 foreach (IComponentTextBox textBox in SelectedTextBoxes.ToArray())
@@ -298,13 +317,13 @@ namespace Exolutio.View
                 }
                 if (component is PSMAttribute)
                 {
-                    view = RepresentantsCollection[((PSMAttribute) component).PSMClass];
-                    t = ((PSMClassView) view).FirstOrDefault(tb => tb.PSMAttribute == component);
+                    view = RepresentantsCollection[((PSMAttribute)component).PSMClass];
+                    t = ((PSMClassView)view).FirstOrDefault(tb => tb.PSMAttribute == component);
                 }
                 if (t != null)
                 {
                     t.Selected = true;
-                    textboxfound = true; 
+                    textboxfound = true;
                 }
             }
             if (view != null)
@@ -358,17 +377,17 @@ namespace Exolutio.View
 
         #endregion
 
-        #if SILVERLIGHT
-        #else
+#if SILVERLIGHT
+#else
         private readonly VersionedElementInfo infoWindow = new VersionedElementInfo();
-        #endif
+#endif
 
         public void InvokeVersionedElementMouseEnter(object sender, Component component)
         {
-            #if SILVERLIGHT
-            #else
+#if SILVERLIGHT
+#else
             if (Current.Project.UsesVersioning &&
-                infoWindow.Component != component && 
+                infoWindow.Component != component &&
                 Keyboard.Modifiers.HasFlag(ModifierKeys.Shift))
             {
                 infoWindow.Component = component;
@@ -377,19 +396,21 @@ namespace Exolutio.View
                 infoWindow.Top = pointToScreen.Y + 30;
                 infoWindow.Show();
             }
-            #endif
+#endif
         }
 
         public void InvokeVersionedElementMouseLeave(object sender, Component component)
         {
-            #if SILVERLIGHT
-            #else
+#if SILVERLIGHT
+#else
             if (infoWindow.Component == component)
             {
                 infoWindow.Hide();
                 infoWindow.Component = null;
             }
-            #endif
+#endif
         }
     }
+
+
 }

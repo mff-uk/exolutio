@@ -348,6 +348,16 @@ namespace Exolutio.WPFClient
             return result;
         }
 
+        public IList<DiagramView> GetOpenedDiagramViews()
+        {
+            List<DiagramView> result = new List<DiagramView>();
+            foreach (DocumentContent d in MainWindow.dockManager.Documents)
+            {
+                result.Add(((DiagramTab) d).DiagramView);
+            }
+            return result;
+        }
+
         public IEnumerable<ExolutioVersionedObject> AnotherOpenedVersions(ExolutioVersionedObject item)
         {
             List<ExolutioVersionedObject> result = null;

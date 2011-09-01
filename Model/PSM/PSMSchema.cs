@@ -179,6 +179,7 @@ namespace Exolutio.Model.PSM
             this.WrapAndSerializeCollection("PSMAssociations", "PSMAssociation", PSMAssociations, parentNode, context);
             this.WrapAndSerializeCollection("PSMContentModels", "PSMContentModel", PSMContentModels, parentNode, context);
             this.WrapAndSerializeCollection("PSMSchemaDefinedTypes", "AttributeType", PSMSchemaDefinedTypes, parentNode, context, true);
+            base.SerializeRemaining(parentNode, context);
         }
 
         public override void Deserialize(XElement parentNode, SerializationContext context)
@@ -210,6 +211,7 @@ namespace Exolutio.Model.PSM
                 psmAssociation.Parent = psmAssociation.Parent; 
             }
 
+            base.DeserializeRemaining(parentNode, context);
             context.CurrentSchemaGuid = Guid.Empty;
         }
 

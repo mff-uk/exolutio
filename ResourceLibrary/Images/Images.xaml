@@ -13,6 +13,7 @@
     <ImageSource x:Key="BringForward">BringForward.png</ImageSource>
     <ImageSource x:Key="BringToFront">BringToFront.png</ImageSource>
     <ImageSource x:Key="bullet_ball_red">bullet_ball_red.png</ImageSource>
+    <ImageSource x:Key="Camera">Camera.png</ImageSource>
     <ImageSource x:Key="cancel">cancel.png</ImageSource>
     <ImageSource x:Key="class">class.png</ImageSource>
     <ImageSource x:Key="comment">comment.png</ImageSource>

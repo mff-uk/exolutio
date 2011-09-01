@@ -188,7 +188,7 @@
       <DependentUpon>FileView.xaml</DependentUpon>
     </Compile>
     <Compile Include="IconConverter.cs" />
-    <Compile Include="ImageExporter.cs" />
+    <Compile Include="DiagramImageExporter.cs" />
     <Compile Include="INodeComponentViewBase.cs" />
     <Compile Include="PIM view\AttributeTypeDialog.xaml.cs">
       <DependentUpon>AttributeTypeDialog.xaml</DependentUpon>

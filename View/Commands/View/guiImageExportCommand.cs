@@ -37,8 +37,8 @@ namespace Exolutio.View.Commands.View
                                             };
             if (dialog.ShowDialog() == true)
             {
-                ImageExporter e = new ImageExporter();
-                e.ExportToImage(Current.ActiveDiagramView, ImageExporter.EExportToImageMethod.PNG,
+                DiagramImageExporter e = new DiagramImageExporter();
+                e.ExportToImage(Current.ActiveDiagramView, DiagramImageExporter.EExportToImageMethod.PNG,
                     dialog.FileName, Current.ActiveDiagramView.Diagram.Caption, !shiftPressed);
             }
         }
@@ -76,8 +76,8 @@ namespace Exolutio.View.Commands.View
             };
             if (dialog.ShowDialog() == true)
             {
-                ImageExporter e = new ImageExporter();
-                e.ExportToImage(Current.ActiveDiagramView, ImageExporter.EExportToImageMethod.XPS,
+                DiagramImageExporter e = new DiagramImageExporter();
+                e.ExportToImage(Current.ActiveDiagramView, DiagramImageExporter.EExportToImageMethod.XPS,
                     dialog.FileName, Current.ActiveDiagramView.Diagram.Caption, !shiftPressed);
             }
         }
