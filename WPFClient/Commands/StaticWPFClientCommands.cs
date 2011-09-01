@@ -19,6 +19,7 @@ namespace Exolutio.WPFClient.Commands
         public static guiEndReplay guiEndReplay { get; set; }
         public static guiExecuteNextInLog guiExecuteNextInLog { get; set; }
         public static guiLoadLog guiLoadLog { get; set; }
+        public static guiSnapshotMode guiSnapshotMode { get; set; }
 
         static StaticWPFClientCommands()
         {
@@ -37,6 +38,7 @@ namespace Exolutio.WPFClient.Commands
             guiEndReplay = new guiEndReplay { CommandLogger = commandLogger };
             guiExecuteNextInLog = new guiExecuteNextInLog { CommandLogger = commandLogger };
             guiLoadLog = new guiLoadLog { CommandLogger = commandLogger };
+            guiSnapshotMode = new guiSnapshotMode();
         }
     }
 }

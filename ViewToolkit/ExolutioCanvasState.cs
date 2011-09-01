@@ -24,7 +24,8 @@ namespace Exolutio.ViewToolkit
         /// <summary>
         /// <see cref="ExolutioCanvas.DraggingElementState">Dragging element state</see>
         /// </summary>
-        DraggingElement
+        DraggingElement,
+        TakingSnapshot
     }
 
     public partial class ExolutioCanvas
@@ -274,6 +275,127 @@ namespace Exolutio.ViewToolkit
                 }
 
                 //base.SelectableItem_PreviewMouseDown(item, e);
+            }
+        }
+
+
+        public class TakingSnapshotState : ExolutioCanvasState
+        {
+            /// <summary>
+            /// Creates new instance of <see cref="TakingSnapshotState"/>
+            /// </summary>
+            /// <param name="canvas">canvas</param>
+            public TakingSnapshotState(ExolutioCanvas canvas)
+                : base(canvas)
+            {
+            }
+
+            /// <summary>
+            /// Returns <see cref="ECanvasState.Normal"/>
+            /// </summary>
+            public override ECanvasState Type
+            {
+                get
+                {
+                    return ECanvasState.TakingSnapshot;
+                }
+            }
+
+            internal Point? dragStartPoint;
+
+#if SILVERLIGHT
+            internal RubberbandAdorner adorner;
+#endif
+
+            internal Rect selectionRectangle; 
+
+            /// <summary>
+            /// Reaction to the <see cref="UIElement.MouseDown"/> event of <see cref="ExolutioCanvasState.Canvas"/>.
+            /// OnMouseDown creates <see cref="RubberbandAdorner"/> - a selecting rectangle, which can be 
+            /// resized via mouse drag and selects touched elements when mouse button is realeased
+            /// </summary>
+            /// <param name="e">event arguments</param>
+            public override void Canvas_MouseDown(MouseButtonEventArgs e)
+            {
+                base.Canvas_MouseDown(e);
+
+#if SILVERLIGHT
+                if (e.OriginalSource == Canvas && LeftButton)
+#else
+                if (e.Source == Canvas && e.ChangedButton == MouseButton.Left)
+#endif
+                {
+                    this.dragStartPoint = e.GetPosition(Canvas);
+                    e.Handled = true;
+                }
+                else
+                {
+                    this.dragStartPoint = null;
+                }
+            }
+
+            /// <summary>
+            /// Resizes the <see cref="RubberbandAdorner"/> created in <see cref="Canvas_MouseDown"/>.
+            /// </summary>
+            /// <param name="e">event arguments</param>
+            public override void Canvas_MouseMove(MouseEventArgs e)
+            {
+                base.Canvas_MouseMove(e);
+
+#if SILVERLIGHT
+                //if (!LeftButton)
+                //{
+                //    this.dragStartPoint = null;
+                //    if (adorner != null)
+                //    {
+                //        adorner.ClearUp();
+                //    }
+                //}
+
+
+                if (this.dragStartPoint.HasValue && LeftButton)
+                {
+                    if (adorner == null)
+                    {
+                        adorner = new RubberbandAdorner(Canvas, dragStartPoint);
+                    }
+                    //adorner.OnMouseMove(e);
+                }
+#else
+                if (e.LeftButton != MouseButtonState.Pressed)
+                    this.dragStartPoint = null;
+
+                if (this.dragStartPoint.HasValue)
+                {
+                    AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(Canvas);
+                    if (adornerLayer != null)
+                    {
+                        SnapshotAdorner adorner = new SnapshotAdorner(Canvas, dragStartPoint);
+                        adornerLayer.Add(adorner);
+                    }
+                }
+#endif
+            }
+
+            
+
+            public override void Canvas_MouseUp(MouseButtonEventArgs e)
+            {
+                base.Canvas_MouseUp(e);
+                Canvas.EnterScreenshotView();
+                FrameworkElementImageExporter exporter = new FrameworkElementImageExporter();
+                if (!selectionRectangle.IsEmpty && selectionRectangle.Width > 0 && selectionRectangle.Height > 0)
+                {
+                    exporter.ExportToImage(Canvas, FrameworkElementImageExporter.EExportToImageMethod.PNGClipBoard, false, null, selectionRectangle);
+                }
+                Canvas.ExitScreenshotView();
+
+#if SILVERLIGHT
+                if (adorner != null)
+                {
+                    adorner.ClearUp();
+                }
+#endif
             }
         }
 

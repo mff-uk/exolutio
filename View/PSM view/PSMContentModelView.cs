@@ -11,7 +11,7 @@ using Exolutio.ViewToolkit;
 
 namespace Exolutio.View
 {
-    public class PSMContentModelView : NodeComponentViewBase<PSMContentModelViewHelper>
+    public class PSMContentModelView : NodeComponentViewBase<PSMContentModelViewHelper>, IChangesInScreenShotView
     {
         #region inner controls
         private StackPanel stackPanel;
@@ -141,6 +141,16 @@ namespace Exolutio.View
                 base.Selected = value;
                 this.border.BorderBrush = value ? ViewToolkitResources.SelectedBorderBrush : ViewToolkitResources.BlackBrush;
             }
+        }
+
+        public void EnterScreenShotView()
+        {
+            foldingButton.Visibility = Visibility.Hidden;
+        }
+
+        public void ExitScreenShotView()
+        {
+            foldingButton.Visibility = Visibility.Visible;
         }
     }
 }

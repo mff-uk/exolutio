@@ -254,6 +254,7 @@ namespace Exolutio.View
         IEnumerable<ExolutioVersionedObject> AnotherOpenedVersions(ExolutioVersionedObject item);
         DiagramView GetOpenedDiagramView(Diagram diagram);
         IList<DiagramView> GetTopDiagramViews();
+        IList<DiagramView> GetOpenedDiagramViews();
     }
 
     public interface IMainWindow

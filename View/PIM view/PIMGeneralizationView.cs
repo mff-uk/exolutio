@@ -16,7 +16,7 @@ using Label = Exolutio.ViewToolkit.Label;
 
 namespace Exolutio.View
 {
-    public class PIMGeneralizationView : ComponentViewBaseVH<PIMGeneralizationViewHelper>, IConnectorViewBase
+    public class PIMGeneralizationView : ComponentViewBaseVH<PIMGeneralizationViewHelper>, IConnectorViewBase, IChangesInScreenShotView
     {
         public PIMGeneralization PIMGeneralization { get; private set; }
 
@@ -272,6 +272,16 @@ namespace Exolutio.View
             {
                 base.Selected = value;
             }
+        }
+
+        public void EnterScreenShotView()
+        {
+            Connector.HideAllPoints();
+        }
+
+        public void ExitScreenShotView()
+        {
+            Connector.UnHideAllPoints();
         }
     }
 }

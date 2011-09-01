@@ -16,7 +16,7 @@ using Label = Exolutio.ViewToolkit.Label;
 
 namespace Exolutio.View
 {
-    public class PIMAssociationView : ComponentViewBaseVH<PIMAssociationViewHelper>, IConnectorViewBase
+    public class PIMAssociationView : ComponentViewBaseVH<PIMAssociationViewHelper>, IConnectorViewBase, IChangesInScreenShotView
     {
         public PIMAssociation PIMAssociation { get; private set; }
 
@@ -578,6 +578,16 @@ namespace Exolutio.View
             {
                 base.Selected = value;
             }
+        }
+
+        public void EnterScreenShotView()
+        {
+            Connector.HideAllPoints();
+        }
+
+        public void ExitScreenShotView()
+        {
+            Connector.UnHideAllPoints();
         }
     }
 }

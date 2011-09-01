@@ -10,7 +10,7 @@ using System.Windows.Media;
 
 namespace Exolutio.ViewToolkit
 {
-    public partial class ExolutioCanvas: Canvas
+    public partial class ExolutioCanvas : Canvas
     {
         public ExolutioCanvas()
         {
@@ -18,7 +18,7 @@ namespace Exolutio.ViewToolkit
             this.LayoutUpdated += ExolutioCanvas_LayoutUpdated;
             this.Background = ViewToolkitResources.GoldBrush;
 #else
-            
+
 #endif
             InitializeStates();
             Loaded += Canvas_Loaded;
@@ -82,7 +82,7 @@ namespace Exolutio.ViewToolkit
             node.RemovedFromCanvas();
             this.Children.Remove(node);
             node.ExolutioCanvas = null;
-            InvalidateMeasure(); 
+            InvalidateMeasure();
             InvokeContentChanged();
         }
 
@@ -191,7 +191,7 @@ namespace Exolutio.ViewToolkit
             get;
             set;
         }
-        #endif
+#endif
 
         //#region Zoom
 
@@ -279,52 +279,57 @@ namespace Exolutio.ViewToolkit
         ///// </summary>
         //public DraggingElementState draggingElementState { get; private set; }
 
-		/// <summary>
-		/// Instance of <see cref="NormalState"/> for this ExolutioCanvas.
-		/// </summary>
-		public NormalState normalState { get; private set; }
+        /// <summary>
+        /// Instance of <see cref="NormalState"/> for this ExolutioCanvas.
+        /// </summary>
+        public NormalState normalState { get; private set; }
+        public TakingSnapshotState takingSnapshotState { get; private set; }
 
-		/// <summary>
-		/// Current canvas state
-		/// </summary>
-		private ExolutioCanvasState CurrentState;
+        /// <summary>
+        /// Current canvas state
+        /// </summary>
+        private ExolutioCanvasState CurrentState;
 
-		private ECanvasState state;
+        private ECanvasState state;
 
-		/// <summary>
-		/// Sets <see cref="ExolutioCanvasState">state</see> of the canvas
-		/// </summary>
-		public ECanvasState State
-		{
-			get
-			{
-				return state;
-			}
-			set
-			{
-				if (CurrentState != null)
-					CurrentState.StateLeft();
-				state = value;
-				switch (state)
-				{
-					case ECanvasState.DraggingConnection:
-				        throw new NotImplementedException("Member ExolutioCanvas.State not implemented.");
-						//CurrentState = draggingConnectionState;
-					case ECanvasState.Normal:
-						CurrentState = normalState;
-						break;
-					case ECanvasState.DraggingElement:
+        /// <summary>
+        /// Sets <see cref="ExolutioCanvasState">state</see> of the canvas
+        /// </summary>
+        public ECanvasState State
+        {
+            get
+            {
+                return state;
+            }
+            set
+            {
+                if (CurrentState != null)
+                    CurrentState.StateLeft();
+                state = value;
+                switch (state)
+                {
+                    case ECanvasState.DraggingConnection:
                         throw new NotImplementedException("Member ExolutioCanvas.State not implemented.");
-						//CurrentState = draggingElementState;
-				}
-				if (CurrentState != null)
-					CurrentState.StateActivated();
-			}
-		}
+                    //CurrentState = draggingConnectionState;
+                    case ECanvasState.Normal:
+                        CurrentState = normalState;
+                        break;
+                    case ECanvasState.TakingSnapshot:
+                        CurrentState = takingSnapshotState;
+                        break;
+                    case ECanvasState.DraggingElement:
+                        throw new NotImplementedException("Member ExolutioCanvas.State not implemented.");
+                    //CurrentState = draggingElementState;
+                }
+                if (CurrentState != null)
+                    CurrentState.StateActivated();
+            }
+        }
 
         private void InitializeStates()
         {
             normalState = new NormalState(this);
+            this.takingSnapshotState = new TakingSnapshotState(this);
             this.State = ECanvasState.Normal;
             this.MouseMove += ExolutioCanvas_MouseMove;
 #if SILVERLIGHT
@@ -338,35 +343,35 @@ namespace Exolutio.ViewToolkit
 
         internal void ExolutioCanvas_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            #if SILVERLIGHT
+#if SILVERLIGHT
             CurrentState.LeftButton = true; 
-            #else 
+#else
             base.OnMouseDown(e);
-            #endif
+#endif
             CurrentState.Canvas_MouseDown(e);
         }
 
         internal void ExolutioCanvas_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            #if SILVERLIGHT
+#if SILVERLIGHT
             bool wasRightButton = CurrentState.RightButton;
             CurrentState.LeftButton = false;
             CurrentState.RightButton = false;
-            #endif
+#endif
             CurrentState.Canvas_MouseUp(e);
 
 
-            #if SILVERLIGHT
+#if SILVERLIGHT
             if (e.OriginalSource == this && wasRightButton)
-            #else
+#else
             if (e.ChangedButton == MouseButton.Right && e.OriginalSource == this)
-            #endif
+#endif
             {
                 this.ContextMenu.IsOpen = true;
             }
         }
 
-  
+
 
         internal void ExolutioCanvas_MouseMove(object sender, MouseEventArgs e)
         {
@@ -390,17 +395,17 @@ namespace Exolutio.ViewToolkit
 
             //ShowHideZoomer(e);
         }
-      
-        private System.Windows.Controls.Label mouseLabel; 
+
+        private System.Windows.Controls.Label mouseLabel;
 #endif
 
         public Point GetMousePosition()
         {
-            #if SILVERLIGHT
+#if SILVERLIGHT
             return mousePosition;
-            #else
+#else
             return Mouse.GetPosition(this);
-            #endif
+#endif
         }
 
         public void SelectableItem_PreviewMouseDown(ISelectable item, MouseButtonEventArgs e)
@@ -409,5 +414,35 @@ namespace Exolutio.ViewToolkit
         }
 
         #endregion
+
+        public event Action ScreenShotView;
+
+        public bool InScreenshotView { get; private set; }
+
+        public void EnterScreenshotView()
+        {
+            #if SILVERLIGHT 
+            #else
+            mouseLabel.Visibility = Visibility.Hidden;
+            #endif
+            InScreenshotView = true; 
+            if (ScreenShotView != null)
+            {
+                ScreenShotView();
+            }
+        }
+
+        public void ExitScreenshotView()
+        {
+            InScreenshotView = false;
+            #if SILVERLIGHT
+            #else
+            mouseLabel.Visibility = Visibility.Visible;
+            #endif
+            if (ScreenShotView != null)
+            {
+                ScreenShotView();
+            }
+        }
     }
 }

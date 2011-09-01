@@ -14,7 +14,7 @@ using Label = Exolutio.ViewToolkit.Label;
 
 namespace Exolutio.View
 {
-    public class PSMAssociationView : ComponentViewBaseVH<PSMAssociationViewHelper>, IConnectorViewBase
+    public class PSMAssociationView : ComponentViewBaseVH<PSMAssociationViewHelper>, IConnectorViewBase, IChangesInScreenShotView
     {
         public PSMAssociation PSMAssociation { get; private set; }
 
@@ -289,6 +289,16 @@ namespace Exolutio.View
             {
                 base.Selected = value;
             }
+        }
+
+        public void EnterScreenShotView()
+        {
+            Connector.HideAllPoints();
+        }
+
+        public void ExitScreenShotView()
+        {
+            Connector.UnHideAllPoints();
         }
     }
 }

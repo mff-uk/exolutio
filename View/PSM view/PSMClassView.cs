@@ -16,7 +16,7 @@ using Component = Exolutio.Model.Component;
 
 namespace Exolutio.View
 {
-    public class PSMClassView : NodeComponentViewBase<PSMClassViewHelper>, IEnumerable<PSMAttributeTextBox>
+    public class PSMClassView : NodeComponentViewBase<PSMClassViewHelper>, IEnumerable<PSMAttributeTextBox>, IChangesInScreenShotView
     {
         #region inner controls
         private StackPanel stackPanel;
@@ -378,7 +378,14 @@ namespace Exolutio.View
             return GetEnumerator();
         }
 
+        public void EnterScreenShotView()
+        {
+            foldingButton.Visibility = Visibility.Hidden;
+        }
 
-
+        public void ExitScreenShotView()
+        {
+            foldingButton.Visibility = Visibility.Visible;
+        }
     }
 }

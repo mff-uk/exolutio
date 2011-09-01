@@ -20,6 +20,7 @@ namespace Exolutio.ResourceLibrary
         public const string BringForward = "BringForward";
         public const string BringToFront = "BringToFront";
         public const string bullet_ball_red = "bullet_ball_red";
+        public const string Camera = "Camera";
         public const string cancel = "cancel";
         public const string @class = "class";
         public const string comment = "comment";
