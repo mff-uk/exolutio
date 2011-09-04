@@ -618,6 +618,26 @@ namespace Exolutio.Model
             return list1.Intersect(list2);
         }
 
+        public static List<PIMAttribute> GetInheritedAttributes(this PIMClass pimClass)
+        {
+            List<PIMAttribute> list = new List<PIMAttribute>();
+
+            foreach (PIMClass c in pimClass.GetGeneralClasses())
+                list.AddRange(c.PIMAttributes);
+            
+            return list;
+        }
+
+        public static List<PIMAssociationEnd> GetInheritedAssociationEnds(this PIMClass pimClass)
+        {
+            List<PIMAssociationEnd> list = new List<PIMAssociationEnd>();
+
+            foreach (PIMClass c in pimClass.GetGeneralClasses())
+                list.AddRange(c.PIMAssociationEnds);
+
+            return list;
+        }
+
         public static IEnumerable<PIMAssociation> GetAssociationsWith(this PIMClass class1, PIMClass class2)
         {
             if (class1 == class2)
