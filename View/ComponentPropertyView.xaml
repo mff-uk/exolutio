@@ -47,7 +47,14 @@
                           Padding="10,0,0,0" Margin="0" BorderThickness="0" HorizontalContentAlignment="Left"
                           Focusable="False"
                           Background="Transparent" 
-                          />                
+                          />
+                <TextBlock Text="Inherited attributes: " FontWeight="Bold" Foreground="DarkBlue" Margin="0,5" />
+                <ListView Name="lvPIMAttributesInherited" 
+                          ItemTemplate ="{StaticResource pimAttributeTemplate}" 
+                          Padding="10,0,0,0" Margin="0" BorderThickness="0" HorizontalContentAlignment="Left"
+                          Focusable="False"
+                          Background="Transparent" 
+                          />
             </StackPanel>
 
             <StackPanel Name="spDerivedComponents">                

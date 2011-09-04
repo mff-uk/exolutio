@@ -172,11 +172,13 @@ namespace Exolutio.View
             if (pimClass != null)
             {
                 lvPIMAttributes.ItemsSource = pimClass.PIMAttributes;
+                lvPIMAttributesInherited.ItemsSource = pimClass.GetInheritedAttributes();
                 spPIMAttributes.Visibility = System.Windows.Visibility.Visible;
             }
             else
             {
                 lvPIMAttributes.ItemsSource = null;
+                lvPIMAttributesInherited.ItemsSource = null;
                 spPIMAttributes.Visibility = System.Windows.Visibility.Collapsed;
             }
         }
