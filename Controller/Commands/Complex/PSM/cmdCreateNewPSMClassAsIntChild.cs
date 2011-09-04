@@ -80,7 +80,7 @@ namespace Exolutio.Controller.Commands.Complex.PSM
             PIMAssociationEnd associationEnd = Project.TranslateComponent<PIMAssociationEnd>(PIMAssociationEndGuid);
             PSMClass nic = parent.NearestInterpretedClass();
             if (nic == null) return false;
-            if (!(nic.Interpretation as PIMClass).GetAssociationsWith(associationEnd.PIMClass).Contains(associationEnd.PIMAssociation)) return false;
+            if (!(nic.Interpretation as PIMClass).GetAssociationsWithIncludeInherited(associationEnd.PIMClass).Contains(associationEnd.PIMAssociation)) return false;
             return true;
         }
 

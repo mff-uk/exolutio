@@ -68,34 +68,45 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
 
         internal override void CommandOperation()
         {
-            PSMAssociation c = Project.TranslateComponent<PSMAssociation>(PSMComponentGuid);
-            PIMAssociation oldInterpretation = c.Interpretation as PIMAssociation;
+            PSMAssociation psmAssociation = Project.TranslateComponent<PSMAssociation>(PSMComponentGuid);
+            PIMAssociation oldInterpretation = psmAssociation.Interpretation as PIMAssociation;
             PIMAssociationEnd childAE = childAssociationEnd == Guid.Empty ? null : Project.TranslateComponent<PIMAssociationEnd>(childAssociationEnd);
-            if (c.UsedGeneralizations.Count > 0) oldUsedGeneralizations.AddRange(c.UsedGeneralizations.Select(g => g.ID));
-            if (c.Interpretation == null)
+            if (psmAssociation.UsedGeneralizations.Count > 0) oldUsedGeneralizations.AddRange(psmAssociation.UsedGeneralizations.Select(g => g.ID));
+            if (psmAssociation.Interpretation == null)
             {
                 oldPimComponentGuid = Guid.Empty;
                 oldChildAssociationEnd = Guid.Empty;
             }
             else
             {
-                oldPimComponentGuid = c.Interpretation;
-                oldChildAssociationEnd = c.InterpretedAssociationEnd;
+                oldPimComponentGuid = psmAssociation.Interpretation;
+                oldChildAssociationEnd = psmAssociation.InterpretedAssociationEnd;
             }
             if (PIMComponentGuid != Guid.Empty)
             {
-                c.Interpretation = Project.TranslateComponent<PIMAssociation>(PIMComponentGuid);
-                c.InterpretedAssociationEnd = childAE;
-                //TODO: Work with ordered image to get it easily
-                //c.UsedGeneralizations = (c.NearestInterpretedClass().Interpretation as PIMClass).GetGeneralizationPathTo((c.Interpretation as PIMAttribute).PIMClass).Select(x => x.ID).ToList();
+                psmAssociation.Interpretation = Project.TranslateComponent<PIMAssociation>(PIMComponentGuid);
+                psmAssociation.InterpretedAssociationEnd = childAE;
+                
+                //Get used generalizations on the child and the parent end
+                psmAssociation.UsedGeneralizations.Clear();
+                List<PIMGeneralization> gens = new List<PIMGeneralization>();
+
+                PIMAssociation interpretation = psmAssociation.Interpretation as PIMAssociation;
+                PIMClass nicint = psmAssociation.NearestInterpretedClass().Interpretation as PIMClass;
+                PIMClass childint = (psmAssociation.Child as PSMClass).Interpretation as PIMClass;
+
+                gens.AddRange(childint.GetGeneralizationPathTo(childAE.PIMClass));
+                gens.AddRange(nicint.GetGeneralizationPathTo(interpretation.PIMAssociationEnds.Single(ae => ae != childAE).PIMClass));
+
+                foreach (PIMGeneralization g in gens) psmAssociation.UsedGeneralizations.Add(g);
             }
             else
             {
-                c.Interpretation = null;
-                c.InterpretedAssociationEnd = null;
-                c.UsedGeneralizations.Clear();
+                psmAssociation.Interpretation = null;
+                psmAssociation.InterpretedAssociationEnd = null;
+                psmAssociation.UsedGeneralizations.Clear();
             }
-            Report = new CommandReport(CommandReports.SET_INTERPRETATION, c, oldInterpretation, c.Interpretation);
+            Report = new CommandReport(CommandReports.SET_INTERPRETATION, psmAssociation, oldInterpretation, psmAssociation.Interpretation);
         }
 
         internal override CommandBase.OperationResult UndoOperation()
