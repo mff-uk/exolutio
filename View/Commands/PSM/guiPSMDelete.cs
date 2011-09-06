@@ -34,7 +34,12 @@ namespace Exolutio.View.Commands.PSM
             IEnumerable<PSMAssociationMember> associationMembers = components.Where(c2 => (!(c2 is PSMSchemaClass) && (c2 is PSMAssociationMember))).Cast<PSMAssociationMember>();
             IEnumerable<PSMAssociation> nonrootAssociations = associationMembers.Where(am => am.ParentAssociation != null).Select(am2 => am2.ParentAssociation);
             IEnumerable<PSMAttribute> attributes = components.Where(c => c is PSMAttribute).Cast<PSMAttribute>();
+            IEnumerable<PSMGeneralization> generalizations = components.Where(c => c is PSMGeneralization).Cast<PSMGeneralization>();
             MacroCommand macro = new MacroCommand(Current.Controller) { CheckFirstOnlyInCanExecute = true };
+            foreach (PSMGeneralization g in generalizations)
+            {
+                macro.Commands.Add(new Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers.cmdDeletePSMGeneralization(Current.Controller) { GeneralizationGuid = g });
+            }
             foreach (PSMAssociation a in associations.Union(nonrootAssociations))
             {
                 macro.Commands.Add(new cmdDeletePSMAssociation(Current.Controller) { AssociationGuid = a });

@@ -22,10 +22,45 @@ namespace Exolutio.View
         {
             base.LayoutDiagram(psmDiagramView);
             
-            foreach (PSMAssociationView pimAssociationView in psmDiagramView.RepresentantsCollection.Values.OfType<PSMAssociationView>())
+            foreach (PSMAssociationView psmAssociationView in psmDiagramView.RepresentantsCollection.Values.OfType<PSMAssociationView>())
             {
-                DrawAssociation(pimAssociationView);
+                DrawAssociation(psmAssociationView);
             }
+
+            foreach (PSMGeneralizationView generalizationView in psmDiagramView.RepresentantsCollection.Values.OfType<PSMGeneralizationView>())
+            {
+                DrawGeneralization(generalizationView);
+            }
+        }
+
+        private void DrawGeneralization(PSMGeneralizationView psmGeneralizationView)
+        {
+            Connector connector = psmGeneralizationView.Connector;
+            if (connector.StartNode == null || connector.EndNode == null)
+                return;
+            double y = (int)(connector.StartNode.CanvasPosition.Y + connector.StartNode.ActualHeight / 2);
+            double x = (int)(connector.EndNode.CanvasPosition.X + connector.EndNode.ActualWidth / 2);
+
+            if (connector.Points.Count != 3)
+            {
+                if (connector.Points.Count != 2)
+                {
+
+                }
+                else
+                {
+                    connector.BreakAtPoint(new Point(x, y));
+                    connector.Points[1].IsInvisible = true;
+
+                }
+            }
+
+            if (connector.StartNode.X <= x && x < connector.StartNode.X + connector.StartNode.ActualWidth)
+            {
+                y = connector.StartNode.Y + connector.StartNode.ActualHeight;
+            }
+
+            connector.Points[1].SetPreferedPosition(x, y);
         }
 
         private void DrawAssociation(PSMAssociationView psmAssociationView)

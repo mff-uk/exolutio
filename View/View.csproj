@@ -208,6 +208,7 @@
     </Compile>
     <Compile Include="PSM view\Layout\FoldingHelper.cs" />
     <Compile Include="PSM view\Layout\VerticalTreeRightAngles.cs" />
+    <Compile Include="PSM view\PSMGeneralizationView.cs" />
     <Compile Include="PSM view\PSMClassDialog.xaml.cs">
       <DependentUpon>PSMClassDialog.xaml</DependentUpon>
     </Compile>

@@ -145,9 +145,10 @@ namespace Exolutio.View
             if (psmClass != null)
             {
                 lvPSMAttributes.ItemsSource = psmClass.PSMAttributes;
+                lvPSMAttributesInherited.ItemsSource = psmClass.GetActualPSMAttributesIncludingInherited();
                 spPSMAttributes.Visibility = System.Windows.Visibility.Visible;
 
-                if (psmClass.IsStructuralRepresentative)
+                /*if (psmClass.IsStructuralRepresentative)
                 {
                     lPSMAttributesSRInherited.Visibility = System.Windows.Visibility.Visible;
                     lvPSMAttributesSRInhereted.Visibility = System.Windows.Visibility.Visible;
@@ -157,12 +158,13 @@ namespace Exolutio.View
                 {
                     lPSMAttributesSRInherited.Visibility = System.Windows.Visibility.Collapsed;
                     lvPSMAttributesSRInhereted.Visibility = System.Windows.Visibility.Collapsed;
-                }
+                }*/
 
             }
             else
             {
                 lvPSMAttributes.ItemsSource = null;
+                lvPSMAttributesInherited.ItemsSource = null;
                 spPSMAttributes.Visibility = System.Windows.Visibility.Collapsed;
             }
         }

@@ -65,6 +65,10 @@
     <Compile Include="Commands\Atomic\PIM\acmdDeletePIMGeneralization.cs" />
     <Compile Include="Commands\Atomic\PIM\MacroWrappers\cmdNewPIMGeneralization.cs" />
     <Compile Include="Commands\Atomic\PIM\MacroWrappers\cmdShiftPIMAttribute.cs" />
+    <Compile Include="Commands\Atomic\PSM\acmdDeletePSMGeneralization.cs" />
+    <Compile Include="Commands\Atomic\PSM\acmdNewPSMGeneralization.cs" />
+    <Compile Include="Commands\Atomic\PSM\MacroWrappers\cmdDeletePSMGeneralization.cs" />
+    <Compile Include="Commands\Atomic\PSM\MacroWrappers\cmdNewPSMGeneralization.cs" />
     <Compile Include="Commands\Atomic\PSM\MacroWrappers\cmdRenamePSMSchema.cs" />
     <Compile Include="Commands\Atomic\PSM\MacroWrappers\cmdShiftPSMAttribute.cs" />
     <Compile Include="Commands\Atomic\PSM\MacroWrappers\cmdShiftPSMRoot.cs" />

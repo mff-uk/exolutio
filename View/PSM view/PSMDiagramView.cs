@@ -50,6 +50,13 @@ namespace Exolutio.View
                 typeof(ConnectionViewHelper),
                 typeof(PSMAssociationView)));
 
+            this.RepresentantsCollection.Registrations.Add(typeof(PSMGeneralization), new RepresentantsCollection.RegistrationClass(
+                () => new PSMGeneralizationView(),
+                () => new PSMGeneralizationViewHelper(this.Diagram),
+                typeof(PSMGeneralization),
+                typeof(ConnectionViewHelper),
+                typeof(PSMGeneralizationView)));
+
             LayoutManager = new LayoutManager();
 
             ExolutioCanvas.MouseLeftButtonUp += ExolutioCanvas_MouseLeftButtonUp;

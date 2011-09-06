@@ -91,6 +91,7 @@ namespace Exolutio.View.Commands
         public static guiControllerCommand AddPSMClassCommand { get; set; }
         public static guiControllerCommand AddPSMAttributeCommand { get; set; }
         public static guiControllerCommand AddPSMAssociationCommand { get; set; }
+        public static guiControllerCommand AddPSMGeneralizationCommand { get; set; }
         public static guiControllerCommand AddPSMContentModel { get; set; }
         public static guiSplitPSMAttribute SplitPSMAttributeCommand { get; set; }
         public static guiSplitPSMAssociation SplitPSMAssociationCommand { get; set; }
@@ -389,6 +390,17 @@ namespace Exolutio.View.Commands
                                                OpenDialog = true,
                                                Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.AddChildren),
                                            };
+
+            AddPSMGeneralizationCommand = new guiControllerCommand
+                                            {
+                                                Text = "Add generalization",
+                                                ControllerCommandFactoryMethod = CommandFactory<cmdNewPSMGeneralization>.Factory,
+                                                ControllerCommandType = typeof(cmdNewPSMGeneralization),
+                                                NoScope = true,
+                                                PSMOnly = true,
+                                                OpenDialog = true,
+                                                Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.generalize),
+                                            };
 
             AddPSMChildInterpreted = new guiControllerCommand
                                             {

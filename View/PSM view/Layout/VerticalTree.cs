@@ -78,6 +78,10 @@ namespace Exolutio.View
                     {
                         right += DrawTree(psmDiagramView, (childAssociation).Child, top, right) + horizontalSpace;
                     }
+                    if (rootAM is PSMClass) foreach (PSMGeneralization generalization in (rootAM as PSMClass).GeneralizationsAsGeneral)
+                    {
+                        right += DrawTree(psmDiagramView, (generalization).Specific, top, right) + horizontalSpace;
+                    }
                 }
                 if (right != left) right -= horizontalSpace;
             }

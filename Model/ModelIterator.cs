@@ -145,6 +145,17 @@ namespace Exolutio.Model
             return list;
         }
 
+        public static IEnumerable<PSMAttribute> GetActualPSMAttributesIncludingInherited(this PSMClass psmClass)
+        {
+            List<PSMAttribute> list = new List<PSMAttribute>();
+
+            list.AddRange(psmClass.PSMAttributes);
+            //TODO: Avoid double-cycle?
+            if (psmClass.RepresentedClass != null) list.AddRange(psmClass.RepresentedClass.GetActualPSMAttributesIncludingInherited());
+            if (psmClass.GeneralizationAsSpecific != null) list.AddRange(psmClass.GeneralizationAsSpecific.General.GetActualPSMAttributesIncludingInherited());
+            return list;
+        }
+
         public static IEnumerable<PSMAttribute> GetPSMAttributesOfRepresentedClasses(this PSMClass psmClass)
         {
             List<PSMAttribute> list = new List<PSMAttribute>();
@@ -168,7 +179,18 @@ namespace Exolutio.Model
             }
             return list;
         }
-        
+
+        public static IEnumerable<PSMAssociation> GetActualChildPSMAssociationsIncludingInherited(this PSMClass psmClass)
+        {
+            List<PSMAssociation> list = new List<PSMAssociation>();
+
+            list.AddRange(psmClass.ChildPSMAssociations);
+            //TODO: Avoid double-cycle?
+            if (psmClass.RepresentedClass != null) list.AddRange(psmClass.RepresentedClass.GetActualChildPSMAssociationsIncludingInherited());
+            if (psmClass.GeneralizationAsSpecific != null) list.AddRange(psmClass.GeneralizationAsSpecific.General.GetActualChildPSMAssociationsIncludingInherited());
+            return list;
+        }
+
         public static IEnumerable<ExolutioObject> GetAllModelItems(ProjectVersion projectVersion)
         {
             IEnumerable<ExolutioObject> result = projectVersion.PIMAttributeTypes.Cast<ExolutioObject>();
@@ -547,6 +569,36 @@ namespace Exolutio.Model
         public static List<PIMGeneralization> GetGeneralizationPathTo(this PIMClass specific, PIMClass general)
         {
             List<PIMGeneralization> list = new List<PIMGeneralization>();
+
+            if (specific.GeneralizationAsSpecific == null || specific == general) return list;
+
+            list.Add(specific.GeneralizationAsSpecific);
+            list.AddRange(specific.GeneralizationAsSpecific.General.GetGeneralizationPathTo(general));
+
+            return list;
+        }
+
+        /// <summary>
+        /// Returns a list of PSMClasses more general than psmClass. If psmClass has a general class A, A has a general class B, it returns A, B.
+        /// </summary>
+        /// <param name="psmClass"></param>
+        /// <returns></returns>
+        public static List<PSMClass> GetGeneralClasses(this PSMClass psmClass)
+        {
+            List<PSMClass> general = new List<PSMClass>();
+
+            if (psmClass.GeneralizationAsSpecific == null) return general;
+
+            PSMClass generalClass = psmClass.GeneralizationAsSpecific.General;
+            general.Add(generalClass);
+            general.AddRange(generalClass.GetGeneralClasses());
+
+            return general;
+        }
+
+        public static List<PSMGeneralization> GetGeneralizationPathTo(this PSMClass specific, PSMClass general)
+        {
+            List<PSMGeneralization> list = new List<PSMGeneralization>();
 
             if (specific.GeneralizationAsSpecific == null || specific == general) return list;
 
