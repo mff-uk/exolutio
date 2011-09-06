@@ -129,9 +129,16 @@
                           Focusable="False"
                           Background="Transparent" 
                           />
-                <TextBlock Text="Attributes from represented class/classes: " FontWeight="Bold" Foreground="DarkBlue" Margin="0,5" Name="lPSMAttributesSRInherited" />
+                <TextBlock Text="Attributes from represented class/classes: " FontWeight="Bold" Foreground="DarkBlue" Margin="0,5" Name="lPSMAttributesSRInherited" Visibility="Collapsed"/>
                 <ListView Name="lvPSMAttributesSRInhereted" 
                           ItemTemplate ="{StaticResource psmInheretedAttributeTemplate}" 
+                          Padding="10,0,0,0" Margin="0" BorderThickness="0" HorizontalContentAlignment="Left" Visibility="Collapsed"
+                          Focusable="False"
+                          Background="Transparent" 
+                          />
+                <TextBlock Text="All attributes (including inherited): " FontWeight="Bold" Foreground="DarkBlue" Margin="0,5" />
+                <ListView Name="lvPSMAttributesInherited" 
+                          ItemTemplate ="{StaticResource psmAttributeTemplate}" 
                           Padding="10,0,0,0" Margin="0" BorderThickness="0" HorizontalContentAlignment="Left"
                           Focusable="False"
                           Background="Transparent" 

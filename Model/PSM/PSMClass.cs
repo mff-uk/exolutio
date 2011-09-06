@@ -64,6 +64,7 @@ namespace Exolutio.Model.PSM
         private void InitializeCollections()
         {
             PSMAttributes =new UndirectCollection<PSMAttribute>(Project);
+            GeneralizationsAsGeneral = new UndirectCollection<PSMGeneralization>(Project);
         }
 
         private Guid representedClassGuid;
@@ -124,6 +125,15 @@ namespace Exolutio.Model.PSM
 
         public UndirectCollection<PSMAttribute> PSMAttributes { get; private set; }
 
+        public UndirectCollection<PSMGeneralization> GeneralizationsAsGeneral { get; private set; }
+
+        private Guid generalizationAsSpecificGuid;
+        public PSMGeneralization GeneralizationAsSpecific
+        {
+            get { return generalizationAsSpecificGuid == Guid.Empty ? null : Project.TranslateComponent<PSMGeneralization>(generalizationAsSpecificGuid); }
+            set { generalizationAsSpecificGuid = value == null ? Guid.Empty : value; NotifyPropertyChanged("GeneralizationAsSpecific"); }
+        }
+
         public override string XPath
         {
             get { return ParentAssociation.XPath; }
@@ -140,6 +150,9 @@ namespace Exolutio.Model.PSM
                 this.SerializeIDRef(RepresentedClass, "representedPSMClassId", representsElement, context);
                 parentNode.Add(representsElement);
             }
+            this.WrapAndSerializeIDRefCollection("GeneralizationAsGeneral", "PSMGeneralization", "psmGeneralizationsAsGeneralID", GeneralizationsAsGeneral,
+                                                 parentNode, context);
+            if (GeneralizationAsSpecific != null) this.SerializeIDRef(GeneralizationAsSpecific, "psmGeneralizationAsSpecificID", parentNode, context);
 
             this.WrapAndSerializeCollection("PSMAttributes", "PSMAttribute", PSMAttributes, parentNode, context);
         }
@@ -152,7 +165,9 @@ namespace Exolutio.Model.PSM
             {
                 representedClassGuid = this.DeserializeIDRef("representedPSMClassId", representedClassElement, context, true);
             }
-
+            
+            this.DeserializeWrappedIDRefCollection("GeneralizationsAsGeneral", "psmGeneralizationsAsGeneralID", GeneralizationsAsGeneral, parentNode, context);
+            generalizationAsSpecificGuid = this.DeserializeIDRef("psmGeneralizationAsSpecificID", parentNode, context, true);
             this.DeserializeWrappedCollection("PSMAttributes", PSMAttributes, PSMAttribute.CreateInstance, parentNode, context);
         }
         public static PSMClass CreateInstance(Project project)

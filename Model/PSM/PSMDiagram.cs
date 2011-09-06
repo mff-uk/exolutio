@@ -33,6 +33,7 @@ namespace Exolutio.Model.PSM
             viewHelperFactoryMethods[typeof(PSMClass)] = delegate { return new PSMClassViewHelper(this); };
             viewHelperFactoryMethods[typeof(PSMSchemaClass)] = delegate { return new PSMSchemaClassViewHelper(this); };
             viewHelperFactoryMethods[typeof(PSMAssociation)] = delegate { return new PSMAssociationViewHelper(this); };
+            viewHelperFactoryMethods[typeof(PSMGeneralization)] = delegate { return new PSMGeneralizationViewHelper(this); };
             viewHelperFactoryMethods[typeof(PSMContentModel)] = delegate { return new PSMContentModelViewHelper(this); };
         }
 

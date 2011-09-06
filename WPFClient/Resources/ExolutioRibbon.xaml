@@ -320,6 +320,8 @@
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.AddPSMAssociationCommand}"
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.AddPSMGeneralizationCommand}"
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
             </Fluent:RibbonGroupBox>
             <Fluent:RibbonGroupBox Name="rgbPSM_Create" Header="Create">
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.AddPSMChildInterpreted}" 

@@ -33,6 +33,10 @@ namespace Exolutio.Model.PSM
             PSMClasses.MemberAdded += RegisterPSMComponent;
             PSMClasses.MemberRemoved += UnregisterPSMComponent;
 
+            PSMGeneralizations = new UndirectCollection<PSMGeneralization>(Project);
+            PSMGeneralizations.MemberAdded += RegisterPSMComponent;
+            PSMGeneralizations.MemberRemoved += UnregisterPSMComponent;
+
             PSMContentModels = new UndirectCollection<PSMContentModel>(Project);
             PSMContentModels.MemberAdded += RegisterPSMComponent;
             PSMContentModels.MemberRemoved += UnregisterPSMComponent;
@@ -100,6 +104,8 @@ namespace Exolutio.Model.PSM
         public UndirectCollection<PSMClass> PSMClasses { get; private set; }
 
         public UndirectCollection<PSMContentModel> PSMContentModels { get; private  set; }
+
+        public UndirectCollection<PSMGeneralization> PSMGeneralizations { get; private set; }
 
         public UndirectCollection<PSMAssociationMember> Roots { get; private set; }
 
@@ -176,6 +182,7 @@ namespace Exolutio.Model.PSM
             }
             this.WrapAndSerializeIDRefCollection("Roots", "Root", "rootID", Roots, parentNode, context);
             this.WrapAndSerializeCollection("PSMClasses", "PSMClass", PSMClasses, parentNode, context);
+            this.WrapAndSerializeCollection("PSMGeneralizations", "PSMGeneralization", PSMGeneralizations, parentNode, context);
             this.WrapAndSerializeCollection("PSMAssociations", "PSMAssociation", PSMAssociations, parentNode, context);
             this.WrapAndSerializeCollection("PSMContentModels", "PSMContentModel", PSMContentModels, parentNode, context);
             this.WrapAndSerializeCollection("PSMSchemaDefinedTypes", "AttributeType", PSMSchemaDefinedTypes, parentNode, context, true);
@@ -201,6 +208,7 @@ namespace Exolutio.Model.PSM
 
             this.DeserializeWrappedIDRefCollection("Roots", "rootID", Roots, parentNode, context);
             this.DeserializeWrappedCollection("PSMClasses", PSMClasses, PSMClass.CreateInstance, parentNode, context);
+            this.DeserializeWrappedCollection("PSMGeneralizations", PSMGeneralizations, PSMGeneralization.CreateInstance, parentNode, context);
             this.DeserializeWrappedCollection("PSMAssociations", PSMAssociations, PSMAssociation.CreateInstance, parentNode, context);
             this.DeserializeWrappedCollection("PSMContentModels", PSMContentModels, PSMContentModel.CreateInstance, parentNode, context);
             this.DeserializeWrappedCollection("PSMSchemaDefinedTypes", PSMSchemaDefinedTypes, AttributeType.CreateInstance, parentNode, context, true);
@@ -209,6 +217,12 @@ namespace Exolutio.Model.PSM
             {
                 // assignment has sideffects
                 psmAssociation.Parent = psmAssociation.Parent; 
+            }
+
+            foreach (PSMGeneralization psmGeneralization in PSMGeneralizations)
+            {
+                // assignment has sideffects
+                psmGeneralization.General = psmGeneralization.General;
             }
 
             base.DeserializeRemaining(parentNode, context);

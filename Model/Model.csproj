@@ -153,6 +153,7 @@
     <Compile Include="PIM\PIMGeneralization.cs" />
     <Compile Include="PIM\PIMDiagram.cs" />
     <Compile Include="PIM\PIMOperationParameter.cs" />
+    <Compile Include="PSM\PSMGeneralization.cs" />
     <Compile Include="PSM\IPSMSemanticComponent.cs" />
     <Compile Include="PSM\PSMContentModelType.cs" />
     <Compile Include="PSM\PSMDiagram.cs" />
@@ -203,6 +204,7 @@
     <Compile Include="AttributeType.cs" />
     <Compile Include="Versioning\Version.cs" />
     <Compile Include="Versioning\VersionManager.cs" />
+    <Compile Include="ViewHelper\PSMGeneralizationViewHelper.cs" />
     <Compile Include="ViewHelper\IFoldableComponentViewHelper.cs" />
     <Compile Include="ViewHelper\PIMGeneralizationViewHelper.cs" />
     <Compile Include="ViewHelper\PSMSchemaClassViewHelper.cs" />
