@@ -36,71 +36,24 @@ namespace Exolutio.View
         private void DrawGeneralization(PSMGeneralizationView psmGeneralizationView)
         {
             Connector connector = psmGeneralizationView.Connector;
+
             if (connector.StartNode == null || connector.EndNode == null)
                 return;
-            double y = (int)(connector.StartNode.CanvasPosition.Y + connector.StartNode.ActualHeight / 2);
-            double x = (int)(connector.EndNode.CanvasPosition.X + connector.EndNode.ActualWidth / 2);
-
-            if (connector.Points.Count != 3)
-            {
-                if (connector.Points.Count != 2)
-                {
-
-                }
-                else
-                {
-                    connector.BreakAtPoint(new Point(x, y));
-                    connector.Points[1].IsInvisible = true;
-
-                }
-            }
-
-            if (connector.StartNode.X <= x && x < connector.StartNode.X + connector.StartNode.ActualWidth)
-            {
-                y = connector.StartNode.Y + connector.StartNode.ActualHeight;
-            }
-
-            connector.Points[1].SetPreferedPosition(x, y);
+            bool dummy;
+            DrawConnector(connector, out dummy);
         }
 
         private void DrawAssociation(PSMAssociationView psmAssociationView)
         {
             Connector connector = psmAssociationView.Connector;
-            if (connector.StartNode == null || connector.EndNode == null)
-                return; 
-            double y = (int) (connector.StartNode.CanvasPosition.Y + connector.StartNode.ActualHeight/2);
-            double x = (int) (connector.EndNode.CanvasPosition.X + connector.EndNode.ActualWidth/2);
-            bool movelabel = false; 
-
-            if (connector.Points.Count != 3)
-            {
-                if (connector.Points.Count != 2)
-                {
-                    
-                }
-                else
-                {
-                    connector.BreakAtPoint(new Point(x, y));
-                    connector.Points[1].IsInvisible = true;
-                    
-                }                
-            }
-
-            if (connector.StartNode.X <= x && x < connector.StartNode.X + connector.StartNode.ActualWidth)
-            {
-                y = connector.StartNode.Y + connector.StartNode.ActualHeight;
-            }
-
-            movelabel = connector.Points[1].CanvasPosition != new Point(x, y);
-
-            connector.Points[1].SetPreferedPosition(x, y);
+            bool movelabel;
+            DrawConnector(connector, out movelabel);
 
             if (movelabel)
             {
                 if (psmAssociationView.PSMAssociation.IsNamed)
                 {
                     Rect r = connector.GetBounds();
-                    Point center = connector.GetVirtualCenterPosition();
                     if (connector.StartPoint.CanvasPosition.X <= connector.EndPoint.CanvasPosition.X)
                     {
                         psmAssociationView.NameLabel.X = (r.Width / 2);
@@ -112,6 +65,36 @@ namespace Exolutio.View
                     psmAssociationView.NameLabel.Y = 0;
                 }
             }
+        }
+
+        private static void DrawConnector(Connector connector, out bool movelabel)
+        {
+            movelabel = false;
+            if (connector.StartNode == null || connector.EndNode == null)
+                return;
+            double y = (int) (connector.StartNode.CanvasPosition.Y + connector.StartNode.ActualHeight/2);
+            double x = (int) (connector.EndNode.CanvasPosition.X + connector.EndNode.ActualWidth/2);
+            
+            if (connector.Points.Count != 3)
+            {
+                if (connector.Points.Count != 2)
+                {
+                }
+                else
+                {
+                    connector.BreakAtPoint(new Point(x, y));
+                    connector.Points[1].IsInvisible = true;
+                }
+            }
+
+            if (connector.StartNode.X <= x && x < connector.StartNode.X + connector.StartNode.ActualWidth)
+            {
+                y = connector.StartNode.Y + connector.StartNode.ActualHeight;
+            }
+
+            movelabel = connector.Points[1].CanvasPosition != new Point(x, y);
+
+            connector.Points[1].SetPreferedPosition(x, y);
         }
     }
 }
