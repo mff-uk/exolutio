@@ -257,7 +257,10 @@ namespace Exolutio.View
         protected override void OnMouseLeave(MouseEventArgs e)
         {
             base.OnMouseLeave(e);
-            Container.DiagramView.InvokeVersionedElementMouseLeave(this, PSMAttribute);
+            if (Container != null && Container.DiagramView != null)
+            {
+                Container.DiagramView.InvokeVersionedElementMouseLeave(this, PSMAttribute);
+            }
         }
 	}
 }

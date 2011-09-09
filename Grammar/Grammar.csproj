@@ -55,6 +55,7 @@
     <Compile Include="ProductionRule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegularExpression.cs" />
+    <Compile Include="SchematronTranslation\XDocumentSchematronExtensions.cs" />
     <Compile Include="Terminal.cs" />
     <Compile Include="XSDTranslation\NamingSupport.cs" />
     <Compile Include="XSDTranslation\XDocumentXSDExtensions.cs" />
