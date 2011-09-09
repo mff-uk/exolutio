@@ -168,7 +168,10 @@ namespace Exolutio.View
 
         protected void tbClassHeader_MouseLeave(object sender, MouseEventArgs e)
         {
-            DiagramView.InvokeVersionedElementMouseLeave(this, PSMClass);
+            if (DiagramView != null)
+            {
+                DiagramView.InvokeVersionedElementMouseLeave(this, PSMClass);
+            }
         }
 
         void tbClassHeader_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)

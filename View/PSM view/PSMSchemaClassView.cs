@@ -138,7 +138,10 @@ namespace Exolutio.View
 
         protected void tbClassHeader_MouseLeave(object sender, MouseEventArgs e)
         {
-            DiagramView.InvokeVersionedElementMouseLeave(this, PSMSchemaClass);
+            if (DiagramView != null)
+            {
+                DiagramView.InvokeVersionedElementMouseLeave(this, PSMSchemaClass);
+            }
         }
 
         /// <summary>
