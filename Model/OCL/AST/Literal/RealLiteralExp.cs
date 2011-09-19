@@ -11,22 +11,19 @@ namespace Exolutio.Model.OCL.AST
     /// </summary>
     public class RealLiteralExp : NumericLiteralExp
     {
+        public RealLiteralExp(double value, Types.Classifier type):base(type) {
+            Value = value;
+        }
+
         public double Value
         {
             get;
             set;
         }
 
-        public override Types.Classifier Type
-        {
-            get
-            {
-                return new RealType();
-            }
-            protected set
-            {
-                throw new InvalidOperationException();
-            }
+        public override T Accept<T>(IAstVisitor<T> visitor) {
+            return visitor.Visit(this);
         }
+
     }
 }

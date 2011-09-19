@@ -10,5 +10,6 @@ namespace Exolutio.Model.OCL.AST
     /// </summary>
     public class StateExp : OclExpression
     {
+        public StateExp() : base(null) { }
     }
 }

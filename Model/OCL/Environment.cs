@@ -44,7 +44,7 @@ namespace Exolutio.Model.OCL {
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public abstract Property LookupImplicitSourceForAttribute(string name);
+        public abstract ImplicitPropertyData LookupImplicitAttribute(string name);
 
     
         /// <summary>
@@ -54,7 +54,7 @@ namespace Exolutio.Model.OCL {
         /// <param name="name"></param>
         /// <param name="?"></param>
         /// <returns></returns>
-        public abstract Operation LookupImplicitOperation(string name, IEnumerable<Classifier> parameters);
+        public abstract ImplicitOperationData LookupImplicitOperation(string name, IEnumerable<Classifier> parameters);
 
         /// <summary>
         /// Add all elements in the namespace to the environment.
@@ -67,6 +67,12 @@ namespace Exolutio.Model.OCL {
             return nsEnv;
         }
 
+        public Environment CreateFromClassifier(Classifier cl) {
+            ClassifierEnvironment clEnv = new ClassifierEnvironment(cl);
+            clEnv.Parent = this;
+            return clEnv;
+        }
+
 
         /// <summary>
         /// Add a new named element to the environment.
@@ -75,12 +81,14 @@ namespace Exolutio.Model.OCL {
         /// <param name="type"></param>
         /// <param name="impl"></param>
         /// <returns></returns>
-        public Environment AddElement(string name, ModelElement type, bool impl) {
+        public Environment AddElement(string name, ModelElement type,ModelElement source, bool impl) {
             if (LookupLocal(name) != null) {
                 throw new Exception(string.Format("Variable name `{0}` has already existed.", name));
             }
 
-            return new AddElementEnvironment(this,name, type, impl);
+            Environment env = new AddElementEnvironment(this,name, type,source, impl);
+            env.Parent = this;
+            return env;
         }
     }
 
@@ -109,7 +117,7 @@ namespace Exolutio.Model.OCL {
             }
 
             if (Parent != null) {
-                Parent.Lookup(name);
+                return Parent.Lookup(name);
             }
             return null;
 
@@ -172,15 +180,15 @@ namespace Exolutio.Model.OCL {
             }
         }
 
-        public override Property LookupImplicitSourceForAttribute(string name) {
+        public override ImplicitPropertyData LookupImplicitAttribute(string name) {
             if (Parent != null) {
-                return Parent.LookupImplicitSourceForAttribute(name);
+                return Parent.LookupImplicitAttribute(name);
             }
 
             return null;
         }
 
-        public override Operation LookupImplicitOperation(string name, IEnumerable<Classifier> parameters) {
+        public override ImplicitOperationData LookupImplicitOperation(string name, IEnumerable<Classifier> parameters) {
             if (Parent != null) {
                 return Parent.LookupImplicitOperation(name,parameters);
             }
@@ -189,22 +197,91 @@ namespace Exolutio.Model.OCL {
         }
     }
 
+    public class ClassifierEnvironment : Environment {
+        private Classifier internalClassifier;
+
+        public ClassifierEnvironment(Classifier classifier) {
+            this.internalClassifier = classifier;
+        }
+
+
+
+        public override ModelElement LookupLocal(string name) {
+            // nekontroluje se vnitrni tridy,??operace??
+            return internalClassifier.LookupProperty(name);
+        }
+
+        public override ModelElement LookupNamespaceLocal(string name) {
+            throw new NotImplementedException();
+        }
+
+        public override ModelElement Lookup(string name) {
+            ModelElement el = LookupLocal(name);
+            if (el != null) {
+                return el;
+            }
+            if (Parent != null) {
+                return this.Parent.Lookup(name);
+            }
+            return null;
+        }
+
+        public override ModelElement LookupPathName(IEnumerable<string> path) {
+            // Neuplna implementace !!!!!!!!!!!!!!!!!!!!!!!!!!!
+            if (path.Count() == 1) {
+                var el= LookupLocal(path.First());
+                if (el != null) {
+                    return el;
+                }
+            }
+            if (Parent != null) {
+                return Parent.LookupPathName(path);
+            }
+            return null;
+        }
+
+        public override ImplicitPropertyData LookupImplicitAttribute(string name) {
+           
+            Property prop = internalClassifier.LookupProperty(name);
+            if (prop != null) {
+                return new ImplicitPropertyData(prop,internalClassifier);
+            }
+            if (Parent != null) {
+                return Parent.LookupImplicitAttribute(name);
+            }
+            return null;
+        }
+
+        public override ImplicitOperationData LookupImplicitOperation(string name, IEnumerable<Classifier> parameters) {
+            Operation op = internalClassifier.LookupOperation(name, parameters);
+            if (op != null) {
+                return new ImplicitOperationData(op, internalClassifier);
+            }
+            if (Parent != null) {
+                return Parent.LookupImplicitOperation(name, parameters);
+            }
+            return null;
+        }
+    }
+
     public class AddElementEnvironment : Environment {
         private string Name;
-        private ModelElement Element;
+        private ModelElement Type;
+        private ModelElement Source;
         private bool IsImplicit;
         private Environment RootEnviroment;
 
-        public AddElementEnvironment(Environment rootEnv, string name, ModelElement type, bool impl) {
-            RootEnviroment = rootEnv;
-            Name = name;
-            Element = type;
-            IsImplicit = impl;
+        public AddElementEnvironment(Environment rootEnv, string name, ModelElement type, ModelElement source, bool impl) {
+            this.RootEnviroment = rootEnv;
+            this.Name = name;
+            this.Type = type;
+            this.Source = source;
+            this.IsImplicit = impl;
         }
 
         public override ModelElement LookupLocal(string name) {
             if (name == this.Name) {
-                return Element;
+                return Type;
             }
             else {
                 return RootEnviroment.LookupLocal(name);
@@ -212,8 +289,8 @@ namespace Exolutio.Model.OCL {
         }
 
         public override ModelElement LookupNamespaceLocal(string name) {
-            if (name == this.Name && Element is Namespace) {
-                return Element;
+            if (name == this.Name && Type is Namespace) {
+                return Type;
             }
             else {
                 return RootEnviroment.LookupNamespaceLocal(name);
@@ -222,7 +299,7 @@ namespace Exolutio.Model.OCL {
 
         public override ModelElement Lookup(string name) {
             if (name == this.Name) {
-                return Element;
+                return Source;
             }
             else {
                 return RootEnviroment.Lookup(name);
@@ -234,28 +311,28 @@ namespace Exolutio.Model.OCL {
             return RootEnviroment.LookupPathName(path);
         }
 
-        public override Property LookupImplicitSourceForAttribute(string name) {
+        public override ImplicitPropertyData LookupImplicitAttribute(string name) {
 
-            if (this.Name == name && IsImplicit && Element is Property) {
-                return Element as Property;
+            if (this.Name == name && IsImplicit && Type is Property) {
+                return new ImplicitPropertyData( Type as Property, Source);
             }
 
             if (RootEnviroment != null) {
-                return RootEnviroment.LookupImplicitSourceForAttribute(name);
+                return RootEnviroment.LookupImplicitAttribute(name);
             }
 
             if (Parent != null) {
-                return Parent.LookupImplicitSourceForAttribute(name);
+                return Parent.LookupImplicitAttribute(name);
             }
 
             return null;
         }
 
-        public override Operation LookupImplicitOperation(string name, IEnumerable<Classifier> parameters) {
-            if (this.Name == name && IsImplicit && Element is Operation) {
-                Operation thisOp = Element as Operation;
+        public override ImplicitOperationData LookupImplicitOperation(string name, IEnumerable<Classifier> parameters) {
+            if (this.Name == name && IsImplicit && Type is Operation) {
+                Operation thisOp = Type as Operation;
                 if (thisOp.Parametrs.HasMatchingSignature(parameters)) {
-                    return thisOp;
+                    return new ImplicitOperationData( thisOp, Source);
                 }
             }
 
@@ -268,6 +345,40 @@ namespace Exolutio.Model.OCL {
             }
 
             return null;
+        }
+    }
+
+    public class ImplicitOperationData {
+        public ImplicitOperationData(Operation oper, ModelElement source) {
+            this.Operation = oper;
+            this.Source = source;
+        }
+
+        public Operation Operation {
+            get;
+            protected set;
+        }
+
+        public ModelElement Source {
+            get;
+            protected set;
+        }
+    }
+
+    public class ImplicitPropertyData {
+        public ImplicitPropertyData(Property property, ModelElement source) {
+            this.Property = property;
+            this.Source = source;
+        }
+
+        public Property Property {
+            get;
+            protected set;
+        }
+
+        public ModelElement Source {
+            get;
+            protected set;
         }
     }
 }

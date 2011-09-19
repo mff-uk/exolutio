@@ -12,6 +12,91 @@ namespace Exolutio.Model.OCL.TypesTable {
         private BitArray markingTemp = null;
         private int[] distanceTemp = null;
 
+
+        public IntegerType Integer {
+            get;
+            protected set;
+        }
+
+        public RealType Real {
+            get;
+            protected set;
+        }
+
+        public UnlimitedNaturalType UnlimitedNatural {
+            get;
+            protected set;
+        }
+
+        public StringType String {
+            get;
+            protected set;
+        }
+
+
+        public BooleanType Boolean {
+            get;
+            protected set;
+        }
+
+        public InvalidType Invalid {
+            get;
+            protected set;
+        }
+
+        public AnyType Any {
+            get;
+            protected set;
+        }
+
+        public MessageType Message {
+            get;
+            protected set;
+        }
+
+        public VoidType Void {
+            get;
+            protected set;
+        }
+
+        public TypeType Type {
+            get;
+            protected set;
+        }
+
+        public TypesTable() {
+            Integer = new IntegerType();
+            this.RegisterType(Integer);
+
+            Real = new RealType();
+            this.RegisterType(Real);
+
+            UnlimitedNatural = new UnlimitedNaturalType();
+            this.RegisterType(UnlimitedNatural);
+
+            String = new StringType();
+            this.RegisterType(String);
+
+            Boolean = new BooleanType();
+            this.RegisterType(Boolean);
+
+            Invalid = new InvalidType();
+            this.RegisterType(Invalid);
+
+            Any = new AnyType();
+            this.RegisterType(Any);
+
+            Void = new VoidType();
+            this.RegisterType(Void);
+
+            Message = new MessageType();
+            this.RegisterType(Message);
+
+            Type = new TypeType();
+            this.RegisterType(Type);
+
+        }
+
         public bool RegisterType(Classifier type) {
             if (type == null)
                 throw new NullReferenceException("Type is null.");

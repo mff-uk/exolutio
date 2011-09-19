@@ -10,5 +10,8 @@ namespace Exolutio.Model.OCL.AST
     /// </summary>
     public class MessageExp : OclExpression
     {
+        public MessageExp()
+            : base(null) {
+        }
     }
 }

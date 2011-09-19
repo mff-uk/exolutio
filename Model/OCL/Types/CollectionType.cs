@@ -94,6 +94,11 @@ namespace Exolutio.Model.OCL.Types
         }
 
 
+        public virtual IteratorOperation LookupIteratorOperation(string name) {
+            return CollectionIteratorOperation.Lookup(name);
+        }
+
+
         #region ICompositeType Members
 
         static NonCompositeType<CollectionType> simpleRepresentation = NonCompositeType<CollectionType>.Instance;
@@ -164,6 +169,117 @@ namespace Exolutio.Model.OCL.Types
 
             }
             return null;
+        }
+
+        static class CollectionIteratorOperation {
+            static Dictionary<string, IteratorOperation> operation = new Dictionary<string, IteratorOperation>();
+            public static IteratorOperation Lookup(string name) {
+                IteratorOperation op;
+                if (operation.TryGetValue(name, out op)) {
+                    return op;
+                }
+                else {
+                    return null;
+                }
+            }
+
+            private static void RegistredOperation(string name, Func<int, bool> iteratorCount, Func<CollectionType,Classifier, TypesTable.TypesTable, Classifier> expressionType,
+                Func<CollectionType,Classifier, TypesTable.TypesTable, Classifier> bodyType) {
+                operation.Add(name,new IteratorOperation(name,iteratorCount, expressionType, bodyType));
+            }
+
+            static CollectionIteratorOperation() {
+                RegistredOperation("any", c => c == 1, (s,b, t) => s.ElementType, (s, b,t) => t.Boolean);
+
+                RegistredOperation("closure", c => c == 1,
+                    (s, b, t) => {
+                        if (s.CollectionKind == CollectionKind.Sequence || s.CollectionKind == CollectionKind.OrderedSet) {
+                            OrderedSetType ordSet = new OrderedSetType(b);
+                            t.RegisterType(ordSet);
+                            return ordSet;
+                        }
+                        else {
+                            BagType bag = new BagType(b);
+                            t.RegisterType(bag);
+                            return bag;
+                        }
+                    }
+                    , (s, b, t) => {
+                        if (b is CollectionType) {
+                            return ((CollectionType)b).ElementType;
+                        }
+                        else {
+                            return b;
+                        }
+                    });
+
+                RegistredOperation("collect", c => c == 1,
+                    (s,b, t) => {
+                        if (s.CollectionKind == CollectionKind.Sequence || s.CollectionKind == CollectionKind.OrderedSet) {
+                            SequenceType seq = new SequenceType(b);
+                            t.RegisterType(seq);
+                            return seq;
+                        }
+                        else {
+                            BagType bag = new BagType(b);
+                            t.RegisterType(bag);
+                            return bag;
+                        }
+                    }
+                    , (s,b, t) => b);
+
+                RegistredOperation("collectNested", c => c == 1,
+                    (s, b, t) => {
+                        return t.Boolean;
+                    }
+                    , (s, b, t) => b);
+
+                RegistredOperation("exists", c => c == 1,
+                    (s, b, t) => {
+                        return t.Boolean;
+                    }
+                    , (s, b, t) => t.Boolean);
+
+                RegistredOperation("forAll", c => c == 1,
+                    (s, b, t) => {
+                        return t.Boolean;
+                    }
+                    , (s, b, t) => t.Boolean);
+
+                RegistredOperation("isUnique", c => c == 1,
+                    (s, b, t) => {
+                        return t.Boolean;
+                    }
+                    , (s, b, t) => b);
+
+                RegistredOperation("one", c => c == 1,
+                    (s, b, t) =>  t.Boolean
+                    , (s, b, t) => t.Boolean);
+
+                RegistredOperation("select", c => c == 1,
+                    (s, b, t) => s
+                    , (s, b, t) => t.Boolean);
+
+                RegistredOperation("reject", c => c == 1,
+                    (s, b, t) => s
+                    , (s, b, t) => t.Boolean);
+
+                RegistredOperation("sortedBy", c => c == 1,
+                    (s, b, t) => {
+                        if (s.CollectionKind == CollectionKind.Sequence || s.CollectionKind == CollectionKind.Bag) {
+                            SequenceType seq = new SequenceType(b);
+                            t.RegisterType(seq);
+                            return seq;
+                        }
+                        else {
+                            OrderedSetType ordSet = new OrderedSetType(b);
+                            t.RegisterType(ordSet);
+                            return ordSet;
+                        }
+                    }
+                    , (s, b, t) => t.Boolean);
+
+            }
         }
     }
 }

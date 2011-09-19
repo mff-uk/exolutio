@@ -10,6 +10,11 @@ namespace Exolutio.Model.OCL.AST
     /// </summary>
     public class CollectionItem : CollectionLiteralPart
     {
+        public CollectionItem(OclExpression item)
+            : base() {
+                this.Item = item;
+        }
+
         public OclExpression Item
         {
             get;

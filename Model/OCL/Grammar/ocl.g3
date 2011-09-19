@@ -1,115 +1,248 @@
 grammar OCL;
 
+options {
+    language=CSharp3;
+    TokenLabelType=CommonToken;
+}
 
 @lexer::namespace{Exolutio.Model.OCL.Compiler}
 @parser::namespace{Exolutio.Model.OCL.Compiler}
 
+@parser::header{
+using Exolutio.Model.OCL.AST;
+using Exolutio.Model.OCL.Types;
+}
+
+public 
+contextDeclaratio
+	returns [ClassifierConstraint Decl]
+	:propertyContextDecl
+	|classifierContextDecl {$Decl=$classifierContextDecl.Decl;}
+	|operationContextDecl
+	;
+
+propertyContextDecl
+	:propertyContextHead initOrDerValue*
+	;
+
+propertyContextHead
+	:'context' SimpleName '::' pathName ':' type
+	;
+
+operationContextDecl
+	:operationContextHead prePostOrBodyDecl*
+	;
+
+operationContextHead
+	:'context' operation
+	;
+
+classifierContextDecl
+	returns[ClassifierConstraint Decl]
+	@init{List<OclExpression> invs=new List<OclExpression>(); }
+	@after{EnvironmentStack.Pop();EnvironmentStack.Pop();}
+	:classifierContextHead (invOrDef {invs.Add($invOrDef.Constraint);})*  {$Decl = new ClassifierConstraint($classifierContextHead.Context,invs);}
+	;
+
+classifierContextHead
+	returns [Classifier Context]
+	:'context' pathName		{$Context=ClassifierContextHead($pathName.Path,"self");}
+	|'context' SimpleName':'pathName {$Context=ClassifierContextHead($pathName.Path,$SimpleName.Text);}
+	;
+
+initOrDerValue
+	:'init' ':' oclExpression 
+	|'derivate' ':' oclExpression 
+	;
+
+invOrDef
+	returns[OclExpression Constraint]
+	:'inv' (SimpleName )? ':' oclExpression {$Constraint=$oclExpression.Value;}
+	// chyby def
+	;
+
+prePostOrBodyDecl
+	:'pre' (SimpleName)? ':' oclExpression 
+	|'post' (SimpleName)? ':' oclExpression 
+	|'body' (SimpleName)? ':' oclExpression
+	;
+
+
+operation
+	:pathName /*'::' SimpleName*/ '(' parameters ')' ':' type?
+	;
+
+parameters
+	:variableDeclaration[VariableDeclarationRequirement.OperationContext] (',' parameters)?
+	;
+
+public 
 oclExpression
-	:logicalImpliesExpression
+	returns [OclExpression Value]
+	:logicalImpliesExpression {$Value =$logicalImpliesExpression.Value; }
 	
 	;
 	
 logicalImpliesExpression
-	: logicalXorExpression ('implies' logicalXorExpression)*
+	returns [OclExpression Value]
+	: res=logicalXorExpression {$Value=$res.Value;} (opToken='implies' expr=logicalXorExpression {$Value=InfixOperation($Value,$opToken.Text,$expr.Value);})*
 	;
 logicalXorExpression
-	: logicalOrExpression ('xor' logicalOrExpression)*
+	returns [OclExpression Value]
+	: res=logicalOrExpression {$Value=$res.Value;} (opToken='xor' expr=logicalOrExpression{$Value=InfixOperation($Value,$opToken.Text,$expr.Value);})*
 	;
 logicalOrExpression
-	: logicalAndExpression ('or' logicalAndExpression)*
+	returns [OclExpression Value]
+	: res=logicalAndExpression {$Value=$res.Value;} (opToken='or' expr=logicalAndExpression{$Value=InfixOperation($Value,$opToken.Text,$expr.Value);})*
 	;
 logicalAndExpression
-	: relationalEqExpression ('and' relationalEqExpression)*
+	returns [OclExpression Value]
+	: res=relationalEqExpression {$Value=$res.Value;} (opToken='and' expr=relationalEqExpression{$Value=InfixOperation($Value,$opToken.Text,$expr.Value);})*
 	;
 
 relationalEqExpression
-	:	 relationalNotEqExprassion (('='|'<>') relationalNotEqExprassion)*	 	
+	returns [OclExpression Value]
+	:	 res=relationalNotEqExprassion {$Value=$res.Value;} ((opToken='='|opToken='<>') expr=relationalNotEqExprassion{$Value=InfixOperation($Value,$opToken.Text,$expr.Value);})*	 	
 	;
 relationalNotEqExprassion
-	:additiveExpression (('<'| '>'| '<='| '>=') additiveExpression)*
+	returns [OclExpression Value]
+	:res=additiveExpression {$Value=$res.Value;} ((opToken='<'| opToken='>'| opToken='<='| opToken='>=') expr=additiveExpression{$Value=InfixOperation($Value,$opToken.Text,$expr.Value);})*
 	
 	;
 
 	
 additiveExpression
-	: multiplicativeExpression (('+'|'-')  multiplicativeExpression)* 
+	returns [OclExpression Value]
+	: res=multiplicativeExpression {$Value=$res.Value;} ((opToken='+'|opToken='-') expr= multiplicativeExpression{$Value=InfixOperation($Value,$opToken.Text,$expr.Value);})* 
 	;	
 
 multiplicativeExpression
-	:	 unaryExpression (('*'|'/') unaryExpression)*	
+	returns [OclExpression Value]
+	:	 res=unaryExpression {$Value=$res.Value;} ((opToken='*'|opToken='/') expr=unaryExpression{$Value=InfixOperation($Value,$opToken.Text,$expr.Value);})*	
 	;
 
 unaryExpression
-	:	('-'|'not') termExpression
-	|	termExpression
+	returns [OclExpression Value]
+	:	(opToken='-'|opToken='not') term=termExpression {$Value=UnaryOperation($opToken,$term.Value);}
+	|	termExpression {$Value = $termExpression.Value;}
 	;
 	
-termExpression
-	:	primaryExperession ( (('.'|'->')propertyCall )|oclMessageExp)*
+termExpression 
+	returns[OclExpression Value]
+	@init{
+		SeparatorType separator= SeparatorType.None;
+	}
+	:	expr = primaryExperession ( (('.' {separator=SeparatorType.Dot;}|'->'{separator=SeparatorType.Arrow;}) expr=propertyCall[false,$expr.Value,separator] )|oclMessageExp)* {$Value = $expr.Value;}
 			 
 	;
 
-primaryExperession 
+primaryExperession
+	returns[OclExpression Value]
 	:		
-	 	'self'		//3B
+	// 	'self'		//3B
+		
 	//|	enumLiteralExp  //8A
-	|	collectionLiteralExpAndType //8B, castecne 8E(22)
+	/*|*/	collectionLiteralExpAndType //8B, castecne 8E(22)
+			{$Value = $collectionLiteralExpAndType.Value;}
 	|	tupleLiteralExp	//8C
+			{$Value = $tupleLiteralExp.Literal;}
 	|	primitiveLiteralExp // 8D
+			{$Value = $primitiveLiteralExp.Literal;}
 	//|	typeLiteralExp //8E
 	|	enumAndType //8A,8E,22
-	|	propertyCall
-	
+			{$Value = $enumAndType.Value;}
+	|	propertyCall[true,null,SeparatorType.None]
+			{$Value = $propertyCall.Value;}
 	|	'('oclExpression')'
+			{$Value = $oclExpression.Value;}
 	|	ifExp
 	|	letExp
 	;
-propertyCall
-	:	pathName ('['arguments']')? isMarkedPre? ('('propertyCallParametrs')')?
+propertyCall[bool isRoot,OclExpression root,SeparatorType separator]
+	returns[OclExpression Value]
+	:	pathName ('['arguments']')? isMarkedPre? ('('propertyCallParametrs[root]')')?
+			{$Value=PropertyCall($isRoot,$separator,$pathName.Path,$root,$arguments.Values,$isMarkedPre.IsPre,$propertyCallParametrs.VariableDecl,$propertyCallParametrs.Arguments);}
 			//9 pokud se alspon jednou zopakuje, 28A, 3A - pokud je na zacatku
 			//23,24,25,34,35,36,37,38
-	|'iterate' '('(variableDeclaration ';'?)+ '|' oclExpression ')'
+	|'iterate' '('(variableDeclaration[VariableDeclarationRequirement.Iterate] ';'?)+ '|' oclExpression ')' {throw new System.NotSupportedException();}
 	//|('iterate' '(' variableDeclaration ';')=>'iterate' '('variableDeclaration ';'variableDeclaration '|' oclExpression ')'
 	//|'iterate' '('variableDeclaration  '|' oclExpression ')'
 	//|'iterate' '('( ((variableDeclaration ';')=>variableDeclaration ';'variableDeclaration) | variableDeclaration )'|' oclExpression ')'
 		//POZOR NA STREDNIK
 		//26
 	;
-propertyCallParametrs
-	:	declarePropertyCallParametrs? arguments?
+propertyCallParametrs[OclExpression root]
+	returns[List<TypeDefBag> VariableDecl,List<ArgumentBag> Arguments]
+	@init{
+		int pushedVar = 0;
+	}
+	@after{
+		// Clear pushed variable
+		for(int i=0;i<pushedVar;i++){
+			EnvironmentStack.Pop();
+		}
+	}
+	:	declarePropertyCallParametrs[root]? arguments? {if($arguments.Values== null) $Arguments = new List<ArgumentBag>(); else $Arguments = $arguments.Values; $VariableDecl=$declarePropertyCallParametrs.VariableDecl;pushedVar = $declarePropertyCallParametrs.pushedVar;}
 		//25,35
 	;
-declarePropertyCallParametrs
-	:	( typedef (',' typedef )?'|') //25A
+declarePropertyCallParametrs[OclExpression root]
+	returns [List<TypeDefBag> VariableDecl,int pushedVar]
+	@init{
+		$VariableDecl = new List<TypeDefBag>();
+		$pushedVar = 0;
+	}
+	@after{
+		// add variable to environment
+		foreach(var variable in $VariableDecl)
+		{
+			var env = Environment.AddElement(variable.Name,variable.Type,variable.Declaration,true);
+			EnvironmentStack.Push(env);
+			$pushedVar++;
+		}
+	}
+	:	( t1=typedef[root]{$VariableDecl.Add($t1.Bag);} (',' t2=typedef[root]{$VariableDecl.Add($t2.Bag);} )?'|') //25A
+
 	;
-typedef	:	SimpleName(':'type)?
+typedef[OclExpression root]	
+	returns[TypeDefBag Bag]
+	:	SimpleName(':'type)? {
+	  var decl=CreateVariableDeclaration($SimpleName,$type.Type == null? ((CollectionType)root.Type).ElementType:$type.Type,null,VariableDeclarationRequirement.Iterator);
+	  $Bag = new TypeDefBag($SimpleName.Text,$type.Type,decl);
+	  }
 	;
 	
-enumAndType //9,28
+enumAndType  //9,28
 	 //pathName //9 pokud se alspon jednou zopakuje, 28A, 3A
 		//presunuto do propertyCall
 	//|  collectionType//28B  - obsazen v collectionLiteralExpAndType
-	: tupleType//28C
-	| primitiveType//28D
+	returns [TypeExp Value]
+	: tupleType   //28C
+		{$Value = new TypeExp($tupleType.Type,TypesTable.Type);}		
+	| primitiveType//28D\
+		{$Value = new TypeExp($primitiveType.Type,TypesTable.Type);}	
 	| oclType//28E
+		{$Value = new TypeExp($oclType.Type,TypesTable.Type);}	
 	;
 
 
 
 pathName //7
-	: SimpleName ('::' SimpleName)* // RestrictedKeyword -> simple name
+	returns[List<string> Path,CommonToken FirstToken,CommonToken LastToken]
+	: first=SimpleName ('::' other+=SimpleName)* {$Path = ResolvePathName($first,$other); $FirstToken = $first; $LastToken =$other!= null ? $other[$other.Count-1]:null;} // RestrictedKeyword -> simple name
 	;
 	
 
-collectionLiteralExpAndType
-	:collectionTypeIdentifier ('(' type  ')')? ('{' collectionLiteralParts? '}')? //10A - bez type,10B - vsechno, 22B-nic
+collectionLiteralExpAndType // 
+	returns [OclExpression Value]
+	:collectionTypeIdentifier ('(' type  ')')? ('{' collectionLiteralParts? '}')? //10A - bez type,10B - vsechno, 22(28B)-bez hodnoty
+					{$Value = CollectionLiteralExpAndType($collectionTypeIdentifier.Kind,$collectionTypeIdentifier.Token,$type.Type,$collectionLiteralParts.Values);}
 	;
 
-enumLiteralExp //9
+enumLiteralExp //9 - nepouzite pravidlo, je soucasti propertyCall
 	:pathName'::' SimpleName
 	;
 	
-collectionLiteralExp //10
+collectionLiteralExp //10 - nepouzite pravidlo, je soucasti collectionLiteralExpAndType
 	:collectionTypeIdentifier  '{' collectionLiteralParts? '}'
 	|collectionType '{' collectionLiteralParts? '}'
 	;
@@ -120,94 +253,120 @@ collectionLiteralExp //10
 
 
 collectionTypeIdentifier //11
-	:'Set'
-	|'Bag'
-	|'Sequence'
-	|'Collection'
-	|'OrderedSet'
+	returns [CollectionKind Kind,CommonToken Token]
+	:tok='Set'		{$Kind = CollectionKind.Set; $Token = $tok;}
+	|tok='Bag'		{$Kind = CollectionKind.Bag;$Token = $tok;}
+	|tok='Sequence'	{$Kind = CollectionKind.Sequence;$Token = $tok;}
+	|tok='Collection'{$Kind = CollectionKind.Collection;$Token = $tok;}
+	|tok='OrderedSet'{$Kind = CollectionKind.OrderedSet;$Token = $tok;}
 	;
 
 collectionLiteralParts //12
-	: collectionLiteralPart ( ',' collectionLiteralParts )?
+	returns [List<CollectionLiteralPart> Values]
+	: collectionLiteralPart ( ',' exists=collectionLiteralParts )?
+		{
+			if($exists.Values == null){
+				$Values = new List<CollectionLiteralPart>();
+			} else {
+				$Values = $exists.Values;
+			}
+			$Values.Add($collectionLiteralPart.Part);
+		}
 	;
 
 collectionLiteralPart //13
-	: oclExpression ('..' oclExpression)? //13B,14
-	
+	returns [CollectionLiteralPart Part]
+	: exp1=oclExpression ('..' exp2=oclExpression)? //13B,14
+		{$Part=CreateCollectionLiteralPart($exp1.Value,$exp2.Value);}
 	;
 
 
 primitiveLiteralExp //15
-	: IntegerLiteralExp
-	| RealLiteralExp
-	| StringLiteralExp
-	| BooleanLiteralExp
-	| UnlimitedNaturalLiteralExp
-	| NullLiteralExp
-	| InvalidLiteralExp
+	returns [LiteralExp Literal]
+	: IntegerLiteralExp				{$Literal = CreateIntegerLiteral($IntegerLiteralExp);}
+	| RealLiteralExp				{$Literal = CreateRealLiteral($RealLiteralExp);}
+	| StringLiteralExp				{$Literal = CreateStringLiteral($StringLiteralExp);}
+	| BooleanLiteralExp				{$Literal = CreateBooleanLiteral($BooleanLiteralExp.Text);}
+	| UnlimitedNaturalLiteralExp	{$Literal = CreateUnlimitedNaturalLiteral();}
+	| NullLiteralExp				{$Literal = CreateNullLiteral();}
+	| InvalidLiteralExp				{$Literal = CreateInvalidLiteral();}
 	;
 tupleLiteralExp //16
-	: 'Tuple' '{' variableDeclarationList '}'
+	returns [TupleLiteralExp Literal]
+	: roottoken='Tuple' '{' variableDeclarationList[VariableDeclarationRequirement.TupleLiteral] '}' {$Literal = CreateTupleLiteral($roottoken,$variableDeclarationList.DeclarationList);}
 	;
 	
-typeLiteralExp //22 
+typeLiteralExp //22 nepouzite pravidlo
 	:type
 	;
 
-variableDeclaration //27
-	:SimpleName (':' type)? ( '=' oclExpression )?
+variableDeclaration[VariableDeclarationRequirement requirement] //27
+	returns [VariableDeclaration Declaration]
+	:SimpleName (':' type)? ( '=' oclExpression )? {$Declaration=CreateVariableDeclaration($SimpleName,$type.Type,$oclExpression.Value,requirement); }
 	;
 
 type //28
-	: pathName
-	| collectionType
-	| tupleType
-	| primitiveType
-	| oclType
+	returns [Classifier Type]
+	: pathName		 {$Type = ResolveTypePathName($pathName.Path,$pathName.FirstToken,$pathName.LastToken);}
+	| collectionType {$Type = $collectionType.Type;}
+	| tupleType		 {$Type = $tupleType.Type;}
+	| primitiveType	 {$Type = $primitiveType.Type;}
+	| oclType		 {$Type = $oclType.Type;}
 	;
 		
 primitiveType //29
-	: 'Boolean'
-	| 'Integer'
-	| 'Real'
-	| 'String'
-	| 'UnlimitedNatural'
+	returns [PrimitiveType Type]
+	: 'Boolean'				{$Type = TypesTable.Boolean;}
+	| 'Integer'				{$Type = TypesTable.Integer;}
+	| 'Real'				{$Type = TypesTable.Real;}
+	| 'String'				{$Type = TypesTable.String;}
+	| 'UnlimitedNatural'	{$Type = TypesTable.UnlimitedNatural;}
 	;
 	
 oclType //30
-	: 'OclAny'
-	| 'OclInvalid'
-	| 'OclMessage'
-	| 'OclVoid'
+	returns [Classifier Type]
+	: 'OclAny'				{$Type = TypesTable.Any;}
+	| 'OclInvalid'			{$Type = TypesTable.Invalid;}
+	| 'OclMessage'			{$Type = TypesTable.Message; throw new System.NotSupportedException();}
+	| 'OclVoid'				{$Type = TypesTable.Void;}
 	;
 
 collectionType //31
-	: collectionTypeIdentifier '(' type  ')'
+	returns [CollectionType Type]
+	: collectionTypeIdentifier '(' type  ')' {$Type = CreateCollectionType($collectionTypeIdentifier.Kind,$type.Type);}
 	;
 	
-tupleType ///32
-	: 'Tuple' '(' variableDeclarationList? ')'
+tupleType  ///32
+	returns[TupleType Type]
+	: token='Tuple' '(' variableDeclarationList[VariableDeclarationRequirement.TupleType]? ')' {$Type = CreateTupleType($token,$variableDeclarationList.DeclarationList);}
 	;
 
 
-variableDeclarationList //33
-	: variableDeclaration (','variableDeclarationList )?
+variableDeclarationList[VariableDeclarationRequirement requirement] //33
+	returns [List<VariableDeclaration> DeclarationList ]
+	: variableDeclaration[requirement] (','exists=variableDeclarationList[requirement] )? {$DeclarationList = CreatevariableDeclarationList($variableDeclaration.Declaration,$exists.DeclarationList);}
+	
 	;
 isMarkedPre //39
-	: '@' 'pre'
+	returns [bool IsPre = false]
+	: '@' 'pre' {$IsPre = true;}
 	;
 
 arguments //40
-	: oclExpression ( ',' arguments )?
+	returns [List<ArgumentBag> Values]
+	@init{
+		$Values = new List<ArgumentBag>();
+	}
+	: exp1 = oclExpression {$Values.Add(new ArgumentBag($exp1.Value,$arguments.start,$arguments.stop));} ( ',' exp2=oclExpression{$Values.Add(new ArgumentBag($exp2.Value,$arguments.start,$arguments.stop));} )*
 	;
 
 
 letExp //41
-	: 'let' variableDeclaration letExpSub
+	: 'let' variableDeclaration[VariableDeclarationRequirement.Let] letExpSub
 	;
 
 letExpSub //42
-	: ',' variableDeclaration letExpSub
+	: ',' variableDeclaration[VariableDeclarationRequirement.Let] letExpSub
 	| 'in' (options {greedy=false;} :oclExpression)
 	;
 
@@ -267,7 +426,7 @@ RealLiteralExp //19
 	;
 	
 StringLiteralExp //20
-	: '\'' StringChar* '\''
+	: '\'' StringChar* '\'' 
 	;//Chyby pravidlo B
 
 	

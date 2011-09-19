@@ -9,6 +9,10 @@ namespace Exolutio.Model.OCL.AST
 {
     public class StringLiteralExp : PrimitiveLiteralExp
     {
+        public StringLiteralExp(string value,Classifier type):base(type) {
+            Value = value;
+        }
+
         /// <summary>
         /// A StringLiteralExp denotes a value of the predefined type String.
         /// </summary>
@@ -18,16 +22,9 @@ namespace Exolutio.Model.OCL.AST
             set;
         }
 
-        public override Types.Classifier Type
-        {
-            get
-            {
-                return new  StringType ();
-            }
-            protected set
-            {
-                throw new InvalidOperationException();
-            }
+        public override T Accept<T>(IAstVisitor<T> visitor) {
+            return visitor.Visit(this);
         }
+
     }
 }

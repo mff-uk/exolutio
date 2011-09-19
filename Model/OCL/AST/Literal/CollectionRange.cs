@@ -10,6 +10,11 @@ namespace Exolutio.Model.OCL.AST
     /// </summary>
     public class CollectionRange : CollectionLiteralPart
     {
+        public CollectionRange(OclExpression first, OclExpression last) {
+            this.First = first;
+            this.Last = last;
+        }
+
         public OclExpression First
         {
             set;

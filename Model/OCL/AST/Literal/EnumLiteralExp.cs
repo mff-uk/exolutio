@@ -11,6 +11,10 @@ namespace Exolutio.Model.OCL.AST
     /// </summary>
     public class EnumLiteralExp : LiteralExp
     {
+        public EnumLiteralExp(EnumLiteral referredEnumLiteral):base(referredEnumLiteral.Type) {
+            this.ReferredEnumLiteral = referredEnumLiteral;
+        }
+
         /// <summary>
         /// The EnumLiteral to which the enum expression refers.
         /// </summary>
@@ -20,16 +24,8 @@ namespace Exolutio.Model.OCL.AST
             set;
         }
 
-        public override Types.Classifier Type
-        {
-            get
-            {
-                return ReferredEnumLiteral.Type;
-            }
-            protected set
-            {
-                throw new InvalidOperationException();
-            }
+        public override T Accept<T>(IAstVisitor<T> visitor) {
+            return visitor.Visit(this);
         }
     }
 }

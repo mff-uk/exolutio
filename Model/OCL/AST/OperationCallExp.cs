@@ -13,6 +13,12 @@ namespace Exolutio.Model.OCL.AST
     /// </summary>
     public class OperationCallExp : FeatureCallExp
     {
+
+        public OperationCallExp(OclExpression source, bool isPre, Operation refOperation, List<OclExpression> args):base(source,isPre,refOperation.ReturnType) {
+            this.ReferredOperation = refOperation;
+            this.Arguments = args;
+        }
+
         /// <summary>
         /// The arguments denote the arguments to the operation call. This is only useful when the
         /// operation call is related to an Operation that takes parameters.
@@ -31,6 +37,10 @@ namespace Exolutio.Model.OCL.AST
         {
             get;
             set;
+        }
+
+        public override T Accept<T>(IAstVisitor<T> visitor) {
+            return visitor.Visit(this);
         }
     }
 }

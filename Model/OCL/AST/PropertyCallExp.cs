@@ -12,6 +12,11 @@ namespace Exolutio.Model.OCL.AST
     /// </summary>
     public class PropertyCallExp : NavigationCallExp
     {
+        public PropertyCallExp(OclExpression source, bool isPre, Property navigationSource, OclExpression qualifier, Property referredProperty)
+            : base(source, isPre, navigationSource, qualifier, referredProperty.Type) {
+                this.ReferredProperty = referredProperty;
+        }
+
         /// <summary>
         /// The Attribute to which this AttributeCallExp is a reference.
         /// </summary>
@@ -21,16 +26,8 @@ namespace Exolutio.Model.OCL.AST
             set;
         }
 
-        public override Classifier Type
-        {
-            get
-            {
-                return ReferredProperty.Type;
-            }
-            protected set
-            {
-                throw new InvalidOperationException();
-            }
+        public override T Accept<T>(IAstVisitor<T> visitor) {
+            return visitor.Visit(this);
         }
     }
 }

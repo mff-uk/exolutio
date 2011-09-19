@@ -102,11 +102,19 @@ namespace Exolutio.Model.OCL.Types
         }
 
         public virtual Property LookupProperty(string name) {
-            return Properties[name];
+            Property property;
+            if(Properties.TryGetValue(name,out property)){
+                return property;
+            }
+            return null;
         }
 
         public virtual Operation LookupOperation(string name,IEnumerable<Classifier> parameterTypes) {
-            return Operations[name].LookupOperation(parameterTypes);
+            OperationList ops;
+            if (Operations.TryGetValue(name,out ops)) {
+                return ops.LookupOperation(parameterTypes);
+            }
+            return null;
         }
 
 

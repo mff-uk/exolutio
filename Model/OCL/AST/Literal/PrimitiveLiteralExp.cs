@@ -10,5 +10,8 @@ namespace Exolutio.Model.OCL.AST
     /// </summary>
     public class PrimitiveLiteralExp : LiteralExp
     {
+        protected PrimitiveLiteralExp(Types.Classifier type) : base(type) { }
+
+        
     }
 }

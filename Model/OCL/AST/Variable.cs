@@ -11,8 +11,16 @@ namespace Exolutio.Model.OCL.AST
     /// is in scope. This metaclass represents among others the variables self and result and the variables defined using the Let
     /// expression.
     /// </summary>
-    public class Variable : VariableExp
+    public class Variable 
     {
+        public Variable(VariableDeclaration decl) {
+            RepresentedParameter = decl;
+        }
+
+        public Variable(VariableDeclaration decl, OclExpression init):this(decl) {
+            InitExpression = init;
+        }
+
         /// <summary>
         /// The OclExpression that represents the initial value of the variable. Depending on the role that
         /// a variable declaration plays, the init expression might be mandatory.
@@ -20,17 +28,21 @@ namespace Exolutio.Model.OCL.AST
         public OclExpression InitExpression
         {
             get;
-            set;
+            protected set;
         }
 
         /// <summary>
         /// The Parameter in the current operation this variable is representing. Any access to the
         /// variable represents an access to the parameter value.
-        /// </summary>
-        public Parameter representedParameter
+        /// 
+        /// U typu representedParameter je v dokumentaci docela velky zmatek, podle definice by tam mel byt typ parameter,
+        /// ale dale v dokumentaci se s nim pracuje jako s VariableDeclaration.
+        /// </summary> 
+
+        public VariableDeclaration RepresentedParameter
         {
             get;
-            set;
+            protected set;
         }
 
 

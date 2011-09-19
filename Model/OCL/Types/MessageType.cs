@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Diagnostics;
 
 namespace Exolutio.Model.OCL.Types
 {
@@ -12,9 +13,10 @@ namespace Exolutio.Model.OCL.Types
     //TODO MessageType
     public class MessageType:Classifier
     {
-        public MessageType():base("")
+        public MessageType():base("Message")
         {
-            throw new NotImplementedException();
+           // throw new NotImplementedException();
+           // Debug.Fail("NonImplemented: MessageType");
         }
     }
 }

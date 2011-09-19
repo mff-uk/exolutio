@@ -31,7 +31,7 @@ namespace Exolutio.Model.OCL.Types
     /// </summary>
     public sealed class NonCompositeType<T> :NonCompositeType where T : ICompositeType
     {
-        private NonCompositeType() : base("NoConformsToType<"+typeof(T).Name+">") { }
+        private NonCompositeType() : base("NonConformsToType<"+typeof(T).Name+">") { }
 
         public override Type CompositeType
         {

@@ -15,6 +15,11 @@ namespace Exolutio.Model.OCL.AST
     /// </summary>
     public class NavigationCallExp : FeatureCallExp
     {
+        public NavigationCallExp(OclExpression source, bool isPre, Property navigationSource, OclExpression qualifier, Classifier returnType)
+            : base(source, isPre, returnType) {
+            this.NavigationSource = navigationSource;
+            this.Qualifier = qualifier;
+        }
         /// <summary>
         /// The values for the qualifier attributes if applicable.
         /// </summary>
@@ -34,5 +39,7 @@ namespace Exolutio.Model.OCL.AST
             get;
             set;
         }
+
+        
     }
 }
