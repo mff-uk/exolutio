@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Exolutio.Model.OCL.Types;
 
 namespace Exolutio.Model.OCL.AST
 {
@@ -15,13 +16,22 @@ namespace Exolutio.Model.OCL.AST
     /// </summary>
     public class IterateExp : LoopExp
     {
+        public IterateExp(OclExpression source, OclExpression body, List<VariableDeclaration> iterators, VariableDeclaration result)
+            : base(source, body, iterators,result.PropertyType) {
+                this.Result = result;
+        }
+
         /// <summary>
         /// The Variable that represents the result variable.
         /// </summary>
-        public Variable result
+        public VariableDeclaration Result
         {
             get;
             set;
+        }
+
+        public override T Accept<T>(IAstVisitor<T> visitor) {
+            return visitor.Visit(this);
         }
     }
 }

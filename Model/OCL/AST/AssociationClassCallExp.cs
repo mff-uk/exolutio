@@ -11,7 +11,7 @@ namespace Exolutio.Model.OCL.AST
     /// objects linked to a target object by an association class. The expression refers to these target objects by the name of the
     /// target associationclass.
     /// </summary>
-    public class AssociationClassCallExp : NavigationCallExp
+    public class AssociationClassCallExp //: NavigationCallExp
     {
         /// <summary>
         /// The AssociationClass to which this AssociationClassCallExp is a reference. This refers to an

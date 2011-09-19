@@ -11,13 +11,21 @@ namespace Exolutio.Model.OCL.AST
     /// </summary>
     public class CollectionLiteralExp : LiteralExp
     {
+
+        public CollectionLiteralExp(Types.CollectionType type, List<CollectionLiteralPart> parts)
+            : base(type) {
+                this._type = type;
+                this.Parts = parts;
+        }
+
         /// <summary>
         /// The kind of collection literal that is specified by this CollectionLiteralExp.
         /// </summary>
         public CollectionKind Kind
         {
-            get;
-            set;
+            get {
+                return _type.CollectionKind;
+            }
         }
 
 
@@ -30,13 +38,16 @@ namespace Exolutio.Model.OCL.AST
             set;
         }
 
+        Types.CollectionType _type;
+
         public override Types.Classifier Type {
             get {
-                return null;
-            }
-            protected set {
-                throw new InvalidOperationException();
-            }
+                return _type;
+            }   
+        }
+
+        public override T Accept<T>(IAstVisitor<T> visitor) {
+            return visitor.Visit(this);
         }
     }
 }

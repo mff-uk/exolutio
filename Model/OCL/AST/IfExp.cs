@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Exolutio.Model.OCL.Types;
 
 namespace Exolutio.Model.OCL.AST
 {
@@ -12,6 +13,9 @@ namespace Exolutio.Model.OCL.AST
     /// </summary>
     public class IfExp : OclExpression
     {
+
+
+        public IfExp(BooleanType boolean) : base(boolean) { }
         /// <summary>
         /// The OclExpression that represents the boolean condition. If this condition evaluates to true,
         /// the result of the if expression is identical to the result of the thenExpression. If this condition
@@ -49,6 +53,10 @@ namespace Exolutio.Model.OCL.AST
             protected set {
                
             }
+        }
+
+        public override T Accept<T>(IAstVisitor<T> visitor) {
+            return visitor.Visit(this);
         }
     }
 }

@@ -11,22 +11,18 @@ namespace Exolutio.Model.OCL.AST
     /// </summary>
     public class BooleanLiteralExp : PrimitiveLiteralExp
     {
+        public BooleanLiteralExp(bool value,Classifier type):base(type) {
+            Value = value;
+        }
+
         public bool Value
         {
             get;
             set;
         }
 
-        public override Types.Classifier Type
-        {
-            get
-            {
-                return new BooleanType();
-            }
-            protected set
-            {
-                throw new InvalidOperationException();
-            }
+        public override T Accept<T>(IAstVisitor<T> visitor) {
+            return visitor.Visit(this);
         }
     }
 }

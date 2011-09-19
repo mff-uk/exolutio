@@ -34,10 +34,10 @@ namespace Exolutio.Model.OCL.Types
             Parametrs = new ParameterCollection(this);
         }
 
-        public Operation(string name, bool isQuery, Classifier returnType, IEnumerable<Parameter> Paremetrs)
+        public Operation(string name, bool isQuery, Classifier returnType, IEnumerable<Parameter> parametrs)
             : this(name, isQuery, returnType)
         {
-            this.Parametrs.AddRange(Parametrs);
+            this.Parametrs.AddRange(parametrs);
         }
 
         public virtual bool IsQuery

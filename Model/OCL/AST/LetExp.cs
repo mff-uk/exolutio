@@ -10,8 +10,10 @@ namespace Exolutio.Model.OCL.AST
     /// change its value. The value is always the evaluated value of the initial expression. The variable is visible in the in
     /// expression.
     /// </summary>
-    public class LetExp : OclExpression
+    public  class LetExp : OclExpression
     {
+        public LetExp() : base(null) { }
+
         /// <summary>
         /// The Variable introduced by the Let expression.
         /// </summary>
@@ -37,6 +39,10 @@ namespace Exolutio.Model.OCL.AST
             protected set {
                
             }
+        }
+
+        public override T Accept<T>(IAstVisitor<T> visitor) {
+            return visitor.Visit(this);
         }
     }
 }

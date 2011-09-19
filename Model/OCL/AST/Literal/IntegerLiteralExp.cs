@@ -11,22 +11,18 @@ namespace Exolutio.Model.OCL.AST
     /// </summary>
     public class IntegerLiteralExp : NumericLiteralExp
     {
+        public IntegerLiteralExp(long value,Types.Classifier type):base(type) {
+            Value = value;
+        }
+
         public long Value
         {
             get;
             set;
         }
 
-        public override Types.Classifier Type
-        {
-            get
-            {
-                return new IntegerType();
-            }
-            protected set
-            {
-                throw new InvalidOperationException();
-            }
+        public override T Accept<T>(IAstVisitor<T> visitor) {
+            return visitor.Visit(this);
         }
     }
 }

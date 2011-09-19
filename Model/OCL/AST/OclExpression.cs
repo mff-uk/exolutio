@@ -6,13 +6,17 @@ using Exolutio.Model.OCL.Types;
 
 namespace Exolutio.Model.OCL.AST
 {
-    public class OclExpression:TypedElement
+    public abstract class OclExpression:TypedElement
     {
         public OclExpression(Classifier type)
         {
             Type = type;
         }
 
-        public OclExpression() { }
+        public virtual T Accept<T>(IAstVisitor<T> visitor) {
+            throw new InvalidOperationException();
+        }
+
+     //   public OclExpression() { }
     }
 }

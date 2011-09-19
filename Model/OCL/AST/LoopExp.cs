@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Exolutio.Model.OCL.Types;
 
 namespace Exolutio.Model.OCL.AST
 {
@@ -12,6 +13,12 @@ namespace Exolutio.Model.OCL.AST
     /// </summary>
     public class LoopExp : CallExp
     {
+        public LoopExp(OclExpression source, OclExpression body, List<VariableDeclaration> iterators, Classifier type)
+            : base(source,type) {
+            this.Body = body;
+            this.Iterator = iterators;
+        }
+
         /// <summary>
         /// The OclExpression that is evaluated for each element in the source collection.
         /// </summary>
@@ -25,7 +32,7 @@ namespace Exolutio.Model.OCL.AST
         /// The iterator variables. These variables are, each in its turn, bound to every element value of the
         /// source collection while evaluating the body expression.
         /// </summary>
-        public List<Variable> Iterator
+        public List<VariableDeclaration> Iterator
         {
             get;
             set;

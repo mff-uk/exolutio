@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Exolutio.Model.OCL.Types;
 
 namespace Exolutio.Model.OCL.AST
 {
@@ -14,6 +15,18 @@ namespace Exolutio.Model.OCL.AST
     /// </summary>
     public class IteratorExp : LoopExp
     {
-        
+        public IteratorExp(OclExpression source, OclExpression body, string name, List<VariableDeclaration> iterators, Classifier returnType)
+            : base(source, body, iterators,returnType) {
+                this.IteratorName = name;
+        }
+
+        public string IteratorName {
+            get;
+            protected set;
+        }
+
+        public override T Accept<T>(IAstVisitor<T> visitor) {
+            return visitor.Visit(this);
+        }
     }
 }
