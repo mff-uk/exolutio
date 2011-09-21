@@ -9,7 +9,7 @@ using Exolutio.Controller.Commands.Complex.PSM;
 
 namespace Exolutio.Controller.Commands.Atomic.PIM
 {
-    public class acmdDeleteOCLScript : StackedCommand
+    public class acmdDeleteOCLScript : AtomicCommand
     {
         Guid deletedClassGuid, schemaGuid;
 
