@@ -4,6 +4,7 @@ namespace Exolutio.SupportingClasses
     {
         XML,
         XSD,
+        SCH,
         other
     }
 }

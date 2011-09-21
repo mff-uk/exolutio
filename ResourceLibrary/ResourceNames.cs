@@ -16,6 +16,7 @@ namespace Exolutio.ResourceLibrary
         public const string AlignObjectsTop = "AlignObjectsTop";
         public const string assocclass = "assocclass";
         public const string associate = "associate";
+        public const string bilby = "bilby";
         public const string branch = "branch";
         public const string BringForward = "BringForward";
         public const string BringToFront = "BringToFront";

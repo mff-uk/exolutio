@@ -20,13 +20,19 @@
                     <Label Padding="2">Save to file</Label>
                 </StackPanel>
             </Button>
-            <Button Click="bValidateSchema_Click" Name="bValidateSchema">
+            <Button Click="bValidateSchema_Click" Name="bValidateXMLSchema">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="{StaticResource Validate}" Height="16" Margin="2"></Image>
                     <Label Height="Auto" Padding="2">Validate XML schema</Label>
                 </StackPanel>
             </Button>
-            <Button Click="bValidateAgainstSchema_Click" Name="bValidateAgainstSchema">
+            <Button Click="bValidateSchematronSchema_Click" Name="bValidateSchematronSchema">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="{StaticResource Validate}" Height="16" Margin="2"></Image>
+                    <Label Height="Auto" Padding="2">Validate Schematron schema</Label>
+                </StackPanel>
+            </Button>
+            <Button Click="bValidateAgainstPSMSchema_Click" Name="bValidateAgainstSchema">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="{StaticResource Validate}" Height="16" Margin="2"></Image>
                     <Label Height="Auto" Padding="2">Validate against XML schema</Label>

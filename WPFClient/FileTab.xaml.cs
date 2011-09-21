@@ -19,6 +19,7 @@ using System.Xml.Schema;
 using Exolutio.Dialogs;
 using Exolutio.Model;
 using Exolutio.Model.PSM;
+using Exolutio.Model.PSM.Grammar;
 using Exolutio.Model.PSM.Grammar.XSDTranslation;
 using Exolutio.ResourceLibrary;
 using Exolutio.SupportingClasses;
@@ -76,7 +77,8 @@ namespace Exolutio.WPFClient
 
         private void ShowHideRelevantButtons()
         {
-            bValidateSchema.Visibility = fileView.DisplayedFileType == EDisplayedFileType.XSD ? Visibility.Visible : Visibility.Collapsed;
+            bValidateXMLSchema.Visibility = fileView.DisplayedFileType == EDisplayedFileType.XSD ? Visibility.Visible : Visibility.Collapsed;
+            bValidateSchematronSchema.Visibility = fileView.DisplayedFileType == EDisplayedFileType.SCH ? Visibility.Visible : Visibility.Collapsed;
             bValidateAgainstSchema.Visibility = ValidationSchema != null ? Visibility.Visible : Visibility.Collapsed;
         }
 
@@ -98,6 +100,11 @@ namespace Exolutio.WPFClient
             {
                 defaultExt = "xsd";
                 filter = "XML Schema files (*.xsd)|*.xsd|XML files (*.xml)|*.xml|All files (*.*)|*.*";
+            }
+            else if (fileView.DisplayedFileType == EDisplayedFileType.SCH)
+            {
+                defaultExt = "sch";
+                filter = "Schematron Schema files (*.sch)|*.sch|XML files (*.xml)|*.xml|All files (*.*)|*.*";
             }
             else if (fileView.DisplayedFileType == EDisplayedFileType.XML)
             {
@@ -230,13 +237,17 @@ namespace Exolutio.WPFClient
         private bool isValidAgainstSchema;
         private bool abortValidationAgainstSchema;
 
-        private void bValidateAgainstSchema_Click(object sender, RoutedEventArgs e)
+        private void bValidateAgainstPSMSchema_Click(object sender, RoutedEventArgs e)
         {
             XsdSchemaGenerator g = new XsdSchemaGenerator();
             g.Initialize(ValidationSchema);
             g.GenerateXSDStructure();
             XDocument xDocument = g.GetXsd();
-            
+            ValidateDocumentAgainstSchema(xDocument);
+        }
+
+        private void ValidateDocumentAgainstSchema(XDocument schemaXSD)
+        {
             XmlReader xmlfile = null;
             XmlReader schemaReader = null;
             MemoryStream _msSchemaText = null;
@@ -246,13 +257,19 @@ namespace Exolutio.WPFClient
             {
                 _msSchemaText = new MemoryStream();
                 string tmp = System.IO.Path.GetTempFileName();
-                xDocument.Save(tmp);
+                schemaXSD.Save(tmp);
                 schemaReader = new XmlTextReader(File.OpenRead(tmp));
                 XmlSchema schema = XmlSchema.Read(schemaReader, schemaSettings_ValidationEventHandler);
-                //schema.TargetNamespace = Diagram.Project.Schema.XMLNamespaceOrDefaultNamespace;
-
                 XmlReaderSettings schemaSettings = new XmlReaderSettings();
                 schemaSettings.Schemas.Add(schema);
+                foreach (XmlSchema s in schemaSettings.Schemas.Schemas())
+                {
+                    StringBuilder sb = new StringBuilder();
+                    StringWriter sw = new StringWriter(sb);
+                    s.Write(sw);
+                    sw.Flush();
+                }
+
                 schemaSettings.ValidationType = ValidationType.Schema;
                 schemaSettings.ValidationEventHandler += schemaSettings_ValidationEventHandler;
 
@@ -263,7 +280,9 @@ namespace Exolutio.WPFClient
                 catch (XmlSchemaValidationException ex)
                 {
                     isValidAgainstSchema = false;
-                    ExolutioErrorMsgBox.Show("Invalid schema", string.Format("Validation can not continue - schema is invalid. \r\n\r\n{0}", ex.Message));
+                    ExolutioErrorMsgBox.Show("Invalid schema",
+                                             string.Format("Validation can not continue - schema is invalid. \r\n\r\n{0}",
+                                                           ex.Message));
                     return;
                 }
 
@@ -277,12 +296,14 @@ namespace Exolutio.WPFClient
             catch (XmlSchemaValidationException ex)
             {
                 isValidAgainstSchema = false;
-                ExolutioErrorMsgBox.Show("Invalid document", string.Format("{0} \r\n\r\nValidation can not continue.", ex.Message));
+                ExolutioErrorMsgBox.Show("Invalid document",
+                                         string.Format("{0} \r\n\r\nValidation can not continue.", ex.Message));
             }
             catch (Exception ex)
             {
                 isValidAgainstSchema = false;
-                ExolutioErrorMsgBox.Show("Invalid document", string.Format("{0} \r\n\r\nValidation can not continue.", ex.Message));
+                ExolutioErrorMsgBox.Show("Invalid document",
+                                         string.Format("{0} \r\n\r\nValidation can not continue.", ex.Message));
             }
             finally
             {
@@ -293,7 +314,8 @@ namespace Exolutio.WPFClient
 
             if (isValidAgainstSchema)
             {
-                ExolutioMessageBox.Show("Validation successful", "Document is valid", "Validation against the XML schema passed successfuly. ");
+                ExolutioMessageBox.Show("Validation successful", "Document is valid",
+                                        "Validation against the XML schema passed successfuly. ");
             }
         }
 
@@ -327,6 +349,20 @@ namespace Exolutio.WPFClient
                 b.Click += delegate { filePresenterButton.UpdateFileContentAction(this); };
                 MainToolBar.Items.Add(b);
             }
+        }
+
+        private void bValidateSchematronSchema_Click(object sender, RoutedEventArgs e)
+        {
+            XDocument schematronXSD;
+            using (StringReader sr = new StringReader(Exolutio.Model.PSM.Grammar.Properties.Resources.schematronXSD))
+            {
+                schematronXSD = XDocument.Load(sr);
+            }
+            //XNamespace xsdNS = "http://www.w3.org/2001/XMLSchema";
+            //string tmp = System.IO.Path.GetTempFileName();
+            //System.IO.File.WriteAllText(tmp, Exolutio.Model.PSM.Grammar.Properties.Resources.xmlNamespaceXSD);
+            //schematronXSD.Element(xsdNS + "schema").Element(xsdNS + "import").Attribute("schemaLocation").Value = System.IO.Path.GetFileName(tmp); 
+            ValidateDocumentAgainstSchema(schematronXSD);
         }
     }
 }

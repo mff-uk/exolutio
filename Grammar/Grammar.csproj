@@ -54,7 +54,13 @@
     <Compile Include="NonTerminal.cs" />
     <Compile Include="ProductionRule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="RegularExpression.cs" />
+    <Compile Include="SchematronTranslation\SchematronSchemaGenerator.cs" />
     <Compile Include="SchematronTranslation\XDocumentSchematronExtensions.cs" />
     <Compile Include="Terminal.cs" />
     <Compile Include="XSDTranslation\NamingSupport.cs" />
@@ -70,6 +76,12 @@
       <Project>{AE8E2F66-03CF-44A5-8564-A32906F7F041}</Project>
       <Name>SupportingClasses</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
