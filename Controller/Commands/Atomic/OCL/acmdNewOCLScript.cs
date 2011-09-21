@@ -8,7 +8,7 @@ using Exolutio.Model.OCL;
 
 namespace Exolutio.Controller.Commands.Atomic.PIM
 {
-    public class acmdNewOCLScript : StackedCommand
+    public class acmdNewOCLScript : AtomicCommand
     {
         private Guid schemaGuid;
 
