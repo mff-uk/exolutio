@@ -80,6 +80,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Commands\Edit\guiOpenAttributeTypesDialogCommand.cs" />
+    <Compile Include="Commands\Grammar\guiGenerateSchematronSchemaCommand.cs" />
     <Compile Include="Commands\Grammar\guiGenerateXSDCommand.cs" />
     <Compile Include="Commands\Local\guiSelectNextCommand.cs" />
     <Compile Include="Commands\PIM\guiPIMDeleteGeneralization.cs" />

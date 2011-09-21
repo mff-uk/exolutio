@@ -108,7 +108,7 @@ namespace Exolutio.View
 
         public void Init()
         {
-            if (DisplayedFileType.IsAmong(EDisplayedFileType.XML, EDisplayedFileType.XSD))
+            if (DisplayedFileType.IsAmong(EDisplayedFileType.XML, EDisplayedFileType.XSD, EDisplayedFileType.SCH))
             {
                 tbDocument.SyntaxHighlighting = ICSharpCode.AvalonEdit.Highlighting.HighlightingManager.Instance.GetDefinition("XML");
                 foldingManager = FoldingManager.Install(tbDocument.TextArea);

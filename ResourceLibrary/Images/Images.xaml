@@ -9,6 +9,7 @@
     <ImageSource x:Key="AlignObjectsTop">AlignObjectsTop.png</ImageSource>
     <ImageSource x:Key="assocclass">assocclass.png</ImageSource>
     <ImageSource x:Key="associate">associate.png</ImageSource>
+    <ImageSource x:Key="bilby">bilby.png</ImageSource>
     <ImageSource x:Key="branch">branch.png</ImageSource>
     <ImageSource x:Key="BringForward">BringForward.png</ImageSource>
     <ImageSource x:Key="BringToFront">BringToFront.png</ImageSource>
