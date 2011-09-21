@@ -401,6 +401,8 @@
         </options>
     </meta>
     <projectTree name="eXolutioOutputs.xpr">
+        <folder path="../OclX/"/>
+        <folder path="../SchematronTest/"/>
         <folder path="../XSDTest/"/>
         <folder path="."/>
         <file name="LastSchema.xsd"/>

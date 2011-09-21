@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<purchase purchase-date="vestibulum" amountr="leo">
+  <subcode>libero</subcode>
+  <code>libero</code>
+  <weight>leo</weight>
+  <title>pharetra</title>
+  <unit-price>viverra</unit-price>
+  <subcode>Vestibulum</subcode>
+  <code>leo</code>
+  <weight>tortor</weight>
+  <title>viverra</title>
+  <unit-price>Vivamus</unit-price>
+  <subcode>eleifend</subcode>
+  <code>amet</code>
+  <weight>ante</weight>
+  <title>placerat</title>
+  <unit-price>eleifend</unit-price>
+  <subcode>arcu</subcode>
+  <code>Aenean</code>
+  <weight>leo</weight>
+  <title>quis</title>
+  <unit-price>libero</unit-price>
+  <city>vulputate</city>
+  <zip>Vivamus</zip>
+  <street>pharetra</street>
+  <customer-no>neque</customer-no>
+  <email>arcu</email>
+  <email>Aenean</email>
+  <email>leo</email>
+  <email>pharetra</email>
+  <email>erat</email>
+  <email>Nam</email>
+  <email>euismod</email>
+  <email>bibendum</email>
+  <email>volutpat</email>
+  <email>nec</email>
+</purchase>

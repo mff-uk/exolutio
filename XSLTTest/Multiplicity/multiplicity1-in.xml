@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<purchase-request purchase-date="rutrum">
+  <customer-info>
+    <customer customer-no="Vestibulum">
+      <email>consequat</email>
+      <email>Pellentesque</email>
+    </customer>
+  </customer-info>
+  <assistant  />
+  <item>
+    <product code="est" subcode="tortor">
+      <title>consequat</title>
+      <weight>consectetur</weight>
+      <size>odio</size>
+    </product>
+    <item-info>
+      <amount>id</amount>
+      <unit-price>blandit</unit-price>
+    </item-info>
+  </item>
+  <item>
+    <product code="eleifend" subcode="felis">
+      <title>est</title>
+      <weight>Proin</weight>
+      <size>ullamcorper</size>
+    </product>
+    <item-info>
+      <amount>interdum</amount>
+      <unit-price>leo</unit-price>
+    </item-info>
+  </item>
+  <item>
+    <product code="mattis" subcode="interdum">
+      <title>nisl</title>
+      <weight>Nam</weight>
+      <size>elementum</size>
+    </product>
+    <item-info>
+      <amount>erat</amount>
+      <unit-price>erat</unit-price>
+    </item-info>
+  </item>
+</purchase-request>

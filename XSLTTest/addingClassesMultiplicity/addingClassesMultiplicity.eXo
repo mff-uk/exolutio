@@ -1,0 +1,1103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<eXo:Project xmlns:eXo="http://eXolutio.eu/Project/Serialization/" Version="3.0" UsesVersioning="True" Name="addingClassesMultiplicity">
+  <eXo:Versions Count="2">
+    <eXo:Version ID="b7a9da14-87fc-4a51-8f23-8bb5969ccde1" Label="v1" Number="1" />
+    <eXo:Version ID="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" Label="v2" Number="0" branchedFromVerID="b7a9da14-87fc-4a51-8f23-8bb5969ccde1" branchedFromVer="v1" />
+  </eXo:Versions>
+  <eXo:ProjectVersions Count="2">
+    <eXo:ProjectVersion ID="0d5d4b68-b0b5-43c4-866f-9f2d47a0415c" versionID="b7a9da14-87fc-4a51-8f23-8bb5969ccde1" version="v1">
+      <eXo:AttributeTypes Count="0" />
+      <eXo:PIMSchema ID="99774906-8fc2-4826-aca8-c56e714a824b" Caption="PIMSchema">
+        <eXo:PIMClasses Count="6">
+          <eXo:PIMClass ID="e1fd2d62-e099-4347-939f-98060ccc40ac" Name="Purchase">
+            <eXo:PIMAttributes Count="2">
+              <eXo:PIMAttribute ID="cc063f5b-4be9-45f8-afeb-f646996c8d82" Name="purchase-date" pimClassID="e1fd2d62-e099-4347-939f-98060ccc40ac" />
+              <eXo:PIMAttribute ID="d9749ae0-cb12-491b-8f24-8f5ad0f11187" Name="id" pimClassID="e1fd2d62-e099-4347-939f-98060ccc40ac" />
+            </eXo:PIMAttributes>
+            <eXo:PIMAssociationEnds Count="4">
+              <eXo:PIMAssociationEnd pimAssociationEndID="84b139bb-8816-43a9-bcbb-f3fde7a8f9b0" pimAssociationEnd="PIMAssociationEnd: ** 1..1 C: Purchase A:  " />
+              <eXo:PIMAssociationEnd pimAssociationEndID="cca58ca0-00df-4ea3-a0be-3a0069ada4d4" pimAssociationEnd="PIMAssociationEnd: ** 1..1 C: Purchase A:  " />
+              <eXo:PIMAssociationEnd pimAssociationEndID="9db6e870-9011-4227-99d1-8d1d0710b6b3" pimAssociationEnd="PIMAssociationEnd: ** 1..1 C: Purchase A:  " />
+              <eXo:PIMAssociationEnd pimAssociationEndID="b17e26e2-dc51-4581-b5f4-b563344f89fe" pimAssociationEnd="PIMAssociationEnd: *defaultname* 1..1 C: Purchase A: defaultname " />
+            </eXo:PIMAssociationEnds>
+          </eXo:PIMClass>
+          <eXo:PIMClass ID="0a10051a-2097-4edb-be73-fc763af91664" Name="Customer">
+            <eXo:PIMAttributes Count="2">
+              <eXo:PIMAttribute ID="81affa44-6cdb-4de4-a980-b1ca08a3781f" Name="customer-no" pimClassID="0a10051a-2097-4edb-be73-fc763af91664" />
+              <eXo:PIMAttribute ID="93f0e8bd-dfd2-4bcf-b646-2763ad1b5ba7" Name="email" Lower="0" Upper="*" pimClassID="0a10051a-2097-4edb-be73-fc763af91664" />
+            </eXo:PIMAttributes>
+            <eXo:PIMAssociationEnds Count="1">
+              <eXo:PIMAssociationEnd pimAssociationEndID="c019ca9c-9833-4f1c-b6c8-9d2c0596881d" pimAssociationEnd="PIMAssociationEnd: ** 1..1 C: Customer A:  " />
+            </eXo:PIMAssociationEnds>
+          </eXo:PIMClass>
+          <eXo:PIMClass ID="b20c256f-9403-43da-810c-d651637b42c8" Name="Address">
+            <eXo:PIMAttributes Count="3">
+              <eXo:PIMAttribute ID="eedc3ca2-7cf0-4112-aecf-fc23cf0db500" Name="postcode" pimClassID="b20c256f-9403-43da-810c-d651637b42c8" />
+              <eXo:PIMAttribute ID="4a98d66e-c3b8-47e4-ac40-cb093323eb22" Name="city" pimClassID="b20c256f-9403-43da-810c-d651637b42c8" />
+              <eXo:PIMAttribute ID="921bf6cd-927f-4bfc-9b9c-109771ed2c36" Name="street" pimClassID="b20c256f-9403-43da-810c-d651637b42c8" />
+            </eXo:PIMAttributes>
+            <eXo:PIMAssociationEnds Count="1">
+              <eXo:PIMAssociationEnd pimAssociationEndID="78dd42d2-d1c5-4c4c-b116-189f378c1d2e" pimAssociationEnd="PIMAssociationEnd: ** 1..1 C: Address A:  " />
+            </eXo:PIMAssociationEnds>
+          </eXo:PIMClass>
+          <eXo:PIMClass ID="e68acc8e-ba73-4aba-95bd-1d00e066b9e0" Name="Product">
+            <eXo:PIMAttributes Count="5">
+              <eXo:PIMAttribute ID="c3e75ac6-8f8d-46e1-8ac8-0184c3de20ed" Name="code" pimClassID="e68acc8e-ba73-4aba-95bd-1d00e066b9e0" />
+              <eXo:PIMAttribute ID="0ba0e145-5c6d-4381-b80f-68c5ea7bdd9a" Name="subcode" pimClassID="e68acc8e-ba73-4aba-95bd-1d00e066b9e0" />
+              <eXo:PIMAttribute ID="47f35474-0a8c-4e79-a0d5-f9e898b315e4" Name="title" pimClassID="e68acc8e-ba73-4aba-95bd-1d00e066b9e0" />
+              <eXo:PIMAttribute ID="53743909-67e8-4cba-afd7-78cf3a3f6065" Name="weight" pimClassID="e68acc8e-ba73-4aba-95bd-1d00e066b9e0" />
+              <eXo:PIMAttribute ID="1bf6d519-a469-4ae5-883a-2627282c2c2d" Name="size" pimClassID="e68acc8e-ba73-4aba-95bd-1d00e066b9e0" />
+            </eXo:PIMAttributes>
+            <eXo:PIMAssociationEnds Count="1">
+              <eXo:PIMAssociationEnd pimAssociationEndID="8f309a2c-bcb2-4090-8f7d-b5b283efeef5" pimAssociationEnd="PIMAssociationEnd: ** 1..1 C: Product A:  " />
+            </eXo:PIMAssociationEnds>
+          </eXo:PIMClass>
+          <eXo:PIMClass ID="23c68830-400e-4178-b051-44a60a165724" Name="Item">
+            <eXo:PIMAttributes Count="2">
+              <eXo:PIMAttribute ID="0abe91e2-3e01-4b64-8f42-0b62359d23c4" Name="amount" pimClassID="23c68830-400e-4178-b051-44a60a165724" />
+              <eXo:PIMAttribute ID="27647549-a93d-469e-802e-70b2192d3f4d" Name="unit-price" pimClassID="23c68830-400e-4178-b051-44a60a165724" />
+            </eXo:PIMAttributes>
+            <eXo:PIMAssociationEnds Count="2">
+              <eXo:PIMAssociationEnd pimAssociationEndID="3c8d0c86-cc29-49fd-8a9b-6d9a473baade" pimAssociationEnd="PIMAssociationEnd: ** 1..1 C: Item A:  " />
+              <eXo:PIMAssociationEnd pimAssociationEndID="1d5cdd96-5a0b-46d1-8991-ac75837781c6" pimAssociationEnd="PIMAssociationEnd: ** 1..1 C: Item A:  " />
+            </eXo:PIMAssociationEnds>
+          </eXo:PIMClass>
+          <eXo:PIMClass ID="2ff7488a-cbdf-4269-ab72-0de000a1d91b" Name="SalesAssistant">
+            <eXo:PIMAttributes Count="1">
+              <eXo:PIMAttribute ID="a4d1479f-b491-4047-ae31-60e9813adea4" Name="emp-no" pimClassID="2ff7488a-cbdf-4269-ab72-0de000a1d91b" />
+            </eXo:PIMAttributes>
+            <eXo:PIMAssociationEnds Count="1">
+              <eXo:PIMAssociationEnd pimAssociationEndID="9a77d58b-73ed-4d24-9300-741f58836cec" pimAssociationEnd="PIMAssociationEnd: *defaultname* 0..1 C: SalesAssistant A: defaultname " />
+            </eXo:PIMAssociationEnds>
+          </eXo:PIMClass>
+        </eXo:PIMClasses>
+        <eXo:PIMAssociations Count="5">
+          <eXo:PIMAssociation ID="e735e3f2-e774-45c1-b560-4fe7e5e7d43c" Name="">
+            <eXo:PIMAssociationEnds Count="2">
+              <eXo:PIMAssociationEnd ID="84b139bb-8816-43a9-bcbb-f3fde7a8f9b0" Name="" refPIMClassID="e1fd2d62-e099-4347-939f-98060ccc40ac" refPIMClass="PIMClass: *Purchase*" refPIMAssociationID="e735e3f2-e774-45c1-b560-4fe7e5e7d43c" refPIMAssociation="PIMAssociation **: PIMClass: *Purchase*, PIMClass: *Customer*" />
+              <eXo:PIMAssociationEnd ID="c019ca9c-9833-4f1c-b6c8-9d2c0596881d" Name="" refPIMClassID="0a10051a-2097-4edb-be73-fc763af91664" refPIMClass="PIMClass: *Customer*" refPIMAssociationID="e735e3f2-e774-45c1-b560-4fe7e5e7d43c" refPIMAssociation="PIMAssociation **: PIMClass: *Purchase*, PIMClass: *Customer*" />
+            </eXo:PIMAssociationEnds>
+          </eXo:PIMAssociation>
+          <eXo:PIMAssociation ID="b1d8669f-3f76-40fc-89e2-052fd1475ee1" Name="">
+            <eXo:PIMAssociationEnds Count="2">
+              <eXo:PIMAssociationEnd ID="cca58ca0-00df-4ea3-a0be-3a0069ada4d4" Name="" refPIMClassID="e1fd2d62-e099-4347-939f-98060ccc40ac" refPIMClass="PIMClass: *Purchase*" refPIMAssociationID="b1d8669f-3f76-40fc-89e2-052fd1475ee1" refPIMAssociation="PIMAssociation **: PIMClass: *Purchase*, PIMClass: *Address*" />
+              <eXo:PIMAssociationEnd ID="78dd42d2-d1c5-4c4c-b116-189f378c1d2e" Name="" refPIMClassID="b20c256f-9403-43da-810c-d651637b42c8" refPIMClass="PIMClass: *Address*" refPIMAssociationID="b1d8669f-3f76-40fc-89e2-052fd1475ee1" refPIMAssociation="PIMAssociation **: PIMClass: *Purchase*, PIMClass: *Address*" />
+            </eXo:PIMAssociationEnds>
+          </eXo:PIMAssociation>
+          <eXo:PIMAssociation ID="650fc179-e8aa-4cee-b0d3-58761e8d533e" Name="">
+            <eXo:PIMAssociationEnds Count="2">
+              <eXo:PIMAssociationEnd ID="9db6e870-9011-4227-99d1-8d1d0710b6b3" Name="" refPIMClassID="e1fd2d62-e099-4347-939f-98060ccc40ac" refPIMClass="PIMClass: *Purchase*" refPIMAssociationID="650fc179-e8aa-4cee-b0d3-58761e8d533e" refPIMAssociation="PIMAssociation **: PIMClass: *Purchase*, PIMClass: *Item*" />
+              <eXo:PIMAssociationEnd ID="3c8d0c86-cc29-49fd-8a9b-6d9a473baade" Name="" refPIMClassID="23c68830-400e-4178-b051-44a60a165724" refPIMClass="PIMClass: *Item*" refPIMAssociationID="650fc179-e8aa-4cee-b0d3-58761e8d533e" refPIMAssociation="PIMAssociation **: PIMClass: *Purchase*, PIMClass: *Item*" />
+            </eXo:PIMAssociationEnds>
+          </eXo:PIMAssociation>
+          <eXo:PIMAssociation ID="282b21bc-510d-435e-baf9-a00c71828806" Name="">
+            <eXo:PIMAssociationEnds Count="2">
+              <eXo:PIMAssociationEnd ID="8f309a2c-bcb2-4090-8f7d-b5b283efeef5" Name="" refPIMClassID="e68acc8e-ba73-4aba-95bd-1d00e066b9e0" refPIMClass="PIMClass: *Product*" refPIMAssociationID="282b21bc-510d-435e-baf9-a00c71828806" refPIMAssociation="PIMAssociation **: PIMClass: *Product*, PIMClass: *Item*" />
+              <eXo:PIMAssociationEnd ID="1d5cdd96-5a0b-46d1-8991-ac75837781c6" Name="" refPIMClassID="23c68830-400e-4178-b051-44a60a165724" refPIMClass="PIMClass: *Item*" refPIMAssociationID="282b21bc-510d-435e-baf9-a00c71828806" refPIMAssociation="PIMAssociation **: PIMClass: *Product*, PIMClass: *Item*" />
+            </eXo:PIMAssociationEnds>
+          </eXo:PIMAssociation>
+          <eXo:PIMAssociation ID="ed2f865d-430b-4030-b0e2-7867fd592e0f" Name="defaultname">
+            <eXo:PIMAssociationEnds Count="2">
+              <eXo:PIMAssociationEnd ID="9a77d58b-73ed-4d24-9300-741f58836cec" Name="defaultname" refPIMClassID="2ff7488a-cbdf-4269-ab72-0de000a1d91b" refPIMClass="PIMClass: *SalesAssistant*" refPIMAssociationID="ed2f865d-430b-4030-b0e2-7867fd592e0f" refPIMAssociation="PIMAssociation *defaultname*: PIMClass: *SalesAssistant*, PIMClass: *Purchase*" Lower="0" />
+              <eXo:PIMAssociationEnd ID="b17e26e2-dc51-4581-b5f4-b563344f89fe" Name="defaultname" refPIMClassID="e1fd2d62-e099-4347-939f-98060ccc40ac" refPIMClass="PIMClass: *Purchase*" refPIMAssociationID="ed2f865d-430b-4030-b0e2-7867fd592e0f" refPIMAssociation="PIMAssociation *defaultname*: PIMClass: *SalesAssistant*, PIMClass: *Purchase*" />
+            </eXo:PIMAssociationEnds>
+          </eXo:PIMAssociation>
+        </eXo:PIMAssociations>
+      </eXo:PIMSchema>
+      <eXo:PSMSchemas Count="1">
+        <eXo:PSMSchema ID="838171de-5fec-4b21-adfe-920eed86db33" Caption="PSMSchema 1">
+          <eXo:PSMSchemaClass ID="12b46b5a-909d-4114-bff6-321ab93dcce7" Name="PurchaseSchema">
+            <eXo:ChildPSMAssociations Count="1">
+              <eXo:ChildPSMAssociation childPSMAssociationID="1a55ce6c-9a35-42bc-b8d6-cc144b077229" childPSMAssociation="PSMAssociation from PSMSchemaClass: PurchaseSchema to PSMClass: *Purchase*" />
+            </eXo:ChildPSMAssociations>
+          </eXo:PSMSchemaClass>
+          <eXo:Roots Count="1">
+            <eXo:Root rootID="12b46b5a-909d-4114-bff6-321ab93dcce7" root="PSMSchemaClass: PurchaseSchema" />
+          </eXo:Roots>
+          <eXo:PSMClasses Count="2">
+            <eXo:PSMClass ID="98924b8c-0b8d-41e0-ae70-81ae6e6ebb82" Name="Purchase" InterpretationID="e1fd2d62-e099-4347-939f-98060ccc40ac" Interpretation="PIMClass: *Purchase*" parentAssociationID="1a55ce6c-9a35-42bc-b8d6-cc144b077229" parentAssociation="PSMAssociation from PSMSchemaClass: PurchaseSchema to PSMClass: *Purchase*">
+              <eXo:ChildPSMAssociations Count="1">
+                <eXo:ChildPSMAssociation childPSMAssociationID="17e172de-53c4-403e-b5e6-5b189b50cf59" childPSMAssociation="PSMAssociation from PSMClass: *Purchase* to PSMClass: *Item*" />
+              </eXo:ChildPSMAssociations>
+              <eXo:PSMAttributes Count="2">
+                <eXo:PSMAttribute ID="56e7e939-8b92-418b-b171-ccdd3ab4fc48" Name="purchase-date" InterpretationID="cc063f5b-4be9-45f8-afeb-f646996c8d82" Interpretation="PIMAttribute: *Purchase.purchase-date* 1..1" Element="False" psmClassID="98924b8c-0b8d-41e0-ae70-81ae6e6ebb82" />
+                <eXo:PSMAttribute ID="99229356-09a2-4659-b480-33ee6f847e51" Name="id" InterpretationID="d9749ae0-cb12-491b-8f24-8f5ad0f11187" Interpretation="PIMAttribute: *Purchase.id* 1..1" Element="False" psmClassID="98924b8c-0b8d-41e0-ae70-81ae6e6ebb82" />
+              </eXo:PSMAttributes>
+            </eXo:PSMClass>
+            <eXo:PSMClass ID="ab901f44-5d55-480e-8d74-732421594b1c" Name="Item" InterpretationID="23c68830-400e-4178-b051-44a60a165724" Interpretation="PIMClass: *Item*" parentAssociationID="17e172de-53c4-403e-b5e6-5b189b50cf59" parentAssociation="PSMAssociation from PSMClass: *Purchase* to PSMClass: *Item*">
+              <eXo:ChildPSMAssociations Count="0" />
+              <eXo:PSMAttributes Count="1">
+                <eXo:PSMAttribute ID="c6e10501-cf60-41b7-8fb0-de3d72e501a5" Name="amount" InterpretationID="0abe91e2-3e01-4b64-8f42-0b62359d23c4" Interpretation="PIMAttribute: *Item.amount* 1..1" Element="True" psmClassID="ab901f44-5d55-480e-8d74-732421594b1c" />
+              </eXo:PSMAttributes>
+            </eXo:PSMClass>
+          </eXo:PSMClasses>
+          <eXo:PSMAssociations Count="2">
+            <eXo:PSMAssociation ID="1a55ce6c-9a35-42bc-b8d6-cc144b077229" Name="purchase-request">
+              <eXo:Parent NodeType="PSMSchemaClass" parentID="12b46b5a-909d-4114-bff6-321ab93dcce7" parent="PSMSchemaClass: PurchaseSchema" />
+              <eXo:Child NodeType="PSMClass" childID="98924b8c-0b8d-41e0-ae70-81ae6e6ebb82" child="PSMClass: *Purchase*" />
+            </eXo:PSMAssociation>
+            <eXo:PSMAssociation ID="17e172de-53c4-403e-b5e6-5b189b50cf59" Name="" InterpretationID="650fc179-e8aa-4cee-b0d3-58761e8d533e" Interpretation="PIMAssociation **: PIMClass: *Purchase*, PIMClass: *Item*" Lower="0" Upper="*">
+              <eXo:Parent NodeType="PSMClass" parentID="98924b8c-0b8d-41e0-ae70-81ae6e6ebb82" parent="PSMClass: *Purchase*" />
+              <eXo:Child NodeType="PSMClass" childID="ab901f44-5d55-480e-8d74-732421594b1c" child="PSMClass: *Item*" />
+            </eXo:PSMAssociation>
+          </eXo:PSMAssociations>
+          <eXo:PSMContentModels Count="0" />
+        </eXo:PSMSchema>
+      </eXo:PSMSchemas>
+      <eXo:PIMDiagrams Count="1">
+        <eXo:PIMDiagram ID="7ff38056-00d2-45ad-8438-39e24f2dbd9e" schemaID="99774906-8fc2-4826-aca8-c56e714a824b" schema="PIMSchema" Caption="PIMSchema">
+          <eXo:Components>
+            <eXo:Component Type="PIMClass" componentID="e1fd2d62-e099-4347-939f-98060ccc40ac" component="PIMClass: *Purchase*">
+              <eXo:ViewHelper X="124" Y="212" Width="NaN" Height="NaN" />
+            </eXo:Component>
+            <eXo:Component Type="PIMClass" componentID="0a10051a-2097-4edb-be73-fc763af91664" component="PIMClass: *Customer*">
+              <eXo:ViewHelper X="233" Y="55" Width="NaN" Height="NaN" />
+            </eXo:Component>
+            <eXo:Component Type="PIMClass" componentID="b20c256f-9403-43da-810c-d651637b42c8" component="PIMClass: *Address*">
+              <eXo:ViewHelper X="53" Y="57" Width="NaN" Height="NaN" />
+            </eXo:Component>
+            <eXo:Component Type="PIMClass" componentID="e68acc8e-ba73-4aba-95bd-1d00e066b9e0" component="PIMClass: *Product*">
+              <eXo:ViewHelper X="423" Y="75" Width="NaN" Height="NaN" />
+            </eXo:Component>
+            <eXo:Component Type="PIMClass" componentID="23c68830-400e-4178-b051-44a60a165724" component="PIMClass: *Item*">
+              <eXo:ViewHelper X="299" Y="267" Width="NaN" Height="NaN" />
+            </eXo:Component>
+            <eXo:Component Type="PIMAssociation" componentID="e735e3f2-e774-45c1-b560-4fe7e5e7d43c" component="PIMAssociation **: PIMClass: *Purchase*, PIMClass: *Customer*">
+              <eXo:ViewHelper>
+                <eXo:UseDiamond>False</eXo:UseDiamond>
+                <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                  <eXo:LabelVisible>True</eXo:LabelVisible>
+                </eXo:MainLabelViewHelper>
+                <eXo:AssociationEndsViewHelpers Count="2">
+                  <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="84b139bb-8816-43a9-bcbb-f3fde7a8f9b0" AssociationEnd="PIMAssociationEnd: ** 1..1 C: Purchase A:  ">
+                    <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
+                      <eXo:LabelVisible>True</eXo:LabelVisible>
+                    </eXo:CardinalityLabelViewHelper>
+                    <eXo:RoleLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                      <eXo:LabelVisible>True</eXo:LabelVisible>
+                    </eXo:RoleLabelViewHelper>
+                    <eXo:Points>
+                      <eXo:Point X="64" Y="0" />
+                      <eXo:Point X="22" Y="59" />
+                    </eXo:Points>
+                  </eXo:AssociationEndViewHelper>
+                  <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="c019ca9c-9833-4f1c-b6c8-9d2c0596881d" AssociationEnd="PIMAssociationEnd: ** 1..1 C: Customer A:  ">
+                    <eXo:CardinalityLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                      <eXo:LabelVisible>True</eXo:LabelVisible>
+                    </eXo:CardinalityLabelViewHelper>
+                    <eXo:RoleLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                      <eXo:LabelVisible>True</eXo:LabelVisible>
+                    </eXo:RoleLabelViewHelper>
+                    <eXo:Points />
+                  </eXo:AssociationEndViewHelper>
+                </eXo:AssociationEndsViewHelpers>
+              </eXo:ViewHelper>
+            </eXo:Component>
+            <eXo:Component Type="PIMAssociation" componentID="b1d8669f-3f76-40fc-89e2-052fd1475ee1" component="PIMAssociation **: PIMClass: *Purchase*, PIMClass: *Address*">
+              <eXo:ViewHelper>
+                <eXo:UseDiamond>False</eXo:UseDiamond>
+                <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                  <eXo:LabelVisible>True</eXo:LabelVisible>
+                </eXo:MainLabelViewHelper>
+                <eXo:AssociationEndsViewHelpers Count="2">
+                  <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="cca58ca0-00df-4ea3-a0be-3a0069ada4d4" AssociationEnd="PIMAssociationEnd: ** 1..1 C: Purchase A:  ">
+                    <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
+                      <eXo:LabelVisible>True</eXo:LabelVisible>
+                    </eXo:CardinalityLabelViewHelper>
+                    <eXo:RoleLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                      <eXo:LabelVisible>True</eXo:LabelVisible>
+                    </eXo:RoleLabelViewHelper>
+                    <eXo:Points>
+                      <eXo:Point X="28" Y="0" />
+                      <eXo:Point X="57" Y="75" />
+                    </eXo:Points>
+                  </eXo:AssociationEndViewHelper>
+                  <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="78dd42d2-d1c5-4c4c-b116-189f378c1d2e" AssociationEnd="PIMAssociationEnd: ** 1..1 C: Address A:  ">
+                    <eXo:CardinalityLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                      <eXo:LabelVisible>True</eXo:LabelVisible>
+                    </eXo:CardinalityLabelViewHelper>
+                    <eXo:RoleLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                      <eXo:LabelVisible>True</eXo:LabelVisible>
+                    </eXo:RoleLabelViewHelper>
+                    <eXo:Points />
+                  </eXo:AssociationEndViewHelper>
+                </eXo:AssociationEndsViewHelpers>
+              </eXo:ViewHelper>
+            </eXo:Component>
+            <eXo:Component Type="PIMAssociation" componentID="650fc179-e8aa-4cee-b0d3-58761e8d533e" component="PIMAssociation **: PIMClass: *Purchase*, PIMClass: *Item*">
+              <eXo:ViewHelper>
+                <eXo:UseDiamond>False</eXo:UseDiamond>
+                <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                  <eXo:LabelVisible>True</eXo:LabelVisible>
+                </eXo:MainLabelViewHelper>
+                <eXo:AssociationEndsViewHelpers Count="2">
+                  <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="9db6e870-9011-4227-99d1-8d1d0710b6b3" AssociationEnd="PIMAssociationEnd: ** 1..1 C: Purchase A:  ">
+                    <eXo:CardinalityLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                      <eXo:LabelVisible>True</eXo:LabelVisible>
+                    </eXo:CardinalityLabelViewHelper>
+                    <eXo:RoleLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                      <eXo:LabelVisible>True</eXo:LabelVisible>
+                    </eXo:RoleLabelViewHelper>
+                    <eXo:Points>
+                      <eXo:Point X="89" Y="44" />
+                      <eXo:Point X="0" Y="18" />
+                    </eXo:Points>
+                  </eXo:AssociationEndViewHelper>
+                  <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="3c8d0c86-cc29-49fd-8a9b-6d9a473baade" AssociationEnd="PIMAssociationEnd: ** 1..1 C: Item A:  ">
+                    <eXo:CardinalityLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                      <eXo:LabelVisible>True</eXo:LabelVisible>
+                    </eXo:CardinalityLabelViewHelper>
+                    <eXo:RoleLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                      <eXo:LabelVisible>True</eXo:LabelVisible>
+                    </eXo:RoleLabelViewHelper>
+                    <eXo:Points />
+                  </eXo:AssociationEndViewHelper>
+                </eXo:AssociationEndsViewHelpers>
+              </eXo:ViewHelper>
+            </eXo:Component>
+            <eXo:Component Type="PIMAssociation" componentID="282b21bc-510d-435e-baf9-a00c71828806" component="PIMAssociation **: PIMClass: *Product*, PIMClass: *Item*">
+              <eXo:ViewHelper>
+                <eXo:UseDiamond>False</eXo:UseDiamond>
+                <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                  <eXo:LabelVisible>True</eXo:LabelVisible>
+                </eXo:MainLabelViewHelper>
+                <eXo:AssociationEndsViewHelpers Count="2">
+                  <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="8f309a2c-bcb2-4090-8f7d-b5b283efeef5" AssociationEnd="PIMAssociationEnd: ** 1..1 C: Product A:  ">
+                    <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
+                      <eXo:LabelVisible>True</eXo:LabelVisible>
+                    </eXo:CardinalityLabelViewHelper>
+                    <eXo:RoleLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                      <eXo:LabelVisible>True</eXo:LabelVisible>
+                    </eXo:RoleLabelViewHelper>
+                    <eXo:Points>
+                      <eXo:Point X="0" Y="102" />
+                      <eXo:Point X="55" Y="0" />
+                    </eXo:Points>
+                  </eXo:AssociationEndViewHelper>
+                  <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="1d5cdd96-5a0b-46d1-8991-ac75837781c6" AssociationEnd="PIMAssociationEnd: ** 1..1 C: Item A:  ">
+                    <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
+                      <eXo:LabelVisible>True</eXo:LabelVisible>
+                    </eXo:CardinalityLabelViewHelper>
+                    <eXo:RoleLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                      <eXo:LabelVisible>True</eXo:LabelVisible>
+                    </eXo:RoleLabelViewHelper>
+                    <eXo:Points />
+                  </eXo:AssociationEndViewHelper>
+                </eXo:AssociationEndsViewHelpers>
+              </eXo:ViewHelper>
+            </eXo:Component>
+            <eXo:Component Type="PIMClass" componentID="2ff7488a-cbdf-4269-ab72-0de000a1d91b" component="PIMClass: *SalesAssistant*">
+              <eXo:ViewHelper X="103" Y="344" Width="NaN" Height="NaN" />
+            </eXo:Component>
+            <eXo:Component Type="PIMAssociation" componentID="ed2f865d-430b-4030-b0e2-7867fd592e0f" component="PIMAssociation *defaultname*: PIMClass: *SalesAssistant*, PIMClass: *Purchase*">
+              <eXo:ViewHelper>
+                <eXo:UseDiamond>False</eXo:UseDiamond>
+                <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                  <eXo:LabelVisible>True</eXo:LabelVisible>
+                </eXo:MainLabelViewHelper>
+                <eXo:AssociationEndsViewHelpers Count="2">
+                  <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="9a77d58b-73ed-4d24-9300-741f58836cec" AssociationEnd="PIMAssociationEnd: *defaultname* 0..1 C: SalesAssistant A: defaultname ">
+                    <eXo:CardinalityLabelViewHelper X="-40" Y="-20" Width="NaN" Height="NaN">
+                      <eXo:LabelVisible>True</eXo:LabelVisible>
+                    </eXo:CardinalityLabelViewHelper>
+                    <eXo:RoleLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                      <eXo:LabelVisible>True</eXo:LabelVisible>
+                    </eXo:RoleLabelViewHelper>
+                    <eXo:Points>
+                      <eXo:Point X="59" Y="0" />
+                      <eXo:Point X="42" Y="59" />
+                    </eXo:Points>
+                  </eXo:AssociationEndViewHelper>
+                  <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="b17e26e2-dc51-4581-b5f4-b563344f89fe" AssociationEnd="PIMAssociationEnd: *defaultname* 1..1 C: Purchase A: defaultname ">
+                    <eXo:CardinalityLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                      <eXo:LabelVisible>True</eXo:LabelVisible>
+                    </eXo:CardinalityLabelViewHelper>
+                    <eXo:RoleLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                      <eXo:LabelVisible>True</eXo:LabelVisible>
+                    </eXo:RoleLabelViewHelper>
+                    <eXo:Points />
+                  </eXo:AssociationEndViewHelper>
+                </eXo:AssociationEndsViewHelpers>
+              </eXo:ViewHelper>
+            </eXo:Component>
+          </eXo:Components>
+        </eXo:PIMDiagram>
+      </eXo:PIMDiagrams>
+      <eXo:PSMDiagrams Count="1">
+        <eXo:PSMDiagram ID="1251c9c8-ae6d-4418-aba3-ae3c26d7ea71" schemaID="838171de-5fec-4b21-adfe-920eed86db33" schema="PSMSchema 1" Caption="PSMSchema 1">
+          <eXo:Components>
+            <eXo:Component Type="PSMSchemaClass" componentID="12b46b5a-909d-4114-bff6-321ab93dcce7" component="PSMSchemaClass: PurchaseSchema">
+              <eXo:ViewHelper />
+            </eXo:Component>
+            <eXo:Component Type="PSMClass" componentID="98924b8c-0b8d-41e0-ae70-81ae6e6ebb82" component="PSMClass: *Purchase*">
+              <eXo:ViewHelper />
+            </eXo:Component>
+            <eXo:Component Type="PSMAssociation" componentID="1a55ce6c-9a35-42bc-b8d6-cc144b077229" component="PSMAssociation from PSMSchemaClass: PurchaseSchema to PSMClass: *Purchase*">
+              <eXo:ViewHelper>
+                <eXo:MainLabelViewHelper X="0" Y="-2" Width="NaN" Height="NaN">
+                  <eXo:LabelVisible>True</eXo:LabelVisible>
+                </eXo:MainLabelViewHelper>
+                <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
+                  <eXo:LabelVisible>True</eXo:LabelVisible>
+                </eXo:CardinalityLabelViewHelper>
+              </eXo:ViewHelper>
+            </eXo:Component>
+            <eXo:Component Type="PSMClass" componentID="ab901f44-5d55-480e-8d74-732421594b1c" component="PSMClass: *Item*">
+              <eXo:ViewHelper />
+            </eXo:Component>
+            <eXo:Component Type="PSMAssociation" componentID="17e172de-53c4-403e-b5e6-5b189b50cf59" component="PSMAssociation from PSMClass: *Purchase* to PSMClass: *Item*">
+              <eXo:ViewHelper>
+                <eXo:MainLabelViewHelper X="-10" Y="-1" Width="NaN" Height="NaN">
+                  <eXo:LabelVisible>True</eXo:LabelVisible>
+                </eXo:MainLabelViewHelper>
+                <eXo:CardinalityLabelViewHelper X="-39" Y="-22" Width="NaN" Height="NaN">
+                  <eXo:LabelVisible>True</eXo:LabelVisible>
+                </eXo:CardinalityLabelViewHelper>
+              </eXo:ViewHelper>
+            </eXo:Component>
+          </eXo:Components>
+        </eXo:PSMDiagram>
+      </eXo:PSMDiagrams>
+    </eXo:ProjectVersion>
+    <eXo:ProjectVersion ID="770c8645-1192-4ae0-8b87-bb2771ec0525" versionID="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" version="v2">
+      <eXo:AttributeTypes Count="0" />
+      <eXo:PIMSchema ID="7602d5fd-8e67-456f-9a05-ab73e5c4a40e" Caption="PIMSchema">
+        <eXo:PIMClasses Count="6">
+          <eXo:PIMClass ID="e1074500-033b-4bf3-afb7-362d42931aac" Name="Purchase">
+            <eXo:PIMAttributes Count="2">
+              <eXo:PIMAttribute ID="7d525c10-9ad8-47f3-ba94-09ea4b35d10d" Name="purchase-date" pimClassID="e1074500-033b-4bf3-afb7-362d42931aac" />
+              <eXo:PIMAttribute ID="1d44816a-c48f-4659-9924-d15eb5c466d8" Name="id" pimClassID="e1074500-033b-4bf3-afb7-362d42931aac" />
+            </eXo:PIMAttributes>
+            <eXo:PIMAssociationEnds Count="4">
+              <eXo:PIMAssociationEnd pimAssociationEndID="c978b918-641e-415a-b353-f5fe186ea122" pimAssociationEnd="PIMAssociationEnd: ** 1..1 C: Purchase A:  " />
+              <eXo:PIMAssociationEnd pimAssociationEndID="9097b9bb-c0b9-4ba5-8a58-93eaaeeaa29c" pimAssociationEnd="PIMAssociationEnd: ** 1..1 C: Purchase A:  " />
+              <eXo:PIMAssociationEnd pimAssociationEndID="0e150369-bae5-4736-8869-087228cc8ec9" pimAssociationEnd="PIMAssociationEnd: ** 1..1 C: Purchase A:  " />
+              <eXo:PIMAssociationEnd pimAssociationEndID="1c4636cf-68c9-4e2b-9734-6b2306d5dab5" pimAssociationEnd="PIMAssociationEnd: *defaultname* 1..1 C: Purchase A: defaultname " />
+            </eXo:PIMAssociationEnds>
+          </eXo:PIMClass>
+          <eXo:PIMClass ID="ece43340-4c28-4704-880e-cd717c81f50d" Name="Customer">
+            <eXo:PIMAttributes Count="2">
+              <eXo:PIMAttribute ID="496f9cf4-cfc8-463c-bd3d-84fc4f200259" Name="customer-no" pimClassID="ece43340-4c28-4704-880e-cd717c81f50d" />
+              <eXo:PIMAttribute ID="d329ebbb-8294-4c9a-9094-5a94821e1fe2" Name="email" Lower="0" Upper="*" pimClassID="ece43340-4c28-4704-880e-cd717c81f50d" />
+            </eXo:PIMAttributes>
+            <eXo:PIMAssociationEnds Count="1">
+              <eXo:PIMAssociationEnd pimAssociationEndID="c5246fd6-cb5f-417e-9a8d-6dc368a4e9df" pimAssociationEnd="PIMAssociationEnd: ** 1..1 C: Customer A:  " />
+            </eXo:PIMAssociationEnds>
+          </eXo:PIMClass>
+          <eXo:PIMClass ID="5be67fd2-0138-42cf-89ce-b5987f7fc7a4" Name="Address">
+            <eXo:PIMAttributes Count="3">
+              <eXo:PIMAttribute ID="84217dfb-1e6a-4736-85f0-53f8830bfe08" Name="postcode" pimClassID="5be67fd2-0138-42cf-89ce-b5987f7fc7a4" />
+              <eXo:PIMAttribute ID="b69d4534-3d01-414c-9270-f90c5e54396b" Name="city" pimClassID="5be67fd2-0138-42cf-89ce-b5987f7fc7a4" />
+              <eXo:PIMAttribute ID="cadecfb3-4e58-4259-b504-cd191c86d76e" Name="street" pimClassID="5be67fd2-0138-42cf-89ce-b5987f7fc7a4" />
+            </eXo:PIMAttributes>
+            <eXo:PIMAssociationEnds Count="1">
+              <eXo:PIMAssociationEnd pimAssociationEndID="aa8df50a-ad6a-4d97-be78-f4efbcece48d" pimAssociationEnd="PIMAssociationEnd: ** 1..1 C: Address A:  " />
+            </eXo:PIMAssociationEnds>
+          </eXo:PIMClass>
+          <eXo:PIMClass ID="a0819f15-317c-40a0-8e0c-ba99056114e1" Name="Product">
+            <eXo:PIMAttributes Count="5">
+              <eXo:PIMAttribute ID="696c8816-84cf-4752-b71b-df2458aba88f" Name="code" pimClassID="a0819f15-317c-40a0-8e0c-ba99056114e1" />
+              <eXo:PIMAttribute ID="b7b5b806-26b9-461c-a7d5-41f8caaddbb2" Name="subcode" pimClassID="a0819f15-317c-40a0-8e0c-ba99056114e1" />
+              <eXo:PIMAttribute ID="826e2220-d363-4304-9d7d-61915dba7c22" Name="title" pimClassID="a0819f15-317c-40a0-8e0c-ba99056114e1" />
+              <eXo:PIMAttribute ID="cb8c3f0e-5097-4215-8604-6898cc413616" Name="weight" pimClassID="a0819f15-317c-40a0-8e0c-ba99056114e1" />
+              <eXo:PIMAttribute ID="e8a17636-53ee-4306-9e98-25cdd3a731bb" Name="size" pimClassID="a0819f15-317c-40a0-8e0c-ba99056114e1" />
+            </eXo:PIMAttributes>
+            <eXo:PIMAssociationEnds Count="1">
+              <eXo:PIMAssociationEnd pimAssociationEndID="ecf2c268-a045-4f56-8ecb-62cf62e630ba" pimAssociationEnd="PIMAssociationEnd: ** 1..1 C: Product A:  " />
+            </eXo:PIMAssociationEnds>
+          </eXo:PIMClass>
+          <eXo:PIMClass ID="e6d1fd09-99df-4045-bd8b-0cf624050282" Name="Item">
+            <eXo:PIMAttributes Count="2">
+              <eXo:PIMAttribute ID="120733fd-b7d3-45f6-99a4-01200f0b793e" Name="amount" pimClassID="e6d1fd09-99df-4045-bd8b-0cf624050282" />
+              <eXo:PIMAttribute ID="8beeb010-3e08-43e2-a983-b65f7c1e072e" Name="unit-price" pimClassID="e6d1fd09-99df-4045-bd8b-0cf624050282" />
+            </eXo:PIMAttributes>
+            <eXo:PIMAssociationEnds Count="2">
+              <eXo:PIMAssociationEnd pimAssociationEndID="f748c31f-3e60-4d0e-91c6-0d6eda62d1ec" pimAssociationEnd="PIMAssociationEnd: ** 1..1 C: Item A:  " />
+              <eXo:PIMAssociationEnd pimAssociationEndID="051aa0fb-a664-4c99-8cba-ba1874a16285" pimAssociationEnd="PIMAssociationEnd: ** 1..1 C: Item A:  " />
+            </eXo:PIMAssociationEnds>
+          </eXo:PIMClass>
+          <eXo:PIMClass ID="f47b08d9-9239-43eb-a9c8-a130ba181583" Name="SalesAssistant">
+            <eXo:PIMAttributes Count="1">
+              <eXo:PIMAttribute ID="097d960d-dec2-4ef5-b5bb-585905e9521e" Name="emp-no" pimClassID="f47b08d9-9239-43eb-a9c8-a130ba181583" />
+            </eXo:PIMAttributes>
+            <eXo:PIMAssociationEnds Count="1">
+              <eXo:PIMAssociationEnd pimAssociationEndID="b9f98b86-7380-46a9-b1fd-ff2567e439fb" pimAssociationEnd="PIMAssociationEnd: *defaultname* 0..1 C: SalesAssistant A: defaultname " />
+            </eXo:PIMAssociationEnds>
+          </eXo:PIMClass>
+        </eXo:PIMClasses>
+        <eXo:PIMAssociations Count="5">
+          <eXo:PIMAssociation ID="38b5a22e-1bde-4339-8ea9-c473428f2f12" Name="">
+            <eXo:PIMAssociationEnds Count="2">
+              <eXo:PIMAssociationEnd ID="c978b918-641e-415a-b353-f5fe186ea122" Name="" refPIMClassID="e1074500-033b-4bf3-afb7-362d42931aac" refPIMClass="PIMClass: *Purchase*" refPIMAssociationID="38b5a22e-1bde-4339-8ea9-c473428f2f12" refPIMAssociation="PIMAssociation **: PIMClass: *Purchase*, PIMClass: *Customer*" />
+              <eXo:PIMAssociationEnd ID="c5246fd6-cb5f-417e-9a8d-6dc368a4e9df" Name="" refPIMClassID="ece43340-4c28-4704-880e-cd717c81f50d" refPIMClass="PIMClass: *Customer*" refPIMAssociationID="38b5a22e-1bde-4339-8ea9-c473428f2f12" refPIMAssociation="PIMAssociation **: PIMClass: *Purchase*, PIMClass: *Customer*" />
+            </eXo:PIMAssociationEnds>
+          </eXo:PIMAssociation>
+          <eXo:PIMAssociation ID="698fc601-be01-4808-81bf-20ac3d95f814" Name="">
+            <eXo:PIMAssociationEnds Count="2">
+              <eXo:PIMAssociationEnd ID="9097b9bb-c0b9-4ba5-8a58-93eaaeeaa29c" Name="" refPIMClassID="e1074500-033b-4bf3-afb7-362d42931aac" refPIMClass="PIMClass: *Purchase*" refPIMAssociationID="698fc601-be01-4808-81bf-20ac3d95f814" refPIMAssociation="PIMAssociation **: PIMClass: *Purchase*, PIMClass: *Address*" />
+              <eXo:PIMAssociationEnd ID="aa8df50a-ad6a-4d97-be78-f4efbcece48d" Name="" refPIMClassID="5be67fd2-0138-42cf-89ce-b5987f7fc7a4" refPIMClass="PIMClass: *Address*" refPIMAssociationID="698fc601-be01-4808-81bf-20ac3d95f814" refPIMAssociation="PIMAssociation **: PIMClass: *Purchase*, PIMClass: *Address*" />
+            </eXo:PIMAssociationEnds>
+          </eXo:PIMAssociation>
+          <eXo:PIMAssociation ID="532341f0-72d4-4038-b8e6-d5eda896f17a" Name="">
+            <eXo:PIMAssociationEnds Count="2">
+              <eXo:PIMAssociationEnd ID="0e150369-bae5-4736-8869-087228cc8ec9" Name="" refPIMClassID="e1074500-033b-4bf3-afb7-362d42931aac" refPIMClass="PIMClass: *Purchase*" refPIMAssociationID="532341f0-72d4-4038-b8e6-d5eda896f17a" refPIMAssociation="PIMAssociation **: PIMClass: *Purchase*, PIMClass: *Item*" />
+              <eXo:PIMAssociationEnd ID="f748c31f-3e60-4d0e-91c6-0d6eda62d1ec" Name="" refPIMClassID="e6d1fd09-99df-4045-bd8b-0cf624050282" refPIMClass="PIMClass: *Item*" refPIMAssociationID="532341f0-72d4-4038-b8e6-d5eda896f17a" refPIMAssociation="PIMAssociation **: PIMClass: *Purchase*, PIMClass: *Item*" />
+            </eXo:PIMAssociationEnds>
+          </eXo:PIMAssociation>
+          <eXo:PIMAssociation ID="6a956b29-9800-41b5-8cd3-20d7180075be" Name="">
+            <eXo:PIMAssociationEnds Count="2">
+              <eXo:PIMAssociationEnd ID="ecf2c268-a045-4f56-8ecb-62cf62e630ba" Name="" refPIMClassID="a0819f15-317c-40a0-8e0c-ba99056114e1" refPIMClass="PIMClass: *Product*" refPIMAssociationID="6a956b29-9800-41b5-8cd3-20d7180075be" refPIMAssociation="PIMAssociation **: PIMClass: *Product*, PIMClass: *Item*" />
+              <eXo:PIMAssociationEnd ID="051aa0fb-a664-4c99-8cba-ba1874a16285" Name="" refPIMClassID="e6d1fd09-99df-4045-bd8b-0cf624050282" refPIMClass="PIMClass: *Item*" refPIMAssociationID="6a956b29-9800-41b5-8cd3-20d7180075be" refPIMAssociation="PIMAssociation **: PIMClass: *Product*, PIMClass: *Item*" />
+            </eXo:PIMAssociationEnds>
+          </eXo:PIMAssociation>
+          <eXo:PIMAssociation ID="67549031-3c4a-4ac6-ab28-3a58117ab036" Name="defaultname">
+            <eXo:PIMAssociationEnds Count="2">
+              <eXo:PIMAssociationEnd ID="b9f98b86-7380-46a9-b1fd-ff2567e439fb" Name="defaultname" refPIMClassID="f47b08d9-9239-43eb-a9c8-a130ba181583" refPIMClass="PIMClass: *SalesAssistant*" refPIMAssociationID="67549031-3c4a-4ac6-ab28-3a58117ab036" refPIMAssociation="PIMAssociation *defaultname*: PIMClass: *SalesAssistant*, PIMClass: *Purchase*" Lower="0" />
+              <eXo:PIMAssociationEnd ID="1c4636cf-68c9-4e2b-9734-6b2306d5dab5" Name="defaultname" refPIMClassID="e1074500-033b-4bf3-afb7-362d42931aac" refPIMClass="PIMClass: *Purchase*" refPIMAssociationID="67549031-3c4a-4ac6-ab28-3a58117ab036" refPIMAssociation="PIMAssociation *defaultname*: PIMClass: *SalesAssistant*, PIMClass: *Purchase*" />
+            </eXo:PIMAssociationEnds>
+          </eXo:PIMAssociation>
+        </eXo:PIMAssociations>
+      </eXo:PIMSchema>
+      <eXo:PSMSchemas Count="1">
+        <eXo:PSMSchema ID="b49b9990-0d00-4348-abfb-8d9cfeea430f" Caption="PSMSchema v2">
+          <eXo:PSMSchemaClass ID="91d6e974-a89e-4015-9bbf-bd7bbc62b4a4" Name="PurchaseSchema">
+            <eXo:ChildPSMAssociations Count="1">
+              <eXo:ChildPSMAssociation childPSMAssociationID="226c0387-4cab-46a1-beef-357d537214b6" childPSMAssociation="PSMAssociation from PSMSchemaClass: PurchaseSchema to PSMClass: *Purchase*" />
+            </eXo:ChildPSMAssociations>
+          </eXo:PSMSchemaClass>
+          <eXo:Roots Count="1">
+            <eXo:Root rootID="91d6e974-a89e-4015-9bbf-bd7bbc62b4a4" root="PSMSchemaClass: PurchaseSchema" />
+          </eXo:Roots>
+          <eXo:PSMClasses Count="8">
+            <eXo:PSMClass ID="70b88e62-71ed-4b60-acad-934c3e8a3e39" Name="Purchase" InterpretationID="e1074500-033b-4bf3-afb7-362d42931aac" Interpretation="PIMClass: *Purchase*" parentAssociationID="226c0387-4cab-46a1-beef-357d537214b6" parentAssociation="PSMAssociation from PSMSchemaClass: PurchaseSchema to PSMClass: *Purchase*">
+              <eXo:ChildPSMAssociations Count="7">
+                <eXo:ChildPSMAssociation childPSMAssociationID="40f2dccd-8869-4097-959f-ebd5d72f117b" childPSMAssociation="PSMAssociation from PSMClass: *Purchase* to PSMClass: *Item*" />
+                <eXo:ChildPSMAssociation childPSMAssociationID="891d1ba3-04f3-477b-81c0-a73283d5ed3c" childPSMAssociation="PSMAssociation from PSMClass: *Purchase* to PSMClass: *AddedWithE*" />
+                <eXo:ChildPSMAssociation childPSMAssociationID="a5a89a26-fbfc-4ff3-9b4b-8e46408c7663" childPSMAssociation="PSMAssociation from PSMClass: *Purchase* to PSMClass: *AddedWithA*" />
+                <eXo:ChildPSMAssociation childPSMAssociationID="93b3a07d-1a59-4712-bfaf-00d5c87dab09" childPSMAssociation="PSMAssociation from PSMClass: *Purchase* to PSMClass: *AddedEmpty*" />
+                <eXo:ChildPSMAssociation childPSMAssociationID="452db67b-9264-44a4-91c4-8a3477d5a80d" childPSMAssociation="PSMAssociation from PSMClass: *Purchase* to PSMClass: *GroupEmpty*" />
+                <eXo:ChildPSMAssociation childPSMAssociationID="9f3af81d-3929-4226-b788-ebc3487c9052" childPSMAssociation="PSMAssociation from PSMClass: *Purchase* to PSMClass: *GroupA*" />
+                <eXo:ChildPSMAssociation childPSMAssociationID="e9ebb0d4-10cb-41eb-8471-e8bc9095ebbf" childPSMAssociation="PSMAssociation from PSMClass: *Purchase* to PSMClass: *GroupE*" />
+              </eXo:ChildPSMAssociations>
+              <eXo:PSMAttributes Count="2">
+                <eXo:PSMAttribute ID="064a9330-05f2-4414-9ecd-3cc64b954b22" Name="purchase-date" InterpretationID="7d525c10-9ad8-47f3-ba94-09ea4b35d10d" Interpretation="PIMAttribute: *Purchase.purchase-date* 1..1" Element="False" psmClassID="70b88e62-71ed-4b60-acad-934c3e8a3e39" />
+                <eXo:PSMAttribute ID="aade8192-57b5-4f73-b68a-56b586122814" Name="id" InterpretationID="1d44816a-c48f-4659-9924-d15eb5c466d8" Interpretation="PIMAttribute: *Purchase.id* 1..1" Element="True" psmClassID="70b88e62-71ed-4b60-acad-934c3e8a3e39" />
+              </eXo:PSMAttributes>
+            </eXo:PSMClass>
+            <eXo:PSMClass ID="a886d519-afaf-41c1-95ca-2b168cf65616" Name="Item" InterpretationID="e6d1fd09-99df-4045-bd8b-0cf624050282" Interpretation="PIMClass: *Item*" parentAssociationID="40f2dccd-8869-4097-959f-ebd5d72f117b" parentAssociation="PSMAssociation from PSMClass: *Purchase* to PSMClass: *Item*">
+              <eXo:ChildPSMAssociations Count="0" />
+              <eXo:PSMAttributes Count="2">
+                <eXo:PSMAttribute ID="614c0b94-5a43-43af-b6d6-dd0be2ca8ed9" Name="amount" InterpretationID="120733fd-b7d3-45f6-99a4-01200f0b793e" Interpretation="PIMAttribute: *Item.amount* 1..1" Element="False" psmClassID="a886d519-afaf-41c1-95ca-2b168cf65616" />
+                <eXo:PSMAttribute ID="2ec09af1-324e-40a2-be36-3eeffd6f7273" Name="unit-price" InterpretationID="8beeb010-3e08-43e2-a983-b65f7c1e072e" Interpretation="PIMAttribute: *Item.unit-price* 1..1" Element="False" psmClassID="a886d519-afaf-41c1-95ca-2b168cf65616" />
+              </eXo:PSMAttributes>
+            </eXo:PSMClass>
+            <eXo:PSMClass ID="b90c2b3c-c05f-4143-a06f-eceaad7c99d9" Name="AddedWithE" parentAssociationID="891d1ba3-04f3-477b-81c0-a73283d5ed3c" parentAssociation="PSMAssociation from PSMClass: *Purchase* to PSMClass: *AddedWithE*">
+              <eXo:ChildPSMAssociations Count="0" />
+              <eXo:PSMAttributes Count="1">
+                <eXo:PSMAttribute ID="365e7a65-4216-4d2c-80b3-360048bd03ed" Name="E" Element="True" psmClassID="b90c2b3c-c05f-4143-a06f-eceaad7c99d9" />
+              </eXo:PSMAttributes>
+            </eXo:PSMClass>
+            <eXo:PSMClass ID="e94a2c8a-f30f-4619-808f-32931990a7a6" Name="AddedEmpty" parentAssociationID="93b3a07d-1a59-4712-bfaf-00d5c87dab09" parentAssociation="PSMAssociation from PSMClass: *Purchase* to PSMClass: *AddedEmpty*">
+              <eXo:ChildPSMAssociations Count="0" />
+              <eXo:PSMAttributes Count="0" />
+            </eXo:PSMClass>
+            <eXo:PSMClass ID="aecb3871-cef7-4759-b497-c485e1a69717" Name="AddedWithA" parentAssociationID="a5a89a26-fbfc-4ff3-9b4b-8e46408c7663" parentAssociation="PSMAssociation from PSMClass: *Purchase* to PSMClass: *AddedWithA*">
+              <eXo:ChildPSMAssociations Count="0" />
+              <eXo:PSMAttributes Count="1">
+                <eXo:PSMAttribute ID="12f78c62-9072-41da-8e87-44333705b5ee" Name="A" Element="False" psmClassID="aecb3871-cef7-4759-b497-c485e1a69717" />
+              </eXo:PSMAttributes>
+            </eXo:PSMClass>
+            <eXo:PSMClass ID="9a391ffe-a912-4ae6-8a10-b745a36680ff" Name="GroupEmpty" parentAssociationID="452db67b-9264-44a4-91c4-8a3477d5a80d" parentAssociation="PSMAssociation from PSMClass: *Purchase* to PSMClass: *GroupEmpty*">
+              <eXo:ChildPSMAssociations Count="0" />
+              <eXo:PSMAttributes Count="0" />
+            </eXo:PSMClass>
+            <eXo:PSMClass ID="9ffeafa3-c16b-4f11-93fc-760a41fd006b" Name="GroupA" parentAssociationID="9f3af81d-3929-4226-b788-ebc3487c9052" parentAssociation="PSMAssociation from PSMClass: *Purchase* to PSMClass: *GroupA*">
+              <eXo:ChildPSMAssociations Count="0" />
+              <eXo:PSMAttributes Count="1">
+                <eXo:PSMAttribute ID="078fe45a-4b32-4a78-98d1-48ea882529e3" Name="ga" Element="False" psmClassID="9ffeafa3-c16b-4f11-93fc-760a41fd006b" />
+              </eXo:PSMAttributes>
+            </eXo:PSMClass>
+            <eXo:PSMClass ID="a9c1adfd-1b38-4c86-957d-3a93c072a0f9" Name="GroupE" parentAssociationID="e9ebb0d4-10cb-41eb-8471-e8bc9095ebbf" parentAssociation="PSMAssociation from PSMClass: *Purchase* to PSMClass: *GroupE*">
+              <eXo:ChildPSMAssociations Count="0" />
+              <eXo:PSMAttributes Count="1">
+                <eXo:PSMAttribute ID="fbd29334-58e2-45a9-8a22-ad89f083222f" Name="ge" Element="True" psmClassID="a9c1adfd-1b38-4c86-957d-3a93c072a0f9" />
+              </eXo:PSMAttributes>
+            </eXo:PSMClass>
+          </eXo:PSMClasses>
+          <eXo:PSMAssociations Count="8">
+            <eXo:PSMAssociation ID="226c0387-4cab-46a1-beef-357d537214b6" Name="purchase-request">
+              <eXo:Parent NodeType="PSMSchemaClass" parentID="91d6e974-a89e-4015-9bbf-bd7bbc62b4a4" parent="PSMSchemaClass: PurchaseSchema" />
+              <eXo:Child NodeType="PSMClass" childID="70b88e62-71ed-4b60-acad-934c3e8a3e39" child="PSMClass: *Purchase*" />
+            </eXo:PSMAssociation>
+            <eXo:PSMAssociation ID="40f2dccd-8869-4097-959f-ebd5d72f117b" Name="item" InterpretationID="532341f0-72d4-4038-b8e6-d5eda896f17a" Interpretation="PIMAssociation **: PIMClass: *Purchase*, PIMClass: *Item*" Lower="0" Upper="*">
+              <eXo:Parent NodeType="PSMClass" parentID="70b88e62-71ed-4b60-acad-934c3e8a3e39" parent="PSMClass: *Purchase*" />
+              <eXo:Child NodeType="PSMClass" childID="a886d519-afaf-41c1-95ca-2b168cf65616" child="PSMClass: *Item*" />
+            </eXo:PSMAssociation>
+            <eXo:PSMAssociation ID="891d1ba3-04f3-477b-81c0-a73283d5ed3c" Name="addedWithE" Lower="2" Upper="4">
+              <eXo:Parent NodeType="PSMClass" parentID="70b88e62-71ed-4b60-acad-934c3e8a3e39" parent="PSMClass: *Purchase*" />
+              <eXo:Child NodeType="PSMClass" childID="b90c2b3c-c05f-4143-a06f-eceaad7c99d9" child="PSMClass: *AddedWithE*" />
+            </eXo:PSMAssociation>
+            <eXo:PSMAssociation ID="93b3a07d-1a59-4712-bfaf-00d5c87dab09" Name="addedEmpty" Lower="3" Upper="3">
+              <eXo:Parent NodeType="PSMClass" parentID="70b88e62-71ed-4b60-acad-934c3e8a3e39" parent="PSMClass: *Purchase*" />
+              <eXo:Child NodeType="PSMClass" childID="e94a2c8a-f30f-4619-808f-32931990a7a6" child="PSMClass: *AddedEmpty*" />
+            </eXo:PSMAssociation>
+            <eXo:PSMAssociation ID="a5a89a26-fbfc-4ff3-9b4b-8e46408c7663" Name="addedWithA">
+              <eXo:Parent NodeType="PSMClass" parentID="70b88e62-71ed-4b60-acad-934c3e8a3e39" parent="PSMClass: *Purchase*" />
+              <eXo:Child NodeType="PSMClass" childID="aecb3871-cef7-4759-b497-c485e1a69717" child="PSMClass: *AddedWithA*" />
+            </eXo:PSMAssociation>
+            <eXo:PSMAssociation ID="452db67b-9264-44a4-91c4-8a3477d5a80d" Name="">
+              <eXo:Parent NodeType="PSMClass" parentID="70b88e62-71ed-4b60-acad-934c3e8a3e39" parent="PSMClass: *Purchase*" />
+              <eXo:Child NodeType="PSMClass" childID="9a391ffe-a912-4ae6-8a10-b745a36680ff" child="PSMClass: *GroupEmpty*" />
+            </eXo:PSMAssociation>
+            <eXo:PSMAssociation ID="9f3af81d-3929-4226-b788-ebc3487c9052" Name="">
+              <eXo:Parent NodeType="PSMClass" parentID="70b88e62-71ed-4b60-acad-934c3e8a3e39" parent="PSMClass: *Purchase*" />
+              <eXo:Child NodeType="PSMClass" childID="9ffeafa3-c16b-4f11-93fc-760a41fd006b" child="PSMClass: *GroupA*" />
+            </eXo:PSMAssociation>
+            <eXo:PSMAssociation ID="e9ebb0d4-10cb-41eb-8471-e8bc9095ebbf" Name="" Lower="4" Upper="4">
+              <eXo:Parent NodeType="PSMClass" parentID="70b88e62-71ed-4b60-acad-934c3e8a3e39" parent="PSMClass: *Purchase*" />
+              <eXo:Child NodeType="PSMClass" childID="a9c1adfd-1b38-4c86-957d-3a93c072a0f9" child="PSMClass: *GroupE*" />
+            </eXo:PSMAssociation>
+          </eXo:PSMAssociations>
+          <eXo:PSMContentModels Count="0" />
+        </eXo:PSMSchema>
+      </eXo:PSMSchemas>
+      <eXo:PIMDiagrams Count="1">
+        <eXo:PIMDiagram ID="26080891-9b45-4ad4-b8bb-e2adc397b948" schemaID="7602d5fd-8e67-456f-9a05-ab73e5c4a40e" schema="PIMSchema" Caption="PIMSchema">
+          <eXo:Components>
+            <eXo:Component Type="PIMClass" componentID="e1074500-033b-4bf3-afb7-362d42931aac" component="PIMClass: *Purchase*">
+              <eXo:ViewHelper X="124" Y="212" Width="NaN" Height="NaN" />
+            </eXo:Component>
+            <eXo:Component Type="PIMClass" componentID="ece43340-4c28-4704-880e-cd717c81f50d" component="PIMClass: *Customer*">
+              <eXo:ViewHelper X="233" Y="55" Width="NaN" Height="NaN" />
+            </eXo:Component>
+            <eXo:Component Type="PIMClass" componentID="5be67fd2-0138-42cf-89ce-b5987f7fc7a4" component="PIMClass: *Address*">
+              <eXo:ViewHelper X="53" Y="57" Width="NaN" Height="NaN" />
+            </eXo:Component>
+            <eXo:Component Type="PIMClass" componentID="a0819f15-317c-40a0-8e0c-ba99056114e1" component="PIMClass: *Product*">
+              <eXo:ViewHelper X="423" Y="75" Width="NaN" Height="NaN" />
+            </eXo:Component>
+            <eXo:Component Type="PIMClass" componentID="e6d1fd09-99df-4045-bd8b-0cf624050282" component="PIMClass: *Item*">
+              <eXo:ViewHelper X="299" Y="267" Width="NaN" Height="NaN" />
+            </eXo:Component>
+            <eXo:Component Type="PIMAssociation" componentID="38b5a22e-1bde-4339-8ea9-c473428f2f12" component="PIMAssociation **: PIMClass: *Purchase*, PIMClass: *Customer*">
+              <eXo:ViewHelper>
+                <eXo:UseDiamond>False</eXo:UseDiamond>
+                <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                  <eXo:LabelVisible>True</eXo:LabelVisible>
+                </eXo:MainLabelViewHelper>
+                <eXo:AssociationEndsViewHelpers Count="2">
+                  <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="c978b918-641e-415a-b353-f5fe186ea122" AssociationEnd="PIMAssociationEnd: ** 1..1 C: Purchase A:  ">
+                    <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
+                      <eXo:LabelVisible>True</eXo:LabelVisible>
+                    </eXo:CardinalityLabelViewHelper>
+                    <eXo:RoleLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                      <eXo:LabelVisible>True</eXo:LabelVisible>
+                    </eXo:RoleLabelViewHelper>
+                    <eXo:Points>
+                      <eXo:Point X="64" Y="0" />
+                      <eXo:Point X="22" Y="59" />
+                    </eXo:Points>
+                  </eXo:AssociationEndViewHelper>
+                  <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="c5246fd6-cb5f-417e-9a8d-6dc368a4e9df" AssociationEnd="PIMAssociationEnd: ** 1..1 C: Customer A:  ">
+                    <eXo:CardinalityLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                      <eXo:LabelVisible>True</eXo:LabelVisible>
+                    </eXo:CardinalityLabelViewHelper>
+                    <eXo:RoleLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                      <eXo:LabelVisible>True</eXo:LabelVisible>
+                    </eXo:RoleLabelViewHelper>
+                    <eXo:Points />
+                  </eXo:AssociationEndViewHelper>
+                </eXo:AssociationEndsViewHelpers>
+              </eXo:ViewHelper>
+            </eXo:Component>
+            <eXo:Component Type="PIMAssociation" componentID="698fc601-be01-4808-81bf-20ac3d95f814" component="PIMAssociation **: PIMClass: *Purchase*, PIMClass: *Address*">
+              <eXo:ViewHelper>
+                <eXo:UseDiamond>False</eXo:UseDiamond>
+                <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                  <eXo:LabelVisible>True</eXo:LabelVisible>
+                </eXo:MainLabelViewHelper>
+                <eXo:AssociationEndsViewHelpers Count="2">
+                  <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="9097b9bb-c0b9-4ba5-8a58-93eaaeeaa29c" AssociationEnd="PIMAssociationEnd: ** 1..1 C: Purchase A:  ">
+                    <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
+                      <eXo:LabelVisible>True</eXo:LabelVisible>
+                    </eXo:CardinalityLabelViewHelper>
+                    <eXo:RoleLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                      <eXo:LabelVisible>True</eXo:LabelVisible>
+                    </eXo:RoleLabelViewHelper>
+                    <eXo:Points>
+                      <eXo:Point X="28" Y="0" />
+                      <eXo:Point X="57" Y="75" />
+                    </eXo:Points>
+                  </eXo:AssociationEndViewHelper>
+                  <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="aa8df50a-ad6a-4d97-be78-f4efbcece48d" AssociationEnd="PIMAssociationEnd: ** 1..1 C: Address A:  ">
+                    <eXo:CardinalityLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                      <eXo:LabelVisible>True</eXo:LabelVisible>
+                    </eXo:CardinalityLabelViewHelper>
+                    <eXo:RoleLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                      <eXo:LabelVisible>True</eXo:LabelVisible>
+                    </eXo:RoleLabelViewHelper>
+                    <eXo:Points />
+                  </eXo:AssociationEndViewHelper>
+                </eXo:AssociationEndsViewHelpers>
+              </eXo:ViewHelper>
+            </eXo:Component>
+            <eXo:Component Type="PIMAssociation" componentID="532341f0-72d4-4038-b8e6-d5eda896f17a" component="PIMAssociation **: PIMClass: *Purchase*, PIMClass: *Item*">
+              <eXo:ViewHelper>
+                <eXo:UseDiamond>False</eXo:UseDiamond>
+                <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                  <eXo:LabelVisible>True</eXo:LabelVisible>
+                </eXo:MainLabelViewHelper>
+                <eXo:AssociationEndsViewHelpers Count="2">
+                  <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="0e150369-bae5-4736-8869-087228cc8ec9" AssociationEnd="PIMAssociationEnd: ** 1..1 C: Purchase A:  ">
+                    <eXo:CardinalityLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                      <eXo:LabelVisible>True</eXo:LabelVisible>
+                    </eXo:CardinalityLabelViewHelper>
+                    <eXo:RoleLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                      <eXo:LabelVisible>True</eXo:LabelVisible>
+                    </eXo:RoleLabelViewHelper>
+                    <eXo:Points>
+                      <eXo:Point X="89" Y="44" />
+                      <eXo:Point X="0" Y="18" />
+                    </eXo:Points>
+                  </eXo:AssociationEndViewHelper>
+                  <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="f748c31f-3e60-4d0e-91c6-0d6eda62d1ec" AssociationEnd="PIMAssociationEnd: ** 1..1 C: Item A:  ">
+                    <eXo:CardinalityLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                      <eXo:LabelVisible>True</eXo:LabelVisible>
+                    </eXo:CardinalityLabelViewHelper>
+                    <eXo:RoleLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                      <eXo:LabelVisible>True</eXo:LabelVisible>
+                    </eXo:RoleLabelViewHelper>
+                    <eXo:Points />
+                  </eXo:AssociationEndViewHelper>
+                </eXo:AssociationEndsViewHelpers>
+              </eXo:ViewHelper>
+            </eXo:Component>
+            <eXo:Component Type="PIMAssociation" componentID="6a956b29-9800-41b5-8cd3-20d7180075be" component="PIMAssociation **: PIMClass: *Product*, PIMClass: *Item*">
+              <eXo:ViewHelper>
+                <eXo:UseDiamond>False</eXo:UseDiamond>
+                <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                  <eXo:LabelVisible>True</eXo:LabelVisible>
+                </eXo:MainLabelViewHelper>
+                <eXo:AssociationEndsViewHelpers Count="2">
+                  <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="ecf2c268-a045-4f56-8ecb-62cf62e630ba" AssociationEnd="PIMAssociationEnd: ** 1..1 C: Product A:  ">
+                    <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
+                      <eXo:LabelVisible>True</eXo:LabelVisible>
+                    </eXo:CardinalityLabelViewHelper>
+                    <eXo:RoleLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                      <eXo:LabelVisible>True</eXo:LabelVisible>
+                    </eXo:RoleLabelViewHelper>
+                    <eXo:Points>
+                      <eXo:Point X="0" Y="102" />
+                      <eXo:Point X="55" Y="0" />
+                    </eXo:Points>
+                  </eXo:AssociationEndViewHelper>
+                  <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="051aa0fb-a664-4c99-8cba-ba1874a16285" AssociationEnd="PIMAssociationEnd: ** 1..1 C: Item A:  ">
+                    <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
+                      <eXo:LabelVisible>True</eXo:LabelVisible>
+                    </eXo:CardinalityLabelViewHelper>
+                    <eXo:RoleLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                      <eXo:LabelVisible>True</eXo:LabelVisible>
+                    </eXo:RoleLabelViewHelper>
+                    <eXo:Points />
+                  </eXo:AssociationEndViewHelper>
+                </eXo:AssociationEndsViewHelpers>
+              </eXo:ViewHelper>
+            </eXo:Component>
+            <eXo:Component Type="PIMClass" componentID="f47b08d9-9239-43eb-a9c8-a130ba181583" component="PIMClass: *SalesAssistant*">
+              <eXo:ViewHelper X="103" Y="344" Width="NaN" Height="NaN" />
+            </eXo:Component>
+            <eXo:Component Type="PIMAssociation" componentID="67549031-3c4a-4ac6-ab28-3a58117ab036" component="PIMAssociation *defaultname*: PIMClass: *SalesAssistant*, PIMClass: *Purchase*">
+              <eXo:ViewHelper>
+                <eXo:UseDiamond>False</eXo:UseDiamond>
+                <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                  <eXo:LabelVisible>True</eXo:LabelVisible>
+                </eXo:MainLabelViewHelper>
+                <eXo:AssociationEndsViewHelpers Count="2">
+                  <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="b9f98b86-7380-46a9-b1fd-ff2567e439fb" AssociationEnd="PIMAssociationEnd: *defaultname* 0..1 C: SalesAssistant A: defaultname ">
+                    <eXo:CardinalityLabelViewHelper X="-40" Y="-20" Width="NaN" Height="NaN">
+                      <eXo:LabelVisible>True</eXo:LabelVisible>
+                    </eXo:CardinalityLabelViewHelper>
+                    <eXo:RoleLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                      <eXo:LabelVisible>True</eXo:LabelVisible>
+                    </eXo:RoleLabelViewHelper>
+                    <eXo:Points>
+                      <eXo:Point X="59" Y="0" />
+                      <eXo:Point X="42" Y="59" />
+                    </eXo:Points>
+                  </eXo:AssociationEndViewHelper>
+                  <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="1c4636cf-68c9-4e2b-9734-6b2306d5dab5" AssociationEnd="PIMAssociationEnd: *defaultname* 1..1 C: Purchase A: defaultname ">
+                    <eXo:CardinalityLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                      <eXo:LabelVisible>True</eXo:LabelVisible>
+                    </eXo:CardinalityLabelViewHelper>
+                    <eXo:RoleLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                      <eXo:LabelVisible>True</eXo:LabelVisible>
+                    </eXo:RoleLabelViewHelper>
+                    <eXo:Points />
+                  </eXo:AssociationEndViewHelper>
+                </eXo:AssociationEndsViewHelpers>
+              </eXo:ViewHelper>
+            </eXo:Component>
+          </eXo:Components>
+        </eXo:PIMDiagram>
+      </eXo:PIMDiagrams>
+      <eXo:PSMDiagrams Count="1">
+        <eXo:PSMDiagram ID="1b164c80-1fee-4421-baaa-285c28c020b3" schemaID="b49b9990-0d00-4348-abfb-8d9cfeea430f" schema="PSMSchema v2" Caption="PSMSchema v2">
+          <eXo:Components>
+            <eXo:Component Type="PSMSchemaClass" componentID="91d6e974-a89e-4015-9bbf-bd7bbc62b4a4" component="PSMSchemaClass: PurchaseSchema">
+              <eXo:ViewHelper />
+            </eXo:Component>
+            <eXo:Component Type="PSMClass" componentID="70b88e62-71ed-4b60-acad-934c3e8a3e39" component="PSMClass: *Purchase*">
+              <eXo:ViewHelper />
+            </eXo:Component>
+            <eXo:Component Type="PSMAssociation" componentID="226c0387-4cab-46a1-beef-357d537214b6" component="PSMAssociation from PSMSchemaClass: PurchaseSchema to PSMClass: *Purchase*">
+              <eXo:ViewHelper>
+                <eXo:MainLabelViewHelper X="0" Y="-2" Width="NaN" Height="NaN">
+                  <eXo:LabelVisible>True</eXo:LabelVisible>
+                </eXo:MainLabelViewHelper>
+                <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
+                  <eXo:LabelVisible>True</eXo:LabelVisible>
+                </eXo:CardinalityLabelViewHelper>
+              </eXo:ViewHelper>
+            </eXo:Component>
+            <eXo:Component Type="PSMClass" componentID="a886d519-afaf-41c1-95ca-2b168cf65616" component="PSMClass: *Item*">
+              <eXo:ViewHelper />
+            </eXo:Component>
+            <eXo:Component Type="PSMAssociation" componentID="40f2dccd-8869-4097-959f-ebd5d72f117b" component="PSMAssociation from PSMClass: *Purchase* to PSMClass: *Item*">
+              <eXo:ViewHelper>
+                <eXo:MainLabelViewHelper X="-3" Y="-5" Width="NaN" Height="NaN">
+                  <eXo:LabelVisible>True</eXo:LabelVisible>
+                </eXo:MainLabelViewHelper>
+                <eXo:CardinalityLabelViewHelper X="0" Y="-8" Width="NaN" Height="NaN">
+                  <eXo:LabelVisible>True</eXo:LabelVisible>
+                </eXo:CardinalityLabelViewHelper>
+              </eXo:ViewHelper>
+            </eXo:Component>
+            <eXo:Component Type="PSMClass" componentID="b90c2b3c-c05f-4143-a06f-eceaad7c99d9" component="PSMClass: *AddedWithE*">
+              <eXo:ViewHelper />
+            </eXo:Component>
+            <eXo:Component Type="PSMAssociation" componentID="891d1ba3-04f3-477b-81c0-a73283d5ed3c" component="PSMAssociation from PSMClass: *Purchase* to PSMClass: *AddedWithE*">
+              <eXo:ViewHelper>
+                <eXo:MainLabelViewHelper X="-12" Y="10" Width="NaN" Height="NaN">
+                  <eXo:LabelVisible>True</eXo:LabelVisible>
+                </eXo:MainLabelViewHelper>
+                <eXo:CardinalityLabelViewHelper X="51" Y="-37" Width="NaN" Height="NaN">
+                  <eXo:LabelVisible>True</eXo:LabelVisible>
+                </eXo:CardinalityLabelViewHelper>
+              </eXo:ViewHelper>
+            </eXo:Component>
+            <eXo:Component Type="PSMClass" componentID="e94a2c8a-f30f-4619-808f-32931990a7a6" component="PSMClass: *AddedEmpty*">
+              <eXo:ViewHelper />
+            </eXo:Component>
+            <eXo:Component Type="PSMAssociation" componentID="93b3a07d-1a59-4712-bfaf-00d5c87dab09" component="PSMAssociation from PSMClass: *Purchase* to PSMClass: *AddedEmpty*">
+              <eXo:ViewHelper>
+                <eXo:MainLabelViewHelper X="2" Y="5" Width="NaN" Height="NaN">
+                  <eXo:LabelVisible>True</eXo:LabelVisible>
+                </eXo:MainLabelViewHelper>
+                <eXo:CardinalityLabelViewHelper X="-1" Y="-40" Width="NaN" Height="NaN">
+                  <eXo:LabelVisible>True</eXo:LabelVisible>
+                </eXo:CardinalityLabelViewHelper>
+              </eXo:ViewHelper>
+            </eXo:Component>
+            <eXo:Component Type="PSMClass" componentID="aecb3871-cef7-4759-b497-c485e1a69717" component="PSMClass: *AddedWithA*">
+              <eXo:ViewHelper />
+            </eXo:Component>
+            <eXo:Component Type="PSMAssociation" componentID="a5a89a26-fbfc-4ff3-9b4b-8e46408c7663" component="PSMAssociation from PSMClass: *Purchase* to PSMClass: *AddedWithA*">
+              <eXo:ViewHelper>
+                <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                  <eXo:LabelVisible>True</eXo:LabelVisible>
+                </eXo:MainLabelViewHelper>
+                <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
+                  <eXo:LabelVisible>True</eXo:LabelVisible>
+                </eXo:CardinalityLabelViewHelper>
+              </eXo:ViewHelper>
+            </eXo:Component>
+            <eXo:Component Type="PSMClass" componentID="9a391ffe-a912-4ae6-8a10-b745a36680ff" component="PSMClass: *GroupEmpty*">
+              <eXo:ViewHelper />
+            </eXo:Component>
+            <eXo:Component Type="PSMAssociation" componentID="452db67b-9264-44a4-91c4-8a3477d5a80d" component="PSMAssociation from PSMClass: *Purchase* to PSMClass: *GroupEmpty*">
+              <eXo:ViewHelper>
+                <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                  <eXo:LabelVisible>True</eXo:LabelVisible>
+                </eXo:MainLabelViewHelper>
+                <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
+                  <eXo:LabelVisible>True</eXo:LabelVisible>
+                </eXo:CardinalityLabelViewHelper>
+              </eXo:ViewHelper>
+            </eXo:Component>
+            <eXo:Component Type="PSMClass" componentID="9ffeafa3-c16b-4f11-93fc-760a41fd006b" component="PSMClass: *GroupA*">
+              <eXo:ViewHelper />
+            </eXo:Component>
+            <eXo:Component Type="PSMAssociation" componentID="9f3af81d-3929-4226-b788-ebc3487c9052" component="PSMAssociation from PSMClass: *Purchase* to PSMClass: *GroupA*">
+              <eXo:ViewHelper>
+                <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                  <eXo:LabelVisible>True</eXo:LabelVisible>
+                </eXo:MainLabelViewHelper>
+                <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
+                  <eXo:LabelVisible>True</eXo:LabelVisible>
+                </eXo:CardinalityLabelViewHelper>
+              </eXo:ViewHelper>
+            </eXo:Component>
+            <eXo:Component Type="PSMClass" componentID="a9c1adfd-1b38-4c86-957d-3a93c072a0f9" component="PSMClass: *GroupE*">
+              <eXo:ViewHelper />
+            </eXo:Component>
+            <eXo:Component Type="PSMAssociation" componentID="e9ebb0d4-10cb-41eb-8471-e8bc9095ebbf" component="PSMAssociation from PSMClass: *Purchase* to PSMClass: *GroupE*">
+              <eXo:ViewHelper>
+                <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                  <eXo:LabelVisible>True</eXo:LabelVisible>
+                </eXo:MainLabelViewHelper>
+                <eXo:CardinalityLabelViewHelper X="-40" Y="-42" Width="NaN" Height="NaN">
+                  <eXo:LabelVisible>True</eXo:LabelVisible>
+                </eXo:CardinalityLabelViewHelper>
+              </eXo:ViewHelper>
+            </eXo:Component>
+          </eXo:Components>
+        </eXo:PSMDiagram>
+      </eXo:PSMDiagrams>
+    </eXo:ProjectVersion>
+  </eXo:ProjectVersions>
+  <eXo:VersionLinks>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="99774906-8fc2-4826-aca8-c56e714a824b" item="PIMSchema" versionNumber="b7a9da14-87fc-4a51-8f23-8bb5969ccde1" />
+      <eXo:LinkedItem itemID="7602d5fd-8e67-456f-9a05-ab73e5c4a40e" item="PIMSchema" versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="e1fd2d62-e099-4347-939f-98060ccc40ac" item="PIMClass: *Purchase*" versionNumber="b7a9da14-87fc-4a51-8f23-8bb5969ccde1" />
+      <eXo:LinkedItem itemID="e1074500-033b-4bf3-afb7-362d42931aac" item="PIMClass: *Purchase*" versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="0a10051a-2097-4edb-be73-fc763af91664" item="PIMClass: *Customer*" versionNumber="b7a9da14-87fc-4a51-8f23-8bb5969ccde1" />
+      <eXo:LinkedItem itemID="ece43340-4c28-4704-880e-cd717c81f50d" item="PIMClass: *Customer*" versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="b20c256f-9403-43da-810c-d651637b42c8" item="PIMClass: *Address*" versionNumber="b7a9da14-87fc-4a51-8f23-8bb5969ccde1" />
+      <eXo:LinkedItem itemID="5be67fd2-0138-42cf-89ce-b5987f7fc7a4" item="PIMClass: *Address*" versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="e68acc8e-ba73-4aba-95bd-1d00e066b9e0" item="PIMClass: *Product*" versionNumber="b7a9da14-87fc-4a51-8f23-8bb5969ccde1" />
+      <eXo:LinkedItem itemID="a0819f15-317c-40a0-8e0c-ba99056114e1" item="PIMClass: *Product*" versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="23c68830-400e-4178-b051-44a60a165724" item="PIMClass: *Item*" versionNumber="b7a9da14-87fc-4a51-8f23-8bb5969ccde1" />
+      <eXo:LinkedItem itemID="e6d1fd09-99df-4045-bd8b-0cf624050282" item="PIMClass: *Item*" versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="2ff7488a-cbdf-4269-ab72-0de000a1d91b" item="PIMClass: *SalesAssistant*" versionNumber="b7a9da14-87fc-4a51-8f23-8bb5969ccde1" />
+      <eXo:LinkedItem itemID="f47b08d9-9239-43eb-a9c8-a130ba181583" item="PIMClass: *SalesAssistant*" versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="cc063f5b-4be9-45f8-afeb-f646996c8d82" item="PIMAttribute: *Purchase.purchase-date* 1..1" versionNumber="b7a9da14-87fc-4a51-8f23-8bb5969ccde1" />
+      <eXo:LinkedItem itemID="7d525c10-9ad8-47f3-ba94-09ea4b35d10d" item="PIMAttribute: *Purchase.purchase-date* 1..1" versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="81affa44-6cdb-4de4-a980-b1ca08a3781f" item="PIMAttribute: *Customer.customer-no* 1..1" versionNumber="b7a9da14-87fc-4a51-8f23-8bb5969ccde1" />
+      <eXo:LinkedItem itemID="496f9cf4-cfc8-463c-bd3d-84fc4f200259" item="PIMAttribute: *Customer.customer-no* 1..1" versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="93f0e8bd-dfd2-4bcf-b646-2763ad1b5ba7" item="PIMAttribute: *Customer.email* 0..*" versionNumber="b7a9da14-87fc-4a51-8f23-8bb5969ccde1" />
+      <eXo:LinkedItem itemID="d329ebbb-8294-4c9a-9094-5a94821e1fe2" item="PIMAttribute: *Customer.email* 0..*" versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="eedc3ca2-7cf0-4112-aecf-fc23cf0db500" item="PIMAttribute: *Address.postcode* 1..1" versionNumber="b7a9da14-87fc-4a51-8f23-8bb5969ccde1" />
+      <eXo:LinkedItem itemID="84217dfb-1e6a-4736-85f0-53f8830bfe08" item="PIMAttribute: *Address.postcode* 1..1" versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="4a98d66e-c3b8-47e4-ac40-cb093323eb22" item="PIMAttribute: *Address.city* 1..1" versionNumber="b7a9da14-87fc-4a51-8f23-8bb5969ccde1" />
+      <eXo:LinkedItem itemID="b69d4534-3d01-414c-9270-f90c5e54396b" item="PIMAttribute: *Address.city* 1..1" versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="921bf6cd-927f-4bfc-9b9c-109771ed2c36" item="PIMAttribute: *Address.street* 1..1" versionNumber="b7a9da14-87fc-4a51-8f23-8bb5969ccde1" />
+      <eXo:LinkedItem itemID="cadecfb3-4e58-4259-b504-cd191c86d76e" item="PIMAttribute: *Address.street* 1..1" versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="c3e75ac6-8f8d-46e1-8ac8-0184c3de20ed" item="PIMAttribute: *Product.code* 1..1" versionNumber="b7a9da14-87fc-4a51-8f23-8bb5969ccde1" />
+      <eXo:LinkedItem itemID="696c8816-84cf-4752-b71b-df2458aba88f" item="PIMAttribute: *Product.code* 1..1" versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="0ba0e145-5c6d-4381-b80f-68c5ea7bdd9a" item="PIMAttribute: *Product.subcode* 1..1" versionNumber="b7a9da14-87fc-4a51-8f23-8bb5969ccde1" />
+      <eXo:LinkedItem itemID="b7b5b806-26b9-461c-a7d5-41f8caaddbb2" item="PIMAttribute: *Product.subcode* 1..1" versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="47f35474-0a8c-4e79-a0d5-f9e898b315e4" item="PIMAttribute: *Product.title* 1..1" versionNumber="b7a9da14-87fc-4a51-8f23-8bb5969ccde1" />
+      <eXo:LinkedItem itemID="826e2220-d363-4304-9d7d-61915dba7c22" item="PIMAttribute: *Product.title* 1..1" versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="53743909-67e8-4cba-afd7-78cf3a3f6065" item="PIMAttribute: *Product.weight* 1..1" versionNumber="b7a9da14-87fc-4a51-8f23-8bb5969ccde1" />
+      <eXo:LinkedItem itemID="cb8c3f0e-5097-4215-8604-6898cc413616" item="PIMAttribute: *Product.weight* 1..1" versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="1bf6d519-a469-4ae5-883a-2627282c2c2d" item="PIMAttribute: *Product.size* 1..1" versionNumber="b7a9da14-87fc-4a51-8f23-8bb5969ccde1" />
+      <eXo:LinkedItem itemID="e8a17636-53ee-4306-9e98-25cdd3a731bb" item="PIMAttribute: *Product.size* 1..1" versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="0abe91e2-3e01-4b64-8f42-0b62359d23c4" item="PIMAttribute: *Item.amount* 1..1" versionNumber="b7a9da14-87fc-4a51-8f23-8bb5969ccde1" />
+      <eXo:LinkedItem itemID="120733fd-b7d3-45f6-99a4-01200f0b793e" item="PIMAttribute: *Item.amount* 1..1" versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="27647549-a93d-469e-802e-70b2192d3f4d" item="PIMAttribute: *Item.unit-price* 1..1" versionNumber="b7a9da14-87fc-4a51-8f23-8bb5969ccde1" />
+      <eXo:LinkedItem itemID="8beeb010-3e08-43e2-a983-b65f7c1e072e" item="PIMAttribute: *Item.unit-price* 1..1" versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="a4d1479f-b491-4047-ae31-60e9813adea4" item="PIMAttribute: *SalesAssistant.emp-no* 1..1" versionNumber="b7a9da14-87fc-4a51-8f23-8bb5969ccde1" />
+      <eXo:LinkedItem itemID="097d960d-dec2-4ef5-b5bb-585905e9521e" item="PIMAttribute: *SalesAssistant.emp-no* 1..1" versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="e735e3f2-e774-45c1-b560-4fe7e5e7d43c" item="PIMAssociation **: PIMClass: *Purchase*, PIMClass: *Customer*" versionNumber="b7a9da14-87fc-4a51-8f23-8bb5969ccde1" />
+      <eXo:LinkedItem itemID="38b5a22e-1bde-4339-8ea9-c473428f2f12" item="PIMAssociation **: PIMClass: *Purchase*, PIMClass: *Customer*" versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="b1d8669f-3f76-40fc-89e2-052fd1475ee1" item="PIMAssociation **: PIMClass: *Purchase*, PIMClass: *Address*" versionNumber="b7a9da14-87fc-4a51-8f23-8bb5969ccde1" />
+      <eXo:LinkedItem itemID="698fc601-be01-4808-81bf-20ac3d95f814" item="PIMAssociation **: PIMClass: *Purchase*, PIMClass: *Address*" versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="650fc179-e8aa-4cee-b0d3-58761e8d533e" item="PIMAssociation **: PIMClass: *Purchase*, PIMClass: *Item*" versionNumber="b7a9da14-87fc-4a51-8f23-8bb5969ccde1" />
+      <eXo:LinkedItem itemID="532341f0-72d4-4038-b8e6-d5eda896f17a" item="PIMAssociation **: PIMClass: *Purchase*, PIMClass: *Item*" versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="282b21bc-510d-435e-baf9-a00c71828806" item="PIMAssociation **: PIMClass: *Product*, PIMClass: *Item*" versionNumber="b7a9da14-87fc-4a51-8f23-8bb5969ccde1" />
+      <eXo:LinkedItem itemID="6a956b29-9800-41b5-8cd3-20d7180075be" item="PIMAssociation **: PIMClass: *Product*, PIMClass: *Item*" versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="ed2f865d-430b-4030-b0e2-7867fd592e0f" item="PIMAssociation *defaultname*: PIMClass: *SalesAssistant*, PIMClass: *Purchase*" versionNumber="b7a9da14-87fc-4a51-8f23-8bb5969ccde1" />
+      <eXo:LinkedItem itemID="67549031-3c4a-4ac6-ab28-3a58117ab036" item="PIMAssociation *defaultname*: PIMClass: *SalesAssistant*, PIMClass: *Purchase*" versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="84b139bb-8816-43a9-bcbb-f3fde7a8f9b0" item="PIMAssociationEnd: ** 1..1 C: Purchase A:  " versionNumber="b7a9da14-87fc-4a51-8f23-8bb5969ccde1" />
+      <eXo:LinkedItem itemID="c978b918-641e-415a-b353-f5fe186ea122" item="PIMAssociationEnd: ** 1..1 C: Purchase A:  " versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="c019ca9c-9833-4f1c-b6c8-9d2c0596881d" item="PIMAssociationEnd: ** 1..1 C: Customer A:  " versionNumber="b7a9da14-87fc-4a51-8f23-8bb5969ccde1" />
+      <eXo:LinkedItem itemID="c5246fd6-cb5f-417e-9a8d-6dc368a4e9df" item="PIMAssociationEnd: ** 1..1 C: Customer A:  " versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="cca58ca0-00df-4ea3-a0be-3a0069ada4d4" item="PIMAssociationEnd: ** 1..1 C: Purchase A:  " versionNumber="b7a9da14-87fc-4a51-8f23-8bb5969ccde1" />
+      <eXo:LinkedItem itemID="9097b9bb-c0b9-4ba5-8a58-93eaaeeaa29c" item="PIMAssociationEnd: ** 1..1 C: Purchase A:  " versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="78dd42d2-d1c5-4c4c-b116-189f378c1d2e" item="PIMAssociationEnd: ** 1..1 C: Address A:  " versionNumber="b7a9da14-87fc-4a51-8f23-8bb5969ccde1" />
+      <eXo:LinkedItem itemID="aa8df50a-ad6a-4d97-be78-f4efbcece48d" item="PIMAssociationEnd: ** 1..1 C: Address A:  " versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="9db6e870-9011-4227-99d1-8d1d0710b6b3" item="PIMAssociationEnd: ** 1..1 C: Purchase A:  " versionNumber="b7a9da14-87fc-4a51-8f23-8bb5969ccde1" />
+      <eXo:LinkedItem itemID="0e150369-bae5-4736-8869-087228cc8ec9" item="PIMAssociationEnd: ** 1..1 C: Purchase A:  " versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="3c8d0c86-cc29-49fd-8a9b-6d9a473baade" item="PIMAssociationEnd: ** 1..1 C: Item A:  " versionNumber="b7a9da14-87fc-4a51-8f23-8bb5969ccde1" />
+      <eXo:LinkedItem itemID="f748c31f-3e60-4d0e-91c6-0d6eda62d1ec" item="PIMAssociationEnd: ** 1..1 C: Item A:  " versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="8f309a2c-bcb2-4090-8f7d-b5b283efeef5" item="PIMAssociationEnd: ** 1..1 C: Product A:  " versionNumber="b7a9da14-87fc-4a51-8f23-8bb5969ccde1" />
+      <eXo:LinkedItem itemID="ecf2c268-a045-4f56-8ecb-62cf62e630ba" item="PIMAssociationEnd: ** 1..1 C: Product A:  " versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="1d5cdd96-5a0b-46d1-8991-ac75837781c6" item="PIMAssociationEnd: ** 1..1 C: Item A:  " versionNumber="b7a9da14-87fc-4a51-8f23-8bb5969ccde1" />
+      <eXo:LinkedItem itemID="051aa0fb-a664-4c99-8cba-ba1874a16285" item="PIMAssociationEnd: ** 1..1 C: Item A:  " versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="9a77d58b-73ed-4d24-9300-741f58836cec" item="PIMAssociationEnd: *defaultname* 0..1 C: SalesAssistant A: defaultname " versionNumber="b7a9da14-87fc-4a51-8f23-8bb5969ccde1" />
+      <eXo:LinkedItem itemID="b9f98b86-7380-46a9-b1fd-ff2567e439fb" item="PIMAssociationEnd: *defaultname* 0..1 C: SalesAssistant A: defaultname " versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="b17e26e2-dc51-4581-b5f4-b563344f89fe" item="PIMAssociationEnd: *defaultname* 1..1 C: Purchase A: defaultname " versionNumber="b7a9da14-87fc-4a51-8f23-8bb5969ccde1" />
+      <eXo:LinkedItem itemID="1c4636cf-68c9-4e2b-9734-6b2306d5dab5" item="PIMAssociationEnd: *defaultname* 1..1 C: Purchase A: defaultname " versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="838171de-5fec-4b21-adfe-920eed86db33" item="PSMSchema 1" versionNumber="b7a9da14-87fc-4a51-8f23-8bb5969ccde1" />
+      <eXo:LinkedItem itemID="b49b9990-0d00-4348-abfb-8d9cfeea430f" item="PSMSchema v2" versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="12b46b5a-909d-4114-bff6-321ab93dcce7" item="PSMSchemaClass: PurchaseSchema" versionNumber="b7a9da14-87fc-4a51-8f23-8bb5969ccde1" />
+      <eXo:LinkedItem itemID="91d6e974-a89e-4015-9bbf-bd7bbc62b4a4" item="PSMSchemaClass: PurchaseSchema" versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="98924b8c-0b8d-41e0-ae70-81ae6e6ebb82" item="PSMClass: *Purchase*" versionNumber="b7a9da14-87fc-4a51-8f23-8bb5969ccde1" />
+      <eXo:LinkedItem itemID="70b88e62-71ed-4b60-acad-934c3e8a3e39" item="PSMClass: *Purchase*" versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="ab901f44-5d55-480e-8d74-732421594b1c" item="PSMClass: *Item*" versionNumber="b7a9da14-87fc-4a51-8f23-8bb5969ccde1" />
+      <eXo:LinkedItem itemID="a886d519-afaf-41c1-95ca-2b168cf65616" item="PSMClass: *Item*" versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="1a55ce6c-9a35-42bc-b8d6-cc144b077229" item="PSMAssociation from PSMSchemaClass: PurchaseSchema to PSMClass: *Purchase*" versionNumber="b7a9da14-87fc-4a51-8f23-8bb5969ccde1" />
+      <eXo:LinkedItem itemID="226c0387-4cab-46a1-beef-357d537214b6" item="PSMAssociation from PSMSchemaClass: PurchaseSchema to PSMClass: *Purchase*" versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="17e172de-53c4-403e-b5e6-5b189b50cf59" item="PSMAssociation from PSMClass: *Purchase* to PSMClass: *Item*" versionNumber="b7a9da14-87fc-4a51-8f23-8bb5969ccde1" />
+      <eXo:LinkedItem itemID="40f2dccd-8869-4097-959f-ebd5d72f117b" item="PSMAssociation from PSMClass: *Purchase* to PSMClass: *Item*" versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="56e7e939-8b92-418b-b171-ccdd3ab4fc48" item="PSMAttribute: *Purchase.purchase-date* 1..1" versionNumber="b7a9da14-87fc-4a51-8f23-8bb5969ccde1" />
+      <eXo:LinkedItem itemID="064a9330-05f2-4414-9ecd-3cc64b954b22" item="PSMAttribute: *Purchase.purchase-date* 1..1" versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="c6e10501-cf60-41b7-8fb0-de3d72e501a5" item="PSMAttribute: *Item.amount* 1..1" versionNumber="b7a9da14-87fc-4a51-8f23-8bb5969ccde1" />
+      <eXo:LinkedItem itemID="614c0b94-5a43-43af-b6d6-dd0be2ca8ed9" item="PSMAttribute: *Item.amount* 1..1" versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="7ff38056-00d2-45ad-8438-39e24f2dbd9e" item="PIMSchema" versionNumber="b7a9da14-87fc-4a51-8f23-8bb5969ccde1" />
+      <eXo:LinkedItem itemID="26080891-9b45-4ad4-b8bb-e2adc397b948" item="PIMSchema" versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="1251c9c8-ae6d-4418-aba3-ae3c26d7ea71" item="PSMSchema 1" versionNumber="b7a9da14-87fc-4a51-8f23-8bb5969ccde1" />
+      <eXo:LinkedItem itemID="1b164c80-1fee-4421-baaa-285c28c020b3" item="PSMSchema v2" versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="2ec09af1-324e-40a2-be36-3eeffd6f7273" item="PSMAttribute: *Item.unit-price* 1..1" versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="d9749ae0-cb12-491b-8f24-8f5ad0f11187" item="PIMAttribute: *Purchase.id* 1..1" versionNumber="b7a9da14-87fc-4a51-8f23-8bb5969ccde1" />
+      <eXo:LinkedItem itemID="1d44816a-c48f-4659-9924-d15eb5c466d8" item="PIMAttribute: *Purchase.id* 1..1" versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="99229356-09a2-4659-b480-33ee6f847e51" item="PSMAttribute: *Purchase.id* 1..1" versionNumber="b7a9da14-87fc-4a51-8f23-8bb5969ccde1" />
+      <eXo:LinkedItem itemID="aade8192-57b5-4f73-b68a-56b586122814" item="PSMAttribute: *Purchase.id* 1..1" versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="b90c2b3c-c05f-4143-a06f-eceaad7c99d9" item="PSMClass: *AddedWithE*" versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="891d1ba3-04f3-477b-81c0-a73283d5ed3c" item="PSMAssociation from PSMClass: *Purchase* to PSMClass: *AddedWithE*" versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="e94a2c8a-f30f-4619-808f-32931990a7a6" item="PSMClass: *AddedEmpty*" versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="93b3a07d-1a59-4712-bfaf-00d5c87dab09" item="PSMAssociation from PSMClass: *Purchase* to PSMClass: *AddedEmpty*" versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="aecb3871-cef7-4759-b497-c485e1a69717" item="PSMClass: *AddedWithA*" versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="a5a89a26-fbfc-4ff3-9b4b-8e46408c7663" item="PSMAssociation from PSMClass: *Purchase* to PSMClass: *AddedWithA*" versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="9a391ffe-a912-4ae6-8a10-b745a36680ff" item="PSMClass: *GroupEmpty*" versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="452db67b-9264-44a4-91c4-8a3477d5a80d" item="PSMAssociation from PSMClass: *Purchase* to PSMClass: *GroupEmpty*" versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="9ffeafa3-c16b-4f11-93fc-760a41fd006b" item="PSMClass: *GroupA*" versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="9f3af81d-3929-4226-b788-ebc3487c9052" item="PSMAssociation from PSMClass: *Purchase* to PSMClass: *GroupA*" versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="a9c1adfd-1b38-4c86-957d-3a93c072a0f9" item="PSMClass: *GroupE*" versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="e9ebb0d4-10cb-41eb-8471-e8bc9095ebbf" item="PSMAssociation from PSMClass: *Purchase* to PSMClass: *GroupE*" versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="365e7a65-4216-4d2c-80b3-360048bd03ed" item="PSMAttribute: *AddedWithE.E* 1..1" versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="12f78c62-9072-41da-8e87-44333705b5ee" item="PSMAttribute: *AddedWithA.A* 1..1" versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="078fe45a-4b32-4a78-98d1-48ea882529e3" item="PSMAttribute: *GroupA.ga* 1..1" versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+    <eXo:LinkedItems>
+      <eXo:LinkedItem itemID="fbd29334-58e2-45a9-8a22-ad89f083222f" item="PSMAttribute: *GroupE.ge* 1..1" versionNumber="cd7e8007-6b9f-4e88-954c-ed4c87008bd9" />
+    </eXo:LinkedItems>
+  </eXo:VersionLinks>
+</eXo:Project>

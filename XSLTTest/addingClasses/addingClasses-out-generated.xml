@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<purchase-request purchase-date="facilisis" ga="ga1">
+  <id>erat</id>
+  <item amount="neque" unit-price="unit-price1" />
+  <item amount="lobortis" unit-price="unit-price1" />
+  <item amount="erat" unit-price="unit-price1" />
+  <item amount="urna" unit-price="unit-price1" />
+  <item amount="Aenean" unit-price="unit-price1" />
+  <item amount="ipsum" unit-price="unit-price1" />
+  <item amount="tincidunt" unit-price="unit-price1" />
+  <item amount="sit" unit-price="unit-price1" />
+  <item amount="nec" unit-price="unit-price1" />
+  <addedWithE>
+    <E>E1</E>
+  </addedWithE>
+  <addedWithA A="A1" />
+  <addedEmpty />
+  <ge>ge1</ge>
+</purchase-request>

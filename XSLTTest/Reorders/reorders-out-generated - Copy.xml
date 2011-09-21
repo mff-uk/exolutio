@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<purchase purchase-date="Vivamus">
+  <item amountr="vitae">
+    <product>
+      <subcode>pharetra</subcode>
+      <code>rutrum</code>
+      <weight>consectetur</weight>
+      <title>ipsum</title>
+      <groupatt>lectus</groupatt>
+      <child2 nodeAttAr="euismod">
+        <nodeAttEr>Nam</nodeAttEr>
+      </child2>
+      <child2 nodeAttAr="faucibus">
+        <nodeAttEr>Curabitur</nodeAttEr>
+      </child2>
+      <child2 nodeAttAr="urna">
+        <nodeAttEr>sit</nodeAttEr>
+      </child2>
+      <child1 a1="eget" />
+      <child1 a1="arcu" />
+      <child1 a1="sapien" />
+      <groupatt>nec</groupatt>
+      <child2 nodeAttAr="Suspendisse">
+        <nodeAttEr>erat</nodeAttEr>
+      </child2>
+      <child2 nodeAttAr="Nam">
+        <nodeAttEr>imperdiet</nodeAttEr>
+      </child2>
+      <child2 nodeAttAr="tellus">
+        <nodeAttEr>ipsum</nodeAttEr>
+      </child2>
+      <child1 a1="consectetur" />
+      <child1 a1="vulputate" />
+      <child1 a1="urna" />
+    </product>
+    <unit-price>dolor</unit-price>
+  </item>
+  <item amountr="quam">
+    <product>
+      <subcode>vulputate</subcode>
+      <code>et</code>
+      <weight>Curabitur</weight>
+      <title>libero</title>
+      <groupatt>vulputate</groupatt>
+      <child2 nodeAttAr="In">
+        <nodeAttEr>et</nodeAttEr>
+      </child2>
+      <child2 nodeAttAr="libero">
+        <nodeAttEr>vestibulum</nodeAttEr>
+      </child2>
+      <child2 nodeAttAr="tincidunt">
+        <nodeAttEr>magna</nodeAttEr>
+      </child2>
+      <child1 a1="congue" />
+      <child1 a1="luctus" />
+      <child1 a1="nulla" />
+      <child1 a1="facilisis" />
+      <groupatt>dignissim</groupatt>
+      <child2 nodeAttAr="vitae">
+        <nodeAttEr>Pellentesque</nodeAttEr>
+      </child2>
+      <child2 nodeAttAr="odio">
+        <nodeAttEr>Quisque</nodeAttEr>
+      </child2>
+      <child2 nodeAttAr="Lorem">
+        <nodeAttEr>Donec</nodeAttEr>
+      </child2>
+      <child1 a1="augue" />
+      <child1 a1="in" />
+      <child1 a1="nisl" />
+    </product>
+    <unit-price>eleifend</unit-price>
+  </item>
+  <customer-info>
+    <address-d>
+      <city>tellus</city>
+      <zip>fermentum</zip>
+      <street>odio</street>
+    </address-d>
+    <customer>
+      <customer-no>ut</customer-no>
+    </customer>
+  </customer-info>
+</purchase>

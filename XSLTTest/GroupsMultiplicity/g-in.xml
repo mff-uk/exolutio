@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<purchase-request purchase-date="ullamcorper" emp-no="12">
+  <customer-info>
+    <customer customer-no="ipsum">
+      <email>tar</email>
+      <email>qued</email>
+    </customer>
+    <postcode>blandit</postcode>
+    <city>euismod</city>
+    <street>ullamcorper</street>
+  </customer-info>
+  <product code="ipsum" subcode="dapibus">
+    <title>Donec</title>
+    <weight>adipiscing</weight>
+    <size>arcu</size>
+  </product>
+  <item-info>
+    <amount>pharetra</amount>
+    <unit-price>Nam</unit-price>
+  </item-info>
+  <product code="non" subcode="ullamcorper">
+    <title>Nunc</title>
+    <weight>venenatis</weight>
+    <size>neque</size>
+  </product>
+  <item-info>
+    <amount>arcu</amount>
+    <unit-price>velit</unit-price>
+  </item-info>
+</purchase-request>
