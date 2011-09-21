@@ -331,7 +331,7 @@ inv: !league->isEmpty() implies reg-no != null
             </eXo:ChildPSMAssociations>
             <eXo:GeneralizationAsGeneral Count="0" />
             <eXo:PSMAttributes Count="3">
-              <eXo:PSMAttribute ID="1567afa6-0917-43ab-b0cb-b6437c2f3c86" Name="name" InterpretationID="8f18c308-691f-48d3-82e5-c58e18ac9fc5" Interpretation="PIMAttribute: *Tournament.name* 1..1" Element="True" psmClassID="89dd50ff-6576-4a07-be4c-7d46fe805358">
+              <eXo:PSMAttribute ID="1567afa6-0917-43ab-b0cb-b6437c2f3c86" Name="name" InterpretationID="8f18c308-691f-48d3-82e5-c58e18ac9fc5" Interpretation="PIMAttribute: *Tournament.name* 1..1" Type="e06bc2c1-0ba6-4c8f-a892-93db94b544bb" displayName="AttributeType: string" Element="True" psmClassID="89dd50ff-6576-4a07-be4c-7d46fe805358">
                 <eXo:UsedGeneralizations Count="0" />
               </eXo:PSMAttribute>
               <eXo:PSMAttribute ID="63af3a19-f5a3-4d31-8d0c-5245ca998c3d" Name="start" InterpretationID="a18a531c-368e-4851-9579-55087d59f5c2" Interpretation="PIMAttribute: *Tournament.start* 1..1" Type="cf33518b-c155-4d3b-b102-aa65954c82b8" displayName="AttributeType: dateTime" Element="True" psmClassID="89dd50ff-6576-4a07-be4c-7d46fe805358">
@@ -362,7 +362,7 @@ inv: !league->isEmpty() implies reg-no != null
             <eXo:ChildPSMAssociations Count="0" />
             <eXo:GeneralizationAsGeneral Count="0" />
             <eXo:PSMAttributes Count="1">
-              <eXo:PSMAttribute ID="8eafdc33-79b6-4386-bb20-e3d347c2519f" Name="name" InterpretationID="8bf6ab2d-8b47-41a0-ad94-f4164ce36fbd" Interpretation="PIMAttribute: *Player.name* 1..1" Type="5d84c73e-74cd-4acc-bd44-e465272fb37a" displayName="AttributeType: String" Element="True" psmClassID="a8509e38-ae12-44e0-a86f-b6ea03484a42">
+              <eXo:PSMAttribute ID="8eafdc33-79b6-4386-bb20-e3d347c2519f" Name="name" InterpretationID="8bf6ab2d-8b47-41a0-ad94-f4164ce36fbd" Interpretation="PIMAttribute: *Player.name* 1..1" Type="e06bc2c1-0ba6-4c8f-a892-93db94b544bb" displayName="AttributeType: string" Element="True" psmClassID="a8509e38-ae12-44e0-a86f-b6ea03484a42">
                 <eXo:UsedGeneralizations Count="0" />
               </eXo:PSMAttribute>
             </eXo:PSMAttributes>
@@ -388,10 +388,10 @@ inv: !league->isEmpty() implies reg-no != null
             <eXo:ChildPSMAssociations Count="0" />
             <eXo:GeneralizationAsGeneral Count="0" />
             <eXo:PSMAttributes Count="2">
-              <eXo:PSMAttribute ID="9e687246-827a-4944-9be5-a74800c8f7a3" Name="name" InterpretationID="8bf6ab2d-8b47-41a0-ad94-f4164ce36fbd" Interpretation="PIMAttribute: *Player.name* 1..1" Type="5d84c73e-74cd-4acc-bd44-e465272fb37a" displayName="AttributeType: String" Element="True" psmClassID="7a3a6c1e-634c-44e6-ad2a-ee09254c805c">
+              <eXo:PSMAttribute ID="9e687246-827a-4944-9be5-a74800c8f7a3" Name="name" InterpretationID="8bf6ab2d-8b47-41a0-ad94-f4164ce36fbd" Interpretation="PIMAttribute: *Player.name* 1..1" Type="e06bc2c1-0ba6-4c8f-a892-93db94b544bb" displayName="AttributeType: string" Element="True" psmClassID="7a3a6c1e-634c-44e6-ad2a-ee09254c805c">
                 <eXo:UsedGeneralizations Count="0" />
               </eXo:PSMAttribute>
-              <eXo:PSMAttribute ID="498d4e95-6787-4fd1-8e78-72d7f8bd7fff" Name="email" InterpretationID="ba9b697f-cb0d-4b3d-9877-49dfb701a926" Interpretation="PIMAttribute: *Player.email* 0..1" Type="5d84c73e-74cd-4acc-bd44-e465272fb37a" displayName="AttributeType: String" Element="True" psmClassID="7a3a6c1e-634c-44e6-ad2a-ee09254c805c">
+              <eXo:PSMAttribute ID="498d4e95-6787-4fd1-8e78-72d7f8bd7fff" Name="email" InterpretationID="ba9b697f-cb0d-4b3d-9877-49dfb701a926" Interpretation="PIMAttribute: *Player.email* 0..1" Type="e06bc2c1-0ba6-4c8f-a892-93db94b544bb" displayName="AttributeType: string" Element="True" psmClassID="7a3a6c1e-634c-44e6-ad2a-ee09254c805c">
                 <eXo:UsedGeneralizations Count="0" />
               </eXo:PSMAttribute>
             </eXo:PSMAttributes>
@@ -410,11 +410,8 @@ inv: !league->isEmpty() implies reg-no != null
               <eXo:ChildPSMAssociation childPSMAssociationID="b2006972-b3b2-4566-99a9-a5096d026944" childPSMAssociation="PSMAssociation from PSMClass: *Day* to PSMClass: *Match*" />
             </eXo:ChildPSMAssociations>
             <eXo:GeneralizationAsGeneral Count="0" />
-            <eXo:PSMAttributes Count="2">
+            <eXo:PSMAttributes Count="1">
               <eXo:PSMAttribute ID="01d31d79-0caf-40c1-b90e-85a41f8fa18f" Name="date" Type="bfd5b6ab-988a-429b-a22f-42073ba29dab" displayName="AttributeType: date" Element="True" psmClassID="623cf43a-8572-4771-abe6-09becd0ce8b9">
-                <eXo:UsedGeneralizations Count="0" />
-              </eXo:PSMAttribute>
-              <eXo:PSMAttribute ID="d327e4d6-e2ac-484d-a11e-6217db68ae20" Name="name" Type="e06bc2c1-0ba6-4c8f-a892-93db94b544bb" displayName="AttributeType: string" Element="True" psmClassID="623cf43a-8572-4771-abe6-09becd0ce8b9">
                 <eXo:UsedGeneralizations Count="0" />
               </eXo:PSMAttribute>
             </eXo:PSMAttributes>
@@ -457,7 +454,7 @@ inv: !league->isEmpty() implies reg-no != null
             <eXo:Parent NodeType="PSMClass" parentID="89dd50ff-6576-4a07-be4c-7d46fe805358" parent="PSMClass: *Tournament*" />
             <eXo:Child NodeType="PSMClass" childID="cc14d87e-5aa7-49ed-82d5-5bdf4266ea34" child="PSMClass: *Players*" />
           </eXo:PSMAssociation>
-          <eXo:PSMAssociation ID="6b1de9ed-897d-4814-ba0c-19c601faed02" Name="day">
+          <eXo:PSMAssociation ID="6b1de9ed-897d-4814-ba0c-19c601faed02" Name="day" Upper="*">
             <eXo:UsedGeneralizations Count="0" />
             <eXo:Parent NodeType="PSMClass" parentID="dd9bcc05-4a47-4a3d-85c5-9fc8f3ecb351" parent="PSMClass: *Matches*" />
             <eXo:Child NodeType="PSMClass" childID="623cf43a-8572-4771-abe6-09becd0ce8b9" child="PSMClass: *Day*" />
@@ -481,7 +478,7 @@ least one Match on the first
 day of the Tournament */
 
 context Tournament
-inv: matches.day.match->exists(m:Match | m.start.equals(start))
+inv: matches.day.match->exists(m:Match | m.start = start)
 
 /* A match can only involve players who are
 accepted in the tournament 
@@ -532,7 +529,7 @@ Each day shows only matches taking place that day
 expects conversion dateTime -> date using Date() function
 */
 context Day
-inv: self.match->forAll(d: d.start.Date() =date)]]></eXo:Contents>
+inv: self.match->forAll(m | m.start.Date() =date)]]></eXo:Contents>
           </eXo:OCLScript>
         </eXo:OCLScripts>
       </eXo:PSMSchema>
@@ -555,10 +552,10 @@ inv: self.match->forAll(d: d.start.Date() =date)]]></eXo:Contents>
             </eXo:ChildPSMAssociations>
             <eXo:GeneralizationAsGeneral Count="0" />
             <eXo:PSMAttributes Count="2">
-              <eXo:PSMAttribute ID="87f2efa7-c81e-4d71-a962-3496d3653dd2" Name="name" InterpretationID="8f18c308-691f-48d3-82e5-c58e18ac9fc5" Interpretation="PIMAttribute: *Tournament.name* 1..1" Element="True" psmClassID="7a4fea5d-a035-421e-aca6-2764ee2a39f1">
+              <eXo:PSMAttribute ID="87f2efa7-c81e-4d71-a962-3496d3653dd2" Name="name" InterpretationID="8f18c308-691f-48d3-82e5-c58e18ac9fc5" Interpretation="PIMAttribute: *Tournament.name* 1..1" Type="e06bc2c1-0ba6-4c8f-a892-93db94b544bb" displayName="AttributeType: string" Element="True" psmClassID="7a4fea5d-a035-421e-aca6-2764ee2a39f1">
                 <eXo:UsedGeneralizations Count="0" />
               </eXo:PSMAttribute>
-              <eXo:PSMAttribute ID="2d329022-2985-4e65-bc27-ca760f249abc" Name="requiredQualificationPoints" InterpretationID="70da5237-6284-404f-ad2a-e82732038c94" Interpretation="PIMAttribute: *Tournament.requiredQualificationPoints* 0..1" Lower="0" Element="True" psmClassID="7a4fea5d-a035-421e-aca6-2764ee2a39f1">
+              <eXo:PSMAttribute ID="2d329022-2985-4e65-bc27-ca760f249abc" Name="requiredQualificationPoints" InterpretationID="70da5237-6284-404f-ad2a-e82732038c94" Interpretation="PIMAttribute: *Tournament.requiredQualificationPoints* 0..1" Lower="0" Type="4be2ef00-19ff-4844-81d4-80130ef47602" displayName="AttributeType: nonNegativeInteger" Element="True" psmClassID="7a4fea5d-a035-421e-aca6-2764ee2a39f1">
                 <eXo:UsedGeneralizations Count="0" />
               </eXo:PSMAttribute>
             </eXo:PSMAttributes>
@@ -570,16 +567,16 @@ inv: self.match->forAll(d: d.start.Date() =date)]]></eXo:Contents>
             </eXo:ChildPSMAssociations>
             <eXo:GeneralizationAsGeneral Count="0" />
             <eXo:PSMAttributes Count="4">
-              <eXo:PSMAttribute ID="7bdf1f19-2c36-48ab-b43d-d15ec170f047" Name="points" InterpretationID="2e6f465a-e79e-4f3e-9abf-f231a5b4b6fc" Interpretation="PIMAttribute: *Player.points* 1..1" Type="dc49d35c-feaf-4e9e-9c22-267208d61a77" displayName="AttributeType: Integer" Element="True" psmClassID="d1027b46-1401-4932-8795-80d385a015e0">
+              <eXo:PSMAttribute ID="7bdf1f19-2c36-48ab-b43d-d15ec170f047" Name="points" InterpretationID="2e6f465a-e79e-4f3e-9abf-f231a5b4b6fc" Interpretation="PIMAttribute: *Player.points* 1..1" Type="cc8fb2f9-34eb-445f-80fc-acf8ab017cd1" displayName="AttributeType: integer" Element="True" psmClassID="d1027b46-1401-4932-8795-80d385a015e0">
                 <eXo:UsedGeneralizations Count="0" />
               </eXo:PSMAttribute>
-              <eXo:PSMAttribute ID="4391c318-db48-4f67-abdd-e83269c77469" Name="reg-no" InterpretationID="3e81be96-43ef-41a6-bdda-bd60d6af035f" Interpretation="PIMAttribute: *Player.reg-no* 0..1" Lower="0" Element="True" psmClassID="d1027b46-1401-4932-8795-80d385a015e0">
+              <eXo:PSMAttribute ID="4391c318-db48-4f67-abdd-e83269c77469" Name="reg-no" InterpretationID="3e81be96-43ef-41a6-bdda-bd60d6af035f" Interpretation="PIMAttribute: *Player.reg-no* 0..1" Lower="0" Type="e06bc2c1-0ba6-4c8f-a892-93db94b544bb" displayName="AttributeType: string" Element="True" psmClassID="d1027b46-1401-4932-8795-80d385a015e0">
                 <eXo:UsedGeneralizations Count="0" />
               </eXo:PSMAttribute>
-              <eXo:PSMAttribute ID="dc6db47e-94dd-4dcb-886d-1aaf4b2675c6" Name="email" InterpretationID="ba9b697f-cb0d-4b3d-9877-49dfb701a926" Interpretation="PIMAttribute: *Player.email* 0..1" Lower="0" Type="5d84c73e-74cd-4acc-bd44-e465272fb37a" displayName="AttributeType: String" Element="True" psmClassID="d1027b46-1401-4932-8795-80d385a015e0">
+              <eXo:PSMAttribute ID="dc6db47e-94dd-4dcb-886d-1aaf4b2675c6" Name="email" InterpretationID="ba9b697f-cb0d-4b3d-9877-49dfb701a926" Interpretation="PIMAttribute: *Player.email* 0..1" Lower="0" Type="e06bc2c1-0ba6-4c8f-a892-93db94b544bb" displayName="AttributeType: string" Element="True" psmClassID="d1027b46-1401-4932-8795-80d385a015e0">
                 <eXo:UsedGeneralizations Count="0" />
               </eXo:PSMAttribute>
-              <eXo:PSMAttribute ID="b85c837e-ba48-468c-b9ce-79b6b3efd6b0" Name="name" InterpretationID="8bf6ab2d-8b47-41a0-ad94-f4164ce36fbd" Interpretation="PIMAttribute: *Player.name* 1..1" Type="5d84c73e-74cd-4acc-bd44-e465272fb37a" displayName="AttributeType: String" Element="True" psmClassID="d1027b46-1401-4932-8795-80d385a015e0">
+              <eXo:PSMAttribute ID="b85c837e-ba48-468c-b9ce-79b6b3efd6b0" Name="name" InterpretationID="8bf6ab2d-8b47-41a0-ad94-f4164ce36fbd" Interpretation="PIMAttribute: *Player.name* 1..1" Type="e06bc2c1-0ba6-4c8f-a892-93db94b544bb" displayName="AttributeType: string" Element="True" psmClassID="d1027b46-1401-4932-8795-80d385a015e0">
                 <eXo:UsedGeneralizations Count="0" />
               </eXo:PSMAttribute>
             </eXo:PSMAttributes>
@@ -589,7 +586,7 @@ inv: self.match->forAll(d: d.start.Date() =date)]]></eXo:Contents>
             <eXo:ChildPSMAssociations Count="0" />
             <eXo:GeneralizationAsGeneral Count="0" />
             <eXo:PSMAttributes Count="1">
-              <eXo:PSMAttribute ID="3f60fdbd-3596-4e4f-9ce6-6a292f49c9d0" Name="name" InterpretationID="f18875d3-30d5-4e17-a2fc-31e6cd26175c" Interpretation="PIMAttribute: *League.name* 1..1" Element="True" psmClassID="572f446e-6037-4708-9f76-9eeb68ca3574">
+              <eXo:PSMAttribute ID="3f60fdbd-3596-4e4f-9ce6-6a292f49c9d0" Name="name" InterpretationID="f18875d3-30d5-4e17-a2fc-31e6cd26175c" Interpretation="PIMAttribute: *League.name* 1..1" Type="e06bc2c1-0ba6-4c8f-a892-93db94b544bb" displayName="AttributeType: string" Element="True" psmClassID="572f446e-6037-4708-9f76-9eeb68ca3574">
                 <eXo:UsedGeneralizations Count="0" />
               </eXo:PSMAttribute>
             </eXo:PSMAttributes>
@@ -599,7 +596,7 @@ inv: self.match->forAll(d: d.start.Date() =date)]]></eXo:Contents>
             <eXo:ChildPSMAssociations Count="0" />
             <eXo:GeneralizationAsGeneral Count="0" />
             <eXo:PSMAttributes Count="1">
-              <eXo:PSMAttribute ID="5ca418e3-33a1-4f6c-8192-da2f90be703c" Name="name" InterpretationID="f18875d3-30d5-4e17-a2fc-31e6cd26175c" Interpretation="PIMAttribute: *League.name* 1..1" Element="True" psmClassID="517ae20d-5ac0-4b57-9aec-12c1c81a39d4">
+              <eXo:PSMAttribute ID="5ca418e3-33a1-4f6c-8192-da2f90be703c" Name="name" InterpretationID="f18875d3-30d5-4e17-a2fc-31e6cd26175c" Interpretation="PIMAttribute: *League.name* 1..1" Type="e06bc2c1-0ba6-4c8f-a892-93db94b544bb" displayName="AttributeType: string" Element="True" psmClassID="517ae20d-5ac0-4b57-9aec-12c1c81a39d4">
                 <eXo:UsedGeneralizations Count="0" />
               </eXo:PSMAttribute>
             </eXo:PSMAttributes>
@@ -670,27 +667,27 @@ inv: league.name = parent().tournament-league.name
         <eXo:Roots Count="1">
           <eXo:Root rootID="40d73b84-b0ef-4f24-af84-7707d64e1280" root="PSMSchemaClass: TournamentsSchedule" />
         </eXo:Roots>
-        <eXo:PSMClasses Count="4">
+        <eXo:PSMClasses Count="5">
           <eXo:PSMClass ID="dd212655-be1a-4f33-aa94-0dcf3aa48490" Name="Tournament" InterpretationID="1e014a11-c043-423c-b4a6-5d0553ac31bd" Interpretation="PIMClass: *Tournament*" parentAssociationID="d0801278-3823-42f7-ae21-e28ff301ae89" parentAssociation="PSMAssociation from PSMClass: *Tournaments* to PSMClass: *Tournament*">
             <eXo:UsedGeneralizations Count="0" />
             <eXo:ChildPSMAssociations Count="1">
-              <eXo:ChildPSMAssociation childPSMAssociationID="cca6944a-bfbd-4632-a1a0-f42f82667e85" childPSMAssociation="PSMAssociation from PSMClass: *Tournament* to PSMContentModel: Choice" />
+              <eXo:ChildPSMAssociation childPSMAssociationID="b7e65569-c2f3-474a-9860-9029c3ad649d" childPSMAssociation="PSMAssociation from PSMClass: *Tournament* to PSMClass: *Qualification*" />
             </eXo:ChildPSMAssociations>
             <eXo:GeneralizationAsGeneral Count="0" />
             <eXo:PSMAttributes Count="5">
-              <eXo:PSMAttribute ID="d077b410-c685-4a69-beec-a3ff0d23ce61" Name="name" InterpretationID="8f18c308-691f-48d3-82e5-c58e18ac9fc5" Interpretation="PIMAttribute: *Tournament.name* 1..1" Element="True" psmClassID="dd212655-be1a-4f33-aa94-0dcf3aa48490">
+              <eXo:PSMAttribute ID="d077b410-c685-4a69-beec-a3ff0d23ce61" Name="name" InterpretationID="8f18c308-691f-48d3-82e5-c58e18ac9fc5" Interpretation="PIMAttribute: *Tournament.name* 1..1" Type="e06bc2c1-0ba6-4c8f-a892-93db94b544bb" displayName="AttributeType: string" Element="True" psmClassID="dd212655-be1a-4f33-aa94-0dcf3aa48490">
                 <eXo:UsedGeneralizations Count="0" />
               </eXo:PSMAttribute>
-              <eXo:PSMAttribute ID="e22d793a-1a9f-458e-8978-7324c7c206f5" Name="start" InterpretationID="a18a531c-368e-4851-9579-55087d59f5c2" Interpretation="PIMAttribute: *Tournament.start* 1..1" Element="True" psmClassID="dd212655-be1a-4f33-aa94-0dcf3aa48490">
+              <eXo:PSMAttribute ID="e22d793a-1a9f-458e-8978-7324c7c206f5" Name="start" InterpretationID="a18a531c-368e-4851-9579-55087d59f5c2" Interpretation="PIMAttribute: *Tournament.start* 1..1" Type="bfd5b6ab-988a-429b-a22f-42073ba29dab" displayName="AttributeType: date" Element="True" psmClassID="dd212655-be1a-4f33-aa94-0dcf3aa48490">
                 <eXo:UsedGeneralizations Count="0" />
               </eXo:PSMAttribute>
-              <eXo:PSMAttribute ID="7545c669-d769-4d4b-a150-7a499004353b" Name="end" InterpretationID="ed86c6f3-8c7b-4e14-a22b-f63d17f1a582" Interpretation="PIMAttribute: *Tournament.end* 1..1" Element="True" psmClassID="dd212655-be1a-4f33-aa94-0dcf3aa48490">
+              <eXo:PSMAttribute ID="7545c669-d769-4d4b-a150-7a499004353b" Name="end" InterpretationID="ed86c6f3-8c7b-4e14-a22b-f63d17f1a582" Interpretation="PIMAttribute: *Tournament.end* 1..1" Type="bfd5b6ab-988a-429b-a22f-42073ba29dab" displayName="AttributeType: date" Element="True" psmClassID="dd212655-be1a-4f33-aa94-0dcf3aa48490">
                 <eXo:UsedGeneralizations Count="0" />
               </eXo:PSMAttribute>
-              <eXo:PSMAttribute ID="958be14e-d428-4c93-9cf3-2e3dfed24bc1" Name="requiredQualificationPoints" InterpretationID="70da5237-6284-404f-ad2a-e82732038c94" Interpretation="PIMAttribute: *Tournament.requiredQualificationPoints* 0..1" Lower="0" Element="True" psmClassID="dd212655-be1a-4f33-aa94-0dcf3aa48490">
+              <eXo:PSMAttribute ID="958be14e-d428-4c93-9cf3-2e3dfed24bc1" Name="requiredQualificationPoints" InterpretationID="70da5237-6284-404f-ad2a-e82732038c94" Interpretation="PIMAttribute: *Tournament.requiredQualificationPoints* 0..1" Lower="0" Type="4be2ef00-19ff-4844-81d4-80130ef47602" displayName="AttributeType: nonNegativeInteger" Element="True" psmClassID="dd212655-be1a-4f33-aa94-0dcf3aa48490">
                 <eXo:UsedGeneralizations Count="0" />
               </eXo:PSMAttribute>
-              <eXo:PSMAttribute ID="056298ae-29f6-40f8-8b7a-8d67467bca37" Name="maxNumPlayers" InterpretationID="724c304d-2fa7-466b-8a72-acada67f6103" Interpretation="PIMAttribute: *Tournament.maxNumPlayers* 1..1" Element="False" psmClassID="dd212655-be1a-4f33-aa94-0dcf3aa48490">
+              <eXo:PSMAttribute ID="056298ae-29f6-40f8-8b7a-8d67467bca37" Name="maxNumPlayers" InterpretationID="724c304d-2fa7-466b-8a72-acada67f6103" Interpretation="PIMAttribute: *Tournament.maxNumPlayers* 1..1" Type="ec089adc-8e36-481d-9c18-e41335d5aebb" displayName="AttributeType: positiveInteger" Element="True" psmClassID="dd212655-be1a-4f33-aa94-0dcf3aa48490">
                 <eXo:UsedGeneralizations Count="0" />
               </eXo:PSMAttribute>
             </eXo:PSMAttributes>
@@ -708,7 +705,7 @@ inv: league.name = parent().tournament-league.name
             <eXo:ChildPSMAssociations Count="0" />
             <eXo:GeneralizationAsGeneral Count="0" />
             <eXo:PSMAttributes Count="1">
-              <eXo:PSMAttribute ID="b40af1e9-5820-475a-8fe1-ce3af5b4ba68" Name="open" InterpretationID="fdeda90b-d33a-46ed-a188-6f0c0fdb018b" Interpretation="PIMAttribute: *Tournament.open* 1..1" Element="False" psmClassID="fe1ae3f8-1095-4d6e-95fd-f497d72cfbff">
+              <eXo:PSMAttribute ID="b40af1e9-5820-475a-8fe1-ce3af5b4ba68" Name="open" InterpretationID="fdeda90b-d33a-46ed-a188-6f0c0fdb018b" Interpretation="PIMAttribute: *Tournament.open* 1..1" Type="34b78259-bed9-4eb9-b770-20b4db5c30bb" displayName="AttributeType: boolean" Element="False" psmClassID="fe1ae3f8-1095-4d6e-95fd-f497d72cfbff">
                 <eXo:UsedGeneralizations Count="0" />
               </eXo:PSMAttribute>
             </eXo:PSMAttributes>
@@ -718,15 +715,23 @@ inv: league.name = parent().tournament-league.name
             <eXo:ChildPSMAssociations Count="0" />
             <eXo:GeneralizationAsGeneral Count="0" />
             <eXo:PSMAttributes Count="1">
-              <eXo:PSMAttribute ID="1d2ae3b0-c476-4ad9-84cd-60de4c1f99be" Name="league-name" InterpretationID="f18875d3-30d5-4e17-a2fc-31e6cd26175c" Interpretation="PIMAttribute: *League.name* 1..1" Type="5d84c73e-74cd-4acc-bd44-e465272fb37a" displayName="AttributeType: String" Element="False" psmClassID="22228994-7dfc-48ab-8107-f617dfaeede8">
+              <eXo:PSMAttribute ID="1d2ae3b0-c476-4ad9-84cd-60de4c1f99be" Name="league-name" InterpretationID="f18875d3-30d5-4e17-a2fc-31e6cd26175c" Interpretation="PIMAttribute: *League.name* 1..1" Type="e06bc2c1-0ba6-4c8f-a892-93db94b544bb" displayName="AttributeType: string" Element="False" psmClassID="22228994-7dfc-48ab-8107-f617dfaeede8">
                 <eXo:UsedGeneralizations Count="0" />
               </eXo:PSMAttribute>
             </eXo:PSMAttributes>
           </eXo:PSMClass>
+          <eXo:PSMClass ID="92cd7824-0baa-46b0-bc50-28d5b65600bc" Name="Qualification" parentAssociationID="b7e65569-c2f3-474a-9860-9029c3ad649d" parentAssociation="PSMAssociation from PSMClass: *Tournament* to PSMClass: *Qualification*">
+            <eXo:UsedGeneralizations Count="0" />
+            <eXo:ChildPSMAssociations Count="1">
+              <eXo:ChildPSMAssociation childPSMAssociationID="cca6944a-bfbd-4632-a1a0-f42f82667e85" childPSMAssociation="PSMAssociation from PSMClass: *Qualification* to PSMContentModel: Choice" />
+            </eXo:ChildPSMAssociations>
+            <eXo:GeneralizationAsGeneral Count="0" />
+            <eXo:PSMAttributes Count="0" />
+          </eXo:PSMClass>
         </eXo:PSMClasses>
         <eXo:PSMGeneralizations Count="0" />
-        <eXo:PSMAssociations Count="5">
-          <eXo:PSMAssociation ID="d0801278-3823-42f7-ae21-e28ff301ae89" Name="tournament">
+        <eXo:PSMAssociations Count="6">
+          <eXo:PSMAssociation ID="d0801278-3823-42f7-ae21-e28ff301ae89" Name="tournament" Lower="0" Upper="*">
             <eXo:UsedGeneralizations Count="0" />
             <eXo:Parent NodeType="PSMClass" parentID="52b287ab-5160-460b-8a4a-791cf9ea8cc6" parent="PSMClass: *Tournaments*" />
             <eXo:Child NodeType="PSMClass" childID="dd212655-be1a-4f33-aa94-0dcf3aa48490" child="PSMClass: *Tournament*" />
@@ -748,12 +753,17 @@ inv: league.name = parent().tournament-league.name
           </eXo:PSMAssociation>
           <eXo:PSMAssociation ID="cca6944a-bfbd-4632-a1a0-f42f82667e85" Name="">
             <eXo:UsedGeneralizations Count="0" />
-            <eXo:Parent NodeType="PSMClass" parentID="dd212655-be1a-4f33-aa94-0dcf3aa48490" parent="PSMClass: *Tournament*" />
+            <eXo:Parent NodeType="PSMClass" parentID="92cd7824-0baa-46b0-bc50-28d5b65600bc" parent="PSMClass: *Qualification*" />
             <eXo:Child NodeType="PSMContentModel" childID="96fa7725-c9e5-4d3d-b8e9-1c64e364f1dc" child="PSMContentModel: Choice" />
+          </eXo:PSMAssociation>
+          <eXo:PSMAssociation ID="b7e65569-c2f3-474a-9860-9029c3ad649d" Name="qualification">
+            <eXo:UsedGeneralizations Count="0" />
+            <eXo:Parent NodeType="PSMClass" parentID="dd212655-be1a-4f33-aa94-0dcf3aa48490" parent="PSMClass: *Tournament*" />
+            <eXo:Child NodeType="PSMClass" childID="92cd7824-0baa-46b0-bc50-28d5b65600bc" child="PSMClass: *Qualification*" />
           </eXo:PSMAssociation>
         </eXo:PSMAssociations>
         <eXo:PSMContentModels Count="1">
-          <eXo:PSMContentModel ID="96fa7725-c9e5-4d3d-b8e9-1c64e364f1dc" Name="defaultname" parentAssociationID="cca6944a-bfbd-4632-a1a0-f42f82667e85" parentAssociation="PSMAssociation from PSMClass: *Tournament* to PSMContentModel: Choice" Type="Choice">
+          <eXo:PSMContentModel ID="96fa7725-c9e5-4d3d-b8e9-1c64e364f1dc" Name="defaultname" parentAssociationID="cca6944a-bfbd-4632-a1a0-f42f82667e85" parentAssociation="PSMAssociation from PSMClass: *Qualification* to PSMContentModel: Choice" Type="Choice">
             <eXo:UsedGeneralizations Count="0" />
             <eXo:ChildPSMAssociations Count="2">
               <eXo:ChildPSMAssociation childPSMAssociationID="f2ecb976-c48f-4313-9e2e-eadec7d5cb6f" childPSMAssociation="PSMAssociation from PSMContentModel: Choice to PSMClass: *OpenTournament*" />
@@ -761,6 +771,31 @@ inv: league.name = parent().tournament-league.name
             </eXo:ChildPSMAssociations>
           </eXo:PSMContentModel>
         </eXo:PSMContentModels>
+        <eXo:OCLScripts Count="1">
+          <eXo:OCLScript ID="dd778127-54ae-4b79-9917-242ba3705ef5" Name="defaultname">
+            <eXo:Contents><![CDATA[/* choice tests - choice between attributes is not possible to 
+define sufficiently in XSD */
+
+/* either open tournament or belongs to some league */
+
+context: Tournament
+inv: qualification.choice(1).child(OpenTournament).open == true or 
+qualification.choice(1).child(League).league-name != null 
+
+/* now some other methods how to rewrite previous constraint
+to demonstrate choice naming and PSM navigation */
+
+context: Tournament
+inv: 
+qualification.child(CH_Qualification_OpenTournament_League).child(1).open == true or 
+qualification.child(CH_Qualification_OpenTournament_League).child(2).league-name != null 
+
+inv:
+qualification.CH_Qualification_OpenTournament_League.OpenTournament.open == true or 
+qualification.CH_Qualification_OpenTournament_League.League.league-name != null 
+]]></eXo:Contents>
+          </eXo:OCLScript>
+        </eXo:OCLScripts>
       </eXo:PSMSchema>
     </eXo:PSMSchemas>
     <eXo:PIMDiagrams Count="1">
@@ -1184,7 +1219,7 @@ inv: league.name = parent().tournament-league.name
               <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
-              <eXo:CardinalityLabelViewHelper X="-41" Y="-19" Width="NaN" Height="NaN">
+              <eXo:CardinalityLabelViewHelper X="25" Y="-20" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:CardinalityLabelViewHelper>
             </eXo:ViewHelper>
@@ -1210,7 +1245,7 @@ inv: league.name = parent().tournament-league.name
               <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
-              <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
+              <eXo:CardinalityLabelViewHelper X="12" Y="-19" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:CardinalityLabelViewHelper>
             </eXo:ViewHelper>
@@ -1227,7 +1262,7 @@ inv: league.name = parent().tournament-league.name
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="aac4f282-6a43-4c4e-96e0-e1e7d039a48a" component="PSMAssociation from PSMSchemaClass: TournamentApplication to PSMClass: *Tournament*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="0,143886566162109" Y="0" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
@@ -1253,7 +1288,7 @@ inv: league.name = parent().tournament-league.name
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="5a1a3f43-1499-4a4b-a271-e9cdbe5ba5a1" component="PSMAssociation from PSMClass: *Player* to PSMClass: *League*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="0,162601470947266" Y="0" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
@@ -1266,7 +1301,7 @@ inv: league.name = parent().tournament-league.name
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="88ab1521-f233-4cb3-82e4-6451f01122aa" component="PSMAssociation from PSMClass: *Tournament* to PSMClass: *League*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="0,162605285644531" Y="0" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
@@ -1286,10 +1321,10 @@ inv: league.name = parent().tournament-league.name
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="d0801278-3823-42f7-ae21-e28ff301ae89" component="PSMAssociation from PSMClass: *Tournaments* to PSMClass: *Tournament*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="0,106948852539063" Y="0" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
-              <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
+              <eXo:CardinalityLabelViewHelper X="49" Y="-17" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:CardinalityLabelViewHelper>
             </eXo:ViewHelper>
@@ -1336,9 +1371,22 @@ inv: league.name = parent().tournament-league.name
           <eXo:Component Type="PSMContentModel" componentID="96fa7725-c9e5-4d3d-b8e9-1c64e364f1dc" component="PSMContentModel: Choice">
             <eXo:ViewHelper />
           </eXo:Component>
-          <eXo:Component Type="PSMAssociation" componentID="cca6944a-bfbd-4632-a1a0-f42f82667e85" component="PSMAssociation from PSMClass: *Tournament* to PSMContentModel: Choice">
+          <eXo:Component Type="PSMAssociation" componentID="cca6944a-bfbd-4632-a1a0-f42f82667e85" component="PSMAssociation from PSMClass: *Qualification* to PSMContentModel: Choice">
             <eXo:ViewHelper>
               <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:MainLabelViewHelper>
+              <eXo:CardinalityLabelViewHelper X="-40" Y="4" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:CardinalityLabelViewHelper>
+            </eXo:ViewHelper>
+          </eXo:Component>
+          <eXo:Component Type="PSMClass" componentID="92cd7824-0baa-46b0-bc50-28d5b65600bc" component="PSMClass: *Qualification*">
+            <eXo:ViewHelper />
+          </eXo:Component>
+          <eXo:Component Type="PSMAssociation" componentID="b7e65569-c2f3-474a-9860-9029c3ad649d" component="PSMAssociation from PSMClass: *Tournament* to PSMClass: *Qualification*">
+            <eXo:ViewHelper>
+              <eXo:MainLabelViewHelper X="0,188682556152344" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
