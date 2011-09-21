@@ -39,13 +39,15 @@
   <xsl:template name="TOP-Purchase-Item-ATT">
     <xsl:param name="ci" as="item()*" />
     <xsl:apply-templates select="$ci[name() = 'amount']" />
-    <xsl:call-template name="TOP-Purchase-Item-unit-price" />
+    <xsl:call-template name="TOP-Purchase-Item-unit-price-IG" />
   </xsl:template>
-  <!--PSMAttribute: "Item.unit-price" 1..1-->
-  <xsl:template name="TOP-Purchase-Item-unit-price">
-    <xsl:attribute name="unit-price">###</xsl:attribute>
+  <!-- Instance generators -->
+  <xsl:template name="TOP-Purchase-Item-unit-price-IG">
+    <xsl:param name="count" as="item()" select="1" />
+    <xsl:for-each select="1 to $count">
+      <xsl:attribute name="unit-price">unit-price<xsl:value-of select="current()" /></xsl:attribute>
+    </xsl:for-each>
   </xsl:template>
-  <!--End of: PSMAttribute: "Item.unit-price" 1..1-->
   <!--Element to attribute conversion template-->
   <xsl:template match="amount" priority="0">
     <xsl:attribute name="{name()}">

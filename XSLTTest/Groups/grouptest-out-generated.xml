@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <purchase-request purchase-date="1.1.2010">
   <id>w</id>
-  <item amount="1" unit-price="###" />
-  <item amount="2" unit-price="###" />
-  <item amount="3" unit-price="###" />
+  <item amount="1" unit-price="unit-price1" />
+  <item amount="2" unit-price="unit-price1" />
+  <item amount="3" unit-price="unit-price1" />
 </purchase-request>

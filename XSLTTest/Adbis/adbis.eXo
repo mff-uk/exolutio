@@ -1,18 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<eXo:Project xmlns:eXo="http://eXolutio.eu/Project/Serialization/" Version="3.0" UsesVersioning="True" Name="adbis-branched">
+<eXo:Project xmlns:eXo="http://eXolutio.eu/Project/Serialization/" Version="3.0" UsesVersioning="True" Name="adbis">
   <eXo:Versions Count="2">
     <eXo:Version ID="2a6a7da5-aaf0-43be-9e86-9d34be5034ec" Label="v1" Number="1" />
     <eXo:Version ID="7a716715-12ac-48ee-9ad1-8e710626632f" Label="v2" Number="0" branchedFromVerID="2a6a7da5-aaf0-43be-9e86-9d34be5034ec" branchedFromVer="v1" />
   </eXo:Versions>
   <eXo:ProjectVersions Count="2">
     <eXo:ProjectVersion ID="0d5d4b68-b0b5-43c4-866f-9f2d47a0415c" versionID="2a6a7da5-aaf0-43be-9e86-9d34be5034ec" version="v1">
-      <eXo:AttributeTypes Count="0" />
+      <eXo:PIMAttributeTypes Count="0" />
       <eXo:PIMSchema ID="99774906-8fc2-4826-aca8-c56e714a824b" Caption="PIMSchema">
         <eXo:PIMClasses Count="5">
           <eXo:PIMClass ID="e1fd2d62-e099-4347-939f-98060ccc40ac" Name="Purchase">
             <eXo:PIMAttributes Count="1">
               <eXo:PIMAttribute ID="cc063f5b-4be9-45f8-afeb-f646996c8d82" Name="purchase-date" pimClassID="e1fd2d62-e099-4347-939f-98060ccc40ac" />
             </eXo:PIMAttributes>
+            <eXo:GeneralizationAsGeneral Count="0" />
             <eXo:PIMAssociationEnds Count="3">
               <eXo:PIMAssociationEnd pimAssociationEndID="84b139bb-8816-43a9-bcbb-f3fde7a8f9b0" pimAssociationEnd="PIMAssociationEnd: ** 1..1 C: Purchase A:  " />
               <eXo:PIMAssociationEnd pimAssociationEndID="cca58ca0-00df-4ea3-a0be-3a0069ada4d4" pimAssociationEnd="PIMAssociationEnd: ** 1..1 C: Purchase A:  " />
@@ -24,6 +25,7 @@
               <eXo:PIMAttribute ID="81affa44-6cdb-4de4-a980-b1ca08a3781f" Name="customer-no" pimClassID="0a10051a-2097-4edb-be73-fc763af91664" />
               <eXo:PIMAttribute ID="93f0e8bd-dfd2-4bcf-b646-2763ad1b5ba7" Name="email" Lower="0" Upper="*" pimClassID="0a10051a-2097-4edb-be73-fc763af91664" />
             </eXo:PIMAttributes>
+            <eXo:GeneralizationAsGeneral Count="0" />
             <eXo:PIMAssociationEnds Count="1">
               <eXo:PIMAssociationEnd pimAssociationEndID="c019ca9c-9833-4f1c-b6c8-9d2c0596881d" pimAssociationEnd="PIMAssociationEnd: ** 1..1 C: Customer A:  " />
             </eXo:PIMAssociationEnds>
@@ -34,6 +36,7 @@
               <eXo:PIMAttribute ID="4a98d66e-c3b8-47e4-ac40-cb093323eb22" Name="city" pimClassID="b20c256f-9403-43da-810c-d651637b42c8" />
               <eXo:PIMAttribute ID="921bf6cd-927f-4bfc-9b9c-109771ed2c36" Name="street" pimClassID="b20c256f-9403-43da-810c-d651637b42c8" />
             </eXo:PIMAttributes>
+            <eXo:GeneralizationAsGeneral Count="0" />
             <eXo:PIMAssociationEnds Count="1">
               <eXo:PIMAssociationEnd pimAssociationEndID="78dd42d2-d1c5-4c4c-b116-189f378c1d2e" pimAssociationEnd="PIMAssociationEnd: ** 1..1 C: Address A:  " />
             </eXo:PIMAssociationEnds>
@@ -45,6 +48,7 @@
               <eXo:PIMAttribute ID="47f35474-0a8c-4e79-a0d5-f9e898b315e4" Name="title" pimClassID="e68acc8e-ba73-4aba-95bd-1d00e066b9e0" />
               <eXo:PIMAttribute ID="53743909-67e8-4cba-afd7-78cf3a3f6065" Name="weight" pimClassID="e68acc8e-ba73-4aba-95bd-1d00e066b9e0" />
             </eXo:PIMAttributes>
+            <eXo:GeneralizationAsGeneral Count="0" />
             <eXo:PIMAssociationEnds Count="1">
               <eXo:PIMAssociationEnd pimAssociationEndID="8f309a2c-bcb2-4090-8f7d-b5b283efeef5" pimAssociationEnd="PIMAssociationEnd: ** 1..1 C: Product A:  " />
             </eXo:PIMAssociationEnds>
@@ -54,12 +58,14 @@
               <eXo:PIMAttribute ID="0abe91e2-3e01-4b64-8f42-0b62359d23c4" Name="amount" pimClassID="23c68830-400e-4178-b051-44a60a165724" />
               <eXo:PIMAttribute ID="27647549-a93d-469e-802e-70b2192d3f4d" Name="unit-price" pimClassID="23c68830-400e-4178-b051-44a60a165724" />
             </eXo:PIMAttributes>
+            <eXo:GeneralizationAsGeneral Count="0" />
             <eXo:PIMAssociationEnds Count="2">
               <eXo:PIMAssociationEnd pimAssociationEndID="3c8d0c86-cc29-49fd-8a9b-6d9a473baade" pimAssociationEnd="PIMAssociationEnd: ** 1..1 C: Item A:  " />
               <eXo:PIMAssociationEnd pimAssociationEndID="1d5cdd96-5a0b-46d1-8991-ac75837781c6" pimAssociationEnd="PIMAssociationEnd: ** 1..1 C: Item A:  " />
             </eXo:PIMAssociationEnds>
           </eXo:PIMClass>
         </eXo:PIMClasses>
+        <eXo:PIMGeneralizations Count="0" />
         <eXo:PIMAssociations Count="4">
           <eXo:PIMAssociation ID="e735e3f2-e774-45c1-b560-4fe7e5e7d43c" Name="">
             <eXo:PIMAssociationEnds Count="2">
@@ -354,7 +360,7 @@
             </eXo:Component>
             <eXo:Component Type="PSMAssociation" componentID="1a55ce6c-9a35-42bc-b8d6-cc144b077229" component="PSMAssociation from PSMSchemaClass: PurchaseSchema to PSMClass: *Purchase*">
               <eXo:ViewHelper>
-                <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                <eXo:MainLabelViewHelper X="0,162605285644531" Y="0" Width="NaN" Height="NaN">
                   <eXo:LabelVisible>True</eXo:LabelVisible>
                 </eXo:MainLabelViewHelper>
                 <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
@@ -367,7 +373,7 @@
             </eXo:Component>
             <eXo:Component Type="PSMAssociation" componentID="762c6dbb-c55f-41c0-9b90-a88256502750" component="PSMAssociation from PSMClass: *CustomerInfo* to PSMClass: *Customer*">
               <eXo:ViewHelper>
-                <eXo:MainLabelViewHelper X="-11" Y="0" Width="NaN" Height="NaN">
+                <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
                   <eXo:LabelVisible>True</eXo:LabelVisible>
                 </eXo:MainLabelViewHelper>
                 <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
@@ -377,7 +383,7 @@
             </eXo:Component>
             <eXo:Component Type="PSMAssociation" componentID="b6aee6ba-18f9-4bbe-a423-6f97d949eaa1" component="PSMAssociation from PSMClass: *Purchase* to PSMClass: *CustomerInfo*">
               <eXo:ViewHelper>
-                <eXo:MainLabelViewHelper X="-4" Y="-1" Width="NaN" Height="NaN">
+                <eXo:MainLabelViewHelper X="-23" Y="0" Width="NaN" Height="NaN">
                   <eXo:LabelVisible>True</eXo:LabelVisible>
                 </eXo:MainLabelViewHelper>
                 <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
@@ -390,7 +396,7 @@
             </eXo:Component>
             <eXo:Component Type="PSMAssociation" componentID="17e172de-53c4-403e-b5e6-5b189b50cf59" component="PSMAssociation from PSMClass: *Purchase* to PSMClass: *Item*">
               <eXo:ViewHelper>
-                <eXo:MainLabelViewHelper X="3" Y="-1" Width="NaN" Height="NaN">
+                <eXo:MainLabelViewHelper X="28,5" Y="0" Width="NaN" Height="NaN">
                   <eXo:LabelVisible>True</eXo:LabelVisible>
                 </eXo:MainLabelViewHelper>
                 <eXo:CardinalityLabelViewHelper X="7" Y="-16" Width="NaN" Height="NaN">
@@ -400,7 +406,7 @@
             </eXo:Component>
             <eXo:Component Type="PSMAssociation" componentID="70fb022e-ffad-4a0e-973e-caaef9c11315" component="PSMAssociation from PSMClass: *Item* to PSMClass: *ItemI*">
               <eXo:ViewHelper>
-                <eXo:MainLabelViewHelper X="18" Y="0" Width="NaN" Height="NaN">
+                <eXo:MainLabelViewHelper X="10,5" Y="0" Width="NaN" Height="NaN">
                   <eXo:LabelVisible>True</eXo:LabelVisible>
                 </eXo:MainLabelViewHelper>
                 <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
@@ -410,7 +416,7 @@
             </eXo:Component>
             <eXo:Component Type="PSMAssociation" componentID="dc6a2899-2b12-4291-8904-7ae6550ed218" component="PSMAssociation from PSMClass: *Item* to PSMClass: *Product*">
               <eXo:ViewHelper>
-                <eXo:MainLabelViewHelper X="-16" Y="-1" Width="NaN" Height="NaN">
+                <eXo:MainLabelViewHelper X="-9" Y="0" Width="NaN" Height="NaN">
                   <eXo:LabelVisible>True</eXo:LabelVisible>
                 </eXo:MainLabelViewHelper>
                 <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
@@ -420,7 +426,7 @@
             </eXo:Component>
             <eXo:Component Type="PSMAssociation" componentID="4db45707-7a32-4a29-9c7b-8a82eb729e73" component="PSMAssociation from PSMClass: *CustomerInfo* to PSMClass: *Address*">
               <eXo:ViewHelper>
-                <eXo:MainLabelViewHelper X="12" Y="0" Width="NaN" Height="NaN">
+                <eXo:MainLabelViewHelper X="0,129035949707031" Y="0" Width="NaN" Height="NaN">
                   <eXo:LabelVisible>True</eXo:LabelVisible>
                 </eXo:MainLabelViewHelper>
                 <eXo:CardinalityLabelViewHelper X="28" Y="-19" Width="NaN" Height="NaN">
@@ -433,13 +439,14 @@
       </eXo:PSMDiagrams>
     </eXo:ProjectVersion>
     <eXo:ProjectVersion ID="6eb30120-c067-46ae-a284-608b43e1ac31" versionID="7a716715-12ac-48ee-9ad1-8e710626632f" version="v2">
-      <eXo:AttributeTypes Count="0" />
+      <eXo:PIMAttributeTypes Count="0" />
       <eXo:PIMSchema ID="de5d22c8-d40d-4ce8-9fd8-16fb926a940a" Caption="PIMSchema">
         <eXo:PIMClasses Count="5">
           <eXo:PIMClass ID="76a0d0eb-938e-4fb8-ae1b-c2b2a24a4eb9" Name="Purchase">
             <eXo:PIMAttributes Count="1">
               <eXo:PIMAttribute ID="a699f42c-4580-4d22-9d09-31edad7119f2" Name="purchase-date" pimClassID="76a0d0eb-938e-4fb8-ae1b-c2b2a24a4eb9" />
             </eXo:PIMAttributes>
+            <eXo:GeneralizationAsGeneral Count="0" />
             <eXo:PIMAssociationEnds Count="4">
               <eXo:PIMAssociationEnd pimAssociationEndID="fcdd44b3-f791-4e86-83dd-8cddd82954de" pimAssociationEnd="PIMAssociationEnd: ** 1..1 C: Purchase A:  " />
               <eXo:PIMAssociationEnd pimAssociationEndID="481d6778-be1f-4d05-b254-8937a75fef8a" pimAssociationEnd="PIMAssociationEnd: ** 1..1 C: Purchase A:  " />
@@ -452,6 +459,7 @@
               <eXo:PIMAttribute ID="88a3096b-c631-4742-9922-e78993aafeca" Name="customer-no" pimClassID="51abc279-0ea7-424f-9ae4-a3a8370f2b49" />
               <eXo:PIMAttribute ID="4667ee16-b623-4b5a-b13d-95b57b6a8081" Name="email" Lower="0" Upper="*" pimClassID="51abc279-0ea7-424f-9ae4-a3a8370f2b49" />
             </eXo:PIMAttributes>
+            <eXo:GeneralizationAsGeneral Count="0" />
             <eXo:PIMAssociationEnds Count="2">
               <eXo:PIMAssociationEnd pimAssociationEndID="4db90ab7-7a73-4dcf-8ee2-6781d98b07ef" pimAssociationEnd="PIMAssociationEnd: ** 1..1 C: Customer A:  " />
               <eXo:PIMAssociationEnd pimAssociationEndID="6e351be9-9340-4e2e-a1a7-5a3a32670d4b" pimAssociationEnd="PIMAssociationEnd: *defaultname* 1..1 C: Customer A:  " />
@@ -463,6 +471,7 @@
               <eXo:PIMAttribute ID="8d6fe355-e7c3-4c50-a620-130486758d44" Name="city" pimClassID="95fa2db7-8ce8-43e6-a76f-4aa05b2ff177" />
               <eXo:PIMAttribute ID="8d325d7c-806b-43ff-b6f4-98a0a0fbf95b" Name="street" pimClassID="95fa2db7-8ce8-43e6-a76f-4aa05b2ff177" />
             </eXo:PIMAttributes>
+            <eXo:GeneralizationAsGeneral Count="0" />
             <eXo:PIMAssociationEnds Count="2">
               <eXo:PIMAssociationEnd pimAssociationEndID="03d8c2c6-3aae-4143-a1c1-77b47c2e01f1" pimAssociationEnd="PIMAssociationEnd: ** 1..1 C: Address A:  " />
               <eXo:PIMAssociationEnd pimAssociationEndID="baf3e7a2-def2-4e02-a857-7681b0fe030c" pimAssociationEnd="PIMAssociationEnd: *defaultname* 1..1 C: Address A:  " />
@@ -475,6 +484,7 @@
               <eXo:PIMAttribute ID="3280cfae-164d-409c-9e64-198842523497" Name="title" pimClassID="f34d6455-2e3c-4ef2-bf6d-ed2654c6ab5c" />
               <eXo:PIMAttribute ID="541cd089-ad9d-4c9e-9da1-7aa3ad3bcd2c" Name="weight" pimClassID="f34d6455-2e3c-4ef2-bf6d-ed2654c6ab5c" />
             </eXo:PIMAttributes>
+            <eXo:GeneralizationAsGeneral Count="0" />
             <eXo:PIMAssociationEnds Count="2">
               <eXo:PIMAssociationEnd pimAssociationEndID="fff4fe25-d28f-4370-9a5c-d36608e79df2" pimAssociationEnd="PIMAssociationEnd: ** 1..1 C: Product A:  " />
               <eXo:PIMAssociationEnd pimAssociationEndID="7cc242b5-8a3e-40c8-8b8d-c3d3ef17fdcd" pimAssociationEnd="PIMAssociationEnd: *defaultname* 1..1 C: Product A:  " />
@@ -485,12 +495,14 @@
               <eXo:PIMAttribute ID="233f42c9-603d-4d29-96a1-4132b6c63598" Name="amount" pimClassID="10bc0808-b734-48a1-82c9-4b002717a867" />
               <eXo:PIMAttribute ID="8dd6199d-b3f5-4224-ae57-7718436b0912" Name="unit-price" pimClassID="10bc0808-b734-48a1-82c9-4b002717a867" />
             </eXo:PIMAttributes>
+            <eXo:GeneralizationAsGeneral Count="0" />
             <eXo:PIMAssociationEnds Count="2">
               <eXo:PIMAssociationEnd pimAssociationEndID="25f1ad4f-6c79-4153-a02f-e60700b29e37" pimAssociationEnd="PIMAssociationEnd: ** 1..1 C: Item A:  " />
               <eXo:PIMAssociationEnd pimAssociationEndID="0e2bf602-1607-453c-8b93-22014a59ebf3" pimAssociationEnd="PIMAssociationEnd: ** 1..1 C: Item A:  " />
             </eXo:PIMAssociationEnds>
           </eXo:PIMClass>
         </eXo:PIMClasses>
+        <eXo:PIMGeneralizations Count="0" />
         <eXo:PIMAssociations Count="6">
           <eXo:PIMAssociation ID="fd9c5211-c7a2-465e-a7dd-3a9878dd1be6" Name="">
             <eXo:PIMAssociationEnds Count="2">
@@ -879,7 +891,7 @@
             </eXo:Component>
             <eXo:Component Type="PSMAssociation" componentID="d2ef109f-5559-4766-801f-67091791022d" component="PSMAssociation from PSMSchemaClass: PurchaseSchema to PSMClass: *Purchase*">
               <eXo:ViewHelper>
-                <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                <eXo:MainLabelViewHelper X="0,162605285644531" Y="0" Width="NaN" Height="NaN">
                   <eXo:LabelVisible>True</eXo:LabelVisible>
                 </eXo:MainLabelViewHelper>
                 <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
@@ -892,7 +904,7 @@
             </eXo:Component>
             <eXo:Component Type="PSMAssociation" componentID="dd65c205-bcae-4dac-9d3f-2f8925814d85" component="PSMAssociation from PSMClass: *CustomerInfo* to PSMClass: *Customer*">
               <eXo:ViewHelper>
-                <eXo:MainLabelViewHelper X="-11" Y="0" Width="NaN" Height="NaN">
+                <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
                   <eXo:LabelVisible>True</eXo:LabelVisible>
                 </eXo:MainLabelViewHelper>
                 <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
@@ -902,7 +914,7 @@
             </eXo:Component>
             <eXo:Component Type="PSMAssociation" componentID="f595fff8-2839-4a17-aa6e-d711e61fd180" component="PSMAssociation from PSMClass: *Purchase* to PSMClass: *CustomerInfo*">
               <eXo:ViewHelper>
-                <eXo:MainLabelViewHelper X="-4" Y="-1" Width="NaN" Height="NaN">
+                <eXo:MainLabelViewHelper X="-34,5" Y="0" Width="NaN" Height="NaN">
                   <eXo:LabelVisible>True</eXo:LabelVisible>
                 </eXo:MainLabelViewHelper>
                 <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
@@ -915,7 +927,7 @@
             </eXo:Component>
             <eXo:Component Type="PSMAssociation" componentID="fb648511-a6ee-477a-a145-c205198d4594" component="PSMAssociation from PSMClass: *Items* to PSMClass: *Item*">
               <eXo:ViewHelper>
-                <eXo:MainLabelViewHelper X="3" Y="-1" Width="NaN" Height="NaN">
+                <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
                   <eXo:LabelVisible>True</eXo:LabelVisible>
                 </eXo:MainLabelViewHelper>
                 <eXo:CardinalityLabelViewHelper X="17" Y="-21" Width="NaN" Height="NaN">
@@ -925,7 +937,7 @@
             </eXo:Component>
             <eXo:Component Type="PSMAssociation" componentID="5866f9fd-5cb8-45cb-9060-24266668d6dc" component="PSMAssociation from PSMClass: *Item* to PSMClass: *ItemI*">
               <eXo:ViewHelper>
-                <eXo:MainLabelViewHelper X="30" Y="1" Width="NaN" Height="NaN">
+                <eXo:MainLabelViewHelper X="10,5" Y="0" Width="NaN" Height="NaN">
                   <eXo:LabelVisible>True</eXo:LabelVisible>
                 </eXo:MainLabelViewHelper>
                 <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
@@ -935,7 +947,7 @@
             </eXo:Component>
             <eXo:Component Type="PSMAssociation" componentID="a324bb6f-b015-41db-a8bb-a1f31cb04721" component="PSMAssociation from PSMClass: *Item* to PSMClass: *Product*">
               <eXo:ViewHelper>
-                <eXo:MainLabelViewHelper X="-38" Y="4" Width="NaN" Height="NaN">
+                <eXo:MainLabelViewHelper X="-20" Y="0" Width="NaN" Height="NaN">
                   <eXo:LabelVisible>True</eXo:LabelVisible>
                 </eXo:MainLabelViewHelper>
                 <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
@@ -945,7 +957,7 @@
             </eXo:Component>
             <eXo:Component Type="PSMAssociation" componentID="73ba01cf-f7ec-4ee5-b56d-4047e1593c4a" component="PSMAssociation from PSMClass: *Customer* to PSMClass: *Address*">
               <eXo:ViewHelper>
-                <eXo:MainLabelViewHelper X="-36" Y="-6" Width="NaN" Height="NaN">
+                <eXo:MainLabelViewHelper X="-5,5" Y="0" Width="NaN" Height="NaN">
                   <eXo:LabelVisible>True</eXo:LabelVisible>
                 </eXo:MainLabelViewHelper>
                 <eXo:CardinalityLabelViewHelper X="-74" Y="-20" Width="NaN" Height="NaN">
@@ -958,7 +970,7 @@
             </eXo:Component>
             <eXo:Component Type="PSMAssociation" componentID="097f5a37-9fb4-48dc-8c3d-d4ff4d9d17ef" component="PSMAssociation from PSMClass: *Customer* to PSMClass: *CustEmail*">
               <eXo:ViewHelper>
-                <eXo:MainLabelViewHelper X="21" Y="-2" Width="NaN" Height="NaN">
+                <eXo:MainLabelViewHelper X="2,5" Y="0" Width="NaN" Height="NaN">
                   <eXo:LabelVisible>True</eXo:LabelVisible>
                 </eXo:MainLabelViewHelper>
                 <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
@@ -971,7 +983,7 @@
             </eXo:Component>
             <eXo:Component Type="PSMAssociation" componentID="a688698c-8a83-44b8-ac35-441c2036f5cc" component="PSMAssociation from PSMClass: *Purchase* to PSMClass: *Items*">
               <eXo:ViewHelper>
-                <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                <eXo:MainLabelViewHelper X="28" Y="0" Width="NaN" Height="NaN">
                   <eXo:LabelVisible>True</eXo:LabelVisible>
                 </eXo:MainLabelViewHelper>
                 <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">

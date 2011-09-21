@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<purchase-request purchase-date="ullamcorper">
+  <customer-info>
+    <customer customer-no="ipsum">
+      <delivery-address>
+        <postcode>blandit</postcode>
+        <city>euismod</city>
+        <street>ullamcorper</street>
+      </delivery-address>
+      <email>tar</email>
+      <email>qued</email>
+      <email>email1</email>
+    </customer>
+  </customer-info>
+  <emp-no>12</emp-no>
+  <name>name1</name>
+  <items>
+    <product code="ipsum" subcode="dapibus" title="Donec" />
+    <item-info amount="pharetra">
+      <unit-price>Nam</unit-price>
+    </item-info>
+    <product code="code" subcode="subcode" title="title" />
+    <item-info amount="amount">
+      <unit-price>unit-price</unit-price>
+    </item-info>
+    <product code="code" subcode="subcode" title="title" />
+    <item-info amount="amount">
+      <unit-price>unit-price</unit-price>
+    </item-info>
+    <product code="code" subcode="subcode" title="title" />
+    <item-info amount="amount">
+      <unit-price>unit-price</unit-price>
+    </item-info>
+  </items>
+  <AAA />
+</purchase-request>

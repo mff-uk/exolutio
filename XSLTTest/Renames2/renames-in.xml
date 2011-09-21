@@ -1,0 +1,122 @@
+﻿<purchase purchase-date="viverra">
+  <customer-info>
+    <customer>
+      <customer-no>ipsum</customer-no>
+      <email>e1</email>
+      <email>e2</email>
+    </customer>
+    <address>
+      <zip>arcu</zip>
+      <city>ipsum</city>
+      <street>velit</street>
+    </address>
+  </customer-info>
+  <item>
+    <product>
+      <code>fermentum</code>
+      <subcode>elit</subcode>
+      <title>tincidunt</title>
+      <weight>ipsum</weight>
+      <groupatt>Curabitur</groupatt>
+      <child1 a1="quis" />
+      <child1 a1="interdum" />
+      <child1 a1="magna" />
+      <child2 nodeAttA="est">
+        <nodeAttE>ipsum</nodeAttE>
+      </child2>
+      <child2 nodeAttA="rutrum">
+        <nodeAttE>Proin</nodeAttE>
+      </child2>
+      <child2 nodeAttA="erat">
+        <nodeAttE>interdum</nodeAttE>
+      </child2>
+      <groupatt>imperdiet</groupatt>
+      <child1 a1="mattis" />
+      <child1 a1="libero" />
+      <child1 a1="congue" />
+      <child2 nodeAttA="odio">
+        <nodeAttE>Nam</nodeAttE>
+      </child2>
+      <child2 nodeAttA="luctus">
+        <nodeAttE>malesuada</nodeAttE>
+      </child2>
+      <child2 nodeAttA="bibendum">
+        <nodeAttE>erat</nodeAttE>
+      </child2>
+    </product>
+    <amount>Nam</amount>
+    <unit-price>viverra</unit-price>
+  </item>
+  <item>
+    <product>
+      <code>porta</code>
+      <subcode>interdum</subcode>
+      <title>vulputate</title>
+      <weight>leo</weight>
+      <groupatt>dolor</groupatt>
+      <child1 a1="Donec" />
+      <child1 a1="facilisis" />
+      <child1 a1="ut" />
+      <child2 nodeAttA="arcu">
+        <nodeAttE>bibendum</nodeAttE>
+      </child2>
+      <child2 nodeAttA="neque">
+        <nodeAttE>id</nodeAttE>
+      </child2>
+      <child2 nodeAttA="augue">
+        <nodeAttE>at</nodeAttE>
+      </child2>
+      <groupatt>vestibulum</groupatt>
+      <child1 a1="est" />
+      <child1 a1="vestibulum" />
+      <child1 a1="aliquam" />
+      <child2 nodeAttA="magna">
+        <nodeAttE>interdum</nodeAttE>
+      </child2>
+      <child2 nodeAttA="lacus">
+        <nodeAttE>Curabitur</nodeAttE>
+      </child2>
+      <child2 nodeAttA="eget">
+        <nodeAttE>nec</nodeAttE>
+      </child2>
+    </product>
+    <amount>leo</amount>
+    <unit-price>non</unit-price>
+  </item>
+  <item>
+    <product>
+      <code>Curabitur</code>
+      <subcode>hendrerit</subcode>
+      <title>at</title>
+      <weight>dapibus</weight>
+      <groupatt>Aliquam</groupatt>
+      <child1 a1="eu" />
+      <child1 a1="nisl" />
+      <child1 a1="ac" />
+      <child2 nodeAttA="congue">
+        <nodeAttE>sit</nodeAttE>
+      </child2>
+      <child2 nodeAttA="hendrerit">
+        <nodeAttE>tellus</nodeAttE>
+      </child2>
+      <child2 nodeAttA="eleifend">
+        <nodeAttE>leo</nodeAttE>
+      </child2>
+      <groupatt>leo</groupatt>
+      <child1 a1="vulputate" />
+      <child1 a1="Lorem" />
+      <child1 a1="neque" />
+      <child2 nodeAttA="luctus">
+        <nodeAttE>dolor</nodeAttE>
+      </child2>
+      <child2 nodeAttA="vestibulum">
+        <nodeAttE>euismod</nodeAttE>
+      </child2>
+      <child2 nodeAttA="bibendum">
+        <nodeAttE>tincidunt</nodeAttE>
+      </child2>
+    </product>
+    <amount>urna</amount>
+    <unit-price>vitae</unit-price>
+  </item>
+</purchase>

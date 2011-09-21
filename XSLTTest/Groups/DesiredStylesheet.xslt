@@ -18,7 +18,7 @@
     <xsl:template name="TOP-Purchase-ELM">
         <xsl:param name="ci" as="item()*"/>
         <xsl:apply-templates select="$ci[name() = 'id']" />
-        <xsl:for-each-group select="amount" group-starting-with="amount">
+        <xsl:for-each-group select="$ci[name() = 'amount']" group-starting-with="amount">
             <xsl:call-template name="TOP-Purchase-Item">
                 <xsl:with-param name="ci" select="current-group()"/>
             </xsl:call-template>
@@ -42,11 +42,15 @@
     <xsl:template name="TOP-Purchase-Item-ATT">
         <xsl:param name="ci" as="item()*"/>        
         <xsl:apply-templates select="$ci[name() = 'amount']" />
-        <xsl:call-template name="TOP-Purchase-Item-unit-price"/> 
+        <xsl:call-template name="TOP-Purchase-Item-unit-price-IG" />
     </xsl:template>
-    <xsl:template name="TOP-Purchase-Item-unit-price">
-        <xsl:attribute name="unit-price">###</xsl:attribute>
-    </xsl:template>
+  <!-- Instance generators -->
+  <xsl:template name="TOP-Purchase-Item-unit-price-IG">
+    <xsl:param name="count" as="item()" select="1" />
+    <xsl:for-each select="1 to $count">
+      <xsl:attribute name="unit-price">unit-price<xsl:value-of select="current()" /></xsl:attribute>
+    </xsl:for-each>
+  </xsl:template>
     
     <!-- Element to attribute conversion template -->
     <xsl:template match="amount" priority="0">

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<purchase-request purchase-date="vitae" ga="ga1">
+  <id>interdum</id>
+  <item amount="quam" unit-price="unit-price1" />
+  <item amount="imperdiet" unit-price="unit-price1" />
+  <item amount="mi" unit-price="unit-price1" />
+  <addedWithE>
+    <E>E1</E>
+  </addedWithE>
+  <addedWithE>
+    <E>E1</E>
+  </addedWithE>
+  <addedWithA A="A1" />
+  <addedEmpty />
+  <addedEmpty />
+  <addedEmpty />
+  <ge>ge1</ge>
+  <ge>ge1</ge>
+  <ge>ge1</ge>
+  <ge>ge1</ge>
+</purchase-request>

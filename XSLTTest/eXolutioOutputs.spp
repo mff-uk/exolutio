@@ -12,4 +12,5 @@
 		<File FilePath="LastSchema.xsd" HomeFolder="Yes"/>
 	</Folder>
 	<Folder FolderName="Entities" ExtStr="ent"/>
+	<ExtMountFolder FolderName="D:\Programování\EvoXSVN\XSLTTest"/>
 </Project>

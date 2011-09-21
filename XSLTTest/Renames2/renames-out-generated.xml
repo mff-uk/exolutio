@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<purchaseRQ date="viverra">
+  <customer-info>
+    <customer>
+      <customer-no>ipsum</customer-no>
+      <email>e1</email>
+      <email>e2</email>
+    </customer>
+    <address>
+      <zip>arcu</zip>
+      <city>ipsum</city>
+      <street>velit</street>
+    </address>
+  </customer-info>
+  <pur-item>
+    <product>
+      <code>fermentum</code>
+      <subcode>elit</subcode>
+      <title>tincidunt</title>
+      <weight>ipsum</weight>
+      <groupatt-N>Curabitur</groupatt-N>
+      <newAtt>newAtt1</newAtt>
+      <child1-N a1ren="quis" />
+      <child1-N a1ren="interdum" />
+      <child1-N a1ren="magna" />
+      <child2-N nodeAttAren="est">
+        <nodeAttEren>ipsum</nodeAttEren>
+      </child2-N>
+      <child2-N nodeAttAren="rutrum">
+        <nodeAttEren>Proin</nodeAttEren>
+      </child2-N>
+      <child2-N nodeAttAren="erat">
+        <nodeAttEren>interdum</nodeAttEren>
+      </child2-N>
+      <groupatt-N>imperdiet</groupatt-N>
+      <newAtt>newAtt1</newAtt>
+      <child1-N a1ren="mattis" />
+      <child1-N a1ren="libero" />
+      <child1-N a1ren="congue" />
+      <child2-N nodeAttAren="odio">
+        <nodeAttEren>Nam</nodeAttEren>
+      </child2-N>
+      <child2-N nodeAttAren="luctus">
+        <nodeAttEren>malesuada</nodeAttEren>
+      </child2-N>
+      <child2-N nodeAttAren="bibendum">
+        <nodeAttEren>erat</nodeAttEren>
+      </child2-N>
+    </product>
+    <amount>Nam</amount>
+    <price>viverra</price>
+  </pur-item>
+  <pur-item>
+    <product>
+      <code>porta</code>
+      <subcode>interdum</subcode>
+      <title>vulputate</title>
+      <weight>leo</weight>
+      <groupatt-N>dolor</groupatt-N>
+      <newAtt>newAtt1</newAtt>
+      <child1-N a1ren="Donec" />
+      <child1-N a1ren="facilisis" />
+      <child1-N a1ren="ut" />
+      <child2-N nodeAttAren="arcu">
+        <nodeAttEren>bibendum</nodeAttEren>
+      </child2-N>
+      <child2-N nodeAttAren="neque">
+        <nodeAttEren>id</nodeAttEren>
+      </child2-N>
+      <child2-N nodeAttAren="augue">
+        <nodeAttEren>at</nodeAttEren>
+      </child2-N>
+      <groupatt-N>vestibulum</groupatt-N>
+      <newAtt>newAtt1</newAtt>
+      <child1-N a1ren="est" />
+      <child1-N a1ren="vestibulum" />
+      <child1-N a1ren="aliquam" />
+      <child2-N nodeAttAren="magna">
+        <nodeAttEren>interdum</nodeAttEren>
+      </child2-N>
+      <child2-N nodeAttAren="lacus">
+        <nodeAttEren>Curabitur</nodeAttEren>
+      </child2-N>
+      <child2-N nodeAttAren="eget">
+        <nodeAttEren>nec</nodeAttEren>
+      </child2-N>
+    </product>
+    <amount>leo</amount>
+    <price>non</price>
+  </pur-item>
+  <pur-item>
+    <product>
+      <code>Curabitur</code>
+      <subcode>hendrerit</subcode>
+      <title>at</title>
+      <weight>dapibus</weight>
+      <groupatt-N>Aliquam</groupatt-N>
+      <newAtt>newAtt1</newAtt>
+      <child1-N a1ren="eu" />
+      <child1-N a1ren="nisl" />
+      <child1-N a1ren="ac" />
+      <child2-N nodeAttAren="congue">
+        <nodeAttEren>sit</nodeAttEren>
+      </child2-N>
+      <child2-N nodeAttAren="hendrerit">
+        <nodeAttEren>tellus</nodeAttEren>
+      </child2-N>
+      <child2-N nodeAttAren="eleifend">
+        <nodeAttEren>leo</nodeAttEren>
+      </child2-N>
+      <groupatt-N>leo</groupatt-N>
+      <newAtt>newAtt1</newAtt>
+      <child1-N a1ren="vulputate" />
+      <child1-N a1ren="Lorem" />
+      <child1-N a1ren="neque" />
+      <child2-N nodeAttAren="luctus">
+        <nodeAttEren>dolor</nodeAttEren>
+      </child2-N>
+      <child2-N nodeAttAren="vestibulum">
+        <nodeAttEren>euismod</nodeAttEren>
+      </child2-N>
+      <child2-N nodeAttAren="bibendum">
+        <nodeAttEren>tincidunt</nodeAttEren>
+      </child2-N>
+    </product>
+    <amount>urna</amount>
+    <price>vitae</price>
+  </pur-item>
+</purchaseRQ>

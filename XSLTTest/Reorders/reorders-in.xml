@@ -1,0 +1,85 @@
+<purchase purchase-date="Vivamus">
+  <customer-info>
+    <customer>
+      <customer-no>ut</customer-no>
+    </customer>
+    <address>
+      <zip>fermentum</zip>
+      <city>tellus</city>
+      <street>odio</street>
+    </address>
+  </customer-info>
+  <item>
+    <product>
+      <code>rutrum</code>
+      <subcode>pharetra</subcode>
+      <title>ipsum</title>
+      <weight>consectetur</weight>
+      <groupatt>lectus</groupatt>
+      <child1 a1="eget" />
+      <child1 a1="arcu" />
+      <child1 a1="sapien" />
+      <child2 nodeAttA="euismod">
+        <nodeAttE>Nam</nodeAttE>
+      </child2>
+      <child2 nodeAttA="faucibus">
+        <nodeAttE>Curabitur</nodeAttE>
+      </child2>
+      <child2 nodeAttA="urna">
+        <nodeAttE>sit</nodeAttE>
+      </child2>
+      <groupatt>nec</groupatt>
+      <child1 a1="consectetur" />
+      <child1 a1="vulputate" />
+      <child1 a1="urna" />
+      <child2 nodeAttA="Suspendisse">
+        <nodeAttE>erat</nodeAttE>
+      </child2>
+      <child2 nodeAttA="Nam">
+        <nodeAttE>imperdiet</nodeAttE>
+      </child2>
+      <child2 nodeAttA="tellus">
+        <nodeAttE>ipsum</nodeAttE>
+      </child2>
+    </product>
+    <amount>vitae</amount>
+    <unit-price>dolor</unit-price>
+  </item>
+  <item>
+    <product>
+      <code>et</code>
+      <subcode>vulputate</subcode>
+      <title>libero</title>
+      <weight>Curabitur</weight>
+      <groupatt>vulputate</groupatt>
+      <child1 a1="congue" />
+      <child1 a1="luctus" />
+      <child1 a1="nulla" />
+      <child1 a1="facilisis" />
+      <child2 nodeAttA="In">
+        <nodeAttE>et</nodeAttE>
+      </child2>
+      <child2 nodeAttA="libero">
+        <nodeAttE>vestibulum</nodeAttE>
+      </child2>
+      <child2 nodeAttA="tincidunt">
+        <nodeAttE>magna</nodeAttE>
+      </child2>
+      <groupatt>dignissim</groupatt>
+      <child1 a1="augue" />
+      <child1 a1="in" />
+      <child1 a1="nisl" />
+      <child2 nodeAttA="vitae">
+        <nodeAttE>Pellentesque</nodeAttE>
+      </child2>
+      <child2 nodeAttA="odio">
+        <nodeAttE>Quisque</nodeAttE>
+      </child2>
+      <child2 nodeAttA="Lorem">
+        <nodeAttE>Donec</nodeAttE>
+      </child2>
+    </product>
+    <amount>quam</amount>
+    <unit-price>eleifend</unit-price>
+  </item>
+</purchase>
