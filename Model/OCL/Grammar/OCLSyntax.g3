@@ -61,7 +61,7 @@ initOrDerValue
 
 invOrDef
 	:'inv' (SimpleName )? ':' oclExpression 
-	// chyby def
+	| 'static'? 'def' SimpleName? ':' defExpression
 	;
 
 prePostOrBodyDecl
@@ -72,11 +72,16 @@ prePostOrBodyDecl
 
 
 operation
-	:pathName /*'::' SimpleName*/ '(' parameters ')' ':' type?
+	:pathName /*'::' SimpleName*/ '(' parameters? ')' (':' type)?
 	;
 
 parameters
 	:variableDeclaration (',' parameters)?
+	;
+
+defExpression
+	: variableDeclaration
+	| operation '=' oclExpression
 	;
 
 public 
@@ -148,7 +153,7 @@ propertyCall
 	:	pathName ('['arguments']')? isMarkedPre? ('('propertyCallParametrs')')?
 			//9 pokud se alspon jednou zopakuje, 28A, 3A - pokud je na zacatku
 			//23,24,25,34,35,36,37,38
-			->^(CALL pathName ^(INDEX arguments)? isMarkedPre? propertyCallParametrs)
+			->^(CALL pathName ^(INDEX arguments)? isMarkedPre? propertyCallParametrs?)
 	|it='iterate' '('(variableDeclaration ';'?)+ '|' oclExpression ')'
 			->^(ITERATE[$it] variableDeclaration+  oclExpression)   
 	//|('iterate' '(' variableDeclaration ';')=>'iterate' '('variableDeclaration ';'variableDeclaration '|' oclExpression ')'
@@ -374,15 +379,15 @@ StringLiteralExp //20
 NESTED_ML_COMMENT
     :   '/*' 
         (options {greedy=false;} : NESTED_ML_COMMENT | . )* 
-        '*/' {$channel=HIDDEN;}
+        '*/' {$channel=Hidden;}
     ;
 
 LINE_COMMENT
-	:'--'  ~('\n'|'\r')* (('\r'? '\n')|EOF) {$channel=HIDDEN;}
+	:'--'  ~('\n'|'\r')* (('\r'? '\n')|EOF) {$channel=Hidden;}
 	;
 	
 WS
-    :   WhiteSpaceChar {$channel=HIDDEN;}
+    :   WhiteSpaceChar {$channel=Hidden;}
     ;
 	
 	

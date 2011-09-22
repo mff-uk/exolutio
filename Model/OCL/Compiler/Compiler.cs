@@ -39,7 +39,7 @@ namespace Exolutio.Model.OCL.Compiler {
             parser.TypesTable = tt;
             parser.EnvironmentStack.Push(env);
            
-            return parser.contextDeclaratio();
+            return parser.contextDeclaration();
         }
     }
 }

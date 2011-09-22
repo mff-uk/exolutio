@@ -77,6 +77,9 @@
     <Compile Include="OCL\Compiler\OCLLexer.Service.cs" />
     <Compile Include="OCL\Compiler\OCLParser.cs" />
     <Compile Include="OCL\Compiler\OCLParser.Service.cs" />
+    <Compile Include="OCL\Compiler\OCLSyntaxLexer.cs" />
+    <Compile Include="OCL\Compiler\OCLSyntaxParser.cs" />
+    <Compile Include="OCL\Compiler\OCLSyntaxParser.Service.cs" />
     <Compile Include="OCL\Compiler\ParserErrors.cs" />
     <Compile Include="OCL\Compiler\SeparatorType.cs" />
     <Compile Include="OCL\Compiler\TypeDefBag.cs" />
