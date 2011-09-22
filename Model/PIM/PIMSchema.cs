@@ -103,8 +103,8 @@ namespace Exolutio.Model.PIM
             this.DeserializeWrappedCollection("PIMGeneralizations", PIMGeneralizations, PIMGeneralization.CreateInstance, parentNode, context);
             this.DeserializeWrappedCollection("PIMAssociations", PIMAssociations, PIMAssociation.CreateInstance, parentNode, context);
 
-            context.CurrentSchemaGuid = Guid.Empty;
             base.DeserializeRemaining(parentNode, context);
+            context.CurrentSchemaGuid = Guid.Empty;
         }
         #endregion
 
