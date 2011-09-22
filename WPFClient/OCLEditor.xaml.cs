@@ -113,5 +113,17 @@ namespace Exolutio.WPFClient
                 }
             }
         }
+
+        private void button1_Click(object sender, RoutedEventArgs e) {
+            if (DisplayedScript != null) {
+                string error = DisplayedScript.Compile(DisplayedScript.Contents);
+                if (string.IsNullOrWhiteSpace(error) == false) {
+                    MessageBox.Show(DisplayedScript.Compile(DisplayedScript.Contents));
+                }
+                else {
+                    MessageBox.Show("OK");
+                }
+            }
+        }
     }
 }
