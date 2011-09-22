@@ -10,29 +10,29 @@ namespace Exolutio.Model.OCL.Types
     /// </summary>
     public class Parameter:IHasOwner<Operation>
     {
-        public Parameter(string Name, Classifier Type)
+        public Parameter(string name, Classifier type)
         {
-            name = Name;
-            type = Type;
+            _Name = name;
+            _Type = type;
         }
 
 
-        protected readonly string name;
+        protected readonly string _Name;
         public virtual string Name
         {
             get
             {
-                return name;
+                return _Name;
             }
             
         }
 
-        protected readonly Classifier type;
+        protected Classifier _Type;
         public virtual Classifier Type
         {
             get
             {
-                return type;
+                return _Type;
             }
         }
 

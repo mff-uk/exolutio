@@ -19,32 +19,22 @@ namespace Exolutio.Model.OCL.Types
             }
         }
 
-        static NonCompositeType<OrderedSetType> simpleRepresentation = NonCompositeType<OrderedSetType>.Instance;
-        public override NonCompositeType SimpleRepresentation
-        {
-            get
-            {
-                return simpleRepresentation;
-            }
-        }
+  
 
         public override Classifier CommonSuperType(Classifier other)
         {
-            Classifier common = CommonSuperType<OrderedSetType>(other);
+            Classifier common = CommonSuperType<OrderedSetType>((tt, el) => new OrderedSetType(tt, el), other);
             if (common == null)
                 return base.CommonSuperType(other);
             else
                 return common;
         }
 
-        public OrderedSetType(Classifier elemetnType )
-            : base(elemetnType)
+        public OrderedSetType(TypesTable.TypesTable tt,Classifier elemetnType )
+            : base(tt,elemetnType)
         {
         }
 
-        public OrderedSetType()
-            : base()
-        {
-        }
+        
     }
 }

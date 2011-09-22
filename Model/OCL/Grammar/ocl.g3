@@ -14,7 +14,12 @@ using Exolutio.Model.OCL.Types;
 }
 
 public 
-contextDeclaratio
+contextDeclarationList
+	:contextDeclaration*
+	;
+
+public 
+contextDeclaration
 	returns [ClassifierConstraint Decl]
 	:propertyContextDecl
 	|classifierContextDecl {$Decl=$classifierContextDecl.Decl;}
@@ -217,11 +222,11 @@ enumAndType  //9,28
 	//|  collectionType//28B  - obsazen v collectionLiteralExpAndType
 	returns [TypeExp Value]
 	: tupleType   //28C
-		{$Value = new TypeExp($tupleType.Type,TypesTable.Type);}		
+		{$Value = new TypeExp($tupleType.Type,TypesTable.Library.Type);}		
 	| primitiveType//28D\
-		{$Value = new TypeExp($primitiveType.Type,TypesTable.Type);}	
+		{$Value = new TypeExp($primitiveType.Type,TypesTable.Library.Type);}	
 	| oclType//28E
-		{$Value = new TypeExp($oclType.Type,TypesTable.Type);}	
+		{$Value = new TypeExp($oclType.Type,TypesTable.Library.Type);}	
 	;
 
 
@@ -315,20 +320,20 @@ type //28
 	;
 		
 primitiveType //29
-	returns [PrimitiveType Type]
-	: 'Boolean'				{$Type = TypesTable.Boolean;}
-	| 'Integer'				{$Type = TypesTable.Integer;}
-	| 'Real'				{$Type = TypesTable.Real;}
-	| 'String'				{$Type = TypesTable.String;}
-	| 'UnlimitedNatural'	{$Type = TypesTable.UnlimitedNatural;}
+	returns [Classifier Type]
+	: 'Boolean'				{$Type = TypesTable.Library.Boolean;}
+	| 'Integer'				{$Type = TypesTable.Library.Integer;}
+	| 'Real'				{$Type = TypesTable.Library.Real;}
+	| 'String'				{$Type = TypesTable.Library.String;}
+	| 'UnlimitedNatural'	{$Type = TypesTable.Library.UnlimitedNatural;}
 	;
 	
 oclType //30
 	returns [Classifier Type]
-	: 'OclAny'				{$Type = TypesTable.Any;}
-	| 'OclInvalid'			{$Type = TypesTable.Invalid;}
-	| 'OclMessage'			{$Type = TypesTable.Message; throw new System.NotSupportedException();}
-	| 'OclVoid'				{$Type = TypesTable.Void;}
+	: 'OclAny'				{$Type = TypesTable.Library.Any;}
+	| 'OclInvalid'			{$Type = TypesTable.Library.Invalid;}
+	| 'OclMessage'			{$Type = TypesTable.Library.Message; throw new System.NotSupportedException();}
+	| 'OclVoid'				{$Type = TypesTable.Library.Void;}
 	;
 
 collectionType //31

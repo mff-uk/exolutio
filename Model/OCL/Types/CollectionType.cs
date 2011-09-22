@@ -36,24 +36,17 @@ namespace Exolutio.Model.OCL.Types
         }
 
 
-        public CollectionType(Classifier elemetnType)
-            : base("")
+        public CollectionType(TypesTable.TypesTable tt,Classifier elemetnType)
+            : base(tt,"")
         {
             ElementType = elemetnType;
         }
 
-        public CollectionType()
-            : base("")
-        {
-        }
+       
 
         public override bool ConformsToRegister(Classifier other)
         {
-            //resi i potomky (bag,set,sequence,ordetset)
-            //if (this.GetType().IsSubclassOf(other.GetType()) || other.GetType() == this.GetType())
-            //    return true;
-            //else
-            return false;
+            return (other == TypeTable.Library.Any) ;
         }
 
         public override bool Equals(object obj)
@@ -99,30 +92,7 @@ namespace Exolutio.Model.OCL.Types
         }
 
 
-        #region ICompositeType Members
-
-        static NonCompositeType<CollectionType> simpleRepresentation = NonCompositeType<CollectionType>.Instance;
-        public virtual NonCompositeType SimpleRepresentation
-        {
-            get
-            {
-                return simpleRepresentation;
-            }
-        }
-
-
-        public virtual bool ConformsToSimple(Classifier other)
-        {
-            return SimpleRepresentation.ConformsTo(other);
-        }
-
-        public virtual void RegistredComposite(TypesTable.TypesTable table)
-        {
-            table.RegisterType(SimpleRepresentation);
-            table.RegisterType(ElementType);
-        }
-
-        #endregion
+     
 
         #region IConformsToComposite Members
 
@@ -130,7 +100,7 @@ namespace Exolutio.Model.OCL.Types
         {
             //resi i potomky (bag,set,sequence,ordetset)
             CollectionType otherColl = other as CollectionType;
-            if (otherColl != null && SimpleRepresentation.ConformsTo(otherColl.SimpleRepresentation))
+            if (otherColl != null && (otherColl.GetType().IsSubclassOf(this.GetType()) || otherColl.GetType() == typeof(CollectionType) || otherColl.GetType()== this.GetType()))
             {
                 return ElementType.ConformsTo(otherColl.ElementType);
             }
@@ -141,7 +111,7 @@ namespace Exolutio.Model.OCL.Types
 
         public override Classifier CommonSuperType(Classifier other)
         {
-            Classifier common = CommonSuperType<CollectionType>(other);
+            Classifier common = CommonSuperType<CollectionType>((tt, el) => new CollectionType(tt, el),other);
             if (common == null)
             {
                 if (other is IConformsToComposite && other is ICompositeType == false)
@@ -153,7 +123,7 @@ namespace Exolutio.Model.OCL.Types
             return common;
         }
 
-        public Classifier CommonSuperType<T>(Classifier other) where T : CollectionType, new()
+        public Classifier CommonSuperType<T>(Func<TypesTable.TypesTable,Classifier,T> creator, Classifier other) where T : CollectionType
         {
             if (other is T)
             {
@@ -161,8 +131,7 @@ namespace Exolutio.Model.OCL.Types
 
                 if (commonElementType != null)
                 {
-                    CollectionType commenType = new T();
-                    commenType.ElementType = commonElementType;
+                    CollectionType commenType = creator(TypeTable, commonElementType);
                     TypeTable.RegisterType(commenType);
                     return commenType;
                 }
@@ -171,6 +140,17 @@ namespace Exolutio.Model.OCL.Types
             return null;
         }
 
+        #region ICompositeType Members
+
+        public bool ConformsToSimple(Classifier other) {
+           return TypeTable.ConformsTo(this,other,true);
+        }
+
+        #endregion
+
+        /// <summary>
+        /// 
+        /// </summary>
         static class CollectionIteratorOperation {
             static Dictionary<string, IteratorOperation> operation = new Dictionary<string, IteratorOperation>();
             public static IteratorOperation Lookup(string name) {
@@ -189,17 +169,17 @@ namespace Exolutio.Model.OCL.Types
             }
 
             static CollectionIteratorOperation() {
-                RegistredOperation("any", c => c == 1, (s,b, t) => s.ElementType, (s, b,t) => t.Boolean);
+                RegistredOperation("any", c => c == 1, (s,b, t) => s.ElementType, (s, b,t) => t.Library.Boolean);
 
                 RegistredOperation("closure", c => c == 1,
                     (s, b, t) => {
                         if (s.CollectionKind == CollectionKind.Sequence || s.CollectionKind == CollectionKind.OrderedSet) {
-                            OrderedSetType ordSet = new OrderedSetType(b);
+                            OrderedSetType ordSet = new OrderedSetType(t,b);
                             t.RegisterType(ordSet);
                             return ordSet;
                         }
                         else {
-                            BagType bag = new BagType(b);
+                            BagType bag = new BagType(t,b);
                             t.RegisterType(bag);
                             return bag;
                         }
@@ -216,12 +196,12 @@ namespace Exolutio.Model.OCL.Types
                 RegistredOperation("collect", c => c == 1,
                     (s,b, t) => {
                         if (s.CollectionKind == CollectionKind.Sequence || s.CollectionKind == CollectionKind.OrderedSet) {
-                            SequenceType seq = new SequenceType(b);
+                            SequenceType seq = new SequenceType(t,b);
                             t.RegisterType(seq);
                             return seq;
                         }
                         else {
-                            BagType bag = new BagType(b);
+                            BagType bag = new BagType(t,b);
                             t.RegisterType(bag);
                             return bag;
                         }
@@ -230,56 +210,58 @@ namespace Exolutio.Model.OCL.Types
 
                 RegistredOperation("collectNested", c => c == 1,
                     (s, b, t) => {
-                        return t.Boolean;
+                        return t.Library.Boolean;
                     }
                     , (s, b, t) => b);
 
                 RegistredOperation("exists", c => c == 1,
                     (s, b, t) => {
-                        return t.Boolean;
+                        return t.Library.Boolean;
                     }
-                    , (s, b, t) => t.Boolean);
+                    , (s, b, t) => t.Library.Boolean);
 
                 RegistredOperation("forAll", c => c == 1,
                     (s, b, t) => {
-                        return t.Boolean;
+                        return t.Library.Boolean;
                     }
-                    , (s, b, t) => t.Boolean);
+                    , (s, b, t) => t.Library.Boolean);
 
                 RegistredOperation("isUnique", c => c == 1,
                     (s, b, t) => {
-                        return t.Boolean;
+                        return t.Library.Boolean;
                     }
                     , (s, b, t) => b);
 
                 RegistredOperation("one", c => c == 1,
-                    (s, b, t) =>  t.Boolean
-                    , (s, b, t) => t.Boolean);
+                    (s, b, t) => t.Library.Boolean
+                    , (s, b, t) => t.Library.Boolean);
 
                 RegistredOperation("select", c => c == 1,
                     (s, b, t) => s
-                    , (s, b, t) => t.Boolean);
+                    , (s, b, t) => t.Library.Boolean);
 
                 RegistredOperation("reject", c => c == 1,
                     (s, b, t) => s
-                    , (s, b, t) => t.Boolean);
+                    , (s, b, t) => t.Library.Boolean);
 
                 RegistredOperation("sortedBy", c => c == 1,
                     (s, b, t) => {
                         if (s.CollectionKind == CollectionKind.Sequence || s.CollectionKind == CollectionKind.Bag) {
-                            SequenceType seq = new SequenceType(b);
+                            SequenceType seq = new SequenceType(t,b);
                             t.RegisterType(seq);
                             return seq;
                         }
                         else {
-                            OrderedSetType ordSet = new OrderedSetType(b);
+                            OrderedSetType ordSet = new OrderedSetType(t,b);
                             t.RegisterType(ordSet);
                             return ordSet;
                         }
                     }
-                    , (s, b, t) => t.Boolean);
+                    , (s, b, t) => t.Library.Boolean);
 
             }
         }
+
+
     }
 }

@@ -9,8 +9,16 @@ namespace Exolutio.Model.OCL.Types
     /// A classifier is a classification of instances, it describes a set of instances that have features in common.
     /// Implement UML.Classes.Kernel.Classifier and partially UML.Classes.Kernel.Class from UML SuperStructure
     /// </summary>
-    public abstract class Classifier : ModelElement, IHasOwner<ModelElement>
+    public class Classifier : ModelElement, IHasOwner<ModelElement>
     {
+        /// <summary>
+        /// This gives the superclasses of a class.
+        /// </summary>
+        public virtual Classifier SuperClassifier {
+            get;
+            protected set;
+        }
+
         /// <summary>
         /// The attributes (i.e., the properties) owned by the class. The association is ordered.
         /// </summary> 
@@ -61,12 +69,20 @@ namespace Exolutio.Model.OCL.Types
             private set;
         }
 
-        public Classifier(string name)
+        public Classifier(TypesTable.TypesTable tt, string name)
             : base(name)
         {
+            this.TypeTable = tt;
             Properties = new PropertyCollection(this);
             Operations = new OperationCollection(this);
             NestedClassifier = new NestedElemetCollection<Classifier, ModelElement>(this);
+          
+        }
+
+        public Classifier(TypesTable.TypesTable tt, string name,Classifier superClassifier):this(tt,name)
+        {
+            this.SuperClassifier = superClassifier;
+
         }
 
         public virtual bool ConformsTo(Classifier other)
@@ -77,34 +93,27 @@ namespace Exolutio.Model.OCL.Types
         public virtual bool ConformsToRegister(Classifier other)
         {
             //OCL: conformsTo = (self=other) or (self.allParents()->includes(other))
-            Type thisType = this.GetType();
-            Type otherType = other.GetType();
-
-            if (otherType == typeof(AnyType))
+            if (ReferenceEquals(this, other)) {
                 return true;
+            }
 
-            return (thisType == otherType || thisType.IsSubclassOf(otherType));
-
+            return SuperClassifier != null && other == this.SuperClassifier;
+            
         }
 
         #region Opreration from spec chap.: 8.8.8
         public virtual Classifier CommonSuperType(Classifier other)
         {
-            Classifier realThis = this;
-
-            if(this is ICompositeType)
-                realThis = ((ICompositeType)this).SimpleRepresentation;
-
-            if (other is ICompositeType)
-                other = ((ICompositeType)other).SimpleRepresentation;
-
-            return TypeTable.CommonSuperType(realThis, other);
+            return TypeTable.CommonSuperType(this, other);
         }
 
         public virtual Property LookupProperty(string name) {
             Property property;
             if(Properties.TryGetValue(name,out property)){
                 return property;
+            }
+            if (SuperClassifier != null) {
+                return SuperClassifier.LookupProperty(name);
             }
             return null;
         }
@@ -113,6 +122,9 @@ namespace Exolutio.Model.OCL.Types
             OperationList ops;
             if (Operations.TryGetValue(name,out ops)) {
                 return ops.LookupOperation(parameterTypes);
+            }
+            if (SuperClassifier != null) {
+                return SuperClassifier.LookupOperation(name, parameterTypes);
             }
             return null;
         }

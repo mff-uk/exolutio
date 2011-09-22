@@ -63,6 +63,8 @@ namespace Exolutio.Model.OCL.Types
 
         protected override void OnPreAdd(Operation item)
         {
+            item.Owner = owner;
+
             if (item.Name != NameOfOperations) {
                 System.Diagnostics.Debug.Fail("Try add operation with differnetn name to OperationList (it containts operations with same name but different signature.).");
             }
@@ -74,7 +76,7 @@ namespace Exolutio.Model.OCL.Types
 
         protected override void OnAdded(Operation item)
         {
-            item.Owner = owner;
+           
         }
 
         public Operation LookupOperation(IEnumerable<Classifier> paremetrs) {

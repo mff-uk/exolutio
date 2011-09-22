@@ -7,6 +7,6 @@ namespace Exolutio.Model.OCL.Types
 {
     public interface IConformsToComposite
     {
-        bool ConformsToComposite(Classifier other);
+        
     }
 }

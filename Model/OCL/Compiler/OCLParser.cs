@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// $ANTLR 3.3.1.7705 ..\\..\\Model\\OCL\\Grammar\\OCL.g3 2011-09-19 13:44:26
+// $ANTLR 3.3.1.7705 ..\\..\\Model\\OCL\\Grammar\\OCL.g3 2011-09-20 16:03:17
 
 // The variable 'variable' is assigned but its value is never used.
 #pragma warning disable 219
@@ -3508,7 +3508,7 @@ public partial class OCLParser : Antlr.Runtime.Parser
 		TypeExp Value = default(TypeExp);
 
 		TupleType tupleType24 = default(TupleType);
-		PrimitiveType primitiveType25 = default(PrimitiveType);
+		Classifier primitiveType25 = default(Classifier);
 		Classifier oclType26 = default(Classifier);
 
 		try { DebugEnterRule(GrammarFileName, "enumAndType");
@@ -3563,7 +3563,7 @@ public partial class OCLParser : Antlr.Runtime.Parser
 				PopFollow();
 
 				DebugLocation(220, 3);
-				Value = new TypeExp(tupleType24,TypesTable.Type);
+				Value = new TypeExp(tupleType24,TypesTable.Library.Type);
 
 				}
 				break;
@@ -3577,7 +3577,7 @@ public partial class OCLParser : Antlr.Runtime.Parser
 				PopFollow();
 
 				DebugLocation(222, 3);
-				Value = new TypeExp(primitiveType25,TypesTable.Type);
+				Value = new TypeExp(primitiveType25,TypesTable.Library.Type);
 
 				}
 				break;
@@ -3591,7 +3591,7 @@ public partial class OCLParser : Antlr.Runtime.Parser
 				PopFollow();
 
 				DebugLocation(224, 3);
-				Value = new TypeExp(oclType26,TypesTable.Type);
+				Value = new TypeExp(oclType26,TypesTable.Library.Type);
 
 				}
 				break;
@@ -4922,7 +4922,7 @@ public partial class OCLParser : Antlr.Runtime.Parser
 		OCLParser.pathName_return pathName39 = default(OCLParser.pathName_return);
 		CollectionType collectionType40 = default(CollectionType);
 		TupleType tupleType41 = default(TupleType);
-		PrimitiveType primitiveType42 = default(PrimitiveType);
+		Classifier primitiveType42 = default(Classifier);
 		Classifier oclType43 = default(Classifier);
 
 		try { DebugEnterRule(GrammarFileName, "type");
@@ -5077,14 +5077,14 @@ public partial class OCLParser : Antlr.Runtime.Parser
 	partial void LeaveRule_primitiveType();
 
 	// $ANTLR start "primitiveType"
-	// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:317:1: primitiveType returns [PrimitiveType Type] : ( 'Boolean' | 'Integer' | 'Real' | 'String' | 'UnlimitedNatural' );
+	// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:317:1: primitiveType returns [Classifier Type] : ( 'Boolean' | 'Integer' | 'Real' | 'String' | 'UnlimitedNatural' );
 	[GrammarRule("primitiveType")]
-	private PrimitiveType primitiveType()
+	private Classifier primitiveType()
 	{
 		EnterRule_primitiveType();
 		EnterRule("primitiveType", 42);
 		TraceIn("primitiveType", 42);
-		PrimitiveType Type = default(PrimitiveType);
+		Classifier Type = default(Classifier);
 
 		try { DebugEnterRule(GrammarFileName, "primitiveType");
 		DebugLocation(317, 1);
@@ -5138,7 +5138,7 @@ public partial class OCLParser : Antlr.Runtime.Parser
 				DebugLocation(319, 4);
 				Match(input,45,Follow._45_in_primitiveType1569); 
 				DebugLocation(319, 17);
-				Type = TypesTable.Boolean;
+				Type = TypesTable.Library.Boolean;
 
 				}
 				break;
@@ -5149,7 +5149,7 @@ public partial class OCLParser : Antlr.Runtime.Parser
 				DebugLocation(320, 4);
 				Match(input,47,Follow._47_in_primitiveType1579); 
 				DebugLocation(320, 17);
-				Type = TypesTable.Integer;
+				Type = TypesTable.Library.Integer;
 
 				}
 				break;
@@ -5160,7 +5160,7 @@ public partial class OCLParser : Antlr.Runtime.Parser
 				DebugLocation(321, 4);
 				Match(input,53,Follow._53_in_primitiveType1589); 
 				DebugLocation(321, 14);
-				Type = TypesTable.Real;
+				Type = TypesTable.Library.Real;
 
 				}
 				break;
@@ -5171,7 +5171,7 @@ public partial class OCLParser : Antlr.Runtime.Parser
 				DebugLocation(322, 4);
 				Match(input,56,Follow._56_in_primitiveType1599); 
 				DebugLocation(322, 16);
-				Type = TypesTable.String;
+				Type = TypesTable.Library.String;
 
 				}
 				break;
@@ -5182,7 +5182,7 @@ public partial class OCLParser : Antlr.Runtime.Parser
 				DebugLocation(323, 4);
 				Match(input,58,Follow._58_in_primitiveType1609); 
 				DebugLocation(323, 23);
-				Type = TypesTable.UnlimitedNatural;
+				Type = TypesTable.Library.UnlimitedNatural;
 
 				}
 				break;
@@ -5268,7 +5268,7 @@ public partial class OCLParser : Antlr.Runtime.Parser
 				DebugLocation(328, 4);
 				Match(input,48,Follow._48_in_oclType1629); 
 				DebugLocation(328, 16);
-				Type = TypesTable.Any;
+				Type = TypesTable.Library.Any;
 
 				}
 				break;
@@ -5279,7 +5279,7 @@ public partial class OCLParser : Antlr.Runtime.Parser
 				DebugLocation(329, 4);
 				Match(input,49,Follow._49_in_oclType1639); 
 				DebugLocation(329, 19);
-				Type = TypesTable.Invalid;
+				Type = TypesTable.Library.Invalid;
 
 				}
 				break;
@@ -5290,7 +5290,7 @@ public partial class OCLParser : Antlr.Runtime.Parser
 				DebugLocation(330, 4);
 				Match(input,50,Follow._50_in_oclType1648); 
 				DebugLocation(330, 19);
-				Type = TypesTable.Message; throw new System.NotSupportedException();
+				Type = TypesTable.Library.Message; throw new System.NotSupportedException();
 
 				}
 				break;
@@ -5301,7 +5301,7 @@ public partial class OCLParser : Antlr.Runtime.Parser
 				DebugLocation(331, 4);
 				Match(input,51,Follow._51_in_oclType1657); 
 				DebugLocation(331, 17);
-				Type = TypesTable.Void;
+				Type = TypesTable.Library.Void;
 
 				}
 				break;

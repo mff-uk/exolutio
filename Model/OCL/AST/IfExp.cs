@@ -15,7 +15,7 @@ namespace Exolutio.Model.OCL.AST
     {
 
 
-        public IfExp(BooleanType boolean) : base(boolean) { }
+        public IfExp(Classifier boolean) : base(boolean) { }
         /// <summary>
         /// The OclExpression that represents the boolean condition. If this condition evaluates to true,
         /// the result of the if expression is identical to the result of the thenExpression. If this condition

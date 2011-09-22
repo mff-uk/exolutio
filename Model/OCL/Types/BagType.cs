@@ -19,28 +19,20 @@ namespace Exolutio.Model.OCL.Types
             }
         }
 
-        static  NonCompositeType<BagType> simpleRepresentation = NonCompositeType<BagType>.Instance;
-        public override  NonCompositeType SimpleRepresentation
-        {
-            get
-            {
-                return simpleRepresentation;
-            }
-        }
 
         public override Classifier CommonSuperType(Classifier other)
         {
-            Classifier common = CommonSuperType<BagType>(other);
+            Classifier common = CommonSuperType<BagType>((tt, el) => new BagType(tt, el), other);
             if (common == null)
                 return base.CommonSuperType(other);
             else
                 return common;
         }
 
-        public BagType(Classifier elemetnType)
-            : base(elemetnType)
+        public BagType(TypesTable.TypesTable tt,Classifier elemetnType)
+            : base(tt,elemetnType)
         { }
 
-        public BagType() : base() { }
+   
     }
 }

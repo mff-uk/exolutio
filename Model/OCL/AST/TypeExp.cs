@@ -12,7 +12,7 @@ namespace Exolutio.Model.OCL.AST
     /// </summary>
     public class TypeExp : OclExpression
     {
-        public TypeExp(Classifier referedType,TypeType type)
+        public TypeExp(Classifier referedType,Classifier type)
             : base(type) {
                 this.ReferredType = referedType;
         }
