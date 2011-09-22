@@ -13,88 +13,14 @@ namespace Exolutio.Model.OCL.TypesTable {
         private int[] distanceTemp = null;
 
 
-        public IntegerType Integer {
-            get;
-            protected set;
-        }
 
-        public RealType Real {
+        public Library Library {
             get;
-            protected set;
-        }
-
-        public UnlimitedNaturalType UnlimitedNatural {
-            get;
-            protected set;
-        }
-
-        public StringType String {
-            get;
-            protected set;
-        }
-
-
-        public BooleanType Boolean {
-            get;
-            protected set;
-        }
-
-        public InvalidType Invalid {
-            get;
-            protected set;
-        }
-
-        public AnyType Any {
-            get;
-            protected set;
-        }
-
-        public MessageType Message {
-            get;
-            protected set;
-        }
-
-        public VoidType Void {
-            get;
-            protected set;
-        }
-
-        public TypeType Type {
-            get;
-            protected set;
+            private set;
         }
 
         public TypesTable() {
-            Integer = new IntegerType();
-            this.RegisterType(Integer);
-
-            Real = new RealType();
-            this.RegisterType(Real);
-
-            UnlimitedNatural = new UnlimitedNaturalType();
-            this.RegisterType(UnlimitedNatural);
-
-            String = new StringType();
-            this.RegisterType(String);
-
-            Boolean = new BooleanType();
-            this.RegisterType(Boolean);
-
-            Invalid = new InvalidType();
-            this.RegisterType(Invalid);
-
-            Any = new AnyType();
-            this.RegisterType(Any);
-
-            Void = new VoidType();
-            this.RegisterType(Void);
-
-            Message = new MessageType();
-            this.RegisterType(Message);
-
-            Type = new TypeType();
-            this.RegisterType(Type);
-
+            Library = new Library(this);
         }
 
         public bool RegisterType(Classifier type) {
@@ -105,7 +31,7 @@ namespace Exolutio.Model.OCL.TypesTable {
             type.TypeTable = this;
 
             if (type is ICompositeType) {
-                RegisterCompositeType(type as ICompositeType);
+                RegisterCompositeType(type);
             }
 
             if (newTypeRecord == null)
@@ -116,8 +42,20 @@ namespace Exolutio.Model.OCL.TypesTable {
             return true;
         }
 
-        public void RegisterCompositeType(ICompositeType composit) {
-            composit.RegistredComposite(this);
+        public void RegisterCompositeType(Classifier composit) {
+            
+            Type actType=composit.GetType();
+            while(actType != typeof(Classifier)){
+                Action<Classifier> lazyOpAction;
+                if (Library.LazyOpearation.TryGetValue(actType,out lazyOpAction)) {
+                  lazyOpAction(composit);
+                }
+                actType = actType.BaseType;
+            }
+
+            
+            
+          //  composit.RegistredComposite(this);
         }
 
         private TypeRecord CreateTypeRecord(Classifier type) {
@@ -143,9 +81,12 @@ namespace Exolutio.Model.OCL.TypesTable {
         }
 
 
-
         public bool ConformsTo(Classifier left, Classifier right) {
-            if (left is ICompositeType || right is IConformsToComposite)
+            return ConformsTo(left, right, false);
+        }
+
+        public bool ConformsTo(Classifier left, Classifier right,bool skipComposit) {
+            if (skipComposit == false && (left is ICompositeType || right is IConformsToComposite))
                 return ResolveComposite(left, right);
 
             //realokace makingTemp na velikost matrix.count
@@ -185,13 +126,8 @@ namespace Exolutio.Model.OCL.TypesTable {
                 else
                     return leftComposite.ConformsToSimple(right);
             }
-            else {
-                // right must be composite
-                if (left is IConformsToComposite)
-                    return ((IConformsToComposite)left).ConformsToComposite(right);
-                else
-                    return false;
-            }
+
+            return false;
         }
 
         private void PrepareMarkingTemp() {
@@ -247,7 +183,7 @@ namespace Exolutio.Model.OCL.TypesTable {
                     markingTemp[actIndex] = true;
 
                 if (minDistance > distanceTemp[actIndex] + actDistanc && distanceTemp[actIndex] < Int32.MaxValue) {
-                    minDistance = distanceTemp[actIndex];
+                    minDistance = distanceTemp[actIndex]+actDistanc;
                     commonSuperType = matrix[actIndex].Type;
                 }
 

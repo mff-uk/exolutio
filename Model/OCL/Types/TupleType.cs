@@ -38,8 +38,8 @@ namespace Exolutio.Model.OCL.Types
             
         }
 
-        public TupleType()
-            : base("")
+        public TupleType(TypesTable.TypesTable tt)
+            : base(tt,"")
         {
             TupleParts = new PropertyCollection(this);
         }
@@ -47,6 +47,9 @@ namespace Exolutio.Model.OCL.Types
 
         public override bool ConformsToRegister(Classifier other)
         {
+            if (other == TypeTable.Library.Any)
+                return true;
+
             if ((other.GetType().IsSubclassOf(this.GetType()) || other.GetType() == typeof(TupleType)) == false)
             {
                return base.ConformsToRegister(other); 
@@ -72,25 +75,9 @@ namespace Exolutio.Model.OCL.Types
 
         public bool ConformsToSimple(Classifier other)
         {
-            return simpleRepresentation.ConformsTo(other);
-        }
-
-        static NonCompositeType<TupleType> simpleRepresentation = NonCompositeType<TupleType>.Instance;
-        public virtual NonCompositeType SimpleRepresentation
-        {
-            get
-            {
-                return simpleRepresentation;
-            }
+            return TypeTable.ConformsTo(this,other,true);
         }
         
-
-        public void RegistredComposite(TypesTable.TypesTable table)
-        {
-            table.RegisterType(SimpleRepresentation);
-            foreach (Property prop in this)
-                table.RegisterType(prop.Type);
-        }
 
         #endregion
 
@@ -99,9 +86,9 @@ namespace Exolutio.Model.OCL.Types
         public bool ConformsToComposite(Classifier other)
         {
             TupleType otherType = other as TupleType;
-            if (otherType == null || SimpleRepresentation.ConformsTo(otherType.SimpleRepresentation)== false)
+            if (otherType == null) {
                 return false;
-
+            }
             
             foreach (var otherVar in otherType)
             {
@@ -122,7 +109,7 @@ namespace Exolutio.Model.OCL.Types
             TupleType otherTuple = other as TupleType;
             if (otherTuple != null)
             {
-                TupleType newTuple = new TupleType();
+                TupleType newTuple = new TupleType(TypeTable);
                 foreach (var otherVar in otherTuple)
                 {
                     Property thisVar;

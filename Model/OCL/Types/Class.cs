@@ -15,14 +15,13 @@ namespace Exolutio.Model.OCL.Types
         /// <summary>
         /// This gives the superclasses of a class.
         /// </summary>
-        public virtual List<Class> SuperClass
-        {
+        public virtual List<Class> SuperClass {
             get;
-            protected set;
+            private set;
         }
 
-        public Class(string name)
-            : base(name)
+        public Class(TypesTable.TypesTable tt,string name)
+            : base(tt,name)
         {
             SuperClass = new List<Class>();
         }

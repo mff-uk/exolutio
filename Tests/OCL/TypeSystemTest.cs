@@ -14,11 +14,15 @@ namespace Tests.OCL
         [Test]
         public void PrimitiveTypeConformsToTest()
         {
-            IntegerType integerType = new IntegerType();
-            RealType realType = new RealType();
-            UnlimitedNaturalType unlimnaturalType = new UnlimitedNaturalType();
 
             TypesTable typesTalbe = new TypesTable();
+            StandardLibraryCreator sl = new StandardLibraryCreator();
+            sl.CreateStandardLibrary(typesTalbe);
+
+            Classifier integerType = typesTalbe.Library.Integer;
+            Classifier realType = typesTalbe.Library.Real;
+            Classifier unlimnaturalType = typesTalbe.Library.UnlimitedNatural;
+
             typesTalbe.RegisterType(integerType);
             typesTalbe.RegisterType(realType);
             typesTalbe.RegisterType(unlimnaturalType);
@@ -35,60 +39,60 @@ namespace Tests.OCL
         public void ReflexivityConformsToTest()
         {
             TypesTable typesTalbe = new TypesTable();
+            StandardLibraryCreator sl = new StandardLibraryCreator();
+            sl.CreateStandardLibrary(typesTalbe);
 
-            IntegerType integerType = new IntegerType();
-            typesTalbe.RegisterType(integerType);
+            Classifier integerType = typesTalbe.Library.Integer;
 
             Assert.IsTrue(integerType.ConformsTo(integerType));
-            
-            RealType realType = new RealType();
-            typesTalbe.RegisterType(realType);
+
+            Classifier realType = typesTalbe.Library.Real;
 
             Assert.IsTrue(realType.ConformsTo(realType));
 
-            CollectionType collType = new CollectionType(integerType);
-            CollectionType collType2 = new CollectionType(integerType);
+            CollectionType collType = new CollectionType(typesTalbe,integerType);
+            CollectionType collType2 = new CollectionType(typesTalbe, integerType);
             typesTalbe.RegisterType(collType);
             typesTalbe.RegisterType(collType2);
 
             Assert.IsTrue(collType.ConformsTo(collType));
             Assert.IsTrue(collType.ConformsTo(collType2));
 
-            TupleType tuple = new TupleType();
+            TupleType tuple = new TupleType(typesTalbe);
             tuple.TupleParts.Add(new Property("ahoj", PropertyType.One, integerType));
             typesTalbe.RegisterType(tuple);
 
-            TupleType tuple2 = new TupleType();
+            TupleType tuple2 = new TupleType(typesTalbe);
             tuple2.TupleParts.Add(new Property("ahoj", PropertyType.One, integerType));
             typesTalbe.RegisterType(tuple2);
 
             Assert.IsTrue(tuple.ConformsTo(tuple));
             Assert.IsTrue(tuple.ConformsTo(tuple2));
 
-            CollectionType bagType = new BagType(integerType);
-            CollectionType bagType2 = new BagType(integerType);
+            CollectionType bagType = new BagType(typesTalbe,integerType);
+            CollectionType bagType2 = new BagType(typesTalbe,integerType);
             typesTalbe.RegisterType(bagType);
             typesTalbe.RegisterType(bagType2);
             Assert.IsTrue(bagType.ConformsTo(bagType));
             Assert.IsTrue(bagType.ConformsTo(bagType2));
 
 
-            CollectionType setType = new SetType(integerType);
-            CollectionType setType2 = new SetType(integerType);
+            CollectionType setType = new SetType(typesTalbe,integerType);
+            CollectionType setType2 = new SetType(typesTalbe,integerType);
             typesTalbe.RegisterType(setType);
             typesTalbe.RegisterType(setType2);
             Assert.IsTrue(setType.ConformsTo(setType));
             Assert.IsTrue(setType.ConformsTo(setType2));
 
-            VoidType voidType = new VoidType();
+            Classifier voidType = typesTalbe.Library.Void;
             typesTalbe.RegisterType(voidType);
             Assert.IsTrue(voidType.ConformsTo(voidType));
 
-            AnyType anyType = new AnyType();
+            Classifier anyType = typesTalbe.Library.Any;
             typesTalbe.RegisterType(anyType);
             Assert.IsTrue(anyType.ConformsTo(anyType));
 
-            InvalidType invalidType = new InvalidType();
+            Classifier invalidType = typesTalbe.Library.Invalid;
             typesTalbe.RegisterType(invalidType);
             Assert.IsTrue(invalidType.ConformsTo(invalidType));
             //pridat class
@@ -98,30 +102,33 @@ namespace Tests.OCL
         public void TupleTest()
         {
             TypesTable typesTalbe = new TypesTable();
-            IntegerType integerType = new IntegerType();
-            RealType realType = new RealType();
-            AnyType anyType = new AnyType();
+            StandardLibraryCreator sl = new StandardLibraryCreator();
+            sl.CreateStandardLibrary(typesTalbe);
+
+            Classifier integerType = typesTalbe.Library.Integer;
+            Classifier realType = typesTalbe.Library.Real;
+            Classifier anyType = typesTalbe.Library.Any;
 
             typesTalbe.RegisterType(integerType);
             typesTalbe.RegisterType(realType);
             typesTalbe.RegisterType(anyType);
 
-            TupleType tuple = new TupleType();
+            TupleType tuple = new TupleType(typesTalbe);
             tuple.TupleParts.Add(new Property("prop1", PropertyType.One, integerType));
-            Assert.AreEqual(tuple.Name, "Tuple(prop1:Integer)");
+            Assert.AreEqual(tuple.Name, "Tuple(prop1:::Integer)");
             tuple.TupleParts.Add(new Property("prop2", PropertyType.One, integerType));
             typesTalbe.RegisterType(tuple);
 
-            TupleType tuple2 = new TupleType();
+            TupleType tuple2 = new TupleType(typesTalbe);
             tuple2.TupleParts.Add(new Property("prop1", PropertyType.One, realType));
             tuple2.TupleParts.Add(new Property("prop2", PropertyType.One, integerType));
             typesTalbe.RegisterType(tuple2);
-            
+
 
             Assert.IsTrue(tuple.ConformsTo(tuple2));
             Assert.IsFalse(tuple2.ConformsTo(tuple));
 
-            TupleType tuple3 = new TupleType();
+            TupleType tuple3 = new TupleType(typesTalbe);
             tuple3.TupleParts.Add(new Property("prop1", PropertyType.One, realType));
             tuple3.TupleParts.Add(new Property("prop2", PropertyType.One, integerType));
             tuple3.TupleParts.Add(new Property("prop3", PropertyType.One, anyType));
@@ -132,7 +139,7 @@ namespace Tests.OCL
 
 
             Assert.IsTrue(tuple["prop1"].Type == integerType);
-            Assert.AreEqual(tuple.Name, "Tuple(prop1:Integer,prop2:Integer)");
+            Assert.AreEqual(tuple.Name, "Tuple(prop1:::Integer,prop2:::Integer)");
             
             
            
@@ -143,19 +150,19 @@ namespace Tests.OCL
         public void CollectionTest()
         {
             TypesTable typesTalbe = new TypesTable();
-            IntegerType integerType = new IntegerType();
-            RealType realType = new RealType();
-            AnyType anyType = new AnyType();
-            typesTalbe.RegisterType(integerType);
-            typesTalbe.RegisterType(realType);
-            typesTalbe.RegisterType(anyType);
+            StandardLibraryCreator sl = new StandardLibraryCreator();
+            sl.CreateStandardLibrary(typesTalbe);
 
-            BagType bagInteger = new BagType(integerType);
-            BagType bagReal = new BagType(realType);
-            SetType setType = new SetType(integerType);
-            SequenceType seqType = new SequenceType(integerType);
-            OrderedSetType ordType = new OrderedSetType(integerType);
-            CollectionType collInteger = new CollectionType(integerType);
+            Classifier integerType = typesTalbe.Library.Integer;
+            Classifier realType = typesTalbe.Library.Real;
+            Classifier anyType = typesTalbe.Library.Any;
+
+            BagType bagInteger = new BagType(typesTalbe,integerType);
+            BagType bagReal = new BagType(typesTalbe, realType);
+            SetType setType = new SetType(typesTalbe, integerType);
+            SequenceType seqType = new SequenceType(typesTalbe, integerType);
+            OrderedSetType ordType = new OrderedSetType(typesTalbe, integerType);
+            CollectionType collInteger = new CollectionType(typesTalbe, integerType);
 
 
 
@@ -195,13 +202,13 @@ namespace Tests.OCL
 
 
 
-            Assert.AreEqual(bagInteger.Name, "Bag(" + new IntegerType().QualifiedName + ")");
-            Assert.AreEqual(collInteger.Name, "Collection(" + new IntegerType().QualifiedName + ")");
-            Assert.AreEqual(setType.Name, "Set(" + new IntegerType().QualifiedName + ")");
-            Assert.AreEqual(ordType.Name, "OrderedSet(" + new IntegerType().QualifiedName + ")");
-            Assert.AreEqual(seqType.Name, "Sequence(" + new IntegerType().QualifiedName + ")");
+            Assert.AreEqual(bagInteger.Name, "Bag(" + integerType.QualifiedName + ")");
+            Assert.AreEqual(collInteger.Name, "Collection(" + integerType.QualifiedName + ")");
+            Assert.AreEqual(setType.Name, "Set(" + integerType.QualifiedName + ")");
+            Assert.AreEqual(ordType.Name, "OrderedSet(" + integerType.QualifiedName + ")");
+            Assert.AreEqual(seqType.Name, "Sequence(" + integerType.QualifiedName + ")");
 
-            Assert.IsTrue(bagInteger == new BagType(new IntegerType()));
+            Assert.IsTrue(bagInteger == new BagType( typesTalbe,integerType));
             Assert.IsFalse(bagInteger == null);
             Assert.IsFalse(bagInteger == bagReal);
             Assert.IsFalse(bagInteger.Equals(null));
@@ -213,28 +220,31 @@ namespace Tests.OCL
         [Test]
         public void ClassTest()
         {
-            TypesTable typesTable = new TypesTable();
-            IntegerType integerType = new IntegerType();
-            RealType realType = new RealType();
-            AnyType anyType = new AnyType();
-            typesTable.RegisterType(integerType);
-            typesTable.RegisterType(realType);
-            typesTable.RegisterType(anyType);
+            TypesTable typesTalbe = new TypesTable();
+            StandardLibraryCreator sl = new StandardLibraryCreator();
+            sl.CreateStandardLibrary(typesTalbe);
 
-            Class baseClass = new Class("Base");
+            Classifier integerType = typesTalbe.Library.Integer;
+            Classifier realType = typesTalbe.Library.Real;
+            Classifier anyType = typesTalbe.Library.Any;
+
+            
+
+            Class baseClass = new Class(typesTalbe,"Base");
 
             baseClass.Properties.Add(new Property("Name", PropertyType.One, integerType));
-            baseClass.Operations.Add(new Operation("Work",true,integerType,new Parameter[]{}));
+            baseClass.Operations.Add(new Operation("Work", true, integerType, new Parameter[] { }));
 
-            Class A = new Class("A");
-            Class B = new Class("B");
+            Class A = new Class(typesTalbe,"A");
+            Class B = new Class(typesTalbe,"B");
 
             A.SuperClass.Add(baseClass);
             B.SuperClass.Add(baseClass);
 
-            typesTable.RegisterType(baseClass);
-            typesTable.RegisterType(A);
-            typesTable.RegisterType(B);
+            typesTalbe.RegisterType(baseClass);
+            typesTalbe.RegisterType(A);
+            typesTalbe.RegisterType(B);
+            
             Assert.IsTrue(B.ConformsTo(baseClass));
             Assert.IsFalse(B.ConformsTo(A));
         }
@@ -242,33 +252,33 @@ namespace Tests.OCL
         [Test]
         public void NamespaceTest()
         {
-            TypesTable typesTable = new TypesTable();
-            IntegerType integerType = new IntegerType();
-            RealType realType = new RealType();
-            AnyType anyType = new AnyType();
-            typesTable.RegisterType(integerType);
-            typesTable.RegisterType(realType);
-            typesTable.RegisterType(anyType);
+            TypesTable typesTalbe = new TypesTable();
+            StandardLibraryCreator sl = new StandardLibraryCreator();
+            sl.CreateStandardLibrary(typesTalbe);
 
-            Class baseClass = new Class("Base");
+            Classifier integerType = typesTalbe.Library.Integer;
+            Classifier realType = typesTalbe.Library.Real;
+            Classifier anyType = typesTalbe.Library.Any;
+
+            Class baseClass = new Class(typesTalbe,"Base");
 
             baseClass.Properties.Add(new Property("Name", PropertyType.One, integerType));
             baseClass.Operations.Add(new Operation("Work", true, integerType, new Parameter[] { }));
 
-            Class A = new Class("A");
-            Class B = new Class("B");
+            Class A = new Class(typesTalbe,"A");
+            Class B = new Class(typesTalbe,"B");
 
             A.SuperClass.Add(baseClass);
             B.SuperClass.Add(baseClass);
 
-            typesTable.RegisterType(baseClass);
-            typesTable.RegisterType(A);
-            typesTable.RegisterType(B);
+            typesTalbe.RegisterType(baseClass);
+            typesTalbe.RegisterType(A);
+            typesTalbe.RegisterType(B);
             Assert.IsTrue(B.ConformsTo(baseClass));
             Assert.IsFalse(B.ConformsTo(A));
 
             Namespace basic = new Namespace("");
-           
+
             Namespace subNamespace = new Namespace("subNamespace");
             basic.NestedNamespace.Add(subNamespace);
             subNamespace.NestedClassifier.Add(baseClass);
@@ -280,17 +290,19 @@ namespace Tests.OCL
         public void CommonSuperTypeTest()
         {
             TypesTable typesTable = new TypesTable();
-            IntegerType integerType = new IntegerType();
-            RealType realType = new RealType();
-            UnlimitedNaturalType unlimitedType = new UnlimitedNaturalType();
-            StringType stringType = new StringType();
-            AnyType anyType = new AnyType();
-            typesTable.RegisterType(integerType);
-            typesTable.RegisterType(realType);
-            typesTable.RegisterType(unlimitedType);
-            typesTable.RegisterType(stringType);
-            typesTable.RegisterType(anyType);
-            
+            StandardLibraryCreator sl = new StandardLibraryCreator();
+            sl.CreateStandardLibrary(typesTable);
+
+            Classifier integerType = typesTable.Library.Integer;
+            Classifier realType = typesTable.Library.Real;
+            Classifier anyType = typesTable.Library.Any;
+
+
+            Classifier unlimitedType = typesTable.Library.UnlimitedNatural;
+            Classifier stringType = typesTable.Library.String;
+        
+       
+
 
             Assert.AreEqual(integerType.CommonSuperType(realType), realType);//real,integer -> real
             Assert.AreEqual(realType.CommonSuperType(realType), realType);//real,real -> real
@@ -301,13 +313,13 @@ namespace Tests.OCL
 
 
             //Collection
-            BagType bagIntegerType = new BagType(integerType);
-            BagType bagRealType = new BagType(realType);
-            SetType setType = new SetType(integerType);
-            SequenceType seqType = new SequenceType(integerType);
-            OrderedSetType ordType = new OrderedSetType(integerType);
-            CollectionType collIntegerType = new CollectionType(integerType);
-            CollectionType collRealType = new CollectionType(realType);
+            BagType bagIntegerType = new BagType(typesTable,integerType);
+            BagType bagRealType = new BagType(typesTable, realType);
+            SetType setType = new SetType(typesTable, integerType);
+            SequenceType seqType = new SequenceType(typesTable, integerType);
+            OrderedSetType ordType = new OrderedSetType(typesTable, integerType);
+            CollectionType collIntegerType = new CollectionType(typesTable, integerType);
+            CollectionType collRealType = new CollectionType(typesTable, realType);
 
             typesTable.RegisterType(bagIntegerType);
             typesTable.RegisterType(bagRealType);
@@ -329,8 +341,7 @@ namespace Tests.OCL
             Assert.AreEqual(setType.CommonSuperType(realType), anyType); //set(integer),real -> any
 
             //void test
-            VoidType voidType = new VoidType();
-            typesTable.RegisterType(voidType);
+            Classifier voidType = typesTable.Library.Void;
 
             Assert.AreEqual(voidType.CommonSuperType(integerType), integerType);
             Assert.AreEqual(realType.CommonSuperType(voidType), realType);
@@ -345,25 +356,25 @@ namespace Tests.OCL
             Assert.AreEqual(setType.CommonSuperType(anyType), anyType);
 
             //tuple test
-            TupleType tuple1 = new TupleType();
+            TupleType tuple1 = new TupleType(typesTable);
             tuple1.TupleParts.Add(new Property("prop1", PropertyType.Many, integerType));
             tuple1.TupleParts.Add(new Property("prop2", PropertyType.Many, integerType));
             tuple1.TupleParts.Add(new Property("prop3", PropertyType.Many, realType));
 
             typesTable.RegisterType(tuple1);
 
-            TupleType tuple2 = new TupleType();
+            TupleType tuple2 = new TupleType(typesTable);
             tuple2.TupleParts.Add(new Property("prop1", PropertyType.Many, integerType));
             tuple2.TupleParts.Add(new Property("prop4", PropertyType.Many, integerType));
             tuple2.TupleParts.Add(new Property("prop3", PropertyType.One, anyType));
 
             typesTable.RegisterType(tuple2);
 
-            TupleType tupleCommon =(TupleType) tuple1.CommonSuperType(tuple2);
+            TupleType tupleCommon = (TupleType)tuple1.CommonSuperType(tuple2);
 
             Assert.AreEqual(tupleCommon.TupleParts.Count, 2);
-            Assert.AreEqual( tupleCommon["prop1"].PropertyType,tuple1["prop1"].PropertyType);
-            Assert.AreEqual(tupleCommon["prop1"].Type ,tuple1["prop1"].Type);
+            Assert.AreEqual(tupleCommon["prop1"].PropertyType, tuple1["prop1"].PropertyType);
+            Assert.AreEqual(tupleCommon["prop1"].Type, tuple1["prop1"].Type);
 
 
             Assert.AreEqual(tupleCommon["prop3"].PropertyType, tuple1["prop3"].PropertyType);

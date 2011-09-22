@@ -83,7 +83,8 @@ namespace Exolutio.Model.OCL.AST {
         }
 
         public string Visit(NullLiteralExp node) {
-            throw new NotImplementedException();
+            sb.Append("null");
+            return string.Empty;
         }
 
         public string Visit(OperationCallExp node) {

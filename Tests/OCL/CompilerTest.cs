@@ -13,60 +13,71 @@ namespace Tests.OCL {
     public class CompilerTest {
 
 
-        public Tuple<TypesTable,Exolutio.Model.OCL.Environment> CreateTestEnv() {
+        public Tuple<TypesTable, Exolutio.Model.OCL.Environment> CreateTestEnv() {
             TypesTable tt = new TypesTable();
+            StandardLibraryCreator slc = new StandardLibraryCreator();
+            slc.CreateStandardLibrary(tt);
 
-            tt.Boolean.Operations.Add(new Operation("and",true, tt.Boolean, new Parameter[] { new Parameter("time", tt.Boolean) }));
-             tt.Boolean.Operations.Add(new Operation("or",true, tt.Boolean, new Parameter[] { new Parameter("time", tt.Boolean) }));
-            tt.Boolean.Operations.Add(new Operation("implies", true, tt.Boolean, new Parameter[] { new Parameter("time", tt.Boolean) }));
-            tt.Boolean.Operations.Add(new Operation("not", true, tt.Boolean));
-            
 
-            Class date = new Class("Date");
-            date.Operations.Add(new Operation("after", true, tt.Boolean, new Parameter[] { new Parameter("time", date) }));
-            date.Operations.Add(new Operation("before", true, tt.Boolean, new Parameter[] { new Parameter("time", date) }));
-            date.Operations.Add(new Operation("equals", true, tt.Boolean, new Parameter[] { new Parameter("time", date) }));
-             date.Operations.Add(new Operation("<=", true, tt.Boolean, new Parameter[] { new Parameter("time", date) }));
+            //tt.Library.Boolean.Operations.Add(new Operation("and", true, tt.Library.Boolean, new Parameter[] { new Parameter("time", tt.Library.Boolean) }));
+            //tt.Library.Boolean.Operations.Add(new Operation("or", true, tt.Library.Boolean, new Parameter[] { new Parameter("time", tt.Library.Boolean) }));
+            //tt.Library.Boolean.Operations.Add(new Operation("implies", true, tt.Library.Boolean, new Parameter[] { new Parameter("time", tt.Library.Boolean) }));
+            //tt.Library.Boolean.Operations.Add(new Operation("not", true, tt.Library.Boolean));
 
-            Class tournament = new Class("Tournament");
-            tournament.Properties.Add(new Property("name", PropertyType.One, tt.String));
+
+            Class date = new Class(tt,"Date");
+            date.Operations.Add(new Operation("after", true, tt.Library.Boolean, new Parameter[] { new Parameter("time", date) }));
+            date.Operations.Add(new Operation("before", true, tt.Library.Boolean, new Parameter[] { new Parameter("time", date) }));
+            date.Operations.Add(new Operation("equals", true, tt.Library.Boolean, new Parameter[] { new Parameter("time", date) }));
+            date.Operations.Add(new Operation("<=", true, tt.Library.Boolean, new Parameter[] { new Parameter("time", date) }));
+
+            Class tournament = new Class(tt,"Tournament");
+            tournament.Properties.Add(new Property("name", PropertyType.One, tt.Library.String));
             tournament.Properties.Add(new Property("start", PropertyType.One, date));
             tournament.Properties.Add(new Property("end", PropertyType.One, date));
-            tournament.Properties.Add(new Property("maxNumPlayers", PropertyType.One, tt.Integer));
-            tournament.Properties.Add(new Property("advertised", PropertyType.ZeroToOne, tt.Boolean));
-            tournament.Properties.Add(new Property("requiredQualificationPoints", PropertyType.One, tt.Integer));
-            tournament.Properties.Add(new Property("open", PropertyType.One, tt.Boolean));
-            tournament.Operations.Add(new Operation("overlap", true, tt.Boolean, new Parameter[] { new Parameter("t", tournament) }));
-            tournament.Operations.Add(new Operation("<>", true, tt.Boolean, new Parameter[] { new Parameter("tournament", tournament) }));
+            tournament.Properties.Add(new Property("maxNumPlayers", PropertyType.One, tt.Library.Integer));
+            tournament.Properties.Add(new Property("advertised", PropertyType.ZeroToOne, tt.Library.Boolean));
+            tournament.Properties.Add(new Property("requiredQualificationPoints", PropertyType.One, tt.Library.Integer));
+            tournament.Properties.Add(new Property("open", PropertyType.One, tt.Library.Boolean));
+            tournament.Operations.Add(new Operation("overlap", true, tt.Library.Boolean, new Parameter[] { new Parameter("t", tournament) }));
+            tournament.Operations.Add(new Operation("<>", true, tt.Library.Boolean, new Parameter[] { new Parameter("tournament", tournament) }));
 
-            Class match = new Class("Match");
+            Class match = new Class(tt,"Match");
             match.Properties.Add(new Property("start", PropertyType.One, date));
             match.Properties.Add(new Property("end", PropertyType.One, date));
             // chyby status
 
-            Class tournamentControl = new Class("TournamentControl");
+            Class tournamentControl = new Class(tt,"TournamentControl");
 
-            Class player = new Class("Player");
+            Class player = new Class(tt,"Player");
+            player.Properties.Add(new Property("points", PropertyType.One, tt.Library.Integer));
+            player.Properties.Add(new Property("regno", PropertyType.One, tt.Library.String));
 
-           
+            Class league = new Class(tt, "League");
+
 
             //Vzjemne propejeni trid
-            BagType matchesBagType = new BagType(match);
-            matchesBagType.Operations.Add(new Operation("includes",true,tt.Boolean,new Parameter[] { new Parameter("tournament", match) }));
+            BagType matchesBagType = new BagType(tt,match);
+          //  matchesBagType.Operations.Add(new Operation("includes", true, tt.Library.Boolean, new Parameter[] { new Parameter("tournament", match) }));
+
             tournament.Properties.Add(new Property("matches", PropertyType.Many, matchesBagType));
-            BagType playersBagType = new BagType(player);
+            BagType playersBagType = new BagType(tt,player);
             tournament.Properties.Add(new Property("players", PropertyType.Many, playersBagType));
-            BagType tournamentBagType = new BagType(tournament);
+            BagType tournamentBagType = new BagType(tt,tournament);
             player.Properties.Add(new Property("tournaments", PropertyType.Many, tournamentBagType));
             player.Properties.Add(new Property("matches", PropertyType.Many, matchesBagType));
             tournamentControl.Properties.Add(new Property("tournament", PropertyType.One, tournament));
             match.Properties.Add(new Property("players", PropertyType.Many, playersBagType));
+            BagType leagueBag = new BagType(tt, league);
+            player.Properties.Add(new Property("league", PropertyType.ZeroToOne, leagueBag));
 
-            Namespace ns = new Namespace("");
+            Namespace ns = tt.Library.RootNamespace;
             ns.NestedClassifier.Add(date);
             ns.NestedClassifier.Add(tournament);
             ns.NestedClassifier.Add(match);
             ns.NestedClassifier.Add(tournamentControl);
+            ns.NestedClassifier.Add(player);
+            ns.NestedClassifier.Add(league);
 
 
             tt.RegisterType(date);
@@ -76,7 +87,10 @@ namespace Tests.OCL {
             tt.RegisterType(tournamentControl);
             tt.RegisterType(playersBagType);
             tt.RegisterType(tournamentBagType);
-            
+            tt.RegisterType(player);
+            tt.RegisterType(league);
+            tt.RegisterType(leagueBag);
+
 
             NamespaceEnvironment env = new NamespaceEnvironment(ns);
 
@@ -88,7 +102,7 @@ namespace Tests.OCL {
         [Test]
         public void SimpleTest() {
             Compiler compiler = new Compiler();
-            Tuple<TypesTable,Exolutio.Model.OCL.Environment> root = CreateTestEnv();
+            Tuple<TypesTable, Exolutio.Model.OCL.Environment> root = CreateTestEnv();
             //compiler.TypesTable = tt;
 
             var ast = compiler.TestCompiler(@"/* All Matches in a Tournament occur
@@ -97,11 +111,11 @@ within the Tournament’s time frame */
 context Tournament
 inv:
 matches->forAll(m:Match |
-m.start.after(start) and m.end.before(end))", root.Item1,root.Item2);
+m.start.after(start) and m.end.before(end))", root.Item1, root.Item2);
 
             Exolutio.Model.OCL.AST.PrintVisitor printer = new Exolutio.Model.OCL.AST.PrintVisitor();
             string text = printer.AstToString(ast.Constraints[0]);
-             
+
         }
 
         [Test]
@@ -160,19 +174,17 @@ t.matches->includes(self)))", root.Item1, root.Item2);
             string text = printer.AstToString(ast.Constraints[0]);
         }
 
+
+
         [Test]
         public void SimpleTest5() {
             Compiler compiler = new Compiler();
             Tuple<TypesTable, Exolutio.Model.OCL.Environment> root = CreateTestEnv();
             //compiler.TypesTable = tt;
 
-            var ast = compiler.TestCompiler(@"/* A match can only involve players who are
-accepted in the tournament */
-
-context Match
-inv: players->forAll(p|
-p.tournaments->exists(t|
-t.matches->includes(self)))", root.Item1, root.Item2);
+            var ast = compiler.TestCompiler(@"/* dates consistency */
+context Tournament
+inv : start <= end", root.Item1, root.Item2);
 
             Exolutio.Model.OCL.AST.PrintVisitor printer = new Exolutio.Model.OCL.AST.PrintVisitor();
             string text = printer.AstToString(ast.Constraints[0]);
@@ -185,9 +197,25 @@ t.matches->includes(self)))", root.Item1, root.Item2);
             Tuple<TypesTable, Exolutio.Model.OCL.Environment> root = CreateTestEnv();
             //compiler.TypesTable = tt;
 
-            var ast = compiler.TestCompiler(@"/* dates consistency */
+            var ast = compiler.TestCompiler(@"/* participating players meet the requirements of the tournament */
 context Tournament
-inv : start <= end", root.Item1, root.Item2);
+inv: requiredQualificationPoints = null or 
+players->forAll(p | p.points >= requiredQualificationPoints)", root.Item1, root.Item2);
+
+            Exolutio.Model.OCL.AST.PrintVisitor printer = new Exolutio.Model.OCL.AST.PrintVisitor();
+            string text = printer.AstToString(ast.Constraints[0]);
+
+        }
+
+        [Test]
+        public void SimpleTest7() {
+            Compiler compiler = new Compiler();
+            Tuple<TypesTable, Exolutio.Model.OCL.Environment> root = CreateTestEnv();
+            //compiler.TypesTable = tt;
+
+            var ast = compiler.TestCompiler(@"/* players playing leagues must have registration numbers */
+context Player
+inv: not league->isEmpty() implies regno <> null ", root.Item1, root.Item2);
 
             Exolutio.Model.OCL.AST.PrintVisitor printer = new Exolutio.Model.OCL.AST.PrintVisitor();
             string text = printer.AstToString(ast.Constraints[0]);

@@ -9,8 +9,8 @@ namespace Exolutio.Model.OCL.Types
 
     public abstract class NonCompositeType : Classifier
     {
-        protected NonCompositeType() : base("NoConformsToType") { }
-        protected NonCompositeType(string name) : base(name) { }
+        protected NonCompositeType(TypesTable.TypesTable tt) : base(tt,"NoConformsToType") { }
+        protected NonCompositeType(TypesTable.TypesTable tt,string name) : base(tt,name) { }
 
         public abstract Type CompositeType
         {
@@ -31,7 +31,7 @@ namespace Exolutio.Model.OCL.Types
     /// </summary>
     public sealed class NonCompositeType<T> :NonCompositeType where T : ICompositeType
     {
-        private NonCompositeType() : base("NonConformsToType<"+typeof(T).Name+">") { }
+        private NonCompositeType(TypesTable.TypesTable tt) : base(tt,"NonConformsToType<" + typeof(T).Name + ">") { }
 
         public override Type CompositeType
         {
@@ -41,20 +41,7 @@ namespace Exolutio.Model.OCL.Types
             }
         }
 
-        static NonCompositeType<T> instance =null;
-
-        public static NonCompositeType<T> Instance
-        {
-            get
-            {
-                if (instance == null)
-                    instance = new NonCompositeType<T>();
-                return instance;
-            }
-        }
-
- 
-
+       
         public override bool Equals(object obj)
         {
             return obj.GetType() == this.GetType();

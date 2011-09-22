@@ -33,6 +33,9 @@ namespace Exolutio.Model.OCL
 
         public string Contents { get; set; }
 
+        public void Compile() {
+        }
+
         #region Implementation of IExolutioSerializable
 
         public override void Serialize(System.Xml.Linq.XElement parentNode, Serialization.SerializationContext context)

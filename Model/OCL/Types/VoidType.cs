@@ -11,9 +11,13 @@ namespace Exolutio.Model.OCL.Types
     /// </summary>
     public class VoidType: Classifier,IConformsToComposite
     {
-        public VoidType()
-            : base("Void")
+        public VoidType(TypesTable.TypesTable tt)
+            : base(tt,"Void")
         { }
+
+        public override bool ConformsTo(Classifier other) {
+            return ConformsToRegister(other);
+        }
 
         public override bool ConformsToRegister(Classifier other)
         {

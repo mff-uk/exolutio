@@ -10,9 +10,13 @@ namespace Exolutio.Model.OCL.Types
     /// </summary>
     public class InvalidType:Classifier,IConformsToComposite
     {
-        public InvalidType()
-            : base("Invalid")
+        public InvalidType(TypesTable.TypesTable tt)
+            : base(tt,"Invalid")
         { }
+
+        public override bool ConformsTo(Classifier other) {
+            return ConformsToRegister(other);
+        }
 
         public override bool ConformsToRegister(Classifier other)
         {

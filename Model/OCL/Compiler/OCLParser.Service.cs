@@ -67,7 +67,7 @@ namespace Exolutio.Model.OCL.Compiler {
             Operation op =exp1.Type.LookupOperation(name, new Classifier[] { exp2.Type });
             if (op == null) {
                 Errors.AddError(new ErrorItem(String.Format("On type `{0}` is not defined operation `{1}`.",exp1.Type,name)));
-                return new AST.ErrorExp(TypesTable.Any);
+                return new AST.ErrorExp(TypesTable.Library.Any);
             }
             return new AST.OperationCallExp( exp1, false,op,new List<AST.OclExpression>(new AST.OclExpression[] { exp2 }));
         }
@@ -76,7 +76,7 @@ namespace Exolutio.Model.OCL.Compiler {
             Operation op = exp1.Type.LookupOperation(name.Text, new Classifier[] {  });
             if (op == null) {
                 Errors.AddError(new CodeErrorItem(String.Format("On type `{0}` is not defined operation `{1}`.", exp1.Type, name),name,name));
-                return new AST.ErrorExp(TypesTable.Any);
+                return new AST.ErrorExp(TypesTable.Library.Any);
             }
             return new AST.OperationCallExp(exp1, false, op, new List<AST.OclExpression>(new AST.OclExpression[] {}));
         }
@@ -119,7 +119,7 @@ namespace Exolutio.Model.OCL.Compiler {
                     ModelElement element = Environment.LookupPathName(path);
                     //Chyby enum !!!!!!!!!!!!!!!!!!!!!!!!
                     if (element is Classifier) {
-                        return new AST.TypeExp((Classifier)element, TypesTable.Type);
+                        return new AST.TypeExp((Classifier)element, TypesTable.Library.Type);
                     }
                     // Chyby 36C
                     throw new NotImplementedException();
@@ -133,7 +133,7 @@ namespace Exolutio.Model.OCL.Compiler {
                     ImplicitOperationData operation = Environment.LookupImplicitOperation(path[0], callArgs.Select(arg => arg.Expression.Type));
                     if (operation == null) {
                         Errors.AddError(new ErrorItem(string.Format("Operace `{0}` nenalezena.", path[0])));
-                        return new AST.ErrorExp(TypesTable.Any);
+                        return new AST.ErrorExp(TypesTable.Library.Any);
                     }
                     //self problem
                     // tady by melo byt vyreseno self
@@ -154,13 +154,13 @@ namespace Exolutio.Model.OCL.Compiler {
                 //25a,36b
                 if (rootExpr.Type is CollectionType == false) {
                     Errors.AddError(new ErrorItem("Illegal use of '->', source is not collection."));
-                    return new AST.ErrorExp(TypesTable.Any);
+                    return new AST.ErrorExp(TypesTable.Library.Any);
                 }
 
-                bool correctCall = path.Count ==1 && indexArgs == null && isPre == false /*&& varDecl != null*/ && callArgs != null && callArgs.Count == 1 ;
+                bool correctCall = path.Count == 1 && indexArgs == null && isPre == false /*&& varDecl != null && callArgs != null && callArgs.Count == 1*/ ;
                 if (correctCall == false) {
                     Errors.AddError(new ErrorItem("Incorect call convention for iterator."));
-                    return new AST.ErrorExp(TypesTable.Any);
+                    return new AST.ErrorExp(TypesTable.Library.Any);
                 }
                 return ProcessArrowIterator(rootExpr, path[0], varDecl, callArgs);
                 
@@ -210,6 +210,11 @@ namespace Exolutio.Model.OCL.Compiler {
             }
 
             // 25a
+            if (callArgs == null || callArgs.Count != 1) {
+                Errors.AddError(new ErrorItem("Incorect call convention for iterator."));
+                return new AST.ErrorExp(TypesTable.Library.Any);
+            }
+
             IteratorOperation iteratorOperation = ((CollectionType)(rootExpr.Type)).LookupIteratorOperation(name);
             // Iterator expresion muze byt NULL -> pak se pouziji defaultni nazvy ... neni implementovano
             if (iteratorOperation != null) {
@@ -232,7 +237,7 @@ namespace Exolutio.Model.OCL.Compiler {
             if (type != null && parts == null) {
                 // type
                 var collType = CreateCollectionType(kind, type);
-                return new AST.TypeExp(collType, TypesTable.Type);
+                return new AST.TypeExp(collType, TypesTable.Library.Type);
             }
 
             if (kind == CollectionKind.Collection) {
@@ -252,7 +257,7 @@ namespace Exolutio.Model.OCL.Compiler {
             }
 
             if (type == null && parts != null) {
-                Classifier elementType = TypesTable.Void;
+                Classifier elementType = TypesTable.Library.Void;
                 foreach (var part in parts) {
                     elementType = elementType.CommonSuperType(part.Type);
                 }
@@ -260,7 +265,7 @@ namespace Exolutio.Model.OCL.Compiler {
                 return new AST.CollectionLiteralExp(collType, parts);
             }
 
-            return new AST.ErrorExp(TypesTable.Any);
+            return new AST.ErrorExp(TypesTable.Library.Any);
 
         }
 
@@ -293,7 +298,7 @@ namespace Exolutio.Model.OCL.Compiler {
                 Errors.AddError(new CodeErrorItem(String.Format("Number {0} is overflow.", token.Text), token, token));
             }
 
-            return new AST.IntegerLiteralExp(value, TypesTable.Integer);
+            return new AST.IntegerLiteralExp(value, TypesTable.Library.Integer);
         }
 
         /// <summary>
@@ -308,7 +313,7 @@ namespace Exolutio.Model.OCL.Compiler {
             catch (FormatException) {
                 Errors.AddError(new CodeErrorItem("Bad format of real.", token, token));
             }
-            return new AST.RealLiteralExp(value, TypesTable.Real);
+            return new AST.RealLiteralExp(value, TypesTable.Library.Real);
 
         }
 
@@ -320,7 +325,7 @@ namespace Exolutio.Model.OCL.Compiler {
         /// </remarks>
         /// <returns></returns>
         AST.StringLiteralExp CreateStringLiteral(CommonToken value) {
-            return new AST.StringLiteralExp(value.Text, TypesTable.String);
+            return new AST.StringLiteralExp(value.Text, TypesTable.Library.String);
         }
 
         /// <summary>
@@ -331,7 +336,7 @@ namespace Exolutio.Model.OCL.Compiler {
             bool newValue;
             newValue = value == TrueConstant;
 
-            return new AST.BooleanLiteralExp(newValue, TypesTable.Boolean);
+            return new AST.BooleanLiteralExp(newValue, TypesTable.Library.Boolean);
         }
 
         /// <summary>
@@ -339,7 +344,7 @@ namespace Exolutio.Model.OCL.Compiler {
         /// </summary>
         /// <returns></returns>
         AST.UnlimitedNaturalLiteralExp CreateUnlimitedNaturalLiteral() {
-            return new AST.UnlimitedNaturalLiteralExp(TypesTable.UnlimitedNatural);
+            return new AST.UnlimitedNaturalLiteralExp(TypesTable.Library.UnlimitedNatural);
         }
 
         /// <summary>
@@ -347,7 +352,7 @@ namespace Exolutio.Model.OCL.Compiler {
         /// </summary>
         /// <returns></returns>
         AST.NullLiteralExp CreateNullLiteral() {
-            return new AST.NullLiteralExp();
+            return new AST.NullLiteralExp(TypesTable.Library.Void);
         }
 
         /// <summary>
@@ -355,7 +360,7 @@ namespace Exolutio.Model.OCL.Compiler {
         /// </summary>
         /// <returns></returns>
         AST.InvalidLiteralExp CreateInvalidLiteral() {
-            return new AST.InvalidLiteralExp(TypesTable.Invalid);
+            return new AST.InvalidLiteralExp(TypesTable.Library.Invalid);
         }
 
         List<string> ResolvePathName(CommonToken first, List<CommonToken> other) {
@@ -371,7 +376,7 @@ namespace Exolutio.Model.OCL.Compiler {
         AST.TupleLiteralExp CreateTupleLiteral(CommonToken rootToken, List<VariableDeclaration> vars) {
 
             Dictionary<string, AST.TupleLiteralPart> parts = new Dictionary<string, AST.TupleLiteralPart>();
-            TupleType tupleType = new TupleType();
+            TupleType tupleType = new TupleType(TypesTable);
 
             foreach (var var in vars) {
                 if (parts.ContainsKey(var.Name)) {
@@ -396,19 +401,19 @@ namespace Exolutio.Model.OCL.Compiler {
             CollectionType collectionType;
             switch (kind) {
                 case CollectionKind.Bag:
-                    collectionType = new BagType(type);
+                    collectionType = new BagType(TypesTable, type);
                     break;
                 case CollectionKind.Collection:
-                    collectionType = new CollectionType(type);
+                    collectionType = new CollectionType(TypesTable,type);
                     break;
                 case CollectionKind.OrderedSet:
-                    collectionType = new OrderedSetType(type);
+                    collectionType = new OrderedSetType(TypesTable,type);
                     break;
                 case CollectionKind.Sequence:
-                    collectionType = new SequenceType(type);
+                    collectionType = new SequenceType(TypesTable,type);
                     break;
                 case CollectionKind.Set:
-                    collectionType = new SetType(type);
+                    collectionType = new SetType(TypesTable,type);
                     break;
 
                 default:
@@ -424,7 +429,7 @@ namespace Exolutio.Model.OCL.Compiler {
 
 
         TupleType CreateTupleType(CommonToken rootToken, List<VariableDeclaration> variables) {
-            TupleType tuple = new TupleType();
+            TupleType tuple = new TupleType(TypesTable);
             foreach (var variable in variables) {
                 if (tuple.TupleParts.Keys.Contains(variable.Name)) {// Kontrola nad ramec specifikace
                     Errors.AddError(new CodeErrorItem(String.Format("Name {0} is used multipled.", variable.Name), rootToken, rootToken));
@@ -444,7 +449,7 @@ namespace Exolutio.Model.OCL.Compiler {
                 case VariableDeclarationRequirement.Iterator:
                     bool okConditionIterator = type != null && value == null;
                     if (okConditionIterator == false) {
-                        type = TypesTable.Any;
+                        type = TypesTable.Library.Invalid;
                         value = null;
                         Errors.AddError(new CodeErrorItem("The loop variable of an iterator expression has no init expression.", name, name));
                     }
@@ -452,7 +457,7 @@ namespace Exolutio.Model.OCL.Compiler {
                 case VariableDeclarationRequirement.TupleType:
                     bool okCondition = type != null && value == null;
                     if (okCondition == false) {
-                        type = TypesTable.Any;
+                        type = TypesTable.Library.Invalid;
                         value = null;
                         Errors.AddError(new CodeErrorItem("Of all VariableDeclarations the initExpression must be empty and the type must exist.", name, name));
                     }
@@ -460,8 +465,8 @@ namespace Exolutio.Model.OCL.Compiler {
                 case VariableDeclarationRequirement.TupleLiteral:
                     bool okConditionLit = type != null && value != null;
                     if (okConditionLit == false) {
-                        type = TypesTable.Any;
-                        value = new AST.ErrorExp(TypesTable.Any);
+                        type = TypesTable.Library.Invalid;
+                        value = new AST.ErrorExp(TypesTable.Library.Invalid);
                         Errors.AddError(new CodeErrorItem("The initExpression and type of all VariableDeclarations must exist.", name, name));
                     }
                     break;
@@ -491,13 +496,13 @@ namespace Exolutio.Model.OCL.Compiler {
 
 
             if (foundType == null) {
-                foundType = TypesTable.Any;
+                foundType = TypesTable.Library.Invalid;
                 Errors.AddError(new CodeErrorItem(String.Format("Path {0} do not exists.", path), FirstPathToken, LastPathToken));
             }
 
 
             if (foundType is Classifier == false) {
-                foundType = TypesTable.Any;
+                foundType = TypesTable.Library.Invalid;
                 Errors.AddError(new CodeErrorItem(String.Format("Path {0} do not referres type.", path), FirstPathToken, LastPathToken));
             }
 
