@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// $ANTLR 3.3.1.7705 ..\\..\\Model\\OCL\\Grammar\\OCL.g3 2011-09-20 16:03:18
+// $ANTLR 3.3.1.7705 ..\\..\\Model\\OCL\\Grammar\\OCL.g3 2011-09-22 16:41:12
 
 // The variable 'variable' is assigned but its value is never used.
 #pragma warning disable 219
@@ -2325,7 +2325,7 @@ public partial class OCLLexer : Antlr.Runtime.Lexer
 		{
 			int _type = BooleanLiteralExp;
 			int _channel = DefaultTokenChannel;
-			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:398:2: ( 'true' | 'false' )
+			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:403:2: ( 'true' | 'false' )
 			int alt1=2;
 			try { DebugEnterDecision(1, false);
 			int LA1_0 = input.LA(1);
@@ -2349,9 +2349,9 @@ public partial class OCLLexer : Antlr.Runtime.Lexer
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:398:3: 'true'
+				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:403:3: 'true'
 				{
-				DebugLocation(398, 3);
+				DebugLocation(403, 3);
 				Match("true"); 
 
 
@@ -2359,9 +2359,9 @@ public partial class OCLLexer : Antlr.Runtime.Lexer
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:399:3: 'false'
+				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:404:3: 'false'
 				{
-				DebugLocation(399, 3);
+				DebugLocation(404, 3);
 				Match("false"); 
 
 
@@ -2395,11 +2395,11 @@ public partial class OCLLexer : Antlr.Runtime.Lexer
 		{
 			int _type = NullLiteralExp;
 			int _channel = DefaultTokenChannel;
-			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:403:2: ( 'null' )
+			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:408:2: ( 'null' )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:403:4: 'null'
+			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:408:4: 'null'
 			{
-			DebugLocation(403, 4);
+			DebugLocation(408, 4);
 			Match("null"); 
 
 
@@ -2431,11 +2431,11 @@ public partial class OCLLexer : Antlr.Runtime.Lexer
 		{
 			int _type = InvalidLiteralExp;
 			int _channel = DefaultTokenChannel;
-			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:407:2: ( 'invalid' )
+			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:412:2: ( 'invalid' )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:407:4: 'invalid'
+			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:412:4: 'invalid'
 			{
-			DebugLocation(407, 4);
+			DebugLocation(412, 4);
 			Match("invalid"); 
 
 
@@ -2467,7 +2467,7 @@ public partial class OCLLexer : Antlr.Runtime.Lexer
 		{
 			int _type = SimpleName;
 			int _channel = DefaultTokenChannel;
-			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:413:2: ( NameStartChar ( NameChar )* | '_' '\\'' ( StringChar )* '\\'' )
+			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:418:2: ( NameStartChar ( NameChar )* | '_' '\\'' ( StringChar )* '\\'' )
 			int alt4=2;
 			try { DebugEnterDecision(4, false);
 			int LA4_0 = input.LA(1);
@@ -2499,12 +2499,12 @@ public partial class OCLLexer : Antlr.Runtime.Lexer
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:413:4: NameStartChar ( NameChar )*
+				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:418:4: NameStartChar ( NameChar )*
 				{
-				DebugLocation(413, 4);
+				DebugLocation(418, 4);
 				mNameStartChar(); 
-				DebugLocation(413, 18);
-				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:413:18: ( NameChar )*
+				DebugLocation(418, 18);
+				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:418:18: ( NameChar )*
 				try { DebugEnterSubRule(2);
 				while (true)
 				{
@@ -2525,7 +2525,7 @@ public partial class OCLLexer : Antlr.Runtime.Lexer
 						DebugEnterAlt(1);
 						// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:
 						{
-						DebugLocation(413, 18);
+						DebugLocation(418, 18);
 						input.Consume();
 
 
@@ -2547,14 +2547,14 @@ public partial class OCLLexer : Antlr.Runtime.Lexer
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:414:4: '_' '\\'' ( StringChar )* '\\''
+				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:419:4: '_' '\\'' ( StringChar )* '\\''
 				{
-				DebugLocation(414, 4);
+				DebugLocation(419, 4);
 				Match('_'); 
-				DebugLocation(414, 8);
+				DebugLocation(419, 8);
 				Match('\''); 
-				DebugLocation(414, 13);
-				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:414:13: ( StringChar )*
+				DebugLocation(419, 13);
+				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:419:13: ( StringChar )*
 				try { DebugEnterSubRule(3);
 				while (true)
 				{
@@ -2573,9 +2573,9 @@ public partial class OCLLexer : Antlr.Runtime.Lexer
 					{
 					case 1:
 						DebugEnterAlt(1);
-						// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:414:13: StringChar
+						// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:419:13: StringChar
 						{
-						DebugLocation(414, 13);
+						DebugLocation(419, 13);
 						mStringChar(); 
 
 						}
@@ -2591,7 +2591,7 @@ public partial class OCLLexer : Antlr.Runtime.Lexer
 
 				} finally { DebugExitSubRule(3); }
 
-				DebugLocation(414, 25);
+				DebugLocation(419, 25);
 				Match('\''); 
 
 				}
@@ -2624,11 +2624,11 @@ public partial class OCLLexer : Antlr.Runtime.Lexer
 		{
 			int _type = UnlimitedNaturalLiteralExp;
 			int _channel = DefaultTokenChannel;
-			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:419:2: ( '*' )
+			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:424:2: ( '*' )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:419:3: '*'
+			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:424:3: '*'
 			{
-			DebugLocation(419, 3);
+			DebugLocation(424, 3);
 			Match('*'); 
 
 			}
@@ -2659,7 +2659,7 @@ public partial class OCLLexer : Antlr.Runtime.Lexer
 		{
 			int _type = IntegerLiteralExp;
 			int _channel = DefaultTokenChannel;
-			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:421:2: ( '0' | '1' .. '9' ( Num )* )
+			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:426:2: ( '0' | '1' .. '9' ( Num )* )
 			int alt6=2;
 			try { DebugEnterDecision(6, false);
 			int LA6_0 = input.LA(1);
@@ -2683,21 +2683,21 @@ public partial class OCLLexer : Antlr.Runtime.Lexer
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:421:4: '0'
+				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:426:4: '0'
 				{
-				DebugLocation(421, 4);
+				DebugLocation(426, 4);
 				Match('0'); 
 
 				}
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:422:4: '1' .. '9' ( Num )*
+				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:427:4: '1' .. '9' ( Num )*
 				{
-				DebugLocation(422, 4);
+				DebugLocation(427, 4);
 				MatchRange('1','9'); 
-				DebugLocation(422, 13);
-				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:422:13: ( Num )*
+				DebugLocation(427, 13);
+				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:427:13: ( Num )*
 				try { DebugEnterSubRule(5);
 				while (true)
 				{
@@ -2718,7 +2718,7 @@ public partial class OCLLexer : Antlr.Runtime.Lexer
 						DebugEnterAlt(1);
 						// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:
 						{
-						DebugLocation(422, 13);
+						DebugLocation(427, 13);
 						input.Consume();
 
 
@@ -2766,12 +2766,12 @@ public partial class OCLLexer : Antlr.Runtime.Lexer
 		{
 			int _type = RealLiteralExp;
 			int _channel = DefaultTokenChannel;
-			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:425:2: ( ( Num )+ ( ( '.' ( Num )+ ( ExponentPart )? ) | ( ExponentPart ) ) )
+			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:430:2: ( ( Num )+ ( ( '.' ( Num )+ ( ExponentPart )? ) | ( ExponentPart ) ) )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:425:4: ( Num )+ ( ( '.' ( Num )+ ( ExponentPart )? ) | ( ExponentPart ) )
+			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:430:4: ( Num )+ ( ( '.' ( Num )+ ( ExponentPart )? ) | ( ExponentPart ) )
 			{
-			DebugLocation(425, 4);
-			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:425:4: ( Num )+
+			DebugLocation(430, 4);
+			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:430:4: ( Num )+
 			int cnt7=0;
 			try { DebugEnterSubRule(7);
 			while (true)
@@ -2793,7 +2793,7 @@ public partial class OCLLexer : Antlr.Runtime.Lexer
 					DebugEnterAlt(1);
 					// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:
 					{
-					DebugLocation(425, 4);
+					DebugLocation(430, 4);
 					input.Consume();
 
 
@@ -2815,8 +2815,8 @@ public partial class OCLLexer : Antlr.Runtime.Lexer
 
 			} finally { DebugExitSubRule(7); }
 
-			DebugLocation(425, 9);
-			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:425:9: ( ( '.' ( Num )+ ( ExponentPart )? ) | ( ExponentPart ) )
+			DebugLocation(430, 9);
+			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:430:9: ( ( '.' ( Num )+ ( ExponentPart )? ) | ( ExponentPart ) )
 			int alt10=2;
 			try { DebugEnterSubRule(10);
 			try { DebugEnterDecision(10, false);
@@ -2841,17 +2841,17 @@ public partial class OCLLexer : Antlr.Runtime.Lexer
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:425:10: ( '.' ( Num )+ ( ExponentPart )? )
+				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:430:10: ( '.' ( Num )+ ( ExponentPart )? )
 				{
-				DebugLocation(425, 10);
-				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:425:10: ( '.' ( Num )+ ( ExponentPart )? )
+				DebugLocation(430, 10);
+				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:430:10: ( '.' ( Num )+ ( ExponentPart )? )
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:425:11: '.' ( Num )+ ( ExponentPart )?
+				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:430:11: '.' ( Num )+ ( ExponentPart )?
 				{
-				DebugLocation(425, 11);
+				DebugLocation(430, 11);
 				Match('.'); 
-				DebugLocation(425, 14);
-				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:425:14: ( Num )+
+				DebugLocation(430, 14);
+				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:430:14: ( Num )+
 				int cnt8=0;
 				try { DebugEnterSubRule(8);
 				while (true)
@@ -2873,7 +2873,7 @@ public partial class OCLLexer : Antlr.Runtime.Lexer
 						DebugEnterAlt(1);
 						// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:
 						{
-						DebugLocation(425, 14);
+						DebugLocation(430, 14);
 						input.Consume();
 
 
@@ -2895,8 +2895,8 @@ public partial class OCLLexer : Antlr.Runtime.Lexer
 
 				} finally { DebugExitSubRule(8); }
 
-				DebugLocation(425, 19);
-				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:425:19: ( ExponentPart )?
+				DebugLocation(430, 19);
+				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:430:19: ( ExponentPart )?
 				int alt9=2;
 				try { DebugEnterSubRule(9);
 				try { DebugEnterDecision(9, false);
@@ -2911,9 +2911,9 @@ public partial class OCLLexer : Antlr.Runtime.Lexer
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:425:20: ExponentPart
+					// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:430:20: ExponentPart
 					{
-					DebugLocation(425, 20);
+					DebugLocation(430, 20);
 					mExponentPart(); 
 
 					}
@@ -2930,14 +2930,14 @@ public partial class OCLLexer : Antlr.Runtime.Lexer
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:425:37: ( ExponentPart )
+				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:430:37: ( ExponentPart )
 				{
-				DebugLocation(425, 37);
-				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:425:37: ( ExponentPart )
+				DebugLocation(430, 37);
+				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:430:37: ( ExponentPart )
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:425:38: ExponentPart
+				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:430:38: ExponentPart
 				{
-				DebugLocation(425, 38);
+				DebugLocation(430, 38);
 				mExponentPart(); 
 
 				}
@@ -2978,14 +2978,14 @@ public partial class OCLLexer : Antlr.Runtime.Lexer
 		{
 			int _type = StringLiteralExp;
 			int _channel = DefaultTokenChannel;
-			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:429:2: ( '\\'' ( StringChar )* '\\'' )
+			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:434:2: ( '\\'' ( StringChar )* '\\'' )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:429:4: '\\'' ( StringChar )* '\\''
+			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:434:4: '\\'' ( StringChar )* '\\''
 			{
-			DebugLocation(429, 4);
+			DebugLocation(434, 4);
 			Match('\''); 
-			DebugLocation(429, 9);
-			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:429:9: ( StringChar )*
+			DebugLocation(434, 9);
+			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:434:9: ( StringChar )*
 			try { DebugEnterSubRule(11);
 			while (true)
 			{
@@ -3004,9 +3004,9 @@ public partial class OCLLexer : Antlr.Runtime.Lexer
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:429:9: StringChar
+					// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:434:9: StringChar
 					{
-					DebugLocation(429, 9);
+					DebugLocation(434, 9);
 					mStringChar(); 
 
 					}
@@ -3022,7 +3022,7 @@ public partial class OCLLexer : Antlr.Runtime.Lexer
 
 			} finally { DebugExitSubRule(11); }
 
-			DebugLocation(429, 21);
+			DebugLocation(434, 21);
 			Match('\''); 
 
 			}
@@ -3053,15 +3053,15 @@ public partial class OCLLexer : Antlr.Runtime.Lexer
 		{
 			int _type = NESTED_ML_COMMENT;
 			int _channel = DefaultTokenChannel;
-			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:434:5: ( '/*' ( options {greedy=false; } : NESTED_ML_COMMENT | . )* '*/' )
+			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:439:5: ( '/*' ( options {greedy=false; } : NESTED_ML_COMMENT | . )* '*/' )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:434:9: '/*' ( options {greedy=false; } : NESTED_ML_COMMENT | . )* '*/'
+			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:439:9: '/*' ( options {greedy=false; } : NESTED_ML_COMMENT | . )* '*/'
 			{
-			DebugLocation(434, 9);
+			DebugLocation(439, 9);
 			Match("/*"); 
 
-			DebugLocation(435, 9);
-			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:435:9: ( options {greedy=false; } : NESTED_ML_COMMENT | . )*
+			DebugLocation(440, 9);
+			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:440:9: ( options {greedy=false; } : NESTED_ML_COMMENT | . )*
 			try { DebugEnterSubRule(12);
 			while (true)
 			{
@@ -3110,18 +3110,18 @@ public partial class OCLLexer : Antlr.Runtime.Lexer
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:435:36: NESTED_ML_COMMENT
+					// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:440:36: NESTED_ML_COMMENT
 					{
-					DebugLocation(435, 36);
+					DebugLocation(440, 36);
 					mNESTED_ML_COMMENT(); 
 
 					}
 					break;
 				case 2:
 					DebugEnterAlt(2);
-					// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:435:56: .
+					// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:440:56: .
 					{
-					DebugLocation(435, 56);
+					DebugLocation(440, 56);
 					MatchAny(); 
 
 					}
@@ -3137,10 +3137,10 @@ public partial class OCLLexer : Antlr.Runtime.Lexer
 
 			} finally { DebugExitSubRule(12); }
 
-			DebugLocation(436, 9);
+			DebugLocation(441, 9);
 			Match("*/"); 
 
-			DebugLocation(436, 14);
+			DebugLocation(441, 14);
 			_channel=Hidden;
 
 			}
@@ -3171,15 +3171,15 @@ public partial class OCLLexer : Antlr.Runtime.Lexer
 		{
 			int _type = LINE_COMMENT;
 			int _channel = DefaultTokenChannel;
-			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:440:2: ( '--' (~ ( '\\n' | '\\r' ) )* ( ( ( '\\r' )? '\\n' ) | EOF ) )
+			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:445:2: ( '--' (~ ( '\\n' | '\\r' ) )* ( ( ( '\\r' )? '\\n' ) | EOF ) )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:440:3: '--' (~ ( '\\n' | '\\r' ) )* ( ( ( '\\r' )? '\\n' ) | EOF )
+			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:445:3: '--' (~ ( '\\n' | '\\r' ) )* ( ( ( '\\r' )? '\\n' ) | EOF )
 			{
-			DebugLocation(440, 3);
+			DebugLocation(445, 3);
 			Match("--"); 
 
-			DebugLocation(440, 9);
-			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:440:9: (~ ( '\\n' | '\\r' ) )*
+			DebugLocation(445, 9);
+			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:445:9: (~ ( '\\n' | '\\r' ) )*
 			try { DebugEnterSubRule(13);
 			while (true)
 			{
@@ -3200,7 +3200,7 @@ public partial class OCLLexer : Antlr.Runtime.Lexer
 					DebugEnterAlt(1);
 					// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:
 					{
-					DebugLocation(440, 9);
+					DebugLocation(445, 9);
 					input.Consume();
 
 
@@ -3217,8 +3217,8 @@ public partial class OCLLexer : Antlr.Runtime.Lexer
 
 			} finally { DebugExitSubRule(13); }
 
-			DebugLocation(440, 23);
-			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:440:23: ( ( ( '\\r' )? '\\n' ) | EOF )
+			DebugLocation(445, 23);
+			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:445:23: ( ( ( '\\r' )? '\\n' ) | EOF )
 			int alt15=2;
 			try { DebugEnterSubRule(15);
 			try { DebugEnterDecision(15, false);
@@ -3236,15 +3236,15 @@ public partial class OCLLexer : Antlr.Runtime.Lexer
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:440:24: ( ( '\\r' )? '\\n' )
+				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:445:24: ( ( '\\r' )? '\\n' )
 				{
-				DebugLocation(440, 24);
-				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:440:24: ( ( '\\r' )? '\\n' )
+				DebugLocation(445, 24);
+				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:445:24: ( ( '\\r' )? '\\n' )
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:440:25: ( '\\r' )? '\\n'
+				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:445:25: ( '\\r' )? '\\n'
 				{
-				DebugLocation(440, 25);
-				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:440:25: ( '\\r' )?
+				DebugLocation(445, 25);
+				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:445:25: ( '\\r' )?
 				int alt14=2;
 				try { DebugEnterSubRule(14);
 				try { DebugEnterDecision(14, false);
@@ -3259,9 +3259,9 @@ public partial class OCLLexer : Antlr.Runtime.Lexer
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:440:25: '\\r'
+					// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:445:25: '\\r'
 					{
-					DebugLocation(440, 25);
+					DebugLocation(445, 25);
 					Match('\r'); 
 
 					}
@@ -3270,7 +3270,7 @@ public partial class OCLLexer : Antlr.Runtime.Lexer
 				}
 				} finally { DebugExitSubRule(14); }
 
-				DebugLocation(440, 31);
+				DebugLocation(445, 31);
 				Match('\n'); 
 
 				}
@@ -3280,9 +3280,9 @@ public partial class OCLLexer : Antlr.Runtime.Lexer
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:440:37: EOF
+				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:445:37: EOF
 				{
-				DebugLocation(440, 37);
+				DebugLocation(445, 37);
 				Match(EOF); 
 
 				}
@@ -3291,7 +3291,7 @@ public partial class OCLLexer : Antlr.Runtime.Lexer
 			}
 			} finally { DebugExitSubRule(15); }
 
-			DebugLocation(440, 42);
+			DebugLocation(445, 42);
 			_channel=Hidden;
 
 			}
@@ -3322,13 +3322,13 @@ public partial class OCLLexer : Antlr.Runtime.Lexer
 		{
 			int _type = WS;
 			int _channel = DefaultTokenChannel;
-			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:444:5: ( WhiteSpaceChar )
+			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:449:5: ( WhiteSpaceChar )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:444:9: WhiteSpaceChar
+			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:449:9: WhiteSpaceChar
 			{
-			DebugLocation(444, 9);
+			DebugLocation(449, 9);
 			mWhiteSpaceChar(); 
-			DebugLocation(444, 24);
+			DebugLocation(449, 24);
 			_channel=Hidden;
 
 			}
@@ -3357,11 +3357,11 @@ public partial class OCLLexer : Antlr.Runtime.Lexer
 		TraceIn("NameStartChar", 73);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:453:2: ( 'A' .. 'Z' | '_' | '$' | 'a' .. 'z' | '\\u00C0' .. '\\u00D6' | '\\u00D8' .. '\\u00F6' | '\\u00F8' .. '\\u02FF' | '\\u0370' .. '\\u037D' | '\\u037F' .. '\\u1FFF' | '\\u200C' .. '\\u200D' | '\\u2070' .. '\\u218F' | '\\u2C00' .. '\\u2FEF' | '\\u3001' .. '\\uD7FF' | '\\uF900' .. '\\uFDCF' | '\\uFDF0' .. '\\uFFFD' )
+			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:458:2: ( 'A' .. 'Z' | '_' | '$' | 'a' .. 'z' | '\\u00C0' .. '\\u00D6' | '\\u00D8' .. '\\u00F6' | '\\u00F8' .. '\\u02FF' | '\\u0370' .. '\\u037D' | '\\u037F' .. '\\u1FFF' | '\\u200C' .. '\\u200D' | '\\u2070' .. '\\u218F' | '\\u2C00' .. '\\u2FEF' | '\\u3001' .. '\\uD7FF' | '\\uF900' .. '\\uFDCF' | '\\uFDF0' .. '\\uFFFD' )
 			DebugEnterAlt(1);
 			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:
 			{
-			DebugLocation(453, 2);
+			DebugLocation(458, 2);
 			if (input.LA(1)=='$'||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z')||(input.LA(1)>='\u00C0' && input.LA(1)<='\u00D6')||(input.LA(1)>='\u00D8' && input.LA(1)<='\u00F6')||(input.LA(1)>='\u00F8' && input.LA(1)<='\u02FF')||(input.LA(1)>='\u0370' && input.LA(1)<='\u037D')||(input.LA(1)>='\u037F' && input.LA(1)<='\u1FFF')||(input.LA(1)>='\u200C' && input.LA(1)<='\u200D')||(input.LA(1)>='\u2070' && input.LA(1)<='\u218F')||(input.LA(1)>='\u2C00' && input.LA(1)<='\u2FEF')||(input.LA(1)>='\u3001' && input.LA(1)<='\uD7FF')||(input.LA(1)>='\uF900' && input.LA(1)<='\uFDCF')||(input.LA(1)>='\uFDF0' && input.LA(1)<='\uFFFD'))
 			{
 				input.Consume();
@@ -3399,11 +3399,11 @@ public partial class OCLLexer : Antlr.Runtime.Lexer
 		TraceIn("NameChar", 74);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:462:2: ( NameStartChar | Num )
+			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:467:2: ( NameStartChar | Num )
 			DebugEnterAlt(1);
 			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:
 			{
-			DebugLocation(462, 2);
+			DebugLocation(467, 2);
 			if (input.LA(1)=='$'||(input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z')||(input.LA(1)>='\u00C0' && input.LA(1)<='\u00D6')||(input.LA(1)>='\u00D8' && input.LA(1)<='\u00F6')||(input.LA(1)>='\u00F8' && input.LA(1)<='\u02FF')||(input.LA(1)>='\u0370' && input.LA(1)<='\u037D')||(input.LA(1)>='\u037F' && input.LA(1)<='\u1FFF')||(input.LA(1)>='\u200C' && input.LA(1)<='\u200D')||(input.LA(1)>='\u2070' && input.LA(1)<='\u218F')||(input.LA(1)>='\u2C00' && input.LA(1)<='\u2FEF')||(input.LA(1)>='\u3001' && input.LA(1)<='\uD7FF')||(input.LA(1)>='\uF900' && input.LA(1)<='\uFDCF')||(input.LA(1)>='\uFDF0' && input.LA(1)<='\uFFFD'))
 			{
 				input.Consume();
@@ -3441,7 +3441,7 @@ public partial class OCLLexer : Antlr.Runtime.Lexer
 		TraceIn("StringChar", 75);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:468:2: ( Char | EscapeSequence )
+			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:473:2: ( Char | EscapeSequence )
 			int alt16=2;
 			try { DebugEnterDecision(16, false);
 			int LA16_0 = input.LA(1);
@@ -3465,18 +3465,18 @@ public partial class OCLLexer : Antlr.Runtime.Lexer
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:468:4: Char
+				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:473:4: Char
 				{
-				DebugLocation(468, 4);
+				DebugLocation(473, 4);
 				mChar(); 
 
 				}
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:468:11: EscapeSequence
+				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:473:11: EscapeSequence
 				{
-				DebugLocation(468, 11);
+				DebugLocation(473, 11);
 				mEscapeSequence(); 
 
 				}
@@ -3505,11 +3505,11 @@ public partial class OCLLexer : Antlr.Runtime.Lexer
 		TraceIn("WhiteSpaceChar", 76);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:473:2: ( '\\t' | '\\n' | '\\f' | '\\r' | ' ' )
+			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:478:2: ( '\\t' | '\\n' | '\\f' | '\\r' | ' ' )
 			DebugEnterAlt(1);
 			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:
 			{
-			DebugLocation(473, 2);
+			DebugLocation(478, 2);
 			if ((input.LA(1)>='\t' && input.LA(1)<='\n')||(input.LA(1)>='\f' && input.LA(1)<='\r')||input.LA(1)==' ')
 			{
 				input.Consume();
@@ -3547,11 +3547,11 @@ public partial class OCLLexer : Antlr.Runtime.Lexer
 		TraceIn("Char", 77);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:480:2: ( '\\u0020' .. '\\u0026' | '\\u0028' .. '\\u005B' | '\\u005D' .. '\\uD7FF' | '\\uE000' .. '\\uFFFD' )
+			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:485:2: ( '\\u0020' .. '\\u0026' | '\\u0028' .. '\\u005B' | '\\u005D' .. '\\uD7FF' | '\\uE000' .. '\\uFFFD' )
 			DebugEnterAlt(1);
 			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:
 			{
-			DebugLocation(480, 2);
+			DebugLocation(485, 2);
 			if ((input.LA(1)>=' ' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uD7FF')||(input.LA(1)>='\uE000' && input.LA(1)<='\uFFFD'))
 			{
 				input.Consume();
@@ -3589,14 +3589,14 @@ public partial class OCLLexer : Antlr.Runtime.Lexer
 		TraceIn("EscapeSequence", 78);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:486:2: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' | 'x' Hex Hex | 'u' Hex Hex Hex Hex ) )
+			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:491:2: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' | 'x' Hex Hex | 'u' Hex Hex Hex Hex ) )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:486:4: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' | 'x' Hex Hex | 'u' Hex Hex Hex Hex )
+			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:491:4: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' | 'x' Hex Hex | 'u' Hex Hex Hex Hex )
 			{
-			DebugLocation(486, 4);
+			DebugLocation(491, 4);
 			Match('\\'); 
-			DebugLocation(487, 3);
-			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:487:3: ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' | 'x' Hex Hex | 'u' Hex Hex Hex Hex )
+			DebugLocation(492, 3);
+			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:492:3: ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' | 'x' Hex Hex | 'u' Hex Hex Hex Hex )
 			int alt17=10;
 			try { DebugEnterSubRule(17);
 			try { DebugEnterDecision(17, false);
@@ -3665,102 +3665,102 @@ public partial class OCLLexer : Antlr.Runtime.Lexer
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:487:4: 'b'
+				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:492:4: 'b'
 				{
-				DebugLocation(487, 4);
+				DebugLocation(492, 4);
 				Match('b'); 
 
 				}
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:488:5: 't'
+				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:493:5: 't'
 				{
-				DebugLocation(488, 5);
+				DebugLocation(493, 5);
 				Match('t'); 
 
 				}
 				break;
 			case 3:
 				DebugEnterAlt(3);
-				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:489:5: 'n'
+				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:494:5: 'n'
 				{
-				DebugLocation(489, 5);
+				DebugLocation(494, 5);
 				Match('n'); 
 
 				}
 				break;
 			case 4:
 				DebugEnterAlt(4);
-				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:490:5: 'f'
+				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:495:5: 'f'
 				{
-				DebugLocation(490, 5);
+				DebugLocation(495, 5);
 				Match('f'); 
 
 				}
 				break;
 			case 5:
 				DebugEnterAlt(5);
-				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:491:5: 'r'
+				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:496:5: 'r'
 				{
-				DebugLocation(491, 5);
+				DebugLocation(496, 5);
 				Match('r'); 
 
 				}
 				break;
 			case 6:
 				DebugEnterAlt(6);
-				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:492:5: '\\\"'
+				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:497:5: '\\\"'
 				{
-				DebugLocation(492, 5);
+				DebugLocation(497, 5);
 				Match('\"'); 
 
 				}
 				break;
 			case 7:
 				DebugEnterAlt(7);
-				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:493:5: '\\''
+				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:498:5: '\\''
 				{
-				DebugLocation(493, 5);
+				DebugLocation(498, 5);
 				Match('\''); 
 
 				}
 				break;
 			case 8:
 				DebugEnterAlt(8);
-				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:494:5: '\\\\'
+				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:499:5: '\\\\'
 				{
-				DebugLocation(494, 5);
+				DebugLocation(499, 5);
 				Match('\\'); 
 
 				}
 				break;
 			case 9:
 				DebugEnterAlt(9);
-				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:495:5: 'x' Hex Hex
+				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:500:5: 'x' Hex Hex
 				{
-				DebugLocation(495, 5);
+				DebugLocation(500, 5);
 				Match('x'); 
-				DebugLocation(495, 9);
+				DebugLocation(500, 9);
 				mHex(); 
-				DebugLocation(495, 13);
+				DebugLocation(500, 13);
 				mHex(); 
 
 				}
 				break;
 			case 10:
 				DebugEnterAlt(10);
-				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:496:5: 'u' Hex Hex Hex Hex
+				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:501:5: 'u' Hex Hex Hex Hex
 				{
-				DebugLocation(496, 5);
+				DebugLocation(501, 5);
 				Match('u'); 
-				DebugLocation(496, 9);
+				DebugLocation(501, 9);
 				mHex(); 
-				DebugLocation(496, 13);
+				DebugLocation(501, 13);
 				mHex(); 
-				DebugLocation(496, 17);
+				DebugLocation(501, 17);
 				mHex(); 
-				DebugLocation(496, 21);
+				DebugLocation(501, 21);
 				mHex(); 
 
 				}
@@ -3794,11 +3794,11 @@ public partial class OCLLexer : Antlr.Runtime.Lexer
 		TraceIn("Hex", 79);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:501:5: ( '0' .. '9' | 'A' .. 'F' | 'a' .. 'f' )
+			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:506:5: ( '0' .. '9' | 'A' .. 'F' | 'a' .. 'f' )
 			DebugEnterAlt(1);
 			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:
 			{
-			DebugLocation(501, 5);
+			DebugLocation(506, 5);
 			if ((input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='F')||(input.LA(1)>='a' && input.LA(1)<='f'))
 			{
 				input.Consume();
@@ -3836,11 +3836,11 @@ public partial class OCLLexer : Antlr.Runtime.Lexer
 		TraceIn("Num", 80);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:506:2: ( '0' .. '9' )
+			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:511:2: ( '0' .. '9' )
 			DebugEnterAlt(1);
 			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:
 			{
-			DebugLocation(506, 2);
+			DebugLocation(511, 2);
 			if ((input.LA(1)>='0' && input.LA(1)<='9'))
 			{
 				input.Consume();
@@ -3878,11 +3878,11 @@ public partial class OCLLexer : Antlr.Runtime.Lexer
 		TraceIn("ExponentPart", 81);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:511:2: ( ( 'e' | 'E' ) ( '+' | '-' )? ( Num )+ )
+			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:516:2: ( ( 'e' | 'E' ) ( '+' | '-' )? ( Num )+ )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:511:3: ( 'e' | 'E' ) ( '+' | '-' )? ( Num )+
+			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:516:3: ( 'e' | 'E' ) ( '+' | '-' )? ( Num )+
 			{
-			DebugLocation(511, 3);
+			DebugLocation(516, 3);
 			if (input.LA(1)=='E'||input.LA(1)=='e')
 			{
 				input.Consume();
@@ -3895,8 +3895,8 @@ public partial class OCLLexer : Antlr.Runtime.Lexer
 				Recover(mse);
 				throw mse;}
 
-			DebugLocation(511, 13);
-			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:511:13: ( '+' | '-' )?
+			DebugLocation(516, 13);
+			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:516:13: ( '+' | '-' )?
 			int alt18=2;
 			try { DebugEnterSubRule(18);
 			try { DebugEnterDecision(18, false);
@@ -3913,7 +3913,7 @@ public partial class OCLLexer : Antlr.Runtime.Lexer
 				DebugEnterAlt(1);
 				// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:
 				{
-				DebugLocation(511, 13);
+				DebugLocation(516, 13);
 				input.Consume();
 
 
@@ -3923,8 +3923,8 @@ public partial class OCLLexer : Antlr.Runtime.Lexer
 			}
 			} finally { DebugExitSubRule(18); }
 
-			DebugLocation(511, 24);
-			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:511:24: ( Num )+
+			DebugLocation(516, 24);
+			// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:516:24: ( Num )+
 			int cnt19=0;
 			try { DebugEnterSubRule(19);
 			while (true)
@@ -3946,7 +3946,7 @@ public partial class OCLLexer : Antlr.Runtime.Lexer
 					DebugEnterAlt(1);
 					// ..\\..\\Model\\OCL\\Grammar\\OCL.g3:
 					{
-					DebugLocation(511, 24);
+					DebugLocation(516, 24);
 					input.Consume();
 
 
