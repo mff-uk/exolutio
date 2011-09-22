@@ -498,7 +498,7 @@ we are traversing an associations in an opposite direction
 context Match
 inv: matchPlayers.player->forAll(p|
 p.parent().parent().parent().parent().parent().participatingPlayers.player.exists(px |
-px.name = p.name)
+px.name = p.name))
 
 
 
@@ -715,7 +715,7 @@ inv: league.name = parent().tournamentLeague.name
             <eXo:ChildPSMAssociations Count="0" />
             <eXo:GeneralizationAsGeneral Count="0" />
             <eXo:PSMAttributes Count="1">
-              <eXo:PSMAttribute ID="1d2ae3b0-c476-4ad9-84cd-60de4c1f99be" Name="league-name" InterpretationID="f18875d3-30d5-4e17-a2fc-31e6cd26175c" Interpretation="PIMAttribute: *League.name* 1..1" Type="e06bc2c1-0ba6-4c8f-a892-93db94b544bb" displayName="AttributeType: string" Element="False" psmClassID="22228994-7dfc-48ab-8107-f617dfaeede8">
+              <eXo:PSMAttribute ID="1d2ae3b0-c476-4ad9-84cd-60de4c1f99be" Name="leagueName" InterpretationID="f18875d3-30d5-4e17-a2fc-31e6cd26175c" Interpretation="PIMAttribute: *League.name* 1..1" Type="e06bc2c1-0ba6-4c8f-a892-93db94b544bb" displayName="AttributeType: string" Element="False" psmClassID="22228994-7dfc-48ab-8107-f617dfaeede8">
                 <eXo:UsedGeneralizations Count="0" />
               </eXo:PSMAttribute>
             </eXo:PSMAttributes>
@@ -778,21 +778,21 @@ define sufficiently in XSD */
 
 /* either open tournament or belongs to some league */
 
-context: Tournament
-inv: qualification.choice(1).child(OpenTournament).open == true or 
-qualification.choice(1).child(League).league-name != null 
+context Tournament
+inv: qualification.choice(1).child(OpenTournament).open = true or 
+qualification.choice(1).child(League).leagueName <> null 
 
 /* now some other methods how to rewrite previous constraint
 to demonstrate choice naming and PSM navigation */
 
-context: Tournament
+context Tournament
 inv: 
-qualification.child(CH_Qualification_OpenTournament_League).child(1).open == true or 
-qualification.child(CH_Qualification_OpenTournament_League).child(2).league-name != null 
+qualification.child(CH_Qualification_OpenTournament_League).child(1).open = true or 
+qualification.child(CH_Qualification_OpenTournament_League).child(2).leagueName <> null 
 
 inv:
-qualification.CH_Qualification_OpenTournament_League.OpenTournament.open == true or 
-qualification.CH_Qualification_OpenTournament_League.League.league-name != null 
+qualification.CH_Qualification_OpenTournament_League.OpenTournament.open = true or 
+qualification.CH_Qualification_OpenTournament_League.League.leagueName <> null 
 ]]></eXo:Contents>
           </eXo:OCLScript>
         </eXo:OCLScripts>
@@ -1301,7 +1301,7 @@ qualification.CH_Qualification_OpenTournament_League.League.league-name != null
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="88ab1521-f233-4cb3-82e4-6451f01122aa" component="PSMAssociation from PSMClass: *Tournament* to PSMClass: *League*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="3" Y="-1" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
