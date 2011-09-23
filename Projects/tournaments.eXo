@@ -62,7 +62,7 @@
             <eXo:PIMAttribute ID="fdeda90b-d33a-46ed-a188-6f0c0fdb018b" Name="open" Type="1ce3b950-194d-42c9-aeeb-a9cec5e5505a" displayName="AttributeType: Boolean" pimClassID="1e014a11-c043-423c-b4a6-5d0553ac31bd" />
           </eXo:PIMAttributes>
           <eXo:PIMOperations Count="5">
-            <eXo:PIMOperation ID="9c761dca-f1b3-48ff-8cf8-2deb34ff1e00" Name="getMaxNumPlayers" pimClassID="1e014a11-c043-423c-b4a6-5d0553ac31bd">
+            <eXo:PIMOperation ID="9c761dca-f1b3-48ff-8cf8-2deb34ff1e00" Name="getMaxNumPlayers" pimClassID="1e014a11-c043-423c-b4a6-5d0553ac31bd" ResultType="dc49d35c-feaf-4e9e-9c22-267208d61a77">
               <eXo:Parameters Count="1">
                 <eXo:Parameter Name="p" Type="dc49d35c-feaf-4e9e-9c22-267208d61a77" displayName="AttributeType: Integer" />
               </eXo:Parameters>
@@ -1337,7 +1337,7 @@ qualification.CH_Qualification_OpenTournament_League.League.leagueName <> null
               <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
-              <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
+              <eXo:CardinalityLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:CardinalityLabelViewHelper>
             </eXo:ViewHelper>
@@ -1376,7 +1376,7 @@ qualification.CH_Qualification_OpenTournament_League.League.leagueName <> null
               <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
-              <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
+              <eXo:CardinalityLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:CardinalityLabelViewHelper>
             </eXo:ViewHelper>
@@ -1389,7 +1389,7 @@ qualification.CH_Qualification_OpenTournament_League.League.leagueName <> null
               <eXo:MainLabelViewHelper X="0,188682556152344" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
-              <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
+              <eXo:CardinalityLabelViewHelper X="-40" Y="4" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:CardinalityLabelViewHelper>
             </eXo:ViewHelper>
