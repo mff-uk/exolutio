@@ -110,7 +110,7 @@ namespace Exolutio.Model.PIM
             this.SerializeIDRef(PIMClass, "pimClassID", parentNode, context, false);
             if (ResultType != null)
             {
-                this.SerializeToChildElement("ResultType", ResultType, parentNode, context);
+                this.SerializeAttributeType(ResultType, parentNode, context, "ResultType");
             }
             this.WrapAndSerializeCollection("Parameters", "Parameter", Parameters, parentNode, context, true);
         }
@@ -119,11 +119,8 @@ namespace Exolutio.Model.PIM
         {
             base.Deserialize(parentNode, context);
 
-            if (parentNode.Element(context.ExolutioNS + "ResultType") != null)
-            {
-                this.DeserializeFromChildElement("ResultType", parentNode, context);
-            }
-
+            this.resultTypeGuid = this.DeserializeAttributeType(parentNode, context, "ResultType", true);
+            
             if (parentNode.Element(context.ExolutioNS + "Parameters") != null)
             {
                 foreach (XElement parameterElement in parentNode.Element(context.ExolutioNS + "Parameters").Elements(context.ExolutioNS + "Parameter"))

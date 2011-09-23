@@ -112,7 +112,7 @@ namespace Exolutio.View
                         if (parameter.Type != null)
                         {
                             textBuilder.Append(":");
-                            textBuilder.Append(parameter.Type.ToString());
+                            textBuilder.Append(parameter.Type.Name);
                         }
                     }
                 }
@@ -120,7 +120,7 @@ namespace Exolutio.View
                 if (PIMOperation.ResultType != null)
                 {
                     textBuilder.Append(":");
-                    textBuilder.Append(PIMOperation.ResultType.ToString());
+                    textBuilder.Append(PIMOperation.ResultType.Name);
                 }
                 this.Text = textBuilder.ToString();
             }
