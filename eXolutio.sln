@@ -42,6 +42,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Updater", "Updater\Updater.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdaterService", "UpdaterService\UpdaterService.csproj", "{FD855766-5DB3-4A8B-9A25-E00D2267A386}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{28DEA075-F9B1-402A-A90D-0AA2526FC439}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -235,6 +237,12 @@ Global
 		{FD855766-5DB3-4A8B-9A25-E00D2267A386}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{FD855766-5DB3-4A8B-9A25-E00D2267A386}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{FD855766-5DB3-4A8B-9A25-E00D2267A386}.Release|x86.ActiveCfg = Release|Any CPU
+		{28DEA075-F9B1-402A-A90D-0AA2526FC439}.Debug|Any CPU.ActiveCfg = Debug
+		{28DEA075-F9B1-402A-A90D-0AA2526FC439}.Debug|Mixed Platforms.ActiveCfg = Debug
+		{28DEA075-F9B1-402A-A90D-0AA2526FC439}.Debug|x86.ActiveCfg = Debug
+		{28DEA075-F9B1-402A-A90D-0AA2526FC439}.Release|Any CPU.ActiveCfg = Release
+		{28DEA075-F9B1-402A-A90D-0AA2526FC439}.Release|Mixed Platforms.ActiveCfg = Release
+		{28DEA075-F9B1-402A-A90D-0AA2526FC439}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
