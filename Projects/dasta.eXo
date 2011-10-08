@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <eXo:Project xmlns:eXo="http://eXolutio.eu/Project/Serialization/" Version="3.0" UsesVersioning="False" Name="dasta">
   <eXo:SingleVersion ID="ea3ea823-6190-44e7-93db-23021e47b591">
-    <eXo:AttributeTypes Count="0" />
+    <eXo:PIMAttributeTypes Count="0" />
     <eXo:PIMSchema ID="6ad28b74-738d-4364-af02-b0bb20e5ed9f" Caption="PIMSchema">
       <eXo:PIMClasses Count="53">
         <eXo:PIMClass ID="918577f0-cce0-45c4-babb-6490c1bf9830" Name="Adresa">
@@ -18,6 +18,7 @@
             <eXo:PIMAttribute ID="f6067222-6bb0-4394-ba86-a83c38d30756" Name="cislo_popisne" pimClassID="918577f0-cce0-45c4-babb-6490c1bf9830" />
             <eXo:PIMAttribute ID="ddd07ff9-69a6-487e-8753-8067d82a8eb6" Name="cislo_orientacni" pimClassID="918577f0-cce0-45c4-babb-6490c1bf9830" />
           </eXo:PIMAttributes>
+          <eXo:GeneralizationAsGeneral Count="0" />
           <eXo:PIMAssociationEnds Count="6">
             <eXo:PIMAssociationEnd pimAssociationEndID="f25786d9-46e8-46ca-91b2-70143725231c" pimAssociationEnd="PIMAssociationEnd: ** 1..1 C: Adresa A:  " />
             <eXo:PIMAssociationEnd pimAssociationEndID="9e4b778c-5f5e-442a-8d95-58dd053150cc" pimAssociationEnd="PIMAssociationEnd: ** 1..1 C: Adresa A: pobyt " />
@@ -44,6 +45,7 @@
             <eXo:PIMAttribute ID="6f5652df-1614-4078-ad98-cd87b800145a" Name="krevni_skupina" pimClassID="65b05ede-0add-4137-8bb0-d72200a48ae8" />
             <eXo:PIMAttribute ID="de42f776-645f-49a0-9ec2-20ce7fbffdcc" Name="rh_faktor" pimClassID="65b05ede-0add-4137-8bb0-d72200a48ae8" />
           </eXo:PIMAttributes>
+          <eXo:GeneralizationAsGeneral Count="0" />
           <eXo:PIMAssociationEnds Count="16">
             <eXo:PIMAssociationEnd pimAssociationEndID="d1c7d44d-0573-4a6f-98cd-90a456e5211a" pimAssociationEnd="PIMAssociationEnd: ** 1..1 C: Pacient A:  " />
             <eXo:PIMAssociationEnd pimAssociationEndID="67354209-d969-4157-850c-aa49b16f9075" pimAssociationEnd="PIMAssociationEnd: ** 1..1 C: Pacient A:  " />
@@ -68,6 +70,7 @@
             <eXo:PIMAttribute ID="82acd6dd-1ff4-458b-a187-88e543a8410c" Name="ico" pimClassID="4311c4bd-84f8-4a3c-add5-8d4d4cad5fce" />
             <eXo:PIMAttribute ID="a1ba9ad5-a921-4c31-bee1-56829b211f60" Name="nazev" pimClassID="4311c4bd-84f8-4a3c-add5-8d4d4cad5fce" />
           </eXo:PIMAttributes>
+          <eXo:GeneralizationAsGeneral Count="0" />
           <eXo:PIMAssociationEnds Count="2">
             <eXo:PIMAssociationEnd pimAssociationEndID="946c5120-e20c-4e10-8795-bff9ea5d5fad" pimAssociationEnd="PIMAssociationEnd: *defaultname* 1..1 C: Subjekt A:  " />
             <eXo:PIMAssociationEnd pimAssociationEndID="3c919ca8-820e-49e0-a93d-86d2c91376a9" pimAssociationEnd="PIMAssociationEnd: *defaultname* 1..1 C: Subjekt A:  " />
@@ -78,6 +81,7 @@
             <eXo:PIMAttribute ID="c7a5deaa-0024-4cc8-ba62-bbd3655fb3dd" Name="ic" pimClassID="a84d5d81-de3a-4d4c-b601-aedf96390611" />
             <eXo:PIMAttribute ID="7d619f93-865d-4c4d-850a-fcaaf0e56e0c" Name="nazev" pimClassID="a84d5d81-de3a-4d4c-b601-aedf96390611" />
           </eXo:PIMAttributes>
+          <eXo:GeneralizationAsGeneral Count="0" />
           <eXo:PIMAssociationEnds Count="4">
             <eXo:PIMAssociationEnd pimAssociationEndID="6160689a-4508-4a00-8f2c-c8318d37e6eb" pimAssociationEnd="PIMAssociationEnd: *defaultname* 1..* C: Zarizeni A:  " />
             <eXo:PIMAssociationEnd pimAssociationEndID="35d2a668-e3bf-49b6-94ef-15b51ff44da7" pimAssociationEnd="PIMAssociationEnd: *defaultname* 1..1 C: Zarizeni A:  " />
@@ -93,6 +97,7 @@
             <eXo:PIMAttribute ID="1041e571-042b-43d1-8147-e8fcf64054c4" Name="icpe" Lower="0" pimClassID="2637b279-9776-4599-b075-e1cf372f22b8" />
             <eXo:PIMAttribute ID="b75984c9-01dc-4d37-9374-b245fc6fb372" Name="odbornost" pimClassID="2637b279-9776-4599-b075-e1cf372f22b8" />
           </eXo:PIMAttributes>
+          <eXo:GeneralizationAsGeneral Count="0" />
           <eXo:PIMAssociationEnds Count="9">
             <eXo:PIMAssociationEnd pimAssociationEndID="23e300eb-147a-4ea0-bb29-cd2ac8f74d85" pimAssociationEnd="PIMAssociationEnd: *defaultname* 1..* C: Pracoviste A:  " />
             <eXo:PIMAssociationEnd pimAssociationEndID="2438306d-2cf2-4783-8b04-deed96194db6" pimAssociationEnd="PIMAssociationEnd: *defaultname* 1..1 C: Pracoviste A:  " />
@@ -110,6 +115,7 @@
             <eXo:PIMAttribute ID="806511c8-c0a9-48a5-adaa-8ceb6dc3d2f8" Name="cislo" pimClassID="b35f2272-57b2-467c-8585-3f2a080ccced" />
             <eXo:PIMAttribute ID="0a43340d-9b0f-4131-91af-939500f20375" Name="nazev" pimClassID="b35f2272-57b2-467c-8585-3f2a080ccced" />
           </eXo:PIMAttributes>
+          <eXo:GeneralizationAsGeneral Count="0" />
           <eXo:PIMAssociationEnds Count="2">
             <eXo:PIMAssociationEnd pimAssociationEndID="4b910f68-afda-45b3-b4a6-80a395679533" pimAssociationEnd="PIMAssociationEnd: *defaultname* 1..* C: Oddeleni A:  " />
             <eXo:PIMAssociationEnd pimAssociationEndID="82d790ef-02d6-47dd-a613-b59b3f634cb4" pimAssociationEnd="PIMAssociationEnd: *defaultname* 0..1 C: Oddeleni A:  " />
@@ -119,6 +125,7 @@
           <eXo:PIMAttributes Count="1">
             <eXo:PIMAttribute ID="ada332e9-f046-4670-a15a-9aa56f2f30b0" Name="icl" pimClassID="50098a78-a426-45db-87f2-12316942e537" />
           </eXo:PIMAttributes>
+          <eXo:GeneralizationAsGeneral Count="0" />
           <eXo:PIMAssociationEnds Count="11">
             <eXo:PIMAssociationEnd pimAssociationEndID="3abeb42e-9eb7-48cb-9cce-30f7188c7a38" pimAssociationEnd="PIMAssociationEnd: *autor* 0..1 C: Lekar A:  " />
             <eXo:PIMAssociationEnd pimAssociationEndID="fc15b812-f9d8-4281-85d5-c1e03426b50e" pimAssociationEnd="PIMAssociationEnd: ** 1..1 C: Lekar A:  " />
@@ -137,6 +144,7 @@
           <eXo:PIMAttributes Count="1">
             <eXo:PIMAttribute ID="3f7fdf02-090f-41a6-814a-7b4cf71fc034" Name="kod" pimClassID="a32274bf-4f18-43d9-948c-f6894de6c2f7" />
           </eXo:PIMAttributes>
+          <eXo:GeneralizationAsGeneral Count="0" />
           <eXo:PIMAssociationEnds Count="2">
             <eXo:PIMAssociationEnd pimAssociationEndID="17c5ef70-49fc-4f41-9fdc-21470260a740" pimAssociationEnd="PIMAssociationEnd: ** 1..1 C: Pojistovna A:  " />
             <eXo:PIMAssociationEnd pimAssociationEndID="e3360d28-f742-445d-beae-0cc393d5c277" pimAssociationEnd="PIMAssociationEnd: ** 0..* C: Pojistovna A:  " />
@@ -151,6 +159,7 @@
             <eXo:PIMAttribute ID="bebab15d-7057-4d19-9579-0f7ace2b94cd" Name="platnost_od" Lower="0" pimClassID="09d0dfcb-9b14-4411-a5e6-1a7cd54f1121" />
             <eXo:PIMAttribute ID="5c6c777f-1114-4bc2-9822-20acd9ebc887" Name="platnost_do" Lower="0" pimClassID="09d0dfcb-9b14-4411-a5e6-1a7cd54f1121" />
           </eXo:PIMAttributes>
+          <eXo:GeneralizationAsGeneral Count="0" />
           <eXo:PIMAssociationEnds Count="2">
             <eXo:PIMAssociationEnd pimAssociationEndID="5ff65085-5df5-488b-ba82-9cdb8354b0d5" pimAssociationEnd="PIMAssociationEnd: ** 0..* C: PojistnaSmlouva A:  " />
             <eXo:PIMAssociationEnd pimAssociationEndID="e08f4ac8-c398-4a0c-a76b-9ff4d5031b05" pimAssociationEnd="PIMAssociationEnd: ** 1..1 C: PojistnaSmlouva A:  " />
@@ -164,6 +173,7 @@
             <eXo:PIMAttribute ID="81d5639a-3617-47d9-b723-287567024e08" Name="poznamka_k_vydeji" pimClassID="ec875412-f945-4f36-acb4-b01805a165ee" />
             <eXo:PIMAttribute ID="cddf2b18-22a8-48d5-950e-d14909fc8aec" Name="typ_medikace" pimClassID="ec875412-f945-4f36-acb4-b01805a165ee" />
           </eXo:PIMAttributes>
+          <eXo:GeneralizationAsGeneral Count="0" />
           <eXo:PIMAssociationEnds Count="4">
             <eXo:PIMAssociationEnd pimAssociationEndID="341d1cf8-d6e1-42d8-ac94-1004a1593520" pimAssociationEnd="PIMAssociationEnd: ** 0..* C: PodaniLeku A:  " />
             <eXo:PIMAssociationEnd pimAssociationEndID="890536cb-029e-484f-b3dc-6718bf62a537" pimAssociationEnd="PIMAssociationEnd: ** 0..* C: PodaniLeku A:  " />
@@ -178,6 +188,7 @@
             <eXo:PIMAttribute ID="1d2cb677-8724-4afc-9c2b-df42434b321f" Name="kod" pimClassID="14c44d84-e8c5-4eaa-89be-b7913aec3804" />
             <eXo:PIMAttribute ID="a90fd569-cfeb-4c65-be17-0a329c4015f8" Name="kod_antibiotika" pimClassID="14c44d84-e8c5-4eaa-89be-b7913aec3804" />
           </eXo:PIMAttributes>
+          <eXo:GeneralizationAsGeneral Count="0" />
           <eXo:PIMAssociationEnds Count="3">
             <eXo:PIMAssociationEnd pimAssociationEndID="eb8adc3f-319d-4c5f-9622-9a5a0b5a9dca" pimAssociationEnd="PIMAssociationEnd: ** 1..1 C: Lek A:  " />
             <eXo:PIMAssociationEnd pimAssociationEndID="d303085a-f492-4675-ab55-c4190f3f8a9e" pimAssociationEnd="PIMAssociationEnd: ** 1..1 C: Lek A:  " />
@@ -193,6 +204,7 @@
             <eXo:PIMAttribute ID="139261de-0f5b-46f9-911e-d6208dd6e1ff" Name="odbornost" pimClassID="30f2f9f1-548d-4d80-8410-fdbc031aef81" />
             <eXo:PIMAttribute ID="11d41df5-cbff-4f21-b7e7-37c37350e0be" Name="funkce" pimClassID="30f2f9f1-548d-4d80-8410-fdbc031aef81" />
           </eXo:PIMAttributes>
+          <eXo:GeneralizationAsGeneral Count="0" />
           <eXo:PIMAssociationEnds Count="12">
             <eXo:PIMAssociationEnd pimAssociationEndID="0ace0791-3f33-4e20-a71c-86b25ac25f6e" pimAssociationEnd="PIMAssociationEnd: ** 1..1 C: Osoba A: vydala " />
             <eXo:PIMAssociationEnd pimAssociationEndID="36afc159-a17a-4835-bd19-d9b65f037fd1" pimAssociationEnd="PIMAssociationEnd: *defaultname* 1..1 C: Osoba A: zadajici " />
@@ -218,6 +230,7 @@
             <eXo:PIMAttribute ID="8ab27209-bf21-4292-aeee-e11c8e4116fa" Name="davkovani_leku" pimClassID="6fa82d01-d2ab-42de-8f3b-4a9c975453be" />
             <eXo:PIMAttribute ID="f16c7e2d-5bae-47a2-86da-641d5278231b" Name="poznamka_k_vydeji" pimClassID="6fa82d01-d2ab-42de-8f3b-4a9c975453be" />
           </eXo:PIMAttributes>
+          <eXo:GeneralizationAsGeneral Count="0" />
           <eXo:PIMAssociationEnds Count="4">
             <eXo:PIMAssociationEnd pimAssociationEndID="3689d019-e1a4-4ab2-9cc3-ad4b89f48842" pimAssociationEnd="PIMAssociationEnd: ** 0..* C: VydejLeku A:  " />
             <eXo:PIMAssociationEnd pimAssociationEndID="312d0962-c9ac-4116-a11a-affb2b1e1c98" pimAssociationEnd="PIMAssociationEnd: ** 0..* C: VydejLeku A:  " />
@@ -239,6 +252,7 @@
             <eXo:PIMAttribute ID="b9c60e3a-62be-4376-a792-b22cd92d7c99" Name="cislo_tiskopisu" pimClassID="af735155-cbcf-4d4f-b147-8156b9aa7d05" />
             <eXo:PIMAttribute ID="c4785db8-7807-4789-b090-853ac966ff83" Name="stat" pimClassID="af735155-cbcf-4d4f-b147-8156b9aa7d05" />
           </eXo:PIMAttributes>
+          <eXo:GeneralizationAsGeneral Count="0" />
           <eXo:PIMAssociationEnds Count="11">
             <eXo:PIMAssociationEnd pimAssociationEndID="dd132d76-747f-46f7-8e5f-2b27a8d8017e" pimAssociationEnd="PIMAssociationEnd: ** 0..* C: PracovniNeschopnost A:  " />
             <eXo:PIMAssociationEnd pimAssociationEndID="fcdd25b0-344d-44ee-9538-fdc36a9b5068" pimAssociationEnd="PIMAssociationEnd: ** 0..* C: PracovniNeschopnost A: vystavil " />
@@ -259,6 +273,7 @@
             <eXo:PIMAttribute ID="a980ecd3-e079-4a08-967d-d4f47043d49f" Name="povoleni_vychazek" pimClassID="a0c2c7e2-e504-4d3d-995b-1a6dd923bf34" />
             <eXo:PIMAttribute ID="95a1516c-6f44-41b3-8686-8731642e9d0b" Name="zruseni_vychazek" pimClassID="a0c2c7e2-e504-4d3d-995b-1a6dd923bf34" />
           </eXo:PIMAttributes>
+          <eXo:GeneralizationAsGeneral Count="0" />
           <eXo:PIMAssociationEnds Count="2">
             <eXo:PIMAssociationEnd pimAssociationEndID="5023f5ad-4fc2-4a4b-9ecc-944c191dcd1a" pimAssociationEnd="PIMAssociationEnd: ** 1..1 C: PovoleniVychazek A:  " />
             <eXo:PIMAssociationEnd pimAssociationEndID="5707a314-f7ef-4cca-8738-40b678f22182" pimAssociationEnd="PIMAssociationEnd: ** 1..1 C: PovoleniVychazek A:  " />
@@ -269,6 +284,7 @@
             <eXo:PIMAttribute ID="b86f2216-f52a-4049-9173-e18e744414d0" Name="cas_zacatku" pimClassID="fe54471e-d94c-49c9-9fa8-8aed1174e009" />
             <eXo:PIMAttribute ID="992bc889-ecaf-4774-a353-9131a1a45102" Name="cas_konce" pimClassID="fe54471e-d94c-49c9-9fa8-8aed1174e009" />
           </eXo:PIMAttributes>
+          <eXo:GeneralizationAsGeneral Count="0" />
           <eXo:PIMAssociationEnds Count="1">
             <eXo:PIMAssociationEnd pimAssociationEndID="40170c6a-e237-4d73-80d3-042d9cc70436" pimAssociationEnd="PIMAssociationEnd: ** 1..2 C: Vychazka A:  " />
           </eXo:PIMAssociationEnds>
@@ -277,6 +293,7 @@
           <eXo:PIMAttributes Count="1">
             <eXo:PIMAttribute ID="35e5d2a2-4d17-4a33-ab77-3753baee9c40" Name="datum_predani" pimClassID="5350bdb0-aaf6-4b38-a2b3-3813ea68964f" />
           </eXo:PIMAttributes>
+          <eXo:GeneralizationAsGeneral Count="0" />
           <eXo:PIMAssociationEnds Count="2">
             <eXo:PIMAssociationEnd pimAssociationEndID="74464f51-9f23-41eb-9201-f7fba28c231a" pimAssociationEnd="PIMAssociationEnd: ** 0..* C: PredaniDoPece A:  " />
             <eXo:PIMAssociationEnd pimAssociationEndID="d60963b9-4e99-4092-87db-9cf0f132c657" pimAssociationEnd="PIMAssociationEnd: ** 0..* C: PredaniDoPece A:  " />
@@ -289,6 +306,7 @@
             <eXo:PIMAttribute ID="fcb6201c-cea4-4af3-b15d-95247011e28e" Name="datum_zjisteni" pimClassID="ab01fbca-bbff-4ff5-9c59-41619e5face2" />
             <eXo:PIMAttribute ID="334007a0-1339-47fe-acba-990ee102e0cf" Name="specifikace" pimClassID="ab01fbca-bbff-4ff5-9c59-41619e5face2" />
           </eXo:PIMAttributes>
+          <eXo:GeneralizationAsGeneral Count="0" />
           <eXo:PIMAssociationEnds Count="7">
             <eXo:PIMAssociationEnd pimAssociationEndID="a0d9c43c-b226-4a7e-a2ae-7e2c3b188c5d" pimAssociationEnd="PIMAssociationEnd: ** 0..* C: Diagnoza A:  " />
             <eXo:PIMAssociationEnd pimAssociationEndID="acfd5011-10a7-4ce8-a9aa-61cc2e9b1994" pimAssociationEnd="PIMAssociationEnd: ** 0..* C: Diagnoza A:  " />
@@ -306,6 +324,7 @@
             <eXo:PIMAttribute ID="feae233a-1eb0-4e41-aa8c-9c5dfe4dfb70" Name="datum_pristiho_ockovani" pimClassID="250c27d6-380f-4c72-ab23-4b512d6cee98" />
             <eXo:PIMAttribute ID="382401de-5031-47bc-9f45-fdf9ae0f61ed" Name="poznamka" pimClassID="250c27d6-380f-4c72-ab23-4b512d6cee98" />
           </eXo:PIMAttributes>
+          <eXo:GeneralizationAsGeneral Count="0" />
           <eXo:PIMAssociationEnds Count="2">
             <eXo:PIMAssociationEnd pimAssociationEndID="f0c33ab3-aa26-4730-b349-6f3e1fe2933f" pimAssociationEnd="PIMAssociationEnd: ** 0..* C: Ockovani A:  " />
             <eXo:PIMAssociationEnd pimAssociationEndID="8c13a0b1-3d84-447b-8811-02fc22fd8061" pimAssociationEnd="PIMAssociationEnd: ** 1..1 C: Ockovani A:  " />
@@ -317,6 +336,7 @@
             <eXo:PIMAttribute ID="123e97a8-87ca-4d5a-9a37-488d8c0ddb31" Name="cislo_sarze" pimClassID="54b3ea20-ee92-4b6c-a0e2-5e701c2a9ce6" />
             <eXo:PIMAttribute ID="d6b13e7e-dc6f-425e-9be3-cb94a50f645e" Name="datum_cas_ockovani" pimClassID="54b3ea20-ee92-4b6c-a0e2-5e701c2a9ce6" />
           </eXo:PIMAttributes>
+          <eXo:GeneralizationAsGeneral Count="0" />
           <eXo:PIMAssociationEnds Count="4">
             <eXo:PIMAssociationEnd pimAssociationEndID="69a603c3-0c9e-4863-939b-375270cccf28" pimAssociationEnd="PIMAssociationEnd: ** 1..1 C: OckovaciDavka A:  " />
             <eXo:PIMAssociationEnd pimAssociationEndID="21700371-43a4-4320-9755-0dc067f2848f" pimAssociationEnd="PIMAssociationEnd: ** 1..* C: OckovaciDavka A:  " />
@@ -330,6 +350,7 @@
             <eXo:PIMAttribute ID="c6cd50b5-91bd-4a35-bd38-79d267ce3a19" Name="typ" pimClassID="af208784-3130-458b-8a6e-fa2e25285afb" />
             <eXo:PIMAttribute ID="8b1dfc1a-db5a-4ada-bd86-c3787fd26a61" Name="popis" pimClassID="af208784-3130-458b-8a6e-fa2e25285afb" />
           </eXo:PIMAttributes>
+          <eXo:GeneralizationAsGeneral Count="0" />
           <eXo:PIMAssociationEnds Count="2">
             <eXo:PIMAssociationEnd pimAssociationEndID="ffe27a80-2641-45ef-93e1-661fc28788d6" pimAssociationEnd="PIMAssociationEnd: ** 0..* C: ReakceNaOckovani A: autor_popisu " />
             <eXo:PIMAssociationEnd pimAssociationEndID="85b45d6a-3e13-4ae3-81ad-4dae7ef9ddb2" pimAssociationEnd="PIMAssociationEnd: ** 1..1 C: ReakceNaOckovani A:  " />
@@ -353,6 +374,7 @@
             <eXo:PIMAttribute ID="ef7c7951-cb1f-4f36-ae72-b9a28f828051" Name="text_zaver" pimClassID="0dd30287-5306-4949-97a1-b3c3a18db0f7" />
             <eXo:PIMAttribute ID="07935b20-6f42-4389-8596-45793c7acbd7" Name="text_pro_pacienta" pimClassID="0dd30287-5306-4949-97a1-b3c3a18db0f7" />
           </eXo:PIMAttributes>
+          <eXo:GeneralizationAsGeneral Count="0" />
           <eXo:PIMAssociationEnds Count="12">
             <eXo:PIMAssociationEnd pimAssociationEndID="eae1e6c0-51d9-4bc7-8381-3b7074adbd5f" pimAssociationEnd="PIMAssociationEnd: *defaultname* 1..1 C: KlinickaUdalost A:  " />
             <eXo:PIMAssociationEnd pimAssociationEndID="80055b0b-f4ef-4af2-96a7-768817549686" pimAssociationEnd="PIMAssociationEnd: *defaultname* 1..1 C: KlinickaUdalost A: zadajici " />
@@ -376,6 +398,7 @@
             <eXo:PIMAttribute ID="d993ae1f-10a8-46a9-a3b5-a6944e5b6140" Name="kontrast" pimClassID="2faedcf4-9c6a-4bc8-847b-179266978211" />
             <eXo:PIMAttribute ID="d817c0a4-221b-426a-844b-4907b69b10d0" Name="ozareni_celkem" pimClassID="2faedcf4-9c6a-4bc8-847b-179266978211" />
           </eXo:PIMAttributes>
+          <eXo:GeneralizationAsGeneral Count="0" />
           <eXo:PIMAssociationEnds Count="3">
             <eXo:PIMAssociationEnd pimAssociationEndID="21417443-1126-4970-b41b-81eb2c0be0be" pimAssociationEnd="PIMAssociationEnd: *defaultname* 0..1 C: RTGVysetreni A:  " />
             <eXo:PIMAssociationEnd pimAssociationEndID="393d9f06-8f81-4668-8a48-f7e866852ec8" pimAssociationEnd="PIMAssociationEnd: *defaultname* 1..1 C: RTGVysetreni A:  " />
@@ -392,6 +415,7 @@
             <eXo:PIMAttribute ID="067bf03f-53a3-4000-9691-8c9da0161373" Name="komprese" pimClassID="96be7429-e900-458b-a8b5-cdefcb9bfe09" />
             <eXo:PIMAttribute ID="d2763983-235a-4ef2-ac58-f4e415578191" Name="davka" pimClassID="96be7429-e900-458b-a8b5-cdefcb9bfe09" />
           </eXo:PIMAttributes>
+          <eXo:GeneralizationAsGeneral Count="0" />
           <eXo:PIMAssociationEnds Count="1">
             <eXo:PIMAssociationEnd pimAssociationEndID="ec5ae9cb-6841-48da-a9b8-0531345ec14c" pimAssociationEnd="PIMAssociationEnd: *defaultname* 1..* C: Expozice A:  " />
           </eXo:PIMAssociationEnds>
@@ -403,6 +427,7 @@
             <eXo:PIMAttribute ID="c31215ae-0a1d-42ff-a9bb-0b46cf2ccd71" Name="text" pimClassID="629ba733-e682-4098-9909-4d36b9f564f6" />
             <eXo:PIMAttribute ID="d24eb0a3-51ed-47e3-ab8f-0d2ba2ec9a5c" Name="priloha" pimClassID="629ba733-e682-4098-9909-4d36b9f564f6" />
           </eXo:PIMAttributes>
+          <eXo:GeneralizationAsGeneral Count="0" />
           <eXo:PIMAssociationEnds Count="1">
             <eXo:PIMAssociationEnd pimAssociationEndID="0d65c330-24f2-493e-8d62-0e47b828bfa9" pimAssociationEnd="PIMAssociationEnd: *defaultname* 1..1 C: Obraz A:  " />
           </eXo:PIMAssociationEnds>
@@ -425,6 +450,7 @@
             <eXo:PIMAttribute ID="17952e58-5e52-4420-84d3-e42e74bbce36" Name="zpusob_dodani_skal" pimClassID="7fff4fb2-21e7-4dad-814f-1d757d789ae0" />
             <eXo:PIMAttribute ID="488f4688-4c9a-43ee-9351-12ccec8d9d41" Name="zpusob_dodani_komentaru" pimClassID="7fff4fb2-21e7-4dad-814f-1d757d789ae0" />
           </eXo:PIMAttributes>
+          <eXo:GeneralizationAsGeneral Count="0" />
           <eXo:PIMAssociationEnds Count="9">
             <eXo:PIMAssociationEnd pimAssociationEndID="becb2c9a-06d3-4920-8c19-bbc88240ab3d" pimAssociationEnd="PIMAssociationEnd: *defaultname* 1..* C: LaboratorniVysetreni A:  " />
             <eXo:PIMAssociationEnd pimAssociationEndID="782dee1b-7ce6-4cb6-860d-1530a1974280" pimAssociationEnd="PIMAssociationEnd: *defaultname* 1..1 C: LaboratorniVysetreni A: &lt;&lt;inheritance&gt;&gt; " />
@@ -454,6 +480,7 @@
             <eXo:PIMAttribute ID="0bc649b9-0499-4ecc-a25f-ad4b3648f4c2" Name="nejistota" pimClassID="3ca4aaef-e011-412e-afc3-b71b43a6e605" />
             <eXo:PIMAttribute ID="5106b74f-f3ea-4bfc-909d-de4cb8c6934c" Name="skala" pimClassID="3ca4aaef-e011-412e-afc3-b71b43a6e605" />
           </eXo:PIMAttributes>
+          <eXo:GeneralizationAsGeneral Count="0" />
           <eXo:PIMAssociationEnds Count="1">
             <eXo:PIMAssociationEnd pimAssociationEndID="dba7065f-61e7-4a98-b81a-4cf4cadbc782" pimAssociationEnd="PIMAssociationEnd: *defaultname* 1..1 C: LV_NumerickeHodnoty A: &lt;&lt;inheritance&gt;&gt; " />
           </eXo:PIMAssociationEnds>
@@ -484,6 +511,7 @@
             <eXo:PIMAttribute ID="a4559e70-9f46-4b05-9e56-1142a52adaec" Name="kvantita_velicina" pimClassID="40c5d872-abca-4b45-b9b9-efa0c62ab2a0" />
             <eXo:PIMAttribute ID="285d99ea-40c0-413c-be0b-50b4e073fec7" Name="kvantita_jednotka" pimClassID="40c5d872-abca-4b45-b9b9-efa0c62ab2a0" />
           </eXo:PIMAttributes>
+          <eXo:GeneralizationAsGeneral Count="0" />
           <eXo:PIMAssociationEnds Count="2">
             <eXo:PIMAssociationEnd pimAssociationEndID="5a0ffd92-b3ac-4868-8c81-487297c7f975" pimAssociationEnd="PIMAssociationEnd: *defaultname* 1..1 C: LV_Mikrobiologicke A: &lt;&lt;inheritance&gt;&gt; " />
             <eXo:PIMAssociationEnd pimAssociationEndID="6d44a267-9557-4796-b836-3dc2a6bd9107" pimAssociationEnd="PIMAssociationEnd: *defaultname* 1..1 C: LV_Mikrobiologicke A:  " />
@@ -496,6 +524,7 @@
             <eXo:PIMAttribute ID="4b4a3955-922e-4f50-91e1-d364b8631bd1" Name="pritomnost" pimClassID="b403c6d0-75d0-4911-9fd0-c2d9bc284c5c" />
             <eXo:PIMAttribute ID="7d985695-960f-4943-a809-8d5931324e10" Name="dodatek" pimClassID="b403c6d0-75d0-4911-9fd0-c2d9bc284c5c" />
           </eXo:PIMAttributes>
+          <eXo:GeneralizationAsGeneral Count="0" />
           <eXo:PIMAssociationEnds Count="1">
             <eXo:PIMAssociationEnd pimAssociationEndID="0a800761-23b3-48c1-add8-12ddb403305f" pimAssociationEnd="PIMAssociationEnd: *defaultname* 1..1 C: TestovanaVlastnostAgens A:  " />
           </eXo:PIMAssociationEnds>
@@ -507,6 +536,7 @@
             <eXo:PIMAttribute ID="b70f9e2b-2f8d-450c-87d1-284ac5d62583" Name="stran_nalezu" pimClassID="f3d45cd6-8907-496a-a34c-0a9026c80292" />
             <eXo:PIMAttribute ID="393d3bc3-8f9c-4bd6-a0b2-69125841ae3c" Name="text" pimClassID="f3d45cd6-8907-496a-a34c-0a9026c80292" />
           </eXo:PIMAttributes>
+          <eXo:GeneralizationAsGeneral Count="0" />
           <eXo:PIMAssociationEnds Count="1">
             <eXo:PIMAssociationEnd pimAssociationEndID="4683ec5a-dfdf-40d5-bf79-4680962f2d9f" pimAssociationEnd="PIMAssociationEnd: *defaultname* 1..1 C: LV_KompletniNalezy A: &lt;&lt;inheritance&gt;&gt; " />
           </eXo:PIMAssociationEnds>
@@ -524,6 +554,7 @@
             <eXo:PIMAttribute ID="cf2f6845-d7c9-442c-8bc4-09da9667fd7d" Name="hodnota_text" pimClassID="b2c09ad3-d16c-4fd0-88cc-3a7221f364f6" />
             <eXo:PIMAttribute ID="cef73319-50c8-40b7-91c2-6e9b3c023cdb" Name="hodnoceni_kvalitativni" pimClassID="b2c09ad3-d16c-4fd0-88cc-3a7221f364f6" />
           </eXo:PIMAttributes>
+          <eXo:GeneralizationAsGeneral Count="0" />
           <eXo:PIMAssociationEnds Count="1">
             <eXo:PIMAssociationEnd pimAssociationEndID="86d7291d-d0d9-486d-b800-d7b310e23661" pimAssociationEnd="PIMAssociationEnd: *defaultname* 1..1 C: LV_TextoveHodnoty A: &lt;&lt;inheritance&gt;&gt; " />
           </eXo:PIMAssociationEnds>
@@ -537,6 +568,7 @@
             <eXo:PIMAttribute ID="253d2535-6386-4ec3-b7f0-23f5d7259712" Name="datum_cas_pozadovaneho_provedeni_do" pimClassID="1f2c00b0-06f7-49f5-a6b9-e9ccb0df77e8" />
             <eXo:PIMAttribute ID="00562455-3ec2-4063-8292-ef5628e95068" Name="duvod" pimClassID="1f2c00b0-06f7-49f5-a6b9-e9ccb0df77e8" />
           </eXo:PIMAttributes>
+          <eXo:GeneralizationAsGeneral Count="0" />
           <eXo:PIMAssociationEnds Count="1">
             <eXo:PIMAssociationEnd pimAssociationEndID="89b5b7e1-efb1-4bc8-8765-2c583e48662c" pimAssociationEnd="PIMAssociationEnd: *defaultname* 1..1 C: Objednavka A:  " />
           </eXo:PIMAssociationEnds>
@@ -546,6 +578,7 @@
             <eXo:PIMAttribute ID="5316a6cd-59b5-458d-97c6-b8b0e33af065" Name="agens" pimClassID="0f8c17ad-9b90-425a-8e39-78abd95f3cc4" />
             <eXo:PIMAttribute ID="79e879e0-2c8f-4f63-8db3-727608827420" Name="datum_zjisteni" pimClassID="0f8c17ad-9b90-425a-8e39-78abd95f3cc4" />
           </eXo:PIMAttributes>
+          <eXo:GeneralizationAsGeneral Count="0" />
           <eXo:PIMAssociationEnds Count="2">
             <eXo:PIMAssociationEnd pimAssociationEndID="cb5e2b56-e44e-4427-b1ee-87ef29ccfbd2" pimAssociationEnd="PIMAssociationEnd: *defaultname* 0..* C: Alergie A:  " />
             <eXo:PIMAssociationEnd pimAssociationEndID="dcffb7ac-af78-457a-99ef-98f3d40667e6" pimAssociationEnd="PIMAssociationEnd: *defaultname* 0..* C: Alergie A:  " />
@@ -562,6 +595,7 @@
             <eXo:PIMAttribute ID="7269b003-6104-4c7d-bb47-8795c4242a0a" Name="urgentnost" pimClassID="26218e5f-0c7c-4018-9d33-77a862f08dc2" />
             <eXo:PIMAttribute ID="84ef8687-dcee-486a-81be-90eee7af8dcf" Name="datum_cas_zahajeni_transportu" pimClassID="26218e5f-0c7c-4018-9d33-77a862f08dc2" />
           </eXo:PIMAttributes>
+          <eXo:GeneralizationAsGeneral Count="0" />
           <eXo:PIMAssociationEnds Count="2">
             <eXo:PIMAssociationEnd pimAssociationEndID="155f92d9-bbd1-46f4-a2b1-c498b4605701" pimAssociationEnd="PIMAssociationEnd: *defaultname* 0..* C: Vzorek A:  " />
             <eXo:PIMAssociationEnd pimAssociationEndID="e03a62d8-fb3c-4ecb-8d20-244b24f9ecc2" pimAssociationEnd="PIMAssociationEnd: *defaultname* 1..1 C: Vzorek A:  " />
@@ -573,6 +607,7 @@
             <eXo:PIMAttribute ID="3918e6e7-3d21-407e-aa3a-aa2e85fca1c0" Name="klic_objednane_polozky" pimClassID="0ee07f51-0cbc-4394-b22f-6fcc32e776b8" />
             <eXo:PIMAttribute ID="44ce5732-12c9-4f26-8587-2c8845c9d735" Name="klic_sdelovane_polozky" pimClassID="0ee07f51-0cbc-4394-b22f-6fcc32e776b8" />
           </eXo:PIMAttributes>
+          <eXo:GeneralizationAsGeneral Count="0" />
           <eXo:PIMAssociationEnds Count="5">
             <eXo:PIMAssociationEnd pimAssociationEndID="15b8a992-f8f9-4914-b21f-258470c5ff7b" pimAssociationEnd="PIMAssociationEnd: *defaultname* 1..* C: UpresneniLV A:  " />
             <eXo:PIMAssociationEnd pimAssociationEndID="11533dc1-4e86-4d3b-bafd-05b038d02edd" pimAssociationEnd="PIMAssociationEnd: *defaultname* 1..1 C: UpresneniLV A: &lt;&lt;inheritance&gt;&gt; " />
@@ -583,6 +618,7 @@
         </eXo:PIMClass>
         <eXo:PIMClass ID="2eb70d43-e247-43f8-b69c-135e17bf2956" Name="PozadavekVysFormNemikro">
           <eXo:PIMAttributes Count="0" />
+          <eXo:GeneralizationAsGeneral Count="0" />
           <eXo:PIMAssociationEnds Count="2">
             <eXo:PIMAssociationEnd pimAssociationEndID="9fc97a33-99e3-4eb9-a721-d2106b20f32a" pimAssociationEnd="PIMAssociationEnd: *defaultname* 1..1 C: PozadavekVysFormNemikro A: &lt;&lt;inheritance&gt;&gt; " />
             <eXo:PIMAssociationEnd pimAssociationEndID="2a46e153-e0a6-42c2-bc59-d49c0cec4d55" pimAssociationEnd="PIMAssociationEnd: *defaultname* 0..* C: PozadavekVysFormNemikro A:  " />
@@ -592,6 +628,7 @@
           <eXo:PIMAttributes Count="1">
             <eXo:PIMAttribute ID="7d61df46-5754-42f9-8d3c-ebda20116d27" Name="text" pimClassID="7c82ebcf-3c77-4abc-ae1f-17beee234baa" />
           </eXo:PIMAttributes>
+          <eXo:GeneralizationAsGeneral Count="0" />
           <eXo:PIMAssociationEnds Count="1">
             <eXo:PIMAssociationEnd pimAssociationEndID="e7a272ba-b253-4498-bd24-b3b6cafe51d5" pimAssociationEnd="PIMAssociationEnd: *defaultname* 1..1 C: PozadavekVysNeformNemikro A: &lt;&lt;inheritance&gt;&gt; " />
           </eXo:PIMAssociationEnds>
@@ -600,6 +637,7 @@
           <eXo:PIMAttributes Count="1">
             <eXo:PIMAttribute ID="0c1fa946-7fc8-486e-ae5e-dd551a66eb7f" Name="text" pimClassID="c9bce11b-ba35-445f-a60e-85008005a641" />
           </eXo:PIMAttributes>
+          <eXo:GeneralizationAsGeneral Count="0" />
           <eXo:PIMAssociationEnds Count="1">
             <eXo:PIMAssociationEnd pimAssociationEndID="57508297-a767-4dcf-8dba-b290abc835c3" pimAssociationEnd="PIMAssociationEnd: *defaultname* 1..1 C: PozadavekVysNelaboratorni A: &lt;&lt;inheritance&gt;&gt; " />
           </eXo:PIMAssociationEnds>
@@ -614,6 +652,7 @@
             <eXo:PIMAttribute ID="9fe28c37-3b19-4fe2-bfd6-6d6febb6bd78" Name="specifikace_objednavky_kod" pimClassID="56317b39-b2b3-4036-9b41-f3173bdea6d6" />
             <eXo:PIMAttribute ID="f6b3eb2c-0a8a-44ba-91f8-ce2f5bd24c5f" Name="specifikace_objednavky_text" pimClassID="56317b39-b2b3-4036-9b41-f3173bdea6d6" />
           </eXo:PIMAttributes>
+          <eXo:GeneralizationAsGeneral Count="0" />
           <eXo:PIMAssociationEnds Count="1">
             <eXo:PIMAssociationEnd pimAssociationEndID="a94d81b7-c789-479b-a97f-5169e4811557" pimAssociationEnd="PIMAssociationEnd: *defaultname* 1..1 C: PozadavekVysFormMikro A: &lt;&lt;inheritance&gt;&gt; " />
           </eXo:PIMAssociationEnds>
@@ -623,6 +662,7 @@
             <eXo:PIMAttribute ID="efcf3a98-ee6f-4390-b3d8-d6b7ef0451ab" Name="lokalita" pimClassID="039241cf-9403-4e76-8b04-f0647c197cd4" />
             <eXo:PIMAttribute ID="7e3cf586-af4d-4cfc-8451-18a05e28b774" Name="lateralita" pimClassID="039241cf-9403-4e76-8b04-f0647c197cd4" />
           </eXo:PIMAttributes>
+          <eXo:GeneralizationAsGeneral Count="0" />
           <eXo:PIMAssociationEnds Count="2">
             <eXo:PIMAssociationEnd pimAssociationEndID="c71187c4-9923-4f9a-bc53-c1d7c2866a34" pimAssociationEnd="PIMAssociationEnd: *defaultname* 1..1 C: Lokalizace A:  " />
             <eXo:PIMAssociationEnd pimAssociationEndID="e40d3e2c-0540-4c25-95cf-9e46b6e02978" pimAssociationEnd="PIMAssociationEnd: *defaultname* 1..* C: Lokalizace A:  " />
@@ -639,6 +679,7 @@
             <eXo:PIMAttribute ID="93a2778d-3abd-4d9d-aaeb-41b3612a64ad" Name="uctovatelnost" pimClassID="0bf6bfb2-8913-48ac-8fb3-ed51ea0bf504" />
             <eXo:PIMAttribute ID="77683bfe-88bc-4149-9e44-ac1f122f8b24" Name="typ_omezeni" pimClassID="0bf6bfb2-8913-48ac-8fb3-ed51ea0bf504" />
           </eXo:PIMAttributes>
+          <eXo:GeneralizationAsGeneral Count="0" />
           <eXo:PIMAssociationEnds Count="5">
             <eXo:PIMAssociationEnd pimAssociationEndID="38d797b1-4b26-4185-adc1-e552f3bb30e9" pimAssociationEnd="PIMAssociationEnd: *defaultname* 0..* C: UctovanyVykon A:  " />
             <eXo:PIMAssociationEnd pimAssociationEndID="e41c679e-8698-45f1-8ea5-81540b6071bd" pimAssociationEnd="PIMAssociationEnd: *defaultname* 1..1 C: UctovanyVykon A: &lt;&lt;inheritance&gt;&gt; " />
@@ -653,6 +694,7 @@
             <eXo:PIMAttribute ID="35251c8f-7e39-423b-be01-3b617af42067" Name="lokalizace_zubu" pimClassID="2aa936f6-7ae8-4bfe-9336-b66f40d27644" />
             <eXo:PIMAttribute ID="35af3149-0c6c-4061-a6ca-da078fd910b2" Name="pocet" pimClassID="2aa936f6-7ae8-4bfe-9336-b66f40d27644" />
           </eXo:PIMAttributes>
+          <eXo:GeneralizationAsGeneral Count="0" />
           <eXo:PIMAssociationEnds Count="1">
             <eXo:PIMAssociationEnd pimAssociationEndID="c9ee30dc-b656-42f4-9427-e2b3778a37bb" pimAssociationEnd="PIMAssociationEnd: *defaultname* 1..1 C: Vykon A: &lt;&lt;inheritance&gt;&gt; " />
           </eXo:PIMAssociationEnds>
@@ -664,6 +706,7 @@
             <eXo:PIMAttribute ID="7336df1b-9a86-4005-8df1-1a962bfba17f" Name="mnozstvi" pimClassID="92d0fe24-dc97-487c-a2f9-d8ef70d1a141" />
             <eXo:PIMAttribute ID="adec7b71-631b-4cc8-84b4-d7ea5ef87c14" Name="cena" pimClassID="92d0fe24-dc97-487c-a2f9-d8ef70d1a141" />
           </eXo:PIMAttributes>
+          <eXo:GeneralizationAsGeneral Count="0" />
           <eXo:PIMAssociationEnds Count="1">
             <eXo:PIMAssociationEnd pimAssociationEndID="987efa65-f469-4926-a55f-e82352dd78f1" pimAssociationEnd="PIMAssociationEnd: *defaultname* 1..1 C: ZUM A: &lt;&lt;inheritance&gt;&gt; " />
           </eXo:PIMAssociationEnds>
@@ -673,6 +716,7 @@
             <eXo:PIMAttribute ID="e0dd216a-5a1b-4ed1-84ce-1f5d0e6de736" Name="datum_cas_odeslani" pimClassID="b3742ec5-e6ca-4785-9105-1aaa5371c8dd" />
             <eXo:PIMAttribute ID="d41068bf-c285-4803-8adb-e1eb3d01d9f8" Name="datum_cas_prijeti" pimClassID="b3742ec5-e6ca-4785-9105-1aaa5371c8dd" />
           </eXo:PIMAttributes>
+          <eXo:GeneralizationAsGeneral Count="0" />
           <eXo:PIMAssociationEnds Count="3">
             <eXo:PIMAssociationEnd pimAssociationEndID="262a7dbe-d2ec-4a15-abd8-bab308f51aab" pimAssociationEnd="PIMAssociationEnd: *defaultname* 1..1 C: Zprava A:  " />
             <eXo:PIMAssociationEnd pimAssociationEndID="9cf119e8-3899-49e2-ba6e-8d5b69f9a9b1" pimAssociationEnd="PIMAssociationEnd: *defaultname* 0..* C: Zprava A: odesilatel " />
@@ -683,6 +727,7 @@
           <eXo:PIMAttributes Count="1">
             <eXo:PIMAttribute ID="0af0904f-beba-4ffc-a31c-a49ce0ce8467" Name="cislo_osvedceni" pimClassID="89009716-09e5-4720-b44f-c2c2db5f5830" />
           </eXo:PIMAttributes>
+          <eXo:GeneralizationAsGeneral Count="0" />
           <eXo:PIMAssociationEnds Count="1">
             <eXo:PIMAssociationEnd pimAssociationEndID="c2b66f20-8fea-4e13-a629-bde6fb03ef86" pimAssociationEnd="PIMAssociationEnd: *defaultname* 1..1 C: Laborator A: &lt;&lt;inheritance&gt;&gt; " />
           </eXo:PIMAssociationEnds>
@@ -695,6 +740,7 @@
             <eXo:PIMAttribute ID="3890c18b-940f-4f0f-b104-f525fbabd586" Name="vnitrni" pimClassID="0b9023dc-f4b9-4289-903e-5817d11fd5e9" />
             <eXo:PIMAttribute ID="93f828bd-a5e2-4a38-b424-9e8850906d0a" Name="sdeleni" pimClassID="0b9023dc-f4b9-4289-903e-5817d11fd5e9" />
           </eXo:PIMAttributes>
+          <eXo:GeneralizationAsGeneral Count="0" />
           <eXo:PIMAssociationEnds Count="1">
             <eXo:PIMAssociationEnd pimAssociationEndID="5e6d0b39-87f5-471e-ac76-f5ca8f83371d" pimAssociationEnd="PIMAssociationEnd: *defaultname* 1..* C: Spojeni A:  " />
           </eXo:PIMAssociationEnds>
@@ -703,6 +749,7 @@
           <eXo:PIMAttributes Count="1">
             <eXo:PIMAttribute ID="39c258c1-d0ed-48c0-bd4f-c2e9f4660cc4" Name="typ" pimClassID="9c189c60-d31b-47bb-9e29-8233c7ca9595" />
           </eXo:PIMAttributes>
+          <eXo:GeneralizationAsGeneral Count="0" />
           <eXo:PIMAssociationEnds Count="2">
             <eXo:PIMAssociationEnd pimAssociationEndID="73fdfbef-afee-422e-9b9c-fbf34702e644" pimAssociationEnd="PIMAssociationEnd: *defaultname* 1..1 C: PribuzenskyVztah A:  " />
             <eXo:PIMAssociationEnd pimAssociationEndID="14a0d044-4dd1-4870-b96b-a285fc9d55a2" pimAssociationEnd="PIMAssociationEnd: *defaultname* 1..1 C: PribuzenskyVztah A: pribuzny_pacienta " />
@@ -715,6 +762,7 @@
             <eXo:PIMAttribute ID="edc65589-388c-41b4-a068-2c4908905593" Name="cislo_chorobopisu" Lower="0" pimClassID="331aff0a-b109-4e5a-9553-b8eda95cfc62" />
             <eXo:PIMAttribute ID="f087fbc8-a9f4-41be-af12-1607ce3de18b" Name="cislo_v_IS" Lower="0" pimClassID="331aff0a-b109-4e5a-9553-b8eda95cfc62" />
           </eXo:PIMAttributes>
+          <eXo:GeneralizationAsGeneral Count="0" />
           <eXo:PIMAssociationEnds Count="2">
             <eXo:PIMAssociationEnd pimAssociationEndID="cfc1a81a-8c98-420d-b5b4-ec8b8a04a510" pimAssociationEnd="PIMAssociationEnd: *defaultname* 0..* C: Registrace A:  " />
             <eXo:PIMAssociationEnd pimAssociationEndID="b0ec6d47-5c1f-483c-ac5b-74ca70600011" pimAssociationEnd="PIMAssociationEnd: *defaultname* 0..* C: Registrace A:  " />
@@ -726,6 +774,7 @@
             <eXo:PIMAttribute ID="a8c73a4b-2d7c-4951-8467-71729d4fd08a" Name="hmotnost" Lower="0" pimClassID="47851d2e-3499-445c-9cc8-ddc664b88f72" />
             <eXo:PIMAttribute ID="99cb18c6-fdac-4722-bbf2-823ad794c67b" Name="datum_mereni" Lower="0" pimClassID="47851d2e-3499-445c-9cc8-ddc664b88f72" />
           </eXo:PIMAttributes>
+          <eXo:GeneralizationAsGeneral Count="0" />
           <eXo:PIMAssociationEnds Count="1">
             <eXo:PIMAssociationEnd pimAssociationEndID="04569be8-6135-427c-b451-681e0e7bc90c" pimAssociationEnd="PIMAssociationEnd: *defaultname* 0..* C: Fyziologie A:  " />
           </eXo:PIMAssociationEnds>
@@ -737,6 +786,7 @@
             <eXo:PIMAttribute ID="e12b96ed-8a85-4dbc-a218-3cf076e6a0c4" Name="poradove_cislo" pimClassID="741b2136-56ed-4a38-b658-8983bed4aad0" />
             <eXo:PIMAttribute ID="89d5b37b-ce83-4357-ba6c-345275eeea74" Name="datum_vystaveni_neschopenky" pimClassID="741b2136-56ed-4a38-b658-8983bed4aad0" />
           </eXo:PIMAttributes>
+          <eXo:GeneralizationAsGeneral Count="0" />
           <eXo:PIMAssociationEnds Count="1">
             <eXo:PIMAssociationEnd pimAssociationEndID="205ad7fe-d239-4ae9-8cd2-c98ba30619c0" pimAssociationEnd="PIMAssociationEnd: *defaultname* 1..1 C: Neschopenka A:  " />
           </eXo:PIMAssociationEnds>
@@ -746,6 +796,7 @@
             <eXo:PIMAttribute ID="a9a6ae86-4968-4890-af3a-45a4171175ae" Name="datum_od" pimClassID="d8a979ee-c9b9-4666-aaa1-104de0519385" />
             <eXo:PIMAttribute ID="a7473740-7105-4d2f-95a4-8e0e215d940f" Name="datum_do" pimClassID="d8a979ee-c9b9-4666-aaa1-104de0519385" />
           </eXo:PIMAttributes>
+          <eXo:GeneralizationAsGeneral Count="0" />
           <eXo:PIMAssociationEnds Count="2">
             <eXo:PIMAssociationEnd pimAssociationEndID="437f176c-f6d6-4dba-a61e-81b4a684f808" pimAssociationEnd="PIMAssociationEnd: *defaultname* 0..* C: Hospitalizace A:  " />
             <eXo:PIMAssociationEnd pimAssociationEndID="1c4952d3-240f-4b8b-b34b-5e934ab445c9" pimAssociationEnd="PIMAssociationEnd: *defaultname* 0..* C: Hospitalizace A:  " />
@@ -758,6 +809,7 @@
             <eXo:PIMAttribute ID="cbee47d5-51f8-40af-a749-6885e550b058" Name="datum_rozhodnuti" pimClassID="a5ac9a45-ca1b-4d25-bbf3-e60eb589af0d" />
             <eXo:PIMAttribute ID="577e0eca-657c-43f0-8473-f5f40fed06d0" Name="kod_SSZ" pimClassID="a5ac9a45-ca1b-4d25-bbf3-e60eb589af0d" />
           </eXo:PIMAttributes>
+          <eXo:GeneralizationAsGeneral Count="0" />
           <eXo:PIMAssociationEnds Count="1">
             <eXo:PIMAssociationEnd pimAssociationEndID="09e981bc-1b0c-4357-9e88-11cd40cb4eda" pimAssociationEnd="PIMAssociationEnd: *defaultname* 0..1 C: UkonceniNeschopnosti A:  " />
           </eXo:PIMAssociationEnds>
@@ -766,12 +818,14 @@
           <eXo:PIMAttributes Count="1">
             <eXo:PIMAttribute ID="8dc3ad24-a02f-42dd-a2c4-111bbe1f4f1d" Name="datum_zmeny" pimClassID="94740450-ff95-472e-823c-14e520912be5" />
           </eXo:PIMAttributes>
+          <eXo:GeneralizationAsGeneral Count="0" />
           <eXo:PIMAssociationEnds Count="2">
             <eXo:PIMAssociationEnd pimAssociationEndID="e7c2ecd9-03c5-4b73-b825-376a413ca2f2" pimAssociationEnd="PIMAssociationEnd: *defaultname* 0..1 C: ZmenaDiagnozy A:  " />
             <eXo:PIMAssociationEnd pimAssociationEndID="0bbf6d53-2a56-4325-b78a-d5fe17b0a0fe" pimAssociationEnd="PIMAssociationEnd: *defaultname* 0..1 C: ZmenaDiagnozy A:  " />
           </eXo:PIMAssociationEnds>
         </eXo:PIMClass>
       </eXo:PIMClasses>
+      <eXo:PIMGeneralizations Count="0" />
       <eXo:PIMAssociations Count="90">
         <eXo:PIMAssociation ID="e7798153-ae2f-4b96-b744-aa77db377039" Name="">
           <eXo:PIMAssociationEnds Count="2">
@@ -1315,7 +1369,7 @@
         </eXo:PIMAssociation>
       </eXo:PIMAssociations>
     </eXo:PIMSchema>
-    <eXo:PSMSchemas Count="8">
+    <eXo:PSMSchemas Count="9">
       <eXo:PSMSchema ID="5de6b74d-8c4e-44c4-be88-9aee84cc9ea0" Caption="Zprava_Template">
         <eXo:PSMSchemaClass ID="35514b36-4c2b-4ca5-b75c-2e630466f03b" Name="DASTA" parentAssociationID="2d4be4f2-98db-4eb3-be85-90762edac635" parentAssociation="PSMAssociation from PSMClass: *DASTA-SCHEMA* to PSMSchemaClass: DASTA">
           <eXo:ChildPSMAssociations Count="1">
@@ -2702,10 +2756,8 @@
             <eXo:ChildPSMAssociation childPSMAssociationID="69938ff8-319b-450d-8864-2eadbe455136" childPSMAssociation="PSMAssociation from PSMSchemaClass: DASTA-KLINICKA-UDALOST-OBJ to PSMClass: *DASTA*" />
           </eXo:ChildPSMAssociations>
         </eXo:PSMSchemaClass>
-        <eXo:Roots Count="3">
+        <eXo:Roots Count="1">
           <eXo:Root rootID="a5c2baab-1950-40b9-a173-f57f43071e77" root="PSMSchemaClass: DASTA-KLINICKA-UDALOST-OBJ" />
-          <eXo:Root rootID="6b0197d4-0da9-42de-bcd8-6e73a6ac004d" root="PSMContentModel: Sequence" />
-          <eXo:Root rootID="fa39047d-e267-40e1-aa7a-f2122b315f28" root="PSMContentModel: Sequence" />
         </eXo:Roots>
         <eXo:PSMClasses Count="25">
           <eXo:PSMClass ID="73847bdf-9402-4399-83dd-c9ba0e4d05c1" Name="DASTA" parentAssociationID="69938ff8-319b-450d-8864-2eadbe455136" parentAssociation="PSMAssociation from PSMSchemaClass: DASTA-KLINICKA-UDALOST-OBJ to PSMClass: *DASTA*">
@@ -3024,22 +3076,33 @@
             <eXo:Child NodeType="PSMClass" childID="b940eeae-fb32-45bf-bf8f-3bc2ae63c59a" child="PSMClass: *UpresneniLV*" />
           </eXo:PSMAssociation>
         </eXo:PSMAssociations>
-        <eXo:PSMContentModels Count="3">
-          <eXo:PSMContentModel ID="6b0197d4-0da9-42de-bcd8-6e73a6ac004d" Name="defaultname" Type="Sequence">
-            <eXo:ChildPSMAssociations Count="0" />
-          </eXo:PSMContentModel>
-          <eXo:PSMContentModel ID="fa39047d-e267-40e1-aa7a-f2122b315f28" Name="defaultname" Type="Sequence">
-            <eXo:ChildPSMAssociations Count="0" />
-          </eXo:PSMContentModel>
+        <eXo:PSMContentModels Count="1">
           <eXo:PSMContentModel ID="8bad5200-d8e4-4030-bd3d-04fe5978f70c" Name="defaultname" parentAssociationID="a6360875-0365-45c8-a394-b218ab832cf6" parentAssociation="PSMAssociation from PSMClass: *KlinickaUdalost* to PSMContentModel: Sequence" Type="Sequence">
             <eXo:ChildPSMAssociations Count="4">
-              <eXo:ChildPSMAssociation childPSMAssociationID="2f6acc74-110d-4905-aadf-ec874be5ace3" childPSMAssociation="PSMAssociation from PSMContentModel: Sequence to PSMClass: *ProvadejiciPracoviste*" />
               <eXo:ChildPSMAssociation childPSMAssociationID="4dfab925-cb3a-4555-b394-e631ca98d5ac" childPSMAssociation="PSMAssociation from PSMContentModel: Sequence to PSMClass: *ZadajiciOsoba*" />
               <eXo:ChildPSMAssociation childPSMAssociationID="85568f79-892f-499f-b6ce-9bb12051fd83" childPSMAssociation="PSMAssociation from PSMContentModel: Sequence to PSMClass: *ZadajiciPracoviste*" />
+              <eXo:ChildPSMAssociation childPSMAssociationID="2f6acc74-110d-4905-aadf-ec874be5ace3" childPSMAssociation="PSMAssociation from PSMContentModel: Sequence to PSMClass: *ProvadejiciPracoviste*" />
               <eXo:ChildPSMAssociation childPSMAssociationID="07173927-2dd2-45e0-bd57-6d05a343efc7" childPSMAssociation="PSMAssociation from PSMContentModel: Sequence to PSMClass: *ProvadejiciOsoba*" />
             </eXo:ChildPSMAssociations>
           </eXo:PSMContentModel>
         </eXo:PSMContentModels>
+      </eXo:PSMSchema>
+      <eXo:PSMSchema ID="090a1c3d-2939-4fe3-9d49-88a5418c1fa4" Caption="PSMSchema 9">
+        <eXo:PSMSchemaClass ID="c78cff1f-d0ba-472d-8ec6-334344ed4176" Name="defaultname">
+          <eXo:ChildPSMAssociations Count="0" />
+        </eXo:PSMSchemaClass>
+        <eXo:Roots Count="2">
+          <eXo:Root rootID="c78cff1f-d0ba-472d-8ec6-334344ed4176" root="PSMSchemaClass: defaultname" />
+          <eXo:Root rootID="9b9874f5-bf45-42b4-8c21-b12bd49f0660" root="PSMClass: *defaultname*" />
+        </eXo:Roots>
+        <eXo:PSMClasses Count="1">
+          <eXo:PSMClass ID="9b9874f5-bf45-42b4-8c21-b12bd49f0660" Name="defaultname">
+            <eXo:ChildPSMAssociations Count="0" />
+            <eXo:PSMAttributes Count="0" />
+          </eXo:PSMClass>
+        </eXo:PSMClasses>
+        <eXo:PSMAssociations Count="0" />
+        <eXo:PSMContentModels Count="0" />
       </eXo:PSMSchema>
     </eXo:PSMSchemas>
     <eXo:PIMDiagrams Count="1">
@@ -3140,7 +3203,7 @@
                     <eXo:LabelVisible>True</eXo:LabelVisible>
                   </eXo:RoleLabelViewHelper>
                   <eXo:Points>
-                    <eXo:Point X="41" Y="107" />
+                    <eXo:Point X="37" Y="107" />
                     <eXo:Point X="44" Y="0" />
                   </eXo:Points>
                 </eXo:AssociationEndViewHelper>
@@ -3472,13 +3535,13 @@
                     <eXo:LabelVisible>True</eXo:LabelVisible>
                   </eXo:RoleLabelViewHelper>
                   <eXo:Points>
-                    <eXo:Point X="0" Y="21" />
-                    <eXo:Point X="318" Y="275" />
-                    <eXo:Point X="59" Y="0" />
+                    <eXo:Point X="0" Y="12" />
+                    <eXo:Point X="324" Y="267" />
+                    <eXo:Point X="64" Y="0" />
                   </eXo:Points>
                 </eXo:AssociationEndViewHelper>
                 <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="bfdd068a-0f75-4c93-8cf2-beb7c35b1937" AssociationEnd="PIMAssociationEnd: ** 0..* C: VydejLeku A:  ">
-                  <eXo:CardinalityLabelViewHelper X="-13,9935275080906" Y="-26,8888888888889" Width="NaN" Height="NaN">
+                  <eXo:CardinalityLabelViewHelper X="-40" Y="-20" Width="NaN" Height="NaN">
                     <eXo:LabelVisible>True</eXo:LabelVisible>
                   </eXo:CardinalityLabelViewHelper>
                   <eXo:RoleLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
@@ -4008,7 +4071,7 @@
             </eXo:ViewHelper>
           </eXo:Component>
           <eXo:Component Type="PIMClass" componentID="af208784-3130-458b-8a6e-fa2e25285afb" component="PIMClass: *ReakceNaOckovani*">
-            <eXo:ViewHelper X="926,099259060976" Y="456,15926108273" Width="NaN" Height="NaN" />
+            <eXo:ViewHelper X="926,099259060976" Y="442,825927749397" Width="NaN" Height="NaN" />
           </eXo:Component>
           <eXo:Component Type="PIMAssociation" componentID="f73419b0-6ca6-44b7-9bfa-52b0c88ec210" component="PIMAssociation *autor_popisu*: PIMClass: *Lekar*, PIMClass: *ReakceNaOckovani*">
             <eXo:ViewHelper>
@@ -4026,7 +4089,7 @@
                   </eXo:RoleLabelViewHelper>
                   <eXo:Points>
                     <eXo:Point X="37" Y="43" />
-                    <eXo:Point X="71" Y="0" />
+                    <eXo:Point X="70" Y="0" />
                   </eXo:Points>
                 </eXo:AssociationEndViewHelper>
                 <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="ffe27a80-2641-45ef-93e1-661fc28788d6" AssociationEnd="PIMAssociationEnd: ** 0..* C: ReakceNaOckovani A: autor_popisu ">
@@ -4057,7 +4120,7 @@
                   </eXo:RoleLabelViewHelper>
                   <eXo:Points>
                     <eXo:Point X="61" Y="75" />
-                    <eXo:Point X="127" Y="8" />
+                    <eXo:Point X="127" Y="4" />
                   </eXo:Points>
                 </eXo:AssociationEndViewHelper>
                 <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="ff564d2a-40f2-4430-ad8b-ea27360c29b4" AssociationEnd="PIMAssociationEnd: ** 1..1 C: OckovaciDavka A:  ">
@@ -4073,7 +4136,7 @@
             </eXo:ViewHelper>
           </eXo:Component>
           <eXo:Component Type="PIMClass" componentID="0dd30287-5306-4949-97a1-b3c3a18db0f7" component="PIMClass: *KlinickaUdalost*">
-            <eXo:ViewHelper X="1083,06605005696" Y="992,214533450801" Width="NaN" Height="NaN" />
+            <eXo:ViewHelper X="1079,73271672363" Y="992,214533450801" Width="NaN" Height="NaN" />
           </eXo:Component>
           <eXo:Component Type="PIMAssociation" componentID="c661f58a-5cdb-4efc-9517-3e1d4f10e18e" component="PIMAssociation *zadajici*: PIMClass: *Pracoviste*, PIMClass: *KlinickaUdalost*">
             <eXo:ViewHelper>
@@ -4319,8 +4382,8 @@
                     <eXo:LabelVisible>True</eXo:LabelVisible>
                   </eXo:RoleLabelViewHelper>
                   <eXo:Points>
-                    <eXo:Point X="101" Y="0" />
-                    <eXo:Point X="63" Y="267" />
+                    <eXo:Point X="100" Y="0" />
+                    <eXo:Point X="64" Y="267" />
                   </eXo:Points>
                 </eXo:AssociationEndViewHelper>
                 <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="14235246-c1cc-4435-9a84-6a7547a74eaa" AssociationEnd="PIMAssociationEnd: *defaultname* 1..1 C: KlinickaUdalost A:  ">
@@ -4554,8 +4617,8 @@
                     <eXo:LabelVisible>True</eXo:LabelVisible>
                   </eXo:RoleLabelViewHelper>
                   <eXo:Points>
-                    <eXo:Point X="11" Y="91" />
-                    <eXo:Point X="125" Y="49" />
+                    <eXo:Point X="10" Y="91" />
+                    <eXo:Point X="125" Y="51" />
                   </eXo:Points>
                 </eXo:AssociationEndViewHelper>
                 <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="26743c89-1d91-4fd4-a1b9-f1dd62bd5f1c" AssociationEnd="PIMAssociationEnd: *defaultname* 0..1 C: KlinickaUdalost A: vystupni ">
@@ -4954,7 +5017,7 @@
                   </eXo:RoleLabelViewHelper>
                   <eXo:Points>
                     <eXo:Point X="0" Y="15" />
-                    <eXo:Point X="297" Y="1485" />
+                    <eXo:Point X="294" Y="1489" />
                     <eXo:Point X="33" Y="123" />
                   </eXo:Points>
                 </eXo:AssociationEndViewHelper>
@@ -4985,8 +5048,8 @@
                     <eXo:LabelVisible>True</eXo:LabelVisible>
                   </eXo:RoleLabelViewHelper>
                   <eXo:Points>
-                    <eXo:Point X="0" Y="108" />
-                    <eXo:Point X="269" Y="1513" />
+                    <eXo:Point X="7" Y="123" />
+                    <eXo:Point X="268" Y="1515" />
                     <eXo:Point X="0" Y="41" />
                   </eXo:Points>
                 </eXo:AssociationEndViewHelper>
@@ -5182,8 +5245,8 @@
                     <eXo:LabelVisible>True</eXo:LabelVisible>
                   </eXo:RoleLabelViewHelper>
                   <eXo:Points>
-                    <eXo:Point X="67" Y="108" />
-                    <eXo:Point X="320" Y="1452" />
+                    <eXo:Point X="58" Y="123" />
+                    <eXo:Point X="318" Y="1451" />
                     <eXo:Point X="806" Y="1451" />
                     <eXo:Point X="41" Y="59" />
                   </eXo:Points>
@@ -5216,11 +5279,11 @@
                   </eXo:RoleLabelViewHelper>
                   <eXo:Points>
                     <eXo:Point X="116" Y="29" />
-                    <eXo:Point X="2249" Y="1229" />
+                    <eXo:Point X="2251" Y="1229" />
                     <eXo:Point X="2251" Y="159" />
-                    <eXo:Point X="158" Y="161" />
-                    <eXo:Point X="170" Y="1063" />
-                    <eXo:Point X="0" Y="58" />
+                    <eXo:Point X="168" Y="164" />
+                    <eXo:Point X="168" Y="1071" />
+                    <eXo:Point X="0" Y="61" />
                   </eXo:Points>
                 </eXo:AssociationEndViewHelper>
                 <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="d2e71a46-7a24-4476-9213-baad250b7600" AssociationEnd="PIMAssociationEnd: *defaultname* 1..1 C: Osoba A: odesilatel ">
@@ -5422,8 +5485,8 @@
                   </eXo:RoleLabelViewHelper>
                   <eXo:Points>
                     <eXo:Point X="14" Y="0" />
-                    <eXo:Point X="955" Y="212" />
-                    <eXo:Point X="220" Y="208" />
+                    <eXo:Point X="954" Y="212" />
+                    <eXo:Point X="225" Y="212" />
                     <eXo:Point X="225" Y="1025" />
                     <eXo:Point X="0" Y="14" />
                   </eXo:Points>
@@ -5456,9 +5519,9 @@
                   </eXo:RoleLabelViewHelper>
                   <eXo:Points>
                     <eXo:Point X="0" Y="89" />
-                    <eXo:Point X="171" Y="1100" />
-                    <eXo:Point X="170" Y="2254" />
-                    <eXo:Point X="1962" Y="2254" />
+                    <eXo:Point X="170" Y="1099" />
+                    <eXo:Point X="170" Y="2214" />
+                    <eXo:Point X="1960" Y="2214" />
                     <eXo:Point X="1960" Y="881" />
                     <eXo:Point X="96" Y="124" />
                   </eXo:Points>
@@ -5754,7 +5817,7 @@
                   <eXo:Points>
                     <eXo:Point X="83" Y="0" />
                     <eXo:Point X="2149" Y="213" />
-                    <eXo:Point X="985" Y="212" />
+                    <eXo:Point X="982" Y="213" />
                     <eXo:Point X="42" Y="0" />
                   </eXo:Points>
                 </eXo:AssociationEndViewHelper>
@@ -5878,15 +5941,15 @@
               </eXo:MainLabelViewHelper>
               <eXo:AssociationEndsViewHelpers Count="2">
                 <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="da2089db-51d9-42fc-977b-4dfa92ac1d0e" AssociationEnd="PIMAssociationEnd: *defaultname* 0..1 C: Pracoviste A: vystavil ">
-                  <eXo:CardinalityLabelViewHelper X="-3,33333333333337" Y="18,3333333333333" Width="NaN" Height="NaN">
+                  <eXo:CardinalityLabelViewHelper X="-12,3333333333334" Y="11,3333333333333" Width="NaN" Height="NaN">
                     <eXo:LabelVisible>True</eXo:LabelVisible>
                   </eXo:CardinalityLabelViewHelper>
                   <eXo:RoleLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
                     <eXo:LabelVisible>True</eXo:LabelVisible>
                   </eXo:RoleLabelViewHelper>
                   <eXo:Points>
-                    <eXo:Point X="93" Y="80" />
-                    <eXo:Point X="890" Y="1468" />
+                    <eXo:Point X="86" Y="107" />
+                    <eXo:Point X="857" Y="1466" />
                     <eXo:Point X="2221" Y="1466" />
                     <eXo:Point X="172" Y="178" />
                   </eXo:Points>
@@ -6018,11 +6081,11 @@
                     <eXo:LabelVisible>True</eXo:LabelVisible>
                   </eXo:RoleLabelViewHelper>
                   <eXo:Points>
-                    <eXo:Point X="106" Y="26" />
-                    <eXo:Point X="702" Y="2228" />
-                    <eXo:Point X="1885" Y="2237" />
-                    <eXo:Point X="1885" Y="1549" />
-                    <eXo:Point X="180" Y="76" />
+                    <eXo:Point X="103" Y="26" />
+                    <eXo:Point X="699" Y="2192" />
+                    <eXo:Point X="1885" Y="2192" />
+                    <eXo:Point X="1885" Y="1491" />
+                    <eXo:Point X="180" Y="16" />
                   </eXo:Points>
                 </eXo:AssociationEndViewHelper>
                 <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="e03a62d8-fb3c-4ecb-8d20-244b24f9ecc2" AssociationEnd="PIMAssociationEnd: *defaultname* 1..1 C: Vzorek A:  ">
@@ -6040,7 +6103,7 @@
         </eXo:Components>
       </eXo:PIMDiagram>
     </eXo:PIMDiagrams>
-    <eXo:PSMDiagrams Count="8">
+    <eXo:PSMDiagrams Count="9">
       <eXo:PSMDiagram ID="c96b75a9-0972-48b2-9266-cc2d761aba70" schemaID="5de6b74d-8c4e-44c4-be88-9aee84cc9ea0" schema="Zprava_Template" Caption="Zprava_Template">
         <eXo:Components>
           <eXo:Component Type="PSMSchemaClass" componentID="35514b36-4c2b-4ca5-b75c-2e630466f03b" component="PSMSchemaClass: DASTA">
@@ -6051,7 +6114,7 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="2d4be4f2-98db-4eb3-be85-90762edac635" component="PSMAssociation from PSMClass: *DASTA-SCHEMA* to PSMSchemaClass: DASTA">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="0,188690185546875" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
@@ -6098,7 +6161,7 @@
               <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
-              <eXo:CardinalityLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:CardinalityLabelViewHelper>
             </eXo:ViewHelper>
@@ -6168,10 +6231,10 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="fc59e995-f887-4501-adf6-8ee85968dbab" component="PSMAssociation from PSMClass: *Zprava* to PSMClass: *Spojeni*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="-228" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
-              <eXo:CardinalityLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:CardinalityLabelViewHelper>
             </eXo:ViewHelper>
@@ -6190,7 +6253,7 @@
               <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
-              <eXo:CardinalityLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:CardinalityLabelViewHelper>
             </eXo:ViewHelper>
@@ -6220,7 +6283,7 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="1d85887b-036d-4af6-97bf-298d111e2c6a" component="PSMAssociation from PSMClass: *Pracoviste-Adr* to PSMClass: *AdresaOdesilatele*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="15,5555555555557" Y="0" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="0,1639404296875" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
@@ -6233,7 +6296,7 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="f1a7e94e-ea52-4f5e-9d4d-4b289530a3f5" component="PSMAssociation from PSMClass: *Zprava* to PSMClass: *Pacient*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="86" Y="42" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="118,160583496094" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
@@ -6249,7 +6312,7 @@
               <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
-              <eXo:CardinalityLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:CardinalityLabelViewHelper>
             </eXo:ViewHelper>
@@ -6262,7 +6325,7 @@
               <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
-              <eXo:CardinalityLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:CardinalityLabelViewHelper>
             </eXo:ViewHelper>
@@ -6275,7 +6338,7 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="b1de1ce7-a8f4-4c21-b6f5-826732452212" component="PSMAssociation from PSMClass: *PacientOsoba* to PSMClass: *AdresaPacienta*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="0" Y="1,42857142857144" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="0,1639404296875" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="20" Y="-35,4285714285714" Width="NaN" Height="NaN">
@@ -6307,7 +6370,7 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="05747ad3-ba70-4306-92c0-a45d54c52dbb" component="PSMAssociation from PSMClass: *Pribuzny* to PSMClass: *AdresaPribuzneho*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="0" Y="1,42857142857133" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="-39,0476190476191" Y="-19,1746031746032" Width="NaN" Height="NaN">
@@ -6392,7 +6455,7 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="6198b06e-ee19-4dcf-941c-cbdc4fe9fa7b" component="PSMAssociation from PSMClass: *PraktikOsoba* to PSMClass: *AdresaPraktika*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="0" Y="1,42857142857144" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="0,1639404296875" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="-38,5714285714287" Y="-18,2857142857142" Width="NaN" Height="NaN">
@@ -6405,10 +6468,10 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="2bf4eb00-064a-489c-81a0-c1b9dfdac295" component="PSMAssociation from PSMClass: *Pacient* to PSMClass: *Registrace*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="-120" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
-              <eXo:CardinalityLabelViewHelper X="0" Y="-8" Width="NaN" Height="NaN">
+              <eXo:CardinalityLabelViewHelper X="-40" Y="-20" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:CardinalityLabelViewHelper>
             </eXo:ViewHelper>
@@ -6418,7 +6481,7 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="4b7b3c4b-c273-4414-84f7-101a073cde01" component="PSMAssociation from PSMClass: *Pacient* to PSMClass: *Fyziologie*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="5,55555555555543" Y="-2,22222222222229" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="146,662780761719" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="-40" Y="-20" Width="NaN" Height="NaN">
@@ -6447,7 +6510,7 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="76b6a7eb-6b0d-4613-bb62-bc3472a260ba" component="PSMAssociation from PSMClass: *Pojistovna* to PSMClass: *AdresaPojistovny*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="0,1639404296875" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
@@ -6457,10 +6520,10 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="0e6739c9-77db-4822-b82a-8eae025a4831" component="PSMAssociation from PSMClass: *Pacient* to PSMClass: *PojistnaSmlouva*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="-12" Y="-11" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="214,633056640625" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
-              <eXo:CardinalityLabelViewHelper X="-46" Y="-13" Width="NaN" Height="NaN">
+              <eXo:CardinalityLabelViewHelper X="-40" Y="-20" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:CardinalityLabelViewHelper>
             </eXo:ViewHelper>
@@ -6477,7 +6540,7 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="6b98762f-7a39-43ed-87d1-302df4ce3cb7" component="PSMAssociation from PSMSchemaClass: DASTA-OCKOVANI to PSMClass: *DASTA*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="0" Y="1" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="0,188674926757813" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
@@ -6503,7 +6566,7 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="cff7c8ea-8568-48e3-b1bb-24264459e8e8" component="PSMAssociation from PSMClass: *Zprava* to PSMClass: *Pacient*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="0,16259765625" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
@@ -6516,7 +6579,7 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="5d51a10b-7931-4bd2-9a75-cfcfcce99df6" component="PSMAssociation from PSMClass: *Pacient* to PSMClass: *Ockovani*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="-1" Y="-4" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="-39" Y="-18" Width="NaN" Height="NaN">
@@ -6548,7 +6611,7 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="7b40eb3d-9b84-48d0-9ef1-8827cad9296d" component="PSMAssociation from PSMClass: *Ockovani* to PSMClass: *OckovaciDavka*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="14" Y="-1" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="-12,5" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="-40" Y="-20" Width="NaN" Height="NaN">
@@ -6561,7 +6624,7 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="861f6668-ff1a-4598-a23e-244eb63054a5" component="PSMAssociation from PSMClass: *OckovaciDavka* to PSMClass: *Lekar*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="-5,0802139037433" Y="-3,04812834224606" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="0,16259765625" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="17,3048128342245" Y="-17,9679144385027" Width="NaN" Height="NaN">
@@ -6574,7 +6637,7 @@
               <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
-              <eXo:CardinalityLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:CardinalityLabelViewHelper>
             </eXo:ViewHelper>
@@ -6584,7 +6647,7 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="eb9bb99a-a28d-42de-abd3-b2acdf91ca9f" component="PSMAssociation from PSMClass: *OckovaciDavka* to PSMClass: *ReakceNaOckovani*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="12,192513368984" Y="0" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="111" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
@@ -6597,7 +6660,7 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="4ab44b26-6fa3-40de-98b2-8bdcd6adb47d" component="PSMAssociation from PSMClass: *ReakceNaOckovani* to PSMClass: *Lekar*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="0" Y="-3,04812834224595" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="0,188690185546875" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="10,8021390374331" Y="-18,2245989304813" Width="NaN" Height="NaN">
@@ -6656,7 +6719,7 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="30c91ebf-215f-49af-8ef1-618ef9c547b0" component="PSMAssociation from PSMSchemaClass: DASTA-PODAVANE-LEKY to PSMClass: *DASTA*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="0,188682556152344" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
@@ -6666,7 +6729,7 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="8832b621-3116-4b23-8b96-df5daeb8fad3" component="PSMAssociation from PSMClass: *Zprava* to PSMClass: *Pacient*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="0,162605285644531" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
@@ -6692,7 +6755,7 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="caa67199-bd6d-488a-b8ad-d729aa04820e" component="PSMAssociation from PSMClass: *Pacient* to PSMClass: *PodaniLeku*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="0,162605285644531" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="-41" Y="-20" Width="NaN" Height="NaN">
@@ -6708,7 +6771,7 @@
               <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
-              <eXo:CardinalityLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:CardinalityLabelViewHelper>
             </eXo:ViewHelper>
@@ -6718,7 +6781,7 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="90597f59-7fa1-4df6-8c03-3f7324e7091d" component="PSMAssociation from PSMClass: *PodaniLeku* to PSMClass: *Lekar*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="42,7066650390625" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="1" Y="-21" Width="NaN" Height="NaN">
@@ -6770,7 +6833,7 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="188280f5-80c9-4d9b-8a37-6fd2e1868b64" component="PSMAssociation from PSMSchemaClass: DASTA-DIAGNOZY to PSMClass: *DASTA*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="0,188678741455078" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
@@ -6790,7 +6853,7 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="3ef7133e-160f-4f29-963c-eaa50a605aec" component="PSMAssociation from PSMClass: *Zprava* to PSMClass: *Pacient*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="0" Y="1" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="0,162601470947266" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
@@ -6803,7 +6866,7 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="014b384e-b52a-421d-814d-b478f798de10" component="PSMAssociation from PSMClass: *Pacient* to PSMClass: *Diagnozy*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="0,188678741455078" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
@@ -6816,7 +6879,7 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="60171b5b-8c3c-497d-a9c0-43ea821e4c8e" component="PSMAssociation from PSMClass: *Diagnozy* to PSMClass: *Diagnoza*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="0,116958618164063" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
@@ -6829,7 +6892,7 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="be52b9d0-dbe6-4cc9-a408-88b5754e02b5" component="PSMAssociation from PSMClass: *Diagnoza* to PSMClass: *Lekar*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="0" Y="-4" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="0,188678741455078" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="-43" Y="-18" Width="NaN" Height="NaN">
@@ -6868,7 +6931,7 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="fb3b7f5f-e701-4773-a3e4-a747a954145a" component="PSMAssociation from PSMSchemaClass: DASTA-VYDANE-LEKY to PSMClass: *DASTA*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="0,188674926757813" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
@@ -6888,7 +6951,7 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="eb6aef99-55be-4558-bd9d-d5856924dff0" component="PSMAssociation from PSMClass: *Zprava* to PSMClass: *Pacient*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="0,16259765625" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
@@ -6901,7 +6964,7 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="9137d9ec-0aeb-468d-a2ea-3e5e63298198" component="PSMAssociation from PSMClass: *VydaneLeky* to PSMClass: *VydejLeku*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="-1" Y="-4" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="0,188674926757813" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="-76" Y="-17" Width="NaN" Height="NaN">
@@ -6914,7 +6977,7 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="2afbd1b4-51d2-4c35-91df-e04434fcacdd" component="PSMAssociation from PSMClass: *Pacient* to PSMClass: *VydaneLeky*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="0,188674926757813" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
@@ -6930,7 +6993,7 @@
               <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
-              <eXo:CardinalityLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:CardinalityLabelViewHelper>
             </eXo:ViewHelper>
@@ -6943,7 +7006,7 @@
               <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
-              <eXo:CardinalityLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:CardinalityLabelViewHelper>
             </eXo:ViewHelper>
@@ -7015,7 +7078,7 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="9077c5e2-8c8e-4b40-8ff5-cfc57c7b5cd3" component="PSMAssociation from PSMSchemaClass: DASTA-PRACOVNI-NESCHOPNOSTI to PSMClass: *DASTA*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="0,188674926757813" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
@@ -7038,7 +7101,7 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="364c5462-5605-4150-b208-c55c59780c0e" component="PSMAssociation from PSMClass: *Zprava* to PSMClass: *Pacient*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="0,16259765625" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
@@ -7051,7 +7114,7 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="e82fd551-9085-4c37-bcdf-deb677788578" component="PSMAssociation from PSMClass: *PracovniNeschopnosti* to PSMClass: *PracovniNeschopnost*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="0,079681396484375" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
@@ -7064,7 +7127,7 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="f3bf4266-08c9-488f-8648-4bdeb82fc895" component="PSMAssociation from PSMClass: *Pacient* to PSMClass: *PracovniNeschopnosti*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="0,188674926757813" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
@@ -7136,7 +7199,7 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="9eb4f703-e272-4e85-a51d-f5600c009e7f" component="PSMAssociation from PSMSchemaClass: DASTA_HLASENI_PRACOVNI_NESCHOPNOSTI to PSMClass: *DASTA*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="0,18865966796875" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
@@ -7162,7 +7225,7 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="a895994d-1a1e-41c2-b6de-0f314c8ebff6" component="PSMAssociation from PSMClass: *Zprava* to PSMClass: *Pacient*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="0,16259765625" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
@@ -7175,7 +7238,7 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="b92567b8-2379-42ba-bfc1-91ad0c78ca92" component="PSMAssociation from PSMClass: *Pacient* to PSMClass: *PracovniNeschopnosti*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="0,18865966796875" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
@@ -7188,7 +7251,7 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="97baeee5-e7e4-4784-9b40-7d7d782c3bec" component="PSMAssociation from PSMClass: *PracovniNeschopnosti* to PSMClass: *PracovniNeschopnost*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="0,09130859375" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="-42" Y="-17" Width="NaN" Height="NaN">
@@ -7227,10 +7290,10 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="cf1e17f8-4828-4467-bf2b-96b383a068ec" component="PSMAssociation from PSMClass: *PracovniNeschopnost* to PSMClass: *Identifikace*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="-219" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
-              <eXo:CardinalityLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:CardinalityLabelViewHelper>
             </eXo:ViewHelper>
@@ -7292,10 +7355,10 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="837109b5-93ce-48d7-b430-24efe6e3a1e4" component="PSMAssociation from PSMClass: *PracovniNeschopnost* to PSMClass: *Pacient*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="-32,5" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
-              <eXo:CardinalityLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:CardinalityLabelViewHelper>
             </eXo:ViewHelper>
@@ -7305,7 +7368,7 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="e789a73a-50db-4e96-9eef-8dd60924489a" component="PSMAssociation from PSMClass: *PracovniNeschopnost* to PSMClass: *PovoleniVychazek*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="0,1290283203125" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
@@ -7334,7 +7397,7 @@
               <eXo:MainLabelViewHelper X="18,3333333333335" Y="-1,66666666666674" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
-              <eXo:CardinalityLabelViewHelper X="-40" Y="4" Width="NaN" Height="NaN">
+              <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:CardinalityLabelViewHelper>
             </eXo:ViewHelper>
@@ -7370,10 +7433,10 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="a206231b-3fcd-414d-9c5c-5416a33df0e0" component="PSMAssociation from PSMClass: *PracovniNeschopnost* to PSMContentModel: Choice">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="-368" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
-              <eXo:CardinalityLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:CardinalityLabelViewHelper>
             </eXo:ViewHelper>
@@ -7409,10 +7472,10 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="a41d0d7a-96b9-4b98-98fc-c3f083124486" component="PSMAssociation from PSMClass: *PracovniNeschopnost* to PSMClass: *UkonceniNeschopnosti*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="17,1428571428573" Y="0" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="161,176818847656" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
-              <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
+              <eXo:CardinalityLabelViewHelper X="-40" Y="-20" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:CardinalityLabelViewHelper>
             </eXo:ViewHelper>
@@ -7477,7 +7540,7 @@
               <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
-              <eXo:CardinalityLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:CardinalityLabelViewHelper>
             </eXo:ViewHelper>
@@ -7487,10 +7550,10 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="ad53f8a0-91b1-4a64-8cef-f6e1b549dbbc" component="PSMAssociation from PSMClass: *PracovniNeschopnost* to PSMClass: *Lekar*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="441,209106445313" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
-              <eXo:CardinalityLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:CardinalityLabelViewHelper>
             </eXo:ViewHelper>
@@ -7500,7 +7563,7 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="ef355c38-2c14-4f56-9494-51375cadf903" component="PSMAssociation from PSMClass: *Lekar* to PSMClass: *LekarIDL*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="0,18865966796875" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
@@ -7539,7 +7602,7 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="69938ff8-319b-450d-8864-2eadbe455136" component="PSMAssociation from PSMSchemaClass: DASTA-KLINICKA-UDALOST-OBJ to PSMClass: *DASTA*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="-1" Y="0" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="0,188690185546875" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
@@ -7559,7 +7622,7 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="f1e1036a-c560-4e34-8f1f-47bfa602ce69" component="PSMAssociation from PSMClass: *Zprava* to PSMClass: *Pacient*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="0,16259765625" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
@@ -7585,7 +7648,7 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="3d62ce7c-a234-4b6a-8274-dbff43ca6401" component="PSMAssociation from PSMClass: *KlinickeUdalosti* to PSMClass: *KlinickaUdalost*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="-1" Y="0" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="0,106964111328125" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
@@ -7601,7 +7664,7 @@
               <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
-              <eXo:CardinalityLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:CardinalityLabelViewHelper>
             </eXo:ViewHelper>
@@ -7611,7 +7674,7 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="4dfab925-cb3a-4555-b394-e631ca98d5ac" component="PSMAssociation from PSMContentModel: Sequence to PSMClass: *ZadajiciOsoba*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="-94" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
@@ -7624,10 +7687,10 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="85568f79-892f-499f-b6ce-9bb12051fd83" component="PSMAssociation from PSMContentModel: Sequence to PSMClass: *ZadajiciPracoviste*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="-42" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
-              <eXo:CardinalityLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:CardinalityLabelViewHelper>
             </eXo:ViewHelper>
@@ -7650,7 +7713,7 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="0bb277c6-58d1-497e-8af2-a49497857e41" component="PSMAssociation from PSMClass: *ZadajiciPracoviste* to PSMClass: *AdresaPracovitště*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="0,1639404296875" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
@@ -7663,7 +7726,7 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="2f6acc74-110d-4905-aadf-ec874be5ace3" component="PSMAssociation from PSMContentModel: Sequence to PSMClass: *ProvadejiciPracoviste*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="46,6770935058594" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
@@ -7676,7 +7739,7 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="07173927-2dd2-45e0-bd57-6d05a343efc7" component="PSMAssociation from PSMContentModel: Sequence to PSMClass: *ProvadejiciOsoba*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="135,5" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
@@ -7689,7 +7752,7 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="2752b09b-3b39-4d50-b3ca-bf215ca0fb39" component="PSMAssociation from PSMClass: *KlinickaUdalost* to PSMClass: *Leky*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="-6,25" Y="5" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="117,719604492188" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
@@ -7702,10 +7765,10 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="a893b838-6c79-4ed8-aa50-cd6a9a5213ff" component="PSMAssociation from PSMClass: *KlinickaUdalost* to PSMClass: *Diagnoza*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="-125,5" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
-              <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
+              <eXo:CardinalityLabelViewHelper X="-40" Y="-20" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:CardinalityLabelViewHelper>
             </eXo:ViewHelper>
@@ -7715,10 +7778,10 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="ee1902d1-ed13-4928-a655-39443b04db12" component="PSMAssociation from PSMClass: *Leky* to PSMClass: *PodaniLeku*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="-317,5" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
-              <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
+              <eXo:CardinalityLabelViewHelper X="-40" Y="-20" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:CardinalityLabelViewHelper>
             </eXo:ViewHelper>
@@ -7736,12 +7799,6 @@
               </eXo:CardinalityLabelViewHelper>
             </eXo:ViewHelper>
           </eXo:Component>
-          <eXo:Component Type="PSMContentModel" componentID="6b0197d4-0da9-42de-bcd8-6e73a6ac004d" component="PSMContentModel: Sequence">
-            <eXo:ViewHelper />
-          </eXo:Component>
-          <eXo:Component Type="PSMContentModel" componentID="fa39047d-e267-40e1-aa7a-f2122b315f28" component="PSMContentModel: Sequence">
-            <eXo:ViewHelper />
-          </eXo:Component>
           <eXo:Component Type="PSMContentModel" componentID="8bad5200-d8e4-4030-bd3d-04fe5978f70c" component="PSMContentModel: Sequence">
             <eXo:ViewHelper />
           </eXo:Component>
@@ -7750,7 +7807,7 @@
               <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
-              <eXo:CardinalityLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:CardinalityLabelViewHelper>
             </eXo:ViewHelper>
@@ -7760,10 +7817,10 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="6be48992-f151-4404-8f77-3113c2949435" component="PSMAssociation from PSMClass: *KlinickaUdalost* to PSMClass: *RTGVysetreni*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="41,25" Y="0" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="169,5" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
-              <eXo:CardinalityLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:CardinalityLabelViewHelper>
             </eXo:ViewHelper>
@@ -7773,10 +7830,10 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="1ed099d3-5faf-43e5-948e-727a580b3c31" component="PSMAssociation from PSMClass: *RTGVysetreni* to PSMClass: *Lokalizace*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="-314,5" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
-              <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
+              <eXo:CardinalityLabelViewHelper X="-40" Y="-20" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:CardinalityLabelViewHelper>
             </eXo:ViewHelper>
@@ -7799,7 +7856,7 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="bb844e6c-0e4f-4d5c-ac5d-c527e7515478" component="PSMAssociation from PSMClass: *KlinickaUdalost* to PSMClass: *LaboratorniVysetreniContainer*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="266,5" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
@@ -7815,7 +7872,7 @@
               <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
-              <eXo:CardinalityLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:CardinalityLabelViewHelper>
             </eXo:ViewHelper>
@@ -7828,7 +7885,7 @@
               <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
-              <eXo:CardinalityLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:CardinalityLabelViewHelper>
             </eXo:ViewHelper>
@@ -7851,7 +7908,7 @@
           </eXo:Component>
           <eXo:Component Type="PSMAssociation" componentID="9a3a4dbd-79cd-4358-8057-d6e6908c9b70" component="PSMAssociation from PSMClass: *Vzorek* to PSMClass: *PozadavekVysFormNemikro*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="0,188690185546875" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
@@ -7871,6 +7928,16 @@
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:CardinalityLabelViewHelper>
             </eXo:ViewHelper>
+          </eXo:Component>
+        </eXo:Components>
+      </eXo:PSMDiagram>
+      <eXo:PSMDiagram ID="991f3e5f-5b74-4390-a59d-f329477a0532" schemaID="090a1c3d-2939-4fe3-9d49-88a5418c1fa4" schema="PSMSchema 9" Caption="PSMSchema 9">
+        <eXo:Components>
+          <eXo:Component Type="PSMSchemaClass" componentID="c78cff1f-d0ba-472d-8ec6-334344ed4176" component="PSMSchemaClass: defaultname">
+            <eXo:ViewHelper />
+          </eXo:Component>
+          <eXo:Component Type="PSMClass" componentID="9b9874f5-bf45-42b4-8c21-b12bd49f0660" component="PSMClass: *defaultname*">
+            <eXo:ViewHelper />
           </eXo:Component>
         </eXo:Components>
       </eXo:PSMDiagram>
