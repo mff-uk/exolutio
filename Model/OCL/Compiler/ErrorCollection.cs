@@ -10,6 +10,10 @@ namespace Exolutio.Model.OCL.Compiler {
             Errors = new List<ErrorItem>();
         }
 
+        public ErrorCollection(ErrorCollection errorRoot) {
+            Errors = errorRoot.Errors;
+        }
+
         /// <summary>
         /// Tady to bude chtit udelat nake zmeny.
         /// </summary>

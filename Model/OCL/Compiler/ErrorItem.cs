@@ -17,16 +17,16 @@ namespace Exolutio.Model.OCL.Compiler {
     }
 
     public class CodeErrorItem:ErrorItem {
-        public CommonToken StartToken {
+        public IToken StartToken {
             protected set;
             get;
         }
-        public CommonToken EndToken {
+        public IToken EndToken {
             protected set;
             get;
         }
 
-        public CodeErrorItem(string text, CommonToken startToken, CommonToken endToken):base(text){
+        public CodeErrorItem(string text, IToken startToken, IToken endToken):base(text){
             StartToken = StartToken;
             EndToken = endToken;
         }

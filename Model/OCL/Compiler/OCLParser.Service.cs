@@ -49,13 +49,14 @@ namespace Exolutio.Model.OCL.Compiler {
             ModelElement element =  Environment.LookupPathName(path);
             if (element is Classifier == false) {
                 // error
+                Errors.AddError(new ErrorItem("Nenalezena trida v ClassifierContextHeader"));
                 return null;
             }
             Classifier contextClassifier = element as Classifier;
 
-            Environment classifierEnv = Environment.CreateFromClassifier(contextClassifier);
-            EnvironmentStack.Push(classifierEnv);
             VariableDeclaration varSelf = new VariableDeclaration(selfName, contextClassifier, null);
+            Environment classifierEnv = Environment.CreateFromClassifier(contextClassifier,varSelf);
+            EnvironmentStack.Push(classifierEnv);
             Environment self = Environment.AddElement(selfName, contextClassifier, varSelf, true);
             EnvironmentStack.Push(self);
 

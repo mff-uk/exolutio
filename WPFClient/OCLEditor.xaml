@@ -4,14 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="374">
+             d:DesignHeight="300" d:DesignWidth="642">
     <DockPanel LastChildFill="True">        
         <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Height="30">
             <Button Content="Create" Click="Create_Click" Margin="3" />
             <Button Content="Remove" Click="Remove_Click" Margin="3" />
             <Label Content="Scripts:" Margin="3" />
             <ComboBox Height="23" Name="cbScripts" Width="136" SelectionChanged="cbScripts_SelectionChanged" Margin="3" />
-            <Button Content="Syntax check" Height="23" Name="button1" Width="84" Click="button1_Click" />
+            <Button Content="Syntax check" Height="23" Name="button1" Width="84" Margin="3" Click="button1_Click" />
+            <Button Content="check" Height="23" Name="button2" Width="75" Margin="3" Click="button2_Click" />
+            <Button Content="AST" Height="23" Name="button3" Width="75" Click="button3_Click" />
         </StackPanel>
         <TextBox Name="textBox1" AcceptsReturn="True" KeyUp="textBox1_KeyUp" />
     </DockPanel>

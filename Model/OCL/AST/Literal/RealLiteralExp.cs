@@ -25,5 +25,9 @@ namespace Exolutio.Model.OCL.AST
             return visitor.Visit(this);
         }
 
+        public override void Accept(IAstVisitor visitor) {
+            visitor.Visit(this);
+        }
+
     }
 }

@@ -15,7 +15,11 @@ namespace Exolutio.Model.OCL.AST
     {
 
 
-        public IfExp(Classifier boolean) : base(boolean) { }
+        public IfExp(Classifier type,OclExpression condition, OclExpression thenExpr,OclExpression elseExpr) : base(type) {
+            this.Condition = condition;
+            this.ThenExpression = thenExpr;
+            this.ElseExpression = elseExpr;
+        }
         /// <summary>
         /// The OclExpression that represents the boolean condition. If this condition evaluates to true,
         /// the result of the if expression is identical to the result of the thenExpression. If this condition
@@ -57,6 +61,10 @@ namespace Exolutio.Model.OCL.AST
 
         public override T Accept<T>(IAstVisitor<T> visitor) {
             return visitor.Visit(this);
+        }
+
+        public override void Accept(IAstVisitor visitor) {
+            visitor.Visit(this);
         }
     }
 }

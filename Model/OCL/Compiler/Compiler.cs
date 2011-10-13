@@ -29,6 +29,8 @@ namespace Exolutio.Model.OCL.Compiler {
             }
         }
 
+
+
         public ClassifierConstraint TestCompiler(string s,TypesTable.TypesTable tt, Environment env) {
             ANTLRStringStream stringStream = new ANTLRStringStream(s);
             OCLLexer lexer = new OCLLexer(stringStream);
@@ -40,6 +42,26 @@ namespace Exolutio.Model.OCL.Compiler {
             parser.EnvironmentStack.Push(env);
            
             return parser.contextDeclaration();
+        }
+
+        public string TestCompiler2(string s, TypesTable.TypesTable tt, Environment env) {
+            ANTLRStringStream stringStream = new ANTLRStringStream(s);
+            OCLLexer lexer = new OCLLexer(stringStream);
+
+            CommonTokenStream tokenStream = new CommonTokenStream(lexer);
+            OCLParser parser = new OCLParser(tokenStream);
+
+            parser.TypesTable = tt;
+            parser.EnvironmentStack.Push(env);
+
+             parser.contextDeclarationList();
+
+             if (parser.Errors.HasError || parser.NumberOfSyntaxErrors >0 ) {
+                 return "Fail";
+             }
+             else {
+                 return "OK";
+             }
         }
     }
 }

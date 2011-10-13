@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// $ANTLR 3.3.1.7705 ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3 2011-09-22 16:41:16
+// $ANTLR 3.3.1.7705 ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3 2011-10-12 22:44:53
 
 // The variable 'variable' is assigned but its value is never used.
 #pragma warning disable 219
@@ -26,62 +26,62 @@ namespace Exolutio.Model.OCL.Compiler
 public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 {
 	public const int EOF=-1;
-	public const int BooleanLiteralExp=4;
-	public const int CALL=5;
-	public const int CALLARGS=6;
-	public const int COLLECTIONLITERAL=7;
-	public const int COLLECTIONTYPE=8;
-	public const int COLLPART=9;
-	public const int COLLTYPE=10;
-	public const int Char=11;
-	public const int DECL=12;
-	public const int EscapeSequence=13;
-	public const int ExponentPart=14;
-	public const int Hex=15;
-	public const int INDEX=16;
-	public const int INFIX=17;
-	public const int ITERATE=18;
-	public const int IntegerLiteralExp=19;
-	public const int InvalidLiteralExp=20;
-	public const int LET=21;
-	public const int LINE_COMMENT=22;
-	public const int MESSAGE=23;
-	public const int NESTED_ML_COMMENT=24;
-	public const int NameChar=25;
-	public const int NameStartChar=26;
-	public const int NullLiteralExp=27;
-	public const int Num=28;
-	public const int PATH=29;
-	public const int PRIMITIVELITERAL=30;
-	public const int RealLiteralExp=31;
-	public const int SimpleName=32;
-	public const int StringChar=33;
-	public const int StringLiteralExp=34;
-	public const int TUPLELITERAL=35;
-	public const int TYPE=36;
-	public const int UNARY=37;
-	public const int UnlimitedNaturalLiteralExp=38;
-	public const int VARDECL=39;
-	public const int WS=40;
-	public const int WhiteSpaceChar=41;
-	public const int T__42=42;
-	public const int T__43=43;
-	public const int T__44=44;
-	public const int T__45=45;
-	public const int T__46=46;
-	public const int T__47=47;
-	public const int T__48=48;
-	public const int T__49=49;
-	public const int T__50=50;
-	public const int T__51=51;
-	public const int T__52=52;
-	public const int T__53=53;
-	public const int T__54=54;
-	public const int T__55=55;
-	public const int T__56=56;
-	public const int T__57=57;
-	public const int T__58=58;
-	public const int T__59=59;
+	public const int ACC=4;
+	public const int ARGS=5;
+	public const int BODY=6;
+	public const int CALL=7;
+	public const int CALLARGS=8;
+	public const int CLASSIFIERCONDITION=9;
+	public const int CLASSIFIERHEAD=10;
+	public const int COLLECTIONLITERAL=11;
+	public const int COLLECTIONTYPE=12;
+	public const int COLLPART=13;
+	public const int COLLPARTRANGE=14;
+	public const int COLLTYPE=15;
+	public const int CONDITION=16;
+	public const int Char=17;
+	public const int DECL=18;
+	public const int DEF=19;
+	public const int DERIVATE=20;
+	public const int EscapeSequence=21;
+	public const int ExponentPart=22;
+	public const int Hex=23;
+	public const int IF=24;
+	public const int INDEX=25;
+	public const int INFIX=26;
+	public const int INIT=27;
+	public const int INV=28;
+	public const int ITERATE=29;
+	public const int IntegerLiteralExp=30;
+	public const int InvalidLiteralExp=31;
+	public const int LET=32;
+	public const int LINE_COMMENT=33;
+	public const int MESSAGE=34;
+	public const int NESTED_ML_COMMENT=35;
+	public const int NameChar=36;
+	public const int NameStartChar=37;
+	public const int NullLiteralExp=38;
+	public const int Num=39;
+	public const int OPERATION=40;
+	public const int OPERATIONCONDITION=41;
+	public const int OPERATIONHEAD=42;
+	public const int PATH=43;
+	public const int POST=44;
+	public const int PRE=45;
+	public const int PRIMITIVELITERAL=46;
+	public const int PROPERTYCONDITION=47;
+	public const int PROPERTYHEAD=48;
+	public const int RealLiteralExp=49;
+	public const int SimpleName=50;
+	public const int StringChar=51;
+	public const int StringLiteralExp=52;
+	public const int TUPLELITERAL=53;
+	public const int TYPE=54;
+	public const int UNARY=55;
+	public const int UnlimitedNaturalLiteralExp=56;
+	public const int VARDECL=57;
+	public const int WS=58;
+	public const int WhiteSpaceChar=59;
 	public const int T__60=60;
 	public const int T__61=61;
 	public const int T__62=62;
@@ -127,6 +127,26 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 	public const int T__102=102;
 	public const int T__103=103;
 	public const int T__104=104;
+	public const int T__105=105;
+	public const int T__106=106;
+	public const int T__107=107;
+	public const int T__108=108;
+	public const int T__109=109;
+	public const int T__110=110;
+	public const int T__111=111;
+	public const int T__112=112;
+	public const int T__113=113;
+	public const int T__114=114;
+	public const int T__115=115;
+	public const int T__116=116;
+	public const int T__117=117;
+	public const int T__118=118;
+	public const int T__119=119;
+	public const int T__120=120;
+	public const int T__121=121;
+	public const int T__122=122;
+	public const int T__123=123;
+	public const int T__124=124;
 
     // delegates
     // delegators
@@ -155,19 +175,19 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 	partial void EnterRule(string ruleName, int ruleIndex);
 	partial void LeaveRule(string ruleName, int ruleIndex);
 
-	partial void EnterRule_T__42();
-	partial void LeaveRule_T__42();
+	partial void EnterRule_T__60();
+	partial void LeaveRule_T__60();
 
-	// $ANTLR start "T__42"
-	[GrammarRule("T__42")]
-	private void mT__42()
+	// $ANTLR start "T__60"
+	[GrammarRule("T__60")]
+	private void mT__60()
 	{
-		EnterRule_T__42();
-		EnterRule("T__42", 1);
-		TraceIn("T__42", 1);
+		EnterRule_T__60();
+		EnterRule("T__60", 1);
+		TraceIn("T__60", 1);
 		try
 		{
-			int _type = T__42;
+			int _type = T__60;
 			int _channel = DefaultTokenChannel;
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:10:7: ( '(' )
 			DebugEnterAlt(1);
@@ -183,26 +203,26 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("T__42", 1);
-			LeaveRule("T__42", 1);
-			LeaveRule_T__42();
+			TraceOut("T__60", 1);
+			LeaveRule("T__60", 1);
+			LeaveRule_T__60();
 		}
 	}
-	// $ANTLR end "T__42"
+	// $ANTLR end "T__60"
 
-	partial void EnterRule_T__43();
-	partial void LeaveRule_T__43();
+	partial void EnterRule_T__61();
+	partial void LeaveRule_T__61();
 
-	// $ANTLR start "T__43"
-	[GrammarRule("T__43")]
-	private void mT__43()
+	// $ANTLR start "T__61"
+	[GrammarRule("T__61")]
+	private void mT__61()
 	{
-		EnterRule_T__43();
-		EnterRule("T__43", 2);
-		TraceIn("T__43", 2);
+		EnterRule_T__61();
+		EnterRule("T__61", 2);
+		TraceIn("T__61", 2);
 		try
 		{
-			int _type = T__43;
+			int _type = T__61;
 			int _channel = DefaultTokenChannel;
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:11:7: ( ')' )
 			DebugEnterAlt(1);
@@ -218,26 +238,26 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("T__43", 2);
-			LeaveRule("T__43", 2);
-			LeaveRule_T__43();
+			TraceOut("T__61", 2);
+			LeaveRule("T__61", 2);
+			LeaveRule_T__61();
 		}
 	}
-	// $ANTLR end "T__43"
+	// $ANTLR end "T__61"
 
-	partial void EnterRule_T__44();
-	partial void LeaveRule_T__44();
+	partial void EnterRule_T__62();
+	partial void LeaveRule_T__62();
 
-	// $ANTLR start "T__44"
-	[GrammarRule("T__44")]
-	private void mT__44()
+	// $ANTLR start "T__62"
+	[GrammarRule("T__62")]
+	private void mT__62()
 	{
-		EnterRule_T__44();
-		EnterRule("T__44", 3);
-		TraceIn("T__44", 3);
+		EnterRule_T__62();
+		EnterRule("T__62", 3);
+		TraceIn("T__62", 3);
 		try
 		{
-			int _type = T__44;
+			int _type = T__62;
 			int _channel = DefaultTokenChannel;
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:12:7: ( '+' )
 			DebugEnterAlt(1);
@@ -253,26 +273,26 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("T__44", 3);
-			LeaveRule("T__44", 3);
-			LeaveRule_T__44();
+			TraceOut("T__62", 3);
+			LeaveRule("T__62", 3);
+			LeaveRule_T__62();
 		}
 	}
-	// $ANTLR end "T__44"
+	// $ANTLR end "T__62"
 
-	partial void EnterRule_T__45();
-	partial void LeaveRule_T__45();
+	partial void EnterRule_T__63();
+	partial void LeaveRule_T__63();
 
-	// $ANTLR start "T__45"
-	[GrammarRule("T__45")]
-	private void mT__45()
+	// $ANTLR start "T__63"
+	[GrammarRule("T__63")]
+	private void mT__63()
 	{
-		EnterRule_T__45();
-		EnterRule("T__45", 4);
-		TraceIn("T__45", 4);
+		EnterRule_T__63();
+		EnterRule("T__63", 4);
+		TraceIn("T__63", 4);
 		try
 		{
-			int _type = T__45;
+			int _type = T__63;
 			int _channel = DefaultTokenChannel;
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:13:7: ( ',' )
 			DebugEnterAlt(1);
@@ -288,26 +308,26 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("T__45", 4);
-			LeaveRule("T__45", 4);
-			LeaveRule_T__45();
+			TraceOut("T__63", 4);
+			LeaveRule("T__63", 4);
+			LeaveRule_T__63();
 		}
 	}
-	// $ANTLR end "T__45"
+	// $ANTLR end "T__63"
 
-	partial void EnterRule_T__46();
-	partial void LeaveRule_T__46();
+	partial void EnterRule_T__64();
+	partial void LeaveRule_T__64();
 
-	// $ANTLR start "T__46"
-	[GrammarRule("T__46")]
-	private void mT__46()
+	// $ANTLR start "T__64"
+	[GrammarRule("T__64")]
+	private void mT__64()
 	{
-		EnterRule_T__46();
-		EnterRule("T__46", 5);
-		TraceIn("T__46", 5);
+		EnterRule_T__64();
+		EnterRule("T__64", 5);
+		TraceIn("T__64", 5);
 		try
 		{
-			int _type = T__46;
+			int _type = T__64;
 			int _channel = DefaultTokenChannel;
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:14:7: ( '-' )
 			DebugEnterAlt(1);
@@ -323,26 +343,26 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("T__46", 5);
-			LeaveRule("T__46", 5);
-			LeaveRule_T__46();
+			TraceOut("T__64", 5);
+			LeaveRule("T__64", 5);
+			LeaveRule_T__64();
 		}
 	}
-	// $ANTLR end "T__46"
+	// $ANTLR end "T__64"
 
-	partial void EnterRule_T__47();
-	partial void LeaveRule_T__47();
+	partial void EnterRule_T__65();
+	partial void LeaveRule_T__65();
 
-	// $ANTLR start "T__47"
-	[GrammarRule("T__47")]
-	private void mT__47()
+	// $ANTLR start "T__65"
+	[GrammarRule("T__65")]
+	private void mT__65()
 	{
-		EnterRule_T__47();
-		EnterRule("T__47", 6);
-		TraceIn("T__47", 6);
+		EnterRule_T__65();
+		EnterRule("T__65", 6);
+		TraceIn("T__65", 6);
 		try
 		{
-			int _type = T__47;
+			int _type = T__65;
 			int _channel = DefaultTokenChannel;
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:15:7: ( '->' )
 			DebugEnterAlt(1);
@@ -359,26 +379,26 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("T__47", 6);
-			LeaveRule("T__47", 6);
-			LeaveRule_T__47();
+			TraceOut("T__65", 6);
+			LeaveRule("T__65", 6);
+			LeaveRule_T__65();
 		}
 	}
-	// $ANTLR end "T__47"
+	// $ANTLR end "T__65"
 
-	partial void EnterRule_T__48();
-	partial void LeaveRule_T__48();
+	partial void EnterRule_T__66();
+	partial void LeaveRule_T__66();
 
-	// $ANTLR start "T__48"
-	[GrammarRule("T__48")]
-	private void mT__48()
+	// $ANTLR start "T__66"
+	[GrammarRule("T__66")]
+	private void mT__66()
 	{
-		EnterRule_T__48();
-		EnterRule("T__48", 7);
-		TraceIn("T__48", 7);
+		EnterRule_T__66();
+		EnterRule("T__66", 7);
+		TraceIn("T__66", 7);
 		try
 		{
-			int _type = T__48;
+			int _type = T__66;
 			int _channel = DefaultTokenChannel;
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:16:7: ( '.' )
 			DebugEnterAlt(1);
@@ -394,26 +414,26 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("T__48", 7);
-			LeaveRule("T__48", 7);
-			LeaveRule_T__48();
+			TraceOut("T__66", 7);
+			LeaveRule("T__66", 7);
+			LeaveRule_T__66();
 		}
 	}
-	// $ANTLR end "T__48"
+	// $ANTLR end "T__66"
 
-	partial void EnterRule_T__49();
-	partial void LeaveRule_T__49();
+	partial void EnterRule_T__67();
+	partial void LeaveRule_T__67();
 
-	// $ANTLR start "T__49"
-	[GrammarRule("T__49")]
-	private void mT__49()
+	// $ANTLR start "T__67"
+	[GrammarRule("T__67")]
+	private void mT__67()
 	{
-		EnterRule_T__49();
-		EnterRule("T__49", 8);
-		TraceIn("T__49", 8);
+		EnterRule_T__67();
+		EnterRule("T__67", 8);
+		TraceIn("T__67", 8);
 		try
 		{
-			int _type = T__49;
+			int _type = T__67;
 			int _channel = DefaultTokenChannel;
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:17:7: ( '..' )
 			DebugEnterAlt(1);
@@ -430,26 +450,26 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("T__49", 8);
-			LeaveRule("T__49", 8);
-			LeaveRule_T__49();
+			TraceOut("T__67", 8);
+			LeaveRule("T__67", 8);
+			LeaveRule_T__67();
 		}
 	}
-	// $ANTLR end "T__49"
+	// $ANTLR end "T__67"
 
-	partial void EnterRule_T__50();
-	partial void LeaveRule_T__50();
+	partial void EnterRule_T__68();
+	partial void LeaveRule_T__68();
 
-	// $ANTLR start "T__50"
-	[GrammarRule("T__50")]
-	private void mT__50()
+	// $ANTLR start "T__68"
+	[GrammarRule("T__68")]
+	private void mT__68()
 	{
-		EnterRule_T__50();
-		EnterRule("T__50", 9);
-		TraceIn("T__50", 9);
+		EnterRule_T__68();
+		EnterRule("T__68", 9);
+		TraceIn("T__68", 9);
 		try
 		{
-			int _type = T__50;
+			int _type = T__68;
 			int _channel = DefaultTokenChannel;
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:18:7: ( '/' )
 			DebugEnterAlt(1);
@@ -465,26 +485,26 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("T__50", 9);
-			LeaveRule("T__50", 9);
-			LeaveRule_T__50();
+			TraceOut("T__68", 9);
+			LeaveRule("T__68", 9);
+			LeaveRule_T__68();
 		}
 	}
-	// $ANTLR end "T__50"
+	// $ANTLR end "T__68"
 
-	partial void EnterRule_T__51();
-	partial void LeaveRule_T__51();
+	partial void EnterRule_T__69();
+	partial void LeaveRule_T__69();
 
-	// $ANTLR start "T__51"
-	[GrammarRule("T__51")]
-	private void mT__51()
+	// $ANTLR start "T__69"
+	[GrammarRule("T__69")]
+	private void mT__69()
 	{
-		EnterRule_T__51();
-		EnterRule("T__51", 10);
-		TraceIn("T__51", 10);
+		EnterRule_T__69();
+		EnterRule("T__69", 10);
+		TraceIn("T__69", 10);
 		try
 		{
-			int _type = T__51;
+			int _type = T__69;
 			int _channel = DefaultTokenChannel;
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:19:7: ( ':' )
 			DebugEnterAlt(1);
@@ -500,26 +520,26 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("T__51", 10);
-			LeaveRule("T__51", 10);
-			LeaveRule_T__51();
+			TraceOut("T__69", 10);
+			LeaveRule("T__69", 10);
+			LeaveRule_T__69();
 		}
 	}
-	// $ANTLR end "T__51"
+	// $ANTLR end "T__69"
 
-	partial void EnterRule_T__52();
-	partial void LeaveRule_T__52();
+	partial void EnterRule_T__70();
+	partial void LeaveRule_T__70();
 
-	// $ANTLR start "T__52"
-	[GrammarRule("T__52")]
-	private void mT__52()
+	// $ANTLR start "T__70"
+	[GrammarRule("T__70")]
+	private void mT__70()
 	{
-		EnterRule_T__52();
-		EnterRule("T__52", 11);
-		TraceIn("T__52", 11);
+		EnterRule_T__70();
+		EnterRule("T__70", 11);
+		TraceIn("T__70", 11);
 		try
 		{
-			int _type = T__52;
+			int _type = T__70;
 			int _channel = DefaultTokenChannel;
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:20:7: ( '::' )
 			DebugEnterAlt(1);
@@ -536,26 +556,26 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("T__52", 11);
-			LeaveRule("T__52", 11);
-			LeaveRule_T__52();
+			TraceOut("T__70", 11);
+			LeaveRule("T__70", 11);
+			LeaveRule_T__70();
 		}
 	}
-	// $ANTLR end "T__52"
+	// $ANTLR end "T__70"
 
-	partial void EnterRule_T__53();
-	partial void LeaveRule_T__53();
+	partial void EnterRule_T__71();
+	partial void LeaveRule_T__71();
 
-	// $ANTLR start "T__53"
-	[GrammarRule("T__53")]
-	private void mT__53()
+	// $ANTLR start "T__71"
+	[GrammarRule("T__71")]
+	private void mT__71()
 	{
-		EnterRule_T__53();
-		EnterRule("T__53", 12);
-		TraceIn("T__53", 12);
+		EnterRule_T__71();
+		EnterRule("T__71", 12);
+		TraceIn("T__71", 12);
 		try
 		{
-			int _type = T__53;
+			int _type = T__71;
 			int _channel = DefaultTokenChannel;
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:21:7: ( ';' )
 			DebugEnterAlt(1);
@@ -571,26 +591,26 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("T__53", 12);
-			LeaveRule("T__53", 12);
-			LeaveRule_T__53();
+			TraceOut("T__71", 12);
+			LeaveRule("T__71", 12);
+			LeaveRule_T__71();
 		}
 	}
-	// $ANTLR end "T__53"
+	// $ANTLR end "T__71"
 
-	partial void EnterRule_T__54();
-	partial void LeaveRule_T__54();
+	partial void EnterRule_T__72();
+	partial void LeaveRule_T__72();
 
-	// $ANTLR start "T__54"
-	[GrammarRule("T__54")]
-	private void mT__54()
+	// $ANTLR start "T__72"
+	[GrammarRule("T__72")]
+	private void mT__72()
 	{
-		EnterRule_T__54();
-		EnterRule("T__54", 13);
-		TraceIn("T__54", 13);
+		EnterRule_T__72();
+		EnterRule("T__72", 13);
+		TraceIn("T__72", 13);
 		try
 		{
-			int _type = T__54;
+			int _type = T__72;
 			int _channel = DefaultTokenChannel;
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:22:7: ( '<' )
 			DebugEnterAlt(1);
@@ -606,26 +626,26 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("T__54", 13);
-			LeaveRule("T__54", 13);
-			LeaveRule_T__54();
+			TraceOut("T__72", 13);
+			LeaveRule("T__72", 13);
+			LeaveRule_T__72();
 		}
 	}
-	// $ANTLR end "T__54"
+	// $ANTLR end "T__72"
 
-	partial void EnterRule_T__55();
-	partial void LeaveRule_T__55();
+	partial void EnterRule_T__73();
+	partial void LeaveRule_T__73();
 
-	// $ANTLR start "T__55"
-	[GrammarRule("T__55")]
-	private void mT__55()
+	// $ANTLR start "T__73"
+	[GrammarRule("T__73")]
+	private void mT__73()
 	{
-		EnterRule_T__55();
-		EnterRule("T__55", 14);
-		TraceIn("T__55", 14);
+		EnterRule_T__73();
+		EnterRule("T__73", 14);
+		TraceIn("T__73", 14);
 		try
 		{
-			int _type = T__55;
+			int _type = T__73;
 			int _channel = DefaultTokenChannel;
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:23:7: ( '<=' )
 			DebugEnterAlt(1);
@@ -642,26 +662,26 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("T__55", 14);
-			LeaveRule("T__55", 14);
-			LeaveRule_T__55();
+			TraceOut("T__73", 14);
+			LeaveRule("T__73", 14);
+			LeaveRule_T__73();
 		}
 	}
-	// $ANTLR end "T__55"
+	// $ANTLR end "T__73"
 
-	partial void EnterRule_T__56();
-	partial void LeaveRule_T__56();
+	partial void EnterRule_T__74();
+	partial void LeaveRule_T__74();
 
-	// $ANTLR start "T__56"
-	[GrammarRule("T__56")]
-	private void mT__56()
+	// $ANTLR start "T__74"
+	[GrammarRule("T__74")]
+	private void mT__74()
 	{
-		EnterRule_T__56();
-		EnterRule("T__56", 15);
-		TraceIn("T__56", 15);
+		EnterRule_T__74();
+		EnterRule("T__74", 15);
+		TraceIn("T__74", 15);
 		try
 		{
-			int _type = T__56;
+			int _type = T__74;
 			int _channel = DefaultTokenChannel;
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:24:7: ( '<>' )
 			DebugEnterAlt(1);
@@ -678,26 +698,26 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("T__56", 15);
-			LeaveRule("T__56", 15);
-			LeaveRule_T__56();
+			TraceOut("T__74", 15);
+			LeaveRule("T__74", 15);
+			LeaveRule_T__74();
 		}
 	}
-	// $ANTLR end "T__56"
+	// $ANTLR end "T__74"
 
-	partial void EnterRule_T__57();
-	partial void LeaveRule_T__57();
+	partial void EnterRule_T__75();
+	partial void LeaveRule_T__75();
 
-	// $ANTLR start "T__57"
-	[GrammarRule("T__57")]
-	private void mT__57()
+	// $ANTLR start "T__75"
+	[GrammarRule("T__75")]
+	private void mT__75()
 	{
-		EnterRule_T__57();
-		EnterRule("T__57", 16);
-		TraceIn("T__57", 16);
+		EnterRule_T__75();
+		EnterRule("T__75", 16);
+		TraceIn("T__75", 16);
 		try
 		{
-			int _type = T__57;
+			int _type = T__75;
 			int _channel = DefaultTokenChannel;
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:25:7: ( '=' )
 			DebugEnterAlt(1);
@@ -713,26 +733,26 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("T__57", 16);
-			LeaveRule("T__57", 16);
-			LeaveRule_T__57();
+			TraceOut("T__75", 16);
+			LeaveRule("T__75", 16);
+			LeaveRule_T__75();
 		}
 	}
-	// $ANTLR end "T__57"
+	// $ANTLR end "T__75"
 
-	partial void EnterRule_T__58();
-	partial void LeaveRule_T__58();
+	partial void EnterRule_T__76();
+	partial void LeaveRule_T__76();
 
-	// $ANTLR start "T__58"
-	[GrammarRule("T__58")]
-	private void mT__58()
+	// $ANTLR start "T__76"
+	[GrammarRule("T__76")]
+	private void mT__76()
 	{
-		EnterRule_T__58();
-		EnterRule("T__58", 17);
-		TraceIn("T__58", 17);
+		EnterRule_T__76();
+		EnterRule("T__76", 17);
+		TraceIn("T__76", 17);
 		try
 		{
-			int _type = T__58;
+			int _type = T__76;
 			int _channel = DefaultTokenChannel;
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:26:7: ( '>' )
 			DebugEnterAlt(1);
@@ -748,26 +768,26 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("T__58", 17);
-			LeaveRule("T__58", 17);
-			LeaveRule_T__58();
+			TraceOut("T__76", 17);
+			LeaveRule("T__76", 17);
+			LeaveRule_T__76();
 		}
 	}
-	// $ANTLR end "T__58"
+	// $ANTLR end "T__76"
 
-	partial void EnterRule_T__59();
-	partial void LeaveRule_T__59();
+	partial void EnterRule_T__77();
+	partial void LeaveRule_T__77();
 
-	// $ANTLR start "T__59"
-	[GrammarRule("T__59")]
-	private void mT__59()
+	// $ANTLR start "T__77"
+	[GrammarRule("T__77")]
+	private void mT__77()
 	{
-		EnterRule_T__59();
-		EnterRule("T__59", 18);
-		TraceIn("T__59", 18);
+		EnterRule_T__77();
+		EnterRule("T__77", 18);
+		TraceIn("T__77", 18);
 		try
 		{
-			int _type = T__59;
+			int _type = T__77;
 			int _channel = DefaultTokenChannel;
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:27:7: ( '>=' )
 			DebugEnterAlt(1);
@@ -784,26 +804,26 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("T__59", 18);
-			LeaveRule("T__59", 18);
-			LeaveRule_T__59();
+			TraceOut("T__77", 18);
+			LeaveRule("T__77", 18);
+			LeaveRule_T__77();
 		}
 	}
-	// $ANTLR end "T__59"
+	// $ANTLR end "T__77"
 
-	partial void EnterRule_T__60();
-	partial void LeaveRule_T__60();
+	partial void EnterRule_T__78();
+	partial void LeaveRule_T__78();
 
-	// $ANTLR start "T__60"
-	[GrammarRule("T__60")]
-	private void mT__60()
+	// $ANTLR start "T__78"
+	[GrammarRule("T__78")]
+	private void mT__78()
 	{
-		EnterRule_T__60();
-		EnterRule("T__60", 19);
-		TraceIn("T__60", 19);
+		EnterRule_T__78();
+		EnterRule("T__78", 19);
+		TraceIn("T__78", 19);
 		try
 		{
-			int _type = T__60;
+			int _type = T__78;
 			int _channel = DefaultTokenChannel;
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:28:7: ( '?' )
 			DebugEnterAlt(1);
@@ -819,26 +839,26 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("T__60", 19);
-			LeaveRule("T__60", 19);
-			LeaveRule_T__60();
+			TraceOut("T__78", 19);
+			LeaveRule("T__78", 19);
+			LeaveRule_T__78();
 		}
 	}
-	// $ANTLR end "T__60"
+	// $ANTLR end "T__78"
 
-	partial void EnterRule_T__61();
-	partial void LeaveRule_T__61();
+	partial void EnterRule_T__79();
+	partial void LeaveRule_T__79();
 
-	// $ANTLR start "T__61"
-	[GrammarRule("T__61")]
-	private void mT__61()
+	// $ANTLR start "T__79"
+	[GrammarRule("T__79")]
+	private void mT__79()
 	{
-		EnterRule_T__61();
-		EnterRule("T__61", 20);
-		TraceIn("T__61", 20);
+		EnterRule_T__79();
+		EnterRule("T__79", 20);
+		TraceIn("T__79", 20);
 		try
 		{
-			int _type = T__61;
+			int _type = T__79;
 			int _channel = DefaultTokenChannel;
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:29:7: ( '@' )
 			DebugEnterAlt(1);
@@ -854,26 +874,26 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("T__61", 20);
-			LeaveRule("T__61", 20);
-			LeaveRule_T__61();
+			TraceOut("T__79", 20);
+			LeaveRule("T__79", 20);
+			LeaveRule_T__79();
 		}
 	}
-	// $ANTLR end "T__61"
+	// $ANTLR end "T__79"
 
-	partial void EnterRule_T__62();
-	partial void LeaveRule_T__62();
+	partial void EnterRule_T__80();
+	partial void LeaveRule_T__80();
 
-	// $ANTLR start "T__62"
-	[GrammarRule("T__62")]
-	private void mT__62()
+	// $ANTLR start "T__80"
+	[GrammarRule("T__80")]
+	private void mT__80()
 	{
-		EnterRule_T__62();
-		EnterRule("T__62", 21);
-		TraceIn("T__62", 21);
+		EnterRule_T__80();
+		EnterRule("T__80", 21);
+		TraceIn("T__80", 21);
 		try
 		{
-			int _type = T__62;
+			int _type = T__80;
 			int _channel = DefaultTokenChannel;
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:30:7: ( 'Bag' )
 			DebugEnterAlt(1);
@@ -890,26 +910,26 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("T__62", 21);
-			LeaveRule("T__62", 21);
-			LeaveRule_T__62();
+			TraceOut("T__80", 21);
+			LeaveRule("T__80", 21);
+			LeaveRule_T__80();
 		}
 	}
-	// $ANTLR end "T__62"
+	// $ANTLR end "T__80"
 
-	partial void EnterRule_T__63();
-	partial void LeaveRule_T__63();
+	partial void EnterRule_T__81();
+	partial void LeaveRule_T__81();
 
-	// $ANTLR start "T__63"
-	[GrammarRule("T__63")]
-	private void mT__63()
+	// $ANTLR start "T__81"
+	[GrammarRule("T__81")]
+	private void mT__81()
 	{
-		EnterRule_T__63();
-		EnterRule("T__63", 22);
-		TraceIn("T__63", 22);
+		EnterRule_T__81();
+		EnterRule("T__81", 22);
+		TraceIn("T__81", 22);
 		try
 		{
-			int _type = T__63;
+			int _type = T__81;
 			int _channel = DefaultTokenChannel;
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:31:7: ( 'Boolean' )
 			DebugEnterAlt(1);
@@ -926,26 +946,26 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("T__63", 22);
-			LeaveRule("T__63", 22);
-			LeaveRule_T__63();
+			TraceOut("T__81", 22);
+			LeaveRule("T__81", 22);
+			LeaveRule_T__81();
 		}
 	}
-	// $ANTLR end "T__63"
+	// $ANTLR end "T__81"
 
-	partial void EnterRule_T__64();
-	partial void LeaveRule_T__64();
+	partial void EnterRule_T__82();
+	partial void LeaveRule_T__82();
 
-	// $ANTLR start "T__64"
-	[GrammarRule("T__64")]
-	private void mT__64()
+	// $ANTLR start "T__82"
+	[GrammarRule("T__82")]
+	private void mT__82()
 	{
-		EnterRule_T__64();
-		EnterRule("T__64", 23);
-		TraceIn("T__64", 23);
+		EnterRule_T__82();
+		EnterRule("T__82", 23);
+		TraceIn("T__82", 23);
 		try
 		{
-			int _type = T__64;
+			int _type = T__82;
 			int _channel = DefaultTokenChannel;
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:32:7: ( 'Collection' )
 			DebugEnterAlt(1);
@@ -962,26 +982,26 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("T__64", 23);
-			LeaveRule("T__64", 23);
-			LeaveRule_T__64();
+			TraceOut("T__82", 23);
+			LeaveRule("T__82", 23);
+			LeaveRule_T__82();
 		}
 	}
-	// $ANTLR end "T__64"
+	// $ANTLR end "T__82"
 
-	partial void EnterRule_T__65();
-	partial void LeaveRule_T__65();
+	partial void EnterRule_T__83();
+	partial void LeaveRule_T__83();
 
-	// $ANTLR start "T__65"
-	[GrammarRule("T__65")]
-	private void mT__65()
+	// $ANTLR start "T__83"
+	[GrammarRule("T__83")]
+	private void mT__83()
 	{
-		EnterRule_T__65();
-		EnterRule("T__65", 24);
-		TraceIn("T__65", 24);
+		EnterRule_T__83();
+		EnterRule("T__83", 24);
+		TraceIn("T__83", 24);
 		try
 		{
-			int _type = T__65;
+			int _type = T__83;
 			int _channel = DefaultTokenChannel;
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:33:7: ( 'Integer' )
 			DebugEnterAlt(1);
@@ -998,26 +1018,26 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("T__65", 24);
-			LeaveRule("T__65", 24);
-			LeaveRule_T__65();
+			TraceOut("T__83", 24);
+			LeaveRule("T__83", 24);
+			LeaveRule_T__83();
 		}
 	}
-	// $ANTLR end "T__65"
+	// $ANTLR end "T__83"
 
-	partial void EnterRule_T__66();
-	partial void LeaveRule_T__66();
+	partial void EnterRule_T__84();
+	partial void LeaveRule_T__84();
 
-	// $ANTLR start "T__66"
-	[GrammarRule("T__66")]
-	private void mT__66()
+	// $ANTLR start "T__84"
+	[GrammarRule("T__84")]
+	private void mT__84()
 	{
-		EnterRule_T__66();
-		EnterRule("T__66", 25);
-		TraceIn("T__66", 25);
+		EnterRule_T__84();
+		EnterRule("T__84", 25);
+		TraceIn("T__84", 25);
 		try
 		{
-			int _type = T__66;
+			int _type = T__84;
 			int _channel = DefaultTokenChannel;
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:34:7: ( 'OclAny' )
 			DebugEnterAlt(1);
@@ -1034,26 +1054,26 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("T__66", 25);
-			LeaveRule("T__66", 25);
-			LeaveRule_T__66();
+			TraceOut("T__84", 25);
+			LeaveRule("T__84", 25);
+			LeaveRule_T__84();
 		}
 	}
-	// $ANTLR end "T__66"
+	// $ANTLR end "T__84"
 
-	partial void EnterRule_T__67();
-	partial void LeaveRule_T__67();
+	partial void EnterRule_T__85();
+	partial void LeaveRule_T__85();
 
-	// $ANTLR start "T__67"
-	[GrammarRule("T__67")]
-	private void mT__67()
+	// $ANTLR start "T__85"
+	[GrammarRule("T__85")]
+	private void mT__85()
 	{
-		EnterRule_T__67();
-		EnterRule("T__67", 26);
-		TraceIn("T__67", 26);
+		EnterRule_T__85();
+		EnterRule("T__85", 26);
+		TraceIn("T__85", 26);
 		try
 		{
-			int _type = T__67;
+			int _type = T__85;
 			int _channel = DefaultTokenChannel;
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:35:7: ( 'OclInvalid' )
 			DebugEnterAlt(1);
@@ -1070,26 +1090,26 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("T__67", 26);
-			LeaveRule("T__67", 26);
-			LeaveRule_T__67();
+			TraceOut("T__85", 26);
+			LeaveRule("T__85", 26);
+			LeaveRule_T__85();
 		}
 	}
-	// $ANTLR end "T__67"
+	// $ANTLR end "T__85"
 
-	partial void EnterRule_T__68();
-	partial void LeaveRule_T__68();
+	partial void EnterRule_T__86();
+	partial void LeaveRule_T__86();
 
-	// $ANTLR start "T__68"
-	[GrammarRule("T__68")]
-	private void mT__68()
+	// $ANTLR start "T__86"
+	[GrammarRule("T__86")]
+	private void mT__86()
 	{
-		EnterRule_T__68();
-		EnterRule("T__68", 27);
-		TraceIn("T__68", 27);
+		EnterRule_T__86();
+		EnterRule("T__86", 27);
+		TraceIn("T__86", 27);
 		try
 		{
-			int _type = T__68;
+			int _type = T__86;
 			int _channel = DefaultTokenChannel;
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:36:7: ( 'OclMessage' )
 			DebugEnterAlt(1);
@@ -1106,26 +1126,26 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("T__68", 27);
-			LeaveRule("T__68", 27);
-			LeaveRule_T__68();
+			TraceOut("T__86", 27);
+			LeaveRule("T__86", 27);
+			LeaveRule_T__86();
 		}
 	}
-	// $ANTLR end "T__68"
+	// $ANTLR end "T__86"
 
-	partial void EnterRule_T__69();
-	partial void LeaveRule_T__69();
+	partial void EnterRule_T__87();
+	partial void LeaveRule_T__87();
 
-	// $ANTLR start "T__69"
-	[GrammarRule("T__69")]
-	private void mT__69()
+	// $ANTLR start "T__87"
+	[GrammarRule("T__87")]
+	private void mT__87()
 	{
-		EnterRule_T__69();
-		EnterRule("T__69", 28);
-		TraceIn("T__69", 28);
+		EnterRule_T__87();
+		EnterRule("T__87", 28);
+		TraceIn("T__87", 28);
 		try
 		{
-			int _type = T__69;
+			int _type = T__87;
 			int _channel = DefaultTokenChannel;
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:37:7: ( 'OclVoid' )
 			DebugEnterAlt(1);
@@ -1142,26 +1162,26 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("T__69", 28);
-			LeaveRule("T__69", 28);
-			LeaveRule_T__69();
+			TraceOut("T__87", 28);
+			LeaveRule("T__87", 28);
+			LeaveRule_T__87();
 		}
 	}
-	// $ANTLR end "T__69"
+	// $ANTLR end "T__87"
 
-	partial void EnterRule_T__70();
-	partial void LeaveRule_T__70();
+	partial void EnterRule_T__88();
+	partial void LeaveRule_T__88();
 
-	// $ANTLR start "T__70"
-	[GrammarRule("T__70")]
-	private void mT__70()
+	// $ANTLR start "T__88"
+	[GrammarRule("T__88")]
+	private void mT__88()
 	{
-		EnterRule_T__70();
-		EnterRule("T__70", 29);
-		TraceIn("T__70", 29);
+		EnterRule_T__88();
+		EnterRule("T__88", 29);
+		TraceIn("T__88", 29);
 		try
 		{
-			int _type = T__70;
+			int _type = T__88;
 			int _channel = DefaultTokenChannel;
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:38:7: ( 'OrderedSet' )
 			DebugEnterAlt(1);
@@ -1178,26 +1198,26 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("T__70", 29);
-			LeaveRule("T__70", 29);
-			LeaveRule_T__70();
+			TraceOut("T__88", 29);
+			LeaveRule("T__88", 29);
+			LeaveRule_T__88();
 		}
 	}
-	// $ANTLR end "T__70"
+	// $ANTLR end "T__88"
 
-	partial void EnterRule_T__71();
-	partial void LeaveRule_T__71();
+	partial void EnterRule_T__89();
+	partial void LeaveRule_T__89();
 
-	// $ANTLR start "T__71"
-	[GrammarRule("T__71")]
-	private void mT__71()
+	// $ANTLR start "T__89"
+	[GrammarRule("T__89")]
+	private void mT__89()
 	{
-		EnterRule_T__71();
-		EnterRule("T__71", 30);
-		TraceIn("T__71", 30);
+		EnterRule_T__89();
+		EnterRule("T__89", 30);
+		TraceIn("T__89", 30);
 		try
 		{
-			int _type = T__71;
+			int _type = T__89;
 			int _channel = DefaultTokenChannel;
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:39:7: ( 'Real' )
 			DebugEnterAlt(1);
@@ -1214,26 +1234,26 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("T__71", 30);
-			LeaveRule("T__71", 30);
-			LeaveRule_T__71();
+			TraceOut("T__89", 30);
+			LeaveRule("T__89", 30);
+			LeaveRule_T__89();
 		}
 	}
-	// $ANTLR end "T__71"
+	// $ANTLR end "T__89"
 
-	partial void EnterRule_T__72();
-	partial void LeaveRule_T__72();
+	partial void EnterRule_T__90();
+	partial void LeaveRule_T__90();
 
-	// $ANTLR start "T__72"
-	[GrammarRule("T__72")]
-	private void mT__72()
+	// $ANTLR start "T__90"
+	[GrammarRule("T__90")]
+	private void mT__90()
 	{
-		EnterRule_T__72();
-		EnterRule("T__72", 31);
-		TraceIn("T__72", 31);
+		EnterRule_T__90();
+		EnterRule("T__90", 31);
+		TraceIn("T__90", 31);
 		try
 		{
-			int _type = T__72;
+			int _type = T__90;
 			int _channel = DefaultTokenChannel;
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:40:7: ( 'Sequence' )
 			DebugEnterAlt(1);
@@ -1250,26 +1270,26 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("T__72", 31);
-			LeaveRule("T__72", 31);
-			LeaveRule_T__72();
+			TraceOut("T__90", 31);
+			LeaveRule("T__90", 31);
+			LeaveRule_T__90();
 		}
 	}
-	// $ANTLR end "T__72"
+	// $ANTLR end "T__90"
 
-	partial void EnterRule_T__73();
-	partial void LeaveRule_T__73();
+	partial void EnterRule_T__91();
+	partial void LeaveRule_T__91();
 
-	// $ANTLR start "T__73"
-	[GrammarRule("T__73")]
-	private void mT__73()
+	// $ANTLR start "T__91"
+	[GrammarRule("T__91")]
+	private void mT__91()
 	{
-		EnterRule_T__73();
-		EnterRule("T__73", 32);
-		TraceIn("T__73", 32);
+		EnterRule_T__91();
+		EnterRule("T__91", 32);
+		TraceIn("T__91", 32);
 		try
 		{
-			int _type = T__73;
+			int _type = T__91;
 			int _channel = DefaultTokenChannel;
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:41:7: ( 'Set' )
 			DebugEnterAlt(1);
@@ -1286,26 +1306,26 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("T__73", 32);
-			LeaveRule("T__73", 32);
-			LeaveRule_T__73();
+			TraceOut("T__91", 32);
+			LeaveRule("T__91", 32);
+			LeaveRule_T__91();
 		}
 	}
-	// $ANTLR end "T__73"
+	// $ANTLR end "T__91"
 
-	partial void EnterRule_T__74();
-	partial void LeaveRule_T__74();
+	partial void EnterRule_T__92();
+	partial void LeaveRule_T__92();
 
-	// $ANTLR start "T__74"
-	[GrammarRule("T__74")]
-	private void mT__74()
+	// $ANTLR start "T__92"
+	[GrammarRule("T__92")]
+	private void mT__92()
 	{
-		EnterRule_T__74();
-		EnterRule("T__74", 33);
-		TraceIn("T__74", 33);
+		EnterRule_T__92();
+		EnterRule("T__92", 33);
+		TraceIn("T__92", 33);
 		try
 		{
-			int _type = T__74;
+			int _type = T__92;
 			int _channel = DefaultTokenChannel;
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:42:7: ( 'String' )
 			DebugEnterAlt(1);
@@ -1322,26 +1342,26 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("T__74", 33);
-			LeaveRule("T__74", 33);
-			LeaveRule_T__74();
+			TraceOut("T__92", 33);
+			LeaveRule("T__92", 33);
+			LeaveRule_T__92();
 		}
 	}
-	// $ANTLR end "T__74"
+	// $ANTLR end "T__92"
 
-	partial void EnterRule_T__75();
-	partial void LeaveRule_T__75();
+	partial void EnterRule_T__93();
+	partial void LeaveRule_T__93();
 
-	// $ANTLR start "T__75"
-	[GrammarRule("T__75")]
-	private void mT__75()
+	// $ANTLR start "T__93"
+	[GrammarRule("T__93")]
+	private void mT__93()
 	{
-		EnterRule_T__75();
-		EnterRule("T__75", 34);
-		TraceIn("T__75", 34);
+		EnterRule_T__93();
+		EnterRule("T__93", 34);
+		TraceIn("T__93", 34);
 		try
 		{
-			int _type = T__75;
+			int _type = T__93;
 			int _channel = DefaultTokenChannel;
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:43:7: ( 'Tuple' )
 			DebugEnterAlt(1);
@@ -1358,26 +1378,26 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("T__75", 34);
-			LeaveRule("T__75", 34);
-			LeaveRule_T__75();
+			TraceOut("T__93", 34);
+			LeaveRule("T__93", 34);
+			LeaveRule_T__93();
 		}
 	}
-	// $ANTLR end "T__75"
+	// $ANTLR end "T__93"
 
-	partial void EnterRule_T__76();
-	partial void LeaveRule_T__76();
+	partial void EnterRule_T__94();
+	partial void LeaveRule_T__94();
 
-	// $ANTLR start "T__76"
-	[GrammarRule("T__76")]
-	private void mT__76()
+	// $ANTLR start "T__94"
+	[GrammarRule("T__94")]
+	private void mT__94()
 	{
-		EnterRule_T__76();
-		EnterRule("T__76", 35);
-		TraceIn("T__76", 35);
+		EnterRule_T__94();
+		EnterRule("T__94", 35);
+		TraceIn("T__94", 35);
 		try
 		{
-			int _type = T__76;
+			int _type = T__94;
 			int _channel = DefaultTokenChannel;
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:44:7: ( 'UnlimitedNatural' )
 			DebugEnterAlt(1);
@@ -1394,26 +1414,26 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("T__76", 35);
-			LeaveRule("T__76", 35);
-			LeaveRule_T__76();
+			TraceOut("T__94", 35);
+			LeaveRule("T__94", 35);
+			LeaveRule_T__94();
 		}
 	}
-	// $ANTLR end "T__76"
+	// $ANTLR end "T__94"
 
-	partial void EnterRule_T__77();
-	partial void LeaveRule_T__77();
+	partial void EnterRule_T__95();
+	partial void LeaveRule_T__95();
 
-	// $ANTLR start "T__77"
-	[GrammarRule("T__77")]
-	private void mT__77()
+	// $ANTLR start "T__95"
+	[GrammarRule("T__95")]
+	private void mT__95()
 	{
-		EnterRule_T__77();
-		EnterRule("T__77", 36);
-		TraceIn("T__77", 36);
+		EnterRule_T__95();
+		EnterRule("T__95", 36);
+		TraceIn("T__95", 36);
 		try
 		{
-			int _type = T__77;
+			int _type = T__95;
 			int _channel = DefaultTokenChannel;
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:45:7: ( '[' )
 			DebugEnterAlt(1);
@@ -1429,26 +1449,26 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("T__77", 36);
-			LeaveRule("T__77", 36);
-			LeaveRule_T__77();
+			TraceOut("T__95", 36);
+			LeaveRule("T__95", 36);
+			LeaveRule_T__95();
 		}
 	}
-	// $ANTLR end "T__77"
+	// $ANTLR end "T__95"
 
-	partial void EnterRule_T__78();
-	partial void LeaveRule_T__78();
+	partial void EnterRule_T__96();
+	partial void LeaveRule_T__96();
 
-	// $ANTLR start "T__78"
-	[GrammarRule("T__78")]
-	private void mT__78()
+	// $ANTLR start "T__96"
+	[GrammarRule("T__96")]
+	private void mT__96()
 	{
-		EnterRule_T__78();
-		EnterRule("T__78", 37);
-		TraceIn("T__78", 37);
+		EnterRule_T__96();
+		EnterRule("T__96", 37);
+		TraceIn("T__96", 37);
 		try
 		{
-			int _type = T__78;
+			int _type = T__96;
 			int _channel = DefaultTokenChannel;
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:46:7: ( ']' )
 			DebugEnterAlt(1);
@@ -1464,26 +1484,26 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("T__78", 37);
-			LeaveRule("T__78", 37);
-			LeaveRule_T__78();
+			TraceOut("T__96", 37);
+			LeaveRule("T__96", 37);
+			LeaveRule_T__96();
 		}
 	}
-	// $ANTLR end "T__78"
+	// $ANTLR end "T__96"
 
-	partial void EnterRule_T__79();
-	partial void LeaveRule_T__79();
+	partial void EnterRule_T__97();
+	partial void LeaveRule_T__97();
 
-	// $ANTLR start "T__79"
-	[GrammarRule("T__79")]
-	private void mT__79()
+	// $ANTLR start "T__97"
+	[GrammarRule("T__97")]
+	private void mT__97()
 	{
-		EnterRule_T__79();
-		EnterRule("T__79", 38);
-		TraceIn("T__79", 38);
+		EnterRule_T__97();
+		EnterRule("T__97", 38);
+		TraceIn("T__97", 38);
 		try
 		{
-			int _type = T__79;
+			int _type = T__97;
 			int _channel = DefaultTokenChannel;
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:47:7: ( '^' )
 			DebugEnterAlt(1);
@@ -1499,26 +1519,26 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("T__79", 38);
-			LeaveRule("T__79", 38);
-			LeaveRule_T__79();
+			TraceOut("T__97", 38);
+			LeaveRule("T__97", 38);
+			LeaveRule_T__97();
 		}
 	}
-	// $ANTLR end "T__79"
+	// $ANTLR end "T__97"
 
-	partial void EnterRule_T__80();
-	partial void LeaveRule_T__80();
+	partial void EnterRule_T__98();
+	partial void LeaveRule_T__98();
 
-	// $ANTLR start "T__80"
-	[GrammarRule("T__80")]
-	private void mT__80()
+	// $ANTLR start "T__98"
+	[GrammarRule("T__98")]
+	private void mT__98()
 	{
-		EnterRule_T__80();
-		EnterRule("T__80", 39);
-		TraceIn("T__80", 39);
+		EnterRule_T__98();
+		EnterRule("T__98", 39);
+		TraceIn("T__98", 39);
 		try
 		{
-			int _type = T__80;
+			int _type = T__98;
 			int _channel = DefaultTokenChannel;
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:48:7: ( '^^' )
 			DebugEnterAlt(1);
@@ -1535,26 +1555,26 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("T__80", 39);
-			LeaveRule("T__80", 39);
-			LeaveRule_T__80();
+			TraceOut("T__98", 39);
+			LeaveRule("T__98", 39);
+			LeaveRule_T__98();
 		}
 	}
-	// $ANTLR end "T__80"
+	// $ANTLR end "T__98"
 
-	partial void EnterRule_T__81();
-	partial void LeaveRule_T__81();
+	partial void EnterRule_T__99();
+	partial void LeaveRule_T__99();
 
-	// $ANTLR start "T__81"
-	[GrammarRule("T__81")]
-	private void mT__81()
+	// $ANTLR start "T__99"
+	[GrammarRule("T__99")]
+	private void mT__99()
 	{
-		EnterRule_T__81();
-		EnterRule("T__81", 40);
-		TraceIn("T__81", 40);
+		EnterRule_T__99();
+		EnterRule("T__99", 40);
+		TraceIn("T__99", 40);
 		try
 		{
-			int _type = T__81;
+			int _type = T__99;
 			int _channel = DefaultTokenChannel;
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:49:7: ( 'and' )
 			DebugEnterAlt(1);
@@ -1571,656 +1591,8 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("T__81", 40);
-			LeaveRule("T__81", 40);
-			LeaveRule_T__81();
-		}
-	}
-	// $ANTLR end "T__81"
-
-	partial void EnterRule_T__82();
-	partial void LeaveRule_T__82();
-
-	// $ANTLR start "T__82"
-	[GrammarRule("T__82")]
-	private void mT__82()
-	{
-		EnterRule_T__82();
-		EnterRule("T__82", 41);
-		TraceIn("T__82", 41);
-		try
-		{
-			int _type = T__82;
-			int _channel = DefaultTokenChannel;
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:50:7: ( 'body' )
-			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:50:9: 'body'
-			{
-			DebugLocation(50, 9);
-			Match("body"); 
-
-
-			}
-
-			state.type = _type;
-			state.channel = _channel;
-		}
-		finally
-		{
-			TraceOut("T__82", 41);
-			LeaveRule("T__82", 41);
-			LeaveRule_T__82();
-		}
-	}
-	// $ANTLR end "T__82"
-
-	partial void EnterRule_T__83();
-	partial void LeaveRule_T__83();
-
-	// $ANTLR start "T__83"
-	[GrammarRule("T__83")]
-	private void mT__83()
-	{
-		EnterRule_T__83();
-		EnterRule("T__83", 42);
-		TraceIn("T__83", 42);
-		try
-		{
-			int _type = T__83;
-			int _channel = DefaultTokenChannel;
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:51:7: ( 'context' )
-			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:51:9: 'context'
-			{
-			DebugLocation(51, 9);
-			Match("context"); 
-
-
-			}
-
-			state.type = _type;
-			state.channel = _channel;
-		}
-		finally
-		{
-			TraceOut("T__83", 42);
-			LeaveRule("T__83", 42);
-			LeaveRule_T__83();
-		}
-	}
-	// $ANTLR end "T__83"
-
-	partial void EnterRule_T__84();
-	partial void LeaveRule_T__84();
-
-	// $ANTLR start "T__84"
-	[GrammarRule("T__84")]
-	private void mT__84()
-	{
-		EnterRule_T__84();
-		EnterRule("T__84", 43);
-		TraceIn("T__84", 43);
-		try
-		{
-			int _type = T__84;
-			int _channel = DefaultTokenChannel;
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:52:7: ( 'def' )
-			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:52:9: 'def'
-			{
-			DebugLocation(52, 9);
-			Match("def"); 
-
-
-			}
-
-			state.type = _type;
-			state.channel = _channel;
-		}
-		finally
-		{
-			TraceOut("T__84", 43);
-			LeaveRule("T__84", 43);
-			LeaveRule_T__84();
-		}
-	}
-	// $ANTLR end "T__84"
-
-	partial void EnterRule_T__85();
-	partial void LeaveRule_T__85();
-
-	// $ANTLR start "T__85"
-	[GrammarRule("T__85")]
-	private void mT__85()
-	{
-		EnterRule_T__85();
-		EnterRule("T__85", 44);
-		TraceIn("T__85", 44);
-		try
-		{
-			int _type = T__85;
-			int _channel = DefaultTokenChannel;
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:53:7: ( 'derivate' )
-			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:53:9: 'derivate'
-			{
-			DebugLocation(53, 9);
-			Match("derivate"); 
-
-
-			}
-
-			state.type = _type;
-			state.channel = _channel;
-		}
-		finally
-		{
-			TraceOut("T__85", 44);
-			LeaveRule("T__85", 44);
-			LeaveRule_T__85();
-		}
-	}
-	// $ANTLR end "T__85"
-
-	partial void EnterRule_T__86();
-	partial void LeaveRule_T__86();
-
-	// $ANTLR start "T__86"
-	[GrammarRule("T__86")]
-	private void mT__86()
-	{
-		EnterRule_T__86();
-		EnterRule("T__86", 45);
-		TraceIn("T__86", 45);
-		try
-		{
-			int _type = T__86;
-			int _channel = DefaultTokenChannel;
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:54:7: ( 'else' )
-			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:54:9: 'else'
-			{
-			DebugLocation(54, 9);
-			Match("else"); 
-
-
-			}
-
-			state.type = _type;
-			state.channel = _channel;
-		}
-		finally
-		{
-			TraceOut("T__86", 45);
-			LeaveRule("T__86", 45);
-			LeaveRule_T__86();
-		}
-	}
-	// $ANTLR end "T__86"
-
-	partial void EnterRule_T__87();
-	partial void LeaveRule_T__87();
-
-	// $ANTLR start "T__87"
-	[GrammarRule("T__87")]
-	private void mT__87()
-	{
-		EnterRule_T__87();
-		EnterRule("T__87", 46);
-		TraceIn("T__87", 46);
-		try
-		{
-			int _type = T__87;
-			int _channel = DefaultTokenChannel;
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:55:7: ( 'endif' )
-			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:55:9: 'endif'
-			{
-			DebugLocation(55, 9);
-			Match("endif"); 
-
-
-			}
-
-			state.type = _type;
-			state.channel = _channel;
-		}
-		finally
-		{
-			TraceOut("T__87", 46);
-			LeaveRule("T__87", 46);
-			LeaveRule_T__87();
-		}
-	}
-	// $ANTLR end "T__87"
-
-	partial void EnterRule_T__88();
-	partial void LeaveRule_T__88();
-
-	// $ANTLR start "T__88"
-	[GrammarRule("T__88")]
-	private void mT__88()
-	{
-		EnterRule_T__88();
-		EnterRule("T__88", 47);
-		TraceIn("T__88", 47);
-		try
-		{
-			int _type = T__88;
-			int _channel = DefaultTokenChannel;
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:56:7: ( 'if' )
-			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:56:9: 'if'
-			{
-			DebugLocation(56, 9);
-			Match("if"); 
-
-
-			}
-
-			state.type = _type;
-			state.channel = _channel;
-		}
-		finally
-		{
-			TraceOut("T__88", 47);
-			LeaveRule("T__88", 47);
-			LeaveRule_T__88();
-		}
-	}
-	// $ANTLR end "T__88"
-
-	partial void EnterRule_T__89();
-	partial void LeaveRule_T__89();
-
-	// $ANTLR start "T__89"
-	[GrammarRule("T__89")]
-	private void mT__89()
-	{
-		EnterRule_T__89();
-		EnterRule("T__89", 48);
-		TraceIn("T__89", 48);
-		try
-		{
-			int _type = T__89;
-			int _channel = DefaultTokenChannel;
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:57:7: ( 'implies' )
-			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:57:9: 'implies'
-			{
-			DebugLocation(57, 9);
-			Match("implies"); 
-
-
-			}
-
-			state.type = _type;
-			state.channel = _channel;
-		}
-		finally
-		{
-			TraceOut("T__89", 48);
-			LeaveRule("T__89", 48);
-			LeaveRule_T__89();
-		}
-	}
-	// $ANTLR end "T__89"
-
-	partial void EnterRule_T__90();
-	partial void LeaveRule_T__90();
-
-	// $ANTLR start "T__90"
-	[GrammarRule("T__90")]
-	private void mT__90()
-	{
-		EnterRule_T__90();
-		EnterRule("T__90", 49);
-		TraceIn("T__90", 49);
-		try
-		{
-			int _type = T__90;
-			int _channel = DefaultTokenChannel;
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:58:7: ( 'in' )
-			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:58:9: 'in'
-			{
-			DebugLocation(58, 9);
-			Match("in"); 
-
-
-			}
-
-			state.type = _type;
-			state.channel = _channel;
-		}
-		finally
-		{
-			TraceOut("T__90", 49);
-			LeaveRule("T__90", 49);
-			LeaveRule_T__90();
-		}
-	}
-	// $ANTLR end "T__90"
-
-	partial void EnterRule_T__91();
-	partial void LeaveRule_T__91();
-
-	// $ANTLR start "T__91"
-	[GrammarRule("T__91")]
-	private void mT__91()
-	{
-		EnterRule_T__91();
-		EnterRule("T__91", 50);
-		TraceIn("T__91", 50);
-		try
-		{
-			int _type = T__91;
-			int _channel = DefaultTokenChannel;
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:59:7: ( 'init' )
-			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:59:9: 'init'
-			{
-			DebugLocation(59, 9);
-			Match("init"); 
-
-
-			}
-
-			state.type = _type;
-			state.channel = _channel;
-		}
-		finally
-		{
-			TraceOut("T__91", 50);
-			LeaveRule("T__91", 50);
-			LeaveRule_T__91();
-		}
-	}
-	// $ANTLR end "T__91"
-
-	partial void EnterRule_T__92();
-	partial void LeaveRule_T__92();
-
-	// $ANTLR start "T__92"
-	[GrammarRule("T__92")]
-	private void mT__92()
-	{
-		EnterRule_T__92();
-		EnterRule("T__92", 51);
-		TraceIn("T__92", 51);
-		try
-		{
-			int _type = T__92;
-			int _channel = DefaultTokenChannel;
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:60:7: ( 'inv' )
-			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:60:9: 'inv'
-			{
-			DebugLocation(60, 9);
-			Match("inv"); 
-
-
-			}
-
-			state.type = _type;
-			state.channel = _channel;
-		}
-		finally
-		{
-			TraceOut("T__92", 51);
-			LeaveRule("T__92", 51);
-			LeaveRule_T__92();
-		}
-	}
-	// $ANTLR end "T__92"
-
-	partial void EnterRule_T__93();
-	partial void LeaveRule_T__93();
-
-	// $ANTLR start "T__93"
-	[GrammarRule("T__93")]
-	private void mT__93()
-	{
-		EnterRule_T__93();
-		EnterRule("T__93", 52);
-		TraceIn("T__93", 52);
-		try
-		{
-			int _type = T__93;
-			int _channel = DefaultTokenChannel;
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:61:7: ( 'iterate' )
-			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:61:9: 'iterate'
-			{
-			DebugLocation(61, 9);
-			Match("iterate"); 
-
-
-			}
-
-			state.type = _type;
-			state.channel = _channel;
-		}
-		finally
-		{
-			TraceOut("T__93", 52);
-			LeaveRule("T__93", 52);
-			LeaveRule_T__93();
-		}
-	}
-	// $ANTLR end "T__93"
-
-	partial void EnterRule_T__94();
-	partial void LeaveRule_T__94();
-
-	// $ANTLR start "T__94"
-	[GrammarRule("T__94")]
-	private void mT__94()
-	{
-		EnterRule_T__94();
-		EnterRule("T__94", 53);
-		TraceIn("T__94", 53);
-		try
-		{
-			int _type = T__94;
-			int _channel = DefaultTokenChannel;
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:62:7: ( 'let' )
-			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:62:9: 'let'
-			{
-			DebugLocation(62, 9);
-			Match("let"); 
-
-
-			}
-
-			state.type = _type;
-			state.channel = _channel;
-		}
-		finally
-		{
-			TraceOut("T__94", 53);
-			LeaveRule("T__94", 53);
-			LeaveRule_T__94();
-		}
-	}
-	// $ANTLR end "T__94"
-
-	partial void EnterRule_T__95();
-	partial void LeaveRule_T__95();
-
-	// $ANTLR start "T__95"
-	[GrammarRule("T__95")]
-	private void mT__95()
-	{
-		EnterRule_T__95();
-		EnterRule("T__95", 54);
-		TraceIn("T__95", 54);
-		try
-		{
-			int _type = T__95;
-			int _channel = DefaultTokenChannel;
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:63:7: ( 'not' )
-			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:63:9: 'not'
-			{
-			DebugLocation(63, 9);
-			Match("not"); 
-
-
-			}
-
-			state.type = _type;
-			state.channel = _channel;
-		}
-		finally
-		{
-			TraceOut("T__95", 54);
-			LeaveRule("T__95", 54);
-			LeaveRule_T__95();
-		}
-	}
-	// $ANTLR end "T__95"
-
-	partial void EnterRule_T__96();
-	partial void LeaveRule_T__96();
-
-	// $ANTLR start "T__96"
-	[GrammarRule("T__96")]
-	private void mT__96()
-	{
-		EnterRule_T__96();
-		EnterRule("T__96", 55);
-		TraceIn("T__96", 55);
-		try
-		{
-			int _type = T__96;
-			int _channel = DefaultTokenChannel;
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:64:7: ( 'or' )
-			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:64:9: 'or'
-			{
-			DebugLocation(64, 9);
-			Match("or"); 
-
-
-			}
-
-			state.type = _type;
-			state.channel = _channel;
-		}
-		finally
-		{
-			TraceOut("T__96", 55);
-			LeaveRule("T__96", 55);
-			LeaveRule_T__96();
-		}
-	}
-	// $ANTLR end "T__96"
-
-	partial void EnterRule_T__97();
-	partial void LeaveRule_T__97();
-
-	// $ANTLR start "T__97"
-	[GrammarRule("T__97")]
-	private void mT__97()
-	{
-		EnterRule_T__97();
-		EnterRule("T__97", 56);
-		TraceIn("T__97", 56);
-		try
-		{
-			int _type = T__97;
-			int _channel = DefaultTokenChannel;
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:65:7: ( 'post' )
-			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:65:9: 'post'
-			{
-			DebugLocation(65, 9);
-			Match("post"); 
-
-
-			}
-
-			state.type = _type;
-			state.channel = _channel;
-		}
-		finally
-		{
-			TraceOut("T__97", 56);
-			LeaveRule("T__97", 56);
-			LeaveRule_T__97();
-		}
-	}
-	// $ANTLR end "T__97"
-
-	partial void EnterRule_T__98();
-	partial void LeaveRule_T__98();
-
-	// $ANTLR start "T__98"
-	[GrammarRule("T__98")]
-	private void mT__98()
-	{
-		EnterRule_T__98();
-		EnterRule("T__98", 57);
-		TraceIn("T__98", 57);
-		try
-		{
-			int _type = T__98;
-			int _channel = DefaultTokenChannel;
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:66:7: ( 'pre' )
-			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:66:9: 'pre'
-			{
-			DebugLocation(66, 9);
-			Match("pre"); 
-
-
-			}
-
-			state.type = _type;
-			state.channel = _channel;
-		}
-		finally
-		{
-			TraceOut("T__98", 57);
-			LeaveRule("T__98", 57);
-			LeaveRule_T__98();
-		}
-	}
-	// $ANTLR end "T__98"
-
-	partial void EnterRule_T__99();
-	partial void LeaveRule_T__99();
-
-	// $ANTLR start "T__99"
-	[GrammarRule("T__99")]
-	private void mT__99()
-	{
-		EnterRule_T__99();
-		EnterRule("T__99", 58);
-		TraceIn("T__99", 58);
-		try
-		{
-			int _type = T__99;
-			int _channel = DefaultTokenChannel;
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:67:7: ( 'static' )
-			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:67:9: 'static'
-			{
-			DebugLocation(67, 9);
-			Match("static"); 
-
-
-			}
-
-			state.type = _type;
-			state.channel = _channel;
-		}
-		finally
-		{
-			TraceOut("T__99", 58);
-			LeaveRule("T__99", 58);
+			TraceOut("T__99", 40);
+			LeaveRule("T__99", 40);
 			LeaveRule_T__99();
 		}
 	}
@@ -2234,18 +1606,18 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 	private void mT__100()
 	{
 		EnterRule_T__100();
-		EnterRule("T__100", 59);
-		TraceIn("T__100", 59);
+		EnterRule("T__100", 41);
+		TraceIn("T__100", 41);
 		try
 		{
 			int _type = T__100;
 			int _channel = DefaultTokenChannel;
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:68:8: ( 'then' )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:50:8: ( 'body' )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:68:10: 'then'
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:50:10: 'body'
 			{
-			DebugLocation(68, 10);
-			Match("then"); 
+			DebugLocation(50, 10);
+			Match("body"); 
 
 
 			}
@@ -2255,8 +1627,8 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("T__100", 59);
-			LeaveRule("T__100", 59);
+			TraceOut("T__100", 41);
+			LeaveRule("T__100", 41);
 			LeaveRule_T__100();
 		}
 	}
@@ -2270,18 +1642,18 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 	private void mT__101()
 	{
 		EnterRule_T__101();
-		EnterRule("T__101", 60);
-		TraceIn("T__101", 60);
+		EnterRule("T__101", 42);
+		TraceIn("T__101", 42);
 		try
 		{
 			int _type = T__101;
 			int _channel = DefaultTokenChannel;
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:69:8: ( 'xor' )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:51:8: ( 'context' )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:69:10: 'xor'
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:51:10: 'context'
 			{
-			DebugLocation(69, 10);
-			Match("xor"); 
+			DebugLocation(51, 10);
+			Match("context"); 
 
 
 			}
@@ -2291,8 +1663,8 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("T__101", 60);
-			LeaveRule("T__101", 60);
+			TraceOut("T__101", 42);
+			LeaveRule("T__101", 42);
 			LeaveRule_T__101();
 		}
 	}
@@ -2306,18 +1678,19 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 	private void mT__102()
 	{
 		EnterRule_T__102();
-		EnterRule("T__102", 61);
-		TraceIn("T__102", 61);
+		EnterRule("T__102", 43);
+		TraceIn("T__102", 43);
 		try
 		{
 			int _type = T__102;
 			int _channel = DefaultTokenChannel;
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:70:8: ( '{' )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:52:8: ( 'def' )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:70:10: '{'
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:52:10: 'def'
 			{
-			DebugLocation(70, 10);
-			Match('{'); 
+			DebugLocation(52, 10);
+			Match("def"); 
+
 
 			}
 
@@ -2326,8 +1699,8 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("T__102", 61);
-			LeaveRule("T__102", 61);
+			TraceOut("T__102", 43);
+			LeaveRule("T__102", 43);
 			LeaveRule_T__102();
 		}
 	}
@@ -2341,18 +1714,19 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 	private void mT__103()
 	{
 		EnterRule_T__103();
-		EnterRule("T__103", 62);
-		TraceIn("T__103", 62);
+		EnterRule("T__103", 44);
+		TraceIn("T__103", 44);
 		try
 		{
 			int _type = T__103;
 			int _channel = DefaultTokenChannel;
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:71:8: ( '|' )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:53:8: ( 'derivate' )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:71:10: '|'
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:53:10: 'derivate'
 			{
-			DebugLocation(71, 10);
-			Match('|'); 
+			DebugLocation(53, 10);
+			Match("derivate"); 
+
 
 			}
 
@@ -2361,8 +1735,8 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("T__103", 62);
-			LeaveRule("T__103", 62);
+			TraceOut("T__103", 44);
+			LeaveRule("T__103", 44);
 			LeaveRule_T__103();
 		}
 	}
@@ -2376,17 +1750,735 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 	private void mT__104()
 	{
 		EnterRule_T__104();
-		EnterRule("T__104", 63);
-		TraceIn("T__104", 63);
+		EnterRule("T__104", 45);
+		TraceIn("T__104", 45);
 		try
 		{
 			int _type = T__104;
 			int _channel = DefaultTokenChannel;
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:72:8: ( '}' )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:54:8: ( 'else' )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:72:10: '}'
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:54:10: 'else'
+			{
+			DebugLocation(54, 10);
+			Match("else"); 
+
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally
+		{
+			TraceOut("T__104", 45);
+			LeaveRule("T__104", 45);
+			LeaveRule_T__104();
+		}
+	}
+	// $ANTLR end "T__104"
+
+	partial void EnterRule_T__105();
+	partial void LeaveRule_T__105();
+
+	// $ANTLR start "T__105"
+	[GrammarRule("T__105")]
+	private void mT__105()
+	{
+		EnterRule_T__105();
+		EnterRule("T__105", 46);
+		TraceIn("T__105", 46);
+		try
+		{
+			int _type = T__105;
+			int _channel = DefaultTokenChannel;
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:55:8: ( 'endif' )
+			DebugEnterAlt(1);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:55:10: 'endif'
+			{
+			DebugLocation(55, 10);
+			Match("endif"); 
+
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally
+		{
+			TraceOut("T__105", 46);
+			LeaveRule("T__105", 46);
+			LeaveRule_T__105();
+		}
+	}
+	// $ANTLR end "T__105"
+
+	partial void EnterRule_T__106();
+	partial void LeaveRule_T__106();
+
+	// $ANTLR start "T__106"
+	[GrammarRule("T__106")]
+	private void mT__106()
+	{
+		EnterRule_T__106();
+		EnterRule("T__106", 47);
+		TraceIn("T__106", 47);
+		try
+		{
+			int _type = T__106;
+			int _channel = DefaultTokenChannel;
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:56:8: ( 'false' )
+			DebugEnterAlt(1);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:56:10: 'false'
+			{
+			DebugLocation(56, 10);
+			Match("false"); 
+
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally
+		{
+			TraceOut("T__106", 47);
+			LeaveRule("T__106", 47);
+			LeaveRule_T__106();
+		}
+	}
+	// $ANTLR end "T__106"
+
+	partial void EnterRule_T__107();
+	partial void LeaveRule_T__107();
+
+	// $ANTLR start "T__107"
+	[GrammarRule("T__107")]
+	private void mT__107()
+	{
+		EnterRule_T__107();
+		EnterRule("T__107", 48);
+		TraceIn("T__107", 48);
+		try
+		{
+			int _type = T__107;
+			int _channel = DefaultTokenChannel;
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:57:8: ( 'if' )
+			DebugEnterAlt(1);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:57:10: 'if'
+			{
+			DebugLocation(57, 10);
+			Match("if"); 
+
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally
+		{
+			TraceOut("T__107", 48);
+			LeaveRule("T__107", 48);
+			LeaveRule_T__107();
+		}
+	}
+	// $ANTLR end "T__107"
+
+	partial void EnterRule_T__108();
+	partial void LeaveRule_T__108();
+
+	// $ANTLR start "T__108"
+	[GrammarRule("T__108")]
+	private void mT__108()
+	{
+		EnterRule_T__108();
+		EnterRule("T__108", 49);
+		TraceIn("T__108", 49);
+		try
+		{
+			int _type = T__108;
+			int _channel = DefaultTokenChannel;
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:58:8: ( 'implies' )
+			DebugEnterAlt(1);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:58:10: 'implies'
+			{
+			DebugLocation(58, 10);
+			Match("implies"); 
+
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally
+		{
+			TraceOut("T__108", 49);
+			LeaveRule("T__108", 49);
+			LeaveRule_T__108();
+		}
+	}
+	// $ANTLR end "T__108"
+
+	partial void EnterRule_T__109();
+	partial void LeaveRule_T__109();
+
+	// $ANTLR start "T__109"
+	[GrammarRule("T__109")]
+	private void mT__109()
+	{
+		EnterRule_T__109();
+		EnterRule("T__109", 50);
+		TraceIn("T__109", 50);
+		try
+		{
+			int _type = T__109;
+			int _channel = DefaultTokenChannel;
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:59:8: ( 'in' )
+			DebugEnterAlt(1);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:59:10: 'in'
+			{
+			DebugLocation(59, 10);
+			Match("in"); 
+
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally
+		{
+			TraceOut("T__109", 50);
+			LeaveRule("T__109", 50);
+			LeaveRule_T__109();
+		}
+	}
+	// $ANTLR end "T__109"
+
+	partial void EnterRule_T__110();
+	partial void LeaveRule_T__110();
+
+	// $ANTLR start "T__110"
+	[GrammarRule("T__110")]
+	private void mT__110()
+	{
+		EnterRule_T__110();
+		EnterRule("T__110", 51);
+		TraceIn("T__110", 51);
+		try
+		{
+			int _type = T__110;
+			int _channel = DefaultTokenChannel;
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:60:8: ( 'init' )
+			DebugEnterAlt(1);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:60:10: 'init'
+			{
+			DebugLocation(60, 10);
+			Match("init"); 
+
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally
+		{
+			TraceOut("T__110", 51);
+			LeaveRule("T__110", 51);
+			LeaveRule_T__110();
+		}
+	}
+	// $ANTLR end "T__110"
+
+	partial void EnterRule_T__111();
+	partial void LeaveRule_T__111();
+
+	// $ANTLR start "T__111"
+	[GrammarRule("T__111")]
+	private void mT__111()
+	{
+		EnterRule_T__111();
+		EnterRule("T__111", 52);
+		TraceIn("T__111", 52);
+		try
+		{
+			int _type = T__111;
+			int _channel = DefaultTokenChannel;
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:61:8: ( 'inv' )
+			DebugEnterAlt(1);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:61:10: 'inv'
+			{
+			DebugLocation(61, 10);
+			Match("inv"); 
+
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally
+		{
+			TraceOut("T__111", 52);
+			LeaveRule("T__111", 52);
+			LeaveRule_T__111();
+		}
+	}
+	// $ANTLR end "T__111"
+
+	partial void EnterRule_T__112();
+	partial void LeaveRule_T__112();
+
+	// $ANTLR start "T__112"
+	[GrammarRule("T__112")]
+	private void mT__112()
+	{
+		EnterRule_T__112();
+		EnterRule("T__112", 53);
+		TraceIn("T__112", 53);
+		try
+		{
+			int _type = T__112;
+			int _channel = DefaultTokenChannel;
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:62:8: ( 'iterate' )
+			DebugEnterAlt(1);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:62:10: 'iterate'
+			{
+			DebugLocation(62, 10);
+			Match("iterate"); 
+
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally
+		{
+			TraceOut("T__112", 53);
+			LeaveRule("T__112", 53);
+			LeaveRule_T__112();
+		}
+	}
+	// $ANTLR end "T__112"
+
+	partial void EnterRule_T__113();
+	partial void LeaveRule_T__113();
+
+	// $ANTLR start "T__113"
+	[GrammarRule("T__113")]
+	private void mT__113()
+	{
+		EnterRule_T__113();
+		EnterRule("T__113", 54);
+		TraceIn("T__113", 54);
+		try
+		{
+			int _type = T__113;
+			int _channel = DefaultTokenChannel;
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:63:8: ( 'let' )
+			DebugEnterAlt(1);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:63:10: 'let'
+			{
+			DebugLocation(63, 10);
+			Match("let"); 
+
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally
+		{
+			TraceOut("T__113", 54);
+			LeaveRule("T__113", 54);
+			LeaveRule_T__113();
+		}
+	}
+	// $ANTLR end "T__113"
+
+	partial void EnterRule_T__114();
+	partial void LeaveRule_T__114();
+
+	// $ANTLR start "T__114"
+	[GrammarRule("T__114")]
+	private void mT__114()
+	{
+		EnterRule_T__114();
+		EnterRule("T__114", 55);
+		TraceIn("T__114", 55);
+		try
+		{
+			int _type = T__114;
+			int _channel = DefaultTokenChannel;
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:64:8: ( 'not' )
+			DebugEnterAlt(1);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:64:10: 'not'
+			{
+			DebugLocation(64, 10);
+			Match("not"); 
+
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally
+		{
+			TraceOut("T__114", 55);
+			LeaveRule("T__114", 55);
+			LeaveRule_T__114();
+		}
+	}
+	// $ANTLR end "T__114"
+
+	partial void EnterRule_T__115();
+	partial void LeaveRule_T__115();
+
+	// $ANTLR start "T__115"
+	[GrammarRule("T__115")]
+	private void mT__115()
+	{
+		EnterRule_T__115();
+		EnterRule("T__115", 56);
+		TraceIn("T__115", 56);
+		try
+		{
+			int _type = T__115;
+			int _channel = DefaultTokenChannel;
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:65:8: ( 'or' )
+			DebugEnterAlt(1);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:65:10: 'or'
+			{
+			DebugLocation(65, 10);
+			Match("or"); 
+
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally
+		{
+			TraceOut("T__115", 56);
+			LeaveRule("T__115", 56);
+			LeaveRule_T__115();
+		}
+	}
+	// $ANTLR end "T__115"
+
+	partial void EnterRule_T__116();
+	partial void LeaveRule_T__116();
+
+	// $ANTLR start "T__116"
+	[GrammarRule("T__116")]
+	private void mT__116()
+	{
+		EnterRule_T__116();
+		EnterRule("T__116", 57);
+		TraceIn("T__116", 57);
+		try
+		{
+			int _type = T__116;
+			int _channel = DefaultTokenChannel;
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:66:8: ( 'post' )
+			DebugEnterAlt(1);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:66:10: 'post'
+			{
+			DebugLocation(66, 10);
+			Match("post"); 
+
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally
+		{
+			TraceOut("T__116", 57);
+			LeaveRule("T__116", 57);
+			LeaveRule_T__116();
+		}
+	}
+	// $ANTLR end "T__116"
+
+	partial void EnterRule_T__117();
+	partial void LeaveRule_T__117();
+
+	// $ANTLR start "T__117"
+	[GrammarRule("T__117")]
+	private void mT__117()
+	{
+		EnterRule_T__117();
+		EnterRule("T__117", 58);
+		TraceIn("T__117", 58);
+		try
+		{
+			int _type = T__117;
+			int _channel = DefaultTokenChannel;
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:67:8: ( 'pre' )
+			DebugEnterAlt(1);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:67:10: 'pre'
+			{
+			DebugLocation(67, 10);
+			Match("pre"); 
+
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally
+		{
+			TraceOut("T__117", 58);
+			LeaveRule("T__117", 58);
+			LeaveRule_T__117();
+		}
+	}
+	// $ANTLR end "T__117"
+
+	partial void EnterRule_T__118();
+	partial void LeaveRule_T__118();
+
+	// $ANTLR start "T__118"
+	[GrammarRule("T__118")]
+	private void mT__118()
+	{
+		EnterRule_T__118();
+		EnterRule("T__118", 59);
+		TraceIn("T__118", 59);
+		try
+		{
+			int _type = T__118;
+			int _channel = DefaultTokenChannel;
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:68:8: ( 'static' )
+			DebugEnterAlt(1);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:68:10: 'static'
+			{
+			DebugLocation(68, 10);
+			Match("static"); 
+
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally
+		{
+			TraceOut("T__118", 59);
+			LeaveRule("T__118", 59);
+			LeaveRule_T__118();
+		}
+	}
+	// $ANTLR end "T__118"
+
+	partial void EnterRule_T__119();
+	partial void LeaveRule_T__119();
+
+	// $ANTLR start "T__119"
+	[GrammarRule("T__119")]
+	private void mT__119()
+	{
+		EnterRule_T__119();
+		EnterRule("T__119", 60);
+		TraceIn("T__119", 60);
+		try
+		{
+			int _type = T__119;
+			int _channel = DefaultTokenChannel;
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:69:8: ( 'then' )
+			DebugEnterAlt(1);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:69:10: 'then'
+			{
+			DebugLocation(69, 10);
+			Match("then"); 
+
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally
+		{
+			TraceOut("T__119", 60);
+			LeaveRule("T__119", 60);
+			LeaveRule_T__119();
+		}
+	}
+	// $ANTLR end "T__119"
+
+	partial void EnterRule_T__120();
+	partial void LeaveRule_T__120();
+
+	// $ANTLR start "T__120"
+	[GrammarRule("T__120")]
+	private void mT__120()
+	{
+		EnterRule_T__120();
+		EnterRule("T__120", 61);
+		TraceIn("T__120", 61);
+		try
+		{
+			int _type = T__120;
+			int _channel = DefaultTokenChannel;
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:70:8: ( 'true' )
+			DebugEnterAlt(1);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:70:10: 'true'
+			{
+			DebugLocation(70, 10);
+			Match("true"); 
+
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally
+		{
+			TraceOut("T__120", 61);
+			LeaveRule("T__120", 61);
+			LeaveRule_T__120();
+		}
+	}
+	// $ANTLR end "T__120"
+
+	partial void EnterRule_T__121();
+	partial void LeaveRule_T__121();
+
+	// $ANTLR start "T__121"
+	[GrammarRule("T__121")]
+	private void mT__121()
+	{
+		EnterRule_T__121();
+		EnterRule("T__121", 62);
+		TraceIn("T__121", 62);
+		try
+		{
+			int _type = T__121;
+			int _channel = DefaultTokenChannel;
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:71:8: ( 'xor' )
+			DebugEnterAlt(1);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:71:10: 'xor'
+			{
+			DebugLocation(71, 10);
+			Match("xor"); 
+
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally
+		{
+			TraceOut("T__121", 62);
+			LeaveRule("T__121", 62);
+			LeaveRule_T__121();
+		}
+	}
+	// $ANTLR end "T__121"
+
+	partial void EnterRule_T__122();
+	partial void LeaveRule_T__122();
+
+	// $ANTLR start "T__122"
+	[GrammarRule("T__122")]
+	private void mT__122()
+	{
+		EnterRule_T__122();
+		EnterRule("T__122", 63);
+		TraceIn("T__122", 63);
+		try
+		{
+			int _type = T__122;
+			int _channel = DefaultTokenChannel;
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:72:8: ( '{' )
+			DebugEnterAlt(1);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:72:10: '{'
 			{
 			DebugLocation(72, 10);
+			Match('{'); 
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally
+		{
+			TraceOut("T__122", 63);
+			LeaveRule("T__122", 63);
+			LeaveRule_T__122();
+		}
+	}
+	// $ANTLR end "T__122"
+
+	partial void EnterRule_T__123();
+	partial void LeaveRule_T__123();
+
+	// $ANTLR start "T__123"
+	[GrammarRule("T__123")]
+	private void mT__123()
+	{
+		EnterRule_T__123();
+		EnterRule("T__123", 64);
+		TraceIn("T__123", 64);
+		try
+		{
+			int _type = T__123;
+			int _channel = DefaultTokenChannel;
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:73:8: ( '|' )
+			DebugEnterAlt(1);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:73:10: '|'
+			{
+			DebugLocation(73, 10);
+			Match('|'); 
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally
+		{
+			TraceOut("T__123", 64);
+			LeaveRule("T__123", 64);
+			LeaveRule_T__123();
+		}
+	}
+	// $ANTLR end "T__123"
+
+	partial void EnterRule_T__124();
+	partial void LeaveRule_T__124();
+
+	// $ANTLR start "T__124"
+	[GrammarRule("T__124")]
+	private void mT__124()
+	{
+		EnterRule_T__124();
+		EnterRule("T__124", 65);
+		TraceIn("T__124", 65);
+		try
+		{
+			int _type = T__124;
+			int _channel = DefaultTokenChannel;
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:74:8: ( '}' )
+			DebugEnterAlt(1);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:74:10: '}'
+			{
+			DebugLocation(74, 10);
 			Match('}'); 
 
 			}
@@ -2396,82 +2488,12 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("T__104", 63);
-			LeaveRule("T__104", 63);
-			LeaveRule_T__104();
+			TraceOut("T__124", 65);
+			LeaveRule("T__124", 65);
+			LeaveRule_T__124();
 		}
 	}
-	// $ANTLR end "T__104"
-
-	partial void EnterRule_BooleanLiteralExp();
-	partial void LeaveRule_BooleanLiteralExp();
-
-	// $ANTLR start "BooleanLiteralExp"
-	[GrammarRule("BooleanLiteralExp")]
-	private void mBooleanLiteralExp()
-	{
-		EnterRule_BooleanLiteralExp();
-		EnterRule("BooleanLiteralExp", 64);
-		TraceIn("BooleanLiteralExp", 64);
-		try
-		{
-			int _type = BooleanLiteralExp;
-			int _channel = DefaultTokenChannel;
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:344:2: ( 'true' | 'false' )
-			int alt1=2;
-			try { DebugEnterDecision(1, false);
-			int LA1_0 = input.LA(1);
-
-			if ((LA1_0=='t'))
-			{
-				alt1 = 1;
-			}
-			else if ((LA1_0=='f'))
-			{
-				alt1 = 2;
-			}
-			else
-			{
-				NoViableAltException nvae = new NoViableAltException("", 1, 0, input);
-				DebugRecognitionException(nvae);
-				throw nvae;
-			}
-			} finally { DebugExitDecision(1); }
-			switch (alt1)
-			{
-			case 1:
-				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:344:3: 'true'
-				{
-				DebugLocation(344, 3);
-				Match("true"); 
-
-
-				}
-				break;
-			case 2:
-				DebugEnterAlt(2);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:345:3: 'false'
-				{
-				DebugLocation(345, 3);
-				Match("false"); 
-
-
-				}
-				break;
-
-			}
-			state.type = _type;
-			state.channel = _channel;
-		}
-		finally
-		{
-			TraceOut("BooleanLiteralExp", 64);
-			LeaveRule("BooleanLiteralExp", 64);
-			LeaveRule_BooleanLiteralExp();
-		}
-	}
-	// $ANTLR end "BooleanLiteralExp"
+	// $ANTLR end "T__124"
 
 	partial void EnterRule_NullLiteralExp();
 	partial void LeaveRule_NullLiteralExp();
@@ -2481,17 +2503,17 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 	private void mNullLiteralExp()
 	{
 		EnterRule_NullLiteralExp();
-		EnterRule("NullLiteralExp", 65);
-		TraceIn("NullLiteralExp", 65);
+		EnterRule("NullLiteralExp", 66);
+		TraceIn("NullLiteralExp", 66);
 		try
 		{
 			int _type = NullLiteralExp;
 			int _channel = DefaultTokenChannel;
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:349:2: ( 'null' )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:365:2: ( 'null' )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:349:4: 'null'
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:365:4: 'null'
 			{
-			DebugLocation(349, 4);
+			DebugLocation(365, 4);
 			Match("null"); 
 
 
@@ -2502,8 +2524,8 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("NullLiteralExp", 65);
-			LeaveRule("NullLiteralExp", 65);
+			TraceOut("NullLiteralExp", 66);
+			LeaveRule("NullLiteralExp", 66);
 			LeaveRule_NullLiteralExp();
 		}
 	}
@@ -2517,17 +2539,17 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 	private void mInvalidLiteralExp()
 	{
 		EnterRule_InvalidLiteralExp();
-		EnterRule("InvalidLiteralExp", 66);
-		TraceIn("InvalidLiteralExp", 66);
+		EnterRule("InvalidLiteralExp", 67);
+		TraceIn("InvalidLiteralExp", 67);
 		try
 		{
 			int _type = InvalidLiteralExp;
 			int _channel = DefaultTokenChannel;
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:353:2: ( 'invalid' )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:369:2: ( 'invalid' )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:353:4: 'invalid'
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:369:4: 'invalid'
 			{
-			DebugLocation(353, 4);
+			DebugLocation(369, 4);
 			Match("invalid"); 
 
 
@@ -2538,8 +2560,8 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("InvalidLiteralExp", 66);
-			LeaveRule("InvalidLiteralExp", 66);
+			TraceOut("InvalidLiteralExp", 67);
+			LeaveRule("InvalidLiteralExp", 67);
 			LeaveRule_InvalidLiteralExp();
 		}
 	}
@@ -2553,50 +2575,100 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 	private void mSimpleName()
 	{
 		EnterRule_SimpleName();
-		EnterRule("SimpleName", 67);
-		TraceIn("SimpleName", 67);
+		EnterRule("SimpleName", 68);
+		TraceIn("SimpleName", 68);
 		try
 		{
 			int _type = SimpleName;
 			int _channel = DefaultTokenChannel;
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:359:2: ( NameStartChar ( NameChar )* | '_' '\\'' ( StringChar )* '\\'' )
-			int alt4=2;
-			try { DebugEnterDecision(4, false);
-			int LA4_0 = input.LA(1);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:375:2: ( NameStartChar ( NameChar )* | '_' '\\'' ( StringChar )* '\\'' )
+			int alt3=2;
+			try { DebugEnterDecision(3, false);
+			int LA3_0 = input.LA(1);
 
-			if ((LA4_0=='_'))
+			if ((LA3_0=='_'))
 			{
-				int LA4_1 = input.LA(2);
+				int LA3_1 = input.LA(2);
 
-				if ((LA4_1=='\''))
+				if ((LA3_1=='\''))
 				{
-					alt4 = 2;
+					alt3 = 2;
 				}
 				else
 				{
-					alt4 = 1;}
+					alt3 = 1;}
 			}
-			else if ((LA4_0=='$'||(LA4_0>='A' && LA4_0<='Z')||(LA4_0>='a' && LA4_0<='z')||(LA4_0>='\u00C0' && LA4_0<='\u00D6')||(LA4_0>='\u00D8' && LA4_0<='\u00F6')||(LA4_0>='\u00F8' && LA4_0<='\u02FF')||(LA4_0>='\u0370' && LA4_0<='\u037D')||(LA4_0>='\u037F' && LA4_0<='\u1FFF')||(LA4_0>='\u200C' && LA4_0<='\u200D')||(LA4_0>='\u2070' && LA4_0<='\u218F')||(LA4_0>='\u2C00' && LA4_0<='\u2FEF')||(LA4_0>='\u3001' && LA4_0<='\uD7FF')||(LA4_0>='\uF900' && LA4_0<='\uFDCF')||(LA4_0>='\uFDF0' && LA4_0<='\uFFFD')))
+			else if ((LA3_0=='$'||(LA3_0>='A' && LA3_0<='Z')||(LA3_0>='a' && LA3_0<='z')||(LA3_0>='\u00C0' && LA3_0<='\u00D6')||(LA3_0>='\u00D8' && LA3_0<='\u00F6')||(LA3_0>='\u00F8' && LA3_0<='\u02FF')||(LA3_0>='\u0370' && LA3_0<='\u037D')||(LA3_0>='\u037F' && LA3_0<='\u1FFF')||(LA3_0>='\u200C' && LA3_0<='\u200D')||(LA3_0>='\u2070' && LA3_0<='\u218F')||(LA3_0>='\u2C00' && LA3_0<='\u2FEF')||(LA3_0>='\u3001' && LA3_0<='\uD7FF')||(LA3_0>='\uF900' && LA3_0<='\uFDCF')||(LA3_0>='\uFDF0' && LA3_0<='\uFFFD')))
 			{
-				alt4 = 1;
+				alt3 = 1;
 			}
 			else
 			{
-				NoViableAltException nvae = new NoViableAltException("", 4, 0, input);
+				NoViableAltException nvae = new NoViableAltException("", 3, 0, input);
 				DebugRecognitionException(nvae);
 				throw nvae;
 			}
-			} finally { DebugExitDecision(4); }
-			switch (alt4)
+			} finally { DebugExitDecision(3); }
+			switch (alt3)
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:359:4: NameStartChar ( NameChar )*
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:375:4: NameStartChar ( NameChar )*
 				{
-				DebugLocation(359, 4);
+				DebugLocation(375, 4);
 				mNameStartChar(); 
-				DebugLocation(359, 18);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:359:18: ( NameChar )*
+				DebugLocation(375, 18);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:375:18: ( NameChar )*
+				try { DebugEnterSubRule(1);
+				while (true)
+				{
+					int alt1=2;
+					try { DebugEnterDecision(1, false);
+					int LA1_0 = input.LA(1);
+
+					if ((LA1_0=='$'||(LA1_0>='0' && LA1_0<='9')||(LA1_0>='A' && LA1_0<='Z')||LA1_0=='_'||(LA1_0>='a' && LA1_0<='z')||(LA1_0>='\u00C0' && LA1_0<='\u00D6')||(LA1_0>='\u00D8' && LA1_0<='\u00F6')||(LA1_0>='\u00F8' && LA1_0<='\u02FF')||(LA1_0>='\u0370' && LA1_0<='\u037D')||(LA1_0>='\u037F' && LA1_0<='\u1FFF')||(LA1_0>='\u200C' && LA1_0<='\u200D')||(LA1_0>='\u2070' && LA1_0<='\u218F')||(LA1_0>='\u2C00' && LA1_0<='\u2FEF')||(LA1_0>='\u3001' && LA1_0<='\uD7FF')||(LA1_0>='\uF900' && LA1_0<='\uFDCF')||(LA1_0>='\uFDF0' && LA1_0<='\uFFFD')))
+					{
+						alt1 = 1;
+					}
+
+
+					} finally { DebugExitDecision(1); }
+					switch ( alt1 )
+					{
+					case 1:
+						DebugEnterAlt(1);
+						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:
+						{
+						DebugLocation(375, 18);
+						input.Consume();
+
+
+						}
+						break;
+
+					default:
+						goto loop1;
+					}
+				}
+
+				loop1:
+					;
+
+				} finally { DebugExitSubRule(1); }
+
+
+				}
+				break;
+			case 2:
+				DebugEnterAlt(2);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:376:4: '_' '\\'' ( StringChar )* '\\''
+				{
+				DebugLocation(376, 4);
+				Match('_'); 
+				DebugLocation(376, 8);
+				Match('\''); 
+				DebugLocation(376, 13);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:376:13: ( StringChar )*
 				try { DebugEnterSubRule(2);
 				while (true)
 				{
@@ -2604,7 +2676,7 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 					try { DebugEnterDecision(2, false);
 					int LA2_0 = input.LA(1);
 
-					if ((LA2_0=='$'||(LA2_0>='0' && LA2_0<='9')||(LA2_0>='A' && LA2_0<='Z')||LA2_0=='_'||(LA2_0>='a' && LA2_0<='z')||(LA2_0>='\u00C0' && LA2_0<='\u00D6')||(LA2_0>='\u00D8' && LA2_0<='\u00F6')||(LA2_0>='\u00F8' && LA2_0<='\u02FF')||(LA2_0>='\u0370' && LA2_0<='\u037D')||(LA2_0>='\u037F' && LA2_0<='\u1FFF')||(LA2_0>='\u200C' && LA2_0<='\u200D')||(LA2_0>='\u2070' && LA2_0<='\u218F')||(LA2_0>='\u2C00' && LA2_0<='\u2FEF')||(LA2_0>='\u3001' && LA2_0<='\uD7FF')||(LA2_0>='\uF900' && LA2_0<='\uFDCF')||(LA2_0>='\uFDF0' && LA2_0<='\uFFFD')))
+					if (((LA2_0>=' ' && LA2_0<='&')||(LA2_0>='(' && LA2_0<='\uD7FF')||(LA2_0>='\uE000' && LA2_0<='\uFFFD')))
 					{
 						alt2 = 1;
 					}
@@ -2615,11 +2687,10 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 					{
 					case 1:
 						DebugEnterAlt(1);
-						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:
+						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:376:13: StringChar
 						{
-						DebugLocation(359, 18);
-						input.Consume();
-
+						DebugLocation(376, 13);
+						mStringChar(); 
 
 						}
 						break;
@@ -2634,56 +2705,7 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 
 				} finally { DebugExitSubRule(2); }
 
-
-				}
-				break;
-			case 2:
-				DebugEnterAlt(2);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:360:4: '_' '\\'' ( StringChar )* '\\''
-				{
-				DebugLocation(360, 4);
-				Match('_'); 
-				DebugLocation(360, 8);
-				Match('\''); 
-				DebugLocation(360, 13);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:360:13: ( StringChar )*
-				try { DebugEnterSubRule(3);
-				while (true)
-				{
-					int alt3=2;
-					try { DebugEnterDecision(3, false);
-					int LA3_0 = input.LA(1);
-
-					if (((LA3_0>=' ' && LA3_0<='&')||(LA3_0>='(' && LA3_0<='\uD7FF')||(LA3_0>='\uE000' && LA3_0<='\uFFFD')))
-					{
-						alt3 = 1;
-					}
-
-
-					} finally { DebugExitDecision(3); }
-					switch ( alt3 )
-					{
-					case 1:
-						DebugEnterAlt(1);
-						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:360:13: StringChar
-						{
-						DebugLocation(360, 13);
-						mStringChar(); 
-
-						}
-						break;
-
-					default:
-						goto loop3;
-					}
-				}
-
-				loop3:
-					;
-
-				} finally { DebugExitSubRule(3); }
-
-				DebugLocation(360, 25);
+				DebugLocation(376, 25);
 				Match('\''); 
 
 				}
@@ -2695,8 +2717,8 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("SimpleName", 67);
-			LeaveRule("SimpleName", 67);
+			TraceOut("SimpleName", 68);
+			LeaveRule("SimpleName", 68);
 			LeaveRule_SimpleName();
 		}
 	}
@@ -2710,17 +2732,17 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 	private void mUnlimitedNaturalLiteralExp()
 	{
 		EnterRule_UnlimitedNaturalLiteralExp();
-		EnterRule("UnlimitedNaturalLiteralExp", 68);
-		TraceIn("UnlimitedNaturalLiteralExp", 68);
+		EnterRule("UnlimitedNaturalLiteralExp", 69);
+		TraceIn("UnlimitedNaturalLiteralExp", 69);
 		try
 		{
 			int _type = UnlimitedNaturalLiteralExp;
 			int _channel = DefaultTokenChannel;
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:365:2: ( '*' )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:381:2: ( '*' )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:365:3: '*'
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:381:3: '*'
 			{
-			DebugLocation(365, 3);
+			DebugLocation(381, 3);
 			Match('*'); 
 
 			}
@@ -2730,8 +2752,8 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("UnlimitedNaturalLiteralExp", 68);
-			LeaveRule("UnlimitedNaturalLiteralExp", 68);
+			TraceOut("UnlimitedNaturalLiteralExp", 69);
+			LeaveRule("UnlimitedNaturalLiteralExp", 69);
 			LeaveRule_UnlimitedNaturalLiteralExp();
 		}
 	}
@@ -2745,72 +2767,72 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 	private void mIntegerLiteralExp()
 	{
 		EnterRule_IntegerLiteralExp();
-		EnterRule("IntegerLiteralExp", 69);
-		TraceIn("IntegerLiteralExp", 69);
+		EnterRule("IntegerLiteralExp", 70);
+		TraceIn("IntegerLiteralExp", 70);
 		try
 		{
 			int _type = IntegerLiteralExp;
 			int _channel = DefaultTokenChannel;
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:367:2: ( '0' | '1' .. '9' ( Num )* )
-			int alt6=2;
-			try { DebugEnterDecision(6, false);
-			int LA6_0 = input.LA(1);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:383:2: ( '0' | '1' .. '9' ( Num )* )
+			int alt5=2;
+			try { DebugEnterDecision(5, false);
+			int LA5_0 = input.LA(1);
 
-			if ((LA6_0=='0'))
+			if ((LA5_0=='0'))
 			{
-				alt6 = 1;
+				alt5 = 1;
 			}
-			else if (((LA6_0>='1' && LA6_0<='9')))
+			else if (((LA5_0>='1' && LA5_0<='9')))
 			{
-				alt6 = 2;
+				alt5 = 2;
 			}
 			else
 			{
-				NoViableAltException nvae = new NoViableAltException("", 6, 0, input);
+				NoViableAltException nvae = new NoViableAltException("", 5, 0, input);
 				DebugRecognitionException(nvae);
 				throw nvae;
 			}
-			} finally { DebugExitDecision(6); }
-			switch (alt6)
+			} finally { DebugExitDecision(5); }
+			switch (alt5)
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:367:4: '0'
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:383:4: '0'
 				{
-				DebugLocation(367, 4);
+				DebugLocation(383, 4);
 				Match('0'); 
 
 				}
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:368:4: '1' .. '9' ( Num )*
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:384:4: '1' .. '9' ( Num )*
 				{
-				DebugLocation(368, 4);
+				DebugLocation(384, 4);
 				MatchRange('1','9'); 
-				DebugLocation(368, 13);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:368:13: ( Num )*
-				try { DebugEnterSubRule(5);
+				DebugLocation(384, 13);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:384:13: ( Num )*
+				try { DebugEnterSubRule(4);
 				while (true)
 				{
-					int alt5=2;
-					try { DebugEnterDecision(5, false);
-					int LA5_0 = input.LA(1);
+					int alt4=2;
+					try { DebugEnterDecision(4, false);
+					int LA4_0 = input.LA(1);
 
-					if (((LA5_0>='0' && LA5_0<='9')))
+					if (((LA4_0>='0' && LA4_0<='9')))
 					{
-						alt5 = 1;
+						alt4 = 1;
 					}
 
 
-					} finally { DebugExitDecision(5); }
-					switch ( alt5 )
+					} finally { DebugExitDecision(4); }
+					switch ( alt4 )
 					{
 					case 1:
 						DebugEnterAlt(1);
 						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:
 						{
-						DebugLocation(368, 13);
+						DebugLocation(384, 13);
 						input.Consume();
 
 
@@ -2818,14 +2840,14 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 						break;
 
 					default:
-						goto loop5;
+						goto loop4;
 					}
 				}
 
-				loop5:
+				loop4:
 					;
 
-				} finally { DebugExitSubRule(5); }
+				} finally { DebugExitSubRule(4); }
 
 
 				}
@@ -2837,8 +2859,8 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("IntegerLiteralExp", 69);
-			LeaveRule("IntegerLiteralExp", 69);
+			TraceOut("IntegerLiteralExp", 70);
+			LeaveRule("IntegerLiteralExp", 70);
 			LeaveRule_IntegerLiteralExp();
 		}
 	}
@@ -2852,40 +2874,40 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 	private void mRealLiteralExp()
 	{
 		EnterRule_RealLiteralExp();
-		EnterRule("RealLiteralExp", 70);
-		TraceIn("RealLiteralExp", 70);
+		EnterRule("RealLiteralExp", 71);
+		TraceIn("RealLiteralExp", 71);
 		try
 		{
 			int _type = RealLiteralExp;
 			int _channel = DefaultTokenChannel;
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:371:2: ( ( Num )+ ( ( '.' ( Num )+ ( ExponentPart )? ) | ( ExponentPart ) ) )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:387:2: ( ( Num )+ ( ( '.' ( Num )+ ( ExponentPart )? ) | ( ExponentPart ) ) )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:371:4: ( Num )+ ( ( '.' ( Num )+ ( ExponentPart )? ) | ( ExponentPart ) )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:387:4: ( Num )+ ( ( '.' ( Num )+ ( ExponentPart )? ) | ( ExponentPart ) )
 			{
-			DebugLocation(371, 4);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:371:4: ( Num )+
-			int cnt7=0;
-			try { DebugEnterSubRule(7);
+			DebugLocation(387, 4);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:387:4: ( Num )+
+			int cnt6=0;
+			try { DebugEnterSubRule(6);
 			while (true)
 			{
-				int alt7=2;
-				try { DebugEnterDecision(7, false);
-				int LA7_0 = input.LA(1);
+				int alt6=2;
+				try { DebugEnterDecision(6, false);
+				int LA6_0 = input.LA(1);
 
-				if (((LA7_0>='0' && LA7_0<='9')))
+				if (((LA6_0>='0' && LA6_0<='9')))
 				{
-					alt7 = 1;
+					alt6 = 1;
 				}
 
 
-				} finally { DebugExitDecision(7); }
-				switch (alt7)
+				} finally { DebugExitDecision(6); }
+				switch (alt6)
 				{
 				case 1:
 					DebugEnterAlt(1);
 					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:
 					{
-					DebugLocation(371, 4);
+					DebugLocation(387, 4);
 					input.Consume();
 
 
@@ -2893,79 +2915,79 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 					break;
 
 				default:
-					if (cnt7 >= 1)
-						goto loop7;
+					if (cnt6 >= 1)
+						goto loop6;
 
-					EarlyExitException eee7 = new EarlyExitException( 7, input );
-					DebugRecognitionException(eee7);
-					throw eee7;
+					EarlyExitException eee6 = new EarlyExitException( 6, input );
+					DebugRecognitionException(eee6);
+					throw eee6;
 				}
-				cnt7++;
+				cnt6++;
 			}
-			loop7:
+			loop6:
 				;
 
-			} finally { DebugExitSubRule(7); }
+			} finally { DebugExitSubRule(6); }
 
-			DebugLocation(371, 9);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:371:9: ( ( '.' ( Num )+ ( ExponentPart )? ) | ( ExponentPart ) )
-			int alt10=2;
-			try { DebugEnterSubRule(10);
-			try { DebugEnterDecision(10, false);
-			int LA10_0 = input.LA(1);
+			DebugLocation(387, 9);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:387:9: ( ( '.' ( Num )+ ( ExponentPart )? ) | ( ExponentPart ) )
+			int alt9=2;
+			try { DebugEnterSubRule(9);
+			try { DebugEnterDecision(9, false);
+			int LA9_0 = input.LA(1);
 
-			if ((LA10_0=='.'))
+			if ((LA9_0=='.'))
 			{
-				alt10 = 1;
+				alt9 = 1;
 			}
-			else if ((LA10_0=='E'||LA10_0=='e'))
+			else if ((LA9_0=='E'||LA9_0=='e'))
 			{
-				alt10 = 2;
+				alt9 = 2;
 			}
 			else
 			{
-				NoViableAltException nvae = new NoViableAltException("", 10, 0, input);
+				NoViableAltException nvae = new NoViableAltException("", 9, 0, input);
 				DebugRecognitionException(nvae);
 				throw nvae;
 			}
-			} finally { DebugExitDecision(10); }
-			switch (alt10)
+			} finally { DebugExitDecision(9); }
+			switch (alt9)
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:371:10: ( '.' ( Num )+ ( ExponentPart )? )
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:387:10: ( '.' ( Num )+ ( ExponentPart )? )
 				{
-				DebugLocation(371, 10);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:371:10: ( '.' ( Num )+ ( ExponentPart )? )
+				DebugLocation(387, 10);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:387:10: ( '.' ( Num )+ ( ExponentPart )? )
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:371:11: '.' ( Num )+ ( ExponentPart )?
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:387:11: '.' ( Num )+ ( ExponentPart )?
 				{
-				DebugLocation(371, 11);
+				DebugLocation(387, 11);
 				Match('.'); 
-				DebugLocation(371, 14);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:371:14: ( Num )+
-				int cnt8=0;
-				try { DebugEnterSubRule(8);
+				DebugLocation(387, 14);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:387:14: ( Num )+
+				int cnt7=0;
+				try { DebugEnterSubRule(7);
 				while (true)
 				{
-					int alt8=2;
-					try { DebugEnterDecision(8, false);
-					int LA8_0 = input.LA(1);
+					int alt7=2;
+					try { DebugEnterDecision(7, false);
+					int LA7_0 = input.LA(1);
 
-					if (((LA8_0>='0' && LA8_0<='9')))
+					if (((LA7_0>='0' && LA7_0<='9')))
 					{
-						alt8 = 1;
+						alt7 = 1;
 					}
 
 
-					} finally { DebugExitDecision(8); }
-					switch (alt8)
+					} finally { DebugExitDecision(7); }
+					switch (alt7)
 					{
 					case 1:
 						DebugEnterAlt(1);
 						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:
 						{
-						DebugLocation(371, 14);
+						DebugLocation(387, 14);
 						input.Consume();
 
 
@@ -2973,46 +2995,46 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 						break;
 
 					default:
-						if (cnt8 >= 1)
-							goto loop8;
+						if (cnt7 >= 1)
+							goto loop7;
 
-						EarlyExitException eee8 = new EarlyExitException( 8, input );
-						DebugRecognitionException(eee8);
-						throw eee8;
+						EarlyExitException eee7 = new EarlyExitException( 7, input );
+						DebugRecognitionException(eee7);
+						throw eee7;
 					}
-					cnt8++;
+					cnt7++;
 				}
-				loop8:
+				loop7:
 					;
 
-				} finally { DebugExitSubRule(8); }
+				} finally { DebugExitSubRule(7); }
 
-				DebugLocation(371, 19);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:371:19: ( ExponentPart )?
-				int alt9=2;
-				try { DebugEnterSubRule(9);
-				try { DebugEnterDecision(9, false);
-				int LA9_0 = input.LA(1);
+				DebugLocation(387, 19);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:387:19: ( ExponentPart )?
+				int alt8=2;
+				try { DebugEnterSubRule(8);
+				try { DebugEnterDecision(8, false);
+				int LA8_0 = input.LA(1);
 
-				if ((LA9_0=='E'||LA9_0=='e'))
+				if ((LA8_0=='E'||LA8_0=='e'))
 				{
-					alt9 = 1;
+					alt8 = 1;
 				}
-				} finally { DebugExitDecision(9); }
-				switch (alt9)
+				} finally { DebugExitDecision(8); }
+				switch (alt8)
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:371:20: ExponentPart
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:387:20: ExponentPart
 					{
-					DebugLocation(371, 20);
+					DebugLocation(387, 20);
 					mExponentPart(); 
 
 					}
 					break;
 
 				}
-				} finally { DebugExitSubRule(9); }
+				} finally { DebugExitSubRule(8); }
 
 
 				}
@@ -3022,14 +3044,14 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:371:37: ( ExponentPart )
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:387:37: ( ExponentPart )
 				{
-				DebugLocation(371, 37);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:371:37: ( ExponentPart )
+				DebugLocation(387, 37);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:387:37: ( ExponentPart )
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:371:38: ExponentPart
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:387:38: ExponentPart
 				{
-				DebugLocation(371, 38);
+				DebugLocation(387, 38);
 				mExponentPart(); 
 
 				}
@@ -3039,7 +3061,7 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 				break;
 
 			}
-			} finally { DebugExitSubRule(10); }
+			} finally { DebugExitSubRule(9); }
 
 
 			}
@@ -3049,8 +3071,8 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("RealLiteralExp", 70);
-			LeaveRule("RealLiteralExp", 70);
+			TraceOut("RealLiteralExp", 71);
+			LeaveRule("RealLiteralExp", 71);
 			LeaveRule_RealLiteralExp();
 		}
 	}
@@ -3064,30 +3086,136 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 	private void mStringLiteralExp()
 	{
 		EnterRule_StringLiteralExp();
-		EnterRule("StringLiteralExp", 71);
-		TraceIn("StringLiteralExp", 71);
+		EnterRule("StringLiteralExp", 72);
+		TraceIn("StringLiteralExp", 72);
 		try
 		{
 			int _type = StringLiteralExp;
 			int _channel = DefaultTokenChannel;
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:375:2: ( '\\'' ( StringChar )* '\\'' )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:391:2: ( '\\'' ( StringChar )* '\\'' )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:375:4: '\\'' ( StringChar )* '\\''
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:391:4: '\\'' ( StringChar )* '\\''
 			{
-			DebugLocation(375, 4);
+			DebugLocation(391, 4);
 			Match('\''); 
-			DebugLocation(375, 9);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:375:9: ( StringChar )*
+			DebugLocation(391, 9);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:391:9: ( StringChar )*
+			try { DebugEnterSubRule(10);
+			while (true)
+			{
+				int alt10=2;
+				try { DebugEnterDecision(10, false);
+				int LA10_0 = input.LA(1);
+
+				if (((LA10_0>=' ' && LA10_0<='&')||(LA10_0>='(' && LA10_0<='\uD7FF')||(LA10_0>='\uE000' && LA10_0<='\uFFFD')))
+				{
+					alt10 = 1;
+				}
+
+
+				} finally { DebugExitDecision(10); }
+				switch ( alt10 )
+				{
+				case 1:
+					DebugEnterAlt(1);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:391:9: StringChar
+					{
+					DebugLocation(391, 9);
+					mStringChar(); 
+
+					}
+					break;
+
+				default:
+					goto loop10;
+				}
+			}
+
+			loop10:
+				;
+
+			} finally { DebugExitSubRule(10); }
+
+			DebugLocation(391, 21);
+			Match('\''); 
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally
+		{
+			TraceOut("StringLiteralExp", 72);
+			LeaveRule("StringLiteralExp", 72);
+			LeaveRule_StringLiteralExp();
+		}
+	}
+	// $ANTLR end "StringLiteralExp"
+
+	partial void EnterRule_NESTED_ML_COMMENT();
+	partial void LeaveRule_NESTED_ML_COMMENT();
+
+	// $ANTLR start "NESTED_ML_COMMENT"
+	[GrammarRule("NESTED_ML_COMMENT")]
+	private void mNESTED_ML_COMMENT()
+	{
+		EnterRule_NESTED_ML_COMMENT();
+		EnterRule("NESTED_ML_COMMENT", 73);
+		TraceIn("NESTED_ML_COMMENT", 73);
+		try
+		{
+			int _type = NESTED_ML_COMMENT;
+			int _channel = DefaultTokenChannel;
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:396:5: ( '/*' ( options {greedy=false; } : NESTED_ML_COMMENT | . )* '*/' )
+			DebugEnterAlt(1);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:396:9: '/*' ( options {greedy=false; } : NESTED_ML_COMMENT | . )* '*/'
+			{
+			DebugLocation(396, 9);
+			Match("/*"); 
+
+			DebugLocation(397, 9);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:397:9: ( options {greedy=false; } : NESTED_ML_COMMENT | . )*
 			try { DebugEnterSubRule(11);
 			while (true)
 			{
-				int alt11=2;
+				int alt11=3;
 				try { DebugEnterDecision(11, false);
 				int LA11_0 = input.LA(1);
 
-				if (((LA11_0>=' ' && LA11_0<='&')||(LA11_0>='(' && LA11_0<='\uD7FF')||(LA11_0>='\uE000' && LA11_0<='\uFFFD')))
+				if ((LA11_0=='*'))
 				{
-					alt11 = 1;
+					int LA11_1 = input.LA(2);
+
+					if ((LA11_1=='/'))
+					{
+						alt11 = 3;
+					}
+					else if (((LA11_1>='\u0000' && LA11_1<='.')||(LA11_1>='0' && LA11_1<='\uFFFF')))
+					{
+						alt11 = 2;
+					}
+
+
+				}
+				else if ((LA11_0=='/'))
+				{
+					int LA11_2 = input.LA(2);
+
+					if ((LA11_2=='*'))
+					{
+						alt11 = 1;
+					}
+					else if (((LA11_2>='\u0000' && LA11_2<=')')||(LA11_2>='+' && LA11_2<='\uFFFF')))
+					{
+						alt11 = 2;
+					}
+
+
+				}
+				else if (((LA11_0>='\u0000' && LA11_0<=')')||(LA11_0>='+' && LA11_0<='.')||(LA11_0>='0' && LA11_0<='\uFFFF')))
+				{
+					alt11 = 2;
 				}
 
 
@@ -3096,10 +3224,19 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:375:9: StringChar
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:397:36: NESTED_ML_COMMENT
 					{
-					DebugLocation(375, 9);
-					mStringChar(); 
+					DebugLocation(397, 36);
+					mNESTED_ML_COMMENT(); 
+
+					}
+					break;
+				case 2:
+					DebugEnterAlt(2);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:397:56: .
+					{
+					DebugLocation(397, 56);
+					MatchAny(); 
 
 					}
 					break;
@@ -3114,8 +3251,11 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 
 			} finally { DebugExitSubRule(11); }
 
-			DebugLocation(375, 21);
-			Match('\''); 
+			DebugLocation(398, 9);
+			Match("*/"); 
+
+			DebugLocation(398, 14);
+			_channel=Hidden;
 
 			}
 
@@ -3124,76 +3264,46 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("StringLiteralExp", 71);
-			LeaveRule("StringLiteralExp", 71);
-			LeaveRule_StringLiteralExp();
+			TraceOut("NESTED_ML_COMMENT", 73);
+			LeaveRule("NESTED_ML_COMMENT", 73);
+			LeaveRule_NESTED_ML_COMMENT();
 		}
 	}
-	// $ANTLR end "StringLiteralExp"
+	// $ANTLR end "NESTED_ML_COMMENT"
 
-	partial void EnterRule_NESTED_ML_COMMENT();
-	partial void LeaveRule_NESTED_ML_COMMENT();
+	partial void EnterRule_LINE_COMMENT();
+	partial void LeaveRule_LINE_COMMENT();
 
-	// $ANTLR start "NESTED_ML_COMMENT"
-	[GrammarRule("NESTED_ML_COMMENT")]
-	private void mNESTED_ML_COMMENT()
+	// $ANTLR start "LINE_COMMENT"
+	[GrammarRule("LINE_COMMENT")]
+	private void mLINE_COMMENT()
 	{
-		EnterRule_NESTED_ML_COMMENT();
-		EnterRule("NESTED_ML_COMMENT", 72);
-		TraceIn("NESTED_ML_COMMENT", 72);
+		EnterRule_LINE_COMMENT();
+		EnterRule("LINE_COMMENT", 74);
+		TraceIn("LINE_COMMENT", 74);
 		try
 		{
-			int _type = NESTED_ML_COMMENT;
+			int _type = LINE_COMMENT;
 			int _channel = DefaultTokenChannel;
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:380:5: ( '/*' ( options {greedy=false; } : NESTED_ML_COMMENT | . )* '*/' )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:402:2: ( '--' (~ ( '\\n' | '\\r' ) )* ( ( ( '\\r' )? '\\n' ) | EOF ) )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:380:9: '/*' ( options {greedy=false; } : NESTED_ML_COMMENT | . )* '*/'
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:402:3: '--' (~ ( '\\n' | '\\r' ) )* ( ( ( '\\r' )? '\\n' ) | EOF )
 			{
-			DebugLocation(380, 9);
-			Match("/*"); 
+			DebugLocation(402, 3);
+			Match("--"); 
 
-			DebugLocation(381, 9);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:381:9: ( options {greedy=false; } : NESTED_ML_COMMENT | . )*
+			DebugLocation(402, 9);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:402:9: (~ ( '\\n' | '\\r' ) )*
 			try { DebugEnterSubRule(12);
 			while (true)
 			{
-				int alt12=3;
+				int alt12=2;
 				try { DebugEnterDecision(12, false);
 				int LA12_0 = input.LA(1);
 
-				if ((LA12_0=='*'))
+				if (((LA12_0>='\u0000' && LA12_0<='\t')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\uFFFF')))
 				{
-					int LA12_1 = input.LA(2);
-
-					if ((LA12_1=='/'))
-					{
-						alt12 = 3;
-					}
-					else if (((LA12_1>='\u0000' && LA12_1<='.')||(LA12_1>='0' && LA12_1<='\uFFFF')))
-					{
-						alt12 = 2;
-					}
-
-
-				}
-				else if ((LA12_0=='/'))
-				{
-					int LA12_2 = input.LA(2);
-
-					if ((LA12_2=='*'))
-					{
-						alt12 = 1;
-					}
-					else if (((LA12_2>='\u0000' && LA12_2<=')')||(LA12_2>='+' && LA12_2<='\uFFFF')))
-					{
-						alt12 = 2;
-					}
-
-
-				}
-				else if (((LA12_0>='\u0000' && LA12_0<=')')||(LA12_0>='+' && LA12_0<='.')||(LA12_0>='0' && LA12_0<='\uFFFF')))
-				{
-					alt12 = 2;
+					alt12 = 1;
 				}
 
 
@@ -3202,19 +3312,11 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:381:36: NESTED_ML_COMMENT
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:
 					{
-					DebugLocation(381, 36);
-					mNESTED_ML_COMMENT(); 
+					DebugLocation(402, 9);
+					input.Consume();
 
-					}
-					break;
-				case 2:
-					DebugEnterAlt(2);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:381:56: .
-					{
-					DebugLocation(381, 56);
-					MatchAny(); 
 
 					}
 					break;
@@ -3229,140 +3331,60 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 
 			} finally { DebugExitSubRule(12); }
 
-			DebugLocation(382, 9);
-			Match("*/"); 
+			DebugLocation(402, 23);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:402:23: ( ( ( '\\r' )? '\\n' ) | EOF )
+			int alt14=2;
+			try { DebugEnterSubRule(14);
+			try { DebugEnterDecision(14, false);
+			int LA14_0 = input.LA(1);
 
-			DebugLocation(382, 14);
-			_channel=Hidden;
-
-			}
-
-			state.type = _type;
-			state.channel = _channel;
-		}
-		finally
-		{
-			TraceOut("NESTED_ML_COMMENT", 72);
-			LeaveRule("NESTED_ML_COMMENT", 72);
-			LeaveRule_NESTED_ML_COMMENT();
-		}
-	}
-	// $ANTLR end "NESTED_ML_COMMENT"
-
-	partial void EnterRule_LINE_COMMENT();
-	partial void LeaveRule_LINE_COMMENT();
-
-	// $ANTLR start "LINE_COMMENT"
-	[GrammarRule("LINE_COMMENT")]
-	private void mLINE_COMMENT()
-	{
-		EnterRule_LINE_COMMENT();
-		EnterRule("LINE_COMMENT", 73);
-		TraceIn("LINE_COMMENT", 73);
-		try
-		{
-			int _type = LINE_COMMENT;
-			int _channel = DefaultTokenChannel;
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:386:2: ( '--' (~ ( '\\n' | '\\r' ) )* ( ( ( '\\r' )? '\\n' ) | EOF ) )
-			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:386:3: '--' (~ ( '\\n' | '\\r' ) )* ( ( ( '\\r' )? '\\n' ) | EOF )
+			if ((LA14_0=='\n'||LA14_0=='\r'))
 			{
-			DebugLocation(386, 3);
-			Match("--"); 
-
-			DebugLocation(386, 9);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:386:9: (~ ( '\\n' | '\\r' ) )*
-			try { DebugEnterSubRule(13);
-			while (true)
-			{
-				int alt13=2;
-				try { DebugEnterDecision(13, false);
-				int LA13_0 = input.LA(1);
-
-				if (((LA13_0>='\u0000' && LA13_0<='\t')||(LA13_0>='\u000B' && LA13_0<='\f')||(LA13_0>='\u000E' && LA13_0<='\uFFFF')))
-				{
-					alt13 = 1;
-				}
-
-
-				} finally { DebugExitDecision(13); }
-				switch ( alt13 )
-				{
-				case 1:
-					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:
-					{
-					DebugLocation(386, 9);
-					input.Consume();
-
-
-					}
-					break;
-
-				default:
-					goto loop13;
-				}
-			}
-
-			loop13:
-				;
-
-			} finally { DebugExitSubRule(13); }
-
-			DebugLocation(386, 23);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:386:23: ( ( ( '\\r' )? '\\n' ) | EOF )
-			int alt15=2;
-			try { DebugEnterSubRule(15);
-			try { DebugEnterDecision(15, false);
-			int LA15_0 = input.LA(1);
-
-			if ((LA15_0=='\n'||LA15_0=='\r'))
-			{
-				alt15 = 1;
+				alt14 = 1;
 			}
 			else
 			{
-				alt15 = 2;}
-			} finally { DebugExitDecision(15); }
-			switch (alt15)
+				alt14 = 2;}
+			} finally { DebugExitDecision(14); }
+			switch (alt14)
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:386:24: ( ( '\\r' )? '\\n' )
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:402:24: ( ( '\\r' )? '\\n' )
 				{
-				DebugLocation(386, 24);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:386:24: ( ( '\\r' )? '\\n' )
+				DebugLocation(402, 24);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:402:24: ( ( '\\r' )? '\\n' )
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:386:25: ( '\\r' )? '\\n'
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:402:25: ( '\\r' )? '\\n'
 				{
-				DebugLocation(386, 25);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:386:25: ( '\\r' )?
-				int alt14=2;
-				try { DebugEnterSubRule(14);
-				try { DebugEnterDecision(14, false);
-				int LA14_0 = input.LA(1);
+				DebugLocation(402, 25);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:402:25: ( '\\r' )?
+				int alt13=2;
+				try { DebugEnterSubRule(13);
+				try { DebugEnterDecision(13, false);
+				int LA13_0 = input.LA(1);
 
-				if ((LA14_0=='\r'))
+				if ((LA13_0=='\r'))
 				{
-					alt14 = 1;
+					alt13 = 1;
 				}
-				} finally { DebugExitDecision(14); }
-				switch (alt14)
+				} finally { DebugExitDecision(13); }
+				switch (alt13)
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:386:25: '\\r'
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:402:25: '\\r'
 					{
-					DebugLocation(386, 25);
+					DebugLocation(402, 25);
 					Match('\r'); 
 
 					}
 					break;
 
 				}
-				} finally { DebugExitSubRule(14); }
+				} finally { DebugExitSubRule(13); }
 
-				DebugLocation(386, 31);
+				DebugLocation(402, 31);
 				Match('\n'); 
 
 				}
@@ -3372,18 +3394,18 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:386:37: EOF
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:402:37: EOF
 				{
-				DebugLocation(386, 37);
+				DebugLocation(402, 37);
 				Match(EOF); 
 
 				}
 				break;
 
 			}
-			} finally { DebugExitSubRule(15); }
+			} finally { DebugExitSubRule(14); }
 
-			DebugLocation(386, 42);
+			DebugLocation(402, 42);
 			_channel=Hidden;
 
 			}
@@ -3393,8 +3415,8 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("LINE_COMMENT", 73);
-			LeaveRule("LINE_COMMENT", 73);
+			TraceOut("LINE_COMMENT", 74);
+			LeaveRule("LINE_COMMENT", 74);
 			LeaveRule_LINE_COMMENT();
 		}
 	}
@@ -3408,19 +3430,19 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 	private void mWS()
 	{
 		EnterRule_WS();
-		EnterRule("WS", 74);
-		TraceIn("WS", 74);
+		EnterRule("WS", 75);
+		TraceIn("WS", 75);
 		try
 		{
 			int _type = WS;
 			int _channel = DefaultTokenChannel;
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:390:5: ( WhiteSpaceChar )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:406:5: ( WhiteSpaceChar )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:390:9: WhiteSpaceChar
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:406:9: WhiteSpaceChar
 			{
-			DebugLocation(390, 9);
+			DebugLocation(406, 9);
 			mWhiteSpaceChar(); 
-			DebugLocation(390, 24);
+			DebugLocation(406, 24);
 			_channel=Hidden;
 
 			}
@@ -3430,8 +3452,8 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("WS", 74);
-			LeaveRule("WS", 74);
+			TraceOut("WS", 75);
+			LeaveRule("WS", 75);
 			LeaveRule_WS();
 		}
 	}
@@ -3445,15 +3467,15 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 	private void mNameStartChar()
 	{
 		EnterRule_NameStartChar();
-		EnterRule("NameStartChar", 75);
-		TraceIn("NameStartChar", 75);
+		EnterRule("NameStartChar", 76);
+		TraceIn("NameStartChar", 76);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:399:2: ( 'A' .. 'Z' | '_' | '$' | 'a' .. 'z' | '\\u00C0' .. '\\u00D6' | '\\u00D8' .. '\\u00F6' | '\\u00F8' .. '\\u02FF' | '\\u0370' .. '\\u037D' | '\\u037F' .. '\\u1FFF' | '\\u200C' .. '\\u200D' | '\\u2070' .. '\\u218F' | '\\u2C00' .. '\\u2FEF' | '\\u3001' .. '\\uD7FF' | '\\uF900' .. '\\uFDCF' | '\\uFDF0' .. '\\uFFFD' )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:415:2: ( 'A' .. 'Z' | '_' | '$' | 'a' .. 'z' | '\\u00C0' .. '\\u00D6' | '\\u00D8' .. '\\u00F6' | '\\u00F8' .. '\\u02FF' | '\\u0370' .. '\\u037D' | '\\u037F' .. '\\u1FFF' | '\\u200C' .. '\\u200D' | '\\u2070' .. '\\u218F' | '\\u2C00' .. '\\u2FEF' | '\\u3001' .. '\\uD7FF' | '\\uF900' .. '\\uFDCF' | '\\uFDF0' .. '\\uFFFD' )
 			DebugEnterAlt(1);
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:
 			{
-			DebugLocation(399, 2);
+			DebugLocation(415, 2);
 			if (input.LA(1)=='$'||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z')||(input.LA(1)>='\u00C0' && input.LA(1)<='\u00D6')||(input.LA(1)>='\u00D8' && input.LA(1)<='\u00F6')||(input.LA(1)>='\u00F8' && input.LA(1)<='\u02FF')||(input.LA(1)>='\u0370' && input.LA(1)<='\u037D')||(input.LA(1)>='\u037F' && input.LA(1)<='\u1FFF')||(input.LA(1)>='\u200C' && input.LA(1)<='\u200D')||(input.LA(1)>='\u2070' && input.LA(1)<='\u218F')||(input.LA(1)>='\u2C00' && input.LA(1)<='\u2FEF')||(input.LA(1)>='\u3001' && input.LA(1)<='\uD7FF')||(input.LA(1)>='\uF900' && input.LA(1)<='\uFDCF')||(input.LA(1)>='\uFDF0' && input.LA(1)<='\uFFFD'))
 			{
 				input.Consume();
@@ -3472,8 +3494,8 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("NameStartChar", 75);
-			LeaveRule("NameStartChar", 75);
+			TraceOut("NameStartChar", 76);
+			LeaveRule("NameStartChar", 76);
 			LeaveRule_NameStartChar();
 		}
 	}
@@ -3487,15 +3509,15 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 	private void mNameChar()
 	{
 		EnterRule_NameChar();
-		EnterRule("NameChar", 76);
-		TraceIn("NameChar", 76);
+		EnterRule("NameChar", 77);
+		TraceIn("NameChar", 77);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:408:2: ( NameStartChar | Num )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:424:2: ( NameStartChar | Num )
 			DebugEnterAlt(1);
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:
 			{
-			DebugLocation(408, 2);
+			DebugLocation(424, 2);
 			if (input.LA(1)=='$'||(input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z')||(input.LA(1)>='\u00C0' && input.LA(1)<='\u00D6')||(input.LA(1)>='\u00D8' && input.LA(1)<='\u00F6')||(input.LA(1)>='\u00F8' && input.LA(1)<='\u02FF')||(input.LA(1)>='\u0370' && input.LA(1)<='\u037D')||(input.LA(1)>='\u037F' && input.LA(1)<='\u1FFF')||(input.LA(1)>='\u200C' && input.LA(1)<='\u200D')||(input.LA(1)>='\u2070' && input.LA(1)<='\u218F')||(input.LA(1)>='\u2C00' && input.LA(1)<='\u2FEF')||(input.LA(1)>='\u3001' && input.LA(1)<='\uD7FF')||(input.LA(1)>='\uF900' && input.LA(1)<='\uFDCF')||(input.LA(1)>='\uFDF0' && input.LA(1)<='\uFFFD'))
 			{
 				input.Consume();
@@ -3514,8 +3536,8 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("NameChar", 76);
-			LeaveRule("NameChar", 76);
+			TraceOut("NameChar", 77);
+			LeaveRule("NameChar", 77);
 			LeaveRule_NameChar();
 		}
 	}
@@ -3529,46 +3551,46 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 	private void mStringChar()
 	{
 		EnterRule_StringChar();
-		EnterRule("StringChar", 77);
-		TraceIn("StringChar", 77);
+		EnterRule("StringChar", 78);
+		TraceIn("StringChar", 78);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:414:2: ( Char | EscapeSequence )
-			int alt16=2;
-			try { DebugEnterDecision(16, false);
-			int LA16_0 = input.LA(1);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:430:2: ( Char | EscapeSequence )
+			int alt15=2;
+			try { DebugEnterDecision(15, false);
+			int LA15_0 = input.LA(1);
 
-			if (((LA16_0>=' ' && LA16_0<='&')||(LA16_0>='(' && LA16_0<='[')||(LA16_0>=']' && LA16_0<='\uD7FF')||(LA16_0>='\uE000' && LA16_0<='\uFFFD')))
+			if (((LA15_0>=' ' && LA15_0<='&')||(LA15_0>='(' && LA15_0<='[')||(LA15_0>=']' && LA15_0<='\uD7FF')||(LA15_0>='\uE000' && LA15_0<='\uFFFD')))
 			{
-				alt16 = 1;
+				alt15 = 1;
 			}
-			else if ((LA16_0=='\\'))
+			else if ((LA15_0=='\\'))
 			{
-				alt16 = 2;
+				alt15 = 2;
 			}
 			else
 			{
-				NoViableAltException nvae = new NoViableAltException("", 16, 0, input);
+				NoViableAltException nvae = new NoViableAltException("", 15, 0, input);
 				DebugRecognitionException(nvae);
 				throw nvae;
 			}
-			} finally { DebugExitDecision(16); }
-			switch (alt16)
+			} finally { DebugExitDecision(15); }
+			switch (alt15)
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:414:4: Char
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:430:4: Char
 				{
-				DebugLocation(414, 4);
+				DebugLocation(430, 4);
 				mChar(); 
 
 				}
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:414:11: EscapeSequence
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:430:11: EscapeSequence
 				{
-				DebugLocation(414, 11);
+				DebugLocation(430, 11);
 				mEscapeSequence(); 
 
 				}
@@ -3578,8 +3600,8 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("StringChar", 77);
-			LeaveRule("StringChar", 77);
+			TraceOut("StringChar", 78);
+			LeaveRule("StringChar", 78);
 			LeaveRule_StringChar();
 		}
 	}
@@ -3593,15 +3615,15 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 	private void mWhiteSpaceChar()
 	{
 		EnterRule_WhiteSpaceChar();
-		EnterRule("WhiteSpaceChar", 78);
-		TraceIn("WhiteSpaceChar", 78);
+		EnterRule("WhiteSpaceChar", 79);
+		TraceIn("WhiteSpaceChar", 79);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:419:2: ( '\\t' | '\\n' | '\\f' | '\\r' | ' ' )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:435:2: ( '\\t' | '\\n' | '\\f' | '\\r' | ' ' )
 			DebugEnterAlt(1);
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:
 			{
-			DebugLocation(419, 2);
+			DebugLocation(435, 2);
 			if ((input.LA(1)>='\t' && input.LA(1)<='\n')||(input.LA(1)>='\f' && input.LA(1)<='\r')||input.LA(1)==' ')
 			{
 				input.Consume();
@@ -3620,8 +3642,8 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("WhiteSpaceChar", 78);
-			LeaveRule("WhiteSpaceChar", 78);
+			TraceOut("WhiteSpaceChar", 79);
+			LeaveRule("WhiteSpaceChar", 79);
 			LeaveRule_WhiteSpaceChar();
 		}
 	}
@@ -3635,15 +3657,15 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 	private void mChar()
 	{
 		EnterRule_Char();
-		EnterRule("Char", 79);
-		TraceIn("Char", 79);
+		EnterRule("Char", 80);
+		TraceIn("Char", 80);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:426:2: ( '\\u0020' .. '\\u0026' | '\\u0028' .. '\\u005B' | '\\u005D' .. '\\uD7FF' | '\\uE000' .. '\\uFFFD' )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:442:2: ( '\\u0020' .. '\\u0026' | '\\u0028' .. '\\u005B' | '\\u005D' .. '\\uD7FF' | '\\uE000' .. '\\uFFFD' )
 			DebugEnterAlt(1);
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:
 			{
-			DebugLocation(426, 2);
+			DebugLocation(442, 2);
 			if ((input.LA(1)>=' ' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uD7FF')||(input.LA(1)>='\uE000' && input.LA(1)<='\uFFFD'))
 			{
 				input.Consume();
@@ -3662,8 +3684,8 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("Char", 79);
-			LeaveRule("Char", 79);
+			TraceOut("Char", 80);
+			LeaveRule("Char", 80);
 			LeaveRule_Char();
 		}
 	}
@@ -3677,189 +3699,189 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 	private void mEscapeSequence()
 	{
 		EnterRule_EscapeSequence();
-		EnterRule("EscapeSequence", 80);
-		TraceIn("EscapeSequence", 80);
+		EnterRule("EscapeSequence", 81);
+		TraceIn("EscapeSequence", 81);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:432:2: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' | 'x' Hex Hex | 'u' Hex Hex Hex Hex ) )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:448:2: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' | 'x' Hex Hex | 'u' Hex Hex Hex Hex ) )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:432:4: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' | 'x' Hex Hex | 'u' Hex Hex Hex Hex )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:448:4: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' | 'x' Hex Hex | 'u' Hex Hex Hex Hex )
 			{
-			DebugLocation(432, 4);
+			DebugLocation(448, 4);
 			Match('\\'); 
-			DebugLocation(433, 3);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:433:3: ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' | 'x' Hex Hex | 'u' Hex Hex Hex Hex )
-			int alt17=10;
-			try { DebugEnterSubRule(17);
-			try { DebugEnterDecision(17, false);
+			DebugLocation(449, 3);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:449:3: ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' | 'x' Hex Hex | 'u' Hex Hex Hex Hex )
+			int alt16=10;
+			try { DebugEnterSubRule(16);
+			try { DebugEnterDecision(16, false);
 			switch (input.LA(1))
 			{
 			case 'b':
 				{
-				alt17 = 1;
+				alt16 = 1;
 				}
 				break;
 			case 't':
 				{
-				alt17 = 2;
+				alt16 = 2;
 				}
 				break;
 			case 'n':
 				{
-				alt17 = 3;
+				alt16 = 3;
 				}
 				break;
 			case 'f':
 				{
-				alt17 = 4;
+				alt16 = 4;
 				}
 				break;
 			case 'r':
 				{
-				alt17 = 5;
+				alt16 = 5;
 				}
 				break;
 			case '\"':
 				{
-				alt17 = 6;
+				alt16 = 6;
 				}
 				break;
 			case '\'':
 				{
-				alt17 = 7;
+				alt16 = 7;
 				}
 				break;
 			case '\\':
 				{
-				alt17 = 8;
+				alt16 = 8;
 				}
 				break;
 			case 'x':
 				{
-				alt17 = 9;
+				alt16 = 9;
 				}
 				break;
 			case 'u':
 				{
-				alt17 = 10;
+				alt16 = 10;
 				}
 				break;
 			default:
 				{
-					NoViableAltException nvae = new NoViableAltException("", 17, 0, input);
+					NoViableAltException nvae = new NoViableAltException("", 16, 0, input);
 					DebugRecognitionException(nvae);
 					throw nvae;
 				}
 			}
 
-			} finally { DebugExitDecision(17); }
-			switch (alt17)
+			} finally { DebugExitDecision(16); }
+			switch (alt16)
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:433:4: 'b'
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:449:4: 'b'
 				{
-				DebugLocation(433, 4);
+				DebugLocation(449, 4);
 				Match('b'); 
 
 				}
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:434:5: 't'
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:450:5: 't'
 				{
-				DebugLocation(434, 5);
+				DebugLocation(450, 5);
 				Match('t'); 
 
 				}
 				break;
 			case 3:
 				DebugEnterAlt(3);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:435:5: 'n'
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:451:5: 'n'
 				{
-				DebugLocation(435, 5);
+				DebugLocation(451, 5);
 				Match('n'); 
 
 				}
 				break;
 			case 4:
 				DebugEnterAlt(4);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:436:5: 'f'
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:452:5: 'f'
 				{
-				DebugLocation(436, 5);
+				DebugLocation(452, 5);
 				Match('f'); 
 
 				}
 				break;
 			case 5:
 				DebugEnterAlt(5);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:437:5: 'r'
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:453:5: 'r'
 				{
-				DebugLocation(437, 5);
+				DebugLocation(453, 5);
 				Match('r'); 
 
 				}
 				break;
 			case 6:
 				DebugEnterAlt(6);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:438:5: '\\\"'
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:454:5: '\\\"'
 				{
-				DebugLocation(438, 5);
+				DebugLocation(454, 5);
 				Match('\"'); 
 
 				}
 				break;
 			case 7:
 				DebugEnterAlt(7);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:439:5: '\\''
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:455:5: '\\''
 				{
-				DebugLocation(439, 5);
+				DebugLocation(455, 5);
 				Match('\''); 
 
 				}
 				break;
 			case 8:
 				DebugEnterAlt(8);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:440:5: '\\\\'
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:456:5: '\\\\'
 				{
-				DebugLocation(440, 5);
+				DebugLocation(456, 5);
 				Match('\\'); 
 
 				}
 				break;
 			case 9:
 				DebugEnterAlt(9);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:441:5: 'x' Hex Hex
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:457:5: 'x' Hex Hex
 				{
-				DebugLocation(441, 5);
+				DebugLocation(457, 5);
 				Match('x'); 
-				DebugLocation(441, 9);
+				DebugLocation(457, 9);
 				mHex(); 
-				DebugLocation(441, 13);
+				DebugLocation(457, 13);
 				mHex(); 
 
 				}
 				break;
 			case 10:
 				DebugEnterAlt(10);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:442:5: 'u' Hex Hex Hex Hex
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:458:5: 'u' Hex Hex Hex Hex
 				{
-				DebugLocation(442, 5);
+				DebugLocation(458, 5);
 				Match('u'); 
-				DebugLocation(442, 9);
+				DebugLocation(458, 9);
 				mHex(); 
-				DebugLocation(442, 13);
+				DebugLocation(458, 13);
 				mHex(); 
-				DebugLocation(442, 17);
+				DebugLocation(458, 17);
 				mHex(); 
-				DebugLocation(442, 21);
+				DebugLocation(458, 21);
 				mHex(); 
 
 				}
 				break;
 
 			}
-			} finally { DebugExitSubRule(17); }
+			} finally { DebugExitSubRule(16); }
 
 
 			}
@@ -3867,8 +3889,8 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("EscapeSequence", 80);
-			LeaveRule("EscapeSequence", 80);
+			TraceOut("EscapeSequence", 81);
+			LeaveRule("EscapeSequence", 81);
 			LeaveRule_EscapeSequence();
 		}
 	}
@@ -3882,15 +3904,15 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 	private void mHex()
 	{
 		EnterRule_Hex();
-		EnterRule("Hex", 81);
-		TraceIn("Hex", 81);
+		EnterRule("Hex", 82);
+		TraceIn("Hex", 82);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:447:5: ( '0' .. '9' | 'A' .. 'F' | 'a' .. 'f' )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:463:5: ( '0' .. '9' | 'A' .. 'F' | 'a' .. 'f' )
 			DebugEnterAlt(1);
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:
 			{
-			DebugLocation(447, 5);
+			DebugLocation(463, 5);
 			if ((input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='F')||(input.LA(1)>='a' && input.LA(1)<='f'))
 			{
 				input.Consume();
@@ -3909,8 +3931,8 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("Hex", 81);
-			LeaveRule("Hex", 81);
+			TraceOut("Hex", 82);
+			LeaveRule("Hex", 82);
 			LeaveRule_Hex();
 		}
 	}
@@ -3924,15 +3946,15 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 	private void mNum()
 	{
 		EnterRule_Num();
-		EnterRule("Num", 82);
-		TraceIn("Num", 82);
+		EnterRule("Num", 83);
+		TraceIn("Num", 83);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:452:2: ( '0' .. '9' )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:468:2: ( '0' .. '9' )
 			DebugEnterAlt(1);
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:
 			{
-			DebugLocation(452, 2);
+			DebugLocation(468, 2);
 			if ((input.LA(1)>='0' && input.LA(1)<='9'))
 			{
 				input.Consume();
@@ -3951,8 +3973,8 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("Num", 82);
-			LeaveRule("Num", 82);
+			TraceOut("Num", 83);
+			LeaveRule("Num", 83);
 			LeaveRule_Num();
 		}
 	}
@@ -3966,15 +3988,15 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 	private void mExponentPart()
 	{
 		EnterRule_ExponentPart();
-		EnterRule("ExponentPart", 83);
-		TraceIn("ExponentPart", 83);
+		EnterRule("ExponentPart", 84);
+		TraceIn("ExponentPart", 84);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:457:2: ( ( 'e' | 'E' ) ( '+' | '-' )? ( Num )+ )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:473:2: ( ( 'e' | 'E' ) ( '+' | '-' )? ( Num )+ )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:457:3: ( 'e' | 'E' ) ( '+' | '-' )? ( Num )+
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:473:3: ( 'e' | 'E' ) ( '+' | '-' )? ( Num )+
 			{
-			DebugLocation(457, 3);
+			DebugLocation(473, 3);
 			if (input.LA(1)=='E'||input.LA(1)=='e')
 			{
 				input.Consume();
@@ -3987,25 +4009,25 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 				Recover(mse);
 				throw mse;}
 
-			DebugLocation(457, 13);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:457:13: ( '+' | '-' )?
-			int alt18=2;
-			try { DebugEnterSubRule(18);
-			try { DebugEnterDecision(18, false);
-			int LA18_0 = input.LA(1);
+			DebugLocation(473, 13);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:473:13: ( '+' | '-' )?
+			int alt17=2;
+			try { DebugEnterSubRule(17);
+			try { DebugEnterDecision(17, false);
+			int LA17_0 = input.LA(1);
 
-			if ((LA18_0=='+'||LA18_0=='-'))
+			if ((LA17_0=='+'||LA17_0=='-'))
 			{
-				alt18 = 1;
+				alt17 = 1;
 			}
-			} finally { DebugExitDecision(18); }
-			switch (alt18)
+			} finally { DebugExitDecision(17); }
+			switch (alt17)
 			{
 			case 1:
 				DebugEnterAlt(1);
 				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:
 				{
-				DebugLocation(457, 13);
+				DebugLocation(473, 13);
 				input.Consume();
 
 
@@ -4013,32 +4035,32 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 				break;
 
 			}
-			} finally { DebugExitSubRule(18); }
+			} finally { DebugExitSubRule(17); }
 
-			DebugLocation(457, 24);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:457:24: ( Num )+
-			int cnt19=0;
-			try { DebugEnterSubRule(19);
+			DebugLocation(473, 24);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:473:24: ( Num )+
+			int cnt18=0;
+			try { DebugEnterSubRule(18);
 			while (true)
 			{
-				int alt19=2;
-				try { DebugEnterDecision(19, false);
-				int LA19_0 = input.LA(1);
+				int alt18=2;
+				try { DebugEnterDecision(18, false);
+				int LA18_0 = input.LA(1);
 
-				if (((LA19_0>='0' && LA19_0<='9')))
+				if (((LA18_0>='0' && LA18_0<='9')))
 				{
-					alt19 = 1;
+					alt18 = 1;
 				}
 
 
-				} finally { DebugExitDecision(19); }
-				switch (alt19)
+				} finally { DebugExitDecision(18); }
+				switch (alt18)
 				{
 				case 1:
 					DebugEnterAlt(1);
 					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:
 					{
-					DebugLocation(457, 24);
+					DebugLocation(473, 24);
 					input.Consume();
 
 
@@ -4046,19 +4068,19 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 					break;
 
 				default:
-					if (cnt19 >= 1)
-						goto loop19;
+					if (cnt18 >= 1)
+						goto loop18;
 
-					EarlyExitException eee19 = new EarlyExitException( 19, input );
-					DebugRecognitionException(eee19);
-					throw eee19;
+					EarlyExitException eee18 = new EarlyExitException( 18, input );
+					DebugRecognitionException(eee18);
+					throw eee18;
 				}
-				cnt19++;
+				cnt18++;
 			}
-			loop19:
+			loop18:
 				;
 
-			} finally { DebugExitSubRule(19); }
+			} finally { DebugExitSubRule(18); }
 
 
 			}
@@ -4066,8 +4088,8 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 		}
 		finally
 		{
-			TraceOut("ExponentPart", 83);
-			LeaveRule("ExponentPart", 83);
+			TraceOut("ExponentPart", 84);
+			LeaveRule("ExponentPart", 84);
 			LeaveRule_ExponentPart();
 		}
 	}
@@ -4075,683 +4097,692 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 
 	public override void mTokens()
 	{
-		// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:8: ( T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | T__58 | T__59 | T__60 | T__61 | T__62 | T__63 | T__64 | T__65 | T__66 | T__67 | T__68 | T__69 | T__70 | T__71 | T__72 | T__73 | T__74 | T__75 | T__76 | T__77 | T__78 | T__79 | T__80 | T__81 | T__82 | T__83 | T__84 | T__85 | T__86 | T__87 | T__88 | T__89 | T__90 | T__91 | T__92 | T__93 | T__94 | T__95 | T__96 | T__97 | T__98 | T__99 | T__100 | T__101 | T__102 | T__103 | T__104 | BooleanLiteralExp | NullLiteralExp | InvalidLiteralExp | SimpleName | UnlimitedNaturalLiteralExp | IntegerLiteralExp | RealLiteralExp | StringLiteralExp | NESTED_ML_COMMENT | LINE_COMMENT | WS )
-		int alt20=74;
-		try { DebugEnterDecision(20, false);
+		// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:8: ( T__60 | T__61 | T__62 | T__63 | T__64 | T__65 | T__66 | T__67 | T__68 | T__69 | T__70 | T__71 | T__72 | T__73 | T__74 | T__75 | T__76 | T__77 | T__78 | T__79 | T__80 | T__81 | T__82 | T__83 | T__84 | T__85 | T__86 | T__87 | T__88 | T__89 | T__90 | T__91 | T__92 | T__93 | T__94 | T__95 | T__96 | T__97 | T__98 | T__99 | T__100 | T__101 | T__102 | T__103 | T__104 | T__105 | T__106 | T__107 | T__108 | T__109 | T__110 | T__111 | T__112 | T__113 | T__114 | T__115 | T__116 | T__117 | T__118 | T__119 | T__120 | T__121 | T__122 | T__123 | T__124 | NullLiteralExp | InvalidLiteralExp | SimpleName | UnlimitedNaturalLiteralExp | IntegerLiteralExp | RealLiteralExp | StringLiteralExp | NESTED_ML_COMMENT | LINE_COMMENT | WS )
+		int alt19=75;
+		try { DebugEnterDecision(19, false);
 		try
 		{
-			alt20 = dfa20.Predict(input);
+			alt19 = dfa19.Predict(input);
 		}
 		catch (NoViableAltException nvae)
 		{
 			DebugRecognitionException(nvae);
 			throw;
 		}
-		} finally { DebugExitDecision(20); }
-		switch (alt20)
+		} finally { DebugExitDecision(19); }
+		switch (alt19)
 		{
 		case 1:
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:10: T__42
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:10: T__60
 			{
 			DebugLocation(1, 10);
-			mT__42(); 
+			mT__60(); 
 
 			}
 			break;
 		case 2:
 			DebugEnterAlt(2);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:16: T__43
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:16: T__61
 			{
 			DebugLocation(1, 16);
-			mT__43(); 
+			mT__61(); 
 
 			}
 			break;
 		case 3:
 			DebugEnterAlt(3);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:22: T__44
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:22: T__62
 			{
 			DebugLocation(1, 22);
-			mT__44(); 
+			mT__62(); 
 
 			}
 			break;
 		case 4:
 			DebugEnterAlt(4);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:28: T__45
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:28: T__63
 			{
 			DebugLocation(1, 28);
-			mT__45(); 
+			mT__63(); 
 
 			}
 			break;
 		case 5:
 			DebugEnterAlt(5);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:34: T__46
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:34: T__64
 			{
 			DebugLocation(1, 34);
-			mT__46(); 
+			mT__64(); 
 
 			}
 			break;
 		case 6:
 			DebugEnterAlt(6);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:40: T__47
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:40: T__65
 			{
 			DebugLocation(1, 40);
-			mT__47(); 
+			mT__65(); 
 
 			}
 			break;
 		case 7:
 			DebugEnterAlt(7);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:46: T__48
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:46: T__66
 			{
 			DebugLocation(1, 46);
-			mT__48(); 
+			mT__66(); 
 
 			}
 			break;
 		case 8:
 			DebugEnterAlt(8);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:52: T__49
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:52: T__67
 			{
 			DebugLocation(1, 52);
-			mT__49(); 
+			mT__67(); 
 
 			}
 			break;
 		case 9:
 			DebugEnterAlt(9);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:58: T__50
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:58: T__68
 			{
 			DebugLocation(1, 58);
-			mT__50(); 
+			mT__68(); 
 
 			}
 			break;
 		case 10:
 			DebugEnterAlt(10);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:64: T__51
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:64: T__69
 			{
 			DebugLocation(1, 64);
-			mT__51(); 
+			mT__69(); 
 
 			}
 			break;
 		case 11:
 			DebugEnterAlt(11);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:70: T__52
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:70: T__70
 			{
 			DebugLocation(1, 70);
-			mT__52(); 
+			mT__70(); 
 
 			}
 			break;
 		case 12:
 			DebugEnterAlt(12);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:76: T__53
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:76: T__71
 			{
 			DebugLocation(1, 76);
-			mT__53(); 
+			mT__71(); 
 
 			}
 			break;
 		case 13:
 			DebugEnterAlt(13);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:82: T__54
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:82: T__72
 			{
 			DebugLocation(1, 82);
-			mT__54(); 
+			mT__72(); 
 
 			}
 			break;
 		case 14:
 			DebugEnterAlt(14);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:88: T__55
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:88: T__73
 			{
 			DebugLocation(1, 88);
-			mT__55(); 
+			mT__73(); 
 
 			}
 			break;
 		case 15:
 			DebugEnterAlt(15);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:94: T__56
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:94: T__74
 			{
 			DebugLocation(1, 94);
-			mT__56(); 
+			mT__74(); 
 
 			}
 			break;
 		case 16:
 			DebugEnterAlt(16);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:100: T__57
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:100: T__75
 			{
 			DebugLocation(1, 100);
-			mT__57(); 
+			mT__75(); 
 
 			}
 			break;
 		case 17:
 			DebugEnterAlt(17);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:106: T__58
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:106: T__76
 			{
 			DebugLocation(1, 106);
-			mT__58(); 
+			mT__76(); 
 
 			}
 			break;
 		case 18:
 			DebugEnterAlt(18);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:112: T__59
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:112: T__77
 			{
 			DebugLocation(1, 112);
-			mT__59(); 
+			mT__77(); 
 
 			}
 			break;
 		case 19:
 			DebugEnterAlt(19);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:118: T__60
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:118: T__78
 			{
 			DebugLocation(1, 118);
-			mT__60(); 
+			mT__78(); 
 
 			}
 			break;
 		case 20:
 			DebugEnterAlt(20);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:124: T__61
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:124: T__79
 			{
 			DebugLocation(1, 124);
-			mT__61(); 
+			mT__79(); 
 
 			}
 			break;
 		case 21:
 			DebugEnterAlt(21);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:130: T__62
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:130: T__80
 			{
 			DebugLocation(1, 130);
-			mT__62(); 
+			mT__80(); 
 
 			}
 			break;
 		case 22:
 			DebugEnterAlt(22);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:136: T__63
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:136: T__81
 			{
 			DebugLocation(1, 136);
-			mT__63(); 
+			mT__81(); 
 
 			}
 			break;
 		case 23:
 			DebugEnterAlt(23);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:142: T__64
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:142: T__82
 			{
 			DebugLocation(1, 142);
-			mT__64(); 
+			mT__82(); 
 
 			}
 			break;
 		case 24:
 			DebugEnterAlt(24);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:148: T__65
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:148: T__83
 			{
 			DebugLocation(1, 148);
-			mT__65(); 
+			mT__83(); 
 
 			}
 			break;
 		case 25:
 			DebugEnterAlt(25);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:154: T__66
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:154: T__84
 			{
 			DebugLocation(1, 154);
-			mT__66(); 
+			mT__84(); 
 
 			}
 			break;
 		case 26:
 			DebugEnterAlt(26);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:160: T__67
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:160: T__85
 			{
 			DebugLocation(1, 160);
-			mT__67(); 
+			mT__85(); 
 
 			}
 			break;
 		case 27:
 			DebugEnterAlt(27);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:166: T__68
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:166: T__86
 			{
 			DebugLocation(1, 166);
-			mT__68(); 
+			mT__86(); 
 
 			}
 			break;
 		case 28:
 			DebugEnterAlt(28);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:172: T__69
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:172: T__87
 			{
 			DebugLocation(1, 172);
-			mT__69(); 
+			mT__87(); 
 
 			}
 			break;
 		case 29:
 			DebugEnterAlt(29);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:178: T__70
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:178: T__88
 			{
 			DebugLocation(1, 178);
-			mT__70(); 
+			mT__88(); 
 
 			}
 			break;
 		case 30:
 			DebugEnterAlt(30);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:184: T__71
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:184: T__89
 			{
 			DebugLocation(1, 184);
-			mT__71(); 
+			mT__89(); 
 
 			}
 			break;
 		case 31:
 			DebugEnterAlt(31);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:190: T__72
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:190: T__90
 			{
 			DebugLocation(1, 190);
-			mT__72(); 
+			mT__90(); 
 
 			}
 			break;
 		case 32:
 			DebugEnterAlt(32);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:196: T__73
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:196: T__91
 			{
 			DebugLocation(1, 196);
-			mT__73(); 
+			mT__91(); 
 
 			}
 			break;
 		case 33:
 			DebugEnterAlt(33);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:202: T__74
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:202: T__92
 			{
 			DebugLocation(1, 202);
-			mT__74(); 
+			mT__92(); 
 
 			}
 			break;
 		case 34:
 			DebugEnterAlt(34);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:208: T__75
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:208: T__93
 			{
 			DebugLocation(1, 208);
-			mT__75(); 
+			mT__93(); 
 
 			}
 			break;
 		case 35:
 			DebugEnterAlt(35);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:214: T__76
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:214: T__94
 			{
 			DebugLocation(1, 214);
-			mT__76(); 
+			mT__94(); 
 
 			}
 			break;
 		case 36:
 			DebugEnterAlt(36);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:220: T__77
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:220: T__95
 			{
 			DebugLocation(1, 220);
-			mT__77(); 
+			mT__95(); 
 
 			}
 			break;
 		case 37:
 			DebugEnterAlt(37);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:226: T__78
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:226: T__96
 			{
 			DebugLocation(1, 226);
-			mT__78(); 
+			mT__96(); 
 
 			}
 			break;
 		case 38:
 			DebugEnterAlt(38);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:232: T__79
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:232: T__97
 			{
 			DebugLocation(1, 232);
-			mT__79(); 
+			mT__97(); 
 
 			}
 			break;
 		case 39:
 			DebugEnterAlt(39);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:238: T__80
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:238: T__98
 			{
 			DebugLocation(1, 238);
-			mT__80(); 
+			mT__98(); 
 
 			}
 			break;
 		case 40:
 			DebugEnterAlt(40);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:244: T__81
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:244: T__99
 			{
 			DebugLocation(1, 244);
-			mT__81(); 
+			mT__99(); 
 
 			}
 			break;
 		case 41:
 			DebugEnterAlt(41);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:250: T__82
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:250: T__100
 			{
 			DebugLocation(1, 250);
-			mT__82(); 
+			mT__100(); 
 
 			}
 			break;
 		case 42:
 			DebugEnterAlt(42);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:256: T__83
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:257: T__101
 			{
-			DebugLocation(1, 256);
-			mT__83(); 
+			DebugLocation(1, 257);
+			mT__101(); 
 
 			}
 			break;
 		case 43:
 			DebugEnterAlt(43);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:262: T__84
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:264: T__102
 			{
-			DebugLocation(1, 262);
-			mT__84(); 
+			DebugLocation(1, 264);
+			mT__102(); 
 
 			}
 			break;
 		case 44:
 			DebugEnterAlt(44);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:268: T__85
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:271: T__103
 			{
-			DebugLocation(1, 268);
-			mT__85(); 
+			DebugLocation(1, 271);
+			mT__103(); 
 
 			}
 			break;
 		case 45:
 			DebugEnterAlt(45);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:274: T__86
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:278: T__104
 			{
-			DebugLocation(1, 274);
-			mT__86(); 
+			DebugLocation(1, 278);
+			mT__104(); 
 
 			}
 			break;
 		case 46:
 			DebugEnterAlt(46);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:280: T__87
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:285: T__105
 			{
-			DebugLocation(1, 280);
-			mT__87(); 
+			DebugLocation(1, 285);
+			mT__105(); 
 
 			}
 			break;
 		case 47:
 			DebugEnterAlt(47);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:286: T__88
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:292: T__106
 			{
-			DebugLocation(1, 286);
-			mT__88(); 
+			DebugLocation(1, 292);
+			mT__106(); 
 
 			}
 			break;
 		case 48:
 			DebugEnterAlt(48);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:292: T__89
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:299: T__107
 			{
-			DebugLocation(1, 292);
-			mT__89(); 
+			DebugLocation(1, 299);
+			mT__107(); 
 
 			}
 			break;
 		case 49:
 			DebugEnterAlt(49);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:298: T__90
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:306: T__108
 			{
-			DebugLocation(1, 298);
-			mT__90(); 
+			DebugLocation(1, 306);
+			mT__108(); 
 
 			}
 			break;
 		case 50:
 			DebugEnterAlt(50);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:304: T__91
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:313: T__109
 			{
-			DebugLocation(1, 304);
-			mT__91(); 
+			DebugLocation(1, 313);
+			mT__109(); 
 
 			}
 			break;
 		case 51:
 			DebugEnterAlt(51);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:310: T__92
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:320: T__110
 			{
-			DebugLocation(1, 310);
-			mT__92(); 
+			DebugLocation(1, 320);
+			mT__110(); 
 
 			}
 			break;
 		case 52:
 			DebugEnterAlt(52);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:316: T__93
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:327: T__111
 			{
-			DebugLocation(1, 316);
-			mT__93(); 
+			DebugLocation(1, 327);
+			mT__111(); 
 
 			}
 			break;
 		case 53:
 			DebugEnterAlt(53);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:322: T__94
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:334: T__112
 			{
-			DebugLocation(1, 322);
-			mT__94(); 
+			DebugLocation(1, 334);
+			mT__112(); 
 
 			}
 			break;
 		case 54:
 			DebugEnterAlt(54);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:328: T__95
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:341: T__113
 			{
-			DebugLocation(1, 328);
-			mT__95(); 
+			DebugLocation(1, 341);
+			mT__113(); 
 
 			}
 			break;
 		case 55:
 			DebugEnterAlt(55);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:334: T__96
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:348: T__114
 			{
-			DebugLocation(1, 334);
-			mT__96(); 
+			DebugLocation(1, 348);
+			mT__114(); 
 
 			}
 			break;
 		case 56:
 			DebugEnterAlt(56);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:340: T__97
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:355: T__115
 			{
-			DebugLocation(1, 340);
-			mT__97(); 
+			DebugLocation(1, 355);
+			mT__115(); 
 
 			}
 			break;
 		case 57:
 			DebugEnterAlt(57);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:346: T__98
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:362: T__116
 			{
-			DebugLocation(1, 346);
-			mT__98(); 
+			DebugLocation(1, 362);
+			mT__116(); 
 
 			}
 			break;
 		case 58:
 			DebugEnterAlt(58);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:352: T__99
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:369: T__117
 			{
-			DebugLocation(1, 352);
-			mT__99(); 
+			DebugLocation(1, 369);
+			mT__117(); 
 
 			}
 			break;
 		case 59:
 			DebugEnterAlt(59);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:358: T__100
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:376: T__118
 			{
-			DebugLocation(1, 358);
-			mT__100(); 
+			DebugLocation(1, 376);
+			mT__118(); 
 
 			}
 			break;
 		case 60:
 			DebugEnterAlt(60);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:365: T__101
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:383: T__119
 			{
-			DebugLocation(1, 365);
-			mT__101(); 
+			DebugLocation(1, 383);
+			mT__119(); 
 
 			}
 			break;
 		case 61:
 			DebugEnterAlt(61);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:372: T__102
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:390: T__120
 			{
-			DebugLocation(1, 372);
-			mT__102(); 
+			DebugLocation(1, 390);
+			mT__120(); 
 
 			}
 			break;
 		case 62:
 			DebugEnterAlt(62);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:379: T__103
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:397: T__121
 			{
-			DebugLocation(1, 379);
-			mT__103(); 
+			DebugLocation(1, 397);
+			mT__121(); 
 
 			}
 			break;
 		case 63:
 			DebugEnterAlt(63);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:386: T__104
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:404: T__122
 			{
-			DebugLocation(1, 386);
-			mT__104(); 
+			DebugLocation(1, 404);
+			mT__122(); 
 
 			}
 			break;
 		case 64:
 			DebugEnterAlt(64);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:393: BooleanLiteralExp
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:411: T__123
 			{
-			DebugLocation(1, 393);
-			mBooleanLiteralExp(); 
+			DebugLocation(1, 411);
+			mT__123(); 
 
 			}
 			break;
 		case 65:
 			DebugEnterAlt(65);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:411: NullLiteralExp
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:418: T__124
 			{
-			DebugLocation(1, 411);
-			mNullLiteralExp(); 
+			DebugLocation(1, 418);
+			mT__124(); 
 
 			}
 			break;
 		case 66:
 			DebugEnterAlt(66);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:426: InvalidLiteralExp
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:425: NullLiteralExp
 			{
-			DebugLocation(1, 426);
-			mInvalidLiteralExp(); 
+			DebugLocation(1, 425);
+			mNullLiteralExp(); 
 
 			}
 			break;
 		case 67:
 			DebugEnterAlt(67);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:444: SimpleName
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:440: InvalidLiteralExp
 			{
-			DebugLocation(1, 444);
-			mSimpleName(); 
+			DebugLocation(1, 440);
+			mInvalidLiteralExp(); 
 
 			}
 			break;
 		case 68:
 			DebugEnterAlt(68);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:455: UnlimitedNaturalLiteralExp
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:458: SimpleName
 			{
-			DebugLocation(1, 455);
-			mUnlimitedNaturalLiteralExp(); 
+			DebugLocation(1, 458);
+			mSimpleName(); 
 
 			}
 			break;
 		case 69:
 			DebugEnterAlt(69);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:482: IntegerLiteralExp
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:469: UnlimitedNaturalLiteralExp
 			{
-			DebugLocation(1, 482);
-			mIntegerLiteralExp(); 
+			DebugLocation(1, 469);
+			mUnlimitedNaturalLiteralExp(); 
 
 			}
 			break;
 		case 70:
 			DebugEnterAlt(70);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:500: RealLiteralExp
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:496: IntegerLiteralExp
 			{
-			DebugLocation(1, 500);
-			mRealLiteralExp(); 
+			DebugLocation(1, 496);
+			mIntegerLiteralExp(); 
 
 			}
 			break;
 		case 71:
 			DebugEnterAlt(71);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:515: StringLiteralExp
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:514: RealLiteralExp
 			{
-			DebugLocation(1, 515);
-			mStringLiteralExp(); 
+			DebugLocation(1, 514);
+			mRealLiteralExp(); 
 
 			}
 			break;
 		case 72:
 			DebugEnterAlt(72);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:532: NESTED_ML_COMMENT
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:529: StringLiteralExp
 			{
-			DebugLocation(1, 532);
-			mNESTED_ML_COMMENT(); 
+			DebugLocation(1, 529);
+			mStringLiteralExp(); 
 
 			}
 			break;
 		case 73:
 			DebugEnterAlt(73);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:550: LINE_COMMENT
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:546: NESTED_ML_COMMENT
 			{
-			DebugLocation(1, 550);
-			mLINE_COMMENT(); 
+			DebugLocation(1, 546);
+			mNESTED_ML_COMMENT(); 
 
 			}
 			break;
 		case 74:
 			DebugEnterAlt(74);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:563: WS
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:564: LINE_COMMENT
 			{
-			DebugLocation(1, 563);
+			DebugLocation(1, 564);
+			mLINE_COMMENT(); 
+
+			}
+			break;
+		case 75:
+			DebugEnterAlt(75);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:1:577: WS
+			{
+			DebugLocation(1, 577);
 			mWS(); 
 
 			}
@@ -4763,110 +4794,109 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 
 
 	#region DFA
-	DFA20 dfa20;
+	DFA19 dfa19;
 
 	protected override void InitDFAs()
 	{
 		base.InitDFAs();
-		dfa20 = new DFA20(this);
+		dfa19 = new DFA19(this);
 	}
 
-	private class DFA20 : DFA
+	private class DFA19 : DFA
 	{
-		private const string DFA20_eotS =
+		private const string DFA19_eotS =
 			"\x5\xFFFF\x1\x33\x1\x35\x1\x37\x1\x39\x1\xFFFF\x1\x3C\x1\xFFFF\x1\x3E"+
-			"\x2\xFFFF\x8\x2B\x2\xFFFF\x1\x4B\xD\x2B\x3\xFFFF\x1\x2B\x2\xFFFF\x2\x61"+
-			"\x10\xFFFF\xB\x2B\x2\xFFFF\x6\x2B\x1\x77\x1\x2B\x1\x7B\x4\x2B\x1\x80"+
-			"\x7\x2B\x2\xFFFF\x1\x61\x1\x88\x7\x2B\x1\x93\x3\x2B\x1\x97\x2\x2B\x1"+
-			"\x9A\x3\x2B\x1\xFFFF\x2\x2B\x1\xA1\x1\xFFFF\x1\x2B\x1\xA3\x1\xA4\x1\x2B"+
-			"\x1\xFFFF\x1\x2B\x1\xA7\x3\x2B\x1\xAB\x1\x2B\x1\xFFFF\x8\x2B\x1\xB5\x1"+
-			"\x2B\x1\xFFFF\x3\x2B\x1\xFFFF\x1\xBA\x1\x2B\x1\xFFFF\x1\x2B\x1\xBD\x2"+
-			"\x2B\x1\xC0\x1\x2B\x1\xFFFF\x1\x2B\x2\xFFFF\x1\xC3\x1\xC4\x1\xFFFF\x1"+
-			"\x2B\x1\xC6\x1\xC7\x1\xFFFF\x9\x2B\x1\xFFFF\x2\x2B\x1\xD3\x1\x2B\x1\xFFFF"+
-			"\x2\x2B\x1\xFFFF\x1\xD7\x1\x2B\x1\xFFFF\x2\x2B\x2\xFFFF\x1\x2B\x2\xFFFF"+
-			"\x1\xC7\x3\x2B\x1\xDF\x5\x2B\x1\xE5\x1\xFFFF\x3\x2B\x1\xFFFF\x3\x2B\x1"+
-			"\xEC\x1\xED\x1\x2B\x1\xEF\x1\xFFFF\x2\x2B\x1\xF2\x2\x2B\x1\xFFFF\x1\x2B"+
-			"\x1\xF6\x1\x2B\x1\xF8\x1\xF9\x1\xFA\x2\xFFFF\x1\x2B\x1\xFFFF\x2\x2B\x1"+
-			"\xFFFF\x1\x2B\x1\xFF\x1\x2B\x1\xFFFF\x1\x101\x3\xFFFF\x4\x2B\x1\xFFFF"+
-			"\x1\x2B\x1\xFFFF\x1\x107\x1\x108\x1\x109\x1\x10A\x1\x2B\x4\xFFFF\x5\x2B"+
-			"\x1\x111\x1\xFFFF";
-		private const string DFA20_eofS =
-			"\x112\xFFFF";
-		private const string DFA20_minS =
+			"\x2\xFFFF\x8\x2B\x2\xFFFF\x1\x4B\xE\x2B\x5\xFFFF\x2\x61\x10\xFFFF\xB"+
+			"\x2B\x2\xFFFF\x7\x2B\x1\x78\x1\x2B\x1\x7C\x4\x2B\x1\x81\x6\x2B\x2\xFFFF"+
+			"\x1\x61\x1\x88\x7\x2B\x1\x93\x3\x2B\x1\x97\x2\x2B\x1\x9A\x4\x2B\x1\xFFFF"+
+			"\x2\x2B\x1\xA2\x1\xFFFF\x1\x2B\x1\xA4\x1\xA5\x1\x2B\x1\xFFFF\x1\x2B\x1"+
+			"\xA8\x3\x2B\x1\xAC\x1\xFFFF\x8\x2B\x1\xB5\x1\x2B\x1\xFFFF\x3\x2B\x1\xFFFF"+
+			"\x1\xBA\x1\x2B\x1\xFFFF\x1\x2B\x1\xBD\x3\x2B\x1\xC1\x1\x2B\x1\xFFFF\x1"+
+			"\x2B\x2\xFFFF\x1\xC4\x1\xC5\x1\xFFFF\x1\x2B\x1\xC7\x1\xC8\x1\xFFFF\x8"+
+			"\x2B\x1\xFFFF\x2\x2B\x1\xD3\x1\x2B\x1\xFFFF\x2\x2B\x1\xFFFF\x1\xD7\x1"+
+			"\xD8\x1\x2B\x1\xFFFF\x2\x2B\x2\xFFFF\x1\x2B\x2\xFFFF\x3\x2B\x1\xE0\x5"+
+			"\x2B\x1\xE6\x1\xFFFF\x3\x2B\x2\xFFFF\x3\x2B\x1\xED\x1\xEE\x1\x2B\x1\xF0"+
+			"\x1\xFFFF\x2\x2B\x1\xF3\x2\x2B\x1\xFFFF\x1\x2B\x1\xF7\x1\x2B\x1\xF9\x1"+
+			"\xFA\x1\xFB\x2\xFFFF\x1\x2B\x1\xFFFF\x2\x2B\x1\xFFFF\x1\x2B\x1\x100\x1"+
+			"\x2B\x1\xFFFF\x1\x102\x3\xFFFF\x4\x2B\x1\xFFFF\x1\x2B\x1\xFFFF\x1\x108"+
+			"\x1\x109\x1\x10A\x1\x10B\x1\x2B\x4\xFFFF\x5\x2B\x1\x112\x1\xFFFF";
+		private const string DFA19_eofS =
+			"\x113\xFFFF";
+		private const string DFA19_minS =
 			"\x1\x9\x4\xFFFF\x1\x2D\x1\x2E\x1\x2A\x1\x3A\x1\xFFFF\x1\x3D\x1\xFFFF"+
 			"\x1\x3D\x2\xFFFF\x1\x61\x1\x6F\x1\x6E\x1\x63\x2\x65\x1\x75\x1\x6E\x2"+
-			"\xFFFF\x1\x5E\x1\x6E\x2\x6F\x1\x65\x1\x6C\x1\x66\x1\x65\x1\x6F\x1\x72"+
-			"\x1\x6F\x1\x74\x1\x68\x1\x6F\x3\xFFFF\x1\x61\x2\xFFFF\x2\x2E\x10\xFFFF"+
-			"\x1\x67\x1\x6F\x1\x6C\x1\x74\x1\x6C\x1\x64\x1\x61\x1\x71\x1\x72\x1\x70"+
-			"\x1\x6C\x2\xFFFF\x2\x64\x1\x6E\x1\x66\x1\x73\x1\x64\x1\x24\x1\x70\x1"+
+			"\xFFFF\x1\x5E\x1\x6E\x2\x6F\x1\x65\x1\x6C\x1\x61\x1\x66\x1\x65\x1\x6F"+
+			"\x1\x72\x1\x6F\x1\x74\x1\x68\x1\x6F\x5\xFFFF\x2\x2E\x10\xFFFF\x1\x67"+
+			"\x1\x6F\x1\x6C\x1\x74\x1\x6C\x1\x64\x1\x61\x1\x71\x1\x72\x1\x70\x1\x6C"+
+			"\x2\xFFFF\x2\x64\x1\x6E\x1\x66\x1\x73\x1\x64\x1\x6C\x1\x24\x1\x70\x1"+
 			"\x24\x1\x65\x2\x74\x1\x6C\x1\x24\x1\x73\x1\x65\x1\x61\x1\x65\x1\x75\x1"+
-			"\x72\x1\x6C\x2\xFFFF\x1\x2E\x1\x24\x2\x6C\x1\x65\x1\x41\x1\x65\x1\x6C"+
-			"\x1\x75\x1\x24\x1\x69\x1\x6C\x1\x69\x1\x24\x1\x79\x1\x74\x1\x24\x1\x69"+
-			"\x1\x65\x1\x69\x1\xFFFF\x1\x6C\x1\x74\x1\x24\x1\xFFFF\x1\x72\x2\x24\x1"+
-			"\x6C\x1\xFFFF\x1\x74\x1\x24\x1\x74\x1\x6E\x1\x65\x1\x24\x1\x73\x1\xFFFF"+
-			"\x2\x65\x1\x67\x2\x6E\x1\x65\x1\x6F\x1\x72\x1\x24\x1\x65\x1\xFFFF\x1"+
-			"\x6E\x1\x65\x1\x6D\x1\xFFFF\x1\x24\x1\x65\x1\xFFFF\x1\x76\x1\x24\x1\x66"+
+			"\x72\x2\xFFFF\x1\x2E\x1\x24\x2\x6C\x1\x65\x1\x41\x1\x65\x1\x6C\x1\x75"+
+			"\x1\x24\x1\x69\x1\x6C\x1\x69\x1\x24\x1\x79\x1\x74\x1\x24\x1\x69\x1\x65"+
+			"\x1\x69\x1\x73\x1\xFFFF\x1\x6C\x1\x74\x1\x24\x1\xFFFF\x1\x72\x2\x24\x1"+
+			"\x6C\x1\xFFFF\x1\x74\x1\x24\x1\x74\x1\x6E\x1\x65\x1\x24\x1\xFFFF\x2\x65"+
+			"\x1\x67\x2\x6E\x1\x65\x1\x6F\x1\x72\x1\x24\x1\x65\x1\xFFFF\x1\x6E\x1"+
+			"\x65\x1\x6D\x1\xFFFF\x1\x24\x1\x65\x1\xFFFF\x1\x76\x1\x24\x1\x66\x1\x65"+
 			"\x1\x69\x1\x24\x1\x6C\x1\xFFFF\x1\x61\x2\xFFFF\x2\x24\x1\xFFFF\x1\x69"+
-			"\x2\x24\x1\xFFFF\x1\x65\x1\x61\x1\x63\x1\x65\x1\x79\x1\x76\x1\x73\x1"+
-			"\x69\x1\x65\x1\xFFFF\x1\x6E\x1\x67\x1\x24\x1\x69\x1\xFFFF\x1\x78\x1\x61"+
-			"\x1\xFFFF\x1\x24\x1\x65\x1\xFFFF\x1\x69\x1\x74\x2\xFFFF\x1\x63\x2\xFFFF"+
-			"\x1\x24\x1\x6E\x1\x74\x1\x72\x1\x24\x1\x61\x1\x73\x2\x64\x1\x63\x1\x24"+
-			"\x1\xFFFF\x3\x74\x1\xFFFF\x1\x73\x1\x64\x1\x65\x2\x24\x1\x69\x1\x24\x1"+
-			"\xFFFF\x1\x6C\x1\x61\x1\x24\x1\x53\x1\x65\x1\xFFFF\x1\x65\x1\x24\x1\x65"+
-			"\x3\x24\x2\xFFFF\x1\x6F\x1\xFFFF\x1\x69\x1\x67\x1\xFFFF\x1\x65\x1\x24"+
-			"\x1\x64\x1\xFFFF\x1\x24\x3\xFFFF\x1\x6E\x1\x64\x1\x65\x1\x74\x1\xFFFF"+
-			"\x1\x4E\x1\xFFFF\x4\x24\x1\x61\x4\xFFFF\x1\x74\x1\x75\x1\x72\x1\x61\x1"+
-			"\x6C\x1\x24\x1\xFFFF";
-		private const string DFA20_maxS =
+			"\x2\x24\x1\xFFFF\x1\x61\x1\x63\x1\x65\x1\x79\x1\x76\x1\x73\x1\x69\x1"+
+			"\x65\x1\xFFFF\x1\x6E\x1\x67\x1\x24\x1\x69\x1\xFFFF\x1\x78\x1\x61\x1\xFFFF"+
+			"\x2\x24\x1\x65\x1\xFFFF\x1\x69\x1\x74\x2\xFFFF\x1\x63\x2\xFFFF\x1\x6E"+
+			"\x1\x74\x1\x72\x1\x24\x1\x61\x1\x73\x2\x64\x1\x63\x1\x24\x1\xFFFF\x3"+
+			"\x74\x2\xFFFF\x1\x73\x1\x64\x1\x65\x2\x24\x1\x69\x1\x24\x1\xFFFF\x1\x6C"+
+			"\x1\x61\x1\x24\x1\x53\x1\x65\x1\xFFFF\x1\x65\x1\x24\x1\x65\x3\x24\x2"+
+			"\xFFFF\x1\x6F\x1\xFFFF\x1\x69\x1\x67\x1\xFFFF\x1\x65\x1\x24\x1\x64\x1"+
+			"\xFFFF\x1\x24\x3\xFFFF\x1\x6E\x1\x64\x1\x65\x1\x74\x1\xFFFF\x1\x4E\x1"+
+			"\xFFFF\x4\x24\x1\x61\x4\xFFFF\x1\x74\x1\x75\x1\x72\x1\x61\x1\x6C\x1\x24"+
+			"\x1\xFFFF";
+		private const string DFA19_maxS =
 			"\x1\xFFFD\x4\xFFFF\x1\x3E\x1\x2E\x1\x2A\x1\x3A\x1\xFFFF\x1\x3E\x1\xFFFF"+
 			"\x1\x3D\x2\xFFFF\x2\x6F\x1\x6E\x1\x72\x1\x65\x1\x74\x1\x75\x1\x6E\x2"+
-			"\xFFFF\x1\x5E\x1\x6E\x2\x6F\x1\x65\x1\x6E\x1\x74\x1\x65\x1\x75\x2\x72"+
-			"\x1\x74\x1\x72\x1\x6F\x3\xFFFF\x1\x61\x2\xFFFF\x2\x65\x10\xFFFF\x1\x67"+
-			"\x1\x6F\x1\x6C\x1\x74\x1\x6C\x1\x64\x1\x61\x1\x74\x1\x72\x1\x70\x1\x6C"+
-			"\x2\xFFFF\x2\x64\x1\x6E\x1\x72\x1\x73\x1\x64\x1\xFFFD\x1\x70\x1\xFFFD"+
-			"\x1\x65\x2\x74\x1\x6C\x1\xFFFD\x1\x73\x1\x65\x1\x61\x1\x65\x1\x75\x1"+
-			"\x72\x1\x6C\x2\xFFFF\x1\x65\x1\xFFFD\x2\x6C\x1\x65\x1\x56\x1\x65\x1\x6C"+
-			"\x1\x75\x1\xFFFD\x1\x69\x1\x6C\x1\x69\x1\xFFFD\x1\x79\x1\x74\x1\xFFFD"+
-			"\x1\x69\x1\x65\x1\x69\x1\xFFFF\x1\x6C\x1\x74\x1\xFFFD\x1\xFFFF\x1\x72"+
-			"\x2\xFFFD\x1\x6C\x1\xFFFF\x1\x74\x1\xFFFD\x1\x74\x1\x6E\x1\x65\x1\xFFFD"+
-			"\x1\x73\x1\xFFFF\x2\x65\x1\x67\x2\x6E\x1\x65\x1\x6F\x1\x72\x1\xFFFD\x1"+
-			"\x65\x1\xFFFF\x1\x6E\x1\x65\x1\x6D\x1\xFFFF\x1\xFFFD\x1\x65\x1\xFFFF"+
-			"\x1\x76\x1\xFFFD\x1\x66\x1\x69\x1\xFFFD\x1\x6C\x1\xFFFF\x1\x61\x2\xFFFF"+
-			"\x2\xFFFD\x1\xFFFF\x1\x69\x2\xFFFD\x1\xFFFF\x1\x65\x1\x61\x1\x63\x1\x65"+
-			"\x1\x79\x1\x76\x1\x73\x1\x69\x1\x65\x1\xFFFF\x1\x6E\x1\x67\x1\xFFFD\x1"+
-			"\x69\x1\xFFFF\x1\x78\x1\x61\x1\xFFFF\x1\xFFFD\x1\x65\x1\xFFFF\x1\x69"+
-			"\x1\x74\x2\xFFFF\x1\x63\x2\xFFFF\x1\xFFFD\x1\x6E\x1\x74\x1\x72\x1\xFFFD"+
-			"\x1\x61\x1\x73\x2\x64\x1\x63\x1\xFFFD\x1\xFFFF\x3\x74\x1\xFFFF\x1\x73"+
-			"\x1\x64\x1\x65\x2\xFFFD\x1\x69\x1\xFFFD\x1\xFFFF\x1\x6C\x1\x61\x1\xFFFD"+
-			"\x1\x53\x1\x65\x1\xFFFF\x1\x65\x1\xFFFD\x1\x65\x3\xFFFD\x2\xFFFF\x1\x6F"+
-			"\x1\xFFFF\x1\x69\x1\x67\x1\xFFFF\x1\x65\x1\xFFFD\x1\x64\x1\xFFFF\x1\xFFFD"+
-			"\x3\xFFFF\x1\x6E\x1\x64\x1\x65\x1\x74\x1\xFFFF\x1\x4E\x1\xFFFF\x4\xFFFD"+
-			"\x1\x61\x4\xFFFF\x1\x74\x1\x75\x1\x72\x1\x61\x1\x6C\x1\xFFFD\x1\xFFFF";
-		private const string DFA20_acceptS =
+			"\xFFFF\x1\x5E\x1\x6E\x2\x6F\x1\x65\x1\x6E\x1\x61\x1\x74\x1\x65\x1\x75"+
+			"\x2\x72\x1\x74\x1\x72\x1\x6F\x5\xFFFF\x2\x65\x10\xFFFF\x1\x67\x1\x6F"+
+			"\x1\x6C\x1\x74\x1\x6C\x1\x64\x1\x61\x1\x74\x1\x72\x1\x70\x1\x6C\x2\xFFFF"+
+			"\x2\x64\x1\x6E\x1\x72\x1\x73\x1\x64\x1\x6C\x1\xFFFD\x1\x70\x1\xFFFD\x1"+
+			"\x65\x2\x74\x1\x6C\x1\xFFFD\x1\x73\x1\x65\x1\x61\x1\x65\x1\x75\x1\x72"+
+			"\x2\xFFFF\x1\x65\x1\xFFFD\x2\x6C\x1\x65\x1\x56\x1\x65\x1\x6C\x1\x75\x1"+
+			"\xFFFD\x1\x69\x1\x6C\x1\x69\x1\xFFFD\x1\x79\x1\x74\x1\xFFFD\x1\x69\x1"+
+			"\x65\x1\x69\x1\x73\x1\xFFFF\x1\x6C\x1\x74\x1\xFFFD\x1\xFFFF\x1\x72\x2"+
+			"\xFFFD\x1\x6C\x1\xFFFF\x1\x74\x1\xFFFD\x1\x74\x1\x6E\x1\x65\x1\xFFFD"+
+			"\x1\xFFFF\x2\x65\x1\x67\x2\x6E\x1\x65\x1\x6F\x1\x72\x1\xFFFD\x1\x65\x1"+
+			"\xFFFF\x1\x6E\x1\x65\x1\x6D\x1\xFFFF\x1\xFFFD\x1\x65\x1\xFFFF\x1\x76"+
+			"\x1\xFFFD\x1\x66\x1\x65\x1\x69\x1\xFFFD\x1\x6C\x1\xFFFF\x1\x61\x2\xFFFF"+
+			"\x2\xFFFD\x1\xFFFF\x1\x69\x2\xFFFD\x1\xFFFF\x1\x61\x1\x63\x1\x65\x1\x79"+
+			"\x1\x76\x1\x73\x1\x69\x1\x65\x1\xFFFF\x1\x6E\x1\x67\x1\xFFFD\x1\x69\x1"+
+			"\xFFFF\x1\x78\x1\x61\x1\xFFFF\x2\xFFFD\x1\x65\x1\xFFFF\x1\x69\x1\x74"+
+			"\x2\xFFFF\x1\x63\x2\xFFFF\x1\x6E\x1\x74\x1\x72\x1\xFFFD\x1\x61\x1\x73"+
+			"\x2\x64\x1\x63\x1\xFFFD\x1\xFFFF\x3\x74\x2\xFFFF\x1\x73\x1\x64\x1\x65"+
+			"\x2\xFFFD\x1\x69\x1\xFFFD\x1\xFFFF\x1\x6C\x1\x61\x1\xFFFD\x1\x53\x1\x65"+
+			"\x1\xFFFF\x1\x65\x1\xFFFD\x1\x65\x3\xFFFD\x2\xFFFF\x1\x6F\x1\xFFFF\x1"+
+			"\x69\x1\x67\x1\xFFFF\x1\x65\x1\xFFFD\x1\x64\x1\xFFFF\x1\xFFFD\x3\xFFFF"+
+			"\x1\x6E\x1\x64\x1\x65\x1\x74\x1\xFFFF\x1\x4E\x1\xFFFF\x4\xFFFD\x1\x61"+
+			"\x4\xFFFF\x1\x74\x1\x75\x1\x72\x1\x61\x1\x6C\x1\xFFFD\x1\xFFFF";
+		private const string DFA19_acceptS =
 			"\x1\xFFFF\x1\x1\x1\x2\x1\x3\x1\x4\x4\xFFFF\x1\xC\x1\xFFFF\x1\x10\x1\xFFFF"+
-			"\x1\x13\x1\x14\x8\xFFFF\x1\x24\x1\x25\xE\xFFFF\x1\x3D\x1\x3E\x1\x3F\x1"+
-			"\xFFFF\x1\x43\x1\x44\x2\xFFFF\x1\x47\x1\x4A\x1\x6\x1\x49\x1\x5\x1\x8"+
-			"\x1\x7\x1\x48\x1\x9\x1\xB\x1\xA\x1\xE\x1\xF\x1\xD\x1\x12\x1\x11\xB\xFFFF"+
-			"\x1\x27\x1\x26\x15\xFFFF\x1\x45\x1\x46\x14\xFFFF\x1\x2F\x3\xFFFF\x1\x31"+
-			"\x4\xFFFF\x1\x37\x7\xFFFF\x1\x15\xA\xFFFF\x1\x20\x3\xFFFF\x1\x28\x2\xFFFF"+
-			"\x1\x2B\x6\xFFFF\x1\x33\x1\xFFFF\x1\x35\x1\x36\x2\xFFFF\x1\x39\x3\xFFFF"+
-			"\x1\x3C\x9\xFFFF\x1\x1E\x4\xFFFF\x1\x29\x2\xFFFF\x1\x2D\x2\xFFFF\x1\x32"+
-			"\x2\xFFFF\x1\x41\x1\x38\x1\xFFFF\x1\x3B\x1\x40\xB\xFFFF\x1\x22\x3\xFFFF"+
-			"\x1\x2E\x7\xFFFF\x1\x19\x5\xFFFF\x1\x21\x6\xFFFF\x1\x3A\x1\x16\x1\xFFFF"+
-			"\x1\x18\x2\xFFFF\x1\x1C\x3\xFFFF\x1\x2A\x1\xFFFF\x1\x30\x1\x42\x1\x34"+
+			"\x1\x13\x1\x14\x8\xFFFF\x1\x24\x1\x25\xF\xFFFF\x1\x3F\x1\x40\x1\x41\x1"+
+			"\x44\x1\x45\x2\xFFFF\x1\x48\x1\x4B\x1\x6\x1\x4A\x1\x5\x1\x8\x1\x7\x1"+
+			"\x49\x1\x9\x1\xB\x1\xA\x1\xE\x1\xF\x1\xD\x1\x12\x1\x11\xB\xFFFF\x1\x27"+
+			"\x1\x26\x15\xFFFF\x1\x46\x1\x47\x15\xFFFF\x1\x30\x3\xFFFF\x1\x32\x4\xFFFF"+
+			"\x1\x38\x6\xFFFF\x1\x15\xA\xFFFF\x1\x20\x3\xFFFF\x1\x28\x2\xFFFF\x1\x2B"+
+			"\x7\xFFFF\x1\x34\x1\xFFFF\x1\x36\x1\x37\x2\xFFFF\x1\x3A\x3\xFFFF\x1\x3E"+
+			"\x8\xFFFF\x1\x1E\x4\xFFFF\x1\x29\x2\xFFFF\x1\x2D\x3\xFFFF\x1\x33\x2\xFFFF"+
+			"\x1\x42\x1\x39\x1\xFFFF\x1\x3C\x1\x3D\xA\xFFFF\x1\x22\x3\xFFFF\x1\x2E"+
+			"\x1\x2F\x7\xFFFF\x1\x19\x5\xFFFF\x1\x21\x6\xFFFF\x1\x3B\x1\x16\x1\xFFFF"+
+			"\x1\x18\x2\xFFFF\x1\x1C\x3\xFFFF\x1\x2A\x1\xFFFF\x1\x31\x1\x43\x1\x35"+
 			"\x4\xFFFF\x1\x1F\x1\xFFFF\x1\x2C\x5\xFFFF\x1\x17\x1\x1A\x1\x1B\x1\x1D"+
 			"\x6\xFFFF\x1\x23";
-		private const string DFA20_specialS =
-			"\x112\xFFFF}>";
-		private static readonly string[] DFA20_transitionS =
+		private const string DFA19_specialS =
+			"\x113\xFFFF}>";
+		private static readonly string[] DFA19_transitionS =
 			{
 				"\x2\x30\x1\xFFFF\x2\x30\x12\xFFFF\x1\x30\x3\xFFFF\x1\x2B\x2\xFFFF\x1"+
 				"\x2F\x1\x1\x1\x2\x1\x2C\x1\x3\x1\x4\x1\x5\x1\x6\x1\x7\x1\x2D\x9\x2E"+
 				"\x1\x8\x1\x9\x1\xA\x1\xB\x1\xC\x1\xD\x1\xE\x1\x2B\x1\xF\x1\x10\x5\x2B"+
 				"\x1\x11\x5\x2B\x1\x12\x2\x2B\x1\x13\x1\x14\x1\x15\x1\x16\x5\x2B\x1\x17"+
 				"\x1\xFFFF\x1\x18\x1\x19\x1\x2B\x1\xFFFF\x1\x1A\x1\x1B\x1\x1C\x1\x1D"+
-				"\x1\x1E\x1\x2A\x2\x2B\x1\x1F\x2\x2B\x1\x20\x1\x2B\x1\x21\x1\x22\x1\x23"+
-				"\x2\x2B\x1\x24\x1\x25\x3\x2B\x1\x26\x2\x2B\x1\x27\x1\x28\x1\x29\x42"+
+				"\x1\x1E\x1\x1F\x2\x2B\x1\x20\x2\x2B\x1\x21\x1\x2B\x1\x22\x1\x23\x1\x24"+
+				"\x2\x2B\x1\x25\x1\x26\x3\x2B\x1\x27\x2\x2B\x1\x28\x1\x29\x1\x2A\x42"+
 				"\xFFFF\x17\x2B\x1\xFFFF\x1F\x2B\x1\xFFFF\x208\x2B\x70\xFFFF\xE\x2B\x1"+
 				"\xFFFF\x1C81\x2B\xC\xFFFF\x2\x2B\x62\xFFFF\x120\x2B\xA70\xFFFF\x3F0"+
 				"\x2B\x11\xFFFF\xA7FF\x2B\x2100\xFFFF\x4D0\x2B\x20\xFFFF\x20E\x2B",
@@ -4900,18 +4930,18 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 				"\x1\x4E",
 				"\x1\x4F",
 				"\x1\x50\x1\xFFFF\x1\x51",
-				"\x1\x52\x6\xFFFF\x1\x53\x1\x54\x5\xFFFF\x1\x55",
-				"\x1\x56",
-				"\x1\x57\x5\xFFFF\x1\x58",
-				"\x1\x59",
-				"\x1\x5A\x2\xFFFF\x1\x5B",
-				"\x1\x5C",
-				"\x1\x5D\x9\xFFFF\x1\x5E",
-				"\x1\x5F",
-				"",
-				"",
-				"",
+				"\x1\x52",
+				"\x1\x53\x6\xFFFF\x1\x54\x1\x55\x5\xFFFF\x1\x56",
+				"\x1\x57",
+				"\x1\x58\x5\xFFFF\x1\x59",
+				"\x1\x5A",
+				"\x1\x5B\x2\xFFFF\x1\x5C",
+				"\x1\x5D",
+				"\x1\x5E\x9\xFFFF\x1\x5F",
 				"\x1\x60",
+				"",
+				"",
+				"",
 				"",
 				"",
 				"\x1\x62\x1\xFFFF\xA\x62\xB\xFFFF\x1\x62\x1F\xFFFF\x1\x62",
@@ -4951,25 +4981,25 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 				"\x1\x73\xB\xFFFF\x1\x74",
 				"\x1\x75",
 				"\x1\x76",
+				"\x1\x77",
 				"\x1\x2B\xB\xFFFF\xA\x2B\x7\xFFFF\x1A\x2B\x4\xFFFF\x1\x2B\x1\xFFFF\x1A"+
 				"\x2B\x45\xFFFF\x17\x2B\x1\xFFFF\x1F\x2B\x1\xFFFF\x208\x2B\x70\xFFFF"+
 				"\xE\x2B\x1\xFFFF\x1C81\x2B\xC\xFFFF\x2\x2B\x62\xFFFF\x120\x2B\xA70\xFFFF"+
 				"\x3F0\x2B\x11\xFFFF\xA7FF\x2B\x2100\xFFFF\x4D0\x2B\x20\xFFFF\x20E\x2B",
-				"\x1\x78",
+				"\x1\x79",
 				"\x1\x2B\xB\xFFFF\xA\x2B\x7\xFFFF\x1A\x2B\x4\xFFFF\x1\x2B\x1\xFFFF\x8"+
-				"\x2B\x1\x79\xC\x2B\x1\x7A\x4\x2B\x45\xFFFF\x17\x2B\x1\xFFFF\x1F\x2B"+
+				"\x2B\x1\x7A\xC\x2B\x1\x7B\x4\x2B\x45\xFFFF\x17\x2B\x1\xFFFF\x1F\x2B"+
 				"\x1\xFFFF\x208\x2B\x70\xFFFF\xE\x2B\x1\xFFFF\x1C81\x2B\xC\xFFFF\x2\x2B"+
 				"\x62\xFFFF\x120\x2B\xA70\xFFFF\x3F0\x2B\x11\xFFFF\xA7FF\x2B\x2100\xFFFF"+
 				"\x4D0\x2B\x20\xFFFF\x20E\x2B",
-				"\x1\x7C",
 				"\x1\x7D",
 				"\x1\x7E",
 				"\x1\x7F",
+				"\x1\x80",
 				"\x1\x2B\xB\xFFFF\xA\x2B\x7\xFFFF\x1A\x2B\x4\xFFFF\x1\x2B\x1\xFFFF\x1A"+
 				"\x2B\x45\xFFFF\x17\x2B\x1\xFFFF\x1F\x2B\x1\xFFFF\x208\x2B\x70\xFFFF"+
 				"\xE\x2B\x1\xFFFF\x1C81\x2B\xC\xFFFF\x2\x2B\x62\xFFFF\x120\x2B\xA70\xFFFF"+
 				"\x3F0\x2B\x11\xFFFF\xA7FF\x2B\x2100\xFFFF\x4D0\x2B\x20\xFFFF\x20E\x2B",
-				"\x1\x81",
 				"\x1\x82",
 				"\x1\x83",
 				"\x1\x84",
@@ -5010,16 +5040,17 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 				"\x1\x9B",
 				"\x1\x9C",
 				"\x1\x9D",
-				"",
 				"\x1\x9E",
+				"",
 				"\x1\x9F",
+				"\x1\xA0",
 				"\x1\x2B\xB\xFFFF\xA\x2B\x7\xFFFF\x1A\x2B\x4\xFFFF\x1\x2B\x1\xFFFF\x1"+
-				"\xA0\x19\x2B\x45\xFFFF\x17\x2B\x1\xFFFF\x1F\x2B\x1\xFFFF\x208\x2B\x70"+
+				"\xA1\x19\x2B\x45\xFFFF\x17\x2B\x1\xFFFF\x1F\x2B\x1\xFFFF\x208\x2B\x70"+
 				"\xFFFF\xE\x2B\x1\xFFFF\x1C81\x2B\xC\xFFFF\x2\x2B\x62\xFFFF\x120\x2B"+
 				"\xA70\xFFFF\x3F0\x2B\x11\xFFFF\xA7FF\x2B\x2100\xFFFF\x4D0\x2B\x20\xFFFF"+
 				"\x20E\x2B",
 				"",
-				"\x1\xA2",
+				"\x1\xA3",
 				"\x1\x2B\xB\xFFFF\xA\x2B\x7\xFFFF\x1A\x2B\x4\xFFFF\x1\x2B\x1\xFFFF\x1A"+
 				"\x2B\x45\xFFFF\x17\x2B\x1\xFFFF\x1F\x2B\x1\xFFFF\x208\x2B\x70\xFFFF"+
 				"\xE\x2B\x1\xFFFF\x1C81\x2B\xC\xFFFF\x2\x2B\x62\xFFFF\x120\x2B\xA70\xFFFF"+
@@ -5028,21 +5059,20 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 				"\x2B\x45\xFFFF\x17\x2B\x1\xFFFF\x1F\x2B\x1\xFFFF\x208\x2B\x70\xFFFF"+
 				"\xE\x2B\x1\xFFFF\x1C81\x2B\xC\xFFFF\x2\x2B\x62\xFFFF\x120\x2B\xA70\xFFFF"+
 				"\x3F0\x2B\x11\xFFFF\xA7FF\x2B\x2100\xFFFF\x4D0\x2B\x20\xFFFF\x20E\x2B",
-				"\x1\xA5",
-				"",
 				"\x1\xA6",
+				"",
+				"\x1\xA7",
 				"\x1\x2B\xB\xFFFF\xA\x2B\x7\xFFFF\x1A\x2B\x4\xFFFF\x1\x2B\x1\xFFFF\x1A"+
 				"\x2B\x45\xFFFF\x17\x2B\x1\xFFFF\x1F\x2B\x1\xFFFF\x208\x2B\x70\xFFFF"+
 				"\xE\x2B\x1\xFFFF\x1C81\x2B\xC\xFFFF\x2\x2B\x62\xFFFF\x120\x2B\xA70\xFFFF"+
 				"\x3F0\x2B\x11\xFFFF\xA7FF\x2B\x2100\xFFFF\x4D0\x2B\x20\xFFFF\x20E\x2B",
-				"\x1\xA8",
 				"\x1\xA9",
 				"\x1\xAA",
+				"\x1\xAB",
 				"\x1\x2B\xB\xFFFF\xA\x2B\x7\xFFFF\x1A\x2B\x4\xFFFF\x1\x2B\x1\xFFFF\x1A"+
 				"\x2B\x45\xFFFF\x17\x2B\x1\xFFFF\x1F\x2B\x1\xFFFF\x208\x2B\x70\xFFFF"+
 				"\xE\x2B\x1\xFFFF\x1C81\x2B\xC\xFFFF\x2\x2B\x62\xFFFF\x120\x2B\xA70\xFFFF"+
 				"\x3F0\x2B\x11\xFFFF\xA7FF\x2B\x2100\xFFFF\x4D0\x2B\x20\xFFFF\x20E\x2B",
-				"\x1\xAC",
 				"",
 				"\x1\xAD",
 				"\x1\xAE",
@@ -5075,14 +5105,15 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 				"\x3F0\x2B\x11\xFFFF\xA7FF\x2B\x2100\xFFFF\x4D0\x2B\x20\xFFFF\x20E\x2B",
 				"\x1\xBE",
 				"\x1\xBF",
+				"\x1\xC0",
 				"\x1\x2B\xB\xFFFF\xA\x2B\x7\xFFFF\x1A\x2B\x4\xFFFF\x1\x2B\x1\xFFFF\x1A"+
 				"\x2B\x45\xFFFF\x17\x2B\x1\xFFFF\x1F\x2B\x1\xFFFF\x208\x2B\x70\xFFFF"+
 				"\xE\x2B\x1\xFFFF\x1C81\x2B\xC\xFFFF\x2\x2B\x62\xFFFF\x120\x2B\xA70\xFFFF"+
 				"\x3F0\x2B\x11\xFFFF\xA7FF\x2B\x2100\xFFFF\x4D0\x2B\x20\xFFFF\x20E\x2B",
-				"\x1\xC1",
-				"",
 				"\x1\xC2",
 				"",
+				"\x1\xC3",
+				"",
 				"",
 				"\x1\x2B\xB\xFFFF\xA\x2B\x7\xFFFF\x1A\x2B\x4\xFFFF\x1\x2B\x1\xFFFF\x1A"+
 				"\x2B\x45\xFFFF\x17\x2B\x1\xFFFF\x1F\x2B\x1\xFFFF\x208\x2B\x70\xFFFF"+
@@ -5093,7 +5124,7 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 				"\xE\x2B\x1\xFFFF\x1C81\x2B\xC\xFFFF\x2\x2B\x62\xFFFF\x120\x2B\xA70\xFFFF"+
 				"\x3F0\x2B\x11\xFFFF\xA7FF\x2B\x2100\xFFFF\x4D0\x2B\x20\xFFFF\x20E\x2B",
 				"",
-				"\x1\xC5",
+				"\x1\xC6",
 				"\x1\x2B\xB\xFFFF\xA\x2B\x7\xFFFF\x1A\x2B\x4\xFFFF\x1\x2B\x1\xFFFF\x1A"+
 				"\x2B\x45\xFFFF\x17\x2B\x1\xFFFF\x1F\x2B\x1\xFFFF\x208\x2B\x70\xFFFF"+
 				"\xE\x2B\x1\xFFFF\x1C81\x2B\xC\xFFFF\x2\x2B\x62\xFFFF\x120\x2B\xA70\xFFFF"+
@@ -5103,7 +5134,6 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 				"\xE\x2B\x1\xFFFF\x1C81\x2B\xC\xFFFF\x2\x2B\x62\xFFFF\x120\x2B\xA70\xFFFF"+
 				"\x3F0\x2B\x11\xFFFF\xA7FF\x2B\x2100\xFFFF\x4D0\x2B\x20\xFFFF\x20E\x2B",
 				"",
-				"\x1\xC8",
 				"\x1\xC9",
 				"\x1\xCA",
 				"\x1\xCB",
@@ -5128,43 +5158,44 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 				"\x2B\x45\xFFFF\x17\x2B\x1\xFFFF\x1F\x2B\x1\xFFFF\x208\x2B\x70\xFFFF"+
 				"\xE\x2B\x1\xFFFF\x1C81\x2B\xC\xFFFF\x2\x2B\x62\xFFFF\x120\x2B\xA70\xFFFF"+
 				"\x3F0\x2B\x11\xFFFF\xA7FF\x2B\x2100\xFFFF\x4D0\x2B\x20\xFFFF\x20E\x2B",
-				"\x1\xD8",
-				"",
+				"\x1\x2B\xB\xFFFF\xA\x2B\x7\xFFFF\x1A\x2B\x4\xFFFF\x1\x2B\x1\xFFFF\x1A"+
+				"\x2B\x45\xFFFF\x17\x2B\x1\xFFFF\x1F\x2B\x1\xFFFF\x208\x2B\x70\xFFFF"+
+				"\xE\x2B\x1\xFFFF\x1C81\x2B\xC\xFFFF\x2\x2B\x62\xFFFF\x120\x2B\xA70\xFFFF"+
+				"\x3F0\x2B\x11\xFFFF\xA7FF\x2B\x2100\xFFFF\x4D0\x2B\x20\xFFFF\x20E\x2B",
 				"\x1\xD9",
+				"",
 				"\x1\xDA",
-				"",
-				"",
 				"\x1\xDB",
 				"",
 				"",
-				"\x1\x2B\xB\xFFFF\xA\x2B\x7\xFFFF\x1A\x2B\x4\xFFFF\x1\x2B\x1\xFFFF\x1A"+
-				"\x2B\x45\xFFFF\x17\x2B\x1\xFFFF\x1F\x2B\x1\xFFFF\x208\x2B\x70\xFFFF"+
-				"\xE\x2B\x1\xFFFF\x1C81\x2B\xC\xFFFF\x2\x2B\x62\xFFFF\x120\x2B\xA70\xFFFF"+
-				"\x3F0\x2B\x11\xFFFF\xA7FF\x2B\x2100\xFFFF\x4D0\x2B\x20\xFFFF\x20E\x2B",
 				"\x1\xDC",
+				"",
+				"",
 				"\x1\xDD",
 				"\x1\xDE",
+				"\x1\xDF",
 				"\x1\x2B\xB\xFFFF\xA\x2B\x7\xFFFF\x1A\x2B\x4\xFFFF\x1\x2B\x1\xFFFF\x1A"+
 				"\x2B\x45\xFFFF\x17\x2B\x1\xFFFF\x1F\x2B\x1\xFFFF\x208\x2B\x70\xFFFF"+
 				"\xE\x2B\x1\xFFFF\x1C81\x2B\xC\xFFFF\x2\x2B\x62\xFFFF\x120\x2B\xA70\xFFFF"+
 				"\x3F0\x2B\x11\xFFFF\xA7FF\x2B\x2100\xFFFF\x4D0\x2B\x20\xFFFF\x20E\x2B",
-				"\x1\xE0",
 				"\x1\xE1",
 				"\x1\xE2",
 				"\x1\xE3",
 				"\x1\xE4",
+				"\x1\xE5",
 				"\x1\x2B\xB\xFFFF\xA\x2B\x7\xFFFF\x1A\x2B\x4\xFFFF\x1\x2B\x1\xFFFF\x1A"+
 				"\x2B\x45\xFFFF\x17\x2B\x1\xFFFF\x1F\x2B\x1\xFFFF\x208\x2B\x70\xFFFF"+
 				"\xE\x2B\x1\xFFFF\x1C81\x2B\xC\xFFFF\x2\x2B\x62\xFFFF\x120\x2B\xA70\xFFFF"+
 				"\x3F0\x2B\x11\xFFFF\xA7FF\x2B\x2100\xFFFF\x4D0\x2B\x20\xFFFF\x20E\x2B",
 				"",
-				"\x1\xE6",
 				"\x1\xE7",
 				"\x1\xE8",
-				"",
 				"\x1\xE9",
+				"",
+				"",
 				"\x1\xEA",
 				"\x1\xEB",
+				"\x1\xEC",
 				"\x1\x2B\xB\xFFFF\xA\x2B\x7\xFFFF\x1A\x2B\x4\xFFFF\x1\x2B\x1\xFFFF\x1A"+
 				"\x2B\x45\xFFFF\x17\x2B\x1\xFFFF\x1F\x2B\x1\xFFFF\x208\x2B\x70\xFFFF"+
 				"\xE\x2B\x1\xFFFF\x1C81\x2B\xC\xFFFF\x2\x2B\x62\xFFFF\x120\x2B\xA70\xFFFF"+
@@ -5173,27 +5204,27 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 				"\x2B\x45\xFFFF\x17\x2B\x1\xFFFF\x1F\x2B\x1\xFFFF\x208\x2B\x70\xFFFF"+
 				"\xE\x2B\x1\xFFFF\x1C81\x2B\xC\xFFFF\x2\x2B\x62\xFFFF\x120\x2B\xA70\xFFFF"+
 				"\x3F0\x2B\x11\xFFFF\xA7FF\x2B\x2100\xFFFF\x4D0\x2B\x20\xFFFF\x20E\x2B",
-				"\x1\xEE",
+				"\x1\xEF",
 				"\x1\x2B\xB\xFFFF\xA\x2B\x7\xFFFF\x1A\x2B\x4\xFFFF\x1\x2B\x1\xFFFF\x1A"+
 				"\x2B\x45\xFFFF\x17\x2B\x1\xFFFF\x1F\x2B\x1\xFFFF\x208\x2B\x70\xFFFF"+
 				"\xE\x2B\x1\xFFFF\x1C81\x2B\xC\xFFFF\x2\x2B\x62\xFFFF\x120\x2B\xA70\xFFFF"+
 				"\x3F0\x2B\x11\xFFFF\xA7FF\x2B\x2100\xFFFF\x4D0\x2B\x20\xFFFF\x20E\x2B",
 				"",
-				"\x1\xF0",
 				"\x1\xF1",
+				"\x1\xF2",
 				"\x1\x2B\xB\xFFFF\xA\x2B\x7\xFFFF\x1A\x2B\x4\xFFFF\x1\x2B\x1\xFFFF\x1A"+
 				"\x2B\x45\xFFFF\x17\x2B\x1\xFFFF\x1F\x2B\x1\xFFFF\x208\x2B\x70\xFFFF"+
 				"\xE\x2B\x1\xFFFF\x1C81\x2B\xC\xFFFF\x2\x2B\x62\xFFFF\x120\x2B\xA70\xFFFF"+
 				"\x3F0\x2B\x11\xFFFF\xA7FF\x2B\x2100\xFFFF\x4D0\x2B\x20\xFFFF\x20E\x2B",
-				"\x1\xF3",
 				"\x1\xF4",
-				"",
 				"\x1\xF5",
+				"",
+				"\x1\xF6",
 				"\x1\x2B\xB\xFFFF\xA\x2B\x7\xFFFF\x1A\x2B\x4\xFFFF\x1\x2B\x1\xFFFF\x1A"+
 				"\x2B\x45\xFFFF\x17\x2B\x1\xFFFF\x1F\x2B\x1\xFFFF\x208\x2B\x70\xFFFF"+
 				"\xE\x2B\x1\xFFFF\x1C81\x2B\xC\xFFFF\x2\x2B\x62\xFFFF\x120\x2B\xA70\xFFFF"+
 				"\x3F0\x2B\x11\xFFFF\xA7FF\x2B\x2100\xFFFF\x4D0\x2B\x20\xFFFF\x20E\x2B",
-				"\x1\xF7",
+				"\x1\xF8",
 				"\x1\x2B\xB\xFFFF\xA\x2B\x7\xFFFF\x1A\x2B\x4\xFFFF\x1\x2B\x1\xFFFF\x1A"+
 				"\x2B\x45\xFFFF\x17\x2B\x1\xFFFF\x1F\x2B\x1\xFFFF\x208\x2B\x70\xFFFF"+
 				"\xE\x2B\x1\xFFFF\x1C81\x2B\xC\xFFFF\x2\x2B\x62\xFFFF\x120\x2B\xA70\xFFFF"+
@@ -5207,18 +5238,18 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 				"\xE\x2B\x1\xFFFF\x1C81\x2B\xC\xFFFF\x2\x2B\x62\xFFFF\x120\x2B\xA70\xFFFF"+
 				"\x3F0\x2B\x11\xFFFF\xA7FF\x2B\x2100\xFFFF\x4D0\x2B\x20\xFFFF\x20E\x2B",
 				"",
-				"",
-				"\x1\xFB",
 				"",
 				"\x1\xFC",
+				"",
 				"\x1\xFD",
-				"",
 				"\x1\xFE",
+				"",
+				"\x1\xFF",
 				"\x1\x2B\xB\xFFFF\xA\x2B\x7\xFFFF\x1A\x2B\x4\xFFFF\x1\x2B\x1\xFFFF\x1A"+
 				"\x2B\x45\xFFFF\x17\x2B\x1\xFFFF\x1F\x2B\x1\xFFFF\x208\x2B\x70\xFFFF"+
 				"\xE\x2B\x1\xFFFF\x1C81\x2B\xC\xFFFF\x2\x2B\x62\xFFFF\x120\x2B\xA70\xFFFF"+
 				"\x3F0\x2B\x11\xFFFF\xA7FF\x2B\x2100\xFFFF\x4D0\x2B\x20\xFFFF\x20E\x2B",
-				"\x1\x100",
+				"\x1\x101",
 				"",
 				"\x1\x2B\xB\xFFFF\xA\x2B\x7\xFFFF\x1A\x2B\x4\xFFFF\x1\x2B\x1\xFFFF\x1A"+
 				"\x2B\x45\xFFFF\x17\x2B\x1\xFFFF\x1F\x2B\x1\xFFFF\x208\x2B\x70\xFFFF"+
@@ -5227,13 +5258,13 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 				"",
 				"",
 				"",
-				"\x1\x102",
 				"\x1\x103",
 				"\x1\x104",
 				"\x1\x105",
-				"",
 				"\x1\x106",
 				"",
+				"\x1\x107",
+				"",
 				"\x1\x2B\xB\xFFFF\xA\x2B\x7\xFFFF\x1A\x2B\x4\xFFFF\x1\x2B\x1\xFFFF\x1A"+
 				"\x2B\x45\xFFFF\x17\x2B\x1\xFFFF\x1F\x2B\x1\xFFFF\x208\x2B\x70\xFFFF"+
 				"\xE\x2B\x1\xFFFF\x1C81\x2B\xC\xFFFF\x2\x2B\x62\xFFFF\x120\x2B\xA70\xFFFF"+
@@ -5250,16 +5281,16 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 				"\x2B\x45\xFFFF\x17\x2B\x1\xFFFF\x1F\x2B\x1\xFFFF\x208\x2B\x70\xFFFF"+
 				"\xE\x2B\x1\xFFFF\x1C81\x2B\xC\xFFFF\x2\x2B\x62\xFFFF\x120\x2B\xA70\xFFFF"+
 				"\x3F0\x2B\x11\xFFFF\xA7FF\x2B\x2100\xFFFF\x4D0\x2B\x20\xFFFF\x20E\x2B",
-				"\x1\x10B",
-				"",
-				"",
-				"",
-				"",
 				"\x1\x10C",
+				"",
+				"",
+				"",
+				"",
 				"\x1\x10D",
 				"\x1\x10E",
 				"\x1\x10F",
 				"\x1\x110",
+				"\x1\x111",
 				"\x1\x2B\xB\xFFFF\xA\x2B\x7\xFFFF\x1A\x2B\x4\xFFFF\x1\x2B\x1\xFFFF\x1A"+
 				"\x2B\x45\xFFFF\x17\x2B\x1\xFFFF\x1F\x2B\x1\xFFFF\x208\x2B\x70\xFFFF"+
 				"\xE\x2B\x1\xFFFF\x1C81\x2B\xC\xFFFF\x2\x2B\x62\xFFFF\x120\x2B\xA70\xFFFF"+
@@ -5267,38 +5298,38 @@ public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer
 				""
 			};
 
-		private static readonly short[] DFA20_eot = DFA.UnpackEncodedString(DFA20_eotS);
-		private static readonly short[] DFA20_eof = DFA.UnpackEncodedString(DFA20_eofS);
-		private static readonly char[] DFA20_min = DFA.UnpackEncodedStringToUnsignedChars(DFA20_minS);
-		private static readonly char[] DFA20_max = DFA.UnpackEncodedStringToUnsignedChars(DFA20_maxS);
-		private static readonly short[] DFA20_accept = DFA.UnpackEncodedString(DFA20_acceptS);
-		private static readonly short[] DFA20_special = DFA.UnpackEncodedString(DFA20_specialS);
-		private static readonly short[][] DFA20_transition;
+		private static readonly short[] DFA19_eot = DFA.UnpackEncodedString(DFA19_eotS);
+		private static readonly short[] DFA19_eof = DFA.UnpackEncodedString(DFA19_eofS);
+		private static readonly char[] DFA19_min = DFA.UnpackEncodedStringToUnsignedChars(DFA19_minS);
+		private static readonly char[] DFA19_max = DFA.UnpackEncodedStringToUnsignedChars(DFA19_maxS);
+		private static readonly short[] DFA19_accept = DFA.UnpackEncodedString(DFA19_acceptS);
+		private static readonly short[] DFA19_special = DFA.UnpackEncodedString(DFA19_specialS);
+		private static readonly short[][] DFA19_transition;
 
-		static DFA20()
+		static DFA19()
 		{
-			int numStates = DFA20_transitionS.Length;
-			DFA20_transition = new short[numStates][];
+			int numStates = DFA19_transitionS.Length;
+			DFA19_transition = new short[numStates][];
 			for ( int i=0; i < numStates; i++ )
 			{
-				DFA20_transition[i] = DFA.UnpackEncodedString(DFA20_transitionS[i]);
+				DFA19_transition[i] = DFA.UnpackEncodedString(DFA19_transitionS[i]);
 			}
 		}
 
-		public DFA20( BaseRecognizer recognizer )
+		public DFA19( BaseRecognizer recognizer )
 		{
 			this.recognizer = recognizer;
-			this.decisionNumber = 20;
-			this.eot = DFA20_eot;
-			this.eof = DFA20_eof;
-			this.min = DFA20_min;
-			this.max = DFA20_max;
-			this.accept = DFA20_accept;
-			this.special = DFA20_special;
-			this.transition = DFA20_transition;
+			this.decisionNumber = 19;
+			this.eot = DFA19_eot;
+			this.eof = DFA19_eof;
+			this.min = DFA19_min;
+			this.max = DFA19_max;
+			this.accept = DFA19_accept;
+			this.special = DFA19_special;
+			this.transition = DFA19_transition;
 		}
 
-		public override string Description { get { return "1:1: Tokens : ( T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | T__58 | T__59 | T__60 | T__61 | T__62 | T__63 | T__64 | T__65 | T__66 | T__67 | T__68 | T__69 | T__70 | T__71 | T__72 | T__73 | T__74 | T__75 | T__76 | T__77 | T__78 | T__79 | T__80 | T__81 | T__82 | T__83 | T__84 | T__85 | T__86 | T__87 | T__88 | T__89 | T__90 | T__91 | T__92 | T__93 | T__94 | T__95 | T__96 | T__97 | T__98 | T__99 | T__100 | T__101 | T__102 | T__103 | T__104 | BooleanLiteralExp | NullLiteralExp | InvalidLiteralExp | SimpleName | UnlimitedNaturalLiteralExp | IntegerLiteralExp | RealLiteralExp | StringLiteralExp | NESTED_ML_COMMENT | LINE_COMMENT | WS );"; } }
+		public override string Description { get { return "1:1: Tokens : ( T__60 | T__61 | T__62 | T__63 | T__64 | T__65 | T__66 | T__67 | T__68 | T__69 | T__70 | T__71 | T__72 | T__73 | T__74 | T__75 | T__76 | T__77 | T__78 | T__79 | T__80 | T__81 | T__82 | T__83 | T__84 | T__85 | T__86 | T__87 | T__88 | T__89 | T__90 | T__91 | T__92 | T__93 | T__94 | T__95 | T__96 | T__97 | T__98 | T__99 | T__100 | T__101 | T__102 | T__103 | T__104 | T__105 | T__106 | T__107 | T__108 | T__109 | T__110 | T__111 | T__112 | T__113 | T__114 | T__115 | T__116 | T__117 | T__118 | T__119 | T__120 | T__121 | T__122 | T__123 | T__124 | NullLiteralExp | InvalidLiteralExp | SimpleName | UnlimitedNaturalLiteralExp | IntegerLiteralExp | RealLiteralExp | StringLiteralExp | NESTED_ML_COMMENT | LINE_COMMENT | WS );"; } }
 
 		public override void Error(NoViableAltException nvae)
 		{

@@ -42,6 +42,45 @@ namespace Exolutio.Model.OCL.AST {
         T Visit(UnlimitedNaturalLiteralExp node);
 
         T Visit(VariableExp node);
+    }
 
+    public interface IAstVisitor {
+        void Visit(BooleanLiteralExp node);
+
+        void Visit(CollectionLiteralExp node);
+
+        void Visit(EnumLiteralExp node);
+
+        void Visit(ErrorExp node);
+
+        void Visit(IfExp node);
+
+        void Visit(IntegerLiteralExp node);
+
+        void Visit(InvalidLiteralExp node);
+
+        void Visit(IterateExp node);
+
+        void Visit(IteratorExp node);
+
+        void Visit(LetExp node);
+
+        void Visit(NullLiteralExp node);
+
+        void Visit(OperationCallExp node);
+
+        void Visit(PropertyCallExp node);
+
+        void Visit(RealLiteralExp node);
+
+        void Visit(StringLiteralExp node);
+
+        void Visit(TupleLiteralExp node);
+
+        void Visit(TypeExp node);
+
+        void Visit(UnlimitedNaturalLiteralExp node);
+
+        void Visit(VariableExp node);
     }
 }

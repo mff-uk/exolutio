@@ -7,7 +7,9 @@ options {
 }
 
 tokens{
- INFIX;UNARY;MESSAGE;PRIMITIVELITERAL;TYPE;CALL;INDEX;ITERATE;CALLARGS;VARDECL;DECL;PATH;COLLECTIONLITERAL; COLLECTIONTYPE;COLLPART;TUPLELITERAL;LET;COLLTYPE;
+ INFIX;UNARY;MESSAGE;PRIMITIVELITERAL;TYPE;CALL;INDEX;ITERATE;CALLARGS;VARDECL;DECL;PATH;COLLECTIONLITERAL; COLLECTIONTYPE;COLLPART;COLLPARTRANGE;TUPLELITERAL;LET;COLLTYPE;
+ CONDITION;PROPERTYCONDITION;PROPERTYHEAD;OPERATIONCONDITION; OPERATIONHEAD; CLASSIFIERCONDITION; CLASSIFIERHEAD;
+ INIT;DERIVATE;INV; DEF; PRE;POST;BODY;OPERATION;IF;ARGS;ACC;
 }
 
 
@@ -19,7 +21,7 @@ tokens{
 
 public 
 contextDeclarationList
-	:contextDeclaration*
+	:contextDeclaration* -> ^(CONDITION contextDeclaration*)
 	;
 
 public 
@@ -30,58 +32,63 @@ contextDeclaration
 	;
 
 propertyContextDecl
-	:propertyContextHead initOrDerValue*
+	:propertyContextHead initOrDerValue* ->^(PROPERTYCONDITION propertyContextHead initOrDerValue*)
 	;
 
 propertyContextHead
-	:'context' SimpleName '::' pathName ':' type
+	:c='context' SimpleName ('::' SimpleName)+ ':' type
+		-> ^(PROPERTYHEAD[$c] SimpleName+ type)
 	;
 
 operationContextDecl
-	:operationContextHead prePostOrBodyDecl*
+	:operationContextHead prePostOrBodyDecl* ->^(OPERATIONCONDITION operationContextHead prePostOrBodyDecl*)
 	;
 
 operationContextHead
-	:'context' operation
+	:c='context' operation ->^(OPERATIONHEAD[$c] operation)
 	;
 
 classifierContextDecl
-	:classifierContextHead (invOrDef)* 
+	:classifierContextHead (invOrDef)* -> ^(CLASSIFIERCONDITION classifierContextHead invOrDef*)
 	;
 
 classifierContextHead
-	:'context' pathName		
-	|'context' SimpleName':'pathName 
+	:c='context' pathName		->^(CLASSIFIERHEAD[$c] pathName )
+	|c='context' SimpleName':'pathName ->^(CLASSIFIERHEAD[$c] pathName SimpleName )
 	;
 
 initOrDerValue
-	:'init' ':' oclExpression 
-	|'derivate' ':' oclExpression 
+	:i='init' ':' oclExpression -> ^(INIT[$i] oclExpression)
+	|d='derivate' ':' oclExpression ->^(DERIVATE[$d] oclExpression)
 	;
 
 invOrDef
-	:'inv' (SimpleName )? ':' oclExpression 
-	| 'static'? 'def' SimpleName? ':' defExpression
+	:i='inv' (SimpleName )? ':' oclExpression 
+		-> ^(INV[$i] SimpleName? oclExpression)
+	| 'static'? d='def' SimpleName? ':' defExpression
+		-> ^(DEF[$d] 'static'? SimpleName? defExpression)
 	;
 
 prePostOrBodyDecl
-	:'pre' (SimpleName)? ':' oclExpression 
-	|'post' (SimpleName)? ':' oclExpression 
-	|'body' (SimpleName)? ':' oclExpression
+	:h='pre' (SimpleName)? ':' oclExpression ->^(PRE[h] SimpleName? oclExpression)
+	|h='post' (SimpleName)? ':' oclExpression ->^(POST[h] SimpleName? oclExpression)
+	|h='body' (SimpleName)? ':' oclExpression ->^(BODY[h] SimpleName? oclExpression)
 	;
 
 
 operation
 	:pathName /*'::' SimpleName*/ '(' parameters? ')' (':' type)?
+		-> ^(OPERATION pathName parameters? type?)
 	;
 
 parameters
-	:variableDeclaration (',' parameters)?
+	:variableDeclarationList[VariableDeclarationRequirement.OperationContext] 
 	;
 
 defExpression
-	: variableDeclaration
+	: variableDeclaration[VariableDeclarationRequirement.Def]
 	| operation '=' oclExpression
+		->^(DECL operation oclExpression)
 	;
 
 public 
@@ -91,40 +98,40 @@ oclExpression
 	;
 	
 logicalImpliesExpression
-	: (logicalXorExpression->logicalXorExpression)  (opToken='implies' expr=logicalXorExpression->^(INFIX $opToken $logicalImpliesExpression $expr))* 
+	: (logicalXorExpression->logicalXorExpression)  (opToken='implies' expr=logicalXorExpression->^(INFIX[$opToken] $logicalImpliesExpression $expr))* 
 	;
 logicalXorExpression
-	: (logicalOrExpression->logicalOrExpression) (opToken='xor' expr=logicalOrExpression->^(INFIX $opToken $logicalXorExpression $expr))*
+	: (logicalOrExpression->logicalOrExpression) (opToken='xor' expr=logicalOrExpression->^(INFIX[$opToken] $logicalXorExpression $expr))*
 	;
 logicalOrExpression
-	: (logicalAndExpression->logicalAndExpression) (opToken='or' expr=logicalAndExpression->^(INFIX $opToken $logicalOrExpression $expr))*
+	: (logicalAndExpression->logicalAndExpression) (opToken='or' expr=logicalAndExpression->^(INFIX[$opToken] $logicalOrExpression $expr))*
 	;
 logicalAndExpression
-	: (relationalEqExpression->relationalEqExpression)  (opToken='and' expr=relationalEqExpression->^(INFIX $opToken $logicalAndExpression $expr))*
+	: (relationalEqExpression->relationalEqExpression)  (opToken='and' expr=relationalEqExpression->^(INFIX[$opToken] $logicalAndExpression $expr))*
 	;
 
 relationalEqExpression
-	: (relationalNotEqExprassion->relationalNotEqExprassion) ((opToken='='|opToken='<>') expr=relationalNotEqExprassion->^(INFIX $opToken $relationalEqExpression $expr))*	 	
+	: (relationalNotEqExprassion->relationalNotEqExprassion) ((opToken='='|opToken='<>') expr=relationalNotEqExprassion->^(INFIX[$opToken] $relationalEqExpression $expr))*	 	
 	;
 relationalNotEqExprassion
-	: (additiveExpression ->additiveExpression) ((opToken='<'| opToken='>'| opToken='<='| opToken='>=') expr=additiveExpression->^(INFIX $opToken $relationalNotEqExprassion $expr))*	
+	: (additiveExpression ->additiveExpression) ((opToken='<'| opToken='>'| opToken='<='| opToken='>=') expr=additiveExpression->^(INFIX[$opToken] $relationalNotEqExprassion $expr))*	
 	;
 
 additiveExpression
-	: (multiplicativeExpression->multiplicativeExpression) ((opToken='+'|opToken='-') expr= multiplicativeExpression->^(INFIX $opToken $additiveExpression $expr))* 
+	: (multiplicativeExpression->multiplicativeExpression) ((opToken='+'|opToken='-') expr= multiplicativeExpression->^(INFIX[$opToken] $additiveExpression $expr))* 
 	;	
 
 multiplicativeExpression
-	: (unaryExpression->unaryExpression) ((opToken='*'|opToken='/') expr=unaryExpression->^(INFIX $opToken $multiplicativeExpression $expr))*	
+	: (unaryExpression->unaryExpression) ((opToken='*'|opToken='/') expr=unaryExpression->^(INFIX[$opToken] $multiplicativeExpression $expr))*	
 	;
 
 unaryExpression
-	:	(opToken='-'|opToken='not') term=termExpression ->^(UNARY $opToken $term)
+	:	(opToken='-'|opToken='not') term=termExpression ->^(UNARY[$opToken] $term)
 	|	termExpression
 	;
 	
 termExpression 
-	:	(primaryExperession->primaryExperession) ( ((token='.'|token='->') expr=propertyCall -> ^($token $termExpression $expr))
+	:	(primaryExperession->primaryExperession) ( ((token='.'|token='->') expr=propertyCall -> ^($token $termExpression $expr  ))
 			| (oclMessageExp -> MESSAGE oclMessageExp)
 			)* 
 			 
@@ -136,9 +143,9 @@ primaryExperession
 		
 	//|	enumLiteralExp  //8A
 	/*|*/	collectionLiteralExpAndType //8B, castecne 8E(22)
-			->^( collectionLiteralExpAndType)
+	
 	|	tupleLiteralExp	//8C 
-			->^( tupleLiteralExp)
+			
 	|	primitiveLiteralExp // 8D
 			->^(PRIMITIVELITERAL primitiveLiteralExp)
 	//|	typeLiteralExp //8E
@@ -150,20 +157,25 @@ primaryExperession
 	|	letExp
 	;
 propertyCall
-	:	pathName ('['arguments']')? isMarkedPre? ('('propertyCallParametrs')')?
+	:	pathName ('['arguments']')? isMarkedPre? ('('propertyCallParametrs')' )?
 			//9 pokud se alspon jednou zopakuje, 28A, 3A - pokud je na zacatku
 			//23,24,25,34,35,36,37,38
-			->^(CALL pathName ^(INDEX arguments)? isMarkedPre? propertyCallParametrs?)
-	|it='iterate' '('(variableDeclaration ';'?)+ '|' oclExpression ')'
-			->^(ITERATE[$it] variableDeclaration+  oclExpression)   
+			->^(CALL propertyCallParametrs? pathName ^(INDEX arguments)? isMarkedPre? )
+//	|it='iterate' '('(variableDeclaration[VariableDeclarationRequirement.Iterate] ';'?)+ '|' oclExpression ')'
+	//		->^(ITERATE[$it] variableDeclaration+  oclExpression)   
 	//|('iterate' '(' variableDeclaration ';')=>'iterate' '('variableDeclaration ';'variableDeclaration '|' oclExpression ')'
 	//|'iterate' '('variableDeclaration  '|' oclExpression ')'
-	//|'iterate' '('( ((variableDeclaration ';')=>variableDeclaration ';'variableDeclaration) | variableDeclaration )'|' oclExpression ')'
+	|it='iterate' '(' ( 
+				((SimpleName ((':') type)? ';')=>itName=SimpleName ((':') itType = type)? ';'accName = SimpleName (':' accType = type)?'=' accExpr = oclExpression ) 
+				| (accName = SimpleName (':' accType =type)?'='  accExpr =oclExpression) 
+			)
+			'|' body = oclExpression ')'
+		->^(ITERATE[$it]  ^(DECL $itName $itType?)? ^(ACC $accName $accType? $accExpr) $body)  
 		//POZOR NA STREDNIK
 		//26
 	;
 propertyCallParametrs
-	:	declarePropertyCallParametrs? (arguments -> ^(CALLARGS arguments))?
+	:	declarePropertyCallParametrs? arguments? -> ^(ARGS declarePropertyCallParametrs? arguments?)
 			
 		//25,35
 	;
@@ -182,8 +194,11 @@ enumAndType  //9,28
 		//presunuto do propertyCall
 	//|  collectionType//28B  - obsazen v collectionLiteralExpAndType
 	: tupleType   //28C		
+		 tupleType
 	| primitiveType//28D\	
+	  primitiveType
 	| oclType//28E
+		oclType
 
 	;
 
@@ -206,7 +221,7 @@ collectionLiteralExpAndType //
 		('{' collectionLiteralParts '}'	//10B - vsechno, 22(28B)-bez hodnoty		
 			-> ^(COLLECTIONLITERAL collectionTypeIdentifier type collectionLiteralParts)
 		)
-		|	->^(COLLECTIONTYPE collectionTypeIdentifier type)
+		|	->^(COLLTYPE collectionTypeIdentifier type)
 	)
 	;
 
@@ -237,7 +252,7 @@ collectionLiteralParts //12
 	;
 
 collectionLiteralPart //13
-	: exp1=oclExpression (('..' exp2=oclExpression)->^(COLLPART $exp1 $exp2)|->^(COLLPART $exp1)) //13B,14
+	: exp1=oclExpression (('..' exp2=oclExpression)->^(COLLPARTRANGE $exp1 $exp2)|->^(COLLPART $exp1)) //13B,14
 	;
 
 
@@ -245,22 +260,29 @@ primitiveLiteralExp //15
 	: IntegerLiteralExp		
 	| RealLiteralExp	
 	| StringLiteralExp	
-	| BooleanLiteralExp	
+	| 'true'
+	| 'false'
 	| UnlimitedNaturalLiteralExp
 	| NullLiteralExp	
 	| InvalidLiteralExp
 	;
 tupleLiteralExp //16
 	
-	: roottoken='Tuple' '{' variableDeclarationList '}' -> ^(TUPLELITERAL[$roottoken] $roottoken variableDeclarationList)
+	: roottoken='Tuple' '{' variableDeclarationList[VariableDeclarationRequirement.TupleLiteral] '}' -> ^(TUPLELITERAL[$roottoken]  variableDeclarationList)
 	;
 	
 typeLiteralExp //22 nepouzite pravidlo
 	:type
 	;
 
-variableDeclaration//27
-	:SimpleName (':' type)? ( '=' oclExpression )? -> ^(DECL SimpleName type? oclExpression?)
+variableDeclaration[VariableDeclarationRequirement requirement]//27
+	:{$requirement==VariableDeclarationRequirement.TupleType ||
+		$requirement==VariableDeclarationRequirement.Iterator}?
+		SimpleName ':' type  -> ^(DECL SimpleName type? )
+	|{$requirement==VariableDeclarationRequirement.TupleLiteral ||
+		$requirement==VariableDeclarationRequirement.Let}?  
+		SimpleName (':' type)?  '=' oclExpression  -> ^(DECL SimpleName type? oclExpression?)
+	
 	;
 
 type //28
@@ -287,19 +309,19 @@ oclType //30
 	;
 
 collectionType //31
-	: collectionTypeIdentifier '(' type  ')' -> COLLTYPE  collectionTypeIdentifier type
+	: collectionTypeIdentifier '(' type  ')' -> ^(COLLTYPE  collectionTypeIdentifier type)
 	;
 	
 tupleType  ///32
-	: 'Tuple'^ '('! variableDeclarationList? ')'! 
+	: 'Tuple'^ '('! variableDeclarationList[VariableDeclarationRequirement.TupleType]? ')'! 
 	;
 
 
-variableDeclarationList //33
-	: variableDeclaration (','! variableDeclaration )* 
+variableDeclarationList[VariableDeclarationRequirement requirement] //33
+	: variableDeclaration[requirement] (','! variableDeclaration[requirement] )* 
 	;
 isMarkedPre //39
-	: '@'! 'pre'^ 
+	: '@'! 'pre'
 	;
 
 arguments //40
@@ -308,11 +330,11 @@ arguments //40
 
 
 letExp //41
-	: 'let' variableDeclaration letExpSub -> ^(LET variableDeclaration letExpSub)
+	: 'let' variableDeclaration[VariableDeclarationRequirement.Let] letExpSub -> ^(LET variableDeclaration letExpSub)
 	;
 
 letExpSub //42
-	: ',' variableDeclaration letExpSub -> ^(LET variableDeclaration letExpSub)
+	: ',' variableDeclaration[VariableDeclarationRequirement.Let] letExpSub -> ^(LET variableDeclaration letExpSub)
 	| 'in' (options {greedy=false;} :oclExpression) -> oclExpression
 	;
 
@@ -330,7 +352,7 @@ oclMessageArg //45
 	;
 
 ifExp //46
-	: 'if' oclExpression 'then' oclExpression 'else' oclExpression 'endif' -> ^('if' oclExpression+)
+	: i='if' oclExpression 'then' oclExpression 'else' oclExpression 'endif' -> ^(IF[$i] oclExpression+)
 	;
 
 
@@ -338,12 +360,6 @@ ifExp //46
  * Lexer Rules
  */
 
-
-
-BooleanLiteralExp //21
-	:'true' 
-	|'false'
-	;
 	
 NullLiteralExp //47
 	: 'null'
