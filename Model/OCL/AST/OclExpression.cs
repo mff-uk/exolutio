@@ -17,6 +17,10 @@ namespace Exolutio.Model.OCL.AST
             throw new InvalidOperationException();
         }
 
+        public virtual void Accept(IAstVisitor visitor) {
+            throw new InvalidOperationException();
+        }
+
      //   public OclExpression() { }
     }
 }

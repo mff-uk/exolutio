@@ -21,9 +21,10 @@ namespace Exolutio.Model.OCL.Types
         }
 
         public Class(TypesTable.TypesTable tt,string name)
-            : base(tt,name)
+            : base(tt,name,tt.Library.Any)
         {
             SuperClass = new List<Class>();
+
         }
 
         public override bool ConformsToRegister(Classifier other)

@@ -9,10 +9,10 @@ namespace Exolutio.Model.OCL.AST {
 
         public ClassifierConstraint(Classifier context, List<OclExpression> constraints) {
             this.Context = context;
-            this.Constraints = constraints;
+            this.Invariants = constraints;
         }
 
-        public List<OclExpression> Constraints {
+        public List<OclExpression> Invariants {
             get;
             protected set;
         }

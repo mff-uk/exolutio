@@ -67,8 +67,8 @@ namespace Exolutio.Model.OCL {
             return nsEnv;
         }
 
-        public Environment CreateFromClassifier(Classifier cl) {
-            ClassifierEnvironment clEnv = new ClassifierEnvironment(cl);
+        public Environment CreateFromClassifier(Classifier cl,VariableDeclaration varDecl) {
+            ClassifierEnvironment clEnv = new ClassifierEnvironment(cl,varDecl);
             clEnv.Parent = this;
             return clEnv;
         }
@@ -81,7 +81,7 @@ namespace Exolutio.Model.OCL {
         /// <param name="type"></param>
         /// <param name="impl"></param>
         /// <returns></returns>
-        public Environment AddElement(string name, ModelElement type,ModelElement source, bool impl) {
+        public Environment AddElement(string name, ModelElement type,VariableDeclaration source, bool impl) {
             if (LookupLocal(name) != null) {
                 throw new Exception(string.Format("Variable name `{0}` has already existed.", name));
             }
@@ -199,9 +199,11 @@ namespace Exolutio.Model.OCL {
 
     public class ClassifierEnvironment : Environment {
         private Classifier internalClassifier;
+        private VariableDeclaration internalVariableDec;
 
-        public ClassifierEnvironment(Classifier classifier) {
+        public ClassifierEnvironment(Classifier classifier,VariableDeclaration varDecl) {
             this.internalClassifier = classifier;
+            this.internalVariableDec = varDecl;
         }
 
 
@@ -241,10 +243,9 @@ namespace Exolutio.Model.OCL {
         }
 
         public override ImplicitPropertyData LookupImplicitAttribute(string name) {
-           
             Property prop = internalClassifier.LookupProperty(name);
             if (prop != null) {
-                return new ImplicitPropertyData(prop,internalClassifier);
+                return new ImplicitPropertyData(prop,internalVariableDec);
             }
             if (Parent != null) {
                 return Parent.LookupImplicitAttribute(name);
@@ -255,7 +256,7 @@ namespace Exolutio.Model.OCL {
         public override ImplicitOperationData LookupImplicitOperation(string name, IEnumerable<Classifier> parameters) {
             Operation op = internalClassifier.LookupOperation(name, parameters);
             if (op != null) {
-                return new ImplicitOperationData(op, internalClassifier);
+                return new ImplicitOperationData(op, internalVariableDec);
             }
             if (Parent != null) {
                 return Parent.LookupImplicitOperation(name, parameters);
@@ -267,11 +268,11 @@ namespace Exolutio.Model.OCL {
     public class AddElementEnvironment : Environment {
         private string Name;
         private ModelElement Type;
-        private ModelElement Source;
+        private VariableDeclaration Source;
         private bool IsImplicit;
         private Environment RootEnviroment;
 
-        public AddElementEnvironment(Environment rootEnv, string name, ModelElement type, ModelElement source, bool impl) {
+        public AddElementEnvironment(Environment rootEnv, string name, ModelElement type, VariableDeclaration source, bool impl) {
             this.RootEnviroment = rootEnv;
             this.Name = name;
             this.Type = type;
@@ -349,7 +350,7 @@ namespace Exolutio.Model.OCL {
     }
 
     public class ImplicitOperationData {
-        public ImplicitOperationData(Operation oper, ModelElement source) {
+        public ImplicitOperationData(Operation oper, VariableDeclaration source) {
             this.Operation = oper;
             this.Source = source;
         }
@@ -359,14 +360,14 @@ namespace Exolutio.Model.OCL {
             protected set;
         }
 
-        public ModelElement Source {
+        public VariableDeclaration Source {
             get;
             protected set;
         }
     }
 
     public class ImplicitPropertyData {
-        public ImplicitPropertyData(Property property, ModelElement source) {
+        public ImplicitPropertyData(Property property, VariableDeclaration source) {
             this.Property = property;
             this.Source = source;
         }
@@ -376,7 +377,7 @@ namespace Exolutio.Model.OCL {
             protected set;
         }
 
-        public ModelElement Source {
+        public VariableDeclaration Source {
             get;
             protected set;
         }

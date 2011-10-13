@@ -64,27 +64,34 @@
     <Compile Include="ModelVerifier.cs" />
     <Compile Include="ModelWorker.cs" />
     <Compile Include="OCL\AST\ClassifierConstraint.cs" />
+    <Compile Include="OCL\AST\Constraints.cs" />
     <Compile Include="OCL\AST\ErrorExp.cs" />
     <Compile Include="OCL\AST\IAstVisitor.cs" />
     <Compile Include="OCL\AST\PrintVisitor.cs" />
+    <Compile Include="OCL\CompilerResult.cs" />
     <Compile Include="OCL\Compiler\ArgumentBag.cs" />
     <Compile Include="OCL\Compiler\Compiler.cs" />
+    <Compile Include="OCL\Compiler\CompilerHelpers.cs" />
     <Compile Include="OCL\Compiler\Error.cs" />
     <Compile Include="OCL\Compiler\ErrorCollection.cs" />
     <Compile Include="OCL\Compiler\ErrorItem.cs" />
     <Compile Include="OCL\Compiler\LexerErrors.cs" />
+    <Compile Include="OCL\Compiler\OCLAst.cs" />
     <Compile Include="OCL\Compiler\OCLLexer.cs" />
     <Compile Include="OCL\Compiler\OCLLexer.Service.cs" />
     <Compile Include="OCL\Compiler\OCLParser.cs" />
     <Compile Include="OCL\Compiler\OCLParser.Service.cs" />
     <Compile Include="OCL\Compiler\OCLSyntaxLexer.cs" />
+    <Compile Include="OCL\Compiler\OCLSyntaxLexer.Service.cs" />
     <Compile Include="OCL\Compiler\OCLSyntaxParser.cs" />
     <Compile Include="OCL\Compiler\OCLSyntaxParser.Service.cs" />
     <Compile Include="OCL\Compiler\ParserErrors.cs" />
     <Compile Include="OCL\Compiler\SeparatorType.cs" />
     <Compile Include="OCL\Compiler\TypeDefBag.cs" />
+    <Compile Include="OCL\Compiler\VariableDeclarationBag.cs" />
     <Compile Include="OCL\Compiler\VariableDeclarationRequirement.cs" />
     <Compile Include="OCL\Environment.cs" />
+    <Compile Include="OCL\Compiler\OCLAst.g3.cs" />
     <Compile Include="OCL\SupportingClasses\ActionDictionary.cs" />
     <Compile Include="OCL\SupportingClasses\ActionList.cs" />
     <Compile Include="OCL\TypesTable\StandardLibrary.cs" />
@@ -246,6 +253,9 @@
     <None Include="ObjectOwnership.cd" />
     <None Include="OCL\AST\AST.cd" />
     <None Include="OCL\AST\Literal.cd" />
+    <Antlr3 Include="OCL\Grammar\OCLAst.g3">
+      <Generator>MSBuild:Compile</Generator>
+    </Antlr3>
     <None Include="OCL\Grammar\OCLSyntax.g3" />
     <None Include="OCL\Grammar\OCL.g3" />
     <None Include="OCL\Types\TypeSystem.cd" />

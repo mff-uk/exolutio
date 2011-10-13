@@ -12,12 +12,16 @@ namespace Exolutio.Model.OCL.AST
     /// </summary>
     public  class LetExp : OclExpression
     {
-        public LetExp() : base(null) { }
+        public LetExp(Types.VariableDeclaration variable, OclExpression inExpr)
+            : base(inExpr.Type) {
+            this.Variable = variable;
+            this.InExpression = inExpr;
+        }
 
         /// <summary>
         /// The Variable introduced by the Let expression.
         /// </summary>
-        public OclExpression Variable
+        public Types.VariableDeclaration Variable
         {
             get;
             set;
@@ -32,17 +36,14 @@ namespace Exolutio.Model.OCL.AST
             set;
         }
 
-        public override Types.Classifier Type {
-            get {
-                return InExpression.Type;
-            }
-            protected set {
-               
-            }
-        }
+        
 
         public override T Accept<T>(IAstVisitor<T> visitor) {
             return visitor.Visit(this);
+        }
+
+        public override void Accept(IAstVisitor visitor) {
+            visitor.Visit(this);
         }
     }
 }

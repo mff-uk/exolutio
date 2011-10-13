@@ -5,15 +5,15 @@ using System.Text;
 using Antlr.Runtime;
 
 namespace Exolutio.Model.OCL.Compiler {
-    partial class OCLSyntaxParser {
+    public partial class OCLSyntaxLexer : Antlr.Runtime.Lexer{
+
         public ErrorCollection Errors {
             get;
             private set;
         }
 
-        public OCLSyntaxParser(ITokenStream input, ErrorCollection errColl)
-            : this(input) {
-            Errors = errColl;
+        public OCLSyntaxLexer(ICharStream input,ErrorCollection errorColl):this(input) {
+            Errors = errorColl;
         }
 
         partial void OnCreated() {
@@ -25,6 +25,7 @@ namespace Exolutio.Model.OCL.Compiler {
         public override void ReportError(Antlr.Runtime.RecognitionException e) {
             Errors.AddError(new CodeErrorItem(e.ToString(), e.Token, e.Token));
             base.ReportError(e);
+                                                                                                                                                    throw new Exception("Byl jsem tu, Marek :)");
         }
     }
 }

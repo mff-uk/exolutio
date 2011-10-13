@@ -16,9 +16,9 @@ namespace Exolutio.Model.OCL.AST
     /// </summary>
     public class IterateExp : LoopExp
     {
-        public IterateExp(OclExpression source, OclExpression body, List<VariableDeclaration> iterators, VariableDeclaration result)
-            : base(source, body, iterators,result.PropertyType) {
-                this.Result = result;
+        public IterateExp(OclExpression source, OclExpression body, VariableDeclaration iterator, VariableDeclaration resultVariable)
+            : base(source, body, iterator,resultVariable.PropertyType) {
+                this.Result = resultVariable;
         }
 
         /// <summary>
@@ -32,6 +32,10 @@ namespace Exolutio.Model.OCL.AST
 
         public override T Accept<T>(IAstVisitor<T> visitor) {
             return visitor.Visit(this);
+        }
+
+        public override void Accept(IAstVisitor visitor) {
+            visitor.Visit(this);
         }
     }
 }
