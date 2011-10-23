@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?> 
 <eXo:Project xmlns:eXo="http://eXolutio.eu/Project/Serialization/" Version="3.0" UsesVersioning="False" Name="tournaments">
   <eXo:SingleVersion ID="355ec43b-a8a3-40db-8d29-7707630b6702">
     <eXo:PIMAttributeTypes Count="3">
