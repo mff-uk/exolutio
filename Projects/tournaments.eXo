@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?> 
 <eXo:Project xmlns:eXo="http://eXolutio.eu/Project/Serialization/" Version="3.0" UsesVersioning="False" Name="tournaments">
   <eXo:SingleVersion ID="355ec43b-a8a3-40db-8d29-7707630b6702">
-    <eXo:PIMAttributeTypes Count="3">
+    <eXo:PIMAttributeTypes Count="4">
+      <eXo:AttributeType ID="3ab2660d-9b3a-4e77-bb8d-57dd7c155aa6" Name="Advertiser" IsSealed="False" />
       <eXo:AttributeType ID="b46fab0a-0554-4225-a932-6d6f1c706c43" Name="MatchStatus" IsSealed="False" />
       <eXo:AttributeType ID="e3459e52-d48e-47ca-82b6-ad7374cd5a0e" Name="Player" IsSealed="False" componentId="06298e91-d009-4005-8a15-6d4e15d9df5e" displayName="PIMClass: *Player*" />
       <eXo:AttributeType ID="bc694e1d-d1e7-4ac6-8e1f-071255a6bc71" Name="Tournament" IsSealed="False" componentId="1e014a11-c043-423c-b4a6-5d0553ac31bd" displayName="PIMClass: *Tournament*" />
@@ -23,7 +24,7 @@
           <eXo:PIMOperations Count="1">
             <eXo:PIMOperation ID="29181676-7051-4fb4-ba3a-128e1d75500a" Name="selectSponsors" pimClassID="2c95f723-f908-4c13-817d-cf26d54a9837">
               <eXo:Parameters Count="1">
-                <eXo:Parameter Name="advertisers" />
+                <eXo:Parameter Name="advertisers" Type="3ab2660d-9b3a-4e77-bb8d-57dd7c155aa6" displayName="AttributeType: Advertiser" />
               </eXo:Parameters>
             </eXo:PIMOperation>
           </eXo:PIMOperations>
@@ -45,7 +46,7 @@
           <eXo:PIMOperations Count="0" />
           <eXo:GeneralizationAsGeneral Count="0" />
           <eXo:PIMAssociationEnds Count="4">
-            <eXo:PIMAssociationEnd pimAssociationEndID="a070d791-db95-4eea-a31f-5f349d0008ec" pimAssociationEnd="PIMAssociationEnd: ** 0..* C: Player A:  " />
+            <eXo:PIMAssociationEnd pimAssociationEndID="a070d791-db95-4eea-a31f-5f349d0008ec" pimAssociationEnd="PIMAssociationEnd: *players* 0..* C: Player A:  " />
             <eXo:PIMAssociationEnd pimAssociationEndID="70ccf73e-da14-4c2a-9ada-eadbcb3be6b1" pimAssociationEnd="PIMAssociationEnd: *players* 0..* C: Player A:  " />
             <eXo:PIMAssociationEnd pimAssociationEndID="a05e0731-c5e7-48d1-bf8c-6db7ab9107fe" pimAssociationEnd="PIMAssociationEnd: ** 0..* C: Player A:  " />
             <eXo:PIMAssociationEnd pimAssociationEndID="51000991-5b2f-49cc-ad73-1bdc7a799717" pimAssociationEnd="PIMAssociationEnd: *players* 0..* C: Player A:  " />
@@ -82,7 +83,7 @@
                 <eXo:Parameter Name="p" Type="e3459e52-d48e-47ca-82b6-ad7374cd5a0e" displayName="AttributeType: Player" />
               </eXo:Parameters>
             </eXo:PIMOperation>
-            <eXo:PIMOperation ID="ebbbac10-3b10-42da-a089-c061ceca3afc" Name="overlap" pimClassID="1e014a11-c043-423c-b4a6-5d0553ac31bd">
+            <eXo:PIMOperation ID="ebbbac10-3b10-42da-a089-c061ceca3afc" Name="overlap" pimClassID="1e014a11-c043-423c-b4a6-5d0553ac31bd" ResultType="1ce3b950-194d-42c9-aeeb-a9cec5e5505a">
               <eXo:Parameters Count="1">
                 <eXo:Parameter Name="t" Type="bc694e1d-d1e7-4ac6-8e1f-071255a6bc71" displayName="AttributeType: Tournament" />
               </eXo:Parameters>
@@ -93,7 +94,7 @@
             <eXo:PIMAssociationEnd pimAssociationEndID="f8ebf0bb-027b-477d-bacc-ea55ae052cc1" pimAssociationEnd="PIMAssociationEnd: ** 1..1 C: Tournament A:  " />
             <eXo:PIMAssociationEnd pimAssociationEndID="5b6f9a82-a378-4515-a158-b66d1338af1e" pimAssociationEnd="PIMAssociationEnd: ** 0..* C: Tournament A:  " />
             <eXo:PIMAssociationEnd pimAssociationEndID="53003995-f8cb-4698-85b1-eee86385c8ed" pimAssociationEnd="PIMAssociationEnd: ** 1..1 C: Tournament A:  " />
-            <eXo:PIMAssociationEnd pimAssociationEndID="0688533e-d366-4d29-aece-977e2912f8e9" pimAssociationEnd="PIMAssociationEnd: ** 0..* C: Tournament A:  " />
+            <eXo:PIMAssociationEnd pimAssociationEndID="0688533e-d366-4d29-aece-977e2912f8e9" pimAssociationEnd="PIMAssociationEnd: *tournaments* 0..* C: Tournament A:  " />
             <eXo:PIMAssociationEnd pimAssociationEndID="71bcda29-6a38-49af-922d-a0f927d0e456" pimAssociationEnd="PIMAssociationEnd: *tournaments* 0..* C: Tournament A:  " />
           </eXo:PIMAssociationEnds>
         </eXo:PIMClass>
@@ -163,14 +164,14 @@
         </eXo:PIMAssociation>
         <eXo:PIMAssociation ID="096f7e38-d280-48b3-97e5-0cebb3a3b691" Name="">
           <eXo:PIMAssociationEnds Count="2">
-            <eXo:PIMAssociationEnd ID="a070d791-db95-4eea-a31f-5f349d0008ec" Name="" refPIMClassID="06298e91-d009-4005-8a15-6d4e15d9df5e" refPIMClass="PIMClass: *Player*" refPIMAssociationID="096f7e38-d280-48b3-97e5-0cebb3a3b691" refPIMAssociation="PIMAssociation **: PIMClass: *Player*, PIMClass: *Match*" Lower="0" Upper="*" />
+            <eXo:PIMAssociationEnd ID="a070d791-db95-4eea-a31f-5f349d0008ec" Name="players" refPIMClassID="06298e91-d009-4005-8a15-6d4e15d9df5e" refPIMClass="PIMClass: *Player*" refPIMAssociationID="096f7e38-d280-48b3-97e5-0cebb3a3b691" refPIMAssociation="PIMAssociation **: PIMClass: *Player*, PIMClass: *Match*" Lower="0" Upper="*" />
             <eXo:PIMAssociationEnd ID="fc0e52dd-bafb-425f-8504-9c2b05d82209" Name="matches" refPIMClassID="609302e3-1aab-42e4-939c-78f1cfc04b3f" refPIMClass="PIMClass: *Match*" refPIMAssociationID="096f7e38-d280-48b3-97e5-0cebb3a3b691" refPIMAssociation="PIMAssociation **: PIMClass: *Player*, PIMClass: *Match*" Lower="0" Upper="*" />
           </eXo:PIMAssociationEnds>
         </eXo:PIMAssociation>
         <eXo:PIMAssociation ID="bfa88fc9-6446-4ba3-9e11-4fe6a55630f0" Name="">
           <eXo:PIMAssociationEnds Count="2">
             <eXo:PIMAssociationEnd ID="70ccf73e-da14-4c2a-9ada-eadbcb3be6b1" Name="players" refPIMClassID="06298e91-d009-4005-8a15-6d4e15d9df5e" refPIMClass="PIMClass: *Player*" refPIMAssociationID="bfa88fc9-6446-4ba3-9e11-4fe6a55630f0" refPIMAssociation="PIMAssociation **: PIMClass: *Player*, PIMClass: *Tournament*" Lower="0" Upper="*" />
-            <eXo:PIMAssociationEnd ID="0688533e-d366-4d29-aece-977e2912f8e9" Name="" refPIMClassID="1e014a11-c043-423c-b4a6-5d0553ac31bd" refPIMClass="PIMClass: *Tournament*" refPIMAssociationID="bfa88fc9-6446-4ba3-9e11-4fe6a55630f0" refPIMAssociation="PIMAssociation **: PIMClass: *Player*, PIMClass: *Tournament*" Lower="0" Upper="*" />
+            <eXo:PIMAssociationEnd ID="0688533e-d366-4d29-aece-977e2912f8e9" Name="tournaments" refPIMClassID="1e014a11-c043-423c-b4a6-5d0553ac31bd" refPIMClass="PIMClass: *Tournament*" refPIMAssociationID="bfa88fc9-6446-4ba3-9e11-4fe6a55630f0" refPIMAssociation="PIMAssociation **: PIMClass: *Player*, PIMClass: *Tournament*" Lower="0" Upper="*" />
           </eXo:PIMAssociationEnds>
         </eXo:PIMAssociation>
         <eXo:PIMAssociation ID="c64702e4-5bf4-44d0-93e8-3e088b93f1d9" Name="">
@@ -432,7 +433,7 @@ inv: not league->isEmpty() implies regNo <> null
           <eXo:PSMAssociation ID="b9ddd4d0-b7fc-427d-a4d1-81c5afd86fe3" Name="player" InterpretationID="096f7e38-d280-48b3-97e5-0cebb3a3b691" Interpretation="PIMAssociation **: PIMClass: *Player*, PIMClass: *Match*" Upper="*">
             <eXo:UsedGeneralizations Count="0" />
             <eXo:Parent NodeType="PSMClass" parentID="05090327-4bd7-43ec-a245-814636822e6d" parent="PSMClass: *Players*" />
-            <eXo:Child NodeType="PSMClass" childID="a8509e38-ae12-44e0-a86f-b6ea03484a42" child="PSMClass: *Player*" interpretedAssociationEndID="a070d791-db95-4eea-a31f-5f349d0008ec" interpretedAssociationEnd="PIMAssociationEnd: ** 0..* C: Player A:  " />
+            <eXo:Child NodeType="PSMClass" childID="a8509e38-ae12-44e0-a86f-b6ea03484a42" child="PSMClass: *Player*" interpretedAssociationEndID="a070d791-db95-4eea-a31f-5f349d0008ec" interpretedAssociationEnd="PIMAssociationEnd: *players* 0..* C: Player A:  " />
           </eXo:PSMAssociation>
           <eXo:PSMAssociation ID="4f2d264d-31b5-4e79-b297-23846e78c898" Name="matches">
             <eXo:UsedGeneralizations Count="0" />
@@ -951,8 +952,8 @@ qualification.CH_Qualification_OpenTournament_League.League.leagueName <> null
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:AssociationEndsViewHelpers Count="2">
-                <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="a070d791-db95-4eea-a31f-5f349d0008ec" AssociationEnd="PIMAssociationEnd: ** 0..* C: Player A:  ">
-                  <eXo:CardinalityLabelViewHelper X="2" Y="-21" Width="NaN" Height="NaN">
+                <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="a070d791-db95-4eea-a31f-5f349d0008ec" AssociationEnd="PIMAssociationEnd: *players* 0..* C: Player A:  ">
+                  <eXo:CardinalityLabelViewHelper X="0" Y="-8" Width="NaN" Height="NaN">
                     <eXo:LabelVisible>True</eXo:LabelVisible>
                   </eXo:CardinalityLabelViewHelper>
                   <eXo:RoleLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
@@ -986,7 +987,7 @@ qualification.CH_Qualification_OpenTournament_League.League.leagueName <> null
                   <eXo:CardinalityLabelViewHelper X="3" Y="-23" Width="NaN" Height="NaN">
                     <eXo:LabelVisible>True</eXo:LabelVisible>
                   </eXo:CardinalityLabelViewHelper>
-                  <eXo:RoleLabelViewHelper X="2" Y="-41" Width="NaN" Height="NaN">
+                  <eXo:RoleLabelViewHelper X="3" Y="-45" Width="NaN" Height="NaN">
                     <eXo:LabelVisible>True</eXo:LabelVisible>
                   </eXo:RoleLabelViewHelper>
                   <eXo:Points>
@@ -994,11 +995,11 @@ qualification.CH_Qualification_OpenTournament_League.League.leagueName <> null
                     <eXo:Point X="0" Y="30" />
                   </eXo:Points>
                 </eXo:AssociationEndViewHelper>
-                <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="0688533e-d366-4d29-aece-977e2912f8e9" AssociationEnd="PIMAssociationEnd: ** 0..* C: Tournament A:  ">
-                  <eXo:CardinalityLabelViewHelper X="-37" Y="-18" Width="NaN" Height="NaN">
+                <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="0688533e-d366-4d29-aece-977e2912f8e9" AssociationEnd="PIMAssociationEnd: *tournaments* 0..* C: Tournament A:  ">
+                  <eXo:CardinalityLabelViewHelper X="-42" Y="-21" Width="NaN" Height="NaN">
                     <eXo:LabelVisible>True</eXo:LabelVisible>
                   </eXo:CardinalityLabelViewHelper>
-                  <eXo:RoleLabelViewHelper X="-58" Y="-47" Width="NaN" Height="NaN">
+                  <eXo:RoleLabelViewHelper X="-90" Y="-40" Width="NaN" Height="NaN">
                     <eXo:LabelVisible>True</eXo:LabelVisible>
                   </eXo:RoleLabelViewHelper>
                   <eXo:Points />
@@ -1021,7 +1022,7 @@ qualification.CH_Qualification_OpenTournament_League.League.leagueName <> null
                     <eXo:LabelVisible>True</eXo:LabelVisible>
                   </eXo:RoleLabelViewHelper>
                   <eXo:Points>
-                    <eXo:Point X="0" Y="26" />
+                    <eXo:Point X="0" Y="23" />
                     <eXo:Point X="67" Y="96" />
                     <eXo:Point X="59" Y="0" />
                   </eXo:Points>
@@ -1046,14 +1047,14 @@ qualification.CH_Qualification_OpenTournament_League.League.leagueName <> null
               </eXo:MainLabelViewHelper>
               <eXo:AssociationEndsViewHelpers Count="2">
                 <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="26090e42-604b-4de4-947d-9455da0a8ae2" AssociationEnd="PIMAssociationEnd: ** 0..* C: TournamentControl A:  ">
-                  <eXo:CardinalityLabelViewHelper X="2" Y="-26" Width="NaN" Height="NaN">
+                  <eXo:CardinalityLabelViewHelper X="-40" Y="4" Width="NaN" Height="NaN">
                     <eXo:LabelVisible>True</eXo:LabelVisible>
                   </eXo:CardinalityLabelViewHelper>
                   <eXo:RoleLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
                     <eXo:LabelVisible>True</eXo:LabelVisible>
                   </eXo:RoleLabelViewHelper>
                   <eXo:Points>
-                    <eXo:Point X="156" Y="32" />
+                    <eXo:Point X="156" Y="43" />
                     <eXo:Point X="616" Y="102" />
                     <eXo:Point X="616" Y="414" />
                     <eXo:Point X="94" Y="13" />
