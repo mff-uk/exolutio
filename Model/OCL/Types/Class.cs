@@ -24,7 +24,6 @@ namespace Exolutio.Model.OCL.Types
             : base(tt,name,tt.Library.Any)
         {
             SuperClass = new List<Class>();
-
         }
 
         public override bool ConformsToRegister(Classifier other)
@@ -33,7 +32,6 @@ namespace Exolutio.Model.OCL.Types
                 return ConformsToRegisterClass((Class)other);
             else
                 return base.ConformsToRegister(other);
-           
         }
 
         public virtual bool ConformsToRegisterClass(Class other)

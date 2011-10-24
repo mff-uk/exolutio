@@ -113,7 +113,7 @@ inv:
 matches->forAll(m:Match |
 m.start.after(start) and m.end.before(end))", root.Item1, root.Item2);
 
-            Exolutio.Model.OCL.AST.PrintVisitor printer = new Exolutio.Model.OCL.AST.PrintVisitor();
+            Exolutio.Model.OCL.Utils.PrintVisitor printer = new Exolutio.Model.OCL.Utils.PrintVisitor();
             string text = printer.AstToString(ast.Invariants[0]);
 
         }
@@ -131,7 +131,7 @@ day of the Tournament */
 context Tournament
 inv: matches->exists(m:Match | m.start.equals(start))", root.Item1, root.Item2);
 
-            Exolutio.Model.OCL.AST.PrintVisitor printer = new Exolutio.Model.OCL.AST.PrintVisitor();
+            Exolutio.Model.OCL.Utils.PrintVisitor printer = new Exolutio.Model.OCL.Utils.PrintVisitor();
             string text = printer.AstToString(ast.Invariants[0]);
 
         }
@@ -151,7 +151,7 @@ p.tournaments->forAll(t|
 t <> tournament implies
 not t.overlap(tournament)))", root.Item1, root.Item2);
 
-            Exolutio.Model.OCL.AST.PrintVisitor printer = new Exolutio.Model.OCL.AST.PrintVisitor();
+            Exolutio.Model.OCL.Utils.PrintVisitor printer = new Exolutio.Model.OCL.Utils.PrintVisitor();
             string text = printer.AstToString(ast.Invariants[0]);
 
         }
@@ -170,7 +170,7 @@ inv: players->forAll(p|
 p.tournaments->exists(t|
 t.matches->includes(self)))", root.Item1, root.Item2);
 
-            Exolutio.Model.OCL.AST.PrintVisitor printer = new Exolutio.Model.OCL.AST.PrintVisitor();
+            Exolutio.Model.OCL.Utils.PrintVisitor printer = new Exolutio.Model.OCL.Utils.PrintVisitor();
             string text = printer.AstToString(ast.Invariants[0]);
         }
 
@@ -186,7 +186,7 @@ t.matches->includes(self)))", root.Item1, root.Item2);
 context Tournament
 inv : start <= end", root.Item1, root.Item2);
 
-            Exolutio.Model.OCL.AST.PrintVisitor printer = new Exolutio.Model.OCL.AST.PrintVisitor();
+            Exolutio.Model.OCL.Utils.PrintVisitor printer = new Exolutio.Model.OCL.Utils.PrintVisitor();
             string text = printer.AstToString(ast.Invariants[0]);
 
         }
@@ -202,7 +202,7 @@ context Tournament
 inv: requiredQualificationPoints = null or 
 players->forAll(p | p.points >= requiredQualificationPoints)", root.Item1, root.Item2);
 
-            Exolutio.Model.OCL.AST.PrintVisitor printer = new Exolutio.Model.OCL.AST.PrintVisitor();
+            Exolutio.Model.OCL.Utils.PrintVisitor printer = new Exolutio.Model.OCL.Utils.PrintVisitor();
             string text = printer.AstToString(ast.Invariants[0]);
 
         }
@@ -217,7 +217,7 @@ players->forAll(p | p.points >= requiredQualificationPoints)", root.Item1, root.
 context Player
 inv: not league->isEmpty() implies regno <> null ", root.Item1, root.Item2);
 
-            Exolutio.Model.OCL.AST.PrintVisitor printer = new Exolutio.Model.OCL.AST.PrintVisitor();
+            Exolutio.Model.OCL.Utils.PrintVisitor printer = new Exolutio.Model.OCL.Utils.PrintVisitor();
             string text = printer.AstToString(ast.Invariants[0]);
 
         }
