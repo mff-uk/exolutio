@@ -109,7 +109,7 @@ namespace Exolutio.Model.OCL {
             semantic.EnvironmentStack.Push(new NamespaceEnvironment(tt.Library.RootNamespace));
             AST.Constraints constraints = semantic.contextDeclarationList();
 
-            return new CompilerResult(constraints, errColl);
+            return new CompilerResult(constraints, errColl, tt.Library);
         }
 
         void TranslateModel(TypesTable.TypesTable tt) {
@@ -137,6 +137,8 @@ namespace Exolutio.Model.OCL {
                     tt.Library.RootNamespace.NestedClassifier.Add(newClass);
                     tt.RegisterType(newClass);
                     classToProcess.Add(new Tuple<Class, PIM.PIMClass>(newClass, cl));
+                    //Hack
+                    newClass.Tag = cl;
                 }
 
                 // Property
@@ -145,6 +147,8 @@ namespace Exolutio.Model.OCL {
                         Classifier propType = tt.Library.RootNamespace.NestedClassifier[pr.AttributeType.Name];
                         Property newProp = new Property(pr.Name, PropertyType.One, propType);
                         item.Item1.Properties.Add(newProp);
+                        //Hack
+                        newProp.Tag = pr;
                     }
                 }
 
@@ -170,6 +174,9 @@ namespace Exolutio.Model.OCL {
                         tt.RegisterType(propType);
                         Property newass = new Property(name, PropertyType.One, propType);
                         item.Item1.Properties.Add(newass);
+
+                        //hack
+                        newass.Tag = ass;
                     }
                 }
 
@@ -179,6 +186,9 @@ namespace Exolutio.Model.OCL {
                         Operation newOp = new Operation(op.Name, true, op.ResultType != null ? tt.Library.RootNamespace.NestedClassifier[op.ResultType.Name] : tt.Library.Void,
                         op.Parameters.Select(p => new Parameter(p.Name, tt.Library.RootNamespace.NestedClassifier[p.Type.Name])));
                         item.Item1.Operations.Add(newOp);
+
+                        //hack
+                        newOp.Tag = op;
                     }
                 }
             }

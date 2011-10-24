@@ -67,7 +67,8 @@
     <Compile Include="OCL\AST\Constraints.cs" />
     <Compile Include="OCL\AST\ErrorExp.cs" />
     <Compile Include="OCL\AST\IAstVisitor.cs" />
-    <Compile Include="OCL\AST\PrintVisitor.cs" />
+    <Compile Include="OCL\Bridge\OCLPIMClass.cs" />
+    <Compile Include="OCL\Utils\PrintVisitor.cs" />
     <Compile Include="OCL\CompilerResult.cs" />
     <Compile Include="OCL\Compiler\ArgumentBag.cs" />
     <Compile Include="OCL\Compiler\Compiler.cs" />

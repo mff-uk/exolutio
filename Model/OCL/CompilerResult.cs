@@ -17,9 +17,15 @@ namespace Exolutio.Model.OCL {
             get;
         }
 
-        public CompilerResult(Constraints con, ErrorCollection errColl) {
-            Constraints = con;
-            Errors = errColl;
+        public TypesTable.Library Library {
+            private set;
+            get;
+        }
+
+        public CompilerResult(Constraints con, ErrorCollection errColl,TypesTable.Library lib) {
+            this.Constraints = con;
+            this.Errors = errColl;
+            this.Library = lib;
         }
     }
 }

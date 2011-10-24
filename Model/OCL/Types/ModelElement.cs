@@ -31,6 +31,11 @@ namespace Exolutio.Model.OCL.Types
             return QualifiedName;
         }
 
+        public object Tag {
+            get;
+            set;
+        }
+
         public override bool Equals(object obj)
         {
             ModelElement other = obj as ModelElement;
