@@ -21,6 +21,11 @@ namespace Exolutio.Model.OCL.AST
             throw new InvalidOperationException();
         }
 
+        public override string ToString() {
+            Utils.PrintVisitor printer = new Utils.PrintVisitor();
+            return printer.AstToString(this);
+        }
+
      //   public OclExpression() { }
     }
 }
