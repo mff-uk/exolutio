@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Exolutio.Model.OCL.AST;
+using Exolutio.Model.OCL.Types;
 
 namespace Exolutio.Model.OCL.Utils {
     public class PrintVisitor:IAstVisitor {
@@ -18,11 +19,13 @@ namespace Exolutio.Model.OCL.Utils {
         #region IAstVisitor Members
 
         public void Visit(BooleanLiteralExp node) {
-            sb.AppendFormat("({0}:{1})", node.GetType().Name, node.Value);            
+            sb.AppendFormat("{0}",  node.Value);            
         }
 
         public void Visit(CollectionLiteralExp node) {
-            sb.Append("CollectionLiteral("+node.Type.Name+")");
+            CollectionType col = (CollectionType) node.Type;
+            sb.AppendFormat("{0}({1}){ ----", col.Name, col.ElementType.Name);
+            sb.Append("}");
         }
 
         public void Visit(EnumLiteralExp node) {
@@ -30,36 +33,35 @@ namespace Exolutio.Model.OCL.Utils {
         }
 
         public void Visit(ErrorExp node) {
-            sb.Append("ErrorExp");
-            
+            sb.Append("ERROR");   
         }
 
         public void Visit(IfExp node) {
-            sb.Append("If(" );
+            sb.Append("if " );
             node.Condition.Accept(this);
-            sb.Append(")");
+            sb.Append(" then");
             node.ThenExpression.Accept(this);
-            sb.Append("Else");
+            sb.Append(" else ");
             node.ElseExpression.Accept(this);
-            sb.Append("EndIf");
-            
+            sb.Append(" endIf ");  
         }
 
         public void Visit(IntegerLiteralExp node) {
-            sb.AppendFormat("({0}:{1})", node.GetType().Name, node.Value);   
-            
+            sb.Append( node.Value);   
         }
 
         public void Visit(InvalidLiteralExp node) {
-            sb.AppendFormat("({0})",node.GetType().Name);
-            
+            sb.AppendFormat("({0})",node.GetType().Name);      
         }
 
         public void Visit(IterateExp node) {
             if (node.Source != null) {
                 node.Source.Accept(this);
             }
-            sb.AppendFormat("->iterate(");
+            sb.AppendFormat("->iterate( ---- |");
+            
+            node.Body.Accept(this);
+            sb.Append(")");
         }
 
         public void Visit(IteratorExp node) {
@@ -70,17 +72,15 @@ namespace Exolutio.Model.OCL.Utils {
             sb.Append(node.IteratorName);
             sb.Append("(");
             node.Body.Accept(this);
-            sb.Append(")");
-            
-            
+            sb.Append(")");      
         }
 
         public void Visit(LetExp node) {
-            sb.AppendFormat("(let {0}:{1} = ", node.Variable.Name, node.Variable.PropertyType);
+            sb.AppendFormat("let {0}:{1} = ", node.Variable.Name, node.Variable.PropertyType);
             node.Variable.Value.Accept(this);
-            sb.Append("in");
+            sb.Append(" in ");
             node.InExpression.Accept(this);
-            sb.Append(")");
+           
         }
 
         public void Visit(NullLiteralExp node) {
@@ -99,9 +99,7 @@ namespace Exolutio.Model.OCL.Utils {
                 arg.Accept(this);
                 sb.Append(",");
             }
-            sb.Append(")");
-
-            
+            sb.Append(")");          
         }
 
         public void Visit(PropertyCallExp node) {
@@ -110,34 +108,30 @@ namespace Exolutio.Model.OCL.Utils {
             }
             sb.Append(".");
             sb.Append(node.ReferredProperty.Name);
-            
-
-            
         }
 
         public void Visit(RealLiteralExp node) {
-            throw new NotImplementedException();
+            sb.Append(node.Value); 
         }
 
         public void Visit(StringLiteralExp node) {
-            throw new NotImplementedException();
+            sb.Append(node.Value); 
         }
 
         public void Visit(TupleLiteralExp node) {
-            throw new NotImplementedException();
+            sb.Append(node.Type.Name);
+            sb.Append("( --- )");
         }
 
         public void Visit(TypeExp node) {
-            throw new NotImplementedException();
+            sb.Append(node.ReferredType.Name);
         }
 
-        public void Visit(UnlimitedNaturalLiteralExp node) {
-            throw new NotImplementedException();
+        public void Visit(UnlimitedNaturalLiteralExp node) { 
         }
 
         public void Visit(VariableExp node) {
-            sb.Append(node.referredVariable.Name);
-            
+            sb.Append(node.referredVariable.Name);  
         }
 
         #endregion
