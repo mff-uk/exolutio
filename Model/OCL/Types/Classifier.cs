@@ -58,7 +58,11 @@ namespace Exolutio.Model.OCL.Types
                 //pridat konstantu na ::
                 if (Owner == null)
                     return Name;
-
+                if (Owner is Namespace) {
+                    if (((Namespace)Owner).Owner == null && string.IsNullOrWhiteSpace(Owner.Name) ) {
+                        return Name;
+                    }
+                }
                 return String.Concat(Owner.QualifiedName, "::", Name);
             }
         }
