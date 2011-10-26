@@ -115,7 +115,7 @@ namespace Tests.OCL
 
             TupleType tuple = new TupleType(typesTalbe);
             tuple.TupleParts.Add(new Property("prop1", PropertyType.One, integerType));
-            Assert.AreEqual(tuple.Name, "Tuple(prop1:::Integer)");
+            Assert.AreEqual(tuple.Name, "Tuple(prop1:Integer)");
             tuple.TupleParts.Add(new Property("prop2", PropertyType.One, integerType));
             typesTalbe.RegisterType(tuple);
 
@@ -139,7 +139,7 @@ namespace Tests.OCL
 
 
             Assert.IsTrue(tuple["prop1"].Type == integerType);
-            Assert.AreEqual(tuple.Name, "Tuple(prop1:::Integer,prop2:::Integer)");
+            Assert.AreEqual(tuple.Name, "Tuple(prop1:Integer,prop2:Integer)");
             
             
            
