@@ -127,7 +127,7 @@ namespace Exolutio.Model.OCL.Compiler {
             AST.VariableExp localVar = new AST.VariableExp(varDecl);
             AST.PropertyCallExp localProp = new AST.PropertyCallExp(localVar, false, null, null, property);
             //Napevno zafixovany navratovy typ collect
-            Classifier returnType = new CollectionType(TypesTable, property.Type);
+            Classifier returnType = TypesTable.Library.CreateCollection(CollectionKind.Collection, property.Type);
             return new AST.IteratorExp(expr, localProp, "Collect", varList, returnType);
         }
 
@@ -166,7 +166,7 @@ namespace Exolutio.Model.OCL.Compiler {
             AST.VariableExp localVar = new AST.VariableExp(varDecl);
             AST.OperationCallExp localOp = new AST.OperationCallExp(localVar, false, op, args);
             //Napevno zafixovany navratovy typ collect
-            Classifier returnType = new CollectionType(TypesTable, op.ReturnType);
+            Classifier returnType = TypesTable.Library.CreateCollection( CollectionKind.Collection, op.ReturnType);
             return new AST.IteratorExp(expr, localOp, "Collect", varList, returnType);
         }
 
@@ -443,30 +443,8 @@ namespace Exolutio.Model.OCL.Compiler {
         }
 
         CollectionType CreateCollectionType(CollectionKind kind, Classifier type) {
-            CollectionType collectionType;
-            switch (kind) {
-                case CollectionKind.Bag:
-                    collectionType = new BagType(TypesTable, type);
-                    break;
-                case CollectionKind.Collection:
-                    collectionType = new CollectionType(TypesTable, type);
-                    break;
-                case CollectionKind.OrderedSet:
-                    collectionType = new OrderedSetType(TypesTable, type);
-                    break;
-                case CollectionKind.Sequence:
-                    collectionType = new SequenceType(TypesTable, type);
-                    break;
-                case CollectionKind.Set:
-                    collectionType = new SetType(TypesTable, type);
-                    break;
+            CollectionType collectionType = TypesTable.Library.CreateCollection(kind, type);
 
-                default:
-                    collectionType = null;
-                    System.Diagnostics.Debug.Fail("CreateCollectionType( ... ): missing case for CollectionKind.");
-                    break;
-            }
-            TypesTable.RegisterCompositeType(collectionType);
             return collectionType;
         }
 

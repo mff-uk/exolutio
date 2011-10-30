@@ -7,16 +7,24 @@ using Exolutio.Model.OCL.Types;
 using Exolutio.Model.OCL.TypesTable;
 using Exolutio.Model.OCL.Compiler;
 using Exolutio.Model.OCL;
+using Exolutio.Model.Serialization;
+using Exolutio.Model;
 
 namespace Tests.OCL {
     [TestFixture]
     public class CompilerTest {
-
-
         public Tuple<TypesTable, Exolutio.Model.OCL.Environment> CreateTestEnv() {
             TypesTable tt = new TypesTable();
             StandardLibraryCreator slc = new StandardLibraryCreator();
             slc.CreateStandardLibrary(tt);
+
+
+            ProjectSerializationManager m = new ProjectSerializationManager();
+            Project loadedProject = m.LoadProject(@"..\..\..\Projects\tournaments.eXo");
+            ModelIntegrity.ModelConsistency.CheckProject(loadedProject);
+
+            loadedProject.SingleVersion.PIMSchema.OCLScripts[0].TranslateModel(tt);
+            /*
 
 
             //tt.Library.Boolean.Operations.Add(new Operation("and", true, tt.Library.Boolean, new Parameter[] { new Parameter("time", tt.Library.Boolean) }));
@@ -91,12 +99,12 @@ namespace Tests.OCL {
             tt.RegisterType(league);
             tt.RegisterType(leagueBag);
 
+            */
+            NamespaceEnvironment env = new NamespaceEnvironment(tt.Library.RootNamespace);
+            
 
-            NamespaceEnvironment env = new NamespaceEnvironment(ns);
 
-
-
-            return new Tuple<TypesTable, Exolutio.Model.OCL.Environment>(tt, env);
+            return new Tuple<TypesTable, Exolutio.Model.OCL.Environment>(tt,env );
         }
 
         [Test]
@@ -215,7 +223,7 @@ players->forAll(p | p.points >= requiredQualificationPoints)", root.Item1, root.
 
             var ast = compiler.TestCompiler(@"/* players playing leagues must have registration numbers */
 context Player
-inv: not league->isEmpty() implies regno <> null ", root.Item1, root.Item2);
+inv: not league->isEmpty() implies regNo <> null ", root.Item1, root.Item2);
 
             Exolutio.Model.OCL.Utils.PrintVisitor printer = new Exolutio.Model.OCL.Utils.PrintVisitor();
             string text = printer.AstToString(ast.Invariants[0]);

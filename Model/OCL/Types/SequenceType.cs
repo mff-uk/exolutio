@@ -22,15 +22,15 @@ namespace Exolutio.Model.OCL.Types
 
         public override Classifier CommonSuperType(Classifier other)
         {
-            Classifier common = CommonSuperType<SequenceType>((tt,el)=>new SequenceType(tt,el), other);
+            Classifier common = CommonSuperType<SequenceType>((tt,el)=>(SequenceType)tt.Library.CreateCollection(OCL.CollectionKind.Sequence,el), other);
             if (common == null)
                 return base.CommonSuperType(other);
             else
                 return common;
         }
 
-        public SequenceType(TypesTable.TypesTable tt,Classifier elemetnType)
-            : base(tt,elemetnType)
+        public SequenceType(TypesTable.TypesTable tt,Classifier elemetnType,Classifier superClassifier)
+            : base(tt,elemetnType,superClassifier)
         {
         }
 

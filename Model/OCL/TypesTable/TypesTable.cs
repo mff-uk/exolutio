@@ -44,14 +44,14 @@ namespace Exolutio.Model.OCL.TypesTable {
 
         public void RegisterCompositeType(Classifier composit) {
             
-            Type actType=composit.GetType();
-            while(actType != typeof(Classifier)){
-                Action<Classifier> lazyOpAction;
-                if (Library.LazyOpearation.TryGetValue(actType,out lazyOpAction)) {
-                  lazyOpAction(composit);
-                }
-                actType = actType.BaseType;
-            }
+            //Type actType=composit.GetType();
+            ////while(actType != typeof(Classifier)){
+            //    Action<Classifier> lazyOpAction;
+            //    if (Library.LazyOpearation.TryGetValue(actType,out lazyOpAction)) {
+            //      lazyOpAction(composit);
+            //    }
+            //  //  actType = actType.BaseType;
+            ////}
 
             
             
