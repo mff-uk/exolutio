@@ -399,31 +399,9 @@ namespace Exolutio.Model.OCL.Compiler {
         }
 
         CollectionType CreateCollectionType(CollectionKind kind, Classifier type) {
-            CollectionType collectionType;
-            switch (kind) {
-                case CollectionKind.Bag:
-                    collectionType = new BagType(TypesTable, type);
-                    break;
-                case CollectionKind.Collection:
-                    collectionType = new CollectionType(TypesTable,type);
-                    break;
-                case CollectionKind.OrderedSet:
-                    collectionType = new OrderedSetType(TypesTable,type);
-                    break;
-                case CollectionKind.Sequence:
-                    collectionType = new SequenceType(TypesTable,type);
-                    break;
-                case CollectionKind.Set:
-                    collectionType = new SetType(TypesTable,type);
-                    break;
+            CollectionType collectionType = TypesTable.Library.CreateCollection(kind, type);
 
-                default:
-                    collectionType = null;
-                    System.Diagnostics.Debug.Fail("CreateCollectionType( ... ): missing case for CollectionKind.");
-                    break;
-            }
-
-            TypesTable.RegisterCompositeType(collectionType);
+            //TypesTable.RegisterCompositeType(collectionType);
 
             return collectionType;
         }

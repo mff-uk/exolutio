@@ -103,7 +103,51 @@ namespace Exolutio.Model.OCL.TypesTable {
             protected set;
         }
 
-        
+        public CollectionType CreateCollection(CollectionKind kind, Classifier elementType) {
+            CollectionType newType ;
+            if (kind == CollectionKind.Collection) {
+                newType = new CollectionType(TypeTable, elementType, Any);
+            }
+            else {
+                CollectionType inheritFrom = inheritFrom = CreateCollection(CollectionKind.Collection, elementType);
+                switch (kind) {
+                    case CollectionKind.Bag:
+                        inheritFrom = CreateCollection(CollectionKind.Collection, elementType);
+                        newType = new BagType(TypeTable, elementType, inheritFrom);
+                        break;
+                    case CollectionKind.Collection:
+                        newType = null;
+                        System.Diagnostics.Debug.Fail("Hups.");
+                        break;
+                    case CollectionKind.OrderedSet:
+                        inheritFrom = CreateCollection(CollectionKind.Collection, elementType);
+                        newType = new OrderedSetType(TypeTable, elementType, inheritFrom);
+                        break;
+                    case CollectionKind.Sequence:
+                        inheritFrom = CreateCollection(CollectionKind.Collection, elementType);
+                        newType = new SequenceType(TypeTable, elementType, inheritFrom);
+                        break;
+                    case CollectionKind.Set:
+                        inheritFrom = CreateCollection(CollectionKind.Collection, elementType);
+                        newType = new SetType(TypeTable, elementType, inheritFrom);
+                        break;
+                    default:
+                        newType = null;
+                        System.Diagnostics.Debug.Fail("CreateCollectionType( ... ): missing case for CollectionKind.");
+                        break;
+                }
+            }
+
+            //Operations injection
+            Type actType = newType.GetType();
+            Action<Classifier> lazyOpAction;
+            if (LazyOpearation.TryGetValue(actType, out lazyOpAction)) {
+                lazyOpAction(newType);
+            }
+
+            TypeTable.RegisterType(newType);
+            return newType;
+        }
     }
 
 
@@ -187,7 +231,7 @@ namespace Exolutio.Model.OCL.TypesTable {
             AddOperation(integer, "max", integer, integer);
             AddOperation(integer, "toString", str);
 
-            SequenceType strSeq = new SequenceType(tt,str);
+            CollectionType strSeq = lib.CreateCollection(CollectionKind.Sequence, str);
             tt.RegisterType(strSeq);
             //string
             AddOperation(str, "+", str, str);

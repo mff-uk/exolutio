@@ -39,7 +39,7 @@ namespace Exolutio.Model.OCL.Types
         }
 
         public TupleType(TypesTable.TypesTable tt)
-            : base(tt,"")
+            : base(tt,"",null)
         {
             TupleParts = new PropertyCollection(this);
         }

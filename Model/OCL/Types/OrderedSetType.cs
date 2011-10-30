@@ -23,15 +23,15 @@ namespace Exolutio.Model.OCL.Types
 
         public override Classifier CommonSuperType(Classifier other)
         {
-            Classifier common = CommonSuperType<OrderedSetType>((tt, el) => new OrderedSetType(tt, el), other);
+            Classifier common = CommonSuperType<OrderedSetType>((tt, el) =>(OrderedSetType)tt.Library.CreateCollection(OCL.CollectionKind.OrderedSet, el), other);
             if (common == null)
                 return base.CommonSuperType(other);
             else
                 return common;
         }
 
-        public OrderedSetType(TypesTable.TypesTable tt,Classifier elemetnType )
-            : base(tt,elemetnType)
+        public OrderedSetType(TypesTable.TypesTable tt,Classifier elemetnType,Classifier superClassifier )
+            : base(tt,elemetnType,superClassifier)
         {
         }
 

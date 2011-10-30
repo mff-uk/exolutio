@@ -22,15 +22,15 @@ namespace Exolutio.Model.OCL.Types
 
         public override Classifier CommonSuperType(Classifier other)
         {
-            Classifier common = CommonSuperType<BagType>((tt, el) => new BagType(tt, el), other);
+            Classifier common = CommonSuperType<BagType>((tt, el) => (BagType)tt.Library.CreateCollection(OCL.CollectionKind.Bag,el), other);
             if (common == null)
                 return base.CommonSuperType(other);
             else
                 return common;
         }
 
-        public BagType(TypesTable.TypesTable tt,Classifier elemetnType)
-            : base(tt,elemetnType)
+        public BagType(TypesTable.TypesTable tt, Classifier elemetnType, Classifier superClassifier)
+            : base(tt,elemetnType,superClassifier)
         { }
 
    

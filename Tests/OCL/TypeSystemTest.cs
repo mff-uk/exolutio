@@ -38,62 +38,60 @@ namespace Tests.OCL
         [Test]
         public void ReflexivityConformsToTest()
         {
-            TypesTable typesTalbe = new TypesTable();
+            TypesTable typesTable = new TypesTable();
             StandardLibraryCreator sl = new StandardLibraryCreator();
-            sl.CreateStandardLibrary(typesTalbe);
+            sl.CreateStandardLibrary(typesTable);
 
-            Classifier integerType = typesTalbe.Library.Integer;
+            Classifier integerType = typesTable.Library.Integer;
 
             Assert.IsTrue(integerType.ConformsTo(integerType));
 
-            Classifier realType = typesTalbe.Library.Real;
+            Classifier realType = typesTable.Library.Real;
 
             Assert.IsTrue(realType.ConformsTo(realType));
 
-            CollectionType collType = new CollectionType(typesTalbe,integerType);
-            CollectionType collType2 = new CollectionType(typesTalbe, integerType);
-            typesTalbe.RegisterType(collType);
-            typesTalbe.RegisterType(collType2);
+            CollectionType collType = typesTable.Library.CreateCollection(Exolutio.Model.OCL.CollectionKind.Bag, integerType) ;
+            CollectionType collType2 = typesTable.Library.CreateCollection(Exolutio.Model.OCL.CollectionKind.Bag, integerType);
+            typesTable.RegisterType(collType);
+            typesTable.RegisterType(collType2);
 
             Assert.IsTrue(collType.ConformsTo(collType));
             Assert.IsTrue(collType.ConformsTo(collType2));
 
-            TupleType tuple = new TupleType(typesTalbe);
+            TupleType tuple = new TupleType(typesTable);
             tuple.TupleParts.Add(new Property("ahoj", PropertyType.One, integerType));
-            typesTalbe.RegisterType(tuple);
+            typesTable.RegisterType(tuple);
 
-            TupleType tuple2 = new TupleType(typesTalbe);
+            TupleType tuple2 = new TupleType(typesTable);
             tuple2.TupleParts.Add(new Property("ahoj", PropertyType.One, integerType));
-            typesTalbe.RegisterType(tuple2);
+            typesTable.RegisterType(tuple2);
 
             Assert.IsTrue(tuple.ConformsTo(tuple));
             Assert.IsTrue(tuple.ConformsTo(tuple2));
 
-            CollectionType bagType = new BagType(typesTalbe,integerType);
-            CollectionType bagType2 = new BagType(typesTalbe,integerType);
-            typesTalbe.RegisterType(bagType);
-            typesTalbe.RegisterType(bagType2);
+            CollectionType bagType = typesTable.Library.CreateCollection(Exolutio.Model.OCL.CollectionKind.Bag,integerType);
+            CollectionType bagType2 = typesTable.Library.CreateCollection(Exolutio.Model.OCL.CollectionKind.Bag, integerType);
+            
             Assert.IsTrue(bagType.ConformsTo(bagType));
             Assert.IsTrue(bagType.ConformsTo(bagType2));
 
 
-            CollectionType setType = new SetType(typesTalbe,integerType);
-            CollectionType setType2 = new SetType(typesTalbe,integerType);
-            typesTalbe.RegisterType(setType);
-            typesTalbe.RegisterType(setType2);
+            CollectionType setType = typesTable.Library.CreateCollection(Exolutio.Model.OCL.CollectionKind.Set, integerType);
+            CollectionType setType2 = typesTable.Library.CreateCollection(Exolutio.Model.OCL.CollectionKind.Set, integerType); 
+ 
             Assert.IsTrue(setType.ConformsTo(setType));
             Assert.IsTrue(setType.ConformsTo(setType2));
 
-            Classifier voidType = typesTalbe.Library.Void;
-            typesTalbe.RegisterType(voidType);
+            Classifier voidType = typesTable.Library.Void;
+            typesTable.RegisterType(voidType);
             Assert.IsTrue(voidType.ConformsTo(voidType));
 
-            Classifier anyType = typesTalbe.Library.Any;
-            typesTalbe.RegisterType(anyType);
+            Classifier anyType = typesTable.Library.Any;
+            typesTable.RegisterType(anyType);
             Assert.IsTrue(anyType.ConformsTo(anyType));
 
-            Classifier invalidType = typesTalbe.Library.Invalid;
-            typesTalbe.RegisterType(invalidType);
+            Classifier invalidType = typesTable.Library.Invalid;
+            typesTable.RegisterType(invalidType);
             Assert.IsTrue(invalidType.ConformsTo(invalidType));
             //pridat class
         }
@@ -149,30 +147,20 @@ namespace Tests.OCL
         [Test]
         public void CollectionTest()
         {
-            TypesTable typesTalbe = new TypesTable();
+            TypesTable typesTable = new TypesTable();
             StandardLibraryCreator sl = new StandardLibraryCreator();
-            sl.CreateStandardLibrary(typesTalbe);
+            sl.CreateStandardLibrary(typesTable);
 
-            Classifier integerType = typesTalbe.Library.Integer;
-            Classifier realType = typesTalbe.Library.Real;
-            Classifier anyType = typesTalbe.Library.Any;
+            Classifier integerType = typesTable.Library.Integer;
+            Classifier realType = typesTable.Library.Real;
+            Classifier anyType = typesTable.Library.Any;
 
-            BagType bagInteger = new BagType(typesTalbe,integerType);
-            BagType bagReal = new BagType(typesTalbe, realType);
-            SetType setType = new SetType(typesTalbe, integerType);
-            SequenceType seqType = new SequenceType(typesTalbe, integerType);
-            OrderedSetType ordType = new OrderedSetType(typesTalbe, integerType);
-            CollectionType collInteger = new CollectionType(typesTalbe, integerType);
-
-
-
-            typesTalbe.RegisterType(bagInteger);
-            typesTalbe.RegisterType(bagReal);
-            typesTalbe.RegisterType(setType);
-            typesTalbe.RegisterType(seqType);
-            typesTalbe.RegisterType(ordType);
-            typesTalbe.RegisterType(collInteger);
-
+            CollectionType bagInteger = typesTable.Library.CreateCollection(Exolutio.Model.OCL.CollectionKind.Bag,integerType);
+            CollectionType bagReal = typesTable.Library.CreateCollection(Exolutio.Model.OCL.CollectionKind.Bag, realType);
+            CollectionType setType = typesTable.Library.CreateCollection(Exolutio.Model.OCL.CollectionKind.Set, integerType);
+            CollectionType seqType = typesTable.Library.CreateCollection(Exolutio.Model.OCL.CollectionKind.Sequence, integerType); ;
+            CollectionType ordType = typesTable.Library.CreateCollection(Exolutio.Model.OCL.CollectionKind.OrderedSet, integerType);
+            CollectionType collInteger = typesTable.Library.CreateCollection(Exolutio.Model.OCL.CollectionKind.Collection, integerType);
 
             Assert.IsTrue(bagInteger.ConformsTo(bagReal));
             Assert.IsTrue(bagInteger.ConformsTo(collInteger));
@@ -208,7 +196,7 @@ namespace Tests.OCL
             Assert.AreEqual(ordType.Name, "OrderedSet(" + integerType.QualifiedName + ")");
             Assert.AreEqual(seqType.Name, "Sequence(" + integerType.QualifiedName + ")");
 
-            Assert.IsTrue(bagInteger == new BagType( typesTalbe,integerType));
+            Assert.IsTrue(bagInteger == typesTable.Library.CreateCollection(Exolutio.Model.OCL.CollectionKind.Bag,integerType));
             Assert.IsFalse(bagInteger == null);
             Assert.IsFalse(bagInteger == bagReal);
             Assert.IsFalse(bagInteger.Equals(null));
@@ -313,20 +301,14 @@ namespace Tests.OCL
 
 
             //Collection
-            BagType bagIntegerType = new BagType(typesTable,integerType);
-            BagType bagRealType = new BagType(typesTable, realType);
-            SetType setType = new SetType(typesTable, integerType);
-            SequenceType seqType = new SequenceType(typesTable, integerType);
-            OrderedSetType ordType = new OrderedSetType(typesTable, integerType);
-            CollectionType collIntegerType = new CollectionType(typesTable, integerType);
-            CollectionType collRealType = new CollectionType(typesTable, realType);
+            BagType bagIntegerType =  (BagType)typesTable.Library.CreateCollection( Exolutio.Model.OCL.CollectionKind.Bag, integerType);
+            BagType bagRealType = (BagType)typesTable.Library.CreateCollection(Exolutio.Model.OCL.CollectionKind.Bag, realType);
+            SetType setType = (SetType)typesTable.Library.CreateCollection(Exolutio.Model.OCL.CollectionKind.Set, integerType);
+            SequenceType seqType = (SequenceType)typesTable.Library.CreateCollection(Exolutio.Model.OCL.CollectionKind.Sequence, integerType);
+            OrderedSetType ordType = (OrderedSetType)typesTable.Library.CreateCollection(Exolutio.Model.OCL.CollectionKind.OrderedSet, integerType);
+            CollectionType collIntegerType = typesTable.Library.CreateCollection(Exolutio.Model.OCL.CollectionKind.Collection, integerType);
+            CollectionType collRealType = typesTable.Library.CreateCollection(Exolutio.Model.OCL.CollectionKind.Collection,realType); ;
 
-            typesTable.RegisterType(bagIntegerType);
-            typesTable.RegisterType(bagRealType);
-            typesTable.RegisterType(setType);
-            typesTable.RegisterType(seqType);
-            typesTable.RegisterType(ordType);
-            typesTable.RegisterType(collIntegerType);
 
             Assert.AreEqual(setType.CommonSuperType(setType), setType); //set(integer),set(integer) -> set(integer)
             Assert.AreEqual(setType.CommonSuperType(ordType), collIntegerType); //set(integer),ord(integer) -> coll(integer)

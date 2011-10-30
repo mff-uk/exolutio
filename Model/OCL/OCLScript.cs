@@ -112,7 +112,7 @@ namespace Exolutio.Model.OCL {
             return new CompilerResult(constraints, errColl, tt.Library);
         }
 
-        void TranslateModel(TypesTable.TypesTable tt) {
+        public void TranslateModel(TypesTable.TypesTable tt) {
             // Docansne reseni s Date
             Class date = new Class(tt, "Date");
             date.Operations.Add(new Operation("after", true, tt.Library.Boolean, new Parameter[] { new Parameter("time", date) }));
@@ -166,7 +166,7 @@ namespace Exolutio.Model.OCL {
                         }
                         Classifier propType;
                         if (end.Upper > 1) {
-                            propType = new BagType(tt, assType);
+                            propType = tt.Library.CreateCollection(CollectionKind.Set,assType);
                         }
                         else {
                             propType = assType;

@@ -36,8 +36,8 @@ namespace Exolutio.Model.OCL.Types
         }
 
 
-        public CollectionType(TypesTable.TypesTable tt,Classifier elemetnType)
-            : base(tt,"")
+        public CollectionType(TypesTable.TypesTable tt,Classifier elemetnType,Classifier superClassifier)
+            : base(tt,"",superClassifier)
         {
             ElementType = elemetnType;
         }
@@ -111,7 +111,7 @@ namespace Exolutio.Model.OCL.Types
 
         public override Classifier CommonSuperType(Classifier other)
         {
-            Classifier common = CommonSuperType<CollectionType>((tt, el) => new CollectionType(tt, el),other);
+            Classifier common = CommonSuperType<CollectionType>((tt, el) => tt.Library.CreateCollection(CollectionKind.Collection, el),other);
             if (common == null)
             {
                 if (other is IConformsToComposite && other is ICompositeType == false)
@@ -174,12 +174,11 @@ namespace Exolutio.Model.OCL.Types
                 RegistredOperation("closure", c => c == 1,
                     (s, b, t) => {
                         if (s.CollectionKind == CollectionKind.Sequence || s.CollectionKind == CollectionKind.OrderedSet) {
-                            OrderedSetType ordSet = new OrderedSetType(t,b);
-                            t.RegisterType(ordSet);
+                            OrderedSetType ordSet = (OrderedSetType)t.Library.CreateCollection(CollectionKind.OrderedSet, b); 
                             return ordSet;
                         }
                         else {
-                            BagType bag = new BagType(t,b);
+                            BagType bag = (BagType)t.Library.CreateCollection(CollectionKind.Bag, b);
                             t.RegisterType(bag);
                             return bag;
                         }
@@ -196,12 +195,12 @@ namespace Exolutio.Model.OCL.Types
                 RegistredOperation("collect", c => c == 1,
                     (s,b, t) => {
                         if (s.CollectionKind == CollectionKind.Sequence || s.CollectionKind == CollectionKind.OrderedSet) {
-                            SequenceType seq = new SequenceType(t,b);
+                            SequenceType seq = (SequenceType)t.Library.CreateCollection(CollectionKind.Sequence, b);
                             t.RegisterType(seq);
                             return seq;
                         }
                         else {
-                            BagType bag = new BagType(t,b);
+                            BagType bag = (BagType)t.Library.CreateCollection(CollectionKind.Bag, b) ;
                             t.RegisterType(bag);
                             return bag;
                         }
@@ -247,12 +246,12 @@ namespace Exolutio.Model.OCL.Types
                 RegistredOperation("sortedBy", c => c == 1,
                     (s, b, t) => {
                         if (s.CollectionKind == CollectionKind.Sequence || s.CollectionKind == CollectionKind.Bag) {
-                            SequenceType seq = new SequenceType(t,b);
+                            SequenceType seq = (SequenceType)t.Library.CreateCollection(CollectionKind.Sequence, b); ;
                             t.RegisterType(seq);
                             return seq;
                         }
                         else {
-                            OrderedSetType ordSet = new OrderedSetType(t,b);
+                            OrderedSetType ordSet = (OrderedSetType)t.Library.CreateCollection(CollectionKind.OrderedSet, b); ;
                             t.RegisterType(ordSet);
                             return ordSet;
                         }
