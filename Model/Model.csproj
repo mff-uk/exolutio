@@ -63,6 +63,7 @@
     <Compile Include="ModelIterator.cs" />
     <Compile Include="ModelVerifier.cs" />
     <Compile Include="ModelWorker.cs" />
+    <Compile Include="OCL\AST\AssociationEndCall.cs" />
     <Compile Include="OCL\AST\ClassifierConstraint.cs" />
     <Compile Include="OCL\AST\Constraints.cs" />
     <Compile Include="OCL\AST\ErrorExp.cs" />

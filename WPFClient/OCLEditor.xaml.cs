@@ -94,7 +94,7 @@ namespace Exolutio.WPFClient {
             }
         }
 
-        private void button1_Click(object sender, RoutedEventArgs e) {
+       /* private void button1_Click(object sender, RoutedEventArgs e) {
             if (DisplayedScript != null) {
                 string error = DisplayedScript.Compile(DisplayedScript.Contents);
                 if (string.IsNullOrWhiteSpace(error) == false) {
@@ -113,23 +113,28 @@ namespace Exolutio.WPFClient {
                 MessageBox.Show(error);
 
             }
-        }
+        }*/
 
         private void button3_Click(object sender, RoutedEventArgs e) {
             if (DisplayedScript != null) {
                 var res = DisplayedScript.CompileToAst();
+                StringBuilder sb = new StringBuilder();
                 if (res.Errors.HasError) {
-                    StringBuilder sb = new StringBuilder();
                     sb.AppendLine("Errors:");
                     foreach (var er in res.Errors.Errors) {
                         sb.AppendLine(er.Text);
                     }
-                    MessageBox.Show(sb.ToString());
                 }
                 else {
-                    MessageBox.Show("Compile OK");
+                    sb.AppendLine("Compilation OK.");
+                    foreach (var context in res.Constraints.Classifiers) {
+                        sb.AppendLine("context " + context.Context.ToString());
+                        foreach (var constraint in context.Invariants) {
+                            sb.AppendLine("inv: " + constraint.ToString());
+                        }
+                    }
                 }
-
+                MessageBox.Show(sb.ToString());
             }
         }
     }

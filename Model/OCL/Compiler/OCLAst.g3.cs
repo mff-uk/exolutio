@@ -116,7 +116,7 @@ namespace Exolutio.Model.OCL.Compiler {
                 }
             }
 
-            Errors.AddError(new CodeErrorItem("Name of property does not exit.", tokenPath.First(), tokenPath.Last()));
+            Errors.AddError(new CodeErrorItem(String.Format("Property `{0}` does not exit.",path[0]), tokenPath.First(), tokenPath.Last()));
             return new AST.ErrorExp(Library.Invalid);
         }
 
@@ -155,7 +155,7 @@ namespace Exolutio.Model.OCL.Compiler {
                 }
             }
 
-            Errors.AddError(new CodeErrorItem("Operation does not exit.", tokenPath.First(), tokenPath.Last()));
+            Errors.AddError(new CodeErrorItem(string.Format("Operation `{0}` does not exit.",path.First()), tokenPath.First(), tokenPath.Last()));
             return new AST.ErrorExp(Library.Invalid);
         }
 
