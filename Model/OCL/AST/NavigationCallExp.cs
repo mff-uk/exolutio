@@ -13,7 +13,7 @@ namespace Exolutio.Model.OCL.AST
     /// qualifier attached to the source end of the association, then additional qualifier expressions may be used to specify the
     /// values of the qualifying attributes.
     /// </summary>
-    public class NavigationCallExp : FeatureCallExp
+    public abstract class NavigationCallExp : FeatureCallExp
     {
         public NavigationCallExp(OclExpression source, bool isPre, Property navigationSource, OclExpression qualifier, Classifier returnType)
             : base(source, isPre, returnType) {

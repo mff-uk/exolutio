@@ -17,14 +17,14 @@
   <Class Name="Exolutio.Model.AttributeType">
     <Position X="10.25" Y="4" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAgBAAAAAAAIAAEQEAAAAQEACBAIAAIAAAAAAAAABA=</HashCode>
+      <HashCode>AAAgBAAAAAAAIAAEQEAABAQEACBAIAAIAABAAAAABBA=</HashCode>
       <FileName>AttributeType.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Exolutio.Model.PIM.PIMClass">
     <Position X="12.5" Y="11.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAABIACAAAAAAAEAAAACAAABCBAIAAAAAAAAAAAABA=</HashCode>
+      <HashCode>AAAABJACGAAAAAAEAAAACAAABCBAIAAAAAAAAAAAgBA=</HashCode>
       <FileName>PIM\PIMClass.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -68,7 +68,7 @@
       </Delegate>
     </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AAAEAIAAEAAAACIAAAAACAAABCBAIAgAAAAAABQAADA=</HashCode>
+      <HashCode>AAAEAIAAEAAIACIAAAAACAAABCBAIAgAAAAAABQAADA=</HashCode>
       <FileName>PIM\PIMSchema.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -82,14 +82,14 @@
       </Delegate>
     </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AAAEHCAAEAAAAAoIAAAAAAAAFCBBIEAAAAIAABZgABg=</HashCode>
+      <HashCode>AAAGHCAAEQAAAAoIAAAAAAAAFCBBIEAAAAIAABZwABg=</HashCode>
       <FileName>PSM\PSMSchema.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Exolutio.Model.PSM.PSMAssociation">
     <Position X="22.25" Y="11.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAFAAAABAAAIAEAgAAQIBBACBAIQAAAAEEAAAAABA=</HashCode>
+      <HashCode>AAAAFAAAABBAAMAEAgAAQIBBACBAIQAAAAUEAAAAABA=</HashCode>
       <FileName>PSM\PSMAssociation.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -97,7 +97,7 @@
   <Class Name="Exolutio.Model.PSM.PSMAttribute">
     <Position X="31.75" Y="11.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAFAAAABAAAAUEIAgAAAAJACBAIYAAQAAEAAAAABA=</HashCode>
+      <HashCode>AAAAFAAAABBAAAUEIAgAAAAJACBAIYAAQAEEAAAAABA=</HashCode>
       <FileName>PSM\PSMAttribute.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -105,7 +105,7 @@
   <Class Name="Exolutio.Model.PSM.PSMComponent">
     <Position X="28.5" Y="8.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAgAAAAAAAAAAAIAAAAAAAAACBAIAAAAAAAAAAAIAA=</HashCode>
+      <HashCode>AAAgAgAAAABAAAAIAAAAAAAAgCBAIAAAAAAAAAAAIAA=</HashCode>
       <FileName>PSM\PSMComponent.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -115,7 +115,7 @@
   <Class Name="Exolutio.Model.PSM.PSMClass">
     <Position X="24.5" Y="15.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AgAABiAAAAAAAAAEAAgAAAEAACBAIAAABAAAAAAQABA=</HashCode>
+      <HashCode>AgAABjAACABAAAAEAAgAAAEAACBAIAAABAAAAAAQgBA=</HashCode>
       <FileName>PSM\PSMClass.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -123,19 +123,19 @@
   <Class Name="Exolutio.Model.PSM.PSMContentModel">
     <Position X="29" Y="15.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAABAAAAAAAAAAEAAAAAAAAACBBIAAAAQAAAAAAABA=</HashCode>
+      <HashCode>AAAABAAAAABAAAAEAAAAAAAAACBBIAAAAQAAAAAAABA=</HashCode>
       <FileName>PSM\PSMContentModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Exolutio.Model.PSM.PSMSchemaClass">
     <Position X="26.75" Y="15.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAIAAAAAAAAAAAABA=</HashCode>
+      <HashCode>AAAAAAAAAABAAAAEAAAAAAAAAAAAIAAAAAAAAAAAABA=</HashCode>
       <FileName>PSM\PSMSchemaClass.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Exolutio.Model.PSM.PSMAssociationMember">
-    <Position X="26.5" Y="11.25" Width="2.5" />
+  <Class Name="Exolutio.Model.PSM.PSMAssociationMember" Collapsed="true">
+    <Position X="28" Y="12.75" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAgAABAAAAAACAAAAAAAAACBAIAEAAAAAAAAAAAA=</HashCode>
       <FileName>PSM\PSMAssociationMember.cs</FileName>
@@ -144,7 +144,7 @@
   <Class Name="Exolutio.Model.Project">
     <Position X="0.5" Y="3" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AEEIAggAChAAAMAQAAACIAwAgCBGQAAABEAMAAVAAAA=</HashCode>
+      <HashCode>CMEIAggAChAIgMAQAAACIAwAgCBGQAAABEAMAAVCAAA=</HashCode>
       <FileName>Project.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -152,7 +152,7 @@
   <Class Name="Exolutio.Model.ProjectVersion">
     <Position X="3.5" Y="4" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IAACBgAAAAAAAAABAAADAAAABCBAIAAAAAAIAAAwABA=</HashCode>
+      <HashCode>IAACBgAACAAAAAABAAAGAQAABCBAIAAAAAAIAAAwABA=</HashCode>
       <FileName>ProjectVersion.cs</FileName>
     </TypeIdentifier>
   </Class>
