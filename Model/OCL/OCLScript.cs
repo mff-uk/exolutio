@@ -331,7 +331,7 @@ namespace Exolutio.Model.OCL {
                     item.Item1.Properties.Add(newass);
 
                     //hack
-                    newass.Tag = ass;
+                    newass.Tag = end;
                 }
             }
 
