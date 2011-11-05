@@ -314,7 +314,7 @@ namespace Exolutio.Model.OCL {
                     Classifier assType = tt.Library.RootNamespace.NestedClassifier[end.PIMClass.Name];
                     string name;
                     if (string.IsNullOrEmpty(end.Name)) {
-                        name = assType.Name.ToLower();
+                        name = assType.Name;
                     }
                     else {
                         name = end.Name;
