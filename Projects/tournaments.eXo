@@ -252,10 +252,10 @@ inv: matches->exists(m:Match | m.start.equals(start))
 more Tournaments that overlap */
 
 context TournamentControl
-inv: tournament.players->forAll(p|
+inv: Tournament.players->forAll(p|
 p.tournaments->forAll(t|
-t <> tournament implies
-not t.overlap(tournament)))
+t <> Tournament implies
+not t.overlap(Tournament)))
 
 /* A match can only involve players who are
 accepted in the tournament */
@@ -306,7 +306,8 @@ players->forAll(p | p.points >= requiredQualificationPoints)
 
 /* players playing leagues must have registration numbers */
 context Player
-inv: not league->isEmpty() implies regNo <> null 
+inv: not 
+League->isEmpty() implies regNo <> null 
 
 ]]></eXo:Contents>
         </eXo:OCLScript>
