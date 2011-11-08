@@ -68,6 +68,7 @@
     <Compile Include="ModelIntegrity\ModelConsistency.cs" />
     <Compile Include="ModelIntegrity\ModelConsistencyException.cs" />
     <Compile Include="OCL\CompilerTest.cs" />
+    <Compile Include="OCL\CreateAST.cs" />
     <Compile Include="OCL\TypeSystemTest.cs" />
     <Compile Include="Reflection\ReflectionTests.cs" />
     <Compile Include="Program.cs" />

@@ -25,11 +25,25 @@ namespace Exolutio.Model.OCL.Types {
         }
 
         Func<CollectionType,Classifier, TypesTable.TypesTable, Classifier> expressionType;
+        /// <summary>
+        /// Call after validate body type
+        /// </summary>
+        /// <param name="sourceType"></param>
+        /// <param name="_bodyType"></param>
+        /// <param name="tt"></param>
+        /// <returns></returns>
         public Classifier ExpressionType(CollectionType sourceType,Classifier _bodyType, TypesTable.TypesTable tt) {
             return expressionType(sourceType,_bodyType,tt);
         }
 
         Func<CollectionType, Classifier, TypesTable.TypesTable, Classifier> bodyType;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sourceType"></param>
+        /// <param name="_bodyType"></param>
+        /// <param name="tt"></param>
+        /// <returns></returns>
         public Classifier BodyType(CollectionType sourceType, Classifier _bodyType, TypesTable.TypesTable tt) {
             return bodyType(sourceType,_bodyType,tt);
         }
