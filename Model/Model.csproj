@@ -68,7 +68,11 @@
     <Compile Include="OCL\AST\Constraints.cs" />
     <Compile Include="OCL\AST\ErrorExp.cs" />
     <Compile Include="OCL\AST\IAstVisitor.cs" />
-    <Compile Include="OCL\Bridge\OCLPIMClass.cs" />
+    <Compile Include="OCL\Bridge\BridgeFactory.cs" />
+    <Compile Include="OCL\Bridge\IBridgeToOCL.cs" />
+    <Compile Include="OCL\Bridge\PIMBridge.cs" />
+    <Compile Include="OCL\Bridge\PSMBridge.cs" />
+    <Compile Include="OCL\Bridge\UnsupportedSchemaTypeException.cs" />
     <Compile Include="OCL\Utils\CanonicPrinterVisitor.cs" />
     <Compile Include="OCL\Utils\PrintVisitor.cs" />
     <Compile Include="OCL\CompilerResult.cs" />
