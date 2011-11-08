@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
+using Exolutio.Model.OCL.Bridge;
 using Exolutio.Model.OCL.Types;
 using Exolutio.Model.OCL.TypesTable;
 using Exolutio.Model.OCL.Compiler;
@@ -14,19 +15,17 @@ namespace Tests.OCL {
     [TestFixture]
     public class CompilerTest {
         public Tuple<TypesTable, Exolutio.Model.OCL.Environment> CreateTestEnv() {
-            TypesTable tt = new TypesTable();
-            StandardLibraryCreator slc = new StandardLibraryCreator();
-            slc.CreateStandardLibrary(tt);
+            
 
 
             ProjectSerializationManager m = new ProjectSerializationManager();
             Project loadedProject = m.LoadProject(@"..\..\..\Projects\tournaments.eXo");
             ModelIntegrity.ModelConsistency.CheckProject(loadedProject);
 
-            loadedProject.SingleVersion.PIMSchema.OCLScripts[0].TranslateModel(tt);
+            BridgeFactory brFactory = new BridgeFactory();
+            TypesTable tt = brFactory.Create(loadedProject.SingleVersion.PIMSchema.OCLScripts[0].Schema).TypesTable;
+      
             /*
-
-
             //tt.Library.Boolean.Operations.Add(new Operation("and", true, tt.Library.Boolean, new Parameter[] { new Parameter("time", tt.Library.Boolean) }));
             //tt.Library.Boolean.Operations.Add(new Operation("or", true, tt.Library.Boolean, new Parameter[] { new Parameter("time", tt.Library.Boolean) }));
             //tt.Library.Boolean.Operations.Add(new Operation("implies", true, tt.Library.Boolean, new Parameter[] { new Parameter("time", tt.Library.Boolean) }));
@@ -152,12 +151,11 @@ inv: matches->exists(m:Match | m.start.equals(start))", root.Item1, root.Item2);
 
             var ast = compiler.TestCompiler(@"/* No Player can take part in two or
 more Tournaments that overlap */
-
 context TournamentControl
-inv: tournament.players->forAll(p|
+inv: Tournament.players->forAll(p|
 p.tournaments->forAll(t|
-t <> tournament implies
-not t.overlap(tournament)))", root.Item1, root.Item2);
+t <> Tournament implies
+not t.overlap(Tournament)))", root.Item1, root.Item2);
 
             Exolutio.Model.OCL.Utils.PrintVisitor printer = new Exolutio.Model.OCL.Utils.PrintVisitor();
             string text = printer.AstToString(ast.Invariants[0]);
@@ -223,7 +221,7 @@ players->forAll(p | p.points >= requiredQualificationPoints)", root.Item1, root.
 
             var ast = compiler.TestCompiler(@"/* players playing leagues must have registration numbers */
 context Player
-inv: not league->isEmpty() implies regNo <> null ", root.Item1, root.Item2);
+inv: not League->isEmpty() implies regNo <> null ", root.Item1, root.Item2);
 
             Exolutio.Model.OCL.Utils.PrintVisitor printer = new Exolutio.Model.OCL.Utils.PrintVisitor();
             string text = printer.AstToString(ast.Invariants[0]);
