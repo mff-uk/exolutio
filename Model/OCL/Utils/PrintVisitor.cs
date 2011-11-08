@@ -10,6 +10,31 @@ namespace Exolutio.Model.OCL.Utils {
 
         StringBuilder sb;
 
+        Dictionary<string, int> infixOpPriority = new Dictionary<string, int>();
+        HashSet<string> unaryOperation = new HashSet<string>();
+
+        public PrintVisitor() {
+            infixOpPriority.Add("*", 1);
+            infixOpPriority.Add("/", 1);
+            infixOpPriority.Add("+", 2);
+            infixOpPriority.Add("-", 2);
+            infixOpPriority.Add("<", 3);
+            infixOpPriority.Add(">", 3);
+            infixOpPriority.Add("<=", 3);
+            infixOpPriority.Add(">=", 3);
+            infixOpPriority.Add("=", 4);
+            infixOpPriority.Add("<>", 4);
+            infixOpPriority.Add("and", 5);
+            infixOpPriority.Add("or", 6);
+            infixOpPriority.Add("xor", 7);
+            infixOpPriority.Add("implies", 8);
+
+
+            unaryOperation.Add("-");
+            unaryOperation.Add("not");
+        }
+
+
         public string AstToString(OclExpression expr) {
             sb = new StringBuilder();
             expr.Accept(this);
@@ -25,7 +50,7 @@ namespace Exolutio.Model.OCL.Utils {
         public void Visit(CollectionLiteralExp node) {
             CollectionType col = (CollectionType)node.Type;
             sb.AppendFormat("{0}({1}){ ", col.Name, col.ElementType.Name);
-            PrintArgs(node.Parts,",", part => {
+            PrintArgs(node.Parts, ",", part => {
                 if (part is CollectionRange) {
                     CollectionRange range = (CollectionRange)part;
                     range.First.Accept(this);
@@ -110,16 +135,64 @@ namespace Exolutio.Model.OCL.Utils {
         }
 
         public void Visit(OperationCallExp node) {
-            if (node.Source != null) {
-                node.Source.Accept(this);
-                sb.Append(".");
+            int opPriority;
+            if (isInfixOp(node, out opPriority)) {
+                ResolveChildParm(node.Source, opPriority);
+                sb.AppendFormat(" {0} ", node.ReferredOperation.Name);
+                ResolveChildParm(node.Arguments[0], opPriority);
+                return;
             }
+
+            if (isUnaryOp(node)) {
+                sb.AppendFormat("{0} ", node.ReferredOperation.Name);
+                ResolveChildParm(node.Source,-1);
+                return;
+            }
+
+            // Other choice - dot format
+            node.Source.Accept(this);
+            sb.Append(".");
+
+
             sb.Append(node.ReferredOperation.Name);
             sb.Append("(");
             PrintArgs(node.Arguments, ",", (arg) => {
                 arg.Accept(this);
             });
             sb.Append(")");
+
+        }
+
+        private bool isInfixOp(OperationCallExp node, out int infixPriority) {
+            return infixOpPriority.TryGetValue(node.ReferredOperation.Name, out infixPriority)
+                && node.ReferredOperation.Parametrs.Count == 1;
+        }
+
+        private bool isUnaryOp(OperationCallExp node) {
+            return unaryOperation.Contains(node.ReferredOperation.Name) && node.Arguments.Count == 0;
+        }
+
+        private void ResolveChildParm(OclExpression node, int fatherPriority) {
+            if (node is OperationCallExp == false) {
+                node.Accept(this);
+                return;
+            }
+            OperationCallExp op = (OperationCallExp)node;
+            int opPriority;
+            if (isInfixOp(op, out opPriority) == false) {
+                node.Accept(this);
+                return;
+            }
+
+            bool needParenthesis = fatherPriority < opPriority;
+
+            if (needParenthesis) {
+                sb.Append("(");
+            }
+            node.Accept(this);
+            if (needParenthesis) {
+                sb.Append(")");
+            }
         }
 
         public void Visit(PropertyCallExp node) {
