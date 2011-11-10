@@ -46,7 +46,7 @@ classifierContextDecl
 	returns[ClassifierConstraint Decl]
 	@init{List<OclExpression> invs=new List<OclExpression>(); }
 	@after{EnvironmentStack.Pop();EnvironmentStack.Pop();}
-	:classifierContextHead (invOrDef {invs.Add($invOrDef.Constraint);})*  {$Decl = new ClassifierConstraint($classifierContextHead.Context,invs);}
+	:classifierContextHead (invOrDef {invs.Add($invOrDef.Constraint);})*  {$Decl = new ClassifierConstraint($classifierContextHead.Context,invs,null);}
 	;
 
 classifierContextHead

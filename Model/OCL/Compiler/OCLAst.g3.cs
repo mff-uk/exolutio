@@ -61,16 +61,18 @@ namespace Exolutio.Model.OCL.Compiler {
             }
         }
 
-        Classifier ClassifierContextHead(List<IToken> tokenPath, string selfName) {
+        Classifier ClassifierContextHead(List<IToken> tokenPath, string selfName, out VariableDeclaration selfOut) {
             List<string> path = tokenPath.ToStringList();
             ModelElement element = Environment.LookupPathName(path);
             if (element is Classifier == false) {
                 // error
+                selfOut = null;
                 Errors.AddError(new ErrorItem("Nenalezena trida v ClassifierContextHeader"));
                 return null;
             }
             Classifier contextClassifier = element as Classifier;
             VariableDeclaration varSelf = new VariableDeclaration(selfName, contextClassifier, null);// tady by to chtelo doplnit initValue
+            selfOut = varSelf;
             Environment classifierEnv = Environment.CreateFromClassifier(contextClassifier, varSelf);
             EnvironmentStack.Push(classifierEnv);
            

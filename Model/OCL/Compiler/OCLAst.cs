@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// $ANTLR 3.3.1.7705 ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3 2011-10-12 22:44:56
+// $ANTLR 3.3.1.7705 ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3 2011-11-10 22:35:06
 
 // The variable 'variable' is assigned but its value is never used.
 #pragma warning disable 219
@@ -755,7 +755,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 		ClassifierConstraint Decl = default(ClassifierConstraint);
 
 		OclExpression invOrDef2 = default(OclExpression);
-		Classifier classifierContextHead3 = default(Classifier);
+		OCLAst.classifierContextHead_return classifierContextHead3 = default(OCLAst.classifierContextHead_return);
 
 		List<OclExpression> invs=new List<OclExpression>(); 
 		try { DebugEnterRule(GrammarFileName, "classifierContextDecl");
@@ -822,7 +822,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 
 			Match(input, TokenTypes.Up, null); 
 			DebugLocation(55, 95);
-			Decl = new ClassifierConstraint(classifierContextHead3,invs);
+			Decl = new ClassifierConstraint((classifierContextHead3!=null?classifierContextHead3.Context:default(Classifier)),invs,(classifierContextHead3!=null?classifierContextHead3.Self:default(VariableDeclaration)));
 
 			}
 
@@ -846,19 +846,27 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 	}
 	// $ANTLR end "classifierContextDecl"
 
+	private sealed partial class classifierContextHead_return : TreeRuleReturnScope<CommonTree>
+	{
+		public Classifier Context;
+		public VariableDeclaration Self;
+		public classifierContextHead_return(OCLAst grammar) {OnCreated(grammar);}
+		partial void OnCreated(OCLAst grammar);
+	}
 
 	partial void EnterRule_classifierContextHead();
 	partial void LeaveRule_classifierContextHead();
 
 	// $ANTLR start "classifierContextHead"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:58:1: classifierContextHead returns [Classifier Context] : ( ^( CLASSIFIERHEAD pathName ) | ^( CLASSIFIERHEAD pathName SimpleName ) );
+	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:58:1: classifierContextHead returns [Classifier Context, VariableDeclaration Self] : ( ^( CLASSIFIERHEAD pathName ) | ^( CLASSIFIERHEAD pathName SimpleName ) );
 	[GrammarRule("classifierContextHead")]
-	private Classifier classifierContextHead()
+	private OCLAst.classifierContextHead_return classifierContextHead()
 	{
 		EnterRule_classifierContextHead();
 		EnterRule("classifierContextHead", 8);
 		TraceIn("classifierContextHead", 8);
-		Classifier Context = default(Classifier);
+		OCLAst.classifierContextHead_return retval = new OCLAst.classifierContextHead_return(this);
+		retval.Start = (CommonTree)input.LT(1);
 
 		CommonTree SimpleName6 = default(CommonTree);
 		List<IToken> pathName4 = default(List<IToken>);
@@ -900,7 +908,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 
 				Match(input, TokenTypes.Up, null); 
 				DebugLocation(60, 31);
-				Context =ClassifierContextHead(pathName4,"self");
+				retval.Context =ClassifierContextHead(pathName4,"self",out retval.Self);
 
 				}
 				break;
@@ -923,7 +931,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 
 				Match(input, TokenTypes.Up, null); 
 				DebugLocation(61, 42);
-				Context =ClassifierContextHead(pathName5,SimpleName6.Text);
+				retval.Context =ClassifierContextHead(pathName5,SimpleName6.Text,out retval.Self);
 
 				}
 				break;
@@ -943,7 +951,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 		}
 		DebugLocation(62, 1);
 		} finally { DebugExitRule(GrammarFileName, "classifierContextHead"); }
-		return Context;
+		return retval;
 
 	}
 	// $ANTLR end "classifierContextHead"
@@ -5617,7 +5625,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			this.transition = DFA7_transition;
 		}
 
-		public override string Description { get { return "58:1: classifierContextHead returns [Classifier Context] : ( ^( CLASSIFIERHEAD pathName ) | ^( CLASSIFIERHEAD pathName SimpleName ) );"; } }
+		public override string Description { get { return "58:1: classifierContextHead returns [Classifier Context, VariableDeclaration Self] : ( ^( CLASSIFIERHEAD pathName ) | ^( CLASSIFIERHEAD pathName SimpleName ) );"; } }
 
 		public override void Error(NoViableAltException nvae)
 		{
