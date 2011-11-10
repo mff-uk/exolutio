@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// $ANTLR 3.3.1.7705 ..\\..\\Model\\OCL\\Grammar\\OCL.g3 2011-10-12 22:44:48
+// $ANTLR 3.3.1.7705 ..\\..\\Model\\OCL\\Grammar\\OCL.g3 2011-11-10 22:34:58
 
 // The variable 'variable' is assigned but its value is never used.
 #pragma warning disable 219
@@ -676,7 +676,7 @@ public partial class OCLParser : Antlr.Runtime.Parser
 			} finally { DebugExitSubRule(5); }
 
 			DebugLocation(49, 72);
-			Decl = new ClassifierConstraint(classifierContextHead3,invs);
+			Decl = new ClassifierConstraint(classifierContextHead3,invs,null);
 
 			}
 
