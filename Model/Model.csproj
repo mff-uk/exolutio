@@ -73,6 +73,11 @@
     <Compile Include="OCL\Bridge\PIMBridge.cs" />
     <Compile Include="OCL\Bridge\PSMBridge.cs" />
     <Compile Include="OCL\Bridge\UnsupportedSchemaTypeException.cs" />
+    <Compile Include="OCL\TypesTable\StandardTypeName.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StandardTypeName.tt</DependentUpon>
+    </Compile>
     <Compile Include="OCL\Utils\CanonicPrinterVisitor.cs" />
     <Compile Include="OCL\Utils\PrintVisitor.cs" />
     <Compile Include="OCL\CompilerResult.cs" />
@@ -265,6 +270,10 @@
     </Antlr3>
     <None Include="OCL\Grammar\OCLSyntax.g3" />
     <None Include="OCL\Grammar\OCL.g3" />
+    <None Include="OCL\TypesTable\StandardTypeName.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>StandardTypeName.cs</LastGenOutput>
+    </None>
     <None Include="OCL\Types\TypeSystem.cd" />
     <None Include="Versioning\Versioning.cd" />
   </ItemGroup>
@@ -287,6 +296,9 @@
   <ItemGroup>
     <Content Include="PIM\PIM-built-in-types.xml" />
     <Content Include="PSM\PSM-built-in-types.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
