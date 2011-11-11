@@ -7,86 +7,14 @@ using Exolutio.Model.OCL.TypesTable;
 
 namespace Exolutio.Model.OCL.TypesTable {
 
-    class StandardLibraryType {
-        public const string Integer = "Integer";
-        public const string Real = "Real";
-        public const string Any = "Any";
-        public const string UnlimitedNatural = "UnlimitedNatural";
-        public const string String = "String";
-        public const string Boolean = "Boolean";
-        public const string Invalid = "Invalid";
-        public const string Message = "Message";
-        public const string Void = "Void";
-        public const string Type = "Type";
-    }
+    
 
-    public class Library {
-        public Classifier Integer {
-            get {
-                return RootNamespace.NestedClassifier[StandardLibraryType.Integer];
-            }
-        }
+    public partial class Library {
 
-        public Classifier Real {
-            get {
-                return RootNamespace.NestedClassifier[StandardLibraryType.Real];
-            }
-        }
-
-        public Classifier UnlimitedNatural {
-            get {
-                return RootNamespace.NestedClassifier[StandardLibraryType.UnlimitedNatural];
-            }
-        }
-
-        public Classifier String {
-            get {
-                return RootNamespace.NestedClassifier[StandardLibraryType.String];
-            }
-        }
-
-
-        public Classifier Boolean {
-            get {
-                return RootNamespace.NestedClassifier[StandardLibraryType.Boolean];
-            }
-        }
-
-        public Classifier Invalid {
-            get {
-                return RootNamespace.NestedClassifier[StandardLibraryType.Integer];
-            }
-        }
-
-        public Classifier Any {
-            get {
-                return RootNamespace.NestedClassifier[StandardLibraryType.Any];
-            }
-        }
-
-        public Classifier Message {
-            get {
-                return RootNamespace.NestedClassifier[StandardLibraryType.Message];
-            }
-        }
-
-        public Classifier Void {
-            get {
-                return RootNamespace.NestedClassifier[StandardLibraryType.Void];
-            }
-        }
-
-        public Classifier Type {
-            get {
-                return RootNamespace.NestedClassifier[StandardLibraryType.Type];
-            }
-        }
-
-        public Library(TypesTable tt) {
-            RootNamespace = new Namespace("");
-            this.TypeTable = tt;
-            LazyOpearation = new Dictionary<Type, Action<Classifier>>();
-        }
+        public StandardTypeName TypeName {
+            get;
+            set;
+        }  
 
         public Namespace RootNamespace {
             get;
@@ -102,6 +30,15 @@ namespace Exolutio.Model.OCL.TypesTable {
             get;
             protected set;
         }
+
+        public Library(TypesTable tt) {
+            RootNamespace = new Namespace("");
+            this.TypeTable = tt;
+            LazyOpearation = new Dictionary<Type, Action<Classifier>>();
+            TypeName = new StandardTypeName();
+        }
+
+
 
         public CollectionType CreateCollection(CollectionKind kind, Classifier elementType) {
             CollectionType newType ;
@@ -170,21 +107,21 @@ namespace Exolutio.Model.OCL.TypesTable {
         public void CreateStandardLibrary(TypesTable tt) {
             lib = tt.Library;
             
-            Classifier oclAny = new Classifier(tt,StandardLibraryType.Any);
+            Classifier oclAny = new Classifier(tt,lib.TypeName.Any);
             InsertClassifier(oclAny);
-            Classifier real = new Classifier(tt,StandardLibraryType.Real,oclAny);
+            Classifier real = new Classifier(tt,lib.TypeName.Real,oclAny);
             InsertClassifier(real);
-            Classifier integer = new Classifier(tt, StandardLibraryType.Integer,real);
+            Classifier integer = new Classifier(tt, lib.TypeName.Integer,real);
             InsertClassifier(integer);
-            Classifier unlimited = new Classifier(tt, StandardLibraryType.UnlimitedNatural, integer);
+            Classifier unlimited = new Classifier(tt, lib.TypeName.UnlimitedNatural, integer);
             InsertClassifier(unlimited);
-            Classifier str = new Classifier(tt,StandardLibraryType.String,oclAny);
+            Classifier str = new Classifier(tt,lib.TypeName.String,oclAny);
             InsertClassifier(str);
-            Classifier boolean = new Classifier(tt,StandardLibraryType.Boolean,oclAny);
+            Classifier boolean = new Classifier(tt,lib.TypeName.Boolean,oclAny);
             InsertClassifier(boolean);
-            Classifier message = new Classifier(tt,StandardLibraryType.Message,oclAny);
+            Classifier message = new Classifier(tt,lib.TypeName.Message,oclAny);
             InsertClassifier(message);  
-            Classifier type = new Classifier(tt,StandardLibraryType.Type,oclAny);
+            Classifier type = new Classifier(tt,lib.TypeName.Type,oclAny);
             InsertClassifier(type);
 
             Classifier voidT = new VoidType(tt);

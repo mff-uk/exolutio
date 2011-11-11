@@ -1,0 +1,48 @@
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core.dll" #>
+<#@ Assembly Name="System.Windows.Forms.dll" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #> 
+<#
+   string [] names = new String [] {"Integer","Real","UnlimitedNatural","String","Boolean","Invalid","Any","Message","Void","Type"};
+#>
+
+using System;
+using Exolutio.Model.OCL.Types;
+
+namespace Exolutio.Model.OCL.TypesTable{
+   partial class Library{
+     public class StandardTypeName {
+	 	<# foreach(var n in names){ #>
+		
+	 	private string _<#= n #> = "<#= n #>";
+		/// <summary>
+		/// Name of type <#= n #> from OCL Standard library in curent library;
+		/// </summary>
+        public string <#= n #> {
+             get {
+                    return _<#= n #>;
+            }
+             set {
+                 _<#= n #> = value;
+             }
+        }
+		
+		<# } #>
+	 }
+	 
+	 <# foreach(var n in names){ #>
+	 public Classifier <#= n #> {
+            get {
+                return RootNamespace.NestedClassifier[TypeName.<#= n #>];
+            }
+        }
+	<# } #>
+  }
+}
+ 
