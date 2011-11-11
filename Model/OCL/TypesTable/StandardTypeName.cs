@@ -1,6 +1,7 @@
 ﻿ 
 
 using System;
+using System.Collections.Generic;
 using Exolutio.Model.OCL.Types;
 
 namespace Exolutio.Model.OCL.TypesTable{
@@ -17,6 +18,7 @@ namespace Exolutio.Model.OCL.TypesTable{
             }
              set {
                  _Integer = value;
+				 isNameChange = true;
              }
         }
 		
@@ -31,6 +33,7 @@ namespace Exolutio.Model.OCL.TypesTable{
             }
              set {
                  _Real = value;
+				 isNameChange = true;
              }
         }
 		
@@ -45,6 +48,7 @@ namespace Exolutio.Model.OCL.TypesTable{
             }
              set {
                  _UnlimitedNatural = value;
+				 isNameChange = true;
              }
         }
 		
@@ -59,6 +63,7 @@ namespace Exolutio.Model.OCL.TypesTable{
             }
              set {
                  _String = value;
+				 isNameChange = true;
              }
         }
 		
@@ -73,6 +78,7 @@ namespace Exolutio.Model.OCL.TypesTable{
             }
              set {
                  _Boolean = value;
+				 isNameChange = true;
              }
         }
 		
@@ -87,6 +93,7 @@ namespace Exolutio.Model.OCL.TypesTable{
             }
              set {
                  _Invalid = value;
+				 isNameChange = true;
              }
         }
 		
@@ -101,6 +108,7 @@ namespace Exolutio.Model.OCL.TypesTable{
             }
              set {
                  _Any = value;
+				 isNameChange = true;
              }
         }
 		
@@ -115,6 +123,7 @@ namespace Exolutio.Model.OCL.TypesTable{
             }
              set {
                  _Message = value;
+				 isNameChange = true;
              }
         }
 		
@@ -129,6 +138,7 @@ namespace Exolutio.Model.OCL.TypesTable{
             }
              set {
                  _Void = value;
+				 isNameChange = true;
              }
         }
 		
@@ -143,10 +153,25 @@ namespace Exolutio.Model.OCL.TypesTable{
             }
              set {
                  _Type = value;
+				 isNameChange = true;
              }
         }
 		
-			 }
+				
+		bool isNameChange = true;
+		
+		HashSet<string> usedName;
+		
+		public bool IsNameUsed(string name){
+			if(isNameChange){
+				usedName = new HashSet<string>(new string[] {
+												_Integer,_Real,_UnlimitedNatural,_String,_Boolean,_Invalid,_Any,_Message,_Void,_Type				});
+				isNameChange = false;
+			}
+			return usedName.Contains(name);
+		}
+		
+	 }
 	 
 	 	 public Classifier Integer {
             get {

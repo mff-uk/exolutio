@@ -23,6 +23,10 @@ namespace Exolutio.Model.OCL.TypesTable {
             Library = new Library(this);
         }
 
+        public TypesTable(Library.StandardTypeName naming) {
+            Library = new Library(this,naming);
+        }
+
         public bool RegisterType(Classifier type) {
             if (type == null)
                 throw new NullReferenceException("Type is null.");
