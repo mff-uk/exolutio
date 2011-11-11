@@ -29,9 +29,15 @@ namespace Exolutio.Model.OCL.Bridge {
             set;
         }
 
+        private Dictionary<AttributeType, Types.Classifier> PSMAttributeType {
+            get;
+            set;
+        }
+
 
         public PSMBridge(PSMSchema schema) {
             PSMAssociationMembers = new Dictionary<PSMAssociationMember, Class>();
+            PSMAttributeType = new Dictionary<AttributeType, Classifier>();
             this.Schema = schema;
             CreateTypesTable();
         }
@@ -44,20 +50,49 @@ namespace Exolutio.Model.OCL.Bridge {
             return PSMAssociationMembers[psmMember];
         }
 
+        /// <summary>
+        /// Gets the class from type associated with the attribute type.
+        /// </summary>
+        /// <exception cref="KeyNotFoundException">Attribute type does not exist in collection.</exception>
+        public Types.Classifier Find(AttributeType psmAttType) {
+            return PSMAttributeType[psmAttType];
+        }
+
         private void CreateTypesTable() {
-            TypesTable = new TypesTable.TypesTable();
+            Library.StandardTypeName naming = new OCL.TypesTable.Library.StandardTypeName();
+            naming.Any = "any";
+            naming.Boolean = "boolean";
+            naming.Integer = "integer";
+            naming.Invalid = "invalid";
+            naming.Message = "message";
+            naming.Real = "real";
+            naming.String = "string";
+            naming.Type = "type";
+            naming.UnlimitedNatural = "unlimitedNatural";
+            naming.Void = "void";
+
+            TypesTable = new TypesTable.TypesTable(naming);
             TypesTable.StandardLibraryCreator sLC = new TypesTable.StandardLibraryCreator();
             sLC.CreateStandardLibrary(TypesTable);
 
             // Docasna podpora pro typy v Tournaments.eXo
-            Class date = new Class(TypesTable, "Date");
+            Class date = new Class(TypesTable, "date");
             date.Operations.Add(new Operation("after", true, TypesTable.Library.Boolean, new Parameter[] { new Parameter("time", date) }));
             date.Operations.Add(new Operation("before", true, TypesTable.Library.Boolean, new Parameter[] { new Parameter("time", date) }));
             date.Operations.Add(new Operation("equals", true, TypesTable.Library.Boolean, new Parameter[] { new Parameter("time", date) }));
             date.Operations.Add(new Operation("<=", true, TypesTable.Library.Boolean, new Parameter[] { new Parameter("time", date) }));
-
-            TypesTable.Library.RootNamespace.NestedClassifier.Add(date);
             TypesTable.RegisterType(date);
+            TypesTable.Library.RootNamespace.NestedClassifier.Add(date);
+            
+
+            Class dateTime = new Class(TypesTable, "dateTime");
+            dateTime.Operations.Add(new Operation("after", true, TypesTable.Library.Boolean, new Parameter[] { new Parameter("time", dateTime) }));
+            dateTime.Operations.Add(new Operation("before", true, TypesTable.Library.Boolean, new Parameter[] { new Parameter("time", dateTime) }));
+            dateTime.Operations.Add(new Operation("equals", true, TypesTable.Library.Boolean, new Parameter[] { new Parameter("time", dateTime) }));
+            dateTime.Operations.Add(new Operation("<=", true, TypesTable.Library.Boolean, new Parameter[] { new Parameter("time", dateTime) }));
+            TypesTable.RegisterType(dateTime);
+            TypesTable.Library.RootNamespace.NestedClassifier.Add(dateTime);
+            
 
             Class matchesStatus = new Class(TypesTable, "MatchStatus");
             TypesTable.Library.RootNamespace.NestedClassifier.Add(matchesStatus);
@@ -73,13 +108,35 @@ namespace Exolutio.Model.OCL.Bridge {
             PSM.PSMSchema schema = Schema as PSM.PSMSchema;
 
             Dictionary<string, string> PSMToOCLMap = new Dictionary<string, string>();
-            PSMToOCLMap.Add("string", "String");
-            PSMToOCLMap.Add("integer", "Integer");
-            PSMToOCLMap.Add("boolean", "Boolean");
-            PSMToOCLMap.Add("nonNegativeInteger", "Integer");
-            PSMToOCLMap.Add("dateTime", "Date");
-            PSMToOCLMap.Add("date", "Date");
-            PSMToOCLMap.Add("positiveInteger", "Integer");
+         //   PSMToOCLMap.Add("dateTime", "date");
+ 
+        /*    PSMToOCLMap.Add("nonNegativeInteger", "integer");
+           
+
+            PSMToOCLMap.Add("positiveInteger", "integer");*/
+
+            IEnumerable<AttributeType> attTypes = schema.GetAvailablePSMTypes();
+            foreach (AttributeType type in attTypes) {
+                Classifier existsCl;
+                if (Library.RootNamespace.NestedClassifier.TryGetValue(type.Name,out existsCl)) {
+                    PSMAttributeType.Add(type, existsCl);
+                    continue;
+                }
+                Classifier parent;
+                if (type.BaseType == null) {
+                    parent = Library.Any;
+                }
+                else {
+                    if (Library.RootNamespace.NestedClassifier.TryGetValue(type.BaseType.Name, out parent) == false) {
+                        parent = Library.Any;
+                    }
+                }
+
+                Classifier newClassifier = new Classifier(tt, type.Name, parent);
+                tt.RegisterType(newClassifier);
+                Library.RootNamespace.NestedClassifier.Add(newClassifier);
+                PSMAttributeType.Add(type, newClassifier);
+            }
 
             Func<string, string> translateName = (s) => {
                 string oclName;

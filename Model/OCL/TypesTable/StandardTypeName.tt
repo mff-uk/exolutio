@@ -13,6 +13,7 @@
 #>
 
 using System;
+using System.Collections.Generic;
 using Exolutio.Model.OCL.Types;
 
 namespace Exolutio.Model.OCL.TypesTable{
@@ -30,10 +31,27 @@ namespace Exolutio.Model.OCL.TypesTable{
             }
              set {
                  _<#= n #> = value;
+				 isNameChange = true;
              }
         }
 		
 		<# } #>
+		
+		bool isNameChange = true;
+		
+		HashSet<string> usedName;
+		
+		public bool IsNameUsed(string name){
+			if(isNameChange){
+				usedName = new HashSet<string>(new string[] {
+						<# bool isOther = false; #>
+						<# foreach(var n in names){ if (isOther) { #>,<# } #>_<#= n #><# isOther = true; } #>
+				});
+				isNameChange = false;
+			}
+			return usedName.Contains(name);
+		}
+		
 	 }
 	 
 	 <# foreach(var n in names){ #>
