@@ -61,7 +61,7 @@ namespace Tests.OCL {
             var eXoSchema = envData.Item2;
            
             PIMClass PIMtournamentControl =  eXoSchema.PIMClasses.Single( c => c.Name =="TournamentControl");
-            Class OCLtournamentControl = br.Find(PIMtournamentControl);
+            PIMBridgeClass OCLtournamentControl = br.Find(PIMtournamentControl);
             //self var 
             VariableDeclaration selfVarDecl = new VariableDeclaration("self",OCLtournamentControl, null);
             AST.VariableExp selfVar = new AST.VariableExp(selfVarDecl);
@@ -76,7 +76,7 @@ namespace Tests.OCL {
             
             //iterator ve forAll
             PIMClass PIMtournament =  eXoSchema.PIMClasses.Single( c => c.Name =="Tournament");
-            Class OCLtournament = br.Find(PIMtournament);
+            PIMBridgeClass OCLtournament = br.Find(PIMtournament);
             // t:Tournament
             VariableDeclaration tVarDelc = new VariableDeclaration("t", OCLtournament,null);
             // t var

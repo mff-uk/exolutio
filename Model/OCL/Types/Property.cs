@@ -41,8 +41,9 @@ namespace Exolutio.Model.OCL.Types
             }
             set
             {
-                if (owner != null)
+                if (owner != null && value != owner) {
                     throw new InvalidOperationException();
+                }
                 owner = value;
             }
         }
