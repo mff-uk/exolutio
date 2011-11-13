@@ -12,6 +12,10 @@ namespace Exolutio.Model.OCL.AST
     /// </summary>
     public class VariableExp:OclExpression
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="variable">Represents variable.</param>
         public VariableExp(VariableDeclaration variable)
             : base(variable.PropertyType) {
             referredVariable = variable;

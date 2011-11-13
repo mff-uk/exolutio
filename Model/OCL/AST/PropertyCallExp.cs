@@ -12,6 +12,14 @@ namespace Exolutio.Model.OCL.AST
     /// </summary>
     public class PropertyCallExp : NavigationCallExp
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="source">Source expression of iterotor. Itertor is calling on this expression.</param>
+        /// <param name="isPre">Is marked by pre</param>
+        /// <param name="navigationSource">Source of navigation. Example: expr.navigationSource::referedProperty</param>
+        /// <param name="qualifier">Qulifier of property. Example: expr.referedProperty[qualifier]</param>
+        /// <param name="referredProperty">Destination property</param>
         public PropertyCallExp(OclExpression source, bool isPre, Property navigationSource, OclExpression qualifier, Property referredProperty)
             : base(source, isPre, navigationSource, qualifier, referredProperty.Type) {
                 this.ReferredProperty = referredProperty;

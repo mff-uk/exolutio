@@ -12,6 +12,11 @@ namespace Exolutio.Model.OCL.AST
     /// </summary>
     public class TypeExp : OclExpression
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="referedType"></param>
+        /// <param name="type">Reference to TypeType instance in TypesTable</param>
         public TypeExp(Classifier referedType,Classifier type)
             : base(type) {
                 this.ReferredType = referedType;

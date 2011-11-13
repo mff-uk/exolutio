@@ -12,6 +12,11 @@ namespace Exolutio.Model.OCL.AST
     /// </summary>
     public  class LetExp : OclExpression
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="variable">Substitute variable</param>
+        /// <param name="inExpr">Substitute expression in expression</param>
         public LetExp(Types.VariableDeclaration variable, OclExpression inExpr)
             : base(inExpr.Type) {
             this.Variable = variable;

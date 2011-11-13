@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using Exolutio.Model;
 using Exolutio.Model.OCL;
 using Exolutio.View;
+using ICSharpCode.AvalonEdit.Highlighting;
 
 namespace Exolutio.WPFClient {
     /// <summary>
@@ -22,6 +23,8 @@ namespace Exolutio.WPFClient {
     public partial class OCLEditor : UserControl {
         public OCLEditor() {
             InitializeComponent();
+            System.Xml.XmlReader reader = new System.Xml.XmlTextReader("ocl.xshd");
+            textBox1.SyntaxHighlighting = ICSharpCode.AvalonEdit.Highlighting.Xshd.HighlightingLoader.Load(reader, HighlightingManager.Instance);
         }
 
         private Schema CurrentSchema {
