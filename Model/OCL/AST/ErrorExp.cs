@@ -5,7 +5,14 @@ using System.Text;
 using Exolutio.Model.OCL.Types;
 
 namespace Exolutio.Model.OCL.AST {
+    /// <summary>
+    /// ErrorExp represens error in AST.
+    /// </summary>
     public class ErrorExp :OclExpression{
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
         public ErrorExp(Classifier type):base(type) {
             
         }

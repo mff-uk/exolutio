@@ -15,6 +15,14 @@ namespace Exolutio.Model.OCL.AST
     /// </summary>
     public class IteratorExp : LoopExp
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="source">Source expression of iterotor. Itertor is calling on this expression.</param>
+        /// <param name="body">Iterator body expression</param>
+        /// <param name="name">Name of iterator operation</param>
+        /// <param name="iterators">Iterators variable</param>
+        /// <param name="returnType">Returns type of iterator</param>
         public IteratorExp(OclExpression source, OclExpression body, string name, List<VariableDeclaration> iterators, Classifier returnType)
             : base(source, body, iterators,returnType) {
                 this.IteratorName = name;

@@ -14,7 +14,13 @@ namespace Exolutio.Model.OCL.AST
     public class IfExp : OclExpression
     {
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type">Return type of If expression.</param>
+        /// <param name="condition">If condition</param>
+        /// <param name="thenExpr"></param>
+        /// <param name="elseExpr"></param>
         public IfExp(Classifier type,OclExpression condition, OclExpression thenExpr,OclExpression elseExpr) : base(type) {
             this.Condition = condition;
             this.ThenExpression = thenExpr;

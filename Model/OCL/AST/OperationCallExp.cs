@@ -13,7 +13,13 @@ namespace Exolutio.Model.OCL.AST
     /// </summary>
     public class OperationCallExp : FeatureCallExp
     {
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="source">Source expression of iterotor. Itertor is calling on this expression.</param>
+        /// <param name="isPre">Is marked by pre</param>
+        /// <param name="refOperation">Called operation</param>
+        /// <param name="args">Parameters of operation</param>
         public OperationCallExp(OclExpression source, bool isPre, Operation refOperation, List<OclExpression> args):base(source,isPre,refOperation.ReturnType) {
             this.ReferredOperation = refOperation;
             this.Arguments = args;
