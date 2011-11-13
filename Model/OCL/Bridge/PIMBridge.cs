@@ -27,13 +27,13 @@ namespace Exolutio.Model.OCL.Bridge {
             }
         }
 
-        private Dictionary<PIM.PIMClass, Types.Class> PIMClasses {
+        private Dictionary<PIM.PIMClass, PIMBridgeClass> PIMClasses {
             get;
             set;
         }
 
         public PIMBridge(PIM.PIMSchema schema) {
-            PIMClasses = new Dictionary<PIMClass, Class>();
+            PIMClasses = new Dictionary<PIMClass, PIMBridgeClass>();
             this.Schema = schema;
             CreateTypesTable();
         }
@@ -42,7 +42,7 @@ namespace Exolutio.Model.OCL.Bridge {
         /// Gets the class from type associated with the PIM class.
         /// </summary>
         /// <exception cref="KeyNotFoundException">PIM class does not exist in collection.</exception>
-        public Types.Class Find(PIM.PIMClass pimClass) {
+        public PIMBridgeClass Find(PIM.PIMClass pimClass) {
             return PIMClasses[pimClass];
         }
 
@@ -74,70 +74,22 @@ namespace Exolutio.Model.OCL.Bridge {
 
             PIM.PIMSchema schema = Schema;
             //obsahuje v Tuplu tridu z OCL a k ni korespondujici tridu z PIM
-            List<Tuple<Class, PIM.PIMClass>> classToProcess = new List<Tuple<Class, PIM.PIMClass>>();
+            List<PIMBridgeClass> classToProcess = new List<PIMBridgeClass>();
             //vytvoreni prazdnych trid
             //musi predchazet propertam a associacim, aby se neodkazovalo na neexistujici typy
             foreach (PIM.PIMClass cl in schema.PIMClasses) {
-                Class newClass = new Class(tt, cl.Name);
+                PIMBridgeClass newClass = new PIMBridgeClass(tt, cl);
                 tt.Library.RootNamespace.NestedClassifier.Add(newClass);
                 tt.RegisterType(newClass);
-                classToProcess.Add(new Tuple<Class, PIM.PIMClass>(newClass, cl));
+                classToProcess.Add(newClass);
                 //Hack
                 newClass.Tag = cl;
                 //Registred to find
                 PIMClasses.Add(cl, newClass);
             }
 
-            // Property
-            foreach (Tuple<Class, PIM.PIMClass> item in classToProcess) {
-                foreach (var pr in item.Item2.PIMAttributes) {
-                    Classifier propType = tt.Library.RootNamespace.NestedClassifier[pr.AttributeType.Name];
-                    Property newProp = new Property(pr.Name, PropertyType.One, propType);
-                    item.Item1.Properties.Add(newProp);
-                    //Hack
-                    newProp.Tag = pr;
-                }
-            }
-
-            //Associace
-            foreach (Tuple<Class, PIM.PIMClass> item in classToProcess) {
-                foreach (var ass in item.Item2.PIMAssociationEnds) {
-                    var end = ass.PIMAssociation.PIMAssociationEnds.Where(a => a.ID != ass.ID).First();
-                    Classifier assType = tt.Library.RootNamespace.NestedClassifier[end.PIMClass.Name];
-                    string name;
-                    if (string.IsNullOrEmpty(end.Name)) {
-                        name = assType.Name;
-                    }
-                    else {
-                        name = end.Name;
-                    }
-                    Classifier propType;
-                    if (end.Upper > 1) {
-                        propType = tt.Library.CreateCollection(CollectionKind.Set, assType);
-                    }
-                    else {
-                        propType = assType;
-                    }
-                    tt.RegisterType(propType);
-                    Property newass = new Property(name, PropertyType.One, propType);
-                    item.Item1.Properties.Add(newass);
-
-                    //hack
-                    newass.Tag = end;
-                }
-            }
-
-            //Operation
-            foreach (Tuple<Class, PIM.PIMClass> item in classToProcess) {
-                foreach (var op in item.Item2.PIMOperations) {
-                    Operation newOp = new Operation(op.Name, true, op.ResultType != null ? tt.Library.RootNamespace.NestedClassifier[op.ResultType.Name] : tt.Library.Void,
-                    op.Parameters.Select(p => new Parameter(p.Name, tt.Library.RootNamespace.NestedClassifier[p.Type.Name])));
-                    item.Item1.Operations.Add(newOp);
-
-                    //hack
-                    newOp.Tag = op;
-                }
-            }
+            //Translates classes members
+            classToProcess.ForEach(cl => cl.TranslateMembers());
         }
     }
 }

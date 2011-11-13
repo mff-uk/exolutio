@@ -83,10 +83,10 @@ namespace Exolutio.Model.OCL.Types
           
         }
 
-        public Classifier(TypesTable.TypesTable tt, string name,Classifier superClassifier):this(tt,name)
+        public Classifier(TypesTable.TypesTable tt, string name,Classifier superClassifier)
+            :this(tt,name)
         {
             this.SuperClassifier = superClassifier;
-
         }
 
         public virtual bool ConformsTo(Classifier other)

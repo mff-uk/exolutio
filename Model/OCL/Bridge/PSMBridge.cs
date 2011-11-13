@@ -24,7 +24,7 @@ namespace Exolutio.Model.OCL.Bridge {
             }
         }
 
-        private Dictionary<PSM.PSMAssociationMember, Types.Class> PSMAssociationMembers {
+        private Dictionary<PSM.PSMAssociationMember, PSMBridgeClass> PSMAssociationMembers {
             get;
             set;
         }
@@ -36,17 +36,17 @@ namespace Exolutio.Model.OCL.Bridge {
 
 
         public PSMBridge(PSMSchema schema) {
-            PSMAssociationMembers = new Dictionary<PSMAssociationMember, Class>();
+            PSMAssociationMembers = new Dictionary<PSMAssociationMember, PSMBridgeClass>();
             PSMAttributeType = new Dictionary<AttributeType, Classifier>();
             this.Schema = schema;
             CreateTypesTable();
         }
 
         /// <summary>
-        /// Gets the class from type associated with the PIM class.
+        /// Gets the class from type associated with the PSM class.
         /// </summary>
         /// <exception cref="KeyNotFoundException">PIM class does not exist in collection.</exception>
-        public Types.Class Find(PSMAssociationMember psmMember) {
+        public PSMBridgeClass Find(PSMAssociationMember psmMember) {
             return PSMAssociationMembers[psmMember];
         }
 
@@ -106,16 +106,8 @@ namespace Exolutio.Model.OCL.Bridge {
         private void Translate(TypesTable.TypesTable tt) {
 
             PSM.PSMSchema schema = Schema as PSM.PSMSchema;
-
-            Dictionary<string, string> PSMToOCLMap = new Dictionary<string, string>();
-         //   PSMToOCLMap.Add("dateTime", "date");
- 
-        /*    PSMToOCLMap.Add("nonNegativeInteger", "integer");
-           
-
-            PSMToOCLMap.Add("positiveInteger", "integer");*/
-
             IEnumerable<AttributeType> attTypes = schema.GetAvailablePSMTypes();
+
             foreach (AttributeType type in attTypes) {
                 Classifier existsCl;
                 if (Library.RootNamespace.NestedClassifier.TryGetValue(type.Name,out existsCl)) {
@@ -131,31 +123,18 @@ namespace Exolutio.Model.OCL.Bridge {
                         parent = Library.Any;
                     }
                 }
-
                 Classifier newClassifier = new Classifier(tt, type.Name, parent);
                 tt.RegisterType(newClassifier);
                 Library.RootNamespace.NestedClassifier.Add(newClassifier);
                 PSMAttributeType.Add(type, newClassifier);
             }
 
-            Func<string, string> translateName = (s) => {
-                string oclName;
-                if (PSMToOCLMap.TryGetValue(s, out oclName)) {
-                    return oclName;
-                }
-                else {
-                    return s;
-                }
-            };
-
-            //preregistrace typu na mala pismena
-
-            List<Tuple<Class, PSM.PSMAssociationMember>> classToProcess = new List<Tuple<Class, PSM.PSMAssociationMember>>();
+            List<PSMBridgeClass> classToProcess = new List<PSMBridgeClass>();
             foreach (PSM.PSMClass cl in schema.PSMClasses) {
-                Class newClass = new Class(tt, cl.Name);
+                PSMBridgeClass newClass = new PSMBridgeClass(tt, cl);
                 tt.Library.RootNamespace.NestedClassifier.Add(newClass);
                 tt.RegisterType(newClass);
-                classToProcess.Add(new Tuple<Class, PSM.PSMAssociationMember>(newClass, cl));
+                classToProcess.Add(newClass);
                 //Hack
                 newClass.Tag = cl;
                 //Registred to find
@@ -164,105 +143,16 @@ namespace Exolutio.Model.OCL.Bridge {
 
             foreach (var cM in schema.PSMContentModels) {
                 string cMName = GetContentModelOCLName(cM);
-                Class newClass = new Class(tt, cMName);
+                PSMBridgeClass newClass = new PSMBridgeClass(tt, cM);
                 tt.Library.RootNamespace.NestedClassifier.Add(newClass);
                 tt.RegisterType(newClass);
-                classToProcess.Add(new Tuple<Class, PSM.PSMAssociationMember>(newClass, cM));
+                classToProcess.Add(newClass);
                 newClass.Tag = cM;
                 //Registred to find
                 PSMAssociationMembers.Add(cM, newClass);
             }
 
-            // Property
-            foreach (Tuple<Class, PSM.PSMAssociationMember> item in classToProcess) {
-                if (item.Item2 is PSM.PSMClass) {
-                    PSM.PSMClass sourceClass = (PSM.PSMClass)item.Item2;
-                    foreach (var pr in sourceClass.PSMAttributes) {
-                        Classifier propType = tt.Library.RootNamespace.NestedClassifier[translateName(pr.AttributeType.Name)];
-                        Property newProp = new Property(pr.Name, PropertyType.One, propType);
-                        item.Item1.Properties.Add(newProp);
-                        //Hack
-                        newProp.Tag = pr;
-                    }
-                }
-            }
-
-
-            //Associace
-            foreach (var item in classToProcess) {
-                //parent
-                PSM.PSMAssociation parentAss = item.Item2.ParentAssociation;
-                if (parentAss != null) {
-                    string parentName = null;
-                    if (parentAss.Parent is PSM.PSMClass) {
-                        parentName = parentAss.Parent.Name;
-                    }
-                    else if (parentAss.Parent is PSM.PSMContentModel) {
-                        parentName = GetContentModelOCLName((PSM.PSMContentModel)parentAss.Parent);
-                    }
-
-                    if (parentName != null) {
-                        Classifier propType = tt.Library.RootNamespace.NestedClassifier[translateName(parentName)];
-                        Property newProp = new Property("parent", PropertyType.One, propType);
-                        item.Item1.Properties.Add(newProp);
-                        //Hack
-                        newProp.Tag = parentAss.Parent;
-                    }
-                }
-
-                int childCount = 0;
-                Dictionary<PSM.PSMContentModelType, int> childContentModelCount = new Dictionary<PSM.PSMContentModelType, int>();
-                childContentModelCount[PSM.PSMContentModelType.Choice] = 0;
-                childContentModelCount[PSM.PSMContentModelType.Sequence] = 0;
-                childContentModelCount[PSM.PSMContentModelType.Set] = 0;
-
-                //child 
-                foreach (var ass in item.Item2.ChildPSMAssociations) {
-                    string childClassName;
-                    List<string> namesInOcl = new List<string>();
-
-                    if (ass.Child is PSM.PSMClass) {
-                        childClassName = ass.Child.Name;
-                    }
-                    else if (ass.Child is PSM.PSMContentModel) {
-                        var cM = (PSM.PSMContentModel)ass.Child;
-                        childClassName = GetContentModelOCLName((PSM.PSMContentModel)ass.Child);
-                        childContentModelCount[cM.Type] = childContentModelCount[cM.Type] + 1;
-                        namesInOcl.Add(String.Format("{0}_{1}", cM.Type.ToString().ToLower(), childContentModelCount[cM.Type]));
-                    }
-                    else {
-                        System.Diagnostics.Debug.Fail("Nepodporovany typ v PSM.");
-                        continue;
-                    }
-
-                    namesInOcl.Add(string.Format("child_{0}", ++childCount));
-
-                    Classifier assType = tt.Library.RootNamespace.NestedClassifier[translateName(childClassName)];
-
-                    if (string.IsNullOrEmpty(ass.Name) == false) {
-                        namesInOcl.Add(ass.Name);
-                    }
-                    else {
-                        namesInOcl.Add(String.Format("child_{0}", childClassName));
-                    }
-
-                    Classifier propType;
-                    if (ass.Upper > 1) {
-                        propType = tt.Library.CreateCollection(CollectionKind.Set, assType);
-                    }
-                    else {
-                        propType = assType;
-                    }
-                    tt.RegisterType(propType);
-
-                    foreach (string name in namesInOcl) {
-                        Property newass = new Property(name, PropertyType.One, propType);
-                        item.Item1.Properties.Add(newass);
-                        //hack
-                        newass.Tag = ass;
-                    }
-                }
-            }
+            classToProcess.ForEach(cl => cl.TranslateMembers());
         }
 
         private string GetContentModelOCLName(PSM.PSMContentModel c) {

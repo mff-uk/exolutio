@@ -37,6 +37,10 @@ namespace Exolutio.Model.OCL.Types
             base.Add(property.Name, property);
         }
 
+        public void Add(Property property, string alias) {
+            base.Add(alias , property);
+        }
+
         public override string ToString()
         {
             StringBuilder nameBuilder = new StringBuilder("(");
