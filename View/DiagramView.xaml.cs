@@ -310,10 +310,10 @@ namespace Exolutio.View
                     view = RepresentantsCollection[((PIMAttribute)component).PIMClass];
                     t = ((PIMClassView)view).AttributeTextBoxes.FirstOrDefault(tb => tb.PIMAttribute == component);
                 }
-                if (component is PIMOperation)
+                if (component is ModelOperation)
                 {
-                    view = RepresentantsCollection[((PIMOperation)component).PIMClass];
-                    t = ((PIMClassView)view).OperationTextBoxes.FirstOrDefault(tb => tb.PIMOperation == component);
+                    view = RepresentantsCollection[((ModelOperation)component).PIMClass];
+                    t = ((PIMClassView)view).OperationTextBoxes.FirstOrDefault(tb => tb.ModelOperation == component);
                 }
                 if (component is PSMAttribute)
                 {

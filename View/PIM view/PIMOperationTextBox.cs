@@ -18,13 +18,13 @@ namespace Exolutio.View
     /// </summary>
     public class PIMOperationTextBox : EditableTextBox, IComponentTextBox, ISelectableSubItem
     {
-        public PIMOperation PIMOperation { get; private set; }
+        public ModelOperation ModelOperation { get; private set; }
 
         public PIMOperationsContainer Container { get; set; }
 
         public override void SetDisplayedObject(object property, object diagram)
         {
-            this.PIMOperation = (PIMOperation)property;
+            this.ModelOperation = (ModelOperation)property;
 
             //this.classController = classController;
 
@@ -42,7 +42,7 @@ namespace Exolutio.View
             PreviewMouseDown += PIMOperationTextBox_PreviewMouseDown;
 #endif
 
-            this.PIMOperation.PropertyChanged += OnPropertyChangedEvent;
+            this.ModelOperation.PropertyChanged += OnPropertyChangedEvent;
             Background = ViewToolkitResources.TransparentBrush;
             RefreshTextContent();
             BindType();
@@ -64,9 +64,9 @@ namespace Exolutio.View
                 type.PropertyChanged -= Type_PropertyChanged;
             }
 
-            if (PIMOperation.ResultType != null)
+            if (ModelOperation.ResultType != null)
             {
-                type = PIMOperation.ResultType;
+                type = ModelOperation.ResultType;
                 type.PropertyChanged += Type_PropertyChanged;
             }
         }
@@ -78,7 +78,7 @@ namespace Exolutio.View
             {
                 type.PropertyChanged -= Type_PropertyChanged;
             }
-            PIMOperation.PropertyChanged -= OnPropertyChangedEvent;
+            ModelOperation.PropertyChanged -= OnPropertyChangedEvent;
             base.UnBindModelView();
         }
 
@@ -92,7 +92,7 @@ namespace Exolutio.View
         
         private void RefreshTextContent()
         {
-            if (PIMOperation.Parameters.Count != 0 || PIMOperation.ResultType != null)
+            if (ModelOperation.Parameters.Count != 0 || ModelOperation.ResultType != null)
             {
                 if (textBuilder == null)
                 {
@@ -102,11 +102,11 @@ namespace Exolutio.View
                 {
                     textBuilder.Clear();
                 }
-                textBuilder.Append(PIMOperation.Name);
+                textBuilder.Append(ModelOperation.Name);
                 textBuilder.Append("(");
-                if (PIMOperation.Parameters.Count > 0)
+                if (ModelOperation.Parameters.Count > 0)
                 {                    
-                    foreach (PIMOperationParameter parameter in PIMOperation.Parameters)
+                    foreach (ModelOperationParameter parameter in ModelOperation.Parameters)
                     {
                         textBuilder.Append(parameter.Name);
                         if (parameter.Type != null)
@@ -117,16 +117,16 @@ namespace Exolutio.View
                     }
                 }
                 textBuilder.Append(")");
-                if (PIMOperation.ResultType != null)
+                if (ModelOperation.ResultType != null)
                 {
                     textBuilder.Append(":");
-                    textBuilder.Append(PIMOperation.ResultType.Name);
+                    textBuilder.Append(ModelOperation.ResultType.Name);
                 }
                 this.Text = textBuilder.ToString();
             }
             else
             {
-                this.Text = string.Format("{0}()", PIMOperation.Name);
+                this.Text = string.Format("{0}()", ModelOperation.Name);
             }
         }
 
@@ -134,7 +134,7 @@ namespace Exolutio.View
 
         void PIMOperationTextBox_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Current.InvokeComponentTouched(PIMOperation);
+            Current.InvokeComponentTouched(ModelOperation);
         }
 
         void PIMOperationTextBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
@@ -146,10 +146,10 @@ namespace Exolutio.View
         {
 #if SILVERLIGHT
 #else
-            if (PIMOperation != null)
+            if (ModelOperation != null)
             {
                 PIMClassDialog d = new PIMClassDialog();
-                d.Initialize(Current.Controller, PIMOperation.PIMClass);
+                d.Initialize(Current.Controller, ModelOperation.PIMClass);
                 d.Topmost = true;
                 d.Show();
             }
@@ -200,7 +200,7 @@ namespace Exolutio.View
 
         public Component Component
         {
-            get { return PIMOperation; }
+            get { return ModelOperation; }
         }
     }
 }
