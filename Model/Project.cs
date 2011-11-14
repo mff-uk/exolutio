@@ -84,10 +84,10 @@ namespace Exolutio.Model
                     {
                         foreach (XElement operationElement in type.Element(context.ExolutioNS + "Operations").Elements())
                         {
-                            string resultTypeID = operationElement.Attribute("resultTypeID").Value;
+                            string resultTypeID = operationElement.Attribute("ResultType").Value;
                             if (resultTypeID.StartsWith("{"))
                             {
-                                operationElement.Attribute("resultTypeID").Value = typeDict[resultTypeID.Substring(1, resultTypeID.Length - 2)].ToString();
+                                operationElement.Attribute("ResultType").Value = typeDict[resultTypeID.Substring(1, resultTypeID.Length - 2)].ToString();
                             }
                             foreach (XElement parameterElement in operationElement.Element(context.ExolutioNS + "Parameters").Elements())
                             {
