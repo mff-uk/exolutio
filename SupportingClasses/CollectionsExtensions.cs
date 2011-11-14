@@ -84,6 +84,13 @@ namespace Exolutio.SupportingClasses
             return values;
         }
 
+        public static KeyValuePair<TKey, TValue> FindByValue<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TValue value)
+            where TValue : class
+        {
+            KeyValuePair<TKey, TValue> result = dictionary.FirstOrDefault(kvp => kvp.Value == value);
+            return result; 
+        }
+
         public static TValue ValueOrNull<TKey, TValue> (this IDictionary<TKey, TValue> dictionary, TKey key)
             where TValue: class
         {

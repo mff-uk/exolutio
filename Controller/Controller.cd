@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Exolutio.Controller.Commands.Atomic.PIM.acmdDeletePIMAssociation" Collapsed="true">
+    <Position X="1" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAABAAACAAIAMAAAAAAAAAAQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Commands\Atomic\PIM\acmdDeletePIMAssociation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Exolutio.Controller.Commands.Atomic.PIM.acmdUpdatePIMAttributeType" Collapsed="true">
+    <Position X="2.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAACAAIAEAAAAAAAAAAAAAAAAAAAAAAIgA=</HashCode>
+      <FileName>Commands\Atomic\PIM\acmdUpdatePIMAttributeType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Exolutio.Controller.Commands.Atomic.PIM.acmdDeletePIMAttribute" Collapsed="true">
+    <Position X="2.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAACAAIQMAAAAIAAAAAAAAAAAAAAAARAAA=</HashCode>
+      <FileName>Commands\Atomic\PIM\acmdDeletePIMAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Exolutio.Controller.Commands.Atomic.PIM.acmdDeletePIMClass" Collapsed="true">
+    <Position X="4.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAIQMAAAAAAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>Commands\Atomic\PIM\acmdDeletePIMClass.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Exolutio.Controller.Commands.Atomic.PIM.acmdMoveAssociationEnd" Collapsed="true">
+    <Position X="8" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAIAMAAAAAAAAAAAEAAAAEAAAAAABA=</HashCode>
+      <FileName>Commands\Atomic\PIM\acmdMoveAssociationEnd.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Exolutio.Controller.Commands.Atomic.PIM.acmdMovePIMAttribute" Collapsed="true">
+    <Position X="1" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAACAAIAMAAAAAAAAAAAEAAAAAAAAABABA=</HashCode>
+      <FileName>Commands\Atomic\PIM\acmdMovePIMAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Exolutio.Controller.Commands.Atomic.PIM.acmdNewPIMAssociation" Collapsed="true">
+    <Position X="2.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAIQEABgABAAAAAQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Commands\Atomic\PIM\acmdNewPIMAssociation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Exolutio.Controller.Commands.Atomic.PIM.acmdNewPIMAttribute" Collapsed="true">
+    <Position X="4.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAACAAIQEAAIAIAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Commands\Atomic\PIM\acmdNewPIMAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Exolutio.Controller.Commands.Atomic.PIM.acmdNewPIMClass" Collapsed="true">
+    <Position X="6.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAIQkAAAAIAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Commands\Atomic\PIM\acmdNewPIMClass.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Exolutio.Controller.Commands.Atomic.PIM.acmdShiftPIMAttribute" Collapsed="true">
+    <Position X="1" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAACAAIAEAAAAAAAAAAAAAAAAAAAgAAAAA=</HashCode>
+      <FileName>Commands\Atomic\PIM\acmdShiftPIMAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Exolutio.Controller.Commands.Atomic.PIM.acmdSynchroPIMAssociations" Collapsed="true">
+    <Position X="2.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAIAMABAAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Commands\Atomic\PIM\acmdSynchroPIMAssociations.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Exolutio.Controller.Commands.Atomic.PIM.acmdSynchroPIMAttributes" Collapsed="true">
+    <Position X="4.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAIAMABAAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Commands\Atomic\PIM\acmdSynchroPIMAttributes.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Exolutio.Controller.Commands.Atomic.PIM.acmdUpdatePIMAssociationEndCardinality" Collapsed="true">
+    <Position X="6.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAADgAAAAAACAAIAMACAAAAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>Commands\Atomic\PIM\acmdUpdatePIMAssociationEndCardinality.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Exolutio.Controller.Commands.Atomic.PIM.acmdUpdatePIMAttributeCardinality" Collapsed="true">
+    <Position X="8" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAADgAAAAAACAAIAEACAAAAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>Commands\Atomic\PIM\acmdUpdatePIMAttributeCardinality.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Exolutio.Controller.Commands.AtomicCommand" Collapsed="true">
+    <Position X="4.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Commands\Base\AtomicCommand.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

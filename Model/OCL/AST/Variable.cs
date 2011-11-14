@@ -7,6 +7,8 @@ using Exolutio.Model.OCL.Types;
 namespace Exolutio.Model.OCL.AST
 {
     /// <summary>
+    /// <b>THIS CLASS IS NOT USED ANYWHERE</b>
+    /// 
     /// Variables are typed elements for passing data in expressions. The variable can be used in expressions where the variable
     /// is in scope. This metaclass represents among others the variables self and result and the variables defined using the Let
     /// expression.

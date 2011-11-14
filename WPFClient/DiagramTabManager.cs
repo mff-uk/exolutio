@@ -5,6 +5,7 @@ using System.Linq;
 using System.Xml.Linq;
 using AvalonDock;
 using Exolutio.Model;
+using Exolutio.Model.OCL;
 using Exolutio.Model.PIM;
 using Exolutio.Model.PSM;
 using Exolutio.SupportingClasses;
@@ -356,6 +357,11 @@ namespace Exolutio.WPFClient
                 result.Add(((DiagramTab) d).DiagramView);
             }
             return result;
+        }
+
+        public void ShowOCLScript(OCLScript oclScript)
+        {
+            MainWindow.OCLEditor.ShowScript(oclScript);
         }
 
         public IEnumerable<ExolutioVersionedObject> AnotherOpenedVersions(ExolutioVersionedObject item)

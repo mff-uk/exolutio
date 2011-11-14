@@ -79,6 +79,10 @@
     <Compile Include="OCL\Bridge\PSMBridgeAttribute.cs" />
     <Compile Include="OCL\Bridge\BridgeProperty.cs" />
     <Compile Include="OCL\Bridge\UnsupportedSchemaTypeException.cs" />
+    <Compile Include="OCL\ConstraintConversion\ConstraintConvertor.cs" />
+    <Compile Include="OCL\ConstraintConversion\ConvertToPSMVisitorBase.cs" />
+    <Compile Include="OCL\ConstraintConversion\PSMPath.cs" />
+    <Compile Include="OCL\ConstraintConversion\PIMPath.cs" />
     <Compile Include="OCL\Bridge\PSMBridgeClass.cs" />
     <Compile Include="OCL\TypesTable\StandardTypeName.cs">
       <AutoGen>True</AutoGen>
@@ -109,8 +113,10 @@
     <Compile Include="OCL\Compiler\TypeDefBag.cs" />
     <Compile Include="OCL\Compiler\VariableDeclarationBag.cs" />
     <Compile Include="OCL\Compiler\VariableDeclarationRequirement.cs" />
+    <Compile Include="OCL\ConstraintConversion\ConstraintsSuggestor.cs" />
     <Compile Include="OCL\Environment.cs" />
     <Compile Include="OCL\Compiler\OCLAst.g3.cs" />
+    <Compile Include="OCL\ConstraintConversion\PSMConstraintSuitabilityChecker.cs" />
     <Compile Include="OCL\SupportingClasses\ActionDictionary.cs" />
     <Compile Include="OCL\SupportingClasses\ActionList.cs" />
     <Compile Include="OCL\TypesTable\StandardLibrary.cs" />

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Exolutio.Model.OCL.AST;
+using Exolutio.Model.OCL.Bridge;
 using Exolutio.Model.OCL.Compiler;
+using Exolutio.Model.OCL.TypesTable;
 
 namespace Exolutio.Model.OCL {
     public class CompilerResult {
@@ -22,10 +24,13 @@ namespace Exolutio.Model.OCL {
             get;
         }
 
-        public CompilerResult(Constraints con, ErrorCollection errColl,TypesTable.Library lib) {
+        public IBridgeToOCL Bridge { get; set; }
+
+        public CompilerResult(Constraints con, ErrorCollection errColl, Library lib, IBridgeToOCL bridge) {
             this.Constraints = con;
             this.Errors = errColl;
             this.Library = lib;
+            this.Bridge = bridge;
         }
     }
 }

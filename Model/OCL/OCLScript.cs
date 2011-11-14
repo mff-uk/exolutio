@@ -25,10 +25,24 @@ namespace Exolutio.Model.OCL {
 
         }
 
+
+        /// <summary>
+        /// Creates an ocl script and adds it to <paramref name="schema"/>.<see cref="Schema.OCLScripts"/> collection.
+        /// </summary>
         public OCLScript(Project p, Guid g, Schema schema)
             : base(p, g) {
             this.Schema = schema;
             schema.OCLScripts.Add(this);
+        }
+
+
+        /// <summary>
+        /// Creates an ocl script and adds it to <paramref name="schema"/>.<see cref="Schema.OCLScripts"/> collection.
+        /// </summary>
+        public OCLScript(Schema schema)
+            : this(schema.Project, Guid.NewGuid(), schema)
+        {
+            
         }
 
         #endregion
@@ -53,7 +67,7 @@ namespace Exolutio.Model.OCL {
             semantic.EnvironmentStack.Push(new NamespaceEnvironment(tt.Library.RootNamespace));
             AST.Constraints constraints = semantic.contextDeclarationList();
 
-            return new CompilerResult(constraints, errColl, tt.Library);
+            return new CompilerResult(constraints, errColl, tt.Library, bridge);
         }
 
         

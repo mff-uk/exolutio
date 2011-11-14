@@ -140,5 +140,10 @@ namespace Exolutio.WPFClient {
                 MessageBox.Show(sb.ToString());
             }
         }
+
+        public void ShowScript(OCLScript oclScript)
+        {
+            cbScripts.SelectedItem = oclScript;
+        }
     }
 }

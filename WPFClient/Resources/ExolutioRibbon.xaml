@@ -406,10 +406,12 @@
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.CreateSampleDocumentCommand}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
             </Fluent:RibbonGroupBox>
-            <Fluent:RibbonGroupBox Header="XSD / Schematron">
+            <Fluent:RibbonGroupBox Header="OCL / XSD / Schematron">
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.GenerateXsdCommand}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.GenerateSchematronSchemaCommand}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.SuggestConstraintsCommand}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
             </Fluent:RibbonGroupBox>
         </Fluent:RibbonTabItem>
