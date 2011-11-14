@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<eXo:Project xmlns:eXo="http://eXolutio.eu/Project/PSM/built-in-types/">
+<eXo:Project
+    xmlns:eXo="http://eXolutio.eu/Project/PSM/built-in-types/"
+    xmlns:eXoS="http://eXolutio.eu/Project/Serialization/">
   <eXo:AttributeTypes>
     <eXo:AttributeType Name="duration" IsSealed="True" ID="CB7AB121-4845-4175-84F6-06E08B0F21F9" XSDDefinition="xs:duration" />
     <eXo:AttributeType Name="dateTime" IsSealed="True" ID="CF33518B-C155-4d3b-B102-AA65954C82B8" XSDDefinition="xs:dateTime" />
@@ -18,7 +20,38 @@
     <eXo:AttributeType Name="anyURI" IsSealed="True" ID="BC2DD6A0-AC6A-4fed-8C74-F34FC76974FD" XSDDefinition="xs:anyURI" />
     <eXo:AttributeType Name="QName" IsSealed="True" ID="DCBA2EAA-230B-464b-B9FF-DAE80112231B" XSDDefinition="xs:QName" />
     <eXo:AttributeType Name="NOTATION" IsSealed="True" ID="AA94B56C-7BE7-4d30-A588-F58EE86B136F" XSDDefinition="xs:NOTATION" />
-    <eXo:AttributeType Name="string" IsSealed="True" ID="E06BC2C1-0BA6-4c8f-A892-93DB94B544BB" XSDDefinition="xs:string" />
+    <eXo:AttributeType Name="string" IsSealed="True" ID="E06BC2C1-0BA6-4c8f-A892-93DB94B544BB" XSDDefinition="xs:string">
+      <eXoS:Operations>
+        <eXoS:Operation ID="A4402798-91FA-4849-B0E9-A1052F053090" Name="substring" resultTypeID="{string}">
+          <eXoS:Parameters Count="2">
+            <eXoS:Parameter Name="sourceString" Type="{string}" />
+            <eXoS:Parameter Name="startingLoc" Type="{double}" />
+          </eXoS:Parameters>
+          <eXoS:Summary>
+            <![CDATA[Returns the portion of the value of $sourceString beginning at the position indicated by the value of $startingLoc. The characters returned do not extend beyond $sourceString. If $startingLoc is zero or negative, only those characters in positions greater than zero are returned.]]>
+          </eXoS:Summary>
+        </eXoS:Operation>
+        <eXoS:Operation ID="7E4A9C2E-3667-4EBD-85C8-A4E2790C73C2" Name="substring" resultTypeID="{string}">
+          <eXoS:Parameters Count="3">
+            <eXoS:Parameter Name="sourceString" Type="{string}" />
+            <eXoS:Parameter Name="startingLoc" Type="{double}" />
+            <eXoS:Parameter Name="length" Type="{double}" />
+          </eXoS:Parameters>
+          <eXoS:Summary>
+            <![CDATA[Returns the portion of the value of $sourceString beginning at the position indicated by the value of $startingLoc and continuing for the number of characters indicated by the value of $length. The characters returned do not extend beyond $sourceString. If $startingLoc is zero or negative, only those characters in positions greater than zero are returned.]]>
+          </eXoS:Summary>
+        </eXoS:Operation>
+        <!--
+        <eXoS:Operations>
+          <eXoS:Operation ID="" Name="" resultTypeID="" resultType="">
+            <eXoS:Parameters Count="">
+              <eXoS:Parameter Type="" Name="" displayName="" />
+            </eXoS:Parameters>
+          </eXoS:Operation>  
+        </eXoS:Operations>
+        -->
+      </eXoS:Operations>
+    </eXo:AttributeType>
     <eXo:AttributeType Name="decimal" IsSealed="True" ID="97772CA0-C38E-43f4-8E30-5EF2113340C1" XSDDefinition="xs:decimal" />
     <eXo:AttributeType Name="normalizedString" baseType="string" baseTypeID="E06BC2C1-0BA6-4c8f-A892-93DB94B544BB" IsSealed="True" ID="7059EF2A-FFA1-4335-AD73-91081C5DE4F7" XSDDefinition="xs:normalizedString" />
     <eXo:AttributeType Name="token" baseType="normalizedString" baseTypeID="7059EF2A-FFA1-4335-AD73-91081C5DE4F7" IsSealed="True" ID="8750390E-CBC0-4be5-A5B1-411655E888BF" XSDDefinition="xs:token" />

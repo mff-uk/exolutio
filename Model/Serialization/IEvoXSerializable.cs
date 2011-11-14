@@ -194,11 +194,18 @@ namespace Exolutio.Model.Serialization
                 return element.Value;
         }
 
-        public static string DeserializeSimpleValueFromCDATA(this IExolutioSerializable component, [NotNull]string elementName, XElement parentNode, SerializationContext context)
+        public static string DeserializeSimpleValueFromCDATA(this IExolutioSerializable component, [NotNull]string elementName, XElement parentNode, SerializationContext context, bool optional = false)
         {
             XElement element = parentNode.Element(context.ExolutioNS + elementName);
-            XCData cdata = (XCData) element.Nodes().First();
-            return cdata.Value;
+            if (element == null && optional)
+            {
+                return null;
+            }
+            else
+            {
+                XCData cdata = (XCData) element.Nodes().First();
+                return cdata.Value;
+            }
         }
 
         public static string DeserializeSimpleValueFromAttribute(this IExolutioSerializable component, [NotNull]string elementName, XElement parentNode, SerializationContext context)

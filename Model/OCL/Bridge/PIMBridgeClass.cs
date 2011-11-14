@@ -23,7 +23,7 @@ namespace Exolutio.Model.OCL.Bridge {
             set;
         }
 
-        private Dictionary<PIMOperation, Operation> PIMOperations {
+        private Dictionary<ModelOperation, Operation> PIMOperations {
             get;
             set;
         }
@@ -33,7 +33,7 @@ namespace Exolutio.Model.OCL.Bridge {
             this.SourceClass = sourceClass;
             PIMAttribute = new Dictionary<PIMAttribute, PIMBridgeAttribute>();
             PIMAssociations = new Dictionary<PIMAssociationEnd, PIMBridgeAssociation>();
-            PIMOperations = new Dictionary<PIMOperation, Operation>();
+            PIMOperations = new Dictionary<ModelOperation, Operation>();
         }
 
         public Property FindAttribute(PIMAttribute att) {
@@ -44,7 +44,7 @@ namespace Exolutio.Model.OCL.Bridge {
             return PIMAssociations[assEnd];
         }
 
-        public Operation FindOperation(PIMOperation op){
+        public Operation FindOperation(ModelOperation op){
             return PIMOperations[op];
         }
 
