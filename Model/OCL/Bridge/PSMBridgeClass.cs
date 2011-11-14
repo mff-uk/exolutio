@@ -60,6 +60,8 @@ namespace Exolutio.Model.OCL.Bridge {
             return PSMChildMembers[ass];
         }
 
+      
+
         internal void TranslateMembers() {
             // property
             if (PSMSource is PSMClass) {

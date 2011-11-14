@@ -16,11 +16,11 @@ namespace Exolutio.View
     /// Implementation of <see cref="IOperationsContainer{PIMOperation, PIMOperationTextBox}"/>, displays operations
     /// using <see cref="PIMOperationTextBox">OperationTextBoxes</see>.
     /// </summary>
-    public class PIMOperationsContainer : TextBoxContainer<PIMOperation, PIMOperationTextBox>, IOperationsContainer<PIMOperation, PIMOperationTextBox>
+    public class PIMOperationsContainer : TextBoxContainer<ModelOperation, PIMOperationTextBox>, IOperationsContainer<ModelOperation, PIMOperationTextBox>
     {
-        private ICollection<PIMOperation> operationsCollection;
+        private ICollection<ModelOperation> operationsCollection;
 
-        ICollection<PIMOperation> IOperationsContainer<PIMOperation, PIMOperationTextBox>.OperationsCollection
+        ICollection<ModelOperation> IOperationsContainer<ModelOperation, PIMOperationTextBox>.OperationsCollection
         {
             get { return Collection; }
         }
@@ -28,7 +28,7 @@ namespace Exolutio.View
         /// <summary>
         /// Visualized collection 
         /// </summary>
-        public override ICollection<PIMOperation> Collection
+        public override ICollection<ModelOperation> Collection
         {
             get
             {
