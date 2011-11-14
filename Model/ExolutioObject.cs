@@ -70,9 +70,18 @@ namespace Exolutio.Model
             this.SerializeIDRef(this, "ID", parentNode, context, false);
         }
 
+        protected bool MakeUpIdIfNotDeserialized = false; 
+
         public virtual void Deserialize(XElement parentNode, SerializationContext context)
         {
-            this.ID = this.DeserializeIDRef("ID", parentNode, context);
+            if (parentNode.Attribute("ID") != null)
+            {
+                this.ID = this.DeserializeIDRef("ID", parentNode, context);
+            }
+            else
+            {
+                this.ID = Guid.NewGuid();
+            }
         }
         #endregion
 

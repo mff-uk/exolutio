@@ -9,8 +9,17 @@ namespace Exolutio.Model
 {
     public class AttributeType : ExolutioVersionedObjectNotAPartOfSchema
     {
-        public AttributeType(Project p) : base(p) { }
-        public AttributeType(Project p, Guid g) : base(p, g) { }
+        public AttributeType(Project p) : base(p)
+        {
+            InitCollections(); 
+        }
+
+        private void InitCollections()
+        {
+            Operations = new UndirectCollection<ModelOperation>(Project);
+        }
+
+        public AttributeType(Project p, Guid g) : base(p, g) { InitCollections(); }
 
         /// <summary>
         /// Gets or sets a value indicating whether the type is defined by external 
@@ -44,6 +53,41 @@ namespace Exolutio.Model
 
         public string XSDDefinition { get; set; }
 
+        private Guid schemaGuid;
+        public Schema Schema
+        {
+            get
+            {
+                return schemaGuid == Guid.Empty ? null : Project.TranslateComponent<Schema>(schemaGuid);
+            }
+            set 
+            {
+                schemaGuid = value != null ? value : Guid.Empty;
+                
+            }
+        }
+
+        public bool IsModelType
+        {
+            get { return componentGuid != Guid.Empty; }
+        }
+
+        private Guid componentGuid;
+        
+        public Component Component
+        {
+            get
+            {
+                return componentGuid == Guid.Empty ? null : Project.TranslateComponent<Component>(componentGuid);
+            }
+            set
+            {
+                componentGuid = value != null ? value : Guid.Empty;
+            }
+        }
+
+        public UndirectCollection<ModelOperation> Operations { get; private set; }
+
         #region Implementation of IExolutioSerializable
 
         public override void Serialize(XElement parentNode, SerializationContext context)
@@ -74,6 +118,8 @@ namespace Exolutio.Model
                 xsdDefinitionElement.Add(xsdDefinitionCData);
                 parentNode.Add(xsdDefinitionElement);
             }
+
+            this.WrapAndSerializeCollection("Operations", "Operation", Operations, parentNode, context, true);
         }
 
         public override void Deserialize(XElement parentNode, SerializationContext context)
@@ -90,6 +136,8 @@ namespace Exolutio.Model
             {
                 this.XSDDefinition = ((XCData) xsdDefinitionElement.Nodes().First()).Value;
             }
+
+            this.DeserializeWrappedCollection("Operations", Operations, ModelOperation.CreateInstance, parentNode, context, true);
 
             SetProjectVersion(context.CurrentProjectVersion);
         }
@@ -129,43 +177,11 @@ namespace Exolutio.Model
             {
                 copyAttributeType.componentGuid = createdCopies.GetGuidForCopyOf(Component);
             }
+            this.CopyCollection(Operations, copyAttributeType.Operations, projectVersion, createdCopies);
             copyAttributeType.SetProjectVersion(projectVersion);
         }
 
         #endregion
-
-        private Guid schemaGuid;
-        public Schema Schema
-        {
-            get
-            {
-                return schemaGuid == Guid.Empty ? null : Project.TranslateComponent<Schema>(schemaGuid);
-            }
-            set 
-            {
-                schemaGuid = value != null ? value : Guid.Empty;
-                
-            }
-        }
-
-        public bool IsModelType
-        {
-            get { return componentGuid != Guid.Empty; }
-        }
-
-        private Guid componentGuid;
-        
-        public Component Component
-        {
-            get
-            {
-                return componentGuid == Guid.Empty ? null : Project.TranslateComponent<Component>(componentGuid);
-            }
-            set
-            {
-                componentGuid = value != null ? value : Guid.Empty;
-            }
-        }
 
         public override string ToString()
         {

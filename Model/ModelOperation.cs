@@ -55,8 +55,8 @@ namespace Exolutio.Model
 
         private void InitializeCollections()
         {
-            parameters = new ObservableCollection<ModelOperationParameter>();
-            parameters.CollectionChanged += parameters_CollectionChanged;
+            Parameters = new UndirectCollection<ModelOperationParameter>(Project);
+            Parameters.CollectionChanged += parameters_CollectionChanged;
         }
 
         void parameters_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -72,12 +72,12 @@ namespace Exolutio.Model
             set { pimClassGuid = value; NotifyPropertyChanged("PIMClass"); }
         }
 
-        private Guid declaringAttributeType; 
+        private Guid declaringType; 
 
-        public AttributeType DeclaringAttributeType
+        public AttributeType DeclaringType
         {
-            get { return Project.TranslateComponent<AttributeType>(declaringAttributeType); }
-            set { declaringAttributeType = value; NotifyPropertyChanged("DeclaringAttributeType"); }
+            get { return Project.TranslateComponent<AttributeType>(declaringType); }
+            set { declaringType = value; NotifyPropertyChanged("DeclaringType"); }
         }
 
         private Guid resultTypeGuid;
@@ -102,12 +102,14 @@ namespace Exolutio.Model
             }
         }
 
-        private ObservableCollection<ModelOperationParameter> parameters;
-
-        public ObservableCollection<ModelOperationParameter> Parameters
+        private string summary;
+        public string Summary
         {
-            get { return parameters; }
+            get { return summary; }
+            set { summary = value; NotifyPropertyChanged("Summary");}
         }
+
+        public UndirectCollection<ModelOperationParameter> Parameters { get; private set; }
 
         #region Implementation of IExolutioSerializable
 
@@ -118,36 +120,34 @@ namespace Exolutio.Model
             {
                 this.SerializeIDRef(PIMClass, "pimClassID", parentNode, context, false);
             }
-            if (DeclaringAttributeType != null)
+            if (DeclaringType != null)
             {
-                this.SerializeIDRef(DeclaringAttributeType, "declaringAttributeTypeID", parentNode, context, false);
+                this.SerializeIDRef(DeclaringType, "declaringTypeID", parentNode, context, false);
             }
             if (ResultType != null)
             {
                 this.SerializeAttributeType(ResultType, parentNode, context, "ResultType");
             }
             this.WrapAndSerializeCollection("Parameters", "Parameter", Parameters, parentNode, context, true);
+            if (!String.IsNullOrEmpty(Summary))
+            {
+                this.SerializeSimpleValueToCDATA("Summary", Summary, parentNode, context);
+            }
         }
 
         public override void Deserialize(XElement parentNode, SerializationContext context)
         {
             base.Deserialize(parentNode, context);
 
-            this.resultTypeGuid = this.DeserializeAttributeType(parentNode, context, "ResultType", true);
-            
-            if (parentNode.Element(context.ExolutioNS + "Parameters") != null)
+            this.resultTypeGuid = this.DeserializeAttributeType(parentNode, context, "resultTypeID", true);
+            this.DeserializeWrappedCollection("Parameters", Parameters, ModelOperationParameter.CreateInstance, parentNode, context);
+            foreach (ModelOperationParameter parameter in Parameters)
             {
-                foreach (XElement parameterElement in parentNode.Element(context.ExolutioNS + "Parameters").Elements(context.ExolutioNS + "Parameter"))
-                {
-                    ModelOperationParameter modelOperationParameter = new ModelOperationParameter();
-                    modelOperationParameter.ModelOperation = this;
-                    modelOperationParameter.Deserialize(parameterElement, context);
-                    Parameters.Add(modelOperationParameter);
-                }
+                parameter.ModelOperation = this;
             }
-
             pimClassGuid = this.DeserializeIDRef("pimClassID", parentNode, context, true);
-            declaringAttributeType = this.DeserializeIDRef("declaringAttributeTypeID", parentNode, context, true);
+            declaringType = this.DeserializeIDRef("declaringTypeID", parentNode, context, true);
+            Summary = this.DeserializeSimpleValueFromCDATA("Summary", parentNode, context, true);
         }
         public static ModelOperation CreateInstance(Project project)
         {
@@ -176,7 +176,16 @@ namespace Exolutio.Model
 
             ModelOperation copyModelOperation = (ModelOperation)copyComponent;
             
-            copyModelOperation.pimClassGuid = createdCopies.GetGuidForCopyOf(PIMClass);
+            if (PIMClass != null)
+            {
+                copyModelOperation.pimClassGuid = createdCopies.GetGuidForCopyOf(PIMClass);
+            }
+            if (DeclaringType != null)
+            {
+                copyModelOperation.declaringType = createdCopies.GetGuidForCopyOf(DeclaringType);
+            }
+
+            this.CopyCollection<ModelOperationParameter>(Parameters, copyModelOperation.Parameters, projectVersion, createdCopies);
         }
 
         #endregion

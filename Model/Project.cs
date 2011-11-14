@@ -55,6 +55,10 @@ namespace Exolutio.Model
                 {
                     AttributeType attributeType = new AttributeType(this, Guid.Empty);
                     attributeType.Deserialize(type, context);
+                    foreach (ModelOperation modelOperation in attributeType.Operations)
+                    {
+                        modelOperation.DeclaringType = attributeType;
+                    }
                     pimBuiltInTypes.Add(attributeType);
                 }
             }
@@ -66,12 +70,41 @@ namespace Exolutio.Model
                     xbuiltInTypes.Element(psmBuiltInTypesNS + "Project").Element(psmBuiltInTypesNS + "AttributeTypes").
                         Elements(psmBuiltInTypesNS + "AttributeType");
 
+                Dictionary<string, Guid> typeDict = new Dictionary<string, Guid>();
+                foreach (XElement typeElement in types)
+                {
+                    typeDict[typeElement.Attribute("Name").Value] = Guid.Parse(typeElement.Attribute("ID").Value);
+                }
+
                 SerializationContext context = new SerializationContext();
 
                 foreach (XElement type in types)
                 {
+                    if (type.Element(context.ExolutioNS + "Operations") != null)
+                    {
+                        foreach (XElement operationElement in type.Element(context.ExolutioNS + "Operations").Elements())
+                        {
+                            string resultTypeID = operationElement.Attribute("resultTypeID").Value;
+                            if (resultTypeID.StartsWith("{"))
+                            {
+                                operationElement.Attribute("resultTypeID").Value = typeDict[resultTypeID.Substring(1, resultTypeID.Length - 2)].ToString();
+                            }
+                            foreach (XElement parameterElement in operationElement.Element(context.ExolutioNS + "Parameters").Elements())
+                            {
+                                string parType = parameterElement.Attribute("Type").Value;
+                                if (parType.StartsWith("{"))
+                                {
+                                    parameterElement.Attribute("Type").Value = typeDict[parType.Substring(1, parType.Length - 2)].ToString();
+                                }
+                            }
+                        }
+                    }
                     AttributeType attributeType = new AttributeType(this, Guid.Empty);
                     attributeType.Deserialize(type, context);
+                    foreach (ModelOperation modelOperation in attributeType.Operations)
+                    {
+                        modelOperation.DeclaringType = attributeType;
+                    }
                     psmBuiltInTypes.Add(attributeType);
                 }
             }
