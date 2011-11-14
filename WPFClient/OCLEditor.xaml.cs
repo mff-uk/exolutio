@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -23,7 +24,8 @@ namespace Exolutio.WPFClient {
     public partial class OCLEditor : UserControl {
         public OCLEditor() {
             InitializeComponent();
-            System.Xml.XmlReader reader = new System.Xml.XmlTextReader("ocl.xshd");
+            StringReader sr = new StringReader(Properties.Resources.OCL_syntax);
+            System.Xml.XmlReader reader = new System.Xml.XmlTextReader(sr);
             textBox1.SyntaxHighlighting = ICSharpCode.AvalonEdit.Highlighting.Xshd.HighlightingLoader.Load(reader, HighlightingManager.Instance);
         }
 
