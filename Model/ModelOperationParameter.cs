@@ -2,11 +2,11 @@
 using System.Xml.Linq;
 using Exolutio.Model.Serialization;
 
-namespace Exolutio.Model.PIM
+namespace Exolutio.Model
 {
-    public class PIMOperationParameter: IExolutioSerializable
+    public class ModelOperationParameter: IExolutioSerializable
     {
-        public PIMOperation PIMOperation { get; set; }
+        public ModelOperation ModelOperation { get; set; }
 
         private Guid typeGuid;
 
@@ -15,7 +15,7 @@ namespace Exolutio.Model.PIM
             get
             {
                 return typeGuid != Guid.Empty
-                           ? PIMOperation.Project.TranslateComponent<AttributeType>(typeGuid)
+                           ? ModelOperation.Project.TranslateComponent<AttributeType>(typeGuid)
                            : null;
             }
             set
@@ -28,9 +28,9 @@ namespace Exolutio.Model.PIM
                 {
                     typeGuid = Guid.Empty;
                 }
-                if (PIMOperation != null)
+                if (ModelOperation != null)
                 {
-                    PIMOperation.NotifyPropertyChanged("Parameters");
+                    ModelOperation.NotifyPropertyChanged("Parameters");
                 }
             }
         }
@@ -42,9 +42,9 @@ namespace Exolutio.Model.PIM
             set
             {
                 name = value;
-                if (PIMOperation != null)
+                if (ModelOperation != null)
                 {
-                    PIMOperation.NotifyPropertyChanged("Parameters");
+                    ModelOperation.NotifyPropertyChanged("Parameters");
                 }
             }
         }
@@ -64,15 +64,15 @@ namespace Exolutio.Model.PIM
             }
         }
 
-        public static PIMOperationParameter CreateInstance(Project project)
+        public static ModelOperationParameter CreateInstance(Project project)
         {
-            return new PIMOperationParameter();
+            return new ModelOperationParameter();
         }
 
 
         public Project Project
         {
-            get { return PIMOperation.Project; }
+            get { return ModelOperation.Project; }
         }
     }
 }

@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Xml;
 using System.Xml.Linq;
+using Exolutio.Model.PIM;
 using Exolutio.Model.Serialization;
 using Exolutio.Model.Versioning;
-using Exolutio.Model.PSM;
 
-namespace Exolutio.Model.PIM
+namespace Exolutio.Model
 {
-    public class PIMOperation : PIMComponent
+    public class ModelOperation : Component
     {
         #region Constructors
-        public PIMOperation(Project p) : base(p) { InitializeCollections(); }
-        public PIMOperation(Project p, Guid g) : base(p, g) { InitializeCollections(); }
+        public ModelOperation(Project p) : base(p) { InitializeCollections(); }
+        public ModelOperation(Project p, Guid g) : base(p, g) { InitializeCollections(); }
         /// <summary>
         /// Constructs a PIMOperation and registers it with schema 
         /// <paramref name="schema"/> and inserts it into <see cref="PIMClass"/> 
@@ -22,7 +21,7 @@ namespace Exolutio.Model.PIM
         /// <param name="c"><see cref="PIMClass"/> to insert to</param>
         /// <param name="schema"><see cref="PIMSchema"/> to register with
         /// </param>
-        public PIMOperation(Project p, PIMClass c, PIMSchema schema, int index = -1)
+        public ModelOperation(Project p, PIMClass c, PIMSchema schema, int index = -1)
             : base(p)
         {
             InitializeCollections(); 
@@ -40,7 +39,7 @@ namespace Exolutio.Model.PIM
         /// <param name="g"><see cref="Guid"/> to be set</param>
         /// <param name="c"><see cref="PIMClass"/> to insert to</param>
         /// <param name="schema"><see cref="PIMSchema"/> to register with</param>
-        public PIMOperation(Project p, Guid g, PIMClass c, PIMSchema schema, int index = -1)
+        public ModelOperation(Project p, Guid g, PIMClass c, PIMSchema schema, int index = -1)
             : base(p, g)
         {
             InitializeCollections(); 
@@ -56,7 +55,7 @@ namespace Exolutio.Model.PIM
 
         private void InitializeCollections()
         {
-            parameters = new ObservableCollection<PIMOperationParameter>();
+            parameters = new ObservableCollection<ModelOperationParameter>();
             parameters.CollectionChanged += parameters_CollectionChanged;
         }
 
@@ -71,6 +70,14 @@ namespace Exolutio.Model.PIM
         {
             get { return Project.TranslateComponent<PIMClass>(pimClassGuid); }
             set { pimClassGuid = value; NotifyPropertyChanged("PIMClass"); }
+        }
+
+        private Guid declaringAttributeType; 
+
+        public AttributeType DeclaringAttributeType
+        {
+            get { return Project.TranslateComponent<AttributeType>(declaringAttributeType); }
+            set { declaringAttributeType = value; NotifyPropertyChanged("DeclaringAttributeType"); }
         }
 
         private Guid resultTypeGuid;
@@ -95,9 +102,9 @@ namespace Exolutio.Model.PIM
             }
         }
 
-        private ObservableCollection<PIMOperationParameter> parameters;
+        private ObservableCollection<ModelOperationParameter> parameters;
 
-        public ObservableCollection<PIMOperationParameter> Parameters
+        public ObservableCollection<ModelOperationParameter> Parameters
         {
             get { return parameters; }
         }
@@ -107,7 +114,14 @@ namespace Exolutio.Model.PIM
         public override void Serialize(XElement parentNode, SerializationContext context)
         {
             base.Serialize(parentNode, context);
-            this.SerializeIDRef(PIMClass, "pimClassID", parentNode, context, false);
+            if (PIMClass != null)
+            {
+                this.SerializeIDRef(PIMClass, "pimClassID", parentNode, context, false);
+            }
+            if (DeclaringAttributeType != null)
+            {
+                this.SerializeIDRef(DeclaringAttributeType, "declaringAttributeTypeID", parentNode, context, false);
+            }
             if (ResultType != null)
             {
                 this.SerializeAttributeType(ResultType, parentNode, context, "ResultType");
@@ -125,18 +139,19 @@ namespace Exolutio.Model.PIM
             {
                 foreach (XElement parameterElement in parentNode.Element(context.ExolutioNS + "Parameters").Elements(context.ExolutioNS + "Parameter"))
                 {
-                    PIMOperationParameter pimOperationParameter = new PIMOperationParameter();
-                    pimOperationParameter.PIMOperation = this;
-                    pimOperationParameter.Deserialize(parameterElement, context);
-                    Parameters.Add(pimOperationParameter);
+                    ModelOperationParameter modelOperationParameter = new ModelOperationParameter();
+                    modelOperationParameter.ModelOperation = this;
+                    modelOperationParameter.Deserialize(parameterElement, context);
+                    Parameters.Add(modelOperationParameter);
                 }
             }
 
-            pimClassGuid = this.DeserializeIDRef("pimClassID", parentNode, context, false);
+            pimClassGuid = this.DeserializeIDRef("pimClassID", parentNode, context, true);
+            declaringAttributeType = this.DeserializeIDRef("declaringAttributeTypeID", parentNode, context, true);
         }
-        public static PIMOperation CreateInstance(Project project)
+        public static ModelOperation CreateInstance(Project project)
         {
-            return new PIMOperation(project, Guid.Empty);
+            return new ModelOperation(project, Guid.Empty);
         }
 
         #endregion
@@ -151,7 +166,7 @@ namespace Exolutio.Model.PIM
 
         public override IExolutioCloneable Clone(ProjectVersion projectVersion, ElementCopiesMap createdCopies)
         {
-            return new PIMOperation(projectVersion.Project, createdCopies.SuggestGuid(this));
+            return new ModelOperation(projectVersion.Project, createdCopies.SuggestGuid(this));
         }
 
         public override void FillCopy(IExolutioCloneable copyComponent, ProjectVersion projectVersion,
@@ -159,9 +174,9 @@ namespace Exolutio.Model.PIM
         {
             base.FillCopy(copyComponent, projectVersion, createdCopies);
 
-            PIMOperation copyPIMOperation = (PIMOperation)copyComponent;
+            ModelOperation copyModelOperation = (ModelOperation)copyComponent;
             
-            copyPIMOperation.pimClassGuid = createdCopies.GetGuidForCopyOf(PIMClass);
+            copyModelOperation.pimClassGuid = createdCopies.GetGuidForCopyOf(PIMClass);
         }
 
         #endregion
