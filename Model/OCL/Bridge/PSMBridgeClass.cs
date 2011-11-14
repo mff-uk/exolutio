@@ -56,7 +56,7 @@ namespace Exolutio.Model.OCL.Bridge {
         /// Gets the class from type associated with the PIM class.
         /// </summary>
         /// <exception cref="KeyNotFoundException">PSM association not exists in this class.</exception>
-        public Property FindChild(PSMAssociation ass) {
+        public PSMBridgeAssociation FindChild(PSMAssociation ass) {
             return PSMChildMembers[ass];
         }
 
