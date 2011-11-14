@@ -122,7 +122,7 @@ namespace Exolutio.Model
             }
             if (DeclaringType != null)
             {
-                this.SerializeIDRef(DeclaringType, "declaringTypeID", parentNode, context, false);
+                this.SerializeAttributeType(DeclaringType, parentNode, context, "DeclaringType");
             }
             if (ResultType != null)
             {
@@ -139,14 +139,14 @@ namespace Exolutio.Model
         {
             base.Deserialize(parentNode, context);
 
-            this.resultTypeGuid = this.DeserializeAttributeType(parentNode, context, "resultTypeID", true);
+            this.resultTypeGuid = this.DeserializeAttributeType(parentNode, context, "ResultType", true);
             this.DeserializeWrappedCollection("Parameters", Parameters, ModelOperationParameter.CreateInstance, parentNode, context);
             foreach (ModelOperationParameter parameter in Parameters)
             {
                 parameter.ModelOperation = this;
             }
             pimClassGuid = this.DeserializeIDRef("pimClassID", parentNode, context, true);
-            declaringType = this.DeserializeIDRef("declaringTypeID", parentNode, context, true);
+            declaringType = this.DeserializeAttributeType(parentNode, context, "DeclaringType", true);
             Summary = this.DeserializeSimpleValueFromCDATA("Summary", parentNode, context, true);
         }
         public static ModelOperation CreateInstance(Project project)
