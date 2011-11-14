@@ -9,6 +9,7 @@ using System.Xml.Linq;
 using Exolutio.Controller;
 using Exolutio.Controller.Commands;
 using Exolutio.Model;
+using Exolutio.Model.OCL;
 using Exolutio.Model.PIM;
 using Exolutio.Model.PSM;
 using Exolutio.SupportingClasses;
@@ -255,6 +256,7 @@ namespace Exolutio.View
         DiagramView GetOpenedDiagramView(Diagram diagram);
         IList<DiagramView> GetTopDiagramViews();
         IList<DiagramView> GetOpenedDiagramViews();
+        void ShowOCLScript(OCLScript oclScript);
     }
 
     public interface IMainWindow

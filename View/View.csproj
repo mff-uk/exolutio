@@ -80,8 +80,12 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Commands\Edit\guiOpenAttributeTypesDialogCommand.cs" />
+    <Compile Include="Commands\OCL\SuggestConstraintsWindow.xaml.cs">
+      <DependentUpon>SuggestConstraintsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Commands\Grammar\guiGenerateSchematronSchemaCommand.cs" />
     <Compile Include="Commands\Grammar\guiGenerateXSDCommand.cs" />
+    <Compile Include="Commands\OCL\guiSuggestConstraintsCommand.cs" />
     <Compile Include="Commands\Local\guiSelectNextCommand.cs" />
     <Compile Include="Commands\PIM\guiPIMDeleteGeneralization.cs" />
     <Compile Include="Commands\PIM\guiSplitPIMAssociation.cs" />
@@ -326,6 +330,10 @@
     <Page Include="Commands\CommandDialogWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Commands\OCL\SuggestConstraintsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Commands\Grammar\GrammarWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

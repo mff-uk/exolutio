@@ -8,6 +8,7 @@ using Exolutio.Model.PSM;
 using Exolutio.ResourceLibrary;
 using Exolutio.View.Commands.Edit;
 using Exolutio.View.Commands.Grammar;
+using Exolutio.View.Commands.OCL;
 using Exolutio.View.Commands.Project;
 using Exolutio.View;
 using Exolutio.View.Commands.Versioning;
@@ -56,6 +57,7 @@ namespace Exolutio.View.Commands
         public static guiGenerateGrammarCommand GenerateGrammarCommand { get; set; }
         public static guiGenerateXsdCommand GenerateXsdCommand { get; set; }
         public static guiGenerateSchematronSchemaCommand GenerateSchematronSchemaCommand { get; set; }
+        public static guiSuggestConstraintsCommand SuggestConstraintsCommand { get; set; }
 
         #endregion
 
@@ -232,6 +234,7 @@ namespace Exolutio.View.Commands
             GenerateXsdCommand = new guiGenerateXsdCommand();
             GenerateSchematronSchemaCommand = new guiGenerateSchematronSchemaCommand();
             CreateSampleDocumentCommand = new guiSampleDocumentCommand();
+            SuggestConstraintsCommand = new guiSuggestConstraintsCommand();
 
             #endregion
 

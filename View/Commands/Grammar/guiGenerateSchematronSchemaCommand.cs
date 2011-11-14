@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Xml.Linq;
 using Exolutio.Model.PSM;
-using Exolutio.Model.PSM.Grammar;
 using Exolutio.Model.PSM.Grammar.SchematronTranslation;
 using Exolutio.ResourceLibrary;
 using Exolutio.SupportingClasses;

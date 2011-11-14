@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Xml.Linq;
 using Exolutio.Model.OCL;
+using Exolutio.Model.OCL.AST;
 using Exolutio.SupportingClasses;
 
 namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
@@ -39,7 +40,21 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 
         private void TranslateScript(XElement schSchema, OCLScript oclScript)
         {
-            schSchema.SchematronPattern(oclScript.Name);
+            XElement patternElement = schSchema.SchematronPattern(oclScript.Name);
+
+            CompilerResult compilerResult = oclScript.CompileToAst();
+            if (!compilerResult.Errors.HasError)
+            {
+                foreach (ClassifierConstraint constraint in compilerResult.Constraints.Classifiers)
+                {
+                    
+                }
+            }
+            else
+            {
+                XComment comment = new XComment(string.Format("OCL script contains errors and thus can not be translated"));
+                patternElement.Add(comment);
+            }
         }
     }
 }
