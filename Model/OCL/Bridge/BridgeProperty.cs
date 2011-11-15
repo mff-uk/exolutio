@@ -7,6 +7,9 @@ using Exolutio.Model.PSM;
 
 namespace Exolutio.Model.OCL.Bridge {
     public class BridgeProperty : Property {
+        /// <summary>
+        /// Logic source type of property. (Association, Attribute)
+        /// </summary>
         public BridgePropertyType SourceType {
             get;
             protected set;
