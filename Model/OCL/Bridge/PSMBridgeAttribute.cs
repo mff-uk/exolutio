@@ -6,7 +6,7 @@ using Exolutio.Model.OCL.Types;
 using Exolutio.Model.PSM;
 
 namespace Exolutio.Model.OCL.Bridge {
-    class PSMBridgeAttribute : BridgeProperty 
+    public class PSMBridgeAttribute : BridgeProperty 
     {
         public PSMAttribute SourceAttribute {
             get;

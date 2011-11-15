@@ -7,7 +7,13 @@ using Exolutio.Model.PIM;
 using Exolutio.Model.OCL.TypesTable;
 
 namespace Exolutio.Model.OCL.Bridge {
+    /// <summary>
+    /// Represents class from PIM in OCL type system.
+    /// </summary>
     public class PIMBridgeClass : Classifier {
+        /// <summary>
+        /// Containts source class from PIM.
+        /// </summary>
         public PIMClass SourceClass {
             get;
             private set;
@@ -28,6 +34,11 @@ namespace Exolutio.Model.OCL.Bridge {
             set;
         }
 
+        /// <summary>
+        /// Creates instance which represents <paramref name="sourceClass"/> in OCL type system.
+        /// </summary>
+        /// <param name="tt">Destination OCL type system.</param>
+        /// <param name="sourceClass">Source class</param>
         public PIMBridgeClass(TypesTable.TypesTable tt, PIMClass sourceClass)
             : base(tt, sourceClass.Name, tt.Library.Any) {
             this.SourceClass = sourceClass;
@@ -36,14 +47,26 @@ namespace Exolutio.Model.OCL.Bridge {
             PIMOperations = new Dictionary<ModelOperation, Operation>();
         }
 
-        public Property FindAttribute(PIMAttribute att) {
+        /// <summary>
+        /// Tries find instance of PIMBridgeAttribute associated with <paramref name="att"/> from PIM.
+        /// </summary>
+        /// <exception cref="KeyNotFoundException"><paramref name="att"/> not exists in this class.</exception>
+        public PIMBridgeAttribute FindAttribute(PIMAttribute att) {
             return PIMAttribute[att];
         }
 
-        public Property FindAssociation(PIMAssociationEnd assEnd) {
+        /// <summary>
+        /// Tries find instance of PIMBridgeAssociation associated with <paramref name="ass"/> from PIM.
+        /// </summary>
+        /// <exception cref="KeyNotFoundException"><paramref name="ass"/> not exists in this class.</exception>
+        public PIMBridgeAssociation FindAssociation(PIMAssociationEnd assEnd) {
             return PIMAssociations[assEnd];
         }
 
+        /// <summary>
+        /// Tries find instance of Operation associated with <paramref name="op"/> from PIM.
+        /// </summary>
+        /// <exception cref="KeyNotFoundException"><paramref name="op"/> not exists in this class.</exception>
         public Operation FindOperation(ModelOperation op){
             return PIMOperations[op];
         }
