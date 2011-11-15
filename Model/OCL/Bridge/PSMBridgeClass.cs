@@ -117,7 +117,8 @@ namespace Exolutio.Model.OCL.Bridge {
                 if (parentName != null) {
                     Classifier propType = TypeTable.Library.RootNamespace.NestedClassifier[parentName];
                     PSMBridgeAssociation newProp = new PSMBridgeAssociation(defaultName, namesInOcl, parentAss, PSMBridgeAssociation.AssociationDirection.Up, PropertyType.One, propType);
-                    Properties.Add(newProp);
+                    //Properties.Add(newProp);
+                    namesInOcl.ForEach(name => Properties.Add(newProp, name));
                     //Hack
                     newProp.Tag = parentAss.Parent;
 
