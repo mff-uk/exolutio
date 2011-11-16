@@ -182,4 +182,7 @@
   <data name="OCLAst_TestNull_Compiler_panic_in_method__0__">
     <value xml:space="preserve">Compiler panic in method {0}.</value>
   </data>
+  <data name="OCLAst_ProcessIteratorCall_Compiler_don_t_support_iterator_operations_on_not_collection_type">
+    <value xml:space="preserve">Compiler don't support iterator operations on not-collection type.</value>
+  </data>
 </root>

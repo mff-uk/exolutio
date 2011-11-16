@@ -196,6 +196,16 @@ namespace Exolutio.Model.OCL.Compiler {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Compiler don&apos;t support iterator operations on not-collection type..
+        /// </summary>
+        internal static string OCLAst_ProcessIteratorCall_Compiler_don_t_support_iterator_operations_on_not_collection_type {
+            get {
+                return ResourceManager.GetString("OCLAst_ProcessIteratorCall_Compiler_don_t_support_iterator_operations_on_not_coll" +
+                        "ection_type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Iterator ma jenom jedno tělo výrazu..
         /// </summary>
         internal static string OCLAst_ProcessIteratorCall_Iterator_ma_jenom_jedno_tělo_výrazu {
