@@ -67,7 +67,7 @@ namespace Exolutio.Model.OCL.Compiler {
             if (element is Classifier == false) {
                 // error
                 selfOut = null;
-                Errors.AddError(new ErrorItem("Nenalezena trida v ClassifierContextHeader"));
+                Errors.AddError(new ErrorItem(CompilerErrors.OCLAst_ClassifierContextHead_Nenalezena_trida_v_ClassifierContextHeader));
                 return null;
             }
             Classifier contextClassifier = element as Classifier;
@@ -90,7 +90,7 @@ namespace Exolutio.Model.OCL.Compiler {
 
             Operation op = exp1.Type.LookupOperation(name, new Classifier[] { exp2.Type });
             if (op == null) {
-                Errors.AddError(new ErrorItem(String.Format("On type `{0}` is not defined operation `{1}`.", exp1.Type, name)));
+                Errors.AddError(new ErrorItem(String.Format(CompilerErrors.OCLAst_InfixOperation_NotDefined, exp1.Type, name)));
                 return new AST.ErrorExp(Library.Any);
             }
             return new AST.OperationCallExp(exp1, false, op, new List<AST.OclExpression>(new AST.OclExpression[] { exp2 }));
@@ -103,7 +103,7 @@ namespace Exolutio.Model.OCL.Compiler {
 
             Operation op = exp1.Type.LookupOperation(name.Text, new Classifier[] { });
             if (op == null) {
-                Errors.AddError(new CodeErrorItem(String.Format("On type `{0}` is not defined operation `{1}`.", exp1.Type, name), name, name));
+                Errors.AddError(new CodeErrorItem(String.Format(CompilerErrors.OCLAst_InfixOperation_NotDefined, exp1.Type, name), name, name));
                 return new AST.ErrorExp(Library.Any);
             }
             return new AST.OperationCallExp(exp1, false, op, new List<AST.OclExpression>(new AST.OclExpression[] { }));
@@ -129,7 +129,7 @@ namespace Exolutio.Model.OCL.Compiler {
                 }
             }
 
-            Errors.AddError(new CodeErrorItem(String.Format("Property `{0}` does not exit.",path[0]), tokenPath.First(), tokenPath.Last()));
+            Errors.AddError(new CodeErrorItem(String.Format(CompilerErrors.OCLAst_ProcessPropertyCall_PropertyNotExists,path[0]), tokenPath.First(), tokenPath.Last()));
             return new AST.ErrorExp(Library.Invalid);
         }
 
@@ -174,7 +174,7 @@ namespace Exolutio.Model.OCL.Compiler {
                 }
             }
 
-            Errors.AddError(new CodeErrorItem(string.Format("Operation `{0}` does not exit.",path.First()), tokenPath.First(), tokenPath.Last()));
+            Errors.AddError(new CodeErrorItem(string.Format(CompilerErrors.OCLAst_ProcessOperationCall_OperationNotExists,path.First()), tokenPath.First(), tokenPath.Last()));
             return new AST.ErrorExp(Library.Invalid);
         }
 
@@ -205,11 +205,11 @@ namespace Exolutio.Model.OCL.Compiler {
 
             List<string> path = tokenPath.ToStringList();
             if (path.Count != 1) {
-                Errors.AddError(new CodeErrorItem("Unknow iterator operation.", tokenPath.First(), tokenPath.Last()));
+                Errors.AddError(new CodeErrorItem(CompilerErrors.OCLAst_ProcessIteratorCall_Unknow_iterator_operation, tokenPath.First(), tokenPath.Last()));
                 return new AST.ErrorExp(Library.Invalid);
             }
             if (args.Count > 1) {
-                Errors.AddError(new CodeErrorItem("Iterator ma jenom jedno tělo výrazu.", tokenPath.First(), tokenPath.Last()));
+                Errors.AddError(new CodeErrorItem(CompilerErrors.OCLAst_ProcessIteratorCall_Iterator_ma_jenom_jedno_tělo_výrazu, tokenPath.First(), tokenPath.Last()));
             }
 
             string name = path[0];
@@ -220,7 +220,7 @@ namespace Exolutio.Model.OCL.Compiler {
                 // Pozadovany typ na telo iteratoru, podle pouzite funkce
                 Classifier bodyType = iteratorOperation.BodyType(expr.Type as CollectionType, args[0].Type, TypesTable);
                 if (args[0].Type.ConformsTo(bodyType) == false) {
-                    Errors.AddError(new CodeErrorItem("Nesedi typy v body", tokenPath.First(), tokenPath.Last()));
+                    Errors.AddError(new CodeErrorItem(CompilerErrors.OCLAst_ProcessIteratorCall_Nesedi_typy_v_body, tokenPath.First(), tokenPath.Last()));
                 }
                 //Navratovy typ iteratoru podle pouzite operace
                 Classifier returnType = iteratorOperation.ExpressionType(expr.Type as CollectionType, args[0].Type, TypesTable);
@@ -228,7 +228,7 @@ namespace Exolutio.Model.OCL.Compiler {
                 return new AST.IteratorExp(expr, args[0], name, decls, returnType);
             }
 
-            Errors.AddError(new CodeErrorItem("Bad iterator operation.", tokenPath.First(), tokenPath.Last()));
+            Errors.AddError(new CodeErrorItem(CompilerErrors.OCLAst_ProcessIteratorCall_Bad_iterator_operation, tokenPath.First(), tokenPath.Last()));
             return new AST.ErrorExp(Library.Invalid);
         }
 
@@ -250,7 +250,7 @@ namespace Exolutio.Model.OCL.Compiler {
             }
             List<string> path = tokenPath.ToStringList();
             if (path.Count != 1) {
-                Errors.AddError(new CodeErrorItem("Unknow iterator operation.", tokenPath.First(), tokenPath.Last()));
+                Errors.AddError(new CodeErrorItem(CompilerErrors.OCLAst_ProcessIteratorCall_Unknow_iterator_operation, tokenPath.First(), tokenPath.Last()));
                 return new AST.ErrorExp(Library.Invalid);
             }
             string name = path[0];
@@ -262,7 +262,7 @@ namespace Exolutio.Model.OCL.Compiler {
                 return new AST.OperationCallExp(expr, false, collectionOperation, args);
             }
 
-            Errors.AddError(new CodeErrorItem(String.Format("Unknown collection operation - {0}",tokenPath[0]), tokenPath.First(), tokenPath.Last()));
+            Errors.AddError(new CodeErrorItem(String.Format(CompilerErrors.OCLAst_ProcessCollectionOperationCall_Unknown_collection_operation,tokenPath[0]), tokenPath.First(), tokenPath.Last()));
             return new AST.ErrorExp(Library.Invalid);
         }
 
@@ -278,7 +278,7 @@ namespace Exolutio.Model.OCL.Compiler {
                 //Variable
                 if (element is VariableDeclaration) {
                     if (isPre) {
-                        Errors.AddError(new ErrorItem("Modifikator @pre se nepojí s proměnou"));
+                        Errors.AddError(new ErrorItem(CompilerErrors.OCLAst_ResolvePath_Modifikator__pre_se_nepoji_s_promenou));
                     }
                     return new AST.VariableExp((VariableDeclaration)element);
                 }
@@ -302,7 +302,7 @@ namespace Exolutio.Model.OCL.Compiler {
                 // Chyby 36C
 
             }
-            Errors.AddError(new CodeErrorItem("Chyba nebo nepodporovane pravidlo", tokenPath.First(), tokenPath.Last()));
+            Errors.AddError(new CodeErrorItem(CompilerErrors.OCLAst_ResolvePath_Chyba_nebo_nepodporovane_pravidlo, tokenPath.First(), tokenPath.Last()));
             return new AST.ErrorExp(Library.Invalid);
         }
 
@@ -316,7 +316,7 @@ namespace Exolutio.Model.OCL.Compiler {
                 //35 d,f
                 ImplicitOperationData operation = Environment.LookupImplicitOperation(path[0], callArgs.Select(arg => arg.Type));
                 if (operation == null) {
-                    Errors.AddError(new ErrorItem(string.Format("Operace `{0}` nenalezena.", path[0])));
+                    Errors.AddError(new ErrorItem(string.Format(CompilerErrors.OCLAst_ResolveImplicitOperation_OperaceNenalezena, path[0])));
                     return new AST.ErrorExp(Library.Any);
                 }
                 //self problem
@@ -346,10 +346,10 @@ namespace Exolutio.Model.OCL.Compiler {
                 value = long.Parse(token.Text);
             }
             catch (FormatException) {
-                Errors.AddError(new CodeErrorItem("Bad format of integer.", token.Token, token.Token));
+                Errors.AddError(new CodeErrorItem(CompilerErrors.OCLAst_CreateIntegerLiteral_Bad_format_of_integer, token.Token, token.Token));
             }
             catch (OverflowException) {
-                Errors.AddError(new CodeErrorItem(String.Format("Number {0} is overflow.", token.Text), token.Token, token.Token));
+                Errors.AddError(new CodeErrorItem(String.Format(CompilerErrors.OCLAst_CreateIntegerLiteral_Number__0__is_overflow_, token.Text), token.Token, token.Token));
             }
 
             return new AST.IntegerLiteralExp(value, Library.Integer);
@@ -369,7 +369,7 @@ namespace Exolutio.Model.OCL.Compiler {
                 value = double.Parse(token.Text);
             }
             catch (FormatException) {
-                Errors.AddError(new CodeErrorItem("Bad format of real.", token.Token, token.Token));
+                Errors.AddError(new CodeErrorItem(CompilerErrors.OCLAst_CreateRealLiteral_Bad_format_of_real, token.Token, token.Token));
             }
             return new AST.RealLiteralExp(value, Library.Real);
 
@@ -442,14 +442,14 @@ namespace Exolutio.Model.OCL.Compiler {
             }
 
             if (kind == CollectionKind.Collection) {
-                Errors.AddError(new CodeErrorItem("‘Collection’ is an abstract class on the M1 level and has no M0 instances.", token.Token, token.Token));
+                Errors.AddError(new CodeErrorItem(CompilerErrors.OCLAst_CollectionLiteralExp_CollectionIsAbstract, token.Token, token.Token));
             }
 
             var collType = CreateCollectionType(kind, type);
             // check type
             foreach (var part in parts) {
                 if (part.Type.ConformsTo(collType.ElementType) == false) {
-                    Errors.AddError(new CodeErrorItem("Incorrects mishmash type in collection literal.", token.Token, token.Token));
+                    Errors.AddError(new CodeErrorItem(CompilerErrors.OCLAst_CollectionLiteralExp_Incorrects_mishmash_type_in_collection_literal, token.Token, token.Token));
                 }
             }
             return new AST.CollectionLiteralExp(collType, parts);
@@ -467,7 +467,7 @@ namespace Exolutio.Model.OCL.Compiler {
 
             foreach (var var in vars) {
                 if (parts.ContainsKey(var.Name)) {
-                    Errors.AddError(new CodeErrorItem(String.Format("Name {0} is used multipled.", var.Name), rootToken, rootToken));
+                    Errors.AddError(new CodeErrorItem(String.Format(CompilerErrors.OCLAst_CreateTupleLiteral_Name__0__is_used_multipled, var.Name), rootToken, rootToken));
                     continue;
                 }
 
@@ -482,7 +482,7 @@ namespace Exolutio.Model.OCL.Compiler {
                 }
 
                 if (expr.Type.ConformsTo(type) == false) {
-                    Errors.AddError(new ErrorItem("Type does not comform to declared type."));
+                    Errors.AddError(new ErrorItem(CompilerErrors.OCLAst_CreateTupleLiteral_Type_does_not_comform_to_declared_type));
                 }
 
                 //hodnota
@@ -508,12 +508,12 @@ namespace Exolutio.Model.OCL.Compiler {
             ModelElement foundType = Environment.LookupPathName(path);
             if (foundType == null) {
                 foundType = Library.Invalid;
-                Errors.AddError(new CodeErrorItem(String.Format("Path {0} do not exists.", path), tokenPath.First(), tokenPath.Last()));
+                Errors.AddError(new CodeErrorItem(String.Format(CompilerErrors.OCLAst_ResolveTypePathName_Path__0__do_not_exists, path), tokenPath.First(), tokenPath.Last()));
             }
 
             if (foundType is Classifier == false) {
                 foundType = Library.Invalid;
-                Errors.AddError(new CodeErrorItem(String.Format("Path {0} do not referres type.", path), tokenPath.First(), tokenPath.Last()));
+                Errors.AddError(new CodeErrorItem(String.Format(CompilerErrors.OCLAst_ResolveTypePathName_Path__0__do_not_referres_type, path), tokenPath.First(), tokenPath.Last()));
             }
 
             return ((Classifier)foundType);
@@ -534,7 +534,7 @@ namespace Exolutio.Model.OCL.Compiler {
             TupleType tuple = new TupleType(TypesTable);
             foreach (var variable in variables) {
                 if (tuple.TupleParts.Keys.Contains(variable.Name)) {// Kontrola nad ramec specifikace
-                    Errors.AddError(new CodeErrorItem(String.Format("Name {0} is used multipled.", variable.Name), rootToken, rootToken));
+                    Errors.AddError(new CodeErrorItem(String.Format(CompilerErrors.OCLAst_CreateTupleLiteral_Name__0__is_used_multipled, variable.Name), rootToken, rootToken));
                     continue;
                 }
                 Classifier propertyType = variable.Type;
@@ -557,7 +557,7 @@ namespace Exolutio.Model.OCL.Compiler {
             Classifier finalType = initExpr.Type;
             if (type != null) {
                 if (initExpr.Type.ConformsTo(type) == false) {
-                    Errors.AddError(new ErrorItem("Init value do not conform to variable type."));
+                    Errors.AddError(new ErrorItem(CompilerErrors.OCLAst_ProcessAccDef_Init_value_do_not_conform_to_variable_type));
                 }
                 finalType = type;
             }
@@ -613,14 +613,14 @@ namespace Exolutio.Model.OCL.Compiler {
             }
 
             if (Environment.Lookup(varBag.Name) != null) {
-                Errors.AddError(new CodeErrorItem("The variable name must be unique in the current scope", letToken, letToken));
+                Errors.AddError(new CodeErrorItem(CompilerErrors.OCLAst_LetDecl_The_variable_name_must_be_unique_in_the_current_scope, letToken, letToken));
                 return null;
             }
 
             Classifier type = varBag.Type ?? varBag.Expression.Type;
 
             if (varBag.Expression.Type.ConformsTo(varBag.Type) == false) {
-                Errors.AddError(new CodeErrorItem("Variable type does not conform to variable expression type.", letToken, letToken));
+                Errors.AddError(new CodeErrorItem(CompilerErrors.OCLAst_LetDecl_Variable_type_does_not_conform_to_variable_expression_type, letToken, letToken));
             }
 
             VariableDeclaration var = new VariableDeclaration(varBag.Name, varBag.Type, varBag.Expression);
@@ -646,7 +646,7 @@ namespace Exolutio.Model.OCL.Compiler {
             }
 
             if (condition.Type.ConformsTo(Library.Boolean)) {
-                Errors.AddError(new CodeErrorItem("Condition of IF must conform to bool.", ifTok, ifTok));
+                Errors.AddError(new CodeErrorItem(CompilerErrors.OCLAst_CreateIf_Condition_of_IF_must_conform_to_bool, ifTok, ifTok));
             }
 
             EnvironmentStack.Pop();
@@ -661,7 +661,7 @@ namespace Exolutio.Model.OCL.Compiler {
             if (objs.Any(o => o == null)) {
                 System.Diagnostics.StackTrace st = new System.Diagnostics.StackTrace();
                 var callingMethod = st.GetFrame(1).GetMethod();
-                Errors.AddError(new ErrorItem(String.Format("Compiler panic in method {0}.", callingMethod.Name)));
+                Errors.AddError(new ErrorItem(String.Format(CompilerErrors.OCLAst_TestNull_Compiler_panic_in_method__0__, callingMethod.Name)));
                 return true;
             }
             return false;
