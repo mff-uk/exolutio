@@ -199,7 +199,7 @@ namespace Exolutio.Model.OCL.Compiler {
             }
 
             if (expr.Type is CollectionType == false) {
-                Errors.AddError( new ErrorItem("Compiler don't support iterator operations on not-collection type."));
+                Errors.AddError( new ErrorItem(CompilerErrors.OCLAst_ProcessIteratorCall_Compiler_don_t_support_iterator_operations_on_not_collection_type));
                 return new AST.ErrorExp(Library.Invalid);
             }
 
