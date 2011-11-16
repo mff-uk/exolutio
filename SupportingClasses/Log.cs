@@ -5,19 +5,24 @@ using Exolutio.SupportingClasses.Annotations;
 
 namespace Exolutio.SupportingClasses
 {
+    public class Log : Log<object>
+    {
+        
+    }
+
 	/// <summary>
 	/// Log class 
 	/// </summary>
-	public class Log : List<LogMessage>
+    public class Log<TMessageTag> : List<LogMessage<TMessageTag>>
 	{
 		private int errors = 0;
 
 		private int warnings = 0;
 
-	    public void AddLogMessage(LogMessage logMessage)
+        public void AddLogMessage(LogMessage<TMessageTag> logMessage)
 	    {
 	        this.Add(logMessage);
-	        if (logMessage.Severity == LogMessage.ESeverity.Error)
+            if (logMessage.Severity == ELogMessageSeverity.Error)
 	        {
 	            errors++;
 	        }
@@ -31,9 +36,9 @@ namespace Exolutio.SupportingClasses
 		/// Adds error message.
 		/// </summary>
 		/// <param name="text">The message text.</param>
-		public LogMessage AddError(string text)
+        public LogMessage<TMessageTag> AddError(string text)
 		{
-		    LogMessage logMessage = new LogMessage { MessageText = text, Severity = LogMessage.ESeverity.Error, Number = errors};
+            LogMessage<TMessageTag> logMessage = new LogMessage<TMessageTag> { MessageText = text, Severity = ELogMessageSeverity.Error, Number = errors };
 		    Add(logMessage);
 			errors++;
 		    return logMessage;
@@ -43,9 +48,9 @@ namespace Exolutio.SupportingClasses
 		/// Adds warning message.
 		/// </summary>
 		/// <param name="text">The message text.</param>
-		public LogMessage AddWarning(string text)
+        public LogMessage<TMessageTag> AddWarning(string text)
 		{
-		    LogMessage logMessage = new LogMessage { MessageText = text, Severity = LogMessage.ESeverity.Warning, Number = warnings};
+            LogMessage<TMessageTag> logMessage = new LogMessage<TMessageTag> { MessageText = text, Severity = ELogMessageSeverity.Warning, Number = warnings };
 		    Add(logMessage);
 			warnings++;
 		    return logMessage;
@@ -57,7 +62,7 @@ namespace Exolutio.SupportingClasses
         /// <param name="format">The format string.</param>
         /// <param name="args">The format string arguments.</param>
         [StringFormatMethod("format")]
-        public LogMessage AddWarningFormat(string format, params object[] args)
+        public LogMessage<TMessageTag> AddWarningFormat(string format, params object[] args)
         {
             return AddWarning(string.Format(format, args));
         }
@@ -68,7 +73,7 @@ namespace Exolutio.SupportingClasses
         /// <param name="format">The format string.</param>
         /// <param name="args">The format string arguments.</param>
         [StringFormatMethod("format")]
-        public LogMessage AddErrorFormat(string format, params object[] args)
+        public LogMessage<TMessageTag> AddErrorFormat(string format, params object[] args)
         {
             return AddError(string.Format(format, args));
         }
@@ -83,14 +88,19 @@ namespace Exolutio.SupportingClasses
 			warnings = 0;
 		}
 
-	    public IEnumerable<LogMessage> Errors
+        public IEnumerable<LogMessage<TMessageTag>> Errors
 	    {
-            get { return this.Where(m => m.Severity == LogMessage.ESeverity.Error); }
+            get { return this.Where(m => m.Severity == ELogMessageSeverity.Error); }
 	    }
 
-        public IEnumerable<LogMessage> Warnings
+        public IEnumerable<LogMessage<TMessageTag>> Warnings
         {
-            get { return this.Where(m => m.Severity == LogMessage.ESeverity.Warning); }
+            get { return this.Where(m => m.Severity == ELogMessageSeverity.Warning); }
         }
-	}
+
+	    public IEnumerable<ILogMessage>  AllMessages
+	    {
+            get { return this; }
+	    }
+    }
 }

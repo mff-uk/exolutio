@@ -1,14 +1,58 @@
 namespace Exolutio.SupportingClasses
 {
-	/// <summary>
+    public class LogMessage : LogMessage<object>
+    {
+        
+    }
+
+    public interface ILogMessage
+    {
+        /// <summary>
+        /// Number of the message in the log.
+        /// </summary>
+        int Number { get; set; }
+
+        /// <summary>
+        /// Severity of the message
+        /// </summary>
+        /// <value><see cref="ELogMessageSeverity"/></value>
+        ELogMessageSeverity Severity { get; set; }
+
+        /// <summary>
+        /// Message text
+        /// </summary>
+        string MessageText { get; set; }
+
+        /// <summary>
+        /// Line on which the error occurred
+        /// </summary>
+        int Line { get; set; }
+
+        /// <summary>
+        /// Column in which the error occurred
+        /// </summary>
+        int Column { get; set; }
+
+        /// <summary>
+        /// Returns image for the message. 
+        /// The image is selected by the <see cref="ImageGetter"/>
+        /// function. If no image getter function is provided, 
+        /// <c>null</c> is returned. 
+        /// </summary>
+        object Image { get; }
+
+        ILogMessage RelatedMessage { get; set; }
+    }
+
+    /// <summary>
 	/// One log entry 
 	/// </summary>
-	public class LogMessage
-	{
+	public class LogMessage<TTag> : ILogMessage
+    {
 		/// <summary>
 		/// Defines handler that returns image for a log message. 
 		/// </summary>
-		public delegate object ImageGetterHandler(LogMessage message);
+        public delegate object ImageGetterHandler(ILogMessage message);
 
 		/// <summary>
 		/// Fill this property with a function, that returns proper 
@@ -17,22 +61,7 @@ namespace Exolutio.SupportingClasses
 		/// </summary>
 		public static ImageGetterHandler ImageGetter;
 
-		/// <summary>
-		/// Severity of the message
-		/// </summary>
-		public enum ESeverity
-		{
-			/// <summary>
-			/// Warning message
-			/// </summary>
-			Warning,
-			/// <summary>
-			/// Error message, contains severe errors
-			/// </summary>
-			Error
-		}
-
-		/// <summary>
+	    /// <summary>
 		/// Number of the message in the log.
 		/// </summary>
 		public int Number { get; set; }
@@ -40,8 +69,8 @@ namespace Exolutio.SupportingClasses
 		/// <summary>
 		/// Severity of the message
 		/// </summary>
-		/// <value><see cref="ESeverity"/></value>
-		public ESeverity Severity { get; set; }
+		/// <value><see cref="ELogMessageSeverity"/></value>
+		public ELogMessageSeverity Severity { get; set; }
 
 		/// <summary>
 		/// Message text
@@ -77,6 +106,29 @@ namespace Exolutio.SupportingClasses
 			}
 		}
 
-        public LogMessage RelatedMessage { get; set; }
+        public LogMessage<TTag> RelatedMessage { get; set; }
+
+        ILogMessage ILogMessage.RelatedMessage
+        {
+            get { return RelatedMessage; }
+            set { RelatedMessage = (LogMessage<TTag>) value; }
+        }
+
+        public TTag Tag { get; set; }
 	}
+
+    /// <summary>
+    /// Severity of the message
+    /// </summary>
+    public enum ELogMessageSeverity
+    {
+        /// <summary>
+        /// Warning message
+        /// </summary>
+        Warning,
+        /// <summary>
+        /// Error message, contains severe errors
+        /// </summary>
+        Error
+    }
 }

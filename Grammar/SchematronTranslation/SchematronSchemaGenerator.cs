@@ -2,6 +2,7 @@
 using System.Xml.Linq;
 using Exolutio.Model.OCL;
 using Exolutio.Model.OCL.AST;
+using Exolutio.Model.OCL.Bridge;
 using Exolutio.SupportingClasses;
 
 namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
@@ -47,7 +48,13 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             {
                 foreach (ClassifierConstraint constraint in compilerResult.Constraints.Classifiers)
                 {
-                    
+                    PSMAssociationMember contextNode = (PSMAssociationMember)constraint.Context.Tag;
+                    XElement ruleElement = patternElement.SchematronRule(contextNode.XPath);
+                    foreach (OclExpression invariant in constraint.Invariants)
+                    {
+                        string xpath = TranslateInvariantToXPath(oclScript, constraint, compilerResult.Bridge, invariant);
+                        XElement assertElement = ruleElement.SchematronAssert(xpath);
+                    }
                 }
             }
             else
@@ -55,6 +62,18 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
                 XComment comment = new XComment(string.Format("OCL script contains errors and thus can not be translated"));
                 patternElement.Add(comment);
             }
+        }
+
+        private string TranslateInvariantToXPath(OCLScript oclScript, ClassifierConstraint constraint, IBridgeToOCL bridge, OclExpression invariant)
+        {
+            PSMOCLtoXPathConverter xpathConverter = new PSMOCLtoXPathConverter();
+            xpathConverter.OCLScript = oclScript;
+            xpathConverter.Bridge = (PSMBridge) bridge;
+            xpathConverter.Constraint = constraint;
+            xpathConverter.TranslateInvariant(invariant);
+
+            return invariant.ToString();
+
         }
     }
 }

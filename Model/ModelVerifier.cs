@@ -25,7 +25,7 @@ namespace Exolutio.Model
         {
             LogMessage m = new LogMessage()
                                {
-                                   Severity = LogMessage.ESeverity.Error,
+                                   Severity = ELogMessageSeverity.Error,
                                    MessageText = string.Format("PSM schema '{0}' is not normalized", psmSchema)
                                };
             messageDict[psmSchema] = m;
@@ -55,7 +55,7 @@ namespace Exolutio.Model
                     && psmAssociationMember != psmSchema.PSMSchemaClass 
                     && !((PSMClass)psmAssociationMember).HasStructuralRepresentatives)
                 {
-                    LogMessage message = Log.AddWarningFormat("Root classes other than schema class must be referenced by structural representatives. Violated by {0}.", psmAssociationMember);
+                    ILogMessage message = Log.AddWarningFormat("Root classes other than schema class must be referenced by structural representatives. Violated by {0}.", psmAssociationMember);
                     if (messageDict.ContainsKey(psmSchema))
                     {
                         message.RelatedMessage = messageDict[psmSchema];
@@ -76,7 +76,7 @@ namespace Exolutio.Model
             {
                 if (psmAssociationMember is PSMContentModel)
                 {
-                    LogMessage message = Log.AddWarningFormat("Content models are not allowed as roots. Violated by {0}.", psmAssociationMember);
+                    ILogMessage message = Log.AddWarningFormat("Content models are not allowed as roots. Violated by {0}.", psmAssociationMember);
                     if (messageDict.ContainsKey(psmSchema))
                     {
                         message.RelatedMessage = messageDict[psmSchema];
@@ -97,7 +97,7 @@ namespace Exolutio.Model
             {
                 if (psmAssociation.Child is PSMContentModel && psmAssociation.IsNamed)
                 {
-                    LogMessage message = Log.AddWarningFormat("Parent associations of content models must not have a name. Violated by {0}.", psmAssociation);
+                    ILogMessage message = Log.AddWarningFormat("Parent associations of content models must not have a name. Violated by {0}.", psmAssociation);
                     if (messageDict.ContainsKey(psmSchema))
                     {
                         message.RelatedMessage = messageDict[psmSchema];
@@ -118,7 +118,7 @@ namespace Exolutio.Model
             {
                 if (!(psmAssociationMember is PSMClass))
                 {
-                    LogMessage message = Log.AddWarningFormat("Child nodes of a schema class must be classes. Violated by {0}.", psmAssociationMember);
+                    ILogMessage message = Log.AddWarningFormat("Child nodes of a schema class must be classes. Violated by {0}.", psmAssociationMember);
                     if (messageDict.ContainsKey(psmSchema))
                     {
                         message.RelatedMessage = messageDict[psmSchema];
@@ -139,7 +139,7 @@ namespace Exolutio.Model
             {
                 if (!(psmClass.ParentAssociation.IsNamed))
                 {
-                    LogMessage message = Log.AddWarningFormat("Associations in the content of a schema class must have a name. Violated by {0}.", psmClass.ParentAssociation);
+                    ILogMessage message = Log.AddWarningFormat("Associations in the content of a schema class must have a name. Violated by {0}.", psmClass.ParentAssociation);
                     if (messageDict.ContainsKey(psmSchema))
                     {
                         message.RelatedMessage = messageDict[psmSchema];
@@ -160,7 +160,7 @@ namespace Exolutio.Model
             {
                 if (!(psmClass.ParentAssociation.Lower == 1 && psmClass.ParentAssociation.Upper == 1))
                 {
-                    LogMessage message = Log.AddWarningFormat("Associations in the content of a schema class must have cardinality 1..1. Violated by {0}.", psmClass.ParentAssociation);
+                    ILogMessage message = Log.AddWarningFormat("Associations in the content of a schema class must have cardinality 1..1. Violated by {0}.", psmClass.ParentAssociation);
                     if (messageDict.ContainsKey(psmSchema))
                     {
                         message.RelatedMessage = messageDict[psmSchema];

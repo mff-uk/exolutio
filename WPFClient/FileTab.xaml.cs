@@ -52,7 +52,7 @@ namespace Exolutio.WPFClient
 
             if (log != null)
             {
-                LogMessages = log;
+                LogMessages = log.AllMessages.ToList(); 
             }
 
             ValidationSchema = validationSchema;
@@ -68,7 +68,7 @@ namespace Exolutio.WPFClient
 
             if (log != null)
             {
-                LogMessages = log;
+                LogMessages = log.AllMessages.ToList();
             }
 
             ValidationSchema = validationSchema;
@@ -132,17 +132,17 @@ namespace Exolutio.WPFClient
 
         #region log
 
-        private static object ImageGetter(LogMessage message)
+        private static object ImageGetter(ILogMessage message)
         {
-            if (message.Severity == LogMessage.ESeverity.Error)
+            if (message.Severity == ELogMessageSeverity.Error)
                 return ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.error_button);
             else
                 return ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.Warning);
         }
 
-        private IList<LogMessage> logMessages;
+        private IList<ILogMessage> logMessages;
 
-        public IList<LogMessage> LogMessages
+        public IList<ILogMessage> LogMessages
         {
             get
             {
@@ -152,9 +152,9 @@ namespace Exolutio.WPFClient
             {
                 logMessages = value;
                 LogMessage.ImageGetter = ImageGetter;
-                gridLog.ItemsSource = logMessages.OrderBy(message => message.Severity == LogMessage.ESeverity.Error ? 0 : 1);
-                int countw = logMessages.Count(e => e.Severity == LogMessage.ESeverity.Warning);
-                int counte = logMessages.Count(e => e.Severity == LogMessage.ESeverity.Error);
+                gridLog.ItemsSource = logMessages.OrderBy(message => message.Severity == ELogMessageSeverity.Error ? 0 : 1);
+                int countw = logMessages.Count(e => e.Severity == ELogMessageSeverity.Warning);
+                int counte = logMessages.Count(e => e.Severity == ELogMessageSeverity.Error);
                 if (countw > 0 && counte > 0)
                     expander1.Header = String.Format("Task completed with {0} errors and {1} warnings", counte, countw);
                 else if (countw > 0)
