@@ -60,6 +60,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="RegularExpression.cs" />
+    <Compile Include="SchematronTranslation\PSMOCLtoXPathConverter.cs" />
     <Compile Include="SchematronTranslation\SchematronSchemaGenerator.cs" />
     <Compile Include="SchematronTranslation\XDocumentSchematronExtensions.cs" />
     <Compile Include="Terminal.cs" />
