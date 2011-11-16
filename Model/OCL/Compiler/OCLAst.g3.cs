@@ -198,6 +198,11 @@ namespace Exolutio.Model.OCL.Compiler {
                 return new AST.ErrorExp(Library.Invalid);
             }
 
+            if (expr.Type is CollectionType == false) {
+                Errors.AddError( new ErrorItem("Compiler don't support iterator operations on not-collection type."));
+                return new AST.ErrorExp(Library.Invalid);
+            }
+
             List<string> path = tokenPath.ToStringList();
             if (path.Count != 1) {
                 Errors.AddError(new CodeErrorItem("Unknow iterator operation.", tokenPath.First(), tokenPath.Last()));
