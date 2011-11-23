@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace Exolutio.SupportingClasses.Annotations
 {
@@ -61,7 +62,7 @@ namespace Exolutio.SupportingClasses.Annotations
         /// Initializes new instance of StringFormatMethodAttribute
         /// </summary>
         /// <param name="formatParameterName">Specifies which parameter of an annotated method should be treated as format-string</param>
-        public StringFormatMethodAttribute(string formatParameterName)
+        public StringFormatMethodAttribute([Localizable(false)]string formatParameterName)
         {
             myFormatParameterName = formatParameterName;
         }

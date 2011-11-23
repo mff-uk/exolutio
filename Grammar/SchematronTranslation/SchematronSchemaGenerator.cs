@@ -16,12 +16,12 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             get { return psmSchema; }
         }
 
-        public Log Log { get; private set; }
+        public Log<OclExpression> Log { get; private set; }
 
         public void Initialize(PSMSchema psmSchema)
         {
             this.psmSchema = psmSchema;
-            Log = new Log();
+            Log = new Log<OclExpression>();
         }
 
         public XDocument GetSchematronSchema()
@@ -71,6 +71,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             xpathConverter.Bridge = (PSMBridge) bridge;
             xpathConverter.Constraint = constraint;
             xpathConverter.TranslateInvariant(invariant);
+            xpathConverter.Log = Log;
 
             return invariant.ToString();
 

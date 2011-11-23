@@ -185,4 +185,7 @@
   <data name="OCLAst_ProcessIteratorCall_Compiler_don_t_support_iterator_operations_on_not_collection_type">
     <value xml:space="preserve">Compiler don't support iterator operations on not-collection type.</value>
   </data>
+  <data name="VariableAlreadyExisted">
+    <value xml:space="preserve">Variable name `{0}` has already existed.</value>
+  </data>
 </root>

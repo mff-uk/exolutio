@@ -64,7 +64,7 @@ namespace Exolutio.View
         public Dictionary<string, Tuple<string, PublicCommandAttribute.EPulicCommandCategory>> 
             KnownOperations { get; set; }
 
-        public Log DisplayedLog { get; set; }
+        public ILog DisplayedLog { get; set; }
 
         public void ExecutedCommand(CommandBase command, bool ispartofmacro, CommandBase macrocommand, bool isUndo, bool isRedo)
         {

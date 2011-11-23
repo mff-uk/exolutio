@@ -83,7 +83,7 @@ namespace Exolutio.Model.OCL {
         /// <returns></returns>
         public Environment AddElement(string name, ModelElement type,VariableDeclaration source, bool impl) {
             if (LookupLocal(name) != null) {
-                throw new Exception(string.Format("Variable name `{0}` has already existed.", name));
+                throw new Exception(string.Format(CompilerErrors.VariableAlreadyExisted, name));
             }
 
             Environment env = new AddElementEnvironment(this,name, type,source, impl);

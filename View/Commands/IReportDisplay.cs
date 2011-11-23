@@ -5,7 +5,7 @@ namespace Exolutio.View.Commands
 {
     public interface IReportDisplay
     {
-        Log DisplayedLog { get; set; }
+        ILog DisplayedLog { get; set; }
         CommandReportBase DisplayedReport { get; set; }
         void Update();
     }

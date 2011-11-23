@@ -35,9 +35,6 @@ namespace Exolutio.SupportingClasses
 
         /// <summary>
         /// Returns image for the message. 
-        /// The image is selected by the <see cref="ImageGetter"/>
-        /// function. If no image getter function is provided, 
-        /// <c>null</c> is returned. 
         /// </summary>
         object Image { get; }
 

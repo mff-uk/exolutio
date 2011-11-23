@@ -181,7 +181,7 @@ namespace Exolutio.Model.OCL.ConstraintConversion
 
         public static PIMPath BuildPIMPath(PropertyCallExp node)
         {
-            PIMPath n = new PIMPath();
+            PIMPath path = new PIMPath();
 
             OclExpression s;
             if (node.ReferredProperty.Tag is PIMAssociationEnd)
@@ -193,7 +193,7 @@ namespace Exolutio.Model.OCL.ConstraintConversion
                 PIMAttribute a = (PIMAttribute) node.ReferredProperty.Tag;
 
                 PIMPathAttributeStep pathAttributeStep = new PIMPathAttributeStep {Attribute = a};
-                n.Steps.Add(pathAttributeStep);
+                path.Steps.Add(pathAttributeStep);
                 s = node.Source;
             }
             
@@ -201,15 +201,14 @@ namespace Exolutio.Model.OCL.ConstraintConversion
             {
                 PIMPathAssociationStep step = new PIMPathAssociationStep();
                 step.AssociationEnd = (PIMAssociationEnd) ((PropertyCallExp)s).ReferredProperty.Tag;
-                n.Steps.Insert(0, step);
+                path.Steps.Insert(0, step);
                 s = ((PropertyCallExp)s).Source;
             }
-            // n is variable exp
+
             PIMPathVariableStep pathVariableStep = new PIMPathVariableStep();
             pathVariableStep.VariableExp = (VariableExp)s;
-            n.Steps.Insert(0, pathVariableStep);
-            string name = n.ToString();
-            return n;
+            path.Steps.Insert(0, pathVariableStep);
+            return path;
         }
 
     }

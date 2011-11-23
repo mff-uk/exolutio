@@ -43,7 +43,7 @@ namespace Exolutio.WPFClient
 
         public PSMSchema ValidationSchema { get; set; }
 
-        public void DisplayFile(EDisplayedFileType displayedFileType, Stream fileContents, string fileName = null, Log log = null, PSMSchema validationSchema = null)
+        public void DisplayFile(EDisplayedFileType displayedFileType, Stream fileContents, string fileName = null, ILog log = null, PSMSchema validationSchema = null)
         {
             fileView.DisplayFile(displayedFileType, fileContents);
             
@@ -52,14 +52,14 @@ namespace Exolutio.WPFClient
 
             if (log != null)
             {
-                LogMessages = log.AllMessages.ToList(); 
+                LogMessages = log; 
             }
 
             ValidationSchema = validationSchema;
             ShowHideRelevantButtons();
         }
 
-        public void DisplayFile(EDisplayedFileType displayedFileType, string fileContents, string fileName = null, Log log = null, PSMSchema validationSchema = null)
+        public void DisplayFile(EDisplayedFileType displayedFileType, string fileContents, string fileName = null, ILog log = null, PSMSchema validationSchema = null)
         {
             fileView.DisplayFile(displayedFileType, fileContents);
             
@@ -68,7 +68,7 @@ namespace Exolutio.WPFClient
 
             if (log != null)
             {
-                LogMessages = log.AllMessages.ToList();
+                LogMessages = log;
             }
 
             ValidationSchema = validationSchema;
@@ -140,9 +140,9 @@ namespace Exolutio.WPFClient
                 return ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.Warning);
         }
 
-        private IList<ILogMessage> logMessages;
+        private ILog logMessages;
 
-        public IList<ILogMessage> LogMessages
+        public ILog LogMessages
         {
             get
             {

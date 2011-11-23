@@ -324,7 +324,7 @@ namespace Exolutio.WPFClient
             }
         }
 
-        public void DisplayFile(XDocument xmlDocument, EDisplayedFileType fileType, string fileName = null, Log log = null, PSMSchema validationSchema = null, FilePresenterButton[] additionalActions = null)
+        public void DisplayFile(XDocument xmlDocument, EDisplayedFileType fileType, string fileName = null, ILog log = null, PSMSchema validationSchema = null, FilePresenterButton[] additionalActions = null)
         {
             FileTab f = new FileTab();
             f.DisplayFile(fileType, xmlDocument.ToString(), fileName, log, validationSchema);

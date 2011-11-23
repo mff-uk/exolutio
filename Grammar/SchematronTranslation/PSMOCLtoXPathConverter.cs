@@ -5,6 +5,8 @@ using System.Xml.Linq;
 using Exolutio.Model.OCL;
 using Exolutio.Model.OCL.AST;
 using Exolutio.Model.OCL.Bridge;
+using Exolutio.Model.OCL.ConstraintConversion;
+using Exolutio.Model.OCL.Types;
 using Exolutio.SupportingClasses;
 
 namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
@@ -20,12 +22,8 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
         public PSMBridge Bridge { get; set; }
 
         public ClassifierConstraint Constraint { get; set; }
-
-        private readonly Log log = new Log();
-        public Log Log
-        {
-            get { return log; }
-        }
+        
+        public Log<OclExpression> Log { get; set; }
 
         private LoopExp GetLoopExpForVariable(VariableExp v)
         {
@@ -60,21 +58,26 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 
         public string Visit(PropertyCallExp node)
         {
-            PSMAttribute property = (PSMAttribute) node.ReferredProperty.Tag;
-            return property.XPath;
+            if (!(node.ReferredProperty.Tag is PSMAttribute))
+            {
+                Log.AddWarningTaggedFormat(XPathTranslationLogMessages.UNSAFE_PROPERTY_CALL_EXP, node);
+            }
+            PSMPath psmPath = PSMPathBuilder.BuildPSMPath(node);
+            string xpath = psmPath.ToXPath();
+            return xpath;
         }
 
         public string Visit(VariableExp node)
         {
-            if (loopStacks.IsEmpty() && node.referredVariable == Constraint.Self)
+            if (node.Type is Class)
             {
-                Log.AddWarning("self variable ");
-                return ".";
+                Log.AddWarningTaggedFormat(XPathTranslationLogMessages.UNSAFE_VARIABLE_EXP, 
+                    node, node.referredVariable.Name);
             }
-            else
-            {
-                return string.Format("${0}", node.referredVariable.Name);
-            }
+
+            PSMPath psmPath = PSMPathBuilder.BuildPSMPath(node);
+            string xpath = psmPath.ToXPath();
+            return xpath;
         }
 
         #region not supported yet 
@@ -165,7 +168,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
         public void Clear()
         {
             loopStacks.Clear();
-            log.Clear();
+            Log.Clear();
         }
 
         public string TranslateInvariant(OclExpression invariant)

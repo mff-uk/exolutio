@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Exolutio.Model.OCL.AST;
+using Exolutio.Model.OCL.Bridge;
 using Exolutio.Model.OCL.Types;
 using Exolutio.Model.PSM;
 using Exolutio.SupportingClasses;
@@ -11,6 +12,26 @@ namespace Exolutio.Model.OCL.ConstraintConversion
 {
     public class PSMPath : ICloneable
     {
+        public class PathContext
+        {
+            private readonly List<LoopExp> loopStack = new List<LoopExp>();
+            public List<LoopExp> LoopStack
+            {
+                get { return loopStack; }
+            }
+
+            public PSMBridge Bridge { get; set; }
+
+            public ClassifierConstraint ClassifierConstraint { get; set; }
+        }
+
+        public PathContext Context { get; private set; }
+
+        public PSMPath()
+        {
+            Context = new PathContext();
+        }
+
         private readonly List<PSMPathStep> steps = new List<PSMPathStep>();
 
         public VariableExp StartingVariable
@@ -59,23 +80,42 @@ namespace Exolutio.Model.OCL.ConstraintConversion
         public object Clone()
         {
             PSMPath clone = new PSMPath();
+            clone.Context = Context;
             foreach (PSMPathStep navigationStep in Steps)
             {
-                PSMPathStep stepClone = (PSMPathStep)navigationStep.Clone();
+                PSMPathStep stepClone = (PSMPathStep)navigationStep.Clone(clone);
                 clone.Steps.Add(stepClone);
             }
             return clone;
         }
+
+        public string ToXPath()
+        {
+            return Steps.Select(s => s.ToXPath()).ConcatWithSeparator(String.Empty);
+        }
     }
 
 
-    public abstract class PSMPathStep : ICloneable
+    public abstract class PSMPathStep
     {
-        public abstract object Clone();
+        public abstract object Clone(PSMPath newContainingPath);
+
+        public abstract string ToXPath();
+
+        public PSMPath Path { get; private set; }
+
+        protected PSMPathStep(PSMPath path)
+        {
+            Path = path;
+        }
     }
 
     class PSMPathVariableStep : PSMPathStep
     {
+        public PSMPathVariableStep(PSMPath path) : base(path)
+        {
+        }
+
         public PSMClass VariableType
         {
             get { return (PSMClass)Variable.PropertyType.Tag; }
@@ -91,14 +131,37 @@ namespace Exolutio.Model.OCL.ConstraintConversion
             return Variable.Name;
         }
 
-        public override object Clone()
+        public override object Clone(PSMPath newContainingPath)
         {
-            return new PSMPathVariableStep { VariableExp = this.VariableExp };
+            return new PSMPathVariableStep(newContainingPath) { VariableExp = this.VariableExp };
+        }
+
+        public override string ToXPath()
+        {
+            if (Variable == Path.Context.ClassifierConstraint.Self)
+            {
+                if (Path.Context.LoopStack.IsEmpty())
+                {
+                    return @".";
+                }
+                else
+                {
+                    return @"$self";
+                }
+            }
+            else
+            {
+                return string.Format(@"${0}", Variable.Name);
+            }
         }
     }
 
     class PSMPathAttributeStep : PSMPathStep
     {
+        public PSMPathAttributeStep(PSMPath path) : base(path)
+        {
+        }
+
         public PSMAttribute Attribute { get; set; }
         public PSMClass Class { get { return Attribute.PSMClass; } }
         public override string ToString()
@@ -106,14 +169,30 @@ namespace Exolutio.Model.OCL.ConstraintConversion
             return Attribute.Name;
         }
 
-        public override object Clone()
+        public override object Clone(PSMPath newContainingPath)
         {
-            return new PSMPathAttributeStep { Attribute = this.Attribute };
+            return new PSMPathAttributeStep(newContainingPath) { Attribute = this.Attribute };
+        }
+
+        public override string ToXPath()
+        {
+            if (Attribute.Element)
+            {
+                return string.Format(@"/{0}", Attribute.Name);
+            }
+            else
+            {
+                return string.Format(@"/@{0}", Attribute.Name);
+            }
         }
     }
 
     public class PSMPathAssociationStep : PSMPathStep
     {
+        public PSMPathAssociationStep(PSMPath path) : base(path)
+        {
+        }
+
         public PSMAssociationMember From { get; set; }
         public PSMAssociation Association { get; set; }
         public PSMAssociationMember To { get; set; }
@@ -124,14 +203,26 @@ namespace Exolutio.Model.OCL.ConstraintConversion
             if (!string.IsNullOrEmpty(To.Name))
                 return To.Name;
             if (From.ParentAssociation == Association)
-                return "parent";
+                return @"parent";
             else 
                 return string.Format(@"child_{0}", Association.Parent.ChildPSMAssociations.IndexOf(Association));
         }
 
-        public override object Clone()
+        public override object Clone(PSMPath newContainingPath)
         {
-            return new PSMPathAssociationStep { Association = this.Association, From = this.From, To = this.To };
+            return new PSMPathAssociationStep(newContainingPath) { Association = this.Association, From = this.From, To = this.To };
+        }
+
+        public override string ToXPath()
+        {
+            if (Association.IsNamed)
+            {
+                return string.Format(@"/{0}", Association.Name);
+            }
+            else
+            {
+                return string.Empty;
+            }
         }
     }
 
@@ -145,8 +236,43 @@ namespace Exolutio.Model.OCL.ConstraintConversion
 
         public static PSMPath BuildPSMPath(PropertyCallExp node)
         {
-            throw new NotImplementedException();
+            PSMPath path = new PSMPath();
+
+            OclExpression s;
+            if (node.ReferredProperty.Tag is PSMAssociation)
+            {
+                s = node;
+            }
+            else
+            {
+                PSMAttribute a = (PSMAttribute)node.ReferredProperty.Tag;
+
+                PSMPathAttributeStep pathAttributeStep = new PSMPathAttributeStep(path) { Attribute = a };
+                path.Steps.Add(pathAttributeStep);
+                s = node.Source;
+            }
+
+            while (!(s is VariableExp))
+            {
+                PSMPathAssociationStep step = new PSMPathAssociationStep(path);
+                step.Association = (PSMAssociation)((PropertyCallExp)s).ReferredProperty.Tag;
+                step.From = null;
+                step.To = null;
+                path.Steps.Insert(0, step);
+                s = ((PropertyCallExp)s).Source;
+            }
+
+            PSMPathVariableStep pathVariableStep = new PSMPathVariableStep(path) { VariableExp = (VariableExp)s };
+            path.Steps.Insert(0, pathVariableStep);
+            return path;
         }
 
+        public static PSMPath BuildPSMPath(VariableExp node)
+        {
+            PSMPath path = new PSMPath();
+            PSMPathVariableStep pathVariableStep = new PSMPathVariableStep(path) { VariableExp = node };
+            path.Steps.Insert(0, pathVariableStep);
+            return path;
+        }
     }
 }

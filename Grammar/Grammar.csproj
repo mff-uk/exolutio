@@ -63,6 +63,11 @@
     <Compile Include="SchematronTranslation\PSMOCLtoXPathConverter.cs" />
     <Compile Include="SchematronTranslation\SchematronSchemaGenerator.cs" />
     <Compile Include="SchematronTranslation\XDocumentSchematronExtensions.cs" />
+    <Compile Include="SchematronTranslation\XPathTranslationLogMessages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>XPathTranslationLogMessages.resx</DependentUpon>
+    </Compile>
     <Compile Include="Terminal.cs" />
     <Compile Include="XSDTranslation\NamingSupport.cs" />
     <Compile Include="XSDTranslation\XDocumentXSDExtensions.cs" />
@@ -82,6 +87,10 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SchematronTranslation\XPathTranslationLogMessages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>XPathTranslationLogMessages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

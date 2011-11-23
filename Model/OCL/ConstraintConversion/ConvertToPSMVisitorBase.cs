@@ -136,7 +136,7 @@ namespace Exolutio.Model.OCL.ConstraintConversion
                     if (candidate.Interpretation == null || interpretedClassSatisfies)
                     {
                         PSMPath nextBuiltPath = (PSMPath) builtPath.Clone();
-                        nextBuiltPath.Steps.Add(new PSMPathAssociationStep {Association = candidateAssociation, To = candidate, From = currentMember});
+                        nextBuiltPath.Steps.Add(new PSMPathAssociationStep(nextBuiltPath) {Association = candidateAssociation, To = candidate, From = currentMember});
 
                         if (interpretedClassSatisfies)
                         {
@@ -173,7 +173,7 @@ namespace Exolutio.Model.OCL.ConstraintConversion
                         vd = variableTranslations[pathVariableStep.Variable];
                     }
 
-                    builtPath.Steps.Add(new PSMPathVariableStep { VariableExp = new VariableExp(vd) });
+                    builtPath.Steps.Add(new PSMPathVariableStep(builtPath) { VariableExp = new VariableExp(vd) });
                     bool candidateUsable = FindNavigationsForPIMNavigationRecursive(pimPath, stepIndex + 1, candidate, builtPath, true, ref result, null);
                     if (!candidateUsable)
                     {
@@ -199,7 +199,7 @@ namespace Exolutio.Model.OCL.ConstraintConversion
                     if (psmAttribute.Interpretation == pathAttributeStep.Attribute)
                     {
                         PSMPath nextBuiltPath = (PSMPath) builtPath.Clone();
-                        nextBuiltPath.Steps.Add(new PSMPathAttributeStep {Attribute = psmAttribute});
+                        nextBuiltPath.Steps.Add(new PSMPathAttributeStep(nextBuiltPath) {Attribute = psmAttribute});
                         result.Add(nextBuiltPath);
                         found |= true; 
                     }
