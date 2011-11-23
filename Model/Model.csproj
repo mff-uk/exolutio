@@ -79,7 +79,7 @@
     <Compile Include="OCL\Bridge\PSMBridgeAttribute.cs" />
     <Compile Include="OCL\Bridge\BridgeProperty.cs" />
     <Compile Include="OCL\Bridge\UnsupportedSchemaTypeException.cs" />
-    <Compile Include="OCL\Compiler\CompilerErrors.Designer.cs">
+    <Compile Include="OCL\CompilerErrors.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CompilerErrors.resx</DependentUpon>
@@ -296,7 +296,7 @@
     <None Include="Versioning\Versioning.cd" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="OCL\Compiler\CompilerErrors.resx">
+    <EmbeddedResource Include="OCL\CompilerErrors.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>CompilerErrors.Designer.cs</LastGenOutput>
     </EmbeddedResource>

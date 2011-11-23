@@ -215,7 +215,7 @@ namespace Exolutio.View
 
     public interface IFilePresenter
     {
-        void DisplayFile(XDocument xmlDocument, EDisplayedFileType fileType, string fileName = null, Log log = null, PSMSchema validationSchema = null, FilePresenterButton[] additionalActions = null);
+        void DisplayFile(XDocument xmlDocument, EDisplayedFileType fileType, string fileName = null, ILog log = null, PSMSchema validationSchema = null, FilePresenterButton[] additionalActions = null);
     }
 
     public struct FilePresenterButton

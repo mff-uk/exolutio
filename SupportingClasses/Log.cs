@@ -5,6 +5,20 @@ using Exolutio.SupportingClasses.Annotations;
 
 namespace Exolutio.SupportingClasses
 {
+    public interface ILog : IList<ILogMessage>
+    {
+        IEnumerable<ILogMessage> Errors { get; }
+        
+        IEnumerable<ILogMessage> Warnings { get; }
+        
+        int CountOfErrors { get; }
+        
+        int CountOfWarnings { get; }
+        
+        void AddLogMessage(ILogMessage logMessage);
+    }
+
+
     public class Log : Log<object>
     {
         
@@ -13,46 +27,50 @@ namespace Exolutio.SupportingClasses
 	/// <summary>
 	/// Log class 
 	/// </summary>
-    public class Log<TMessageTag> : List<LogMessage<TMessageTag>>
+    public class Log<TMessageTag> : List<LogMessage<TMessageTag>>, ILog
 	{
-		private int errors = 0;
+        public int CountOfErrors { get { return Errors.Count(); } }
 
-		private int warnings = 0;
-
-        public void AddLogMessage(LogMessage<TMessageTag> logMessage)
-	    {
-	        this.Add(logMessage);
-            if (logMessage.Severity == ELogMessageSeverity.Error)
-	        {
-	            errors++;
-	        }
+        public int CountOfWarnings { get { return Warnings.Count(); } }
+	    
+        public void AddLogMessage(ILogMessage logMessage)
+        {
+            if (logMessage is LogMessage<TMessageTag>)
+            {
+                base.Add((LogMessage<TMessageTag>) logMessage);
+            }
             else
-	        {
-	            warnings++;
-	        }
+            {
+                throw new ArgumentException("Log accepts only messages of type 'LogMessage<TMessageTag>'");
+            }
+        }
+
+	    public void AddLogMessage(LogMessage<TMessageTag> logMessage)
+	    {
+	        base.Add(logMessage);
 	    }
 
 		/// <summary>
-		/// Adds error message.
-		/// </summary>
-		/// <param name="text">The message text.</param>
-        public LogMessage<TMessageTag> AddError(string text)
-		{
-            LogMessage<TMessageTag> logMessage = new LogMessage<TMessageTag> { MessageText = text, Severity = ELogMessageSeverity.Error, Number = errors };
-		    Add(logMessage);
-			errors++;
-		    return logMessage;
-		}
+	    /// Adds error message.
+	    /// </summary>
+	    /// <param name="text">The message text.</param>
+	    /// <param name="tag">Tag of the created message</param>
+	    public LogMessage<TMessageTag> AddError(string text, TMessageTag tag = default(TMessageTag))
+        {
+            LogMessage<TMessageTag> logMessage = new LogMessage<TMessageTag> { MessageText = text, Severity = ELogMessageSeverity.Error, Number = CountOfErrors, Tag = tag };
+            Add(logMessage);
+            return logMessage;
+        }
 
 		/// <summary>
 		/// Adds warning message.
 		/// </summary>
-		/// <param name="text">The message text.</param>
-        public LogMessage<TMessageTag> AddWarning(string text)
+        /// <param name="text">The message text.</param>
+        /// <param name="tag">Tag of the created message</param>
+        public LogMessage<TMessageTag> AddWarning(string text, TMessageTag tag = default(TMessageTag))
 		{
-            LogMessage<TMessageTag> logMessage = new LogMessage<TMessageTag> { MessageText = text, Severity = ELogMessageSeverity.Warning, Number = warnings };
+            LogMessage<TMessageTag> logMessage = new LogMessage<TMessageTag> { MessageText = text, Severity = ELogMessageSeverity.Warning, Number = CountOfWarnings, Tag = tag };
 		    Add(logMessage);
-			warnings++;
 		    return logMessage;
 		}
 
@@ -68,6 +86,18 @@ namespace Exolutio.SupportingClasses
         }
 
         /// <summary>
+        /// Adds warning message.
+        /// </summary>
+        /// <param name="format">The format string.</param>
+        /// <param name="args">The format string arguments.</param>
+        /// <param name="tag">Tag of the created message</param>
+        [StringFormatMethod("format")]
+        public LogMessage<TMessageTag> AddWarningTaggedFormat(string format, TMessageTag tag, params object[] args)
+        {
+            return AddWarning(string.Format(format, args), tag);
+        }
+
+        /// <summary>
         /// Adds error message.
         /// </summary>
         /// <param name="format">The format string.</param>
@@ -78,29 +108,142 @@ namespace Exolutio.SupportingClasses
             return AddError(string.Format(format, args));
         }
 
-		/// <summary>
+        /// <summary>
+        /// Adds error message.
+        /// </summary>
+        /// <param name="format">The format string.</param>
+        /// <param name="args">The format string arguments.</param>
+        /// <param name="tag">Tag of the created message</param>
+        [StringFormatMethod("format")]
+        public LogMessage<TMessageTag> AddErrorTaggedFormat(string format, TMessageTag tag, params object[] args)
+        {
+            return AddError(string.Format(format, args), tag);
+        }
+
+	    public void Add(ILogMessage item)
+	    {
+            if (item is LogMessage<TMessageTag>)
+            {
+                base.Add((LogMessage<TMessageTag>)item);
+            }
+            else
+            {
+                throw new ArgumentException("Log accepts only messages of type 'LogMessage<TMessageTag>'");
+            }
+	    }
+
+	    /// <summary>
 		/// Removes all elements from the log.
 		/// </summary>
 		public new void Clear()
 		{
 			base.Clear();
-			errors = 0;
-			warnings = 0;
 		}
 
-        public IEnumerable<LogMessage<TMessageTag>> Errors
+	    public bool Contains(ILogMessage item)
 	    {
-            get { return this.Where(m => m.Severity == ELogMessageSeverity.Error); }
+            if (item is LogMessage<TMessageTag>)
+                return base.Contains((LogMessage<TMessageTag>) item);
+            else return false;
+	    }
+
+	    public void CopyTo(ILogMessage[] array, int arrayIndex)
+	    {
+	        foreach (LogMessage<TMessageTag> logMessage in this)
+	        {
+	            array[arrayIndex] = logMessage;
+	            arrayIndex++;
+	        }
+	    }
+
+	    public bool Remove(ILogMessage item)
+	    {
+	        if (item is LogMessage<TMessageTag>)
+	        {
+	            return base.Remove((LogMessage<TMessageTag>) item);
+	        }
+            else
+	        {
+	            return false;
+	        }
+	    }
+
+	    public bool IsReadOnly
+	    {
+            get { return false; }
+	    }
+
+	    public IEnumerable<LogMessage<TMessageTag>> Errors
+	    {
+            get { return this.Where<LogMessage<TMessageTag>>(m => m.Severity == ELogMessageSeverity.Error); }
 	    }
 
         public IEnumerable<LogMessage<TMessageTag>> Warnings
         {
-            get { return this.Where(m => m.Severity == ELogMessageSeverity.Warning); }
+            get { return this.Where<LogMessage<TMessageTag>>(m => m.Severity == ELogMessageSeverity.Warning); }
         }
 
-	    public IEnumerable<ILogMessage>  AllMessages
+	    IEnumerable<ILogMessage> ILog.Warnings
 	    {
-            get { return this; }
+	        get { return Warnings;}
 	    }
-    }
+
+	    IEnumerable<ILogMessage> ILog.Errors
+	    {
+            get { return Errors; }
+	    }
+
+	    #region Implementation of IList<ILogMessage>
+
+	    public int IndexOf(ILogMessage item)
+	    {
+            if (item is LogMessage<TMessageTag>)
+            {
+                return base.IndexOf((LogMessage<TMessageTag>) item);
+            }
+            else
+            {
+                return -1; 
+            }
+	    }
+
+	    public void Insert(int index, ILogMessage item)
+	    {
+            if (item is LogMessage<TMessageTag>)
+            {
+                base.Insert(index, (LogMessage<TMessageTag>)item);
+            }
+            else
+            {
+                throw new ArgumentException("Log accepts only messages of type 'LogMessage<TMessageTag>'");
+            }
+	    }
+
+	    ILogMessage IList<ILogMessage>.this[int index]
+	    {
+            get { return base[index]; }
+	        set
+	        {
+                if (value is LogMessage<TMessageTag>)
+                {
+                    base[index] = (LogMessage<TMessageTag>) value;
+                }
+                else
+                {
+                    throw new ArgumentException("Log accepts only messages of type 'LogMessage<TMessageTag>'");
+                }
+	        }
+	    }
+
+	    #endregion
+
+	    #region Implementation of IEnumerable<out ILogMessage>
+
+	    IEnumerator<ILogMessage> IEnumerable<ILogMessage>.GetEnumerator()
+	    {
+	        return base.GetEnumerator();
+	    }
+
+	    #endregion
+	}
 }

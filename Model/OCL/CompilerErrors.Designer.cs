@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Exolutio.Model.OCL.Compiler {
+namespace Exolutio.Model.OCL {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Exolutio.Model.OCL.Compiler {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Exolutio.Model.OCL.Compiler.CompilerErrors", typeof(CompilerErrors).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Exolutio.Model.OCL.CompilerErrors", typeof(CompilerErrors).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -319,6 +319,15 @@ namespace Exolutio.Model.OCL.Compiler {
         internal static string OCLAst_TestNull_Compiler_panic_in_method__0__ {
             get {
                 return ResourceManager.GetString("OCLAst_TestNull_Compiler_panic_in_method__0__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Variable name `{0}` has already existed..
+        /// </summary>
+        internal static string VariableAlreadyExisted {
+            get {
+                return ResourceManager.GetString("VariableAlreadyExisted", resourceCulture);
             }
         }
     }

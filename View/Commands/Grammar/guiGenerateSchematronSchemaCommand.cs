@@ -37,7 +37,7 @@ namespace Exolutio.View.Commands.Grammar
             get { return "Generate Schematron schema from the OCL scripts defined for this PSM schema"; }
         }
 
-        public override bool CanExecute(object parameter)
+        public override bool CanExecute(object parameter = null)
         {
             return Current.ActiveDiagram != null && Current.ActiveDiagram is PSMDiagram;
         }
