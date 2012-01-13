@@ -317,7 +317,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="PIM\PIM-built-in-types.xml" />
-    <Content Include="PSM\PSM-built-in-types.xml" />
+    <Content Include="PSM\PSM-built-in-types.xml">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -68,16 +68,16 @@ namespace Exolutio.Model
 
         public PIMClass PIMClass
         {
-            get { return Project.TranslateComponent<PIMClass>(pimClassGuid); }
+            get { return pimClassGuid != Guid.Empty ? Project.TranslateComponent<PIMClass>(pimClassGuid) : null; }
             set { pimClassGuid = value; NotifyPropertyChanged("PIMClass"); }
         }
 
-        private Guid declaringType; 
+        private Guid declaringTypeGuid; 
 
         public AttributeType DeclaringType
         {
-            get { return Project.TranslateComponent<AttributeType>(declaringType); }
-            set { declaringType = value; NotifyPropertyChanged("DeclaringType"); }
+            get { return declaringTypeGuid != Guid.Empty ? Project.TranslateComponent<AttributeType>(declaringTypeGuid) : null; }
+            set { declaringTypeGuid = value; NotifyPropertyChanged("DeclaringType"); }
         }
 
         private Guid resultTypeGuid;
@@ -90,14 +90,7 @@ namespace Exolutio.Model
             }
             set
             {
-                if (value != null)
-                {
-                    resultTypeGuid = value;
-                }
-                else
-                {
-                    resultTypeGuid = Guid.Empty;
-                }
+                resultTypeGuid = value;
                 NotifyPropertyChanged("ResultType");
             }
         }
@@ -146,7 +139,7 @@ namespace Exolutio.Model
                 parameter.ModelOperation = this;
             }
             pimClassGuid = this.DeserializeIDRef("pimClassID", parentNode, context, true);
-            declaringType = this.DeserializeAttributeType(parentNode, context, "DeclaringType", true);
+            declaringTypeGuid = this.DeserializeAttributeType(parentNode, context, "DeclaringType", true);
             Summary = this.DeserializeSimpleValueFromCDATA("Summary", parentNode, context, true);
         }
         public static ModelOperation CreateInstance(Project project)
@@ -182,7 +175,7 @@ namespace Exolutio.Model
             }
             if (DeclaringType != null)
             {
-                copyModelOperation.declaringType = createdCopies.GetGuidForCopyOf(DeclaringType);
+                copyModelOperation.declaringTypeGuid = createdCopies.GetGuidForCopyOf(DeclaringType);
             }
 
             this.CopyCollection<ModelOperationParameter>(Parameters, copyModelOperation.Parameters, projectVersion, createdCopies);
