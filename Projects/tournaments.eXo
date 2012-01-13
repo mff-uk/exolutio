@@ -24,7 +24,7 @@
           <eXo:PIMOperations Count="1">
             <eXo:PIMOperation ID="29181676-7051-4fb4-ba3a-128e1d75500a" Name="selectSponsors" pimClassID="2c95f723-f908-4c13-817d-cf26d54a9837">
               <eXo:Parameters Count="1">
-                <eXo:Parameter Name="advertisers" Type="3ab2660d-9b3a-4e77-bb8d-57dd7c155aa6" displayName="AttributeType: Advertiser" />
+                <eXo:Parameter ID="f856a23a-c98d-46af-8176-8c44277badb5" Name="advertisers" Type="3ab2660d-9b3a-4e77-bb8d-57dd7c155aa6" displayName="AttributeType: Advertiser" />
               </eXo:Parameters>
             </eXo:PIMOperation>
           </eXo:PIMOperations>
@@ -65,27 +65,27 @@
           <eXo:PIMOperations Count="5">
             <eXo:PIMOperation ID="9c761dca-f1b3-48ff-8cf8-2deb34ff1e00" Name="getMaxNumPlayers" pimClassID="1e014a11-c043-423c-b4a6-5d0553ac31bd" ResultType="dc49d35c-feaf-4e9e-9c22-267208d61a77" displayName="AttributeType: Integer">
               <eXo:Parameters Count="1">
-                <eXo:Parameter Name="p" Type="dc49d35c-feaf-4e9e-9c22-267208d61a77" displayName="AttributeType: Integer" />
+                <eXo:Parameter ID="41782a73-ce1b-4e69-b006-2e20a0658b61" Name="p" Type="dc49d35c-feaf-4e9e-9c22-267208d61a77" displayName="AttributeType: Integer" />
               </eXo:Parameters>
             </eXo:PIMOperation>
             <eXo:PIMOperation ID="3d0086c5-02d1-48d6-b072-dde715f14110" Name="acceptPlayer" pimClassID="1e014a11-c043-423c-b4a6-5d0553ac31bd">
               <eXo:Parameters Count="1">
-                <eXo:Parameter Name="p" Type="e3459e52-d48e-47ca-82b6-ad7374cd5a0e" displayName="AttributeType: Player" />
+                <eXo:Parameter ID="b40c218d-efd1-4c14-9c9f-76aeac0f3111" Name="p" Type="e3459e52-d48e-47ca-82b6-ad7374cd5a0e" displayName="AttributeType: Player" />
               </eXo:Parameters>
             </eXo:PIMOperation>
             <eXo:PIMOperation ID="f7358cbc-3c90-4a84-b4cc-6069644294d0" Name="removePlayer" pimClassID="1e014a11-c043-423c-b4a6-5d0553ac31bd">
               <eXo:Parameters Count="1">
-                <eXo:Parameter Name="p" Type="e3459e52-d48e-47ca-82b6-ad7374cd5a0e" displayName="AttributeType: Player" />
+                <eXo:Parameter ID="0f8f4cb0-3089-47a3-afcc-3cc3271fa2c0" Name="p" Type="e3459e52-d48e-47ca-82b6-ad7374cd5a0e" displayName="AttributeType: Player" />
               </eXo:Parameters>
             </eXo:PIMOperation>
             <eXo:PIMOperation ID="a6b96abd-129b-4d80-b26b-80bc7c46714f" Name="isPlayerAccepted" pimClassID="1e014a11-c043-423c-b4a6-5d0553ac31bd">
               <eXo:Parameters Count="1">
-                <eXo:Parameter Name="p" Type="e3459e52-d48e-47ca-82b6-ad7374cd5a0e" displayName="AttributeType: Player" />
+                <eXo:Parameter ID="f753e0de-2620-40f6-a019-b3b79183389d" Name="p" Type="e3459e52-d48e-47ca-82b6-ad7374cd5a0e" displayName="AttributeType: Player" />
               </eXo:Parameters>
             </eXo:PIMOperation>
             <eXo:PIMOperation ID="ebbbac10-3b10-42da-a089-c061ceca3afc" Name="overlap" pimClassID="1e014a11-c043-423c-b4a6-5d0553ac31bd" ResultType="1ce3b950-194d-42c9-aeeb-a9cec5e5505a" displayName="AttributeType: Boolean">
               <eXo:Parameters Count="1">
-                <eXo:Parameter Name="t" Type="bc694e1d-d1e7-4ac6-8e1f-071255a6bc71" displayName="AttributeType: Tournament" />
+                <eXo:Parameter ID="db92449a-5ca3-4ac4-9b40-796a6580b605" Name="t" Type="bc694e1d-d1e7-4ac6-8e1f-071255a6bc71" displayName="AttributeType: Tournament" />
               </eXo:Parameters>
             </eXo:PIMOperation>
           </eXo:PIMOperations>
@@ -245,6 +245,7 @@ m.start.after(start) and m.end.before(end))
 least one Match on the first
 day of the Tournament */
 
+/* TODO: this constraint asserts datetimes, it should assert dates */
 context Tournament
 inv: matches->exists(m:Match | m.start.equals(start))
 
@@ -479,6 +480,7 @@ m.start.after(start) and m.end.before(end))
 least one Match on the first
 day of the Tournament */
 
+/* TODO: this constraint asserts datetimes, it should assert dates */
 context Tournament
 inv: matches.day.match->exists(m:Match | m.start = start)
 
@@ -502,6 +504,11 @@ inv: matchPlayers.player->forAll(p|
 p.parent.parent.parent.parent.parent.participatingPlayers.player->exists(px |
 px.name = p.name))
 
+/*
+Test of type-defined function
+context Player
+inv: email.substring(0) = email
+*/
 
 
 
@@ -530,8 +537,13 @@ not t.overlap(tournament)))
 Each day shows only matches taking place that day
 expects conversion dateTime -> date using Date() function
 */
+
 context Day
-inv: self.match->forAll(m | m.start.Date() =date)]]></eXo:Contents>
+inv: self.match->forAll(m | m.start.Date() = date)
+
+/* days are unique */
+context Tournament
+inv: matches.day->forAll(d1, d2 | d1.date <> d2.date)]]></eXo:Contents>
           </eXo:OCLScript>
         </eXo:OCLScripts>
       </eXo:PSMSchema>
