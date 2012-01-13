@@ -18,5 +18,7 @@
              xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
              Name="textBox1"
              FontFamily="Consolas"
-             FontSize="10pt"/></DockPanel>
+             FontSize="10pt"
+             KeyUp="textBox1_KeyUp"
+            /></DockPanel>
 </UserControl>

@@ -24,7 +24,7 @@
       <eXoS:Operations>
         <eXoS:Operation ID="A4402798-91FA-4849-B0E9-A1052F053090" Name="substring" ResultType="{string}">
           <eXoS:Parameters Count="2">
-            <eXoS:Parameter Name="sourceString" Type="{string}" />
+            <!--<eXoS:Parameter Name="sourceString" Type="{string}" />-->
             <eXoS:Parameter Name="startingLoc" Type="{double}" />
           </eXoS:Parameters>
           <eXoS:Summary>
@@ -33,7 +33,7 @@
         </eXoS:Operation>
         <eXoS:Operation ID="7E4A9C2E-3667-4EBD-85C8-A4E2790C73C2" Name="substring" ResultType="{string}">
           <eXoS:Parameters Count="3">
-            <eXoS:Parameter Name="sourceString" Type="{string}" />
+            <!--<eXoS:Parameter Name="sourceString" Type="{string}" />-->
             <eXoS:Parameter Name="startingLoc" Type="{double}" />
             <eXoS:Parameter Name="length" Type="{double}" />
           </eXoS:Parameters>

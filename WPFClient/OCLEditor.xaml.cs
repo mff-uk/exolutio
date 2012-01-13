@@ -91,6 +91,7 @@ namespace Exolutio.WPFClient {
         private bool updatesBlocked = false;
 
         private void textBox1_KeyUp(object sender, KeyEventArgs e) {
+            
             if (DisplayedScript != null && !updatesBlocked) {
                 if (DisplayedScript.Contents != textBox1.Text) {
                     DisplayedScript.Contents = textBox1.Text;
