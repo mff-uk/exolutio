@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?oxygen SCHSchema="department.sch"?>
+<departments>
+	<department>
+		<name>d1</name>
+		<employeeCount>3</employeeCount>
+		<salaryExpenses>39000</salaryExpenses>
+		<share>0.6290322580645161</share>
+		<employees>
+			<employee>
+				<name>John</name>
+				<salary>12000</salary>
+			</employee>
+			<employee>
+				<name>Martin</name>
+				<salary>13000</salary>
+			</employee>
+			<employee>
+				<name>Jack</name>
+				<salary>14000</salary>
+			</employee>
+		</employees>
+	</department>
+	<department>
+		<name>d2</name>
+		<employeeCount>2</employeeCount>
+		<salaryExpenses>23000</salaryExpenses>
+		<share>0.3709677419354839</share>
+		<employees>
+			<employee>
+				<name>Peter</name>
+				<salary>12000</salary>
+			</employee>
+			<employee>
+				<name>James</name>
+				<salary>11000</salary>
+			</employee>
+		</employees>
+	</department>
+</departments>

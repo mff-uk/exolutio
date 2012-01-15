@@ -4,35 +4,19 @@
   xmlns:oclXin="http://eXolutio.com/oclX/dynamic/internal"
   xmlns:oclDate="http://eXolutio.com/oclX/types/date" 
   xmlns:saxon="http://saxon.sf.net/"
+  xmlns:map="http://www.w3.org/2005/xpath-functions/map"
   exclude-result-prefixes="oclX saxon xs oclDate oclXin" 
-  xmlns:xs="http://www.w3.org/2001/XMLSchema" version="2.0">
+  xmlns:xs="http://www.w3.org/2001/XMLSchema" version="3.0">
 
   <xsl:import href="../OclX/oclX-dynamic.xsl"/>
   <xsl:output indent="yes"/>
   
-  
   <xsl:template match="tournament">
-    <xsl:variable name="variables" as="item()*">
-      <variables/>
-      <!-- just a placeholder -->
-      <dummy/>      
-      <!-- name of the $self variable -->
-      <self/>      
-      <!-- value of the $self variable-->
-      <xsl:sequence select="."/>  
-    </xsl:variable>
-    
+    <xsl:variable name="variables" as="item()*" select="oclX:vars(.)" />
+      
     CONTEXT TOURNAMENT
     
-    <!-- 
-      Each day shows only matches taking place that day
-      expects conversion dateTime -> date using Date() function
-    -->
-    Each day shows only matches taking place that day
-    <!--<sch:rule context="/tournament/matches/day">
-      <sch:assert test="oclX:forAll(match, 'm', 'oclX:Date(m/start) = date)" />
-    </sch:rule>    -->
-    
+     
     <!-- Each Tournament conducts at least one Match on the first day of the Tournament 
          * working constraint from ocl * 
          matches.day.match->exists(m:Match | m.start = start)
@@ -84,8 +68,18 @@
         'oclDate:after($m/start, $self/start) and oclDate:before($m/end, $self/end)',
         $variables
       ) "/>
-
-      <xsl:apply-templates select="//match" />
+    
+    <!-- dates consistency
+         start <= end
+    -->
+    Dates consistency
+    <xsl:copy-of
+      select="
+      oclX:holds('$self/start le $self/end', $variables)
+      "/>
+    
+    <xsl:apply-templates select="//match" />
+    <xsl:apply-templates select="//day"/>
   </xsl:template>
   
   <xsl:template match="match">
@@ -112,5 +106,17 @@
       oclX:forAll(match-players/player, 
       'p', 'oclX:exists($p/../../../../../participating-players/player, ''regp'', ''$regp/name eq $p/name'', $variables)', $variables)   
       "/>
+  </xsl:template>
+
+  <xsl:template match="day">
+    CONTEXT DAY
+    <!-- 
+      Each day shows only matches taking place that day
+      expects conversion dateTime -> date using getDate() function
+      * working constraint from ocl *
+      self.match->forAll(m | m.start.Date() = date)
+    -->
+    Each day shows only matches taking place that day
+    <xsl:copy-of select="oclX:forAll(match, 'm', 'oclDate:getDate($m/start) = $self/date', oclX:vars(.))" />    
   </xsl:template>
 </xsl:stylesheet>

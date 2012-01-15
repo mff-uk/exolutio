@@ -18,4 +18,8 @@
     <xsl:sequence select="xs:dateTime($date2) ge xs:dateTime($date1)"/>
   </xsl:function>
   
+  <xsl:function name="oclDate:getDate" as="xs:date">
+    <xsl:param name="dateTime" as="xs:dateTime" />
+    <xsl:sequence select="xs:date(format-dateTime($dateTime, '[Y]-[M,2]-[D,2]'))" />
+  </xsl:function>
 </xsl:stylesheet>

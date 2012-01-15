@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<purchase>
+	<totalprice>36</totalprice>
+	<totalprice2>1</totalprice2>	
+	<item>
+		<amount>2</amount>
+		<price>25</price>
+		<tester>AAA</tester>
+	</item>
+	<item>
+		<amount>3</amount>
+		<price>11</price>
+		<tester>BBB</tester>
+	</item>
+</purchase>

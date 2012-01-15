@@ -504,14 +504,15 @@ inv: matchPlayers.player->forAll(p|
 p.parent.parent.parent.parent.parent.participatingPlayers.player->exists(px |
 px.name = p.name))
 
+/* dates consistency */
+context Tournament
+inv: start <= end
+
 /*
 Test of type-defined function
 context Player
 inv: email.substring(0) = email
 */
-
-
-
 ]]></eXo:Contents>
           </eXo:OCLScript>
           <eXo:OCLScript ID="fb8e63fa-e432-484e-9672-a0363284c48a" Name="defaultname">
@@ -539,7 +540,7 @@ expects conversion dateTime -> date using Date() function
 */
 
 context Day
-inv: self.match->forAll(m | m.start.Date() = date)
+inv: self.match->forAll(m | m.start.getDate() = date)
 
 /* days are unique */
 context Tournament

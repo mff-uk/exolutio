@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.IO;
 using System.Xml.Linq;
 using Exolutio.SupportingClasses;
@@ -51,6 +52,11 @@ namespace Exolutio.WPFClient
         public const string ConfigFileName = "UserConfig.xml";
 
         public const string LayoutFileName = "Layout.xml";
+
+        public static NameValueCollection GetApplicationSettings()
+        {
+            return System.Configuration.ConfigurationManager.AppSettings;
+        }
 
         private static string ExolutioUserDataDir
         {
