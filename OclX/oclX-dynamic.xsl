@@ -62,6 +62,13 @@
     
   </xsl:function>
   
+  <xsl:function name="oclX:holds" as="xs:boolean">
+    <xsl:param name="expression"  as="xs:string" />
+    <xsl:param name="variables" as="item()*" />
+    
+    <xsl:sequence select="oclXin:evaluate($expression, $variables)" />
+  </xsl:function>
+  
     <!-- forAll function using dynamic evaluation --> 
   <xsl:function name="oclX:forAll" as="xs:boolean">
     <xsl:param name="collection"  as="item()*" />
@@ -163,6 +170,17 @@
       </xsl:choose>
     </xsl:variable>
     <xsl:sequence select="$result" />
+  </xsl:function>
+  
+  <xsl:function name="oclX:vars" as="item()*">
+    <xsl:param name="current-node" as="item()"/>
+    <variables/>
+    <!-- just a placeholder -->
+    <dummy/>      
+    <!-- name of the $self variable -->
+    <self/>      
+    <!-- value of the $self variable-->
+    <xsl:sequence select="$current-node"/>  
   </xsl:function>
   
   <!-- sum function implemented using dynamic iterate--> 

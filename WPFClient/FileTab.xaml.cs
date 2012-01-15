@@ -20,6 +20,7 @@ using Exolutio.Dialogs;
 using Exolutio.Model;
 using Exolutio.Model.PSM;
 using Exolutio.Model.PSM.Grammar;
+using Exolutio.Model.PSM.Grammar.SchematronTranslation;
 using Exolutio.Model.PSM.Grammar.XSDTranslation;
 using Exolutio.ResourceLibrary;
 using Exolutio.SupportingClasses;
@@ -80,6 +81,7 @@ namespace Exolutio.WPFClient
             bValidateXMLSchema.Visibility = fileView.DisplayedFileType == EDisplayedFileType.XSD ? Visibility.Visible : Visibility.Collapsed;
             bValidateSchematronSchema.Visibility = fileView.DisplayedFileType == EDisplayedFileType.SCH ? Visibility.Visible : Visibility.Collapsed;
             bValidateAgainstSchema.Visibility = ValidationSchema != null ? Visibility.Visible : Visibility.Collapsed;
+            bExecuteSchematronPipeline.Visibility = fileView.DisplayedFileType == EDisplayedFileType.SCH ? Visibility.Visible : Visibility.Collapsed;
         }
 
         public string GetDocumentText()
@@ -363,6 +365,14 @@ namespace Exolutio.WPFClient
             //System.IO.File.WriteAllText(tmp, Exolutio.Model.PSM.Grammar.Properties.Resources.xmlNamespaceXSD);
             //schematronXSD.Element(xsdNS + "schema").Element(xsdNS + "import").Attribute("schemaLocation").Value = System.IO.Path.GetFileName(tmp); 
             ValidateDocumentAgainstSchema(schematronXSD);
+        }
+
+        private void bExecuteSchematronPipeline_Click(object sender, RoutedEventArgs e)
+        {
+            SchematronPipelineWithSaxonTransform p = new SchematronPipelineWithSaxonTransform();
+            p.SaxonTransformExecutablePath = ConfigurationManager.GetApplicationSettings()["SaxonTransformExecutablePath"];
+            p.IsoSchematronTemplatesPath = ConfigurationManager.GetApplicationSettings()["IsoSchematronTemplatesPath"];
+            p.Process(@"D:\Programování\EVOXSVN\SchematronTest\LastSchSchema.sch", @"D:\Programování\EVOXSVN\SchematronTest\");
         }
     }
 }

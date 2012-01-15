@@ -32,6 +32,12 @@
                     <Label Height="Auto" Padding="2">Validate Schematron schema</Label>
                 </StackPanel>
             </Button>
+            <Button Click="bExecuteSchematronPipeline_Click" Name="bExecuteSchematronPipeline">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="{StaticResource media_play_green}" Height="16" Margin="2"></Image>
+                    <Label Height="Auto" Padding="2">Execute schematron pipeline</Label>
+                </StackPanel>
+            </Button>
             <Button Click="bValidateAgainstPSMSchema_Click" Name="bValidateAgainstSchema">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="{StaticResource Validate}" Height="16" Margin="2"></Image>

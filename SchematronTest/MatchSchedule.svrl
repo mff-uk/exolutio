@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<svrl:schematron-output xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                        xmlns:schold="http://www.ascc.net/xml/schematron"
+                        xmlns:iso="http://purl.oclc.org/dsdl/schematron"
+                        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+                        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                        xmlns:oclX="http://eXolutio.com/oclX/dynamic"
+                        xmlns:oclXin="http://eXolutio.com/oclX/dynamic/internal"
+                        xmlns:oclDate="http://eXolutio.com/oclX/types/date"
+                        xmlns:saxon="http://saxon.sf.net/"
+                        title=""
+                        schemaVersion=""><!--   
+		   
+		   
+		 --><svrl:active-pattern document="file:/D:/Programování/EVOXSVN/SchematronTest/MatchSchedule.xml"/>
+   <svrl:fired-rule context="/tournament"/>
+   <svrl:failed-assert test="oclX:forAll( oclX:collect(matches/day, 'it', '$it/match', $variables), 'm', 'oclDate:after($m/start, $self/start) and oclDate:before($m/end, $self/end)', oclX:vars(.) )"
+                       location="/tournament">
+      <svrl:text>
+        All Matches in a Tournament occur
+        within the Tournament’s time frame fail.
+      </svrl:text>
+   </svrl:failed-assert>
+   <svrl:active-pattern document="file:/D:/Programování/EVOXSVN/SchematronTest/MatchSchedule.xml"/>
+   <svrl:fired-rule context="/tournament"/>
+</svrl:schematron-output>

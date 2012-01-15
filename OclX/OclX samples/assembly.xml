@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<product-assembly-report>
+    <parts>
+        <part>
+            <name>kolo</name>
+            <code>c3</code>
+        </part>
+        <part>
+            <name>karosa</name>
+            <code>c2</code>
+        </part>
+        <part>
+            <name>sterac</name>
+            <code>c1</code>
+        </part>
+    </parts>
+    <supply>
+        <date>2010-01-01</date>
+        <price>10</price>
+        <supplied-part>
+            <code>c1</code>
+        </supplied-part>
+        <supplied-part>
+            <code>c3</code>
+        </supplied-part>        
+        <supplier  />
+    </supply>
+    <supply>
+        <date>2010-01-02</date>
+        <price>24</price>
+        <supplied-part>
+            <code>c2</code>
+        </supplied-part>       
+        <supplier  />
+    </supply>      
+</product-assembly-report>

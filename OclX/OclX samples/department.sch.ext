@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:function name="oclX:iterate">
+	<xsl:param name="collection"/>
+	<xsl:param name="accumulator"/>
+	<xsl:param name="iteration"/>
+	<xsl:param name="total-iterations"/>
+	<xsl:param name="expr"/>
+	<xsl:choose>
+		<xsl:when test="$iteration &lt;= $total-iterations">
+			<xsl:variable name="newAccumulator">
+				<xsl:value-of select="$accumulator + $collection[$iteration]/@price"/>
+			</xsl:variable>
+			<xsl:value-of select="oclX:iterate($collection, $newAccumulator, $iteration + 1, $total-iterations)"/>
+		</xsl:when>
+		<xsl:otherwise>
+			<xsl:value-of select="$accumulator"/>
+		</xsl:otherwise>
+	</xsl:choose>
+	<!--<xsl:value-of select="sum($collection/@price)"/>-->
+</xsl:function>
