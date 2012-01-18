@@ -44,7 +44,9 @@ namespace Exolutio.WPFClient
 
         public PSMSchema ValidationSchema { get; set; }
 
-        public void DisplayFile(EDisplayedFileType displayedFileType, Stream fileContents, string fileName = null, ILog log = null, PSMSchema validationSchema = null)
+        public PSMSchema SourcePSMSchema { get; set; }
+
+        public void DisplayFile(EDisplayedFileType displayedFileType, Stream fileContents, string fileName = null, ILog log = null, PSMSchema validationSchema = null, PSMSchema sourcePSMSchema = null)
         {
             fileView.DisplayFile(displayedFileType, fileContents);
             
@@ -57,10 +59,11 @@ namespace Exolutio.WPFClient
             }
 
             ValidationSchema = validationSchema;
+            SourcePSMSchema = sourcePSMSchema;
             ShowHideRelevantButtons();
         }
 
-        public void DisplayFile(EDisplayedFileType displayedFileType, string fileContents, string fileName = null, ILog log = null, PSMSchema validationSchema = null)
+        public void DisplayFile(EDisplayedFileType displayedFileType, string fileContents, string fileName = null, ILog log = null, PSMSchema validationSchema = null, PSMSchema sourcePSMSchema = null)
         {
             fileView.DisplayFile(displayedFileType, fileContents);
             
@@ -73,7 +76,15 @@ namespace Exolutio.WPFClient
             }
 
             ValidationSchema = validationSchema;
+            SourcePSMSchema = sourcePSMSchema;
             ShowHideRelevantButtons();
+        }
+
+        public Action<IFilePresenterTab> RefreshCallback { get; set; }
+
+        public void ReDisplayFile(XDocument xmlDocument, EDisplayedFileType displayedFileType, string fileName = null, ILog log = null, PSMSchema validationSchema = null, PSMSchema sourcePSMSchema = null, FilePresenterButton[] additionalActions = null)
+        {
+            DisplayFile(displayedFileType, xmlDocument.ToString(), fileName, log, validationSchema, sourcePSMSchema);
         }
 
         private void ShowHideRelevantButtons()
@@ -82,6 +93,7 @@ namespace Exolutio.WPFClient
             bValidateSchematronSchema.Visibility = fileView.DisplayedFileType == EDisplayedFileType.SCH ? Visibility.Visible : Visibility.Collapsed;
             bValidateAgainstSchema.Visibility = ValidationSchema != null ? Visibility.Visible : Visibility.Collapsed;
             bExecuteSchematronPipeline.Visibility = fileView.DisplayedFileType == EDisplayedFileType.SCH ? Visibility.Visible : Visibility.Collapsed;
+            bRefresh.Visibility = fileView.DisplayedFileType == EDisplayedFileType.SCH ? Visibility.Visible : Visibility.Collapsed;
         }
 
         public string GetDocumentText()
@@ -373,6 +385,14 @@ namespace Exolutio.WPFClient
             p.SaxonTransformExecutablePath = ConfigurationManager.GetApplicationSettings()["SaxonTransformExecutablePath"];
             p.IsoSchematronTemplatesPath = ConfigurationManager.GetApplicationSettings()["IsoSchematronTemplatesPath"];
             p.Process(@"D:\Programování\EVOXSVN\SchematronTest\LastSchSchema.sch", @"D:\Programování\EVOXSVN\SchematronTest\");
+        }
+
+        private void bRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            if (RefreshCallback != null)
+            {
+                RefreshCallback(this);
+            }
         }
     }
 }

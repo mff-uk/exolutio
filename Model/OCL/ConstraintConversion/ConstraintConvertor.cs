@@ -96,7 +96,7 @@ namespace Exolutio.Model.OCL.ConstraintConversion
 
         private OclExpression CreateExpressionFromPath(PSMPath psmPath)
         {
-            VariableExp startVarExp = new VariableExp(psmPath.StartingVariable.referredVariable);
+            VariableExp startVarExp = new VariableExp(psmPath.StartingVariableExp.referredVariable);
             OclExpression result = startVarExp;
             Classifier sourceClassifier = startVarExp.Type;
             foreach (PSMPathStep step in psmPath.Steps)

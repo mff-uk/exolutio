@@ -215,7 +215,7 @@ namespace Exolutio.View
 
     public interface IFilePresenter
     {
-        void DisplayFile(XDocument xmlDocument, EDisplayedFileType fileType, string fileName = null, ILog log = null, PSMSchema validationSchema = null, FilePresenterButton[] additionalActions = null);
+        IFilePresenterTab DisplayFile(XDocument xmlDocument, EDisplayedFileType fileType, string fileName = null, ILog log = null, PSMSchema validationSchema = null, PSMSchema sourcePSMSchema = null, FilePresenterButton[] additionalActions = null);
     }
 
     public struct FilePresenterButton
@@ -233,6 +233,9 @@ namespace Exolutio.View
         PSMSchema ValidationSchema { get; set; }
         string GetDocumentText();
         void SetDocumentText(string text);
+        Action<IFilePresenterTab> RefreshCallback { get; set; }
+        PSMSchema SourcePSMSchema { get; set; }
+        void ReDisplayFile(XDocument xmlDocument, EDisplayedFileType fileType, string fileName = null, ILog log = null, PSMSchema validationSchema = null, PSMSchema sourcePSMSchema = null, FilePresenterButton[] additionalActions = null);
     }
 
     public delegate void UpdateFileContent(IFilePresenterTab fileTab);

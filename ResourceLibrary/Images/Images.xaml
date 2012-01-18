@@ -63,6 +63,7 @@
     <ImageSource x:Key="properties">props.ico</ImageSource>
     <ImageSource x:Key="question_mark">question_mark.png</ImageSource>
     <ImageSource x:Key="redo">redo.png</ImageSource>
+    <ImageSource x:Key="refresh">refresh.png</ImageSource>
     <ImageSource x:Key="Save">Save.png</ImageSource>
     <ImageSource x:Key="SendBackward">SendBackward.png</ImageSource>
     <ImageSource x:Key="SendToBack">SendToBack.png</ImageSource>

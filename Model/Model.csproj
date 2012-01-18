@@ -89,6 +89,7 @@
     <Compile Include="OCL\ConstraintConversion\PSMPath.cs" />
     <Compile Include="OCL\ConstraintConversion\PIMPath.cs" />
     <Compile Include="OCL\Bridge\PSMBridgeClass.cs" />
+    <Compile Include="OCL\ConstraintConversion\VariableNamer.cs" />
     <Compile Include="OCL\TypesTable\StandardTypeName.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

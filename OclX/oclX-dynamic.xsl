@@ -69,7 +69,7 @@
     <xsl:sequence select="oclXin:evaluate($expression, $variables)" />
   </xsl:function>
   
-    <!-- forAll function using dynamic evaluation --> 
+  <!-- forAll function using dynamic evaluation --> 
   <xsl:function name="oclX:forAll" as="xs:boolean">
     <xsl:param name="collection"  as="item()*" />
     <xsl:param name="iterationVar" as="xs:string"/>
@@ -101,6 +101,51 @@
         <xsl:choose>
           <xsl:when test="$forThis">
             <xsl:sequence select="oclX:forAll-rec($collection, $iterationVar, $expression, $iteration +1, $totalIterations, $variables)"/>        
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:sequence select="false()"/>                        
+          </xsl:otherwise>
+        </xsl:choose>                
+      </xsl:otherwise>            
+    </xsl:choose>       
+  </xsl:function>
+  
+  <!-- forAll function using dynamic evaluation --> 
+  <xsl:function name="oclX:forAllN" as="xs:boolean">
+    <xsl:param name="collection"  as="item()*" />
+    <xsl:param name="iterationVars" as="xs:string*"/>
+    <xsl:param name="expression"  as="xs:string" />
+    <xsl:param name="variables" as="item()*" />
+    
+    <xsl:sequence select="oclX:forAllN-rec($collection, $iterationVars,
+      $expression, 1, oclXin:power(count($collection), count($iterationVars)), $variables)" />        
+  </xsl:function>  
+  
+  <xsl:function name="oclX:forAllN-rec" as="xs:boolean">
+    <xsl:param name="collection" as="item()*" />
+    <xsl:param name="iterationVars" as="xs:string*"/>
+    <xsl:param name="expression" as="xs:string" />
+    <xsl:param name="iterationE" as="xs:integer" />
+    <xsl:param name="totalIterations" as="xs:integer" />
+    <xsl:param name="variables" as="item()*" />
+    
+    <xsl:choose>            
+      <xsl:when test="$iterationE = $totalIterations + 1">
+        <xsl:sequence select="true()"/>
+      </xsl:when>            
+      <xsl:otherwise>  
+        <xsl:variable name="indices" as="xs:integer*" 
+          select="oclXin:getIndices($iterationE - 1, count($collection), count($iterationVars), ())" />
+        <!-- ted mam v indices treba (2, 3) -->        
+        <xsl:variable name="variablesForThisIteration" as="item()*" 
+          select="oclXin:appendVarToSequenceN($variables, $iterationVars, $collection, $indices)" />         
+        <xsl:variable name="forThis" as="xs:boolean">
+          <xsl:message><xsl:copy-of select="$indices"/><xsl:copy-of select="$variablesForThisIteration[6]/date"/><xsl:copy-of select="$variablesForThisIteration[8]/date"/></xsl:message>          
+          <xsl:sequence select="oclXin:evaluate($expression, $variablesForThisIteration)" />
+        </xsl:variable>
+        <xsl:choose>
+          <xsl:when test="$forThis">            
+            <xsl:sequence select="oclX:forAllN-rec($collection, $iterationVars, $expression, $iterationE +1, $totalIterations, $variables)"/>        
           </xsl:when>
           <xsl:otherwise>
             <xsl:sequence select="false()"/>                        
