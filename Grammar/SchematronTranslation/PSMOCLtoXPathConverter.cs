@@ -11,23 +11,35 @@ using Exolutio.SupportingClasses;
 
 namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 {
+    /// <summary>
+    /// Translats valid OCL expression (invariant) into an XPath expression 
+    /// </summary>
     public class PSMOCLtoXPathConverter: IAstVisitor<string>
     {
-
-        protected readonly Stack<LoopExp> loopStacks
+        protected readonly Stack<LoopExp> loopStack
             = new Stack<LoopExp>();
+
+        private bool variablesDefinedExplicitly { get; set; }
+
+        private bool insideDynamicEvaluation = false; 
+
+        private OperationHelper OperationHelper { get; set; }
 
         public OCLScript OCLScript { get; set; }
 
         public PSMBridge Bridge { get; set; }
 
-        public ClassifierConstraint Constraint { get; set; }
+        public ClassifierConstraint OclContext { get; set; }
         
         public Log<OclExpression> Log { get; set; }
+        protected VariableNamer VariableNamer { get; set; }
+
+        protected OclExpression TranslatedOclExpression { get; set; }
+
 
         private LoopExp GetLoopExpForVariable(VariableExp v)
         {
-            return loopStacks.LastOrDefault(l => l.Iterator.Any(vd => vd.Name == v.referredVariable.Name));
+            return loopStack.LastOrDefault(l => l.Iterator.Any(vd => vd.Name == v.referredVariable.Name));
         }
 
         public string Visit(ErrorExp node)
@@ -37,23 +49,67 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 
         public string Visit(IterateExp node)
         {
-            loopStacks.Push(node);
+            loopStack.Push(node);
 
-            loopStacks.Pop();
+            loopStack.Pop();
             return null;
         }
 
         public string Visit(IteratorExp node)
         {
-            loopStacks.Push(node);
+            loopStack.Push(node);
 
-            loopStacks.Pop();
-            return null;
+            string sourceExpression = node.Source.Accept(this);
+            var prevInsideDynamicEvaluation = insideDynamicEvaluation;            
+            insideDynamicEvaluation = true; 
+            string bodyExpression = node.Body.Accept(this);            
+            insideDynamicEvaluation = prevInsideDynamicEvaluation;
+
+            string iteratorName;
+            // HACK: WFJT 
+            if (node.IteratorName != "Collect")
+            {
+                iteratorName = node.IteratorName;
+            }
+            else
+            {
+                iteratorName = "collect";
+            }
+            
+            string variablesDef;
+            if (loopStack.Count > 1 || variablesDefinedExplicitly)
+            {
+                variablesDef = "$variables";
+            }
+            else
+            {
+                variablesDef = "oclX:vars(.)";
+            }
+
+            string apostrophe = insideDynamicEvaluation ? "''" : "'";
+            string result = string.Format("oclX:{0}({1}, {5}{2}{5}, {5}{3}{5}, {4})", 
+                iteratorName, sourceExpression, node.Iterator[0].Name, bodyExpression, variablesDef, apostrophe);
+
+            loopStack.Pop();
+            
+            return result;
         }
 
         public string Visit(OperationCallExp node)
         {
-            return null;
+            string[] argumentsStrings = new string[node.Arguments.Count + 1];
+            OclExpression[] arguments = new OclExpression[node.Arguments.Count + 1];
+            string argTran = node.Source.Accept(this);
+            arguments[0] = node.Source;
+            argumentsStrings[0] = argTran;
+            for (int i = 0; i < node.Arguments.Count; i++)
+            {
+                argTran = node.Arguments[i].Accept(this);
+                argumentsStrings[i + 1] = argTran;
+                arguments[i + 1] = node.Arguments[i];
+            }
+            string result = OperationHelper.ToStringWithArgs(node, arguments, argumentsStrings);
+            return result;
         }
 
         public string Visit(PropertyCallExp node)
@@ -62,8 +118,9 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             {
                 Log.AddWarningTaggedFormat(XPathTranslationLogMessages.UNSAFE_PROPERTY_CALL_EXP, node);
             }
-            PSMPath psmPath = PSMPathBuilder.BuildPSMPath(node);
-            string xpath = psmPath.ToXPath();
+            PSMPath psmPath = PSMPathBuilder.BuildPSMPath(node, OclContext, VariableNamer);
+            
+            string xpath = psmPath.ToXPath(!insideDynamicEvaluation);
             return xpath;
         }
 
@@ -75,8 +132,8 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
                     node, node.referredVariable.Name);
             }
 
-            PSMPath psmPath = PSMPathBuilder.BuildPSMPath(node);
-            string xpath = psmPath.ToXPath();
+            PSMPath psmPath = PSMPathBuilder.BuildPSMPath(node, OclContext, VariableNamer);
+            string xpath = psmPath.ToXPath(!insideDynamicEvaluation);
             return xpath;
         }
 
@@ -167,13 +224,32 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 
         public void Clear()
         {
-            loopStacks.Clear();
+            loopStack.Clear();
             Log.Clear();
         }
 
-        public string TranslateInvariant(OclExpression invariant)
+        public string TranslateExpression(OclExpression expression)
         {
-            return invariant.Accept(this);
+            OperationHelper = new OperationHelper();
+            OperationHelper.InitStandard();
+            OperationHelper.PSMSchema = (PSMSchema) this.OCLScript.Schema;
+            OperationHelper.Log = Log;
+            TranslatedOclExpression = expression;
+            VariableNamer = new VariableNamer();
+            return expression.Accept(this);
+            //if (!(expression is LoopExp))
+            //{
+            //    variablesDefinedExplicitly = true;
+            //    string expressionT = expression.Accept(this);
+            //    insideDynamicEvaluation = true; 
+            //    return string.Format("oclX:holds('{0}', oclX:vars(.))", expressionT);
+            //}
+            //else
+            //{
+            //    variablesDefinedExplicitly = false;
+            //    insideDynamicEvaluation = false; 
+            //    return expression.Accept(this);
+            //}
         }
     }
 
@@ -184,4 +260,6 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             
         }
     }
+
+   
 }

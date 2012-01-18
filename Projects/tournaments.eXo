@@ -475,7 +475,7 @@ context Tournament
 inv:
 matches.day.match->forAll(m:Match |
 m.start.after(start) and m.end.before(end))
-
+ 
 /* Each Tournament conducts at
 least one Match on the first
 day of the Tournament */
@@ -536,15 +536,16 @@ not t.overlap(tournament)))
 
 /*
 Each day shows only matches taking place that day
-expects conversion dateTime -> date using Date() function
+expects conversion dateTime -> date using getDate() function
 */
 
-context Day
+/*context Day
 inv: self.match->forAll(m | m.start.getDate() = date)
+*/
 
 /* days are unique */
 context Tournament
-inv: matches.day->forAll(d1, d2 | d1.date <> d2.date)]]></eXo:Contents>
+inv: matches.day->forAll(d1, d2 | d1 <> d2 implies d1.date <> d2.date)]]></eXo:Contents>
           </eXo:OCLScript>
         </eXo:OCLScripts>
       </eXo:PSMSchema>

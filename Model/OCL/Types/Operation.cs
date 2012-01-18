@@ -64,7 +64,7 @@ namespace Exolutio.Model.OCL.Types
             {
                 return base.Name;
             }
-            protected set
+            set
             {
                 base.Name = value;
             }

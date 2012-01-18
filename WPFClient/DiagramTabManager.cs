@@ -324,16 +324,17 @@ namespace Exolutio.WPFClient
             }
         }
 
-        public void DisplayFile(XDocument xmlDocument, EDisplayedFileType fileType, string fileName = null, ILog log = null, PSMSchema validationSchema = null, FilePresenterButton[] additionalActions = null)
+        public IFilePresenterTab DisplayFile(XDocument xmlDocument, EDisplayedFileType fileType, string fileName = null, ILog log = null, PSMSchema validationSchema = null, PSMSchema sourcePSMSchema = null, FilePresenterButton[] additionalActions = null)
         {
             FileTab f = new FileTab();
-            f.DisplayFile(fileType, xmlDocument.ToString(), fileName, log, validationSchema);
+            f.DisplayFile(fileType, xmlDocument.ToString(), fileName, log, validationSchema, sourcePSMSchema);
             f.FloatingWindowSize = new System.Windows.Size(800, 600);
             if (additionalActions != null)
             {
                 f.CreateAdditionalActionsButtons(additionalActions);
             }
             f.Show(DockManager, true);
+            return f;
         }
 
         public IList<DiagramView> GetTopDiagramViews()

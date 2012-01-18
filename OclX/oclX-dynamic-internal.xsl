@@ -34,6 +34,24 @@
     <xsl:sequence select="$sequence, $newVar" />
   </xsl:function>
   
+  <xsl:function name="oclXin:appendVarToSequenceN" as="item()*">
+    <xsl:param name="sequence" as="item()*"/>
+    <xsl:param name="varNames" as="xs:string*"/>
+    <xsl:param name="collection" as="item()*" />
+    <xsl:param name="indices" as="xs:integer*" /> 
+   
+    <xsl:choose>
+      <xsl:when test="count($varNames) eq 0">
+        <xsl:sequence select="$sequence" />
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:sequence select="oclXin:appendVarToSequenceN(
+          oclXin:appendVarToSequence($sequence, $varNames[1], $collection[$indices[1] + 1]),
+          subsequence($varNames, 2), $collection, subsequence($indices, 2))"></xsl:sequence>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:function>
+  
   <xsl:function name="oclXin:wrap">
     <xsl:param name="value" as="item()" />
     <xsl:param name="text" as="xs:string"/>
@@ -99,6 +117,31 @@
   <xsl:function name="oclXin:oddMembers" as="item()*">
     <xsl:param name="sequence" as="item()*" />
     <xsl:sequence select="for $i in 1 to (count($sequence) div 2) return $sequence[$i * 2 - 1]" />
+  </xsl:function>
+  
+  <xsl:function name="oclXin:power" as="xs:integer">
+    <xsl:param name="base" as="xs:integer" />
+    <xsl:param name="exp" as="xs:integer" />    
+    <xsl:sequence select="if ($exp ge 1) then $base * oclXin:power($base, $exp - 1) else if ($exp eq 1) then $base else if ($exp eq 0) then 1 else -1" />
+  </xsl:function>
+  
+  <xsl:function name="oclXin:getIndices" as="xs:integer*">
+    <xsl:param name="scalar" as="xs:integer" /> 
+    <xsl:param name="base" as="xs:integer" />
+    <xsl:param name="length" as="xs:integer" />
+    <xsl:param name="result" as="xs:integer*" />
+    <xsl:choose>      
+      <xsl:when test="$scalar eq 0">
+        <xsl:sequence select="
+          (for $i in 1 to ($length - count($result)) return 0),
+          $result" />
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:variable name="mod" select="$scalar mod $base"/>
+        <xsl:sequence select="            
+          oclXin:getIndices(xs:integer($scalar div $base), $base, $length, (($mod), $result))" />
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:function>
   
 </xsl:stylesheet>

@@ -1,3 +1,4 @@
+using System;
 using AvalonDock;
 
 namespace Exolutio.WPFClient

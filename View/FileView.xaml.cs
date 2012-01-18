@@ -103,12 +103,14 @@ namespace Exolutio.View
         public string FileContents
         {
             get { return tbDocument.Text; }
-            set { tbDocument.Text = value; }
+            set { 
+                tbDocument.Clear();
+                tbDocument.Text = value; }
         }
 
         public void Init()
         {
-            if (DisplayedFileType.IsAmong(EDisplayedFileType.XML, EDisplayedFileType.XSD, EDisplayedFileType.SCH))
+            if (DisplayedFileType.IsAmong(EDisplayedFileType.XML, EDisplayedFileType.XSD, EDisplayedFileType.SCH) && tbDocument.SyntaxHighlighting == null)
             {
                 tbDocument.SyntaxHighlighting = ICSharpCode.AvalonEdit.Highlighting.HighlightingManager.Instance.GetDefinition("XML");
                 foldingManager = FoldingManager.Install(tbDocument.TextArea);

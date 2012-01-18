@@ -13,18 +13,36 @@ namespace Exolutio.View.Commands.Grammar
         {
             if (Current.ActiveDiagram != null && Current.ActiveDiagram is PSMDiagram)
             {
-                SchematronSchemaGenerator schemaGenerator = new SchematronSchemaGenerator();
-                schemaGenerator.Initialize((PSMSchema)Current.ActiveDiagram.Schema);
-                
-                XDocument schematronSchemaDocument = schemaGenerator.GetSchematronSchema();
+                XDocument schematronSchemaDocument;
+                ILog log;
+                GenerateSchema((PSMSchema) Current.ActiveDiagram.Schema, out schematronSchemaDocument, out log);
 
-                if (Environment.MachineName.Contains("TRUPIK"))
-                {
-                    schematronSchemaDocument.Save(@"D:\Programování\EVOXSVN\SchematronTest\LastSchSchema.sch");
-                }
-
-                Current.MainWindow.FilePresenter.DisplayFile(schematronSchemaDocument, EDisplayedFileType.SCH, Current.ActiveDiagram.Caption + ".sch", schemaGenerator.Log);
+                IFilePresenterTab filePresenterTab
+                    = Current.MainWindow.FilePresenter.DisplayFile(schematronSchemaDocument, EDisplayedFileType.SCH, Current.ActiveDiagram.Caption + ".sch", log, sourcePSMSchema:(PSMSchema)Current.ActiveDiagram.Schema);
+                filePresenterTab.RefreshCallback += RefreshCallback;
             }
+        }
+
+        private static void GenerateSchema(PSMSchema psmSchema, out XDocument schematronSchemaDocument, out ILog log)
+        {
+            SchematronSchemaGenerator schemaGenerator = new SchematronSchemaGenerator();
+            schemaGenerator.Initialize(psmSchema);
+
+            schematronSchemaDocument = schemaGenerator.GetSchematronSchema();
+
+            if (Environment.MachineName.Contains("TRUPIK"))
+            {
+                schematronSchemaDocument.Save(@"D:\Programování\EVOXSVN\SchematronTest\LastSchSchema.sch");
+            }
+            log = schemaGenerator.Log;
+        }
+
+        private void RefreshCallback(IFilePresenterTab filePresenterTab)
+        {
+            XDocument document;
+            ILog log;
+            GenerateSchema(filePresenterTab.SourcePSMSchema, out document, out log);
+            filePresenterTab.ReDisplayFile(document, EDisplayedFileType.SCH, filePresenterTab.SourcePSMSchema.Caption, log, filePresenterTab.ValidationSchema, filePresenterTab.SourcePSMSchema);
         }
 
         public override string Text

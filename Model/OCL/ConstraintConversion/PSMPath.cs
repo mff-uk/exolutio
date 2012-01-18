@@ -23,6 +23,8 @@ namespace Exolutio.Model.OCL.ConstraintConversion
             public PSMBridge Bridge { get; set; }
 
             public ClassifierConstraint ClassifierConstraint { get; set; }
+
+            public VariableNamer VariableNamer { get; set; }
         }
 
         public PathContext Context { get; private set; }
@@ -34,14 +36,14 @@ namespace Exolutio.Model.OCL.ConstraintConversion
 
         private readonly List<PSMPathStep> steps = new List<PSMPathStep>();
 
-        public VariableExp StartingVariable
+        public VariableExp StartingVariableExp
         {
             get { return ((PSMPathVariableStep)steps[0]).VariableExp; }
         }
 
         public PSMClass StartingClass
         {
-            get { return (PSMClass)StartingVariable.Type.Tag; }
+            get { return (PSMClass)StartingVariableExp.Type.Tag; }
         }
 
         public bool StartsInContext
@@ -51,7 +53,7 @@ namespace Exolutio.Model.OCL.ConstraintConversion
 
         public string StartingVariableName
         {
-            get { return StartingVariable.referredVariable.Name; }
+            get { return StartingVariableExp.referredVariable.Name; }
         }
 
         public List<PSMPathStep> Steps
@@ -89,9 +91,21 @@ namespace Exolutio.Model.OCL.ConstraintConversion
             return clone;
         }
 
-        public string ToXPath()
+        public string ToXPath(bool selfIsCurrent)
         {
-            return Steps.Select(s => s.ToXPath()).ConcatWithSeparator(String.Empty);
+            if (selfIsCurrent && 
+                StartingVariableExp.referredVariable == Context.ClassifierConstraint.Self)
+            {
+                string path = Steps.Select(s => s == Steps.First() ? "." : s.ToXPath()).ConcatWithSeparator(String.Empty);
+                if (path.StartsWith(@"./"))
+                    return path.Substring(2);
+                else 
+                    return path;
+            }
+            else
+            {
+                return Steps.Select(s => s.ToXPath()).ConcatWithSeparator(String.Empty);
+            }
         }
     }
 
@@ -140,11 +154,11 @@ namespace Exolutio.Model.OCL.ConstraintConversion
         {
             if (Variable == Path.Context.ClassifierConstraint.Self)
             {
-                if (Path.Context.LoopStack.IsEmpty())
-                {
-                    return @".";
-                }
-                else
+                //if (Path.Context.LoopStack.IsEmpty())
+                //{
+                //    return @".";
+                //}
+                //else
                 {
                     return @"$self";
                 }
@@ -196,6 +210,9 @@ namespace Exolutio.Model.OCL.ConstraintConversion
         public PSMAssociationMember From { get; set; }
         public PSMAssociation Association { get; set; }
         public PSMAssociationMember To { get; set; }
+
+        public bool IsUp { get; set; }
+
         public override string ToString()
         {
             if (!string.IsNullOrEmpty(Association.Name))
@@ -217,7 +234,14 @@ namespace Exolutio.Model.OCL.ConstraintConversion
         {
             if (Association.IsNamed)
             {
-                return string.Format(@"/{0}", Association.Name);
+                if (IsUp)
+                {
+                    return string.Format(@"/..");   
+                }
+                else
+                {
+                    return string.Format(@"/{0}", Association.Name);
+                }
             }
             else
             {
@@ -228,15 +252,20 @@ namespace Exolutio.Model.OCL.ConstraintConversion
 
     public class PSMPathBuilder
     {
-        public static PSMPath BuildPSMPath(NavigationCallExp node)
+        public static PSMPath BuildPSMPath(NavigationCallExp node, ClassifierConstraint constraint, VariableNamer variableNamer)
         {
+            PSMPath path = new PSMPath();
+            path.Context.ClassifierConstraint = constraint;
+            path.Context.VariableNamer = variableNamer;
             throw new NotImplementedException();
         }
 
 
-        public static PSMPath BuildPSMPath(PropertyCallExp node)
+        public static PSMPath BuildPSMPath(PropertyCallExp node, ClassifierConstraint constraint, VariableNamer variableNamer)
         {
             PSMPath path = new PSMPath();
+            path.Context.ClassifierConstraint = constraint;
+            path.Context.VariableNamer = variableNamer;
 
             OclExpression s;
             if (node.ReferredProperty.Tag is PSMAssociation)
@@ -255,22 +284,47 @@ namespace Exolutio.Model.OCL.ConstraintConversion
             while (!(s is VariableExp))
             {
                 PSMPathAssociationStep step = new PSMPathAssociationStep(path);
-                step.Association = (PSMAssociation)((PropertyCallExp)s).ReferredProperty.Tag;
-                step.From = null;
-                step.To = null;
+                var sp = ((PropertyCallExp)s);
+                // HACK: WFJT turn class tag into association tag
+                PSMBridgeAssociation bridgeAssociation = (PSMBridgeAssociation) sp.ReferredProperty;
+                step.Association = bridgeAssociation.SourceAsscociation;
+                if (bridgeAssociation.Direction == PSMBridgeAssociation.AssociationDirection.Down)
+                {
+                    step.From = bridgeAssociation.SourceAsscociation.Parent;
+                    step.To = bridgeAssociation.SourceAsscociation.Child;
+                    step.IsUp = false;
+                }
+                else
+                {
+                    step.From = bridgeAssociation.SourceAsscociation.Child;
+                    step.To = bridgeAssociation.SourceAsscociation.Parent;
+                    step.IsUp = true;
+                }
                 path.Steps.Insert(0, step);
-                s = ((PropertyCallExp)s).Source;
+                s = sp.Source;
             }
 
-            PSMPathVariableStep pathVariableStep = new PSMPathVariableStep(path) { VariableExp = (VariableExp)s };
+            VariableExp variableExp = (VariableExp) s;
+            PSMPathVariableStep pathVariableStep = new PSMPathVariableStep(path) { VariableExp = variableExp };
+            if (string.IsNullOrEmpty(variableExp.referredVariable.Name))
+            {
+                variableExp.referredVariable.Name = path.Context.VariableNamer.GetName(variableExp.referredVariable.PropertyType);
+            }
             path.Steps.Insert(0, pathVariableStep);
             return path;
         }
 
-        public static PSMPath BuildPSMPath(VariableExp node)
+        public static PSMPath BuildPSMPath(VariableExp variableExp, ClassifierConstraint constraint, VariableNamer variableNamer)
         {
             PSMPath path = new PSMPath();
-            PSMPathVariableStep pathVariableStep = new PSMPathVariableStep(path) { VariableExp = node };
+            path.Context.ClassifierConstraint = constraint;
+            path.Context.VariableNamer = variableNamer;
+
+            PSMPathVariableStep pathVariableStep = new PSMPathVariableStep(path) { VariableExp = variableExp };
+            if (string.IsNullOrEmpty(variableExp.referredVariable.Name))
+            {
+                variableExp.referredVariable.Name = path.Context.VariableNamer.GetName(variableExp.referredVariable.PropertyType);
+            }
             path.Steps.Insert(0, pathVariableStep);
             return path;
         }

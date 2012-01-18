@@ -14,13 +14,13 @@
 		   
 		 --><svrl:active-pattern document="file:/D:/Programování/EVOXSVN/SchematronTest/MatchSchedule.xml"/>
    <svrl:fired-rule context="/tournament"/>
-   <svrl:failed-assert test="oclX:forAll( oclX:collect(matches/day, 'it', '$it/match', $variables), 'm', 'oclDate:after($m/start, $self/start) and oclDate:before($m/end, $self/end)', oclX:vars(.) )"
-                       location="/tournament">
-      <svrl:text>
-        All Matches in a Tournament occur
-        within the Tournament’s time frame fail.
-      </svrl:text>
-   </svrl:failed-assert>
-   <svrl:active-pattern document="file:/D:/Programování/EVOXSVN/SchematronTest/MatchSchedule.xml"/>
-   <svrl:fired-rule context="/tournament"/>
+   <svrl:fired-rule context="/tournament/matches/day"/>
+   <svrl:fired-rule context="/tournament/matches/day/match"/>
+   <svrl:fired-rule context="/tournament/matches/day/match"/>
+   <svrl:fired-rule context="/tournament/matches/day"/>
+   <svrl:fired-rule context="/tournament/matches/day/match"/>
+   <svrl:fired-rule context="/tournament/matches/day/match"/>
+   <svrl:fired-rule context="/tournament/matches/day"/>
+   <svrl:fired-rule context="/tournament/matches/day/match"/>
+   <svrl:fired-rule context="/tournament/matches/day/match"/>
 </svrl:schematron-output>

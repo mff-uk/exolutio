@@ -29,7 +29,7 @@ namespace Exolutio.Model.OCL.Types
             {
                 return String.Format("{0}({1})", CollectionKind.ToString(), ElementType.QualifiedName);
             }
-            protected set
+            set
             {
                 // je volano z predka
             }

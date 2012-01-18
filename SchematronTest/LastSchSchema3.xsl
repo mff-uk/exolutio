@@ -177,13 +177,6 @@
             <xsl:apply-templates/>
          </svrl:active-pattern>
          <xsl:apply-templates select="/" mode="M0"/>
-         <svrl:active-pattern>
-            <xsl:attribute name="document">
-               <xsl:value-of select="document-uri(/)"/>
-            </xsl:attribute>
-            <xsl:apply-templates/>
-         </svrl:active-pattern>
-         <xsl:apply-templates select="/" mode="M1"/>
       </svrl:schematron-output>
    </xsl:template>
 
@@ -194,22 +187,101 @@
 
 
 	<!--RULE -->
-<xsl:template match="/tournament" priority="1000" mode="M0"><!--OclX--><xsl:variable name="variables" as="item()*" select="oclX:vars(.)"/>
+<xsl:template match="/tournament" priority="1004" mode="M0"><!--OclX--><xsl:variable name="variables" as="item()*" select="oclX:vars(.)"/>
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="/tournament"/>
 
 		    <!--ASSERT -->
 <xsl:choose>
-         <xsl:when test="         oclX:forAll(         oclX:collect(matches/day, 'it', '$it/match', $variables),                 'm',         'oclDate:after($m/start, $self/start) and oclDate:before($m/end, $self/end)',         oclX:vars(.)         ) "/>
+         <xsl:when test="oclX:forAll(oclX:collect($self/matches/day, 'it', '$it/match', $variables),'m','oclDate:after($m/start, $self/start) and oclDate:before($m/end, $self/end)', oclX:vars(.)) "/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="oclX:forAll( oclX:collect(matches/day, 'it', '$it/match', $variables), 'm', 'oclDate:after($m/start, $self/start) and oclDate:before($m/end, $self/end)', oclX:vars(.) )">
+                                test="oclX:forAll(oclX:collect($self/matches/day, 'it', '$it/match', $variables),'m','oclDate:after($m/start, $self/start) and oclDate:before($m/end, $self/end)', oclX:vars(.))">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>
-        All Matches in a Tournament occur
-        within the Tournament’s time frame fail.
-      </svrl:text>
+               <svrl:text/>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M0"/>
+   </xsl:template>
+
+	  <!--RULE -->
+<xsl:template match="/tournament" priority="1003" mode="M0"><!--OclX--><xsl:variable name="variables" as="item()*" select="oclX:vars(.)"/>
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="/tournament"/>
+
+		    <!--ASSERT -->
+<xsl:choose>
+         <xsl:when test="oclX:exists(matches/day/match, 'm', '$m/start eq $self/start')"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="oclX:exists(matches/day/match, 'm', '$m/start eq $self/start')">
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text/>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M0"/>
+   </xsl:template>
+
+	  <!--RULE -->
+<xsl:template match="/tournament/matches/day/match" priority="1002" mode="M0"><!--OclX--><xsl:variable name="variables" as="item()*" select="oclX:vars(.)"/>
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="/tournament/matches/day/match"/>
+
+		    <!--ASSERT -->
+<xsl:choose>
+         <xsl:when test="oclX:forAll(match-players/player,'p', 'ocl:exists(p/../../../../../participating-players/player, 'px', 'px/name = p/name')')"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="oclX:forAll(match-players/player,'p', 'ocl:exists(p/../../../../../participating-players/player, 'px', 'px/name = p/name')')">
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text/>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M0"/>
+   </xsl:template>
+
+	  <!--RULE -->
+<xsl:template match="/tournament" priority="1001" mode="M0"><!--OclX--><xsl:variable name="variables" as="item()*" select="oclX:vars(.)"/>
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="/tournament"/>
+
+		    <!--ASSERT -->
+<xsl:choose>
+         <xsl:when test="oclX:holds('$self/start le $self/end', oclX:vars(.))"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="oclX:holds('$self/start le $self/end', oclX:vars(.))">
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text/>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M0"/>
+   </xsl:template>
+
+	  <!--RULE -->
+<xsl:template match="/tournament/matches/day" priority="1000" mode="M0"><!--OclX--><xsl:variable name="variables" as="item()*" select="oclX:vars(.)"/>
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="/tournament/matches/day"/>
+
+		    <!--ASSERT -->
+<xsl:choose>
+         <xsl:when test="oclX:forAll(match, 'm', 'oclDate:getDate($m/start) = $self/date', oclX:vars(.))"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="oclX:forAll(match, 'm', 'oclDate:getDate($m/start) = $self/date', oclX:vars(.))">
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text/>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -218,32 +290,5 @@
    <xsl:template match="text()" priority="-1" mode="M0"/>
    <xsl:template match="@*|node()" priority="-2" mode="M0">
       <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M0"/>
-   </xsl:template>
-
-   <!--PATTERN -->
-
-
-	<!--RULE -->
-<xsl:template match="/tournament" priority="1000" mode="M1"><!--OclX--><xsl:variable name="variables" as="item()*" select="oclX:vars(.)"/>
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="/tournament"/>
-
-		    <!--ASSERT -->
-<xsl:choose>
-         <xsl:when test="1=1"/>
-         <xsl:otherwise>
-            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="1=1">
-               <xsl:attribute name="location">
-                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
-               </xsl:attribute>
-               <svrl:text>a
-      </svrl:text>
-            </svrl:failed-assert>
-         </xsl:otherwise>
-      </xsl:choose>
-      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M1"/>
-   </xsl:template>
-   <xsl:template match="text()" priority="-1" mode="M1"/>
-   <xsl:template match="@*|node()" priority="-2" mode="M1">
-      <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M1"/>
    </xsl:template>
 </xsl:stylesheet>

@@ -1,1 +1,72 @@
-<?xml version="1.0" encoding="UTF-8"?>asdf
+<?xml version="1.0" encoding="UTF-8"?>
+      
+    CONTEXT TOURNAMENT
+    
+     
+    
+    Each Tournament conducts at least one Match on the first day of the Tournament 
+    true
+        
+    
+    No Will Black
+    true
+
+    
+    Days are different
+    true
+    
+    
+    All Matches in a Tournament occur within the Tournament’s time frame 
+    true
+    
+    
+    Dates consistency
+    true
+    
+    CONTEXT MATCH 
+    
+    
+    A match can only involve players who are accepted in the tournament
+    true
+    
+    CONTEXT MATCH 
+    
+    
+    A match can only involve players who are accepted in the tournament
+    true
+    
+    CONTEXT MATCH 
+    
+    
+    A match can only involve players who are accepted in the tournament
+    true
+    
+    CONTEXT MATCH 
+    
+    
+    A match can only involve players who are accepted in the tournament
+    true
+    
+    CONTEXT MATCH 
+    
+    
+    A match can only involve players who are accepted in the tournament
+    true
+    
+    CONTEXT MATCH 
+    
+    
+    A match can only involve players who are accepted in the tournament
+    true
+    CONTEXT DAY
+    
+    Each day shows only matches taking place that day
+    true
+    CONTEXT DAY
+    
+    Each day shows only matches taking place that day
+    true
+    CONTEXT DAY
+    
+    Each day shows only matches taking place that day
+    true

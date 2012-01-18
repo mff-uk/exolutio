@@ -10,7 +10,32 @@
 
   <xsl:import href="../OclX/oclX-dynamic.xsl"/>
   <xsl:output indent="yes"/>
-  
+
+  <xsl:template match="tournament">
+    Days are different 1
+    <xsl:copy-of select="
+      oclX:forAll(
+      matches/day,
+      'd1',
+      'oclX:forAll($self/matches/day, ''d2'', ''if (not($d1 is $d2)) then $d1/date ne $d2/date else true()'', $variables)',
+      oclX:vars(.)
+      )      
+      "
+    />
+    
+    Days are different 2
+    <xsl:copy-of select="
+      oclX:forAllN(
+      matches/day,
+      'd1, d2',
+      'if (not($d1 is $d2)) then $d1/date ne $d2/date else true()',
+      oclX:vars(.)
+      )      
+      "
+    />
+    
+  </xsl:template>
+ 
   <xsl:template match="tournament">
     <xsl:variable name="variables" as="item()*" select="oclX:vars(.)" />
       

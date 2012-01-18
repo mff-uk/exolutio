@@ -10,7 +10,7 @@ namespace Exolutio.Model.OCL.Types
         public virtual string Name
         {
             get;
-            protected set;
+            set;
         }
 
         public abstract string QualifiedName
