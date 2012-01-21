@@ -465,7 +465,7 @@ League->isEmpty() implies regNo <> null
         </eXo:PSMAssociations>
         <eXo:PSMContentModels Count="0" />
         <eXo:OCLScripts Count="3">
-          <eXo:OCLScript ID="e7ac709c-e419-467b-8ce3-acbe1074e440" Name="defaultname">
+          <eXo:OCLScript ID="e7ac709c-e419-467b-8ce3-acbe1074e440" Name="collections">
             <eXo:Contents><![CDATA[/* more complex invariants, integrity, forall construct */
 
 /* All Matches in a Tournament occur
@@ -504,9 +504,7 @@ inv: matchPlayers.player->forAll(p|
 p.parent.parent.parent.parent.parent.participatingPlayers.player->exists(px |
 px.name = p.name))
 
-/* dates consistency */
-context Tournament
-inv: start <= end
+
 
 /*
 Test of type-defined function
@@ -515,7 +513,7 @@ inv: email.substring(0) = email
 */
 ]]></eXo:Contents>
           </eXo:OCLScript>
-          <eXo:OCLScript ID="fb8e63fa-e432-484e-9672-a0363284c48a" Name="defaultname">
+          <eXo:OCLScript ID="fb8e63fa-e432-484e-9672-a0363284c48a" Name="empty">
             <eXo:Contents><![CDATA[/* Example of a PIM constraint that is not used, even though it could be,
 such a constraint would should be suggested by the tool and then removed
 by the designer :
@@ -531,7 +529,7 @@ not t.overlap(tournament)))
 */
 ]]></eXo:Contents>
           </eXo:OCLScript>
-          <eXo:OCLScript ID="eebd91cf-1ebf-43e1-85a0-f22319e5d3be" Name="defaultname">
+          <eXo:OCLScript ID="eebd91cf-1ebf-43e1-85a0-f22319e5d3be" Name="days">
             <eXo:Contents><![CDATA[-- PSM only constraint
 
 /*
@@ -545,7 +543,11 @@ inv: self.match->forAll(m | m.start.getDate() = date)
 
 /* days are unique */
 context Tournament
-inv: matches.day->forAll(d1, d2 | d1 <> d2 implies d1.date <> d2.date)]]></eXo:Contents>
+inv: matches.day->forAll(d1, d2 | d1 <> d2 implies d1.date <> d2.date)
+
+/* dates consistency */
+context Tournament
+inv: start <= end]]></eXo:Contents>
           </eXo:OCLScript>
         </eXo:OCLScripts>
       </eXo:PSMSchema>
@@ -579,7 +581,7 @@ inv: matches.day->forAll(d1, d2 | d1 <> d2 implies d1.date <> d2.date)]]></eXo:C
           <eXo:PSMClass ID="d1027b46-1401-4932-8795-80d385a015e0" Name="Player" InterpretationID="06298e91-d009-4005-8a15-6d4e15d9df5e" Interpretation="PIMClass: *Player*" parentAssociationID="504e9f25-c437-4906-8973-526242a91366" parentAssociation="PSMAssociation from PSMClass: *Tournament* to PSMClass: *Player*">
             <eXo:UsedGeneralizations Count="0" />
             <eXo:ChildPSMAssociations Count="1">
-              <eXo:ChildPSMAssociation childPSMAssociationID="5a1a3f43-1499-4a4b-a271-e9cdbe5ba5a1" childPSMAssociation="PSMAssociation from PSMClass: *Player* to PSMClass: *RepresentingLeague*" />
+              <eXo:ChildPSMAssociation childPSMAssociationID="5a1a3f43-1499-4a4b-a271-e9cdbe5ba5a1" childPSMAssociation="PSMAssociation from PSMClass: *Player* to PSMClass: *PlayerLeague*" />
             </eXo:ChildPSMAssociations>
             <eXo:GeneralizationAsGeneral Count="0" />
             <eXo:PSMAttributes Count="4">
@@ -597,7 +599,7 @@ inv: matches.day->forAll(d1, d2 | d1 <> d2 implies d1.date <> d2.date)]]></eXo:C
               </eXo:PSMAttribute>
             </eXo:PSMAttributes>
           </eXo:PSMClass>
-          <eXo:PSMClass ID="572f446e-6037-4708-9f76-9eeb68ca3574" Name="RepresentingLeague" InterpretationID="3e279515-9b51-44b0-86f5-2fb35705ff03" Interpretation="PIMClass: *League*" parentAssociationID="5a1a3f43-1499-4a4b-a271-e9cdbe5ba5a1" parentAssociation="PSMAssociation from PSMClass: *Player* to PSMClass: *RepresentingLeague*">
+          <eXo:PSMClass ID="572f446e-6037-4708-9f76-9eeb68ca3574" Name="PlayerLeague" InterpretationID="3e279515-9b51-44b0-86f5-2fb35705ff03" Interpretation="PIMClass: *League*" parentAssociationID="5a1a3f43-1499-4a4b-a271-e9cdbe5ba5a1" parentAssociation="PSMAssociation from PSMClass: *Player* to PSMClass: *PlayerLeague*">
             <eXo:UsedGeneralizations Count="0" />
             <eXo:ChildPSMAssociations Count="0" />
             <eXo:GeneralizationAsGeneral Count="0" />
@@ -625,15 +627,15 @@ inv: matches.day->forAll(d1, d2 | d1 <> d2 implies d1.date <> d2.date)]]></eXo:C
             <eXo:Parent NodeType="PSMSchemaClass" parentID="b99990b5-6540-408e-b145-7d8f1141b7a4" parent="PSMSchemaClass: TournamentApplication" />
             <eXo:Child NodeType="PSMClass" childID="7a4fea5d-a035-421e-aca6-2764ee2a39f1" child="PSMClass: *Tournament*" />
           </eXo:PSMAssociation>
-          <eXo:PSMAssociation ID="504e9f25-c437-4906-8973-526242a91366" Name="player" InterpretationID="bfa88fc9-6446-4ba3-9e11-4fe6a55630f0" Interpretation="PIMAssociation **: PIMClass: *Player*, PIMClass: *Tournament*" Upper="*">
+          <eXo:PSMAssociation ID="504e9f25-c437-4906-8973-526242a91366" Name="player" InterpretationID="bfa88fc9-6446-4ba3-9e11-4fe6a55630f0" Interpretation="PIMAssociation **: PIMClass: *Player*, PIMClass: *Tournament*">
             <eXo:UsedGeneralizations Count="0" />
             <eXo:Parent NodeType="PSMClass" parentID="7a4fea5d-a035-421e-aca6-2764ee2a39f1" parent="PSMClass: *Tournament*" />
             <eXo:Child NodeType="PSMClass" childID="d1027b46-1401-4932-8795-80d385a015e0" child="PSMClass: *Player*" interpretedAssociationEndID="70ccf73e-da14-4c2a-9ada-eadbcb3be6b1" interpretedAssociationEnd="PIMAssociationEnd: *players* 0..* C: Player A:  " />
           </eXo:PSMAssociation>
-          <eXo:PSMAssociation ID="5a1a3f43-1499-4a4b-a271-e9cdbe5ba5a1" Name="representingLeague" InterpretationID="f51c3165-9475-4d22-95b9-b1c6e6a5a8eb" Interpretation="PIMAssociation **: PIMClass: *League*, PIMClass: *Player*">
+          <eXo:PSMAssociation ID="5a1a3f43-1499-4a4b-a271-e9cdbe5ba5a1" Name="playerLeague" InterpretationID="f51c3165-9475-4d22-95b9-b1c6e6a5a8eb" Interpretation="PIMAssociation **: PIMClass: *League*, PIMClass: *Player*">
             <eXo:UsedGeneralizations Count="0" />
             <eXo:Parent NodeType="PSMClass" parentID="d1027b46-1401-4932-8795-80d385a015e0" parent="PSMClass: *Player*" />
-            <eXo:Child NodeType="PSMClass" childID="572f446e-6037-4708-9f76-9eeb68ca3574" child="PSMClass: *RepresentingLeague*" interpretedAssociationEndID="69d01064-00b4-43bd-b496-bca2aa1383cc" interpretedAssociationEnd="PIMAssociationEnd: ** 0..* C: League A:  " />
+            <eXo:Child NodeType="PSMClass" childID="572f446e-6037-4708-9f76-9eeb68ca3574" child="PSMClass: *PlayerLeague*" interpretedAssociationEndID="69d01064-00b4-43bd-b496-bca2aa1383cc" interpretedAssociationEnd="PIMAssociationEnd: ** 0..* C: League A:  " />
           </eXo:PSMAssociation>
           <eXo:PSMAssociation ID="88ab1521-f233-4cb3-82e4-6451f01122aa" Name="tournamentLeague" InterpretationID="bf487109-1943-44c2-9ce3-efb76120b5b8" Interpretation="PIMAssociation **: PIMClass: *Tournament*, PIMClass: *League*">
             <eXo:UsedGeneralizations Count="0" />
@@ -646,18 +648,20 @@ inv: matches.day->forAll(d1, d2 | d1 <> d2 implies d1.date <> d2.date)]]></eXo:C
           <eXo:OCLScript ID="f8144be1-e473-40ba-aed1-f24b4962ebf0" Name="defaultname">
             <eXo:Contents><![CDATA[/*Má být associace player s jednoduchou kardinalitou?*/
 
+/*
 context Tournament
 inv: requiredQualificationPoints = null or player->forAll(p | p.points >= requiredQualificationPoints)
-
+*/
 /*
 smarter enginge should rewrite the preceding expression into a simpler one 
 (seeing that the collection player can have only one instance)
 The rewrited expression would be: 
 */
-/*
+
 context Tournament
 inv: requiredQualificationPoints = null or (player.points >= requiredQualificationPoints)
-*/
+
+
 /*
 is rewriting different for different functions?
 
@@ -669,7 +673,7 @@ iterate: more complicated
 
 /* leagues are correct */
 context Player
-inv: representingLeague.name = parent.tournamentLeague.name
+inv: playerLeague.name = parent.tournamentLeague.name
 
 ]]></eXo:Contents>
           </eXo:OCLScript>
@@ -790,7 +794,7 @@ inv: representingLeague.name = parent.tournamentLeague.name
           </eXo:PSMContentModel>
         </eXo:PSMContentModels>
         <eXo:OCLScripts Count="1">
-          <eXo:OCLScript ID="dd778127-54ae-4b79-9917-242ba3705ef5" Name="defaultname">
+          <eXo:OCLScript ID="dd778127-54ae-4b79-9917-242ba3705ef5" Name="choice">
             <eXo:Contents><![CDATA[/* choice tests - choice between attributes is not possible to 
 define sufficiently in XSD */
 
@@ -1301,17 +1305,17 @@ qualification.CH_Qualification_OpenTournament_League.League.leagueName <> null
               <eXo:MainLabelViewHelper X="0,116958618164063" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
-              <eXo:CardinalityLabelViewHelper X="-40" Y="-20" Width="NaN" Height="NaN">
+              <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:CardinalityLabelViewHelper>
             </eXo:ViewHelper>
           </eXo:Component>
-          <eXo:Component Type="PSMClass" componentID="572f446e-6037-4708-9f76-9eeb68ca3574" component="PSMClass: *RepresentingLeague*">
+          <eXo:Component Type="PSMClass" componentID="572f446e-6037-4708-9f76-9eeb68ca3574" component="PSMClass: *PlayerLeague*">
             <eXo:ViewHelper />
           </eXo:Component>
-          <eXo:Component Type="PSMAssociation" componentID="5a1a3f43-1499-4a4b-a271-e9cdbe5ba5a1" component="PSMAssociation from PSMClass: *Player* to PSMClass: *RepresentingLeague*">
+          <eXo:Component Type="PSMAssociation" componentID="5a1a3f43-1499-4a4b-a271-e9cdbe5ba5a1" component="PSMAssociation from PSMClass: *Player* to PSMClass: *PlayerLeague*">
             <eXo:ViewHelper>
-              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+              <eXo:MainLabelViewHelper X="0,162601470947266" Y="0" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">

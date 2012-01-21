@@ -4,7 +4,7 @@
     <start>luctus</start>
     <end>urna</end>
     <maxNumPlayers>12</maxNumPlayers>
-    <qualification league-name="Pro-league" />
+    <qualification leagueName="Pro-league" />
   </tournament>
   <tournament>
     <name>West Open</name>
@@ -19,7 +19,7 @@
     <start>vulputate</start>
     <end>porta</end>
     <maxNumPlayers>12</maxNumPlayers>
-    <qualification league-name="Pro-league" />
+    <qualification leagueName="Pro-league" />
   </tournament>
   <tournament>
     <name>South Open</name>

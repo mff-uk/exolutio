@@ -25,6 +25,7 @@ using Exolutio.Model.PSM.Grammar.XSDTranslation;
 using Exolutio.ResourceLibrary;
 using Exolutio.SupportingClasses;
 using Exolutio.View;
+using Exolutio.ViewToolkit;
 using Microsoft.Win32;
 using Label = Exolutio.ViewToolkit.Label;
 
@@ -358,9 +359,10 @@ namespace Exolutio.WPFClient
                 StackPanel stackPanel = new StackPanel();
                 stackPanel.Orientation = Orientation.Horizontal;
                 b.Content = stackPanel;
-                stackPanel.Children.Add(new Image() {Source = filePresenterButton.Icon});
-                stackPanel.Children.Add(new System.Windows.Controls.Label() {Content = filePresenterButton.Text});
-                b.Click += delegate { filePresenterButton.UpdateFileContentAction(this); };
+                stackPanel.Children.Add(new Image() {Source = filePresenterButton.Icon, Height=16, Margin=ViewToolkitResources.Thickness2 });
+                stackPanel.Children.Add(new System.Windows.Controls.Label() { Content = filePresenterButton.Text, Padding = ViewToolkitResources.Thickness2 });
+                FilePresenterButton fpb = filePresenterButton;
+                b.Click += delegate { fpb.UpdateFileContentAction(this); };
                 MainToolBar.Items.Add(b);
             }
         }

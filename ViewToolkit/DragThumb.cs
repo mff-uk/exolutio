@@ -328,6 +328,8 @@ namespace Exolutio.ViewToolkit
                     case EPlacementKind.ParentAutoPos:
                         if (ParentControl == null)
                         {
+                            return Position;
+
                             throw new Exception("Placement is set to ParentAutoPos or AbsoluteSubCanvas but ParentControl is null. ");
                         }
                         return new Point(Canvas.GetLeft(ParentControl) + X, Canvas.GetTop(ParentControl) + Y);

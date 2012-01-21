@@ -12,15 +12,21 @@
                         schemaVersion=""><!--   
 		   
 		   
-		 --><svrl:active-pattern document="file:/D:/Programování/EVOXSVN/SchematronTest/MatchSchedule.xml"/>
+		 --><svrl:active-pattern document="file:/D:/Programování/EVOXSVN/SchematronTest/MatchSchedule.xml"
+                        id="defaultname"
+                        name="defaultname"/>
    <svrl:fired-rule context="/tournament"/>
-   <svrl:fired-rule context="/tournament/matches/day"/>
    <svrl:fired-rule context="/tournament/matches/day/match"/>
    <svrl:fired-rule context="/tournament/matches/day/match"/>
-   <svrl:fired-rule context="/tournament/matches/day"/>
    <svrl:fired-rule context="/tournament/matches/day/match"/>
    <svrl:fired-rule context="/tournament/matches/day/match"/>
-   <svrl:fired-rule context="/tournament/matches/day"/>
    <svrl:fired-rule context="/tournament/matches/day/match"/>
    <svrl:fired-rule context="/tournament/matches/day/match"/>
+   <svrl:active-pattern document="file:/D:/Programování/EVOXSVN/SchematronTest/MatchSchedule.xml"
+                        id="defaultname"
+                        name="defaultname"/>
+   <svrl:active-pattern document="file:/D:/Programování/EVOXSVN/SchematronTest/MatchSchedule.xml"
+                        id="defaultname"
+                        name="defaultname"/>
+   <svrl:fired-rule context="/tournament"/>
 </svrl:schematron-output>

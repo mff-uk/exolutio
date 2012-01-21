@@ -37,11 +37,11 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             element.Add(XElement);
         }
 
-        public static XElement SchematronPattern(this XElement parentElement, string name = null)
+        public static XElement SchematronPattern(this XElement parentElement, string id = null)
         {
             XElement pattern = parentElement.SchematronGenericElement("pattern");
-            if (!string.IsNullOrEmpty(name))
-                pattern.AddAttributeWithValue("name", name);
+            if (!string.IsNullOrEmpty(id))
+                pattern.AddAttributeWithValue("id", id);
             return pattern;
         }
 
