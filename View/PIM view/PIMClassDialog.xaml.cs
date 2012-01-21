@@ -371,7 +371,7 @@ namespace Exolutio.View
                     error = true;
                 }
             }
-            gridAttributes.Items.Refresh();
+            Initialize(controller, PIMClass);
             applyButtonPressed = false; 
         }
 

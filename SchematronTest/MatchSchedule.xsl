@@ -11,7 +11,8 @@
   <xsl:import href="../OclX/oclX-dynamic.xsl"/>
   <xsl:output indent="yes"/>
 
-  <xsl:template match="tournament">
+  <xsl:template match="tournament">  
+    
     Days are different 1
     <xsl:copy-of select="
       oclX:forAll(
@@ -36,7 +37,7 @@
     
   </xsl:template>
  
-  <xsl:template match="tournament">
+  <xsl:template match="btournament">
     <xsl:variable name="variables" as="item()*" select="oclX:vars(.)" />
       
     CONTEXT TOURNAMENT
@@ -107,7 +108,7 @@
     <xsl:apply-templates select="//day"/>
   </xsl:template>
   
-  <xsl:template match="match">
+  <xsl:template match="bmatch">
     <xsl:variable name="variables" as="item()*">
       <variables/>
       <!-- just a placeholder -->
@@ -133,7 +134,7 @@
       "/>
   </xsl:template>
 
-  <xsl:template match="day">
+  <xsl:template match="bday">
     CONTEXT DAY
     <!-- 
       Each day shows only matches taking place that day

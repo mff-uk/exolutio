@@ -21,7 +21,9 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 
         private bool variablesDefinedExplicitly { get; set; }
 
-        private bool insideDynamicEvaluation = false; 
+        private bool insideDynamicEvaluation = false;
+
+        public SchematronSchemaGenerator.TranslationSettings Settings { get; set; }
 
         private OperationHelper OperationHelper { get; set; }
 
@@ -30,7 +32,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
         public PSMBridge Bridge { get; set; }
 
         public ClassifierConstraint OclContext { get; set; }
-        
+
         public Log<OclExpression> Log { get; set; }
         protected VariableNamer VariableNamer { get; set; }
 
@@ -83,13 +85,24 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             }
             else
             {
-                variablesDef = "oclX:vars(.)";
+                variablesDef = "$variables";
             }
 
             string apostrophe = insideDynamicEvaluation ? "''" : "'";
-            string result = string.Format("oclX:{0}({1}, {5}{2}{5}, {5}{3}{5}, {4})", 
-                iteratorName, sourceExpression, node.Iterator[0].Name, bodyExpression, variablesDef, apostrophe);
+            string result;
+            if (node.Iterator.Count == 1)
+            {
 
+                result = string.Format("oclX:{0}({1}, {5}{2}{5}, {5}{3}{5}, {4})",
+                                       iteratorName, sourceExpression, node.Iterator[0].Name, bodyExpression,
+                                       variablesDef, apostrophe);
+            }
+            else
+            {
+                result = string.Format("oclX:{0}N({1}, {5}{2}{5}, {5}{3}{5}, {4})",
+                                       iteratorName, sourceExpression, node.Iterator.ConcatWithSeparator(", "), bodyExpression,
+                                       variablesDef, apostrophe);
+            }
             loopStack.Pop();
             
             return result;
@@ -234,22 +247,11 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             OperationHelper.InitStandard();
             OperationHelper.PSMSchema = (PSMSchema) this.OCLScript.Schema;
             OperationHelper.Log = Log;
+            OperationHelper.ExplicitCastAtomicOperands = !Settings.SchemaAware;
+            OperationHelper.PSMBridge = Bridge;
             TranslatedOclExpression = expression;
             VariableNamer = new VariableNamer();
             return expression.Accept(this);
-            //if (!(expression is LoopExp))
-            //{
-            //    variablesDefinedExplicitly = true;
-            //    string expressionT = expression.Accept(this);
-            //    insideDynamicEvaluation = true; 
-            //    return string.Format("oclX:holds('{0}', oclX:vars(.))", expressionT);
-            //}
-            //else
-            //{
-            //    variablesDefinedExplicitly = false;
-            //    insideDynamicEvaluation = false; 
-            //    return expression.Accept(this);
-            //}
         }
     }
 

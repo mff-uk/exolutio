@@ -1,15 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<sch:schema 
-  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-  xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-  >
-  
-  <sch:pattern>
+<?xml version="1.0" encoding="utf-8"?>
+<sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron">  
+  <sch:pattern id="choice">
     <!-- either open tournament or belongs to some league --> 
     <sch:rule context="/tournaments/tournament">
-      <sch:assert test="
-        qualification/@open == true or qualification/@league-name != '' 
-        " />      
+      <!--self.qualification.choice_1.OpenTournament.open = True or self.qualification.choice_1.League.leagueName <> null-->
+      <sch:assert test="xs:boolean(qualification/@open) eq true() or exists(qualification/@leagueName)" />      
     </sch:rule>
     
     
@@ -18,13 +13,9 @@
     remark: in schematron they are all the same 
     --> 
     <sch:rule context="/tournaments/tournament">
-      <sch:assert test="
-        qualification/@open == true or qualification/@league-name != '' 
-        " />      >
-      <sch:assert test="
-        qualification/@open == true or qualification/@league-name != '' 
-        " />      
-    </sch:rule>
+      <!--self.qualification.choice_1.OpenTournament.open = True or self.qualification.choice_1.League.leagueName <> null-->
+      <sch:assert test="xs:boolean(qualification/@open) eq true() or exists(qualification/@leagueName)" />   
+    </sch:rule>    
     
   </sch:pattern>
 </sch:schema>

@@ -7,6 +7,8 @@
   exclude-result-prefixes="xs saxon oclXin"
   >
   
+  <xsl:param name="debug" as="xs:boolean" select="false() "/>
+  
   <xsl:function name="oclXin:appendVarToSequence" as="item()*">
     <xsl:param name="sequence" as="item()*"/>
     <xsl:param name="varName" as="xs:string"/>

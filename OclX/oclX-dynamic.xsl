@@ -6,13 +6,16 @@
   xmlns:saxon="http://saxon.sf.net/"    
   xmlns:xs="http://www.w3.org/2001/XMLSchema" 
   xmlns:oclDate="http://eXolutio.com/oclX/types/date"
-  exclude-result-prefixes="xd oclX saxon"  
+  xmlns:doc="http://www.oxygenxml.com/ns/doc/xsl"
+  exclude-result-prefixes="xd oclX saxon doc"  
   version="2.0">
   
   <xsl:import href="types/date.xsl"/>
-  <xsl:import href="oclX-dynamic-internal.xsl"/>
+  <xsl:import href="oclX-dynamic-internal.xsl" />
   
-  <!-- iterate function using dynamic evaluation --> 
+  <xsl:param name="debug" as="xs:boolean" select="false()"/>
+  
+  <!-- iterate function using dynamic evaluation -->
   <xsl:function name="oclX:iterate" as="item()*" >
     <xsl:param name="collection"  as="item()*" />
     <xsl:param name="iterationVar" as="xs:string"/>
@@ -113,12 +116,13 @@
   <!-- forAll function using dynamic evaluation --> 
   <xsl:function name="oclX:forAllN" as="xs:boolean">
     <xsl:param name="collection"  as="item()*" />
-    <xsl:param name="iterationVars" as="xs:string*"/>
+    <xsl:param name="iterationVars" as="xs:string"/>
     <xsl:param name="expression"  as="xs:string" />
     <xsl:param name="variables" as="item()*" />
     
-    <xsl:sequence select="oclX:forAllN-rec($collection, $iterationVars,
-      $expression, 1, oclXin:power(count($collection), count($iterationVars)), $variables)" />        
+    <xsl:variable name="iterationVarsSplitted" select="tokenize($iterationVars, '\s*[,;]\s*') />"
+      <xsl:sequence select="oclX:forAllN-rec($collection, $iterationVarsSplitted,      
+        $expression, 1, oclXin:power(count($collection), count(iterationVarsSplitted)), $variables)" />        
   </xsl:function>  
   
   <xsl:function name="oclX:forAllN-rec" as="xs:boolean">
@@ -129,6 +133,7 @@
     <xsl:param name="totalIterations" as="xs:integer" />
     <xsl:param name="variables" as="item()*" />
     
+    <xsl:message><xsl:value-of select="$iterationE"></xsl:value-of></xsl:message>
     <xsl:choose>            
       <xsl:when test="$iterationE = $totalIterations + 1">
         <xsl:sequence select="true()"/>
@@ -139,15 +144,38 @@
         <!-- ted mam v indices treba (2, 3) -->        
         <xsl:variable name="variablesForThisIteration" as="item()*" 
           select="oclXin:appendVarToSequenceN($variables, $iterationVars, $collection, $indices)" />         
-        <xsl:variable name="forThis" as="xs:boolean">
-          <xsl:message><xsl:copy-of select="$indices"/><xsl:copy-of select="$variablesForThisIteration[6]/date"/><xsl:copy-of select="$variablesForThisIteration[8]/date"/></xsl:message>          
+        <xsl:variable name="forThis" as="xs:boolean">                    
           <xsl:sequence select="oclXin:evaluate($expression, $variablesForThisIteration)" />
         </xsl:variable>
         <xsl:choose>
-          <xsl:when test="$forThis">            
+          <xsl:when test="$forThis">         
+            <xsl:message>
+              <xsl:text>Condition </xsl:text>
+              <xsl:copy-of select="$expression" />
+              <xsl:text> not satisfied for </xsl:text>
+            </xsl:message>                          
+            <xsl:for-each select="1 to count($variablesForThisIteration) div 2">
+              <xsl:variable name="debugIndex" select=". * 2 - 1"/>
+              <xsl:if test="count($iterationVars[. eq local-name($variablesForThisIteration[$debugIndex])])">
+                <xsl:message><xsl:sequence select="local-name($variablesForThisIteration[$debugIndex])" /></xsl:message>
+                <xsl:message><xsl:sequence select="$variablesForThisIteration[$debugIndex + 1]" /></xsl:message>
+              </xsl:if>
+            </xsl:for-each>
             <xsl:sequence select="oclX:forAllN-rec($collection, $iterationVars, $expression, $iterationE +1, $totalIterations, $variables)"/>        
           </xsl:when>
           <xsl:otherwise>
+            <xsl:message>
+              <xsl:text>Condition </xsl:text>
+              <xsl:copy-of select="$expression" />
+              <xsl:text> not satisfied for </xsl:text>
+            </xsl:message>                          
+            <xsl:for-each select="1 to count($variablesForThisIteration) div 2">
+              <xsl:variable name="debugIndex" select=". * 2 - 1"/>
+              <xsl:if test="count($iterationVars[. eq local-name($variablesForThisIteration[$debugIndex])])">
+                <xsl:message><xsl:sequence select="local-name($variablesForThisIteration[$debugIndex])" /></xsl:message>
+                <xsl:message><xsl:sequence select="$variablesForThisIteration[$debugIndex + 1]" /></xsl:message>
+              </xsl:if>
+            </xsl:for-each>
             <xsl:sequence select="false()"/>                        
           </xsl:otherwise>
         </xsl:choose>                
@@ -180,7 +208,7 @@
     </xsl:variable>
     <xsl:sequence select="$result" />
   </xsl:function> 
-  
+ 
   <xsl:function name="oclXin:evaluate" as="item()*">
     <xsl:param name="expression" as="xs:string"/>    
     <xsl:param name="variables" as="item()*" />

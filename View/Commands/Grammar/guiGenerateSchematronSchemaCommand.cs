@@ -15,20 +15,45 @@ namespace Exolutio.View.Commands.Grammar
             {
                 XDocument schematronSchemaDocument;
                 ILog log;
-                GenerateSchema((PSMSchema) Current.ActiveDiagram.Schema, out schematronSchemaDocument, out log);
+                GenerateSchema((PSMSchema)Current.ActiveDiagram.Schema, settings, out schematronSchemaDocument, out log);
 
+                FilePresenterButton[] additionalButtons = new[] {
+                    new FilePresenterButton() { Text = "Not schema aware", Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.refresh), UpdateFileContentAction = GenerateNotSchemaAware },
+                    new FilePresenterButton() { Text = "Expect schema aware", Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.refresh), UpdateFileContentAction = GenerateSchemaAware }
+                    };
                 IFilePresenterTab filePresenterTab
-                    = Current.MainWindow.FilePresenter.DisplayFile(schematronSchemaDocument, EDisplayedFileType.SCH, Current.ActiveDiagram.Caption + ".sch", log, sourcePSMSchema:(PSMSchema)Current.ActiveDiagram.Schema);
+                    = Current.MainWindow.FilePresenter.DisplayFile(schematronSchemaDocument, EDisplayedFileType.SCH, Current.ActiveDiagram.Caption + ".sch", log, sourcePSMSchema:(PSMSchema)Current.ActiveDiagram.Schema,
+                    additionalActions: additionalButtons);
                 filePresenterTab.RefreshCallback += RefreshCallback;
             }
         }
 
-        private static void GenerateSchema(PSMSchema psmSchema, out XDocument schematronSchemaDocument, out ILog log)
+        private void GenerateNotSchemaAware(IFilePresenterTab filePresenterTab)
+        {
+            XDocument document;
+            ILog log;
+            settings.SchemaAware = false; 
+            GenerateSchema(filePresenterTab.SourcePSMSchema, settings, out document, out log);
+            filePresenterTab.ReDisplayFile(document, EDisplayedFileType.SCH, filePresenterTab.SourcePSMSchema.Caption, log, filePresenterTab.ValidationSchema, filePresenterTab.SourcePSMSchema);
+        }
+
+        SchematronSchemaGenerator.TranslationSettings settings = new SchematronSchemaGenerator.TranslationSettings();
+
+        private void GenerateSchemaAware(IFilePresenterTab filePresenterTab)
+        {
+            XDocument document;
+            ILog log;
+            settings.SchemaAware = true; 
+            GenerateSchema(filePresenterTab.SourcePSMSchema, settings, out document, out log);
+            filePresenterTab.ReDisplayFile(document, EDisplayedFileType.SCH, filePresenterTab.SourcePSMSchema.Caption, log, filePresenterTab.ValidationSchema, filePresenterTab.SourcePSMSchema);
+        }
+
+        private static void GenerateSchema(PSMSchema psmSchema, SchematronSchemaGenerator.TranslationSettings settings, out XDocument schematronSchemaDocument, out ILog log)
         {
             SchematronSchemaGenerator schemaGenerator = new SchematronSchemaGenerator();
             schemaGenerator.Initialize(psmSchema);
 
-            schematronSchemaDocument = schemaGenerator.GetSchematronSchema();
+            schematronSchemaDocument = schemaGenerator.GetSchematronSchema(settings);
 
             if (Environment.MachineName.Contains("TRUPIK"))
             {
@@ -41,7 +66,8 @@ namespace Exolutio.View.Commands.Grammar
         {
             XDocument document;
             ILog log;
-            GenerateSchema(filePresenterTab.SourcePSMSchema, out document, out log);
+            settings.SchemaAware = true; 
+            GenerateSchema(filePresenterTab.SourcePSMSchema, settings, out document, out log);
             filePresenterTab.ReDisplayFile(document, EDisplayedFileType.SCH, filePresenterTab.SourcePSMSchema.Caption, log, filePresenterTab.ValidationSchema, filePresenterTab.SourcePSMSchema);
         }
 

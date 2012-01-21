@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<sch:schema 
-  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-  xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-  >
+<sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron">
     
-  <sch:pattern>
-    <sch:rule context="/tournament-application">
-      <sch:assert test="not(requiredQualificationPoints) or 
-        oclX:forall(player, 'p.points >= requiredQualificationPoints', ())" />
- 
+  <sch:pattern id="applications">
+    <!--Below follow constraints from OCL script 'applications'. -->
+    <sch:rule context="/tournamentApplication">
+      <!--self.requiredQualificationPoints = null or self.player->forAll(p : Player | p.points >= self.requiredQualificationPoints)-->
+      <sch:assert test="not(exists(requiredQualificationPoints)) or oclX:forAll(player, 'p', '$p/points ge $self/requiredQualificationPoints', oclX:vars(.))" />
+    </sch:rule>
+       
+    <sch:rule context="/tournamentApplication">
+      <!--self.requiredQualificationPoints = null or self.player.points >= self.requiredQualificationPoints-->
+      <sch:assert test="not(exists(requiredQualificationPoints)) or xs:integer(player/points) ge xs:nonNegativeInteger(requiredQualificationPoints)"/> 
     </sch:rule>
     
-    <sch:rule context="/tournament-application">
-      <sch:assert test="
-        not(requiredQualificationPoints) or (player/points >= requiredQualificationPoints)"/>      
+    <sch:rule context="/tournamentApplication/player">
+      <!--self.playerLeague.name = self.Tournament.tournamentLeague.name-->
+      <sch:assert test="playerLeague/name eq ../tournamentLeague/name" />
     </sch:rule>
+  
   </sch:pattern>
 </sch:schema>
 

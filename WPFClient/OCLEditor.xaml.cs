@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Exolutio.Controller.Commands.Atomic.MacroWrappers;
+using Exolutio.Dialogs;
 using Exolutio.Model;
 using Exolutio.Model.OCL;
 using Exolutio.View;
@@ -147,6 +149,22 @@ namespace Exolutio.WPFClient {
         public void ShowScript(OCLScript oclScript)
         {
             cbScripts.SelectedItem = oclScript;
+        }
+
+        private void Rename_Click(object sender, RoutedEventArgs e)
+        {
+            if (DisplayedScript != null)
+            {
+                string newName;
+                if (ExolutioInputBox.Show("Enter new name of the script", DisplayedScript.Name, out newName) == true)
+                {
+                    cmdRenameComponent c = new cmdRenameComponent(Current.Controller);
+                    c.ComponentGuid = DisplayedScript;
+                    c.NewName = newName;
+                    c.Execute();
+                }
+            }
+            
         }
     }
 }

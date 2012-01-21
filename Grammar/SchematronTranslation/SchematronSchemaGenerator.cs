@@ -4,11 +4,17 @@ using Exolutio.Model.OCL;
 using Exolutio.Model.OCL.AST;
 using Exolutio.Model.OCL.Bridge;
 using Exolutio.SupportingClasses;
+using Exolutio.SupportingClasses.Annotations;
 
 namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 {
     public class SchematronSchemaGenerator
     {
+        public struct TranslationSettings
+        {
+            public bool SchemaAware { get; set; }
+        }
+
         private PSMSchema psmSchema;
 
         public PSMSchema PSMSchema
@@ -24,7 +30,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             Log = new Log<OclExpression>();
         }
 
-        public XDocument GetSchematronSchema()
+        public XDocument GetSchematronSchema([NotNull]TranslationSettings translationSettings)
         {
             XDocument doc = new XDocument(new XDeclaration("1.0", "utf-8", null));
             XElement schSchema = doc.SchematronSchema();
@@ -33,15 +39,15 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 
             foreach (OCLScript oclScript in PSMSchema.OCLScripts)
             {
-                TranslateScript(schSchema, oclScript);
+                TranslateScript(schSchema, oclScript, translationSettings);
             }
 
             return doc;
         }
 
-        private void TranslateScript(XElement schSchema, OCLScript oclScript)
+        private void TranslateScript(XElement schSchema, OCLScript oclScript, TranslationSettings translationSettings)
         {
-            XElement patternElement = schSchema.SchematronPattern();
+            XElement patternElement = schSchema.SchematronPattern(oclScript.Name);
 
             CompilerResult compilerResult = oclScript.CompileToAst();
             if (!compilerResult.Errors.HasError)
@@ -54,7 +60,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
                     XElement ruleElement = patternElement.SchematronRule(contextNode.XPath);                    
                     foreach (OclExpression invariant in constraint.Invariants)
                     {
-                        string xpath = TranslateInvariantToXPath(oclScript, constraint, compilerResult.Bridge, invariant);
+                        string xpath = TranslateInvariantToXPath(oclScript, constraint, compilerResult.Bridge, invariant, translationSettings);
                         try
                         {
                             ruleElement.Add(new XComment(invariant.ToString()));
@@ -74,13 +80,14 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             }
         }
 
-        private string TranslateInvariantToXPath(OCLScript oclScript, ClassifierConstraint constraint, IBridgeToOCL bridge, OclExpression invariant)
+        private string TranslateInvariantToXPath(OCLScript oclScript, ClassifierConstraint constraint, IBridgeToOCL bridge, OclExpression invariant, TranslationSettings translationSettings)
         {
             PSMOCLtoXPathConverter xpathConverter = new PSMOCLtoXPathConverter();
             xpathConverter.OCLScript = oclScript;
             xpathConverter.Bridge = (PSMBridge) bridge;
             xpathConverter.OclContext = constraint;
             xpathConverter.Log = Log;
+            xpathConverter.Settings = translationSettings;
             string invariantStr = xpathConverter.TranslateExpression(invariant);
 
             return invariantStr;
