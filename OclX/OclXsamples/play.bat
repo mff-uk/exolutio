@@ -1,0 +1,1 @@
+"c:\Program Files\Saxonica\SaxonEE9.4N\bin\Query.exe" -s:play.xml -q:"D:\Programov n¡\EvoXSVN\OclX\OclXSamples\play2.xq" -qversion:3.0                                       
