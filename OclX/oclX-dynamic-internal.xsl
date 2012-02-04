@@ -3,7 +3,7 @@
   xmlns:xs="http://www.w3.org/2001/XMLSchema" 
   xmlns:saxon="http://saxon.sf.net/"      
   xmlns:oclXin="http://eXolutio.com/oclX/dynamic/internal"
-  version="2.0"
+  version="3.0"
   exclude-result-prefixes="xs saxon oclXin"
   >
   
@@ -104,7 +104,7 @@
   <xsl:function name="oclXin:retrieveVarFromSequence" as="item()*">
     <xsl:param name="item" /> 
     <xsl:choose>
-      <xsl:when test="xs:string($item) eq '##EMPTY'">
+      <xsl:when test="not($item instance of element()) and xs:string($item) eq '##EMPTY'">
         <xsl:sequence select="()" />
       </xsl:when>
       <xsl:when test="$item instance of element() and local-name($item) eq 'SEQ'">
@@ -145,5 +145,35 @@
       </xsl:otherwise>
     </xsl:choose>
   </xsl:function>
+  
+  <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
+    <desc>Nodes are compared for identity. Atomic items using deep-equal.</desc>
+  </doc>
+  <xsl:function name="oclXin:combined-first-index-of" as="xs:integer">
+    <xsl:param name="sequence" as="item()*"/>
+    <xsl:param name="item" as="item()"/>
+    
+    <xsl:variable name="foundIndices" as="xs:integer*">
+      <xsl:choose>
+        <xsl:when test="$item instance of node()">
+          <xsl:for-each select="$sequence">
+            <xsl:if test="(. instance of node()) and (. is $item)">
+              <xsl:sequence select="position()"/>            
+            </xsl:if>
+          </xsl:for-each>    
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:for-each select="$sequence">
+            <xsl:if test="not(. instance of node()) and deep-equal(., $item)">
+              <xsl:sequence select="position()"/>
+            </xsl:if>
+          </xsl:for-each> 
+        </xsl:otherwise>
+      </xsl:choose>      
+    </xsl:variable>
+    <xsl:sequence select="if (count($foundIndices) > 0) then $foundIndices[1] else -1" />
+    
+  </xsl:function>
+
   
 </xsl:stylesheet>
