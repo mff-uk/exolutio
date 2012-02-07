@@ -47,7 +47,8 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
 
         internal override CommandBase.OperationResult UndoOperation()
         {
-            throw new NotImplementedException("Member acmdSynchroPSMAssociations.UndoOperation not implemented.");
+            //throw new NotImplementedException("Member acmdSynchroPSMAssociations.UndoOperation not implemented.");
+            return OperationResult.OK;
         }
 
         internal override PropagationMacroCommand PostPropagation()
