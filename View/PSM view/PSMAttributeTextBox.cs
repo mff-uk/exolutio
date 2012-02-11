@@ -197,6 +197,7 @@ namespace Exolutio.View
                 d.Topmost = true;
                 d.Initialize(Current.Controller, PSMAttribute.PSMClass, PSMAttribute);
                 d.Show();
+                e.Handled = true;
             }
         #endif
         }

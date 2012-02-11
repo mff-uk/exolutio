@@ -81,7 +81,7 @@
                             <DataGridCheckBoxColumn Header="Element" x:Name="xformColumn" Binding="{Binding XFormElement}" Width="60" IsThreeState="False">
                             </DataGridCheckBoxColumn>
                             <!--<DataGridTextColumn Header="PIM class" MinWidth="70" x:Name="pimClassColumn" Binding="{Binding ComesFrom.Name, FallbackValue=pim-less}" Width="100" IsReadOnly="True" />-->
-							<DataGridComboBoxColumn Header="Type" MinWidth="80" x:Name="typeColumn" SelectedValueBinding="{Binding Type}" Width="80" />
+                            <DataGridComboBoxColumn Header="Type" MinWidth="80" x:Name="typeColumn" SelectedValueBinding="{Binding Type}" DisplayMemberPath="Name" Width="80" />
                             <DataGridTextColumn Header="Default value" x:Name="defaultValueColumn" Binding="{Binding DefaultValue}" Width="90" />
 							<DataGridTextColumn Header="Multiplicity" x:Name="multiplicityColumn" Binding="{Binding Multiplicity,  ValidatesOnExceptions=True}" EditingElementStyle="{StaticResource CellEditStyle}" Width="70" />
 						</DataGrid.Columns>

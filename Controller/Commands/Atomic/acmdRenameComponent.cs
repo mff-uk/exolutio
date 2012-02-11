@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Exolutio.Controller.Commands;
+using Exolutio.Model.PIM;
 using Exolutio.Model.PSM;
 using Exolutio.Model;
 
@@ -51,6 +52,26 @@ namespace Exolutio.Controller.Commands.Atomic
             Component component = Project.TranslateComponent<Component>(NamedComponentGuid);
             component.Name = oldname;
             return OperationResult.OK;
+        }
+
+        internal override PropagationMacroCommand PostPropagation()
+        {
+            PropagationMacroCommand command = new PropagationMacroCommand(Controller) { CheckFirstOnlyInCanExecute = true };
+            ExolutioObject component = Project.TranslateComponent(NamedComponentGuid);
+
+            if (component is PIMComponent)
+            {
+                PIMComponent pimComponent = (PIMComponent)component;
+                foreach (PSMComponent psmComponent in pimComponent.GetInterpretedComponents())
+                {
+                    if (psmComponent.IsNamed && psmComponent.Name == oldname)
+                    {
+                        command.Commands.Add(new acmdRenameComponent(Controller, psmComponent, NewName));
+                    }
+                }
+            }
+
+            return command;
         }
     }
 }

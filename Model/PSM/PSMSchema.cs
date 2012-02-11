@@ -115,7 +115,7 @@ namespace Exolutio.Model.PSM
         {
             return PSMSchemaDefinedTypes.Concat(Project.PSMBuiltInTypes);
         }
-
+        
         #region schema class
 
         private Guid psmSchemaClassGuid;

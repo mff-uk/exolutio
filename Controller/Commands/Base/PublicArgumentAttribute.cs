@@ -24,16 +24,19 @@ namespace Exolutio.Controller.Commands
 	        set { allowNullInput = value; }
 	    }
 
+	    public bool CreateEditorHierarchy { get; set; }
+
 	    public PublicArgumentAttribute(string argumentName)
 	    {
 	        ArgumentName = argumentName;
 	    }
 
-	    public PublicArgumentAttribute(string argumentName, Type componentType, bool allowNullInput = false)
+        public PublicArgumentAttribute(string argumentName, Type componentType, bool allowNullInput = false, bool createEditorHierarchy = true)
 	    {
 	        ArgumentName = argumentName;
 	        ComponentType = componentType;
 	        AllowNullInput = allowNullInput;
+	        CreateEditorHierarchy = createEditorHierarchy;
 	    }
 	}
 }

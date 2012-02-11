@@ -127,6 +127,7 @@ namespace Exolutio.View
                 d.Initialize(Current.Controller, PIMAttribute.PIMClass, PIMAttribute);
                 d.Topmost = true;
                 d.Show();
+                e.Handled = true;
             }
 #endif
         }

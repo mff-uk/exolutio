@@ -180,6 +180,8 @@ namespace Exolutio.Controller.Commands.Reflection
                     parameter.ModifiedComponentPropertyName = a.ModifiedPropertyName;
                 }
                 
+                parameter.CreateEditorHierarchy = a.CreateEditorHierarchy;
+                
                 result.Add(parameter);
             }
 

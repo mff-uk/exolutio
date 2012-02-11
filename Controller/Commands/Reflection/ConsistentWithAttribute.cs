@@ -122,6 +122,15 @@ namespace Exolutio.Controller.Commands.Reflection
                 }
                 return instances[PSMAssociationMemberParameterConsistency.Key];
             }
+
+            if (consistencyKey == PSMClassInterpretedEndParameterConsistency.Key)
+            {
+                if (!instances.ContainsKey(PSMClassInterpretedEndParameterConsistency.Key))
+                {
+                    instances[PSMClassInterpretedEndParameterConsistency.Key] = new PSMClassInterpretedEndParameterConsistency();
+                }
+                return instances[PSMClassInterpretedEndParameterConsistency.Key];
+            }
             throw new ArgumentException(string.Format("Unknown consistency type: {0}.", consistencyKey), "consistencyKey");
         }
     }

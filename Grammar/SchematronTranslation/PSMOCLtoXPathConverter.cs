@@ -14,7 +14,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
     /// <summary>
     /// Translats valid OCL expression (invariant) into an XPath expression 
     /// </summary>
-    public class PSMOCLtoXPathConverter: IAstVisitor<string>
+    public class PSMOCLtoXPathConverter : IAstVisitor<ConvertedExp>
     {
         protected readonly Stack<LoopExp> loopStack
             = new Stack<LoopExp>();
@@ -44,12 +44,12 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             return loopStack.LastOrDefault(l => l.Iterator.Any(vd => vd.Name == v.referredVariable.Name));
         }
 
-        public string Visit(ErrorExp node)
+        public ConvertedExp Visit(ErrorExp node)
         {
             throw new ExpressionNotSupportedInXPath(node);
         }
 
-        public string Visit(IterateExp node)
+        public ConvertedExp Visit(IterateExp node)
         {
             loopStack.Push(node);
 
@@ -57,14 +57,14 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             return null;
         }
 
-        public string Visit(IteratorExp node)
+        public ConvertedExp Visit(IteratorExp node)
         {
             loopStack.Push(node);
 
-            string sourceExpression = node.Source.Accept(this);
+            string sourceExpression = node.Source.Accept(this).GetString();
             var prevInsideDynamicEvaluation = insideDynamicEvaluation;            
             insideDynamicEvaluation = true; 
-            string bodyExpression = node.Body.Accept(this);            
+            string bodyExpression = node.Body.Accept(this).GetString();            
             insideDynamicEvaluation = prevInsideDynamicEvaluation;
 
             string iteratorName;
@@ -105,14 +105,14 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             }
             loopStack.Pop();
             
-            return result;
+            return new ConvertedExp(result);
         }
 
-        public string Visit(OperationCallExp node)
+        public ConvertedExp Visit(OperationCallExp node)
         {
-            string[] argumentsStrings = new string[node.Arguments.Count + 1];
+            ConvertedExp[] argumentsStrings = new ConvertedExp[node.Arguments.Count + 1];
             OclExpression[] arguments = new OclExpression[node.Arguments.Count + 1];
-            string argTran = node.Source.Accept(this);
+            ConvertedExp argTran = node.Source.Accept(this);
             arguments[0] = node.Source;
             argumentsStrings[0] = argTran;
             for (int i = 0; i < node.Arguments.Count; i++)
@@ -122,10 +122,10 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
                 arguments[i + 1] = node.Arguments[i];
             }
             string result = OperationHelper.ToStringWithArgs(node, arguments, argumentsStrings);
-            return result;
+            return new ConvertedExp(result);
         }
 
-        public string Visit(PropertyCallExp node)
+        public ConvertedExp Visit(PropertyCallExp node)
         {
             if (!(node.ReferredProperty.Tag is PSMAttribute))
             {
@@ -134,10 +134,10 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             PSMPath psmPath = PSMPathBuilder.BuildPSMPath(node, OclContext, VariableNamer);
             
             string xpath = psmPath.ToXPath(!insideDynamicEvaluation);
-            return xpath;
+            return new ConvertedExp(xpath, OperationHelper.IsXPathAtomic(node.Type));
         }
 
-        public string Visit(VariableExp node)
+        public ConvertedExp Visit(VariableExp node)
         {
             if (node.Type is Class)
             {
@@ -147,18 +147,19 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 
             PSMPath psmPath = PSMPathBuilder.BuildPSMPath(node, OclContext, VariableNamer);
             string xpath = psmPath.ToXPath(!insideDynamicEvaluation);
-            return xpath;
+            ConvertedExp convertedExp = new ConvertedExp(xpath, OperationHelper.IsXPathAtomic(node.Type));
+            return convertedExp;
         }
 
         #region not supported yet 
 
-        public string Visit(LetExp node)
+        public ConvertedExp Visit(LetExp node)
         {
             // TODO: PSM2XPath: there should be some suport for let expression in the future
             throw new ExpressionNotSupportedInXPath(node);
         }
 
-        public string Visit(TypeExp node)
+        public ConvertedExp Visit(TypeExp node)
         {
             // TODO: PSM2XPath: there should be some suport for types in the future
             throw new ExpressionNotSupportedInXPath(node);
@@ -169,68 +170,68 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 
         #region structural
 
-        public string Visit(IfExp node)
+        public ConvertedExp Visit(IfExp node)
         {
-            string cond = node.Condition.Accept(this);
-            string thenExpr = node.ThenExpression.Accept(this);
-            string elseExpr = node.ElseExpression.Accept(this);
-            return string.Format("if ({0}) then {1} else {2}", cond, thenExpr, elseExpr);
+            string cond = node.Condition.Accept(this).GetString();
+            string thenExpr = node.ThenExpression.Accept(this).GetString();
+            string elseExpr = node.ElseExpression.Accept(this).GetString();
+            return new ConvertedExp(string.Format("if ({0}) then {1} else {2}", cond, thenExpr, elseExpr));
         }
 
         #endregion 
 
         #region literals
 
-        public string Visit(TupleLiteralExp node)
+        public ConvertedExp Visit(TupleLiteralExp node)
         {
             throw new ExpressionNotSupportedInXPath(node);
         }
 
-        public string Visit(InvalidLiteralExp node)
+        public ConvertedExp Visit(InvalidLiteralExp node)
         {
             return null;
         }
 
-        public string Visit(BooleanLiteralExp node)
+        public ConvertedExp Visit(BooleanLiteralExp node)
         {
             // instead boolean literals, functions are used
-            return node.Value ? "true()" : "false()";
+            return new ConvertedExp(node.Value ? "true()" : "false()");
         }
 
-        public string Visit(CollectionLiteralExp node)
+        public ConvertedExp Visit(CollectionLiteralExp node)
         {
             // TODO: PSM2XPath: some support for collection linterals
             throw new ExpressionNotSupportedInXPath(node);
         }
 
-        public string Visit(EnumLiteralExp node)
+        public ConvertedExp Visit(EnumLiteralExp node)
         {
             return null;
         }
 
-        public string Visit(NullLiteralExp node)
+        public ConvertedExp Visit(NullLiteralExp node)
         {
-            return null;
+            return new ConvertedExp("()");
         }
 
-        public string Visit(UnlimitedNaturalLiteralExp node)
+        public ConvertedExp Visit(UnlimitedNaturalLiteralExp node)
         {
             throw new ExpressionNotSupportedInXPath(node);
         }
 
-        public string Visit(IntegerLiteralExp node)
+        public ConvertedExp Visit(IntegerLiteralExp node)
         {
-            return node.ToString();
+            return new ConvertedExp(node.ToString());
         }
 
-        public string Visit(RealLiteralExp node)
+        public ConvertedExp Visit(RealLiteralExp node)
         {
-            return node.ToString();
+            return new ConvertedExp(node.ToString());
         }
 
-        public string Visit(StringLiteralExp node)
+        public ConvertedExp Visit(StringLiteralExp node)
         {
-            return string.Format("'{0}'", node.Value);
+            return new ConvertedExp(string.Format("'{0}'", node.Value));
         }
 
         #endregion 
@@ -251,7 +252,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             OperationHelper.PSMBridge = Bridge;
             TranslatedOclExpression = expression;
             VariableNamer = new VariableNamer();
-            return expression.Accept(this);
+            return expression.Accept(this).GetString();
         }
     }
 
@@ -263,5 +264,34 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
         }
     }
 
-   
+    public class ConvertedExp
+    {
+        public string RawString { get; set; }
+
+        public bool AddDataCall { get; set; }
+    
+        public string GetString()
+        {
+            if (AddDataCall)
+            {
+                return string.Format("xs:data({0})", RawString);
+            }
+            else
+            {
+                return RawString;
+            }
+        }
+
+        public ConvertedExp(string rawString, bool addDataCall = false)
+        {
+            this.RawString = rawString;
+            AddDataCall = addDataCall;
+        }
+
+        public override string ToString()
+        {
+            //throw new Exception("TO STRING IN CONVERTEDEXP");
+            return null;
+        }
+    }
 }

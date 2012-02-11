@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
 using Exolutio.Model.PSM;
@@ -34,6 +35,8 @@ namespace Exolutio.Model.Serialization
         public Guid CurrentSchemaGuid { get; set; }
 
         public ProjectVersion CurrentProjectVersion { get; set; }
+
+        public Dictionary<string, Guid> TypeDict { get; set; }
 
         #region static encoding functions
 

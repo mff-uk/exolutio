@@ -193,6 +193,11 @@ namespace Exolutio.WPFClient
 
         static void Current_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
+            if (e.Exception.Source == "Fluent")
+            {
+                e.Handled = true;
+                return;
+            }
             ExceptionWindow w = new ExceptionWindow(e.Exception);
             if (w.ShowDialog() == true)
             {
