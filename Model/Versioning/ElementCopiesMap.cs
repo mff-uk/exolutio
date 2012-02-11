@@ -20,10 +20,20 @@ namespace Exolutio.Model.Versioning
 
         public bool KeepGuids { get; set; }
 
+        public List<Guid> ImmutableGuids = new List<Guid>(); 
+
         public ElementCopiesMap(Project sourceProject, Project targetProject)
         {
             SourceProject = sourceProject;
             TargetProject = targetProject;
+            foreach (AttributeType pimBuiltInType in SourceProject.PIMBuiltInTypes)
+            {
+                ImmutableGuids.Add(pimBuiltInType.ID);
+            }
+            foreach (AttributeType psmBuiltInType in SourceProject.PSMBuiltInTypes)
+            {
+                ImmutableGuids.Add(psmBuiltInType.ID);
+            }
         }
 
         public Guid SuggestGuid(IExolutioCloneable item)
@@ -37,6 +47,10 @@ namespace Exolutio.Model.Versioning
             if (copyDictionaryGuid.TryGetValue(item.ID, out foundItem))
             {
                 return foundItem;
+            }
+            else if (ImmutableGuids.Contains(item.ID))
+            {
+                return item.ID;
             }
             else
             {

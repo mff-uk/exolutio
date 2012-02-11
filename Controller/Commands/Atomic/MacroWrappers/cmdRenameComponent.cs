@@ -31,11 +31,12 @@ namespace Exolutio.Controller.Commands.Atomic.MacroWrappers
         {
             CheckFirstOnlyInCanExecute = true;
         }
-
+        
         public void Set(Guid componentGuid, string newName)
         {
             NewName = newName;
             ComponentGuid = componentGuid;
+            Component component = (Component) Project.TranslateComponent(ComponentGuid);
         }
 
         protected override void GenerateSubCommands()

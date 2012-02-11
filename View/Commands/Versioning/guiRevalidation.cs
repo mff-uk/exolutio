@@ -81,7 +81,7 @@ namespace Exolutio.View.Commands.Versioning
                     revalidationStylesheet.Save(ls);
                 }
             }
-            else
+            //else
             {
                 XsltTestWindow.ShowDialog(detectedChangeInstancesSet, schemaVersion1, schemaVersion2);    
             }

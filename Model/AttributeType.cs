@@ -53,6 +53,8 @@ namespace Exolutio.Model
 
         public string XSDDefinition { get; set; }
 
+        public bool XSDAtomic { get; set; }
+
         private Guid schemaGuid;
         public Schema Schema
         {
@@ -88,6 +90,19 @@ namespace Exolutio.Model
 
         public UndirectCollection<ModelOperation> Operations { get; private set; }
 
+        private Guid representedPIMTypeGuid;
+        public AttributeType RepresentedPIMType
+        {
+            get
+            {
+                return representedPIMTypeGuid == Guid.Empty ? null : Project.TranslateComponent<AttributeType>(representedPIMTypeGuid);
+            }
+            set
+            {
+                representedPIMTypeGuid = value != null ? value : Guid.Empty;
+            }
+        }
+
         #region Implementation of IExolutioSerializable
 
         public override void Serialize(XElement parentNode, SerializationContext context)
@@ -110,6 +125,11 @@ namespace Exolutio.Model
                 this.SerializeIDRef(Component, "componentId", parentNode, context);
             }
 
+            if (RepresentedPIMType != null)
+            {
+                this.SerializeIDRef(Component, "representedPIMTypeID", parentNode, context);
+            }
+
             if (XSDDefinition != null)
             {
                 XCData xsdDefinitionCData = new XCData(XSDDefinition);
@@ -117,6 +137,12 @@ namespace Exolutio.Model
                 XElement xsdDefinitionElement = new XElement(context.ExolutioNS + "XSDDefinition");
                 xsdDefinitionElement.Add(xsdDefinitionCData);
                 parentNode.Add(xsdDefinitionElement);
+            }
+
+            if (XSDAtomic)
+            {
+                XAttribute xsdAtomicAttribute = new XAttribute("XSDAtomic", SerializationContext.EncodeValue(true));
+                parentNode.Add(xsdAtomicAttribute);
             }
 
             this.WrapAndSerializeCollection("Operations", "Operation", Operations, parentNode, context, true);
@@ -129,12 +155,42 @@ namespace Exolutio.Model
             this.IsSealed = SerializationContext.DecodeBool(parentNode.Attribute("IsSealed").Value);
             this.Name = SerializationContext.DecodeString(parentNode.Attribute("Name").Value);
             baseTypeGuid = this.DeserializeIDRef("baseTypeID", parentNode, context, true);
+
+            XAttribute baseTypeAttribute = parentNode.Attribute("baseType");
+            if (baseTypeAttribute != null)
+            {
+                if (context.TypeDict != null && context.TypeDict.ContainsKey(baseTypeAttribute.Value))
+                {
+                    baseTypeGuid = context.TypeDict[baseTypeAttribute.Value];
+                }
+            }
+
+            XAttribute xsdAtomicAttribute = parentNode.Attribute("xsdAtomic");
+            if (xsdAtomicAttribute != null)
+            {
+                this.XSDAtomic = SerializationContext.DecodeBool(xsdAtomicAttribute.Value);
+            }
+
             componentGuid = this.DeserializeIDRef("componentId", parentNode, context, true);
+            representedPIMTypeGuid = this.DeserializeIDRef("representedPIMTypeID", parentNode, context, true);
 
             XElement xsdDefinitionElement = parentNode.Element(context.ExolutioNS + "XSDDefinition");
             if (xsdDefinitionElement != null)
             {
                 this.XSDDefinition = ((XCData) xsdDefinitionElement.Nodes().First()).Value;
+            }
+
+            XAttribute xsdAtomicAtribute = parentNode.Attribute("XSDAtomic");
+            if (xsdAtomicAtribute != null)
+            {
+                this.XSDAtomic = true; 
+
+            }
+
+            XAttribute xsdDefinitionAttribute = parentNode.Attribute("XSDDefinition");
+            if (xsdDefinitionAttribute != null)
+            {
+                this.XSDDefinition = xsdDefinitionAttribute.Value;
             }
 
             this.DeserializeWrappedCollection("Operations", Operations, ModelOperation.CreateInstance, parentNode, context, true);
@@ -165,6 +221,7 @@ namespace Exolutio.Model
             copyAttributeType.Name = this.Name;
             copyAttributeType.IsSealed = this.IsSealed;
             copyAttributeType.XSDDefinition = this.XSDDefinition;
+            copyAttributeType.XSDAtomic = this.XSDAtomic;
             if (BaseType != null)
             {
                 copyAttributeType.baseTypeGuid = createdCopies.GetGuidForCopyOf(BaseType);
@@ -176,6 +233,10 @@ namespace Exolutio.Model
             if (Component != null)
             {
                 copyAttributeType.componentGuid = createdCopies.GetGuidForCopyOf(Component);
+            }
+            if (RepresentedPIMType != null)
+            {
+                copyAttributeType.representedPIMTypeGuid = RepresentedPIMType;
             }
             this.CopyCollection(Operations, copyAttributeType.Operations, projectVersion, createdCopies);
             copyAttributeType.SetProjectVersion(projectVersion);

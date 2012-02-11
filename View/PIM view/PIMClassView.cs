@@ -132,6 +132,7 @@ namespace Exolutio.View
         void tbClassHeader_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             OpenPIMClassDialog();
+            e.Handled = true;
         }
 
         public void OpenPIMClassDialog()
@@ -146,6 +147,7 @@ namespace Exolutio.View
             dialog.Topmost = true;
             dialog.Initialize(Current.Controller, PIMClass);
             dialog.Show();
+            dialog.Focus();
 #endif
         }
 

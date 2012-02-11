@@ -177,6 +177,7 @@ namespace Exolutio.View
         void tbClassHeader_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             OpenPSMClassDialog();
+            e.Handled = true;
         }
 
         public void OpenPSMClassDialog()

@@ -126,7 +126,10 @@ namespace Exolutio.Model.PIM
             this.CopyCollection(PIMAttributes, copyPIMClass.PIMAttributes, projectVersion, createdCopies);
             this.CopyCollection(PIMOperations, copyPIMClass.PIMOperations, projectVersion, createdCopies);
             this.CopyRefCollection(GeneralizationsAsGeneral, copyPIMClass.GeneralizationsAsGeneral, projectVersion, createdCopies, true);
-            copyPIMClass.generalizationAsSpecificGuid = createdCopies.GetGuidForCopyOf(GeneralizationAsSpecific);
+            if (GeneralizationAsSpecific != null)
+            {
+                copyPIMClass.generalizationAsSpecificGuid = createdCopies.GetGuidForCopyOf(GeneralizationAsSpecific);
+            }
             this.CopyRefCollection(PIMAssociationEnds, copyPIMClass.PIMAssociationEnds, projectVersion, createdCopies, true);
         }
 

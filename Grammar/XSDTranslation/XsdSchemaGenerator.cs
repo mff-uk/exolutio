@@ -262,7 +262,9 @@ namespace Exolutio.Model.PSM.Grammar.XSDTranslation
             if (nodeInfo.Node is PSMClass)
             {
                 PSMClass psmClass = (PSMClass) nodeInfo.Node;
-                if (psmClass.IsStructuralRepresentative)
+                // HACK: nodeInfos.ContainsKey(psmClass.RepresentedClass) -- this prevents references to cross-schema representatives,
+                //       for now, but should be fixed in the future
+                if (psmClass.IsStructuralRepresentative && nodeInfos.ContainsKey(psmClass.RepresentedClass))
                 {
                     XsdNodeTranslationInfo srInfo = nodeInfos[psmClass.RepresentedClass];
                     if (srInfo.DefinesElements && !attributeReferences)

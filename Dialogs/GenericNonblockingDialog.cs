@@ -1,4 +1,5 @@
-﻿using System.Windows.Media;
+﻿using System.Windows.Input;
+using System.Windows.Media;
 
 namespace System.Windows.Controls
 {
@@ -9,7 +10,20 @@ namespace System.Windows.Controls
         : Window
         #endif
     {
-         
+        public GenericNonblockingDialog()
+        {
+            
+        }
+
+        protected override void OnKeyUp(Input.KeyEventArgs e)
+        {
+            base.OnKeyUp(e);
+            if (!e.Handled && e.Key == Key.Escape &&  Keyboard.Modifiers.HasFlag(ModifierKeys.Control))
+            {
+                Close(false);
+            }
+        }
+
         /// <summary>
         /// Closes eXolutio dialog window. 
         /// </summary>

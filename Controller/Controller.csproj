@@ -184,6 +184,7 @@
     <Compile Include="Commands\Complex\PSM\cmdInsertPSMClass.cs" />
     <Compile Include="Commands\Complex\PSM\cmdFixPSMAssociationInterpretation.cs" />
     <Compile Include="Commands\Reflection\CommandSerializer.cs" />
+    <Compile Include="Commands\Reflection\PSMClassInterpretedEndParameterConsistency.cs" />
     <Compile Include="Commands\Reflection\PSMAssociationMemberParameterConsistency.cs" />
     <Compile Include="Commands\Reflection\DescriptionAttribute.cs" />
     <Compile Include="Commands\Reflection\PIMAttributeNeighboringClassParameterConsistency.cs" />

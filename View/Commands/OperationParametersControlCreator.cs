@@ -331,7 +331,7 @@ namespace Exolutio.View.Commands
                     GuidLookup superiorPropertyEditor = null;
                     IOperationParameterControlWithConsistencyCheck oneBelowSuperiorPropertyEditor = null;
                     Type topLevelType = null;
-                    while (InputHierarchy.ContainsKey(componentType))
+                    while (InputHierarchy.ContainsKey(componentType) && parameter.CreateEditorHierarchy)
                     {
                         InputHierarchyStruct inputHierarchyStruct = InputHierarchy[componentType];
                         Type superiorType = inputHierarchyStruct.SuperiorType;

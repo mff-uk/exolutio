@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Exolutio.Controller.Commands.Reflection;
 using Exolutio.Model;
 using Exolutio.Model.PIM;
 using Exolutio.Model.PSM;
@@ -17,7 +18,8 @@ namespace Exolutio.Controller.Commands.Complex.PSM
         [Scope(ScopeAttribute.EScope.PSMClass)]
         public Guid ParentPSMClassGuid { get; set; }
 
-        [PublicArgument("PIM association end", typeof(PIMAssociationEnd))]
+        [ConsistentWith("ParentPSMClassGuid", PSMClassInterpretedEndParameterConsistency.Key)]
+        [PublicArgument("PIM association end", typeof(PIMAssociationEnd), CreateEditorHierarchy = false)]
         public Guid PIMAssociationEndGuid { get; set; }
 
         /// <summary>
@@ -62,6 +64,8 @@ namespace Exolutio.Controller.Commands.Complex.PSM
             Commands.Add(new acmdSetPSMClassInterpretation(Controller, ClassGuid, associationEnd.PIMClass));
             Commands.Add(new acmdNewPSMAssociation(Controller, parent, ClassGuid, parent.PSMSchema) { AssociationGuid = AssociationGuid });
             Commands.Add(new acmdSetPSMAssociationInterpretation(Controller, AssociationGuid, associationEnd, associationEnd.PIMAssociation));
+            
+            /*
             foreach (PIMAttribute a in associationEnd.PIMClass.PIMAttributes)
             {
                 Guid attrGuid = Guid.NewGuid();
@@ -69,6 +73,24 @@ namespace Exolutio.Controller.Commands.Complex.PSM
                 c.Set(ClassGuid, a.AttributeType, a.Name, a.Lower, a.Upper, false);
                 Commands.Add(c);
                 Commands.Add(new acmdSetPSMAttributeInterpretation(Controller, attrGuid, a));
+            }
+            */
+
+            if (associationEnd.IsNamed)
+            {
+                Commands.Add(new acmdRenameComponent(Controller, AssociationGuid, associationEnd.Name));
+            }
+            else if (associationEnd.PIMAssociation.IsNamed)
+            {
+                Commands.Add(new acmdRenameComponent(Controller, AssociationGuid, associationEnd.PIMAssociation.Name));
+            }
+            else
+            {
+                Commands.Add(new acmdRenameComponent(Controller, AssociationGuid, string.Empty));
+            }
+            if (associationEnd.HasNondefaultCardinality())
+            {
+                Commands.Add(new acmdUpdatePSMAssociationCardinality(Controller, AssociationGuid, associationEnd.Lower, associationEnd.Upper));
             }
 
         }

@@ -133,10 +133,13 @@ namespace Exolutio.Model.PIM
         public override string ToString()
         {
             string s = "PIMAssociationEnd: ";
-            if (Name != null) s += "\"" + Name + "\" ";
-            s += lower + ".." + Upper + " ";
-            if (pimClassGuid != Guid.Empty && PIMClass.Name != null) s += "C: " + PIMClass.Name + " ";
+            if (!string.IsNullOrEmpty(Name)) s += "\"" + Name + "\" ";
             if (pimAssociationGuid != Guid.Empty && PIMAssociation.Name != null) s += "A: " + PIMAssociation.Name + " ";
+            if (pimClassGuid != Guid.Empty && PIMClass.Name != null) s += "[" + PIMClass.Name + "] ";
+            if (this.HasNondefaultCardinality())
+            {
+                s += "{" + lower + ".." + Upper + "}";
+            }
             return s;
         }
 

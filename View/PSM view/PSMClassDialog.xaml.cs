@@ -82,7 +82,7 @@ namespace Exolutio.View
             public FakePSMAttribute()
             {
                 Multiplicity = "1";
-                XFormElement = false;
+                XFormElement = true;
                 Name = "Attribute";
             }
 
@@ -101,7 +101,7 @@ namespace Exolutio.View
                 XFormElement = p.Element;
             }
 
-            public FakePSMAttribute(PIMAttribute p)
+            public FakePSMAttribute(PIMAttribute p, TypeFinder typeFinder)
                 : this()
             {
                 Name = p.Name;                
@@ -111,8 +111,13 @@ namespace Exolutio.View
                 RepresentedAttribute = p;
                 ComesFrom = (PIMClass)p.PIMClass;
                 Checked = false;
-                XFormElement = false;
+                XFormElement = true;
+                if (p.AttributeType != null)
+                {
+                    Type = typeFinder(p.AttributeType);
+                }
             }
+
 
             public void BeginEdit()
             {
@@ -267,7 +272,7 @@ namespace Exolutio.View
 
             }
 
-            public FakeAttributeCollection(ObservableCollection<FakePSMAttribute> attributesList, PSMClass psmClass)
+            public FakeAttributeCollection(ObservableCollection<FakePSMAttribute> attributesList, PSMClass psmClass, TypeFinder typeFinder)
                 : base(attributesList)
             {
                 foreach (PSMAttribute psmAttribute in psmClass.PSMAttributes)
@@ -285,7 +290,7 @@ namespace Exolutio.View
                     {
                         if (!attributesList.Any(p => p.SourceAttribute != null && p.SourceAttribute.Interpretation == attribute))
                         {
-                            attributesList.Add(new FakePSMAttribute(attribute) { Checked = classEmpty });
+                            attributesList.Add(new FakePSMAttribute(attribute, typeFinder) { Checked = classEmpty });
                         }
                     }
                 }
@@ -384,7 +389,8 @@ namespace Exolutio.View
 
             ObservableCollection<FakePSMAttribute> fakeAttributesList = new ObservableCollection<FakePSMAttribute>();
 
-            fakeAttributes = new FakeAttributeCollection(fakeAttributesList, psmClass);
+            TypeFinder tf = TryFindSuitablePIMType;
+            fakeAttributes = new FakeAttributeCollection(fakeAttributesList, psmClass, tf);
             fakeAttributesList.CollectionChanged += delegate { UpdateApplyEnabled(); };
             gridAttributes.ItemsSource = fakeAttributesList;
 
@@ -781,6 +787,20 @@ namespace Exolutio.View
             #endregion 
 
             return !error;
+        }
+
+        public delegate AttributeType TypeFinder(AttributeType pimType); 
+
+        public AttributeType TryFindSuitablePIMType(AttributeType pimType)
+        {
+            foreach (AttributeType availablePsmType in this.psmClass.PSMSchema.GetAvailablePSMTypes())
+            {
+                if (pimType == availablePsmType.RepresentedPIMType)
+                {
+                    return availablePsmType;
+                }
+            }
+            return null;
         }
 
         #region update apply enabled

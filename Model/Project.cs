@@ -77,6 +77,7 @@ namespace Exolutio.Model
                 }
 
                 SerializationContext context = new SerializationContext();
+                context.TypeDict = typeDict;
 
                 foreach (XElement type in types)
                 {
