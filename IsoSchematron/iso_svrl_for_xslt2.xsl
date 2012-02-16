@@ -209,7 +209,8 @@
 		<xsl:if test=" string-length($output-encoding) &gt; 0">
 			<xsl:attribute name="encoding"><xsl:value-of select=" $output-encoding" /></xsl:attribute>
 		</xsl:if>
-    </axsl:output>    
+    </axsl:output>
+     
 </xsl:template>
 
 <!-- Overrides skeleton.xsl -->

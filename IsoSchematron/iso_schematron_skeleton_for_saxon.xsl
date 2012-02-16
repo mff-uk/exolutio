@@ -430,10 +430,6 @@
     xmlns:exsl="http://exslt.org/common" 
     xmlns:xhtml="http://www.w3.org/1999/xhtml" 
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:oclX="http://eXolutio.com/oclX/dynamic"
-	xmlns:oclXin="http://eXolutio.com/oclX/dynamic/internal"
-	xmlns:oclDate="http://eXolutio.com/oclX/types/date" 
-	xmlns:saxon="http://saxon.sf.net/"
     extension-element-prefixes="exsl"
     version="2.0"
 	 >
@@ -573,7 +569,7 @@ which require a preprocess.
 		select="iso:ns" />
 
 	    <!-- Handle the namespaces before the version attribute: reported to help SAXON -->
-	    <xsl:attribute name="version">3.0</xsl:attribute>
+	    <xsl:attribute name="version">1.0</xsl:attribute>
 	    
 		<xsl:apply-templates select="." mode="stylesheetbody"/>
 		<!-- was xsl:call-template name="stylesheetbody"/ -->
@@ -641,9 +637,7 @@ which require a preprocess.
    that string could be put in fileDirParameter. The archives parameters are available
    for ZIP archives.
 	-->
-	<!-- OCLX: added to import OCLX stylesheets --> 
-	<xsl:comment>OclX</xsl:comment>
-    <axsl:import href="../OclX/oclX-dynamic.xsl"/>
+    
     <xsl:call-template name="iso:exslt.add.imports" /> <!-- RJ moved report BH -->
 	<axsl:param name="archiveDirParameter" />
 	<axsl:param name="archiveNameParameter" />
@@ -1625,9 +1619,7 @@ which require a preprocess.
 <!-- DPC priorities count up from 1000 not down from 4000 (templates in same priority order as before) -->
 		<axsl:template match="{@context}"
 		priority="{1000 + count(following-sibling::*)}" mode="M{count(../preceding-sibling::*)}">
-			<!-- OCLX: added to define variables --> 	
-			<xsl:comment>OclX</xsl:comment>
-			<axsl:variable name="variables" as="item()*" select="oclX:vars(.)" />			
+		 
 			<xsl:call-template name="process-rule">
 				<xsl:with-param name="context" select="@context"/>
 				
