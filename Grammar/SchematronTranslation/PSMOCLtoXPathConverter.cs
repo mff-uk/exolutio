@@ -14,14 +14,10 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
     /// <summary>
     /// Translats valid OCL expression (invariant) into an XPath expression 
     /// </summary>
-    public class PSMOCLtoXPathConverter : IAstVisitor<ConvertedExp>
+    public abstract class PSMOCLtoXPathConverter : IAstVisitor<ConvertedExp>
     {
         protected readonly Stack<LoopExp> loopStack
             = new Stack<LoopExp>();
-
-        private bool variablesDefinedExplicitly { get; set; }
-
-        private bool insideDynamicEvaluation = false;
 
         public SchematronSchemaGenerator.TranslationSettings Settings { get; set; }
 
@@ -32,14 +28,16 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
         public PSMBridge Bridge { get; set; }
 
         public ClassifierConstraint OclContext { get; set; }
-
+        
         public Log<OclExpression> Log { get; set; }
+        
         protected VariableNamer VariableNamer { get; set; }
 
         protected OclExpression TranslatedOclExpression { get; set; }
 
+        public abstract bool CanTranslateSelfAsCurrent { get; }
 
-        private LoopExp GetLoopExpForVariable(VariableExp v)
+        protected LoopExp GetLoopExpForVariable(VariableExp v)
         {
             return loopStack.LastOrDefault(l => l.Iterator.Any(vd => vd.Name == v.referredVariable.Name));
         }
@@ -49,64 +47,9 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             throw new ExpressionNotSupportedInXPath(node);
         }
 
-        public ConvertedExp Visit(IterateExp node)
-        {
-            loopStack.Push(node);
+        public abstract ConvertedExp Visit(IterateExp node);
 
-            loopStack.Pop();
-            return null;
-        }
-
-        public ConvertedExp Visit(IteratorExp node)
-        {
-            loopStack.Push(node);
-
-            string sourceExpression = node.Source.Accept(this).GetString();
-            var prevInsideDynamicEvaluation = insideDynamicEvaluation;            
-            insideDynamicEvaluation = true; 
-            string bodyExpression = node.Body.Accept(this).GetString();            
-            insideDynamicEvaluation = prevInsideDynamicEvaluation;
-
-            string iteratorName;
-            // HACK: WFJT 
-            if (node.IteratorName != "Collect")
-            {
-                iteratorName = node.IteratorName;
-            }
-            else
-            {
-                iteratorName = "collect";
-            }
-            
-            string variablesDef;
-            if (loopStack.Count > 1 || variablesDefinedExplicitly)
-            {
-                variablesDef = "$variables";
-            }
-            else
-            {
-                variablesDef = "$variables";
-            }
-
-            string apostrophe = insideDynamicEvaluation ? "''" : "'";
-            string result;
-            if (node.Iterator.Count == 1)
-            {
-
-                result = string.Format("oclX:{0}({1}, {5}{2}{5}, {5}{3}{5}, {4})",
-                                       iteratorName, sourceExpression, node.Iterator[0].Name, bodyExpression,
-                                       variablesDef, apostrophe);
-            }
-            else
-            {
-                result = string.Format("oclX:{0}N({1}, {5}{2}{5}, {5}{3}{5}, {4})",
-                                       iteratorName, sourceExpression, node.Iterator.ConcatWithSeparator(", "), bodyExpression,
-                                       variablesDef, apostrophe);
-            }
-            loopStack.Pop();
-            
-            return new ConvertedExp(result);
-        }
+        public abstract ConvertedExp Visit(IteratorExp node);
 
         public ConvertedExp Visit(OperationCallExp node)
         {
@@ -133,7 +76,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             }
             PSMPath psmPath = PSMPathBuilder.BuildPSMPath(node, OclContext, VariableNamer);
             
-            string xpath = psmPath.ToXPath(!insideDynamicEvaluation);
+            string xpath = psmPath.ToXPath(CanTranslateSelfAsCurrent);
             return new ConvertedExp(xpath, OperationHelper.IsXPathAtomic(node.Type));
         }
 
@@ -146,7 +89,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             }
 
             PSMPath psmPath = PSMPathBuilder.BuildPSMPath(node, OclContext, VariableNamer);
-            string xpath = psmPath.ToXPath(!insideDynamicEvaluation);
+            string xpath = psmPath.ToXPath(CanTranslateSelfAsCurrent);
             ConvertedExp convertedExp = new ConvertedExp(xpath, OperationHelper.IsXPathAtomic(node.Type));
             return convertedExp;
         }
@@ -253,6 +196,133 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             TranslatedOclExpression = expression;
             VariableNamer = new VariableNamer();
             return expression.Accept(this).GetString();
+        }
+    }
+
+    public class PSMOCLtoXPathConverterFunctional : PSMOCLtoXPathConverter
+    {
+        public override bool CanTranslateSelfAsCurrent
+        {
+            get { return loopStack.Count == 0; }
+        }
+
+        public override ConvertedExp Visit(IterateExp node)
+        {
+            loopStack.Push(node);
+
+            string sourceExpression = node.Source.Accept(this).GetString();
+            string bodyExpression = node.Body.Accept(this).GetString();
+            string accInitExpression = node.Result.Value.Accept(this).GetString();
+            string result = string.Format("oclX:iterate({0}, {3}, function(${1}) {{ {2} }})", sourceExpression, node.Iterator[0].Name, bodyExpression, accInitExpression);
+
+            loopStack.Pop();
+            return new ConvertedExp(result);
+        }
+
+        public override ConvertedExp Visit(IteratorExp node)
+        {
+            loopStack.Push(node);
+
+            string sourceExpression = node.Source.Accept(this).GetString();
+            string bodyExpression = node.Body.Accept(this).GetString();
+
+            string iteratorName;
+            // HACK: WFJT 
+            if (node.IteratorName != "Collect")
+            {
+                iteratorName = node.IteratorName;
+            }
+            else
+            {
+                iteratorName = "collect";
+            }
+
+            string result;
+            if (node.Iterator.Count == 1)
+            {
+
+                result = string.Format("oclX:{0}({1}, function(${2}) {{ {3} }})",
+                                       iteratorName, sourceExpression, node.Iterator[0].Name, bodyExpression);
+            }
+            else
+            {
+                result = string.Format("oclX:{0}N({1}, function({2}) {{ {3} }})",
+                                       iteratorName, sourceExpression, node.Iterator.ConcatWithSeparator(vd => "$" + vd.Name, ", "), bodyExpression);
+            }
+            loopStack.Pop();
+
+            return new ConvertedExp(result);
+        }
+    }
+
+    public class PSMOCLtoXPathConverterDynamic : PSMOCLtoXPathConverter
+    {
+        private bool insideDynamicEvaluation = false;
+        private bool variablesDefinedExplicitly { get; set; }
+
+        public override bool CanTranslateSelfAsCurrent
+        {
+            get { return !insideDynamicEvaluation; }
+        }
+
+        public override ConvertedExp Visit(IterateExp node)
+        {
+            loopStack.Push(node);
+
+            loopStack.Pop();
+            return null;
+        }
+
+
+        public override ConvertedExp Visit(IteratorExp node)
+        {
+            loopStack.Push(node);
+
+            string sourceExpression = node.Source.Accept(this).GetString();
+            var prevInsideDynamicEvaluation = insideDynamicEvaluation;
+            insideDynamicEvaluation = true;
+            string bodyExpression = node.Body.Accept(this).GetString();
+            insideDynamicEvaluation = prevInsideDynamicEvaluation;
+
+            string iteratorName;
+            // HACK: WFJT 
+            if (node.IteratorName != "Collect")
+            {
+                iteratorName = node.IteratorName;
+            }
+            else
+            {
+                iteratorName = "collect";
+            }
+
+            string variablesDef;
+            if (loopStack.Count > 1 || variablesDefinedExplicitly)
+            {
+                variablesDef = "$variables";
+            }
+            else
+            {
+                variablesDef = "$variables";
+            }
+
+            string apostrophe = insideDynamicEvaluation ? "''" : "'";
+            string result;
+            if (node.Iterator.Count == 1)
+            {
+
+                result = string.Format("oclX:{0}({1}, {5}{2}{5}, {5}{3}{5}, {4})",
+                                       iteratorName, sourceExpression, node.Iterator[0].Name, bodyExpression,
+                                       variablesDef, apostrophe);
+            }
+            else
+            {
+                result = string.Format("oclX:{0}N({1}, {5}{2}{5}, {5}{3}{5}, {4})",
+                                       iteratorName, sourceExpression, node.Iterator.ConcatWithSeparator(vd => vd.Name, ", "), bodyExpression,
+                                       variablesDef, apostrophe);
+            }
+            loopStack.Pop();
+
+            return new ConvertedExp(result);
         }
     }
 

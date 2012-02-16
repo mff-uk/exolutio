@@ -28,6 +28,7 @@ using Exolutio.View;
 using Exolutio.ViewToolkit;
 using Microsoft.Win32;
 using Label = Exolutio.ViewToolkit.Label;
+using System.Windows.Controls.Primitives;
 
 namespace Exolutio.WPFClient
 {
@@ -83,9 +84,15 @@ namespace Exolutio.WPFClient
 
         public Action<IFilePresenterTab> RefreshCallback { get; set; }
 
-        public void ReDisplayFile(XDocument xmlDocument, EDisplayedFileType displayedFileType, string fileName = null, ILog log = null, PSMSchema validationSchema = null, PSMSchema sourcePSMSchema = null, FilePresenterButton[] additionalActions = null)
+        public void ReDisplayFile(XDocument xmlDocument, EDisplayedFileType displayedFileType, string fileName = null, ILog log = null, PSMSchema validationSchema = null, PSMSchema sourcePSMSchema = null, FilePresenterButtonInfo[] additionalActions = null)
         {
             DisplayFile(displayedFileType, xmlDocument.ToString(), fileName, log, validationSchema, sourcePSMSchema);
+        }
+
+        private readonly List<FilePresenterButtonInfo> filePresenterButtons = new List<FilePresenterButtonInfo>(); 
+        public IEnumerable<FilePresenterButtonInfo> FilePresenterButtons
+        {
+            get { return filePresenterButtons; }
         }
 
         private void ShowHideRelevantButtons()
@@ -93,7 +100,7 @@ namespace Exolutio.WPFClient
             bValidateXMLSchema.Visibility = fileView.DisplayedFileType == EDisplayedFileType.XSD ? Visibility.Visible : Visibility.Collapsed;
             bValidateSchematronSchema.Visibility = fileView.DisplayedFileType == EDisplayedFileType.SCH ? Visibility.Visible : Visibility.Collapsed;
             bValidateAgainstSchema.Visibility = ValidationSchema != null ? Visibility.Visible : Visibility.Collapsed;
-            bExecuteSchematronPipeline.Visibility = fileView.DisplayedFileType == EDisplayedFileType.SCH ? Visibility.Visible : Visibility.Collapsed;
+            bExecuteSchematronPipeline.Visibility = Visibility.Collapsed; // fileView.DisplayedFileType == EDisplayedFileType.SCH ? Visibility.Visible : Visibility.Collapsed;
             bRefresh.Visibility = fileView.DisplayedFileType == EDisplayedFileType.SCH ? Visibility.Visible : Visibility.Collapsed;
         }
 
@@ -351,19 +358,42 @@ namespace Exolutio.WPFClient
 
         #endregion
 
-        public void CreateAdditionalActionsButtons(FilePresenterButton[] additionalActions)
+        public void CreateAdditionalActionsButtons(FilePresenterButtonInfo[] additionalActions)
         {
-            foreach (FilePresenterButton filePresenterButton in additionalActions)
+            foreach (FilePresenterButtonInfo buttonInfo in additionalActions)
             {
-                Button b = new Button();
+                FilePresenterButtonInfo fpb = buttonInfo;
+                ButtonBase b;
+                if (!fpb.ToggleButton)
+                {
+                    b = new Button();
+                }
+                else
+                {
+                    ToggleButton toggleButton = new ToggleButton {IsChecked = fpb.IsToggled};
+                    toggleButton.Checked += (sender, args) => fpb.IsToggled = toggleButton.IsChecked == true;
+                    b = toggleButton;
+                }
+                if (!string.IsNullOrEmpty(fpb.ButtonName))
+                {
+                    b.Name = fpb.ButtonName;
+                }
+
                 StackPanel stackPanel = new StackPanel();
                 stackPanel.Orientation = Orientation.Horizontal;
                 b.Content = stackPanel;
-                stackPanel.Children.Add(new Image() {Source = filePresenterButton.Icon, Height=16, Margin=ViewToolkitResources.Thickness2 });
-                stackPanel.Children.Add(new System.Windows.Controls.Label() { Content = filePresenterButton.Text, Padding = ViewToolkitResources.Thickness2 });
-                FilePresenterButton fpb = filePresenterButton;
-                b.Click += delegate { fpb.UpdateFileContentAction(this); };
+                stackPanel.Children.Add(new Image() {Source = fpb.Icon, Height=16, Margin=ViewToolkitResources.Thickness2 });
+                stackPanel.Children.Add(new System.Windows.Controls.Label() { Content = fpb.Text, Padding = ViewToolkitResources.Thickness2 });
+                b.Click += delegate(object sender, RoutedEventArgs args)
+                               {
+                                   if (sender is ToggleButton)
+                                   {
+                                       fpb.IsToggled = ((ToggleButton) sender).IsChecked ==true;
+                                   }
+                                   fpb.UpdateFileContentAction(this);
+                               };
                 MainToolBar.Items.Add(b);
+                filePresenterButtons.Add(fpb);
             }
         }
 

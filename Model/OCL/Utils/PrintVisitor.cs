@@ -217,7 +217,14 @@ namespace Exolutio.Model.OCL.Utils {
             sb.Append("Tuple");
             sb.Append("{");
             PrintArgs(node.Parts, ",", (v) => {
-                sb.AppendFormat("{0} : {1} = ", v.Key, v.Value.Type.Name);
+                if (v.Value.Type != null)
+                {
+                    sb.AppendFormat("{0} : {1} = ", v.Key, v.Value.Type.Name);
+                }
+                else
+                {
+                    sb.AppendFormat("{0} = ", v.Key);
+                }
                 v.Value.Value.Accept(this);
             });
             sb.Append("} ");

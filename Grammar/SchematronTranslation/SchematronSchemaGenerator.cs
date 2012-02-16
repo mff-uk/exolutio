@@ -13,6 +13,8 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
         public struct TranslationSettings
         {
             public bool SchemaAware { get; set; }
+
+            public bool Functional { get; set; }
         }
 
         private PSMSchema psmSchema;
@@ -82,14 +84,15 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 
         private string TranslateInvariantToXPath(OCLScript oclScript, ClassifierConstraint constraint, IBridgeToOCL bridge, OclExpression invariant, TranslationSettings translationSettings)
         {
-            PSMOCLtoXPathConverter xpathConverter = new PSMOCLtoXPathConverter();
+            PSMOCLtoXPathConverter xpathConverter = translationSettings.Functional ? 
+                (PSMOCLtoXPathConverter) new PSMOCLtoXPathConverterFunctional() : 
+                (PSMOCLtoXPathConverter) new PSMOCLtoXPathConverterDynamic();
             xpathConverter.OCLScript = oclScript;
             xpathConverter.Bridge = (PSMBridge) bridge;
             xpathConverter.OclContext = constraint;
             xpathConverter.Log = Log;
             xpathConverter.Settings = translationSettings;
             string invariantStr = xpathConverter.TranslateExpression(invariant);
-
             return invariantStr;
 
         }

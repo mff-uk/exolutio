@@ -15,38 +15,55 @@ namespace Exolutio.View.Commands.Grammar
             {
                 XDocument schematronSchemaDocument;
                 ILog log;
+
+                SchematronSchemaGenerator.TranslationSettings settings = new SchematronSchemaGenerator.TranslationSettings();
+                settings.Functional = true;
+                settings.SchemaAware = true; 
+
                 GenerateSchema((PSMSchema)Current.ActiveDiagram.Schema, settings, out schematronSchemaDocument, out log);
 
-                FilePresenterButton[] additionalButtons = new[] {
-                    new FilePresenterButton() { Text = "Not schema aware", Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.refresh), UpdateFileContentAction = GenerateNotSchemaAware },
-                    new FilePresenterButton() { Text = "Expect schema aware", Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.refresh), UpdateFileContentAction = GenerateSchemaAware }
+                FilePresenterButtonInfo[] additionalButtonsInfo = new[] {
+                    new FilePresenterButtonInfo() { ButtonName = "SA", Text = "Schema aware", Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.refresh), UpdateFileContentAction = RegenerateSchema, ToggleButton = true, IsToggled = true },
+                    new FilePresenterButtonInfo() { ButtonName = "F", Text = "Functional", Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.refresh), UpdateFileContentAction = RegenerateSchema, ToggleButton = true, IsToggled = true },
                     };
                 IFilePresenterTab filePresenterTab
                     = Current.MainWindow.FilePresenter.DisplayFile(schematronSchemaDocument, EDisplayedFileType.SCH, Current.ActiveDiagram.Caption + ".sch", log, sourcePSMSchema:(PSMSchema)Current.ActiveDiagram.Schema,
-                    additionalActions: additionalButtons);
-                filePresenterTab.RefreshCallback += RefreshCallback;
+                    additionalActions: additionalButtonsInfo, tag: settings);
+                filePresenterTab.RefreshCallback += RegenerateSchema;
             }
         }
 
-        private void GenerateNotSchemaAware(IFilePresenterTab filePresenterTab)
+        private void RegenerateSchema(IFilePresenterTab filePresenterTab)
         {
             XDocument document;
             ILog log;
-            settings.SchemaAware = false; 
+
+            SchematronSchemaGenerator.TranslationSettings settings = (SchematronSchemaGenerator.TranslationSettings) filePresenterTab.Tag;
+            foreach (FilePresenterButtonInfo buttonInfo in filePresenterTab.FilePresenterButtons)
+            {
+                if (buttonInfo.ButtonName == "SA")
+                {
+                    settings.SchemaAware = buttonInfo.IsToggled;
+                }
+                if (buttonInfo.ButtonName == "F")
+                {
+                    settings.Functional = buttonInfo.IsToggled;
+                }
+            }
+
             GenerateSchema(filePresenterTab.SourcePSMSchema, settings, out document, out log);
             filePresenterTab.ReDisplayFile(document, EDisplayedFileType.SCH, filePresenterTab.SourcePSMSchema.Caption, log, filePresenterTab.ValidationSchema, filePresenterTab.SourcePSMSchema);
         }
 
-        SchematronSchemaGenerator.TranslationSettings settings = new SchematronSchemaGenerator.TranslationSettings();
 
-        private void GenerateSchemaAware(IFilePresenterTab filePresenterTab)
-        {
-            XDocument document;
-            ILog log;
-            settings.SchemaAware = true; 
-            GenerateSchema(filePresenterTab.SourcePSMSchema, settings, out document, out log);
-            filePresenterTab.ReDisplayFile(document, EDisplayedFileType.SCH, filePresenterTab.SourcePSMSchema.Caption, log, filePresenterTab.ValidationSchema, filePresenterTab.SourcePSMSchema);
-        }
+        //private void GenerateSchemaAware(IFilePresenterTab filePresenterTab)
+        //{
+        //    XDocument document;
+        //    ILog log;
+        //    SchematronSchemaGenerator.TranslationSettings settings = (SchematronSchemaGenerator.TranslationSettings)filePresenterTab.Tag;
+        //    GenerateSchema(filePresenterTab.SourcePSMSchema, settings, out document, out log);
+        //    filePresenterTab.ReDisplayFile(document, EDisplayedFileType.SCH, filePresenterTab.SourcePSMSchema.Caption, log, filePresenterTab.ValidationSchema, filePresenterTab.SourcePSMSchema);
+        //}
 
         private static void GenerateSchema(PSMSchema psmSchema, SchematronSchemaGenerator.TranslationSettings settings, out XDocument schematronSchemaDocument, out ILog log)
         {
@@ -62,14 +79,14 @@ namespace Exolutio.View.Commands.Grammar
             log = schemaGenerator.Log;
         }
 
-        private void RefreshCallback(IFilePresenterTab filePresenterTab)
-        {
-            XDocument document;
-            ILog log;
-            settings.SchemaAware = true; 
-            GenerateSchema(filePresenterTab.SourcePSMSchema, settings, out document, out log);
-            filePresenterTab.ReDisplayFile(document, EDisplayedFileType.SCH, filePresenterTab.SourcePSMSchema.Caption, log, filePresenterTab.ValidationSchema, filePresenterTab.SourcePSMSchema);
-        }
+        //private void RefreshCallback(IFilePresenterTab filePresenterTab)
+        //{
+        //    XDocument document;
+        //    ILog log;
+        //    settings.SchemaAware = true; 
+        //    GenerateSchema(filePresenterTab.SourcePSMSchema, settings, out document, out log);
+        //    filePresenterTab.ReDisplayFile(document, EDisplayedFileType.SCH, filePresenterTab.SourcePSMSchema.Caption, log, filePresenterTab.ValidationSchema, filePresenterTab.SourcePSMSchema);
+        //}
 
         public override string Text
         {
