@@ -324,7 +324,7 @@ namespace Exolutio.WPFClient
             }
         }
 
-        public IFilePresenterTab DisplayFile(XDocument xmlDocument, EDisplayedFileType fileType, string fileName = null, ILog log = null, PSMSchema validationSchema = null, PSMSchema sourcePSMSchema = null, FilePresenterButton[] additionalActions = null)
+        public IFilePresenterTab DisplayFile(XDocument xmlDocument, EDisplayedFileType fileType, string fileName = null, ILog log = null, PSMSchema validationSchema = null, PSMSchema sourcePSMSchema = null, FilePresenterButtonInfo[] additionalActions = null, object tag = null)
         {
             FileTab f = new FileTab();
             f.DisplayFile(fileType, xmlDocument.ToString(), fileName, log, validationSchema, sourcePSMSchema);
@@ -334,6 +334,7 @@ namespace Exolutio.WPFClient
                 f.CreateAdditionalActionsButtons(additionalActions);
             }
             f.Show(DockManager, true);
+            f.Tag = tag;
             return f;
         }
 

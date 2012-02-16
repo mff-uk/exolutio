@@ -75,8 +75,9 @@ namespace Exolutio.Model.OCL.Bridge {
         internal void TranslateMembers() {
 
             //Attributy
-            foreach (var pr in SourceClass.PIMAttributes) {
-                Classifier propType = TypeTable.Library.RootNamespace.NestedClassifier[pr.AttributeType.Name];
+            foreach (var pr in SourceClass.PIMAttributes)
+            {
+                Classifier propType = pr.AttributeType != null ? TypeTable.Library.RootNamespace.NestedClassifier[pr.AttributeType.Name] : TypeTable.Library.Any;
                 PIMBridgeAttribute newProp = new PIMBridgeAttribute(pr, PropertyType.One, propType);
                 Properties.Add(newProp);
                 //Hack

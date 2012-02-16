@@ -43,9 +43,9 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             Add(new OperationInfo { Priority = 3, IsXPathInfix = true, IsOclInfix = true, CanOmitDataCall = true, OclName = "<=", XPathName = "le", CustomTranslateHandler = InfixAtomicHandler });
             Add(new OperationInfo { Priority = 3, IsXPathInfix = true, IsOclInfix = true, CanOmitDataCall = true, OclName = ">=", XPathName = "ge", CustomTranslateHandler = InfixAtomicHandler });
             Add(new OperationInfo { Priority = 4, IsXPathInfix = true, IsOclInfix = true, CanOmitDataCall = true, OclName = "=", XPathName = "eq", TypeDependent = true, ArgumentCondition = IsXPathAtomic, CustomTranslateHandler = EqualityTestHandler });
-            Add(new OperationInfo { Priority = 4, IsXPathInfix = true, IsOclInfix = true, OclName = "=", XPathName = "is", TypeDependent = true, ArgumentCondition = IsXPathNode, CustomTranslateHandler = EqualityTestHandler });
+            Add(new OperationInfo { Priority = 4, IsXPathInfix = true, IsOclInfix = true, OclName = "=", XPathName = "is", TypeDependent = true, ArgumentCondition = IsXPathNonAtomic, CustomTranslateHandler = EqualityTestHandler });
             Add(new OperationInfo { Priority = 4, IsXPathInfix = true, IsOclInfix = true, CanOmitDataCall = true, OclName = "<>", XPathName = "ne", TypeDependent = true, ArgumentCondition = IsXPathAtomic, CustomTranslateHandler = EqualityTestHandler });
-            Add(new OperationInfo { Priority = 4, IsXPathInfix = true, IsOclInfix = true, OclName = "<>", XPathName = "is not", TypeDependent = true, ArgumentCondition = IsXPathNode, CustomTranslateHandler = EqualityTestHandler });
+            Add(new OperationInfo { Priority = 4, IsXPathInfix = true, IsOclInfix = true, OclName = "<>", XPathName = "is not", TypeDependent = true, ArgumentCondition = IsXPathNonAtomic, CustomTranslateHandler = EqualityTestHandler });
             Add(new OperationInfo { Priority = 5, IsXPathInfix = true, IsOclInfix = true, CanOmitDataCall = true, OclName = "and", XPathName = "and", CustomTranslateHandler = InfixAtomicHandler });
             Add(new OperationInfo { Priority = 6, IsXPathInfix = true, IsOclInfix = true, CanOmitDataCall = true, OclName = "or", XPathName = "or", CustomTranslateHandler = InfixAtomicHandler });
             Add(new OperationInfo { Priority = 7, IsXPathInfix = true, IsOclInfix = true, CanOmitDataCall = true, OclName = "xor", XPathName = "oclBoolean:xor", CustomXPathSyntaxFormatString = "oclBoolean:xor({0}, {1})", CustomTranslateHandler = FunctionAtomicHandler });
@@ -57,6 +57,52 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 
             Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "after", XPathName = "oclDate:after", Arity = 2, CustomTranslateHandler = FunctionAtomicHandler });
             Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "before", XPathName = "oclDate:before", Arity = 2, CustomTranslateHandler = FunctionAtomicHandler });
+
+            // conversions 
+            Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "toString", XPathName = "xs:string", Arity = 1, CustomTranslateHandler = FunctionAtomicHandler });
+            Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "toInteger", XPathName = "xs:integer", Arity = 1, CustomTranslateHandler = FunctionAtomicHandler });
+            Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "toReal", XPathName = "xs:double", Arity = 1, CustomTranslateHandler = FunctionAtomicHandler });
+
+
+            // string handling 
+            Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "concat", XPathName = "concat", Arity = 2, CustomTranslateHandler = FunctionAtomicHandler });
+            Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "substring", XPathName = "substring", Arity = 2, CustomTranslateHandler = FunctionAtomicHandler });
+            Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "toUpperCase", XPathName = "upper-case", Arity = 1, CustomTranslateHandler = FunctionAtomicHandler });
+            Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "toLowerCase", XPathName = "lower-case", Arity = 1, CustomTranslateHandler = FunctionAtomicHandler });
+            Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "equalsIgnoreCase", XPathName = "oclString:equalsIgnoreCase", Arity = 2, CustomTranslateHandler = FunctionAtomicHandler });
+            Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "at", XPathName = "oclString:at", Arity = 2, CustomTranslateHandler = FunctionAtomicHandler });
+
+            // arithmetic 
+            Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "abs", XPathName = "abs", Arity = 1, CustomTranslateHandler = FunctionAtomicHandler });
+            Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "floor", XPathName = "floor", Arity = 1, CustomTranslateHandler = FunctionAtomicHandler });
+            Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "round", XPathName = "round", Arity = 1, CustomTranslateHandler = FunctionAtomicHandler });
+            Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "max", XPathName = "max", Arity = 2, CustomTranslateHandler = FunctionAtomicHandler, TypeDependent = true, ArgumentCondition = IsXPathAtomic });
+            Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "min", XPathName = "min", Arity = 2, CustomTranslateHandler = FunctionAtomicHandler, TypeDependent = true, ArgumentCondition = IsXPathAtomic });
+            Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "div", XPathName = "idiv", Arity = 2, CustomTranslateHandler = InfixAtomicHandler, IsXPathInfix = true, IsOclInfix = false });
+
+            // collection + 
+            Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "includes", XPathName = "oclX:includes", Arity = 2, CustomTranslateHandler = FunctionAtomicHandler });
+            Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "excludes", XPathName = "oclX:excludes", Arity = 2, CustomTranslateHandler = FunctionAtomicHandler });
+            Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "includesAll", XPathName = "oclX:includesAll", Arity = 2, CustomTranslateHandler = FunctionAtomicHandler });
+            Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "excludesAll", XPathName = "oclX:excludesAll", Arity = 2, CustomTranslateHandler = FunctionAtomicHandler });
+            Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "size", XPathName = "count", Arity = 1, CustomTranslateHandler = FunctionAtomicHandler });
+            Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "count", XPathName = "oclX:count", Arity = 1, CustomTranslateHandler = FunctionAtomicHandler });
+            Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "product", XPathName = "oclX:product", Arity = 2, CustomTranslateHandler = FunctionAtomicHandler });
+            Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "sum", XPathName = "sum", Arity = 1, CustomTranslateHandler = FunctionAtomicHandler });
+            Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "append", XPathName = "oclX:append", Arity = 2, CustomTranslateHandler = FunctionAtomicHandler });
+            Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "prepend", XPathName = "oclX:prepend", Arity = 2, CustomTranslateHandler = FunctionAtomicHandler });
+            Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "insertAt", XPathName = "oclX:insertAt", Arity = 3, CustomTranslateHandler = FunctionAtomicHandler });
+            Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "at", XPathName = "oclX:at", Arity = 2, CustomTranslateHandler = FunctionAtomicHandler });
+            Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "indexOf", XPathName = "oclX:indexOf", Arity = 2, CustomTranslateHandler = FunctionAtomicHandler });
+            Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "first", XPathName = "oclX:first", Arity = 1, CustomTranslateHandler = FunctionAtomicHandler });
+            Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "last", XPathName = "oclX:last", Arity = 1, CustomTranslateHandler = FunctionAtomicHandler });
+            Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "reverse", XPathName = "reverse", Arity = 1, CustomTranslateHandler = FunctionAtomicHandler });
+            Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "max", XPathName = "max", Arity = 1, CustomTranslateHandler = FunctionAtomicHandler, TypeDependent = true, ArgumentCondition = IsXPathNonAtomic });
+            Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "min", XPathName = "min", Arity = 1, CustomTranslateHandler = FunctionAtomicHandler, TypeDependent = true, ArgumentCondition = IsXPathNonAtomic });
+            Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "sum", XPathName = "sum", Arity = 1, CustomTranslateHandler = FunctionAtomicHandler, TypeDependent = true, ArgumentCondition = IsXPathNonAtomic });
+
+
+
         }
 
         private string PrefixAtomicHandler(OperationCallExp operationExpression, OperationInfo operationInfo, OclExpression[] arguments, ConvertedExp[] convertedArguments)
@@ -71,6 +117,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             string rightOp = WrapAtomicOperand(arguments[1], operationInfo, convertedArguments[1]);
             return string.Format("{1} {0} {2}", operationInfo.XPathName, leftOp, rightOp);
         }
+
 
         private string FunctionAtomicHandler(OperationCallExp operationExpression, OperationInfo operationInfo, OclExpression[] arguments, ConvertedExp[] convertedArguments)
         {
@@ -231,7 +278,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             return false;
         }
 
-        private bool IsXPathNode(Classifier obj)
+        private bool IsXPathNonAtomic(Classifier obj)
         {
             return !IsXPathAtomic(obj);
         }

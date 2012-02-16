@@ -215,14 +215,20 @@ namespace Exolutio.View
 
     public interface IFilePresenter
     {
-        IFilePresenterTab DisplayFile(XDocument xmlDocument, EDisplayedFileType fileType, string fileName = null, ILog log = null, PSMSchema validationSchema = null, PSMSchema sourcePSMSchema = null, FilePresenterButton[] additionalActions = null);
+        IFilePresenterTab DisplayFile(XDocument xmlDocument, EDisplayedFileType fileType, string fileName = null, ILog log = null, PSMSchema validationSchema = null, PSMSchema sourcePSMSchema = null, FilePresenterButtonInfo[] additionalActions = null, object tag = null);
     }
 
-    public struct FilePresenterButton
+    public class FilePresenterButtonInfo
     {
         public ImageSource Icon { get; set; }
 
         public string Text { get; set; }
+
+        public bool ToggleButton { get; set; }
+
+        public bool IsToggled { get; set; }
+
+        public string ButtonName { get; set; }
 
         public UpdateFileContent UpdateFileContentAction;
     }
@@ -235,7 +241,9 @@ namespace Exolutio.View
         void SetDocumentText(string text);
         Action<IFilePresenterTab> RefreshCallback { get; set; }
         PSMSchema SourcePSMSchema { get; set; }
-        void ReDisplayFile(XDocument xmlDocument, EDisplayedFileType fileType, string fileName = null, ILog log = null, PSMSchema validationSchema = null, PSMSchema sourcePSMSchema = null, FilePresenterButton[] additionalActions = null);
+        void ReDisplayFile(XDocument xmlDocument, EDisplayedFileType fileType, string fileName = null, ILog log = null, PSMSchema validationSchema = null, PSMSchema sourcePSMSchema = null, FilePresenterButtonInfo[] additionalActions = null);
+        IEnumerable<FilePresenterButtonInfo> FilePresenterButtons { get; }
+        object Tag { get; }
     }
 
     public delegate void UpdateFileContent(IFilePresenterTab fileTab);

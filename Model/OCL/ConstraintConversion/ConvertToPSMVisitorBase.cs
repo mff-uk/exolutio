@@ -114,17 +114,36 @@ namespace Exolutio.Model.OCL.ConstraintConversion
                 PIMPathAssociationStep nextStep = (PIMPathAssociationStep)currentStep;
                 List<PSMAssociationMember> candidates = currentMember.ChildPSMAssociations.Select(a => a.Child).ToList();
                 List<PSMAssociation> candidatesAssociations = currentMember.ChildPSMAssociations.ToList();
-                if (canGoToParent && !(currentMember.ParentAssociation.Parent is PSMSchemaClass))
+                PSMAssociationMember parent = currentMember.ParentAssociation.Parent;
+
+                if (canGoToParent && !(parent is PSMSchemaClass))
                 {
-                    candidates.Add(currentMember.ParentAssociation.Parent);
-                    candidatesAssociations.Add(currentMember.ParentAssociation);
+                    bool candidateParent = true;
+                    if (currentMember.ParentAssociation.Interpretation != null)
+                    {
+                        PIMAssociation interpretedAssociation = (PIMAssociation) currentMember.ParentAssociation.Interpretation;
+                        PIMAssociationEnd interpretedEnd = currentMember.ParentAssociation.InterpretedAssociationEnd;
+                        PIMAssociationEnd oppositeEnd = interpretedAssociation.PIMAssociationEnds.Single(e => e != interpretedEnd);
+
+                        // upwards navigation on ends with upper cardinality > 1 breaks semantics of the expression
+                        if (oppositeEnd.Upper > 1)
+                        {
+                            candidateParent = false;
+                        }
+                    }
+
+                    if (candidateParent)
+                    {
+                        candidates.Add(parent);
+                        candidatesAssociations.Add(currentMember.ParentAssociation);    
+                    }
                 }
                 bool found = false;
                 for (int index = 0; index < candidates.Count; index++)
                 {
                     PSMAssociationMember candidate = candidates[index];
                     PSMAssociation candidateAssociation = candidatesAssociations[index];
-                    bool parentStep = candidate == currentMember.ParentAssociation.Parent;
+                    bool parentStep = candidate == parent;
                     // forbid traversing the same association several times
                     if (associationUsedAlready == candidateAssociation)
                         continue;
