@@ -762,25 +762,6 @@
     <xsl:sequence select="lower-case($string1) eq lower-case($string2)" />
   </xsl:function>
   
-  <!-- Date --> 
-  
-  <xsl:function name="oclDate:after" as="xs:boolean">
-    <xsl:param name="date1" />
-    <xsl:param name="date2" />    
-    <xsl:sequence select="xs:dateTime($date1) ge xs:dateTime($date2)"/>
-  </xsl:function>
-  
-  <xsl:function name="oclDate:before" as="xs:boolean">
-    <xsl:param name="date1" />
-    <xsl:param name="date2" />    
-    <xsl:sequence select="xs:dateTime($date2) ge xs:dateTime($date1)"/>
-  </xsl:function>
-  
-  <xsl:function name="oclDate:getDate" as="xs:date">
-    <xsl:param name="dateTime" as="xs:dateTime" />
-    <xsl:sequence select="xs:date(format-dateTime($dateTime, '[Y]-[M,2]-[D,2]'))" />
-  </xsl:function>
-  
   <!--
     Helper functions   
   -->

@@ -25,7 +25,7 @@ namespace Exolutio.Model.OCL.Compiler {
         public override void ReportError(Antlr.Runtime.RecognitionException e) {
             Errors.AddError(new CodeErrorItem(e.ToString(), e.Token, e.Token));
             base.ReportError(e);
-                                                                                                                                                    throw new Exception("Byl jsem tu, Marek :)");
+                                                                                                                                                    
         }
     }
 }

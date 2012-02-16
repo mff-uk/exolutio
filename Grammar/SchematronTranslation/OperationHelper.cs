@@ -71,6 +71,8 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "toLowerCase", XPathName = "lower-case", Arity = 1, CustomTranslateHandler = FunctionAtomicHandler });
             Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "equalsIgnoreCase", XPathName = "oclString:equalsIgnoreCase", Arity = 2, CustomTranslateHandler = FunctionAtomicHandler });
             Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "at", XPathName = "oclString:at", Arity = 2, CustomTranslateHandler = FunctionAtomicHandler });
+            Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "size", XPathName = "string-length", Arity = 1, CustomTranslateHandler = FunctionAtomicHandler, TypeDependent = true, ArgumentTypes = new[] { PSMBridge.TypesTable.Library.String }});
+            Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "indexOf", XPathName = "oclString:indexOf", Arity = 2, CustomTranslateHandler = FunctionAtomicHandler, TypeDependent = true, ArgumentTypes = new[] { PSMBridge.TypesTable.Library.String, PSMBridge.TypesTable.Library.String} });
 
             // arithmetic 
             Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "abs", XPathName = "abs", Arity = 1, CustomTranslateHandler = FunctionAtomicHandler });
@@ -80,7 +82,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "min", XPathName = "min", Arity = 2, CustomTranslateHandler = FunctionAtomicHandler, TypeDependent = true, ArgumentCondition = IsXPathAtomic });
             Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "div", XPathName = "idiv", Arity = 2, CustomTranslateHandler = InfixAtomicHandler, IsXPathInfix = true, IsOclInfix = false });
 
-            // collection + 
+            // collection
             Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "includes", XPathName = "oclX:includes", Arity = 2, CustomTranslateHandler = FunctionAtomicHandler });
             Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "excludes", XPathName = "oclX:excludes", Arity = 2, CustomTranslateHandler = FunctionAtomicHandler });
             Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "includesAll", XPathName = "oclX:includesAll", Arity = 2, CustomTranslateHandler = FunctionAtomicHandler });
@@ -101,8 +103,12 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "min", XPathName = "min", Arity = 1, CustomTranslateHandler = FunctionAtomicHandler, TypeDependent = true, ArgumentCondition = IsXPathNonAtomic });
             Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "sum", XPathName = "sum", Arity = 1, CustomTranslateHandler = FunctionAtomicHandler, TypeDependent = true, ArgumentCondition = IsXPathNonAtomic });
 
-
-
+            Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "union", XPathName = "oclX:union", Arity = 2, CustomTranslateHandler = FunctionAtomicHandler, TypeDependent = true, ArgumentCondition = IsXPathNonAtomic });
+            Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "subOrderedSet", XPathName = "oclX:subOrderedSet", Arity = 1, CustomTranslateHandler = FunctionAtomicHandler, TypeDependent = true, ArgumentCondition = IsXPathNonAtomic });
+            Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "subSequence", XPathName = "oclX:subSequence", Arity = 1, CustomTranslateHandler = FunctionAtomicHandler, TypeDependent = true, ArgumentCondition = IsXPathNonAtomic });
+            Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "-", XPathName = "oclX:setMinus", Arity = 2, CustomTranslateHandler = FunctionAtomicHandler, TypeDependent = true, ArgumentCondition = IsXPathNonAtomic });
+            Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "symmetricDifference", XPathName = "oclX:symmetricDifference", Arity = 2, CustomTranslateHandler = FunctionAtomicHandler, TypeDependent = true, ArgumentCondition = IsXPathNonAtomic });
+            
         }
 
         private string PrefixAtomicHandler(OperationCallExp operationExpression, OperationInfo operationInfo, OclExpression[] arguments, ConvertedExp[] convertedArguments)
