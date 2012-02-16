@@ -188,11 +188,11 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
         public string TranslateExpression(OclExpression expression)
         {
             OperationHelper = new OperationHelper();
-            OperationHelper.InitStandard();
             OperationHelper.PSMSchema = (PSMSchema) this.OCLScript.Schema;
             OperationHelper.Log = Log;
             OperationHelper.ExplicitCastAtomicOperands = !Settings.SchemaAware;
             OperationHelper.PSMBridge = Bridge;
+            OperationHelper.InitStandard();
             TranslatedOclExpression = expression;
             VariableNamer = new VariableNamer();
             return expression.Accept(this).GetString();

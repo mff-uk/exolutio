@@ -18,6 +18,7 @@ documentation of <doc:i>oclX:evaluate</doc:i> for more information.">
   exclude-result-prefixes="oclX saxon doc"
   version="2.0">
 
+  <xsl:import href="types/date.xsl"/>
   <xsl:import href="oclX-dynamic-internal.xsl"/>
 
   <doc:doc scope="stylesheet">
@@ -514,23 +515,6 @@ documentation of <doc:i>oclX:evaluate</doc:i> for more information.">
     <xsl:param name="variables" as="item()*"/>
     
     
-  </xsl:function>
-  
-  <xsl:function name="oclDate:after" as="xs:boolean">
-    <xsl:param name="date1" />
-    <xsl:param name="date2" />    
-    <xsl:sequence select="xs:dateTime($date1) ge xs:dateTime($date2)"/>
-  </xsl:function>
-  
-  <xsl:function name="oclDate:before" as="xs:boolean">
-    <xsl:param name="date1" />
-    <xsl:param name="date2" />    
-    <xsl:sequence select="xs:dateTime($date2) ge xs:dateTime($date1)"/>
-  </xsl:function>
-  
-  <xsl:function name="oclDate:getDate" as="xs:date">
-    <xsl:param name="dateTime" as="xs:dateTime" />
-    <xsl:sequence select="xs:date(format-dateTime($dateTime, '[Y]-[M,2]-[D,2]'))" />
   </xsl:function>
   
   <doc:doc>

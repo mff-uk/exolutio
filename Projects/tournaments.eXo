@@ -200,7 +200,7 @@
         </eXo:PIMAssociation>
       </eXo:PIMAssociations>
       <eXo:OCLScripts Count="4">
-        <eXo:OCLScript ID="c9c736eb-3985-4683-83b7-8748121496e8" Name="">
+        <eXo:OCLScript ID="c9c736eb-3985-4683-83b7-8748121496e8" Name="methods pre and post conditions">
           <eXo:Contents><![CDATA[/* methods pre and post conditions */
 
 context Tournament::acceptPlayer(p)
@@ -230,7 +230,7 @@ pre: league.players->includes(p)
 context League::getActivePlayers
 post: result = tournaments.players->asSet()]]></eXo:Contents>
         </eXo:OCLScript>
-        <eXo:OCLScript ID="627fce62-3ce6-4981-b826-27a7450e4904" Name="defaultname">
+        <eXo:OCLScript ID="627fce62-3ce6-4981-b826-27a7450e4904" Name="collections">
           <eXo:Contents><![CDATA[/* more complex invariants, integrity, forall construct */
 
 /* All Matches in a Tournament occur
@@ -266,9 +266,13 @@ inv: players->forAll(p|
 p.tournaments->exists(t|
 t.matches->includes(self)))
 
+/* A match can only involve players who are
+accepted in the tournament -- different version*/
+context Tournament
+inv: matches->forAll(m|m.players->forAll(mp|mp.tournaments->includes(self)))
 ]]></eXo:Contents>
         </eXo:OCLScript>
-        <eXo:OCLScript ID="252ed172-ba2d-41fa-afde-b2332b35f90e" Name="defaultname">
+        <eXo:OCLScript ID="252ed172-ba2d-41fa-afde-b2332b35f90e" Name="other pre and post conditions">
           <eXo:Contents><![CDATA[/* other pre and post conditions */
 
 context TournamentControl::selectSponsors(advertisers)
@@ -293,7 +297,7 @@ not isPlayerOverbooked(p)
 context TournamentControl::acceptPlayer(p)
 post: tournament.players->includes(p)]]></eXo:Contents>
         </eXo:OCLScript>
-        <eXo:OCLScript ID="4c06e9cd-0942-48bd-a24c-fde2b32f7a55" Name="defaultname">
+        <eXo:OCLScript ID="4c06e9cd-0942-48bd-a24c-fde2b32f7a55" Name="data and coocurence">
           <eXo:Contents><![CDATA[/* data, coocurrence tests */
 
 /* dates consistency */
@@ -511,7 +515,10 @@ Test of type-defined function
 context Player
 inv: email.substring(0) = email
 */
-]]></eXo:Contents>
+
+/* players have unique email */
+context Players
+inv: player->isUnique(p | p.email)]]></eXo:Contents>
           </eXo:OCLScript>
           <eXo:OCLScript ID="fb8e63fa-e432-484e-9672-a0363284c48a" Name="empty">
             <eXo:Contents><![CDATA[/* Example of a PIM constraint that is not used, even though it could be,
