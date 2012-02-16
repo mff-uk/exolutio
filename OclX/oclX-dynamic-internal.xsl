@@ -3,7 +3,7 @@
   xmlns:xs="http://www.w3.org/2001/XMLSchema" 
   xmlns:saxon="http://saxon.sf.net/"      
   xmlns:oclXin="http://eXolutio.com/oclX/dynamic/internal"
-  version="3.0"
+  version="2.0"
   exclude-result-prefixes="xs saxon oclXin"
   >
   
