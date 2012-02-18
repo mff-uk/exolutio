@@ -13,9 +13,6 @@
   exclude-result-prefixes="xd oclX saxon doc map math"
   version="3.0">
   
-  <xsl:include href="types/date.xsl"/>
-  <xsl:include href="oclX-standard-library.xsl"/>
-  
   <xd:doc scope="stylesheet">
     <xd:desc>
       <xd:p><xd:b>Created on:</xd:b> Jan 1, 2012</xd:p>
@@ -509,11 +506,10 @@
   
   <doc:doc>
     <doc:desc>
-      <doc:p></doc:p>
+      <doc:p>Computes intersection of <xd:i>collection1</xd:i> and <xd:i>collection2</xd:i>. </doc:p>
     </doc:desc>
-    <doc:param name="collection1"></doc:param>
-    <doc:param name="collection2"></doc:param>
-    <doc:return></doc:return>
+    <doc:param>First intersected collection.</doc:param>
+    <doc:param name="collection2">Second intersected collection. </doc:param>
   </doc:doc>
   <xsl:function name="oclX:intersection" as="item()*">
     <xsl:param name="collection1" as="item()*" />
@@ -527,10 +523,9 @@
   
   <doc:doc>
     <doc:desc>
-      <doc:p></doc:p>
+      <doc:p>Returns the first item in <xd:i>collection</xd:i>.</doc:p>
     </doc:desc>
-    <doc:param name="collection"></doc:param>
-    <doc:return></doc:return>
+    <doc:param name="collection">The input collection. </doc:param>
   </doc:doc>
   <xsl:function name="oclX:first" as="item()">
     <xsl:param name="collection" as="item()*" />
@@ -539,10 +534,9 @@
   
   <doc:doc>
     <doc:desc>
-      <doc:p></doc:p>
+      <doc:p>Returns the last item in <xd:i>collection</xd:i>.</doc:p>
     </doc:desc>
-    <doc:param name="collection"></doc:param>
-    <doc:return></doc:return>
+    <doc:param name="collection">The input collection. </doc:param>
   </doc:doc>
   <xsl:function name="oclX:last" as="item()">
     <xsl:param name="collection" as="item()*" />
@@ -551,11 +545,10 @@
   
   <doc:doc>
     <doc:desc>
-      <doc:p></doc:p>
+      <doc:p>Returns the index of <xd:i>item</xd:i> in the <xd:i>collection</xd:i>.</doc:p>
     </doc:desc>
-    <doc:param name="collection"></doc:param>
-    <doc:param name="item"></doc:param>
-    <doc:return></doc:return>
+    <doc:param name="collection">The searched collection. </doc:param>
+    <doc:param name="item">The searched item. </doc:param>
   </doc:doc>
   <xsl:function name="oclX:indexOf" as="xs:integer">
     <xsl:param name="collection" as="item()*" />
@@ -566,12 +559,12 @@
   
   <doc:doc>
     <doc:desc>
-      <doc:p></doc:p>
+      <doc:p>Returns a new collection, which is a copy of <xd:i>collection</xd:i> with
+          <xd:i>item</xd:i> inserted at the <xd:i>index</xd:i>. </doc:p>
     </doc:desc>
-    <doc:param name="collection"></doc:param>
-    <doc:param name="index"></doc:param>
-    <doc:param name="item"></doc:param>
-    <doc:return></doc:return>
+    <doc:param name="collection">The input collection. </doc:param>
+    <doc:param name="index">Index, where item is inserted. </doc:param>
+    <doc:param name="item">Added item. </doc:param>
   </doc:doc>
   <xsl:function name="oclX:insertAt" as="xs:integer">
     <xsl:param name="collection" as="item()*" />
@@ -585,7 +578,7 @@
   
   <doc:doc>
     <doc:desc>
-      <doc:p></doc:p>
+      <doc:p>Returns the count of occurences of <xd:i>item</xd:i> in <xd:i>collection</xd:i>. </doc:p>
     </doc:desc>
     <doc:param name="collection"></doc:param>
     <doc:param name="item"></doc:param>
