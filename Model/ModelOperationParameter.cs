@@ -82,7 +82,7 @@ namespace Exolutio.Model
         }
 
 
-        public Project Project
+        public new Project Project
         {
             get { return ModelOperation.Project; }
         }
