@@ -11,34 +11,10 @@
   <xsl:import href="../OclX/oclX-dynamic.xsl"/>
   <xsl:output indent="yes"/>
 
-  <xsl:template match="tournament">  
+  <xsl:template match="tournament">
+    <!--<xsl:sequence select="oclXin:combined-index-of(//day, //day[3])" />-->
+    <xsl:variable name="variables" as="item()*" select="oclX:vars(.)" />    
     
-    Days are different 1
-    <xsl:copy-of select="
-      oclX:forAll(
-      matches/day,
-      'd1',
-      'oclX:forAll($self/matches/day, ''d2'', ''if (not($d1 is $d2)) then $d1/date ne $d2/date else true()'', $variables)',
-      oclX:vars(.)
-      )      
-      "
-    />
-    
-    Days are different 2
-    <xsl:copy-of select="
-      oclX:forAllN(
-      matches/day,
-      'd1, d2',
-      'if (not($d1 is $d2)) then $d1/date ne $d2/date else true()',
-      oclX:vars(.)
-      )      
-      "
-    />
-    
-  </xsl:template>
- 
-  <xsl:template match="btournament">
-    <xsl:variable name="variables" as="item()*" select="oclX:vars(.)" />
       
     CONTEXT TOURNAMENT
     
@@ -80,6 +56,17 @@
       "
     />
     
+    Days are different 2
+    <xsl:copy-of select="
+      oclX:forAllN(
+      matches/day,
+      'd1, d2',
+      'if (not($d1 is $d2)) then xs:date($d1/date) ne xs:date($d2/date) else true()',
+      oclX:vars(.)
+      )      
+      "
+    />
+    
     <!-- All Matches in a Tournament occur within the Tournament’s time frame 
          * working constraint from ocl * 
          matches.day.match->forAll(m:Match | m.start.after(start) and m.end.before(end)) i.e.
@@ -108,7 +95,7 @@
     <xsl:apply-templates select="//day"/>
   </xsl:template>
   
-  <xsl:template match="bmatch">
+  <xsl:template match="match">
     <xsl:variable name="variables" as="item()*">
       <variables/>
       <!-- just a placeholder -->
@@ -134,7 +121,7 @@
       "/>
   </xsl:template>
 
-  <xsl:template match="bday">
+  <xsl:template match="day">
     CONTEXT DAY
     <!-- 
       Each day shows only matches taking place that day
@@ -145,4 +132,13 @@
     Each day shows only matches taking place that day
     <xsl:copy-of select="oclX:forAll(match, 'm', 'oclDate:getDate($m/start) = $self/date', oclX:vars(.))" />    
   </xsl:template>
+
+
+  <!--<xsl:template match="/tournament">
+    <xsl:copy-of select="//node()[not(node())]"/>
+    <!-\-<xsl:apply-templates select="matches//*" />-\->
+    <!-\-<xsl:copy-of select="//*[not(*)]"/>-\->
+  </xsl:template>-->
+
+ <xsl:template match="* | text() | @*">NO MATCHING RULE! (<xsl:value-of select="name()" />). </xsl:template>
 </xsl:stylesheet>

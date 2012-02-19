@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tournament xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+<tournament 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"   
   xsi:noNamespaceSchemaLocation="MatchSchedule.xsd">
   <name>dictum</name>
   <start>2012-01-01T09:00:00</start>

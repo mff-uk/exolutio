@@ -26,9 +26,11 @@
       <!--self.matchPlayers.player->forAll(p : MatchPlayer | p.MatchPlayers.Match.Day.Matches.Tournament.participatingPlayers.player->exists(px : Player | px.name = p.name))-->		
       <sch:assert test="oclX:forAll(matchPlayers/player, 'p', 'oclX:exists($p/../../../../../participatingPlayers/player, ''px'', ''$px/name eq $p/name'', $variables)', $variables)" />
     </sch:rule>      
-      
-           
-        
+    <!-- players have unique email -->
+    <sch:rule context="/tournament/participatingPlayers">
+      <!--self.player->isUnique(p : Player | p.email)-->
+      <sch:assert test="oclX:isUnique(player, 'p', 'data($p/email)', $variables)" />
+    </sch:rule>
   </sch:pattern>
   <sch:pattern id="empty">
     <!--Below follow constraints from OCL script 'empty'. -->

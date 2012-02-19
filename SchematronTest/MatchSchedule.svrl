@@ -13,8 +13,8 @@
 		   
 		   
 		 --><svrl:active-pattern document="file:/D:/Programování/EVOXSVN/SchematronTest/MatchSchedule.xml"
-                        id="defaultname"
-                        name="defaultname"/>
+                        id="collections"
+                        name="collections"/>
    <svrl:fired-rule context="/tournament"/>
    <svrl:fired-rule context="/tournament/matches/day/match"/>
    <svrl:fired-rule context="/tournament/matches/day/match"/>
@@ -22,11 +22,15 @@
    <svrl:fired-rule context="/tournament/matches/day/match"/>
    <svrl:fired-rule context="/tournament/matches/day/match"/>
    <svrl:fired-rule context="/tournament/matches/day/match"/>
+   <svrl:fired-rule context="/tournament/participatingPlayers"/>
    <svrl:active-pattern document="file:/D:/Programování/EVOXSVN/SchematronTest/MatchSchedule.xml"
-                        id="defaultname"
-                        name="defaultname"/>
+                        id="empty"
+                        name="empty"/>
    <svrl:active-pattern document="file:/D:/Programování/EVOXSVN/SchematronTest/MatchSchedule.xml"
-                        id="defaultname"
-                        name="defaultname"/>
+                        id="days"
+                        name="days"/>
    <svrl:fired-rule context="/tournament"/>
+   <svrl:fired-rule context="/tournament/matches/day"/>
+   <svrl:fired-rule context="/tournament/matches/day"/>
+   <svrl:fired-rule context="/tournament/matches/day"/>
 </svrl:schematron-output>

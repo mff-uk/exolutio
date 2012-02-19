@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Xml.Linq;
 using Exolutio.Model.OCL;
 using Exolutio.Model.OCL.AST;
@@ -96,12 +97,8 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 
         #region not supported yet 
 
-        public ConvertedExp Visit(LetExp node)
-        {
-            // TODO: PSM2XPath: there should be some suport for let expression in the future
-            throw new ExpressionNotSupportedInXPath(node);
-        }
-
+        public abstract ConvertedExp Visit(LetExp node);
+        
         public ConvertedExp Visit(TypeExp node)
         {
             // TODO: PSM2XPath: there should be some suport for types in the future
@@ -125,10 +122,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 
         #region literals
 
-        public ConvertedExp Visit(TupleLiteralExp node)
-        {
-            throw new ExpressionNotSupportedInXPath(node);
-        }
+        public abstract ConvertedExp Visit(TupleLiteralExp node);
 
         public ConvertedExp Visit(InvalidLiteralExp node)
         {
@@ -143,8 +137,18 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 
         public ConvertedExp Visit(CollectionLiteralExp node)
         {
-            // TODO: PSM2XPath: some support for collection linterals
-            throw new ExpressionNotSupportedInXPath(node);
+            StringBuilder partsBuilder = new StringBuilder();
+            foreach (CollectionLiteralPart clp in node.Parts)
+            {   
+                //TODO: WFJT
+                //string partValue = clp.Value.Accept(this).GetString();
+                //partsBuilder.AppendFormat("'{0}' := {1}, ", clp.Value.Attribute.Name, partValue);
+            }
+            if (partsBuilder.Length > 0)
+            {
+                partsBuilder.Length = partsBuilder.Length - 2;
+            }
+            return new ConvertedExp(string.Format("({0})", partsBuilder.ToString()));
         }
 
         public ConvertedExp Visit(EnumLiteralExp node)
@@ -159,7 +163,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 
         public ConvertedExp Visit(UnlimitedNaturalLiteralExp node)
         {
-            throw new ExpressionNotSupportedInXPath(node);
+            return new ConvertedExp(node.ToString());
         }
 
         public ConvertedExp Visit(IntegerLiteralExp node)
@@ -213,7 +217,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             string sourceExpression = node.Source.Accept(this).GetString();
             string bodyExpression = node.Body.Accept(this).GetString();
             string accInitExpression = node.Result.Value.Accept(this).GetString();
-            string result = string.Format("oclX:iterate({0}, {3}, function(${1}) {{ {2} }})", sourceExpression, node.Iterator[0].Name, bodyExpression, accInitExpression);
+            string result = string.Format("oclX:iterate({0}, {1}, function(${2}, {3}) {{ {4} }})", sourceExpression, accInitExpression, node.Iterator[0].Name, node.Result.Name, bodyExpression);
 
             loopStack.Pop();
             return new ConvertedExp(result);
@@ -253,6 +257,29 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 
             return new ConvertedExp(result);
         }
+
+        public override ConvertedExp Visit(LetExp node)
+        {
+            string valueExp = node.Variable.Value.Accept(this).GetString();
+            string bodyExpression = node.InExpression.Accept(this).GetString();
+            return new ConvertedExp(string.Format("let ${0} := {1} return {2}", node.Variable.Name, valueExp, bodyExpression));
+        }
+
+        public override ConvertedExp Visit(TupleLiteralExp node)
+        {
+            StringBuilder partsBuilder = new StringBuilder();
+            foreach (KeyValuePair<string, TupleLiteralPart> kvp in node.Parts)
+            {
+                string partValue = kvp.Value.Value.Accept(this).GetString();
+                partsBuilder.AppendFormat("'{0}' := {1}, ", kvp.Value.Attribute.Name, partValue );
+
+            }
+            if (partsBuilder.Length > 0)
+            {
+                partsBuilder.Length = partsBuilder.Length - 2; 
+            }
+            return new ConvertedExp(string.Format("map{{{0}}}", partsBuilder.ToString()));
+        }
     }
 
     public class PSMOCLtoXPathConverterDynamic : PSMOCLtoXPathConverter
@@ -269,8 +296,33 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
         {
             loopStack.Push(node);
 
+            string sourceExpression = node.Source.Accept(this).GetString();
+            string accInitExpression = node.Result.Value.Accept(this).GetString();
+            var prevInsideDynamicEvaluation = insideDynamicEvaluation;
+            insideDynamicEvaluation = true;
+            string bodyExpression = node.Body.Accept(this).GetString();
+            insideDynamicEvaluation = prevInsideDynamicEvaluation;
+
+            string variablesDef;
+            if (loopStack.Count > 1 || variablesDefinedExplicitly)
+            {
+                variablesDef = "$variables";
+            }
+            else
+            {
+                variablesDef = "$variables";
+            }
+
+            string apostrophe = insideDynamicEvaluation ? "''" : "'";
+            string result;
+                result = string.Format("oclX:iterate({0}, {3}, function(${1}) {{ {2} }})", sourceExpression, node.Iterator[0].Name, bodyExpression, accInitExpression);
+
+                result = string.Format("oclX:iterate({0}, {6}{1}{6}, {6}{2}{6}, {6}{3}{6}, {6}{4}{6}, {5})",
+                                       sourceExpression, node.Iterator[0].Name, node.Result.Name, accInitExpression, bodyExpression,
+                                       variablesDef, apostrophe);
             loopStack.Pop();
-            return null;
+
+            return new ConvertedExp(result);
         }
 
 
@@ -324,13 +376,35 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 
             return new ConvertedExp(result);
         }
+
+        public override ConvertedExp Visit(LetExp node)
+        {
+            string valueExp = node.Variable.Value.Accept(this).GetString();
+            string bodyExpression = node.InExpression.Accept(this).GetString();
+            return new ConvertedExp(string.Format("for ${0} in {1} return {2}", node.Variable.Name, valueExp, bodyExpression));
+        }
+
+        public override ConvertedExp Visit(TupleLiteralExp node)
+        {
+            throw new ExpressionNotSupportedInXPath(node, "Tuples are supported only in 'functional' schemas. ");
+        }
     }
 
     public class ExpressionNotSupportedInXPath: Exception
     {
-        public ExpressionNotSupportedInXPath(OclExpression node)
+        public OclExpression Expression
         {
-            
+            get; set; 
+        }
+
+        public ExpressionNotSupportedInXPath(OclExpression expression)
+        {
+            Expression = expression; 
+        }
+
+        public ExpressionNotSupportedInXPath(OclExpression expression, string message) : base(message)
+        {
+            Expression = expression; 
         }
     }
 
@@ -344,7 +418,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
         {
             if (AddDataCall)
             {
-                return string.Format("xs:data({0})", RawString);
+                return string.Format("data({0})", RawString);
             }
             else
             {

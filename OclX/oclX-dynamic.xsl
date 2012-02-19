@@ -34,8 +34,12 @@ documentation of <doc:i>oclX:evaluate</doc:i> for more information.">
       <doc:p>Go to http://exolutio.com and download eXolutio - a tool which allows translation
         from OCL scripts to Schematron schemas. You can also find the modified Schematron pipeline
         XSLTs on this address. </doc:p>
-      <doc:p> The library uses SAXON extensions for dynamic evaluation of expressions. (See function
+      <doc:p>The library uses SAXON extensions for dynamic evaluation of expressions. (See function
           <doc:i>oclX:evaluate</doc:i> for more information). </doc:p>
+      <doc:p>We strongly advise to use <doc:b>>OclX-functional</doc:b> instead of OclX-dynamic (this library). 
+        OclX-functional contains definitions of the majority of functions defined in the 
+      specification of OCL. OclX-dynamic focuses almost solely on iterator expressions.</doc:p>
+      <doc:p>Please, be aware that at this moment, OclX does not support nested collections. </doc:p>
     </doc:desc>
   </doc:doc>
 
@@ -493,41 +497,98 @@ documentation of <doc:i>oclX:evaluate</doc:i> for more information.">
     <xsl:param name="collection" as="item()*"/>
     <xsl:param name="iterationVar" as="xs:string"/>
     <xsl:param name="body" as="xs:string"/>
-    <xsl:param name="variables" as="item()*"/>
+    <xsl:param name="variables" as="item()*"/>   
     
-    
+      <xsl:sequence
+        select="oclX:iterate(
+        $collection, $iterationVar, 'acc', '()',            
+        concat('$acc, if ((', $body, ') eq true()) then ($', $iterationVar, ') else ()'),               
+        $variables)"
+      />
   </xsl:function>
   
+  <doc:doc>
+    <doc:desc>
+      <doc:p>Implements <doc:i>reject</doc:i> function from OCL. The implementation uses
+        <doc:i>oclX:iterate</doc:i> internally. </doc:p>
+      <doc:p>The subsequence of the source <doc:i>collection</doc:i> for which <doc:i>body</doc:i> is
+        false.</doc:p>
+    </doc:desc>
+    <doc:param name="collection">The iterated collection.</doc:param>
+    <doc:param name="iterationVar">The <doc:i>name</doc:i> of the iteration variable.</doc:param>
+    <doc:param name="body">The expression evaluated for each member of
+      <doc:i>collection</doc:i>.</doc:param>
+    <doc:param name="variables"></doc:param>
+    <doc:return>The subsequence of the source <doc:i>collection</doc:i> for which <doc:i>body</doc:i> is
+      false.</doc:return>
+  </doc:doc>
   <xsl:function name="oclX:reject" as="item()*">
     <xsl:param name="collection" as="item()*"/>
     <xsl:param name="iterationVar" as="xs:string"/>
     <xsl:param name="body" as="xs:string"/>
     <xsl:param name="variables" as="item()*"/>
     
-    
+      <xsl:sequence
+        select="oclX:iterate(
+        $collection, $iterationVar, 'acc', '()',            
+        concat('$acc, if ((', $body, ') eq false()) then ($', $iterationVar, ') else ()'),               
+        $variables)"
+      />
   </xsl:function>
   
+  <doc:doc>
+    <doc:desc>
+      <doc:p>Results in the collection containing all elements of the source
+        <doc:i>collection</doc:i>. The element for which <doc:i>body</doc:i> has the lowest value
+        comes first, and so on. Uses <doc:i>xsl:perform-sort</doc:i> and dynamic evaluation
+        internally. </doc:p>
+    </doc:desc>
+    <doc:param name="collection">The iterated collection.</doc:param>
+    <doc:param name="body">Condition evaluated for each member of
+      <doc:i>collection</doc:i>.</doc:param>
+    <doc:return>Ordered sequence. </doc:return>
+  </doc:doc>
   <xsl:function name="oclX:sortedBy" as="item()*">
     <xsl:param name="collection" as="item()*"/>
     <xsl:param name="iterationVar" as="xs:string"/>
     <xsl:param name="body" as="xs:string"/>
     <xsl:param name="variables" as="item()*"/>
     
-    
+    <xsl:perform-sort select="$collection">
+      <xsl:sort select="oclXin:evaluate($body, oclXin:appendVarToSequence($variables, $iterationVar, current()))"/>
+    </xsl:perform-sort>
   </xsl:function>
   
+  <doc:doc>
+    <doc:desc>
+      <doc:p>Returns <doc:i>true</doc:i> when <doc:i>date2</doc:i> follows after
+        <doc:i>date1</doc:i> (also when the dates are equal). </doc:p>
+    </doc:desc>
+    <doc:param name="date1">First date. </doc:param>
+    <doc:param name="date2">Second date. </doc:param>
+  </doc:doc>
   <xsl:function name="oclDate:after" as="xs:boolean">
     <xsl:param name="date1" />
     <xsl:param name="date2" />    
     <xsl:sequence select="xs:dateTime($date1) ge xs:dateTime($date2)"/>
   </xsl:function>
   
+  <doc:doc>
+    <doc:desc>Returns <doc:i>true</doc:i> when <doc:i>date1</doc:i> follows after
+      <doc:i>date2</doc:i> (also when the dates are equal). </doc:desc>
+    <doc:param name="date1">First date. </doc:param>
+    <doc:param name="date2">Second date. </doc:param>
+  </doc:doc>
   <xsl:function name="oclDate:before" as="xs:boolean">
     <xsl:param name="date1" />
     <xsl:param name="date2" />    
     <xsl:sequence select="xs:dateTime($date2) ge xs:dateTime($date1)"/>
   </xsl:function>
   
+  <doc:doc>
+    <doc:desc>Returns date from a dateTime.</doc:desc>
+    <doc:param name="dateTime">Input date. </doc:param>
+  </doc:doc>
   <xsl:function name="oclDate:getDate" as="xs:date">
     <xsl:param name="dateTime" as="xs:dateTime" />
     <xsl:sequence select="xs:date(format-dateTime($dateTime, '[Y]-[M,2]-[D,2]'))" />
@@ -570,6 +631,7 @@ documentation of <doc:i>oclX:evaluate</doc:i> for more information.">
   <xsl:function name="oclXin:evaluate" as="item()*">
     <xsl:param name="expression" as="xs:string"/>
     <xsl:param name="variables" as="item()*"/>
+    
     <xsl:variable name="expressionReplaced"
       select="oclXin:expressionForSaxon($expression, $variables)" as="xs:string"/>
     <xsl:variable name="result" as="item()*">
