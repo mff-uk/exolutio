@@ -96,27 +96,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="SchematronTranslation\OclX\oclX-dynamic-internal.xsl" />
-    <None Include="SchematronTranslation\OclX\oclX-dynamic.xsl" />
-    <None Include="SchematronTranslation\OclX\oclX-functional.xsl" />
-    <None Include="SchematronTranslation\SchematronPipeline\oclx-schematron-pipeline.xpl" />
-    <None Include="SchematronTranslation\SchematronPipeline\sch-messages-cs.xhtml" />
-    <None Include="SchematronTranslation\SchematronPipeline\sch-messages-de.xhtml" />
-    <None Include="SchematronTranslation\SchematronPipeline\sch-messages-en.xhtml" />
-    <None Include="SchematronTranslation\SchematronPipeline\sch-messages-fr.xhtml" />
-    <None Include="SchematronTranslation\SchematronPipeline\sch-messages-nl.xhtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="SchematronTranslation\SchematronPipeline\ExtractSchFromRNG-2.xsl" />
-    <None Include="SchematronTranslation\SchematronPipeline\ExtractSchFromXSD-2.xsl" />
-    <None Include="SchematronTranslation\SchematronPipeline\iso_abstract_expand.xsl" />
-    <None Include="SchematronTranslation\SchematronPipeline\iso_dsdl_include.xsl" />
-    <None Include="SchematronTranslation\SchematronPipeline\iso_schematron_message_xslt2.xsl" />
-    <None Include="SchematronTranslation\SchematronPipeline\iso_schematron_skeleton_for_saxon.xsl" />
-    <None Include="SchematronTranslation\SchematronPipeline\iso_svrl_for_xslt2.xsl" />
-    <None Include="SchematronTranslation\SchematronPipeline\oclx_include.xsl" />
-    <None Include="SchematronTranslation\SchematronPipeline\readme.txt" />
-    <None Include="SchematronTranslation\SchematronPipeline\schematron-skeleton-api.htm" />
+    <Folder Include="SchematronTranslation\SchematronPipeline\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

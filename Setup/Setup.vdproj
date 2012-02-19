@@ -15,6 +15,36 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_0362A038711447429109A66A99FE2372"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_03DD708D5CEC4AC792FFE6493E79D6E5"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_07C7C0305F4F4FC3ADA86730D62A6A94"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_094342E7CDAE4ECBB5E9C9C895ECDD03"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_0AAE778FB607409C991338D1E5E70C16"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_0F934589B889113672F68B88446A9E48"
         "OwnerKey" = "8:_FBED219A449B4B06DAD02C31CBC1FEC7"
         "MsmSig" = "8:_UNDEFINED"
@@ -35,6 +65,12 @@
         {
         "MsmKey" = "8:_0F934589B889113672F68B88446A9E48"
         "OwnerKey" = "8:_678B506FB37C3E838AAB5A98ED2302E3"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_1171A05B59AA4D3EBC5981A0175C68AD"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -63,13 +99,19 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_14316DC73201473686C5870F54E10338"
+        "MsmKey" = "8:_16941CFC3BAB4FB5B1F126DF6A4FAFB1"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_1CA7137038AA441092151B5604F7982F"
+        "MsmKey" = "8:_1A999C393E7E41CFA48F9D681A2337B2"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_1E7E3CD75E484581A379C861BAC36060"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -117,14 +159,14 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_23BDF1D7E41E4B5AB64DDBAE5FABF74E"
-        "OwnerKey" = "8:_UNDEFINED"
+        "MsmKey" = "8:_24D23D8031D5AC9038F5F8A6D81D4CF9"
+        "OwnerKey" = "8:_BA10DA897183484ABA01E6BE8DF08D6E"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_24D23D8031D5AC9038F5F8A6D81D4CF9"
-        "OwnerKey" = "8:_BA10DA897183484ABA01E6BE8DF08D6E"
+        "MsmKey" = "8:_2E795AA7436848D8BC8A3DDADC9BA63C"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -183,6 +225,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_390F7BC8AE2249038F908C8E03988424"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_39BE0091B705E9FD798E449F716B7E5F"
         "OwnerKey" = "8:_BA10DA897183484ABA01E6BE8DF08D6E"
         "MsmSig" = "8:_UNDEFINED"
@@ -195,7 +243,19 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_45E74DCD2EE04F3DA709A7CDFEEFB382"
+        "MsmKey" = "8:_3E47162E581448509997182246F39BDD"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_420827CCFD6344C58BE0B7A3F12DF913"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_464C7AD6E47746769122BAC5E382CACF"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -225,7 +285,37 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_4FB987320CC742F4B6DFA312A6D342AD"
+        "MsmKey" = "8:_4B95D4238F53447EADFE7C9236B2040A"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_523DE034B1D941DFA95C44FE236A14E8"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_54FB531B875D47E5819377AA281F0693"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_56DE87758E0B430884987A4C9FFA1004"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_5B00BA1E8ED1499CA9019085E912E843"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_5B2139ACFD134842BB644F3FFE12F05F"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -239,6 +329,12 @@
         {
         "MsmKey" = "8:_5DE537EBF45E88CF619A3A6A0E8222F6"
         "OwnerKey" = "8:_BA10DA897183484ABA01E6BE8DF08D6E"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_5EED62E000B84EEDA389D0CA4C20713E"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -321,6 +417,24 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_6121F112FA3347FA8D36A45DA73A449A"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_6253757C79F94D9EBB5FA1B291D9D9AD"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_62EE20BDB7684CA0BD0548A5F046FEDC"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_678B506FB37C3E838AAB5A98ED2302E3"
         "OwnerKey" = "8:_BA10DA897183484ABA01E6BE8DF08D6E"
         "MsmSig" = "8:_UNDEFINED"
@@ -341,6 +455,24 @@
         {
         "MsmKey" = "8:_690D93D06617200CF38EC182A79D1276"
         "OwnerKey" = "8:_24D23D8031D5AC9038F5F8A6D81D4CF9"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_6A3274990BEF4371AEB97F01A49A5F16"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_71056B5192DB4044A9324E8FC92B0D21"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_71EC53022F3B4AA3AACE4DDE26E1EE72"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -453,19 +585,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_7D1CB79BF9CD4E53B65029ABAE21CF96"
+        "MsmKey" = "8:_7FE8BBE0963A4FD99E1E7F999A1B0708"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_7F212FB520DC4E1EBCE57BDC84C210E8"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_81358732E602485FAA7EA04AD6991EB4"
+        "MsmKey" = "8:_8142E235030D46D0BB8D77508C5A7B8B"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -531,7 +657,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_8B0D6B95D38F429CB49C6E13FEC81457"
+        "MsmKey" = "8:_859C22F8BBBC4FC5B4F6FC900817E319"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_894B0DF7E596492298D8EA44F8743607"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -539,6 +671,12 @@
         {
         "MsmKey" = "8:_8D0B6B64182FB084B79C258A966BE9AC"
         "OwnerKey" = "8:_BA10DA897183484ABA01E6BE8DF08D6E"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_8E2F2431C0034D189E4FB9810139A8EE"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -573,12 +711,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_A3B9B7321F124FDA95A16A8FB5D8BA2D"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_A86BF301576D2540BF0E72CF155803E2"
         "OwnerKey" = "8:_BA10DA897183484ABA01E6BE8DF08D6E"
         "MsmSig" = "8:_UNDEFINED"
@@ -591,7 +723,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_ADA793A4529643468FAA35752DE5DF91"
+        "MsmKey" = "8:_A8E6524F96AB4AC9B660D9029B13DBDF"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -639,6 +771,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_B9BA576C5D65425082D365D14257B68E"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_BA10DA897183484ABA01E6BE8DF08D6E"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -659,6 +797,12 @@
         {
         "MsmKey" = "8:_BA852618D44012700F2EEFF5D859D249"
         "OwnerKey" = "8:_E4DB0D5BC8AD2F631F8A6F1BA6D4FF2C"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_BF2E2FBD613A44BFBEE79582E87A2879"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -723,7 +867,31 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_CE58EA790C824E8CB431725ABAE2BE42"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_CEBDAB069B2B444F94A881EF689ADAB8"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_D321998504384C49B2BF54BFA6E44A95"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_D67BC18FD6EF483DB2DF111905B746C7"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_DCDA28FC806F4C58A49059E634A9A8BE"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -741,7 +909,19 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_E12A14147179417C9BAB262AB844B7D6"
+        "MsmKey" = "8:_E08126D6A452442990ABB3BF91BFDC37"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_E14D4FC6F7434BAA802C0F99BE01001D"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_E305BF7BA2044462A5ACC7FFAFA7822B"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -759,7 +939,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_ED60D20732674E90989BFF2338D46729"
+        "MsmKey" = "8:_EAE60A48A71045C2A37D2D69C5E3D809"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_EAEBEF4B8C8E4B2EBA5396365F79D237"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -795,7 +981,19 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_EED42F1613974BEFB2350B105C1241E3"
+        "MsmKey" = "8:_EF6444C293244A2997AB781BE9EAE693"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_EFD0C69183D7428EB8D2C88FDBD0E8DA"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_F31419C9BDE944DBBF2DE5E84AF6EB56"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -807,13 +1005,19 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_F9DE14BC84524B53BA2B457708D61541"
+        "MsmKey" = "8:_F4AD6354C9914AC7A8FE1244420224D2"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_FA2A0A3DDA9D45139491786663E4EC3E"
+        "MsmKey" = "8:_F8D7540669C6423387F6A3DF6D62D906"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_F94CEE43E7FE419FA37E2F7DC675FC6C"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -833,12 +1037,6 @@
         {
         "MsmKey" = "8:_FBED219A449B4B06DAD02C31CBC1FEC7"
         "OwnerKey" = "8:_678B506FB37C3E838AAB5A98ED2302E3"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_B300AC60677A0F5731CDCC2A8DB5427F"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1075,6 +1273,12 @@
         "OwnerKey" = "8:_6059C2DE4A2DDA6DF1CF6A87653326CE"
         "MsmSig" = "8:_UNDEFINED"
         }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_B300AC60677A0F5731CDCC2A8DB5427F"
+        "MsmSig" = "8:_UNDEFINED"
+        }
     }
     "Configurations"
     {
@@ -1180,6 +1384,106 @@
         }
         "File"
         {
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0362A038711447429109A66A99FE2372"
+            {
+            "SourcePath" = "8:..\\IsoSchematron\\iso_abstract_expand.xsl"
+            "TargetName" = "8:iso_abstract_expand.xsl"
+            "Tag" = "8:"
+            "Folder" = "8:_A870E468599047E0BD21EAD937BDF1FC"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_03DD708D5CEC4AC792FFE6493E79D6E5"
+            {
+            "SourcePath" = "8:..\\IsoSchematron\\sch-messages-en.xhtml"
+            "TargetName" = "8:sch-messages-en.xhtml"
+            "Tag" = "8:"
+            "Folder" = "8:_A870E468599047E0BD21EAD937BDF1FC"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_07C7C0305F4F4FC3ADA86730D62A6A94"
+            {
+            "SourcePath" = "8:..\\OclX\\Documentation\\oclX-dynamic-internal.html"
+            "TargetName" = "8:oclX-dynamic-internal.html"
+            "Tag" = "8:"
+            "Folder" = "8:_F79535CE8621487BBABF00ED073EBF66"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_094342E7CDAE4ECBB5E9C9C895ECDD03"
+            {
+            "SourcePath" = "8:..\\OclX\\Documentation\\img\\lR.gif"
+            "TargetName" = "8:lR.gif"
+            "Tag" = "8:"
+            "Folder" = "8:_22297744796A4F478958B231D0FDF6B8"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0AAE778FB607409C991338D1E5E70C16"
+            {
+            "SourcePath" = "8:..\\IsoSchematron\\iso_schematron_skeleton_for_saxon.xsl"
+            "TargetName" = "8:iso_schematron_skeleton_for_saxon.xsl"
+            "Tag" = "8:"
+            "Folder" = "8:_A870E468599047E0BD21EAD937BDF1FC"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_0F934589B889113672F68B88446A9E48"
             {
             "AssemblyRegister" = "3:1"
@@ -1211,11 +1515,31 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1171A05B59AA4D3EBC5981A0175C68AD"
+            {
+            "SourcePath" = "8:..\\OclX\\Documentation\\oclX-functional0.html"
+            "TargetName" = "8:oclX-functional0.html"
+            "Tag" = "8:"
+            "Folder" = "8:_F79535CE8621487BBABF00ED073EBF66"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_1233E8099C10E268D0E1EC66DD18F7E4"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Exolutio.Controller, Version=1.0.0.32785, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:Exolutio.Controller, Version=1.0.0.40438, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_1233E8099C10E268D0E1EC66DD18F7E4"
@@ -1242,12 +1566,12 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_14316DC73201473686C5870F54E10338"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_16941CFC3BAB4FB5B1F126DF6A4FAFB1"
             {
-            "SourcePath" = "8:..\\IsoSchematron\\ExtractSchFromXSD-2.xsl"
-            "TargetName" = "8:ExtractSchFromXSD-2.xsl"
+            "SourcePath" = "8:..\\IsoSchematron\\iso_svrl_for_xslt2.xsl"
+            "TargetName" = "8:iso_svrl_for_xslt2.xsl"
             "Tag" = "8:"
-            "Folder" = "8:_EA0CD5E3196343C5AFFE3FF6CE4319B5"
+            "Folder" = "8:_A870E468599047E0BD21EAD937BDF1FC"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1262,12 +1586,32 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1CA7137038AA441092151B5604F7982F"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1A999C393E7E41CFA48F9D681A2337B2"
             {
-            "SourcePath" = "8:..\\IsoSchematron\\iso_svrl_for_xslt2.xsl"
-            "TargetName" = "8:iso_svrl_for_xslt2.xsl"
+            "SourcePath" = "8:..\\OclX\\Documentation\\img\\btP.gif"
+            "TargetName" = "8:btP.gif"
             "Tag" = "8:"
-            "Folder" = "8:_EA0CD5E3196343C5AFFE3FF6CE4319B5"
+            "Folder" = "8:_22297744796A4F478958B231D0FDF6B8"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1E7E3CD75E484581A379C861BAC36060"
+            {
+            "SourcePath" = "8:..\\IsoSchematron\\sch-messages-cs.xhtml"
+            "TargetName" = "8:sch-messages-cs.xhtml"
+            "Tag" = "8:"
+            "Folder" = "8:_A870E468599047E0BD21EAD937BDF1FC"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1313,26 +1657,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_23BDF1D7E41E4B5AB64DDBAE5FABF74E"
-            {
-            "SourcePath" = "8:..\\IsoSchematron\\readme.txt"
-            "TargetName" = "8:readme.txt"
-            "Tag" = "8:"
-            "Folder" = "8:_EA0CD5E3196343C5AFFE3FF6CE4319B5"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_24D23D8031D5AC9038F5F8A6D81D4CF9"
             {
             "AssemblyRegister" = "3:1"
@@ -1362,6 +1686,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2E795AA7436848D8BC8A3DDADC9BA63C"
+            {
+            "SourcePath" = "8:..\\IsoSchematron\\iso_dsdl_include.xsl"
+            "TargetName" = "8:iso_dsdl_include.xsl"
+            "Tag" = "8:"
+            "Folder" = "8:_A870E468599047E0BD21EAD937BDF1FC"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_2ECA574BEEDCC389EA0CCD671CB97C24"
@@ -1426,6 +1770,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_390F7BC8AE2249038F908C8E03988424"
+            {
+            "SourcePath" = "8:..\\IsoSchematron\\sch-messages-nl.xhtml"
+            "TargetName" = "8:sch-messages-nl.xhtml"
+            "Tag" = "8:"
+            "Folder" = "8:_A870E468599047E0BD21EAD937BDF1FC"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_39BE0091B705E9FD798E449F716B7E5F"
             {
             "AssemblyRegister" = "3:1"
@@ -1462,7 +1826,7 @@
             "SourcePath" = "8:..\\Projects\\tournaments.eXo"
             "TargetName" = "8:tournaments.eXo"
             "Tag" = "8:"
-            "Folder" = "8:_B5973DCD884A4BE09534857A24BEBEF2"
+            "Folder" = "8:_C8967144ADF54680B60E427E9D582A2E"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1477,12 +1841,52 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_45E74DCD2EE04F3DA709A7CDFEEFB382"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3E47162E581448509997182246F39BDD"
             {
-            "SourcePath" = "8:..\\IsoSchematron\\iso_schematron_skeleton_for_saxon.xsl"
-            "TargetName" = "8:iso_schematron_skeleton_for_saxon.xsl"
+            "SourcePath" = "8:..\\OclX\\Documentation\\img\\cBL.gif"
+            "TargetName" = "8:cBL.gif"
             "Tag" = "8:"
-            "Folder" = "8:_EA0CD5E3196343C5AFFE3FF6CE4319B5"
+            "Folder" = "8:_22297744796A4F478958B231D0FDF6B8"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_420827CCFD6344C58BE0B7A3F12DF913"
+            {
+            "SourcePath" = "8:..\\OclX\\Examples\\SchemaAware\\MatchScheduleSA.sch"
+            "TargetName" = "8:MatchScheduleSA.sch"
+            "Tag" = "8:"
+            "Folder" = "8:_084394272F0B4969AEFE4F4B37A22FCD"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_464C7AD6E47746769122BAC5E382CACF"
+            {
+            "SourcePath" = "8:..\\OclX\\Documentation\\img\\tplN16.gif"
+            "TargetName" = "8:tplN16.gif"
+            "Tag" = "8:"
+            "Folder" = "8:_22297744796A4F478958B231D0FDF6B8"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1559,12 +1963,112 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4FB987320CC742F4B6DFA312A6D342AD"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4B95D4238F53447EADFE7C9236B2040A"
             {
-            "SourcePath" = "8:..\\IsoSchematron\\oclx_include.xsl"
-            "TargetName" = "8:oclx_include.xsl"
+            "SourcePath" = "8:..\\OclX\\Examples\\NotSchemaAware\\TournamentApplication.xml"
+            "TargetName" = "8:TournamentApplication.xml"
             "Tag" = "8:"
-            "Folder" = "8:_EA0CD5E3196343C5AFFE3FF6CE4319B5"
+            "Folder" = "8:_18136FED77E94C7E9B00C8FB9F4114F7"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_523DE034B1D941DFA95C44FE236A14E8"
+            {
+            "SourcePath" = "8:..\\OclX\\Examples\\NotSchemaAware\\TournamentsSchedule.sch"
+            "TargetName" = "8:TournamentsSchedule.sch"
+            "Tag" = "8:"
+            "Folder" = "8:_18136FED77E94C7E9B00C8FB9F4114F7"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_54FB531B875D47E5819377AA281F0693"
+            {
+            "SourcePath" = "8:..\\IsoSchematron\\ExtractSchFromRNG-2.xsl"
+            "TargetName" = "8:ExtractSchFromRNG-2.xsl"
+            "Tag" = "8:"
+            "Folder" = "8:_A870E468599047E0BD21EAD937BDF1FC"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_56DE87758E0B430884987A4C9FFA1004"
+            {
+            "SourcePath" = "8:..\\OclX\\Examples\\NotSchemaAware\\TournamentApplication.sch"
+            "TargetName" = "8:TournamentApplication.sch"
+            "Tag" = "8:"
+            "Folder" = "8:_18136FED77E94C7E9B00C8FB9F4114F7"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5B00BA1E8ED1499CA9019085E912E843"
+            {
+            "SourcePath" = "8:..\\OclX\\Examples\\SchemaAware\\MatchSchedule.xml"
+            "TargetName" = "8:MatchSchedule.xml"
+            "Tag" = "8:"
+            "Folder" = "8:_084394272F0B4969AEFE4F4B37A22FCD"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5B2139ACFD134842BB644F3FFE12F05F"
+            {
+            "SourcePath" = "8:..\\OclX\\Examples\\NotSchemaAware\\MatchSchedule.xml"
+            "TargetName" = "8:MatchSchedule.xml"
+            "Tag" = "8:"
+            "Folder" = "8:_18136FED77E94C7E9B00C8FB9F4114F7"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1608,6 +2112,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5EED62E000B84EEDA389D0CA4C20713E"
+            {
+            "SourcePath" = "8:..\\OclX\\Documentation\\docHtml.css"
+            "TargetName" = "8:docHtml.css"
+            "Tag" = "8:"
+            "Folder" = "8:_F79535CE8621487BBABF00ED073EBF66"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_5FC78EA29BD8FE4E1ACEE2C77B46C79F"
@@ -1672,6 +2196,66 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6121F112FA3347FA8D36A45DA73A449A"
+            {
+            "SourcePath" = "8:..\\OclX\\Documentation\\img\\lL.gif"
+            "TargetName" = "8:lL.gif"
+            "Tag" = "8:"
+            "Folder" = "8:_22297744796A4F478958B231D0FDF6B8"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6253757C79F94D9EBB5FA1B291D9D9AD"
+            {
+            "SourcePath" = "8:..\\OclX\\Documentation\\img\\lT.gif"
+            "TargetName" = "8:lT.gif"
+            "Tag" = "8:"
+            "Folder" = "8:_22297744796A4F478958B231D0FDF6B8"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_62EE20BDB7684CA0BD0548A5F046FEDC"
+            {
+            "SourcePath" = "8:..\\IsoSchematron\\sch-messages-fr.xhtml"
+            "TargetName" = "8:sch-messages-fr.xhtml"
+            "Tag" = "8:"
+            "Folder" = "8:_A870E468599047E0BD21EAD937BDF1FC"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_678B506FB37C3E838AAB5A98ED2302E3"
             {
             "AssemblyRegister" = "3:1"
@@ -1734,11 +2318,71 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6A3274990BEF4371AEB97F01A49A5F16"
+            {
+            "SourcePath" = "8:..\\OclX\\Documentation\\oclX-dynamic.html"
+            "TargetName" = "8:oclX-dynamic.html"
+            "Tag" = "8:"
+            "Folder" = "8:_F79535CE8621487BBABF00ED073EBF66"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_71056B5192DB4044A9324E8FC92B0D21"
+            {
+            "SourcePath" = "8:..\\IsoSchematron\\oclx-schematron-pipeline.xpl"
+            "TargetName" = "8:oclx-schematron-pipeline.xpl"
+            "Tag" = "8:"
+            "Folder" = "8:_A870E468599047E0BD21EAD937BDF1FC"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_71EC53022F3B4AA3AACE4DDE26E1EE72"
+            {
+            "SourcePath" = "8:..\\OclX\\Documentation\\img\\cTL.gif"
+            "TargetName" = "8:cTL.gif"
+            "Tag" = "8:"
+            "Folder" = "8:_22297744796A4F478958B231D0FDF6B8"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_75089443E5254EB2FADB9D690436368E"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Exolutio.Model, Version=1.0.0.32785, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:Exolutio.Model, Version=1.0.0.40436, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_75089443E5254EB2FADB9D690436368E"
@@ -1851,7 +2495,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Exolutio.Model, Version=1.0.0.32785, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:Exolutio.Model, Version=1.0.0.40436, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_7CD34E5996E2170277BDCC5C8C1FFD65"
@@ -1878,12 +2522,12 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7D1CB79BF9CD4E53B65029ABAE21CF96"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7FE8BBE0963A4FD99E1E7F999A1B0708"
             {
-            "SourcePath" = "8:..\\IsoSchematron\\sch-messages-fr.xhtml"
-            "TargetName" = "8:sch-messages-fr.xhtml"
+            "SourcePath" = "8:..\\OclX\\Documentation\\oclX-dynamic1.html"
+            "TargetName" = "8:oclX-dynamic1.html"
             "Tag" = "8:"
-            "Folder" = "8:_EA0CD5E3196343C5AFFE3FF6CE4319B5"
+            "Folder" = "8:_F79535CE8621487BBABF00ED073EBF66"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1898,32 +2542,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7F212FB520DC4E1EBCE57BDC84C210E8"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8142E235030D46D0BB8D77508C5A7B8B"
             {
-            "SourcePath" = "8:..\\IsoSchematron\\oclx-schematron-pipeline.xpl"
-            "TargetName" = "8:oclx-schematron-pipeline.xpl"
+            "SourcePath" = "8:..\\IsoSchematron\\readme.txt"
+            "TargetName" = "8:readme.txt"
             "Tag" = "8:"
-            "Folder" = "8:_EA0CD5E3196343C5AFFE3FF6CE4319B5"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_81358732E602485FAA7EA04AD6991EB4"
-            {
-            "SourcePath" = "8:..\\IsoSchematron\\sch-messages-de.xhtml"
-            "TargetName" = "8:sch-messages-de.xhtml"
-            "Tag" = "8:"
-            "Folder" = "8:_EA0CD5E3196343C5AFFE3FF6CE4319B5"
+            "Folder" = "8:_A870E468599047E0BD21EAD937BDF1FC"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -2062,12 +2686,32 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8B0D6B95D38F429CB49C6E13FEC81457"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_859C22F8BBBC4FC5B4F6FC900817E319"
             {
-            "SourcePath" = "8:..\\IsoSchematron\\sch-messages-en.xhtml"
-            "TargetName" = "8:sch-messages-en.xhtml"
+            "SourcePath" = "8:..\\OclX\\Examples\\SchemaAware\\MatchSchedule.xsd"
+            "TargetName" = "8:MatchSchedule.xsd"
             "Tag" = "8:"
-            "Folder" = "8:_EA0CD5E3196343C5AFFE3FF6CE4319B5"
+            "Folder" = "8:_084394272F0B4969AEFE4F4B37A22FCD"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_894B0DF7E596492298D8EA44F8743607"
+            {
+            "SourcePath" = "8:..\\IsoSchematron\\oclx_include.xsl"
+            "TargetName" = "8:oclx_include.xsl"
+            "Tag" = "8:"
+            "Folder" = "8:_A870E468599047E0BD21EAD937BDF1FC"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -2111,6 +2755,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8E2F2431C0034D189E4FB9810139A8EE"
+            {
+            "SourcePath" = "8:..\\OclX\\Documentation\\oclX-functional.indexList.html"
+            "TargetName" = "8:oclX-functional.indexList.html"
+            "Tag" = "8:"
+            "Folder" = "8:_F79535CE8621487BBABF00ED073EBF66"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_90BD8CA777ED40489F406C9BA2C83529"
@@ -2184,26 +2848,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A3B9B7321F124FDA95A16A8FB5D8BA2D"
-            {
-            "SourcePath" = "8:..\\IsoSchematron\\iso_abstract_expand.xsl"
-            "TargetName" = "8:iso_abstract_expand.xsl"
-            "Tag" = "8:"
-            "Folder" = "8:_EA0CD5E3196343C5AFFE3FF6CE4319B5"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_A86BF301576D2540BF0E72CF155803E2"
             {
             "AssemblyRegister" = "3:1"
@@ -2235,12 +2879,12 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_ADA793A4529643468FAA35752DE5DF91"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A8E6524F96AB4AC9B660D9029B13DBDF"
             {
-            "SourcePath" = "8:..\\IsoSchematron\\iso_schematron_message_xslt2.xsl"
-            "TargetName" = "8:iso_schematron_message_xslt2.xsl"
+            "SourcePath" = "8:..\\OclX\\Documentation\\oclX-dynamic-internal.indexList.html"
+            "TargetName" = "8:oclX-dynamic-internal.indexList.html"
             "Tag" = "8:"
-            "Folder" = "8:_EA0CD5E3196343C5AFFE3FF6CE4319B5"
+            "Folder" = "8:_F79535CE8621487BBABF00ED073EBF66"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -2348,6 +2992,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B9BA576C5D65425082D365D14257B68E"
+            {
+            "SourcePath" = "8:..\\OclX\\Documentation\\oclX-dynamic.indexList.html"
+            "TargetName" = "8:oclX-dynamic.indexList.html"
+            "Tag" = "8:"
+            "Folder" = "8:_F79535CE8621487BBABF00ED073EBF66"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_BA852618D44012700F2EEFF5D859D249"
             {
             "AssemblyRegister" = "3:1"
@@ -2377,6 +3041,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BF2E2FBD613A44BFBEE79582E87A2879"
+            {
+            "SourcePath" = "8:..\\OclX\\Documentation\\img\\tplN12.gif"
+            "TargetName" = "8:tplN12.gif"
+            "Tag" = "8:"
+            "Folder" = "8:_22297744796A4F478958B231D0FDF6B8"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_C24C9446FA0120FF44AC3746F0E5C8A1"
@@ -2523,12 +3207,92 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CE58EA790C824E8CB431725ABAE2BE42"
+            {
+            "SourcePath" = "8:..\\OclX\\Examples\\NotSchemaAware\\MatchSchedule.sch"
+            "TargetName" = "8:MatchSchedule.sch"
+            "Tag" = "8:"
+            "Folder" = "8:_18136FED77E94C7E9B00C8FB9F4114F7"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CEBDAB069B2B444F94A881EF689ADAB8"
+            {
+            "SourcePath" = "8:..\\OclX\\Documentation\\oclX-dynamic2.html"
+            "TargetName" = "8:oclX-dynamic2.html"
+            "Tag" = "8:"
+            "Folder" = "8:_F79535CE8621487BBABF00ED073EBF66"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D321998504384C49B2BF54BFA6E44A95"
+            {
+            "SourcePath" = "8:..\\IsoSchematron\\sch-messages-de.xhtml"
+            "TargetName" = "8:sch-messages-de.xhtml"
+            "Tag" = "8:"
+            "Folder" = "8:_A870E468599047E0BD21EAD937BDF1FC"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D67BC18FD6EF483DB2DF111905B746C7"
             {
             "SourcePath" = "8:..\\ResourceLibrary\\Images\\Exolutio.ico"
             "TargetName" = "8:Exolutio.ico"
             "Tag" = "8:"
             "Folder" = "8:_486AD895D63F4B68A1712D8230B63514"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DCDA28FC806F4C58A49059E634A9A8BE"
+            {
+            "SourcePath" = "8:..\\OclX\\Documentation\\oclX-functional.html"
+            "TargetName" = "8:oclX-functional.html"
+            "Tag" = "8:"
+            "Folder" = "8:_F79535CE8621487BBABF00ED073EBF66"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -2574,12 +3338,52 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E12A14147179417C9BAB262AB844B7D6"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E08126D6A452442990ABB3BF91BFDC37"
             {
-            "SourcePath" = "8:..\\IsoSchematron\\iso_dsdl_include.xsl"
-            "TargetName" = "8:iso_dsdl_include.xsl"
+            "SourcePath" = "8:..\\IsoSchematron\\ExtractSchFromXSD-2.xsl"
+            "TargetName" = "8:ExtractSchFromXSD-2.xsl"
             "Tag" = "8:"
-            "Folder" = "8:_EA0CD5E3196343C5AFFE3FF6CE4319B5"
+            "Folder" = "8:_A870E468599047E0BD21EAD937BDF1FC"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E14D4FC6F7434BAA802C0F99BE01001D"
+            {
+            "SourcePath" = "8:..\\OclX\\Documentation\\img\\hierarchy_arrow.gif"
+            "TargetName" = "8:hierarchy_arrow.gif"
+            "Tag" = "8:"
+            "Folder" = "8:_22297744796A4F478958B231D0FDF6B8"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E305BF7BA2044462A5ACC7FFAFA7822B"
+            {
+            "SourcePath" = "8:..\\OclX\\Documentation\\oclX-dynamic-internal0.html"
+            "TargetName" = "8:oclX-dynamic-internal0.html"
+            "Tag" = "8:"
+            "Folder" = "8:_F79535CE8621487BBABF00ED073EBF66"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -2625,12 +3429,32 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_ED60D20732674E90989BFF2338D46729"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EAE60A48A71045C2A37D2D69C5E3D809"
             {
-            "SourcePath" = "8:..\\IsoSchematron\\sch-messages-cs.xhtml"
-            "TargetName" = "8:sch-messages-cs.xhtml"
+            "SourcePath" = "8:..\\IsoSchematron\\schematron-skeleton-api.htm"
+            "TargetName" = "8:schematron-skeleton-api.htm"
             "Tag" = "8:"
-            "Folder" = "8:_EA0CD5E3196343C5AFFE3FF6CE4319B5"
+            "Folder" = "8:_A870E468599047E0BD21EAD937BDF1FC"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EAEBEF4B8C8E4B2EBA5396365F79D237"
+            {
+            "SourcePath" = "8:..\\OclX\\Documentation\\oclX-dynamic0.html"
+            "TargetName" = "8:oclX-dynamic0.html"
+            "Tag" = "8:"
+            "Folder" = "8:_F79535CE8621487BBABF00ED073EBF66"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -2707,12 +3531,52 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EED42F1613974BEFB2350B105C1241E3"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EF6444C293244A2997AB781BE9EAE693"
             {
-            "SourcePath" = "8:..\\IsoSchematron\\schematron-skeleton-api.htm"
-            "TargetName" = "8:schematron-skeleton-api.htm"
+            "SourcePath" = "8:..\\IsoSchematron\\iso_schematron_message_xslt2.xsl"
+            "TargetName" = "8:iso_schematron_message_xslt2.xsl"
             "Tag" = "8:"
-            "Folder" = "8:_EA0CD5E3196343C5AFFE3FF6CE4319B5"
+            "Folder" = "8:_A870E468599047E0BD21EAD937BDF1FC"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EFD0C69183D7428EB8D2C88FDBD0E8DA"
+            {
+            "SourcePath" = "8:..\\OclX\\Documentation\\img\\lB.gif"
+            "TargetName" = "8:lB.gif"
+            "Tag" = "8:"
+            "Folder" = "8:_22297744796A4F478958B231D0FDF6B8"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F31419C9BDE944DBBF2DE5E84AF6EB56"
+            {
+            "SourcePath" = "8:..\\OclX\\Documentation\\img\\cTR.gif"
+            "TargetName" = "8:cTR.gif"
+            "Tag" = "8:"
+            "Folder" = "8:_22297744796A4F478958B231D0FDF6B8"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -2758,12 +3622,12 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F9DE14BC84524B53BA2B457708D61541"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F4AD6354C9914AC7A8FE1244420224D2"
             {
-            "SourcePath" = "8:..\\IsoSchematron\\sch-messages-nl.xhtml"
-            "TargetName" = "8:sch-messages-nl.xhtml"
+            "SourcePath" = "8:..\\OclX\\Documentation\\img\\btM.gif"
+            "TargetName" = "8:btM.gif"
             "Tag" = "8:"
-            "Folder" = "8:_EA0CD5E3196343C5AFFE3FF6CE4319B5"
+            "Folder" = "8:_22297744796A4F478958B231D0FDF6B8"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -2778,12 +3642,32 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FA2A0A3DDA9D45139491786663E4EC3E"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F8D7540669C6423387F6A3DF6D62D906"
             {
-            "SourcePath" = "8:..\\IsoSchematron\\ExtractSchFromRNG-2.xsl"
-            "TargetName" = "8:ExtractSchFromRNG-2.xsl"
+            "SourcePath" = "8:..\\OclX\\Documentation\\img\\cBR.gif"
+            "TargetName" = "8:cBR.gif"
             "Tag" = "8:"
-            "Folder" = "8:_EA0CD5E3196343C5AFFE3FF6CE4319B5"
+            "Folder" = "8:_22297744796A4F478958B231D0FDF6B8"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F94CEE43E7FE419FA37E2F7DC675FC6C"
+            {
+            "SourcePath" = "8:..\\OclX\\Examples\\NotSchemaAware\\TournamentsSchedule.xml"
+            "TargetName" = "8:TournamentsSchedule.xml"
+            "Tag" = "8:"
+            "Folder" = "8:_18136FED77E94C7E9B00C8FB9F4114F7"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -2899,6 +3783,72 @@
                     "Property" = "8:_4BAFB3B1BE754E288B921D2F09A4DDA6"
                         "Folders"
                         {
+                            "{9EF0B969-E518-4E46-987F-47570745A589}:_2BC5039301EE48DC85F48200DBF6C6E6"
+                            {
+                            "Name" = "8:Examples"
+                            "AlwaysCreate" = "11:FALSE"
+                            "Condition" = "8:"
+                            "Transitive" = "11:FALSE"
+                            "Property" = "8:_94C57FFDF59D4D148C248F17ACE5445E"
+                                "Folders"
+                                {
+                                    "{9EF0B969-E518-4E46-987F-47570745A589}:_084394272F0B4969AEFE4F4B37A22FCD"
+                                    {
+                                    "Name" = "8:SchemaAware"
+                                    "AlwaysCreate" = "11:FALSE"
+                                    "Condition" = "8:"
+                                    "Transitive" = "11:FALSE"
+                                    "Property" = "8:_577FC970021C41D08165DDA041905B5D"
+                                        "Folders"
+                                        {
+                                        }
+                                    }
+                                    "{9EF0B969-E518-4E46-987F-47570745A589}:_18136FED77E94C7E9B00C8FB9F4114F7"
+                                    {
+                                    "Name" = "8:NotSchemaAware"
+                                    "AlwaysCreate" = "11:FALSE"
+                                    "Condition" = "8:"
+                                    "Transitive" = "11:FALSE"
+                                    "Property" = "8:_AFF791C1DE7E46C3B7A88A2B7ECB1D33"
+                                        "Folders"
+                                        {
+                                        }
+                                    }
+                                }
+                            }
+                            "{9EF0B969-E518-4E46-987F-47570745A589}:_A870E468599047E0BD21EAD937BDF1FC"
+                            {
+                            "Name" = "8:Pipeline"
+                            "AlwaysCreate" = "11:FALSE"
+                            "Condition" = "8:"
+                            "Transitive" = "11:FALSE"
+                            "Property" = "8:_2FDEA0795C0D492A885DEBCAB7F00E8C"
+                                "Folders"
+                                {
+                                }
+                            }
+                            "{9EF0B969-E518-4E46-987F-47570745A589}:_F79535CE8621487BBABF00ED073EBF66"
+                            {
+                            "Name" = "8:Documentation"
+                            "AlwaysCreate" = "11:FALSE"
+                            "Condition" = "8:"
+                            "Transitive" = "11:FALSE"
+                            "Property" = "8:_6A0FCEB8D06F4C1A90DEBAA3CB32FD94"
+                                "Folders"
+                                {
+                                    "{9EF0B969-E518-4E46-987F-47570745A589}:_22297744796A4F478958B231D0FDF6B8"
+                                    {
+                                    "Name" = "8:img"
+                                    "AlwaysCreate" = "11:FALSE"
+                                    "Condition" = "8:"
+                                    "Transitive" = "11:FALSE"
+                                    "Property" = "8:_13821583152041B1B85D4B2BD71EC9ED"
+                                        "Folders"
+                                        {
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                     "{9EF0B969-E518-4E46-987F-47570745A589}:_B5973DCD884A4BE09534857A24BEBEF2"
@@ -2910,17 +3860,17 @@
                     "Property" = "8:_BDB62CA91EEE484C888065560D622134"
                         "Folders"
                         {
-                        }
-                    }
-                    "{9EF0B969-E518-4E46-987F-47570745A589}:_EA0CD5E3196343C5AFFE3FF6CE4319B5"
-                    {
-                    "Name" = "8:SchematronPipeline"
-                    "AlwaysCreate" = "11:FALSE"
-                    "Condition" = "8:"
-                    "Transitive" = "11:FALSE"
-                    "Property" = "8:_3FC26B4468874FABA1F74819F3C56C7F"
-                        "Folders"
-                        {
+                            "{9EF0B969-E518-4E46-987F-47570745A589}:_C8967144ADF54680B60E427E9D582A2E"
+                            {
+                            "Name" = "8:Tournaments"
+                            "AlwaysCreate" = "11:FALSE"
+                            "Condition" = "8:"
+                            "Transitive" = "11:FALSE"
+                            "Property" = "8:_935520D092FD47ED9B46A2B9A37CF573"
+                                "Folders"
+                                {
+                                }
+                            }
                         }
                     }
                 }
