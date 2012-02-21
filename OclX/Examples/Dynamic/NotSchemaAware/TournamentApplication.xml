@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tournamentApplication>
+  <name>Springfield Open</name>
+  <requiredQualificationPoints>21</requiredQualificationPoints>
+  <player>
+    <points>24</points>
+    <reg-no>002</reg-no>
+    <name>John Smith</name>
+    <playerLeague>
+      <name>Springfield League</name>
+    </playerLeague>
+  </player>
+  <tournamentLeague>
+    <name>Springfield League</name>
+  </tournamentLeague>
+</tournamentApplication>

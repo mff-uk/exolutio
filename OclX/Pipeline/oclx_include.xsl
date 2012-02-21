@@ -46,11 +46,29 @@
   </xd:doc>
   <xsl:param name="oclx-import-href" select="'../OclX/oclx-functional.xsl'" as="xs:string" />
    
+  
+  <xd:doc>
+    <xd:desc>
+      <xd:p>If set to true, the XPath assert tests are wrapped using 
+        <xd:i>oclX:checked</xd:i> function, which prevents the XSLT 
+      compiler from stopping on dynamic errors. I.e. when a dynamic error
+      is encountered, the assert fails and the validation proceeds. </xd:p>
+      <xd:p>        
+        Note: this settings is only relevant for functional OclX.  
+      </xd:p>
+    </xd:desc>
+  </xd:doc>
+  <xsl:param name="protect-invalid" select="'true'" as="xs:string" /> 
+   
   <xsl:namespace-alias stylesheet-prefix="axsl" result-prefix="xsl"/>
 
   <xd:doc>
     <xd:desc>
-      <xd:p></xd:p>
+      <xd:p>The template refines the top-level stylesheet element.
+      It adds references to OclX, changes the version of the stylesheet 
+      to 3.0 when functional OclX is being used and adds namespace for
+      Saxon extension when dymaic OclX is being used. 
+      </xd:p>
     </xd:desc>
   </xd:doc>
   <xsl:template match="xsl:stylesheet">
@@ -69,6 +87,9 @@
       </xsl:choose>      
       <xsl:namespace name="oclDate" select="'http://eXolutio.com/oclX/types/date'" />
       <xsl:namespace name="oclString" select="'http://eXolutio.com/oclX/types/string'" />
+      <xsl:namespace name="svrl" select="'http://purl.oclc.org/dsdl/svrl'" />
+      <xsl:namespace name="err" select="'http://www.w3.org/2005/xqt-errors'" />
+      
       <xsl:choose>
         <xsl:when test="$mode_functional">          
           <xsl:attribute name="version" select="'3.0'" />    
@@ -99,7 +120,7 @@
       <xd:p>Define the variable <xd:i>$self</xd:i> in each rule. </xd:p>
     </xd:desc>
   </xd:doc>
-  <xsl:template match="xsl:template[svrl:fired-rule]" exclude-result-prefixes="svrl" mode="functional">
+  <xsl:template match="xsl:template[svrl:fired-rule]" mode="functional">
     <xsl:copy>
       <xsl:copy-of select="@*" />
       <axsl:variable name="self" as="item()" select="current()" />    
@@ -118,12 +139,59 @@
       </xd:p>
     </xd:desc>
   </xd:doc>
-  <xsl:template match="svrl:failed-assert" mode="functional">
-    <xsl:copy>
+  <xsl:template match="svrl:failed-assert/attribute::test" mode="functional">
+    <xsl:attribute name="test" select="replace(replace(., '\{', '{{'), '\}', '}}')"/>
+  </xsl:template>
+
+  <xd:doc>
+    <xd:desc>
+      <xd:p>When <xd:i>protect-invalid</xd:i> parameter is set to 'true', 
+      a call of <xd:i>oclX:checked</xd:i> is added around every 
+      assert test to prevent it from stopping the validation when 
+      a dynamic error is encountered. 
+      </xd:p>
+    </xd:desc>
+  </xd:doc>
+  <xsl:template match="xsl:choose[preceding-sibling::svrl:fired-rule]" mode="functional">
+    <xsl:choose>
+      <xsl:when test="$protect-invalid eq 'true'">
+        <axsl:try>
+          <axsl:choose>
+            <xsl:apply-templates select="./(@* | node())" mode="#current" />    
+          </axsl:choose>
+          <axsl:catch>
+            <svrl:failed-assert>
+              <xsl:apply-templates select=".//svrl:failed-assert/(node() | @*)" mode="#current" />
+              <svrl:text>Assert failed due to expression resulting in 'invalid'.</svrl:text>
+              <svrl:text>  - dynamic error occured during evaluation</svrl:text>
+              <svrl:text><axsl:sequence select="'  - code: ' || $err:code"/></svrl:text>
+              <svrl:text><axsl:sequence select="'  - description: ' || $err:description"/></svrl:text>
+              <svrl:text><axsl:sequence select="'  - value: ' || $err:value"/></svrl:text>
+            </svrl:failed-assert>            
+          </axsl:catch>
+        </axsl:try>        
+      </xsl:when>
+      <xsl:otherwise>          
+        <xsl:copy-of select="." />
+      </xsl:otherwise>
+    </xsl:choose>
+    
+    <!--<xsl:copy>
       <xsl:copy-of select="@*[not(. is ../@test)]" />
-      <xsl:attribute name="test" select="replace(replace(@test, '\{', '{{'), '\}', '}}')"/>   
+      <xsl:choose>
+        <xsl:when test="$protect-invalid eq 'true'">
+          <xsl:attribute name="test">
+            <xsl:text>oclX:checked(function() { </xsl:text>
+            <xsl:value-of select="@test" />
+            <xsl:text> })</xsl:text>
+          </xsl:attribute>          
+        </xsl:when>
+        <xsl:otherwise>          
+          <xsl:copy-of select="@test" />
+        </xsl:otherwise>
+      </xsl:choose>      
       <xsl:apply-templates mode="#current" />
-    </xsl:copy>
+    </xsl:copy>-->
   </xsl:template>
 
   <!-- templates for dynamic evaluation OclX -->
@@ -133,10 +201,10 @@
       <xd:p>Define the variable <xd:i>$variables</xd:i> in each rule. </xd:p>
     </xd:desc>
   </xd:doc>
-  <xsl:template match="xsl:template[svrl:fired-rule]" exclude-result-prefixes="svrl" mode="dynamic">
+  <xsl:template match="xsl:template[svrl:fired-rule]" mode="dynamic">
     <xsl:copy>
       <xsl:copy-of select="@*" />      
-      <axsl:variable name="self" as="item()" select="current()" />
+      <axsl:variable name="variables" as="item()*" select="oclX:vars(.)" />
       <xsl:apply-templates mode="#current" />
     </xsl:copy>
   </xsl:template>

@@ -5,10 +5,13 @@
   xmlns:xs="http://www.w3.org/2001/XMLSchema" 
   xmlns:oclDate="http://eXolutio.com/oclX/types/date"
   xmlns:oclString="http://eXolutio.com/oclX/types/string"
+  xmlns:oclBoolean="http://eXolutio.com/oclX/types/xor"
   xmlns:doc="http://www.oxygenxml.com/ns/doc/xsl"
   xmlns:map="http://www.w3.org/2005/xpath-functions/map"
   xmlns:math="http://www.w3.org/2005/xpath-functions/math"
-  exclude-result-prefixes="oclX doc map math" 
+  xmlns:err="http://www.w3.org/2005/xqt-errors"
+  xmlns:oclError="http://eXolutio.com/oclX/functional/error"
+  exclude-result-prefixes="oclX oclError doc map math err xs oclXin oclDate oclString" 
   version="3.0">
 
   <doc:doc scope="stylesheet">
@@ -36,6 +39,13 @@
   </doc:doc>
   <xsl:param name="debug" as="xs:boolean" select="false()"/>
 
+  <doc:doc>
+    <doc:desc>
+      <doc:p>Definitions of runtime OclX errors. </doc:p>
+    </doc:desc>
+  </doc:doc>
+  <xsl:variable name="errors" as="element()*" select="document('oclX-error.xml')//oclError:error" />    
+      
   <!-- 
     Iterator Expressions 
   -->
@@ -570,7 +580,19 @@
   </doc:doc>
   <xsl:function name="oclX:first" as="item()">
     <xsl:param name="collection" as="item()*"/>
-    <xsl:sequence select="oclX:at($collection, 1)"/>
+    <xsl:choose>
+      <xsl:when test="count($collection) eq 0">
+        <xsl:if test="$debug">
+          <xsl:message select="'Attempt to get first item in an empty collection'"></xsl:message>
+        </xsl:if>
+        <xsl:sequence select="
+          error(QName('http://eXolutio.com/oclX/functional/error', 'oclError:E004'), 
+          $errors[@xml:id='E004']/oclError:description/text())" />
+      </xsl:when>
+      <xsl:otherwise>        
+        <xsl:sequence select="oclX:at($collection, 1)"/>
+      </xsl:otherwise>
+    </xsl:choose>       
   </xsl:function>
 
   <doc:doc>
@@ -581,7 +603,20 @@
   </doc:doc>
   <xsl:function name="oclX:last" as="item()">
     <xsl:param name="collection" as="item()*"/>
-    <xsl:sequence select="oclX:at($collection, count($collection))"/>
+    
+    <xsl:choose>
+      <xsl:when test="count($collection) eq 0">
+        <xsl:if test="$debug">
+          <xsl:message select="'Attempt to get last item in an empty collection'"></xsl:message>
+        </xsl:if>
+        <xsl:sequence select="
+          error(QName('http://eXolutio.com/oclX/functional/error', 'oclError:E004'), 
+          $errors[@xml:id='E004']/oclError:description/text())" />
+      </xsl:when>
+      <xsl:otherwise>        
+        <xsl:sequence select="oclX:at($collection, count($collection))"/>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:function>
 
   <doc:doc>
@@ -607,15 +642,19 @@
     <doc:param name="index">Index, where item is inserted. </doc:param>
     <doc:param name="item">Added item. </doc:param>
   </doc:doc>
-  <xsl:function name="oclX:insertAt" as="xs:integer">
+  <xsl:function name="oclX:insertAt" as="item()*">
     <xsl:param name="collection" as="item()*"/>
     <xsl:param name="index" as="xs:integer"/>
     <xsl:param name="item" as="item()"/>
 
     <xsl:sequence
-      select="for $i in 1 to count($collection) return 
-      if ($i eq $index) then ($item, $collection($i))
-      else $collection($i)"
+      select="
+      if ((count($collection) + 1) ge $index) then
+        for $i in 1 to (count($collection) + 1) return 
+          if ($i eq $index) then ($item, $collection[$i])
+          else $collection[$i]
+      else error(QName('http://eXolutio.com/oclX/functional/error', 'oclError:E002'), 
+                 $errors[@xml:id='E002']/oclError:description/text(), $index)"
     />
   </xsl:function>
 
@@ -737,7 +776,11 @@
   <xsl:function name="oclX:at" as="item()">
     <xsl:param name="collection" as="item()*"/>
     <xsl:param name="index" as="xs:integer"/>
-    <xsl:sequence select="$collection[$index]"/>
+    
+    <xsl:sequence select="
+      if (count($collection) ge $index) then $collection[$index] else 
+        error(QName('http://eXolutio.com/oclX/functional/error', 'oclError:E002'), 
+        $errors[@xml:id='E002']/oclError:description/text(), $index)"/>
   </xsl:function>
 
   <doc:doc>
@@ -821,8 +864,25 @@
     <xsl:param name="lower" as="xs:integer"/>
     <xsl:param name="upper" as="xs:integer"/>
 
-    <xsl:sequence select="for $index in $lower to $upper return $collection[$index]"/>
-
+    <xsl:choose>
+      <xsl:when test="($lower gt $upper) or
+        ($lower gt count($collection)) or
+        ($upper gt count($collection)) or
+        ($lower le 0) or 
+        ($upper le 0)">
+        <xsl:if test="$debug">
+          <xsl:message select="
+            'Failed attemt to get a subseqeunce of a sequence of length: ' || count($collection) || 
+            ' , lower index: ' || $lower || ' upper index: ' || $upper "/>
+        </xsl:if>
+        <xsl:sequence select="
+          error(QName('http://eXolutio.com/oclX/functional/error', 'oclError:E002'), 
+          $errors[@xml:id='E002']/oclError:description/text(), ($lower, $upper))" />
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:sequence select="for $index in $lower to $upper return $collection[$index]"/>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:function>
 
   <doc:doc>
@@ -840,10 +900,26 @@
     <xsl:param name="lower" as="xs:integer"/>
     <xsl:param name="upper" as="xs:integer"/>
 
-    <xsl:sequence select="for $index in $lower to $upper return $collection[$index]"/>
-
+    <xsl:choose>
+      <xsl:when test="($lower gt $upper) or
+        ($lower gt count($collection)) or
+        ($upper gt count($collection)) or
+        ($lower le 0) or 
+        ($upper le 0)">
+        <xsl:if test="$debug">
+          <xsl:message select="
+            'Failed attemt to get a subseqeunce of a sequence of length: ' || count($collection) || 
+            ' , lower index: ' || $lower || ' upper index: ' || $upper "/>
+        </xsl:if>
+        <xsl:sequence select="
+          error(QName('http://eXolutio.com/oclX/functional/error', 'oclError:E002'), 
+          $errors[@xml:id='E002']/oclError:description/text(), ($lower, $upper))" />      
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:sequence select="for $index in $lower to $upper return $collection[$index]"/>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:function>
-
 
   <!-- String -->
 
@@ -857,7 +933,12 @@
   <xsl:function name="oclString:at" as="xs:string">
     <xsl:param name="string" as="xs:string"/>
     <xsl:param name="index" as="xs:integer"/>
-    <xsl:sequence select="substring($string, $index, 1)"/>
+    
+    <xsl:sequence select="
+      if (string-length($string) ge $index) then substring($string, $index, 1) else 
+        error(QName('http://eXolutio.com/oclX/functional/error', 'oclError:E005'), 
+        $errors[@xml:id='E005']/oclError:description/text())"/>
+ 
   </xsl:function>
 
   <doc:doc>
@@ -926,9 +1007,99 @@
     <xsl:sequence select="xs:date(format-dateTime($dateTime, '[Y]-[M,2]-[D,2]'))"/>
   </xsl:function>
 
+  <!-- 
+    Boolean
+    -->
+  <doc:doc>
+    <doc:desc>Computes logical xor.</doc:desc>
+  </doc:doc>
+  <xsl:function name="oclBoolean:xor" as="xs:boolean">
+    <xsl:param name="arg1" as="xs:boolean"/>    
+    <xsl:param name="arg2" as="xs:boolean"/>
+    
+    <xsl:sequence select="($arg1 and not($arg2)) or (not($arg1) and $arg2)"/>
+  </xsl:function>
+
   <!--
     Helper functions   
   -->
+
+  <doc:doc>
+    <doc:desc>
+      <doc:p>Evaluates <doc:i>func</doc:i> and returns the result. 
+      If the evaluation fails due to a dynamic error, the error 
+      is caught and the result is <doc:i>false</doc:i></doc:p>
+    </doc:desc>
+    <doc:param name="func"></doc:param>    
+  </doc:doc>
+  <xsl:function name="oclX:checked" as="item()*">
+    <xsl:param name="func" as="function() as item()*" />
+    <xsl:try select="$func()">
+      <xsl:catch>
+        <xsl:if test="$debug">
+          <xsl:message select="'Runtime error occured during execution making the result ''invalid''. '"/>
+          <xsl:message select="'  - code: ' || $err:code"/>
+          <xsl:message select="'  - description: ' || $err:description"/>
+          <xsl:message select="'  - value: ' || $err:value"/>
+        </xsl:if>
+        <xsl:sequence select="false()" />
+      </xsl:catch>
+    </xsl:try>
+  </xsl:function>
+  
+  <doc:doc>
+    <doc:desc>
+      <doc:p>Returns <doc:i>false</doc:i> if <doc:i>func</doc:i> evaluates 
+        successfuly, <doc:i>true</doc:i> otherwise. The execution of this function never 
+        fails due to a dynamic error. </doc:p>
+    </doc:desc>
+    <doc:param name="func">Evaluated function.</doc:param>
+  </doc:doc>
+  <xsl:function name="oclX:oclIsInvalid" as="xs:boolean">
+    <xsl:param name="func" as="function() as item()*" />
+    
+    <!-- evaluate func and forget the result, return false if evaluation succeeds --> 
+    <xsl:try select="let $result := $func() return false()">
+      <xsl:catch>
+        <xsl:if test="$debug">
+          <xsl:message select="'Runtime error occured during execution making the result ''invalid''. '"/>
+          <xsl:message select="'  - code: ' || $err:code"/>
+          <xsl:message select="'  - description: ' || $err:description"/>
+          <xsl:message select="'  - value: ' || $err:value"/>
+        </xsl:if>
+        <!-- if function call fails, return true  -->
+        <xsl:sequence select="true()" />
+      </xsl:catch>
+    </xsl:try>    
+  </xsl:function>
+   
+  <doc:doc>
+    <doc:desc>
+      <doc:p>Returns <doc:i>true</doc:i> if <doc:i>func</doc:i> evaluates 
+      successfuly, <doc:i>false</doc:i> otherwise. The execution of this function never 
+      fails due to a dynamic error. </doc:p>
+    </doc:desc>
+    <doc:param name="func">Evaluated function.</doc:param>
+  </doc:doc>
+  <xsl:function name="oclX:oclIsValid" as="xs:boolean">
+    <xsl:param name="func" as="function() as item()*" /> 
+    <xsl:sequence select="not(oclX:oclIsInvalid($func))" />
+  </xsl:function>
+
+  <doc:doc>
+    <doc:desc>
+      <doc:p>Always results in dynamic error http://eXolutio.com/oclX/functional/error:E010.
+        The function is used to represent <doc:i>invalid</doc:i> literal from OCL. </doc:p>
+    </doc:desc>
+    <doc:return></doc:return>
+  </doc:doc>
+  <xsl:function name="oclX:invalid" as="item()*">
+    <xsl:sequence
+      select="error(QName('http://eXolutio.com/oclX/functional/error', 'oclError:E010'), 
+      $errors[@xml:id='E010']/oclError:description/text())" 
+    />
+    
+  </xsl:function>
 
   <doc:doc>
     <doc:desc>
@@ -955,7 +1126,8 @@
       select="if ($arity eq 1) then $function($parameters[$indices[1] + 1])
       else if ($arity eq 2) then $function($parameters[$indices[1] + 1], $parameters[$indices[2] + 1])
       else if ($arity eq 3) then $function($parameters[$indices[1] + 1], $parameters[$indices[2] + 1], $parameters[$indices[3] + 1])
-      else error(QName('http://eXolutio.com/oclX/functional/error', 'oclXer:E001'), 'A maximum of three different iterators are allowed. ')"
+      else error(QName('http://eXolutio.com/oclX/functional/error', 'oclXer:E001'), 
+                 $errors[@xml:id='E001']/oclError:description/text())"
     />
   </xsl:function>
 

@@ -1,0 +1,1635 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Stylesheet documentation for: </title>
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript">
+         <!--
+        
+        var parametersBoxes= new Array('prs_F_appendVarToSequenceS_oclX-dynamic-internal.xsl', 
+				'prs_F_appendVarToSequenceNS_oclX-dynamic-internal.xsl', 
+				'prs_F_wrapS_oclX-dynamic-internal.xsl', 
+				'prs_F_expressionForSaxonS_oclX-dynamic-internal.xsl', 
+				'prs_F_retrieveVarFromSequenceS_oclX-dynamic-internal.xsl', 
+				'prs_F_oddMembersS_oclX-dynamic-internal.xsl', 
+				'prs_F_powerS_oclX-dynamic-internal.xsl', 
+				'prs_F_getIndicesS_oclX-dynamic-internal.xsl');
+
+        
+        var usedByBoxes= new Array('uB_F_appendVarToSequenceS_oclX-dynamic-internal.xsl', 
+				'uB_F_appendVarToSequenceNS_oclX-dynamic-internal.xsl', 
+				'uB_F_wrapS_oclX-dynamic-internal.xsl', 
+				'uB_F_oddMembersS_oclX-dynamic-internal.xsl', 
+				'uB_F_powerS_oclX-dynamic-internal.xsl', 
+				'uB_F_getIndicesS_oclX-dynamic-internal.xsl');
+
+        var docBoxes= new Array('dS_F_expressionForSaxonS_oclX-dynamic-internal.xsl');
+
+        var sourceBoxes= new Array('src_P_debugS_oclX-dynamic-internal.xsl', 
+				'src_F_appendVarToSequenceS_oclX-dynamic-internal.xsl', 
+				'src_F_appendVarToSequenceNS_oclX-dynamic-internal.xsl', 
+				'src_F_wrapS_oclX-dynamic-internal.xsl', 
+				'src_F_expressionForSaxonS_oclX-dynamic-internal.xsl', 
+				'src_F_retrieveVarFromSequenceS_oclX-dynamic-internal.xsl', 
+				'src_F_oddMembersS_oclX-dynamic-internal.xsl', 
+				'src_F_powerS_oclX-dynamic-internal.xsl', 
+				'src_F_getIndicesS_oclX-dynamic-internal.xsl');
+
+        
+        
+        var referencesBoxes= new Array('refs_F_appendVarToSequenceS_oclX-dynamic-internal.xsl', 
+				'refs_F_appendVarToSequenceNS_oclX-dynamic-internal.xsl', 
+				'refs_F_expressionForSaxonS_oclX-dynamic-internal.xsl', 
+				'refs_F_powerS_oclX-dynamic-internal.xsl', 
+				'refs_F_getIndicesS_oclX-dynamic-internal.xsl');
+
+        
+        
+        
+        
+        var button_prefix = 'bt_';
+        
+        /**
+        * Get all DIV elements with a specified class name.
+        *
+        * @param className The class name. 
+        */
+        function getElementsByClassName(className) {
+            var results = [];
+    
+             if (document.getElementsByClassName == undefined) {
+                var allElements = document.getElementsByTagName("div");
+                var element;
+                for (var i = 0; i < allElements.length; i++) {
+                    var element = allElements[i];
+                	var elementClass = element.className;
+                	if (elementClass == className) { 
+                		results.push(element);
+                	}
+                }
+             } else {
+                results = document.getElementsByClassName(className);
+             }
+    
+            return results;
+        }
+            
+        /**
+        * Returns an element in the current HTML document.
+        *
+        * @param elementID Identifier of HTML element
+        * @return               HTML element object
+        */
+        function getElementObject(elementID) {
+            var elemObj = null;
+            if (document.getElementById) {
+                elemObj = document.getElementById(elementID);
+            }
+            return elemObj;
+        }
+        
+        /**
+        * Switches the state of a collapseable box, e.g.
+        * if it's opened, it'll be closed, and vice versa.
+        *
+        * @param boxID Identifier of box
+        */
+        function switchState(boxID) {
+            var boxObj = getElementObject(boxID);
+            var buttonObj = getElementObject(button_prefix + boxID);
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else if (boxObj.style.display == "none") {
+                // Box is closed, so open it
+                openBox(boxObj, buttonObj);
+            } else if (boxObj.style.display == "block") {
+                // Box is opened, so close it
+                closeBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+        * Opens a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function openBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "block";
+                
+                // Change text of button
+                if (boxObj.style.display == "block") {
+                    buttonObj.src = "img/btM.gif";
+                }
+            }
+        }
+        
+        /**
+        * Closes a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function closeBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "none";
+                
+                // Change text of button
+                if (boxObj.style.display == "none") {
+                    buttonObj.src = "img/btP.gif";
+                }
+            }
+        }
+
+       /**
+        * Switch between the compact list representation and the clasic list representation.
+        */
+       function switchMode(checkBox) {
+            if (checkBox == null) {
+                // Checkbox not found
+            } else if (checkBox.checked == 1) {
+                // Compact mode
+                var divs = getElementsByClassName('refItemBlock');
+                for (var i = 0; i < divs.length; i ++) {
+                    divs[i].style.display = "inline";
+                    var children = divs[i].children;
+                    var refItemSep = children[children.length - 1];
+                    if (refItemSep.className == "refItemSep") {
+                        children[children.length - 1].style.display = "inline";
+                    }
+                }
+            } else {
+                // Expanded mode
+                var divs = getElementsByClassName('refItemBlock');
+                for (var i = 0; i < divs.length; i ++) {
+                    divs[i].style.display = "block";
+                    var children = divs[i].children;
+                    var refItemSep = children[children.length - 1];
+                    if (refItemSep.className == "refItemSep") {
+                        children[children.length - 1].style.display = "none";
+                    }
+                }
+            }
+        }
+
+       function switchStateForAll(buttonObj, boxList) {
+            if (buttonObj == null) {
+                // button not found
+            } else if (buttonObj.value == "+") {
+                // Expand all
+                expandAll(boxList);
+                buttonObj.value = "-";
+            } else if (buttonObj.value == "-") {
+                // Collapse all
+                collapseAll(boxList);
+                buttonObj.value = "+";
+            }
+        }
+        
+        /**
+        * Closes all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function collapseAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                closeBox(boxObj, buttonObj);
+            }
+        }
+            
+        /**
+        * Open all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function expandAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                openBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+         * Update the message presented in the title of the html page.
+         * - If the documentation was splited by namespace we present something like: "Documentation for namespace 'ns'"
+         * - If the documentation was splited by location we present somehing like: "Documentation for 'Schema.xsd'"
+         * - If no split we always present: "Documentation for 'MainSchema.xsd'"
+         */
+        function updPT(message) {
+            top.document.title = "Stylesheet documentation for: " + message;
+        }
+        
+          
+                    
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function findAndFloat(id, x_displacement, y_displacement){
+
+            var element = getElementObject(id);            
+            
+            window[id + "_obj"] = element;
+            
+            if(document.layers) {
+               element.style = element;
+            }
+            
+            element.current_y = y_displacement;      
+            element.first_time = true;
+         
+            element.floatElement = function(){
+               // It may be closed by an user action.
+                
+               // Target X and Y coordinates.
+               var x, y;
+               
+               var myWidth = 0, myHeight = 0;
+               if( typeof( window.innerWidth ) == 'number' ) {
+                  //Non-IE
+                  myWidth = window.innerWidth;
+                  myHeight = window.innerHeight;
+               } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+                  //IE 6+ in 'standards compliant mode'
+                  myWidth = document.documentElement.clientWidth;
+                  myHeight = document.documentElement.clientHeight;
+               } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+                  //IE 4 compatible
+                  myWidth = document.body.clientWidth;
+                  myHeight = document.body.clientHeight;
+               }
+               
+               
+               x = myWidth - x_displacement;
+               
+               var ns = (navigator.appName.indexOf("Netscape") != -1);               
+               y = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+                  document.documentElement.scrollTop : document.body.scrollTop;               
+               y = y + y_displacement;               
+               
+               // The current y is the current coordinate of the floating element.
+               // This should be at the limit the y target coordinate.
+               this.current_y += (y - this.current_y)/1.25;
+               
+               // Add the pixels constant after the values
+               // and move the element.
+               var px = document.layers ? "" : "px";
+               this.style.left =  x + px;
+               this.style.top =  this.current_y + px;
+                              
+               setTimeout(this.id + "_obj.floatElement()", 100);
+            }
+            
+            element.floatElement();
+            return element;
+          }
+
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function selectTOCGroupBy(id){
+         var selectIds = new Array('toc_group_by_location', 'toc_group_by_component_type', 'toc_group_by_namespace', 'toc_group_by_mode');
+            // Make all the tabs invisible.
+            for (i = 0; i < 4; i++){
+               var tab = getElementObject(selectIds[i]);
+               tab.style.display = 'none';
+            }
+            var selTab = getElementObject(id);
+            selTab.style.display = 'block';            
+         }
+          
+
+    --></script></head>
+   <body>
+      <div id="global_controls" class="globalControls" style="position:absolute;right:0;">
+         <table class="rt">
+            <tr>
+               <td class="rt_cTL"></td>
+               <td class="rt_lT"></td>
+               <td class="rt_cTR"></td>
+            </tr>
+            <tr>
+               <td class="rt_lL"></td>
+               <td class="rt_cnt">
+                  <h3>Mode:</h3>
+                  <table>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchMode(this);"
+                                     class="control" /></span><span class="globalControlName">Compact lists</span></td>
+                     </tr>
+                  </table>
+                  <h3>Showing:</h3>
+                  <table>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked"
+                                     onclick="switchStateForAll(this, docBoxes);"
+                                     class="control" /></span><span class="globalControlName">Documentation
+                              </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked"
+                                     onclick="switchStateForAll(this, parametersBoxes);"
+                                     class="control" /></span><span class="globalControlName">Parameters </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked"
+                                     onclick="switchStateForAll(this, usedByBoxes);"
+                                     class="control" /></span><span class="globalControlName">Used by </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked"
+                                     onclick="switchStateForAll(this, referencesBoxes);"
+                                     class="control" /></span><span class="globalControlName">References </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked"
+                                     onclick="switchStateForAll(this, sourceBoxes);"
+                                     class="control" /></span><span class="globalControlName">Source </span></td>
+                     </tr>
+                  </table>
+                  <div align="right"><span><input type="button"
+                               onclick="getElementObject('global_controls').style.display = 'none';"
+                               value="Close" /></span></div>
+               </td>
+               <td class="rt_lR"></td>
+            </tr>
+            <tr>
+               <td class="rt_cBL"></td>
+               <td class="rt_lB"></td>
+               <td class="rt_cBR"></td>
+            </tr>
+         </table>
+      </div><a id="oclX-dynamic-internal.xsl"></a><div class="cmpT">Main stylesheet
+         <span class="qname">oclX-dynamic-internal.xsl</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cTL"></td>
+            <td class="rt_lT"></td>
+            <td class="rt_cTR"></td>
+         </tr>
+         <tr>
+            <td class="rt_lL"></td>
+            <td class="rt_cnt">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="fCol">Stylesheet version</td>
+                        <td>2.0</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lR"></td>
+         </tr>
+         <tr>
+            <td class="rt_cBL"></td>
+            <td class="rt_lB"></td>
+            <td class="rt_cBR"></td>
+         </tr>
+      </table><a id="P_debugS_oclX-dynamic-internal.xsl"></a><div class="cmpT">Parameter
+         <span class="qname">debug</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cTL"></td>
+            <td class="rt_lT"></td>
+            <td class="rt_cTR"></td>
+         </tr>
+         <tr>
+            <td class="rt_lL"></td>
+            <td class="rt_cnt">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="fCol">Namespace</td>
+                        <td>No namespace</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Select</td>
+                        <td>false() </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Type</td>
+                        <td>xs:boolean</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Source</div>
+                           <div class="flR"><input id="bt_src_P_debugS_oclX-dynamic-internal.xsl" type="image" src="img/btM.gif"
+                                     value="-"
+                                     onclick="switchState('src_P_debugS_oclX-dynamic-internal.xsl');"
+                                     class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="src_P_debugS_oclX-dynamic-internal.xsl" style="display:block">
+                              <table class="pWCont">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"debug"</span><span class="tAN"> as=</span><span class="tAV">"xs:boolean"</span><span class="tAN"> select=</span><span class="tAV">"false() "</span><span class="tXSLEl">/&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lR"></td>
+         </tr>
+         <tr>
+            <td class="rt_cBL"></td>
+            <td class="rt_lB"></td>
+            <td class="rt_cBR"></td>
+         </tr>
+      </table><a id="F_appendVarToSequenceS_oclX-dynamic-internal.xsl"></a><div class="cmpT">Function
+         <span class="qname">oclXin:appendVarToSequence (<span class="fParams">sequence, varName, varValue</span>)</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cTL"></td>
+            <td class="rt_lT"></td>
+            <td class="rt_cTR"></td>
+         </tr>
+         <tr>
+            <td class="rt_lL"></td>
+            <td class="rt_cnt">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="fCol">Namespace</td>
+                        <td>http://eXolutio.com/oclX/dynamic/internal</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Type</td>
+                        <td>item()*</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Used by</div>
+                           <div class="flR"><input id="bt_uB_F_appendVarToSequenceS_oclX-dynamic-internal.xsl" type="image"
+                                     src="img/btM.gif"
+                                     value="-"
+                                     onclick="switchState('uB_F_appendVarToSequenceS_oclX-dynamic-internal.xsl');"
+                                     class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="uB_F_appendVarToSequenceS_oclX-dynamic-internal.xsl" style="display:block">
+                              <table class="uBT">
+                                 <tr>
+                                    <td class="fCol">Function</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="oclX-dynamic-internal0.html#F_appendVarToSequenceNS_oclX-dynamic-internal.xsl"
+                                                target="_self"
+                                                title="http://eXolutio.com/oclX/dynamic/internal"
+                                                onclick="updPT('oclX-dynamic-internal.xsl')"><span>oclXin:appendVarToSequenceN (</span><span class="fParams">sequence, varNames, collection, indices</span><span>)</span></a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">References</div>
+                           <div class="flR"><input id="bt_refs_F_appendVarToSequenceS_oclX-dynamic-internal.xsl" type="image"
+                                     src="img/btM.gif"
+                                     value="-"
+                                     onclick="switchState('refs_F_appendVarToSequenceS_oclX-dynamic-internal.xsl');"
+                                     class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="refs_F_appendVarToSequenceS_oclX-dynamic-internal.xsl"
+                                style="display:block">
+                              <table class="uBT">
+                                 <tr>
+                                    <td class="fCol">Function</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="oclX-dynamic-internal0.html#F_wrapS_oclX-dynamic-internal.xsl"
+                                                target="_self"
+                                                title="http://eXolutio.com/oclX/dynamic/internal"
+                                                onclick="updPT('oclX-dynamic-internal.xsl')"><span>wrap (</span><span class="fParams">value, text</span><span>)</span></a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Parameters</div>
+                           <div class="flR"><input id="bt_prs_F_appendVarToSequenceS_oclX-dynamic-internal.xsl" type="image"
+                                     src="img/btM.gif"
+                                     value="-"
+                                     onclick="switchState('prs_F_appendVarToSequenceS_oclX-dynamic-internal.xsl');"
+                                     class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="prs_F_appendVarToSequenceS_oclX-dynamic-internal.xsl" style="display:block">
+                              <table class="attsT">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th>Namespace</th>
+                                       <th>Type</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="fCol">sequence</td>
+                                    <td>No namespace</td>
+                                    <td>item()*</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">varName</td>
+                                    <td>No namespace</td>
+                                    <td>xs:string</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">varValue</td>
+                                    <td>No namespace</td>
+                                    <td>item()*</td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Import precedence</td>
+                        <td>0</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Source</div>
+                           <div class="flR"><input id="bt_src_F_appendVarToSequenceS_oclX-dynamic-internal.xsl" type="image"
+                                     src="img/btM.gif"
+                                     value="-"
+                                     onclick="switchState('src_F_appendVarToSequenceS_oclX-dynamic-internal.xsl');"
+                                     class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="src_F_appendVarToSequenceS_oclX-dynamic-internal.xsl" style="display:block">
+                              <table class="pWCont">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:function</span><span class="tAN"> name=</span><span class="tAV">"oclXin:appendVarToSequence"</span><span class="tAN"> as=</span><span class="tAV">"item()*"</span><span class="tXSLEl">&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"sequence"</span><span class="tAN"> as=</span><span class="tAV">"item()*"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"varName"</span><span class="tAN"> as=</span><span class="tAV">"xs:string"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"varValue"</span><span class="tAN"> as=</span><span class="tAV">"item()*"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"newVar"</span><span class="tAN"> as=</span><span class="tAV">"item()*"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:element</span><span class="tAN"> name=</span><span class="tAV">"{$varName}"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tC">&lt;!-- use placeholder ##EMPTY to represente empty sequence --&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:choose</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"count($varValue) eq 0"</span><span class="tXSLEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:text</span><span class="tXSLEl">&gt;</span><span class="tT">##EMPTY</span><span class="tXSLEl">&lt;/xsl:text&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"count($varValue) eq 1"</span><span class="tXSLEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:sequence</span><span class="tAN"> select=</span><span class="tAV">"$varValue"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:otherwise</span><span class="tXSLEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;SEQ</span><span class="tEl">&gt;</span><span class="tI">
+          </span><span class="tXSLEl">&lt;xsl:sequence</span><span class="tAN"> select=</span><span class="tAV">"for $i in $varValue return oclXin:wrap($i, 'ITEM')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;/SEQ&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;/xsl:otherwise&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:choose&gt;</span><span class="tI">
+    </span><span class="tC">&lt;!--&lt;xsl:sequence select="if (exists($varValue)) then $varValue else" /&gt;--&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:variable&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:sequence</span><span class="tAN"> select=</span><span class="tAV">"$sequence, $newVar"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+</span><span class="tXSLEl">&lt;/xsl:function&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lR"></td>
+         </tr>
+         <tr>
+            <td class="rt_cBL"></td>
+            <td class="rt_lB"></td>
+            <td class="rt_cBR"></td>
+         </tr>
+      </table><a id="F_appendVarToSequenceNS_oclX-dynamic-internal.xsl"></a><div class="cmpT">Function
+         <span class="qname">oclXin:appendVarToSequenceN (<span class="fParams">sequence, varNames, collection, indices</span>)</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cTL"></td>
+            <td class="rt_lT"></td>
+            <td class="rt_cTR"></td>
+         </tr>
+         <tr>
+            <td class="rt_lL"></td>
+            <td class="rt_cnt">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="fCol">Namespace</td>
+                        <td>http://eXolutio.com/oclX/dynamic/internal</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Type</td>
+                        <td>item()*</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Used by</div>
+                           <div class="flR"><input id="bt_uB_F_appendVarToSequenceNS_oclX-dynamic-internal.xsl" type="image"
+                                     src="img/btM.gif"
+                                     value="-"
+                                     onclick="switchState('uB_F_appendVarToSequenceNS_oclX-dynamic-internal.xsl');"
+                                     class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="uB_F_appendVarToSequenceNS_oclX-dynamic-internal.xsl" style="display:block">
+                              <table class="uBT">
+                                 <tr>
+                                    <td class="fCol">Function</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="oclX-dynamic-internal0.html#F_appendVarToSequenceNS_oclX-dynamic-internal.xsl"
+                                                target="_self"
+                                                title="http://eXolutio.com/oclX/dynamic/internal"
+                                                onclick="updPT('oclX-dynamic-internal.xsl')"><span>oclXin:appendVarToSequenceN (</span><span class="fParams">sequence, varNames, collection, indices</span><span>)</span></a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">References</div>
+                           <div class="flR"><input id="bt_refs_F_appendVarToSequenceNS_oclX-dynamic-internal.xsl" type="image"
+                                     src="img/btM.gif"
+                                     value="-"
+                                     onclick="switchState('refs_F_appendVarToSequenceNS_oclX-dynamic-internal.xsl');"
+                                     class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="refs_F_appendVarToSequenceNS_oclX-dynamic-internal.xsl"
+                                style="display:block">
+                              <table class="uBT">
+                                 <tr>
+                                    <td class="fCol">Functions</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="oclX-dynamic-internal0.html#F_appendVarToSequenceS_oclX-dynamic-internal.xsl"
+                                                target="_self"
+                                                title="http://eXolutio.com/oclX/dynamic/internal"
+                                                onclick="updPT('oclX-dynamic-internal.xsl')"><span>appendVarToSequence (</span><span class="fParams">sequence, varName, varValue</span><span>)</span></a><span class="refItemSep">;</span></div>
+                                          <div class="refItemBlock"><a href="oclX-dynamic-internal0.html#F_appendVarToSequenceNS_oclX-dynamic-internal.xsl"
+                                                target="_self"
+                                                title="http://eXolutio.com/oclX/dynamic/internal"
+                                                onclick="updPT('oclX-dynamic-internal.xsl')"><span>appendVarToSequenceN (</span><span class="fParams">sequence, varNames, collection, indices</span><span>)</span></a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Parameters</div>
+                           <div class="flR"><input id="bt_prs_F_appendVarToSequenceNS_oclX-dynamic-internal.xsl" type="image"
+                                     src="img/btM.gif"
+                                     value="-"
+                                     onclick="switchState('prs_F_appendVarToSequenceNS_oclX-dynamic-internal.xsl');"
+                                     class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="prs_F_appendVarToSequenceNS_oclX-dynamic-internal.xsl"
+                                style="display:block">
+                              <table class="attsT">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th>Namespace</th>
+                                       <th>Type</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="fCol">collection</td>
+                                    <td>No namespace</td>
+                                    <td>item()*</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">indices</td>
+                                    <td>No namespace</td>
+                                    <td>xs:integer*</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">sequence</td>
+                                    <td>No namespace</td>
+                                    <td>item()*</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">varNames</td>
+                                    <td>No namespace</td>
+                                    <td>xs:string*</td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Import precedence</td>
+                        <td>0</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Source</div>
+                           <div class="flR"><input id="bt_src_F_appendVarToSequenceNS_oclX-dynamic-internal.xsl" type="image"
+                                     src="img/btM.gif"
+                                     value="-"
+                                     onclick="switchState('src_F_appendVarToSequenceNS_oclX-dynamic-internal.xsl');"
+                                     class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="src_F_appendVarToSequenceNS_oclX-dynamic-internal.xsl"
+                                style="display:block">
+                              <table class="pWCont">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:function</span><span class="tAN"> name=</span><span class="tAV">"oclXin:appendVarToSequenceN"</span><span class="tAN"> as=</span><span class="tAV">"item()*"</span><span class="tXSLEl">&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"sequence"</span><span class="tAN"> as=</span><span class="tAV">"item()*"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"varNames"</span><span class="tAN"> as=</span><span class="tAV">"xs:string*"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"collection"</span><span class="tAN"> as=</span><span class="tAV">"item()*"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"indices"</span><span class="tAN"> as=</span><span class="tAV">"xs:integer*"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:choose</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"count($varNames) eq 0"</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:sequence</span><span class="tAN"> select=</span><span class="tAV">"$sequence"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:otherwise</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:sequence</span><span class="tAN"> select=</span><span class="tAV">"oclXin:appendVarToSequenceN(           oclXin:appendVarToSequence($sequence, $varNames[1], $collection[$indices[1] + 1]),           subsequence($varNames, 2), $collection, subsequence($indices, 2))"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:otherwise&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:choose&gt;</span><span class="tI">
+</span><span class="tXSLEl">&lt;/xsl:function&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lR"></td>
+         </tr>
+         <tr>
+            <td class="rt_cBL"></td>
+            <td class="rt_lB"></td>
+            <td class="rt_cBR"></td>
+         </tr>
+      </table><a id="F_wrapS_oclX-dynamic-internal.xsl"></a><div class="cmpT">Function
+         <span class="qname">oclXin:wrap (<span class="fParams">value, text</span>)</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cTL"></td>
+            <td class="rt_lT"></td>
+            <td class="rt_cTR"></td>
+         </tr>
+         <tr>
+            <td class="rt_lL"></td>
+            <td class="rt_cnt">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="fCol">Namespace</td>
+                        <td>http://eXolutio.com/oclX/dynamic/internal</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Used by</div>
+                           <div class="flR"><input id="bt_uB_F_wrapS_oclX-dynamic-internal.xsl" type="image" src="img/btM.gif"
+                                     value="-"
+                                     onclick="switchState('uB_F_wrapS_oclX-dynamic-internal.xsl');"
+                                     class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="uB_F_wrapS_oclX-dynamic-internal.xsl" style="display:block">
+                              <table class="uBT">
+                                 <tr>
+                                    <td class="fCol">Function</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="oclX-dynamic-internal0.html#F_appendVarToSequenceS_oclX-dynamic-internal.xsl"
+                                                target="_self"
+                                                title="http://eXolutio.com/oclX/dynamic/internal"
+                                                onclick="updPT('oclX-dynamic-internal.xsl')"><span>oclXin:appendVarToSequence (</span><span class="fParams">sequence, varName, varValue</span><span>)</span></a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Parameters</div>
+                           <div class="flR"><input id="bt_prs_F_wrapS_oclX-dynamic-internal.xsl" type="image" src="img/btM.gif"
+                                     value="-"
+                                     onclick="switchState('prs_F_wrapS_oclX-dynamic-internal.xsl');"
+                                     class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="prs_F_wrapS_oclX-dynamic-internal.xsl" style="display:block">
+                              <table class="attsT">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th>Namespace</th>
+                                       <th>Type</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="fCol">text</td>
+                                    <td>No namespace</td>
+                                    <td>xs:string</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">value</td>
+                                    <td>No namespace</td>
+                                    <td>item()</td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Import precedence</td>
+                        <td>0</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Source</div>
+                           <div class="flR"><input id="bt_src_F_wrapS_oclX-dynamic-internal.xsl" type="image" src="img/btM.gif"
+                                     value="-"
+                                     onclick="switchState('src_F_wrapS_oclX-dynamic-internal.xsl');"
+                                     class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="src_F_wrapS_oclX-dynamic-internal.xsl" style="display:block">
+                              <table class="pWCont">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:function</span><span class="tAN"> name=</span><span class="tAV">"oclXin:wrap"</span><span class="tXSLEl">&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"value"</span><span class="tAN"> as=</span><span class="tAV">"item()"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"text"</span><span class="tAN"> as=</span><span class="tAV">"xs:string"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:element</span><span class="tAN"> name=</span><span class="tAV">"{$text}"</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:sequence</span><span class="tAN"> select=</span><span class="tAV">"$value"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:element&gt;</span><span class="tI">
+</span><span class="tXSLEl">&lt;/xsl:function&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lR"></td>
+         </tr>
+         <tr>
+            <td class="rt_cBL"></td>
+            <td class="rt_lB"></td>
+            <td class="rt_cBR"></td>
+         </tr>
+      </table><a id="F_expressionForSaxonS_oclX-dynamic-internal.xsl"></a><div class="cmpT">Function
+         <span class="qname">oclXin:expressionForSaxon (<span class="fParams">expression, replacements</span>)</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cTL"></td>
+            <td class="rt_lT"></td>
+            <td class="rt_cTR"></td>
+         </tr>
+         <tr>
+            <td class="rt_lL"></td>
+            <td class="rt_cnt">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Documentation</div>
+                           <div class="flR"><input id="bt_dS_F_expressionForSaxonS_oclX-dynamic-internal.xsl" type="image"
+                                     src="img/btM.gif"
+                                     value="-"
+                                     onclick="switchState('dS_F_expressionForSaxonS_oclX-dynamic-internal.xsl');"
+                                     class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="dS_F_expressionForSaxonS_oclX-dynamic-internal.xsl" style="display:block">
+                              <div>
+                                 <h3>Description</h3><pre>&lt;xsl:function name="oclXin:varToSequence" as="item()*"&gt;    
+    &lt;xsl:param name="varName" as="xs:string"/&gt;
+    &lt;xsl:param name="varValue" as="item()*" /&gt;
+    
+    &lt;xsl:variable name="newVar" as="item()*"&gt;
+      &lt;xsl:element name="{$varName}"/&gt;
+      &lt;!-\- use placeholder ##EMPTY to represente empty sequence -\-&gt; 
+      &lt;xsl:sequence select="if (exists($varValue)) then $varValue else '##EMPTY'" /&gt;
+    &lt;/xsl:variable&gt;  
+    &lt;xsl:sequence select="$newVar" /&gt;
+  &lt;/xsl:function&gt;</pre><pre> 
+    Performs variable replacement in the string. 
+    substrings as $self, $x, $var1 are replaced for $p1, $p2, $p3... 
+    replacements contains sequence defining substrings for replacements, 
+    e.g. &lt;self&gt;..&lt;/self&gt;&lt;x&gt;..&lt;/x&gt;&lt;var1&gt;..&lt;/var1&gt;
+  </pre></div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Namespace</td>
+                        <td>http://eXolutio.com/oclX/dynamic/internal</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Type</td>
+                        <td>xs:string</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">References</div>
+                           <div class="flR"><input id="bt_refs_F_expressionForSaxonS_oclX-dynamic-internal.xsl" type="image"
+                                     src="img/btM.gif"
+                                     value="-"
+                                     onclick="switchState('refs_F_expressionForSaxonS_oclX-dynamic-internal.xsl');"
+                                     class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="refs_F_expressionForSaxonS_oclX-dynamic-internal.xsl" style="display:block">
+                              <table class="uBT">
+                                 <tr>
+                                    <td class="fCol">Function</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="oclX-dynamic-internal0.html#F_oddMembersS_oclX-dynamic-internal.xsl"
+                                                target="_self"
+                                                title="http://eXolutio.com/oclX/dynamic/internal"
+                                                onclick="updPT('oclX-dynamic-internal.xsl')"><span>oddMembers (</span><span class="fParams">sequence</span><span>)</span></a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Parameters</div>
+                           <div class="flR"><input id="bt_prs_F_expressionForSaxonS_oclX-dynamic-internal.xsl" type="image"
+                                     src="img/btM.gif"
+                                     value="-"
+                                     onclick="switchState('prs_F_expressionForSaxonS_oclX-dynamic-internal.xsl');"
+                                     class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="prs_F_expressionForSaxonS_oclX-dynamic-internal.xsl" style="display:block">
+                              <table class="attsT">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th>Namespace</th>
+                                       <th>Type</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="fCol">expression</td>
+                                    <td>No namespace</td>
+                                    <td>xs:string</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">replacements</td>
+                                    <td>No namespace</td>
+                                    <td>item()*</td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Import precedence</td>
+                        <td>0</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Source</div>
+                           <div class="flR"><input id="bt_src_F_expressionForSaxonS_oclX-dynamic-internal.xsl" type="image"
+                                     src="img/btM.gif"
+                                     value="-"
+                                     onclick="switchState('src_F_expressionForSaxonS_oclX-dynamic-internal.xsl');"
+                                     class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="src_F_expressionForSaxonS_oclX-dynamic-internal.xsl" style="display:block">
+                              <table class="pWCont">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:function</span><span class="tAN"> name=</span><span class="tAV">"oclXin:expressionForSaxon"</span><span class="tAN"> as=</span><span class="tAV">"xs:string"</span><span class="tXSLEl">&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"expression"</span><span class="tAN"> as=</span><span class="tAV">"xs:string"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"replacements"</span><span class="tAN"> as=</span><span class="tAV">"item()*"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:value-of</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"oddMembers"</span><span class="tAN"> select=</span><span class="tAV">"oclXin:oddMembers($replacements)"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:analyze-string</span><span class="tAN"> select=</span><span class="tAV">"$expression"</span><span class="tAN"> regex=</span><span class="tAV">"\$([a-zA-Z][a-zA-Z0-9_]*)"</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:matching-substring</span><span class="tXSLEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"trueMatch"</span><span class="tAN"> select=</span><span class="tAV">"$oddMembers[name() = regex-group(1)]"</span><span class="tAN"> as=</span><span class="tAV">"element()*"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:sequence</span><span class="tAN"> select=</span><span class="tAV">"             if (exists($trueMatch))             then (for $index in (1 to count($oddMembers))             return if ($oddMembers[$index] is $trueMatch) then concat('$p', $index) else ())[1]             else .             "</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;/xsl:matching-substring&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:non-matching-substring</span><span class="tXSLEl">&gt;</span><span class="tI">
+        </span><span class="tXSLEl">&lt;xsl:sequence</span><span class="tAN"> select=</span><span class="tAV">"."</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;/xsl:non-matching-substring&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:analyze-string&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:value-of&gt;</span><span class="tI">
+</span><span class="tXSLEl">&lt;/xsl:function&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lR"></td>
+         </tr>
+         <tr>
+            <td class="rt_cBL"></td>
+            <td class="rt_lB"></td>
+            <td class="rt_cBR"></td>
+         </tr>
+      </table><a id="F_retrieveVarFromSequenceS_oclX-dynamic-internal.xsl"></a><div class="cmpT">Function
+         <span class="qname">oclXin:retrieveVarFromSequence (<span class="fParams">item</span>)</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cTL"></td>
+            <td class="rt_lT"></td>
+            <td class="rt_cTR"></td>
+         </tr>
+         <tr>
+            <td class="rt_lL"></td>
+            <td class="rt_cnt">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="fCol">Namespace</td>
+                        <td>http://eXolutio.com/oclX/dynamic/internal</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Type</td>
+                        <td>item()*</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Parameters</div>
+                           <div class="flR"><input id="bt_prs_F_retrieveVarFromSequenceS_oclX-dynamic-internal.xsl" type="image"
+                                     src="img/btM.gif"
+                                     value="-"
+                                     onclick="switchState('prs_F_retrieveVarFromSequenceS_oclX-dynamic-internal.xsl');"
+                                     class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="prs_F_retrieveVarFromSequenceS_oclX-dynamic-internal.xsl"
+                                style="display:block">
+                              <table class="attsT">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th>Namespace</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="fCol">item</td>
+                                    <td>No namespace</td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Import precedence</td>
+                        <td>0</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Source</div>
+                           <div class="flR"><input id="bt_src_F_retrieveVarFromSequenceS_oclX-dynamic-internal.xsl" type="image"
+                                     src="img/btM.gif"
+                                     value="-"
+                                     onclick="switchState('src_F_retrieveVarFromSequenceS_oclX-dynamic-internal.xsl');"
+                                     class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="src_F_retrieveVarFromSequenceS_oclX-dynamic-internal.xsl"
+                                style="display:block">
+                              <table class="pWCont">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:function</span><span class="tAN"> name=</span><span class="tAV">"oclXin:retrieveVarFromSequence"</span><span class="tAN"> as=</span><span class="tAV">"item()*"</span><span class="tXSLEl">&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"item"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:choose</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"not($item instance of element()) and xs:string($item) eq '##EMPTY'"</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:sequence</span><span class="tAN"> select=</span><span class="tAV">"()"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"$item instance of element() and local-name($item) eq 'SEQ'"</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:sequence</span><span class="tAN"> select=</span><span class="tAV">"$item/ITEM/child::node()"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:otherwise</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:sequence</span><span class="tAN"> select=</span><span class="tAV">"$item"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:otherwise&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:choose&gt;</span><span class="tI">
+</span><span class="tXSLEl">&lt;/xsl:function&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lR"></td>
+         </tr>
+         <tr>
+            <td class="rt_cBL"></td>
+            <td class="rt_lB"></td>
+            <td class="rt_cBR"></td>
+         </tr>
+      </table><a id="F_oddMembersS_oclX-dynamic-internal.xsl"></a><div class="cmpT">Function
+         <span class="qname">oclXin:oddMembers (<span class="fParams">sequence</span>)</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cTL"></td>
+            <td class="rt_lT"></td>
+            <td class="rt_cTR"></td>
+         </tr>
+         <tr>
+            <td class="rt_lL"></td>
+            <td class="rt_cnt">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="fCol">Namespace</td>
+                        <td>http://eXolutio.com/oclX/dynamic/internal</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Type</td>
+                        <td>item()*</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Used by</div>
+                           <div class="flR"><input id="bt_uB_F_oddMembersS_oclX-dynamic-internal.xsl" type="image"
+                                     src="img/btM.gif"
+                                     value="-"
+                                     onclick="switchState('uB_F_oddMembersS_oclX-dynamic-internal.xsl');"
+                                     class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="uB_F_oddMembersS_oclX-dynamic-internal.xsl" style="display:block">
+                              <table class="uBT">
+                                 <tr>
+                                    <td class="fCol">Function</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="oclX-dynamic-internal0.html#F_expressionForSaxonS_oclX-dynamic-internal.xsl"
+                                                target="_self"
+                                                title="http://eXolutio.com/oclX/dynamic/internal"
+                                                onclick="updPT('oclX-dynamic-internal.xsl')"><span>oclXin:expressionForSaxon (</span><span class="fParams">expression, replacements</span><span>)</span></a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Parameters</div>
+                           <div class="flR"><input id="bt_prs_F_oddMembersS_oclX-dynamic-internal.xsl" type="image"
+                                     src="img/btM.gif"
+                                     value="-"
+                                     onclick="switchState('prs_F_oddMembersS_oclX-dynamic-internal.xsl');"
+                                     class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="prs_F_oddMembersS_oclX-dynamic-internal.xsl" style="display:block">
+                              <table class="attsT">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th>Namespace</th>
+                                       <th>Type</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="fCol">sequence</td>
+                                    <td>No namespace</td>
+                                    <td>item()*</td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Import precedence</td>
+                        <td>0</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Source</div>
+                           <div class="flR"><input id="bt_src_F_oddMembersS_oclX-dynamic-internal.xsl" type="image"
+                                     src="img/btM.gif"
+                                     value="-"
+                                     onclick="switchState('src_F_oddMembersS_oclX-dynamic-internal.xsl');"
+                                     class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="src_F_oddMembersS_oclX-dynamic-internal.xsl" style="display:block">
+                              <table class="pWCont">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:function</span><span class="tAN"> name=</span><span class="tAV">"oclXin:oddMembers"</span><span class="tAN"> as=</span><span class="tAV">"item()*"</span><span class="tXSLEl">&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"sequence"</span><span class="tAN"> as=</span><span class="tAV">"item()*"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:sequence</span><span class="tAN"> select=</span><span class="tAV">"for $i in 1 to (count($sequence) div 2) return $sequence[$i * 2 - 1]"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+</span><span class="tXSLEl">&lt;/xsl:function&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lR"></td>
+         </tr>
+         <tr>
+            <td class="rt_cBL"></td>
+            <td class="rt_lB"></td>
+            <td class="rt_cBR"></td>
+         </tr>
+      </table><a id="F_powerS_oclX-dynamic-internal.xsl"></a><div class="cmpT">Function
+         <span class="qname">oclXin:power (<span class="fParams">base, exp</span>)</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cTL"></td>
+            <td class="rt_lT"></td>
+            <td class="rt_cTR"></td>
+         </tr>
+         <tr>
+            <td class="rt_lL"></td>
+            <td class="rt_cnt">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="fCol">Namespace</td>
+                        <td>http://eXolutio.com/oclX/dynamic/internal</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Type</td>
+                        <td>xs:integer</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Used by</div>
+                           <div class="flR"><input id="bt_uB_F_powerS_oclX-dynamic-internal.xsl" type="image" src="img/btM.gif"
+                                     value="-"
+                                     onclick="switchState('uB_F_powerS_oclX-dynamic-internal.xsl');"
+                                     class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="uB_F_powerS_oclX-dynamic-internal.xsl" style="display:block">
+                              <table class="uBT">
+                                 <tr>
+                                    <td class="fCol">Function</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="oclX-dynamic-internal0.html#F_powerS_oclX-dynamic-internal.xsl"
+                                                target="_self"
+                                                title="http://eXolutio.com/oclX/dynamic/internal"
+                                                onclick="updPT('oclX-dynamic-internal.xsl')"><span>oclXin:power (</span><span class="fParams">base, exp</span><span>)</span></a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">References</div>
+                           <div class="flR"><input id="bt_refs_F_powerS_oclX-dynamic-internal.xsl" type="image" src="img/btM.gif"
+                                     value="-"
+                                     onclick="switchState('refs_F_powerS_oclX-dynamic-internal.xsl');"
+                                     class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="refs_F_powerS_oclX-dynamic-internal.xsl" style="display:block">
+                              <table class="uBT">
+                                 <tr>
+                                    <td class="fCol">Function</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="oclX-dynamic-internal0.html#F_powerS_oclX-dynamic-internal.xsl"
+                                                target="_self"
+                                                title="http://eXolutio.com/oclX/dynamic/internal"
+                                                onclick="updPT('oclX-dynamic-internal.xsl')"><span>power (</span><span class="fParams">base, exp</span><span>)</span></a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Parameters</div>
+                           <div class="flR"><input id="bt_prs_F_powerS_oclX-dynamic-internal.xsl" type="image" src="img/btM.gif"
+                                     value="-"
+                                     onclick="switchState('prs_F_powerS_oclX-dynamic-internal.xsl');"
+                                     class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="prs_F_powerS_oclX-dynamic-internal.xsl" style="display:block">
+                              <table class="attsT">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th>Namespace</th>
+                                       <th>Type</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="fCol">base</td>
+                                    <td>No namespace</td>
+                                    <td>xs:integer</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">exp</td>
+                                    <td>No namespace</td>
+                                    <td>xs:integer</td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Import precedence</td>
+                        <td>0</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Source</div>
+                           <div class="flR"><input id="bt_src_F_powerS_oclX-dynamic-internal.xsl" type="image" src="img/btM.gif"
+                                     value="-"
+                                     onclick="switchState('src_F_powerS_oclX-dynamic-internal.xsl');"
+                                     class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="src_F_powerS_oclX-dynamic-internal.xsl" style="display:block">
+                              <table class="pWCont">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:function</span><span class="tAN"> name=</span><span class="tAV">"oclXin:power"</span><span class="tAN"> as=</span><span class="tAV">"xs:integer"</span><span class="tXSLEl">&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"base"</span><span class="tAN"> as=</span><span class="tAV">"xs:integer"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"exp"</span><span class="tAN"> as=</span><span class="tAV">"xs:integer"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:sequence</span><span class="tAN"> select=</span><span class="tAV">"if ($exp ge 1) then $base * oclXin:power($base, $exp - 1) else if ($exp eq 1) then $base else if ($exp eq 0) then 1 else -1"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+</span><span class="tXSLEl">&lt;/xsl:function&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lR"></td>
+         </tr>
+         <tr>
+            <td class="rt_cBL"></td>
+            <td class="rt_lB"></td>
+            <td class="rt_cBR"></td>
+         </tr>
+      </table><a id="F_getIndicesS_oclX-dynamic-internal.xsl"></a><div class="cmpT">Function
+         <span class="qname">oclXin:getIndices (<span class="fParams">scalar, base, length, result</span>)</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cTL"></td>
+            <td class="rt_lT"></td>
+            <td class="rt_cTR"></td>
+         </tr>
+         <tr>
+            <td class="rt_lL"></td>
+            <td class="rt_cnt">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="fCol">Namespace</td>
+                        <td>http://eXolutio.com/oclX/dynamic/internal</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Type</td>
+                        <td>xs:integer*</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Used by</div>
+                           <div class="flR"><input id="bt_uB_F_getIndicesS_oclX-dynamic-internal.xsl" type="image"
+                                     src="img/btM.gif"
+                                     value="-"
+                                     onclick="switchState('uB_F_getIndicesS_oclX-dynamic-internal.xsl');"
+                                     class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="uB_F_getIndicesS_oclX-dynamic-internal.xsl" style="display:block">
+                              <table class="uBT">
+                                 <tr>
+                                    <td class="fCol">Function</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="oclX-dynamic-internal0.html#F_getIndicesS_oclX-dynamic-internal.xsl"
+                                                target="_self"
+                                                title="http://eXolutio.com/oclX/dynamic/internal"
+                                                onclick="updPT('oclX-dynamic-internal.xsl')"><span>oclXin:getIndices (</span><span class="fParams">scalar, base, length, result</span><span>)</span></a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">References</div>
+                           <div class="flR"><input id="bt_refs_F_getIndicesS_oclX-dynamic-internal.xsl" type="image"
+                                     src="img/btM.gif"
+                                     value="-"
+                                     onclick="switchState('refs_F_getIndicesS_oclX-dynamic-internal.xsl');"
+                                     class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="refs_F_getIndicesS_oclX-dynamic-internal.xsl" style="display:block">
+                              <table class="uBT">
+                                 <tr>
+                                    <td class="fCol">Function</td>
+                                    <td>
+                                       <div class="listGrouping">
+                                          <div class="refItemBlock"><a href="oclX-dynamic-internal0.html#F_getIndicesS_oclX-dynamic-internal.xsl"
+                                                target="_self"
+                                                title="http://eXolutio.com/oclX/dynamic/internal"
+                                                onclick="updPT('oclX-dynamic-internal.xsl')"><span>getIndices (</span><span class="fParams">scalar, base, length, result</span><span>)</span></a></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Parameters</div>
+                           <div class="flR"><input id="bt_prs_F_getIndicesS_oclX-dynamic-internal.xsl" type="image"
+                                     src="img/btM.gif"
+                                     value="-"
+                                     onclick="switchState('prs_F_getIndicesS_oclX-dynamic-internal.xsl');"
+                                     class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="prs_F_getIndicesS_oclX-dynamic-internal.xsl" style="display:block">
+                              <table class="attsT">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th>Namespace</th>
+                                       <th>Type</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="fCol">base</td>
+                                    <td>No namespace</td>
+                                    <td>xs:integer</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">length</td>
+                                    <td>No namespace</td>
+                                    <td>xs:integer</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">result</td>
+                                    <td>No namespace</td>
+                                    <td>xs:integer*</td>
+                                 </tr>
+                                 <tr>
+                                    <td class="fCol">scalar</td>
+                                    <td>No namespace</td>
+                                    <td>xs:integer</td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Import precedence</td>
+                        <td>0</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Source</div>
+                           <div class="flR"><input id="bt_src_F_getIndicesS_oclX-dynamic-internal.xsl" type="image"
+                                     src="img/btM.gif"
+                                     value="-"
+                                     onclick="switchState('src_F_getIndicesS_oclX-dynamic-internal.xsl');"
+                                     class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="src_F_getIndicesS_oclX-dynamic-internal.xsl" style="display:block">
+                              <table class="pWCont">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:function</span><span class="tAN"> name=</span><span class="tAV">"oclXin:getIndices"</span><span class="tAN"> as=</span><span class="tAV">"xs:integer*"</span><span class="tXSLEl">&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"scalar"</span><span class="tAN"> as=</span><span class="tAV">"xs:integer"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"base"</span><span class="tAN"> as=</span><span class="tAV">"xs:integer"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"length"</span><span class="tAN"> as=</span><span class="tAV">"xs:integer"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"result"</span><span class="tAN"> as=</span><span class="tAV">"xs:integer*"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:choose</span><span class="tXSLEl">&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"$scalar eq 0"</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:sequence</span><span class="tAN"> select=</span><span class="tAV">"           (for $i in 1 to ($length - count($result)) return 0),           $result"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:otherwise</span><span class="tXSLEl">&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"mod"</span><span class="tAN"> select=</span><span class="tAV">"$scalar mod $base"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+      </span><span class="tXSLEl">&lt;xsl:sequence</span><span class="tAN"> select=</span><span class="tAV">"                       oclXin:getIndices(xs:integer($scalar div $base), $base, $length, (($mod), $result))"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;/xsl:otherwise&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;/xsl:choose&gt;</span><span class="tI">
+</span><span class="tXSLEl">&lt;/xsl:function&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lR"></td>
+         </tr>
+         <tr>
+            <td class="rt_cBL"></td>
+            <td class="rt_lB"></td>
+            <td class="rt_cBR"></td>
+         </tr>
+      </table>
+      <div class="footer">
+         <hr />
+         <div align="center">Stylesheet documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.
+         </div>
+      </div><script type="text/javascript">
+         <!--                     
+                    // The namespace is the selected option in the TOC combo.
+                    
+                    // The corresponding div is already visible conf. to its style attr.                     
+                    
+                            var selectToc = getElementObject('selectTOC');
+                            if(selectToc != null){
+                            // It can be null when having chunking, the combo of the TOC is in another frame.
+                            selectToc.selectedIndex = 0;
+                            }
+                        
+                    
+                    // Floats the toolbar.
+                    var globalControls = getElementObject("global_controls"); 
+                    
+                    if(globalControls != null){
+                    var browser=navigator.appName;
+                    var version = parseFloat(navigator.appVersion.split('MSIE')[1]);
+                    
+                    var IE6 = false;
+                    if ((browser=="Microsoft Internet Explorer") && (version < 7)){
+                    IE6 = true;
+                    }
+                    
+                    //alert (IE6 + " |V| " + version);
+                    
+                    if(IE6){
+                    // On IE 6 the 'fixed' property is not supported. We must use javascript. 
+                    globalControls.style.position='absolute';                         
+                    // The global controls will do not exist in the TOC frame, when chunking.
+                    findAndFloat("global_controls", 225, 30);    
+                    } else {
+                    globalControls.style.position='fixed';                     	
+                    }
+                    
+                    globalControls.style.right='0';                       
+                    }
+                --></script></body>
+</html>

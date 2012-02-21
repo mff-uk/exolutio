@@ -124,6 +124,14 @@ namespace Exolutio.Model.OCL.ConstraintConversion
             if (obj.GetType() != typeof(PIMPathVariableStep)) return false;
             return Equals((PIMPathVariableStep)obj);
         }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return (base.GetHashCode()*397) ^ (VariableExp != null ? VariableExp.GetHashCode() : 0);
+            }
+        }
     }
 
     class PIMPathAttributeStep : PIMPathStep, IEquatable<PIMPathAttributeStep>
@@ -134,6 +142,8 @@ namespace Exolutio.Model.OCL.ConstraintConversion
         {
             return Attribute.Name;
         }
+
+        
 
         public bool Equals(PIMPathAttributeStep other)
         {
@@ -146,6 +156,14 @@ namespace Exolutio.Model.OCL.ConstraintConversion
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != typeof(PIMPathAttributeStep)) return false;
             return Equals((PIMPathAttributeStep)obj);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return (base.GetHashCode()*397) ^ (Attribute != null ? Attribute.GetHashCode() : 0);
+            }
         }
     }
 
@@ -169,6 +187,14 @@ namespace Exolutio.Model.OCL.ConstraintConversion
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != typeof(PIMPathAssociationStep)) return false;
             return Equals((PIMPathAssociationStep)obj);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return (base.GetHashCode()*397) ^ (AssociationEnd != null ? AssociationEnd.GetHashCode() : 0);
+            }
         }
     }
 

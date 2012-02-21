@@ -10,24 +10,79 @@
                         <scenarioAssociation-array>
                             <scenarioAssociation>
                                 <field name="name">
-                                    <String>pipe - MatchSchedule func SA</String>
+                                    <String>MatchSchedule F NSA</String>
                                 </field>
                                 <field name="type">
                                     <String>XPROC</String>
                                 </field>
                                 <field name="url">
-                                    <String>../SchematronTest/oclx-schematron-pipeline.xpl</String>
+                                    <String>../OclX/oclX-functional.xsl</String>
                                 </field>
                             </scenarioAssociation>
                             <scenarioAssociation>
                                 <field name="name">
-                                    <String>pipe - TournamentApplication func</String>
+                                    <String>MatchSchedule F NSA</String>
                                 </field>
                                 <field name="type">
                                     <String>XPROC</String>
                                 </field>
                                 <field name="url">
-                                    <String>../IsoSchematron/oclx-schematron-pipeline.xpl</String>
+                                    <String>../OclX/Examples/Functional/NotSchemaAware/MatchSchedule.sch</String>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="name">
+                                    <String>MatchSchedule F NSA</String>
+                                </field>
+                                <field name="type">
+                                    <String>XPROC</String>
+                                </field>
+                                <field name="url">
+                                    <String>../OclX/Pipeline/step4.out.xsl</String>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="name">
+                                    <String>MatchSchedule F NSA</String>
+                                </field>
+                                <field name="type">
+                                    <String>XPROC</String>
+                                </field>
+                                <field name="url">
+                                    <String>../OclX/Pipeline/oclx_include.xsl</String>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="name">
+                                    <String>MatchSchedule F NSA</String>
+                                </field>
+                                <field name="type">
+                                    <String>XPROC</String>
+                                </field>
+                                <field name="url">
+                                    <String>../OclX/Examples/Functional/NotSchemaAware/MatchSchedule.xml</String>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="name">
+                                    <String>MatchSchedule F NSA</String>
+                                </field>
+                                <field name="type">
+                                    <String>XPROC</String>
+                                </field>
+                                <field name="url">
+                                    <String>../OclX/Pipeline/oclx-schematron-pipeline.xpl</String>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="name">
+                                    <String>MatchSchedule D NSA</String>
+                                </field>
+                                <field name="type">
+                                    <String>XPROC</String>
+                                </field>
+                                <field name="url">
+                                    <String>../OclX/Examples/Dynamic/NotSchemaAware/MatchSchedule.sch</String>
                                 </field>
                             </scenarioAssociation>
                             <scenarioAssociation>
@@ -39,28 +94,6 @@
                                 </field>
                                 <field name="url">
                                     <String>../SchematronTest/MatchSchedule.xml</String>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="name">
-                                    <String>SR</String>
-                                </field>
-                                <field name="type">
-                                    <String>XML</String>
-                                </field>
-                                <field name="url">
-                                    <String>../OclX/oclX-functional.xsl</String>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="name">
-                                    <String>pipe 3</String>
-                                </field>
-                                <field name="type">
-                                    <String>XPROC</String>
-                                </field>
-                                <field name="url">
-                                    <String>../SchematronTest/pipe.xpl</String>
                                 </field>
                             </scenarioAssociation>
                             <scenarioAssociation>
@@ -101,89 +134,6 @@
                     <entry>
                         <String>scenarios</String>
                         <scenario-array>
-                            <scenario>
-                                <field name="advancedOptionsMap">
-                                    <null/>
-                                </field>
-                                <field name="name">
-                                    <String>current file saxon 9.4</String>
-                                </field>
-                                <field name="baseURL">
-                                    <String></String>
-                                </field>
-                                <field name="footerURL">
-                                    <String></String>
-                                </field>
-                                <field name="fOPMethod">
-                                    <String>pdf</String>
-                                </field>
-                                <field name="fOProcessorName">
-                                    <String>Apache FOP</String>
-                                </field>
-                                <field name="headerURL">
-                                    <String></String>
-                                </field>
-                                <field name="inputXSLURL">
-                                    <String>${cfn}.xsl</String>
-                                </field>
-                                <field name="inputXMLURL">
-                                    <String>${cfn}.xml</String>
-                                </field>
-                                <field name="defaultScenario">
-                                    <Boolean>false</Boolean>
-                                </field>
-                                <field name="isFOPPerforming">
-                                    <Boolean>false</Boolean>
-                                </field>
-                                <field name="type">
-                                    <String>XSL</String>
-                                </field>
-                                <field name="saveAs">
-                                    <Boolean>true</Boolean>
-                                </field>
-                                <field name="openInBrowser">
-                                    <Boolean>false</Boolean>
-                                </field>
-                                <field name="outputFile">
-                                    <null/>
-                                </field>
-                                <field name="openOtherLocationInBrowser">
-                                    <Boolean>false</Boolean>
-                                </field>
-                                <field name="locationToOpenInBrowserURL">
-                                    <null/>
-                                </field>
-                                <field name="openInEditor">
-                                    <Boolean>false</Boolean>
-                                </field>
-                                <field name="showInHTMLPane">
-                                    <Boolean>false</Boolean>
-                                </field>
-                                <field name="showInXMLPane">
-                                    <Boolean>true</Boolean>
-                                </field>
-                                <field name="showInSVGPane">
-                                    <Boolean>false</Boolean>
-                                </field>
-                                <field name="showInResultSetPane">
-                                    <Boolean>false</Boolean>
-                                </field>
-                                <field name="useXSLTInput">
-                                    <Boolean>true</Boolean>
-                                </field>
-                                <field name="xsltParams">
-                                    <list/>
-                                </field>
-                                <field name="cascadingStylesheets">
-                                    <String-array/>
-                                </field>
-                                <field name="xslTransformer">
-                                    <String>Saxon 9.4</String>
-                                </field>
-                                <field name="extensionURLs">
-                                    <String-array/>
-                                </field>
-                            </scenario>
                             <scenario>
                                 <field name="advancedOptionsMap">
                                     <null/>
@@ -433,6 +383,89 @@
                                     <String-array/>
                                 </field>
                             </scenario>
+                            <scenario>
+                                <field name="advancedOptionsMap">
+                                    <null/>
+                                </field>
+                                <field name="name">
+                                    <String>current file saxon 9.4</String>
+                                </field>
+                                <field name="baseURL">
+                                    <String></String>
+                                </field>
+                                <field name="footerURL">
+                                    <String></String>
+                                </field>
+                                <field name="fOPMethod">
+                                    <String>pdf</String>
+                                </field>
+                                <field name="fOProcessorName">
+                                    <String>Apache FOP</String>
+                                </field>
+                                <field name="headerURL">
+                                    <String></String>
+                                </field>
+                                <field name="inputXSLURL">
+                                    <String>${cfn}.xsl</String>
+                                </field>
+                                <field name="inputXMLURL">
+                                    <String>${cfn}.xml</String>
+                                </field>
+                                <field name="defaultScenario">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="isFOPPerforming">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="type">
+                                    <String>XSL</String>
+                                </field>
+                                <field name="saveAs">
+                                    <Boolean>true</Boolean>
+                                </field>
+                                <field name="openInBrowser">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="outputFile">
+                                    <null/>
+                                </field>
+                                <field name="openOtherLocationInBrowser">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="locationToOpenInBrowserURL">
+                                    <null/>
+                                </field>
+                                <field name="openInEditor">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="showInHTMLPane">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="showInXMLPane">
+                                    <Boolean>true</Boolean>
+                                </field>
+                                <field name="showInSVGPane">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="showInResultSetPane">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="useXSLTInput">
+                                    <Boolean>true</Boolean>
+                                </field>
+                                <field name="xsltParams">
+                                    <list/>
+                                </field>
+                                <field name="cascadingStylesheets">
+                                    <String-array/>
+                                </field>
+                                <field name="xslTransformer">
+                                    <String>Saxon 9.4</String>
+                                </field>
+                                <field name="extensionURLs">
+                                    <String-array/>
+                                </field>
+                            </scenario>
                             <xprocScenario>
                                 <field name="inputPorts">
                                     <xprocInputPort-array>
@@ -442,7 +475,7 @@
                                             </field>
                                             <field name="urls">
                                                 <String-array>
-                                                    <String>file:/D:/Programov%C3%A1n%C3%AD/EvoXSVN/SchematronTest/MatchSchedule.xml</String>
+                                                    <String>file:/D:/Programov%C3%A1n%C3%AD/EvoXSVN/OclX/Examples/Dynamic/NotSchemaAware/MatchSchedule.xml</String>
                                                 </String-array>
                                             </field>
                                         </xprocInputPort>
@@ -452,7 +485,7 @@
                                             </field>
                                             <field name="urls">
                                                 <String-array>
-                                                    <String>file:/D:/Programov%C3%A1n%C3%AD/EvoXSVN/SchematronTest/MatchScheduleSA.sch</String>
+                                                    <String>file:/D:/Programov%C3%A1n%C3%AD/EvoXSVN/OclX/Examples/Dynamic/NotSchemaAware/MatchSchedule.sch</String>
                                                 </String-array>
                                             </field>
                                         </xprocInputPort>
@@ -494,7 +527,7 @@
                                                 <String>functional</String>
                                             </field>
                                             <field name="value">
-                                                <String>true</String>
+                                                <String>false</String>
                                             </field>
                                         </xprocOption>
                                         <xprocOption>
@@ -505,7 +538,7 @@
                                                 <String>oclx-import-href</String>
                                             </field>
                                             <field name="value">
-                                                <String>../OclX/oclX-functional.xsl</String>
+                                                <String>../../../oclX-dynamic.xsl</String>
                                             </field>
                                         </xprocOption>
                                         <xprocOption>
@@ -516,7 +549,18 @@
                                                 <String>output-intermediate-steps</String>
                                             </field>
                                             <field name="value">
-                                                <String>false</String>
+                                                <String>true</String>
+                                            </field>
+                                        </xprocOption>
+                                        <xprocOption>
+                                            <field name="namespaceURI">
+                                                <String></String>
+                                            </field>
+                                            <field name="localName">
+                                                <String>protect-invalid</String>
+                                            </field>
+                                            <field name="value">
+                                                <String>true</String>
                                             </field>
                                         </xprocOption>
                                     </xprocOption-array>
@@ -545,7 +589,7 @@
                                     <null/>
                                 </field>
                                 <field name="name">
-                                    <String>pipe - MatchSchedule func SA</String>
+                                    <String>MatchSchedule D NSA</String>
                                 </field>
                                 <field name="baseURL">
                                     <null/>
@@ -632,7 +676,7 @@
                                             </field>
                                             <field name="urls">
                                                 <String-array>
-                                                    <String>file:/D:/Programov%C3%A1n%C3%AD/EvoXSVN/SchematronTest/MatchSchedule.xml</String>
+                                                    <String>file:/D:/Programov%C3%A1n%C3%AD/EvoXSVN/OclX/Examples/Functional/NotSchemaAware/MatchSchedule.xml</String>
                                                 </String-array>
                                             </field>
                                         </xprocInputPort>
@@ -642,7 +686,7 @@
                                             </field>
                                             <field name="urls">
                                                 <String-array>
-                                                    <String>file:/D:/Programov%C3%A1n%C3%AD/EvoXSVN/SchematronTest/MatchScheduleDyn.sch</String>
+                                                    <String>file:/D:/Programov%C3%A1n%C3%AD/EvoXSVN/OclX/Examples/Functional/NotSchemaAware/MatchSchedule.sch</String>
                                                 </String-array>
                                             </field>
                                         </xprocInputPort>
@@ -695,7 +739,7 @@
                                                 <String>oclx-import-href</String>
                                             </field>
                                             <field name="value">
-                                                <String>../OclX/oclX-functional.xsl</String>
+                                                <String>../../../oclX-functional.xsl</String>
                                             </field>
                                         </xprocOption>
                                         <xprocOption>
@@ -706,7 +750,18 @@
                                                 <String>output-intermediate-steps</String>
                                             </field>
                                             <field name="value">
-                                                <String>false</String>
+                                                <String>true</String>
+                                            </field>
+                                        </xprocOption>
+                                        <xprocOption>
+                                            <field name="namespaceURI">
+                                                <String></String>
+                                            </field>
+                                            <field name="localName">
+                                                <String>protect-invalid</String>
+                                            </field>
+                                            <field name="value">
+                                                <String>true</String>
                                             </field>
                                         </xprocOption>
                                     </xprocOption-array>
@@ -735,7 +790,208 @@
                                     <null/>
                                 </field>
                                 <field name="name">
-                                    <String>pipe - MatchSchedule func</String>
+                                    <String>MatchSchedule F NSA</String>
+                                </field>
+                                <field name="baseURL">
+                                    <null/>
+                                </field>
+                                <field name="footerURL">
+                                    <null/>
+                                </field>
+                                <field name="fOPMethod">
+                                    <null/>
+                                </field>
+                                <field name="fOProcessorName">
+                                    <null/>
+                                </field>
+                                <field name="headerURL">
+                                    <null/>
+                                </field>
+                                <field name="inputXSLURL">
+                                    <String>file:/D:/Programov%C3%A1n%C3%AD/EvoXSVN/OclX/Pipeline/oclx-schematron-pipeline.xpl</String>
+                                </field>
+                                <field name="inputXMLURL">
+                                    <String></String>
+                                </field>
+                                <field name="defaultScenario">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="isFOPPerforming">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="type">
+                                    <String>XPROC</String>
+                                </field>
+                                <field name="saveAs">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="openInBrowser">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="outputFile">
+                                    <null/>
+                                </field>
+                                <field name="openOtherLocationInBrowser">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="locationToOpenInBrowserURL">
+                                    <null/>
+                                </field>
+                                <field name="openInEditor">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="showInHTMLPane">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="showInXMLPane">
+                                    <Boolean>true</Boolean>
+                                </field>
+                                <field name="showInSVGPane">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="showInResultSetPane">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="useXSLTInput">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="xsltParams">
+                                    <list/>
+                                </field>
+                                <field name="cascadingStylesheets">
+                                    <String-array/>
+                                </field>
+                                <field name="xslTransformer">
+                                    <String>Calabash XProc</String>
+                                </field>
+                                <field name="extensionURLs">
+                                    <String-array/>
+                                </field>
+                            </xprocScenario>
+                            <xprocScenario>
+                                <field name="inputPorts">
+                                    <xprocInputPort-array>
+                                        <xprocInputPort>
+                                            <field name="portName">
+                                                <String>source</String>
+                                            </field>
+                                            <field name="urls">
+                                                <String-array>
+                                                    <String>file:/D:/Programov%C3%A1n%C3%AD/EvoXSVN/OclX/Examples/Dynamic/NotSchemaAware/TournamentsSchedule.xml</String>
+                                                </String-array>
+                                            </field>
+                                        </xprocInputPort>
+                                        <xprocInputPort>
+                                            <field name="portName">
+                                                <String>schema</String>
+                                            </field>
+                                            <field name="urls">
+                                                <String-array>
+                                                    <String>file:/D:/Programov%C3%A1n%C3%AD/EvoXSVN/OclX/Examples/Functional/NotSchemaAware/TournamentsSchedule.sch</String>
+                                                </String-array>
+                                            </field>
+                                        </xprocInputPort>
+                                    </xprocInputPort-array>
+                                </field>
+                                <field name="outputPorts">
+                                    <xprocOutputPort-array>
+                                        <xprocOutputPort>
+                                            <field name="portName">
+                                                <String>result</String>
+                                            </field>
+                                            <field name="url">
+                                                <null/>
+                                            </field>
+                                            <field name="showInSequenceView">
+                                                <Boolean>true</Boolean>
+                                            </field>
+                                        </xprocOutputPort>
+                                    </xprocOutputPort-array>
+                                </field>
+                                <field name="xprocOptions">
+                                    <xprocOption-array>
+                                        <xprocOption>
+                                            <field name="namespaceURI">
+                                                <String></String>
+                                            </field>
+                                            <field name="localName">
+                                                <String>debug</String>
+                                            </field>
+                                            <field name="value">
+                                                <String></String>
+                                            </field>
+                                        </xprocOption>
+                                        <xprocOption>
+                                            <field name="namespaceURI">
+                                                <String></String>
+                                            </field>
+                                            <field name="localName">
+                                                <String>functional</String>
+                                            </field>
+                                            <field name="value">
+                                                <String>true</String>
+                                            </field>
+                                        </xprocOption>
+                                        <xprocOption>
+                                            <field name="namespaceURI">
+                                                <String></String>
+                                            </field>
+                                            <field name="localName">
+                                                <String>oclx-import-href</String>
+                                            </field>
+                                            <field name="value">
+                                                <String>../../../oclX-functional.xsl</String>
+                                            </field>
+                                        </xprocOption>
+                                        <xprocOption>
+                                            <field name="namespaceURI">
+                                                <String></String>
+                                            </field>
+                                            <field name="localName">
+                                                <String>output-intermediate-steps</String>
+                                            </field>
+                                            <field name="value">
+                                                <String>false</String>
+                                            </field>
+                                        </xprocOption>
+                                        <xprocOption>
+                                            <field name="namespaceURI">
+                                                <String></String>
+                                            </field>
+                                            <field name="localName">
+                                                <String>protect-invalid</String>
+                                            </field>
+                                            <field name="value">
+                                                <String>'false'</String>
+                                            </field>
+                                        </xprocOption>
+                                    </xprocOption-array>
+                                </field>
+                                <field name="xprocParameters">
+                                    <xprocParameterPort-array>
+                                        <xprocParameterPort>
+                                            <field name="portName">
+                                                <String>parameters</String>
+                                            </field>
+                                            <field name="parameters">
+                                                <xprocParameter-array/>
+                                            </field>
+                                        </xprocParameterPort>
+                                        <xprocParameterPort>
+                                            <field name="portName">
+                                                <String>*</String>
+                                            </field>
+                                            <field name="parameters">
+                                                <xprocParameter-array/>
+                                            </field>
+                                        </xprocParameterPort>
+                                    </xprocParameterPort-array>
+                                </field>
+                                <field name="advancedOptionsMap">
+                                    <null/>
+                                </field>
+                                <field name="name">
+                                    <String>TournamensSchedule F NSA</String>
                                 </field>
                                 <field name="baseURL">
                                     <null/>
@@ -822,7 +1078,7 @@
                                             </field>
                                             <field name="urls">
                                                 <String-array>
-                                                    <String>file:/D:/Programov%C3%A1n%C3%AD/EvoXSVN/SchematronTest/TournamentApplication.xml</String>
+                                                    <String>file:/D:/Programov%C3%A1n%C3%AD/EvoXSVN/OclX/Examples/Functional/NotSchemaAware/TournamentApplication.xml</String>
                                                 </String-array>
                                             </field>
                                         </xprocInputPort>
@@ -832,7 +1088,7 @@
                                             </field>
                                             <field name="urls">
                                                 <String-array>
-                                                    <String>file:/D:/Programov%C3%A1n%C3%AD/EvoXSVN/SchematronTest/TournamentApplication.sch</String>
+                                                    <String>file:/D:/Programov%C3%A1n%C3%AD/EvoXSVN/OclX/Examples/Functional/NotSchemaAware/TournamentApplication.sch</String>
                                                 </String-array>
                                             </field>
                                         </xprocInputPort>
@@ -885,7 +1141,7 @@
                                                 <String>oclx-import-href</String>
                                             </field>
                                             <field name="value">
-                                                <String>../OclX/oclX-functional.xsl</String>
+                                                <String>../../../oclX-functional.xsl</String>
                                             </field>
                                         </xprocOption>
                                         <xprocOption>
@@ -897,6 +1153,17 @@
                                             </field>
                                             <field name="value">
                                                 <String>false</String>
+                                            </field>
+                                        </xprocOption>
+                                        <xprocOption>
+                                            <field name="namespaceURI">
+                                                <String></String>
+                                            </field>
+                                            <field name="localName">
+                                                <String>protect-invalid</String>
+                                            </field>
+                                            <field name="value">
+                                                <String>'false'</String>
                                             </field>
                                         </xprocOption>
                                     </xprocOption-array>
@@ -925,7 +1192,7 @@
                                     <null/>
                                 </field>
                                 <field name="name">
-                                    <String>pipe - TournamentApplication func</String>
+                                    <String>TournamentApplication F NSA</String>
                                 </field>
                                 <field name="baseURL">
                                     <null/>
@@ -1012,7 +1279,7 @@
                                             </field>
                                             <field name="urls">
                                                 <String-array>
-                                                    <String>file:/D:/Programov%C3%A1n%C3%AD/EvoXSVN/SchematronTest/TournamentsSchedule.xml</String>
+                                                    <String>file:/D:/Programov%C3%A1n%C3%AD/EvoXSVN/OclX/Examples/Dynamic/NotSchemaAware/TournamentsSchedule.xml</String>
                                                 </String-array>
                                             </field>
                                         </xprocInputPort>
@@ -1022,7 +1289,7 @@
                                             </field>
                                             <field name="urls">
                                                 <String-array>
-                                                    <String>file:/D:/Programov%C3%A1n%C3%AD/EvoXSVN/SchematronTest/TournamentsSchedule.sch</String>
+                                                    <String>file:/D:/Programov%C3%A1n%C3%AD/EvoXSVN/OclX/Examples/Dynamic/NotSchemaAware/TournamentsSchedule.sch</String>
                                                 </String-array>
                                             </field>
                                         </xprocInputPort>
@@ -1064,7 +1331,7 @@
                                                 <String>functional</String>
                                             </field>
                                             <field name="value">
-                                                <String>true</String>
+                                                <String>false</String>
                                             </field>
                                         </xprocOption>
                                         <xprocOption>
@@ -1075,7 +1342,7 @@
                                                 <String>oclx-import-href</String>
                                             </field>
                                             <field name="value">
-                                                <String>../OclX/oclX-functional.xsl</String>
+                                                <String>../../../oclX-dynamic.xsl</String>
                                             </field>
                                         </xprocOption>
                                         <xprocOption>
@@ -1086,7 +1353,18 @@
                                                 <String>output-intermediate-steps</String>
                                             </field>
                                             <field name="value">
-                                                <String>false</String>
+                                                <String>true</String>
+                                            </field>
+                                        </xprocOption>
+                                        <xprocOption>
+                                            <field name="namespaceURI">
+                                                <String></String>
+                                            </field>
+                                            <field name="localName">
+                                                <String>protect-invalid</String>
+                                            </field>
+                                            <field name="value">
+                                                <String>true</String>
                                             </field>
                                         </xprocOption>
                                     </xprocOption-array>
@@ -1115,7 +1393,7 @@
                                     <null/>
                                 </field>
                                 <field name="name">
-                                    <String>pipe - TournamentsSchedule func</String>
+                                    <String>TournamentsSchedule D NSA</String>
                                 </field>
                                 <field name="baseURL">
                                     <null/>
@@ -1202,7 +1480,7 @@
                                             </field>
                                             <field name="urls">
                                                 <String-array>
-                                                    <String>file:/D:/Programov%C3%A1n%C3%AD/EvoXSVN/SchematronTest/MatchSchedule.xml</String>
+                                                    <String>file:/D:/Programov%C3%A1n%C3%AD/EvoXSVN/OclX/Examples/Dynamic/NotSchemaAware/TournamentApplication.xml</String>
                                                 </String-array>
                                             </field>
                                         </xprocInputPort>
@@ -1212,7 +1490,7 @@
                                             </field>
                                             <field name="urls">
                                                 <String-array>
-                                                    <String>file:/D:/Programov%C3%A1n%C3%AD/EvoXSVN/SchematronTest/MatchSchedule.sch</String>
+                                                    <String>file:/D:/Programov%C3%A1n%C3%AD/EvoXSVN/OclX/Examples/Dynamic/NotSchemaAware/TournamentApplication.sch</String>
                                                 </String-array>
                                             </field>
                                         </xprocInputPort>
@@ -1234,16 +1512,89 @@
                                     </xprocOutputPort-array>
                                 </field>
                                 <field name="xprocOptions">
-                                    <xprocOption-array/>
+                                    <xprocOption-array>
+                                        <xprocOption>
+                                            <field name="namespaceURI">
+                                                <String></String>
+                                            </field>
+                                            <field name="localName">
+                                                <String>debug</String>
+                                            </field>
+                                            <field name="value">
+                                                <String></String>
+                                            </field>
+                                        </xprocOption>
+                                        <xprocOption>
+                                            <field name="namespaceURI">
+                                                <String></String>
+                                            </field>
+                                            <field name="localName">
+                                                <String>functional</String>
+                                            </field>
+                                            <field name="value">
+                                                <String>false</String>
+                                            </field>
+                                        </xprocOption>
+                                        <xprocOption>
+                                            <field name="namespaceURI">
+                                                <String></String>
+                                            </field>
+                                            <field name="localName">
+                                                <String>oclx-import-href</String>
+                                            </field>
+                                            <field name="value">
+                                                <String>../../../oclX-dynamic.xsl</String>
+                                            </field>
+                                        </xprocOption>
+                                        <xprocOption>
+                                            <field name="namespaceURI">
+                                                <String></String>
+                                            </field>
+                                            <field name="localName">
+                                                <String>output-intermediate-steps</String>
+                                            </field>
+                                            <field name="value">
+                                                <String>true</String>
+                                            </field>
+                                        </xprocOption>
+                                        <xprocOption>
+                                            <field name="namespaceURI">
+                                                <String></String>
+                                            </field>
+                                            <field name="localName">
+                                                <String>protect-invalid</String>
+                                            </field>
+                                            <field name="value">
+                                                <String>true</String>
+                                            </field>
+                                        </xprocOption>
+                                    </xprocOption-array>
                                 </field>
                                 <field name="xprocParameters">
-                                    <xprocParameterPort-array/>
+                                    <xprocParameterPort-array>
+                                        <xprocParameterPort>
+                                            <field name="portName">
+                                                <String>parameters</String>
+                                            </field>
+                                            <field name="parameters">
+                                                <xprocParameter-array/>
+                                            </field>
+                                        </xprocParameterPort>
+                                        <xprocParameterPort>
+                                            <field name="portName">
+                                                <String>*</String>
+                                            </field>
+                                            <field name="parameters">
+                                                <xprocParameter-array/>
+                                            </field>
+                                        </xprocParameterPort>
+                                    </xprocParameterPort-array>
                                 </field>
                                 <field name="advancedOptionsMap">
                                     <null/>
                                 </field>
                                 <field name="name">
-                                    <String>pipe 3</String>
+                                    <String>TournamentApplication D NSA</String>
                                 </field>
                                 <field name="baseURL">
                                     <null/>
@@ -1315,7 +1666,7 @@
                                     <String-array/>
                                 </field>
                                 <field name="xslTransformer">
-                                    <String>C</String>
+                                    <String>Calabash XProc</String>
                                 </field>
                                 <field name="extensionURLs">
                                     <String-array/>
@@ -1332,7 +1683,6 @@
         </options>
     </meta>
     <projectTree name="eXolutioOutputs.xpr">
-        <folder path="../IsoSchematron/"/>
         <folder path="../OclX/"/>
         <folder path="../SchematronTest/"/>
         <folder path="../XSDTest/"/>
