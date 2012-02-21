@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svrl:schematron-output xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                        xmlns:schold="http://www.ascc.net/xml/schematron"
+                        xmlns:iso="http://purl.oclc.org/dsdl/schematron"
+                        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+                        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                        xmlns:oclX="http://eXolutio.com/oclX/functional"
+                        xmlns:oclXin="http://eXolutio.com/oclX/functional/internal"
+                        xmlns:oclDate="http://eXolutio.com/oclX/types/date"
+                        xmlns:oclString="http://eXolutio.com/oclX/types/string"
+                        title=""
+                        schemaVersion=""><!--  Â 
+		  Â 
+		  Â 
+		 --><svrl:active-pattern document="file:/D:/Programov%C3%A1n%C3%AD/EvoXSVN/OclX/Examples/Functional/NotSchemaAware/MatchSchedule.xml"
+                        id="collections"
+                        name="collections"/>
+   <svrl:fired-rule context="/tournament"/>
+   <svrl:fired-rule context="/tournament/matches/day/match"/>
+   <svrl:fired-rule context="/tournament/matches/day/match"/>
+   <svrl:fired-rule context="/tournament/matches/day/match"/>
+   <svrl:fired-rule context="/tournament/matches/day/match"/>
+   <svrl:fired-rule context="/tournament/matches/day/match"/>
+   <svrl:fired-rule context="/tournament/matches/day/match"/>
+   <svrl:fired-rule context="/tournament/participatingPlayers"/>
+   <svrl:active-pattern document="file:/D:/Programov%C3%A1n%C3%AD/EvoXSVN/OclX/Examples/Functional/NotSchemaAware/MatchSchedule.xml"
+                        id="empty"
+                        name="empty"/>
+   <svrl:active-pattern document="file:/D:/Programov%C3%A1n%C3%AD/EvoXSVN/OclX/Examples/Functional/NotSchemaAware/MatchSchedule.xml"
+                        id="days"
+                        name="days"/>
+   <svrl:fired-rule context="/tournament"/>
+   <svrl:fired-rule context="/tournament/matches/day"/>
+   <svrl:fired-rule context="/tournament/matches/day"/>
+   <svrl:fired-rule context="/tournament/matches/day"/>
+</svrl:schematron-output>

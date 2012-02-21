@@ -1,0 +1,32 @@
+<tournaments>
+  <tournament>
+    <name>West PRO</name>
+    <start>luctus</start>
+    <end>urna</end>
+    <maxNumPlayers>12</maxNumPlayers>
+    <qualification leagueName="Pro-league" />
+  </tournament>
+  <tournament>
+    <name>West Open</name>
+    <start>ac</start>
+    <end>bibendum</end>
+    <requiredQualificationPoints>tortor</requiredQualificationPoints>
+    <maxNumPlayers>24</maxNumPlayers>
+    <qualification open="true" />
+  </tournament>
+  <tournament>
+    <name>South PRO</name>
+    <start>vulputate</start>
+    <end>porta</end>
+    <maxNumPlayers>12</maxNumPlayers>
+    <qualification leagueName="Pro-league" />
+  </tournament>
+  <tournament>
+    <name>South Open</name>
+    <start>bibendum</start>
+    <end>dictum</end>
+    <requiredQualificationPoints>interdum</requiredQualificationPoints>
+    <maxNumPlayers>24</maxNumPlayers>
+    <qualification open="true" />
+  </tournament>
+</tournaments>

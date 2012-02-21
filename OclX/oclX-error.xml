@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<errors xmlns="http://eXolutio.com/oclX/functional/error">
+  <error xml:id="E001">
+    <description>A maximum of three different iterators are allowed. </description>
+  </error>
+  <error xml:id="E002">
+    <description>Index out of bounds of the sequence. </description>
+  </error>
+  <error xml:id="E003">
+    <description>Lower index must not be greater than upper index. </description>
+  </error>
+  <error xml:id="E004">
+    <description>Collection is empty. </description>
+  </error>
+  <error xml:id="E005">
+    <description>Index out of bounds of the string. </description>
+  </error>
+  <error xml:id="E010">
+    <description>Invalid literal used in the expression. </description>
+  </error>
+</errors>

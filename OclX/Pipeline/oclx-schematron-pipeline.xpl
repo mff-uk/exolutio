@@ -37,6 +37,17 @@
         When set to true, output of each intermediate step
         is saved in a separate file.
       </xd:param>
+      <xd:param name="protect-invalid">        
+        <xd:p>If set to 'true', the XPath assert tests are wrapped using 
+          <xd:i>oclX:checked</xd:i> function, which prevents the XSLT 
+          compiler from stopping on dynamic errors. I.e. when a dynamic error
+          is encountered, the assert fails and the validation proceeds. 
+          Default is 'false'.
+        </xd:p>
+        <xd:p>        
+          Note: this settings is only relevant for functional OclX.  
+        </xd:p>        
+      </xd:param>
     </xd:desc>
   </p:documentation>
   
@@ -44,6 +55,7 @@
   <p:option name="functional" select="'true'"/>
   <p:option name="oclx-import-href" select="'oclX-functional.xsl'" ></p:option>
   <p:option name="output-intermediate-steps" select="'false'" />
+  <p:option name="protect-invalid" select="'false'"></p:option>
 
   <p:input port="schema"/>
   
@@ -104,6 +116,7 @@
     </p:input>
     <p:with-param name="functional" select="$functional"/>
     <p:with-param name="oclx-import-href" select="$oclx-import-href"/>
+    <p:with-param name="protect-invalid" select="$protect-invalid"/>
   </p:xslt>
    
   <p:documentation> 
