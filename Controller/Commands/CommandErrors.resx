@@ -240,4 +240,10 @@
   <data name="COMMAND_CANT_EXECUTE_UNEXPECTED" xml:space="preserve">
     <value>Unexpected error: Command could not be executed. Model now may be broken. Do not save the project and restart eXolutio.</value>
   </data>
+  <data name="CMDERR_INVALID_SPECIALIZATION" xml:space="preserve">
+    <value>The special class is not a direct child of the general class.</value>
+  </data>
+  <data name="CMDERR_NO_GENERALIZATION" xml:space="preserve">
+    <value>There is no general class.</value>
+  </data>
 </root>

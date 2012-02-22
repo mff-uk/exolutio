@@ -233,6 +233,15 @@ namespace Exolutio.Controller.Commands {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The special class is not a direct child of the general class..
+        /// </summary>
+        internal static string CMDERR_INVALID_SPECIALIZATION {
+            get {
+                return ResourceManager.GetString("CMDERR_INVALID_SPECIALIZATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Command &quot;{0}&quot; was not correctly initialized, field &quot;{1}&quot; must be defined before execution..
         /// </summary>
         internal static string CMDERR_MANDATORY_ARGUMENT_NOT_INITIALIZED_2 {
@@ -283,6 +292,15 @@ namespace Exolutio.Controller.Commands {
         internal static string CMDERR_NO_COMMON_INTERPRETED_ASSOCIATION {
             get {
                 return ResourceManager.GetString("CMDERR_NO_COMMON_INTERPRETED_ASSOCIATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is no general class..
+        /// </summary>
+        internal static string CMDERR_NO_GENERALIZATION {
+            get {
+                return ResourceManager.GetString("CMDERR_NO_GENERALIZATION", resourceCulture);
             }
         }
         
