@@ -41,7 +41,7 @@ namespace Exolutio.Controller.Commands.Atomic.MacroWrappers
         }
 
 
-        protected override void GenerateSubCommands()
+        internal override void GenerateSubCommands()
         {
             Commands.Add(new acmdUpdateAttributeType(Controller, AttributeTypeGuid, NewName, NewXSDDefinition, NewIsSealed, NewBaseType));
         }

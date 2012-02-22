@@ -41,7 +41,7 @@ namespace Exolutio.Controller.Commands.Complex.PIM
             
         }
 
-        protected override void GenerateSubCommands()
+        internal override void GenerateSubCommands()
         {
             if (RootGuid == Guid.Empty) RootGuid = Guid.NewGuid();
             if (AssociationGuid == Guid.Empty) AssociationGuid = Guid.NewGuid();

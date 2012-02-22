@@ -42,7 +42,7 @@ namespace Exolutio.Controller.Commands.Atomic.PIM.MacroWrappers
             SchemaGuid = schemaGuid;
         }
 
-        protected override void GenerateSubCommands()
+        internal override void GenerateSubCommands()
         {
             Guid AssociationGuid = Guid.NewGuid();
             Guid AssociationEnd1Guid = Guid.NewGuid();

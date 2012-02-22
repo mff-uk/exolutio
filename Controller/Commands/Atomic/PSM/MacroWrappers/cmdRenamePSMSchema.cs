@@ -37,7 +37,7 @@ namespace Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers
             NewName = newName;
         }
 
-        protected override void GenerateSubCommands()
+        internal override void GenerateSubCommands()
         {
             Commands.Add(new acmdRenamePSMSchema(Controller, SchemaGuid, NewName));
         }

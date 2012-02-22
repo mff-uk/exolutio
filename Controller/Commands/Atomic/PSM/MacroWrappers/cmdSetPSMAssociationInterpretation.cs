@@ -37,7 +37,7 @@ namespace Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers
             ChildAssociationEnd = childAssociationEnd;
         }
 
-        protected override void GenerateSubCommands()
+        internal override void GenerateSubCommands()
         {
             Commands.Add(new acmdSetPSMAssociationInterpretation(Controller, PSMComponentGuid, ChildAssociationEnd, PIMComponentGuid));
         }

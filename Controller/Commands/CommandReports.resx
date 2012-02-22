@@ -306,4 +306,40 @@
   <data name="SHIFT_PSM_ROOT" xml:space="preserve">
     <value>PSM root '{0}' shifted '{1}'.</value>
   </data>
+  <data name="PIM_ASSOCIATION_GENERALIZE" xml:space="preserve">
+    <value>PIMAssociation '{0}' generalized from '{1}' to '{2}'.</value>
+  </data>
+  <data name="PIM_ASSOCIATION_SPECIALIZE" xml:space="preserve">
+    <value>PIMAssociation '{0}' speicalized from '{1}' to '{2}'.</value>
+  </data>
+  <data name="PIM_ATTRIBUTE_GENERALIZE" xml:space="preserve">
+    <value>PIMAttribute '{0}' generalized from '{1}' to '{2}'.</value>
+  </data>
+  <data name="PIM_ATTRIBUTE_SPECIALIZE" xml:space="preserve">
+    <value>PIMAttribute '{0}' specialized from '{1}' to '{2}'.</value>
+  </data>
+  <data name="PIM_CLASS_ABSTRACT_CHANGED" xml:space="preserve">
+    <value>PIMClass '{0}' abstract changed from '{1}' to '{2}'.</value>
+  </data>
+  <data name="PIM_CLASS_FINAL_CHANGED" xml:space="preserve">
+    <value>PIMClass '{0}' final changed from '{1}' to '{2}'.</value>
+  </data>
+  <data name="PSM_ASSOCIATION_GENERALIZE" xml:space="preserve">
+    <value>PSMAssociation '{0}' generalized from '{1}' to '{2}'.</value>
+  </data>
+  <data name="PSM_ASSOCIATION_SPECIALIZE" xml:space="preserve">
+    <value>PSMAssociation '{0}' speicalized from '{1}' to '{2}'.</value>
+  </data>
+  <data name="PSM_ATTRIBUTE_GENERALIZE" xml:space="preserve">
+    <value>PSMAttribute '{0}' generalized from '{1}' to '{2}'.</value>
+  </data>
+  <data name="PSM_ATTRIBUTE_SPECIALIZE" xml:space="preserve">
+    <value>PSMAttribute '{0}' specialized from '{1}' to '{2}'.</value>
+  </data>
+  <data name="PSM_CLASS_ABSTRACT_CHANGED" xml:space="preserve">
+    <value>PSMClass '{0}' abstract changed from '{1}' to '{2}'.</value>
+  </data>
+  <data name="PSM_CLASS_FINAL_CHANGED" xml:space="preserve">
+    <value>PSMClass '{0}' final changed from '{1}' to '{2}'.</value>
+  </data>
 </root>

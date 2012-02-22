@@ -52,7 +52,7 @@ namespace Exolutio.Controller.Commands.Atomic.PIM.MacroWrappers
             
         }
 
-        protected override void GenerateSubCommands()
+        internal override void GenerateSubCommands()
         {
             Commands.Add(new acmdSynchroPIMAssociations(Controller) { X1 = x1, X2 = x2 });
         }

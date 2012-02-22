@@ -51,7 +51,7 @@ namespace Exolutio.Controller.Commands.Atomic.PIM.MacroWrappers
             
         }
 
-        protected override void GenerateSubCommands()
+        internal override void GenerateSubCommands()
         {
             if (classGuid == Guid.Empty) classGuid = Guid.NewGuid();
             Commands.Add(new acmdNewPIMClass(Controller, SchemaGuid) { ClassGuid = classGuid });

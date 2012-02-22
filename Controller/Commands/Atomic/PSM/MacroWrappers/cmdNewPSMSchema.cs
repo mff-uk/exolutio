@@ -65,7 +65,7 @@ namespace Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers
         public cmdNewPSMSchema(Controller c)
             : base(c) { }
 
-        protected override void GenerateSubCommands()
+        internal override void GenerateSubCommands()
         {
             if (SchemaGuid == Guid.Empty) SchemaGuid = Guid.NewGuid();
             Commands.Add(new acmdNewPSMSchema(Controller) { SchemaGuid = SchemaGuid, SchemaClassGuid = SchemaClassGuid });

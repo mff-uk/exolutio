@@ -29,7 +29,7 @@ namespace Exolutio.Controller.Commands.Atomic.PIM.MacroWrappers
             
         }
 
-        protected override void GenerateSubCommands()
+        internal override void GenerateSubCommands()
         {
             AttributeGuid = Guid.NewGuid();
             Commands.Add(new acmdNewPIMAttribute(Controller, PIMClassGuid, Project.TranslateComponent<PIMClass>(PIMClassGuid).Schema) { AttributeGuid = AttributeGuid });

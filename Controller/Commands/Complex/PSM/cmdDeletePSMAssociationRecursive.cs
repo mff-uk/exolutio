@@ -33,7 +33,7 @@ namespace Exolutio.Controller.Commands.Complex.PSM
             
         }
 
-        protected override void GenerateSubCommands()
+        internal override void GenerateSubCommands()
         {
             PSMAssociation association = Project.TranslateComponent<PSMAssociation>(AssociationGuid);
             Commands.Add(new cmdDeletePSMAssociation(Controller) { AssociationGuid = association });

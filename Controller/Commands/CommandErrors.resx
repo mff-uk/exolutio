@@ -121,7 +121,7 @@
     <value>CommandNumber should be assigned only once.</value>
   </data>
   <data name="COMMAND_CANT_EXECUTE" xml:space="preserve">
-    <value>Executing command which can not be executed. </value>
+    <value>Command cannot be executed.</value>
   </data>
   <data name="CMDERR_MANDATORY_ARGUMENT_NOT_INITIALIZED_2" xml:space="preserve">
     <value>Command "{0}" was not correctly initialized, field "{1}" must be defined before execution.</value>
@@ -230,5 +230,14 @@
   </data>
   <data name="CMDERR_NO_SELF_INHERITANCE" xml:space="preserve">
     <value>The general class must be different from the specific class.</value>
+  </data>
+  <data name="CMDERR_GENERAL_IS_FINAL" xml:space="preserve">
+    <value>Cannot make class a general class because it is final.</value>
+  </data>
+  <data name="COMMAND_CANT_EXECUTE_PROPAGATION" xml:space="preserve">
+    <value>Unexpected error: Propagation command could not be executed. Model now may be broken. Do not save the project and restart eXolutio.</value>
+  </data>
+  <data name="COMMAND_CANT_EXECUTE_UNEXPECTED" xml:space="preserve">
+    <value>Unexpected error: Command could not be executed. Model now may be broken. Do not save the project and restart eXolutio.</value>
   </data>
 </root>

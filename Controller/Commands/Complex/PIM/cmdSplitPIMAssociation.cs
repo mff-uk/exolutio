@@ -46,7 +46,7 @@ namespace Exolutio.Controller.Commands.Complex.PIM
             Count = count;
         }
 
-        protected override void GenerateSubCommands()
+        internal override void GenerateSubCommands()
         {
             if (NewGuids == null)
             {

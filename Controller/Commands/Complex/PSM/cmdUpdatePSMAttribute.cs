@@ -58,7 +58,7 @@ namespace Exolutio.Controller.Commands.Complex.PSM
             DefaultValue = defaultValue;
         }
 
-        protected override void GenerateSubCommands()
+        internal override void GenerateSubCommands()
         {
             Commands.Add(new acmdRenameComponent(Controller, AttributeGuid, Name) { Propagate = false });
             Commands.Add(new acmdUpdatePSMAttributeCardinality(Controller, AttributeGuid, Lower, Upper) { Propagate = false });

@@ -48,7 +48,7 @@ namespace Exolutio.Controller.Commands.Complex.PSM
             Upper = upper;
         }
 
-        protected override void GenerateSubCommands()
+        internal override void GenerateSubCommands()
         {
             Commands.Add(new acmdRenameComponent(Controller, AssociationGuid, Name) { Propagate = false });
             Commands.Add(new acmdUpdatePSMAssociationCardinality(Controller, AssociationGuid, Lower, Upper) { Propagate = false });

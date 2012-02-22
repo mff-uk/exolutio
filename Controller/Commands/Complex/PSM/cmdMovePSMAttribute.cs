@@ -37,7 +37,7 @@ namespace Exolutio.Controller.Commands.Complex.PSM
             ClassGuid = classGuid;
         }
 
-        protected override void GenerateSubCommands()
+        internal override void GenerateSubCommands()
         {
             PSMAttribute attribute = Project.TranslateComponent<PSMAttribute>(AttributeGuid);
             PSMClass sourceClass = attribute.PSMClass;

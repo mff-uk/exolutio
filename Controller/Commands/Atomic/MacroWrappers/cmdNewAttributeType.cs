@@ -47,7 +47,7 @@ namespace Exolutio.Controller.Commands.Atomic.MacroWrappers
             IsSealed = isSealed;
         }
 
-        protected override void GenerateSubCommands()
+        internal override void GenerateSubCommands()
         {
             Commands.Add(new acmdNewAttributeType(Controller, ProjectVersionGuid, PSMSchemaGuid, Name, XSDDefinition, IsSealed, BaseTypeGuid));
         }

@@ -30,7 +30,7 @@ namespace Exolutio.Controller.Commands.Atomic.PIM.MacroWrappers
             
         }
 
-        protected override void GenerateSubCommands()
+        internal override void GenerateSubCommands()
         {
             Commands.Add(new acmdMoveAssociationEnd(Controller, AssociationEndGuid, NewClassGuid));
         }

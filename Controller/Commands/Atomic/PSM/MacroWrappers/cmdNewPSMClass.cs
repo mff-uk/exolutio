@@ -48,7 +48,7 @@ namespace Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers
             
         }
 
-        protected override void GenerateSubCommands()
+        internal override void GenerateSubCommands()
         {
             if (ClassGuid == Guid.Empty) ClassGuid = Guid.NewGuid();
             Commands.Add(new acmdNewPSMClass(Controller, SchemaGuid) { ClassGuid = ClassGuid });

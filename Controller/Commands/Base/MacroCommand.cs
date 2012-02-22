@@ -81,11 +81,11 @@ namespace Exolutio.Controller.Commands
 		}
 
 		/// <summary>
-        /// Performs CommandOperation of all of the partial Commands.
+        /// Performs CommandOperation of all of the partial Commands if it can be done
         /// </summary>
         internal override void CommandOperation()
 		{
-            GenerateSubCommands();
+            //GenerateSubCommands();
             List<CommandBase> list = new List<CommandBase>(Commands);
             #if DEBUG
                 int counter = 0;
@@ -96,12 +96,13 @@ namespace Exolutio.Controller.Commands
                 #if DEBUG 
 		        FieldsChecker.CheckMandatoryArguments(t);
                 #endif
+                
                 if (t.CanExecute())
                 {
                     //PREPROPAGATION START
-                    if (t is StackedCommand)
+                    if (t is AtomicCommand)
                     {
-                        StackedCommand command = t as StackedCommand;
+                        AtomicCommand command = t as AtomicCommand;
                         if (command.Propagate)
                         {
                             PropagationMacroCommand m = command.PrePropagation();
@@ -111,23 +112,32 @@ namespace Exolutio.Controller.Commands
                                 {
                                     m.Report = new CommandReport("Pre-propagation");
                                 }
+                                m.GenerateSubCommands();
                                 if (m.CanExecute())
                                 {
                                     m.CommandOperation();
                                     Commands.Insert(Commands.IndexOf(t), m);
                                 }
-                                else throw new ExolutioCommandException(CommandErrors.COMMAND_CANT_EXECUTE, m);
+                                else throw new ExolutioCommandException(CommandErrors.COMMAND_CANT_EXECUTE_PROPAGATION, m);
                             }
                         }
                     }
                     //PREPROPAGATION END
-
+                    if (t is MacroCommand)
+                    {
+                        (t as MacroCommand).GenerateSubCommands();
+                        if (!t.CanExecute())
+                        {
+                            throw new ExolutioCommandException(CommandErrors.COMMAND_CANT_EXECUTE_UNEXPECTED, t);
+                        }
+                    }
+                    
                     t.CommandOperation();
 
                     //POSTPROPAGATION START
-                    if (t is StackedCommand)
+                    if (t is AtomicCommand)
                     {
-                        StackedCommand command = t as StackedCommand;
+                        AtomicCommand command = t as AtomicCommand;
                         if (command.Propagate)
                         {
                             PropagationMacroCommand m = command.PostPropagation();
@@ -137,12 +147,13 @@ namespace Exolutio.Controller.Commands
                                 {
                                     m.Report = new CommandReport("Post-propagation");
                                 }
+                                m.GenerateSubCommands();
                                 if (m.CanExecute())
                                 {
                                     m.CommandOperation();
                                     Commands.Insert(Commands.IndexOf(t) + 1, m);
                                 }
-                                else throw new ExolutioCommandException(CommandErrors.COMMAND_CANT_EXECUTE, m);
+                                else throw new ExolutioCommandException(CommandErrors.COMMAND_CANT_EXECUTE_PROPAGATION, m);
                             }
                         }
                     }
@@ -150,7 +161,7 @@ namespace Exolutio.Controller.Commands
                 }
                 else
                 {
-                    throw new ExolutioCommandException(t.ErrorDescription ?? CommandErrors.COMMAND_CANT_EXECUTE, t) { ExceptionTitle = CommandErrors.COMMAND_CANT_EXECUTE };
+                    throw new ExolutioCommandException(t.ErrorDescription ?? CommandErrors.COMMAND_CANT_EXECUTE_UNEXPECTED, t);
                 }
                 #if DEBUG
 		            FieldsChecker.CheckCommandResults(this);
@@ -224,7 +235,7 @@ namespace Exolutio.Controller.Commands
         /// It is called when the macrocommand begins execution and 
         /// requires that all settings of the macrocommand are correctly set.
 	    /// </summary>
-        protected virtual void GenerateSubCommands()
+        internal virtual void GenerateSubCommands()
 	    {
 	        
 	    }

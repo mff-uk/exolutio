@@ -262,7 +262,14 @@ namespace Exolutio.View.Commands
                         ((StackedCommand)ControllerCommand).Controller = Current.Controller;
                     }
                 }
-                ControllerCommand.Execute();
+                try
+                {
+                    ControllerCommand.Execute();
+                }
+                catch (ExolutioCommandException e)
+                {
+                    ExolutioErrorMsgBox.Show("Command can not be executed", e.Message);
+                }
             }
             ControllerCommand = null;
         }

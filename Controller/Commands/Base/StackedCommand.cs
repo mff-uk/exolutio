@@ -40,17 +40,6 @@ namespace Exolutio.Controller.Commands
             set { propagate = value; }
         }
 
-        private Guid propagateSource;
-        
-        /// <summary>
-        /// Sets the source of propagation to avoid propagating back to the source. (PSM => PIM => PSMs)
-        /// </summary>
-        public Guid PropagateSource
-        {
-            get { return propagateSource; }
-            set { propagateSource = value; }
-        }
-
 		/// <summary>
 		/// Gets <see cref="Controller"/>'s UndoStack
 		/// </summary>
@@ -80,46 +69,32 @@ namespace Exolutio.Controller.Commands
 			Controller = controller;
 		}
 
-    	/// <summary>
-    	/// Executes the command with the given parameter. This means calling 
-    	/// <see cref="CommandBase.CommandOperation"/>,
-    	/// pushing the command on the "Undo" stack and clearing the "Redo" stack.
-    	/// </summary>
-		public override sealed void Execute()
-		{
-			if (Controller.CreatedMacro != null)
-			{
-				Controller.CreatedMacro.Commands.Add(this);
-				return;
-			}
-
-			CommandNumber = getNextCommandNumber();
-			// call notifying method
-            Controller.InvokeExecutingCommand(this, false, null, false, false);
-			// check mandatory arguments
-#if DEBUG
-			FieldsChecker.CheckMandatoryArguments(this);
-#endif
-			if (!CanExecute())
-			{
-                throw new ExolutioCommandException(CommandErrors.COMMAND_CANT_EXECUTE, this);
-			}
-
-            /*if (Propagate)
+        /// <summary>
+        /// Executes the command with the given parameter. This means calling 
+        /// <see cref="CommandBase.CommandOperation"/>,
+        /// pushing the command on the "Undo" stack and clearing the "Redo" stack.
+        /// </summary>
+        public override void Execute()
+        {
+            if (Controller.CreatedMacro != null)
             {
-                MacroCommand preCommand = PrePropagation();
-                if (preCommand == null)
-                {
-                    this.paired = false;
-                }
-                else
-                {
-                    this.paired = true;
-                    preCommand.paired = false;
-                    preCommand.Propagate = false;
-                    preCommand.Execute();
-                }
-            }*/
+                Controller.CreatedMacro.Commands.Add(this);
+                return;
+            }
+
+            CommandNumber = getNextCommandNumber();
+            // call notifying method
+            Controller.InvokeExecutingCommand(this, false, null, false, false);
+            // check mandatory arguments
+#if DEBUG
+            FieldsChecker.CheckMandatoryArguments(this);
+#endif
+            if (this is MacroCommand) (this as MacroCommand).GenerateSubCommands();
+            
+            if (!CanExecute())
+            {
+                throw new ExolutioCommandException(CommandErrors.COMMAND_CANT_EXECUTE, this);
+            }
 
             if (Undoable)
             {
@@ -128,27 +103,15 @@ namespace Exolutio.Controller.Commands
                 RedoStack.Invalidate();
             }
             // call the actual executive method
-			CommandOperation();
+            CommandOperation();
             Executed = true;
-			//Debug.WriteLine(string.Format("Command {0} executed.", this));
-
-            /*if (Propagate)
-            {
-                MacroCommand postCommand = PostPropagation();
-                if (postCommand != null)
-                {
-                    postCommand.paired = true;
-                    postCommand.Propagate = false;
-                    postCommand.Execute();
-                }
-            }*/
 
 #if DEBUG
-			FieldsChecker.CheckCommandResults(this);
+            FieldsChecker.CheckCommandResults(this);
 #endif
-			// call successful notification method
-			Controller.InvokeExecutedCommand(this, false, null, false, false);
-		}
+            // call successful notification method
+            Controller.InvokeExecutedCommand(this, false, null, false, false);
+        }
 
     	/// <summary>
     	/// Executes the command as "Redo", which is the same as <see cref="Execute"/> does, except it does not
@@ -162,18 +125,10 @@ namespace Exolutio.Controller.Commands
     		UndoStack.Push(this);
     		if (!CanExecute())
     		{
-                throw new ExolutioCommandException(CommandErrors.COMMAND_CANT_EXECUTE, this);
+                throw new ExolutioCommandException(CommandErrors.COMMAND_CANT_EXECUTE_UNEXPECTED, this);
     		}
 			// call the actual executive method
     		RedoOperation();
-            //Example: propagation MacroCommand
-            /*if (paired)
-            {
-                paired = false;
-                StackedCommand NextCommand = RedoStack.Peek();
-                NextCommand.ExecuteAsRedo();
-                NextCommand.paired = true;
-            }*/
             Debug.WriteLine(string.Format("Redo of command {0} executed", this));
     	}
 
@@ -194,14 +149,6 @@ namespace Exolutio.Controller.Commands
     		{
     			Debug.WriteLine(string.Format("Undo of command {0} executed", this));
 				RedoStack.Push(this);
-                //Example: propagation MacroCommand
-                /*if (paired)
-                {
-                    paired = false;
-                    StackedCommand NextCommand = UndoStack.Peek();
-                    NextCommand.UnExecute();
-                    NextCommand.paired = true;
-                }*/
     		}
     		else
     		{
@@ -209,23 +156,5 @@ namespace Exolutio.Controller.Commands
 				UndoStack.Invalidate();
     		}
     	}
-
-        /// <summary>
-        /// Creates a macrocommand containing what needs to be done before command execution
-        /// </summary>
-        /// <returns></returns>
-        internal virtual PropagationMacroCommand PrePropagation()
-        {
-            return null;
-        }
-
-        /// <summary>
-        /// Creates a macrocommand containing what needs to be done after command execution
-        /// </summary>
-        /// <returns></returns>
-        internal virtual PropagationMacroCommand PostPropagation()
-        {
-            return null;
-        }
     }
 }

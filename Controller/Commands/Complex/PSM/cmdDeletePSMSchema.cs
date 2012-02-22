@@ -33,7 +33,7 @@ namespace Exolutio.Controller.Commands.Complex.PSM
             
         }
 
-        protected override void GenerateSubCommands()
+        internal override void GenerateSubCommands()
         {
             PSMSchema schema = Project.TranslateComponent<PSMSchema>(SchemaGuid);
             foreach (PSMAssociationMember m in schema.Roots)

@@ -29,7 +29,7 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
             
         }
 
-        protected override void GenerateSubCommands()
+        internal override void GenerateSubCommands()
         {
             //TODO: what if the content model was empty and is part of another content model with its last association?
             Commands.Add(new acmdDeletePSMContentModel(Controller, ContentModelGuid));

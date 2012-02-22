@@ -45,7 +45,7 @@ namespace Exolutio.Controller.Commands.Complex.PSM
             AssociationGuid = newAssociationGuid;
         }
 
-        protected override void GenerateSubCommands()
+        internal override void GenerateSubCommands()
         {
             if (ClassGuid == Guid.Empty) ClassGuid = Guid.NewGuid();
             if (AssociationGuid == Guid.Empty) AssociationGuid = Guid.NewGuid();

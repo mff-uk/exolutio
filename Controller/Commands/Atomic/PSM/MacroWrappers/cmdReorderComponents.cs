@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Exolutio.Controller.Commands;
-using Exolutio.Model.PSM;
 using Exolutio.Model;
 
 namespace Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers
@@ -25,7 +21,7 @@ namespace Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers
             OwnerCollection = ownerCollection;
         }
 
-        protected override void GenerateSubCommands()
+        internal override void GenerateSubCommands()
         {
             Commands.Add(new acmdReorderComponents<TComponentType>(Controller, OwnerCollection, ComponentGuids));
         }

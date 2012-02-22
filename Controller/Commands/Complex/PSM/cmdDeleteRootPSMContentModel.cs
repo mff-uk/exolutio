@@ -36,7 +36,7 @@ namespace Exolutio.Controller.Commands.Complex.PSM
             
         }
 
-        protected override void GenerateSubCommands()
+        internal override void GenerateSubCommands()
         {
             PSMContentModel psmContentModel = Project.TranslateComponent<PSMContentModel>(ContentModelGuid);
             foreach (PSMAssociation a in psmContentModel.ChildPSMAssociations)

@@ -29,7 +29,7 @@ namespace Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers
             Up = shiftUp;
         }
 
-        protected override void GenerateSubCommands()
+        internal override void GenerateSubCommands()
         {
             Commands.Add(new acmdShiftPSMAttribute(Controller, AttributeGuid, Up));
         }

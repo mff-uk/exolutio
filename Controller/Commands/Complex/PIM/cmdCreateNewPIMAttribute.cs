@@ -54,7 +54,7 @@ namespace Exolutio.Controller.Commands.Complex.PIM
             DefaultValue = defaultValue;
         }
 
-        protected override void GenerateSubCommands()
+        internal override void GenerateSubCommands()
         {
             if (AttributeGuid == Guid.Empty) AttributeGuid = Guid.NewGuid();
             Commands.Add(new acmdNewPIMAttribute(Controller, PIMClassGuid, Project.TranslateComponent<PIMClass>(PIMClassGuid).Schema) { AttributeGuid = AttributeGuid });

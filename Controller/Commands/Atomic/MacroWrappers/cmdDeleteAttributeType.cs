@@ -30,7 +30,7 @@ namespace Exolutio.Controller.Commands.Atomic.MacroWrappers
             AttributeTypeGuid = attributeTypeGuid;
         }
 
-        protected override void GenerateSubCommands()
+        internal override void GenerateSubCommands()
         {
             Commands.Add(new acmdDeleteAttributeType(Controller, OwnerPSMSchemaGuid, AttributeTypeGuid));
         }

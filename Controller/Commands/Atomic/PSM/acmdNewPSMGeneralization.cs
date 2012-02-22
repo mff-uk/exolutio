@@ -56,6 +56,11 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
                     ErrorDescription = CommandErrors.CMDERR_NO_MULTIPLE_INHERITANCE;
                     return false;
                 }
+                else if (general.Final)
+                {
+                    ErrorDescription = CommandErrors.CMDERR_GENERAL_IS_FINAL;
+                    return false;
+                }
                 else if (specificClassGuid == generalClassGuid)
                 {
                     ErrorDescription = CommandErrors.CMDERR_NO_SELF_INHERITANCE;

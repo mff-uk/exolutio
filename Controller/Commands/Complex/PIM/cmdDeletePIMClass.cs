@@ -32,7 +32,7 @@ namespace Exolutio.Controller.Commands.Complex.PIM
             
         }
 
-        protected override void GenerateSubCommands()
+        internal override void GenerateSubCommands()
         {
             PIMClass pimClass = Project.TranslateComponent<PIMClass>(ClassGuid);
             foreach (PIMAttribute a in pimClass.PIMAttributes)
