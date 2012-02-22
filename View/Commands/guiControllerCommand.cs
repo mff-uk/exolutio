@@ -268,7 +268,7 @@ namespace Exolutio.View.Commands
                 }
                 catch (ExolutioCommandException e)
                 {
-                    ExolutioErrorMsgBox.Show("Command can not be executed", e.Message);
+                    ExolutioErrorMsgBox.Show("Command " + e.Command.GetType().ToString() + " can not be executed", e.Command.ErrorDescription);
                 }
             }
             ControllerCommand = null;
