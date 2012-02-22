@@ -341,6 +341,15 @@ namespace Exolutio.Controller.Commands {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Parent is not a PSM class..
+        /// </summary>
+        internal static string CMDERR_PARENT_NOT_PSMCLASS {
+            get {
+                return ResourceManager.GetString("CMDERR_PARENT_NOT_PSMCLASS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Represented class has different interpreted context than representant class.
         /// </summary>
         internal static string CMDERR_REPR_DIFFERENT_CONTEXT {

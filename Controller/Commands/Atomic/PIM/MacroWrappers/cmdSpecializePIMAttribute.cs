@@ -23,10 +23,10 @@ namespace Exolutio.Controller.Commands.Atomic.PIM.MacroWrappers
         public cmdSpecializePIMAttribute(Controller c)
             : base(c) { }
 
-        public void Set(Guid psmAttributeGuid, Guid specialPIMClassGuid)
+        public void Set(Guid pimAttributeGuid, Guid specialPIMClassGuid)
         {
             SpecialClassGuid = specialPIMClassGuid;
-            AttributeGuid = psmAttributeGuid;
+            AttributeGuid = pimAttributeGuid;
         }
 
         internal override void GenerateSubCommands()

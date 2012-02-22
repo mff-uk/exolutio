@@ -246,4 +246,7 @@
   <data name="CMDERR_NO_GENERALIZATION" xml:space="preserve">
     <value>There is no general class.</value>
   </data>
+  <data name="CMDERR_PARENT_NOT_PSMCLASS" xml:space="preserve">
+    <value>Parent is not a PSM class.</value>
+  </data>
 </root>
