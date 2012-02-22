@@ -208,10 +208,17 @@ namespace Exolutio.Model.Serialization
             }
         }
 
-        public static string DeserializeSimpleValueFromAttribute(this IExolutioSerializable component, [NotNull]string elementName, XElement parentNode, SerializationContext context)
+        public static string DeserializeSimpleValueFromAttribute(this IExolutioSerializable component, [NotNull]string elementName, XElement parentNode, SerializationContext context, bool optional = false)
         {
             XAttribute xmlAttribute = parentNode.Attribute(elementName);
-            return xmlAttribute.Value;
+            if (xmlAttribute == null && optional)
+            {
+                return null;
+            }
+            else
+            {
+                return xmlAttribute.Value;
+            }
         }
 
         public static void DeserializePointsCollection(this IExolutioSerializable component, ObservablePointCollection points, XElement parentNode, SerializationContext context)
