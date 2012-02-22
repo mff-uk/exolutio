@@ -65,6 +65,20 @@ namespace Exolutio.Model.PIM
             get { return generalizationAsSpecificGuid == Guid.Empty ? null : Project.TranslateComponent<PIMGeneralization>(generalizationAsSpecificGuid); }
             set { generalizationAsSpecificGuid = value == null ? Guid.Empty : value; NotifyPropertyChanged("GeneralizationAsSpecific"); }
         }
+
+        private bool final = false;
+        public bool Final
+        {
+            get { return final; }
+            set { final = value; NotifyPropertyChanged("Final"); }
+        }
+
+        private bool abstr = false;
+        public bool Abstract
+        {
+            get { return abstr; }
+            set { abstr = value; NotifyPropertyChanged("Abstract"); }
+        }
         
         public override ComponentList<PSMComponent> GetInterpretedComponents()
         {
@@ -91,6 +105,8 @@ namespace Exolutio.Model.PIM
             if (GeneralizationAsSpecific != null) this.SerializeIDRef(GeneralizationAsSpecific, "pimGeneralizationAsSpecificID", parentNode, context);
             this.WrapAndSerializeIDRefCollection("PIMAssociationEnds", "PIMAssociationEnd", "pimAssociationEndID", PIMAssociationEnds,
                                                  parentNode, context);
+            this.SerializeSimpleValueToAttribute("abstract", Abstract, parentNode, context);
+            this.SerializeSimpleValueToAttribute("final", Final, parentNode, context);
         }
 
         public override void Deserialize(XElement parentNode, SerializationContext context)
@@ -101,6 +117,12 @@ namespace Exolutio.Model.PIM
             this.DeserializeWrappedIDRefCollection("GeneralizationsAsGeneral", "pimGeneralizationsAsGeneralID", GeneralizationsAsGeneral, parentNode, context);
             generalizationAsSpecificGuid = this.DeserializeIDRef("pimGeneralizationAsSpecificID", parentNode, context, true);
             this.DeserializeWrappedIDRefCollection("PIMAssociationEnds", "pimAssociationEndID", PIMAssociationEnds, parentNode, context);
+            
+            bool succeeded, result;
+            result = Boolean.TryParse(this.DeserializeSimpleValueFromAttribute("abstract", parentNode, context, true), out succeeded);
+            Abstract = succeeded ? result : false;
+            result = Boolean.TryParse(this.DeserializeSimpleValueFromAttribute("final", parentNode, context, true), out succeeded);
+            Final = succeeded ? result : false;
         }
 
         public static PIMClass CreateInstance(Project project)
@@ -131,6 +153,8 @@ namespace Exolutio.Model.PIM
                 copyPIMClass.generalizationAsSpecificGuid = createdCopies.GetGuidForCopyOf(GeneralizationAsSpecific);
             }
             this.CopyRefCollection(PIMAssociationEnds, copyPIMClass.PIMAssociationEnds, projectVersion, createdCopies, true);
+            copyPIMClass.Abstract = this.Abstract;
+            copyPIMClass.Final = this.Final;
         }
 
         #endregion

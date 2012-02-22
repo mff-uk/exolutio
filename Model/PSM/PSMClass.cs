@@ -134,6 +134,20 @@ namespace Exolutio.Model.PSM
             set { generalizationAsSpecificGuid = value == null ? Guid.Empty : value; NotifyPropertyChanged("GeneralizationAsSpecific"); }
         }
 
+        private bool final = false;
+        public bool Final
+        {
+            get { return final; }
+            set { final = value; NotifyPropertyChanged("Final"); }
+        }
+
+        private bool abstr = false;
+        public bool Abstract
+        {
+            get { return abstr; }
+            set { abstr = value; NotifyPropertyChanged("Abstract"); }
+        }
+        
         public override string XPath
         {
             get { return ParentAssociation.XPath; }
@@ -155,6 +169,8 @@ namespace Exolutio.Model.PSM
             if (GeneralizationAsSpecific != null) this.SerializeIDRef(GeneralizationAsSpecific, "psmGeneralizationAsSpecificID", parentNode, context);
 
             this.WrapAndSerializeCollection("PSMAttributes", "PSMAttribute", PSMAttributes, parentNode, context);
+            this.SerializeSimpleValueToAttribute("abstract", Abstract, parentNode, context);
+            this.SerializeSimpleValueToAttribute("final", Final, parentNode, context);
         }
 
         public override void Deserialize(XElement parentNode, SerializationContext context)
@@ -169,6 +185,12 @@ namespace Exolutio.Model.PSM
             this.DeserializeWrappedIDRefCollection("GeneralizationsAsGeneral", "psmGeneralizationsAsGeneralID", GeneralizationsAsGeneral, parentNode, context);
             generalizationAsSpecificGuid = this.DeserializeIDRef("psmGeneralizationAsSpecificID", parentNode, context, true);
             this.DeserializeWrappedCollection("PSMAttributes", PSMAttributes, PSMAttribute.CreateInstance, parentNode, context);
+
+            bool succeeded, result;
+            result = Boolean.TryParse(this.DeserializeSimpleValueFromAttribute("abstract", parentNode, context, true), out succeeded);
+            Abstract = succeeded ? result : false;
+            result = Boolean.TryParse(this.DeserializeSimpleValueFromAttribute("final", parentNode, context, true), out succeeded);
+            Final = succeeded ? result : false;
         }
         public static PSMClass CreateInstance(Project project)
         {
@@ -200,6 +222,9 @@ namespace Exolutio.Model.PSM
                 copyPSMClass.representedClassGuid = createdCopies.GetGuidForCopyOf(RepresentedClass);
             }
             this.CopyCollection(PSMAttributes, copyPSMClass.PSMAttributes, projectVersion, createdCopies);
+            copyPSMClass.Abstract = this.Abstract;
+            copyPSMClass.Final = this.Final;
+
         }
 
         #endregion
