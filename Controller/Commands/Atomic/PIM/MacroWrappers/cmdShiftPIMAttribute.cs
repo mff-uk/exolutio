@@ -29,7 +29,7 @@ namespace Exolutio.Controller.Commands.Atomic.PIM.MacroWrappers
             Up = shiftUp;
         }
 
-        protected override void GenerateSubCommands()
+        internal override void GenerateSubCommands()
         {
             Commands.Add(new acmdShiftPIMAttribute(Controller, AttributeGuid, Up));
         }

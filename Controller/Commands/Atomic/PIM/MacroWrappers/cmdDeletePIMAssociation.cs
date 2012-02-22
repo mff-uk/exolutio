@@ -34,7 +34,7 @@ namespace Exolutio.Controller.Commands.Atomic.PIM.MacroWrappers
             
         }
 
-        protected override void GenerateSubCommands()
+        internal override void GenerateSubCommands()
         {
             Commands.AddRange(acmdRemoveComponentFromDiagram.CreateCommandsToRemoveFromAllDiagrams(Controller, AssociationGuid));
             Commands.Add(new acmdDeletePIMAssociation(Controller, AssociationGuid));

@@ -33,7 +33,7 @@ namespace Exolutio.Controller.Commands.Complex.PIM
             
         }
 
-        protected override void GenerateSubCommands()
+        internal override void GenerateSubCommands()
         {
             Commands.Add(new acmdRenameComponent(Controller, AttributeGuid, "") { Propagate = false });
             Commands.Add(new acmdUpdatePIMAttributeCardinality(Controller, AttributeGuid, 1, 1) { Propagate = false });

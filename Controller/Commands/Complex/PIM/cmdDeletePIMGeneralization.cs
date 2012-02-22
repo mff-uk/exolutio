@@ -27,7 +27,7 @@ namespace Exolutio.Controller.Commands.Complex.PIM
 
         }
 
-        protected override void GenerateSubCommands()
+        internal override void GenerateSubCommands()
         {
             Commands.AddRange(acmdRemoveComponentFromDiagram.CreateCommandsToRemoveFromAllDiagrams(Controller, GeneralizationGuid));
             Commands.Add(new acmdDeletePIMGeneralization(Controller, GeneralizationGuid));

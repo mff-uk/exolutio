@@ -41,7 +41,7 @@ namespace Exolutio.Controller.Commands.Atomic.PIM.MacroWrappers
             NewUpper = upper;
         }
 
-        protected override void GenerateSubCommands()
+        internal override void GenerateSubCommands()
         {
             Commands.Add(new acmdUpdatePIMAssociationEndCardinality(Controller, ComponentGuid, NewLower, NewUpper));
         }

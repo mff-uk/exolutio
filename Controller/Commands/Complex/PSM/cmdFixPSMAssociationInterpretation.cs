@@ -27,7 +27,7 @@ namespace Exolutio.Controller.Commands.Complex.PSM
             CheckFirstOnlyInCanExecute = true;
         }
 
-        protected override void GenerateSubCommands()
+        internal override void GenerateSubCommands()
         {
             report.Append("Fixing association interpretations" + newline);
             foreach (PSMAssociation a in Project.LatestVersion.PSMSchemas.SelectMany(s => s.PSMAssociations).Where(assoc => assoc.Interpretation != null && assoc.InterpretedAssociationEnd == null))

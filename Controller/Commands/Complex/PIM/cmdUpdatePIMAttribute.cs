@@ -52,7 +52,7 @@ namespace Exolutio.Controller.Commands.Complex.PIM
             DefaultValue = defaultValue;
         }
 
-        protected override void GenerateSubCommands()
+        internal override void GenerateSubCommands()
         {
             Commands.Add(new acmdRenameComponent(Controller, AttributeGuid, Name) { Propagate = false });
             Commands.Add(new acmdUpdatePIMAttributeCardinality(Controller, AttributeGuid, Lower, Upper) { Propagate = false });

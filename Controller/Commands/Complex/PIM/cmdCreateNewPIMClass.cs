@@ -41,7 +41,7 @@ namespace Exolutio.Controller.Commands.Complex.PIM
             
         }
 
-        protected override void GenerateSubCommands()
+        internal override void GenerateSubCommands()
         {
             if (ClassGuid == Guid.Empty) ClassGuid = Guid.NewGuid();
             Commands.Add(new acmdNewPIMClass(Controller, SchemaGuid) { ClassGuid = ClassGuid });

@@ -39,7 +39,7 @@ namespace Exolutio.Controller.Commands.Atomic.MacroWrappers
             Component component = (Component) Project.TranslateComponent(ComponentGuid);
         }
 
-        protected override void GenerateSubCommands()
+        internal override void GenerateSubCommands()
         {
             Commands.Add(new acmdRenameComponent(Controller, ComponentGuid, NewName));
         }

@@ -32,7 +32,7 @@ namespace Exolutio.Controller.Commands.Atomic.MacroWrappers
             NewName = newName;
         }
 
-        protected override void GenerateSubCommands()
+        internal override void GenerateSubCommands()
         {
             Commands.Add(new acmdRenameProject(Controller, NewName));
         }

@@ -33,7 +33,7 @@ namespace Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers
             
         }
 
-        protected override void GenerateSubCommands()
+        internal override void GenerateSubCommands()
         {
             Commands.Add(new acmdSetPSMClassInterpretation(Controller, PSMComponentGuid, PIMComponentGuid));
         }

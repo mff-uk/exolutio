@@ -51,7 +51,7 @@ namespace Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers
             
         }
 
-        protected override void GenerateSubCommands()
+        internal override void GenerateSubCommands()
         {
             Commands.Add(new acmdSynchroPSMAssociations(Controller) { X1 = x1, X2 = x2 });
         }

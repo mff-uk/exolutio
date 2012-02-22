@@ -30,7 +30,7 @@ namespace Exolutio.Controller.Commands.Complex.PSM
             
         }
 
-        protected override void GenerateSubCommands()
+        internal override void GenerateSubCommands()
         {
             PSMAssociationMember associationMember = Project.TranslateComponent<PSMAssociationMember>(AssociationMemberGuid);
             if (associationMember is PSMClass)

@@ -42,7 +42,7 @@ namespace Exolutio.Controller.Commands.Atomic.PIM.MacroWrappers
             
         }
 
-        protected override void GenerateSubCommands()
+        internal override void GenerateSubCommands()
         {
             Commands.Add(new acmdUpdatePIMAttributeCardinality(Controller, ComponentGuid, NewLower, NewUpper));
         }

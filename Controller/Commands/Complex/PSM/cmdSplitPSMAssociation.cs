@@ -46,7 +46,7 @@ namespace Exolutio.Controller.Commands.Complex.PSM
             Count = count;
         }
 
-        protected override void GenerateSubCommands()
+        internal override void GenerateSubCommands()
         {
             if (NewGuids == null)
             {

@@ -33,7 +33,7 @@ namespace Exolutio.Controller.Commands.Atomic.PIM
             AttributeGuid = pimAttributeGuid;
         }
 
-        protected override void GenerateSubCommands()
+        internal override void GenerateSubCommands()
         {
             Commands.Add(new acmdMovePIMAttribute(Controller, AttributeGuid, TargetClassGuid));
             base.GenerateSubCommands();

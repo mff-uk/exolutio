@@ -33,7 +33,7 @@ namespace Exolutio.Controller.Commands.Complex.PIM
             
         }
 
-        protected override void GenerateSubCommands()
+        internal override void GenerateSubCommands()
         {
             PIMAssociation a = Project.TranslateComponent<PIMAssociation>(AssociationGuid);
             foreach (PIMAssociationEnd e in a.PIMAssociationEnds)
