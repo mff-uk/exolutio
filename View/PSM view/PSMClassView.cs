@@ -334,6 +334,9 @@ namespace Exolutio.View
                     foldingButton.Folded = ViewHelper.IsFolded;
                     FoldingHelper.FoldChildrenRecursive(PSMClass, DiagramView, ViewHelper.IsFolded ? EFoldingAction.Fold : EFoldingAction.Unfold);
                 }
+
+                tbClassHeader.FontStyle = PSMClass.Abstract ? FontStyles.Italic : FontStyles.Normal;
+                tbClassHeader.FontWeight = PSMClass.Final ? FontWeights.Normal : FontWeights.Bold;
             }
 
             tbClassHeader.Text = Name;

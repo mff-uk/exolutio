@@ -190,6 +190,8 @@ namespace Exolutio.View
             if (PIMClass != null)
             {
                 tbClassHeader.Text = PIMClass.Name;
+                tbClassHeader.FontStyle = PIMClass.Abstract ? FontStyles.Italic : FontStyles.Normal;
+                tbClassHeader.FontWeight = PIMClass.Final ? FontWeights.Normal : FontWeights.Bold;
             }
 
             this.X = ViewHelper.X;
