@@ -23,8 +23,18 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
 
         public override bool CanExecute()
         {
-            return classGuid != Guid.Empty
-                && Project.VerifyComponentType<PSMClass>(classGuid);
+            if (classGuid == Guid.Empty)
+            {
+                ErrorDescription = CommandErrors.CMDERR_INPUT_TYPE_MISMATCH;
+                return false;
+            }
+            PSMClass psmClass = Project.TranslateComponent<PSMClass>(classGuid);
+            if (psmClass.GeneralizationsAsGeneral.Count > 0)
+            {
+                ErrorDescription = CommandErrors.CMDERR_CANNOT_SET_FINAL_GENERALIZATIIONS_EXIST;
+                return false;
+            }
+            return true;
         }
         
         internal override void CommandOperation()

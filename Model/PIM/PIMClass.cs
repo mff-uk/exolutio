@@ -100,7 +100,7 @@ namespace Exolutio.Model.PIM
             base.Serialize(parentNode, context);
             this.WrapAndSerializeCollection("PIMAttributes", "PIMAttribute", PIMAttributes, parentNode, context);
             this.WrapAndSerializeCollection("PIMOperations", "PIMOperation", PIMOperations, parentNode, context);
-            this.WrapAndSerializeIDRefCollection("GeneralizationAsGeneral", "PIMGeneralization", "pimGeneralizationsAsGeneralID", GeneralizationsAsGeneral,
+            this.WrapAndSerializeIDRefCollection("GeneralizationsAsGeneral", "PIMGeneralization", "pimGeneralizationsAsGeneralID", GeneralizationsAsGeneral,
                                                  parentNode, context);
             if (GeneralizationAsSpecific != null) this.SerializeIDRef(GeneralizationAsSpecific, "pimGeneralizationAsSpecificID", parentNode, context);
             this.WrapAndSerializeIDRefCollection("PIMAssociationEnds", "PIMAssociationEnd", "pimAssociationEndID", PIMAssociationEnds,

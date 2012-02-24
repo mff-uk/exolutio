@@ -24,8 +24,12 @@ namespace Exolutio.Controller.Commands.Atomic.PIM
 
         public override bool CanExecute()
         {
-            return classGuid != Guid.Empty
-                && Project.VerifyComponentType<PIMClass>(classGuid);
+            if (classGuid == Guid.Empty || !Project.VerifyComponentType<PIMClass>(classGuid))
+            {
+                ErrorDescription = CommandErrors.CMDERR_INPUT_TYPE_MISMATCH;
+                return false;
+            }
+            return true;
         }
         
         internal override void CommandOperation()
