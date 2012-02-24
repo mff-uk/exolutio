@@ -24,7 +24,7 @@ namespace Exolutio.Model.OCL.ConstraintConversion
 
         public bool StartsInContext
         {
-            get { return StartingVariableName == @"self"; }
+            get { return StartingVariable.referredVariable.IsContextVariable; }
         }
 
         public string StartingVariableName

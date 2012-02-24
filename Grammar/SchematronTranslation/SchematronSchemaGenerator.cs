@@ -59,7 +59,14 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
                 foreach (ClassifierConstraint constraint in compilerResult.Constraints.Classifiers)
                 {
                     PSMAssociationMember contextNode = (PSMAssociationMember)constraint.Context.Tag;
-                    XElement ruleElement = patternElement.SchematronRule(contextNode.XPath);                    
+                    XElement ruleElement = patternElement.SchematronRule(contextNode.XPath);
+                    if (constraint.Self.Name != @"self")
+                    {
+                        XElement contextVarElement = new XElement((XNamespace)("http://eXolutio.com/oclX") + "context-variable");
+                        contextVarElement.AddAttributeWithValue("name", constraint.Self.Name);
+                        ruleElement.Add(contextVarElement);    
+                    }                    
+                    
                     foreach (OclExpression invariant in constraint.Invariants)
                     {
                         string xpath = TranslateInvariantToXPath(oclScript, constraint, compilerResult.Bridge, invariant, translationSettings);

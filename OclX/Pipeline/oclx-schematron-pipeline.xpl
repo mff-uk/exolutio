@@ -39,7 +39,7 @@
       </xd:param>
       <xd:param name="protect-invalid">        
         <xd:p>If set to 'true', the XPath assert tests are wrapped using 
-          <xd:i>oclX:checked</xd:i> function, which prevents the XSLT 
+          <xd:i>xsl:try</xd:i> intrsuction, which prevents the XSLT 
           compiler from stopping on dynamic errors. I.e. when a dynamic error
           is encountered, the assert fails and the validation proceeds. 
           Default is 'false'.

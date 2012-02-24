@@ -677,7 +677,9 @@ documentation of <doc:i>oclX:evaluate</doc:i> for more information.">
   <doc:doc>
     <doc:desc>
       <doc:p>This function creates a sequence required by <doc:i>variables</doc:i> parameter of other
-        function. See the documentation of <doc:i>oclX:evaluate</doc:i></doc:p>. </doc:desc>
+        function. See the documentation of <doc:i>oclX:evaluate</doc:i></doc:p>. 
+      <doc:p>The context variable is named <doc:i>self</doc:i></doc:p>
+    </doc:desc>
     <doc:param name="current-node">Context node must be passed as a value for this parameter.
     </doc:param>
   </doc:doc>
@@ -688,6 +690,26 @@ documentation of <doc:i>oclX:evaluate</doc:i> for more information.">
     <dummy/>
     <!-- name of the $self variable -->
     <self/>
+    <!-- value of the $self variable-->
+    <xsl:sequence select="$current-node"/>
+  </xsl:function>
+  
+  <doc:doc>
+    <doc:desc>
+      <doc:p>This function creates a sequence required by <doc:i>variables</doc:i> parameter of other
+        function. See the documentation of <doc:i>oclX:evaluate</doc:i></doc:p>.      
+    </doc:desc>
+    <doc:param name="current-node">Context node must be passed as a value for this parameter.</doc:param>
+    <doc:param name="context-var-name">Name of the context variable.</doc:param>
+  </doc:doc>
+  <xsl:function name="oclX:vars" as="item()*">
+    <xsl:param name="current-node" as="item()"/>
+    <xsl:param name="context-var-name" as="xs:string" />
+    <variables/>
+    <!-- just a placeholder -->
+    <dummy/>
+    <!-- name of the context variable -->
+    <xsl:element name="{$context-var-name}" />
     <!-- value of the $self variable-->
     <xsl:sequence select="$current-node"/>
   </xsl:function>

@@ -139,7 +139,7 @@ namespace Exolutio.Model.OCL.ConstraintConversion
                 PSMClass psmClass = VariableClassMappings[node.referredVariable].First();
                 Classifier variableType = psmBridge.Find(psmClass);
                 VariableDeclaration vd = new VariableDeclaration(node.referredVariable.Name, variableType, value);
-                if (node.referredVariable.Name == @"self")
+                if (node.referredVariable.IsContextVariable)
                     this.SelfVariableDeclaration = vd;
                 return new VariableExp(vd);
             }
