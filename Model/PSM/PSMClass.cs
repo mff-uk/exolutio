@@ -164,7 +164,7 @@ namespace Exolutio.Model.PSM
                 this.SerializeIDRef(RepresentedClass, "representedPSMClassId", representsElement, context);
                 parentNode.Add(representsElement);
             }
-            this.WrapAndSerializeIDRefCollection("GeneralizationAsGeneral", "PSMGeneralization", "psmGeneralizationsAsGeneralID", GeneralizationsAsGeneral,
+            this.WrapAndSerializeIDRefCollection("GeneralizationsAsGeneral", "PSMGeneralization", "psmGeneralizationsAsGeneralID", GeneralizationsAsGeneral,
                                                  parentNode, context);
             if (GeneralizationAsSpecific != null) this.SerializeIDRef(GeneralizationAsSpecific, "psmGeneralizationAsSpecificID", parentNode, context);
 

@@ -61,6 +61,15 @@ namespace Exolutio.Controller.Commands {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot set a class as final because it is a general class. Delete generalizations first..
+        /// </summary>
+        internal static string CMDERR_CANNOT_SET_FINAL_GENERALIZATIIONS_EXIST {
+            get {
+                return ResourceManager.GetString("CMDERR_CANNOT_SET_FINAL_GENERALIZATIIONS_EXIST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot set interpretation for a PSM association, whose child is not a PSM class..
         /// </summary>
         internal static string CMDERR_CANNOT_SET_INTERPRETATION_CHILD_NOT_CLASS {

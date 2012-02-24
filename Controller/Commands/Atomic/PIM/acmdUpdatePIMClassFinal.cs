@@ -21,11 +21,21 @@ namespace Exolutio.Controller.Commands.Atomic.PIM
             classGuid = pimClassGuid;
             newFinal = final;
         }
-
+        
         public override bool CanExecute()
         {
-            return classGuid != Guid.Empty
-                && Project.VerifyComponentType<PIMClass>(classGuid);
+            if (classGuid == Guid.Empty)
+            {
+                ErrorDescription = CommandErrors.CMDERR_INPUT_TYPE_MISMATCH;
+                return false;
+            }
+            PIMClass pimClass = Project.TranslateComponent<PIMClass>(classGuid);
+            if (pimClass.GeneralizationsAsGeneral.Count > 0)
+            {
+                ErrorDescription = CommandErrors.CMDERR_CANNOT_SET_FINAL_GENERALIZATIIONS_EXIST;
+                return false;
+            }
+            return true;
         }
         
         internal override void CommandOperation()
