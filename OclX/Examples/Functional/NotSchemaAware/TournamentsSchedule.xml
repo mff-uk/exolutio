@@ -10,7 +10,7 @@
     <name>West Open</name>
     <start>ac</start>
     <end>bibendum</end>
-    <requiredQualificationPoints>tortor</requiredQualificationPoints>
+    <requiredQualificationPoints>2</requiredQualificationPoints>
     <maxNumPlayers>24</maxNumPlayers>
     <qualification open="true" />
   </tournament>
@@ -25,7 +25,7 @@
     <name>South Open</name>
     <start>bibendum</start>
     <end>dictum</end>
-    <requiredQualificationPoints>interdum</requiredQualificationPoints>
+    <requiredQualificationPoints>4</requiredQualificationPoints>
     <maxNumPlayers>24</maxNumPlayers>
     <qualification open="true" />
   </tournament>

@@ -45,5 +45,7 @@ namespace Exolutio.Model.OCL.Types
         public override string QualifiedName {
             get { return Name; }
         }
+
+        public bool IsContextVariable { get; set; }
     }
 }

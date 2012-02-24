@@ -5,7 +5,9 @@
   xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
   xmlns:axsl="http://www.w3.org/1999/XSL/TransformAlias" 
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
-  exclude-result-prefixes="xd svrl"
+  xmlns:oclX="http://eXolutio.com/oclX"
+  
+  exclude-result-prefixes="xd svrl oclX"
   version="2.0">
   
   <xd:doc scope="stylesheet">
@@ -50,7 +52,7 @@
   <xd:doc>
     <xd:desc>
       <xd:p>If set to true, the XPath assert tests are wrapped using 
-        <xd:i>oclX:checked</xd:i> function, which prevents the XSLT 
+        <xd:i>xsl:try</xd:i> instruction, which prevents the XSLT 
       compiler from stopping on dynamic errors. I.e. when a dynamic error
       is encountered, the assert fails and the validation proceeds. </xd:p>
       <xd:p>        
@@ -58,7 +60,7 @@
       </xd:p>
     </xd:desc>
   </xd:doc>
-  <xsl:param name="protect-invalid" select="'true'" as="xs:string" /> 
+  <xsl:param name="protect-invalid" select="'false'" as="xs:string" /> 
    
   <xsl:namespace-alias stylesheet-prefix="axsl" result-prefix="xsl"/>
 
@@ -117,13 +119,22 @@
 
   <xd:doc>
     <xd:desc>
-      <xd:p>Define the variable <xd:i>$self</xd:i> in each rule. </xd:p>
+      <xd:p>Define the context variable in each rule. </xd:p>
+      <xd:p>The context variable is usually named <xd:i>self</xd:i>,
+      but this default name may be overriden in the OCL constraint. </xd:p>      
     </xd:desc>
   </xd:doc>
   <xsl:template match="xsl:template[svrl:fired-rule]" mode="functional">
     <xsl:copy>
       <xsl:copy-of select="@*" />
-      <axsl:variable name="self" as="item()" select="current()" />    
+      <xsl:choose>
+        <xsl:when test="oclX:context-variable">
+          <axsl:variable name="{oclX:context-variable/@name}" as="item()" select="current()" />    
+        </xsl:when>
+        <xsl:otherwise>
+          <axsl:variable name="self" as="item()" select="current()" />
+        </xsl:otherwise>
+      </xsl:choose>          
       <xsl:apply-templates mode="#current" />
     </xsl:copy>
   </xsl:template>
@@ -146,7 +157,7 @@
   <xd:doc>
     <xd:desc>
       <xd:p>When <xd:i>protect-invalid</xd:i> parameter is set to 'true', 
-      a call of <xd:i>oclX:checked</xd:i> is added around every 
+      <xd:i>xsl:try</xd:i> is added around every 
       assert test to prevent it from stopping the validation when 
       a dynamic error is encountered. 
       </xd:p>
@@ -172,26 +183,11 @@
         </axsl:try>        
       </xsl:when>
       <xsl:otherwise>          
-        <xsl:copy-of select="." />
+        <axsl:choose>
+          <xsl:apply-templates select="./(@* | node())" mode="#current" />    
+        </axsl:choose>
       </xsl:otherwise>
     </xsl:choose>
-    
-    <!--<xsl:copy>
-      <xsl:copy-of select="@*[not(. is ../@test)]" />
-      <xsl:choose>
-        <xsl:when test="$protect-invalid eq 'true'">
-          <xsl:attribute name="test">
-            <xsl:text>oclX:checked(function() { </xsl:text>
-            <xsl:value-of select="@test" />
-            <xsl:text> })</xsl:text>
-          </xsl:attribute>          
-        </xsl:when>
-        <xsl:otherwise>          
-          <xsl:copy-of select="@test" />
-        </xsl:otherwise>
-      </xsl:choose>      
-      <xsl:apply-templates mode="#current" />
-    </xsl:copy>-->
   </xsl:template>
 
   <!-- templates for dynamic evaluation OclX -->
@@ -203,8 +199,15 @@
   </xd:doc>
   <xsl:template match="xsl:template[svrl:fired-rule]" mode="dynamic">
     <xsl:copy>
-      <xsl:copy-of select="@*" />      
-      <axsl:variable name="variables" as="item()*" select="oclX:vars(.)" />
+      <xsl:copy-of select="@*" />
+      <xsl:choose>
+        <xsl:when test="oclX:context-variable">          
+          <axsl:variable name="variables" as="item()*" select="oclX:vars(., '{oclX:context-variable/@name}')" />
+        </xsl:when>
+        <xsl:otherwise>
+          <axsl:variable name="variables" as="item()*" select="oclX:vars(.)" />          
+        </xsl:otherwise>
+      </xsl:choose> 
       <xsl:apply-templates mode="#current" />
     </xsl:copy>
   </xsl:template>
@@ -215,9 +218,13 @@
     </xd:desc>
   </xd:doc>
   <xsl:template match="@*|node()" mode="#all">
-    <xsl:copy>
-      <xsl:apply-templates select="@*|node()" mode="#current"/>
-    </xsl:copy>
+    <xsl:if test="not(local-name() eq 'context-variable')">
+      <xsl:copy>      
+        <xsl:apply-templates select="(@*|node())" mode="#current"/>      
+      </xsl:copy>
+    </xsl:if>
   </xsl:template> 
+  
+  
   
 </xsl:stylesheet>
