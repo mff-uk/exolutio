@@ -9,7 +9,7 @@ namespace Exolutio.Model.OCL.Types
     /// A classifier is a classification of instances, it describes a set of instances that have features in common.
     /// Implement UML.Classes.Kernel.Classifier and partially UML.Classes.Kernel.Class from UML SuperStructure
     /// </summary>
-    public class Classifier : ModelElement, IHasOwner<ModelElement>
+    public class Classifier : IModelElement, IHasOwner<IModelElement>
     {
         /// <summary>
         /// This gives the superclasses of a class.
@@ -45,49 +45,84 @@ namespace Exolutio.Model.OCL.Types
             }
         }
 
-        internal virtual TypesTable.TypesTable TypeTable
+        internal  TypesTable.TypesTable TypeTable
         {
             get;
             set;
         }
 
-        public override string QualifiedName
-        {
-            get
-            {
-                //pridat konstantu na ::
-                if (Owner == null)
-                    return Name;
-                if (Owner is Namespace) {
-                    if (((Namespace)Owner).Owner == null && string.IsNullOrWhiteSpace(Owner.Name) ) {
-                        return Name;
-                    }
-                }
-                return String.Concat(Owner.QualifiedName, "::", Name);
+
+
+        #region IModelElement Members
+        Lazy<string> _QualifiedName;
+        public string QualifiedName {
+            get {
+                return _QualifiedName.Value;
             }
+
         }
 
-        public NestedElemetCollection<Classifier, ModelElement> NestedClassifier
+        public string Name {
+            get;
+            private set;
+        }
+
+        public object Tag {
+            get;
+            set;
+        }
+
+        #endregion
+
+
+        public NestedElemetCollection<Classifier, IModelElement> NestedClassifier
         {
             get;
             private set;
         }
 
-        public Classifier(TypesTable.TypesTable tt, string name)
-            : base(name)
+        public Classifier(TypesTable.TypesTable tt, Namespace ns, string name)
         {
             this.TypeTable = tt;
+           
             Properties = new PropertyCollection(this);
             Operations = new OperationCollection(this);
-            NestedClassifier = new NestedElemetCollection<Classifier, ModelElement>(this);
+            NestedClassifier = new NestedElemetCollection<Classifier, IModelElement>(this);
+
+            this.Name = name;
+            ns.NestedClassifier.Add(this);
+            _QualifiedName = new Lazy<string>(() => GetQualifiedName(),true);
           
         }
 
-        public Classifier(TypesTable.TypesTable tt, string name,Classifier superClassifier)
-            :this(tt,name)
+        public Classifier(TypesTable.TypesTable tt, Namespace ns, string name, Classifier superClassifier)
+            :this(tt,ns,name)
         {
             this.SuperClassifier = superClassifier;
         }
+
+        private string GetQualifiedName() {
+            //pridat konstantu na ::
+            if (Owner == null)
+                return Name;
+            if (Owner is Namespace) {
+                if (((Namespace)Owner).Owner == null && string.IsNullOrWhiteSpace(Owner.Name)) {
+                    return Name;
+                }
+            }
+            return String.Concat(Owner.QualifiedName, "::", Name);
+        }
+
+       /* public override int GetHashCode() {
+            return QualifiedName.GetHashCode();
+        }
+
+        public override bool Equals(object obj) {
+            if (obj is Classifier != true) {
+                return false;
+            }
+            return QualifiedName == ((Classifier)obj).QualifiedName;
+        }*/
 
         public virtual bool ConformsTo(Classifier other)
         {
@@ -139,14 +174,18 @@ namespace Exolutio.Model.OCL.Types
 
         //Ignore: isFinalSpecialization, much associations, much operations
 
-        #region IHasOwner<ModelElement> Members
-
-        public virtual ModelElement Owner
+        #region IHasOwner<IModelElement> Members
+        public virtual IModelElement Owner
         {
             get;
             set;
         }
 
         #endregion
+
+        public override string ToString() {
+            return QualifiedName;
+        }
+
     }
 }

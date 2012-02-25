@@ -11,14 +11,10 @@ namespace Exolutio.Model.OCL.Types
     /// </summary>
     public class SetType : CollectionType
     {
-        override public CollectionKind CollectionKind
-        {
-            get
-            {
-                return CollectionKind.Set;
-            }
-        }
 
+        public SetType(TypesTable.TypesTable tt, Classifier elemetnType, Classifier superClassifier)
+            : base(tt, CollectionKind.Set, elemetnType, superClassifier) {
+        }
 
 
         public override Classifier CommonSuperType(Classifier other)
@@ -28,13 +24,6 @@ namespace Exolutio.Model.OCL.Types
                 return base.CommonSuperType(other);
             else
                 return common;
-        }
-
-        public SetType(TypesTable.TypesTable tt, Classifier elemetnType, Classifier superClassifier)
-            : base(tt,elemetnType,superClassifier)
-        {
-        }
-
-       
+        }       
     }
 }

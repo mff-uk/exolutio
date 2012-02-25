@@ -39,8 +39,8 @@ namespace Exolutio.Model.OCL.Bridge {
         /// </summary>
         /// <param name="tt">Destination OCL type system.</param>
         /// <param name="sourceClass">Source class</param>
-        public PIMBridgeClass(TypesTable.TypesTable tt, PIMClass sourceClass)
-            : base(tt, sourceClass.Name, tt.Library.Any) {
+        public PIMBridgeClass(TypesTable.TypesTable tt, Namespace ns, PIMClass sourceClass)
+            : base(tt,ns, sourceClass.Name, tt.Library.Any) {
             this.SourceClass = sourceClass;
             PIMAttribute = new Dictionary<PIMAttribute, PIMBridgeAttribute>();
             PIMAssociations = new Dictionary<PIMAssociationEnd, PIMBridgeAssociation>();

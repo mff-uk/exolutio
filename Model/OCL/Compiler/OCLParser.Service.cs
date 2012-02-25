@@ -46,7 +46,7 @@ namespace Exolutio.Model.OCL.Compiler {
         }
 
         Classifier ClassifierContextHead(List<string> path,string selfName) {
-            ModelElement element =  Environment.LookupPathName(path);
+            IModelElement element =  Environment.LookupPathName(path);
             if (element is Classifier == false) {
                 // error
                 Errors.AddError(new ErrorItem("Nenalezena trida v ClassifierContextHeader"));
@@ -98,7 +98,7 @@ namespace Exolutio.Model.OCL.Compiler {
             if (indexArgs == null  && callArgs == null) {
                 if (path.Count == 1) {
                     // simpleName
-                    ModelElement element = Environment.Lookup(path[0]);
+                    IModelElement element = Environment.Lookup(path[0]);
 
                     //Variable
                     if (element is VariableDeclaration) {
@@ -117,7 +117,7 @@ namespace Exolutio.Model.OCL.Compiler {
                 }
                 else {
                     // path
-                    ModelElement element = Environment.LookupPathName(path);
+                    IModelElement element = Environment.LookupPathName(path);
                     //Chyby enum !!!!!!!!!!!!!!!!!!!!!!!!
                     if (element is Classifier) {
                         return new AST.TypeExp((Classifier)element, TypesTable.Library.Type);
@@ -375,10 +375,9 @@ namespace Exolutio.Model.OCL.Compiler {
 
 
         AST.TupleLiteralExp CreateTupleLiteral(CommonToken rootToken, List<VariableDeclaration> vars) {
-
             Dictionary<string, AST.TupleLiteralPart> parts = new Dictionary<string, AST.TupleLiteralPart>();
-            TupleType tupleType = new TupleType(TypesTable);
-
+            
+            List<Property> tupleParts = new List<Property>();
             foreach (var var in vars) {
                 if (parts.ContainsKey(var.Name)) {
                     Errors.AddError(new CodeErrorItem(String.Format("Name {0} is used multipled.", var.Name), rootToken, rootToken));
@@ -390,8 +389,9 @@ namespace Exolutio.Model.OCL.Compiler {
                 parts.Add(var.Name, newPart);
 
                 //typ
-                tupleType.TupleParts.Add(newProterty);
+                tupleParts.Add(newProterty);
             }
+            TupleType tupleType = new TupleType(TypesTable,tupleParts);
             TypesTable.RegisterCompositeType(tupleType);
 
             AST.TupleLiteralExp tupleLiteral = new AST.TupleLiteralExp(parts, tupleType);
@@ -408,7 +408,7 @@ namespace Exolutio.Model.OCL.Compiler {
 
 
         TupleType CreateTupleType(CommonToken rootToken, List<VariableDeclaration> variables) {
-            TupleType tuple = new TupleType(TypesTable);
+            TupleType tuple = new TupleType(TypesTable, new List<Property>());
             foreach (var variable in variables) {
                 if (tuple.TupleParts.Keys.Contains(variable.Name)) {// Kontrola nad ramec specifikace
                     Errors.AddError(new CodeErrorItem(String.Format("Name {0} is used multipled.", variable.Name), rootToken, rootToken));
@@ -470,7 +470,7 @@ namespace Exolutio.Model.OCL.Compiler {
         }
 
         Classifier ResolveTypePathName(List<string> path, CommonToken FirstPathToken, CommonToken LastPathToken) {
-            ModelElement foundType = Environment.LookupPathName(path);
+            IModelElement foundType = Environment.LookupPathName(path);
 
 
 

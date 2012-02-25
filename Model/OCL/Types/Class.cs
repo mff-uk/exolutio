@@ -20,8 +20,9 @@ namespace Exolutio.Model.OCL.Types
             private set;
         }
 
-        public Class(TypesTable.TypesTable tt,string name)
-            : base(tt,name,tt.Library.Any)
+
+        public Class(TypesTable.TypesTable tt, Namespace ns, string name)
+            : base(tt,ns,name,tt.Library.Any)
         {
             SuperClass = new List<Class>();
         }

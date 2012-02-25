@@ -52,17 +52,17 @@ namespace Exolutio.Model.OCL.Bridge {
             sLC.CreateStandardLibrary(TypesTable);
 
             // Docasna podpora pro typy v Tournaments.eXo
-            Class date = new Class(TypesTable, "Date");
+            Class date = new Class(TypesTable,TypesTable.Library.RootNamespace, "Date");
             date.Operations.Add(new Operation("after", true, TypesTable.Library.Boolean, new Parameter[] { new Parameter("time", date) }));
             date.Operations.Add(new Operation("before", true, TypesTable.Library.Boolean, new Parameter[] { new Parameter("time", date) }));
             date.Operations.Add(new Operation("equals", true, TypesTable.Library.Boolean, new Parameter[] { new Parameter("time", date) }));
             date.Operations.Add(new Operation("<=", true, TypesTable.Library.Boolean, new Parameter[] { new Parameter("time", date) }));
 
-            TypesTable.Library.RootNamespace.NestedClassifier.Add(date);
+        //    TypesTable.Library.RootNamespace.NestedClassifier.Add(date);
             TypesTable.RegisterType(date);
 
-            Class matchesStatus = new Class(TypesTable, "MatchStatus");
-            TypesTable.Library.RootNamespace.NestedClassifier.Add(matchesStatus);
+            Class matchesStatus = new Class(TypesTable,TypesTable.Library.RootNamespace, "MatchStatus");
+        //    TypesTable.Library.RootNamespace.NestedClassifier.Add(matchesStatus);
             TypesTable.RegisterType(matchesStatus);
 
             Translate(TypesTable);
@@ -78,8 +78,8 @@ namespace Exolutio.Model.OCL.Bridge {
             //vytvoreni prazdnych trid
             //musi predchazet propertam a associacim, aby se neodkazovalo na neexistujici typy
             foreach (PIM.PIMClass cl in schema.PIMClasses) {
-                PIMBridgeClass newClass = new PIMBridgeClass(tt, cl);
-                tt.Library.RootNamespace.NestedClassifier.Add(newClass);
+                PIMBridgeClass newClass = new PIMBridgeClass(tt,tt.Library.RootNamespace, cl);
+              //  tt.Library.RootNamespace.NestedClassifier.Add(newClass);
                 tt.RegisterType(newClass);
                 classToProcess.Add(newClass);
                 //Hack

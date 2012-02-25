@@ -13,8 +13,8 @@ namespace Exolutio.Model.OCL.Types
     /// </summary>
     public class TemplateParameterType:Classifier
     {
-        public TemplateParameterType(TypesTable.TypesTable tt)
-            : base(tt,"")
+        public TemplateParameterType(TypesTable.TypesTable tt,Namespace ns)
+            : base(tt,ns,"")
         {
             throw new NotImplementedException();
         }

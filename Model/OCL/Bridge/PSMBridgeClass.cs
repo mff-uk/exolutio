@@ -44,21 +44,21 @@ namespace Exolutio.Model.OCL.Bridge {
             set;
         }
 
-        private PSMBridgeClass(TypesTable.TypesTable tt, string name)
-            : base(tt, name, tt.Library.Any) {
+        private PSMBridgeClass(TypesTable.TypesTable tt,Namespace ns, string name)
+            : base(tt,ns, name, tt.Library.Any) {
                 PSMChildMembers = new Dictionary<PSMAssociation, PSMBridgeAssociation>();
             PSMAttribute = new Dictionary<PSMAttribute, PSMBridgeAttribute>();
         }
 
-        public PSMBridgeClass(TypesTable.TypesTable tt, PSMClass sourceClass)
-            : this(tt, sourceClass.Name) {
+        public PSMBridgeClass(TypesTable.TypesTable tt,Namespace ns, PSMClass sourceClass)
+            : this(tt,ns, sourceClass.Name) {
             this.PSMSource = sourceClass;
             this.PSMSourceType = SourceType.PSMClass;
             
         }
 
-        public PSMBridgeClass(TypesTable.TypesTable tt, PSMContentModel sourceContentModel)
-            : this (tt, GetContentModelOCLName(sourceContentModel)) {
+        public PSMBridgeClass(TypesTable.TypesTable tt,Namespace ns, PSMContentModel sourceContentModel)
+            : this (tt,ns, GetContentModelOCLName(sourceContentModel)) {
             this.PSMSource = sourceContentModel;
             this.PSMSourceType = SourceType.PSMContentModel;
         }

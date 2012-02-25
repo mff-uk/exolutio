@@ -21,23 +21,23 @@ namespace Exolutio.Model.OCL {
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public abstract ModelElement LookupLocal(string name);
+        public abstract IModelElement LookupLocal(string name);
 
-        public abstract ModelElement LookupNamespaceLocal(string name);
+        public abstract IModelElement LookupNamespaceLocal(string name);
 
         /// <summary>
         /// Find a named element in the current environment or recursively in its parent environment, based on a single name.
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public abstract ModelElement Lookup(string name);
+        public abstract IModelElement Lookup(string name);
 
         /// <summary>
         /// Find a named element in the current environment or recursively in its parent environment, based on a path name.
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        public abstract ModelElement LookupPathName(IEnumerable<string> path);
+        public abstract IModelElement LookupPathName(IEnumerable<string> path);
 
         /// <summary>
         /// Lookup a given association end name of an implicitly named element in the current environment, including its parents.
@@ -81,7 +81,7 @@ namespace Exolutio.Model.OCL {
         /// <param name="type"></param>
         /// <param name="impl"></param>
         /// <returns></returns>
-        public Environment AddElement(string name, ModelElement type,VariableDeclaration source, bool impl) {
+        public Environment AddElement(string name, IModelElement type,VariableDeclaration source, bool impl) {
             if (LookupLocal(name) != null) {
                 throw new Exception(string.Format(CompilerErrors.VariableAlreadyExisted, name));
             }
@@ -100,7 +100,7 @@ namespace Exolutio.Model.OCL {
             internalNamespace = ns;
         }
 
-        public override ModelElement LookupLocal(string name) {
+        public override IModelElement LookupLocal(string name) {
             if (internalNamespace.NestedClassifier.ContainsKey(name)) {
                 return internalNamespace.NestedClassifier[name];
             }
@@ -110,8 +110,8 @@ namespace Exolutio.Model.OCL {
             return null;
         }
 
-        public override ModelElement Lookup(string name) {
-            ModelElement lookupLocalResult = LookupLocal(name);
+        public override IModelElement Lookup(string name) {
+            IModelElement lookupLocalResult = LookupLocal(name);
             if (lookupLocalResult != null) {
                 return lookupLocalResult;
             }
@@ -123,14 +123,14 @@ namespace Exolutio.Model.OCL {
 
         }
 
-        public override ModelElement LookupNamespaceLocal(string name) {
+        public override IModelElement LookupNamespaceLocal(string name) {
             if (internalNamespace.NestedNamespace.ContainsKey(name)) {
                 return internalNamespace.NestedNamespace[name];
             }
             return null;
         }
 
-        public override ModelElement LookupPathName(IEnumerable<string> path) {
+        public override IModelElement LookupPathName(IEnumerable<string> path) {
             int pathLength = path.Count();
             if (pathLength == 0) {
                 return null;
@@ -159,7 +159,7 @@ namespace Exolutio.Model.OCL {
             }
         }
 
-        private ModelElement ForwardLookupPathName(IEnumerable<string> path, Namespace ns) {
+        private IModelElement ForwardLookupPathName(IEnumerable<string> path, Namespace ns) {
             int pathLength = path.Count();
             if (pathLength == 0) {
                 return null;
@@ -208,17 +208,17 @@ namespace Exolutio.Model.OCL {
 
 
 
-        public override ModelElement LookupLocal(string name) {
+        public override IModelElement LookupLocal(string name) {
             // nekontroluje se vnitrni tridy,??operace??
             return internalClassifier.LookupProperty(name);
         }
 
-        public override ModelElement LookupNamespaceLocal(string name) {
+        public override IModelElement LookupNamespaceLocal(string name) {
             throw new NotImplementedException();
         }
 
-        public override ModelElement Lookup(string name) {
-            ModelElement el = LookupLocal(name);
+        public override IModelElement Lookup(string name) {
+            IModelElement el = LookupLocal(name);
             if (el != null) {
                 return el;
             }
@@ -228,7 +228,7 @@ namespace Exolutio.Model.OCL {
             return null;
         }
 
-        public override ModelElement LookupPathName(IEnumerable<string> path) {
+        public override IModelElement LookupPathName(IEnumerable<string> path) {
             // Neuplna implementace !!!!!!!!!!!!!!!!!!!!!!!!!!!
             if (path.Count() == 1) {
                 var el= LookupLocal(path.First());
@@ -267,12 +267,12 @@ namespace Exolutio.Model.OCL {
 
     public class AddElementEnvironment : Environment {
         private string Name;
-        private ModelElement Type;
+        private IModelElement Type;
         private VariableDeclaration Source;
         private bool IsImplicit;
         private Environment RootEnviroment;
 
-        public AddElementEnvironment(Environment rootEnv, string name, ModelElement type, VariableDeclaration source, bool impl) {
+        public AddElementEnvironment(Environment rootEnv, string name, IModelElement type, VariableDeclaration source, bool impl) {
             this.RootEnviroment = rootEnv;
             this.Name = name;
             this.Type = type;
@@ -280,7 +280,7 @@ namespace Exolutio.Model.OCL {
             this.IsImplicit = impl;
         }
 
-        public override ModelElement LookupLocal(string name) {
+        public override IModelElement LookupLocal(string name) {
             if (name == this.Name) {
                 return Type;
             }
@@ -289,7 +289,7 @@ namespace Exolutio.Model.OCL {
             }
         }
 
-        public override ModelElement LookupNamespaceLocal(string name) {
+        public override IModelElement LookupNamespaceLocal(string name) {
             if (name == this.Name && Type is Namespace) {
                 return Type;
             }
@@ -298,7 +298,7 @@ namespace Exolutio.Model.OCL {
             }
         }
 
-        public override ModelElement Lookup(string name) {
+        public override IModelElement Lookup(string name) {
             if (name == this.Name) {
                 return Source;
             }
@@ -307,7 +307,7 @@ namespace Exolutio.Model.OCL {
             }
         }
 
-        public override ModelElement LookupPathName(IEnumerable<string> path) {
+        public override IModelElement LookupPathName(IEnumerable<string> path) {
             // AddElemnt neni soucasti konkretniho namespace => nebudeme hledat path v name
             return RootEnviroment.LookupPathName(path);
         }

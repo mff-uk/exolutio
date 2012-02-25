@@ -15,8 +15,9 @@ namespace Exolutio.Model.OCL.Types
     {
         public PropertyCollection TupleParts
         {
-            get;
-            protected set;
+            get {
+                return Properties;
+            }
         }
 
         public Property this [string propertyName]
@@ -27,23 +28,18 @@ namespace Exolutio.Model.OCL.Types
             }
         }
 
-        public override string Name
+        public TupleType(TypesTable.TypesTable tt,IEnumerable<Property> tupleParts)
+            : base(tt,new Namespace("isolatedNS"), GetName(tupleParts), null)
         {
-            get
-            {
-
-               
-                return String.Format("Tuple{0}", TupleParts.ToString());
+           // this.TupleParts = new PropertyCollection(this);
+            foreach (var p in tupleParts) {
+                this.TupleParts.Add(p);
             }
-            
         }
 
-        public TupleType(TypesTable.TypesTable tt)
-            : base(tt,"",null)
-        {
-            TupleParts = new PropertyCollection(this);
+        private static string GetName(IEnumerable<Property> tupleParts) {
+            return String.Format("Tuple{0}", PropertyCollectionHelpers.Print(tupleParts));
         }
-
 
         public override bool ConformsToRegister(Classifier other)
         {
@@ -109,16 +105,17 @@ namespace Exolutio.Model.OCL.Types
             TupleType otherTuple = other as TupleType;
             if (otherTuple != null)
             {
-                TupleType newTuple = new TupleType(TypeTable);
+                List<Property> tupleParts =new List<Property>();
                 foreach (var otherVar in otherTuple)
                 {
                     Property thisVar;
                     if (TupleParts.TryGetValue(otherVar.Name, out thisVar) == false)
                         continue;
 
-                    newTuple.TupleParts.Add(new Property(thisVar.Name, (PropertyType)Math.Max((int)thisVar.PropertyType,(int)otherVar.PropertyType), thisVar.Type.CommonSuperType(otherVar.Type)));
+                   tupleParts.Add(new Property(thisVar.Name, (PropertyType)Math.Max((int)thisVar.PropertyType,(int)otherVar.PropertyType), thisVar.Type.CommonSuperType(otherVar.Type)));
                 }
 
+                TupleType newTuple = new TupleType(TypeTable,tupleParts);
                 TypeTable.RegisterType(newTuple);
                 return newTuple;
             }

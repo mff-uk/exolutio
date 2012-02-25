@@ -11,14 +11,10 @@ namespace Exolutio.Model.OCL.Types
     /// </summary>
     public class OrderedSetType : CollectionType
     {
-        override public CollectionKind CollectionKind
-        {
-            get
-            {
-                return CollectionKind.OrderedSet;
-            }
-        }
 
+        public OrderedSetType(TypesTable.TypesTable tt, Classifier elemetnType, Classifier superClassifier)
+            : base(tt, CollectionKind.OrderedSet, elemetnType, superClassifier) {
+        }
   
 
         public override Classifier CommonSuperType(Classifier other)
@@ -29,12 +25,5 @@ namespace Exolutio.Model.OCL.Types
             else
                 return common;
         }
-
-        public OrderedSetType(TypesTable.TypesTable tt,Classifier elemetnType,Classifier superClassifier )
-            : base(tt,elemetnType,superClassifier)
-        {
-        }
-
-        
     }
 }

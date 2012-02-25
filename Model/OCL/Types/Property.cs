@@ -9,15 +9,8 @@ namespace Exolutio.Model.OCL.Types
     /// 
     /// It is immutable class(but owner will by able to changed)
     /// </summary>
-    public class Property:ModelElement,IHasOwner<Classifier>
+    public class Property:IModelElement,IHasOwner<Classifier>
     {
-        public Property(string name, PropertyType propertyType,Classifier type)
-            : base(name)
-        {
-            this.type = type;
-            this.propertyType = propertyType;
-        }
-
         protected readonly PropertyType propertyType;
         virtual public PropertyType PropertyType
         {
@@ -48,14 +41,33 @@ namespace Exolutio.Model.OCL.Types
             }
         }
 
-        public override string QualifiedName
-        {
-            get 
-            {
-                return Owner.QualifiedName + "." + Name;
-            }
+        #region IModelElement Members
+
+        public string Name {
+            get;
+            protected set;
         }
 
-        
+        Lazy<string> _QualifiedName;
+        public string QualifiedName {
+            get { return _QualifiedName.Value; }
+        }
+
+        public object Tag {
+            get;
+            set;
+        }
+        #endregion
+
+        public Property(string name, PropertyType propertyType, Classifier type) {
+            this.type = type;
+            this.propertyType = propertyType;
+            this.Name = name;
+            _QualifiedName = new Lazy<string>(() => GetQualifiedName(), true);
+        }
+
+        private string GetQualifiedName(){
+            return String.Format("{0}.{1}",Owner.QualifiedName,Name);
+        }
     }
 }

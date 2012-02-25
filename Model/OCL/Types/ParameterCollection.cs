@@ -62,9 +62,7 @@ namespace Exolutio.Model.OCL.Types
                     nameBuilder.Append(",");
                 else
                     isFirst = false;
-                nameBuilder.AppendFormat("{0}:{1}", parameter.Name, parameter.Type.QualifiedName);
-
-
+                nameBuilder.AppendFormat("{1}", parameter.Name, parameter.Type.QualifiedName);
             }
             nameBuilder.Append(")");
 

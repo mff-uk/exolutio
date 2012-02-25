@@ -3,54 +3,44 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Exolutio.Model.OCL.Types
-{
+namespace Exolutio.Model.OCL.Types {
     /// <summary>
     /// CollectionType describes a list of elements of a particular given type. CollectionType is a concrete metaclass whose
     /// instances are the family of abstract Collection(T) data types.
     /// </summary>
-    public class CollectionType : DataType, ICompositeType
-    {
-        virtual public CollectionKind CollectionKind
-        {
-            get { return CollectionKind.Collection; }
+    public class CollectionType : DataType, ICompositeType {
 
+        public CollectionKind CollectionKind {
+            private set;
+            get;
         }
 
-        public Classifier ElementType
-        {
+        public Classifier ElementType {
             get;
             protected set;
         }
 
-        public override string Name
-        {
-            get
-            {
-                return String.Format("{0}({1})", CollectionKind.ToString(), ElementType.QualifiedName);
-            }
-            set
-            {
-                // je volano z predka
-            }
+        public CollectionType(TypesTable.TypesTable tt, Classifier elemetnType, Classifier superClassifier)
+            : this(tt, CollectionKind.Collection, elemetnType, superClassifier) {
+        }
+
+        protected CollectionType(TypesTable.TypesTable tt, CollectionKind collectionKind, Classifier elemetnType, Classifier superClassifier)
+            : base(tt,new Namespace("isolatedNS"), GetName(collectionKind, elemetnType), superClassifier) {
+            this.CollectionKind = collectionKind;
+            this.ElementType = elemetnType;
+        }
+
+        private static string GetName(CollectionKind kind, Classifier elemetnType) {
+            return String.Format("{0}({1})", kind.ToString(), elemetnType.QualifiedName);
         }
 
 
-        public CollectionType(TypesTable.TypesTable tt,Classifier elemetnType,Classifier superClassifier)
-            : base(tt,"",superClassifier)
-        {
-            ElementType = elemetnType;
+
+        public override bool ConformsToRegister(Classifier other) {
+            return (other == TypeTable.Library.Any);
         }
 
-       
-
-        public override bool ConformsToRegister(Classifier other)
-        {
-            return (other == TypeTable.Library.Any) ;
-        }
-
-        public override bool Equals(object obj)
-        {
+        public override bool Equals(object obj) {
             //resi i Equals pro potomky(bag,set,sequence,ordetset)
             CollectionType other = obj as CollectionType;
             if (other == null)
@@ -60,18 +50,15 @@ namespace Exolutio.Model.OCL.Types
                 && this.ElementType == other.ElementType;
         }
 
-        public override string ToString()
-        {
+        public override string ToString() {
             return Name;
         }
 
-        public override int GetHashCode()
-        {
+        public override int GetHashCode() {
             return CollectionKind.GetHashCode() + this.ElementType.GetHashCode();
         }
 
-        public static bool operator ==(CollectionType left, CollectionType right)
-        {
+        public static bool operator ==(CollectionType left, CollectionType right) {
             if (object.ReferenceEquals(left, null) && object.ReferenceEquals(right, null))
                 return true;
 
@@ -80,8 +67,7 @@ namespace Exolutio.Model.OCL.Types
             return left.Equals(right);
         }
 
-        public static bool operator !=(CollectionType left, CollectionType right)
-        {
+        public static bool operator !=(CollectionType left, CollectionType right) {
 
             return !(left == right);
         }
@@ -92,16 +78,14 @@ namespace Exolutio.Model.OCL.Types
         }
 
 
-     
+
 
         #region IConformsToComposite Members
 
-        public virtual bool ConformsToComposite(Classifier other)
-        {
+        public virtual bool ConformsToComposite(Classifier other) {
             //resi i potomky (bag,set,sequence,ordetset)
             CollectionType otherColl = other as CollectionType;
-            if (otherColl != null && (otherColl.GetType().IsSubclassOf(this.GetType()) || otherColl.GetType() == typeof(CollectionType) || otherColl.GetType()== this.GetType()))
-            {
+            if (otherColl != null && (otherColl.GetType().IsSubclassOf(this.GetType()) || otherColl.GetType() == typeof(CollectionType) || otherColl.GetType() == this.GetType())) {
                 return ElementType.ConformsTo(otherColl.ElementType);
             }
             else
@@ -109,13 +93,10 @@ namespace Exolutio.Model.OCL.Types
         }
         #endregion
 
-        public override Classifier CommonSuperType(Classifier other)
-        {
-            Classifier common = CommonSuperType<CollectionType>((tt, el) => tt.Library.CreateCollection(CollectionKind.Collection, el),other);
-            if (common == null)
-            {
-                if (other is IConformsToComposite && other is ICompositeType == false)
-                {
+        public override Classifier CommonSuperType(Classifier other) {
+            Classifier common = CommonSuperType<CollectionType>((tt, el) => tt.Library.CreateCollection(CollectionKind.Collection, el), other);
+            if (common == null) {
+                if (other is IConformsToComposite && other is ICompositeType == false) {
                     return other.CommonSuperType(this);// commonSuperType is symetric
                 }
                 return base.CommonSuperType(other);
@@ -123,14 +104,11 @@ namespace Exolutio.Model.OCL.Types
             return common;
         }
 
-        public Classifier CommonSuperType<T>(Func<TypesTable.TypesTable,Classifier,T> creator, Classifier other) where T : CollectionType
-        {
-            if (other is T)
-            {
+        public Classifier CommonSuperType<T>(Func<TypesTable.TypesTable, Classifier, T> creator, Classifier other) where T : CollectionType {
+            if (other is T) {
                 Classifier commonElementType = this.ElementType.CommonSuperType(((T)other).ElementType);
 
-                if (commonElementType != null)
-                {
+                if (commonElementType != null) {
                     CollectionType commenType = creator(TypeTable, commonElementType);
                     TypeTable.RegisterType(commenType);
                     return commenType;
@@ -143,7 +121,7 @@ namespace Exolutio.Model.OCL.Types
         #region ICompositeType Members
 
         public bool ConformsToSimple(Classifier other) {
-           return TypeTable.ConformsTo(this,other,true);
+            return TypeTable.ConformsTo(this, other, true);
         }
 
         #endregion
@@ -163,18 +141,18 @@ namespace Exolutio.Model.OCL.Types
                 }
             }
 
-            private static void RegistredOperation(string name, Func<int, bool> iteratorCount, Func<CollectionType,Classifier, TypesTable.TypesTable, Classifier> expressionType,
-                Func<CollectionType,Classifier, TypesTable.TypesTable, Classifier> bodyType) {
-                operation.Add(name,new IteratorOperation(name,iteratorCount, expressionType, bodyType));
+            private static void RegistredOperation(string name, Func<int, bool> iteratorCount, Func<CollectionType, Classifier, TypesTable.TypesTable, Classifier> expressionType,
+                Func<CollectionType, Classifier, TypesTable.TypesTable, Classifier> bodyType) {
+                operation.Add(name, new IteratorOperation(name, iteratorCount, expressionType, bodyType));
             }
 
             static CollectionIteratorOperation() {
-                RegistredOperation("any", c => c == 1, (s,b, t) => s.ElementType, (s, b,t) => t.Library.Boolean);
+                RegistredOperation("any", c => c == 1, (s, b, t) => s.ElementType, (s, b, t) => t.Library.Boolean);
 
                 RegistredOperation("closure", c => c == 1,
                     (s, b, t) => {
                         if (s.CollectionKind == CollectionKind.Sequence || s.CollectionKind == CollectionKind.OrderedSet) {
-                            OrderedSetType ordSet = (OrderedSetType)t.Library.CreateCollection(CollectionKind.OrderedSet, b); 
+                            OrderedSetType ordSet = (OrderedSetType)t.Library.CreateCollection(CollectionKind.OrderedSet, b);
                             return ordSet;
                         }
                         else {
@@ -193,19 +171,19 @@ namespace Exolutio.Model.OCL.Types
                     });
 
                 RegistredOperation("collect", c => c == 1,
-                    (s,b, t) => {
+                    (s, b, t) => {
                         if (s.CollectionKind == CollectionKind.Sequence || s.CollectionKind == CollectionKind.OrderedSet) {
                             SequenceType seq = (SequenceType)t.Library.CreateCollection(CollectionKind.Sequence, b);
                             t.RegisterType(seq);
                             return seq;
                         }
                         else {
-                            BagType bag = (BagType)t.Library.CreateCollection(CollectionKind.Bag, b) ;
+                            BagType bag = (BagType)t.Library.CreateCollection(CollectionKind.Bag, b);
                             t.RegisterType(bag);
                             return bag;
                         }
                     }
-                    , (s,b, t) => b);
+                    , (s, b, t) => b);
 
                 RegistredOperation("collectNested", c => c == 1,
                     (s, b, t) => {

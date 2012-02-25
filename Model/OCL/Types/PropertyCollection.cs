@@ -41,12 +41,20 @@ namespace Exolutio.Model.OCL.Types
             base.Add(alias , property);
         }
 
+       
+
         public override string ToString()
         {
+            return PropertyCollectionHelpers.Print(Data.Values);
+        }
+    }
+
+    internal static class PropertyCollectionHelpers{
+         public static string Print(IEnumerable<Property> properties){
             StringBuilder nameBuilder = new StringBuilder("(");
             bool isFirst = true;
 
-            foreach (var property in Data.Values)
+            foreach (var property in properties)
             {
                 if (isFirst == false)
                     nameBuilder.Append(",");

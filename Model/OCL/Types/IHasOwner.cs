@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Exolutio.Model.OCL.Types
 {
-    public interface IHasOwner<T> where T:ModelElement
+    public interface IHasOwner<T> where T:IModelElement
     {
         T Owner
         {
