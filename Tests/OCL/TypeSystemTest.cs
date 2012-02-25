@@ -58,12 +58,16 @@ namespace Tests.OCL
             Assert.IsTrue(collType.ConformsTo(collType));
             Assert.IsTrue(collType.ConformsTo(collType2));
 
-            TupleType tuple = new TupleType(typesTable);
-            tuple.TupleParts.Add(new Property("ahoj", PropertyType.One, integerType));
+            List<Property> tupleParts1 = new List<Property>();
+            tupleParts1.Add(new Property("ahoj", PropertyType.One, integerType));
+            TupleType tuple = new TupleType(typesTable, tupleParts1);
+            
             typesTable.RegisterType(tuple);
 
-            TupleType tuple2 = new TupleType(typesTable);
-            tuple2.TupleParts.Add(new Property("ahoj", PropertyType.One, integerType));
+            List<Property> tupleParts2 = new List<Property>();
+            tupleParts2.Add(new Property("ahoj", PropertyType.One, integerType));
+            TupleType tuple2 = new TupleType(typesTable,tupleParts2);
+           
             typesTable.RegisterType(tuple2);
 
             Assert.IsTrue(tuple.ConformsTo(tuple));
@@ -111,25 +115,29 @@ namespace Tests.OCL
             typesTalbe.RegisterType(realType);
             typesTalbe.RegisterType(anyType);
 
-            TupleType tuple = new TupleType(typesTalbe);
-            tuple.TupleParts.Add(new Property("prop1", PropertyType.One, integerType));
-            Assert.AreEqual(tuple.Name, "Tuple(prop1:Integer)");
-            tuple.TupleParts.Add(new Property("prop2", PropertyType.One, integerType));
+            List<Property> tupleParts1 = new List<Property>();
+            tupleParts1.Add(new Property("prop1", PropertyType.One, integerType));
+            tupleParts1.Add(new Property("prop2", PropertyType.One, integerType));
+            TupleType tuple = new TupleType(typesTalbe, tupleParts1);
+            
             typesTalbe.RegisterType(tuple);
 
-            TupleType tuple2 = new TupleType(typesTalbe);
-            tuple2.TupleParts.Add(new Property("prop1", PropertyType.One, realType));
-            tuple2.TupleParts.Add(new Property("prop2", PropertyType.One, integerType));
+            List<Property> tupleParts2 = new List<Property>();
+            tupleParts2.Add(new Property("prop1", PropertyType.One, realType));
+            tupleParts2.Add(new Property("prop2", PropertyType.One, integerType));
+            TupleType tuple2 = new TupleType(typesTalbe,tupleParts2);
+            
             typesTalbe.RegisterType(tuple2);
 
 
             Assert.IsTrue(tuple.ConformsTo(tuple2));
             Assert.IsFalse(tuple2.ConformsTo(tuple));
 
-            TupleType tuple3 = new TupleType(typesTalbe);
-            tuple3.TupleParts.Add(new Property("prop1", PropertyType.One, realType));
-            tuple3.TupleParts.Add(new Property("prop2", PropertyType.One, integerType));
-            tuple3.TupleParts.Add(new Property("prop3", PropertyType.One, anyType));
+            List<Property> tupleParts3 = new List<Property>();
+            tupleParts3.Add(new Property("prop1", PropertyType.One, realType));
+            tupleParts3.Add(new Property("prop2", PropertyType.One, integerType));
+            tupleParts3.Add(new Property("prop3", PropertyType.One, anyType));
+            TupleType tuple3 = new TupleType(typesTalbe, tupleParts3);
             typesTalbe.RegisterType(tuple3);
 
             Assert.IsFalse(tuple.ConformsTo(tuple3));
@@ -208,30 +216,31 @@ namespace Tests.OCL
         [Test]
         public void ClassTest()
         {
-            TypesTable typesTalbe = new TypesTable();
+            TypesTable typeTable = new TypesTable();
             StandardLibraryCreator sl = new StandardLibraryCreator();
-            sl.CreateStandardLibrary(typesTalbe);
+            sl.CreateStandardLibrary(typeTable);
+            Namespace ns = typeTable.Library.RootNamespace;
 
-            Classifier integerType = typesTalbe.Library.Integer;
-            Classifier realType = typesTalbe.Library.Real;
-            Classifier anyType = typesTalbe.Library.Any;
+            Classifier integerType = typeTable.Library.Integer;
+            Classifier realType = typeTable.Library.Real;
+            Classifier anyType = typeTable.Library.Any;
 
             
 
-            Class baseClass = new Class(typesTalbe,"Base");
+            Class baseClass = new Class(typeTable,ns,"Base");
 
             baseClass.Properties.Add(new Property("Name", PropertyType.One, integerType));
             baseClass.Operations.Add(new Operation("Work", true, integerType, new Parameter[] { }));
 
-            Class A = new Class(typesTalbe,"A");
-            Class B = new Class(typesTalbe,"B");
+            Class A = new Class(typeTable,ns,"A");
+            Class B = new Class(typeTable,ns,"B");
 
             A.SuperClass.Add(baseClass);
             B.SuperClass.Add(baseClass);
 
-            typesTalbe.RegisterType(baseClass);
-            typesTalbe.RegisterType(A);
-            typesTalbe.RegisterType(B);
+            typeTable.RegisterType(baseClass);
+            typeTable.RegisterType(A);
+            typeTable.RegisterType(B);
             
             Assert.IsTrue(B.ConformsTo(baseClass));
             Assert.IsFalse(B.ConformsTo(A));
@@ -240,36 +249,32 @@ namespace Tests.OCL
         [Test]
         public void NamespaceTest()
         {
-            TypesTable typesTalbe = new TypesTable();
+            TypesTable typeTable = new TypesTable();
             StandardLibraryCreator sl = new StandardLibraryCreator();
-            sl.CreateStandardLibrary(typesTalbe);
+            sl.CreateStandardLibrary(typeTable);
+            Namespace basic = typeTable.Library.RootNamespace;
+            Namespace subNamespace = new Namespace("subNamespace",basic);
 
-            Classifier integerType = typesTalbe.Library.Integer;
-            Classifier realType = typesTalbe.Library.Real;
-            Classifier anyType = typesTalbe.Library.Any;
+            Classifier integerType = typeTable.Library.Integer;
+            Classifier realType = typeTable.Library.Real;
+            Classifier anyType = typeTable.Library.Any;
 
-            Class baseClass = new Class(typesTalbe,"Base");
+            Class baseClass = new Class(typeTable, subNamespace, "Base");
 
             baseClass.Properties.Add(new Property("Name", PropertyType.One, integerType));
             baseClass.Operations.Add(new Operation("Work", true, integerType, new Parameter[] { }));
 
-            Class A = new Class(typesTalbe,"A");
-            Class B = new Class(typesTalbe,"B");
+            Class A = new Class(typeTable, basic, "A");
+            Class B = new Class(typeTable, basic, "B");
 
             A.SuperClass.Add(baseClass);
             B.SuperClass.Add(baseClass);
 
-            typesTalbe.RegisterType(baseClass);
-            typesTalbe.RegisterType(A);
-            typesTalbe.RegisterType(B);
+            typeTable.RegisterType(baseClass);
+            typeTable.RegisterType(A);
+            typeTable.RegisterType(B);
             Assert.IsTrue(B.ConformsTo(baseClass));
             Assert.IsFalse(B.ConformsTo(A));
-
-            Namespace basic = new Namespace("");
-
-            Namespace subNamespace = new Namespace("subNamespace");
-            basic.NestedNamespace.Add(subNamespace);
-            subNamespace.NestedClassifier.Add(baseClass);
 
             Assert.AreEqual(baseClass.ToString(), "::subNamespace::Base");
         }
@@ -338,17 +343,21 @@ namespace Tests.OCL
             Assert.AreEqual(setType.CommonSuperType(anyType), anyType);
 
             //tuple test
-            TupleType tuple1 = new TupleType(typesTable);
-            tuple1.TupleParts.Add(new Property("prop1", PropertyType.Many, integerType));
-            tuple1.TupleParts.Add(new Property("prop2", PropertyType.Many, integerType));
-            tuple1.TupleParts.Add(new Property("prop3", PropertyType.Many, realType));
+            List<Property> tupleParts1 = new List<Property>();
+            tupleParts1.Add(new Property("prop1", PropertyType.Many, integerType));
+            tupleParts1.Add(new Property("prop2", PropertyType.Many, integerType));
+            tupleParts1.Add(new Property("prop3", PropertyType.Many, realType));
+            TupleType tuple1 = new TupleType(typesTable,tupleParts1);
+            
 
             typesTable.RegisterType(tuple1);
 
-            TupleType tuple2 = new TupleType(typesTable);
-            tuple2.TupleParts.Add(new Property("prop1", PropertyType.Many, integerType));
-            tuple2.TupleParts.Add(new Property("prop4", PropertyType.Many, integerType));
-            tuple2.TupleParts.Add(new Property("prop3", PropertyType.One, anyType));
+            List<Property> tupleParts2 = new List<Property>();
+            tupleParts2.Add(new Property("prop1", PropertyType.Many, integerType));
+            tupleParts2.Add(new Property("prop4", PropertyType.Many, integerType));
+            tupleParts2.Add(new Property("prop3", PropertyType.One, anyType));
+            TupleType tuple2 = new TupleType(typesTable,tupleParts2);
+            
 
             typesTable.RegisterType(tuple2);
 
