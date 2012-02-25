@@ -8,7 +8,7 @@ namespace Exolutio.Model.OCL.AST
     /// <summary>
     /// A CollectionLiteralPart is a member of the collection literal.
     /// </summary>
-    public class CollectionLiteralPart : TypedElement
+    public abstract class CollectionLiteralPart : TypedElement
     {
     }
 }
