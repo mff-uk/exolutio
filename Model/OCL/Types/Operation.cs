@@ -9,37 +9,8 @@ namespace Exolutio.Model.OCL.Types
     /// TODO Operation class
     /// 
     /// </summary>
-    public class Operation:ModelElement,IHasOwner<Classifier>
+    public class Operation:IModelElement,IHasOwner<Classifier>
     {
-   
-
-        public Operation(string name, Classifier returnType):base(name)
-        {
-            IsQuery = false;
-            this.ReturnType = returnType;
-            Parametrs = new ParameterCollection(this);
-        }
-
-        public Operation(string name, Classifier returnType, IEnumerable<Parameter> Paremetrs)
-            : this(name,returnType)
-        {
-            this.Parametrs.AddRange(Parametrs);
-        }
-
-        public Operation(string name, bool isQuery, Classifier returnType)
-            : this(name,returnType)
-        {
-            IsQuery = isQuery;
-            this.ReturnType = returnType;
-            Parametrs = new ParameterCollection(this);
-        }
-
-        public Operation(string name, bool isQuery, Classifier returnType, IEnumerable<Parameter> parametrs)
-            : this(name, isQuery, returnType)
-        {
-            this.Parametrs.AddRange(parametrs);
-        }
-
         public virtual bool IsQuery
         {
             get;
@@ -58,25 +29,26 @@ namespace Exolutio.Model.OCL.Types
             protected set;
         }
 
-        public override string Name
-        {
-            get
-            {
-                return base.Name;
-            }
-            set
-            {
-                base.Name = value;
-            }
+
+
+        #region IModelElement Members
+
+        public string Name {
+            get;
+            private set;
         }
 
-        public override string QualifiedName
-        {
-            get 
-            {
-                return owner.QualifiedName + "." + Name;
-            }
+        Lazy<string> _QualifiedName;
+        public string QualifiedName {
+            get { throw new NotImplementedException(); }
         }
+
+        public object Tag {
+            get;
+            set;
+        }
+
+        #endregion
 
         public Classifier owner = null;
         public virtual Classifier Owner
@@ -91,6 +63,31 @@ namespace Exolutio.Model.OCL.Types
                     throw new NotSupportedException();
                 value = owner;
             }
+        }
+
+        public Operation(string name, Classifier returnType) {
+            this.Name = name;
+            IsQuery = false;
+            this.ReturnType = returnType;
+            Parametrs = new ParameterCollection(this);
+            _QualifiedName = new Lazy<string>(() => Owner.QualifiedName + "." + Name);
+        }
+
+        public Operation(string name, Classifier returnType, IEnumerable<Parameter> Paremetrs)
+            : this(name, returnType) {
+            this.Parametrs.AddRange(Parametrs);
+        }
+
+        public Operation(string name, bool isQuery, Classifier returnType)
+            : this(name, returnType) {
+            IsQuery = isQuery;
+            this.ReturnType = returnType;
+            Parametrs = new ParameterCollection(this);
+        }
+
+        public Operation(string name, bool isQuery, Classifier returnType, IEnumerable<Parameter> parametrs)
+            : this(name, isQuery, returnType) {
+            this.Parametrs.AddRange(parametrs);
         }
 
         public override bool Equals(object obj)
@@ -112,5 +109,7 @@ namespace Exolutio.Model.OCL.Types
         {
             return QualifiedName + Parametrs.ToString();
         }
+
+ 
     }
 }

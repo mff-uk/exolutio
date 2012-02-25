@@ -10,8 +10,8 @@ namespace Exolutio.Model.OCL.Types
     /// </summary>
     public abstract class DataType:Classifier
     {
-        public DataType(TypesTable.TypesTable tt, string name, Classifier superClassifier)
-            : base(tt,name,superClassifier)
+        public DataType(TypesTable.TypesTable tt,Namespace ns, string name, Classifier superClassifier)
+            : base(tt,ns,name,superClassifier)
         { }
     }
 }

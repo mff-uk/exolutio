@@ -5,25 +5,29 @@ using System.Text;
 
 namespace Exolutio.Model.OCL.Types
 {
-    public class Namespace : ModelElement,IHasOwner<Namespace>
+    public class Namespace : IModelElement,IHasOwner<Namespace>
     {
-        public override string QualifiedName
-        {
-            get
-            {
-                if (Owner != null)
-                    return Owner.QualifiedName + "::" + Name;
-                else
-                    return Name;
-            }
+        public Namespace(string name, Namespace owner):this(name) {
+            NestedNamespace = new NestedElemetCollection<Namespace, Namespace>(this);
+            NestedClassifier = new NestedElemetCollection<Classifier, IModelElement>(this);
+            this.Name = name;
+            this.Owner = owner;
+            this.QualifiedName = GetQualifiedName(name, owner);
         }
-        
 
         public Namespace(string name)
-            : base(name)
         {
             NestedNamespace = new NestedElemetCollection<Namespace, Namespace>(this);
-            NestedClassifier = new NestedElemetCollection<Classifier, ModelElement>(this);
+            NestedClassifier = new NestedElemetCollection<Classifier, IModelElement>(this);
+            this.Name = name;
+            this.QualifiedName = GetQualifiedName(name, null);
+        }
+
+        public string GetQualifiedName(string name, Namespace owner) {
+            if (owner != null)
+                return owner.QualifiedName + "::" + name;
+            else
+                return name;
         }
 
         public NestedElemetCollection<Namespace, Namespace> NestedNamespace
@@ -32,20 +36,41 @@ namespace Exolutio.Model.OCL.Types
             private set;
         }
 
-        public NestedElemetCollection<Classifier, ModelElement> NestedClassifier
+        public NestedElemetCollection<Classifier, IModelElement> NestedClassifier
         {
             get;
             private set;
         }
+
+        #region IModelElement Members
+
+        public string Name {
+            get;
+            private set;
+        }
+
+        public string QualifiedName {
+            get;
+            private set;
+        }
+
+        public virtual object Tag {
+            get;
+            set;
+        }
+
+        #endregion
 
         #region IHasOwner<Namespace> Members
 
         public virtual Namespace Owner
         {
             get;
-             set;
+            set;
         }
 
         #endregion
+
+
     }
 }

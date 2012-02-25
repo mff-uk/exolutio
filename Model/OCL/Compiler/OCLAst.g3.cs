@@ -63,7 +63,7 @@ namespace Exolutio.Model.OCL.Compiler {
 
         Classifier ClassifierContextHead(List<IToken> tokenPath, string selfName, out VariableDeclaration selfOut) {
             List<string> path = tokenPath.ToStringList();
-            ModelElement element = Environment.LookupPathName(path);
+            IModelElement element = Environment.LookupPathName(path);
             if (element is Classifier == false) {
                 // error
                 selfOut = null;
@@ -75,7 +75,7 @@ namespace Exolutio.Model.OCL.Compiler {
             selfOut = varSelf;
             Environment classifierEnv = Environment.CreateFromClassifier(contextClassifier, varSelf);
             EnvironmentStack.Push(classifierEnv);
-           
+
             Environment self = Environment.AddElement(selfName, contextClassifier, varSelf, true);
             EnvironmentStack.Push(self);
 
@@ -84,7 +84,7 @@ namespace Exolutio.Model.OCL.Compiler {
         }
 
         AST.OclExpression InfixOperation(AST.OclExpression exp1, string name, AST.OclExpression exp2) {
-            if (TestNull(exp1,name,exp2)) {
+            if (TestNull(exp1, name, exp2)) {
                 return new AST.ErrorExp(Library.Invalid);
             }
 
@@ -97,7 +97,7 @@ namespace Exolutio.Model.OCL.Compiler {
         }
 
         AST.OclExpression UnaryOperation(IToken name, AST.OclExpression exp1) {
-            if (TestNull( name, exp1)) {
+            if (TestNull(name, exp1)) {
                 return new AST.ErrorExp(Library.Invalid);
             }
 
@@ -129,7 +129,7 @@ namespace Exolutio.Model.OCL.Compiler {
                 }
             }
 
-            Errors.AddError(new CodeErrorItem(String.Format(CompilerErrors.OCLAst_ProcessPropertyCall_PropertyNotExists,path[0]), tokenPath.First(), tokenPath.Last()));
+            Errors.AddError(new CodeErrorItem(String.Format(CompilerErrors.OCLAst_ProcessPropertyCall_PropertyNotExists, path[0]), tokenPath.First(), tokenPath.Last()));
             return new AST.ErrorExp(Library.Invalid);
         }
 
@@ -174,12 +174,12 @@ namespace Exolutio.Model.OCL.Compiler {
                 }
             }
 
-            Errors.AddError(new CodeErrorItem(string.Format(CompilerErrors.OCLAst_ProcessOperationCall_OperationNotExists,path.First()), tokenPath.First(), tokenPath.Last()));
+            Errors.AddError(new CodeErrorItem(string.Format(CompilerErrors.OCLAst_ProcessOperationCall_OperationNotExists, path.First()), tokenPath.First(), tokenPath.Last()));
             return new AST.ErrorExp(Library.Invalid);
         }
 
         private AST.OclExpression CreateImplicitCollectIterator(AST.OclExpression expr, List<AST.OclExpression> args, Classifier sourceType, Operation op) {
-            if (TestNull(expr, args,sourceType,op)) {
+            if (TestNull(expr, args, sourceType, op)) {
                 return new AST.ErrorExp(Library.Invalid);
             }
 
@@ -189,17 +189,17 @@ namespace Exolutio.Model.OCL.Compiler {
             AST.VariableExp localVar = new AST.VariableExp(varDecl);
             AST.OperationCallExp localOp = new AST.OperationCallExp(localVar, false, op, args);
             //Napevno zafixovany navratovy typ collect
-            Classifier returnType = Library.CreateCollection( CollectionKind.Collection, op.ReturnType);
+            Classifier returnType = Library.CreateCollection(CollectionKind.Collection, op.ReturnType);
             return new AST.IteratorExp(expr, localOp, "Collect", varList, returnType);
         }
 
         AST.OclExpression ProcessIteratorCall(AST.OclExpression expr, List<IToken> tokenPath, List<VariableDeclaration> decls, List<AST.OclExpression> args) {
-            if (TestNull(expr, tokenPath,decls,args)) {
+            if (TestNull(expr, tokenPath, decls, args)) {
                 return new AST.ErrorExp(Library.Invalid);
             }
 
             if (expr.Type is CollectionType == false) {
-                Errors.AddError( new ErrorItem(CompilerErrors.OCLAst_ProcessIteratorCall_Compiler_don_t_support_iterator_operations_on_not_collection_type));
+                Errors.AddError(new ErrorItem(CompilerErrors.OCLAst_ProcessIteratorCall_Compiler_don_t_support_iterator_operations_on_not_collection_type));
                 return new AST.ErrorExp(Library.Invalid);
             }
 
@@ -232,8 +232,8 @@ namespace Exolutio.Model.OCL.Compiler {
             return new AST.ErrorExp(Library.Invalid);
         }
 
-        AST.OclExpression ProcessIterate(AST.OclExpression rootExpr, IToken itToken, VariableDeclaration iteratorDecl,VariableDeclaration accDecl, AST.OclExpression body) {
-            if (TestNull(rootExpr, iteratorDecl,accDecl,body)) {
+        AST.OclExpression ProcessIterate(AST.OclExpression rootExpr, IToken itToken, VariableDeclaration iteratorDecl, VariableDeclaration accDecl, AST.OclExpression body) {
+            if (TestNull(rootExpr, iteratorDecl, accDecl, body)) {
                 return new AST.ErrorExp(Library.Invalid);
             }
             return new AST.IterateExp(rootExpr, body, iteratorDecl, accDecl);
@@ -262,7 +262,7 @@ namespace Exolutio.Model.OCL.Compiler {
                 return new AST.OperationCallExp(expr, false, collectionOperation, args);
             }
 
-            Errors.AddError(new CodeErrorItem(String.Format(CompilerErrors.OCLAst_ProcessCollectionOperationCall_Unknown_collection_operation,tokenPath[0]), tokenPath.First(), tokenPath.Last()));
+            Errors.AddError(new CodeErrorItem(String.Format(CompilerErrors.OCLAst_ProcessCollectionOperationCall_Unknown_collection_operation, tokenPath[0]), tokenPath.First(), tokenPath.Last()));
             return new AST.ErrorExp(Library.Invalid);
         }
 
@@ -273,7 +273,7 @@ namespace Exolutio.Model.OCL.Compiler {
             List<string> path = tokenPath.ToStringList();
             if (path.Count == 1) {
                 // simpleName
-                ModelElement element = Environment.Lookup(path[0]);
+                IModelElement element = Environment.Lookup(path[0]);
 
                 //Variable
                 if (element is VariableDeclaration) {
@@ -294,7 +294,7 @@ namespace Exolutio.Model.OCL.Compiler {
             }
             else {
                 // path
-                ModelElement element = Environment.LookupPathName(path);
+                IModelElement element = Environment.LookupPathName(path);
                 //Chyby enum !!!!!!!!!!!!!!!!!!!!!!!!
                 if (element is Classifier) {
                     return new AST.TypeExp((Classifier)element, Library.Type);
@@ -338,7 +338,7 @@ namespace Exolutio.Model.OCL.Compiler {
         /// <returns></returns>
         AST.IntegerLiteralExp CreateIntegerLiteral(CommonTree token) {
             if (TestNull(token)) {
-                return new AST.IntegerLiteralExp(0,Library.Integer);
+                return new AST.IntegerLiteralExp(0, Library.Integer);
             }
 
             long value = 0;
@@ -437,7 +437,7 @@ namespace Exolutio.Model.OCL.Compiler {
         }
 
         AST.OclExpression CollectionLiteralExp(CollectionKind kind, CommonTree token, Classifier type, List<AST.CollectionLiteralPart> parts) {
-            if (TestNull(token,type,parts)) {
+            if (TestNull(token, type, parts)) {
                 return new AST.ErrorExp(Library.Invalid);
             }
 
@@ -456,15 +456,15 @@ namespace Exolutio.Model.OCL.Compiler {
         }
 
         AST.TupleLiteralExp CreateTupleLiteral(IToken rootToken, List<VariableDeclarationBag> vars) {
-            if (TestNull(rootToken,vars)) {
-                TupleType tupleTypeErr = new TupleType(TypesTable);
+            if (TestNull(rootToken, vars)) {
+                TupleType tupleTypeErr = new TupleType(TypesTable, new List<Property>());
                 TypesTable.RegisterCompositeType(tupleTypeErr);
                 return new AST.TupleLiteralExp(new Dictionary<string, AST.TupleLiteralPart>(), tupleTypeErr);
             }
 
             Dictionary<string, AST.TupleLiteralPart> parts = new Dictionary<string, AST.TupleLiteralPart>();
-            TupleType tupleType = new TupleType(TypesTable);
 
+            List<Property> tupleParts = new List<Property>();
             foreach (var var in vars) {
                 if (parts.ContainsKey(var.Name)) {
                     Errors.AddError(new CodeErrorItem(String.Format(CompilerErrors.OCLAst_CreateTupleLiteral_Name__0__is_used_multipled, var.Name), rootToken, rootToken));
@@ -491,8 +491,9 @@ namespace Exolutio.Model.OCL.Compiler {
                 parts.Add(var.Name, newPart);
 
                 //typ
-                tupleType.TupleParts.Add(newProterty);
+                tupleParts.Add(newProterty);
             }
+            TupleType tupleType = new TupleType(TypesTable, tupleParts);
             TypesTable.RegisterCompositeType(tupleType);
 
             AST.TupleLiteralExp tupleLiteral = new AST.TupleLiteralExp(parts, tupleType);
@@ -505,7 +506,7 @@ namespace Exolutio.Model.OCL.Compiler {
             }
 
             List<string> path = tokenPath.ToStringList();
-            ModelElement foundType = Environment.LookupPathName(path);
+            IModelElement foundType = Environment.LookupPathName(path);
             if (foundType == null) {
                 foundType = Library.Invalid;
                 Errors.AddError(new CodeErrorItem(String.Format(CompilerErrors.OCLAst_ResolveTypePathName_Path__0__do_not_exists, path), tokenPath.First(), tokenPath.Last()));
@@ -525,15 +526,16 @@ namespace Exolutio.Model.OCL.Compiler {
         }
 
         TupleType CreateTupleType(IToken rootToken, List<VariableDeclarationBag> variables) {
-            if (TestNull(rootToken,variables)) {
-                TupleType tupleType = new TupleType(TypesTable);
+            if (TestNull(rootToken, variables)) {
+                TupleType tupleType = new TupleType(TypesTable, new List<Property>());
                 TypesTable.RegisterCompositeType(tupleType);
                 return tupleType;
             }
 
-            TupleType tuple = new TupleType(TypesTable);
+
+            Dictionary<string, Property> tupleParts = new Dictionary<string, Property>();
             foreach (var variable in variables) {
-                if (tuple.TupleParts.Keys.Contains(variable.Name)) {// Kontrola nad ramec specifikace
+                if (tupleParts.Keys.Contains(variable.Name)) {// Kontrola nad ramec specifikace
                     Errors.AddError(new CodeErrorItem(String.Format(CompilerErrors.OCLAst_CreateTupleLiteral_Name__0__is_used_multipled, variable.Name), rootToken, rootToken));
                     continue;
                 }
@@ -541,9 +543,9 @@ namespace Exolutio.Model.OCL.Compiler {
                 if (variable.Type == null) {
                     propertyType = Library.Invalid;
                 }
-                tuple.TupleParts.Add(new Property(variable.Name, PropertyType.One, propertyType));
+                tupleParts.Add(variable.Name, new Property(variable.Name, PropertyType.One, propertyType));
             }
-
+            TupleType tuple = new TupleType(TypesTable, tupleParts.Values);
             TypesTable.RegisterCompositeType(tuple);
 
             return tuple;
@@ -609,7 +611,7 @@ namespace Exolutio.Model.OCL.Compiler {
 
         VariableDeclaration LetDecl(IToken letToken, VariableDeclarationBag varBag) {
             if (TestNull(letToken, varBag)) {
-                return new VariableDeclaration("", Library.Invalid,new AST.ErrorExp(Library.Invalid));
+                return new VariableDeclaration("", Library.Invalid, new AST.ErrorExp(Library.Invalid));
             }
 
             if (Environment.Lookup(varBag.Name) != null) {
@@ -629,10 +631,10 @@ namespace Exolutio.Model.OCL.Compiler {
         }
 
         AST.OclExpression CreateLet(IToken letToken, VariableDeclaration decl, AST.OclExpression inExpr) {
-            if (TestNull( decl, inExpr)) {
+            if (TestNull(decl, inExpr)) {
                 return new AST.ErrorExp(Library.Invalid);
             }
-            
+
             //?????? proc to tady bylo
             //if (decl == null) {
             //    return inExpr;
@@ -641,7 +643,7 @@ namespace Exolutio.Model.OCL.Compiler {
         }
 
         AST.OclExpression CreateIf(IToken ifTok, AST.OclExpression condition, AST.OclExpression th, AST.OclExpression el) {
-            if(TestNull(ifTok,condition,th,el)){
+            if (TestNull(ifTok, condition, th, el)) {
                 return new AST.ErrorExp(Library.Invalid);
             }
 

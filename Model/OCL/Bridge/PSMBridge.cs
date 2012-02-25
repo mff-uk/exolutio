@@ -76,26 +76,26 @@ namespace Exolutio.Model.OCL.Bridge {
             sLC.CreateStandardLibrary(TypesTable);
 
             // Docasna podpora pro typy v Tournaments.eXo
-            Class date = new Class(TypesTable, "date");
+            Class date = new Class(TypesTable,TypesTable.Library.RootNamespace, "date");
             date.Operations.Add(new Operation("after", true, TypesTable.Library.Boolean, new Parameter[] { new Parameter("time", date) }));
             date.Operations.Add(new Operation("before", true, TypesTable.Library.Boolean, new Parameter[] { new Parameter("time", date) }));
             date.Operations.Add(new Operation("equals", true, TypesTable.Library.Boolean, new Parameter[] { new Parameter("time", date) }));
             date.Operations.Add(new Operation("<=", true, TypesTable.Library.Boolean, new Parameter[] { new Parameter("time", date) }));
             TypesTable.RegisterType(date);
-            TypesTable.Library.RootNamespace.NestedClassifier.Add(date);
-            
+          //  TypesTable.Library.RootNamespace.NestedClassifier.Add(date);
 
-            Class dateTime = new Class(TypesTable, "dateTime");
+
+            Class dateTime = new Class(TypesTable, TypesTable.Library.RootNamespace, "dateTime");
             dateTime.Operations.Add(new Operation("after", true, TypesTable.Library.Boolean, new Parameter[] { new Parameter("time", dateTime) }));
             dateTime.Operations.Add(new Operation("before", true, TypesTable.Library.Boolean, new Parameter[] { new Parameter("time", dateTime) }));
             dateTime.Operations.Add(new Operation("equals", true, TypesTable.Library.Boolean, new Parameter[] { new Parameter("time", dateTime) }));
             dateTime.Operations.Add(new Operation("<=", true, TypesTable.Library.Boolean, new Parameter[] { new Parameter("time", dateTime) }));
             TypesTable.RegisterType(dateTime);
-            TypesTable.Library.RootNamespace.NestedClassifier.Add(dateTime);
-            
+          //  TypesTable.Library.RootNamespace.NestedClassifier.Add(dateTime);
 
-            Class matchesStatus = new Class(TypesTable, "MatchStatus");
-            TypesTable.Library.RootNamespace.NestedClassifier.Add(matchesStatus);
+
+            Class matchesStatus = new Class(TypesTable, TypesTable.Library.RootNamespace, "MatchStatus");
+           // TypesTable.Library.RootNamespace.NestedClassifier.Add(matchesStatus);
             TypesTable.RegisterType(matchesStatus);
 
             Translate(TypesTable);
@@ -123,16 +123,16 @@ namespace Exolutio.Model.OCL.Bridge {
                         parent = Library.Any;
                     }
                 }
-                Classifier newClassifier = new Classifier(tt, type.Name, parent);
+                Classifier newClassifier = new Classifier(tt,tt.Library.RootNamespace, type.Name, parent);
                 tt.RegisterType(newClassifier);
-                Library.RootNamespace.NestedClassifier.Add(newClassifier);
+            //    Library.RootNamespace.NestedClassifier.Add(newClassifier);
                 PSMAttributeType.Add(type, newClassifier);
             }
 
             List<PSMBridgeClass> classToProcess = new List<PSMBridgeClass>();
             foreach (PSM.PSMClass cl in schema.PSMClasses) {
-                PSMBridgeClass newClass = new PSMBridgeClass(tt, cl);
-                tt.Library.RootNamespace.NestedClassifier.Add(newClass);
+                PSMBridgeClass newClass = new PSMBridgeClass(tt,tt.Library.RootNamespace, cl);
+              //  tt.Library.RootNamespace.NestedClassifier.Add(newClass);
                 tt.RegisterType(newClass);
                 classToProcess.Add(newClass);
                 //Hack
@@ -143,8 +143,8 @@ namespace Exolutio.Model.OCL.Bridge {
 
             foreach (var cM in schema.PSMContentModels) {
                 string cMName = GetContentModelOCLName(cM);
-                PSMBridgeClass newClass = new PSMBridgeClass(tt, cM);
-                tt.Library.RootNamespace.NestedClassifier.Add(newClass);
+                PSMBridgeClass newClass = new PSMBridgeClass(tt,tt.Library.RootNamespace, cM);
+               // tt.Library.RootNamespace.NestedClassifier.Add(newClass);
                 tt.RegisterType(newClass);
                 classToProcess.Add(newClass);
                 newClass.Tag = cM;

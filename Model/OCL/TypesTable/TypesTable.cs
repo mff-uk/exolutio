@@ -32,7 +32,7 @@ namespace Exolutio.Model.OCL.TypesTable {
                 throw new NullReferenceException("Type is null.");
 
             TypeRecord newTypeRecord = CreateTypeRecord(type);
-            type.TypeTable = this;
+           // type.TypeTable = this;
 
             if (type is ICompositeType) {
                 RegisterCompositeType(type);

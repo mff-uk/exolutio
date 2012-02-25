@@ -11,13 +11,9 @@ namespace Exolutio.Model.OCL.Types
     /// </summary>
     public class BagType : CollectionType
     {
-        override public CollectionKind CollectionKind
-        {
-            get
-            {
-                return CollectionKind.Bag;
-            }
-        }
+
+        public BagType(TypesTable.TypesTable tt, Classifier elemetnType, Classifier superClassifier)
+            : base(tt, CollectionKind.Bag, elemetnType, superClassifier) { }
 
 
         public override Classifier CommonSuperType(Classifier other)
@@ -29,9 +25,7 @@ namespace Exolutio.Model.OCL.Types
                 return common;
         }
 
-        public BagType(TypesTable.TypesTable tt, Classifier elemetnType, Classifier superClassifier)
-            : base(tt,elemetnType,superClassifier)
-        { }
+
 
    
     }

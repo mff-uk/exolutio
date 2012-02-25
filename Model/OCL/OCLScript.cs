@@ -1,3 +1,5 @@
+//#define timeDebug
+
 using System;
 using System.Xml.Linq;
 using System.Linq;
@@ -50,9 +52,21 @@ namespace Exolutio.Model.OCL {
         public string Contents { get; set; }
 
         public CompilerResult CompileToAst() {
+#if timeDebug
+            System.Diagnostics.Stopwatch translateTime = new System.Diagnostics.Stopwatch();
+            System.Diagnostics.Stopwatch compileTime = new System.Diagnostics.Stopwatch();
+#endif
+
             Bridge.BridgeFactory factor = new Bridge.BridgeFactory();
+#if timeDebug
+            translateTime.Start();
+#endif
             Bridge.IBridgeToOCL bridge = factor.Create(Schema);
             TypesTable.TypesTable tt = bridge.TypesTable;
+#if timeDebug
+            translateTime.Stop();
+            compileTime.Start();
+#endif
 
             ErrorCollection errColl = new ErrorCollection();
 
@@ -66,7 +80,11 @@ namespace Exolutio.Model.OCL {
             semantic.TypesTable = tt;
             semantic.EnvironmentStack.Push(new NamespaceEnvironment(tt.Library.RootNamespace));
             AST.Constraints constraints = semantic.contextDeclarationList();
-
+#if timeDebug
+            compileTime.Stop();
+            errColl.AddError(new ErrorItem(String.Format("Translate time:{0} Compile time:{1}",translateTime.ElapsedMilliseconds,compileTime.ElapsedMilliseconds)));
+#endif
+            
             return new CompilerResult(constraints, errColl, tt.Library, bridge);
         }
 

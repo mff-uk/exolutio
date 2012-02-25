@@ -49,7 +49,7 @@ namespace Exolutio.Model.OCL.Utils {
 
         public void Visit(CollectionLiteralExp node) {
             CollectionType col = (CollectionType)node.Type;
-            sb.AppendFormat("{0}({1}){ ", col.Name, col.ElementType.Name);
+            sb.AppendFormat("{0}  ", col.Name);
             PrintArgs(node.Parts, ",", part => {
                 if (part is CollectionRange) {
                     CollectionRange range = (CollectionRange)part;

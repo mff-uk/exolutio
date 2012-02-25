@@ -96,6 +96,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>StandardTypeName.tt</DependentUpon>
     </Compile>
+    <Compile Include="OCL\Types\NonCompositeType.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="OCL\Utils\CanonicPrinterVisitor.cs" />
     <Compile Include="OCL\Utils\PrintVisitor.cs" />
     <Compile Include="OCL\CompilerResult.cs" />
@@ -170,7 +173,6 @@
     <Compile Include="OCL\Types\ModelElement.cs" />
     <Compile Include="OCL\Types\Namespace.cs" />
     <Compile Include="OCL\Types\NestedElemetCollection.cs" />
-    <Compile Include="OCL\Types\NonCompositeType.cs" />
     <Compile Include="OCL\Types\Operation.cs" />
     <Compile Include="OCL\AST\OperationCallExp.cs" />
     <Compile Include="OCL\Types\OperationCollection.cs" />

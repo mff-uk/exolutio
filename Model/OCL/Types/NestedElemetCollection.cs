@@ -7,8 +7,8 @@ using Exolutio.Model.OCL.SupportingClasses;
 namespace Exolutio.Model.OCL.Types
 {
     public class NestedElemetCollection<V, OwnerType> : ActionDictionary<string, V>
-        where V : ModelElement,IHasOwner<OwnerType>
-        where OwnerType : ModelElement
+        where V : IModelElement,IHasOwner<OwnerType>
+        where OwnerType : IModelElement
     {
         protected OwnerType Owner
         {

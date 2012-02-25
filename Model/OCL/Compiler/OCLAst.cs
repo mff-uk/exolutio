@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// $ANTLR 3.3.1.7705 ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3 2011-11-10 22:35:06
+// $ANTLR 3.3.1.7705 ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3 2012-02-25 16:53:53
 
 // The variable 'variable' is assigned but its value is never used.
 #pragma warning disable 219
@@ -3643,7 +3643,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 
 			}
 
-					retval.Tree = retval.Tree;
+					retval.Tree = retval.Start;
 				
 		}
 		catch (RecognitionException re)

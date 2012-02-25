@@ -7,14 +7,14 @@ using Exolutio.Model.OCL.TypesTable;
 
 namespace Exolutio.Model.OCL.TypesTable {
 
-    
+
 
     public partial class Library {
 
         public StandardTypeName TypeName {
             get;
             set;
-        }  
+        }
 
         public Namespace RootNamespace {
             get;
@@ -31,7 +31,7 @@ namespace Exolutio.Model.OCL.TypesTable {
             protected set;
         }
 
-       
+
 
         public Library(TypesTable tt) {
             RootNamespace = new Namespace("");
@@ -50,7 +50,7 @@ namespace Exolutio.Model.OCL.TypesTable {
 
 
         public CollectionType CreateCollection(CollectionKind kind, Classifier elementType) {
-            CollectionType newType ;
+            CollectionType newType;
             if (kind == CollectionKind.Collection) {
                 newType = new CollectionType(TypeTable, elementType, Any);
             }
@@ -98,43 +98,44 @@ namespace Exolutio.Model.OCL.TypesTable {
 
 
 
-   public  class StandardLibraryCreator {
+    public class StandardLibraryCreator {
         Library lib;
 
         public StandardLibraryCreator() {
         }
 
         protected void InsertClassifier(Classifier c) {
-            lib.RootNamespace.NestedClassifier.Add(c);
+          //  lib.RootNamespace.NestedClassifier.Add(c);
             lib.TypeTable.RegisterType(c);
         }
 
-        protected void AddOperation(Classifier cl,string name, Classifier returnType, params Classifier [] types) {
+        protected void AddOperation(Classifier cl, string name, Classifier returnType, params Classifier[] types) {
             cl.Operations.Add(new Operation(name, true, returnType, types.Select(t => new Parameter("", t))));
         }
 
 
         public void CreateStandardLibrary(TypesTable tt) {
             lib = tt.Library;
+            Namespace ns = lib.RootNamespace;
 
-            Classifier oclAny = new Classifier(tt, lib.TypeName.Any);
+            Classifier oclAny = new Classifier(tt, ns, lib.TypeName.Any);
             InsertClassifier(oclAny);
-            Classifier real = new Classifier(tt, lib.TypeName.Real, oclAny);
+            Classifier real = new Classifier(tt, ns, lib.TypeName.Real, oclAny);
             InsertClassifier(real);
-            Classifier integer = new Classifier(tt, lib.TypeName.Integer, real);
+            Classifier integer = new Classifier(tt, ns, lib.TypeName.Integer, real);
             InsertClassifier(integer);
-            Classifier unlimited = new Classifier(tt, lib.TypeName.UnlimitedNatural, integer);
+            Classifier unlimited = new Classifier(tt, ns, lib.TypeName.UnlimitedNatural, integer);
             InsertClassifier(unlimited);
-            Classifier str = new Classifier(tt, lib.TypeName.String, oclAny);
+            Classifier str = new Classifier(tt,ns, lib.TypeName.String, oclAny);
             InsertClassifier(str);
-            Classifier boolean = new Classifier(tt, lib.TypeName.Boolean, oclAny);
+            Classifier boolean = new Classifier(tt,ns, lib.TypeName.Boolean, oclAny);
             InsertClassifier(boolean);
-            Classifier message = new Classifier(tt, lib.TypeName.Message, oclAny);
+            Classifier message = new Classifier(tt,ns, lib.TypeName.Message, oclAny);
             InsertClassifier(message);
-            Classifier type = new Classifier(tt, lib.TypeName.Type, oclAny);
+            Classifier type = new Classifier(tt,ns, lib.TypeName.Type, oclAny);
             InsertClassifier(type);
 
-            Classifier voidT = new VoidType(tt,lib.TypeName.Void);
+            Classifier voidT = new VoidType(tt, lib.TypeName.Void);
             InsertClassifier(voidT);
             Classifier invalid = new InvalidType(tt, lib.TypeName.Invalid);
             InsertClassifier(invalid);

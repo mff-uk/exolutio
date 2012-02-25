@@ -241,7 +241,7 @@ collectionLiteralExp //
 collectionTypeIdentifier //11
 	returns [CollectionKind Kind,CommonTree Tree]
 	@after{
-		$Tree = $collectionTypeIdentifier.Tree;
+		$Tree = $collectionTypeIdentifier.start;
 	}
 	:'Set'	{$Kind = CollectionKind.Set;}
 	|'Bag'	{$Kind = CollectionKind.Bag;}
