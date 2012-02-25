@@ -152,21 +152,21 @@ namespace Exolutio.Model.OCL.ConstraintConversion
 
         public override string ToXPath()
         {
-            if (Variable == Path.Context.ClassifierConstraint.Self)
-            {
-                //if (Path.Context.LoopStack.IsEmpty())
-                //{
-                //    return @".";
-                //}
-                //else
-                {
-                    return @"$self";
-                }
-            }
-            else
-            {
-                return string.Format(@"${0}", Variable.Name);
-            }
+            //if (Variable == Path.Context.ClassifierConstraint.Self)
+            //{
+            //    //if (Path.Context.LoopStack.IsEmpty())
+            //    //{
+            //    //    return @".";
+            //    //}
+            //    //else
+            //    {
+            //        return @"$self";
+            //    }
+            //}
+            //else
+            //{
+            return string.Format(@"${0}", Variable.Name);
+            //}
         }
     }
 
