@@ -10,8 +10,8 @@
        begin="/\*" end="\*/" />
 
     <Span color="String">
-      <Begin>"</Begin>
-      <End>"</End>
+      <Begin>'</Begin>
+      <End>'</End>
       <RuleSet>
         <!-- nested span for escape sequences -->
         <Span begin="\\" end="." />

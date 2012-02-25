@@ -24,81 +24,7 @@ namespace Tests.OCL {
 
             BridgeFactory brFactory = new BridgeFactory();
             TypesTable tt = brFactory.Create(loadedProject.SingleVersion.PIMSchema.OCLScripts[0].Schema).TypesTable;
-      
-            /*
-            //tt.Library.Boolean.Operations.Add(new Operation("and", true, tt.Library.Boolean, new Parameter[] { new Parameter("time", tt.Library.Boolean) }));
-            //tt.Library.Boolean.Operations.Add(new Operation("or", true, tt.Library.Boolean, new Parameter[] { new Parameter("time", tt.Library.Boolean) }));
-            //tt.Library.Boolean.Operations.Add(new Operation("implies", true, tt.Library.Boolean, new Parameter[] { new Parameter("time", tt.Library.Boolean) }));
-            //tt.Library.Boolean.Operations.Add(new Operation("not", true, tt.Library.Boolean));
 
-
-            Class date = new Class(tt,"Date");
-            date.Operations.Add(new Operation("after", true, tt.Library.Boolean, new Parameter[] { new Parameter("time", date) }));
-            date.Operations.Add(new Operation("before", true, tt.Library.Boolean, new Parameter[] { new Parameter("time", date) }));
-            date.Operations.Add(new Operation("equals", true, tt.Library.Boolean, new Parameter[] { new Parameter("time", date) }));
-            date.Operations.Add(new Operation("<=", true, tt.Library.Boolean, new Parameter[] { new Parameter("time", date) }));
-
-            Class tournament = new Class(tt,"Tournament");
-            tournament.Properties.Add(new Property("name", PropertyType.One, tt.Library.String));
-            tournament.Properties.Add(new Property("start", PropertyType.One, date));
-            tournament.Properties.Add(new Property("end", PropertyType.One, date));
-            tournament.Properties.Add(new Property("maxNumPlayers", PropertyType.One, tt.Library.Integer));
-            tournament.Properties.Add(new Property("advertised", PropertyType.ZeroToOne, tt.Library.Boolean));
-            tournament.Properties.Add(new Property("requiredQualificationPoints", PropertyType.One, tt.Library.Integer));
-            tournament.Properties.Add(new Property("open", PropertyType.One, tt.Library.Boolean));
-            tournament.Operations.Add(new Operation("overlap", true, tt.Library.Boolean, new Parameter[] { new Parameter("t", tournament) }));
-            tournament.Operations.Add(new Operation("<>", true, tt.Library.Boolean, new Parameter[] { new Parameter("tournament", tournament) }));
-
-            Class match = new Class(tt,"Match");
-            match.Properties.Add(new Property("start", PropertyType.One, date));
-            match.Properties.Add(new Property("end", PropertyType.One, date));
-            // chyby status
-
-            Class tournamentControl = new Class(tt,"TournamentControl");
-
-            Class player = new Class(tt,"Player");
-            player.Properties.Add(new Property("points", PropertyType.One, tt.Library.Integer));
-            player.Properties.Add(new Property("regno", PropertyType.One, tt.Library.String));
-
-            Class league = new Class(tt, "League");
-
-
-            //Vzjemne propejeni trid
-            BagType matchesBagType = new BagType(tt,match);
-          //  matchesBagType.Operations.Add(new Operation("includes", true, tt.Library.Boolean, new Parameter[] { new Parameter("tournament", match) }));
-
-            tournament.Properties.Add(new Property("matches", PropertyType.Many, matchesBagType));
-            BagType playersBagType = new BagType(tt,player);
-            tournament.Properties.Add(new Property("players", PropertyType.Many, playersBagType));
-            BagType tournamentBagType = new BagType(tt,tournament);
-            player.Properties.Add(new Property("tournaments", PropertyType.Many, tournamentBagType));
-            player.Properties.Add(new Property("matches", PropertyType.Many, matchesBagType));
-            tournamentControl.Properties.Add(new Property("tournament", PropertyType.One, tournament));
-            match.Properties.Add(new Property("players", PropertyType.Many, playersBagType));
-            BagType leagueBag = new BagType(tt, league);
-            player.Properties.Add(new Property("league", PropertyType.ZeroToOne, leagueBag));
-
-            Namespace ns = tt.Library.RootNamespace;
-            ns.NestedClassifier.Add(date);
-            ns.NestedClassifier.Add(tournament);
-            ns.NestedClassifier.Add(match);
-            ns.NestedClassifier.Add(tournamentControl);
-            ns.NestedClassifier.Add(player);
-            ns.NestedClassifier.Add(league);
-
-
-            tt.RegisterType(date);
-            tt.RegisterType(tournament);
-            tt.RegisterType(match);
-            tt.RegisterType(matchesBagType);
-            tt.RegisterType(tournamentControl);
-            tt.RegisterType(playersBagType);
-            tt.RegisterType(tournamentBagType);
-            tt.RegisterType(player);
-            tt.RegisterType(league);
-            tt.RegisterType(leagueBag);
-
-            */
             NamespaceEnvironment env = new NamespaceEnvironment(tt.Library.RootNamespace);
             
 
@@ -227,6 +153,68 @@ inv: not League->isEmpty() implies regNo <> null ", root.Item1, root.Item2);
             string text = printer.AstToString(ast.Invariants[0]);
 
         }
+
+
+        [Test]
+        public void TupleTest() {
+            
+            Compiler compiler = new Compiler();
+            Tuple<TypesTable, Exolutio.Model.OCL.Environment> root = CreateTestEnv();
+            //compiler.TypesTable = tt;
+
+            var ast = compiler.TestCompiler(@"context Tournament 
+inv: (Tuple {x: Integer = 5, y: String = 'hi'}).x = 5", root.Item1, root.Item2);
+
+            Exolutio.Model.OCL.Utils.PrintVisitor printer = new Exolutio.Model.OCL.Utils.PrintVisitor();
+            string text = printer.AstToString(ast.Invariants[0]);
+        }
+
+        [Test]
+        public void StringTest() {
+
+            Compiler compiler = new Compiler();
+            Tuple<TypesTable, Exolutio.Model.OCL.Environment> root = CreateTestEnv();
+            //compiler.TypesTable = tt;
+
+            var ast = compiler.TestCompiler(@"context Tournament 
+inv: 'a'='a'", root.Item1, root.Item2);
+
+            
+
+            Exolutio.Model.OCL.Utils.PrintVisitor printer = new Exolutio.Model.OCL.Utils.PrintVisitor();
+            string text = printer.AstToString(ast.Invariants[0]);
+        }
+
+
+        [Test]
+        public void IntTest() {
+
+            Compiler compiler = new Compiler();
+            Tuple<TypesTable, Exolutio.Model.OCL.Environment> root = CreateTestEnv();
+            //compiler.TypesTable = tt;
+
+            var ast = compiler.TestCompiler(@"context Tournament 
+inv: 1=1", root.Item1, root.Item2);
+
+            Exolutio.Model.OCL.Utils.PrintVisitor printer = new Exolutio.Model.OCL.Utils.PrintVisitor();
+            string text = printer.AstToString(ast.Invariants[0]);
+        }
+
+
+        [Test]
+        public void SetTest() {
+
+            Compiler compiler = new Compiler();
+            Tuple<TypesTable, Exolutio.Model.OCL.Environment> root = CreateTestEnv();
+            //compiler.TypesTable = tt;
+
+            var ast = compiler.TestCompiler(@"context Tournament 
+inv: Set{1,2}->size()=2", root.Item1, root.Item2);
+
+            Exolutio.Model.OCL.Utils.PrintVisitor printer = new Exolutio.Model.OCL.Utils.PrintVisitor();
+            string text = printer.AstToString(ast.Invariants[0]);
+        }
+
 
 
 
