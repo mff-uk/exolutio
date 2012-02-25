@@ -1,0 +1,1176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="schematronXSD" xml:space="preserve">
+    <value>&lt;!-- schemaVersion of 2001/02/15 --&gt;
+&lt;xs:schema targetNamespace="http://www.ascc.net/xml/schematron" xmlns:sch="http://www.ascc.net/xml/schematron" xmlns="http://www.ascc.net/xml/schematron" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="+//IDN sinica.edu.tw//SGML W3C XML Schema for Schematron 1.5//EN"&gt;
+&lt;xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="http://www.w3.org/2001/xml.xsd"&gt;
+&lt;xs:annotation&gt;
+&lt;xs:documentation&gt;
+ Get access to the xml: attribute groups for xml:lang 
+&lt;/xs:documentation&gt;
+&lt;/xs:annotation&gt;
+&lt;/xs:import&gt;
+&lt;xs:annotation&gt;
+&lt;xs:documentation source="http://www.ascc.net/xml/resource/schematron/schematron.html" xml:lang="en"/&gt;
+&lt;/xs:annotation&gt;
+&lt;xs:element name="active"&gt;
+&lt;xs:complexType mixed="true"&gt;
+&lt;xs:choice minOccurs="0" maxOccurs="unbounded"&gt;
+&lt;xs:element ref="sch:dir"/&gt;
+&lt;xs:element ref="sch:emph"/&gt;
+&lt;xs:element ref="sch:span"/&gt;
+&lt;/xs:choice&gt;
+&lt;xs:attribute name="pattern" type="xs:IDREF" use="required"/&gt;
+&lt;/xs:complexType&gt;
+&lt;/xs:element&gt;
+&lt;xs:element name="assert"&gt;
+&lt;xs:complexType mixed="true"&gt;
+&lt;xs:choice minOccurs="0" maxOccurs="unbounded"&gt;
+&lt;xs:element ref="sch:name"/&gt;
+&lt;xs:element ref="sch:emph"/&gt;
+&lt;xs:element ref="sch:dir"/&gt;
+&lt;xs:element ref="sch:span"/&gt;
+&lt;xs:any namespace="##other" processContents="lax"/&gt;
+&lt;/xs:choice&gt;
+&lt;xs:attribute name="test" type="xs:string" use="required"/&gt;
+&lt;xs:attribute name="role" type="xs:NMTOKEN"/&gt;
+&lt;xs:attribute name="id" type="xs:string"/&gt;
+&lt;xs:attribute name="diagnostics" type="xs:IDREFS"/&gt;
+&lt;xs:attribute name="icon" type="xs:anyURI"/&gt;
+&lt;xs:attribute name="subject" type="xs:string" default="."/&gt;
+&lt;xs:attribute ref="xml:lang"/&gt;
+&lt;xs:anyAttribute namespace="##other" processContents="lax"/&gt;
+&lt;/xs:complexType&gt;
+&lt;/xs:element&gt;
+&lt;xs:element name="diagnostic"&gt;
+&lt;xs:complexType mixed="true"&gt;
+&lt;xs:choice minOccurs="0" maxOccurs="unbounded"&gt;
+&lt;xs:element ref="sch:value-of"/&gt;
+&lt;xs:element ref="sch:emph"/&gt;
+&lt;xs:element ref="sch:dir"/&gt;
+&lt;xs:element ref="sch:span"/&gt;
+&lt;xs:any namespace="##other" processContents="lax"/&gt;
+&lt;/xs:choice&gt;
+&lt;xs:attribute name="id" type="xs:ID" use="required"/&gt;
+&lt;xs:attribute name="icon" type="xs:anyURI"/&gt;
+&lt;xs:attribute ref="xml:lang"/&gt;
+&lt;xs:anyAttribute namespace="##other" processContents="lax"/&gt;
+&lt;/xs:complexType&gt;
+&lt;/xs:element&gt;
+&lt;xs:element name="diagnostics"&gt;
+&lt;xs:complexType&gt;
+&lt;xs:sequence&gt;
+&lt;xs:element ref="diagnostic" minOccurs="0" maxOccurs="unbounded"/&gt;
+&lt;/xs:sequence&gt;
+&lt;/xs:complexType&gt;
+&lt;/xs:element&gt;
+&lt;xs:element name="dir"&gt;
+&lt;xs:complexType&gt;
+&lt;xs:simpleContent&gt;
+&lt;xs:extension base="xs:string"&gt;
+&lt;xs:attribute name="value"&gt;
+&lt;xs:simpleType&gt;
+&lt;xs:restriction base="xs:NMTOKEN"&gt;
+&lt;xs:enumeration value="ltr"/&gt;
+&lt;xs:enumeration value="rtl"/&gt;
+&lt;/xs:restriction&gt;
+&lt;/xs:simpleType&gt;
+&lt;/xs:attribute&gt;
+&lt;/xs:extension&gt;
+&lt;/xs:simpleContent&gt;
+&lt;/xs:complexType&gt;
+&lt;/xs:element&gt;
+&lt;xs:element name="emph" type="xs:string"/&gt;
+&lt;xs:element name="extends"&gt;
+&lt;xs:complexType&gt;
+&lt;xs:attribute name="rule" type="xs:string" use="required"/&gt;
+&lt;/xs:complexType&gt;
+&lt;/xs:element&gt;
+&lt;xs:element name="key"&gt;
+&lt;xs:complexType&gt;
+&lt;xs:attribute name="name" type="xs:NMTOKEN" use="required"/&gt;
+&lt;xs:attribute name="path" type="xs:string" use="required"/&gt;
+&lt;xs:attribute name="icon" type="xs:anyURI"/&gt;
+&lt;/xs:complexType&gt;
+&lt;/xs:element&gt;
+&lt;xs:element name="name"&gt;
+&lt;xs:complexType&gt;
+&lt;xs:attribute name="path" type="xs:string" default="."/&gt;
+&lt;/xs:complexType&gt;
+&lt;/xs:element&gt;
+&lt;xs:element name="ns"&gt;
+&lt;xs:complexType&gt;
+&lt;xs:attribute name="uri" type="xs:anyURI" use="required"/&gt;
+&lt;xs:attribute name="prefix" type="xs:NCName"/&gt;
+&lt;/xs:complexType&gt;
+&lt;/xs:element&gt;
+&lt;xs:element name="p"&gt;
+&lt;xs:complexType mixed="true"&gt;
+&lt;xs:choice minOccurs="0" maxOccurs="unbounded"&gt;
+&lt;xs:element ref="sch:dir"/&gt;
+&lt;xs:element ref="sch:emph"/&gt;
+&lt;xs:element ref="sch:span"/&gt;
+&lt;/xs:choice&gt;
+&lt;xs:attribute name="id" type="xs:string"/&gt;
+&lt;xs:attribute name="class" type="xs:string"/&gt;
+&lt;xs:attribute name="icon" type="xs:anyURI"/&gt;
+&lt;xs:attribute ref="xml:lang"/&gt;
+&lt;xs:anyAttribute namespace="##other" processContents="lax"/&gt;
+&lt;/xs:complexType&gt;
+&lt;/xs:element&gt;
+&lt;xs:element name="pattern"&gt;
+&lt;xs:complexType&gt;
+&lt;xs:sequence&gt;
+&lt;xs:element ref="p" minOccurs="0" maxOccurs="unbounded"/&gt;
+&lt;xs:element ref="sch:rule" maxOccurs="unbounded"/&gt;
+&lt;/xs:sequence&gt;
+&lt;xs:attribute name="name" type="xs:string" use="required"/&gt;
+&lt;xs:attribute name="see" type="xs:anyURI"/&gt;
+&lt;xs:attribute name="id" type="xs:string"/&gt;
+&lt;xs:attribute name="icon" type="xs:anyURI"/&gt;
+&lt;/xs:complexType&gt;
+&lt;/xs:element&gt;
+&lt;xs:element name="phase"&gt;
+&lt;xs:complexType&gt;
+&lt;xs:sequence&gt;
+&lt;xs:element ref="sch:p" minOccurs="0" maxOccurs="unbounded"/&gt;
+&lt;xs:element ref="sch:active" maxOccurs="unbounded"/&gt;
+&lt;/xs:sequence&gt;
+&lt;xs:attribute name="id" type="xs:string" use="required"/&gt;
+&lt;xs:attribute name="fpi" type="xs:string"/&gt;
+&lt;xs:attribute name="icon" type="xs:anyURI"/&gt;
+&lt;/xs:complexType&gt;
+&lt;/xs:element&gt;
+&lt;xs:element name="report"&gt;
+&lt;xs:complexType mixed="true"&gt;
+&lt;xs:choice minOccurs="0" maxOccurs="unbounded"&gt;
+&lt;xs:element ref="sch:name"/&gt;
+&lt;xs:element ref="sch:emph"/&gt;
+&lt;xs:element ref="sch:dir"/&gt;
+&lt;xs:element ref="sch:span"/&gt;
+&lt;xs:any namespace="##other" processContents="lax"/&gt;
+&lt;/xs:choice&gt;
+&lt;xs:attribute name="test" type="xs:string" use="required"/&gt;
+&lt;xs:attribute name="role" type="xs:NMTOKEN"/&gt;
+&lt;xs:attribute name="id" type="xs:string"/&gt;
+&lt;xs:attribute name="diagnostics" type="xs:IDREFS"/&gt;
+&lt;xs:attribute name="icon" type="xs:anyURI"/&gt;
+&lt;xs:attribute name="subject" type="xs:string" default="."/&gt;
+&lt;xs:attribute ref="xml:lang"/&gt;
+&lt;/xs:complexType&gt;
+&lt;/xs:element&gt;
+&lt;xs:element name="rule"&gt;
+&lt;xs:complexType&gt;
+&lt;xs:choice maxOccurs="unbounded"&gt;
+&lt;xs:element ref="sch:assert"/&gt;
+&lt;xs:element ref="sch:report"/&gt;
+&lt;xs:element ref="sch:key"/&gt;
+&lt;xs:element ref="sch:extends"/&gt;
+&lt;/xs:choice&gt;
+&lt;xs:attribute name="context" type="xs:string"/&gt;
+&lt;xs:attribute name="abstract" type="xs:boolean" default="false"/&gt;
+&lt;xs:attribute name="role" type="xs:NMTOKEN"/&gt;
+&lt;xs:attribute name="id" type="xs:string"/&gt;
+&lt;/xs:complexType&gt;
+&lt;/xs:element&gt;
+&lt;xs:element name="schema"&gt;
+&lt;xs:complexType&gt;
+&lt;xs:sequence&gt;
+&lt;xs:element ref="sch:title" minOccurs="0"/&gt;
+&lt;xs:element ref="sch:ns" minOccurs="0" maxOccurs="unbounded"/&gt;
+&lt;xs:element ref="sch:p" minOccurs="0" maxOccurs="unbounded"/&gt;
+&lt;xs:element ref="sch:phase" minOccurs="0" maxOccurs="unbounded"/&gt;
+&lt;xs:element ref="sch:pattern" maxOccurs="unbounded"/&gt;
+&lt;xs:element ref="sch:p" minOccurs="0" maxOccurs="unbounded"/&gt;
+&lt;xs:element ref="sch:diagnostics" minOccurs="0"/&gt;
+&lt;/xs:sequence&gt;
+&lt;xs:attribute name="id" type="xs:ID"/&gt;
+&lt;xs:attribute name="fpi" type="xs:string"/&gt;
+&lt;xs:attribute name="schemaVersion" type="xs:string"/&gt;
+&lt;xs:attribute name="defaultPhase" type="xs:string"/&gt;
+&lt;xs:attribute name="icon" type="xs:anyURI"/&gt;
+&lt;xs:attribute name="ns" type="xs:anyURI"/&gt;
+&lt;xs:attribute name="version" type="xs:string" default="1.5"/&gt;
+&lt;xs:attribute ref="xml:lang"/&gt;
+&lt;xs:anyAttribute namespace="##other" processContents="lax"/&gt;
+&lt;/xs:complexType&gt;
+&lt;xs:unique name="assertId"&gt;
+&lt;xs:selector xpath="sch:pattern/sch:rule/sch:assert"/&gt;
+&lt;xs:field xpath="@id"/&gt;
+&lt;/xs:unique&gt;
+&lt;xs:unique name="reportId"&gt;
+&lt;xs:selector xpath="sch:pattern/sch:rule/sch:report"/&gt;
+&lt;xs:field xpath="@id"/&gt;
+&lt;/xs:unique&gt;
+&lt;xs:unique name="ruleId"&gt;
+&lt;xs:selector xpath="sch:pattern/sch:rule"/&gt;
+&lt;xs:field xpath="@id"/&gt;
+&lt;/xs:unique&gt;
+&lt;xs:unique name="patternId"&gt;
+&lt;xs:selector xpath="sch:pattern"/&gt;
+&lt;xs:field xpath="@id"/&gt;
+&lt;/xs:unique&gt;
+&lt;xs:unique name="pId"&gt;
+&lt;xs:selector xpath=".//sch:p"/&gt;
+&lt;xs:field xpath="@id"/&gt;
+&lt;/xs:unique&gt;
+&lt;xs:key name="phaseId"&gt;
+&lt;xs:selector xpath="sch:phase"/&gt;
+&lt;xs:field xpath="@id"/&gt;
+&lt;/xs:key&gt;
+&lt;xs:keyref name="activePattern" refer="patternId"&gt;
+&lt;xs:selector xpath="sch:phase/sch:active"/&gt;
+&lt;xs:field xpath="@pattern"/&gt;
+&lt;/xs:keyref&gt;
+&lt;xs:keyref name="extendsRule" refer="ruleId"&gt;
+&lt;xs:selector xpath="sch:pattern/sch:rule/sch:extends"/&gt;
+&lt;xs:field xpath="@rule"/&gt;
+&lt;/xs:keyref&gt;
+&lt;xs:keyref name="defaultPhase" refer="phaseId"&gt;
+&lt;xs:selector xpath="."/&gt;
+&lt;xs:field xpath="@defaultPhase"/&gt;
+&lt;/xs:keyref&gt;
+&lt;!-- Define the identity constraints --&gt;
+&lt;/xs:element&gt;
+&lt;xs:element name="span"&gt;
+&lt;xs:complexType&gt;
+&lt;xs:simpleContent&gt;
+&lt;xs:extension base="xs:string"&gt;
+&lt;xs:attribute name="class" type="xs:string"/&gt;
+&lt;/xs:extension&gt;
+&lt;/xs:simpleContent&gt;
+&lt;/xs:complexType&gt;
+&lt;/xs:element&gt;
+&lt;xs:element name="title"&gt;
+&lt;xs:complexType mixed="true"&gt;
+&lt;xs:choice minOccurs="0" maxOccurs="unbounded"&gt;
+&lt;xs:element ref="sch:dir"/&gt;
+&lt;/xs:choice&gt;
+&lt;/xs:complexType&gt;
+&lt;/xs:element&gt;
+&lt;xs:element name="value-of"&gt;
+&lt;xs:complexType&gt;
+&lt;xs:attribute name="select" type="xs:string" use="required"/&gt;
+&lt;/xs:complexType&gt;
+&lt;/xs:element&gt;
+&lt;/xs:schema&gt;</value>
+  </data>
+  <data name="schematronXSDwithNamespace" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;xs:schema xmlns="http://www.ascc.net/xml/schematron" xmlns:sch="http://www.ascc.net/xml/schematron" 
+targetNamespace="http://www.ascc.net/xml/schematron" version="+//IDN sinica.edu.tw//SGML W3C XML Schema for Schematron 1.5//EN" xmlns:xs="http://www.w3.org/2001/XMLSchema"&gt;
+  
+  &lt;!--
+  &lt;xs:import schemaLocation="http://www.w3.org/2001/xml.xsd" namespace="http://www.w3.org/XML/1998/namespace"&gt;
+    &lt;xs:annotation&gt;
+      &lt;xs:documentation&gt;
+ Get access to the xml: attribute groups for xml:lang 
+&lt;/xs:documentation&gt;
+    &lt;/xs:annotation&gt;
+  &lt;/xs:import&gt;
+  --&gt;
+  
+  &lt;xs:annotation&gt;
+    &lt;xs:documentation&gt;
+      &lt;div xmlns="http://www.w3.org/1999/xhtml"&gt;
+        &lt;h1&gt;About the XML namespace&lt;/h1&gt;
+        &lt;div class="bodytext"&gt;
+          &lt;p&gt;
+      This schema document describes the XML namespace, in a form
+      suitable for import by other schema documents.
+     &lt;/p&gt;
+          &lt;p&gt;
+      See &lt;a href="http://www.w3.org/XML/1998/namespace.html"&gt;
+      http://www.w3.org/XML/1998/namespace.html&lt;/a&gt; and
+      &lt;a href="http://www.w3.org/TR/REC-xml"&gt;
+      http://www.w3.org/TR/REC-xml&lt;/a&gt; for information 
+      about this namespace.
+     &lt;/p&gt;
+          &lt;p&gt;
+      Note that local names in this namespace are intended to be
+      defined only by the World Wide Web Consortium or its subgroups.
+      The names currently defined in this namespace are listed below.
+      They should not be used with conflicting semantics by any Working
+      Group, specification, or document instance.
+     &lt;/p&gt;
+          &lt;p&gt;   
+      See further below in this document for more information about &lt;a href="#usage"&gt;how to refer to this schema document from your own
+      XSD schema documents&lt;/a&gt; and about &lt;a href="#nsversioning"&gt;the
+      namespace-versioning policy governing this schema document&lt;/a&gt;.
+     &lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/xs:documentation&gt;
+  &lt;/xs:annotation&gt;
+  &lt;xs:attribute name="lang" xmlns:xml="http://www.w3.org/XML/1998/namespace"&gt;
+    &lt;xs:annotation&gt;
+      &lt;xs:documentation&gt;
+        &lt;div xmlns="http://www.w3.org/1999/xhtml"&gt;
+          &lt;h3&gt;lang (as an attribute name)&lt;/h3&gt;
+          &lt;p&gt;
+       denotes an attribute whose value
+       is a language code for the natural language of the content of
+       any element; its value is inherited.  This name is reserved
+       by virtue of its definition in the XML specification.&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div xmlns="http://www.w3.org/1999/xhtml"&gt;
+          &lt;h4&gt;Notes&lt;/h4&gt;
+          &lt;p&gt;
+      Attempting to install the relevant ISO 2- and 3-letter
+      codes as the enumerated possible values is probably never
+      going to be a realistic possibility.  
+     &lt;/p&gt;
+          &lt;p&gt;
+      See BCP 47 at &lt;a href="http://www.rfc-editor.org/rfc/bcp/bcp47.txt"&gt;
+       http://www.rfc-editor.org/rfc/bcp/bcp47.txt&lt;/a&gt;
+      and the IANA language subtag registry at
+      &lt;a href="http://www.iana.org/assignments/language-subtag-registry"&gt;
+       http://www.iana.org/assignments/language-subtag-registry&lt;/a&gt;
+      for further information.
+     &lt;/p&gt;
+          &lt;p&gt;
+      The union allows for the 'un-declaration' of xml:lang with
+      the empty string.
+     &lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/xs:documentation&gt;
+    &lt;/xs:annotation&gt;
+    &lt;xs:simpleType&gt;
+      &lt;xs:union memberTypes="xs:language"&gt;
+        &lt;xs:simpleType&gt;
+          &lt;xs:restriction base="xs:string"&gt;
+            &lt;xs:enumeration value="" /&gt;
+          &lt;/xs:restriction&gt;
+        &lt;/xs:simpleType&gt;
+      &lt;/xs:union&gt;
+    &lt;/xs:simpleType&gt;
+  &lt;/xs:attribute&gt;
+  &lt;xs:attribute name="space" xmlns:xml="http://www.w3.org/XML/1998/namespace"&gt;
+    &lt;xs:annotation&gt;
+      &lt;xs:documentation&gt;
+        &lt;div xmlns="http://www.w3.org/1999/xhtml"&gt;
+          &lt;h3&gt;space (as an attribute name)&lt;/h3&gt;
+          &lt;p&gt;
+       denotes an attribute whose
+       value is a keyword indicating what whitespace processing
+       discipline is intended for the content of the element; its
+       value is inherited.  This name is reserved by virtue of its
+       definition in the XML specification.&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/xs:documentation&gt;
+    &lt;/xs:annotation&gt;
+    &lt;xs:simpleType&gt;
+      &lt;xs:restriction base="xs:NCName"&gt;
+        &lt;xs:enumeration value="default" /&gt;
+        &lt;xs:enumeration value="preserve" /&gt;
+      &lt;/xs:restriction&gt;
+    &lt;/xs:simpleType&gt;
+  &lt;/xs:attribute&gt;
+  &lt;xs:attribute name="base" xmlns:xml="http://www.w3.org/XML/1998/namespace" type="xs:anyURI"&gt;
+    &lt;xs:annotation&gt;
+      &lt;xs:documentation&gt;
+        &lt;div xmlns="http://www.w3.org/1999/xhtml"&gt;
+          &lt;h3&gt;base (as an attribute name)&lt;/h3&gt;
+          &lt;p&gt;
+       denotes an attribute whose value
+       provides a URI to be used as the base for interpreting any
+       relative URIs in the scope of the element on which it
+       appears; its value is inherited.  This name is reserved
+       by virtue of its definition in the XML Base specification.&lt;/p&gt;
+          &lt;p&gt;
+      See &lt;a href="http://www.w3.org/TR/xmlbase/"&gt;http://www.w3.org/TR/xmlbase/&lt;/a&gt;
+      for information about this attribute.
+     &lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/xs:documentation&gt;
+    &lt;/xs:annotation&gt;
+  &lt;/xs:attribute&gt;
+  &lt;xs:attribute name="id" xmlns:xml="http://www.w3.org/XML/1998/namespace" type="xs:ID"&gt;
+    &lt;xs:annotation&gt;
+      &lt;xs:documentation&gt;
+        &lt;div xmlns="http://www.w3.org/1999/xhtml"&gt;
+          &lt;h3&gt;id (as an attribute name)&lt;/h3&gt;
+          &lt;p&gt;
+       denotes an attribute whose value
+       should be interpreted as if declared to be of type ID.
+       This name is reserved by virtue of its definition in the
+       xml:id specification.&lt;/p&gt;
+          &lt;p&gt;
+      See &lt;a href="http://www.w3.org/TR/xml-id/"&gt;http://www.w3.org/TR/xml-id/&lt;/a&gt;
+      for information about this attribute.
+     &lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/xs:documentation&gt;
+    &lt;/xs:annotation&gt;
+  &lt;/xs:attribute&gt;
+  &lt;xs:attributeGroup xmlns:xml="http://www.w3.org/XML/1998/namespace" name="specialAttrs"&gt;
+    &lt;xs:attribute ref="xml:base" /&gt;
+    &lt;xs:attribute ref="xml:lang" /&gt;
+    &lt;xs:attribute ref="xml:space" /&gt;
+    &lt;xs:attribute ref="xml:id" /&gt;
+  &lt;/xs:attributeGroup&gt;
+  &lt;xs:annotation&gt;
+    &lt;xs:documentation&gt;
+      &lt;div xmlns="http://www.w3.org/1999/xhtml"&gt;
+        &lt;h3&gt;Father (in any context at all)&lt;/h3&gt;
+        &lt;div class="bodytext"&gt;
+          &lt;p&gt;
+      denotes Jon Bosak, the chair of 
+      the original XML Working Group.  This name is reserved by 
+      the following decision of the W3C XML Plenary and 
+      XML Coordination groups:
+     &lt;/p&gt;
+          &lt;blockquote&gt;
+            &lt;p&gt;
+	In appreciation for his vision, leadership and
+	dedication the W3C XML Plenary on this 10th day of
+	February, 2000, reserves for Jon Bosak in perpetuity
+	the XML name "xml:Father".
+       &lt;/p&gt;
+          &lt;/blockquote&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/xs:documentation&gt;
+  &lt;/xs:annotation&gt;
+  &lt;xs:annotation&gt;
+    &lt;xs:documentation&gt;
+      &lt;div xml:id="usage" id="usage" xmlns="http://www.w3.org/1999/xhtml"&gt;
+        &lt;h2&gt;
+          &lt;a name="usage"&gt;About this schema document&lt;/a&gt;
+        &lt;/h2&gt;
+        &lt;div class="bodytext"&gt;
+          &lt;p&gt;
+      This schema defines attributes and an attribute group suitable
+      for use by schemas wishing to allow &lt;code&gt;xml:base&lt;/code&gt;,
+      &lt;code&gt;xml:lang&lt;/code&gt;, &lt;code&gt;xml:space&lt;/code&gt; or
+      &lt;code&gt;xml:id&lt;/code&gt; attributes on elements they define.
+     &lt;/p&gt;
+          &lt;p&gt;
+      To enable this, such a schema must import this schema for
+      the XML namespace, e.g. as follows:
+     &lt;/p&gt;
+          &lt;pre&gt;
+          &amp;lt;schema . . .&amp;gt;
+           . . .
+           &amp;lt;import namespace="http://www.w3.org/XML/1998/namespace"
+                      schemaLocation="http://www.w3.org/2001/xml.xsd"/&amp;gt;
+     &lt;/pre&gt;
+          &lt;p&gt;
+      or
+     &lt;/p&gt;
+          &lt;pre&gt;
+           &amp;lt;import namespace="http://www.w3.org/XML/1998/namespace"
+                      schemaLocation="http://www.w3.org/2009/01/xml.xsd"/&amp;gt;
+     &lt;/pre&gt;
+          &lt;p&gt;
+      Subsequently, qualified reference to any of the attributes or the
+      group defined below will have the desired effect, e.g.
+     &lt;/p&gt;
+          &lt;pre&gt;
+          &amp;lt;type . . .&amp;gt;
+           . . .
+           &amp;lt;attributeGroup ref="xml:specialAttrs"/&amp;gt;
+     &lt;/pre&gt;
+          &lt;p&gt;
+      will define a type which will schema-validate an instance element
+      with any of those attributes.
+     &lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/xs:documentation&gt;
+  &lt;/xs:annotation&gt;
+  &lt;xs:annotation&gt;
+    &lt;xs:documentation&gt;
+      &lt;div id="nsversioning" xml:id="nsversioning" xmlns="http://www.w3.org/1999/xhtml"&gt;
+        &lt;h2&gt;
+          &lt;a name="nsversioning"&gt;Versioning policy for this schema document&lt;/a&gt;
+        &lt;/h2&gt;
+        &lt;div class="bodytext"&gt;
+          &lt;p&gt;
+      In keeping with the XML Schema WG's standard versioning
+      policy, this schema document will persist at
+      &lt;a href="http://www.w3.org/2009/01/xml.xsd"&gt;
+       http://www.w3.org/2009/01/xml.xsd&lt;/a&gt;.
+     &lt;/p&gt;
+          &lt;p&gt;
+      At the date of issue it can also be found at
+      &lt;a href="http://www.w3.org/2001/xml.xsd"&gt;
+       http://www.w3.org/2001/xml.xsd&lt;/a&gt;.
+     &lt;/p&gt;
+          &lt;p&gt;
+      The schema document at that URI may however change in the future,
+      in order to remain compatible with the latest version of XML
+      Schema itself, or with the XML namespace itself.  In other words,
+      if the XML Schema or XML namespaces change, the version of this
+      document at &lt;a href="http://www.w3.org/2001/xml.xsd"&gt;
+       http://www.w3.org/2001/xml.xsd 
+      &lt;/a&gt; 
+      will change accordingly; the version at 
+      &lt;a href="http://www.w3.org/2009/01/xml.xsd"&gt;
+       http://www.w3.org/2009/01/xml.xsd 
+      &lt;/a&gt; 
+      will not change.
+     &lt;/p&gt;
+          &lt;p&gt;
+      Previous dated (and unchanging) versions of this schema 
+      document are at:
+     &lt;/p&gt;
+          &lt;ul&gt;
+            &lt;li&gt;
+              &lt;a href="http://www.w3.org/2009/01/xml.xsd"&gt;
+	http://www.w3.org/2009/01/xml.xsd&lt;/a&gt;
+            &lt;/li&gt;
+            &lt;li&gt;
+              &lt;a href="http://www.w3.org/2007/08/xml.xsd"&gt;
+	http://www.w3.org/2007/08/xml.xsd&lt;/a&gt;
+            &lt;/li&gt;
+            &lt;li&gt;
+              &lt;a href="http://www.w3.org/2004/10/xml.xsd"&gt;
+	http://www.w3.org/2004/10/xml.xsd&lt;/a&gt;
+            &lt;/li&gt;
+            &lt;li&gt;
+              &lt;a href="http://www.w3.org/2001/03/xml.xsd"&gt;
+	http://www.w3.org/2001/03/xml.xsd&lt;/a&gt;
+            &lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/xs:documentation&gt;
+  &lt;/xs:annotation&gt;
+
+  
+  
+  &lt;xs:annotation&gt;
+    &lt;xs:documentation source="http://www.ascc.net/xml/resource/schematron/schematron.html" xml:lang="en" /&gt;
+  &lt;/xs:annotation&gt;
+  &lt;xs:element name="active"&gt;
+    &lt;xs:complexType mixed="true"&gt;
+      &lt;xs:choice minOccurs="0" maxOccurs="unbounded"&gt;
+        &lt;xs:element ref="sch:dir" /&gt;
+        &lt;xs:element ref="sch:emph" /&gt;
+        &lt;xs:element ref="sch:span" /&gt;
+      &lt;/xs:choice&gt;
+      &lt;xs:attribute name="pattern" type="xs:IDREF" use="required" /&gt;
+    &lt;/xs:complexType&gt;
+  &lt;/xs:element&gt;
+  &lt;xs:element name="assert"&gt;
+    &lt;xs:complexType mixed="true"&gt;
+      &lt;xs:choice minOccurs="0" maxOccurs="unbounded"&gt;
+        &lt;xs:element ref="sch:name" /&gt;
+        &lt;xs:element ref="sch:emph" /&gt;
+        &lt;xs:element ref="sch:dir" /&gt;
+        &lt;xs:element ref="sch:span" /&gt;
+        &lt;xs:any namespace="##other" processContents="lax" /&gt;
+      &lt;/xs:choice&gt;
+      &lt;xs:attribute name="test" type="xs:string" use="required" /&gt;
+      &lt;xs:attribute name="role" type="xs:NMTOKEN" /&gt;
+      &lt;xs:attribute name="id" type="xs:string" /&gt;
+      &lt;xs:attribute name="diagnostics" type="xs:IDREFS" /&gt;
+      &lt;xs:attribute name="icon" type="xs:anyURI" /&gt;
+      &lt;xs:attribute default="." name="subject" type="xs:string" /&gt;
+      &lt;xs:attribute ref="xml:lang" /&gt;
+      &lt;xs:anyAttribute namespace="##other" processContents="lax" /&gt;
+    &lt;/xs:complexType&gt;
+  &lt;/xs:element&gt;
+  &lt;xs:element name="diagnostic"&gt;
+    &lt;xs:complexType mixed="true"&gt;
+      &lt;xs:choice minOccurs="0" maxOccurs="unbounded"&gt;
+        &lt;xs:element ref="sch:value-of" /&gt;
+        &lt;xs:element ref="sch:emph" /&gt;
+        &lt;xs:element ref="sch:dir" /&gt;
+        &lt;xs:element ref="sch:span" /&gt;
+        &lt;xs:any namespace="##other" processContents="lax" /&gt;
+      &lt;/xs:choice&gt;
+      &lt;xs:attribute name="id" type="xs:ID" use="required" /&gt;
+      &lt;xs:attribute name="icon" type="xs:anyURI" /&gt;
+      &lt;xs:attribute ref="xml:lang" /&gt;
+      &lt;xs:anyAttribute namespace="##other" processContents="lax" /&gt;
+    &lt;/xs:complexType&gt;
+  &lt;/xs:element&gt;
+  &lt;xs:element name="diagnostics"&gt;
+    &lt;xs:complexType&gt;
+      &lt;xs:sequence&gt;
+        &lt;xs:element minOccurs="0" maxOccurs="unbounded" ref="sch:diagnostic" /&gt;
+      &lt;/xs:sequence&gt;
+    &lt;/xs:complexType&gt;
+  &lt;/xs:element&gt;
+  &lt;xs:element name="dir"&gt;
+    &lt;xs:complexType&gt;
+      &lt;xs:simpleContent&gt;
+        &lt;xs:extension base="xs:string"&gt;
+          &lt;xs:attribute name="value"&gt;
+            &lt;xs:simpleType&gt;
+              &lt;xs:restriction base="xs:NMTOKEN"&gt;
+                &lt;xs:enumeration value="ltr" /&gt;
+                &lt;xs:enumeration value="rtl" /&gt;
+              &lt;/xs:restriction&gt;
+            &lt;/xs:simpleType&gt;
+          &lt;/xs:attribute&gt;
+        &lt;/xs:extension&gt;
+      &lt;/xs:simpleContent&gt;
+    &lt;/xs:complexType&gt;
+  &lt;/xs:element&gt;
+  &lt;xs:element name="emph" type="xs:string" /&gt;
+  &lt;xs:element name="extends"&gt;
+    &lt;xs:complexType&gt;
+      &lt;xs:attribute name="rule" type="xs:string" use="required" /&gt;
+    &lt;/xs:complexType&gt;
+  &lt;/xs:element&gt;
+  &lt;xs:element name="key"&gt;
+    &lt;xs:complexType&gt;
+      &lt;xs:attribute name="name" type="xs:NMTOKEN" use="required" /&gt;
+      &lt;xs:attribute name="path" type="xs:string" use="required" /&gt;
+      &lt;xs:attribute name="icon" type="xs:anyURI" /&gt;
+    &lt;/xs:complexType&gt;
+  &lt;/xs:element&gt;
+  &lt;xs:element name="name"&gt;
+    &lt;xs:complexType&gt;
+      &lt;xs:attribute default="." name="path" type="xs:string" /&gt;
+    &lt;/xs:complexType&gt;
+  &lt;/xs:element&gt;
+  &lt;xs:element name="ns"&gt;
+    &lt;xs:complexType&gt;
+      &lt;xs:attribute name="uri" type="xs:anyURI" use="required" /&gt;
+      &lt;xs:attribute name="prefix" type="xs:NCName" /&gt;
+    &lt;/xs:complexType&gt;
+  &lt;/xs:element&gt;
+  &lt;xs:element name="p"&gt;
+    &lt;xs:complexType mixed="true"&gt;
+      &lt;xs:choice minOccurs="0" maxOccurs="unbounded"&gt;
+        &lt;xs:element ref="sch:dir" /&gt;
+        &lt;xs:element ref="sch:emph" /&gt;
+        &lt;xs:element ref="sch:span" /&gt;
+      &lt;/xs:choice&gt;
+      &lt;xs:attribute name="id" type="xs:string" /&gt;
+      &lt;xs:attribute name="class" type="xs:string" /&gt;
+      &lt;xs:attribute name="icon" type="xs:anyURI" /&gt;
+      &lt;xs:attribute ref="xml:lang" /&gt;
+      &lt;xs:anyAttribute namespace="##other" processContents="lax" /&gt;
+    &lt;/xs:complexType&gt;
+  &lt;/xs:element&gt;
+  &lt;xs:element name="pattern"&gt;
+    &lt;xs:complexType&gt;
+      &lt;xs:sequence&gt;
+        &lt;xs:element minOccurs="0" maxOccurs="unbounded" ref="sch:p" /&gt;
+        &lt;xs:element maxOccurs="unbounded" ref="sch:rule" /&gt;
+      &lt;/xs:sequence&gt;
+      &lt;xs:attribute name="name" type="xs:string" use="required" /&gt;
+      &lt;xs:attribute name="see" type="xs:anyURI" /&gt;
+      &lt;xs:attribute name="id" type="xs:string" /&gt;
+      &lt;xs:attribute name="icon" type="xs:anyURI" /&gt;
+    &lt;/xs:complexType&gt;
+  &lt;/xs:element&gt;
+  &lt;xs:element name="phase"&gt;
+    &lt;xs:complexType&gt;
+      &lt;xs:sequence&gt;
+        &lt;xs:element minOccurs="0" maxOccurs="unbounded" ref="sch:p" /&gt;
+        &lt;xs:element maxOccurs="unbounded" ref="sch:active" /&gt;
+      &lt;/xs:sequence&gt;
+      &lt;xs:attribute name="id" type="xs:string" use="required" /&gt;
+      &lt;xs:attribute name="fpi" type="xs:string" /&gt;
+      &lt;xs:attribute name="icon" type="xs:anyURI" /&gt;
+    &lt;/xs:complexType&gt;
+  &lt;/xs:element&gt;
+  &lt;xs:element name="report"&gt;
+    &lt;xs:complexType mixed="true"&gt;
+      &lt;xs:choice minOccurs="0" maxOccurs="unbounded"&gt;
+        &lt;xs:element ref="sch:name" /&gt;
+        &lt;xs:element ref="sch:emph" /&gt;
+        &lt;xs:element ref="sch:dir" /&gt;
+        &lt;xs:element ref="sch:span" /&gt;
+        &lt;xs:any namespace="##other" processContents="lax" /&gt;
+      &lt;/xs:choice&gt;
+      &lt;xs:attribute name="test" type="xs:string" use="required" /&gt;
+      &lt;xs:attribute name="role" type="xs:NMTOKEN" /&gt;
+      &lt;xs:attribute name="id" type="xs:string" /&gt;
+      &lt;xs:attribute name="diagnostics" type="xs:IDREFS" /&gt;
+      &lt;xs:attribute name="icon" type="xs:anyURI" /&gt;
+      &lt;xs:attribute default="." name="subject" type="xs:string" /&gt;
+      &lt;xs:attribute ref="xml:lang" /&gt;
+    &lt;/xs:complexType&gt;
+  &lt;/xs:element&gt;
+  &lt;xs:element name="rule"&gt;
+    &lt;xs:complexType&gt;
+      &lt;xs:choice maxOccurs="unbounded"&gt;
+        &lt;xs:element ref="sch:assert" /&gt;
+        &lt;xs:element ref="sch:report" /&gt;
+        &lt;xs:element ref="sch:key" /&gt;
+        &lt;xs:element ref="sch:extends" /&gt;
+      &lt;/xs:choice&gt;
+      &lt;xs:attribute name="context" type="xs:string" /&gt;
+      &lt;xs:attribute default="false" name="abstract" type="xs:boolean" /&gt;
+      &lt;xs:attribute name="role" type="xs:NMTOKEN" /&gt;
+      &lt;xs:attribute name="id" type="xs:string" /&gt;
+    &lt;/xs:complexType&gt;
+  &lt;/xs:element&gt;
+  &lt;xs:element name="schema"&gt;
+    &lt;xs:complexType&gt;
+      &lt;xs:sequence&gt;
+        &lt;xs:element minOccurs="0" ref="sch:title" /&gt;
+        &lt;xs:element minOccurs="0" maxOccurs="unbounded" ref="sch:ns" /&gt;
+        &lt;xs:element minOccurs="0" maxOccurs="unbounded" ref="sch:p" /&gt;
+        &lt;xs:element minOccurs="0" maxOccurs="unbounded" ref="sch:phase" /&gt;
+        &lt;xs:element maxOccurs="unbounded" ref="sch:pattern" /&gt;
+        &lt;xs:element minOccurs="0" maxOccurs="unbounded" ref="sch:p" /&gt;
+        &lt;xs:element minOccurs="0" ref="sch:diagnostics" /&gt;
+      &lt;/xs:sequence&gt;
+      &lt;xs:attribute name="id" type="xs:ID" /&gt;
+      &lt;xs:attribute name="fpi" type="xs:string" /&gt;
+      &lt;xs:attribute name="schemaVersion" type="xs:string" /&gt;
+      &lt;xs:attribute name="defaultPhase" type="xs:string" /&gt;
+      &lt;xs:attribute name="icon" type="xs:anyURI" /&gt;
+      &lt;xs:attribute name="ns" type="xs:anyURI" /&gt;
+      &lt;xs:attribute default="1.5" name="version" type="xs:string" /&gt;
+      &lt;xs:attribute ref="xml:lang" /&gt;
+      &lt;xs:anyAttribute namespace="##other" processContents="lax" /&gt;
+    &lt;/xs:complexType&gt;
+    &lt;xs:unique name="assertId"&gt;
+      &lt;xs:selector xpath="sch:pattern/sch:rule/sch:assert" /&gt;
+      &lt;xs:field xpath="@id" /&gt;
+    &lt;/xs:unique&gt;
+    &lt;xs:unique name="reportId"&gt;
+      &lt;xs:selector xpath="sch:pattern/sch:rule/sch:report" /&gt;
+      &lt;xs:field xpath="@id" /&gt;
+    &lt;/xs:unique&gt;
+    &lt;xs:unique name="ruleId"&gt;
+      &lt;xs:selector xpath="sch:pattern/sch:rule" /&gt;
+      &lt;xs:field xpath="@id" /&gt;
+    &lt;/xs:unique&gt;
+    &lt;xs:unique name="patternId"&gt;
+      &lt;xs:selector xpath="sch:pattern" /&gt;
+      &lt;xs:field xpath="@id" /&gt;
+    &lt;/xs:unique&gt;
+    &lt;xs:unique name="pId"&gt;
+      &lt;xs:selector xpath=".//sch:p" /&gt;
+      &lt;xs:field xpath="@id" /&gt;
+    &lt;/xs:unique&gt;
+    &lt;xs:key name="phaseId"&gt;
+      &lt;xs:selector xpath="sch:phase" /&gt;
+      &lt;xs:field xpath="@id" /&gt;
+    &lt;/xs:key&gt;
+    &lt;xs:keyref name="activePattern" refer="sch:patternId"&gt;
+      &lt;xs:selector xpath="sch:phase/sch:active" /&gt;
+      &lt;xs:field xpath="@pattern" /&gt;
+    &lt;/xs:keyref&gt;
+    &lt;xs:keyref name="extendsRule" refer="sch:ruleId"&gt;
+      &lt;xs:selector xpath="sch:pattern/sch:rule/sch:extends" /&gt;
+      &lt;xs:field xpath="@rule" /&gt;
+    &lt;/xs:keyref&gt;
+    &lt;xs:keyref name="defaultPhase" refer="sch:phaseId"&gt;
+      &lt;xs:selector xpath="." /&gt;
+      &lt;xs:field xpath="@defaultPhase" /&gt;
+    &lt;/xs:keyref&gt;
+  &lt;/xs:element&gt;
+  &lt;xs:element name="span"&gt;
+    &lt;xs:complexType&gt;
+      &lt;xs:simpleContent&gt;
+        &lt;xs:extension base="xs:string"&gt;
+          &lt;xs:attribute name="class" type="xs:string" /&gt;
+        &lt;/xs:extension&gt;
+      &lt;/xs:simpleContent&gt;
+    &lt;/xs:complexType&gt;
+  &lt;/xs:element&gt;
+  &lt;xs:element name="title"&gt;
+    &lt;xs:complexType mixed="true"&gt;
+      &lt;xs:choice minOccurs="0" maxOccurs="unbounded"&gt;
+        &lt;xs:element ref="sch:dir" /&gt;
+      &lt;/xs:choice&gt;
+    &lt;/xs:complexType&gt;
+  &lt;/xs:element&gt;
+  &lt;xs:element name="value-of"&gt;
+    &lt;xs:complexType&gt;
+      &lt;xs:attribute name="select" type="xs:string" use="required" /&gt;
+    &lt;/xs:complexType&gt;
+  &lt;/xs:element&gt;
+&lt;/xs:schema&gt;</value>
+  </data>
+  <data name="xmlNamespaceXSD" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;xs:schema xmlns="http://www.w3.org/1999/xhtml" targetNamespace="http://www.w3.org/XML/1998/namespace" xml:lang="en" xmlns:xs="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;xs:annotation&gt;
+    &lt;xs:documentation&gt;
+      &lt;div xmlns="http://www.w3.org/1999/xhtml"&gt;
+        &lt;h1&gt;About the XML namespace&lt;/h1&gt;
+        &lt;div class="bodytext"&gt;
+          &lt;p&gt;
+      This schema document describes the XML namespace, in a form
+      suitable for import by other schema documents.
+     &lt;/p&gt;
+          &lt;p&gt;
+      See &lt;a href="http://www.w3.org/XML/1998/namespace.html"&gt;
+      http://www.w3.org/XML/1998/namespace.html&lt;/a&gt; and
+      &lt;a href="http://www.w3.org/TR/REC-xml"&gt;
+      http://www.w3.org/TR/REC-xml&lt;/a&gt; for information 
+      about this namespace.
+     &lt;/p&gt;
+          &lt;p&gt;
+      Note that local names in this namespace are intended to be
+      defined only by the World Wide Web Consortium or its subgroups.
+      The names currently defined in this namespace are listed below.
+      They should not be used with conflicting semantics by any Working
+      Group, specification, or document instance.
+     &lt;/p&gt;
+          &lt;p&gt;   
+      See further below in this document for more information about &lt;a href="#usage"&gt;how to refer to this schema document from your own
+      XSD schema documents&lt;/a&gt; and about &lt;a href="#nsversioning"&gt;the
+      namespace-versioning policy governing this schema document&lt;/a&gt;.
+     &lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/xs:documentation&gt;
+  &lt;/xs:annotation&gt;
+  &lt;xs:attribute name="lang"&gt;
+    &lt;xs:annotation&gt;
+      &lt;xs:documentation&gt;
+        &lt;div xmlns="http://www.w3.org/1999/xhtml"&gt;
+          &lt;h3&gt;lang (as an attribute name)&lt;/h3&gt;
+          &lt;p&gt;
+       denotes an attribute whose value
+       is a language code for the natural language of the content of
+       any element; its value is inherited.  This name is reserved
+       by virtue of its definition in the XML specification.&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div xmlns="http://www.w3.org/1999/xhtml"&gt;
+          &lt;h4&gt;Notes&lt;/h4&gt;
+          &lt;p&gt;
+      Attempting to install the relevant ISO 2- and 3-letter
+      codes as the enumerated possible values is probably never
+      going to be a realistic possibility.  
+     &lt;/p&gt;
+          &lt;p&gt;
+      See BCP 47 at &lt;a href="http://www.rfc-editor.org/rfc/bcp/bcp47.txt"&gt;
+       http://www.rfc-editor.org/rfc/bcp/bcp47.txt&lt;/a&gt;
+      and the IANA language subtag registry at
+      &lt;a href="http://www.iana.org/assignments/language-subtag-registry"&gt;
+       http://www.iana.org/assignments/language-subtag-registry&lt;/a&gt;
+      for further information.
+     &lt;/p&gt;
+          &lt;p&gt;
+      The union allows for the 'un-declaration' of xml:lang with
+      the empty string.
+     &lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/xs:documentation&gt;
+    &lt;/xs:annotation&gt;
+    &lt;xs:simpleType&gt;
+      &lt;xs:union memberTypes="xs:language"&gt;
+        &lt;xs:simpleType&gt;
+          &lt;xs:restriction base="xs:string"&gt;
+            &lt;xs:enumeration value="" /&gt;
+          &lt;/xs:restriction&gt;
+        &lt;/xs:simpleType&gt;
+      &lt;/xs:union&gt;
+    &lt;/xs:simpleType&gt;
+  &lt;/xs:attribute&gt;
+  &lt;xs:attribute name="space"&gt;
+    &lt;xs:annotation&gt;
+      &lt;xs:documentation&gt;
+        &lt;div xmlns="http://www.w3.org/1999/xhtml"&gt;
+          &lt;h3&gt;space (as an attribute name)&lt;/h3&gt;
+          &lt;p&gt;
+       denotes an attribute whose
+       value is a keyword indicating what whitespace processing
+       discipline is intended for the content of the element; its
+       value is inherited.  This name is reserved by virtue of its
+       definition in the XML specification.&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/xs:documentation&gt;
+    &lt;/xs:annotation&gt;
+    &lt;xs:simpleType&gt;
+      &lt;xs:restriction base="xs:NCName"&gt;
+        &lt;xs:enumeration value="default" /&gt;
+        &lt;xs:enumeration value="preserve" /&gt;
+      &lt;/xs:restriction&gt;
+    &lt;/xs:simpleType&gt;
+  &lt;/xs:attribute&gt;
+  &lt;xs:attribute name="base" type="xs:anyURI"&gt;
+    &lt;xs:annotation&gt;
+      &lt;xs:documentation&gt;
+        &lt;div xmlns="http://www.w3.org/1999/xhtml"&gt;
+          &lt;h3&gt;base (as an attribute name)&lt;/h3&gt;
+          &lt;p&gt;
+       denotes an attribute whose value
+       provides a URI to be used as the base for interpreting any
+       relative URIs in the scope of the element on which it
+       appears; its value is inherited.  This name is reserved
+       by virtue of its definition in the XML Base specification.&lt;/p&gt;
+          &lt;p&gt;
+      See &lt;a href="http://www.w3.org/TR/xmlbase/"&gt;http://www.w3.org/TR/xmlbase/&lt;/a&gt;
+      for information about this attribute.
+     &lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/xs:documentation&gt;
+    &lt;/xs:annotation&gt;
+  &lt;/xs:attribute&gt;
+  &lt;xs:attribute name="id" type="xs:ID"&gt;
+    &lt;xs:annotation&gt;
+      &lt;xs:documentation&gt;
+        &lt;div xmlns="http://www.w3.org/1999/xhtml"&gt;
+          &lt;h3&gt;id (as an attribute name)&lt;/h3&gt;
+          &lt;p&gt;
+       denotes an attribute whose value
+       should be interpreted as if declared to be of type ID.
+       This name is reserved by virtue of its definition in the
+       xml:id specification.&lt;/p&gt;
+          &lt;p&gt;
+      See &lt;a href="http://www.w3.org/TR/xml-id/"&gt;http://www.w3.org/TR/xml-id/&lt;/a&gt;
+      for information about this attribute.
+     &lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/xs:documentation&gt;
+    &lt;/xs:annotation&gt;
+  &lt;/xs:attribute&gt;
+  &lt;xs:attributeGroup name="specialAttrs"&gt;
+    &lt;xs:attribute ref="xml:base" /&gt;
+    &lt;xs:attribute ref="xml:lang" /&gt;
+    &lt;xs:attribute ref="xml:space" /&gt;
+    &lt;xs:attribute ref="xml:id" /&gt;
+  &lt;/xs:attributeGroup&gt;
+  &lt;xs:annotation&gt;
+    &lt;xs:documentation&gt;
+      &lt;div xmlns="http://www.w3.org/1999/xhtml"&gt;
+        &lt;h3&gt;Father (in any context at all)&lt;/h3&gt;
+        &lt;div class="bodytext"&gt;
+          &lt;p&gt;
+      denotes Jon Bosak, the chair of 
+      the original XML Working Group.  This name is reserved by 
+      the following decision of the W3C XML Plenary and 
+      XML Coordination groups:
+     &lt;/p&gt;
+          &lt;blockquote&gt;
+            &lt;p&gt;
+	In appreciation for his vision, leadership and
+	dedication the W3C XML Plenary on this 10th day of
+	February, 2000, reserves for Jon Bosak in perpetuity
+	the XML name "xml:Father".
+       &lt;/p&gt;
+          &lt;/blockquote&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/xs:documentation&gt;
+  &lt;/xs:annotation&gt;
+  &lt;xs:annotation&gt;
+    &lt;xs:documentation&gt;
+      &lt;div xml:id="usage" id="usage" xmlns="http://www.w3.org/1999/xhtml"&gt;
+        &lt;h2&gt;
+          &lt;a name="usage"&gt;About this schema document&lt;/a&gt;
+        &lt;/h2&gt;
+        &lt;div class="bodytext"&gt;
+          &lt;p&gt;
+      This schema defines attributes and an attribute group suitable
+      for use by schemas wishing to allow &lt;code&gt;xml:base&lt;/code&gt;,
+      &lt;code&gt;xml:lang&lt;/code&gt;, &lt;code&gt;xml:space&lt;/code&gt; or
+      &lt;code&gt;xml:id&lt;/code&gt; attributes on elements they define.
+     &lt;/p&gt;
+          &lt;p&gt;
+      To enable this, such a schema must import this schema for
+      the XML namespace, e.g. as follows:
+     &lt;/p&gt;
+          &lt;pre&gt;
+          &amp;lt;schema . . .&amp;gt;
+           . . .
+           &amp;lt;import namespace="http://www.w3.org/XML/1998/namespace"
+                      schemaLocation="http://www.w3.org/2001/xml.xsd"/&amp;gt;
+     &lt;/pre&gt;
+          &lt;p&gt;
+      or
+     &lt;/p&gt;
+          &lt;pre&gt;
+           &amp;lt;import namespace="http://www.w3.org/XML/1998/namespace"
+                      schemaLocation="http://www.w3.org/2009/01/xml.xsd"/&amp;gt;
+     &lt;/pre&gt;
+          &lt;p&gt;
+      Subsequently, qualified reference to any of the attributes or the
+      group defined below will have the desired effect, e.g.
+     &lt;/p&gt;
+          &lt;pre&gt;
+          &amp;lt;type . . .&amp;gt;
+           . . .
+           &amp;lt;attributeGroup ref="xml:specialAttrs"/&amp;gt;
+     &lt;/pre&gt;
+          &lt;p&gt;
+      will define a type which will schema-validate an instance element
+      with any of those attributes.
+     &lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/xs:documentation&gt;
+  &lt;/xs:annotation&gt;
+  &lt;xs:annotation&gt;
+    &lt;xs:documentation&gt;
+      &lt;div id="nsversioning" xml:id="nsversioning" xmlns="http://www.w3.org/1999/xhtml"&gt;
+        &lt;h2&gt;
+          &lt;a name="nsversioning"&gt;Versioning policy for this schema document&lt;/a&gt;
+        &lt;/h2&gt;
+        &lt;div class="bodytext"&gt;
+          &lt;p&gt;
+      In keeping with the XML Schema WG's standard versioning
+      policy, this schema document will persist at
+      &lt;a href="http://www.w3.org/2009/01/xml.xsd"&gt;
+       http://www.w3.org/2009/01/xml.xsd&lt;/a&gt;.
+     &lt;/p&gt;
+          &lt;p&gt;
+      At the date of issue it can also be found at
+      &lt;a href="http://www.w3.org/2001/xml.xsd"&gt;
+       http://www.w3.org/2001/xml.xsd&lt;/a&gt;.
+     &lt;/p&gt;
+          &lt;p&gt;
+      The schema document at that URI may however change in the future,
+      in order to remain compatible with the latest version of XML
+      Schema itself, or with the XML namespace itself.  In other words,
+      if the XML Schema or XML namespaces change, the version of this
+      document at &lt;a href="http://www.w3.org/2001/xml.xsd"&gt;
+       http://www.w3.org/2001/xml.xsd 
+      &lt;/a&gt; 
+      will change accordingly; the version at 
+      &lt;a href="http://www.w3.org/2009/01/xml.xsd"&gt;
+       http://www.w3.org/2009/01/xml.xsd 
+      &lt;/a&gt; 
+      will not change.
+     &lt;/p&gt;
+          &lt;p&gt;
+      Previous dated (and unchanging) versions of this schema 
+      document are at:
+     &lt;/p&gt;
+          &lt;ul&gt;
+            &lt;li&gt;
+              &lt;a href="http://www.w3.org/2009/01/xml.xsd"&gt;
+	http://www.w3.org/2009/01/xml.xsd&lt;/a&gt;
+            &lt;/li&gt;
+            &lt;li&gt;
+              &lt;a href="http://www.w3.org/2007/08/xml.xsd"&gt;
+	http://www.w3.org/2007/08/xml.xsd&lt;/a&gt;
+            &lt;/li&gt;
+            &lt;li&gt;
+              &lt;a href="http://www.w3.org/2004/10/xml.xsd"&gt;
+	http://www.w3.org/2004/10/xml.xsd&lt;/a&gt;
+            &lt;/li&gt;
+            &lt;li&gt;
+              &lt;a href="http://www.w3.org/2001/03/xml.xsd"&gt;
+	http://www.w3.org/2001/03/xml.xsd&lt;/a&gt;
+            &lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/xs:documentation&gt;
+  &lt;/xs:annotation&gt;
+&lt;/xs:schema&gt;</value>
+  </data>
+</root>
