@@ -112,63 +112,64 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             
         }
 
-        private string PrefixAtomicHandler(OperationCallExp operationExpression, OperationInfo operationInfo, OclExpression[] arguments, ConvertedExp[] convertedArguments)
+        private string PrefixAtomicHandler(OperationCallExp operationExpression, OperationInfo operationInfo, OclExpression[] arguments)
         {
-            string op = WrapAtomicOperand(arguments[0], operationInfo, convertedArguments[0]);
+            string op = WrapAtomicOperand(arguments[0], operationInfo, 0);
             return string.Format("{0} {1}", operationInfo.XPathName, op);
         }
 
-        private string InfixAtomicHandler(OperationCallExp operationExpression, OperationInfo operationInfo, OclExpression[] arguments, ConvertedExp[] convertedArguments)
+        private string InfixAtomicHandler(OperationCallExp operationExpression, OperationInfo operationInfo, OclExpression[] arguments)
         {
-            string leftOp = WrapAtomicOperand(arguments[0], operationInfo, convertedArguments[0]);
-            string rightOp = WrapAtomicOperand(arguments[1], operationInfo, convertedArguments[1]);
+            string leftOp = WrapAtomicOperand(arguments[0], operationInfo, 0);
+            string rightOp = WrapAtomicOperand(arguments[1], operationInfo, 1);
             return string.Format("{1} {0} {2}", operationInfo.XPathName, leftOp, rightOp);
         }
 
-
-        private string FunctionAtomicHandler(OperationCallExp operationExpression, OperationInfo operationInfo, OclExpression[] arguments, ConvertedExp[] convertedArguments)
+        private string FunctionAtomicHandler(OperationCallExp operationExpression, OperationInfo operationInfo, OclExpression[] arguments)
         {
-            IEnumerable<string> wrappedSequence = from ind in Enumerable.Range(0, arguments.Count()) select WrapAtomicOperand(arguments[ind], operationInfo, convertedArguments[ind]);
+            IEnumerable<string> wrappedSequence = from ind in Enumerable.Range(0, arguments.Count()) 
+                                                  select WrapAtomicOperand(arguments[ind], operationInfo, ind);
 
-            IEnumerable<string> withoutDataCall = convertedArguments.Select(a => a.RawString);
-            IEnumerable<string> withDataCall = convertedArguments.Select(a => a.GetString());
-            IEnumerable<string> stringifiedArguments = !operationInfo.CanOmitDataCall ? withDataCall : withoutDataCall;
+            //IEnumerable<string> withoutDataCall = convertedArguments.Select(a => a.RawString);
+            //IEnumerable<string> withDataCall = convertedArguments.Select(a => a.GetString());
+            //IEnumerable<string> stringifiedArguments = !operationInfo.CanOmitDataCall ? withDataCall : withoutDataCall;
 
 
             if (!string.IsNullOrEmpty(operationInfo.CustomXPathSyntaxFormatString))
             {
-                if (operationInfo.TypeDependent)
-                {
-                    return string.Format(operationInfo.CustomXPathSyntaxFormatString, wrappedSequence.ToArray());
-                }
-                else
-                {
-                    return string.Format(operationInfo.CustomXPathSyntaxFormatString, stringifiedArguments.ToArray());
-                }
+                return string.Format(operationInfo.CustomXPathSyntaxFormatString, wrappedSequence.ToArray());
+                //if (operationInfo.TypeDependent)
+                //{
+                //    return string.Format(operationInfo.CustomXPathSyntaxFormatString, wrappedSequence.ToArray());
+                //}
+                //else
+                //{
+                //    return string.Format(operationInfo.CustomXPathSyntaxFormatString, stringifiedArguments.ToArray());
+                //}
             }
             else
             {
-                if (operationInfo.TypeDependent)
-                {
-                    return string.Format("{0}({1})", operationInfo.XPathName, wrappedSequence.ConcatWithSeparator(", "));
-                }
-                else
-                {
-                    return string.Format("{0}({1})", operationInfo.XPathName, stringifiedArguments.ConcatWithSeparator(", "));
-                }
+                return string.Format("{0}({1})", operationInfo.XPathName, wrappedSequence.ConcatWithSeparator(", "));
+                //if (operationInfo.TypeDependent)
+                //{
+                //    return string.Format("{0}({1})", operationInfo.XPathName, wrappedSequence.ConcatWithSeparator(", "));
+                //}
+                //else
+                //{
+                //    return string.Format("{0}({1})", operationInfo.XPathName, stringifiedArguments.ConcatWithSeparator(", "));
+                //}
             }
         }
 
-        private string EqualityTestHandler(OperationCallExp operationExpression, OperationInfo operationInfo, OclExpression[] arguments, ConvertedExp[] convertedArguments)
+        private string EqualityTestHandler(OperationCallExp operationExpression, OperationInfo operationInfo, OclExpression[] arguments)
         {
-            Debug.Assert(arguments.Count() == 2 && convertedArguments.Count() == 2);
+            Debug.Assert(arguments.Count() == 2);
             OclExpression leftOpExpr = arguments[0];
             OclExpression rightOpExpr = arguments[1];
-            string leftOp = WrapAtomicOperand(leftOpExpr, operationInfo, convertedArguments[0]);
-            string rightOp = WrapAtomicOperand(rightOpExpr, operationInfo, convertedArguments[1]);
+            string leftOp = WrapAtomicOperand(leftOpExpr, operationInfo, 0);
+            string rightOp = WrapAtomicOperand(rightOpExpr, operationInfo, 1);
 
             Classifier voidType = PSMBridge.TypesTable.Library.Void;
-            Classifier invalidType = PSMBridge.TypesTable.Library.Void;
 
             if (leftOpExpr.Type == voidType && rightOpExpr.Type == voidType)
             {
@@ -194,8 +195,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             if (leftOpExpr.Type == voidType || rightOpExpr.Type == voidType)
             {
                 OclExpression comparedOpExpr = leftOpExpr.Type != voidType ? leftOpExpr : rightOpExpr;
-                ConvertedExp comparedOp = leftOpExpr.Type != voidType ? convertedArguments[0] : convertedArguments[1];
-                string comparedOpStr = WrapAtomicOperand(operationExpression, operationInfo, comparedOp);
+                string comparedOpStr = WrapAtomicOperand(comparedOpExpr, operationInfo, 0);
                 if (operationInfo.OclName == "=")
                 {
                     return string.Format("not(exists({0}))", comparedOpStr);
@@ -215,14 +215,13 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             {
                 return string.Format("not({0} is {1})", leftOp, rightOp);
             }
-
         }
 
-        private string WrapAtomicOperand(OclExpression operandExpression, OperationInfo parentOperationInfo, ConvertedExp stringifiedOperand)
+        public string WrapAtomicOperand(OclExpression operandExpression, OperationInfo ? parentOperationInfo, int number)
         {
             // solving priorities - parentheses for infix operations
             bool needsParentheses = false; 
-            if (parentOperationInfo.IsXPathInfix && operandExpression is OperationCallExp)
+            if (parentOperationInfo.HasValue && parentOperationInfo.Value.IsXPathInfix && operandExpression is OperationCallExp)
             {
                 OperationCallExp childExp = (OperationCallExp) operandExpression;
                 OclExpression[] childArguments = new OclExpression[childExp.Arguments.Count + 1];
@@ -235,7 +234,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
                 OperationInfo? childOperation = LookupOperation(childExp, childArguments);
                 if (childOperation.HasValue && childOperation.Value.IsXPathInfix)
                 {
-                    needsParentheses = parentOperationInfo.Priority < childOperation.Value.Priority;
+                    needsParentheses = parentOperationInfo.Value.Priority < childOperation.Value.Priority;
                 }
             }
 
@@ -245,18 +244,18 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
                 && (!operandExpression.Type.IsAmong(PSMBridge.Library.String, PSMBridge.Library.Any)))
             {
                 // needsParentheses can be ignored, because parentheses are added by the constructor syntax anyway
-                return string.Format("{0}:{1}({2})", XsdNamespacePrefix, operandExpression.Type.Name, stringifiedOperand.RawString);
+                return string.Format("{0}:{1}({{{2}}})", XsdNamespacePrefix, operandExpression.Type.Name, number);
             }
-            else if (stringifiedOperand.AddDataCall && !parentOperationInfo.CanOmitDataCall)
+            else if (RequiresDataCall(operandExpression, parentOperationInfo))
             {
-                return string.Format("data({0})", stringifiedOperand.RawString);
+                return string.Format("data({{{0}}})", number);
             }
             else
             {
                 if (needsParentheses)
-                    return string.Format("({0})", stringifiedOperand.RawString);
+                    return string.Format("({{{0}}})", number);
                 else
-                    return stringifiedOperand.RawString;
+                    return string.Format("{{{0}}}", number);
             }
         }
 
@@ -290,21 +289,29 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             return !IsXPathAtomic(obj);
         }
 
-        public string ToStringWithArgs(OperationCallExp expression, OclExpression[] arguments, ConvertedExp[] convertedArguments)
+        public bool RequiresDataCall(OclExpression expression, OperationInfo ? operationInfo)
+        {
+            return (!(operationInfo != null && operationInfo.Value.CanOmitDataCall )
+                && (expression is VariableExp || expression is PropertyCallExp) 
+                && IsXPathAtomic(expression.Type));
+        }
+
+        public string CreateBasicFormatString(OperationCallExp expression, OclExpression[] arguments)
+        //public string ToStringWithArgs(OperationCallExp expression, OclExpression[] arguments, TranslationOptions[] convertedArguments)
         {
             Operation referredOperation = expression.ReferredOperation;
-            // HACK - WFJT: the test should verify, that referredOperation is a built in operation 
+            // TODO HACK - WFJT: the test should verify, that referredOperation is a built in operation 
             if (true)
             {
                 OperationInfo? info = LookupOperation(expression, arguments);
                 if (info.HasValue)
-                    return ToStringWithArgsStandard(expression, referredOperation, info.Value, arguments, convertedArguments);
+                    return ToStringWithArgsStandard(expression, referredOperation, info.Value, arguments);
                 else
-                    throw new OclSubexpressionNotConvertible(string.Format("Operation not found {0} (arity: {1})", referredOperation.Name, convertedArguments.Length));
+                    throw new OclSubexpressionNotConvertible(string.Format("Operation not found {0} (arity: {1})", referredOperation.Name));
             }
             else
             {
-                return ToStringWithArgsModel(referredOperation, convertedArguments);
+                return ToStringWithArgsModel(referredOperation, arguments);
             }
         }
 
@@ -355,38 +362,41 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             return untypedArityMatch.Single();
         }
 
-        private string ToStringWithArgsStandard(OperationCallExp operationExpression, Operation referredOperation, OperationInfo info, OclExpression[] arguments, ConvertedExp[] convertedArguments)
+        private string ToStringWithArgsStandard(OperationCallExp operationExpression, Operation referredOperation, OperationInfo info, OclExpression[] arguments)
         {
             if (info.UseCustomTranslateHandler)
             {
                 Debug.Assert(info.CustomTranslateHandler != null);
-                return info.CustomTranslateHandler(operationExpression, info, arguments, convertedArguments);
+                return info.CustomTranslateHandler(operationExpression, info, arguments);
             }
             else if (info.UseCustomXPathSyntaxFormatString)
             {
                 Debug.Assert(!string.IsNullOrEmpty(info.CustomXPathSyntaxFormatString));
-                return string.Format(info.CustomXPathSyntaxFormatString, convertedArguments);
+                return string.Format(info.CustomXPathSyntaxFormatString);
             }
             else
             {
                 if (info.IsXPathInfix)
                 {
-                    Debug.Assert(convertedArguments.Length == 2 && info.Arity == 2);
-                    return string.Format("{0} {2} {1}", convertedArguments[0], convertedArguments[1], info.XPathName);
+                    Debug.Assert(arguments.Length == 2 && info.Arity == 2);
+                    string leftOp = WrapAtomicOperand(arguments[0], info, 0);
+                    string rightOp = WrapAtomicOperand(arguments[1], info, 1);
+                    return string.Format("{0} {1} {2}", leftOp, info.XPathName, rightOp);
                 }
                 else if (info.IsXPathPrefix)
                 {
-                    Debug.Assert(convertedArguments.Length == 1 && info.Arity == 1);
-                    return string.Format("{1} {0}", convertedArguments[0], info.XPathName);
+                    Debug.Assert(arguments.Length == 1 && info.Arity == 1);
+                    string op = WrapAtomicOperand(arguments[0], info, 0);
+                    return string.Format("{0} {1}", info.XPathName, op);
                 }
                 else
                 {
-                    return string.Format("{0}({1})", info.XPathName, convertedArguments.ConcatWithSeparator(", "));
+                    return string.Format("{0}({1})", info.XPathName, arguments.ConcatWithSeparator(a => WrapAtomicOperand(a, info, Array.IndexOf(arguments, a)), ", "));
                 }
             }
         }
 
-        private string ToStringWithArgsModel(Operation referredOperation, ConvertedExp[] args)
+        private string ToStringWithArgsModel(Operation referredOperation, OclExpression[] args)
         {
             Debug.Assert(referredOperation.Tag != null);
             throw new NotImplementedException();
@@ -415,7 +425,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             set { customXPathSyntaxFormatString = value; if (!string.IsNullOrEmpty(value)) UseCustomXPathSyntaxFormatString = true; }
         }
 
-        public delegate string TranslateHandler(OperationCallExp operationExpression, OperationInfo operationInfo, OclExpression[] arguments, ConvertedExp[] convertedArguments);
+        public delegate string TranslateHandler(OperationCallExp operationExpression, OperationInfo operationInfo, OclExpression[] arguments);
 
         public bool UseCustomTranslateHandler { get; set; }
 
