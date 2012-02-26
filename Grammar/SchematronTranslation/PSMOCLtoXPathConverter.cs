@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Xml.Linq;
 using Exolutio.Model.OCL;
 using Exolutio.Model.OCL.AST;
 using Exolutio.Model.OCL.Bridge;
 using Exolutio.Model.OCL.ConstraintConversion;
-using Exolutio.Model.OCL.Types;
 using Exolutio.SupportingClasses;
 
 namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
@@ -15,7 +13,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
     /// <summary>
     /// Translats valid OCL expression (invariant) into an XPath expression 
     /// </summary>
-    public abstract class PSMOCLtoXPathConverter : IAstVisitor<ConvertedExp>
+    public abstract class PSMOCLtoXPathConverter : IAstVisitor
     {
         protected readonly Stack<LoopExp> loopStack
             = new Stack<LoopExp>();
@@ -23,6 +21,8 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
         public SchematronSchemaGenerator.TranslationSettings Settings { get; set; }
 
         private OperationHelper OperationHelper { get; set; }
+
+        public SubexpressionTranslations SubexpressionTranslations { get; private set; }
 
         public OCLScript OCLScript { get; set; }
 
@@ -43,63 +43,70 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             return loopStack.LastOrDefault(l => l.Iterator.Any(vd => vd.Name == v.referredVariable.Name));
         }
 
-        public ConvertedExp Visit(ErrorExp node)
+        public void Visit(ErrorExp node)
         {
             throw new ExpressionNotSupportedInXPath(node);
         }
 
-        public abstract ConvertedExp Visit(IterateExp node);
+        public abstract void Visit(IterateExp node);
 
-        public abstract ConvertedExp Visit(IteratorExp node);
+        public abstract void Visit(IteratorExp node);
 
-        public ConvertedExp Visit(OperationCallExp node)
+        public void Visit(OperationCallExp node)
         {
-            ConvertedExp[] argumentsStrings = new ConvertedExp[node.Arguments.Count + 1];
             OclExpression[] arguments = new OclExpression[node.Arguments.Count + 1];
-            ConvertedExp argTran = node.Source.Accept(this);
+            if (node.Source is PropertyCallExp)
+                this.Visit((PropertyCallExp)node.Source, true);
+            else
+                node.Source.Accept(this);
+            
             arguments[0] = node.Source;
-            argumentsStrings[0] = argTran;
             for (int i = 0; i < node.Arguments.Count; i++)
             {
-                argTran = node.Arguments[i].Accept(this);
-                argumentsStrings[i + 1] = argTran;
+                if (node.Arguments[i] is PropertyCallExp)
+                    this.Visit((PropertyCallExp)node.Arguments[i], true);
+                else
+                    node.Arguments[i].Accept(this);
                 arguments[i + 1] = node.Arguments[i];
             }
-            string result = OperationHelper.ToStringWithArgs(node, arguments, argumentsStrings);
-            return new ConvertedExp(result);
+
+            TranslationOption option = new TranslationOption();
+            option.FormatString = OperationHelper.CreateBasicFormatString(node, arguments);
+            this.SubexpressionTranslations.AddTranslationOption(node, option, arguments);
         }
 
-        public ConvertedExp Visit(PropertyCallExp node)
+        public void Visit(PropertyCallExp node)
         {
-            if (!(node.ReferredProperty.Tag is PSMAttribute))
-            {
-                Log.AddWarningTaggedFormat(XPathTranslationLogMessages.UNSAFE_PROPERTY_CALL_EXP, node);
-            }
-            PSMPath psmPath = PSMPathBuilder.BuildPSMPath(node, OclContext, VariableNamer);
-            
-            string xpath = psmPath.ToXPath(CanTranslateSelfAsCurrent);
-            return new ConvertedExp(xpath, OperationHelper.IsXPathAtomic(node.Type));
+            Visit(node, false);
         }
 
-        public ConvertedExp Visit(VariableExp node)
+        public void Visit(PropertyCallExp node, bool isOperationArgument)
         {
-            if (node.Type is Class)
-            {
-                Log.AddWarningTaggedFormat(XPathTranslationLogMessages.UNSAFE_VARIABLE_EXP, 
-                    node, node.referredVariable.Name);
-            }
-
             PSMPath psmPath = PSMPathBuilder.BuildPSMPath(node, OclContext, VariableNamer);
             string xpath = psmPath.ToXPath(CanTranslateSelfAsCurrent);
-            ConvertedExp convertedExp = new ConvertedExp(xpath, OperationHelper.IsXPathAtomic(node.Type));
-            return convertedExp;
+            if (!isOperationArgument)
+            {
+                string formatString = OperationHelper.WrapAtomicOperand(node, null, 0);
+                SubexpressionTranslations.AddTrivialTranslation(node, string.Format(formatString, xpath));
+            }
+            else
+            {
+                SubexpressionTranslations.AddTrivialTranslation(node, xpath);
+            }
+        }
+
+        public void Visit(VariableExp node)
+        {
+            PSMPath psmPath = PSMPathBuilder.BuildPSMPath(node, OclContext, VariableNamer);
+            string xpath = psmPath.ToXPath(CanTranslateSelfAsCurrent);
+            SubexpressionTranslations.AddTrivialTranslation(node, xpath);
         }
 
         #region not supported yet 
 
-        public abstract ConvertedExp Visit(LetExp node);
+        public abstract void Visit(LetExp node);
         
-        public ConvertedExp Visit(TypeExp node)
+        public void Visit(TypeExp node)
         {
             // TODO: PSM2XPath: there should be some suport for types in the future
             throw new ExpressionNotSupportedInXPath(node);
@@ -110,75 +117,124 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 
         #region structural
 
-        public ConvertedExp Visit(IfExp node)
+        public void Visit(IfExp node)
         {
-            string cond = node.Condition.Accept(this).GetString();
-            string thenExpr = node.ThenExpression.Accept(this).GetString();
-            string elseExpr = node.ElseExpression.Accept(this).GetString();
-            return new ConvertedExp(string.Format("if ({0}) then {1} else {2}", cond, thenExpr, elseExpr));
+            node.Condition.Accept(this);
+            node.ThenExpression.Accept(this);
+            node.ElseExpression.Accept(this);
+            TranslationOption option = new TranslationOption();
+            option.FormatString = "if ({0}) then {1} else {2}";
+            SubexpressionTranslations.AddTranslationOption(node, option, node.Condition, node.ThenExpression, node.ElseExpression);
         }
 
         #endregion 
 
         #region literals
 
-        public abstract ConvertedExp Visit(TupleLiteralExp node);
+        public abstract void Visit(TupleLiteralExp node);
 
-        public ConvertedExp Visit(InvalidLiteralExp node)
+        public void Visit(InvalidLiteralExp node)
         {
-            return null;
+            SubexpressionTranslations.AddTrivialTranslation(node, "invalid()");
         }
 
-        public ConvertedExp Visit(BooleanLiteralExp node)
+        public void Visit(BooleanLiteralExp node)
         {
             // instead boolean literals, functions are used
-            return new ConvertedExp(node.Value ? "true()" : "false()");
+            SubexpressionTranslations.AddTrivialTranslation(node, node.Value ? "true()" : "false()");
         }
 
-        public ConvertedExp Visit(CollectionLiteralExp node)
+        public void Visit(CollectionLiteralExp node)
         {
-            StringBuilder partsBuilder = new StringBuilder();
+            StringBuilder formatBuilder = new StringBuilder();
+            List<OclExpression> subExpressions = new List<OclExpression>();
+
+            // opening parenthesis of xpath sequence literal
+            formatBuilder.Append("(");
             foreach (CollectionLiteralPart clp in node.Parts)
-            {   
-                //TODO: WFJT
-                //string partValue = clp.Value.Accept(this).GetString();
-                //partsBuilder.AppendFormat("'{0}' := {1}, ", clp.Value.Attribute.Name, partValue);
-            }
-            if (partsBuilder.Length > 0)
             {
-                partsBuilder.Length = partsBuilder.Length - 2;
+                #region helper function
+                Action<OclExpression> appendOne = delegate(OclExpression exp)
+                                                      {
+                                                          if (exp is LiteralExp)
+                                                          {
+                                                              formatBuilder.Append("{");
+                                                              formatBuilder.Append(subExpressions.Count);
+                                                              formatBuilder.Append("}");
+                                                          }
+                                                          else
+                                                          {
+                                                              formatBuilder.Append("{(");
+                                                              formatBuilder.Append(subExpressions.Count);
+                                                              formatBuilder.Append(")}");
+                                                          }
+                                                      };
+                #endregion
+
+                if (clp is CollectionRange)
+                {
+                    CollectionRange range = ((CollectionRange) clp);
+                    range.First.Accept(this);
+                    range.Last.Accept(this);
+
+                    appendOne(range.First);
+                    subExpressions.Add(range.First);
+                    formatBuilder.Append(" to ");
+                    appendOne(range.Last);
+                    subExpressions.Add(range.Last);
+                }
+
+                if (clp is CollectionItem)
+                {
+                    CollectionItem collectionItem = (CollectionItem) clp;
+                    collectionItem.Item.Accept(this);
+                    appendOne(collectionItem.Item);
+                    subExpressions.Add(collectionItem.Item);
+                }
+                formatBuilder.Append(", ");
             }
-            return new ConvertedExp(string.Format("({0})", partsBuilder.ToString()));
+
+            if (formatBuilder.Length > 0) // remove last comma
+            {
+                formatBuilder.Length = formatBuilder.Length - 2;
+            }
+            
+            // closing parenthesis of xpath sequence literal
+            formatBuilder.Append(")");
+
+            TranslationOption option = new TranslationOption();
+            option.FormatString = formatBuilder.ToString();
+            SubexpressionTranslations.AddTranslationOption(node, option, subExpressions.ToArray());
         }
 
-        public ConvertedExp Visit(EnumLiteralExp node)
+        public void Visit(EnumLiteralExp node)
         {
-            return null;
+            throw new ExpressionNotSupportedInXPath(node);
         }
 
-        public ConvertedExp Visit(NullLiteralExp node)
+        public void Visit(NullLiteralExp node)
         {
-            return new ConvertedExp("()");
+            SubexpressionTranslations.AddTrivialTranslation(node, "()");
         }
 
-        public ConvertedExp Visit(UnlimitedNaturalLiteralExp node)
+        public void Visit(UnlimitedNaturalLiteralExp node)
         {
-            return new ConvertedExp(node.ToString());
+            SubexpressionTranslations.AddTrivialTranslation(node, node.ToString());
         }
 
-        public ConvertedExp Visit(IntegerLiteralExp node)
+        public void Visit(IntegerLiteralExp node)
         {
-            return new ConvertedExp(node.ToString());
+            SubexpressionTranslations.AddTrivialTranslation(node, node.Value.ToString());
         }
 
-        public ConvertedExp Visit(RealLiteralExp node)
+        public void Visit(RealLiteralExp node)
         {
-            return new ConvertedExp(node.ToString());
+            SubexpressionTranslations.AddTrivialTranslation(node, node.Value.ToString());
         }
 
-        public ConvertedExp Visit(StringLiteralExp node)
+        public void Visit(StringLiteralExp node)
         {
-            return new ConvertedExp(string.Format("'{0}'", node.Value));
+            SubexpressionTranslations.AddTrivialTranslation(node, string.Format("'{0}'", node.Value));
         }
 
         #endregion 
@@ -199,7 +255,10 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             OperationHelper.InitStandard();
             TranslatedOclExpression = expression;
             VariableNamer = new VariableNamer();
-            return expression.Accept(this).GetString();
+            SubexpressionTranslations = new SubexpressionTranslations();
+            expression.Accept(this);
+            string result = SubexpressionTranslations.GetSubexpressionTranslation(expression).GetString();
+            return result;
         }
     }
 
@@ -210,28 +269,31 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             get { return loopStack.Count == 0; }
         }
 
-        public override ConvertedExp Visit(IterateExp node)
+        public override void Visit(IterateExp node)
         {
             loopStack.Push(node);
 
-            string sourceExpression = node.Source.Accept(this).GetString();
-            string bodyExpression = node.Body.Accept(this).GetString();
-            string accInitExpression = node.Result.Value.Accept(this).GetString();
-            string result = string.Format("oclX:iterate({0}, {1}, function(${2}, {3}) {{ {4} }})", sourceExpression, accInitExpression, node.Iterator[0].Name, node.Result.Name, bodyExpression);
+            node.Source.Accept(this);
+            node.Body.Accept(this);
+            node.Result.Value.Accept(this);
+
+            TranslationOption option = new TranslationOption();
+            option.FormatString = string.Format("oclX:iterate({{0}}, {{1}}, function(${0}, ${1}) {{{{ {{2}} }}}})", node.Iterator[0].Name, node.Result.Name);
+            SubexpressionTranslations.AddTranslationOption(node, option, node.Source, node.Result.Value, node.Body);
 
             loopStack.Pop();
-            return new ConvertedExp(result);
+            
         }
 
-        public override ConvertedExp Visit(IteratorExp node)
+        public override void Visit(IteratorExp node)
         {
             loopStack.Push(node);
 
-            string sourceExpression = node.Source.Accept(this).GetString();
-            string bodyExpression = node.Body.Accept(this).GetString();
+            node.Source.Accept(this);
+            node.Body.Accept(this);
 
             string iteratorName;
-            // HACK: WFJT 
+            // TODO HACK: WFJT 
             if (node.IteratorName != "Collect")
             {
                 iteratorName = node.IteratorName;
@@ -241,103 +303,92 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
                 iteratorName = "collect";
             }
 
-            string result;
+            TranslationOption option = new TranslationOption();
             if (node.Iterator.Count == 1)
             {
-
-                result = string.Format("oclX:{0}({1}, function(${2}) {{ {3} }})",
-                                       iteratorName, sourceExpression, node.Iterator[0].Name, bodyExpression);
+                option.FormatString = string.Format("oclX:{0}({{0}}, function(${1}) {{{{ {{1}} }}}})", iteratorName, node.Iterator[0].Name);
             }
             else
             {
-                result = string.Format("oclX:{0}N({1}, function({2}) {{ {3} }})",
-                                       iteratorName, sourceExpression, node.Iterator.ConcatWithSeparator(vd => "$" + vd.Name, ", "), bodyExpression);
+                option.FormatString = string.Format("oclX:{0}N({{0}}, function({1}) {{{{ {{1}} }}}})", iteratorName, node.Iterator.ConcatWithSeparator(vd => "$" + vd.Name, ", "));
             }
             loopStack.Pop();
-
-            return new ConvertedExp(result);
+                       
+            SubexpressionTranslations.AddTranslationOption(node, option, node.Source, node.Body);
         }
 
-        public override ConvertedExp Visit(LetExp node)
+        public override void Visit(LetExp node)
         {
-            string valueExp = node.Variable.Value.Accept(this).GetString();
-            string bodyExpression = node.InExpression.Accept(this).GetString();
-            return new ConvertedExp(string.Format("let ${0} := {1} return {2}", node.Variable.Name, valueExp, bodyExpression));
+            node.Variable.Value.Accept(this);
+            node.InExpression.Accept(this);
+            TranslationOption translationOption = new TranslationOption();
+            translationOption.FormatString = string.Format("let ${0} := {{0}} return {{1}}", node.Variable.Name);
+            SubexpressionTranslations.AddTranslationOption(node, translationOption, node.Variable.Value, node.InExpression);
         }
 
-        public override ConvertedExp Visit(TupleLiteralExp node)
+        public override void Visit(TupleLiteralExp node)
         {
-            StringBuilder partsBuilder = new StringBuilder();
+            StringBuilder formatBuilder = new StringBuilder();
+            formatBuilder.Append("map{");
+            List<OclExpression> subExpressions = new List<OclExpression>();
             foreach (KeyValuePair<string, TupleLiteralPart> kvp in node.Parts)
             {
-                string partValue = kvp.Value.Value.Accept(this).GetString();
-                partsBuilder.AppendFormat("'{0}' := {1}, ", kvp.Value.Attribute.Name, partValue );
-
+                kvp.Value.Value.Accept(this);
+                formatBuilder.AppendFormat("'{0}' := {{{1}}}, ", kvp.Value.Attribute.Name, subExpressions.Count);
+                subExpressions.Add(kvp.Value.Value);
             }
-            if (partsBuilder.Length > 0)
+            if (formatBuilder.Length > 0)
             {
-                partsBuilder.Length = partsBuilder.Length - 2; 
+                formatBuilder.Length = formatBuilder.Length - 2; 
             }
-            return new ConvertedExp(string.Format("map{{{0}}}", partsBuilder.ToString()));
+            formatBuilder.Append("}");
+            TranslationOption option = new TranslationOption();
+            option.FormatString = formatBuilder.ToString();
+            SubexpressionTranslations.AddTranslationOption(node, option, subExpressions.ToArray());
         }
     }
 
     public class PSMOCLtoXPathConverterDynamic : PSMOCLtoXPathConverter
     {
-        private bool insideDynamicEvaluation = false;
-        private bool variablesDefinedExplicitly { get; set; }
+        private bool insideDynamicEvaluation;
 
         public override bool CanTranslateSelfAsCurrent
         {
             get { return !insideDynamicEvaluation; }
         }
 
-        public override ConvertedExp Visit(IterateExp node)
+        public override void Visit(IterateExp node)
         {
             loopStack.Push(node);
 
-            string sourceExpression = node.Source.Accept(this).GetString();
-            string accInitExpression = node.Result.Value.Accept(this).GetString();
+            node.Source.Accept(this);
+            node.Result.Value.Accept(this);
             var prevInsideDynamicEvaluation = insideDynamicEvaluation;
             insideDynamicEvaluation = true;
-            string bodyExpression = node.Body.Accept(this).GetString();
+            node.Body.Accept(this);
             insideDynamicEvaluation = prevInsideDynamicEvaluation;
 
-            string variablesDef;
-            if (loopStack.Count > 1 || variablesDefinedExplicitly)
-            {
-                variablesDef = "$variables";
-            }
-            else
-            {
-                variablesDef = "$variables";
-            }
-
             string apostrophe = insideDynamicEvaluation ? "''" : "'";
-            string result;
-                result = string.Format("oclX:iterate({0}, {3}, function(${1}) {{ {2} }})", sourceExpression, node.Iterator[0].Name, bodyExpression, accInitExpression);
-
-                result = string.Format("oclX:iterate({0}, {6}{1}{6}, {6}{2}{6}, {6}{3}{6}, {6}{4}{6}, {5})",
-                                       sourceExpression, node.Iterator[0].Name, node.Result.Name, accInitExpression, bodyExpression,
-                                       variablesDef, apostrophe);
+            TranslationOption option = new TranslationOption();
+            option.FormatString = string.Format("oclX:iterate({{0}}, {2}{0}{2}, {2}{1}{2}, {2}{{1}}{2}, {2}{{2}}{2}, $variables)", node.Iterator[0].Name, node.Result.Name, apostrophe);
             loopStack.Pop();
 
-            return new ConvertedExp(result);
+            SubexpressionTranslations.AddTranslationOption(node, option, node.Source, node.Result.Value, node.Body);
         }
 
 
-        public override ConvertedExp Visit(IteratorExp node)
+        public override void Visit(IteratorExp node)
         {
             loopStack.Push(node);
 
-            string sourceExpression = node.Source.Accept(this).GetString();
+            node.Source.Accept(this);
             var prevInsideDynamicEvaluation = insideDynamicEvaluation;
             insideDynamicEvaluation = true;
-            string bodyExpression = node.Body.Accept(this).GetString();
+            node.Body.Accept(this);
             insideDynamicEvaluation = prevInsideDynamicEvaluation;
 
             string iteratorName;
-            // HACK: WFJT 
+            // TODO HACK: WFJT 
             if (node.IteratorName != "Collect")
             {
                 iteratorName = node.IteratorName;
@@ -346,45 +397,32 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             {
                 iteratorName = "collect";
             }
-
-            string variablesDef;
-            if (loopStack.Count > 1 || variablesDefinedExplicitly)
-            {
-                variablesDef = "$variables";
-            }
-            else
-            {
-                variablesDef = "$variables";
-            }
-
             string apostrophe = insideDynamicEvaluation ? "''" : "'";
-            string result;
+
+            TranslationOption option = new TranslationOption();
             if (node.Iterator.Count == 1)
             {
-
-                result = string.Format("oclX:{0}({1}, {5}{2}{5}, {5}{3}{5}, {4})",
-                                       iteratorName, sourceExpression, node.Iterator[0].Name, bodyExpression,
-                                       variablesDef, apostrophe);
+                option.FormatString = string.Format("oclX:{0}({{0}}, {2}{1}{2}, {2}{{1}}{2}, $variables)", iteratorName, node.Iterator[0].Name, apostrophe);
             }
             else
             {
-                result = string.Format("oclX:{0}N({1}, {5}{2}{5}, {5}{3}{5}, {4})",
-                                       iteratorName, sourceExpression, node.Iterator.ConcatWithSeparator(vd => vd.Name, ", "), bodyExpression,
-                                       variablesDef, apostrophe);
+                option.FormatString = string.Format("oclX:{0}N({{0}}, {2}{1}{2}, {2}{{1}}{2}, $variables)", iteratorName, node.Iterator.ConcatWithSeparator(vd => vd.Name, ", "), apostrophe);
             }
+            SubexpressionTranslations.AddTranslationOption(node, option, node.Source, node.Body);
+
             loopStack.Pop();
-
-            return new ConvertedExp(result);
         }
 
-        public override ConvertedExp Visit(LetExp node)
+        public override void Visit(LetExp node)
         {
-            string valueExp = node.Variable.Value.Accept(this).GetString();
-            string bodyExpression = node.InExpression.Accept(this).GetString();
-            return new ConvertedExp(string.Format("for ${0} in {1} return {2}", node.Variable.Name, valueExp, bodyExpression));
+            node.Variable.Value.Accept(this);
+            node.InExpression.Accept(this);
+            TranslationOption translationOption = new TranslationOption();
+            translationOption.FormatString = string.Format("for ${0} in {{0}} return {{1}}", node.Variable.Name);
+            SubexpressionTranslations.AddTranslationOption(node, translationOption, node.Variable.Value, node.InExpression);
         }
 
-        public override ConvertedExp Visit(TupleLiteralExp node)
+        public override void Visit(TupleLiteralExp node)
         {
             throw new ExpressionNotSupportedInXPath(node, "Tuples are supported only in 'functional' schemas. ");
         }
@@ -408,34 +446,132 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
         }
     }
 
-    public class ConvertedExp
+    public class SubexpressionTranslations
     {
-        public string RawString { get; set; }
+        private readonly  Dictionary<OclExpression, TranslationOptions> translations = new Dictionary<OclExpression, TranslationOptions>();
+        
+        private readonly Dictionary<OclExpression, int> selectedTranslations = new Dictionary<OclExpression, int>();
 
-        public bool AddDataCall { get; set; }
-    
-        public string GetString()
+        public Dictionary<OclExpression, TranslationOptions> Translations
         {
-            if (AddDataCall)
+            get { return translations; }
+        }
+
+        public Dictionary<OclExpression, int> SelectedTranslations
+        {
+            get { return selectedTranslations; }
+        }
+
+        public TranslationOption GetSubexpressionTranslation(OclExpression expression)
+        {
+            return Translations[expression].Options[SelectedTranslations[expression]];
+        }
+
+        public void AddTrivialTranslation(OclExpression expression, string translation)
+        {
+            TranslationOptions options = new TranslationOptions();
+            options.SubexpressionTranslations = this;
+            options.TranslatedExpression = expression;
+            TranslationOption option = new TranslationOption();
+            option.OptionsContainer = options;
+            option.FormatString = translation;
+            if (this.Translations.ContainsKey(expression))
             {
-                return string.Format("data({0})", RawString);
+                throw new InvalidOperationException(string.Format("Expression '{0}' translated reapeatedly. ", expression));
+            }
+            options.Options.Add(option);
+            this.Translations[expression] = options;
+            this.SelectedTranslations[expression] = 0;
+        }
+
+        public void AddTranslationOption(OclExpression expression, TranslationOption option, params OclExpression[] subExpressions)
+        {
+            TranslationOptions options;
+            if (!this.Translations.ContainsKey(expression))
+            {
+                options = new TranslationOptions();
+                options.SubexpressionTranslations = this;
+                options.TranslatedExpression = expression;
+                foreach (OclExpression subExpression in subExpressions)
+                {
+                    options.SubExpressions.Add(subExpression);
+                }
+                this.Translations[expression] = options;
             }
             else
             {
-                return RawString;
+                options = this.Translations[expression];
+                if (subExpressions != null && subExpressions.Length > 0)
+                {
+                    if (subExpressions.Length != options.SubExpressions.Count)
+                    {
+                        throw new InvalidOperationException(string.Format("Inconsistency of subexpressions when adding options for '{0}'", expression));
+                    }
+
+                    for (int index = 0; index < subExpressions.Length; index++)
+                    {
+                        OclExpression subExpression = subExpressions[index];
+                        if (subExpression != options.SubExpressions[index])
+                            throw new InvalidOperationException(string.Format("Inconsistency of subexpressions when adding options for '{0}'", expression));
+                    }
+                }
             }
+
+            option.OptionsContainer = options;
+            this.SelectedTranslations[expression] = 0;
+            options.Options.Add(option);
+        }
+    }
+
+    public class TranslationOptions
+    {
+        private readonly List<TranslationOption> options = new List<TranslationOption>();
+        private readonly List<OclExpression> subExpressions = new List<OclExpression>();
+
+        public OclExpression TranslatedExpression { get; set; }
+
+        public SubexpressionTranslations SubexpressionTranslations { get; set; }
+
+        public List<TranslationOption> Options { get { return options; } }
+
+        public List<OclExpression> SubExpressions { get { return subExpressions; } }
+
+        public string GetString(int option = 0)
+        {
+            return Options[option].GetString();
+        }
+        
+        public override string ToString()
+        {
+            throw new Exception("TO STRING IN TRANSLATIONOPTIONS");
+            //return null;
+        }
+    }
+
+    public class TranslationOption
+    {
+        public TranslationOptions OptionsContainer
+        {
+            get; set;
         }
 
-        public ConvertedExp(string rawString, bool addDataCall = false)
-        {
-            this.RawString = rawString;
-            AddDataCall = addDataCall;
-        }
+        public string FormatString { get; set; }
 
         public override string ToString()
         {
-            //throw new Exception("TO STRING IN CONVERTEDEXP");
-            return null;
+            throw new Exception("TO STRING IN TRANSLATIONOPTION");
+            //return null;
+        }
+
+        public string GetString()
+        {
+            object[] translatedSubexpressions = new object[OptionsContainer.SubExpressions.Count];
+            for (int index = 0; index < OptionsContainer.SubExpressions.Count; index++)
+            {
+                OclExpression subExpression = OptionsContainer.SubExpressions[index];
+                translatedSubexpressions[index] = OptionsContainer.SubexpressionTranslations.GetSubexpressionTranslation(subExpression).GetString();
+            }
+            return string.Format(FormatString, translatedSubexpressions); 
         }
     }
 }
