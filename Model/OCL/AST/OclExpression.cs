@@ -27,5 +27,19 @@ namespace Exolutio.Model.OCL.AST
         }
 
      //   public OclExpression() { }
+        private IExpressionSource codeSource;
+        private static readonly IExpressionSource InvalidCodeSource = new InvalidExpressionSource();
+
+        public IExpressionSource CodeSource {
+            get{
+                if (codeSource == null) {
+                    return InvalidCodeSource;
+                }
+                return codeSource;
+            }
+            set {
+                codeSource = value;
+            }
+        }
     }
 }

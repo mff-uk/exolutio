@@ -100,7 +100,7 @@ oclExpression
 	scope{
 		OclExpression RootExpr;
 	}
-	:^(INFIX  e1=oclExpression e2=oclExpression) {$Expr = InfixOperation($e1.Expr,$INFIX.Text,$e2.Expr);}
+	:^(INFIX  e1=oclExpression e2=oclExpression) {$Expr = InfixOperation($e1.Expr,$INFIX,$e2.Expr);}
 	|^(UNARY  e=oclExpression)  {$Expr = UnaryOperation($UNARY.Token,$e.Expr);}
 	|^('.' e=oclExpression{$oclExpression::RootExpr = $e.Expr;} (res=propertyCall | res=operationCall)) {$Expr =$res.Expr;}
 	|^('->' e=oclExpression{$oclExpression::RootExpr = $e.Expr;} (itCall)) {$Expr =$itCall.Expr;}
@@ -123,7 +123,7 @@ primaryExperession
 	 ^(PRIMITIVELITERAL primitiveLiteralExp) {$Expr = $primitiveLiteralExp.Literal;}
 	//|	typeLiteralExp //8E
 	|	//8A,8E,22 - nemuze obsahovat path -> je obsazeno v propertyCall(rozhodnuti co je Path je semanticka akce)
-	 ^(TYPE type) { $Expr = new TypeExp($type.Type,TypesTable.Library.Type);}
+	 ^(TYPE type) { $Expr = new TypeExp($type.Type,TypesTable.Library.Type).SetCodeSource(new CodeSource($TYPE));}
 	|ifExp {$Expr = $ifExp.Expr;}
 	|letExp {$Expr = $letExp.Expr;}
 	//3a, 9, 28a, 36b,36c
@@ -268,11 +268,11 @@ primitiveLiteralExp //15
 	: IntegerLiteralExp				{$Literal = CreateIntegerLiteral($IntegerLiteralExp);}
 	| RealLiteralExp				{$Literal = CreateRealLiteral($RealLiteralExp);}
 	| StringLiteralExp				{$Literal = CreateStringLiteral($StringLiteralExp);}
-	| 'true'						{$Literal = CreateBooleanLiteral(true);}
-	| 'false'						{$Literal = CreateBooleanLiteral(false);}
-	| UnlimitedNaturalLiteralExp	{$Literal = CreateUnlimitedNaturalLiteral();}
-	| NullLiteralExp				{$Literal = CreateNullLiteral();}
-	| InvalidLiteralExp				{$Literal = CreateInvalidLiteral();}
+	| tok = 'true'					{$Literal = CreateBooleanLiteral(true,$tok);}
+	| tok = 'false'					{$Literal = CreateBooleanLiteral(false,$tok);}
+	| UnlimitedNaturalLiteralExp	{$Literal = CreateUnlimitedNaturalLiteral($UnlimitedNaturalLiteralExp);}
+	| NullLiteralExp				{$Literal = CreateNullLiteral($NullLiteralExp);}
+	| InvalidLiteralExp				{$Literal = CreateInvalidLiteral($InvalidLiteralExp);}
 	;
 
 tupleLiteralExp //16
