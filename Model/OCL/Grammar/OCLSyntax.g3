@@ -16,6 +16,9 @@ tokens{
 @lexer::namespace{Exolutio.Model.OCL.Compiler}
 @parser::namespace{Exolutio.Model.OCL.Compiler}
 
+@lexer::header {    using System.Collections.Generic;} 
+@lexer::members {    Queue<IToken> tokens = new Queue<IToken>();    public override void Emit(IToken token)     {        state.token = token;        tokens.Enqueue(token);    }    public override IToken NextToken()    {        base.NextToken();        if ( tokens.Count ==0 )            return Tokens.EndOfFile;        return tokens.Dequeue();    }}
+
 
 
 
@@ -252,7 +255,7 @@ collectionLiteralParts //12
 	;
 
 collectionLiteralPart //13
-	: exp1=oclExpression (('..' exp2=oclExpression)->^(COLLPARTRANGE $exp1 $exp2)|->^(COLLPART $exp1)) //13B,14
+	: exp1=oclExpression ((DoubleDot exp2=oclExpression)->^(COLLPARTRANGE $exp1 $exp2)|->^(COLLPART $exp1)) //13B,14
 	;
 
 
@@ -360,6 +363,9 @@ ifExp //46
  * Lexer Rules
  */
 
+DoubleDot
+	: '..'
+	;
 	
 NullLiteralExp //47
 	: 'null'
@@ -384,7 +390,12 @@ IntegerLiteralExp //18
 	| '1'..'9' Num*
 	;
 RealLiteralExp //19
-	: Num+ (('.'Num+ (ExponentPart)?) |(ExponentPart))
+	: n = Num+ d='..' {
+	      $n.Type = IntegerLiteralExp; 
+		  Emit($n);
+		  $d.Type = DoubleDot;
+		  Emit($d); } 
+	 | Num+ (('.'Num+ (ExponentPart)?) |(ExponentPart))
 	;
 	
 StringLiteralExp //20

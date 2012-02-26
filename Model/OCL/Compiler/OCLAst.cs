@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// $ANTLR 3.3.1.7705 ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3 2012-02-26 13:13:31
+// $ANTLR 3.3.1.7705 ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3 2012-02-26 22:10:10
 
 // The variable 'variable' is assigned but its value is never used.
 #pragma warning disable 219
@@ -31,7 +31,7 @@ namespace Exolutio.Model.OCL.Compiler
 public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 {
 	internal static readonly string[] tokenNames = new string[] {
-		"<invalid>", "<EOR>", "<DOWN>", "<UP>", "ACC", "ARGS", "BODY", "CALL", "CALLARGS", "CLASSIFIERCONDITION", "CLASSIFIERHEAD", "COLLECTIONLITERAL", "COLLECTIONTYPE", "COLLPART", "COLLPARTRANGE", "COLLTYPE", "CONDITION", "Char", "DECL", "DEF", "DERIVATE", "EscapeSequence", "ExponentPart", "Hex", "IF", "INDEX", "INFIX", "INIT", "INV", "ITERATE", "IntegerLiteralExp", "InvalidLiteralExp", "LET", "LINE_COMMENT", "MESSAGE", "NESTED_ML_COMMENT", "NameChar", "NameStartChar", "NullLiteralExp", "Num", "OPERATION", "OPERATIONCONDITION", "OPERATIONHEAD", "PATH", "POST", "PRE", "PRIMITIVELITERAL", "PROPERTYCONDITION", "PROPERTYHEAD", "RealLiteralExp", "SimpleName", "StringChar", "StringLiteralExp", "TUPLELITERAL", "TYPE", "UNARY", "UnlimitedNaturalLiteralExp", "VARDECL", "WS", "WhiteSpaceChar", "'('", "')'", "'+'", "','", "'-'", "'->'", "'.'", "'..'", "'/'", "':'", "'::'", "';'", "'<'", "'<='", "'<>'", "'='", "'>'", "'>='", "'?'", "'@'", "'Bag'", "'Boolean'", "'Collection'", "'Integer'", "'OclAny'", "'OclInvalid'", "'OclMessage'", "'OclVoid'", "'OrderedSet'", "'Real'", "'Sequence'", "'Set'", "'String'", "'Tuple'", "'UnlimitedNatural'", "'['", "']'", "'^'", "'^^'", "'and'", "'body'", "'context'", "'def'", "'derivate'", "'else'", "'endif'", "'false'", "'if'", "'implies'", "'in'", "'init'", "'inv'", "'iterate'", "'let'", "'not'", "'or'", "'post'", "'pre'", "'static'", "'then'", "'true'", "'xor'", "'{'", "'|'", "'}'"
+		"<invalid>", "<EOR>", "<DOWN>", "<UP>", "ACC", "ARGS", "BODY", "CALL", "CALLARGS", "CLASSIFIERCONDITION", "CLASSIFIERHEAD", "COLLECTIONLITERAL", "COLLECTIONTYPE", "COLLPART", "COLLPARTRANGE", "COLLTYPE", "CONDITION", "Char", "DECL", "DEF", "DERIVATE", "DoubleDot", "EscapeSequence", "ExponentPart", "Hex", "IF", "INDEX", "INFIX", "INIT", "INV", "ITERATE", "IntegerLiteralExp", "InvalidLiteralExp", "LET", "LINE_COMMENT", "MESSAGE", "NESTED_ML_COMMENT", "NameChar", "NameStartChar", "NullLiteralExp", "Num", "OPERATION", "OPERATIONCONDITION", "OPERATIONHEAD", "PATH", "POST", "PRE", "PRIMITIVELITERAL", "PROPERTYCONDITION", "PROPERTYHEAD", "RealLiteralExp", "SimpleName", "StringChar", "StringLiteralExp", "TUPLELITERAL", "TYPE", "UNARY", "UnlimitedNaturalLiteralExp", "VARDECL", "WS", "WhiteSpaceChar", "'('", "')'", "'+'", "','", "'-'", "'->'", "'.'", "'/'", "':'", "'::'", "';'", "'<'", "'<='", "'<>'", "'='", "'>'", "'>='", "'?'", "'@'", "'Bag'", "'Boolean'", "'Collection'", "'Integer'", "'OclAny'", "'OclInvalid'", "'OclMessage'", "'OclVoid'", "'OrderedSet'", "'Real'", "'Sequence'", "'Set'", "'String'", "'Tuple'", "'UnlimitedNatural'", "'['", "']'", "'^'", "'^^'", "'and'", "'body'", "'context'", "'def'", "'derivate'", "'else'", "'endif'", "'false'", "'if'", "'implies'", "'in'", "'init'", "'inv'", "'iterate'", "'let'", "'not'", "'or'", "'post'", "'pre'", "'static'", "'then'", "'true'", "'xor'", "'{'", "'|'", "'}'"
 	};
 	public const int EOF=-1;
 	public const int ACC=4;
@@ -51,46 +51,46 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 	public const int DECL=18;
 	public const int DEF=19;
 	public const int DERIVATE=20;
-	public const int EscapeSequence=21;
-	public const int ExponentPart=22;
-	public const int Hex=23;
-	public const int IF=24;
-	public const int INDEX=25;
-	public const int INFIX=26;
-	public const int INIT=27;
-	public const int INV=28;
-	public const int ITERATE=29;
-	public const int IntegerLiteralExp=30;
-	public const int InvalidLiteralExp=31;
-	public const int LET=32;
-	public const int LINE_COMMENT=33;
-	public const int MESSAGE=34;
-	public const int NESTED_ML_COMMENT=35;
-	public const int NameChar=36;
-	public const int NameStartChar=37;
-	public const int NullLiteralExp=38;
-	public const int Num=39;
-	public const int OPERATION=40;
-	public const int OPERATIONCONDITION=41;
-	public const int OPERATIONHEAD=42;
-	public const int PATH=43;
-	public const int POST=44;
-	public const int PRE=45;
-	public const int PRIMITIVELITERAL=46;
-	public const int PROPERTYCONDITION=47;
-	public const int PROPERTYHEAD=48;
-	public const int RealLiteralExp=49;
-	public const int SimpleName=50;
-	public const int StringChar=51;
-	public const int StringLiteralExp=52;
-	public const int TUPLELITERAL=53;
-	public const int TYPE=54;
-	public const int UNARY=55;
-	public const int UnlimitedNaturalLiteralExp=56;
-	public const int VARDECL=57;
-	public const int WS=58;
-	public const int WhiteSpaceChar=59;
-	public const int T__60=60;
+	public const int DoubleDot=21;
+	public const int EscapeSequence=22;
+	public const int ExponentPart=23;
+	public const int Hex=24;
+	public const int IF=25;
+	public const int INDEX=26;
+	public const int INFIX=27;
+	public const int INIT=28;
+	public const int INV=29;
+	public const int ITERATE=30;
+	public const int IntegerLiteralExp=31;
+	public const int InvalidLiteralExp=32;
+	public const int LET=33;
+	public const int LINE_COMMENT=34;
+	public const int MESSAGE=35;
+	public const int NESTED_ML_COMMENT=36;
+	public const int NameChar=37;
+	public const int NameStartChar=38;
+	public const int NullLiteralExp=39;
+	public const int Num=40;
+	public const int OPERATION=41;
+	public const int OPERATIONCONDITION=42;
+	public const int OPERATIONHEAD=43;
+	public const int PATH=44;
+	public const int POST=45;
+	public const int PRE=46;
+	public const int PRIMITIVELITERAL=47;
+	public const int PROPERTYCONDITION=48;
+	public const int PROPERTYHEAD=49;
+	public const int RealLiteralExp=50;
+	public const int SimpleName=51;
+	public const int StringChar=52;
+	public const int StringLiteralExp=53;
+	public const int TUPLELITERAL=54;
+	public const int TYPE=55;
+	public const int UNARY=56;
+	public const int UnlimitedNaturalLiteralExp=57;
+	public const int VARDECL=58;
+	public const int WS=59;
+	public const int WhiteSpaceChar=60;
 	public const int T__61=61;
 	public const int T__62=62;
 	public const int T__63=63;
@@ -1818,12 +1818,12 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 				alt22 = 2;
 				}
 				break;
-			case 66:
+			case 67:
 				{
 				alt22 = 3;
 				}
 				break;
-			case 65:
+			case 66:
 				{
 				alt22 = 4;
 				}
@@ -1908,7 +1908,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 				{
 				DebugLocation(105, 3);
 				DebugLocation(105, 5);
-				Match(input,66,Follow._66_in_oclExpression454); 
+				Match(input,67,Follow._67_in_oclExpression454); 
 
 				Match(input, TokenTypes.Down, null); 
 				DebugLocation(105, 10);
@@ -2005,7 +2005,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 				{
 				DebugLocation(106, 3);
 				DebugLocation(106, 5);
-				Match(input,65,Follow._65_in_oclExpression479); 
+				Match(input,66,Follow._66_in_oclExpression479); 
 
 				Match(input, TokenTypes.Down, null); 
 				DebugLocation(106, 11);
@@ -2686,7 +2686,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 							{
 								alt27 = 1;
 							}
-							else if ((LA27_4==UP||LA27_4==CALL||LA27_4==COLLECTIONLITERAL||LA27_4==IF||LA27_4==INFIX||LA27_4==LET||LA27_4==MESSAGE||LA27_4==PRIMITIVELITERAL||(LA27_4>=TUPLELITERAL && LA27_4<=UNARY)||(LA27_4>=65 && LA27_4<=66)))
+							else if ((LA27_4==UP||LA27_4==CALL||LA27_4==COLLECTIONLITERAL||LA27_4==IF||LA27_4==INFIX||LA27_4==LET||LA27_4==MESSAGE||LA27_4==PRIMITIVELITERAL||(LA27_4>=TUPLELITERAL && LA27_4<=UNARY)||(LA27_4>=66 && LA27_4<=67)))
 							{
 								alt27 = 2;
 							}
@@ -3064,7 +3064,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 				try { DebugEnterDecision(30, false);
 				int LA30_0 = input.LA(1);
 
-				if ((LA30_0==CALL||LA30_0==COLLECTIONLITERAL||LA30_0==IF||LA30_0==INFIX||LA30_0==LET||LA30_0==MESSAGE||LA30_0==PRIMITIVELITERAL||(LA30_0>=TUPLELITERAL && LA30_0<=UNARY)||(LA30_0>=65 && LA30_0<=66)))
+				if ((LA30_0==CALL||LA30_0==COLLECTIONLITERAL||LA30_0==IF||LA30_0==INFIX||LA30_0==LET||LA30_0==MESSAGE||LA30_0==PRIMITIVELITERAL||(LA30_0>=TUPLELITERAL && LA30_0<=UNARY)||(LA30_0>=66 && LA30_0<=67)))
 				{
 					alt30 = 1;
 				}
@@ -4191,7 +4191,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			try { DebugEnterDecision(40, false);
 			int LA40_0 = input.LA(1);
 
-			if ((LA40_0==CALL||LA40_0==COLLECTIONLITERAL||LA40_0==IF||LA40_0==INFIX||LA40_0==LET||LA40_0==MESSAGE||LA40_0==PRIMITIVELITERAL||(LA40_0>=TUPLELITERAL && LA40_0<=UNARY)||(LA40_0>=65 && LA40_0<=66)))
+			if ((LA40_0==CALL||LA40_0==COLLECTIONLITERAL||LA40_0==IF||LA40_0==INFIX||LA40_0==LET||LA40_0==MESSAGE||LA40_0==PRIMITIVELITERAL||(LA40_0>=TUPLELITERAL && LA40_0<=UNARY)||(LA40_0>=66 && LA40_0<=67)))
 			{
 				alt40 = 1;
 			}
@@ -5154,7 +5154,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(358, 9);
 				Match(input,SimpleName,Follow._SimpleName_in_oclMessageExp1707); 
 				DebugLocation(358, 20);
-				Match(input,60,Follow._60_in_oclMessageExp1709); 
+				Match(input,61,Follow._61_in_oclMessageExp1709); 
 				DebugLocation(358, 24);
 				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:358:24: ( oclMessageArguments )?
 				int alt46=2;
@@ -5162,7 +5162,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 				try { DebugEnterDecision(46, false);
 				int LA46_0 = input.LA(1);
 
-				if ((LA46_0==CALL||LA46_0==COLLECTIONLITERAL||LA46_0==IF||LA46_0==INFIX||LA46_0==LET||LA46_0==MESSAGE||LA46_0==PRIMITIVELITERAL||(LA46_0>=TUPLELITERAL && LA46_0<=UNARY)||(LA46_0>=65 && LA46_0<=66)||LA46_0==78))
+				if ((LA46_0==CALL||LA46_0==COLLECTIONLITERAL||LA46_0==IF||LA46_0==INFIX||LA46_0==LET||LA46_0==MESSAGE||LA46_0==PRIMITIVELITERAL||(LA46_0>=TUPLELITERAL && LA46_0<=UNARY)||(LA46_0>=66 && LA46_0<=67)||LA46_0==78))
 				{
 					alt46 = 1;
 				}
@@ -5186,7 +5186,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 				} finally { DebugExitSubRule(46); }
 
 				DebugLocation(358, 45);
-				Match(input,61,Follow._61_in_oclMessageExp1714); 
+				Match(input,62,Follow._62_in_oclMessageExp1714); 
 
 				}
 				break;
@@ -5199,7 +5199,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 				DebugLocation(359, 8);
 				Match(input,SimpleName,Follow._SimpleName_in_oclMessageExp1721); 
 				DebugLocation(359, 19);
-				Match(input,60,Follow._60_in_oclMessageExp1723); 
+				Match(input,61,Follow._61_in_oclMessageExp1723); 
 				DebugLocation(359, 23);
 				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:359:23: ( oclMessageArguments )?
 				int alt47=2;
@@ -5207,7 +5207,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 				try { DebugEnterDecision(47, false);
 				int LA47_0 = input.LA(1);
 
-				if ((LA47_0==CALL||LA47_0==COLLECTIONLITERAL||LA47_0==IF||LA47_0==INFIX||LA47_0==LET||LA47_0==MESSAGE||LA47_0==PRIMITIVELITERAL||(LA47_0>=TUPLELITERAL && LA47_0<=UNARY)||(LA47_0>=65 && LA47_0<=66)||LA47_0==78))
+				if ((LA47_0==CALL||LA47_0==COLLECTIONLITERAL||LA47_0==IF||LA47_0==INFIX||LA47_0==LET||LA47_0==MESSAGE||LA47_0==PRIMITIVELITERAL||(LA47_0>=TUPLELITERAL && LA47_0<=UNARY)||(LA47_0>=66 && LA47_0<=67)||LA47_0==78))
 				{
 					alt47 = 1;
 				}
@@ -5231,7 +5231,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 				} finally { DebugExitSubRule(47); }
 
 				DebugLocation(359, 44);
-				Match(input,61,Follow._61_in_oclMessageExp1728); 
+				Match(input,62,Follow._62_in_oclMessageExp1728); 
 
 				}
 				break;
@@ -5288,7 +5288,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			try { DebugEnterDecision(49, false);
 			int LA49_0 = input.LA(1);
 
-			if ((LA49_0==63))
+			if ((LA49_0==64))
 			{
 				alt49 = 1;
 			}
@@ -5300,7 +5300,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:362:20: ',' oclMessageArguments
 				{
 				DebugLocation(362, 20);
-				Match(input,63,Follow._63_in_oclMessageArguments1742); 
+				Match(input,64,Follow._64_in_oclMessageArguments1742); 
 				DebugLocation(362, 24);
 				PushFollow(Follow._oclMessageArguments_in_oclMessageArguments1744);
 				oclMessageArguments();
@@ -5360,7 +5360,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			{
 				alt51 = 1;
 			}
-			else if ((LA51_0==CALL||LA51_0==COLLECTIONLITERAL||LA51_0==IF||LA51_0==INFIX||LA51_0==LET||LA51_0==MESSAGE||LA51_0==PRIMITIVELITERAL||(LA51_0>=TUPLELITERAL && LA51_0<=UNARY)||(LA51_0>=65 && LA51_0<=66)))
+			else if ((LA51_0==CALL||LA51_0==COLLECTIONLITERAL||LA51_0==IF||LA51_0==INFIX||LA51_0==LET||LA51_0==MESSAGE||LA51_0==PRIMITIVELITERAL||(LA51_0>=TUPLELITERAL && LA51_0<=UNARY)||(LA51_0>=66 && LA51_0<=67)))
 			{
 				alt51 = 2;
 			}
@@ -5468,7 +5468,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:
 			{
 			DebugLocation(374, 2);
-			if (input.LA(1)==UnlimitedNaturalLiteralExp||input.LA(1)==62||input.LA(1)==64||input.LA(1)==68||(input.LA(1)>=72 && input.LA(1)<=77)||input.LA(1)==99||input.LA(1)==108||input.LA(1)==115||input.LA(1)==121)
+			if (input.LA(1)==UnlimitedNaturalLiteralExp||input.LA(1)==63||input.LA(1)==65||input.LA(1)==68||(input.LA(1)>=72 && input.LA(1)<=77)||input.LA(1)==99||input.LA(1)==108||input.LA(1)==115||input.LA(1)==121)
 			{
 				input.Consume();
 				state.errorRecovery=false;
@@ -5523,7 +5523,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:
 			{
 			DebugLocation(391, 2);
-			if (input.LA(1)==64||input.LA(1)==114)
+			if (input.LA(1)==65||input.LA(1)==114)
 			{
 				input.Consume();
 				state.errorRecovery=false;
@@ -5579,9 +5579,9 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 		private const string DFA7_eofS =
 			"\x9\xFFFF";
 		private const string DFA7_minS =
-			"\x1\xA\x1\x2\x1\x2B\x1\x2\x1\x32\x2\x3\x2\xFFFF";
+			"\x1\xA\x1\x2\x1\x2C\x1\x2\x1\x33\x2\x3\x2\xFFFF";
 		private const string DFA7_maxS =
-			"\x1\xA\x1\x2\x1\x2B\x1\x2\x3\x32\x2\xFFFF";
+			"\x1\xA\x1\x2\x1\x2C\x1\x2\x3\x33\x2\xFFFF";
 		private const string DFA7_acceptS =
 			"\x7\xFFFF\x1\x1\x1\x2";
 		private const string DFA7_specialS =
@@ -5593,8 +5593,8 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 				"\x1\x3",
 				"\x1\x4",
 				"\x1\x5",
-				"\x1\x6\x2E\xFFFF\x1\x5",
-				"\x1\x7\x2E\xFFFF\x1\x8",
+				"\x1\x6\x2F\xFFFF\x1\x5",
+				"\x1\x7\x2F\xFFFF\x1\x8",
 				"",
 				""
 			};
@@ -5647,14 +5647,14 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 		private const string DFA23_minS =
 			"\x1\x7\x6\xFFFF\x1\x2\x1\x5\x2\xFFFF";
 		private const string DFA23_maxS =
-			"\x1\x36\x6\xFFFF\x1\x2\x1\x2B\x2\xFFFF";
+			"\x1\x37\x6\xFFFF\x1\x2\x1\x2C\x2\xFFFF";
 		private const string DFA23_acceptS =
 			"\x1\xFFFF\x1\x1\x1\x2\x1\x3\x1\x4\x1\x5\x1\x6\x2\xFFFF\x1\x8\x1\x7";
 		private const string DFA23_specialS =
 			"\xB\xFFFF}>";
 		private static readonly string[] DFA23_transitionS =
 			{
-				"\x1\x7\x3\xFFFF\x1\x1\xC\xFFFF\x1\x5\x7\xFFFF\x1\x6\xD\xFFFF\x1\x3\x6"+
+				"\x1\x7\x3\xFFFF\x1\x1\xD\xFFFF\x1\x5\x7\xFFFF\x1\x6\xD\xFFFF\x1\x3\x6"+
 				"\xFFFF\x1\x2\x1\x4",
 				"",
 				"",
@@ -5663,7 +5663,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 				"",
 				"",
 				"\x1\x8",
-				"\x1\x9\x25\xFFFF\x1\xA",
+				"\x1\x9\x26\xFFFF\x1\xA",
 				"",
 				""
 			};
@@ -5726,15 +5726,15 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 				"\x1\x1",
 				"\x1\x2",
 				"\x1\x4\x1\xFFFF\x1\x6\x5\xFFFF\x1\x7\x1\xFFFF\x1\x5\x1\x3",
-				"\x1\x8\x9\xFFFF\x2\x8\x1\x9\x1B\xFFFF\x1\x9\x25\xFFFF\x1\x9\x1\xFFFF"+
+				"\x1\x8\x9\xFFFF\x2\x8\x1\x9\x1C\xFFFF\x1\x9\x24\xFFFF\x1\x9\x1\xFFFF"+
 				"\x5\x9\x1\xFFFF\x1\x9\x2\xFFFF\x3\x9",
-				"\x1\x8\x9\xFFFF\x2\x8\x1\x9\x1B\xFFFF\x1\x9\x25\xFFFF\x1\x9\x1\xFFFF"+
+				"\x1\x8\x9\xFFFF\x2\x8\x1\x9\x1C\xFFFF\x1\x9\x24\xFFFF\x1\x9\x1\xFFFF"+
 				"\x5\x9\x1\xFFFF\x1\x9\x2\xFFFF\x3\x9",
-				"\x1\x8\x9\xFFFF\x2\x8\x1\x9\x1B\xFFFF\x1\x9\x25\xFFFF\x1\x9\x1\xFFFF"+
+				"\x1\x8\x9\xFFFF\x2\x8\x1\x9\x1C\xFFFF\x1\x9\x24\xFFFF\x1\x9\x1\xFFFF"+
 				"\x5\x9\x1\xFFFF\x1\x9\x2\xFFFF\x3\x9",
-				"\x1\x8\x9\xFFFF\x2\x8\x1\x9\x1B\xFFFF\x1\x9\x25\xFFFF\x1\x9\x1\xFFFF"+
+				"\x1\x8\x9\xFFFF\x2\x8\x1\x9\x1C\xFFFF\x1\x9\x24\xFFFF\x1\x9\x1\xFFFF"+
 				"\x5\x9\x1\xFFFF\x1\x9\x2\xFFFF\x3\x9",
-				"\x1\x8\x9\xFFFF\x2\x8\x1\x9\x1B\xFFFF\x1\x9\x25\xFFFF\x1\x9\x1\xFFFF"+
+				"\x1\x8\x9\xFFFF\x2\x8\x1\x9\x1C\xFFFF\x1\x9\x24\xFFFF\x1\x9\x1\xFFFF"+
 				"\x5\x9\x1\xFFFF\x1\x9\x2\xFFFF\x3\x9",
 				"",
 				""
@@ -5786,70 +5786,70 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 	private static class Follow
 	{
 		public static readonly BitSet _CONDITION_in_contextDeclarationList76 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _contextDeclaration_in_contextDeclarationList78 = new BitSet(new ulong[]{0x820000000208UL});
+		public static readonly BitSet _contextDeclaration_in_contextDeclarationList78 = new BitSet(new ulong[]{0x1040000000208UL});
 		public static readonly BitSet _propertyContextDecl_in_contextDeclaration91 = new BitSet(new ulong[]{0x2UL});
 		public static readonly BitSet _classifierContextDecl_in_contextDeclaration95 = new BitSet(new ulong[]{0x2UL});
 		public static readonly BitSet _operationContextDecl_in_contextDeclaration101 = new BitSet(new ulong[]{0x2UL});
 		public static readonly BitSet _PROPERTYCONDITION_in_propertyContextDecl112 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _propertyContextHead_in_propertyContextDecl114 = new BitSet(new ulong[]{0x8100008UL});
-		public static readonly BitSet _initOrDerValue_in_propertyContextDecl116 = new BitSet(new ulong[]{0x8100008UL});
+		public static readonly BitSet _propertyContextHead_in_propertyContextDecl114 = new BitSet(new ulong[]{0x10100008UL});
+		public static readonly BitSet _initOrDerValue_in_propertyContextDecl116 = new BitSet(new ulong[]{0x10100008UL});
 		public static readonly BitSet _PROPERTYHEAD_in_propertyContextHead129 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _SimpleName_in_propertyContextHead131 = new BitSet(new ulong[]{0x4080000008000UL,0x72FA0000UL});
+		public static readonly BitSet _SimpleName_in_propertyContextHead131 = new BitSet(new ulong[]{0x8100000008000UL,0x72FA0000UL});
 		public static readonly BitSet _type_in_propertyContextHead134 = new BitSet(new ulong[]{0x8UL});
 		public static readonly BitSet _OPERATIONCONDITION_in_operationContextDecl146 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _operationContextHead_in_operationContextDecl148 = new BitSet(new ulong[]{0x300000000048UL});
-		public static readonly BitSet _prePostOrBodyDecl_in_operationContextDecl150 = new BitSet(new ulong[]{0x300000000048UL});
+		public static readonly BitSet _operationContextHead_in_operationContextDecl148 = new BitSet(new ulong[]{0x600000000048UL});
+		public static readonly BitSet _prePostOrBodyDecl_in_operationContextDecl150 = new BitSet(new ulong[]{0x600000000048UL});
 		public static readonly BitSet _OPERATIONHEAD_in_operationContextHead163 = new BitSet(new ulong[]{0x4UL});
 		public static readonly BitSet _operation_in_operationContextHead165 = new BitSet(new ulong[]{0x8UL});
 		public static readonly BitSet _CLASSIFIERCONDITION_in_classifierContextDecl192 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _classifierContextHead_in_classifierContextDecl194 = new BitSet(new ulong[]{0x10080008UL});
-		public static readonly BitSet _invOrDef_in_classifierContextDecl197 = new BitSet(new ulong[]{0x10080008UL});
+		public static readonly BitSet _classifierContextHead_in_classifierContextDecl194 = new BitSet(new ulong[]{0x20080008UL});
+		public static readonly BitSet _invOrDef_in_classifierContextDecl197 = new BitSet(new ulong[]{0x20080008UL});
 		public static readonly BitSet _CLASSIFIERHEAD_in_classifierContextHead220 = new BitSet(new ulong[]{0x4UL});
 		public static readonly BitSet _pathName_in_classifierContextHead222 = new BitSet(new ulong[]{0x8UL});
 		public static readonly BitSet _CLASSIFIERHEAD_in_classifierContextHead231 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _pathName_in_classifierContextHead233 = new BitSet(new ulong[]{0x4000000000000UL});
+		public static readonly BitSet _pathName_in_classifierContextHead233 = new BitSet(new ulong[]{0x8000000000000UL});
 		public static readonly BitSet _SimpleName_in_classifierContextHead235 = new BitSet(new ulong[]{0x8UL});
 		public static readonly BitSet _INIT_in_initOrDerValue250 = new BitSet(new ulong[]{0x4UL});
 		public static readonly BitSet _oclExpression_in_initOrDerValue252 = new BitSet(new ulong[]{0x8UL});
 		public static readonly BitSet _DERIVATE_in_initOrDerValue258 = new BitSet(new ulong[]{0x4UL});
 		public static readonly BitSet _oclExpression_in_initOrDerValue260 = new BitSet(new ulong[]{0x8UL});
 		public static readonly BitSet _INV_in_invOrDef276 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _SimpleName_in_invOrDef278 = new BitSet(new ulong[]{0xE0400505000880UL,0x6UL});
+		public static readonly BitSet _SimpleName_in_invOrDef278 = new BitSet(new ulong[]{0x1C0800A0A000880UL,0xCUL});
 		public static readonly BitSet _oclExpression_in_invOrDef281 = new BitSet(new ulong[]{0x8UL});
 		public static readonly BitSet _DEF_in_invOrDef290 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _118_in_invOrDef292 = new BitSet(new ulong[]{0x4000000040000UL});
-		public static readonly BitSet _SimpleName_in_invOrDef295 = new BitSet(new ulong[]{0x4000000040000UL});
+		public static readonly BitSet _118_in_invOrDef292 = new BitSet(new ulong[]{0x8000000040000UL});
+		public static readonly BitSet _SimpleName_in_invOrDef295 = new BitSet(new ulong[]{0x8000000040000UL});
 		public static readonly BitSet _defExpression_in_invOrDef298 = new BitSet(new ulong[]{0x8UL});
 		public static readonly BitSet _PRE_in_prePostOrBodyDecl312 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _SimpleName_in_prePostOrBodyDecl314 = new BitSet(new ulong[]{0xE0400505000880UL,0x6UL});
+		public static readonly BitSet _SimpleName_in_prePostOrBodyDecl314 = new BitSet(new ulong[]{0x1C0800A0A000880UL,0xCUL});
 		public static readonly BitSet _oclExpression_in_prePostOrBodyDecl317 = new BitSet(new ulong[]{0x8UL});
 		public static readonly BitSet _POST_in_prePostOrBodyDecl323 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _SimpleName_in_prePostOrBodyDecl325 = new BitSet(new ulong[]{0xE0400505000880UL,0x6UL});
+		public static readonly BitSet _SimpleName_in_prePostOrBodyDecl325 = new BitSet(new ulong[]{0x1C0800A0A000880UL,0xCUL});
 		public static readonly BitSet _oclExpression_in_prePostOrBodyDecl328 = new BitSet(new ulong[]{0x8UL});
 		public static readonly BitSet _BODY_in_prePostOrBodyDecl334 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _SimpleName_in_prePostOrBodyDecl336 = new BitSet(new ulong[]{0xE0400505000880UL,0x6UL});
+		public static readonly BitSet _SimpleName_in_prePostOrBodyDecl336 = new BitSet(new ulong[]{0x1C0800A0A000880UL,0xCUL});
 		public static readonly BitSet _oclExpression_in_prePostOrBodyDecl339 = new BitSet(new ulong[]{0x8UL});
 		public static readonly BitSet _OPERATION_in_operation352 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _pathName_in_operation354 = new BitSet(new ulong[]{0x80000048008UL,0x72FA0000UL});
-		public static readonly BitSet _parameters_in_operation356 = new BitSet(new ulong[]{0x80000008008UL,0x72FA0000UL});
+		public static readonly BitSet _pathName_in_operation354 = new BitSet(new ulong[]{0x100000048008UL,0x72FA0000UL});
+		public static readonly BitSet _parameters_in_operation356 = new BitSet(new ulong[]{0x100000008008UL,0x72FA0000UL});
 		public static readonly BitSet _type_in_operation359 = new BitSet(new ulong[]{0x8UL});
 		public static readonly BitSet _variableDeclaration_in_parameters371 = new BitSet(new ulong[]{0x40002UL});
 		public static readonly BitSet _variableDeclaration_in_parameters374 = new BitSet(new ulong[]{0x40002UL});
 		public static readonly BitSet _variableDeclaration_in_defExpression387 = new BitSet(new ulong[]{0x2UL});
 		public static readonly BitSet _DECL_in_defExpression393 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _operation_in_defExpression395 = new BitSet(new ulong[]{0xE0400505000880UL,0x6UL});
+		public static readonly BitSet _operation_in_defExpression395 = new BitSet(new ulong[]{0x1C0800A0A000880UL,0xCUL});
 		public static readonly BitSet _oclExpression_in_defExpression397 = new BitSet(new ulong[]{0x8UL});
 		public static readonly BitSet _INFIX_in_oclExpression423 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _oclExpression_in_oclExpression428 = new BitSet(new ulong[]{0xE0400505000880UL,0x6UL});
+		public static readonly BitSet _oclExpression_in_oclExpression428 = new BitSet(new ulong[]{0x1C0800A0A000880UL,0xCUL});
 		public static readonly BitSet _oclExpression_in_oclExpression432 = new BitSet(new ulong[]{0x8UL});
 		public static readonly BitSet _UNARY_in_oclExpression440 = new BitSet(new ulong[]{0x4UL});
 		public static readonly BitSet _oclExpression_in_oclExpression445 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _66_in_oclExpression454 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _67_in_oclExpression454 = new BitSet(new ulong[]{0x4UL});
 		public static readonly BitSet _oclExpression_in_oclExpression458 = new BitSet(new ulong[]{0x80UL});
 		public static readonly BitSet _propertyCall_in_oclExpression464 = new BitSet(new ulong[]{0x8UL});
 		public static readonly BitSet _operationCall_in_oclExpression470 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _65_in_oclExpression479 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _oclExpression_in_oclExpression483 = new BitSet(new ulong[]{0x20000080UL});
+		public static readonly BitSet _66_in_oclExpression479 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _oclExpression_in_oclExpression483 = new BitSet(new ulong[]{0x40000080UL});
 		public static readonly BitSet _itCall_in_oclExpression487 = new BitSet(new ulong[]{0x8UL});
 		public static readonly BitSet _MESSAGE_in_oclExpression496 = new BitSet(new ulong[]{0x4UL});
 		public static readonly BitSet _oclMessageExp_in_oclExpression498 = new BitSet(new ulong[]{0x8UL});
@@ -5876,7 +5876,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 		public static readonly BitSet _CALL_in_operationCall681 = new BitSet(new ulong[]{0x4UL});
 		public static readonly BitSet _ARGS_in_operationCall685 = new BitSet(new ulong[]{0x4UL});
 		public static readonly BitSet _arguments_in_operationCall691 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _ARGS_in_operationCall694 = new BitSet(new ulong[]{0x80000000000UL});
+		public static readonly BitSet _ARGS_in_operationCall694 = new BitSet(new ulong[]{0x100000000000UL});
 		public static readonly BitSet _pathName_in_operationCall697 = new BitSet(new ulong[]{0x8UL,0x20000000000000UL});
 		public static readonly BitSet _isMarkedPre_in_operationCall701 = new BitSet(new ulong[]{0x8UL});
 		public static readonly BitSet _iteratorCall_in_itCall737 = new BitSet(new ulong[]{0x2UL});
@@ -5890,27 +5890,27 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 		public static readonly BitSet _CALL_in_iteratorCall786 = new BitSet(new ulong[]{0x4UL});
 		public static readonly BitSet _ARGS_in_iteratorCall790 = new BitSet(new ulong[]{0x4UL});
 		public static readonly BitSet _arguments_in_iteratorCall797 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _ARGS_in_iteratorCall800 = new BitSet(new ulong[]{0x80000000000UL});
+		public static readonly BitSet _ARGS_in_iteratorCall800 = new BitSet(new ulong[]{0x100000000000UL});
 		public static readonly BitSet _pathName_in_iteratorCall803 = new BitSet(new ulong[]{0x8UL});
 		public static readonly BitSet _ITERATE_in_iterateCall823 = new BitSet(new ulong[]{0x4UL});
 		public static readonly BitSet _typedef_in_iterateCall832 = new BitSet(new ulong[]{0x10UL});
 		public static readonly BitSet _ACC_in_iterateCall841 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _SimpleName_in_iterateCall847 = new BitSet(new ulong[]{0xE0480505008880UL,0x72FA0006UL});
-		public static readonly BitSet _type_in_iterateCall854 = new BitSet(new ulong[]{0xE0400505000880UL,0x6UL});
+		public static readonly BitSet _SimpleName_in_iterateCall847 = new BitSet(new ulong[]{0x1C0900A0A008880UL,0x72FA000CUL});
+		public static readonly BitSet _type_in_iterateCall854 = new BitSet(new ulong[]{0x1C0800A0A000880UL,0xCUL});
 		public static readonly BitSet _oclExpression_in_iterateCall862 = new BitSet(new ulong[]{0x8UL});
 		public static readonly BitSet _oclExpression_in_iterateCall874 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _oclExpression_in_arguments903 = new BitSet(new ulong[]{0xE0400505000882UL,0x6UL});
+		public static readonly BitSet _oclExpression_in_arguments903 = new BitSet(new ulong[]{0x1C0800A0A000882UL,0xCUL});
 		public static readonly BitSet _typedef_in_typedefs950 = new BitSet(new ulong[]{0x40002UL});
 		public static readonly BitSet _DECL_in_typedef968 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _SimpleName_in_typedef970 = new BitSet(new ulong[]{0x80000008008UL,0x72FA0000UL});
+		public static readonly BitSet _SimpleName_in_typedef970 = new BitSet(new ulong[]{0x100000008008UL,0x72FA0000UL});
 		public static readonly BitSet _type_in_typedef972 = new BitSet(new ulong[]{0x8UL});
 		public static readonly BitSet _PATH_in_pathName1008 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _SimpleName_in_pathName1011 = new BitSet(new ulong[]{0x4000000000008UL});
+		public static readonly BitSet _SimpleName_in_pathName1011 = new BitSet(new ulong[]{0x8000000000008UL});
 		public static readonly BitSet _COLLECTIONLITERAL_in_collectionLiteralExp1038 = new BitSet(new ulong[]{0x4UL});
 		public static readonly BitSet _collectionTypeIdentifier_in_collectionLiteralExp1040 = new BitSet(new ulong[]{0x6008UL});
 		public static readonly BitSet _collectionLiteralParts_in_collectionLiteralExp1042 = new BitSet(new ulong[]{0x8UL});
 		public static readonly BitSet _COLLECTIONLITERAL_in_collectionLiteralExp1057 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _collectionTypeIdentifier_in_collectionLiteralExp1059 = new BitSet(new ulong[]{0x80000008000UL,0x72FA0000UL});
+		public static readonly BitSet _collectionTypeIdentifier_in_collectionLiteralExp1059 = new BitSet(new ulong[]{0x100000008000UL,0x72FA0000UL});
 		public static readonly BitSet _type_in_collectionLiteralExp1061 = new BitSet(new ulong[]{0x6008UL});
 		public static readonly BitSet _collectionLiteralParts_in_collectionLiteralExp1063 = new BitSet(new ulong[]{0x8UL});
 		public static readonly BitSet _91_in_collectionTypeIdentifier1093 = new BitSet(new ulong[]{0x2UL});
@@ -5920,7 +5920,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 		public static readonly BitSet _88_in_collectionTypeIdentifier1118 = new BitSet(new ulong[]{0x2UL});
 		public static readonly BitSet _collectionLiteralPart_in_collectionLiteralParts1137 = new BitSet(new ulong[]{0x6002UL});
 		public static readonly BitSet _COLLPARTRANGE_in_collectionLiteralPart1162 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _oclExpression_in_collectionLiteralPart1166 = new BitSet(new ulong[]{0xE0400505000880UL,0x6UL});
+		public static readonly BitSet _oclExpression_in_collectionLiteralPart1166 = new BitSet(new ulong[]{0x1C0800A0A000880UL,0xCUL});
 		public static readonly BitSet _oclExpression_in_collectionLiteralPart1170 = new BitSet(new ulong[]{0x8UL});
 		public static readonly BitSet _COLLPART_in_collectionLiteralPart1178 = new BitSet(new ulong[]{0x4UL});
 		public static readonly BitSet _oclExpression_in_collectionLiteralPart1180 = new BitSet(new ulong[]{0x8UL});
@@ -5935,8 +5935,8 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 		public static readonly BitSet _TUPLELITERAL_in_tupleLiteralExp1307 = new BitSet(new ulong[]{0x4UL});
 		public static readonly BitSet _variableDeclarationList_in_tupleLiteralExp1311 = new BitSet(new ulong[]{0x8UL});
 		public static readonly BitSet _DECL_in_variableDeclaration1333 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _SimpleName_in_variableDeclaration1335 = new BitSet(new ulong[]{0xE0480505008888UL,0x72FA0006UL});
-		public static readonly BitSet _type_in_variableDeclaration1337 = new BitSet(new ulong[]{0xE0400505000888UL,0x6UL});
+		public static readonly BitSet _SimpleName_in_variableDeclaration1335 = new BitSet(new ulong[]{0x1C0900A0A008888UL,0x72FA000CUL});
+		public static readonly BitSet _type_in_variableDeclaration1337 = new BitSet(new ulong[]{0x1C0800A0A000888UL,0xCUL});
 		public static readonly BitSet _oclExpression_in_variableDeclaration1340 = new BitSet(new ulong[]{0x8UL});
 		public static readonly BitSet _pathName_in_type1360 = new BitSet(new ulong[]{0x2UL});
 		public static readonly BitSet _collectionType_in_type1369 = new BitSet(new ulong[]{0x2UL});
@@ -5953,34 +5953,34 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 		public static readonly BitSet _86_in_oclType1497 = new BitSet(new ulong[]{0x2UL});
 		public static readonly BitSet _87_in_oclType1506 = new BitSet(new ulong[]{0x2UL});
 		public static readonly BitSet _COLLTYPE_in_collectionType1529 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _collectionTypeIdentifier_in_collectionType1532 = new BitSet(new ulong[]{0x80000008000UL,0x72FA0000UL});
+		public static readonly BitSet _collectionTypeIdentifier_in_collectionType1532 = new BitSet(new ulong[]{0x100000008000UL,0x72FA0000UL});
 		public static readonly BitSet _type_in_collectionType1534 = new BitSet(new ulong[]{0x8UL});
 		public static readonly BitSet _93_in_tupleType1559 = new BitSet(new ulong[]{0x4UL});
 		public static readonly BitSet _variableDeclarationList_in_tupleType1562 = new BitSet(new ulong[]{0x8UL});
 		public static readonly BitSet _variableDeclaration_in_variableDeclarationList1585 = new BitSet(new ulong[]{0x40002UL});
 		public static readonly BitSet _117_in_isMarkedPre1606 = new BitSet(new ulong[]{0x2UL});
 		public static readonly BitSet _LET_in_letExp1643 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _variableDeclaration_in_letExp1649 = new BitSet(new ulong[]{0xE0400505000880UL,0x6UL});
+		public static readonly BitSet _variableDeclaration_in_letExp1649 = new BitSet(new ulong[]{0x1C0800A0A000880UL,0xCUL});
 		public static readonly BitSet _oclExpression_in_letExp1659 = new BitSet(new ulong[]{0x8UL});
 		public static readonly BitSet _IF_in_ifExp1679 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _oclExpression_in_ifExp1683 = new BitSet(new ulong[]{0xE0400505000880UL,0x6UL});
-		public static readonly BitSet _oclExpression_in_ifExp1687 = new BitSet(new ulong[]{0xE0400505000880UL,0x6UL});
+		public static readonly BitSet _oclExpression_in_ifExp1683 = new BitSet(new ulong[]{0x1C0800A0A000880UL,0xCUL});
+		public static readonly BitSet _oclExpression_in_ifExp1687 = new BitSet(new ulong[]{0x1C0800A0A000880UL,0xCUL});
 		public static readonly BitSet _oclExpression_in_ifExp1691 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _98_in_oclMessageExp1705 = new BitSet(new ulong[]{0x4000000000000UL});
-		public static readonly BitSet _SimpleName_in_oclMessageExp1707 = new BitSet(new ulong[]{0x1000000000000000UL});
-		public static readonly BitSet _60_in_oclMessageExp1709 = new BitSet(new ulong[]{0x20E0400505000880UL,0x4006UL});
-		public static readonly BitSet _oclMessageArguments_in_oclMessageExp1711 = new BitSet(new ulong[]{0x2000000000000000UL});
-		public static readonly BitSet _61_in_oclMessageExp1714 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _97_in_oclMessageExp1719 = new BitSet(new ulong[]{0x4000000000000UL});
-		public static readonly BitSet _SimpleName_in_oclMessageExp1721 = new BitSet(new ulong[]{0x1000000000000000UL});
-		public static readonly BitSet _60_in_oclMessageExp1723 = new BitSet(new ulong[]{0x20E0400505000880UL,0x4006UL});
-		public static readonly BitSet _oclMessageArguments_in_oclMessageExp1725 = new BitSet(new ulong[]{0x2000000000000000UL});
-		public static readonly BitSet _61_in_oclMessageExp1728 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _oclMessageArg_in_oclMessageArguments1738 = new BitSet(new ulong[]{0x8000000000000002UL});
-		public static readonly BitSet _63_in_oclMessageArguments1742 = new BitSet(new ulong[]{0xE0400505000880UL,0x4006UL});
+		public static readonly BitSet _98_in_oclMessageExp1705 = new BitSet(new ulong[]{0x8000000000000UL});
+		public static readonly BitSet _SimpleName_in_oclMessageExp1707 = new BitSet(new ulong[]{0x2000000000000000UL});
+		public static readonly BitSet _61_in_oclMessageExp1709 = new BitSet(new ulong[]{0x41C0800A0A000880UL,0x400CUL});
+		public static readonly BitSet _oclMessageArguments_in_oclMessageExp1711 = new BitSet(new ulong[]{0x4000000000000000UL});
+		public static readonly BitSet _62_in_oclMessageExp1714 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _97_in_oclMessageExp1719 = new BitSet(new ulong[]{0x8000000000000UL});
+		public static readonly BitSet _SimpleName_in_oclMessageExp1721 = new BitSet(new ulong[]{0x2000000000000000UL});
+		public static readonly BitSet _61_in_oclMessageExp1723 = new BitSet(new ulong[]{0x41C0800A0A000880UL,0x400CUL});
+		public static readonly BitSet _oclMessageArguments_in_oclMessageExp1725 = new BitSet(new ulong[]{0x4000000000000000UL});
+		public static readonly BitSet _62_in_oclMessageExp1728 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _oclMessageArg_in_oclMessageArguments1738 = new BitSet(new ulong[]{0x2UL,0x1UL});
+		public static readonly BitSet _64_in_oclMessageArguments1742 = new BitSet(new ulong[]{0x1C0800A0A000880UL,0x400CUL});
 		public static readonly BitSet _oclMessageArguments_in_oclMessageArguments1744 = new BitSet(new ulong[]{0x2UL});
 		public static readonly BitSet _78_in_oclMessageArg1759 = new BitSet(new ulong[]{0x2UL,0x20UL});
-		public static readonly BitSet _69_in_oclMessageArg1762 = new BitSet(new ulong[]{0x80000008000UL,0x72FA0000UL});
+		public static readonly BitSet _69_in_oclMessageArg1762 = new BitSet(new ulong[]{0x100000008000UL,0x72FA0000UL});
 		public static readonly BitSet _type_in_oclMessageArg1764 = new BitSet(new ulong[]{0x2UL});
 		public static readonly BitSet _oclExpression_in_oclMessageArg1771 = new BitSet(new ulong[]{0x2UL});
 		public static readonly BitSet _set_in_inToken1784 = new BitSet(new ulong[]{0x2UL});
