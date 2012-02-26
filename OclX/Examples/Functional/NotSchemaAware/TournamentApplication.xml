@@ -4,7 +4,7 @@
   <requiredQualificationPoints>21</requiredQualificationPoints>
   <player>
     <points>24</points>
-    <reg-no>002</reg-no>
+    <regNo>002</regNo>
     <name>John Smith</name>
     <playerLeague>
       <name>Springfield League</name>

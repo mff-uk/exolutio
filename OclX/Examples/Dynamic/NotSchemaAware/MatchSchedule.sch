@@ -7,11 +7,7 @@
     within the Tournament’s time frame --> 
     <sch:rule context="/tournament">
       <!--self.matches.day->Collect(d : Day | d.match)->forAll(m : Match | m.start.after(self.start) and m.end.before(self.end))-->
-      <sch:assert test="oclX:forAll(oclX:collect(matches/day, 'd', '$d/match', $variables), 'm', 'oclDate:after($m/start, $self/start) and oclDate:before($m/end, $self/end)', $variables)" />
-    </sch:rule>
-    
-    <sch:rule context="/tournament">      
-      <sch:assert test="1 div 0" />
+      <sch:assert test="oclX:forAll(oclX:collect(matches/day, 'd', '$d/match', $variables), 'm', 'oclDate:after(xs:dateTime($m/start), xs:dateTime($self/start)) and oclDate:before(xs:dateTime($m/end), xs:dateTime($self/end))', $variables)" />
     </sch:rule>
     
     <!-- Each Tournament conducts at
