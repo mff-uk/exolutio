@@ -68,6 +68,7 @@
     <Compile Include="OCL\AST\Constraints.cs" />
     <Compile Include="OCL\AST\ErrorExp.cs" />
     <Compile Include="OCL\AST\IAstVisitor.cs" />
+    <Compile Include="OCL\AST\IExpressionSource.cs" />
     <Compile Include="OCL\Bridge\BridgeFactory.cs" />
     <Compile Include="OCL\Bridge\IBridgeToOCL.cs" />
     <Compile Include="OCL\Bridge\PIMBridge.cs" />
@@ -85,6 +86,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CompilerErrors.resx</DependentUpon>
     </Compile>
+    <Compile Include="OCL\Compiler\CodeSource.cs" />
     <Compile Include="OCL\ConstraintConversion\ConstraintConvertor.cs" />
     <Compile Include="OCL\ConstraintConversion\ConvertToPSMVisitorBase.cs" />
     <Compile Include="OCL\ConstraintConversion\PSMPath.cs" />
