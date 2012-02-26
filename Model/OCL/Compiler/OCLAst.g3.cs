@@ -685,7 +685,7 @@ namespace Exolutio.Model.OCL.Compiler {
                 return new AST.ErrorExp(Library.Invalid);
             }
 
-            if (condition.Type.ConformsTo(Library.Boolean)) {
+            if (condition.Type.ConformsTo(Library.Boolean) == false) {
                 Errors.AddError(new CodeErrorItem(CompilerErrors.OCLAst_CreateIf_Condition_of_IF_must_conform_to_bool, ifTok, ifTok));
             }
 
