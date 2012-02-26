@@ -6,7 +6,7 @@
     within the Tournament’s time frame --> 
     <sch:rule context="/tournament">
       <!--self.matches.day->Collect(d : Day | d.match)->forAll(m : Match | m.start.after(self.start) and m.end.before(self.end))-->
-      <sch:assert test="oclX:forAll(oclX:collect($self/matches/day, function($d) { $d/match }), function($m) { oclDate:after($m/start, $self/start) and oclDate:before($m/end, $self/end) })" />
+      <sch:assert test="oclX:forAll(oclX:collect($self/matches/day, function($d) { $d/match }), function($m) { oclDate:after(xs:dateTime($m/start), xs:dateTime($self/start)) and oclDate:before(xs:dateTime($m/end), xs:dateTime($self/end)) })" />
     </sch:rule>
     
     <!-- Each Tournament conducts at
@@ -35,14 +35,7 @@
     <!--Below follow constraints from OCL script 'empty'. -->
   </sch:pattern>
   <sch:pattern id="days">
-    <!--Below follow constraints from OCL script 'days'. -->
-    <!-- 
-      Each day shows only matches taking place that day
-      expects conversion dateTime -> date using getDate() function
-    -->
-    <sch:rule context="/tournament/matches/day">
-      <sch:assert test="oclX:forAllN($self/matches/day, function($d1, $d2) { if (not($d1 is $d2)) then $d1/date ne $d2/date else true() })" />
-    </sch:rule>      
+    <!--Below follow constraints from OCL script 'days'. -->     
     <!-- days are unique --> 
     <sch:rule context="/tournament">
       <!--self.matches.day->forAll(d1 : Day, d2 : Day | d1 <> d2 implies d1.date <> d2.date)-->
