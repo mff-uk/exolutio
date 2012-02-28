@@ -61,10 +61,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="RegularExpression.cs" />
+    <Compile Include="SchematronTranslation\ExpressionNotSupportedInXPath.cs" />
     <Compile Include="SchematronTranslation\OperationHelper.cs" />
     <Compile Include="SchematronTranslation\PSMOCLtoXPathConverter.cs" />
     <Compile Include="SchematronTranslation\SchematronPipeline.cs" />
     <Compile Include="SchematronTranslation\SchematronSchemaGenerator.cs" />
+    <Compile Include="SchematronTranslation\SubexpressionTranslations.cs" />
     <Compile Include="SchematronTranslation\XDocumentSchematronExtensions.cs" />
     <Compile Include="SchematronTranslation\XPathTranslationLogMessages.Designer.cs">
       <AutoGen>True</AutoGen>

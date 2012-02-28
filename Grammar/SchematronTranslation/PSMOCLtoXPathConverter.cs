@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using Exolutio.Model.OCL;
@@ -82,24 +83,27 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 
         public void Visit(PropertyCallExp node, bool isOperationArgument)
         {
-            PSMPath psmPath = PSMPathBuilder.BuildPSMPath(node, OclContext, VariableNamer);
+            PSMPath psmPath = PSMPathBuilder.BuildPSMPath(node, OclContext, VariableNamer, TupleLiteralToXPath);
             string xpath = psmPath.ToXPath(CanTranslateSelfAsCurrent);
             if (!isOperationArgument)
             {
-                string formatString = OperationHelper.WrapAtomicOperand(node, null, 0);
-                SubexpressionTranslations.AddTrivialTranslation(node, string.Format(formatString, xpath));
+                string wrapString = OperationHelper.WrapAtomicOperand(node, null, 0);
+                xpath = string.Format(wrapString, xpath);
             }
-            else
-            {
-                SubexpressionTranslations.AddTrivialTranslation(node, xpath);
-            }
+
+            TranslationOption option = new TranslationOption();
+            option.FormatString = xpath;
+            SubexpressionTranslations.AddTranslationOption(node, option, psmPath.SubExpressions.ToArray());
         }
 
         public void Visit(VariableExp node)
         {
-            PSMPath psmPath = PSMPathBuilder.BuildPSMPath(node, OclContext, VariableNamer);
+            PSMPath psmPath = PSMPathBuilder.BuildPSMPath(node, OclContext, VariableNamer, TupleLiteralToXPath);
             string xpath = psmPath.ToXPath(CanTranslateSelfAsCurrent);
-            SubexpressionTranslations.AddTrivialTranslation(node, xpath);
+
+            TranslationOption option = new TranslationOption();
+            option.FormatString = xpath;
+            SubexpressionTranslations.AddTranslationOption(node, option, psmPath.SubExpressions.ToArray());
         }
 
         #region not supported yet 
@@ -113,8 +117,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
         }
 
         #endregion
-
-
+        
         #region structural
 
         public void Visit(IfExp node)
@@ -257,13 +260,111 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             VariableNamer = new VariableNamer();
             SubexpressionTranslations = new SubexpressionTranslations();
             expression.Accept(this);
-            string result = SubexpressionTranslations.GetSubexpressionTranslation(expression).GetString();
+            string result = SubexpressionTranslations.GetSubexpressionTranslation(expression).GetString(true);
             return result;
         }
+
+        protected abstract string TupleLiteralToXPath(TupleLiteralExp tupleLiteral, List<OclExpression> subExpressions);
     }
 
     public class PSMOCLtoXPathConverterFunctional : PSMOCLtoXPathConverter
     {
+        private readonly Dictionary<string, Action<IteratorExp>> predefinedIteratorExpressionRewritings = new Dictionary<string, Action<IteratorExp>>();
+        private Dictionary<string, Action<IteratorExp>> PredefinedIteratorExpressionRewritings { get { return predefinedIteratorExpressionRewritings; } }
+        
+        public PSMOCLtoXPathConverterFunctional()
+        {
+            predefinedIteratorExpressionRewritings.Add("forAll", AddForAllOptions);
+            predefinedIteratorExpressionRewritings.Add("exists", AddExistsOptions);
+            predefinedIteratorExpressionRewritings.Add("collect", AddCollectOptions);
+            predefinedIteratorExpressionRewritings.Add("select", AddSelectOptions);
+            predefinedIteratorExpressionRewritings.Add("reject", AddRejectOptions);
+            predefinedIteratorExpressionRewritings.Add("one", AddOneOptions);
+            predefinedIteratorExpressionRewritings.Add("any", AddAnyOptions);
+        }
+
+        private void AddAnyOptions(IteratorExp node)
+        {
+            
+        }
+
+        private void AddOneOptions(IteratorExp node)
+        {
+            
+        }
+
+        private void AddRejectOptions(IteratorExp node)
+        {
+            if (node.Iterator.Count == 1)
+            {
+                TranslationOption option = new TranslationOption();
+                option.ParenthesisWhenNotTopLevel = true;
+                option.FormatString = string.Format("for ${0} in {{0}} return if (not({{1}})) then ${0} else ()", node.Iterator[0].Name);
+                SubexpressionTranslations.AddTranslationOption(node, option);
+            }
+        }
+
+        private void AddSelectOptions(IteratorExp node)
+        {
+            if (node.Iterator.Count == 1)
+            {
+                TranslationOption option = new TranslationOption();
+                option.ParenthesisWhenNotTopLevel = true;
+                option.FormatString = string.Format("for ${0} in {{0}} return if ({{1}}) then ${0} else ()", node.Iterator[0].Name);
+                SubexpressionTranslations.AddTranslationOption(node, option);
+            }
+        }
+
+        #region rewritings
+        
+        private void AddForAllOptions(IteratorExp node)
+        {
+            if (node.Iterator.Count == 1)
+            {
+                TranslationOption option = new TranslationOption();
+                option.ParenthesisWhenNotTopLevel = true;
+                option.FormatString = string.Format("every ${0} in {{0}} satisfies {{1}}", node.Iterator[0].Name);
+                SubexpressionTranslations.AddTranslationOption(node, option);
+            }
+        }
+
+        private void AddExistsOptions(IteratorExp node)
+        {
+            if (node.Iterator.Count == 1)
+            {
+                TranslationOption option = new TranslationOption();
+                option.ParenthesisWhenNotTopLevel = true;
+                option.FormatString = string.Format("some ${0} in {{0}} satisfies {{1}}", node.Iterator[0].Name);
+                SubexpressionTranslations.AddTranslationOption(node, option);
+            }
+        }
+
+        private void AddCollectOptions(IteratorExp node)
+        {
+            if (node.Iterator.Count == 1)
+            {
+                TranslationOption option = new TranslationOption();
+                option.ParenthesisWhenNotTopLevel = true;
+                option.FormatString = string.Format("for ${0} in {{0}} return {{1}}", node.Iterator[0].Name);
+                SubexpressionTranslations.AddTranslationOption(node, option);
+
+                /* when the body of collect is a navigation that can be chained, replace it */
+                if (node.Body is PropertyCallExp)
+                {
+                    PSMPath path = PSMPathBuilder.BuildPSMPath((PropertyCallExp)node.Body, OclContext, VariableNamer, TupleLiteralToXPath);
+                    if (path.StartingVariableExp.referredVariable == node.Iterator[0] 
+                        && path.Steps.Count > 1)
+                    {
+                        TranslationOption option2 = new TranslationOption();
+                        option2.FormatString = string.Format("{{0}}{0}", path.ToXPath(false, true));
+                        SubexpressionTranslations.AddTranslationOption(node, option2);
+                    }
+                }
+            }
+        }
+        
+        #endregion
+
         public override bool CanTranslateSelfAsCurrent
         {
             get { return loopStack.Count == 0; }
@@ -282,7 +383,6 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             SubexpressionTranslations.AddTranslationOption(node, option, node.Source, node.Result.Value, node.Body);
 
             loopStack.Pop();
-            
         }
 
         public override void Visit(IteratorExp node)
@@ -292,29 +392,22 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             node.Source.Accept(this);
             node.Body.Accept(this);
 
-            string iteratorName;
-            // TODO HACK: WFJT 
-            if (node.IteratorName != "Collect")
-            {
-                iteratorName = node.IteratorName;
-            }
-            else
-            {
-                iteratorName = "collect";
-            }
-
             TranslationOption option = new TranslationOption();
             if (node.Iterator.Count == 1)
             {
-                option.FormatString = string.Format("oclX:{0}({{0}}, function(${1}) {{{{ {{1}} }}}})", iteratorName, node.Iterator[0].Name);
+                option.FormatString = string.Format("oclX:{0}({{0}}, function(${1}) {{{{ {{1}} }}}})", node.IteratorName, node.Iterator[0].Name);
             }
             else
             {
-                option.FormatString = string.Format("oclX:{0}N({{0}}, function({1}) {{{{ {{1}} }}}})", iteratorName, node.Iterator.ConcatWithSeparator(vd => "$" + vd.Name, ", "));
+                option.FormatString = string.Format("oclX:{0}N({{0}}, function({1}) {{{{ {{1}} }}}})", node.IteratorName, node.Iterator.ConcatWithSeparator(vd => "$" + vd.Name, ", "));
             }
             loopStack.Pop();
-                       
+
             SubexpressionTranslations.AddTranslationOption(node, option, node.Source, node.Body);
+            if (PredefinedIteratorExpressionRewritings.ContainsKey(node.IteratorName))
+            {
+                PredefinedIteratorExpressionRewritings[node.IteratorName](node);
+            }
         }
 
         public override void Visit(LetExp node)
@@ -328,10 +421,19 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 
         public override void Visit(TupleLiteralExp node)
         {
+            PSMPath psmPath = PSMPathBuilder.BuildPSMPath(node, OclContext, VariableNamer, TupleLiteralToXPath);
+            string xpath = psmPath.ToXPath(CanTranslateSelfAsCurrent);
+
+            TranslationOption option = new TranslationOption();
+            option.FormatString = xpath;
+            SubexpressionTranslations.AddTranslationOption(node, option, psmPath.SubExpressions.ToArray());
+        }
+
+        protected override string TupleLiteralToXPath(TupleLiteralExp tupleLiteral, List<OclExpression> subExpressions)
+        {
             StringBuilder formatBuilder = new StringBuilder();
-            formatBuilder.Append("map{");
-            List<OclExpression> subExpressions = new List<OclExpression>();
-            foreach (KeyValuePair<string, TupleLiteralPart> kvp in node.Parts)
+            formatBuilder.Append("(map{{");
+            foreach (KeyValuePair<string, TupleLiteralPart> kvp in tupleLiteral.Parts)
             {
                 kvp.Value.Value.Accept(this);
                 formatBuilder.AppendFormat("'{0}' := {{{1}}}, ", kvp.Value.Attribute.Name, subExpressions.Count);
@@ -341,10 +443,11 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             {
                 formatBuilder.Length = formatBuilder.Length - 2; 
             }
-            formatBuilder.Append("}");
+            formatBuilder.Append("}})");
             TranslationOption option = new TranslationOption();
             option.FormatString = formatBuilder.ToString();
-            SubexpressionTranslations.AddTranslationOption(node, option, subExpressions.ToArray());
+            SubexpressionTranslations.AddTranslationOption(tupleLiteral, option, subExpressions.ToArray());
+            return option.FormatString;
         }
     }
 
@@ -387,26 +490,16 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             node.Body.Accept(this);
             insideDynamicEvaluation = prevInsideDynamicEvaluation;
 
-            string iteratorName;
-            // TODO HACK: WFJT 
-            if (node.IteratorName != "Collect")
-            {
-                iteratorName = node.IteratorName;
-            }
-            else
-            {
-                iteratorName = "collect";
-            }
             string apostrophe = insideDynamicEvaluation ? "''" : "'";
 
             TranslationOption option = new TranslationOption();
             if (node.Iterator.Count == 1)
             {
-                option.FormatString = string.Format("oclX:{0}({{0}}, {2}{1}{2}, {2}{{1}}{2}, $variables)", iteratorName, node.Iterator[0].Name, apostrophe);
+                option.FormatString = string.Format("oclX:{0}({{0}}, {2}{1}{2}, {2}{{1}}{2}, $variables)", node.IteratorName, node.Iterator[0].Name, apostrophe);
             }
             else
             {
-                option.FormatString = string.Format("oclX:{0}N({{0}}, {2}{1}{2}, {2}{{1}}{2}, $variables)", iteratorName, node.Iterator.ConcatWithSeparator(vd => vd.Name, ", "), apostrophe);
+                option.FormatString = string.Format("oclX:{0}N({{0}}, {2}{1}{2}, {2}{{1}}{2}, $variables)", node.IteratorName, node.Iterator.ConcatWithSeparator(vd => vd.Name, ", "), apostrophe);
             }
             SubexpressionTranslations.AddTranslationOption(node, option, node.Source, node.Body);
 
@@ -426,152 +519,12 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
         {
             throw new ExpressionNotSupportedInXPath(node, "Tuples are supported only in 'functional' schemas. ");
         }
-    }
 
-    public class ExpressionNotSupportedInXPath: Exception
-    {
-        public OclExpression Expression
+        protected override string TupleLiteralToXPath(TupleLiteralExp tupleLiteral, List<OclExpression> subExpressions)
         {
-            get; set; 
-        }
-
-        public ExpressionNotSupportedInXPath(OclExpression expression)
-        {
-            Expression = expression; 
-        }
-
-        public ExpressionNotSupportedInXPath(OclExpression expression, string message) : base(message)
-        {
-            Expression = expression; 
+            throw new ExpressionNotSupportedInXPath(tupleLiteral, "Tuples are supported only in 'functional' schemas. ");
         }
     }
 
-    public class SubexpressionTranslations
-    {
-        private readonly  Dictionary<OclExpression, TranslationOptions> translations = new Dictionary<OclExpression, TranslationOptions>();
-        
-        private readonly Dictionary<OclExpression, int> selectedTranslations = new Dictionary<OclExpression, int>();
-
-        public Dictionary<OclExpression, TranslationOptions> Translations
-        {
-            get { return translations; }
-        }
-
-        public Dictionary<OclExpression, int> SelectedTranslations
-        {
-            get { return selectedTranslations; }
-        }
-
-        public TranslationOption GetSubexpressionTranslation(OclExpression expression)
-        {
-            return Translations[expression].Options[SelectedTranslations[expression]];
-        }
-
-        public void AddTrivialTranslation(OclExpression expression, string translation)
-        {
-            TranslationOptions options = new TranslationOptions();
-            options.SubexpressionTranslations = this;
-            options.TranslatedExpression = expression;
-            TranslationOption option = new TranslationOption();
-            option.OptionsContainer = options;
-            option.FormatString = translation;
-            if (this.Translations.ContainsKey(expression))
-            {
-                throw new InvalidOperationException(string.Format("Expression '{0}' translated reapeatedly. ", expression));
-            }
-            options.Options.Add(option);
-            this.Translations[expression] = options;
-            this.SelectedTranslations[expression] = 0;
-        }
-
-        public void AddTranslationOption(OclExpression expression, TranslationOption option, params OclExpression[] subExpressions)
-        {
-            TranslationOptions options;
-            if (!this.Translations.ContainsKey(expression))
-            {
-                options = new TranslationOptions();
-                options.SubexpressionTranslations = this;
-                options.TranslatedExpression = expression;
-                foreach (OclExpression subExpression in subExpressions)
-                {
-                    options.SubExpressions.Add(subExpression);
-                }
-                this.Translations[expression] = options;
-            }
-            else
-            {
-                options = this.Translations[expression];
-                if (subExpressions != null && subExpressions.Length > 0)
-                {
-                    if (subExpressions.Length != options.SubExpressions.Count)
-                    {
-                        throw new InvalidOperationException(string.Format("Inconsistency of subexpressions when adding options for '{0}'", expression));
-                    }
-
-                    for (int index = 0; index < subExpressions.Length; index++)
-                    {
-                        OclExpression subExpression = subExpressions[index];
-                        if (subExpression != options.SubExpressions[index])
-                            throw new InvalidOperationException(string.Format("Inconsistency of subexpressions when adding options for '{0}'", expression));
-                    }
-                }
-            }
-
-            option.OptionsContainer = options;
-            this.SelectedTranslations[expression] = 0;
-            options.Options.Add(option);
-        }
-    }
-
-    public class TranslationOptions
-    {
-        private readonly List<TranslationOption> options = new List<TranslationOption>();
-        private readonly List<OclExpression> subExpressions = new List<OclExpression>();
-
-        public OclExpression TranslatedExpression { get; set; }
-
-        public SubexpressionTranslations SubexpressionTranslations { get; set; }
-
-        public List<TranslationOption> Options { get { return options; } }
-
-        public List<OclExpression> SubExpressions { get { return subExpressions; } }
-
-        public string GetString(int option = 0)
-        {
-            return Options[option].GetString();
-        }
-        
-        public override string ToString()
-        {
-            throw new Exception("TO STRING IN TRANSLATIONOPTIONS");
-            //return null;
-        }
-    }
-
-    public class TranslationOption
-    {
-        public TranslationOptions OptionsContainer
-        {
-            get; set;
-        }
-
-        public string FormatString { get; set; }
-
-        public override string ToString()
-        {
-            throw new Exception("TO STRING IN TRANSLATIONOPTION");
-            //return null;
-        }
-
-        public string GetString()
-        {
-            object[] translatedSubexpressions = new object[OptionsContainer.SubExpressions.Count];
-            for (int index = 0; index < OptionsContainer.SubExpressions.Count; index++)
-            {
-                OclExpression subExpression = OptionsContainer.SubExpressions[index];
-                translatedSubexpressions[index] = OptionsContainer.SubexpressionTranslations.GetSubexpressionTranslation(subExpression).GetString();
-            }
-            return string.Format(FormatString, translatedSubexpressions); 
-        }
-    }
+   
 }

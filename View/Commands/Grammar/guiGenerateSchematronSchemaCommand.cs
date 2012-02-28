@@ -4,11 +4,18 @@ using Exolutio.Model.PSM;
 using Exolutio.Model.PSM.Grammar.SchematronTranslation;
 using Exolutio.ResourceLibrary;
 using Exolutio.SupportingClasses;
+using Exolutio.Model.OCL.AST;
 
 namespace Exolutio.View.Commands.Grammar
 {
     public class guiGenerateSchematronSchemaCommand : guiActiveDiagramCommand
     {
+        private class TagClass
+        {
+            public SchematronSchemaGenerator.TranslationSettings settings { get; set; }
+            public ExpressionTweakingPanel tweakingPanel { get; set; }
+        }
+
         public override void Execute(object parameter = null)
         {
             if (Current.ActiveDiagram != null && Current.ActiveDiagram is PSMDiagram)
@@ -18,7 +25,7 @@ namespace Exolutio.View.Commands.Grammar
 
                 SchematronSchemaGenerator.TranslationSettings settings = new SchematronSchemaGenerator.TranslationSettings();
                 settings.Functional = true;
-                settings.SchemaAware = true; 
+                settings.SchemaAware = true;
 
                 GenerateSchema((PSMSchema)Current.ActiveDiagram.Schema, settings, out schematronSchemaDocument, out log);
 
@@ -26,10 +33,22 @@ namespace Exolutio.View.Commands.Grammar
                     new FilePresenterButtonInfo() { ButtonName = "SA", Text = "Schema aware", Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.refresh), UpdateFileContentAction = RegenerateSchema, ToggleButton = true, IsToggled = true },
                     new FilePresenterButtonInfo() { ButtonName = "F", Text = "Functional", Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.refresh), UpdateFileContentAction = RegenerateSchema, ToggleButton = true, IsToggled = true },
                     };
+                
+                ExpressionTweakingPanel tweakingPanel = new ExpressionTweakingPanel();
+
+                TagClass tag = new TagClass();
+                tag.settings = settings;
+                tag.tweakingPanel = tweakingPanel;
+
                 IFilePresenterTab filePresenterTab
-                    = Current.MainWindow.FilePresenter.DisplayFile(schematronSchemaDocument, EDisplayedFileType.SCH, Current.ActiveDiagram.Caption + ".sch", log, sourcePSMSchema:(PSMSchema)Current.ActiveDiagram.Schema,
-                    additionalActions: additionalButtonsInfo, tag: settings);
+                    = Current.MainWindow.FilePresenter.DisplayFile(schematronSchemaDocument, EDisplayedFileType.SCH, Current.ActiveDiagram.Caption + ".sch", log, sourcePSMSchema: (PSMSchema)Current.ActiveDiagram.Schema,
+                    additionalActions: additionalButtonsInfo, tag: tag);
                 filePresenterTab.RefreshCallback += RegenerateSchema;
+
+                tweakingPanel.Bind(settings.SubexpressionTranslations);
+                tweakingPanel.FilePresenterTab = filePresenterTab;
+                filePresenterTab.DisplayAdditionalControl(tweakingPanel, "Expression Tweaking");
+                tweakingPanel.TranslationTweaked += tweakingPanel_TranslationTweaked;
             }
         }
 
@@ -38,7 +57,8 @@ namespace Exolutio.View.Commands.Grammar
             XDocument document;
             ILog log;
 
-            SchematronSchemaGenerator.TranslationSettings settings = (SchematronSchemaGenerator.TranslationSettings) filePresenterTab.Tag;
+            TagClass tag = (TagClass) filePresenterTab.Tag;
+            SchematronSchemaGenerator.TranslationSettings settings = tag.settings;
             foreach (FilePresenterButtonInfo buttonInfo in filePresenterTab.FilePresenterButtons)
             {
                 if (buttonInfo.ButtonName == "SA")
@@ -50,11 +70,24 @@ namespace Exolutio.View.Commands.Grammar
                     settings.Functional = buttonInfo.IsToggled;
                 }
             }
+            settings.SubexpressionTranslations.Clear();
 
             GenerateSchema(filePresenterTab.SourcePSMSchema, settings, out document, out log);
             filePresenterTab.ReDisplayFile(document, EDisplayedFileType.SCH, filePresenterTab.SourcePSMSchema.Caption, log, filePresenterTab.ValidationSchema, filePresenterTab.SourcePSMSchema);
         }
 
+        void tweakingPanel_TranslationTweaked(object sender, ExpressionTweakingPanel.TranslationTweakedEventArgs translationTweakedEventArgs)
+        {
+            ExpressionTweakingPanel p = (ExpressionTweakingPanel) sender;
+            XDocument document;
+            ILog log;
+            TagClass tag = (TagClass)p.FilePresenterTab.Tag;
+            SchematronSchemaGenerator.TranslationSettings settings = tag.settings;
+            settings.Retranslation = true; 
+            GenerateSchema(p.FilePresenterTab.SourcePSMSchema, settings, out document, out log);
+            p.FilePresenterTab.ReDisplayFile(document, EDisplayedFileType.SCH,
+                p.FilePresenterTab.SourcePSMSchema.Caption, log, p.FilePresenterTab.ValidationSchema, p.FilePresenterTab.SourcePSMSchema);
+        }
 
         //private void GenerateSchemaAware(IFilePresenterTab filePresenterTab)
         //{
@@ -75,7 +108,8 @@ namespace Exolutio.View.Commands.Grammar
             if (Environment.MachineName.Contains("TRUPIK"))
             {
                 schematronSchemaDocument.Save(@"D:\Programování\EVOXSVN\SchematronTest\LastSchSchema.sch");
-            }
+            }            
+
             log = schemaGenerator.Log;
         }
 

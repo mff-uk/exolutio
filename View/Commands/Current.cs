@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Xml;
 using System.Xml.Linq;
@@ -14,6 +15,7 @@ using Exolutio.Model.PIM;
 using Exolutio.Model.PSM;
 using Exolutio.SupportingClasses;
 using Exolutio.View;
+using Exolutio.View.Commands.Grammar;
 using Component = Exolutio.Model.Component;
 using System.Windows.Media;
 
@@ -244,6 +246,7 @@ namespace Exolutio.View
         void ReDisplayFile(XDocument xmlDocument, EDisplayedFileType fileType, string fileName = null, ILog log = null, PSMSchema validationSchema = null, PSMSchema sourcePSMSchema = null, FilePresenterButtonInfo[] additionalActions = null);
         IEnumerable<FilePresenterButtonInfo> FilePresenterButtons { get; }
         object Tag { get; }
+        void DisplayAdditionalControl(ContentControl contentControl, string tabHeader);
     }
 
     public delegate void UpdateFileContent(IFilePresenterTab fileTab);

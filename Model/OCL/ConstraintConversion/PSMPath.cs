@@ -29,6 +29,14 @@ namespace Exolutio.Model.OCL.ConstraintConversion
 
         public PathContext Context { get; private set; }
 
+        private readonly List<OclExpression> subExpressions = new List<OclExpression>();
+        public List<OclExpression> SubExpressions
+        {
+            get { return subExpressions; }
+        }
+
+        public TupleLiteralToXPathCallbackHandler TupleLiteralToXPathCallback { get; set; }
+
         public PSMPath()
         {
             Context = new PathContext();
@@ -38,7 +46,7 @@ namespace Exolutio.Model.OCL.ConstraintConversion
 
         public VariableExp StartingVariableExp
         {
-            get { return ((PSMPathVariableStep)steps[0]).VariableExp; }
+            get { return steps[0] is PSMPathVariableStep ? ((PSMPathVariableStep)steps[0]).VariableExp : null; }
         }
 
         public PSMClass StartingClass
@@ -91,9 +99,14 @@ namespace Exolutio.Model.OCL.ConstraintConversion
             return clone;
         }
 
-        public string ToXPath(bool selfIsCurrent)
+        public string ToXPath(bool selfIsCurrent, bool withoutFirstStep = false)
         {
-            if (selfIsCurrent && 
+            if (withoutFirstStep)
+            {
+                return Steps.SkipWhile(s => s == Steps[0]).Select(s => s.ToXPath()).ConcatWithSeparator(String.Empty);
+            }
+
+            if (selfIsCurrent && StartingVariableExp != null && 
                 StartingVariableExp.referredVariable == Context.ClassifierConstraint.Self)
             {
                 string path = Steps.Select(s => s == Steps.First() ? "." : s.ToXPath()).ConcatWithSeparator(String.Empty);
@@ -102,13 +115,12 @@ namespace Exolutio.Model.OCL.ConstraintConversion
                 else 
                     return path;
             }
-            else
-            {
-                return Steps.Select(s => s.ToXPath()).ConcatWithSeparator(String.Empty);
-            }
+            
+            return Steps.Select(s => s.ToXPath()).ConcatWithSeparator(String.Empty);
         }
     }
-
+    
+    public delegate string TupleLiteralToXPathCallbackHandler(TupleLiteralExp tupleLiteral, List<OclExpression> subExpressions);
 
     public abstract class PSMPathStep
     {
@@ -152,21 +164,7 @@ namespace Exolutio.Model.OCL.ConstraintConversion
 
         public override string ToXPath()
         {
-            //if (Variable == Path.Context.ClassifierConstraint.Self)
-            //{
-            //    //if (Path.Context.LoopStack.IsEmpty())
-            //    //{
-            //    //    return @".";
-            //    //}
-            //    //else
-            //    {
-            //        return @"$self";
-            //    }
-            //}
-            //else
-            //{
             return string.Format(@"${0}", Variable.Name);
-            //}
         }
     }
 
@@ -198,6 +196,47 @@ namespace Exolutio.Model.OCL.ConstraintConversion
             {
                 return string.Format(@"/@{0}", Attribute.Name);
             }
+        }
+    }
+
+    class TupleLiteralStep: PSMPathStep
+    {
+        public TupleLiteralStep(PSMPath path) : base(path)
+        {
+        }
+
+        public TupleLiteralExp TupleExpresion { get; set; }
+
+        public override object Clone(PSMPath newContainingPath)
+        {
+            return new TupleLiteralStep(newContainingPath) { TupleExpresion = this.TupleExpresion };
+        }
+
+        public override string ToXPath()
+        {
+            string tuple = Path.TupleLiteralToXPathCallback(this.TupleExpresion, Path.SubExpressions);
+            return tuple;
+        }
+    }
+
+    class TuplePartStep : PSMPathStep
+    {
+        public TuplePartStep(PSMPath path) : base(path)
+        {
+        }
+
+        public TupleLiteralExp TupleExpresion { get; set; }
+
+        public TupleLiteralPart TuplePart { get; set; }
+
+        public override object Clone(PSMPath newContainingPath)
+        {
+            return new TuplePartStep(newContainingPath) {TupleExpresion = this.TupleExpresion, TuplePart = this.TuplePart };
+        }
+
+        public override string ToXPath()
+        {
+            return string.Format(@"('{0}')", TuplePart.Attribute.Name);
         }
     }
 
@@ -252,18 +291,10 @@ namespace Exolutio.Model.OCL.ConstraintConversion
 
     public class PSMPathBuilder
     {
-        public static PSMPath BuildPSMPath(NavigationCallExp node, ClassifierConstraint constraint, VariableNamer variableNamer)
+        public static PSMPath BuildPSMPath(PropertyCallExp node, ClassifierConstraint constraint, VariableNamer variableNamer, TupleLiteralToXPathCallbackHandler tupleLiteralToXPathCallback)
         {
             PSMPath path = new PSMPath();
-            path.Context.ClassifierConstraint = constraint;
-            path.Context.VariableNamer = variableNamer;
-            throw new NotImplementedException();
-        }
-
-
-        public static PSMPath BuildPSMPath(PropertyCallExp node, ClassifierConstraint constraint, VariableNamer variableNamer)
-        {
-            PSMPath path = new PSMPath();
+            path.TupleLiteralToXPathCallback = tupleLiteralToXPathCallback;
             path.Context.ClassifierConstraint = constraint;
             path.Context.VariableNamer = variableNamer;
 
@@ -272,16 +303,22 @@ namespace Exolutio.Model.OCL.ConstraintConversion
             {
                 s = node;
             }
+            else if (node.Source is TupleLiteralExp)
+            {
+                TuplePartStep tuplePartStep = new TuplePartStep(path) { TupleExpresion = (TupleLiteralExp) node.Source };
+                tuplePartStep.TuplePart = tuplePartStep.TupleExpresion.Parts[((PropertyCallExp) node).ReferredProperty.Name];
+                path.Steps.Add(tuplePartStep);
+                s = node.Source;
+            }
             else
             {
-                PSMAttribute a = (PSMAttribute)node.ReferredProperty.Tag;
-
-                PSMPathAttributeStep pathAttributeStep = new PSMPathAttributeStep(path) { Attribute = a };
+                PSMAttribute a = (PSMAttribute) node.ReferredProperty.Tag;
+                PSMPathAttributeStep pathAttributeStep = new PSMPathAttributeStep(path) {Attribute = a};
                 path.Steps.Add(pathAttributeStep);
                 s = node.Source;
             }
 
-            while (!(s is VariableExp))
+            while (!(s is VariableExp) && !(s is TupleLiteralExp))
             {
                 PSMPathAssociationStep step = new PSMPathAssociationStep(path);
                 var sp = ((PropertyCallExp)s);
@@ -304,7 +341,35 @@ namespace Exolutio.Model.OCL.ConstraintConversion
                 s = sp.Source;
             }
 
-            VariableExp variableExp = (VariableExp) s;
+            if (s is VariableExp)
+            {
+                VariableExp variableExp = (VariableExp) s;
+                PSMPathVariableStep pathVariableStep = new PSMPathVariableStep(path) {VariableExp = variableExp};
+                if (string.IsNullOrEmpty(variableExp.referredVariable.Name))
+                {
+                    variableExp.referredVariable.Name =
+                        path.Context.VariableNamer.GetName(variableExp.referredVariable.PropertyType);
+                }
+                path.Steps.Insert(0, pathVariableStep);
+            }
+            else if (s is TupleLiteralExp)
+            {
+                TupleLiteralExp tupleLiteralExp = (TupleLiteralExp)s;
+                TupleLiteralStep tupleLiteralStep = new TupleLiteralStep(path);
+                tupleLiteralStep.TupleExpresion = tupleLiteralExp;
+                path.Steps.Insert(0, tupleLiteralStep);
+            } 
+
+            return path;
+        }
+
+        public static PSMPath BuildPSMPath(VariableExp variableExp, ClassifierConstraint constraint, VariableNamer variableNamer, TupleLiteralToXPathCallbackHandler tupleLiteralToXPathCallback)
+        {
+            PSMPath path = new PSMPath();
+            path.Context.ClassifierConstraint = constraint;
+            path.Context.VariableNamer = variableNamer;
+            path.TupleLiteralToXPathCallback = tupleLiteralToXPathCallback;
+
             PSMPathVariableStep pathVariableStep = new PSMPathVariableStep(path) { VariableExp = variableExp };
             if (string.IsNullOrEmpty(variableExp.referredVariable.Name))
             {
@@ -314,17 +379,14 @@ namespace Exolutio.Model.OCL.ConstraintConversion
             return path;
         }
 
-        public static PSMPath BuildPSMPath(VariableExp variableExp, ClassifierConstraint constraint, VariableNamer variableNamer)
+        public static PSMPath BuildPSMPath(TupleLiteralExp tupleLiteral, ClassifierConstraint constraint, VariableNamer variableNamer, TupleLiteralToXPathCallbackHandler tupleLiteralToXPathCallback)
         {
             PSMPath path = new PSMPath();
             path.Context.ClassifierConstraint = constraint;
             path.Context.VariableNamer = variableNamer;
+            path.TupleLiteralToXPathCallback = tupleLiteralToXPathCallback;
 
-            PSMPathVariableStep pathVariableStep = new PSMPathVariableStep(path) { VariableExp = variableExp };
-            if (string.IsNullOrEmpty(variableExp.referredVariable.Name))
-            {
-                variableExp.referredVariable.Name = path.Context.VariableNamer.GetName(variableExp.referredVariable.PropertyType);
-            }
+            TupleLiteralStep pathVariableStep = new TupleLiteralStep(path) { TupleExpresion = tupleLiteral };
             path.Steps.Insert(0, pathVariableStep);
             return path;
         }
