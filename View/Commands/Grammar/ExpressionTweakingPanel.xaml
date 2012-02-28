@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="Exolutio.View.Commands.Grammar.ExpressionTweakingPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:SchematronTranslation="clr-namespace:Exolutio.Model.PSM.Grammar.SchematronTranslation;assembly=Exolutio.Model.PSM.Grammar"
+             mc:Ignorable="d" 
+             d:DesignHeight="419" d:DesignWidth="343" Loaded="UserControl_Loaded">
+    <Grid>
+        <TreeView Margin="12,12,12,12" 
+                  Name="treeView1" 
+                  VerticalAlignment="Stretch" 
+                  HorizontalAlignment="Stretch"
+                  ItemTemplate="{DynamicResource translationOptionsTemplate}"
+                  >
+            <TreeView.Resources>
+                <!-- node for one expression -->
+                <DataTemplate
+                    x:Key="translationOptionTemplate"
+                    DataType="{x:Type SchematronTranslation:TranslationOption}"
+                    >
+                    <StackPanel Margin="0,0,0,5">
+                        <RadioButton GroupName="{Binding Path=OptionsContainer.Identifier}" Checked="RadioButton_Checked" IsChecked="{Binding Path=IsSelectedOption, Mode=OneWay}">
+                            <TextBlock Text="{Binding Path=GetStringProp}" FontStyle="Italic" /> 
+                        </RadioButton>
+                    </StackPanel>
+                </DataTemplate>
+                <HierarchicalDataTemplate 
+                    x:Key="translationOptionsTemplate" 
+                    DataType="{x:Type SchematronTranslation:TranslationOptions}">
+                    <StackPanel Margin="0,0,0,5">
+                        <TreeViewItem IsExpanded="True">
+                            <TreeViewItem.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock>OCL expression:  </TextBlock>
+                                    <TextBlock Text="{Binding Path=Expression}" FontStyle="Italic" />
+                                </StackPanel>
+                            </TreeViewItem.Header>
+                            <TreeViewItem Header="Possible translations: " IsExpanded="True" 
+                                          ItemTemplate="{DynamicResource translationOptionTemplate}" 
+                                          ItemsSource="{Binding Path=Options}" />
+                            
+                        </TreeViewItem>
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+            </TreeView.Resources>
+        </TreeView>
+    </Grid>
+</UserControl>

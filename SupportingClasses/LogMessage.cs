@@ -40,23 +40,29 @@ namespace Exolutio.SupportingClasses
 
         ILogMessage RelatedMessage { get; set; }
     }
+    /// <summary>
+    /// Defines handler that returns image for a log message. 
+	/// </summary>
+    public delegate object ImageGetterHandler(ILogMessage message);
+    
+    internal static class LogMessageImageHelper
+    {
+        public static ImageGetterHandler ImageGetter { get; set; }
+    }
 
     /// <summary>
 	/// One log entry 
 	/// </summary>
 	public class LogMessage<TTag> : ILogMessage
     {
-		/// <summary>
-		/// Defines handler that returns image for a log message. 
-		/// </summary>
-        public delegate object ImageGetterHandler(ILogMessage message);
+		
 
 		/// <summary>
 		/// Fill this property with a function, that returns proper 
 		/// icon for a log message (used to return icons for error or 
 		/// warning).
 		/// </summary>
-		public static ImageGetterHandler ImageGetter;
+        public static ImageGetterHandler ImageGetter { get { return LogMessageImageHelper.ImageGetter; } set { LogMessageImageHelper.ImageGetter = value; } }
 
 	    /// <summary>
 		/// Number of the message in the log.

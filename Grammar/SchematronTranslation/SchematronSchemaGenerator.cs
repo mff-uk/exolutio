@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Xml.Linq;
 using Exolutio.Model.OCL;
 using Exolutio.Model.OCL.AST;
@@ -10,11 +11,26 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 {
     public class SchematronSchemaGenerator
     {
-        public struct TranslationSettings
+        public class TranslationSettings
         {
             public bool SchemaAware { get; set; }
 
             public bool Functional { get; set; }
+
+            public bool Retranslation { get; set; }
+
+            public SubexpressionTranslations SubexpressionTranslations { get; private set; }
+
+            public TranslationSettings()
+            {
+                SubexpressionTranslations = new SubexpressionTranslations();
+            }
+
+            public TranslationSettings(bool schemaAware, bool functional) : this()
+            {
+                SchemaAware = schemaAware;
+                Functional = functional;
+            }
         }
 
         private PSMSchema psmSchema;
@@ -44,6 +60,16 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
                 TranslateScript(schSchema, oclScript, translationSettings);
             }
 
+            foreach (LogMessage<OclExpression> e in Log)
+            {
+                if (e.Tag != null && e.Tag.CodeSource != null && e.Tag.CodeSource.IsFromCode)
+                {
+                    e.MessageText += System.Environment.NewLine + string.Format("Expression: > {0} <", e.Tag);
+                    e.Column = e.Tag.CodeSource.Column;
+                    e.Line = e.Tag.CodeSource.Line;
+                }
+            }
+
             return doc;
         }
 
@@ -70,6 +96,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
                     foreach (OclExpression invariant in constraint.Invariants)
                     {
                         string xpath = TranslateInvariantToXPath(oclScript, constraint, compilerResult.Bridge, invariant, translationSettings);
+
                         try
                         {
                             ruleElement.Add(new XComment(invariant.ToString()));
@@ -99,9 +126,48 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             xpathConverter.OclContext = constraint;
             xpathConverter.Log = Log;
             xpathConverter.Settings = translationSettings;
-            string invariantStr = xpathConverter.TranslateExpression(invariant);
-            return invariantStr;
-
+            if (!translationSettings.Retranslation)
+            {
+                try
+                {
+                    string invariantStr = xpathConverter.TranslateExpression(invariant);
+                    translationSettings.SubexpressionTranslations.Merge(xpathConverter.SubexpressionTranslations);
+                    return invariantStr;
+                }
+                catch (ExpressionNotSupportedInXPath e)
+                {
+                    Log.AddError(e.Message, e.Expression);
+                }
+                catch
+                {
+                    Log.AddError("Unable to translate invariant. ", invariant);
+                }
+            }
+            else
+            {
+                try
+                {
+                    string invariantStr = xpathConverter.TranslateExpression(invariant);
+                    foreach (OclExpression translatedExp in translationSettings.SubexpressionTranslations.Translations.Keys)
+                    {
+                        if (translatedExp.ToString() == invariant.ToString())
+                        {
+                            return translationSettings.SubexpressionTranslations.GetSubexpressionTranslation(translatedExp).GetString(true);
+                        }
+                    }
+                    
+                    //return translationSettings.SubexpressionTranslations.GetSubexpressionTranslation(invariant).GetString();
+                }
+                catch (ExpressionNotSupportedInXPath e)
+                {
+                    Log.AddError(e.Message, e.Expression);
+                }
+                catch
+                {
+                    Log.AddError("Unable to translate invariant. ", invariant);
+                }
+            }
+            return "### ERROR";
         }
     }
 }

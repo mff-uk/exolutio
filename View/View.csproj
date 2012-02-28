@@ -81,6 +81,9 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Commands\Edit\guiOpenAttributeTypesDialogCommand.cs" />
+    <Compile Include="Commands\Grammar\ExpressionTweakingPanel.xaml.cs">
+      <DependentUpon>ExpressionTweakingPanel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Commands\OCL\SuggestConstraintsWindow.xaml.cs">
       <DependentUpon>SuggestConstraintsWindow.xaml</DependentUpon>
     </Compile>
@@ -329,6 +332,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Commands\CommandDialogWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Commands\Grammar\ExpressionTweakingPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

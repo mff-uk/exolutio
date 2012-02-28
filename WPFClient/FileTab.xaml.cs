@@ -95,6 +95,15 @@ namespace Exolutio.WPFClient
             get { return filePresenterButtons; }
         }
 
+        public void DisplayAdditionalControl(ContentControl contentControl, string tabHeader)
+        {
+            TabItem tabItem = new TabItem();
+            tabItem.Header = tabHeader;
+            tabItem.Content = contentControl;
+            tcAdditional.Items.Add(tabItem);
+            tcAdditional.Visibility = Visibility.Visible;
+        }
+
         private void ShowHideRelevantButtons()
         {
             bValidateXMLSchema.Visibility = fileView.DisplayedFileType == EDisplayedFileType.XSD ? Visibility.Visible : Visibility.Collapsed;
@@ -178,11 +187,17 @@ namespace Exolutio.WPFClient
                 int countw = logMessages.Count(e => e.Severity == ELogMessageSeverity.Warning);
                 int counte = logMessages.Count(e => e.Severity == ELogMessageSeverity.Error);
                 if (countw > 0 && counte > 0)
+                {
                     expander1.Header = String.Format("Task completed with {0} errors and {1} warnings", counte, countw);
+                    expander1.IsExpanded = true;
+                }
                 else if (countw > 0)
                     expander1.Header = String.Format("Task completed with {0} warnings", countw);
                 else if (counte > 0)
-                    expander1.Header = String.Format("Task completed with {0} errors", counte);
+                {
+                    expander1.Header = String.Format("Task completed with {0} errors", counte); 
+                    expander1.IsExpanded = true;
+                }
                 else
                     expander1.Header = "Task completed successfully";
             }
