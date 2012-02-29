@@ -44,21 +44,21 @@ namespace Exolutio.Model.OCL.Bridge {
             set;
         }
 
-        private PSMBridgeClass(TypesTable.TypesTable tt,Namespace ns, string name)
-            : base(tt,ns, name, tt.Library.Any) {
-                PSMChildMembers = new Dictionary<PSMAssociation, PSMBridgeAssociation>();
+        private PSMBridgeClass(TypesTable.TypesTable tt, Namespace ns, string name)
+            : base(tt, ns, name, tt.Library.Any) {
+            PSMChildMembers = new Dictionary<PSMAssociation, PSMBridgeAssociation>();
             PSMAttribute = new Dictionary<PSMAttribute, PSMBridgeAttribute>();
         }
 
-        public PSMBridgeClass(TypesTable.TypesTable tt,Namespace ns, PSMClass sourceClass)
-            : this(tt,ns, sourceClass.Name) {
+        public PSMBridgeClass(TypesTable.TypesTable tt, Namespace ns, PSMClass sourceClass)
+            : this(tt, ns, sourceClass.Name) {
             this.PSMSource = sourceClass;
             this.PSMSourceType = SourceType.PSMClass;
-            
+
         }
 
-        public PSMBridgeClass(TypesTable.TypesTable tt,Namespace ns, PSMContentModel sourceContentModel)
-            : this (tt,ns, GetContentModelOCLName(sourceContentModel)) {
+        public PSMBridgeClass(TypesTable.TypesTable tt, Namespace ns, PSMContentModel sourceContentModel)
+            : this(tt, ns, GetContentModelOCLName(sourceContentModel)) {
             this.PSMSource = sourceContentModel;
             this.PSMSourceType = SourceType.PSMContentModel;
         }
@@ -85,7 +85,8 @@ namespace Exolutio.Model.OCL.Bridge {
             if (PSMSource is PSMClass) {
                 PSMClass sourceClass = (PSMClass)PSMSource;
                 foreach (var pr in sourceClass.PSMAttributes) {
-                    Classifier propType = TypeTable.Library.RootNamespace.NestedClassifier[pr.AttributeType.Name];
+                    Classifier baseType = TypeTable.Library.RootNamespace.NestedClassifier[pr.AttributeType.Name];
+                    Classifier propType = BridgeHelpers.GetTypeByCardinality(TypeTable, pr, baseType);
                     PSMBridgeAttribute newProp = new PSMBridgeAttribute(pr, PropertyType.One, propType);
                     Properties.Add(newProp);
                     //Registred to FindProperty
@@ -105,7 +106,7 @@ namespace Exolutio.Model.OCL.Bridge {
                 if (parentAss.Parent is PSM.PSMClass) {
                     parentName = parentAss.Parent.Name;
                     defaultName = parentName;
-                    namesInOcl.Add(parentName);   
+                    namesInOcl.Add(parentName);
                 }
                 else if (parentAss.Parent is PSM.PSMContentModel) {
                     parentName = GetContentModelOCLName((PSM.PSMContentModel)parentAss.Parent);
@@ -157,7 +158,7 @@ namespace Exolutio.Model.OCL.Bridge {
                     System.Diagnostics.Debug.Fail("Nepodporovany typ v PSM.");
                     continue;
                 }
-               
+
                 bool hasAssName = !string.IsNullOrEmpty(ass.Name);
                 if (hasAssName) {
                     namesInOcl.Add(ass.Name);
@@ -170,24 +171,17 @@ namespace Exolutio.Model.OCL.Bridge {
                 namesInOcl.Add(string.Format("child_{0}", ++childCount));
 
                 Classifier assType = TypeTable.Library.RootNamespace.NestedClassifier[childClassName];
-                Classifier propType;
-                if (ass.Upper > 1) {
-                    propType = TypeTable.Library.CreateCollection(CollectionKind.Set, assType);
-                    TypeTable.RegisterType(propType);
-                }
-                else {
-                    propType = assType;
-                }
+                Classifier propType = BridgeHelpers.GetTypeByCardinality(TypeTable, ass, assType);
 
-                PSMBridgeAssociation newAss = new PSMBridgeAssociation( defaultName, namesInOcl,ass, PSMBridgeAssociation.AssociationDirection.Down, PropertyType.One, propType);
+                PSMBridgeAssociation newAss = new PSMBridgeAssociation(defaultName, namesInOcl, ass, PSMBridgeAssociation.AssociationDirection.Down, PropertyType.One, propType);
                 //hack
                 newAss.Tag = ass;
                 //Registre to find
                 PSMChildMembers.Add(ass, newAss);
                 //Registred all name in tables
-                foreach (string name in namesInOcl) {                 
-                    Properties.Add(newAss,name);
-                }  
+                foreach (string name in namesInOcl) {
+                    Properties.Add(newAss, name);
+                }
             }
         }
 
@@ -202,7 +196,7 @@ namespace Exolutio.Model.OCL.Bridge {
         /// Source type.
         /// </summary>
         public enum SourceType {
-            PSMClass,PSMContentModel
+            PSMClass, PSMContentModel
         }
     }
 }

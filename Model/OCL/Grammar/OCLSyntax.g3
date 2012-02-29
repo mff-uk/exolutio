@@ -217,12 +217,12 @@ pathName //7
 collectionLiteralExpAndType // 
 
 	:collectionTypeIdentifier ('{' collectionLiteralParts? '}')? //10A - bez type
-		-> ^(COLLECTIONLITERAL collectionTypeIdentifier collectionLiteralParts)
+		-> ^(COLLECTIONLITERAL collectionTypeIdentifier collectionLiteralParts?)
 
 	| collectionTypeIdentifier ('(' type  ')') 
 	(
-		('{' collectionLiteralParts '}'	//10B - vsechno, 22(28B)-bez hodnoty		
-			-> ^(COLLECTIONLITERAL collectionTypeIdentifier type collectionLiteralParts)
+		('{' collectionLiteralParts? '}'	//10B - vsechno, 22(28B)-bez hodnoty		
+			-> ^(COLLECTIONLITERAL collectionTypeIdentifier type collectionLiteralParts?)
 		)
 		|	->^(COLLTYPE collectionTypeIdentifier type)
 	)
