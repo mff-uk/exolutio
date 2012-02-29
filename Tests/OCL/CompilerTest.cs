@@ -161,18 +161,50 @@ inv: OrderedSet{10,1..3,4}->size()=2");
 
             TryCompile(@"context Tournament 
 inv: Sequence{10,1..3,4}->size()=2");
+
+            TryCompile(@"context Tournament 
+inv: Sequence(Integer){10,1..3,4}->size()=2");
+
+            TryCompile(@"context Tournament 
+inv: Sequence(String){'ahoj'}->size()=2");
+
+            TryCompile(@"context Tournament 
+inv: Sequence(String){}->size()=0");
+            TryCompile(@"context Tournament 
+inv: Bag(Integer){}->size()=0");
         }
 
         [Test]
         public void IfTest() {
             TryCompile(@"context Tournament 
-inv: if 1=1 then true else false endif"); 
+inv: if true then true else 1 = 2 endif"); 
+            TryCompile(@"context Tournament 
+inv: if 1=1 then true else false endif");
         }
 
         [Test]
         public void NegativeIfTest() {
             TryCompileError(@"context Tournament 
 inv: if 'string' then true else false endif");
+        }
+
+        [Test]
+        public void SelfTest() {
+            TryCompile(@"context Tournament 
+inv: self = self");
+        }
+
+        [Test]
+        public void LiteralTest() {
+            TryCompile(@"context Tournament 
+inv: true");
+            TryCompile(@"context Tournament 
+inv: false");
+            TryCompile(@"context Tournament 
+inv: null = null");
+
+            TryCompile(@"context Tournament 
+inv: invalid = invalid");
         }
 
 

@@ -70,6 +70,7 @@
     <Compile Include="OCL\AST\IAstVisitor.cs" />
     <Compile Include="OCL\AST\IExpressionSource.cs" />
     <Compile Include="OCL\Bridge\BridgeFactory.cs" />
+    <Compile Include="OCL\Bridge\BridgeHelpers.cs" />
     <Compile Include="OCL\Bridge\IBridgeToOCL.cs" />
     <Compile Include="OCL\Bridge\PIMBridge.cs" />
     <Compile Include="OCL\Bridge\PIMBridgeAssociation.cs" />

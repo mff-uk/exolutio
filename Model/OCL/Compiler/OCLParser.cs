@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// $ANTLR 3.3.1.7705 ..\\..\\Model\\OCL\\Grammar\\OCL.g3 2012-02-26 22:10:01
+// $ANTLR 3.3.1.7705 ..\\..\\Model\\OCL\\Grammar\\OCL.g3 2012-02-27 21:04:29
 
 // The variable 'variable' is assigned but its value is never used.
 #pragma warning disable 219

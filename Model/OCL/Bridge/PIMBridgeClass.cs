@@ -40,7 +40,7 @@ namespace Exolutio.Model.OCL.Bridge {
         /// <param name="tt">Destination OCL type system.</param>
         /// <param name="sourceClass">Source class</param>
         public PIMBridgeClass(TypesTable.TypesTable tt, Namespace ns, PIMClass sourceClass)
-            : base(tt,ns, sourceClass.Name, tt.Library.Any) {
+            : base(tt, ns, sourceClass.Name, tt.Library.Any) {
             this.SourceClass = sourceClass;
             PIMAttribute = new Dictionary<PIMAttribute, PIMBridgeAttribute>();
             PIMAssociations = new Dictionary<PIMAssociationEnd, PIMBridgeAssociation>();
@@ -67,7 +67,7 @@ namespace Exolutio.Model.OCL.Bridge {
         /// Tries find instance of Operation associated with <paramref name="op"/> from PIM.
         /// </summary>
         /// <exception cref="KeyNotFoundException"><paramref name="op"/> not exists in this class.</exception>
-        public Operation FindOperation(ModelOperation op){
+        public Operation FindOperation(ModelOperation op) {
             return PIMOperations[op];
         }
 
@@ -75,9 +75,10 @@ namespace Exolutio.Model.OCL.Bridge {
         internal void TranslateMembers() {
 
             //Attributy
-            foreach (var pr in SourceClass.PIMAttributes)
-            {
-                Classifier propType = pr.AttributeType != null ? TypeTable.Library.RootNamespace.NestedClassifier[pr.AttributeType.Name] : TypeTable.Library.Any;
+            foreach (var pr in SourceClass.PIMAttributes) {
+
+                Classifier baseType = pr.AttributeType != null ? TypeTable.Library.RootNamespace.NestedClassifier[pr.AttributeType.Name] : TypeTable.Library.Any;
+                Classifier propType = BridgeHelpers.GetTypeByCardinality(TypeTable, pr, baseType);
                 PIMBridgeAttribute newProp = new PIMBridgeAttribute(pr, PropertyType.One, propType);
                 Properties.Add(newProp);
                 //Hack
@@ -99,15 +100,9 @@ namespace Exolutio.Model.OCL.Bridge {
                 else {
                     name = end.Name;
                 }
-                Classifier propType;
-                if (end.Upper > 1) {
-                    propType = TypeTable.Library.CreateCollection(CollectionKind.Set, assType);
-                }
-                else {
-                    propType = assType;
-                }
+                Classifier propType = BridgeHelpers.GetTypeByCardinality(TypeTable, end, assType);
                 TypeTable.RegisterType(propType);
-                PIMBridgeAssociation newass = new PIMBridgeAssociation(name,ass.PIMAssociation,end, PropertyType.One, propType);
+                PIMBridgeAssociation newass = new PIMBridgeAssociation(name, ass.PIMAssociation, end, PropertyType.One, propType);
                 Properties.Add(newass);
 
                 //hack
@@ -132,6 +127,8 @@ namespace Exolutio.Model.OCL.Bridge {
             }
 
         }
+
+        
 
     }
 
