@@ -48,22 +48,23 @@ namespace Exolutio.Controller.Commands.Atomic.PIM
             return OperationResult.OK;
         }
 
-        /*internal override PropagationMacroCommand PrePropagation()
+        internal override PropagationMacroCommand PrePropagation()
         {
-            List<PSMAttribute> list = Project.TranslateComponent<PIMAttribute>(attributeGuid).GetInterpretedComponents().Cast<PSMAttribute>().ToList<PSMAttribute>();
+            PIMClass pimClass = Project.TranslateComponent<PIMClass>(classGuid);
+            List<PSMClass> list = pimClass.GetInterpretedComponents().Cast<PSMClass>().ToList<PSMClass>();
             if (list.Count == 0) return null;
 
             PropagationMacroCommand command = new PropagationMacroCommand(Controller);
-            command.Report = new CommandReport("Pre-propagation (update PIM attribute type)");
+            command.Report = new CommandReport("Pre-propagation (update PIM class abstract property)");
 
-            foreach (PSMAttribute a in list)
+            foreach (PSMClass psmClass in list)
             {
-                acmdUpdatePSMAttributeType d = new acmdUpdatePSMAttributeType(Controller, a, newTypeGuid) { Propagate = false };
-                command.Commands.Add(d);
+                acmdUpdatePSMClassAbstract cmd = new acmdUpdatePSMClassAbstract(Controller, psmClass, newAbstract) { Propagate = false };
+                command.Commands.Add(cmd);
             }
 
             return command;
-        }*/
+        }
 
     }
 }
