@@ -7,6 +7,7 @@ using Exolutio.Model.PIM;
 using Exolutio.Model;
 using Exolutio.Model.PSM;
 using Exolutio.Controller.Commands.Atomic.PSM;
+using System.Diagnostics;
 
 namespace Exolutio.Controller.Commands.Atomic.PIM
 {
@@ -54,22 +55,35 @@ namespace Exolutio.Controller.Commands.Atomic.PIM
             return OperationResult.OK;
         }
 
-        /*internal override PropagationMacroCommand PrePropagation()
+        internal override PropagationMacroCommand PrePropagation()
         {
-            List<PSMAttribute> list = Project.TranslateComponent<PIMAttribute>(attributeGuid).GetInterpretedComponents().Cast<PSMAttribute>().ToList<PSMAttribute>();
+            PIMClass pimClass = Project.TranslateComponent<PIMClass>(classGuid);
+            List<PSMClass> list = pimClass.GetInterpretedComponents().Cast<PSMClass>().ToList<PSMClass>();
             if (list.Count == 0) return null;
 
-            PropagationMacroCommand command = new PropagationMacroCommand(Controller);
-            command.Report = new CommandReport("Pre-propagation (update PIM attribute type)");
+            PropagationMacroCommand command = new PropagationMacroCommand(Controller) { CheckFirstOnlyInCanExecute = true };
+            command.Report = new CommandReport("Pre-propagation (update PIM class final property)");
 
-            foreach (PSMAttribute a in list)
+            foreach (PSMClass c in list)
             {
-                acmdUpdatePSMAttributeType d = new acmdUpdatePSMAttributeType(Controller, a, newTypeGuid) { Propagate = false };
+                if (c.GeneralizationsAsGeneral.Count > 0)
+                {
+                    foreach (PSMGeneralization g in c.GeneralizationsAsGeneral)
+                    {
+                        //This should be only in case of:
+                        Debug.Assert(g.General.Interpretation == g.Specific.Interpretation);
+                        //If not, the PSM class was still involved in a generalization and 
+                        acmdDeletePSMGeneralization d1 = new acmdDeletePSMGeneralization(Controller, g) { Propagate = false };
+                        command.Commands.Add(d1);
+                    }
+                }
+                
+                acmdUpdatePSMClassFinal d = new acmdUpdatePSMClassFinal(Controller, c, newFinal) { Propagate = false };
                 command.Commands.Add(d);
             }
 
             return command;
-        }*/
+        }
 
     }
 }

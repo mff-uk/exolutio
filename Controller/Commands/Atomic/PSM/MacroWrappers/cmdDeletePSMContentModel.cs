@@ -6,7 +6,7 @@ using Exolutio.Controller.Commands;
 using Exolutio.Model.PSM;
 using Exolutio.Model;
 
-namespace Exolutio.Controller.Commands.Atomic.PSM
+namespace Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers
 {
     /// <summary>
     /// Atomic operation that deletes the content model and moves its associations to a parent PSMAssociationMember

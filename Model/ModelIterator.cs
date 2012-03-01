@@ -26,6 +26,7 @@ namespace Exolutio.Model
         }
 
         private static List<PSMClass> visited;
+        private static List<PSMAssociationMember> visitedAM;
         
         public static IEnumerable<Tuple<PSMAttribute, IEnumerable<MoveStep>>> GetContextPSMAttributesWithPaths(this PSMClass psmClass)
         {
@@ -108,25 +109,26 @@ namespace Exolutio.Model
             return list;
         }
 
-        public static IEnumerable<PSMAssociation> GetContextPSMAssociations(this PSMClass psmClass, bool leaveOutRepresentedClass = false)
+        public static IEnumerable<PSMAssociation> GetContextPSMAssociations(this PSMAssociationMember psmAM, bool leaveOutRepresentedClass = false)
         {
-            visited = new List<PSMClass>();
-            return psmClass.getContextPSMAssociations(leaveOutRepresentedClass);
+            visitedAM = new List<PSMAssociationMember>();
+            return psmAM.getContextPSMAssociations(leaveOutRepresentedClass);
         }
 
-        private static IEnumerable<PSMAssociation> getContextPSMAssociations(this PSMClass psmClass, bool leaveOutRepresentedClass)
+        private static IEnumerable<PSMAssociation> getContextPSMAssociations(this PSMAssociationMember psmAM, bool leaveOutRepresentedClass)
         {
             List<PSMAssociation> list = new List<PSMAssociation>();
-            if (visited.Contains(psmClass)) return list;
-            else visited.Add(psmClass);
+            if (visitedAM.Contains(psmAM)) return list;
+            else visitedAM.Add(psmAM);
 
-            list.AddRange(psmClass.ChildPSMAssociations);
+            list.AddRange(psmAM.ChildPSMAssociations);
 
-            IEnumerable<PSMClass> classes;
-            if (leaveOutRepresentedClass) classes = psmClass.UnInterpretedSubClasses();
-            else classes = psmClass.GetSRs().Union(psmClass.UnInterpretedSubClasses());
+            IEnumerable<PSMAssociationMember> associationMembers;
+            if (leaveOutRepresentedClass) associationMembers = psmAM.UnInterpretedSubAMs(false, true);
+            else if (!(psmAM is PSMClass)) associationMembers = psmAM.UnInterpretedSubAMs(false, true);
+            else associationMembers = (psmAM as PSMClass).GetSRs().Union(psmAM.UnInterpretedSubAMs(false, true));
 
-            foreach (PSMClass c in classes.Where(c => !visited.Contains(c)))
+            foreach (PSMAssociationMember c in associationMembers.Where(c => !visitedAM.Contains(c)))
             {
                 list.AddRange(c.getContextPSMAssociations(false));
             }
@@ -633,10 +635,10 @@ namespace Exolutio.Model
             return list;
         }
 
-        public static List<PSMAssociationMember> UnInterpretedSubAMs(this PSMAssociationMember parent, bool includeThis = false)
+        public static List<PSMAssociationMember> UnInterpretedSubAMs(this PSMAssociationMember parent, bool includeThis = false, bool first = false)
         {
             List<PSMAssociationMember> list = new List<PSMAssociationMember>();
-            if (parent is PSMClass && (parent as PSMClass).Interpretation != null) return list;
+            if (!first && parent is PSMClass && (parent as PSMClass).Interpretation != null) return list;
             else
             {
                 if (includeThis) list.Add(parent as PSMAssociationMember);

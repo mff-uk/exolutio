@@ -51,6 +51,12 @@ namespace Exolutio.Controller.Commands.Complex.PSM
                 da.Set(a);
                 Commands.Add(da);
             }
+            foreach (PSMGeneralization g in psmClass.GeneralizationsAsGeneral)
+            {
+                acmdDeletePSMGeneralization dg = new acmdDeletePSMGeneralization(Controller, g);
+                Commands.Add(dg);
+            }
+            if (psmClass.GeneralizationAsSpecific != null) Commands.Add(new acmdDeletePSMGeneralization(Controller, psmClass.GeneralizationAsSpecific));
 
             Commands.Add(new acmdRenameComponent(Controller, ClassGuid, ""));
             foreach (PSMClass representant in psmClass.Representants)
