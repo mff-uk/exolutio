@@ -5,7 +5,7 @@
   <Color name="Keywords" fontWeight="bold" foreground="Blue" />
   <!-- This is the main ruleset. -->
   <RuleSet>
-    <Span color="Comment" begin="//" />
+    <Span color="Comment" begin="--" />
     <Span color="Comment" multiline="true"
        begin="/\*" end="\*/" />
 
