@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Exolutio.Model.OCL.AST;
+using Exolutio.Model.OCL.Types;
+using Exolutio.SupportingClasses;
 
 namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 {
@@ -33,9 +35,25 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             get { return selectedTranslations; }
         }
 
+        public VariableDeclaration SelfVariableDeclaration { get; set; }
+
+        public Log<OclExpression> Log { get; set; }
+
+        //private readonly Stack<VariableDeclaration> contextVariableStack = new Stack<VariableDeclaration>();
+        //public Stack<VariableDeclaration> ContextVariableStack
+        //{
+        //    get { return contextVariableStack; }
+        //}
+
         public TranslationOption GetSubexpressionTranslation(OclExpression expression)
         {
-            return Translations[expression].Options[SelectedTranslations[expression]];
+            TranslationOption selectedOption = Translations[expression].Options[SelectedTranslations[expression]];
+            if (Log != null && selectedOption.LogMessagesWhenSelected != null)
+            {
+                foreach(var v in selectedOption.LogMessagesWhenSelected) 
+                    Log.AddLogMessage(v);
+            }
+            return selectedOption;
         }
 
         public void AddTrivialTranslation(OclExpression expression, string translation)
@@ -156,23 +174,77 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             throw new Exception("TO STRING IN TRANSLATIONOPTION");
         }
 
+        private VariableDeclaration FindContextVariable()
+        {
+            VariableDeclaration result = null;
+
+            TranslationOption co = this.CallingOption;
+            while (co != null)
+            {
+                if (co.ContextVariableForSubExpressions != null
+                    && (co.ContextVariableChangeOnlyIn == -1 || co.ContextVariableChangeOnlyIn == this.SubexpressionIndex))
+                {
+                    result = co.ContextVariableForSubExpressions;
+                    break;
+                }
+                
+                if (co.CallingOption == null)
+                {
+                    result = co.OptionsContainer.Expression.ClassifierConstraint.Self;
+                }
+                co = co.CallingOption;
+            }
+
+            return result;
+        }
+
         public string GetString(bool topLevel)
         {
             object[] translatedSubexpressions = new object[OptionsContainer.SubExpressions.Count];
             for (int index = 0; index < OptionsContainer.SubExpressions.Count; index++)
             {
                 OclExpression subExpression = OptionsContainer.SubExpressions[index];
-                translatedSubexpressions[index] = OptionsContainer.SubexpressionTranslations.GetSubexpressionTranslation(subExpression).GetString(false);
+                TranslationOption selectedSubexpressionTranslationOption = OptionsContainer.SubexpressionTranslations.GetSubexpressionTranslation(subExpression);
+                foreach (TranslationOption subexpressionTranslationOption in OptionsContainer.SubexpressionTranslations.Translations[subExpression].Options)
+                {
+                    subexpressionTranslationOption.CallingOption = this;
+                    subexpressionTranslationOption.SubexpressionIndex = index;
+                }
+                translatedSubexpressions[index] = selectedSubexpressionTranslationOption.GetString(false);
             }
-            if (ParenthesisWhenNotTopLevel && !topLevel)
+
+            string result;
+            if (!ContextVariableSubstitution)
             {
-                return string.Format("(" + FormatString + ")", translatedSubexpressions);
+                result = string.Format(FormatString, translatedSubexpressions);
             }
             else
             {
-                return string.Format(FormatString, translatedSubexpressions);
+                if (StartingVariable == FindContextVariable())
+                {
+                    result = string.Format(FormatString, @".");
+                    if (result.StartsWith(@"./"))
+                        result = result.Substring(2);
+                }
+                else
+                {
+                    result = string.Format(FormatString, "$" + StartingVariable.Name);
+                }
+            }
+
+            if (ParenthesisWhenNotTopLevel && !topLevel)
+            {
+                return "(" + result + ")";
+            }
+            else
+            {
+                return result;
             }
         }
+
+        protected int SubexpressionIndex { get; set; }
+
+        private TranslationOption CallingOption { get; set; }
 
         public string GetStringProp
         {
@@ -190,6 +262,24 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 
         public bool ParenthesisWhenNotTopLevel { get; set; }
 
+        /// <summary>
+        /// When <see cref="StartingVariable"/> is the same as context variable 
+        /// (variable returned by <see cref="FindContextVariable"/>), it is 
+        /// replaced by "."
+        /// </summary>
+        public bool ContextVariableSubstitution { get; set; }
+
+        public VariableDeclaration ContextVariableForSubExpressions { get; set; }
+
+        private int contextVariableChangeOnlyIn = -1;
+        public int ContextVariableChangeOnlyIn
+        {
+            get { return contextVariableChangeOnlyIn; }
+            set { contextVariableChangeOnlyIn = value; }
+        }
+
+        public VariableDeclaration StartingVariable { get; set; }
+
         public void Select()
         {
             OptionsContainer.SubexpressionTranslations.SelectedTranslations[this.OptionsContainer.Expression] =
@@ -197,5 +287,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 
             Debug.Assert(IsSelectedOption);
         }
+
+        public List<LogMessage<OclExpression>> LogMessagesWhenSelected;
     }
 }

@@ -623,6 +623,10 @@ namespace Exolutio.DataGenerator
         {
             uint lower = cardinalityComponent.Lower;
             uint upper = !cardinalityComponent.Upper.IsInfinity ? cardinalityComponent.Upper.Value : InfinityBound;
+            if (upper > 2 && PathElements.Sum(e => e == cardinalityComponent ? 1 : 0) > 2)
+            {
+                upper = 2;
+            }
 
             if (cardinalityComponent is PSMAssociation)
             {

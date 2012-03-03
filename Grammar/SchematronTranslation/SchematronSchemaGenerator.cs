@@ -64,7 +64,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             {
                 if (e.Tag != null && e.Tag.CodeSource != null && e.Tag.CodeSource.IsFromCode)
                 {
-                    e.MessageText += System.Environment.NewLine + string.Format("Expression: > {0} <", e.Tag);
+                    e.MessageTextFull = e.MessageText + System.Environment.NewLine + string.Format("Expression: > {0} <", e.Tag);
                     e.Column = e.Tag.CodeSource.Column;
                     e.Line = e.Tag.CodeSource.Line;
                 }
@@ -118,6 +118,9 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 
         private string TranslateInvariantToXPath(OCLScript oclScript, ClassifierConstraint constraint, IBridgeToOCL bridge, OclExpression invariant, TranslationSettings translationSettings)
         {
+            invariant.IsInvariant = true;
+            invariant.ClassifierConstraint = constraint;
+
             PSMOCLtoXPathConverter xpathConverter = translationSettings.Functional ? 
                 (PSMOCLtoXPathConverter) new PSMOCLtoXPathConverterFunctional() : 
                 (PSMOCLtoXPathConverter) new PSMOCLtoXPathConverterDynamic();
@@ -147,11 +150,13 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             {
                 try
                 {
-                    string invariantStr = xpathConverter.TranslateExpression(invariant);
+                    // this must stay here because of the string comparison - translation renames some variables
+                    xpathConverter.TranslateExpression(invariant);
                     foreach (OclExpression translatedExp in translationSettings.SubexpressionTranslations.Translations.Keys)
                     {
                         if (translatedExp.ToString() == invariant.ToString())
                         {
+                            translationSettings.SubexpressionTranslations.SelfVariableDeclaration = translatedExp.ClassifierConstraint.Self;
                             return translationSettings.SubexpressionTranslations.GetSubexpressionTranslation(translatedExp).GetString(true);
                         }
                     }

@@ -44,7 +44,6 @@ namespace Exolutio.View.Commands.Grammar
                     = Current.MainWindow.FilePresenter.DisplayFile(schematronSchemaDocument, EDisplayedFileType.SCH, Current.ActiveDiagram.Caption + ".sch", log, sourcePSMSchema: (PSMSchema)Current.ActiveDiagram.Schema,
                     additionalActions: additionalButtonsInfo, tag: tag);
                 filePresenterTab.RefreshCallback += RegenerateSchema;
-
                 tweakingPanel.Bind(settings.SubexpressionTranslations);
                 tweakingPanel.FilePresenterTab = filePresenterTab;
                 filePresenterTab.DisplayAdditionalControl(tweakingPanel, "Expression Tweaking");
@@ -71,8 +70,9 @@ namespace Exolutio.View.Commands.Grammar
                 }
             }
             settings.SubexpressionTranslations.Clear();
-
+            settings.Retranslation = false;
             GenerateSchema(filePresenterTab.SourcePSMSchema, settings, out document, out log);
+            tag.tweakingPanel.Bind(settings.SubexpressionTranslations);
             filePresenterTab.ReDisplayFile(document, EDisplayedFileType.SCH, filePresenterTab.SourcePSMSchema.Caption, log, filePresenterTab.ValidationSchema, filePresenterTab.SourcePSMSchema);
         }
 
@@ -102,9 +102,9 @@ namespace Exolutio.View.Commands.Grammar
         {
             SchematronSchemaGenerator schemaGenerator = new SchematronSchemaGenerator();
             schemaGenerator.Initialize(psmSchema);
-
+            settings.SubexpressionTranslations.Log = schemaGenerator.Log;
             schematronSchemaDocument = schemaGenerator.GetSchematronSchema(settings);
-
+            
             if (Environment.MachineName.Contains("TRUPIK"))
             {
                 schematronSchemaDocument.Save(@"D:\Programování\EVOXSVN\SchematronTest\LastSchSchema.sch");

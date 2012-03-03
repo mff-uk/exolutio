@@ -24,6 +24,11 @@ namespace Exolutio.SupportingClasses
         string MessageText { get; set; }
 
         /// <summary>
+        /// Complete message text how it is displayed to client. 
+        /// </summary>
+        string MessageTextFull { get; set; }
+
+        /// <summary>
         /// Line on which the error occurred
         /// </summary>
         int Line { get; set; }
@@ -55,8 +60,6 @@ namespace Exolutio.SupportingClasses
 	/// </summary>
 	public class LogMessage<TTag> : ILogMessage
     {
-		
-
 		/// <summary>
 		/// Fill this property with a function, that returns proper 
 		/// icon for a log message (used to return icons for error or 
@@ -80,7 +83,21 @@ namespace Exolutio.SupportingClasses
 		/// </summary>
 		public string MessageText { get; set; }
 
-		/// <summary>
+        private string messageTextFull;
+
+        public virtual string MessageTextFull
+        {
+            get
+            {
+                if (messageTextFull != null)
+                    return messageTextFull;
+                else
+                    return MessageText;
+            }
+            set { messageTextFull = value; }
+        }
+
+        /// <summary>
 		/// Line on which the error occurred
 		/// </summary>
 		public int Line { get; set; }

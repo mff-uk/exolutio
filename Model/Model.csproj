@@ -203,6 +203,7 @@
     <Compile Include="OCL\Types\VariableDeclaration.cs" />
     <Compile Include="OCL\Types\VoidType.cs" />
     <Compile Include="ModelOperation.cs" />
+    <Compile Include="OCL\Utils\SubexpressionCollector.cs" />
     <Compile Include="PIM\PIMGeneralization.cs" />
     <Compile Include="PIM\PIMDiagram.cs" />
     <Compile Include="ModelOperationParameter.cs" />

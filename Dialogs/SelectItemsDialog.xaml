@@ -15,7 +15,7 @@
                     <ColumnDefinition Width="40" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <Image Name="Icons" Source="question_mark.png" Stretch="Fill" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top" Width="40" />
+                <Image Name="Icons" Source="{DynamicResource question_mark}" Stretch="Fill" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top" Width="40" />
                 <Label Name="tbShort" Content="Select diagrams from the list" Margin="5" FontWeight="bold" Grid.Column="1" VerticalContentAlignment="Center" />
             </Grid>
             <TextBox Name="tbLong" TextWrapping="Wrap" Width="424" Margin="0,5,0,0" BorderThickness="0">Select diagrams you wish to open.</TextBox>
