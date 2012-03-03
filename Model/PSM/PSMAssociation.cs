@@ -33,7 +33,10 @@ namespace Exolutio.Model.PSM
             {
                 Parent.ChildPSMAssociations.Add(this);
             }
-            if (Child != null && setChildParentAssociation) Child.ParentAssociation = this;
+            if (Child != null && setChildParentAssociation)
+            {
+                Child.ParentAssociation = this;
+            }
             schema.PSMAssociations.Add(this);
         }
         public PSMAssociation(Project p, PSMAssociationMember parent, PSMAssociationMember child, int index, PSMSchema schema)
@@ -48,7 +51,7 @@ namespace Exolutio.Model.PSM
             if (Child != null) Child.ParentAssociation = this;
             schema.PSMAssociations.Add(this);
         }
-        public PSMAssociation(Project p, Guid g, PSMAssociationMember parent, PSMAssociationMember child, int index, PSMSchema schema)
+        public PSMAssociation(Project p, Guid g, PSMAssociationMember parent, PSMAssociationMember child, int index, PSMSchema schema, bool setChildParentAssociation = true)
             : base(p, g)
         {
             Parent = parent;
@@ -57,7 +60,10 @@ namespace Exolutio.Model.PSM
             {
                 Parent.ChildPSMAssociations.Insert(this, index);
             }
-            if (Child != null) Child.ParentAssociation = this;
+            if (Child != null && setChildParentAssociation)
+            {
+                Child.ParentAssociation = this;
+            }
             schema.PSMAssociations.Add(this);
         }
 
