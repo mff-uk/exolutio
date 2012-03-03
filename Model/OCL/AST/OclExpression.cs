@@ -41,5 +41,19 @@ namespace Exolutio.Model.OCL.AST
                 codeSource = value;
             }
         }
+
+
+        /// <summary>
+        /// True when the expression is the top-level expression in the invariant. 
+        /// The value is assigned manually, not by parsing. 
+        /// </summary>
+        public bool IsInvariant { get; set; }
+
+        /// <summary>
+        /// When <see cref="IsInvariant"/> == true, this property holds a reference 
+        /// to the containing constraint. 
+        /// The value is assigned manually, not by parsing.
+        /// </summary>
+        public ClassifierConstraint ClassifierConstraint { get; set; }
     }
 }

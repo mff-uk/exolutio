@@ -76,6 +76,8 @@ namespace Exolutio.View
                 {
                     foreach (PSMAssociation childAssociation in rootAM.ChildPSMAssociations)
                     {
+                        if (childAssociation.Child.ParentAssociation != childAssociation)
+                            continue;
                         right += DrawTree(psmDiagramView, (childAssociation).Child, top, right) + horizontalSpace;
                     }
                     if (rootAM is PSMClass) foreach (PSMGeneralization generalization in (rootAM as PSMClass).GeneralizationsAsGeneral)

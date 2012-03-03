@@ -757,9 +757,16 @@ namespace Exolutio.Model
                         }
 
                         IEnumerable<PSMComponent> psmChildren = GetPSMChildren(psmComponent, true);
-                        foreach (PSMComponent psmChild in psmChildren)
+                        foreach (PSMComponent psmChild in psmChildren)                        
                         {
-                            queue.Enqueue(psmChild);
+                            if (psmChild is PSMAssociationMember)
+                            {
+                                PSMAssociationMember psmChildAM = (PSMAssociationMember)psmChild;
+                                if (psmChildAM.ParentAssociation != null && psmChildAM.ParentAssociation.Parent == psmComponent)
+                                {
+                                    queue.Enqueue(psmChild);
+                                }
+                            }
                         }
                     }
                 }

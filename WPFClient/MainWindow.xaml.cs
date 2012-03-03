@@ -193,7 +193,7 @@ namespace Exolutio.WPFClient
 
         static void Current_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
-            if (e.Exception.Source == "Fluent")
+            if (e.Exception.Source == "Fluent" || e.Exception.Message.Contains("Dispatcher"))
             {
                 e.Handled = true;
                 return;

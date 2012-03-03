@@ -225,7 +225,7 @@
       <xsl:if test="$debug">
         <xsl:message>Iteration: <xsl:value-of select="."/>/<xsl:value-of select="count($collection)"
           /></xsl:message>
-        <xsl:message>Current: <xsl:value-of select="$collection[current()]"/>"/></xsl:message>
+        <xsl:message>Current: <xsl:copy-of select="$collection[current()]"/></xsl:message>
       </xsl:if>
       <xsl:next-iteration>
         <xsl:with-param name="acc" select="$body($collection[current()], $acc)"/>
@@ -399,9 +399,9 @@
     <doc:return>A member of <doc:i>collection</doc:i> satisfying <doc:i>body</doc:i>, if such an element
       exists, an empty sequence otherwise. </doc:return>
   </doc:doc>
-  <xsl:function name="oclX:any" as="item()">
+  <xsl:function name="oclX:any" as="item()*">
     <xsl:param name="collection" as="item()*"/>
-    <xsl:param name="body" as="function(item()) as item()"/>
+    <xsl:param name="body" as="function(item()) as xs:boolean"/>
 
     <xsl:variable name="satisfyingItems" as="item()*">
       <xsl:sequence
@@ -412,7 +412,7 @@
         }
         )"
       />
-    </xsl:variable>
+    </xsl:variable>    
     <xsl:sequence select="if (count($satisfyingItems) ge 1) then $satisfyingItems[1] else ()  "/>
   </xsl:function>
 
@@ -1215,6 +1215,27 @@
         <xsl:sequence select="deep-equal($item1, $item2)"/>
       </xsl:otherwise>
     </xsl:choose>
+  </xsl:function>
+  
+  <xsl:function name="oclX:oclEqual" as="xs:boolean">
+    <xsl:param name="collection1" as="item()*" />
+    <xsl:param name="collection2" as="item()*" />   
+    
+    <xsl:choose>
+      <xsl:when test="count($collection1) eq 0 and count($collection2) eq 0">
+        <xsl:sequence select="true()" />
+      </xsl:when>
+      
+      <xsl:when test="count($collection1) ne count($collection2)">
+        <xsl:sequence select="false()" />
+      </xsl:when>
+      
+      <xsl:otherwise>
+        <xsl:sequence select="every $index in 1 to count($collection1) satisfies 
+          oclXin:combined-eq($collection1[$index], $collection2[$index])"/> 
+      </xsl:otherwise>
+    </xsl:choose>
+    
   </xsl:function>
 
   <doc:doc>

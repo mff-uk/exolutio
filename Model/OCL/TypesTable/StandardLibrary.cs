@@ -215,14 +215,17 @@ namespace Exolutio.Model.OCL.TypesTable {
                 AddOperation(coll, "size", integer);
                 AddOperation(coll, "includes", boolean, coll.ElementType);
                 AddOperation(coll, "excludes", boolean, coll.ElementType);
-                AddOperation(coll, "count", coll.ElementType, coll.ElementType);
+                AddOperation(coll, "count", integer, coll.ElementType);
                 AddOperation(coll, "includesAll", boolean, coll);
                 AddOperation(coll, "excludesAll", boolean, coll);
                 AddOperation(coll, "isEmpty", boolean);
                 AddOperation(coll, "notEmpty", boolean);
                 //max,min,sum,product
 
-
+                //Added by J.M. 2.3.2012, should not be under CollectionType 
+                AddOperation(coll, "at", coll.ElementType, integer);
+                AddOperation(coll, "first", coll.ElementType);
+                AddOperation(coll, "last", coll.ElementType);
             });
         }
     }

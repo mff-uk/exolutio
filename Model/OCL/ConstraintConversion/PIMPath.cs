@@ -198,7 +198,7 @@ namespace Exolutio.Model.OCL.ConstraintConversion
         }
     }
 
-    public class PIMPathBuilder
+    public static class PIMPathBuilder
     {
         public static PIMPath BuildPIMPath(NavigationCallExp node)
         {

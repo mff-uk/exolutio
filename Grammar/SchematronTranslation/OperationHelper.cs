@@ -26,6 +26,10 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
         public PSMBridge PSMBridge { get; set; }
 
         private string xsdNamespacePrefix = "xs";
+        internal OperationInfo atOperationInfo;
+        internal OperationInfo firstOperationInfo;
+        internal OperationInfo lastOperationInfo;
+
         public string XsdNamespacePrefix
         {
             get { return xsdNamespacePrefix; }
@@ -72,7 +76,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "toUpperCase", XPathName = "upper-case", Arity = 1, CustomTranslateHandler = FunctionAtomicHandler });
             Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "toLowerCase", XPathName = "lower-case", Arity = 1, CustomTranslateHandler = FunctionAtomicHandler });
             Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "equalsIgnoreCase", XPathName = "oclString:equalsIgnoreCase", Arity = 2, CustomTranslateHandler = FunctionAtomicHandler });
-            Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "at", XPathName = "oclString:at", Arity = 2, CustomTranslateHandler = FunctionAtomicHandler });
+            Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "at", XPathName = "oclString:at", Arity = 2, CustomTranslateHandler = FunctionAtomicHandler, TypeDependent = true, ArgumentTypes = new[] { PSMBridge.TypesTable.Library.String, PSMBridge.TypesTable.Library.Integer }});
             Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "size", XPathName = "string-length", Arity = 1, CustomTranslateHandler = FunctionAtomicHandler, TypeDependent = true, ArgumentTypes = new[] { PSMBridge.TypesTable.Library.String }});
             Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "indexOf", XPathName = "oclString:indexOf", Arity = 2, CustomTranslateHandler = FunctionAtomicHandler, TypeDependent = true, ArgumentTypes = new[] { PSMBridge.TypesTable.Library.String, PSMBridge.TypesTable.Library.String} });
 
@@ -96,10 +100,13 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "append", XPathName = "oclX:append", Arity = 2, CustomTranslateHandler = FunctionAtomicHandler });
             Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "prepend", XPathName = "oclX:prepend", Arity = 2, CustomTranslateHandler = FunctionAtomicHandler });
             Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "insertAt", XPathName = "oclX:insertAt", Arity = 3, CustomTranslateHandler = FunctionAtomicHandler });
-            Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "at", XPathName = "oclX:at", Arity = 2, CustomTranslateHandler = FunctionAtomicHandler });
+            atOperationInfo = new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "at", XPathName = "oclX:at", Arity = 2, CustomTranslateHandler = FunctionAtomicHandler };
+            Add(atOperationInfo);
+            firstOperationInfo = new OperationInfo {Priority = -1, CanOmitDataCall = true, OclName = "first", XPathName = "oclX:first", Arity = 1, CustomTranslateHandler = FunctionAtomicHandler};
+            Add(firstOperationInfo);
+            lastOperationInfo = new OperationInfo {Priority = -1, CanOmitDataCall = true, OclName = "last", XPathName = "oclX:last", Arity = 1, CustomTranslateHandler = FunctionAtomicHandler};
+            Add(lastOperationInfo);
             Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "indexOf", XPathName = "oclX:indexOf", Arity = 2, CustomTranslateHandler = FunctionAtomicHandler });
-            Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "first", XPathName = "oclX:first", Arity = 1, CustomTranslateHandler = FunctionAtomicHandler });
-            Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "last", XPathName = "oclX:last", Arity = 1, CustomTranslateHandler = FunctionAtomicHandler });
             Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "reverse", XPathName = "reverse", Arity = 1, CustomTranslateHandler = FunctionAtomicHandler });
             Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "max", XPathName = "max", Arity = 1, CustomTranslateHandler = FunctionAtomicHandler, TypeDependent = true, ArgumentCondition = IsXPathNonAtomic });
             Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "min", XPathName = "min", Arity = 1, CustomTranslateHandler = FunctionAtomicHandler, TypeDependent = true, ArgumentCondition = IsXPathNonAtomic });
@@ -109,7 +116,6 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "subSequence", XPathName = "oclX:subSequence", Arity = 1, CustomTranslateHandler = FunctionAtomicHandler, TypeDependent = true, ArgumentCondition = IsXPathNonAtomic });
             Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "-", XPathName = "oclX:setMinus", Arity = 2, CustomTranslateHandler = FunctionAtomicHandler, TypeDependent = true, ArgumentCondition = IsXPathNonAtomic });
             Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "symmetricDifference", XPathName = "oclX:symmetricDifference", Arity = 2, CustomTranslateHandler = FunctionAtomicHandler, TypeDependent = true, ArgumentCondition = IsXPathNonAtomic });
-            
         }
 
         private string PrefixAtomicHandler(OperationCallExp operationExpression, OperationInfo operationInfo, OclExpression[] arguments)
@@ -315,7 +321,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             }
         }
 
-        private OperationInfo? LookupOperation(OperationCallExp operationExpression, OclExpression[] arguments)
+        public OperationInfo? LookupOperation(OperationCallExp operationExpression, OclExpression[] arguments)
         {
             Operation referredOperation = operationExpression.ReferredOperation;
             var nameMatch = this.Where(i => i.OclName == referredOperation.Name);
@@ -324,10 +330,11 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
                 Log.AddError(string.Format("Operation named {0} not found. ", referredOperation.Name), operationExpression);
                 return null;
             }
+            int argCountMinus1 = arguments.Count() - 1;
             var arityMatch = nameMatch.Where(i => i.Arity == arguments.Count());
             if (arityMatch.IsEmpty())
             {
-                Log.AddError(string.Format("Operation named {0} with {1} {2} not found. ", referredOperation.Name, arguments.Count(), arguments.Count() == 1 ? "argument" : "arguments"), operationExpression);
+                Log.AddError(string.Format("Operation named {0} with {1} {2} not found. ", referredOperation.Name, argCountMinus1, argCountMinus1 == 1 ? "argument" : "arguments"), operationExpression);
                 return null;
             }
 
@@ -337,7 +344,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
                     );
             if (typedArityMatch.Count() > 1)
             {
-                Log.AddError(string.Format("Call of operation {0} with {1} {2} is ambiguous. ", referredOperation.Name, arguments.Count(), arguments.Count() == 1 ? "argument" : "arguments"), operationExpression);
+                Log.AddError(string.Format("Call of operation {0} with {1} {2} is ambiguous. ", referredOperation.Name, argCountMinus1, argCountMinus1 == 1 ? "argument" : "arguments"), operationExpression);
                 return typedArityMatch.Single();
             }
 
@@ -349,13 +356,13 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             var untypedArityMatch = arityMatch.Where(i => !i.TypeDependent);
             if (untypedArityMatch.Count() > 1)
             {
-                Log.AddError(string.Format("Call of operation {0} with {1} {2} is ambiguous. ", referredOperation.Name, arguments.Count(), arguments.Count() == 1 ? "argument" : "arguments"), operationExpression);
+                Log.AddError(string.Format("Call of operation {0} with {1} {2} is ambiguous. ", referredOperation.Name, argCountMinus1, argCountMinus1 == 1 ? "argument" : "arguments"), operationExpression);
                 return typedArityMatch.Single();
             }
 
             if (untypedArityMatch.IsEmpty())
             {
-                Log.AddError(string.Format("Operation named {0} with {1} {2} not found. ", referredOperation.Name, arguments.Count(), arguments.Count() == 1 ? "argument" : "arguments"), operationExpression);
+                Log.AddError(string.Format("Operation named {0} with {1} {2} not found. ", referredOperation.Name, argCountMinus1, argCountMinus1 == 1 ? "argument" : "arguments"), operationExpression);
                 return null;
             }
 

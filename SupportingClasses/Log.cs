@@ -47,6 +47,7 @@ namespace Exolutio.SupportingClasses
 
 		public void AddLogMessage(LogMessage<TMessageTag> logMessage)
 		{
+            logMessage.Number = logMessage.Severity == ELogMessageSeverity.Error ? CountOfErrors + 1 : CountOfWarnings + 1;
 			base.Add(logMessage);
 		}
 
@@ -57,7 +58,7 @@ namespace Exolutio.SupportingClasses
 		/// <param name="tag">Tag of the created message</param>
 		public LogMessage<TMessageTag> AddError(string text, TMessageTag tag = default(TMessageTag))
 		{
-			LogMessage<TMessageTag> logMessage = new LogMessage<TMessageTag> { MessageText = text, Severity = ELogMessageSeverity.Error, Number = CountOfErrors, Tag = tag };
+			LogMessage<TMessageTag> logMessage = new LogMessage<TMessageTag> { MessageText = text, Severity = ELogMessageSeverity.Error, Number = CountOfErrors + 1, Tag = tag };
 			Add(logMessage);
 			return logMessage;
 		}
@@ -69,7 +70,7 @@ namespace Exolutio.SupportingClasses
 		/// <param name="tag">Tag of the created message</param>
 		public LogMessage<TMessageTag> AddWarning(string text, TMessageTag tag = default(TMessageTag))
 		{
-			LogMessage<TMessageTag> logMessage = new LogMessage<TMessageTag> { MessageText = text, Severity = ELogMessageSeverity.Warning, Number = CountOfWarnings, Tag = tag };
+			LogMessage<TMessageTag> logMessage = new LogMessage<TMessageTag> { MessageText = text, Severity = ELogMessageSeverity.Warning, Number = CountOfWarnings + 1, Tag = tag };
 			Add(logMessage);
 			return logMessage;
 		}
@@ -120,10 +121,11 @@ namespace Exolutio.SupportingClasses
 			return AddError(string.Format(format, args), tag);
 		}
 
-		public void Add(ILogMessage item)
+        public void Add(ILogMessage item)
 		{
 			if (item is LogMessage<TMessageTag>)
 			{
+			    item.Number = item.Severity == ELogMessageSeverity.Error ? CountOfErrors + 1 : CountOfWarnings + 1;
 				base.Add((LogMessage<TMessageTag>)item);
 			}
 			else
@@ -211,6 +213,7 @@ namespace Exolutio.SupportingClasses
 		{
 			if (item is LogMessage<TMessageTag>)
 			{
+                item.Number = item.Severity == ELogMessageSeverity.Error ? CountOfErrors + 1 : CountOfWarnings + 1;
 				base.Insert(index, (LogMessage<TMessageTag>)item);
 			}
 			else
