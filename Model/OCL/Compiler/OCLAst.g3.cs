@@ -128,7 +128,7 @@ namespace Exolutio.Model.OCL.Compiler {
                 Property property = expr.Type.LookupProperty(path[0]);
                 if (property != null) {
                     //36a
-                    return new AST.PropertyCallExp(expr, isPre, null, null, property)
+                    return CheckAmbiguous(new AST.PropertyCallExp(expr, isPre, null, null, property))
                         .SetCodeSource(new CodeSource(tokenPath[0]));
                 }
             }
@@ -148,7 +148,7 @@ namespace Exolutio.Model.OCL.Compiler {
             varList.Add(varDecl);
             AST.VariableExp localVar = new AST.VariableExp(varDecl)
                 .SetCodeSource(codeSource);
-            AST.PropertyCallExp localProp = new AST.PropertyCallExp(localVar, false, null, null, property)
+            AST.PropertyCallExp localProp = CheckAmbiguous(new AST.PropertyCallExp(localVar, false, null, null, property))
                 .SetCodeSource(codeSource);
             //Napevno zafixovany navratovy typ collect
             Classifier returnType = Library.CreateCollection(CollectionKind.Collection, property.Type);
@@ -308,7 +308,7 @@ namespace Exolutio.Model.OCL.Compiler {
                     // self problem
                     AST.VariableExp propertySource = new AST.VariableExp(implProperty.Source)
                         .SetCodeSource(codeSource);
-                    return new AST.PropertyCallExp(propertySource, isPre, null, null, implProperty.Property)
+                    return CheckAmbiguous(new AST.PropertyCallExp(propertySource, isPre, null, null, implProperty.Property))
                         .SetCodeSource(codeSource);
                 }
                 // chyby naky to pravidlo
@@ -706,6 +706,14 @@ namespace Exolutio.Model.OCL.Compiler {
                 return true;
             }
             return false;
-        }    
+        }
+
+        AST.PropertyCallExp CheckAmbiguous(AST.PropertyCallExp prop) {
+            if (prop.ReferredProperty.IsAmbiguous) {
+                Errors.AddError(new ErrorItem(String.Format(CompilerErrors.AmbiguousNavigation,
+                    prop.Source.Type.Name, prop.ReferredProperty.Name)));
+            }
+            return prop;
+        }
     }
 }

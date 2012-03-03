@@ -3,78 +3,74 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Exolutio.Model.OCL.SupportingClasses
-{
-    public class ActionDictionary<K,V>:IDictionary<K,V>
-    {
+namespace Exolutio.Model.OCL.SupportingClasses {
+    public class ActionDictionary<K, V> : IDictionary<K, V> {
 
-        protected Dictionary<K, V> Data=new Dictionary<K,V>();
+        protected Dictionary<K, V> Data = new Dictionary<K, V>();
 
-        protected virtual void OnPreDelete(K key)
-        {
+        protected virtual void OnPreDelete(K key) {
         }
 
-        protected virtual void OnPreAdd(K key, V value)
-        {
+        /// <summary>
+        /// Decides whether an element is added.
+        /// </summary>
+        /// <remarks>Default implementation returns true.</remarks>
+        /// <returns>True whether an element is added.</returns>
+        protected virtual bool IsToAdd(K key, V value) {
+            return true;
         }
 
-        protected virtual void OnAdded(K key, V value)
-        {
+        protected virtual void OnPreAdd(K key, V value) {
         }
 
-        protected virtual void OnPreSet(K key, V value)
-        {
+        protected virtual void OnAdded(K key, V value) {
         }
 
-        protected virtual void OnSet(K key, V value)
-        {
+        protected virtual void OnPreSet(K key, V value) {
+        }
+
+        protected virtual void OnSet(K key, V value) {
         }
 
         #region IDictionary<K,V> Members
 
-        public void Add(K key, V value)
-        {
+        public void Add(K key, V value) {
+            if (IsToAdd(key, value) == false) {
+                return;
+            }
             OnPreAdd(key, value);
             Data.Add(key, value);
             OnAdded(key, value);
         }
 
-        public bool ContainsKey(K key)
-        {
+        public bool ContainsKey(K key) {
             return Data.ContainsKey(key);
         }
 
-        public ICollection<K> Keys
-        {
+        public ICollection<K> Keys {
             get { return Data.Keys; }
         }
 
-        public bool Remove(K key)
-        {
+        public bool Remove(K key) {
             OnPreDelete(key);
             return Data.Remove(key);
         }
 
-        public bool TryGetValue(K key, out V value)
-        {
-            return  Data.TryGetValue(key, out value);
+        public bool TryGetValue(K key, out V value) {
+            return Data.TryGetValue(key, out value);
         }
 
-        public ICollection<V> Values
-        {
+        public ICollection<V> Values {
             get { return Data.Values; }
         }
 
-        public V this[K key]
-        {
-            get
-            {
+        public V this[K key] {
+            get {
                 return Data[key];
             }
-            set
-            {
+            set {
                 OnPreSet(key, value);
-                Data[key]=value;
+                Data[key] = value;
                 OnSet(key, value);
             }
         }
@@ -83,40 +79,33 @@ namespace Exolutio.Model.OCL.SupportingClasses
 
         #region ICollection<KeyValuePair<K,V>> Members
 
-        public void Add(KeyValuePair<K, V> item)
-        {
+        public void Add(KeyValuePair<K, V> item) {
             Add(item.Key, item.Value);
         }
 
-        public void Clear()
-        {
+        public void Clear() {
             foreach (K key in Data.Keys)
                 OnPreDelete(key);
             Data.Clear();
         }
 
-        public bool Contains(KeyValuePair<K, V> item)
-        {
+        public bool Contains(KeyValuePair<K, V> item) {
             return Data.Contains(item);
         }
 
-        public void CopyTo(KeyValuePair<K, V>[] array, int arrayIndex)
-        {
-            ((IDictionary<K, V>)Data).CopyTo(array,arrayIndex);
+        public void CopyTo(KeyValuePair<K, V>[] array, int arrayIndex) {
+            ((IDictionary<K, V>)Data).CopyTo(array, arrayIndex);
         }
 
-        public int Count
-        {
+        public int Count {
             get { return Data.Count; }
         }
 
-        public bool IsReadOnly
-        {
+        public bool IsReadOnly {
             get { return ((IDictionary<K, V>)Data).IsReadOnly; }
         }
 
-        public bool Remove(KeyValuePair<K, V> item)
-        {
+        public bool Remove(KeyValuePair<K, V> item) {
             Data.Remove(item.Key);
             return ((IDictionary<K, V>)Data).Remove(item);
         }
@@ -125,8 +114,7 @@ namespace Exolutio.Model.OCL.SupportingClasses
 
         #region IEnumerable<KeyValuePair<K,V>> Members
 
-        public IEnumerator<KeyValuePair<K, V>> GetEnumerator()
-        {
+        public IEnumerator<KeyValuePair<K, V>> GetEnumerator() {
             return Data.GetEnumerator();
         }
 
@@ -134,8 +122,7 @@ namespace Exolutio.Model.OCL.SupportingClasses
 
         #region IEnumerable Members
 
-        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-        {
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() {
             return Data.GetEnumerator();
         }
 

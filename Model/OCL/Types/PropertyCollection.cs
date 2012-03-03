@@ -15,6 +15,23 @@ namespace Exolutio.Model.OCL.Types
             this.owner = owner;
         }
 
+        protected override bool IsToAdd(string key, Property value) {
+            // is exist in collection
+            if (Data.ContainsKey(key) == false) {
+                return true;
+            }
+            if (Data[key].IsAmbiguous) {
+                return false; 
+            }
+            Data.Remove(key); // remove unambiguous property (one instance of Property class can be use more than one property - a property can have more than one name) 
+
+            Property ambProp = new Property(key, value.PropertyType, value.Type);
+            ambProp.MarkAsAmbigious();
+          
+            Add(ambProp); // add as ambigous
+            return false;
+        }
+
         protected override void OnAdded(string key, Property value)
         {
             value.Owner = owner;
@@ -67,61 +84,4 @@ namespace Exolutio.Model.OCL.Types
             return nameBuilder.ToString();
         }
     }
-
-    //public class PropertyCollection:ActionList<Property>
-    //{
-    //    protected Classifier owner;
-
-    //    internal PropertyCollection(Classifier owner)
-    //    {
-    //        this.owner = owner;
-    //    }
-
-    //    protected override void OnPreDelete(Property item)
-    //    {
-    //        throw new NotSupportedException();
-    //    }
-
-    //    protected override void OnPreSet(Property item)
-    //    {
-    //        throw new NotSupportedException();
-    //    }
-
-    //    protected override void OnPreAdd(Property item)
-    //    {
-    //        //typ neodlisuje dve property
-    //        if (Data.Any(i => i.Name == item.Name))
-    //            throw new Exception();
-    //    }
-
-    //    protected override void OnAdded(Property item)
-    //    {
-    //        item.Owner = owner;
-    //    }
-
-
-    //    public override string ToString()
-    //    {
-    //        StringBuilder nameBuilder = new StringBuilder("(");
-
-
-    //        bool isFirst = true;
-    //        foreach (var property in Data)
-    //        {
-    //            nameBuilder.AppendFormat("{0}:{1}", property.QualifiedName, property.Element.QualifiedName);
-
-    //            if (isFirst == false)
-    //                nameBuilder.Append(",");
-    //            else
-    //                isFirst = false;
-    //        }
-
-            
-
-    //        nameBuilder.Append(")");
-
-    //        return nameBuilder.ToString();
-    //    }
-
-    //}
 }

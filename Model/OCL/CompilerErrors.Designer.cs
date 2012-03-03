@@ -61,6 +61,15 @@ namespace Exolutio.Model.OCL {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Navigation {0}.{1} is ambiguous..
+        /// </summary>
+        internal static string AmbiguousNavigation {
+            get {
+                return ResourceManager.GetString("AmbiguousNavigation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nenalezena trida v ClassifierContextHeader.
         /// </summary>
         internal static string OCLAst_ClassifierContextHead_Nenalezena_trida_v_ClassifierContextHeader {

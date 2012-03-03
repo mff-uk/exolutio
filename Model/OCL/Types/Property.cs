@@ -3,37 +3,41 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Exolutio.Model.OCL.Types
-{
+namespace Exolutio.Model.OCL.Types {
     /// <summary>
     /// 
     /// It is immutable class(but owner will by able to changed)
     /// </summary>
-    public class Property:IModelElement,IHasOwner<Classifier>
-    {
+    public class Property : IModelElement, IHasOwner<Classifier> {
         protected readonly PropertyType propertyType;
-        virtual public PropertyType PropertyType
-        {
-            get{return propertyType;}
-         
+        virtual public PropertyType PropertyType {
+            get { return propertyType; }
+
         }
 
         protected readonly Classifier type;
-        virtual public Classifier Type
-        {
-            get{return type;}
-          
+        virtual public Classifier Type {
+            get {
+                if (isAmbigious && type != null) {
+                    return type.TypeTable.Library.Invalid;
+                }
+                return type;
+            }
+        }
+
+        protected bool isAmbigious = false;
+        public bool IsAmbiguous {
+            get {
+                return isAmbigious;
+            }
         }
 
         protected Classifier owner = null;
-        public virtual Classifier Owner
-        {
-            get
-            {
+        public virtual Classifier Owner {
+            get {
                 return owner;
             }
-            set
-            {
+            set {
                 if (owner != null && value != owner) {
                     throw new InvalidOperationException();
                 }
@@ -66,8 +70,12 @@ namespace Exolutio.Model.OCL.Types
             _QualifiedName = new Lazy<string>(() => GetQualifiedName(), true);
         }
 
-        private string GetQualifiedName(){
-            return String.Format("{0}.{1}",Owner.QualifiedName,Name);
+        private string GetQualifiedName() {
+            return String.Format("{0}.{1}", Owner.QualifiedName, Name);
+        }
+
+        internal void MarkAsAmbigious() {
+            isAmbigious = true;
         }
     }
 }
