@@ -1,191 +1,213 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-	<!-- 
-		Microsoft ResX Schema
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
 
-		Version 1.3
-
-		The primary goals of this format is to allow a simple XML format 
-		that is mostly human readable. The generation and parsing of the 
-		various data types are done through the TypeConverter classes 
-		associated with the data types.
-
-		Example:
-
-		... ado.net/XML headers & schema ...
-		<resheader name="resmimetype">text/microsoft-resx</resheader>
-		<resheader name="version">1.3</resheader>
-		<resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
-		<resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
-		<data name="Name1">this is my long string</data>
-		<data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
-		<data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
-			[base64 mime encoded serialized .NET Framework object]
-		</data>
-		<data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-			[base64 mime encoded string representing a byte array form of the .NET Framework object]
-		</data>
-
-		There are any number of "resheader" rows that contain simple 
-		name/value pairs.
-
-		Each data row contains a name, and value. The row also contains a 
-		type or mimetype. Type corresponds to a .NET class that support 
-		text/value conversion through the TypeConverter architecture. 
-		Classes that don't support this are serialized and stored with the 
-		mimetype set.
-
-		The mimetype is used for serialized objects, and tells the 
-		ResXResourceReader how to depersist the object. This is currently not 
-		extensible. For a given mimetype the value must be set accordingly:
-
-		Note - application/x-microsoft.net.object.binary.base64 is the format 
-		that the ResXResourceWriter will generate, however the reader can 
-		read any of the formats listed below.
-
-		mimetype: application/x-microsoft.net.object.binary.base64
-		value   : The object must be serialized with 
-			: System.Serialization.Formatters.Binary.BinaryFormatter
-			: and then encoded with base64 encoding.
-
-		mimetype: application/x-microsoft.net.object.soap.base64
-		value   : The object must be serialized with 
-			: System.Runtime.Serialization.Formatters.Soap.SoapFormatter
-			: and then encoded with base64 encoding.
-
-		mimetype: application/x-microsoft.net.object.bytearray.base64
-		value   : The object must be serialized into a byte array 
-			: using a System.ComponentModel.TypeConverter
-			: and then encoded with base64 encoding.
-	-->
-	
-	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-		<xsd:element name="root" msdata:IsDataSet="true">
-			<xsd:complexType>
-				<xsd:choice maxOccurs="unbounded">
-					<xsd:element name="data">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-							</xsd:sequence>
-							<xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
-							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-						</xsd:complexType>
-					</xsd:element>
-					<xsd:element name="resheader">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-							</xsd:sequence>
-							<xsd:attribute name="name" type="xsd:string" use="required" />
-						</xsd:complexType>
-					</xsd:element>
-				</xsd:choice>
-			</xsd:complexType>
-		</xsd:element>
-	</xsd:schema>
-	<resheader name="resmimetype">
-		<value>text/microsoft-resx</value>
-	</resheader>
-	<resheader name="version">
-		<value>1.3</value>
-	</resheader>
-	<resheader name="reader">
-		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
-	<resheader name="writer">
-		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
-  <data name="OCLAst_ClassifierContextHead_Nenalezena_trida_v_ClassifierContextHeader">
-    <value xml:space="preserve">Nenalezena trida v ClassifierContextHeader</value>
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="OCLAst_ClassifierContextHead_Nenalezena_trida_v_ClassifierContextHeader" xml:space="preserve">
+    <value>Nenalezena trida v ClassifierContextHeader</value>
   </data>
-  <data name="OCLAst_InfixOperation_NotDefined">
-    <value xml:space="preserve">On type `{0}` is not defined operation `{1}`.</value>
+  <data name="OCLAst_InfixOperation_NotDefined" xml:space="preserve">
+    <value>On type `{0}` is not defined operation `{1}`.</value>
   </data>
-  <data name="OCLAst_ProcessPropertyCall_PropertyNotExists">
-    <value xml:space="preserve">Property `{0}` does not exit.</value>
+  <data name="OCLAst_ProcessPropertyCall_PropertyNotExists" xml:space="preserve">
+    <value>Property `{0}` does not exit.</value>
   </data>
-  <data name="OCLAst_ProcessOperationCall_OperationNotExists">
-    <value xml:space="preserve">Operation `{0}` does not exit.</value>
+  <data name="OCLAst_ProcessOperationCall_OperationNotExists" xml:space="preserve">
+    <value>Operation `{0}` does not exit.</value>
   </data>
-  <data name="OCLAst_ProcessIteratorCall_Unknow_iterator_operation">
-    <value xml:space="preserve">Unknow iterator operation.</value>
+  <data name="OCLAst_ProcessIteratorCall_Unknow_iterator_operation" xml:space="preserve">
+    <value>Unknow iterator operation.</value>
   </data>
-  <data name="OCLAst_ProcessIteratorCall_Iterator_ma_jenom_jedno_tělo_výrazu">
-    <value xml:space="preserve">Iterator ma jenom jedno tělo výrazu.</value>
+  <data name="OCLAst_ProcessIteratorCall_Iterator_ma_jenom_jedno_tělo_výrazu" xml:space="preserve">
+    <value>Iterator ma jenom jedno tělo výrazu.</value>
   </data>
-  <data name="OCLAst_ProcessIteratorCall_Nesedi_typy_v_body">
-    <value xml:space="preserve">Nesedi typy v body</value>
+  <data name="OCLAst_ProcessIteratorCall_Nesedi_typy_v_body" xml:space="preserve">
+    <value>Nesedi typy v body</value>
   </data>
-  <data name="OCLAst_ProcessIteratorCall_Bad_iterator_operation">
-    <value xml:space="preserve">Bad iterator operation.</value>
+  <data name="OCLAst_ProcessIteratorCall_Bad_iterator_operation" xml:space="preserve">
+    <value>Bad iterator operation.</value>
   </data>
-  <data name="OCLAst_ProcessCollectionOperationCall_Unknown_collection_operation">
-    <value xml:space="preserve">Unknown collection operation - {0}</value>
+  <data name="OCLAst_ProcessCollectionOperationCall_Unknown_collection_operation" xml:space="preserve">
+    <value>Unknown collection operation - {0}</value>
   </data>
-  <data name="OCLAst_ResolvePath_Modifikator__pre_se_nepojí_s_proměnou">
-    <value xml:space="preserve">Modifikator @pre se nepojí s proměnou</value>
+  <data name="OCLAst_ResolvePath_Modifikator__pre_se_nepojí_s_proměnou" xml:space="preserve">
+    <value>Modifikator @pre se nepojí s proměnou</value>
   </data>
-  <data name="OCLAst_ResolvePath_Modifikator__pre_se_nepoji_s_promenou">
-    <value xml:space="preserve">Modifikator @pre se nepojí s proměnou</value>
+  <data name="OCLAst_ResolvePath_Modifikator__pre_se_nepoji_s_promenou" xml:space="preserve">
+    <value>Modifikator @pre se nepojí s proměnou</value>
   </data>
-  <data name="OCLAst_ResolvePath_Chyba_nebo_nepodporovane_pravidlo">
-    <value xml:space="preserve">Chyba nebo nepodporovane pravidlo</value>
+  <data name="OCLAst_ResolvePath_Chyba_nebo_nepodporovane_pravidlo" xml:space="preserve">
+    <value>Chyba nebo nepodporovane pravidlo</value>
   </data>
-  <data name="OCLAst_ResolveImplicitOperation">
-    <value xml:space="preserve">Operace `{0}` nenalezena.</value>
+  <data name="OCLAst_ResolveImplicitOperation" xml:space="preserve">
+    <value>Operace `{0}` nenalezena.</value>
   </data>
-  <data name="OCLAst_ResolveImplicitOperation_OperaceNenalezena">
-    <value xml:space="preserve">Operace `{0}` nenalezena.</value>
+  <data name="OCLAst_ResolveImplicitOperation_OperaceNenalezena" xml:space="preserve">
+    <value>Operace `{0}` nenalezena.</value>
   </data>
-  <data name="OCLAst_CreateIntegerLiteral_Bad_format_of_integer">
-    <value xml:space="preserve">Bad format of integer.</value>
+  <data name="OCLAst_CreateIntegerLiteral_Bad_format_of_integer" xml:space="preserve">
+    <value>Bad format of integer.</value>
   </data>
-  <data name="OCLAst_CreateIntegerLiteral_Number__0__is_overflow_">
-    <value xml:space="preserve">Number {0} is overflow.</value>
+  <data name="OCLAst_CreateIntegerLiteral_Number__0__is_overflow_" xml:space="preserve">
+    <value>Number {0} is overflow.</value>
   </data>
-  <data name="OCLAst_CreateRealLiteral_Bad_format_of_real">
-    <value xml:space="preserve">Bad format of real.</value>
+  <data name="OCLAst_CreateRealLiteral_Bad_format_of_real" xml:space="preserve">
+    <value>Bad format of real.</value>
   </data>
-  <data name="OCLAst_CollectionLiteralExp_CollectionIsAbstract">
-    <value xml:space="preserve">‘Collection’ is an abstract class on the M1 level and has no M0 instances.</value>
+  <data name="OCLAst_CollectionLiteralExp_CollectionIsAbstract" xml:space="preserve">
+    <value>‘Collection’ is an abstract class on the M1 level and has no M0 instances.</value>
   </data>
-  <data name="OCLAst_CollectionLiteralExp_Incorrects_mishmash_type_in_collection_literal">
-    <value xml:space="preserve">Incorrects mishmash type in collection literal.</value>
+  <data name="OCLAst_CollectionLiteralExp_Incorrects_mishmash_type_in_collection_literal" xml:space="preserve">
+    <value>Incorrects mishmash type in collection literal.</value>
   </data>
-  <data name="OCLAst_CreateTupleLiteral_Name__0__is_used_multipled">
-    <value xml:space="preserve">Name {0} is used multipled.</value>
+  <data name="OCLAst_CreateTupleLiteral_Name__0__is_used_multipled" xml:space="preserve">
+    <value>Name {0} is used multipled.</value>
   </data>
-  <data name="OCLAst_CreateTupleLiteral_Type_does_not_comform_to_declared_type">
-    <value xml:space="preserve">Type does not comform to declared type.</value>
+  <data name="OCLAst_CreateTupleLiteral_Type_does_not_comform_to_declared_type" xml:space="preserve">
+    <value>Type does not comform to declared type.</value>
   </data>
-  <data name="OCLAst_ResolveTypePathName_Path__0__do_not_exists">
-    <value xml:space="preserve">Path {0} do not exists.</value>
+  <data name="OCLAst_ResolveTypePathName_Path__0__do_not_exists" xml:space="preserve">
+    <value>Path {0} do not exists.</value>
   </data>
-  <data name="OCLAst_ResolveTypePathName_Path__0__do_not_referres_type">
-    <value xml:space="preserve">Path {0} do not referres type.</value>
+  <data name="OCLAst_ResolveTypePathName_Path__0__do_not_referres_type" xml:space="preserve">
+    <value>Path {0} do not referres type.</value>
   </data>
-  <data name="OCLAst_ProcessAccDef_Init_value_do_not_conform_to_variable_type">
-    <value xml:space="preserve">Init value do not conform to variable type.</value>
+  <data name="OCLAst_ProcessAccDef_Init_value_do_not_conform_to_variable_type" xml:space="preserve">
+    <value>Init value do not conform to variable type.</value>
   </data>
-  <data name="OCLAst_LetDecl_The_variable_name_must_be_unique_in_the_current_scope">
-    <value xml:space="preserve">The variable name must be unique in the current scope</value>
+  <data name="OCLAst_LetDecl_The_variable_name_must_be_unique_in_the_current_scope" xml:space="preserve">
+    <value>The variable name must be unique in the current scope</value>
   </data>
-  <data name="OCLAst_LetDecl_Variable_type_does_not_conform_to_variable_expression_type">
-    <value xml:space="preserve">Variable type does not conform to variable expression type.</value>
+  <data name="OCLAst_LetDecl_Variable_type_does_not_conform_to_variable_expression_type" xml:space="preserve">
+    <value>Variable type does not conform to variable expression type.</value>
   </data>
-  <data name="OCLAst_CreateIf_Condition_of_IF_must_conform_to_bool">
-    <value xml:space="preserve">Condition of IF must conform to bool.</value>
+  <data name="OCLAst_CreateIf_Condition_of_IF_must_conform_to_bool" xml:space="preserve">
+    <value>Condition of IF must conform to bool.</value>
   </data>
-  <data name="OCLAst_TestNull_Compiler_panic_in_method__0__">
-    <value xml:space="preserve">Compiler panic in method {0}.</value>
+  <data name="OCLAst_TestNull_Compiler_panic_in_method__0__" xml:space="preserve">
+    <value>Compiler panic in method {0}.</value>
   </data>
-  <data name="OCLAst_ProcessIteratorCall_Compiler_don_t_support_iterator_operations_on_not_collection_type">
-    <value xml:space="preserve">Compiler don't support iterator operations on not-collection type.</value>
+  <data name="OCLAst_ProcessIteratorCall_Compiler_don_t_support_iterator_operations_on_not_collection_type" xml:space="preserve">
+    <value>Compiler don't support iterator operations on not-collection type.</value>
   </data>
-  <data name="VariableAlreadyExisted">
-    <value xml:space="preserve">Variable name `{0}` has already existed.</value>
+  <data name="VariableAlreadyExisted" xml:space="preserve">
+    <value>Variable name `{0}` has already existed.</value>
+  </data>
+  <data name="AmbiguousNavigation" xml:space="preserve">
+    <value>Navigation {0}.{1} is ambiguous.</value>
   </data>
 </root>
