@@ -21,6 +21,8 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
 
         private Guid childGuid = Guid.Empty;
 
+        private bool isNonTreeAssociation; 
+
         int index;
 
         public acmdDeletePSMAssociation(Controller c, Guid psmAssociation)
@@ -85,11 +87,17 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
                 parentGuid = a.Parent;
             }
             //else throw new ExolutioCommandException("Deleted association " + a.ToString() + " had null Parent", this);
+
+            isNonTreeAssociation = a.Child.ParentAssociation != a;
+            
             if (a.Child != null)
             {
-                a.Child.ParentAssociation = null;
                 childGuid = a.Child;
-                s.Roots.Add(a.Child);
+                if (!isNonTreeAssociation)
+                {
+                    a.Child.ParentAssociation = null;
+                    s.Roots.Add(a.Child);
+                }
             }
             //else throw new ExolutioCommandException("Deleted association " + a.ToString() + " had null Child", this);
 
@@ -112,7 +120,7 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
                 parentGuid == Guid.Empty ? null : Project.TranslateComponent<PSMAssociationMember>(parentGuid),
                 childGuid == Guid.Empty ? null : Project.TranslateComponent<PSMAssociationMember>(childGuid),
                 index,
-                Project.TranslateComponent<PSMSchema>(schemaGuid)
+                Project.TranslateComponent<PSMSchema>(schemaGuid), setChildParentAssociation: !isNonTreeAssociation
                 ) { Interpretation = interpretation == Guid.Empty ? null : Project.TranslateComponent<PIMComponent>(interpretation) };
 
             return OperationResult.OK;

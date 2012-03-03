@@ -318,13 +318,14 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
         {
             if (System.Environment.MachineName.Contains("TRUPIK"))
             {
-                predefinedIteratorExpressionRewritings.Add("forAll", AddForAllOptions);
-                predefinedIteratorExpressionRewritings.Add("exists", AddExistsOptions);
-                predefinedIteratorExpressionRewritings.Add("collect", AddCollectOptions);
-                predefinedIteratorExpressionRewritings.Add("select", AddSelectOptions);
-                predefinedIteratorExpressionRewritings.Add("reject", AddRejectOptions);
-                predefinedIteratorExpressionRewritings.Add("one", AddOneOptions);
-                predefinedIteratorExpressionRewritings.Add("any", AddAnyOptions);
+                PredefinedIteratorExpressionRewritings.Add("forAll", AddForAllOptions);
+                PredefinedIteratorExpressionRewritings.Add("exists", AddExistsOptions);
+                PredefinedIteratorExpressionRewritings.Add("collect", AddCollectOptions);
+                PredefinedIteratorExpressionRewritings.Add("select", AddSelectOptions);
+                PredefinedIteratorExpressionRewritings.Add("reject", AddRejectOptions);
+                PredefinedIteratorExpressionRewritings.Add("one", AddOneOptions);
+                PredefinedIteratorExpressionRewritings.Add("any", AddAnyOptions);
+                PredefinedIteratorExpressionRewritings.Add("closure", AddClosureOptions);
             }
         }
 
@@ -519,6 +520,33 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
                         TranslationOption option2 = new TranslationOption();
                         option2.FormatString = string.Format("{{0}}{0}", path.ToXPath(withoutFirstStep: true));
                         SubexpressionTranslations.AddTranslationOption(node, option2);
+                    }
+                }
+            }
+        }
+
+        private void AddClosureOptions(IteratorExp node)
+        {
+            if (node.Iterator.Count == 1)
+            {
+                if (node.Body is PropertyCallExp)
+                {
+                    PSMPath path = PSMPathBuilder.BuildPSMPath((PropertyCallExp)node.Body, OclContext, VariableNamer,
+                                                               TupleLiteralToXPath, GenericExpressionLiteralToXPath);
+                    
+                    // oclX:closure(departments/department, function($c) { $c/subdepartments/department })/name
+                    //              departments/department/descendant-or-self::department
+                    /*
+                     * departments/department + /subdepartments/department
+                     */                     
+                    if (PathsJoinable(path, node) && path.IsDownwards && path.Steps.Count > 0)
+                    {
+                        TranslationOption descendantOption = new TranslationOption();
+                        string lastStep = path.Steps.Last().ToXPath();
+                        if (lastStep.StartsWith("/")) 
+                            lastStep = lastStep.Substring(1);
+                        descendantOption.FormatString = string.Format("{{0}}/descendant-or-self::{0}", lastStep);
+                        SubexpressionTranslations.AddTranslationOption(node, descendantOption);
                     }
                 }
             }

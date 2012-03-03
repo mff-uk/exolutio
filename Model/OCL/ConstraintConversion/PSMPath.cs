@@ -83,7 +83,33 @@ namespace Exolutio.Model.OCL.ConstraintConversion
             }
         }
 
-
+        /// <summary>
+        /// Returns true when the path contains only association and attribute steps 
+        /// and all associations are traversed from the top to the bottom. 
+        /// </summary>
+        public bool IsDownwards
+        {
+            get 
+            {
+                foreach (PSMPathStep psmPathStep in Steps.Skip(1))
+                {
+                    if (psmPathStep is PSMPathAssociationStep)
+                    {
+                        if (((PSMPathAssociationStep)psmPathStep).IsUp)
+                        {
+                            return false; 
+                        }
+                    }
+                    if (psmPathStep is PSMPathAttributeStep)
+                    {
+                        continue;
+                    }
+                    return false;
+                }
+                return true; 
+            }
+        }
+        
         public override string ToString()
         {
             return Steps.ConcatWithSeparator(@".");
