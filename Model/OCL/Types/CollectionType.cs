@@ -161,12 +161,12 @@ namespace Exolutio.Model.OCL.Types {
                             return bag;
                         }
                     }
-                    , (s, b, t) => {
-                        if (b is CollectionType) {
-                            return ((CollectionType)b).ElementType;
+                    , (s, b, t) => { // TODO revise
+                        if (b is CollectionType && ((CollectionType)b).ElementType.ConformsTo(s.ElementType)) {
+                            return (CollectionType)b;
                         }
                         else {
-                            return b;
+                            return s.ElementType;
                         }
                     });
 
