@@ -68,6 +68,7 @@ namespace Exolutio.Model.ViewHelper
             PSMAssociationViewHelper copyAssociationViewHelper = (PSMAssociationViewHelper)copyComponent;
 
             MainLabelViewHelper.FillCopy(copyAssociationViewHelper.MainLabelViewHelper, projectVersion, createdCopies);
+            CardinalityLabelViewHelper.FillCopy(copyAssociationViewHelper.CardinalityLabelViewHelper, projectVersion, createdCopies);
         }
 
         public override void Serialize(XElement parentNode, Serialization.SerializationContext context)
