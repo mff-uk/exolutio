@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tournamentApplication
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"   
+  xsi:noNamespaceSchemaLocation="TournamentApplication.xsd">
+  <name>Springfield Open</name>
+  <requiredQualificationPoints>21</requiredQualificationPoints>
+  <player>
+    <points>24</points>
+    <regNo>002</regNo>
+    <name>John Smith</name>
+    <playerLeague>
+      <name>Springfield League</name>
+    </playerLeague>
+  </player>
+  <tournamentLeague>
+    <name>Springfield League</name>
+  </tournamentLeague>
+</tournamentApplication>

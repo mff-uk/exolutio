@@ -1,0 +1,36 @@
+<tournaments
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"   
+  
+  >
+  <!--xsi:noNamespaceSchemaLocation="TournamentsSchedule.xsd"-->
+  <tournament>
+    <name>West PRO</name>
+    <start>2012-01-01</start>
+    <end>2012-01-07</end>
+    <maxNumPlayers>12</maxNumPlayers>
+    <qualification leagueName="Pro-league" open="true"/>
+  </tournament>
+  <tournament>
+    <name>West Open</name>
+    <start>2012-02-01</start>
+    <end>2012-02-07</end>
+    <requiredQualificationPoints>2</requiredQualificationPoints>
+    <maxNumPlayers>24</maxNumPlayers>
+    <qualification open="true" />
+  </tournament>
+  <tournament>
+    <name>South PRO</name>
+    <start>2012-03-01</start>
+    <end>2012-03-07</end>
+    <maxNumPlayers>12</maxNumPlayers>
+    <qualification leagueName="Pro-league" open="true"/>
+  </tournament>
+  <tournament>
+    <name>South Open</name>
+    <start>2012-04-01</start>
+    <end>2012-04-07</end>
+    <requiredQualificationPoints>4</requiredQualificationPoints>
+    <maxNumPlayers>24</maxNumPlayers>
+    <qualification open="true" />
+  </tournament>
+</tournaments>
