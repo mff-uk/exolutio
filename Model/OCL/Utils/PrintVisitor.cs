@@ -151,7 +151,10 @@ namespace Exolutio.Model.OCL.Utils {
 
             // Other choice - dot format
             node.Source.Accept(this);
-            sb.Append(".");
+            if (node.Source.Type is CollectionType)
+                sb.Append("->");
+            else
+                sb.Append(".");
 
 
             sb.Append(node.ReferredOperation.Name);

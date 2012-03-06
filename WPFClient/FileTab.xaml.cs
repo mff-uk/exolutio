@@ -40,6 +40,8 @@ namespace Exolutio.WPFClient
         public FileTab()
         {
             InitializeComponent();
+
+            columnAdditional.Width = new GridLength(0, GridUnitType.Pixel);
         }
 
         public string FileName { get; set; }
@@ -102,6 +104,7 @@ namespace Exolutio.WPFClient
             tabItem.Content = contentControl;
             tcAdditional.Items.Add(tabItem);
             tcAdditional.Visibility = Visibility.Visible;
+            columnAdditional.Width = new GridLength(1, GridUnitType.Star);
         }
 
         private void ShowHideRelevantButtons()

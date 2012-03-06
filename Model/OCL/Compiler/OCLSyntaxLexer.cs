@@ -17,7 +17,6 @@
 
     using System.Collections.Generic;
 
-using System.Collections.Generic;
 using Antlr.Runtime;
 
 namespace Exolutio.Model.OCL.Compiler

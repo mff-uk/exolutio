@@ -116,6 +116,11 @@ namespace Exolutio.Model.PSM
             }
         }
 
+        public bool IsNonTreeAssociation
+        {
+            get { return Child != null && Child.ParentAssociation != this; }
+        }
+
         public override string XPath
         {
             get { return string.Format("{0}{1}", Parent.XPath, !string.IsNullOrEmpty(this.Name) && !(this.Child is PSMContentModel) ? "/" + this.Name : string.Empty); }

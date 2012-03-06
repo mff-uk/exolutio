@@ -100,11 +100,14 @@ namespace Exolutio.Model.OCL.ConstraintConversion
                             return false; 
                         }
                     }
-                    if (psmPathStep is PSMPathAttributeStep)
+                    else if (psmPathStep is PSMPathAttributeStep)
                     {
                         continue;
                     }
-                    return false;
+                    else
+                    {
+                        return false; 
+                    }
                 }
                 return true; 
             }
