@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:saxon="http://saxon.sf.net/"
-  xmlns:oclX="http://eXolutio.com/oclX/dynamic"
-  xmlns:oclXin="http://eXolutio.com/oclX/dynamic/internal"
+  xmlns:oclX="http://eXolutio.com/oclX/functional"
+  xmlns:oclXin="http://eXolutio.com/oclX/functional/internal"
   xmlns:map="http://www.w3.org/2005/xpath-functions/map" 
   xmlns:math="http://www.w3.org/2005/xpath-functions/math"
+  xmlns:xdt="http://www.w3.org/2005/02/xpath-datatypes"
   exclude-result-prefixes="saxon xs oclX map math"
   version="3.0">
   
-  <xsl:import href="../oclX-dynamic-internal.xsl" />
+  <xsl:import href="../oclX-functional.xsl" />
   
+  <xsl:param name="debug" as="xs:boolean" select="true()"/>
   <!--
   <saxon:import-query 
     href="play.xq" 
     namespace="http://eXolutio.com/oclX/dynamic" 
   />-->
-
+<!--
   <xsl:function name="oclX:forAllPrev" as="xs:boolean">
-    <!--$collection as item()*,-->
+    <!-\-$collection as item()*,-\->
     <xsl:param name="collection" as="item()*"/>
     <xsl:param name="body" as="function(item()) as xs:boolean"/>
     <xsl:param name="variables" as="item()*"/>
@@ -26,7 +28,7 @@
   </xsl:function>
 
   <xsl:function name="oclX:forAllM" as="xs:boolean">
-    <!--$collection as item()*,-->
+    <!-\-$collection as item()*,-\->
     <xsl:param name="collection" as="item()*"/>
     <xsl:param name="iterationVariable" as="xs:string"/>
     <xsl:param name="body" as="function(item(), map(*)) as xs:boolean"/>
@@ -45,7 +47,7 @@
   </xsl:function>
 
   <xsl:function name="oclX:forAllM2" as="xs:boolean">
-    <!--$collection as item()*,-->
+    <!-\-$collection as item()*,-\->
     <xsl:param name="collection" as="item()*"/>
     <xsl:param name="iterationVariable" as="xs:string"/>
     <xsl:param name="body" as="function(item(), map(*)) as xs:boolean"/>
@@ -62,16 +64,16 @@
       satisfies $body($it, map:new(($v, map {$iterationVariable := $it}))) "/>
     <xsl:message><xsl:copy-of select="'out 2'"/></xsl:message>
   </xsl:function>
-  
-  <xsl:function name="oclX:forAll" as="xs:boolean">
-    <!--$collection as item()*,-->
+  -->
+  <!--<xsl:function name="oclX:forAll" as="xs:boolean">
+    <!-\-$collection as item()*,-\->
     <xsl:param name="collection" as="item()*"/>
     <xsl:param name="body" as="function(*)"/>
     
     <xsl:variable name="iteratorCount" select="function-arity($body)" as="xs:integer" />
        
     <xsl:iterate select="1 to xs:integer(math:pow(count($collection), $iteratorCount))">
-      <!-- expect true --> 
+      <!-\- expect true -\-> 
       <xsl:param name="satisfied" as="xs:boolean" select="true()" />
       
       <xsl:message>Iteration: <xsl:value-of select="."/></xsl:message>
@@ -109,33 +111,46 @@
         <xsl:sequence select="$satisfied" />
       </xsl:on-completion>
     </xsl:iterate>    
-  </xsl:function>
+  </xsl:function>--><!--
 
   <xsl:function name="oclX:forAll1" as="xs:boolean">
-    <!--$collection as item()*,-->
+    <!-\-$collection as item()*,-\->
     <xsl:param name="collection" as="item()*"/>
     <xsl:param name="body" as="function(item()) as xs:boolean"/>
     <xsl:sequence select="every $it in $collection satisfies $body($it) "/>
   </xsl:function>
-
+-->
   <xsl:output indent="yes"/>
   
+  <xsl:function name="oclXin:mapPrint">
+    <xsl:param name="m" />
+    
+    <xsl:for-each select="map:keys($m)">
+      <xsl:copy-of select="current()" />
+      <xsl:text> := </xsl:text>
+      <xsl:copy-of select="($m)(current())"/>
+    </xsl:for-each>
+    
+  </xsl:function>
+  
   <xsl:template match="/">
-    <!--<xsl:value-of select="oclX:inc(13)"/>-->
-    <!--<xsl:value-of select="oclX:forAll((4,5,6),function($it as item()) as xs:boolean { $it > 3 },())"/>-->
-    <xsl:variable name="c">
-      <n>1</n>
-      <n>2</n>
-      <n>3</n>
-      <n>4</n>
-    </xsl:variable>
+    <!--<xsl:variable name="v" select="map{ 'a' := (1,2,3), 'b' := (3,2,1) }, map{'a' := (6,6,6) } " />
     
+    <xsl:for-each select="$v">
+      <xsl:copy-of select="oclXin:mapPrint(.)" />  
+    </xsl:for-each>-->
     
-    <!--<xsl:value-of select="oclX:forAll1($c/n, function($x) { xs:integer($x) ge 5 })"/>-->
+    <xsl:for-each select="oclX:groupBy(//b, function($b) { xs:string($b/c) })" >
+      <xsl:text>{ </xsl:text>
+      <xsl:copy-of select="oclXin:mapPrint(.)" />
+      <xsl:text> }</xsl:text>
+    </xsl:for-each>
     
-    <xsl:value-of select="oclX:forAll($c/n, function($x, $y) { if ($x is $y) then true() else $x ne $y })"/>
-    
-    
+    <!--
+    <xsl:copy-of select=" let $self := //tournaments return
+      oclX:any($self/tournament, function($t) { xs:boolean($t/qualification/@open ) })
+    "></xsl:copy-of>
+    -->
     
     <!--<xsl:value-of select="oclX:forAll1($c/n, function($x) { xs:integer($x) ge 5 })"/>-->
     <!--<xsl:value-of select="
@@ -160,13 +175,6 @@
     <!--<xsl:value-of select="(map { 'f':= 'x', 1 := 'aaa'})('f')" />-->
 
   </xsl:template>
-
-  <xsl:function name="oclX:ss" >
-    <xsl:param name="par" />
-    <xsl:value-of select="$par" />
-  </xsl:function>
-  
-  
 
   <!--  <xsl:template match="/">
      <xsl:copy-of select="/aa/b/oclX:foo(.)"/>
