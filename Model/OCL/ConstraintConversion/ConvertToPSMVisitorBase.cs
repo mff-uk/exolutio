@@ -99,6 +99,7 @@ namespace Exolutio.Model.OCL.ConstraintConversion
             return result;
         }
 
+        private bool allowNonTree = true; 
         private bool FindNavigationsForPIMNavigationRecursive(PIMPath pimPath, int stepIndex, PSMAssociationMember currentMember, PSMPath builtPath, bool canGoToParent, ref List<PSMPath> result, PSMAssociation associationUsedAlready)
         {
             if (stepIndex == pimPath.Steps.Count)
@@ -112,8 +113,13 @@ namespace Exolutio.Model.OCL.ConstraintConversion
             {
                 Debug.Assert(currentMember != null);
                 PIMPathAssociationStep nextStep = (PIMPathAssociationStep)currentStep;
-                List<PSMAssociationMember> candidates = currentMember.ChildPSMAssociations.Select(a => a.Child).ToList();
-                List<PSMAssociation> candidatesAssociations = currentMember.ChildPSMAssociations.ToList();
+                List<PSMAssociationMember> candidates = currentMember.ChildPSMAssociations.Where(a => allowNonTree || !a.IsNonTreeAssociation).Select(a => a.Child).ToList();
+                /* 
+                 * we forbid non-tree associations for now,
+                 * it certainly makes thinks easier and I am not sure 
+                 * whether it is really a restriction
+                 */ 
+                List<PSMAssociation> candidatesAssociations = currentMember.ChildPSMAssociations.Where(a => allowNonTree || !a.IsNonTreeAssociation).ToList();
                 PSMAssociationMember parent = currentMember.ParentAssociation.Parent;
 
                 if (canGoToParent && !(parent is PSMSchemaClass))
@@ -143,14 +149,14 @@ namespace Exolutio.Model.OCL.ConstraintConversion
                 {
                     PSMAssociationMember candidate = candidates[index];
                     PSMAssociation candidateAssociation = candidatesAssociations[index];
-                    bool parentStep = candidate == parent;
+                    bool parentStep = candidate == parent && !candidateAssociation.IsNonTreeAssociation;
                     // forbid traversing the same association several times
                     if (associationUsedAlready == candidateAssociation)
                         continue;
 
                     int nextStepIndex = stepIndex;
 
-                    bool interpretedClassSatisfies =
+                    bool interpretedClassSatisfies = candidateAssociation.Interpretation != null &&
                         candidate.DownCastSatisfies<PSMClass>(c => c.Interpretation == nextStep.Class);
                     if (candidate.Interpretation == null || interpretedClassSatisfies)
                     {

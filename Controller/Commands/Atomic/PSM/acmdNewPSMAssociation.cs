@@ -50,7 +50,13 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
                 || !Project.VerifyComponentType<PSMSchema>(schemaGuid)) return false;
             PSMAssociationMember parent = Project.TranslateComponent<PSMAssociationMember>(parentGuid);
             PSMAssociationMember child = Project.TranslateComponent<PSMAssociationMember>(childGuid);
-            
+
+            if (parent.ID == child.ID)
+            {
+                ErrorDescription = CommandErrors.CMDERR_RECURSIVE_ASSOCIATION;
+                return false;
+            }
+
             if (child.ParentAssociation != null)
             {
                 ErrorDescription = CommandErrors.CMDERR_PARENT_ASSOCIATION_EXISTS;

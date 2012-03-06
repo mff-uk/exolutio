@@ -296,7 +296,9 @@ namespace Tests
 
 			ModelConsistency.CheckProject(p);
 
+            #pragma warning disable 612,618
 			Exolutio.Controller.Commands.Atomic.PIM.MacroWrappers.cmdDeletePIMClass command = new Exolutio.Controller.Commands.Atomic.PIM.MacroWrappers.cmdDeletePIMClass(c);
+            #pragma warning restore 612,618
 			command.Set(pimcItem);
 			command.Execute();
 

@@ -252,4 +252,7 @@
   <data name="CMDERR_CANNOT_SET_FINAL_GENERALIZATIIONS_EXIST" xml:space="preserve">
     <value>Cannot set a class as final because it is a general class. Delete generalizations first.</value>
   </data>
+  <data name="CMDERR_RECURSIVE_ASSOCIATION">
+    <value xml:space="preserve">Can not create associations from a class to itself.</value>
+  </data>
 </root>

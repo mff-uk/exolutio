@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Xml.Linq;
 using Exolutio.Model.PSM;
 using Exolutio.Model.PSM.Grammar.SchematronTranslation;
@@ -44,10 +45,13 @@ namespace Exolutio.View.Commands.Grammar
                     = Current.MainWindow.FilePresenter.DisplayFile(schematronSchemaDocument, EDisplayedFileType.SCH, Current.ActiveDiagram.Caption + ".sch", log, sourcePSMSchema: (PSMSchema)Current.ActiveDiagram.Schema,
                     additionalActions: additionalButtonsInfo, tag: tag);
                 filePresenterTab.RefreshCallback += RegenerateSchema;
-                tweakingPanel.Bind(settings.SubexpressionTranslations);
-                tweakingPanel.FilePresenterTab = filePresenterTab;
-                filePresenterTab.DisplayAdditionalControl(tweakingPanel, "Expression Tweaking");
-                tweakingPanel.TranslationTweaked += tweakingPanel_TranslationTweaked;
+                if (settings.SubexpressionTranslations.TranslationOptionsWithMorePossibilities.Any())
+                {
+                    tweakingPanel.Bind(settings.SubexpressionTranslations);
+                    tweakingPanel.FilePresenterTab = filePresenterTab;
+                    filePresenterTab.DisplayAdditionalControl(tweakingPanel, "Expression Tweaking");
+                    tweakingPanel.TranslationTweaked += tweakingPanel_TranslationTweaked;
+                }
             }
         }
 

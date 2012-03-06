@@ -32,7 +32,7 @@ namespace Exolutio.View.Commands.OCL
 
             foreach (ClassifierConstraint constraint in constraints)
             {
-                sb.AppendFormat("context: {0}", ((Component)constraint.Context.Tag).Name);
+                sb.AppendFormat("context {0}", ((Component)constraint.Context.Tag).Name);
                 sb.AppendLine();
                 foreach (OclExpression invariant in constraint.Invariants)
                 {

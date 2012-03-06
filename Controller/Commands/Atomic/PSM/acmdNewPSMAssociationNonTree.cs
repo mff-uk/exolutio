@@ -18,8 +18,6 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
 
         private Guid childGuid;
 
-        private int rootIndex = -1;
-
         /// <summary>
         /// If set before execution, creates a new association with this GUID.
         /// After execution contains GUID of the created association.

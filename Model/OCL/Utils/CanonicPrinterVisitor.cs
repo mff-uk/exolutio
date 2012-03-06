@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Exolutio.Model.OCL.AST;
+using Exolutio.Model.OCL.Types;
 
 namespace Exolutio.Model.OCL.Utils {
     class CanonicPrinterVisitor:IAstVisitor {
@@ -92,7 +93,12 @@ namespace Exolutio.Model.OCL.Utils {
             if (node.Source != null) {
                 node.Source.Accept(this);
             }
-            sb.Append(".");
+            
+            if (node.Source != null && node.Source.Type is CollectionType)
+                sb.Append("->");
+            else
+                sb.Append(".");
+
             sb.Append(node.ReferredOperation.Name);
             sb.Append("(");
             foreach (var arg in node.Arguments) {

@@ -359,6 +359,15 @@ namespace Exolutio.Controller.Commands {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Can not create associations from a class to itself..
+        /// </summary>
+        internal static string CMDERR_RECURSIVE_ASSOCIATION {
+            get {
+                return ResourceManager.GetString("CMDERR_RECURSIVE_ASSOCIATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Represented class has different interpreted context than representant class.
         /// </summary>
         internal static string CMDERR_REPR_DIFFERENT_CONTEXT {
