@@ -580,6 +580,20 @@ namespace Exolutio.Model
             return list;
         }
 
+        public static List<PIMClass> GetSpecificClasses(this PIMClass pimClass, bool includeThis = false)
+        {
+            List<PIMClass> specific = new List<PIMClass>();
+
+            if (includeThis) specific.Add(pimClass);
+
+            foreach (PIMGeneralization g in pimClass.GeneralizationsAsGeneral)
+            {
+                specific.AddRange(g.Specific.GetSpecificClasses(true));
+            }
+
+            return specific;
+        }
+
         /// <summary>
         /// Returns a list of PSMClasses more general than psmClass. If psmClass has a general class A, A has a general class B, it returns A, B.
         /// </summary>

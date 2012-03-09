@@ -161,6 +161,15 @@ namespace Exolutio.Controller.Commands {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Target class is not a general class of the current special class..
+        /// </summary>
+        internal static string CMDERR_CLASS_NOT_GENERAL {
+            get {
+                return ResourceManager.GetString("CMDERR_CLASS_NOT_GENERAL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Class is not root..
         /// </summary>
         internal static string CMDERR_CLASS_NOT_ROOT {

@@ -69,86 +69,66 @@ namespace Exolutio.Controller.Commands.Atomic.PIM
         {
             PIMGeneralization pimGeneralization = Project.TranslateComponent<PIMGeneralization>(generalizationGuid);
             PIMClass pimSpecificClass = pimGeneralization.Specific;
+            PIMClass oldPIMGeneral = pimGeneralization.General;
+            PIMClass newPIMGeneral = oldPIMGeneral.GeneralizationAsSpecific.General;
+            List<PSMClass> classesToCheck = pimSpecificClass.GetSpecificClasses(true).SelectMany(c => c.GetInterpretedComponents().Cast<PSMClass>()).ToList();
             List<PSMClass> psmSpecificClasses = pimSpecificClass.GetInterpretedComponents().Cast<PSMClass>().ToList();
-            if (psmSpecificClasses.Count == 0) return null;
+
+            /* ALTERNATIVE SOLUTION - TO BE THOUGHT THROUGH - MOVE AS MANY ATTS AND ASSOCS AS POSSIBLE - DOES IT MAKE SENSE?
+             * What about those in inheritance subtree??? Must go through every PSM class that has interpretation in the inheritance hierarchy subtree
+             * 
+             * 
+             * 1) Is there a need to move atts and assocs? No - OK
+             *  1a) Yes - where? Is there the "old general class"?
+             *   1aa) Yes - There
+             *   1ab) No - Is there superparent?
+             *    1aba) Yes - Create old parent and there and specialize the subtree under it
+             *    1abb) No - create parent, move "bad" atts and assocs, delete generalization.
+             * 2) Now assocs and attrs are OK. Has inh. parent same interpretation or is there no generalization? Yes - nothing
+             *  2a) No - is it old parent? Yes - generalize
+             *   2aa) No - Nothing - the generalization does not affect the current PSM class.
+             */
 
             PropagationMacroCommand command = new PropagationMacroCommand(Controller) { CheckFirstOnlyInCanExecute = true };
             command.Report = new CommandReport("Pre-propagation (generalize PIM generalization)");
 
-            foreach (PSMClass c in psmSpecificClasses)
+            //DELETE ATTS AND ASSOCS THAT VIOLATE INTERPRETATION AFTER GEN PIM GEN
+            foreach (PSMClass c in classesToCheck)
             {
-                //TODO: parent association (just check it...), it should not be involved...
+                //parent association (just check it...), it should not be involved...
                 Debug.Assert(c.ParentAssociation == null || c.ParentAssociation.Interpretation == null || c.Interpretation == (c.ParentAssociation.Interpretation as PIMAssociation)
                                                               .PIMAssociationEnds
                                                               .Single(e => e != c.ParentAssociation.InterpretedAssociationEnd));
 
                 List<PSMAttribute> attributesLost = c.GetContextPSMAttributes(true).Where
-                    (a => a.Interpretation != null && (a.Interpretation as PIMAttribute).PIMClass == (c.Interpretation as PIMClass).GeneralizationAsSpecific.General).ToList();
+                   (a => a.Interpretation != null && (a.Interpretation as PIMAttribute).PIMClass == pimGeneralization.General).ToList();
 
                 List<PSMAssociation> associationsLost = c.GetContextPSMAssociations(true).Where
-                    (a => a.Interpretation != null && a.InterpretedAssociationEnd.PIMClass == (c.Interpretation as PIMClass).GeneralizationAsSpecific.General).ToList();
+                    (a => a.Interpretation != null && a.InterpretedAssociationEnd.PIMClass == pimGeneralization.General).ToList();
 
-                if (c.GeneralizationAsSpecific != null)
+                foreach (PSMAttribute att in attributesLost)
                 {
-                    bool moveToNewClass = attributesLost.Count > 0 || associationsLost.Count > 0;
-
-                    PSMClass newGeneralPSMClass = c.GeneralizationAsSpecific.General.GeneralizationAsSpecific == null ? null : c.GeneralizationAsSpecific.General.GeneralizationAsSpecific.General;
-
-                    Guid newClassGuid;
-                    if (moveToNewClass)
-                    {
-                        //is there the class to move to?
-                        if (c.GeneralizationAsSpecific.General.Interpretation != pimGeneralization.General)
-                        {
-                            newClassGuid = Guid.NewGuid();
-                            Guid newGeneralizationGuid = Guid.NewGuid();
-                            PIMClass pimGeneralClass = pimSpecificClass.GeneralizationAsSpecific.General;
-                            command.Commands.Add(new acmdNewPSMClass(Controller, c.Schema) { ClassGuid = newClassGuid });
-                            command.Commands.Add(new acmdRenameComponent(Controller, newClassGuid, pimGeneralClass.Name));
-                            command.Commands.Add(new acmdSetPSMClassInterpretation(Controller, newClassGuid, pimGeneralClass));
-                            command.Commands.Add(new acmdNewPSMGeneralization(Controller, c.GeneralizationAsSpecific.General, newClassGuid, c.Schema) { GeneralizationGuid = newGeneralizationGuid });
-                            command.Commands.Add(new acmdSpecializePSMGeneralization(Controller, c.GeneralizationAsSpecific, newClassGuid));
-                        }
-
-                        //TODO: Now this has to be generalized for the whole intcontext....
-                        foreach (PSMAttribute att in attributesLost)
-                        {
-                            if (att.PSMClass != c) command.Commands.Add(new cmdMovePSMAttribute(Controller) { AttributeGuid = att, ClassGuid = c });
-                            command.Commands.Add(new acmdGeneralizePSMAttribute(Controller, att));
-                        }
-
-                        foreach (PSMAssociation assoc in associationsLost)
-                        {
-                            if (assoc.Parent != c) command.Commands.Add(new cmdReconnectPSMAssociation(Controller) { AssociationGuid = assoc, NewParentGuid = c });
-                            command.Commands.Add(new acmdGeneralizePSMAssociation(Controller, assoc));
-
-                        }
-                    }
-                    if (newGeneralPSMClass != null)
-                    {
-                        command.Commands.Add(new acmdGeneralizePSMGeneralization(Controller, c.GeneralizationAsSpecific));
-                    }
-                    else
-                    {
-                        command.Commands.Add(new acmdDeletePSMGeneralization(Controller, c.GeneralizationAsSpecific));
-                    }
-                }   
-                else
-                {
-                    foreach (PSMAttribute att in attributesLost)
-                    {
-                        if (att.PSMClass != c) command.Commands.Add(new cmdMovePSMAttribute(Controller) { AttributeGuid = att, ClassGuid = c });
-                        command.Commands.Add(new cmdDeletePSMAttribute(Controller) { AttributeGuid = att });
-                    }
-
-                    foreach (PSMAssociation assoc in associationsLost)
-                    {
-                        if (assoc.Parent != c) command.Commands.Add(new cmdReconnectPSMAssociation(Controller) { AssociationGuid = assoc, NewParentGuid = c });
-                        command.Commands.Add(new cmdDeletePSMAssociation(Controller) { AssociationGuid = assoc });
-
-                    }
+                    if (att.PSMClass != c) command.Commands.Add(new cmdMovePSMAttribute(Controller) { AttributeGuid = att, ClassGuid = c });
+                    command.Commands.Add(new cmdDeletePSMAttribute(Controller) { AttributeGuid = att });
                 }
 
+                foreach (PSMAssociation assoc in associationsLost)
+                {
+                    if (assoc.Parent != c) command.Commands.Add(new cmdReconnectPSMAssociation(Controller) { AssociationGuid = assoc, NewParentGuid = c });
+                    command.Commands.Add(new cmdDeletePSMAssociation(Controller) { AssociationGuid = assoc });
+
+                }                
+            }
+            
+            foreach (PSMClass c in psmSpecificClasses)
+            {
+                if (c.GeneralizationAsSpecific != null && c.GeneralizationAsSpecific.General.Interpretation != c.Interpretation)
+                {
+                    if (c.GeneralizationAsSpecific.General.Interpretation == oldPIMGeneral)
+                    {
+                        command.Commands.Add(new acmdGeneralizePSMGeneralization(Controller, c.GeneralizationAsSpecific) { Propagate = false });
+                    }
+                }
             }
 
             return command;
