@@ -1,6 +1,10 @@
 ﻿using System;
 using Exolutio.Model.PIM;
 using Exolutio.Model;
+using Exolutio.Model.PSM;
+using System.Collections.Generic;
+using System.Linq;
+using Exolutio.Controller.Commands.Atomic.PSM;
 
 namespace Exolutio.Controller.Commands.Atomic.PIM
 {
@@ -60,9 +64,39 @@ namespace Exolutio.Controller.Commands.Atomic.PIM
             return OperationResult.OK;
         }
 
-        /*internal override PropagationMacroCommand PrePropagation()
+        internal override PropagationMacroCommand PrePropagation()
         {
-            
-        }*/
+            PIMGeneralization pimGeneralization = Project.TranslateComponent<PIMGeneralization>(generalizationGuid);
+            PIMClass newPIMGeneral = Project.TranslateComponent<PIMClass>(specialClassGuid);
+            PIMClass pimSpecificClass = pimGeneralization.Specific;
+            PIMClass oldPIMGeneral = pimGeneralization.General;
+            List<PSMClass> psmSpecificClasses = pimSpecificClass.GetInterpretedComponents().Cast<PSMClass>().ToList();
+            if (psmSpecificClasses.Count == 0) return null;
+
+            PropagationMacroCommand command = new PropagationMacroCommand(Controller) { CheckFirstOnlyInCanExecute = true };
+            command.Report = new CommandReport("Pre-propagation (specialize PIM generalization)");
+
+            foreach (PSMClass c in psmSpecificClasses)
+            {
+                if (c.GeneralizationAsSpecific != null)
+                {
+                    PSMClass oldPSMGeneral = c.GeneralizationAsSpecific.General;
+                    if (oldPSMGeneral.Interpretation == oldPIMGeneral)
+                    {
+                        IEnumerable<PSMClass> rightDescendants = oldPSMGeneral.GeneralizationsAsGeneral.Where(g => g.Specific.Interpretation == newPIMGeneral).Select(g => g.Specific);
+                        if (rightDescendants.Count() == 1)
+                            //0 - there is no suitable class.. nothing has to happen, 
+                            //>1 there are more... nothing will happen and it is up to the user (instead of duplicating or SR). Coherence not violated.
+                        {
+                            PSMClass newPSMGeneral = rightDescendants.Single();
+                            command.Commands.Add(new acmdSpecializePSMGeneralization(Controller, c.GeneralizationAsSpecific, newPSMGeneral) { Propagate = false });
+                        }
+                    }
+
+                }
+            }
+
+            return command;
+        }
     }
 }
