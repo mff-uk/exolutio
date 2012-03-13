@@ -19,10 +19,33 @@
     </Span>
 
     <Keywords color="Keywords">
+      <Word>and</Word>
+      <Word>body</Word>
       <Word>context</Word>
+      <Word>def</Word>
+      <Word>derive</Word>
+      <Word>else</Word>
+      <Word>endif</Word>
+      <Word>endpackage</Word>
+      <Word>false</Word>
+      <Word>if</Word>
+      <Word>implies</Word>
+      <Word>in</Word>
+      <Word>init</Word>
       <Word>inv</Word>
-      <Word>pre</Word>
+      <Word>invalid</Word>
+      <Word>let</Word>
+      <Word>not</Word>
+      <Word>null</Word>
+      <Word>or</Word>
+      <Word>package</Word>
       <Word>post</Word>
+      <Word>pre</Word>
+      <Word>self</Word>
+      <Word>static</Word>
+      <Word>then</Word>
+      <Word>true</Word>
+      <Word>xor</Word>
     </Keywords>
 
     <!-- Digits -->

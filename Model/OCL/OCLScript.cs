@@ -79,7 +79,14 @@ namespace Exolutio.Model.OCL {
             OCLAst semantic = new OCLAst(treeStream, errColl);
             semantic.TypesTable = tt;
             semantic.EnvironmentStack.Push(new NamespaceEnvironment(tt.Library.RootNamespace));
-            AST.Constraints constraints = semantic.contextDeclarationList();
+            AST.Constraints constraints;
+           // try {
+                constraints = semantic.contextDeclarationList();
+           // }
+            //catch{
+           //     constraints = new AST.Constraints();
+            //    errColl.AddError(new ErrorItem("Fatal error."));
+           // }
 #if timeDebug
             compileTime.Stop();
             errColl.AddError(new ErrorItem(String.Format("Translate time:{0} Compile time:{1}",translateTime.ElapsedMilliseconds,compileTime.ElapsedMilliseconds)));

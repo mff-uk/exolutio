@@ -647,7 +647,7 @@ namespace Exolutio.Model.OCL.Compiler {
 
 
         VariableDeclaration LetDecl(IToken letToken, VariableDeclarationBag varBag) {
-            if (TestNull(letToken, varBag)) {
+            if (TestNull(letToken, varBag,varBag!= null ?varBag.Type: null)) {
                 return new VariableDeclaration("", Library.Invalid, new AST.ErrorExp(Library.Invalid));
             }
 
@@ -689,7 +689,7 @@ namespace Exolutio.Model.OCL.Compiler {
                 Errors.AddError(new CodeErrorItem(CompilerErrors.OCLAst_CreateIf_Condition_of_IF_must_conform_to_bool, ifTok, ifTok));
             }
 
-            EnvironmentStack.Pop();
+            //EnvironmentStack.Pop();
 
             Classifier exprType = th.Type.CommonSuperType(el.Type);
 
