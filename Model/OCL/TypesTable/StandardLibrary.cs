@@ -147,6 +147,7 @@ namespace Exolutio.Model.OCL.TypesTable {
             AddOperation(oclAny, "oclIsInvalid", boolean);
             AddOperation(oclAny, "oclAsType", boolean);
             AddOperation(oclAny, "oclIsNew", boolean);
+            
             //par dalsi operaci chybi
 
             //Real
@@ -210,6 +211,8 @@ namespace Exolutio.Model.OCL.TypesTable {
 
             lib.LazyOpearation.Add(typeof(CollectionType), (c) => {
                 CollectionType coll = c as CollectionType;
+                Classifier t = coll.ElementType;
+
                 AddOperation(coll, "=", boolean, coll);
                 AddOperation(coll, "<>", boolean, coll);
                 AddOperation(coll, "size", integer);
@@ -220,12 +223,64 @@ namespace Exolutio.Model.OCL.TypesTable {
                 AddOperation(coll, "excludesAll", boolean, coll);
                 AddOperation(coll, "isEmpty", boolean);
                 AddOperation(coll, "notEmpty", boolean);
-                //max,min,sum,product
 
-                //Added by J.M. 2.3.2012, should not be under CollectionType 
+                /* musi splnovat nektere podminky
+                AddOperation(coll, "max", t);
+                AddOperation(coll, "min", t);
+                AddOperation(coll, "sum", t);
+                */
+
+                //Missing: product, asSet, asOrdredSet,as  sequence,asBag, flatten
+
+               
+            });
+
+
+            //Added by J.M. 2.3.2012, should not be under CollectionType 
+            //AddOperation(coll, "at", coll.ElementType, integer);
+            //AddOperation(coll, "first", coll.ElementType);
+            //AddOperation(coll, "last", coll.ElementType);
+            lib.LazyOpearation.Add(typeof(SetType), (c) => {
+                CollectionType coll = c as CollectionType;
+                Classifier t = coll.ElementType;
+
+                AddOperation(coll, "union", coll, coll);
+                //union with bag missing
+                AddOperation(coll, "=", boolean,coll);
+                AddOperation(coll, "intersection", coll, coll);
+                //intersection with bag missing
+                AddOperation(coll, "-", coll, coll);
+                AddOperation(coll, "including", coll, t);
+                AddOperation(coll, "excluding", coll, t);
+                AddOperation(coll, "symmetricDifference", coll, coll);
+                AddOperation(coll, "count", integer, t);
+                //flatten missing
+                AddOperation(coll, "asSet", coll);
+                //asOrderedSet(),asSequence(),asBag() missing
+            });
+
+            lib.LazyOpearation.Add(typeof(SequenceType), (c) => {
+                CollectionType coll = c as CollectionType;
+                Classifier t = coll.ElementType;
+
+                AddOperation(coll, "count", integer, t);
+                AddOperation(coll, "=", boolean, coll);
+
+                AddOperation(coll, "union", coll, coll);
+                //flatten missing
+                AddOperation(coll, "append", coll, t);
+                AddOperation(coll, "prepend", coll, t);
+                AddOperation(coll, "insertAt", coll,integer, t);
+                AddOperation(coll, "subSequence", coll, integer, integer);
                 AddOperation(coll, "at", coll.ElementType, integer);
+                AddOperation(coll, "indexOf", integer, t);
                 AddOperation(coll, "first", coll.ElementType);
                 AddOperation(coll, "last", coll.ElementType);
+                AddOperation(coll, "including", coll, t);
+                AddOperation(coll, "excluding", coll, t);
+                AddOperation(coll, "reverse", coll, t);
+                AddOperation(coll, "asSequence()", coll, t);
+                //asOrderedSet(),asBag(),asSet() missing
             });
         }
     }

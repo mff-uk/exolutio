@@ -130,7 +130,7 @@ namespace Exolutio.WPFClient {
                 if (res.Errors.HasError) {
                     sb.AppendLine("Errors:");
                     foreach (var er in res.Errors.Errors) {
-                        sb.AppendLine(er.Text);
+                        sb.AppendLine(er.ToString());
                     }
                 }
                 else {
