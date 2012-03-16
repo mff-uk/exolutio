@@ -279,7 +279,7 @@ namespace Exolutio.Model.OCL.TypesTable {
                 AddOperation(coll, "including", coll, t);
                 AddOperation(coll, "excluding", coll, t);
                 AddOperation(coll, "reverse", coll, t);
-                AddOperation(coll, "asSequence()", coll, t);
+                AddOperation(coll, "asSequence", coll, t);
                 //asOrderedSet(),asBag(),asSet() missing
             });
         }

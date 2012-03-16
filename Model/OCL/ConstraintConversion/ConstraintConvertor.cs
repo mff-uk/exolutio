@@ -125,8 +125,6 @@ namespace Exolutio.Model.OCL.ConstraintConversion
             return result;
         }
 
-        public override OclExpression Visit(NavigationCallExp node) { /* TODO: navigation call */ return null; }
-
         public override OclExpression Visit(VariableExp node)
         {
             if (!VariableTranslations.ContainsKey(node.referredVariable))

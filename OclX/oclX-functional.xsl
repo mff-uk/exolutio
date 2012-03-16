@@ -82,10 +82,10 @@
       <xsl:variable name="forThis"
         select="oclXin:functionItemCall(
         $body, $iteratorCount, $indices, $collection)"
-        as="xs:boolean"/>
+        as="xs:boolean?"/>
 
       <xsl:choose>
-        <xsl:when test="$forThis eq false()">
+        <xsl:when test="boolean($forThis) eq false()">
           <xsl:break>
             <xsl:sequence select="false()"/>
           </xsl:break>
@@ -121,7 +121,7 @@
   </doc:doc>
   <xsl:function name="oclX:forAll" as="xs:boolean">
     <xsl:param name="collection" as="item()*"/>
-    <xsl:param name="body" as="function(item()) as xs:boolean"/>
+    <xsl:param name="body" as="function(item()) as xs:boolean?"/>
     <xsl:sequence select="every $it in $collection satisfies $body($it) "/>
   </xsl:function>
 
@@ -141,13 +141,15 @@
   </doc:doc>
   <xsl:function name="oclX:exists" as="xs:boolean">
     <xsl:param name="collection" as="item()*"/>
-    <xsl:param name="body" as="function(item()) as xs:boolean"/>
-    <!--<xsl:sequence select="some $it in $collection satisfies $body($it) "/>-->
+    <xsl:param name="body" as="function(item()) as xs:boolean?"/>
+    
+    <xsl:sequence select="some $it in $collection satisfies $body($it) "/>
 
+    <!--
     <xsl:sequence
       select="oclX:iterate($collection, false(), 
-      function($it, $acc) { $acc or ($body($it)) })"/>
-
+      function($it, $acc) { $acc or boolean($body($it)) })"/>
+    -->
   </xsl:function>
 
   <doc:doc>
@@ -178,15 +180,14 @@
       <xsl:variable name="indices"
         select="
         oclXin:getIndices(. - 1, count($collection), $iteratorCount, ())"/>
-      <xsl:message>Indices: <xsl:value-of select="$indices"/></xsl:message>
-
+      
       <xsl:variable name="forThis"
         select="oclXin:functionItemCall(
         $body, $iteratorCount, $indices, $collection)"
-        as="xs:boolean"/>
+        as="xs:boolean?"/>
 
       <xsl:choose>
-        <xsl:when test="$forThis eq true()">
+        <xsl:when test="boolean($forThis) eq true()">
           <xsl:break>
             <xsl:sequence select="true()"/>
           </xsl:break>
@@ -354,11 +355,11 @@
   </doc:doc>
   <xsl:function name="oclX:select" as="item()*">
     <xsl:param name="collection" as="item()*"/>
-    <xsl:param name="body" as="function(item()) as item()"/>
+    <xsl:param name="body" as="function(item()) as xs:boolean?"/>
 
     <xsl:sequence
       select="oclX:iterate($collection, (), 
-      function($it, $acc) { if ($body($it)) then oclX:including($acc, $it) else $acc })"
+      function($it, $acc) { if (boolean($body($it))) then oclX:including($acc, $it) else $acc })"
     />
   </xsl:function>
 
@@ -376,7 +377,7 @@
   </doc:doc>
   <xsl:function name="oclX:reject" as="item()*">
     <xsl:param name="collection" as="item()*"/>
-    <xsl:param name="body" as="function(item()) as item()"/>
+    <xsl:param name="body" as="function(item()) as xs:boolean?"/>
 
     <xsl:sequence
       select="oclX:iterate($collection, (), 
@@ -401,15 +402,13 @@
   </doc:doc>
   <xsl:function name="oclX:any" as="item()*">
     <xsl:param name="collection" as="item()*"/>
-    <xsl:param name="body" as="function(item()) as xs:boolean"/>
+    <xsl:param name="body" as="function(item()) as xs:boolean?"/>
 
     <xsl:variable name="satisfyingItems" as="item()*">
       <xsl:sequence
         select="oclX:iterate(
         $collection, (),            
-        function($it, $acc) {
-        $acc, if ($body($it) eq true()) then $it else ()
-        }
+        function($it, $acc) { $acc, if (boolean($body($it)) eq true()) then $it else () }
         )"
       />
     </xsl:variable>    
@@ -429,15 +428,13 @@
   </doc:doc>
   <xsl:function name="oclX:one" as="xs:boolean">
     <xsl:param name="collection" as="item()*"/>
-    <xsl:param name="body" as="function(item()) as item()"/>
+    <xsl:param name="body" as="function(item()) as xs:boolean?"/>
 
     <xsl:variable name="satisfyingItems" as="item()*">
       <xsl:sequence
         select="oclX:iterate(
         $collection, (),            
-        function($it, $acc) {
-        $acc, if ($body($it) eq true()) then $it else ()
-        }
+        function($it, $acc) { $acc, if (boolean($body($it)) eq true()) then $it else () }
         )"
       />
     </xsl:variable>
@@ -892,6 +889,26 @@
     />
   </xsl:function>
 
+  <xsl:function name="oclX:setEqual" as="item()*">
+    <xsl:param name="collection1" as="item()*"/>
+    <xsl:param name="collection2" as="item()*"/>
+    
+    <xsl:sequence
+      select="(count($collection1) eq count($collection2)) and 
+        oclX:includesAll($collection1, $collection2)"
+    />
+  </xsl:function>
+  
+  <xsl:function name="oclX:seqEqual" as="item()*">
+    <xsl:param name="collection1" as="item()*"/>
+    <xsl:param name="collection2" as="item()*"/>
+    
+    <xsl:sequence
+      select="(count($collection1) eq count($collection2)) and 
+      (every $index in 1 to count($collection1) satisfies oclX:oclEqual($collection1[$index], $collection2[$index]))"
+    />
+  </xsl:function>
+
   <doc:doc>
     <doc:desc>
       <doc:p>Returns an ordered sub-collection of an ordered collection. </doc:p>
@@ -1261,8 +1278,8 @@
   </xsl:function>
   
   <xsl:function name="oclX:oclEqual" as="xs:boolean">
-    <xsl:param name="collection1" as="item()*" />
-    <xsl:param name="collection2" as="item()*" />   
+    <xsl:param name="collection1" as="item()?" />
+    <xsl:param name="collection2" as="item()?" />   
     
     <xsl:choose>
       <xsl:when test="count($collection1) eq 0 and count($collection2) eq 0">

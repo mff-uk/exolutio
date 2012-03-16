@@ -179,13 +179,6 @@ namespace Exolutio.Model.OCL.ConstraintConversion
             return psmNavigations.Count > 0;
         }
 
-        public override bool Visit(NavigationCallExp node)
-        {
-            // TODO
-            return true; 
-        }
-
-
         public override bool Visit(VariableExp node)
         {
             /* hopefully no problem here */
