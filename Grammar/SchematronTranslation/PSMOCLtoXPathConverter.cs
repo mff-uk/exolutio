@@ -431,7 +431,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
                 else
                     optionFor.FormatString = string.Format(
                         "for ${0} in {{0}} return if (not({{1}})) then ${0} else ()", node.Iterator[0].Name);
-                SubexpressionTranslations.AddTranslationOption(node, optionFor);
+                SubexpressionTranslations.AddTranslationOption(node, optionFor);    
 
                 /*
                  * this option can be used only when there is no iterator in body, which references the current iterator variable,

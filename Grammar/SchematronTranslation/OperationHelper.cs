@@ -179,7 +179,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 
             if (leftOpExpr.Type == voidType && rightOpExpr.Type == voidType)
             {
-                Log.AddWarningTaggedFormat("Comparison expression is always true. ", operationExpression);
+                Log.AddWarningTaggedFormat("Comparison expression is always true (comparing two null literals). ", operationExpression);
                 return "true()";
             }
 
@@ -210,6 +210,16 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
                 {
                     return string.Format("exists({0})", comparedOpStr);
                 }
+            }
+
+            // comparing collections
+            if (arguments[0].Type is SetType || arguments[0].Type is OrderedSetType || arguments[0].Type is BagType)
+            {
+                return string.Format("oclX:setEqual({0}, {1})", leftOp, rightOp);
+            }
+            if (arguments[0].Type is SequenceType)
+            {
+                return string.Format("oclX:seqEqual({0}, {1})", leftOp, rightOp);
             }
 
             // finally - comparing two non atomic types 

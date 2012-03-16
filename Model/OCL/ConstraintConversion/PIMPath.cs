@@ -200,11 +200,6 @@ namespace Exolutio.Model.OCL.ConstraintConversion
 
     public static class PIMPathBuilder
     {
-        public static PIMPath BuildPIMPath(NavigationCallExp node)
-        {
-            throw new NotImplementedException();
-        }
-
         public static PIMPath BuildPIMPath(PropertyCallExp node)
         {
             PIMPath path = new PIMPath();

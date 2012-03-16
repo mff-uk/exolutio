@@ -309,6 +309,7 @@
     <EmbeddedResource Include="OCL\CompilerErrors.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>CompilerErrors.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Exceptions.resx">
       <Generator>ResXFileCodeGenerator</Generator>

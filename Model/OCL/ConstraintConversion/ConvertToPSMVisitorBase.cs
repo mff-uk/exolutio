@@ -64,7 +64,6 @@ namespace Exolutio.Model.OCL.ConstraintConversion
         public abstract TType Visit(IterateExp node);
         public abstract TType Visit(OperationCallExp node);
         public abstract TType Visit(PropertyCallExp node);
-        public abstract TType Visit(NavigationCallExp node);
         public abstract TType Visit(VariableExp node);
         public abstract TType Visit(IfExp node);
         public abstract TType Visit(BooleanLiteralExp node);
