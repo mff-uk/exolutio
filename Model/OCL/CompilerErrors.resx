@@ -118,96 +118,159 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="OCLAst_ClassifierContextHead_Nenalezena_trida_v_ClassifierContextHeader" xml:space="preserve">
-    <value>Nenalezena trida v ClassifierContextHeader</value>
+    <value>Classifier not found in context header.</value>
   </data>
-  <data name="OCLAst_InfixOperation_NotDefined" xml:space="preserve">
-    <value>On type `{0}` is not defined operation `{1}`.</value>
+  <data name="OCLAst_InfixOperation_NotDefined_2" xml:space="preserve">
+    <value>Infix operation `{1}` is not defined on type `{0}`.</value>
   </data>
-  <data name="OCLAst_ProcessPropertyCall_PropertyNotExists" xml:space="preserve">
-    <value>Property `{0}` does not exit.</value>
+  <data name="OCLAst_ProcessPropertyCall_PropertyNotExists_1" xml:space="preserve">
+    <value>Unknown property `{0}`.</value>
   </data>
-  <data name="OCLAst_ProcessOperationCall_OperationNotExists" xml:space="preserve">
-    <value>Operation `{0}` does not exit.</value>
+  <data name="OCLAst_ProcessOperationCall_OperationNotExists_1" xml:space="preserve">
+    <value>Unknowon operation `{0}`.</value>
   </data>
   <data name="OCLAst_ProcessIteratorCall_Unknow_iterator_operation" xml:space="preserve">
     <value>Unknow iterator operation.</value>
   </data>
   <data name="OCLAst_ProcessIteratorCall_Iterator_ma_jenom_jedno_tělo_výrazu" xml:space="preserve">
-    <value>Iterator ma jenom jedno tělo výrazu.</value>
+    <value>Iterator must have only on body expression. </value>
   </data>
-  <data name="OCLAst_ProcessIteratorCall_Nesedi_typy_v_body" xml:space="preserve">
-    <value>Nesedi typy v body</value>
+  <data name="OCLAst_ProcessIteratorCall_Body_type_inconsistency" xml:space="preserve">
+    <value>Inconsistent types in iterator body.</value>
   </data>
-  <data name="OCLAst_ProcessIteratorCall_Bad_iterator_operation" xml:space="preserve">
-    <value>Bad iterator operation.</value>
+  <data name="OCLAst_ProcessIteratorCall_Bad_iterator_operation_1" xml:space="preserve">
+    <value>Unknown iterator operation `{0}`. </value>
   </data>
   <data name="OCLAst_ProcessCollectionOperationCall_Unknown_collection_operation" xml:space="preserve">
-    <value>Unknown collection operation - {0}</value>
-  </data>
-  <data name="OCLAst_ResolvePath_Modifikator__pre_se_nepojí_s_proměnou" xml:space="preserve">
-    <value>Modifikator @pre se nepojí s proměnou</value>
+    <value>Unknown collection operation `{0}`.</value>
   </data>
   <data name="OCLAst_ResolvePath_Modifikator__pre_se_nepoji_s_promenou" xml:space="preserve">
-    <value>Modifikator @pre se nepojí s proměnou</value>
+    <value>Modifier `@pre` is not attached to a variable. </value>
   </data>
   <data name="OCLAst_ResolvePath_Chyba_nebo_nepodporovane_pravidlo" xml:space="preserve">
-    <value>Chyba nebo nepodporovane pravidlo</value>
+    <value>Syntax error or unsupported syntax rule. </value>
   </data>
-  <data name="OCLAst_ResolveImplicitOperation" xml:space="preserve">
-    <value>Operace `{0}` nenalezena.</value>
+  <data name="OCLAst_ResolveImplicitOperation_1" xml:space="preserve">
+    <value>Unknown operation `{0}`.</value>
   </data>
-  <data name="OCLAst_ResolveImplicitOperation_OperaceNenalezena" xml:space="preserve">
-    <value>Operace `{0}` nenalezena.</value>
+  <data name="OCLAst_ResolveImplicitOperation_Operation_not_found_1" xml:space="preserve">
+    <value>Unknown operation `{0}`.</value>
   </data>
   <data name="OCLAst_CreateIntegerLiteral_Bad_format_of_integer" xml:space="preserve">
-    <value>Bad format of integer.</value>
-  </data>
-  <data name="OCLAst_CreateIntegerLiteral_Number__0__is_overflow_" xml:space="preserve">
-    <value>Number {0} is overflow.</value>
+    <value>Wrong integer fromat. </value>
   </data>
   <data name="OCLAst_CreateRealLiteral_Bad_format_of_real" xml:space="preserve">
-    <value>Bad format of real.</value>
+    <value>Wrong real format</value>
   </data>
   <data name="OCLAst_CollectionLiteralExp_CollectionIsAbstract" xml:space="preserve">
-    <value>‘Collection’ is an abstract class on the M1 level and has no M0 instances.</value>
+    <value>'Collection' is an abstract class, can not create instances. </value>
   </data>
   <data name="OCLAst_CollectionLiteralExp_Incorrects_mishmash_type_in_collection_literal" xml:space="preserve">
-    <value>Incorrects mishmash type in collection literal.</value>
+    <value>Inconsistent types in collection literal. </value>
   </data>
-  <data name="OCLAst_CreateTupleLiteral_Name__0__is_used_multipled" xml:space="preserve">
-    <value>Name {0} is used multipled.</value>
+  <data name="OCLAst_CreateTupleLiteral_Name_repeated_1" xml:space="preserve">
+    <value>Name `{0}` is used repeatedly.</value>
   </data>
   <data name="OCLAst_CreateTupleLiteral_Type_does_not_comform_to_declared_type" xml:space="preserve">
-    <value>Type does not comform to declared type.</value>
+    <value>Type does not comform to the declared type.</value>
   </data>
-  <data name="OCLAst_ResolveTypePathName_Path__0__do_not_exists" xml:space="preserve">
-    <value>Path {0} do not exists.</value>
+  <data name="OCLAst_ResolveTypePathName_Path__0__do_not_exists_1" xml:space="preserve">
+    <value>Path `{0}` does not exist.</value>
   </data>
-  <data name="OCLAst_ResolveTypePathName_Path__0__do_not_referres_type" xml:space="preserve">
-    <value>Path {0} do not referres type.</value>
+  <data name="OCLAst_ResolveTypePathName_Path__0__do_not_referres_type_1" xml:space="preserve">
+    <value>Path `{0}` does not refer a type.</value>
   </data>
   <data name="OCLAst_ProcessAccDef_Init_value_do_not_conform_to_variable_type" xml:space="preserve">
-    <value>Init value do not conform to variable type.</value>
+    <value>Value does not conform to variable type.</value>
   </data>
   <data name="OCLAst_LetDecl_The_variable_name_must_be_unique_in_the_current_scope" xml:space="preserve">
-    <value>The variable name must be unique in the current scope</value>
+    <value>The variable name must be unique in the current scope.</value>
   </data>
   <data name="OCLAst_LetDecl_Variable_type_does_not_conform_to_variable_expression_type" xml:space="preserve">
-    <value>Variable type does not conform to variable expression type.</value>
+    <value>Declared variable type does not conform to expression type.</value>
   </data>
   <data name="OCLAst_CreateIf_Condition_of_IF_must_conform_to_bool" xml:space="preserve">
-    <value>Condition of IF must conform to bool.</value>
+    <value>Condition in an if expression must be of type bool.</value>
   </data>
-  <data name="OCLAst_TestNull_Compiler_panic_in_method__0__" xml:space="preserve">
-    <value>Compiler panic in method {0}.</value>
+  <data name="OCLAst_TestNull_Compiler_panic_in_method_1" xml:space="preserve">
+    <value>Compiler panic in method `{0}`.</value>
   </data>
   <data name="OCLAst_ProcessIteratorCall_Compiler_don_t_support_iterator_operations_on_not_collection_type" xml:space="preserve">
-    <value>Compiler don't support iterator operations on not-collection type.</value>
+    <value>Compiler doesn't support iterator operations on non-collection type.</value>
   </data>
   <data name="VariableAlreadyExisted" xml:space="preserve">
-    <value>Variable name `{0}` has already existed.</value>
+    <value>Variable `{0}` has been defined earlier. </value>
   </data>
   <data name="AmbiguousNavigation" xml:space="preserve">
-    <value>Navigation {0}.{1} is ambiguous.</value>
+    <value>Navigation `{0}.{1}` is ambiguous.</value>
+  </data>
+  <data name="OCLParser_UnaryOperation_UnaryOperationNotFound" xml:space="preserve">
+    <value>Unary operation `{1}` is not defined on type `{0}`.</value>
+  </data>
+  <data name="OCLParser_InfixOperation_OperationNotFound_2" xml:space="preserve">
+    <value>Unknown operation `{1}` on type `{0}`.</value>
+  </data>
+  <data name="OCLParser_UnaryOperation_OperationNotFound_2" xml:space="preserve">
+    <value>Operation `{1}` is not defined on type `{0}`.</value>
+  </data>
+  <data name="OCLParser_PropertyCallRoot_PreModifierNotOnVariable" xml:space="preserve">
+    <value>Modifier `@pre` is not attached to a variable.</value>
+  </data>
+  <data name="OCLParser_PropertyCallRoot_OperationNotFound_1" xml:space="preserve">
+    <value>Unknown operation `{0}`.</value>
+  </data>
+  <data name="OCLParser_PropertyCallBody_SourceOfCollectionOperationIsNotACollection" xml:space="preserve">
+    <value>Illegal use of '-&gt;', source is not a collection.</value>
+  </data>
+  <data name="OCLParser_PropertyCallBody_IncorectCallConvention" xml:space="preserve">
+    <value>Incorect call convention for iterator.</value>
+  </data>
+  <data name="OCLParser_ProcessArrowIterator_Illegal_declaration" xml:space="preserve">
+    <value>Variable declaration is not allowed here (this is a collection operation, not an iterator expression). </value>
+  </data>
+  <data name="OCLParser_ProcessArrowIterator_Type_mismatch" xml:space="preserve">
+    <value>Type mismatch.</value>
+  </data>
+  <data name="OCLParser_CollectionLiteralExpAndType_Attemt_to_instantiate_abstract_type" xml:space="preserve">
+    <value>‘Collection’ is an abstract class and can not be instantiated. </value>
+  </data>
+  <data name="OCLParser_CollectionLiteralExpAndType_Inconsistent_types_in_collection_literal" xml:space="preserve">
+    <value>Inconsistent types in collection literal. </value>
+  </data>
+  <data name="OCLParser_CreateIntegerLiteral_Bad_integer_format" xml:space="preserve">
+    <value>Wront integer format. </value>
+  </data>
+  <data name="OCLParser_CreateIntegerLiteral_Integer_literal_overflow_1" xml:space="preserve">
+    <value>Integer literal `{0}` results in overflow.</value>
+  </data>
+  <data name="OCLParser_CreateRealLiteral_Incorrect_real_format" xml:space="preserve">
+    <value>Wrong real format.</value>
+  </data>
+  <data name="OCLParser_CreateTupleLiteral_Tuple_part_name_used_repeatedly_1" xml:space="preserve">
+    <value>Name `{0}` is used repeatedly.</value>
+  </data>
+  <data name="OCLParser_CreateVariableDeclaration_Missing_loop_variable_initialization" xml:space="preserve">
+    <value>Loop variables must be initialized. </value>
+  </data>
+  <data name="OCLParser_CreateVariableDeclaration_Types_do_not_conform_2" xml:space="preserve">
+    <value>Type `{0}` does not conforms to `{1}`.</value>
+  </data>
+  <data name="OCLParser_ResolveTypePathName_Path_not_exists_1" xml:space="preserve">
+    <value>Path `{0}` does not exists.</value>
+  </data>
+  <data name="OCLParser_ResolveTypePathName_Path_does_not_refer_a_type_1" xml:space="preserve">
+    <value>Path `{0}` does not refer a type.</value>
+  </data>
+  <data name="OCLParser_CreateVariableDeclaration_CreateVariableDeclaration_missing_case_for_VariableDeclarationRequirement" xml:space="preserve">
+    <value>CreateVariableDeclaration( ... ): missing case for VariableDeclarationRequirement.</value>
+  </data>
+  <data name="OCLParser_CreateVariableDeclaration_Of_type_variable_condition" xml:space="preserve">
+    <value>Type must be defined and value must be omited for variable declarations of tuple type.</value>
+  </data>
+  <data name="OCLParser_CreateVariableDeclaration_tuple_literal_variable_condition" xml:space="preserve">
+    <value>Type and value must be present in variable declarations for tuple literars.</value>
+  </data>
+  <data name="OCLAst_CreateIntegerLiteral_Number__0__is_overflow_" xml:space="preserve">
+    <value>Literal `{0}` results in overflow.</value>
   </data>
 </root>

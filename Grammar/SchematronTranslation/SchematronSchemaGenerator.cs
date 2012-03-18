@@ -11,28 +11,6 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 {
     public class SchematronSchemaGenerator
     {
-        public class TranslationSettings
-        {
-            public bool SchemaAware { get; set; }
-
-            public bool Functional { get; set; }
-
-            public bool Retranslation { get; set; }
-
-            public SubexpressionTranslations SubexpressionTranslations { get; private set; }
-
-            public TranslationSettings()
-            {
-                SubexpressionTranslations = new SubexpressionTranslations();
-            }
-
-            public TranslationSettings(bool schemaAware, bool functional) : this()
-            {
-                SchemaAware = schemaAware;
-                Functional = functional;
-            }
-        }
-
         private PSMSchema psmSchema;
 
         public PSMSchema PSMSchema
@@ -152,6 +130,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
                 {
                     // this must stay here because of the string comparison - translation renames some variables
                     xpathConverter.TranslateExpression(invariant);
+
                     foreach (OclExpression translatedExp in translationSettings.SubexpressionTranslations.Translations.Keys)
                     {
                         if (translatedExp.ToString() == invariant.ToString())
@@ -161,7 +140,6 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
                         }
                     }
                     
-                    //return translationSettings.SubexpressionTranslations.GetSubexpressionTranslation(invariant).GetString();
                 }
                 catch (ExpressionNotSupportedInXPath e)
                 {

@@ -20,7 +20,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
         protected readonly Stack<LoopExp> loopStack
             = new Stack<LoopExp>();
 
-        public SchematronSchemaGenerator.TranslationSettings Settings { get; set; }
+        public TranslationSettings Settings { get; set; }
 
         protected OperationHelper OperationHelper { get; set; }
 
