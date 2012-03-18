@@ -67,6 +67,7 @@
     <Compile Include="SchematronTranslation\SchematronPipeline.cs" />
     <Compile Include="SchematronTranslation\SchematronSchemaGenerator.cs" />
     <Compile Include="SchematronTranslation\SubexpressionTranslations.cs" />
+    <Compile Include="SchematronTranslation\TranslationSettings.cs" />
     <Compile Include="SchematronTranslation\XDocumentSchematronExtensions.cs" />
     <Compile Include="SchematronTranslation\XPathTranslationLogMessages.Designer.cs">
       <AutoGen>True</AutoGen>

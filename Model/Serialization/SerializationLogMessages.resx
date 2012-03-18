@@ -107,4 +107,10 @@
 	<data name="InconsistentCount">
 		<value><![CDATA[Value of attribute 'Count' = {0} is different than the actual number of items in the collection node {1} (which is {2})]]></value>
 	</data>
+  <data name="OCLParser_ClassifierContextHead_Missing_Classifier_Header">
+    <value xml:space="preserve">Nenalezena trida v ClassifierContextHeader</value>
+  </data>
+  <data name="OCLParser_InfixOperation_InfixOperationNotFound_2">
+    <value xml:space="preserve">On type `{0}` is not defined operation `{1}`.</value>
+  </data>
 </root>

@@ -90,7 +90,7 @@ namespace Exolutio.Model.OCL.Compiler {
 
             Operation op = exp1.Type.LookupOperation(nameTree.Text, new Classifier[] { exp2.Type });
             if (op == null) {
-                Errors.AddError(new ErrorItem(String.Format(CompilerErrors.OCLAst_InfixOperation_NotDefined, exp1.Type, nameTree)));
+                Errors.AddError(new ErrorItem(String.Format(CompilerErrors.OCLAst_InfixOperation_NotDefined_2, exp1.Type, nameTree)));
                 return new AST.ErrorExp(Library.Any);
             }
             return (new AST.OperationCallExp(exp1, false, op, new List<AST.OclExpression>(new AST.OclExpression[] { exp2 })))
@@ -105,7 +105,7 @@ namespace Exolutio.Model.OCL.Compiler {
 
             Operation op = exp1.Type.LookupOperation(name.Text, new Classifier[] { });
             if (op == null) {
-                Errors.AddError(new CodeErrorItem(String.Format(CompilerErrors.OCLAst_InfixOperation_NotDefined, exp1.Type, name), name, name));
+                Errors.AddError(new CodeErrorItem(String.Format(CompilerErrors.OCLAst_InfixOperation_NotDefined_2, exp1.Type, name), name, name));
                 return new AST.ErrorExp(Library.Any);
             }
             return new AST.OperationCallExp(exp1, false, op, new List<AST.OclExpression>(new AST.OclExpression[] { }))
@@ -133,7 +133,7 @@ namespace Exolutio.Model.OCL.Compiler {
                 }
             }
 
-            Errors.AddError(new CodeErrorItem(String.Format(CompilerErrors.OCLAst_ProcessPropertyCall_PropertyNotExists, path[0]), tokenPath.First(), tokenPath.Last()));
+            Errors.AddError(new CodeErrorItem(String.Format(CompilerErrors.OCLAst_ProcessPropertyCall_PropertyNotExists_1, path[0]), tokenPath.First(), tokenPath.Last()));
             return new AST.ErrorExp(Library.Invalid);
         }
 
@@ -152,7 +152,7 @@ namespace Exolutio.Model.OCL.Compiler {
                 .SetCodeSource(codeSource);
             //Napevno zafixovany navratovy typ collect
             Classifier returnType = Library.CreateCollection(CollectionKind.Collection, property.Type);
-            return new AST.IteratorExp(expr, localProp, "collect", varList, returnType)
+            return new AST.IteratorExp(expr, localProp, @"collect", varList, returnType)
                 .SetCodeSource(codeSource);
         }
 
@@ -184,7 +184,7 @@ namespace Exolutio.Model.OCL.Compiler {
                 }
             }
 
-            Errors.AddError(new CodeErrorItem(string.Format(CompilerErrors.OCLAst_ProcessOperationCall_OperationNotExists, path.First()), tokenPath.First(), tokenPath.Last()));
+            Errors.AddError(new CodeErrorItem(string.Format(CompilerErrors.OCLAst_ProcessOperationCall_OperationNotExists_1, path.First()), tokenPath.First(), tokenPath.Last()));
             return new AST.ErrorExp(Library.Invalid);
         }
 
@@ -194,7 +194,7 @@ namespace Exolutio.Model.OCL.Compiler {
             }
 
             var codeSource = new CodeSource(token);
-            VariableDeclaration varDecl = new VariableDeclaration("", sourceType, null);
+            VariableDeclaration varDecl = new VariableDeclaration(string.Empty, sourceType, null);
             List<VariableDeclaration> varList = new List<VariableDeclaration>();
             varList.Add(varDecl);
             AST.VariableExp localVar = new AST.VariableExp(varDecl)
@@ -203,7 +203,7 @@ namespace Exolutio.Model.OCL.Compiler {
                 .SetCodeSource(codeSource);
             //Napevno zafixovany navratovy typ collect
             Classifier returnType = Library.CreateCollection(CollectionKind.Collection, op.ReturnType);
-            return new AST.IteratorExp(expr, localOp, "collect", varList, returnType)
+            return new AST.IteratorExp(expr, localOp, @"collect", varList, returnType)
                 .SetCodeSource(codeSource);
         }
 
@@ -219,7 +219,7 @@ namespace Exolutio.Model.OCL.Compiler {
 
             List<string> path = tokenPath.ToStringList();
             if (path.Count != 1) {
-                Errors.AddError(new CodeErrorItem(CompilerErrors.OCLAst_ProcessIteratorCall_Unknow_iterator_operation, tokenPath.First(), tokenPath.Last()));
+                Errors.AddError(new CodeErrorItem(string.Format(CompilerErrors.OCLAst_ProcessIteratorCall_Unknow_iterator_operation), tokenPath.First(), tokenPath.Last()));
                 return new AST.ErrorExp(Library.Invalid);
             }
             if (args.Count > 1) {
@@ -234,7 +234,7 @@ namespace Exolutio.Model.OCL.Compiler {
                 // Pozadovany typ na telo iteratoru, podle pouzite funkce
                 Classifier bodyType = iteratorOperation.BodyType(expr.Type as CollectionType, args[0].Type, TypesTable);
                 if (args[0].Type.ConformsTo(bodyType) == false) {
-                    Errors.AddError(new CodeErrorItem(CompilerErrors.OCLAst_ProcessIteratorCall_Nesedi_typy_v_body, tokenPath.First(), tokenPath.Last()));
+                    Errors.AddError(new CodeErrorItem(CompilerErrors.OCLAst_ProcessIteratorCall_Body_type_inconsistency, tokenPath.First(), tokenPath.Last()));
                 }
                 //Navratovy typ iteratoru podle pouzite operace
                 Classifier returnType = iteratorOperation.ExpressionType(expr.Type as CollectionType, args[0].Type, TypesTable);
@@ -243,7 +243,7 @@ namespace Exolutio.Model.OCL.Compiler {
                     .SetCodeSource(new CodeSource(tokenPath[0]));
             }
 
-            Errors.AddError(new CodeErrorItem(CompilerErrors.OCLAst_ProcessIteratorCall_Bad_iterator_operation, tokenPath.First(), tokenPath.Last()));
+            Errors.AddError(new CodeErrorItem(string.Format(CompilerErrors.OCLAst_ProcessIteratorCall_Bad_iterator_operation_1, name), tokenPath.First(), tokenPath.Last()));
             return new AST.ErrorExp(Library.Invalid);
         }
 
@@ -341,7 +341,7 @@ namespace Exolutio.Model.OCL.Compiler {
                 //35 d,f
                 ImplicitOperationData operation = Environment.LookupImplicitOperation(path[0], callArgs.Select(arg => arg.Type));
                 if (operation == null) {
-                    Errors.AddError(new ErrorItem(string.Format(CompilerErrors.OCLAst_ResolveImplicitOperation_OperaceNenalezena, path[0])));
+                    Errors.AddError(new ErrorItem(string.Format(CompilerErrors.OCLAst_ResolveImplicitOperation_Operation_not_found_1, path[0])));
                     return new AST.ErrorExp(Library.Any);
                 }
                 //self problem
@@ -503,7 +503,7 @@ namespace Exolutio.Model.OCL.Compiler {
             List<Property> tupleParts = new List<Property>();
             foreach (var var in vars) {
                 if (parts.ContainsKey(var.Name)) {
-                    Errors.AddError(new CodeErrorItem(String.Format(CompilerErrors.OCLAst_CreateTupleLiteral_Name__0__is_used_multipled, var.Name), rootToken, rootToken));
+                    Errors.AddError(new CodeErrorItem(String.Format(CompilerErrors.OCLAst_CreateTupleLiteral_Name_repeated_1, var.Name), rootToken, rootToken));
                     continue;
                 }
 
@@ -546,12 +546,12 @@ namespace Exolutio.Model.OCL.Compiler {
             IModelElement foundType = Environment.LookupPathName(path);
             if (foundType == null) {
                 foundType = Library.Invalid;
-                Errors.AddError(new CodeErrorItem(String.Format(CompilerErrors.OCLAst_ResolveTypePathName_Path__0__do_not_exists, path), tokenPath.First(), tokenPath.Last()));
+                Errors.AddError(new CodeErrorItem(String.Format(CompilerErrors.OCLAst_ResolveTypePathName_Path__0__do_not_exists_1, path), tokenPath.First(), tokenPath.Last()));
             }
 
             if (foundType is Classifier == false) {
                 foundType = Library.Invalid;
-                Errors.AddError(new CodeErrorItem(String.Format(CompilerErrors.OCLAst_ResolveTypePathName_Path__0__do_not_referres_type, path), tokenPath.First(), tokenPath.Last()));
+                Errors.AddError(new CodeErrorItem(String.Format(CompilerErrors.OCLAst_ResolveTypePathName_Path__0__do_not_referres_type_1, path), tokenPath.First(), tokenPath.Last()));
             }
 
             return ((Classifier)foundType);
@@ -573,7 +573,7 @@ namespace Exolutio.Model.OCL.Compiler {
             Dictionary<string, Property> tupleParts = new Dictionary<string, Property>();
             foreach (var variable in variables) {
                 if (tupleParts.Keys.Contains(variable.Name)) {// Kontrola nad ramec specifikace
-                    Errors.AddError(new CodeErrorItem(String.Format(CompilerErrors.OCLAst_CreateTupleLiteral_Name__0__is_used_multipled, variable.Name), rootToken, rootToken));
+                    Errors.AddError(new CodeErrorItem(String.Format(CompilerErrors.OCLAst_CreateTupleLiteral_Name_repeated_1, variable.Name), rootToken, rootToken));
                     continue;
                 }
                 Classifier propertyType = variable.Type;
@@ -702,7 +702,7 @@ namespace Exolutio.Model.OCL.Compiler {
             if (objs.Any(o => o == null)) {
                 System.Diagnostics.StackTrace st = new System.Diagnostics.StackTrace();
                 var callingMethod = st.GetFrame(1).GetMethod();
-                Errors.AddError(new ErrorItem(String.Format(CompilerErrors.OCLAst_TestNull_Compiler_panic_in_method__0__, callingMethod.Name)));
+                Errors.AddError(new ErrorItem(String.Format(CompilerErrors.OCLAst_TestNull_Compiler_panic_in_method_1, callingMethod.Name)));
                 return true;
             }
             return false;
