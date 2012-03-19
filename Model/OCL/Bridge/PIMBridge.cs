@@ -5,6 +5,7 @@ using System.Text;
 using Exolutio.Model.OCL.Types;
 using Exolutio.Model.PIM;
 using Exolutio.Model.OCL.TypesTable;
+using Exolutio.SupportingClasses;
 
 namespace Exolutio.Model.OCL.Bridge {
     /// <summary>
@@ -77,15 +78,22 @@ namespace Exolutio.Model.OCL.Bridge {
             List<PIMBridgeClass> classToProcess = new List<PIMBridgeClass>();
             //vytvoreni prazdnych trid
             //musi predchazet propertam a associacim, aby se neodkazovalo na neexistujici typy
-            foreach (PIM.PIMClass cl in schema.PIMClasses) {
-                PIMBridgeClass newClass = new PIMBridgeClass(tt,tt.Library.RootNamespace, cl);
-              //  tt.Library.RootNamespace.NestedClassifier.Add(newClass);
+
+            // JM: usporadani trid tak, aby predkove byli zalozeni pred potomky
+            List<PIMClass> pimClassesHierarchy = ModelIterator.GetPIMClassesInheritanceBFS(Schema).ToList();
+
+            foreach (PIM.PIMClass pimClass in pimClassesHierarchy)
+            {
+                // JM: parent - predek v PIM modelu
+                PIMBridgeClass parent = pimClass.GeneralizationAsSpecific != null ? PIMClasses[pimClass.GeneralizationAsSpecific.General] : null;
+                PIMBridgeClass newClass = new PIMBridgeClass(tt,tt.Library.RootNamespace, pimClass, parent);
+                //  tt.Library.RootNamespace.NestedClassifier.Add(newClass);
                 tt.RegisterType(newClass);
                 classToProcess.Add(newClass);
                 //Hack
-                newClass.Tag = cl;
+                newClass.Tag = pimClass;
                 //Registred to find
-                PIMClasses.Add(cl, newClass);
+                PIMClasses.Add(pimClass, newClass);
             }
 
             //Translates classes members

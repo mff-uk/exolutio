@@ -13,7 +13,7 @@ namespace Exolutio.SupportingClasses
             {
                 return obj;
             }
-            return null; 
+            return null;
         }
 
         public static object FirstOrDefault(this IEnumerable collection, Func<object, bool> predicate)
@@ -88,15 +88,15 @@ namespace Exolutio.SupportingClasses
             where TValue : class
         {
             KeyValuePair<TKey, TValue> result = dictionary.FirstOrDefault(kvp => kvp.Value == value);
-            return result; 
+            return result;
         }
 
-        public static TValue ValueOrNull<TKey, TValue> (this IDictionary<TKey, TValue> dictionary, TKey key)
-            where TValue: class
+        public static TValue ValueOrNull<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key)
+            where TValue : class
         {
             TValue value = null;
             dictionary.TryGetValue(key, out value);
-            return value; 
+            return value;
         }
 
         public static List<TValue> Flatten<TKey, TValue>(this IDictionary<TKey, List<TValue>> collection)
@@ -111,7 +111,7 @@ namespace Exolutio.SupportingClasses
 
         public static IEnumerable<TValue> Prepend<TValue>(this IEnumerable<TValue> items, TValue item)
         {
-            TValue[] prep = new[] {item};
+            TValue[] prep = new[] { item };
             return prep.Concat(items);
         }
 
@@ -152,8 +152,47 @@ namespace Exolutio.SupportingClasses
             return queue.Count == 0;
         }
 
+        public static IEnumerable<T> Closure<T>(this T seed, Func<T, IEnumerable<T>> step)
+        {
+            return Closure(new[] { seed }, step);
+        }
 
-        #if SILVERLIGHT
+        public static IEnumerable<T> Closure<T>(this T seed, Func<T, T> step)
+        {
+            return Closure(new[] { seed }, c => new[] { step(c) });
+        }
+
+        public static IEnumerable<T> Closure<T>(this IEnumerable<T> seed, Func<T, T> step)
+        {
+            return Closure(seed, c => new[] { step(c) });
+        }
+
+        public static IEnumerable<T> Closure<T>(this IEnumerable<T> seed, Func<T, IEnumerable<T>> step)
+        {
+            List<T> result = new List<T>();
+            Queue<T> toDo = new Queue<T>();
+            foreach (T s in seed)
+            {
+                toDo.Enqueue(s);
+            }
+
+            while (!toDo.IsEmpty())
+            {
+                T e = toDo.Dequeue();
+                if (e != null && !result.Contains(e))
+                {
+                    result.Add(e);
+                    foreach (T next in step(e))
+                    {
+                        toDo.Enqueue(next);
+                    }
+                }
+            }
+            return result;
+        }
+
+
+#if SILVERLIGHT
         public static void RemoveAll<TValue>(this List<TValue> list, Func<TValue, bool> predicate)
         {
             List<TValue> tmp = list.Where(predicate).ToList();
@@ -162,6 +201,6 @@ namespace Exolutio.SupportingClasses
                 tmp.Remove(item);
             }
         }
-        #endif
+#endif
     }
 }
