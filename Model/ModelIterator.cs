@@ -875,6 +875,34 @@ namespace Exolutio.Model
             }
         }
 
-        
+
+        public static IEnumerable<PSMClass> GetAncestors(PSMClass psmClass)
+        {
+            if (psmClass.GeneralizationAsSpecific != null)
+            {
+                return psmClass.GeneralizationAsSpecific.General.Closure(c => c.GeneralizationAsSpecific != null ? c.GeneralizationAsSpecific.General : null);
+            }
+            else
+            {
+                return new PSMClass[0];
+            }
+        }
+
+        public static IEnumerable<PSMClass> GetAncestorsWithSelf(PSMClass psmClass)
+        {
+            return psmClass.Closure(c => c.GeneralizationAsSpecific != null ? c.GeneralizationAsSpecific.General : null);
+        }
+
+        public static IEnumerable<PIMClass> GetPIMClassesInheritanceBFS(PIMSchema pimSchema)
+        {
+            IEnumerable<PIMClass> inheritanceRoots = pimSchema.PIMClasses.Where(c => c.GeneralizationAsSpecific == null);
+            return inheritanceRoots.Closure(parent => parent.GeneralizationsAsGeneral.Select(gen => gen.Specific));
+        }
+
+        public static IEnumerable<PSMClass> GetPSMClassesInheritanceBFS(PSMSchema psmSchema)
+        {
+            IEnumerable<PSMClass> inheritanceRoots = psmSchema.PSMClasses.Where(c => c.GeneralizationAsSpecific == null);
+            return inheritanceRoots.Closure(parent => parent.GeneralizationsAsGeneral.Select(gen => gen.Specific));
+        }
     }
 }

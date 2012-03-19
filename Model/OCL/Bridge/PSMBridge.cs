@@ -130,15 +130,21 @@ namespace Exolutio.Model.OCL.Bridge {
             }
 
             List<PSMBridgeClass> classToProcess = new List<PSMBridgeClass>();
-            foreach (PSM.PSMClass cl in schema.PSMClasses) {
-                PSMBridgeClass newClass = new PSMBridgeClass(tt,tt.Library.RootNamespace, cl);
+            // JM: usporadani trid tak, aby predkove byli zalozeni pred potomky
+            List<PSMClass> psmClassesHierarchy = ModelIterator.GetPSMClassesInheritanceBFS(Schema).ToList();
+            
+            foreach (PSM.PSMClass psmClass in schema.PSMClasses) 
+            {
+                // JM: parent - predek v PSM modelu
+                PSMBridgeClass parent = psmClass.GeneralizationAsSpecific != null ? PSMAssociationMembers[psmClass.GeneralizationAsSpecific.General] : null;
+                PSMBridgeClass newClass = new PSMBridgeClass(tt, tt.Library.RootNamespace, psmClass, parent);
               //  tt.Library.RootNamespace.NestedClassifier.Add(newClass);
                 tt.RegisterType(newClass);
                 classToProcess.Add(newClass);
                 //Hack
-                newClass.Tag = cl;
+                newClass.Tag = psmClass;
                 //Registred to find
-                PSMAssociationMembers.Add(cl, newClass);
+                PSMAssociationMembers.Add(psmClass, newClass);
             }
 
             foreach (var cM in schema.PSMContentModels) {
