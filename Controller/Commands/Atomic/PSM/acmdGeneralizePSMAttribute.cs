@@ -1,6 +1,7 @@
 ﻿using System;
 using Exolutio.Model.PSM;
 using Exolutio.Model;
+using Exolutio.Model.PIM;
 
 namespace Exolutio.Controller.Commands.Atomic.PSM
 {
@@ -29,6 +30,19 @@ namespace Exolutio.Controller.Commands.Atomic.PSM
             {
                 ErrorDescription = CommandErrors.CMDERR_NO_GENERALIZATION;
                 return false;
+            }
+            if (attribute.Interpretation != null)
+            {
+                PSMClass intclass = attribute.NearestInterpretedClass();
+                if (intclass != null)
+                {
+                    if ((intclass.Interpretation as PIMClass) != (attribute.Interpretation as PIMAttribute).PIMClass
+                    && !(intclass.Interpretation as PIMClass).GetGeneralClasses().Contains((attribute.Interpretation as PIMAttribute).PIMClass))
+                    {
+                        ErrorDescription = CommandErrors.CMDERR_CANNOT_GENERALIZE_INTERPRET_ERR;
+                        return false;
+                    }
+                }
             }
             return true;
         }

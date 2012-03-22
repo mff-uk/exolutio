@@ -219,6 +219,8 @@
     <Compile Include="Commands\Complex\PSM\cmdLeaveOutUninterpretedAssociationMember.cs" />
     <Compile Include="Commands\Complex\PSM\cmdInsertPSMClass.cs" />
     <Compile Include="Commands\Complex\PSM\cmdFixPSMAssociationInterpretation.cs" />
+    <Compile Include="Commands\Complex\PSM\cmdGeneralizePSMAttribute.cs" />
+    <Compile Include="Commands\Complex\PSM\cmdGeneralizePSMAssociation.cs" />
     <Compile Include="Commands\Reflection\CommandSerializer.cs" />
     <Compile Include="Commands\Reflection\PSMClassInterpretedEndParameterConsistency.cs" />
     <Compile Include="Commands\Reflection\PSMAssociationMemberParameterConsistency.cs" />

@@ -258,4 +258,7 @@
   <data name="CMDERR_CLASS_NOT_GENERAL" xml:space="preserve">
     <value>Target class is not a general class of the current special class.</value>
   </data>
+  <data name="CMDERR_CANNOT_GENERALIZE_INTERPRET_ERR" xml:space="preserve">
+    <value>Cannot generalize, interpretation would be violated.</value>
+  </data>
 </root>
