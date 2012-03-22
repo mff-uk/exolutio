@@ -509,9 +509,9 @@ namespace Exolutio.Model
             else return NearestInterpretedParentClass(child.Parent);
         }
 
-        public static PSMClass NearestInterpretedClass(this PSMClass child)
+        public static PSMClass NearestInterpretedClass(this PSMAssociationMember child)
         {
-            if (child.Interpretation != null) return child;
+            if (child is PSMClass && child.Interpretation != null) return (child as PSMClass);
             return NearestInterpretedParentClass(child);
         }
 
