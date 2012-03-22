@@ -107,7 +107,22 @@ namespace Exolutio.Model.OCL.ConstraintConversion
                 }
                 Property referredProperty;
                 if (step is PSMPathAssociationStep)
-                    referredProperty = sourceClassifier.LookupProperty(((PSMPathAssociationStep) step).Association.Name);
+                {
+                    PSMPathAssociationStep pathAssociationStep = ((PSMPathAssociationStep)step);
+                    referredProperty = sourceClassifier.LookupProperty(pathAssociationStep.Association.Name);
+                    if (referredProperty == null)
+                    {
+                        if (pathAssociationStep.IsUp)
+                        {
+                            referredProperty = sourceClassifier.LookupProperty(PSMBridgeAssociation.PARENT_STEP);
+                        }
+                        else
+                        {
+                            referredProperty = sourceClassifier.LookupProperty(string.Format(PSMBridgeAssociation.CHILD_N_STEP,
+                                pathAssociationStep.From.ChildPSMAssociations.IndexOf(pathAssociationStep.Association)));
+                        }
+                    }
+                }
                 else if (step is PSMPathAttributeStep)
                     referredProperty = sourceClassifier.LookupProperty(((PSMPathAttributeStep)step).Attribute.Name);
                 else
@@ -137,8 +152,6 @@ namespace Exolutio.Model.OCL.ConstraintConversion
                 PSMClass psmClass = VariableClassMappings[node.referredVariable].First();
                 Classifier variableType = psmBridge.Find(psmClass);
                 VariableDeclaration vd = new VariableDeclaration(node.referredVariable.Name, variableType, value);
-                if (node.referredVariable.IsContextVariable)
-                    this.SelfVariableDeclaration = vd;
                 return new VariableExp(vd);
             }
             else
@@ -252,6 +265,15 @@ namespace Exolutio.Model.OCL.ConstraintConversion
             #endregion
 
             psmBridge = new PSMBridge(TargetPSMSchema);
+
+            #region prepare self variable 
+
+            PSMClass psmClass = VariableClassMappings[classifierConstraint.Self].First();
+            Classifier variableType = psmBridge.Find(psmClass);
+            VariableDeclaration vd = new VariableDeclaration(classifierConstraint.Self.Name, variableType, null);
+            this.SelfVariableDeclaration = vd;
+
+            #endregion
 
             OclExpression translateConstraint = pimInvariant.Accept(this);
             psmContextSuggestion = psmBridge.Find(VariableClassMappings[classifierConstraint.Self].First()); 

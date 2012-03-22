@@ -110,10 +110,10 @@ namespace Exolutio.Model.OCL.Bridge {
                 }
                 else if (parentAss.Parent is PSM.PSMContentModel) {
                     parentName = GetContentModelOCLName((PSM.PSMContentModel)parentAss.Parent);
-                    defaultName = "parent";
+                    defaultName = PSMBridgeAssociation.PARENT_STEP;
                 }
 
-                namesInOcl.Add("parent");
+                namesInOcl.Add(PSMBridgeAssociation.PARENT_STEP);
 
                 if (parentName != null) {
                     Classifier propType = TypeTable.Library.RootNamespace.NestedClassifier[parentName];
@@ -166,9 +166,9 @@ namespace Exolutio.Model.OCL.Bridge {
                 }
                 // Other naming format 
                 // child_{type} 
-                namesInOcl.Add(String.Format("child_{0}", childClassName));
+                namesInOcl.Add(String.Format(PSMBridgeAssociation.CHILD_N_STEP, childClassName));
                 // child_{order}
-                namesInOcl.Add(string.Format("child_{0}", ++childCount));
+                namesInOcl.Add(string.Format(PSMBridgeAssociation.CHILD_N_STEP, ++childCount));
 
                 Classifier assType = TypeTable.Library.RootNamespace.NestedClassifier[childClassName];
                 Classifier propType = BridgeHelpers.GetTypeByCardinality(TypeTable, ass, assType);

@@ -6,6 +6,7 @@ using System.Xml.Linq;
 using Exolutio.Model;
 using Exolutio.Model.OCL;
 using Exolutio.Model.OCL.AST;
+using Exolutio.Model.OCL.Types;
 using Exolutio.Model.OCL.Utils;
 using Exolutio.Model.PSM;
 using Exolutio.Model.PSM.Grammar;
@@ -32,7 +33,14 @@ namespace Exolutio.View.Commands.OCL
 
             foreach (ClassifierConstraint constraint in constraints)
             {
-                sb.AppendFormat("context {0}", ((Component)constraint.Context.Tag).Name);
+                if (constraint.Self.Name == VariableDeclaration.SELF)
+                {
+                    sb.AppendFormat("context {0}", ((Component)constraint.Context.Tag).Name);
+                }
+                else
+                {
+                    sb.AppendFormat("context {0}:{1}", constraint.Self.Name, ((Component)constraint.Context.Tag).Name);
+                }
                 sb.AppendLine();
                 foreach (OclExpression invariant in constraint.Invariants)
                 {

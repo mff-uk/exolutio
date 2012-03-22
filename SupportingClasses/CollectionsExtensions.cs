@@ -191,6 +191,10 @@ namespace Exolutio.SupportingClasses
             return result;
         }
 
+        public static IEnumerable<TKey> GetKeys<TKey, TValue>(this IEnumerable<IGrouping<TKey, TValue>> groupings)
+        {
+            return groupings.Select(g => g.Key);
+        }
 
 #if SILVERLIGHT
         public static void RemoveAll<TValue>(this List<TValue> list, Func<TValue, bool> predicate)

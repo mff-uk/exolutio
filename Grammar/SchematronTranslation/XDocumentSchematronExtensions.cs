@@ -65,7 +65,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 
         public static XElement SchematronReport(this XElement parentElement, string test, string message = null)
         {
-            XElement report = parentElement.SchematronGenericElement("test");
+            XElement report = parentElement.SchematronGenericElement("report");
             report.AddAttributeWithValue("test", test);
             if (!string.IsNullOrEmpty(message))
             {
@@ -79,6 +79,13 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             XElement let = parentElement.SchematronGenericElement("let");
             let.AddAttributeWithValue("name", value);
             return let;
+        }
+
+        public static XElement SchematronParam(this XElement parentElement, string name, string value)
+        {
+            XElement param = parentElement.SchematronGenericElement("param");
+            param.AddAttributeWithValue(name, value);
+            return param;
         }
     }
 }

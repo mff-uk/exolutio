@@ -52,5 +52,6 @@ namespace Exolutio.Model.OCL.Types
 
         public bool IsContextVariable { get; set; }
 
+        public static string SELF = @"self";
     }
 }

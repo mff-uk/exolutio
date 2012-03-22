@@ -40,5 +40,11 @@ namespace Exolutio.Model.OCL.Bridge {
         public enum AssociationDirection{
             Down, Up
         }
+
+        /// <summary>
+        /// Returns a constant string `parent` which can be used for navigation in PSM OCL
+        /// </summary>
+        public const string PARENT_STEP = @"parent";
+        public const string CHILD_N_STEP = @"child_{0}";
     }
 }
