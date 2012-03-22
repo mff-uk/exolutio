@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections;
+using System.Linq; 
 using System.Collections.Generic;
 using System.Xml.Linq;
 using Exolutio.Model.OCL;
 using Exolutio.Model.OCL.AST;
 using Exolutio.Model.OCL.Bridge;
+using Exolutio.Model.OCL.Types;
 using Exolutio.SupportingClasses;
 using Exolutio.SupportingClasses.Annotations;
 
@@ -19,6 +22,12 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
         }
 
         public Log<OclExpression> Log { get; private set; }
+
+        private static readonly XNamespace oclXNamespace = "http://eXolutio.com/oclX";
+        public static XNamespace OclXNamespace
+        {
+            get { return oclXNamespace; }
+        }
 
         public void Initialize(PSMSchema psmSchema)
         {
@@ -51,46 +60,123 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             return doc;
         }
 
+        private class PatternInfo
+        {
+            public string PatternName { get; set; }
+
+            private readonly List<string> contextVariableNames = new List<string>();
+            public List<string> ContextVariableNames
+            {
+                get { return contextVariableNames; }
+            }
+        }
+
         private void TranslateScript(XElement schSchema, OCLScript oclScript, TranslationSettings translationSettings)
         {
-            XElement patternElement = schSchema.SchematronPattern(oclScript.Name);
-
             CompilerResult compilerResult = oclScript.CompileToAst();
+
+            Dictionary<PSMClass, PatternInfo> patterns = new Dictionary<PSMClass, PatternInfo>();
+
             if (!compilerResult.Errors.HasError)
             {
                 XComment comment = new XComment(string.Format("Below follow constraints from OCL script '{0}'. ", oclScript.Name));
-                patternElement.Add(comment);
-                foreach (ClassifierConstraint constraint in compilerResult.Constraints.Classifiers)
-                {
-                    PSMAssociationMember contextNode = (PSMAssociationMember)constraint.Context.Tag;
-                    XElement ruleElement = patternElement.SchematronRule(contextNode.XPath);
-                    if (constraint.Self.Name != @"self")
-                    {
-                        XElement contextVarElement = new XElement((XNamespace)("http://eXolutio.com/oclX") + "context-variable");
-                        contextVarElement.AddAttributeWithValue("name", constraint.Self.Name);
-                        ruleElement.Add(contextVarElement);    
-                    }                    
-                    
-                    foreach (OclExpression invariant in constraint.Invariants)
-                    {
-                        string xpath = TranslateInvariantToXPath(oclScript, constraint, compilerResult.Bridge, invariant, translationSettings);
+                schSchema.Add(comment);
+                IEnumerable<IGrouping<PSMClass, ClassifierConstraint>> grouped = compilerResult.Constraints.Classifiers.GroupBy(GetContextTag);
+                IEnumerable<PSMClass> keys = grouped.GetKeys();
 
-                        try
+                foreach (IGrouping<PSMClass, ClassifierConstraint> group in grouped)
+                {
+                    PSMClass contextClass = @group.Key;
+                    XElement patternElement = schSchema.SchematronPattern(contextClass.Name);
+                    patterns[contextClass] = new PatternInfo { PatternName = contextClass.Name };
+                                        
+                    bool abstractPattern = !contextClass.GeneralizationsAsGeneral.IsEmpty() 
+                        && SpecificHasConstraits(keys, contextClass);
+
+                    #region classes requiring abstract patterns
+
+                    if (abstractPattern)
+                    {
+                        // abstract pattern
+                        patternElement.AddAttributeWithValue("abstract", "true");
+                    }
+
+                    #endregion
+
+                    foreach (ClassifierConstraint constraint in group)
+                    {
+                        XElement ruleElement = patternElement.SchematronRule(!abstractPattern ? contextClass.XPath : "$" + constraint.Self.Name);
+                        patterns[contextClass].ContextVariableNames.AddIfNotContained(constraint.Self.Name);
+                        if (!abstractPattern && constraint.Self.Name != VariableDeclaration.SELF)
                         {
-                            ruleElement.Add(new XComment(invariant.ToString()));
-                            XElement assertElement = ruleElement.SchematronAssert(xpath);
+                            XElement contextVarElement = new XElement(OclXNamespace + "context-variable");
+                            contextVarElement.AddAttributeWithValue("name", constraint.Self.Name);
+                            ruleElement.Add(contextVarElement);
                         }
-                        catch
+
+                        TranslateInvariantsToXPath(constraint, ruleElement, oclScript, (PSMBridge)compilerResult.Bridge, translationSettings);
+                    }
+
+                    #region create instance patterns 
+
+                    IEnumerable<PSMClass> ancestorsAndSelf = ModelIterator.GetAncestorsWithSelf(contextClass);
+                    foreach (PSMClass ancestorClass in ancestorsAndSelf)
+                    {
+                        if (patterns.ContainsKey(ancestorClass) && (abstractPattern || ancestorClass != contextClass))
                         {
-                            ruleElement.Add(new XComment("Translation of the constraint failed. "));
+                            if (ancestorClass != contextClass)
+                            {
+                                schSchema.Add(new XComment(string.Format("instance pattern for {0}'s ancestor {1}", contextClass, ancestorClass.Name)));
+                            }
+                            else
+                            {
+                                schSchema.Add(new XComment(string.Format("instance pattern for {0}'s", contextClass)));
+                            }
+                            XElement instancePattern = schSchema.SchematronPattern();
+                            instancePattern.AddAttributeWithValue("id", string.Format("{0}-as-{1}", contextClass.Name, ancestorClass.Name));
+                            instancePattern.AddAttributeWithValue("is-a", patterns[ancestorClass].PatternName);
+                            foreach (string contextVariableName in patterns[ancestorClass].ContextVariableNames)
+                            {
+                                instancePattern.SchematronParam(contextVariableName, ".");
+                            }
                         }
                     }
+
+                    #endregion                    
                 }
             }
             else
             {
                 XComment comment = new XComment(string.Format("OCL script '{0}' contains errors and thus can not be translated. ", oclScript.Name));
-                patternElement.Add(comment);
+                schSchema.Add(comment);
+            }
+        }
+
+        private static bool SpecificHasConstraits(IEnumerable<PSMClass> keys, PSMClass contextClass)
+        {
+            return contextClass.GeneralizationsAsGeneral.Any(gen => keys.Contains(gen.Specific));
+        }
+
+        private PSMClass GetContextTag(ClassifierConstraint cc)
+        {
+            return (PSMClass) cc.Context.Tag;
+        }
+
+        private void TranslateInvariantsToXPath(ClassifierConstraint constraint, XElement ruleElement, OCLScript oclScript, PSMBridge psmBridge, TranslationSettings translationSettings)
+        {
+            foreach (OclExpression invariant in constraint.Invariants)
+            {
+                string xpath = TranslateInvariantToXPath(oclScript, constraint, psmBridge, invariant, translationSettings);
+
+                try
+                {
+                    ruleElement.Add(new XComment(invariant.ToString()));
+                    ruleElement.SchematronAssert(xpath);
+                }
+                catch
+                {
+                    ruleElement.Add(new XComment("Translation of the constraint failed. "));
+                }
             }
         }
 

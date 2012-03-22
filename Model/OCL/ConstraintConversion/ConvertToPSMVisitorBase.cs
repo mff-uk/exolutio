@@ -160,7 +160,11 @@ namespace Exolutio.Model.OCL.ConstraintConversion
                     if (candidate.Interpretation == null || interpretedClassSatisfies)
                     {
                         PSMPath nextBuiltPath = (PSMPath) builtPath.Clone();
-                        nextBuiltPath.Steps.Add(new PSMPathAssociationStep(nextBuiltPath) {Association = candidateAssociation, To = candidate, From = currentMember});
+                        nextBuiltPath.Steps.Add(new PSMPathAssociationStep(nextBuiltPath)
+                                                    {
+                                                        Association = candidateAssociation, To = candidate, From = currentMember,
+                                                        IsUp =  candidateAssociation.Parent == candidate
+                                                    });
 
                         if (interpretedClassSatisfies)
                         {

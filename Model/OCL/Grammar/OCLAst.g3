@@ -57,7 +57,7 @@ classifierContextDecl
 
 classifierContextHead
 	returns [Classifier Context, VariableDeclaration Self]
-	:^(CLASSIFIERHEAD pathName ) {$Context=ClassifierContextHead($pathName.Path,"self",out $Self);}
+	:^(CLASSIFIERHEAD pathName ) {$Context=ClassifierContextHead($pathName.Path,VariableDeclaration.SELF,out $Self);}
 	|^(CLASSIFIERHEAD pathName SimpleName ) {$Context=ClassifierContextHead($pathName.Path,$SimpleName.Text,out $Self);}
 	;
 

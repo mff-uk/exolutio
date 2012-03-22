@@ -360,7 +360,7 @@ namespace Exolutio.Model.OCL.ConstraintConversion
 
         public override object Clone(PSMPath newContainingPath)
         {
-            return new PSMPathAssociationStep(newContainingPath) { Association = this.Association, From = this.From, To = this.To };
+            return new PSMPathAssociationStep(newContainingPath) { Association = this.Association, From = this.From, To = this.To, IsUp = this.IsUp};
         }
 
         public override string ToXPath()

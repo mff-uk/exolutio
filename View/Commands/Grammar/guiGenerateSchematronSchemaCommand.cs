@@ -13,7 +13,7 @@ namespace Exolutio.View.Commands.Grammar
     {
         private class TagClass
         {
-            public SchematronSchemaGenerator.TranslationSettings settings { get; set; }
+            public TranslationSettings settings { get; set; }
             public ExpressionTweakingPanel tweakingPanel { get; set; }
         }
 
@@ -24,7 +24,7 @@ namespace Exolutio.View.Commands.Grammar
                 XDocument schematronSchemaDocument;
                 ILog log;
 
-                SchematronSchemaGenerator.TranslationSettings settings = new SchematronSchemaGenerator.TranslationSettings();
+                TranslationSettings settings = new TranslationSettings();
                 settings.Functional = true;
                 settings.SchemaAware = true;
 
@@ -61,7 +61,7 @@ namespace Exolutio.View.Commands.Grammar
             ILog log;
 
             TagClass tag = (TagClass) filePresenterTab.Tag;
-            SchematronSchemaGenerator.TranslationSettings settings = tag.settings;
+            TranslationSettings settings = tag.settings;
             foreach (FilePresenterButtonInfo buttonInfo in filePresenterTab.FilePresenterButtons)
             {
                 if (buttonInfo.ButtonName == "SA")
@@ -86,7 +86,7 @@ namespace Exolutio.View.Commands.Grammar
             XDocument document;
             ILog log;
             TagClass tag = (TagClass)p.FilePresenterTab.Tag;
-            SchematronSchemaGenerator.TranslationSettings settings = tag.settings;
+            TranslationSettings settings = tag.settings;
             settings.Retranslation = true; 
             GenerateSchema(p.FilePresenterTab.SourcePSMSchema, settings, out document, out log);
             p.FilePresenterTab.ReDisplayFile(document, EDisplayedFileType.SCH,
@@ -102,7 +102,7 @@ namespace Exolutio.View.Commands.Grammar
         //    filePresenterTab.ReDisplayFile(document, EDisplayedFileType.SCH, filePresenterTab.SourcePSMSchema.Caption, log, filePresenterTab.ValidationSchema, filePresenterTab.SourcePSMSchema);
         //}
 
-        private static void GenerateSchema(PSMSchema psmSchema, SchematronSchemaGenerator.TranslationSettings settings, out XDocument schematronSchemaDocument, out ILog log)
+        private static void GenerateSchema(PSMSchema psmSchema, TranslationSettings settings, out XDocument schematronSchemaDocument, out ILog log)
         {
             SchematronSchemaGenerator schemaGenerator = new SchematronSchemaGenerator();
             schemaGenerator.Initialize(psmSchema);
