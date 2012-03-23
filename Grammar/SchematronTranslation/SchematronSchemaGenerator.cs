@@ -105,7 +105,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 
                     foreach (ClassifierConstraint constraint in group)
                     {
-                        XElement ruleElement = patternElement.SchematronRule(!abstractPattern ? contextClass.XPath : "$" + constraint.Self.Name);
+                        XElement ruleElement = patternElement.SchematronRule(!abstractPattern ? contextClass.XPathFull.ToString() : "$" + constraint.Self.Name);
                         patterns[contextClass].ContextVariableNames.AddIfNotContained(constraint.Self.Name);
                         if (!abstractPattern && constraint.Self.Name != VariableDeclaration.SELF)
                         {
@@ -119,7 +119,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 
                     #region create instance patterns 
 
-                    IEnumerable<PSMClass> ancestorsAndSelf = ModelIterator.GetAncestorsWithSelf(contextClass);
+                    IEnumerable<PSMClass> ancestorsAndSelf = ModelIterator.GetGeneralizationsWithSelf(contextClass);
                     foreach (PSMClass ancestorClass in ancestorsAndSelf)
                     {
                         if (patterns.ContainsKey(ancestorClass) && (abstractPattern || ancestorClass != contextClass))

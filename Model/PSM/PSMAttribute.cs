@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Xml;
 using System.Xml.Linq;
+using Exolutio.Model.PSM.XPath;
 using Exolutio.Model.Serialization;
 using Exolutio.Model.Versioning;
 
@@ -97,6 +98,17 @@ namespace Exolutio.Model.PSM
         public override string XPath
         {
             get { return string.Format("{0}/{1}{2}", PSMClass.XPath, Element ? string.Empty : "@", Name); }
+        }
+
+        public override Path XPathFull
+        {
+            get
+            {
+                Path result = PSMClass.XPathFull.DeepCopy();
+                Step attributeStep = new Step {NodeTest = Name, Axis = Axis.attribute};
+                result.AddStep(attributeStep);
+                return result;
+            }
         }
 
         #region IHasCardinality Members

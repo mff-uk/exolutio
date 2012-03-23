@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Xml;
 using System.Xml.Linq;
+using Exolutio.Model.PSM.XPath;
 using Exolutio.Model.Serialization;
 using Exolutio.Model.Versioning;
 
@@ -153,6 +154,42 @@ namespace Exolutio.Model.PSM
             get { return ParentAssociation.XPath; }
         }
 
+        public override Path XPathFull
+        {
+            get
+            {
+                Path parentPath = ParentAssociation.XPathFull.DeepCopy();
+                IEnumerable<PSMAssociation> nonTreeAssociations = PSMSchema.PSMAssociations.Where(a => a.IsNonTreeAssociation).Where(a => a.Child == this);
+                bool nonTreeAssociationsExist = nonTreeAssociations.Any();
+                IEnumerable<PSMGeneralization> generalizations = PSMSchema.PSMGeneralizations.Where(g => g.General == this);
+                bool specificationsExists = generalizations.Any();
+                if (nonTreeAssociationsExist || specificationsExists)
+                {
+                    UnionPath unionPath = new UnionPath();
+                    unionPath.ComponentPaths.Add(parentPath);
+
+                    foreach (PSMAssociation nta in nonTreeAssociations)
+                    {
+                        if (nta.IsTransitiveRecursion)
+                        Path ntaPath = nta.XPathFull;
+                        unionPath.ComponentPaths.Add(ntaPath);
+                    }
+
+                    foreach (PSMGeneralization generalization in generalizations)
+                    {
+                        Path specificClassPath = generalization.Specific.XPathFull;
+                        unionPath.ComponentPaths.Add(specificClassPath);
+                    }
+
+                    return unionPath;
+                }
+                else
+                {
+                    return parentPath;
+                }
+            }
+        }
+        
         #region Implementation of IExolutioSerializable
 
         public override void Serialize(XElement parentNode, SerializationContext context)

@@ -57,9 +57,11 @@
     <Compile Include="CollectionsExtensions.cs" />
     <Compile Include="DispNullFormatProvider.cs" />
     <Compile Include="EDisplayedFileType.cs" />
+    <Compile Include="EnumExtensions.cs" />
     <Compile Include="ExolutioList.cs" />
     <Compile Include="ComposedKey.cs" />
     <Compile Include="IEnumerableRandomExtensions.cs" />
+    <Compile Include="ISupportsDeepCopy.cs" />
     <Compile Include="LogMessage.cs" />
     <Compile Include="NameSuggestor.cs" />
     <Compile Include="ObservableDictionary.cs" />
