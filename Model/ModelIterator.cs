@@ -263,6 +263,18 @@ namespace Exolutio.Model
             return null;
         }
 
+        public static IEnumerable<PSMAssociationMember> GetPSMAncestors(PSMAssociationMember psmAssociationMember, 
+            bool specializationsAncestors = false, bool includeGeneralizationsAncestors = false)
+        {
+            return psmAssociationMember.Closure(
+                c => c is PSMClass
+                         ? 
+                         (PSMClass)
+                         c.ParentAssociation.Parent
+                         // for content models, just get the parent
+                         : c.ParentAssociation.Parent);
+        }
+
         public static IEnumerable<PSMComponent> GetPSMChildren(PSMComponent component, bool returnAttributesForClass = false, bool returnChildAssociationsForAssociationMembers = false)
         {
             IEnumerable<PSMComponent> result = new PSMComponent[0];
@@ -876,7 +888,7 @@ namespace Exolutio.Model
         }
 
 
-        public static IEnumerable<PSMClass> GetAncestors(PSMClass psmClass)
+        public static IEnumerable<PSMClass> GetGeneralizations(PSMClass psmClass)
         {
             if (psmClass.GeneralizationAsSpecific != null)
             {
@@ -888,7 +900,7 @@ namespace Exolutio.Model
             }
         }
 
-        public static IEnumerable<PSMClass> GetAncestorsWithSelf(PSMClass psmClass)
+        public static IEnumerable<PSMClass> GetGeneralizationsWithSelf(PSMClass psmClass)
         {
             return psmClass.Closure(c => c.GeneralizationAsSpecific != null ? c.GeneralizationAsSpecific.General : null);
         }

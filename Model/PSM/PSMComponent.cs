@@ -2,6 +2,7 @@
 using System.Xml;
 using System.Xml.Linq;
 using Exolutio.Model.PIM;
+using Exolutio.Model.PSM.XPath;
 using Exolutio.Model.Serialization;
 using Exolutio.Model.Versioning;
 using System.Collections.Generic;
@@ -41,6 +42,8 @@ namespace Exolutio.Model.PSM
         public UndirectCollection<PIMGeneralization> UsedGeneralizations { get; private set; }
 
         public abstract string XPath { get; }
+
+        public abstract Path XPathFull { get; }
 
         private void InitializeCollections()
         {

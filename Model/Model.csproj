@@ -214,6 +214,7 @@
     <Compile Include="PSM\PSMContentModelType.cs" />
     <Compile Include="PSM\PSMDiagram.cs" />
     <Compile Include="PSM\PSMSchemaReference.cs" />
+    <Compile Include="PSM\XPath\XPath.cs" />
     <Compile Include="Serialization\IEvoXSerializable.cs" />
     <Compile Include="Serialization\SerializationContext.cs" />
     <Compile Include="Serialization\SerializationLogMessages.Designer.cs">

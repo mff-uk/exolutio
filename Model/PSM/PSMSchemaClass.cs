@@ -1,4 +1,5 @@
 ﻿using System;
+using Exolutio.Model.PSM.XPath;
 using Exolutio.Model.Versioning;
 
 namespace Exolutio.Model.PSM
@@ -29,7 +30,12 @@ namespace Exolutio.Model.PSM
 
         public override string XPath
         {
-            get { return String.Empty; }
+            get { return string.Empty; }
+        }
+
+        public override Path XPathFull
+        {
+            get { return new SimplePath() { IsAbsolute = true }; }
         }
 
         #region Implementation of IExolutioCloneable

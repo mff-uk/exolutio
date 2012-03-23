@@ -1,6 +1,7 @@
 using System;
 using System.Xml;
 using System.Xml.Linq;
+using Exolutio.Model.PSM.XPath;
 using Exolutio.Model.Serialization;
 using Exolutio.Model.Versioning;
 
@@ -59,6 +60,11 @@ namespace Exolutio.Model.PSM
         public override string XPath
         {
             get { return string.Empty; }
+        }
+
+        public override Path XPathFull
+        {
+            get { return null; }
         }
 
         #region IExolutioSerializable Members

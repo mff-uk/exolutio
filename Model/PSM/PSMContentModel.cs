@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Xml;
 using System.Xml.Linq;
+using Exolutio.Model.PSM.XPath;
 using Exolutio.Model.Serialization;
 using Exolutio.Model.Versioning;
 
@@ -56,6 +57,15 @@ namespace Exolutio.Model.PSM
         public override string XPath
         {
             get { return ParentAssociation.XPath; }
+        }
+
+        public override Path XPathFull
+        {
+            get
+            {
+                Path result = ParentAssociation.XPathFull.DeepCopy();
+                return result;
+            }
         }
 
         #region Implementation of IExolutioSerializable
