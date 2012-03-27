@@ -23,7 +23,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 
         public Log<OclExpression> Log { get; private set; }
 
-        private static readonly XNamespace oclXNamespace = "http://eXolutio.com/oclX";
+        private static readonly XNamespace oclXNamespace = @"http://eXolutio.com/oclX";
         public static XNamespace OclXNamespace
         {
             get { return oclXNamespace; }
@@ -107,11 +107,14 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
                     {
                         XElement ruleElement = patternElement.SchematronRule(!abstractPattern ? contextClass.XPathFull.ToString() : "$" + constraint.Self.Name);
                         patterns[contextClass].ContextVariableNames.AddIfNotContained(constraint.Self.Name);
-                        if (!abstractPattern && constraint.Self.Name != VariableDeclaration.SELF)
+                        if (!abstractPattern /* && constraint.Self.Name != VariableDeclaration.SELF */)
                         {
-                            XElement contextVarElement = new XElement(OclXNamespace + "context-variable");
-                            contextVarElement.AddAttributeWithValue("name", constraint.Self.Name);
-                            ruleElement.Add(contextVarElement);
+                            //XElement contextVarElement = new XElement(OclXNamespace + "context-variable");
+                            //contextVarElement.AddAttributeWithValue("name", constraint.Self.Name);
+                            //ruleElement.Add(contextVarElement);
+                            
+                            // using schematron let element instead: 
+                            ruleElement.SchematronLet(constraint.Self.Name, @".");
                         }
 
                         TranslateInvariantsToXPath(constraint, ruleElement, oclScript, (PSMBridge)compilerResult.Bridge, translationSettings);

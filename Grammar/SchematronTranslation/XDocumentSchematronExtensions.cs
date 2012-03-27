@@ -87,5 +87,13 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             param.AddAttributeWithValue(name, value);
             return param;
         }
+
+        public static XElement SchematronLet(this XElement parentElement, string name, string value)
+        {
+            XElement param = parentElement.SchematronGenericElement("let");
+            param.AddAttributeWithValue("name", name);
+            param.AddAttributeWithValue("value", value);
+            return param;
+        }
     }
 }
