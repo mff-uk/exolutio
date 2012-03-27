@@ -38,6 +38,10 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 
         public void InitStandard()
         {
+            // Any
+            Add(new OperationInfo { Priority = 1, CanOmitDataCall = true, OclName = "oclAsSet", XPathName = "oclAsSet", Arity = 1, CustomTranslateHandler = ReplaceByArgumentHandler });
+
+            // operators
             Add(new OperationInfo { Priority = 1, IsXPathInfix = true, IsOclInfix = true, CanOmitDataCall = true, OclName = "*", XPathName = "*", CustomTranslateHandler = InfixAtomicHandler });
             Add(new OperationInfo { Priority = 1, IsXPathInfix = true, IsOclInfix = true, CanOmitDataCall = true, OclName = "/", XPathName = "div", CustomTranslateHandler = InfixAtomicHandler });
             Add(new OperationInfo { Priority = 2, IsXPathInfix = true, IsOclInfix = true, CanOmitDataCall = true, OclName = "+", XPathName = "+", CustomTranslateHandler = InfixAtomicHandler });
@@ -116,6 +120,12 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "subSequence", XPathName = "oclX:subSequence", Arity = 1, CustomTranslateHandler = FunctionAtomicHandler, TypeDependent = true, ArgumentCondition = IsXPathNonAtomic });
             Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "-", XPathName = "oclX:setMinus", Arity = 2, CustomTranslateHandler = FunctionAtomicHandler, TypeDependent = true, ArgumentCondition = IsXPathNonAtomic });
             Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "symmetricDifference", XPathName = "oclX:symmetricDifference", Arity = 2, CustomTranslateHandler = FunctionAtomicHandler, TypeDependent = true, ArgumentCondition = IsXPathNonAtomic });
+        }
+
+        private string ReplaceByArgumentHandler(OperationCallExp operationExpression, OperationInfo operationInfo, OclExpression[] arguments)
+        {
+            string op = WrapAtomicOperand(arguments[0], operationInfo, 0);
+            return string.Format("{0}", op);
         }
 
         private string PrefixAtomicHandler(OperationCallExp operationExpression, OperationInfo operationInfo, OclExpression[] arguments)
@@ -323,7 +333,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
                 if (info.HasValue)
                     return ToStringWithArgsStandard(expression, referredOperation, info.Value, arguments);
                 else
-                    throw new OclSubexpressionNotConvertible(string.Format("Operation not found {0} (arity: {1})", referredOperation.Name));
+                    throw new OclSubexpressionNotConvertible(string.Format("Operation not found {0} (arity: {1})", referredOperation.Name, arguments.Count() - 1));
             }
             else
             {

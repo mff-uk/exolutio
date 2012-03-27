@@ -84,7 +84,8 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
         public static XElement SchematronParam(this XElement parentElement, string name, string value)
         {
             XElement param = parentElement.SchematronGenericElement("param");
-            param.AddAttributeWithValue(name, value);
+            param.AddAttributeWithValue("name", name);
+            param.AddAttributeWithValue("value", value);
             return param;
         }
 

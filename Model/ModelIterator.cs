@@ -297,9 +297,6 @@ namespace Exolutio.Model
             bool followGeneralizationsWhereAsSpecific = false)
         {
             List<PSMCycle> cycles = new List<PSMCycle>();
-            return cycles;
-
-            //List<PSMComponent> stack = new List<PSMComponent>();
             List<PSMComponent> visitedElements = new List<PSMComponent>();
             List<PSMComponent> currentPath = new List<PSMComponent>();            
             
@@ -314,73 +311,80 @@ namespace Exolutio.Model
 
         private static void GetPSMCyclesStartingInAssociationRec(PSMComponent psmComponent, 
             bool followGeneralizationsWhereAsGeneral, bool followGeneralizationsWhereAsSpecific, 
-            List<PSMComponent> visitedElements, List<PSMCycle> cycles,
+            IList<PSMComponent> visitedElements, IList<PSMCycle> cycles,
             List<PSMComponent> currentPath)
         {
-            //while (!stack.IsEmpty())
+            if (psmComponent == null)
             {
-                if (psmComponent == null)
-                {
-                    return;
-                }
-
-                 
-
-                if (currentPath.First() == psmComponent)
-                {
-                    // cycle detected 
-                    PSMCycle cycle = new PSMCycle();
-                    int li = currentPath.LastIndexOf(psmComponent);
-                    cycle.AddRange(currentPath.GetRange(li, currentPath.Count - li));
-                    cycles.Add(cycle);
-                    cycle.Add(psmComponent);
-                    return;
-                }
-
-                if (visitedElements.Contains(psmComponent))
-                    return;
-                
-                // prolong current path
-                currentPath.Add(psmComponent);
-                
-                if (psmComponent is PSMAssociation)
-                {
-                    GetPSMCyclesStartingInAssociationRec(((PSMAssociation)psmComponent).Child, followGeneralizationsWhereAsGeneral, 
-                        followGeneralizationsWhereAsSpecific, visitedElements, cycles, currentPath);
-                }
-                else if (psmComponent is PSMAssociationMember)
-                {
-                    PSMAssociationMember psmAM = (PSMAssociationMember) psmComponent;
-
-                    foreach (PSMAssociation childAssociation in psmAM.ChildPSMAssociations)
-                    {
-                        GetPSMCyclesStartingInAssociationRec(childAssociation, followGeneralizationsWhereAsGeneral,
-                            followGeneralizationsWhereAsSpecific, visitedElements, cycles, currentPath);
-                    }
-
-                    if (psmAM is PSMClass)
-                    {
-                        PSMClass psmClass = (PSMClass) psmAM;
-                        if (followGeneralizationsWhereAsGeneral)
-                        {
-                            foreach (PSMGeneralization gen in psmClass.GeneralizationsAsGeneral)
-                            {
-                                GetPSMCyclesStartingInAssociationRec(gen.Specific, followGeneralizationsWhereAsGeneral,
-                                followGeneralizationsWhereAsSpecific, visitedElements, cycles, currentPath);
-                            }
-                        }
-                        if (followGeneralizationsWhereAsSpecific && psmClass.GeneralizationAsSpecific != null)
-                        {
-                            GetPSMCyclesStartingInAssociationRec(psmClass.GeneralizationAsSpecific.General, followGeneralizationsWhereAsGeneral,
-                                followGeneralizationsWhereAsSpecific, visitedElements, cycles, currentPath);
-                        }
-                    }
-                }
-                
-                visitedElements.Add(psmComponent);
-                Debug.Assert(currentPath.Last() == psmComponent);
-                currentPath.RemoveAt(currentPath.Count - 1);
+                return;
             }
+
+            if (currentPath.First() == psmComponent)
+            {
+                // cycle detected 
+                PSMCycle cycle = new PSMCycle();
+                int li = currentPath.LastIndexOf(psmComponent);
+                cycle.AddRange(currentPath.GetRange(li, currentPath.Count - li));
+                cycles.Add(cycle);
+                cycle.Add(psmComponent);
+                return;
+            }
+
+            if (currentPath.Contains(psmComponent))
+            {
+                // there is a cycle but the starting association of current path is not a part of it
+                return;
+            }
+
+            if (visitedElements.Contains(psmComponent))
+                return;
+
+            // prolong current path
+            currentPath.Add(psmComponent);
+
+            if (psmComponent is PSMAssociation)
+            {
+                GetPSMCyclesStartingInAssociationRec(((PSMAssociation) psmComponent).Child,
+                                                     followGeneralizationsWhereAsGeneral,
+                                                     followGeneralizationsWhereAsSpecific, visitedElements, cycles,
+                                                     currentPath);
+            }
+            else if (psmComponent is PSMAssociationMember)
+            {
+                PSMAssociationMember psmAM = (PSMAssociationMember) psmComponent;
+
+                foreach (PSMAssociation childAssociation in psmAM.ChildPSMAssociations)
+                {
+                    GetPSMCyclesStartingInAssociationRec(childAssociation, followGeneralizationsWhereAsGeneral,
+                                                         followGeneralizationsWhereAsSpecific, visitedElements, cycles,
+                                                         currentPath);
+                }
+
+                if (psmAM is PSMClass)
+                {
+                    PSMClass psmClass = (PSMClass) psmAM;
+                    if (followGeneralizationsWhereAsGeneral)
+                    {
+                        foreach (PSMGeneralization gen in psmClass.GeneralizationsAsGeneral)
+                        {
+                            GetPSMCyclesStartingInAssociationRec(gen.Specific, followGeneralizationsWhereAsGeneral,
+                                                                 followGeneralizationsWhereAsSpecific, visitedElements,
+                                                                 cycles, currentPath);
+                        }
+                    }
+                    if (followGeneralizationsWhereAsSpecific && psmClass.GeneralizationAsSpecific != null)
+                    {
+                        GetPSMCyclesStartingInAssociationRec(psmClass.GeneralizationAsSpecific.General,
+                                                             followGeneralizationsWhereAsGeneral,
+                                                             followGeneralizationsWhereAsSpecific, visitedElements,
+                                                             cycles, currentPath);
+                    }
+                }
+            }
+
+            visitedElements.Add(psmComponent);
+            Debug.Assert(currentPath.Last() == psmComponent);
+            currentPath.RemoveAt(currentPath.Count - 1);
         }
 
         /// <summary>
