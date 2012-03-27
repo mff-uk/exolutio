@@ -95,7 +95,7 @@ namespace Exolutio.Model.OCL.Compiler {
             }
             return (new AST.OperationCallExp(exp1, false, op, new List<AST.OclExpression>(new AST.OclExpression[] { exp2 })))
                 .SetCodeSource(new CodeSource(nameTree));
-            
+
         }
 
         AST.OclExpression UnaryOperation(IToken name, AST.OclExpression exp1) {
@@ -121,7 +121,7 @@ namespace Exolutio.Model.OCL.Compiler {
                 Classifier sourceType = ((CollectionType)expr.Type).ElementType;
                 Property property = sourceType.LookupProperty(path[0]);
                 if (property != null) {
-                    return CreateImplicitPropertyIterator(expr,tokenPath[0], sourceType, property);
+                    return CreateImplicitPropertyIterator(expr, tokenPath[0], sourceType, property);
                 }
             }
             else {
@@ -137,7 +137,7 @@ namespace Exolutio.Model.OCL.Compiler {
             return new AST.ErrorExp(Library.Invalid);
         }
 
-        private AST.OclExpression CreateImplicitPropertyIterator(AST.OclExpression expr,IToken token, Classifier sourceType, Property property) {
+        private AST.OclExpression CreateImplicitPropertyIterator(AST.OclExpression expr, IToken token, Classifier sourceType, Property property) {
             if (TestNull(expr, property)) {
                 return new AST.ErrorExp(Library.Invalid);
             }
@@ -171,7 +171,7 @@ namespace Exolutio.Model.OCL.Compiler {
                     Classifier sourceType = ((CollectionType)expr.Type).ElementType;
                     Operation op = sourceType.LookupOperation(path[0], args.Select(arg => arg.Type));
                     if (op != null) {
-                        return CreateImplicitCollectIterator(expr,tokenPath[0], args, sourceType, op);
+                        return CreateImplicitCollectIterator(expr, tokenPath[0], args, sourceType, op);
                     }
                 }
                 else {
@@ -212,9 +212,15 @@ namespace Exolutio.Model.OCL.Compiler {
                 return new AST.ErrorExp(Library.Invalid);
             }
 
+            // apply oclAsSet opretion on not collect type
             if (expr.Type is CollectionType == false) {
-                Errors.AddError(new ErrorItem(CompilerErrors.OCLAst_ProcessIteratorCall_Compiler_don_t_support_iterator_operations_on_not_collection_type));
-                return new AST.ErrorExp(Library.Invalid);
+                Operation asSetOp = expr.Type.LookupOperation(Library.OclAsSet,new Classifier[0]);
+                if (asSetOp == null) {
+                    Errors.AddError(new ErrorItem(String.Format(CompilerErrors.OCLParser_OperationNotFound_1, Library.OclAsSet)));
+                    return new AST.ErrorExp(Library.Invalid);
+                }
+                expr = new AST.OperationCallExp(expr, false, asSetOp, new List<AST.OclExpression>())
+                    .SetCodeSource(new CodeSource(tokenPath[0]));
             }
 
             List<string> path = tokenPath.ToStringList();
@@ -271,9 +277,20 @@ namespace Exolutio.Model.OCL.Compiler {
             }
             string name = path[0];
 
+            // apply oclAsSet opretion on not collect type
+            if (expr.Type is CollectionType == false) {
+                Operation asSetOp = expr.Type.LookupOperation(Library.OclAsSet, new Classifier[0]);
+                if (asSetOp == null) {
+                    Errors.AddError(new ErrorItem(String.Format(CompilerErrors.OCLParser_OperationNotFound_1, Library.OclAsSet)));
+                    return new AST.ErrorExp(Library.Invalid);
+                }
+                expr = new AST.OperationCallExp(expr, false, asSetOp, new List<AST.OclExpression>())
+                    .SetCodeSource(new CodeSource(tokenPath[0]));
+            }
+
             Operation collectionOperation = expr.Type.LookupOperation(name,
                 args.Select(arg => arg.Type));
-            //Je to operace na kolekci?
+         
             if (collectionOperation != null) { // 36b
                 return new AST.OperationCallExp(expr, false, collectionOperation, args)
                     .SetCodeSource(new CodeSource(tokenPath[0]));
@@ -493,7 +510,7 @@ namespace Exolutio.Model.OCL.Compiler {
         AST.TupleLiteralExp CreateTupleLiteral(IToken rootToken, List<VariableDeclarationBag> vars) {
             if (TestNull(rootToken, vars)) {
                 TupleType tupleTypeErr = new TupleType(TypesTable, new List<Property>());
-                TypesTable.RegisterCompositeType(tupleTypeErr);
+                TypesTable.RegisterType(tupleTypeErr);
                 return new AST.TupleLiteralExp(new Dictionary<string, AST.TupleLiteralPart>(), tupleTypeErr)
                      .SetCodeSource(new CodeSource(rootToken));
             }
@@ -521,17 +538,17 @@ namespace Exolutio.Model.OCL.Compiler {
                     Errors.AddError(new ErrorItem(CompilerErrors.OCLAst_CreateTupleLiteral_Type_does_not_comform_to_declared_type));
                 }
 
-                
+
                 //hodnota
                 var newProterty = new Property(var.Name, PropertyType.One, type);
-                var newPart = new AST.TupleLiteralPart(newProterty, expr); 
+                var newPart = new AST.TupleLiteralPart(newProterty, expr);
                 parts.Add(var.Name, newPart);
 
                 //typ
                 tupleParts.Add(newProterty);
             }
             TupleType tupleType = new TupleType(TypesTable, tupleParts);
-            TypesTable.RegisterCompositeType(tupleType);
+            TypesTable.RegisterType(tupleType);
 
             return new AST.TupleLiteralExp(parts, tupleType)
                 .SetCodeSource(new CodeSource(rootToken)); ;
@@ -565,7 +582,7 @@ namespace Exolutio.Model.OCL.Compiler {
         TupleType CreateTupleType(IToken rootToken, List<VariableDeclarationBag> variables) {
             if (TestNull(rootToken, variables)) {
                 TupleType tupleType = new TupleType(TypesTable, new List<Property>());
-                TypesTable.RegisterCompositeType(tupleType);
+                TypesTable.RegisterType(tupleType);
                 return tupleType;
             }
 
@@ -583,7 +600,7 @@ namespace Exolutio.Model.OCL.Compiler {
                 tupleParts.Add(variable.Name, new Property(variable.Name, PropertyType.One, propertyType));
             }
             TupleType tuple = new TupleType(TypesTable, tupleParts.Values);
-            TypesTable.RegisterCompositeType(tuple);
+            TypesTable.RegisterType(tuple);
 
             return tuple;
         }
@@ -634,7 +651,7 @@ namespace Exolutio.Model.OCL.Compiler {
             //inc pushedVar to future pop EnviromentStack
             //pushedVar is ref variable
             pushedVar++;
-            return decl ;
+            return decl;
         }
 
         VariableDeclaration CreateVariableDeclaration(IToken name, Classifier type, AST.OclExpression value) {
@@ -647,7 +664,7 @@ namespace Exolutio.Model.OCL.Compiler {
 
 
         VariableDeclaration LetDecl(IToken letToken, VariableDeclarationBag varBag) {
-            if (TestNull(letToken, varBag,varBag!= null ?varBag.Type: null)) {
+            if (TestNull(letToken, varBag, varBag != null ? varBag.Type : null)) {
                 return new VariableDeclaration("", Library.Invalid, new AST.ErrorExp(Library.Invalid));
             }
 

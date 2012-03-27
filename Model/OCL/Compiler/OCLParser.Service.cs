@@ -134,7 +134,7 @@ namespace Exolutio.Model.OCL.Compiler {
                     //35 d,f
                     ImplicitOperationData operation = Environment.LookupImplicitOperation(path[0], callArgs.Select(arg => arg.Expression.Type));
                     if (operation == null) {
-                        Errors.AddError(new ErrorItem(string.Format(CompilerErrors.OCLParser_PropertyCallRoot_OperationNotFound_1, path[0])));
+                        Errors.AddError(new ErrorItem(string.Format(CompilerErrors.OCLParser_OperationNotFound_1, path[0])));
                         return new AST.ErrorExp(TypesTable.Library.Any);
                     }
                     //self problem
@@ -393,7 +393,7 @@ namespace Exolutio.Model.OCL.Compiler {
                 tupleParts.Add(newProterty);
             }
             TupleType tupleType = new TupleType(TypesTable,tupleParts);
-            TypesTable.RegisterCompositeType(tupleType);
+            TypesTable.RegisterType(tupleType);
 
             AST.TupleLiteralExp tupleLiteral = new AST.TupleLiteralExp(parts, tupleType);
             return tupleLiteral;
@@ -418,7 +418,7 @@ namespace Exolutio.Model.OCL.Compiler {
                 tuple.TupleParts.Add(new Property(variable.Name, PropertyType.One, variable.PropertyType));
             }
 
-            TypesTable.RegisterCompositeType(tuple);
+            TypesTable.RegisterType(tuple);
 
             return tuple;
         }

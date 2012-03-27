@@ -32,20 +32,22 @@ namespace Exolutio.Model.OCL.TypesTable {
                 throw new NullReferenceException("Type is null.");
 
             TypeRecord newTypeRecord = CreateTypeRecord(type);
-           // type.TypeTable = this;
-
-            if (type is ICompositeType) {
-                RegisterCompositeType(type);
-            }
 
             if (newTypeRecord == null)
                 return false;
 
             CreateEdgeForRecord(newTypeRecord);
 
+           
+
+            if (Library.DefaultLazyOperation != null) {
+                Library.DefaultLazyOperation(type);
+            }
+
             return true;
         }
 
+        [Obsolete]
         public void RegisterCompositeType(Classifier composit) {
             
             //Type actType=composit.GetType();

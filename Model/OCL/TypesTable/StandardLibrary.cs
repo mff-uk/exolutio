@@ -26,24 +26,30 @@ namespace Exolutio.Model.OCL.TypesTable {
             protected set;
         }
 
-        public Dictionary<Type, Action<Classifier>> LazyOpearation {
+        public Dictionary<Type, Action<Classifier>> LazyOperation {
             get;
             protected set;
         }
 
+        public Action<Classifier> DefaultLazyOperation {
+            get;
+            set;
+        }
+
+        public const string OclAsSet = @"oclAsSet";
 
 
         public Library(TypesTable tt) {
             RootNamespace = new Namespace("");
             this.TypeTable = tt;
-            LazyOpearation = new Dictionary<Type, Action<Classifier>>();
+            LazyOperation = new Dictionary<Type, Action<Classifier>>();
             TypeName = new StandardTypeName();
         }
 
         public Library(TypesTable tt, StandardTypeName naming) {
             RootNamespace = new Namespace("");
             this.TypeTable = tt;
-            LazyOpearation = new Dictionary<Type, Action<Classifier>>();
+            LazyOperation = new Dictionary<Type, Action<Classifier>>();
             TypeName = naming;
         }
 
@@ -84,10 +90,10 @@ namespace Exolutio.Model.OCL.TypesTable {
                 }
             }
 
-            //Operations injection
+            // Operations injection
             Type actType = newType.GetType();
             Action<Classifier> lazyOpAction;
-            if (LazyOpearation.TryGetValue(actType, out lazyOpAction)) {
+            if (LazyOperation.TryGetValue(actType, out lazyOpAction)) {
                 lazyOpAction(newType);
             }
 
@@ -105,7 +111,7 @@ namespace Exolutio.Model.OCL.TypesTable {
         }
 
         protected void InsertClassifier(Classifier c) {
-          //  lib.RootNamespace.NestedClassifier.Add(c);
+            //  lib.RootNamespace.NestedClassifier.Add(c);
             lib.TypeTable.RegisterType(c);
         }
 
@@ -118,6 +124,15 @@ namespace Exolutio.Model.OCL.TypesTable {
             lib = tt.Library;
             Namespace ns = lib.RootNamespace;
 
+            // add default template / generic operation 
+            lib.DefaultLazyOperation = (c) => {
+                // oclAsSet is problem on Set type (infinity recursion)
+                if (c is CollectionType == false) {
+                    CollectionType set = lib.CreateCollection(CollectionKind.Set, c);
+                    AddOperation(c, Library.OclAsSet, set);
+                }
+            };
+
             Classifier oclAny = new Classifier(tt, ns, lib.TypeName.Any);
             InsertClassifier(oclAny);
             Classifier real = new Classifier(tt, ns, lib.TypeName.Real, oclAny);
@@ -126,13 +141,13 @@ namespace Exolutio.Model.OCL.TypesTable {
             InsertClassifier(integer);
             Classifier unlimited = new Classifier(tt, ns, lib.TypeName.UnlimitedNatural, integer);
             InsertClassifier(unlimited);
-            Classifier str = new Classifier(tt,ns, lib.TypeName.String, oclAny);
+            Classifier str = new Classifier(tt, ns, lib.TypeName.String, oclAny);
             InsertClassifier(str);
-            Classifier boolean = new Classifier(tt,ns, lib.TypeName.Boolean, oclAny);
+            Classifier boolean = new Classifier(tt, ns, lib.TypeName.Boolean, oclAny);
             InsertClassifier(boolean);
-            Classifier message = new Classifier(tt,ns, lib.TypeName.Message, oclAny);
+            Classifier message = new Classifier(tt, ns, lib.TypeName.Message, oclAny);
             InsertClassifier(message);
-            Classifier type = new Classifier(tt,ns, lib.TypeName.Type, oclAny);
+            Classifier type = new Classifier(tt, ns, lib.TypeName.Type, oclAny);
             InsertClassifier(type);
 
             Classifier voidT = new VoidType(tt, lib.TypeName.Void);
@@ -147,7 +162,7 @@ namespace Exolutio.Model.OCL.TypesTable {
             AddOperation(oclAny, "oclIsInvalid", boolean);
             AddOperation(oclAny, "oclAsType", boolean);
             AddOperation(oclAny, "oclIsNew", boolean);
-            
+
             //par dalsi operaci chybi
 
             //Real
@@ -209,7 +224,7 @@ namespace Exolutio.Model.OCL.TypesTable {
             AddOperation(boolean, "implies", boolean, boolean);
             AddOperation(boolean, "toString", str);
 
-            lib.LazyOpearation.Add(typeof(CollectionType), (c) => {
+            lib.LazyOperation.Add(typeof(CollectionType), (c) => {
                 CollectionType coll = c as CollectionType;
                 Classifier t = coll.ElementType;
 
@@ -232,7 +247,7 @@ namespace Exolutio.Model.OCL.TypesTable {
 
                 //Missing: product, asSet, asOrdredSet,as  sequence,asBag, flatten
 
-               
+
             });
 
 
@@ -240,13 +255,13 @@ namespace Exolutio.Model.OCL.TypesTable {
             //AddOperation(coll, "at", coll.ElementType, integer);
             //AddOperation(coll, "first", coll.ElementType);
             //AddOperation(coll, "last", coll.ElementType);
-            lib.LazyOpearation.Add(typeof(SetType), (c) => {
+            lib.LazyOperation.Add(typeof(SetType), (c) => {
                 CollectionType coll = c as CollectionType;
                 Classifier t = coll.ElementType;
 
                 AddOperation(coll, "union", coll, coll);
                 //union with bag missing
-                AddOperation(coll, "=", boolean,coll);
+                AddOperation(coll, "=", boolean, coll);
                 AddOperation(coll, "intersection", coll, coll);
                 //intersection with bag missing
                 AddOperation(coll, "-", coll, coll);
@@ -259,7 +274,7 @@ namespace Exolutio.Model.OCL.TypesTable {
                 //asOrderedSet(),asSequence(),asBag() missing
             });
 
-            lib.LazyOpearation.Add(typeof(SequenceType), (c) => {
+            lib.LazyOperation.Add(typeof(SequenceType), (c) => {
                 CollectionType coll = c as CollectionType;
                 Classifier t = coll.ElementType;
 
@@ -270,7 +285,7 @@ namespace Exolutio.Model.OCL.TypesTable {
                 //flatten missing
                 AddOperation(coll, "append", coll, t);
                 AddOperation(coll, "prepend", coll, t);
-                AddOperation(coll, "insertAt", coll,integer, t);
+                AddOperation(coll, "insertAt", coll, integer, t);
                 AddOperation(coll, "subSequence", coll, integer, integer);
                 AddOperation(coll, "at", coll.ElementType, integer);
                 AddOperation(coll, "indexOf", integer, t);
