@@ -216,7 +216,7 @@
   <data name="OCLParser_PropertyCallRoot_PreModifierNotOnVariable" xml:space="preserve">
     <value>Modifier `@pre` is not attached to a variable.</value>
   </data>
-  <data name="OCLParser_PropertyCallRoot_OperationNotFound_1" xml:space="preserve">
+  <data name="OCLParser_OperationNotFound_1" xml:space="preserve">
     <value>Unknown operation `{0}`.</value>
   </data>
   <data name="OCLParser_PropertyCallBody_SourceOfCollectionOperationIsNotACollection" xml:space="preserve">
