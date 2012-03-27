@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
 using Exolutio.Model.PSM.XPath;
@@ -141,7 +143,7 @@ namespace Exolutio.Model.PSM
                 return result;
             }
         }
-
+        
         #region IHasCardinality Members
 
         private uint lower = 1;
@@ -172,17 +174,6 @@ namespace Exolutio.Model.PSM
         public string CardinalityString
         {
             get { return this.GetCardinalityString(); }
-        }
-
-        public bool IsTransitiveRecursion
-        {
-            get 
-            {
-                if (!IsNonTreeAssociation)
-                    return false;
-                // points to a class in the ancestors
-                ModelIterator.GetPSMParent()
-            }
         }
 
         #endregion

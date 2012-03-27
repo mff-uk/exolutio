@@ -68,17 +68,17 @@ namespace Exolutio.Model
             if (visited.Contains(psmClass)) return list;
             else visited.Add(psmClass);
             
-            list.AddRange(psmClass.ChildPSMAssociations.Select(a => new Tuple<PSMAssociation, IEnumerable<MoveStep>>(a, Enumerable.Repeat(new MoveStep() { StepType = MoveStep.MoveStepType.None, StepTarget = psmClass }, 1))));
+            list.AddRange(psmClass.ChildPSMAssociations.Select(a => new Tuple<PSMAssociation, IEnumerable<MoveStep>>(a, Enumerable.Repeat(new MoveStep { StepType = MoveStep.MoveStepType.None, StepTarget = psmClass }, 1))));
             foreach (PSMClass c in psmClass.GetSRs())
             {
                 list.AddRange(c.getContextPSMAssociationsWithPaths()
-                    .Select(t => new Tuple<PSMAssociation, IEnumerable<MoveStep>>(t.Item1, new List<MoveStep>(t.Item2).Concat(Enumerable.Repeat(new MoveStep() { StepType = MoveStep.MoveStepType.StructuralRepresentant, StepTarget = psmClass }, 1))))
+                    .Select(t => new Tuple<PSMAssociation, IEnumerable<MoveStep>>(t.Item1, new List<MoveStep>(t.Item2).Concat(Enumerable.Repeat(new MoveStep { StepType = MoveStep.MoveStepType.StructuralRepresentant, StepTarget = psmClass }, 1))))
                     );
             }
             foreach (PSMClass c in psmClass.UnInterpretedSubClasses())
             {
                 list.AddRange(c.getContextPSMAssociationsWithPaths()
-                    .Select(t => new Tuple<PSMAssociation, IEnumerable<MoveStep>>(t.Item1, new List<MoveStep>(t.Item2).Concat(Enumerable.Repeat(new MoveStep() { StepType = MoveStep.MoveStepType.Subtree, StepTarget = psmClass }, 1))))
+                    .Select(t => new Tuple<PSMAssociation, IEnumerable<MoveStep>>(t.Item1, new List<MoveStep>(t.Item2).Concat(Enumerable.Repeat(new MoveStep { StepType = MoveStep.MoveStepType.Subtree, StepTarget = psmClass }, 1))))
                     );
             }
             return list;
@@ -264,15 +264,136 @@ namespace Exolutio.Model
         }
 
         public static IEnumerable<PSMAssociationMember> GetPSMAncestors(PSMAssociationMember psmAssociationMember, 
-            bool specializationsAncestors = false, bool includeGeneralizationsAncestors = false)
+            bool specializationsAsAncestors = false, bool generalizationsAsAncestors = false)
         {
-            return psmAssociationMember.Closure(
-                c => c is PSMClass
-                         ? 
-                         (PSMClass)
-                         c.ParentAssociation.Parent
-                         // for content models, just get the parent
-                         : c.ParentAssociation.Parent);
+            return psmAssociationMember.Closure(c => GetPSMDirectAncestors(c, specializationsAsAncestors, generalizationsAsAncestors));
+        }
+
+        private static IEnumerable<PSMAssociationMember> GetPSMDirectAncestors(PSMAssociationMember psmAssociationMember, 
+            bool specializationsAsAncestors = false, bool generalizationsAsAncestors = false)
+        {
+            
+            yield return psmAssociationMember.ParentAssociation.Parent;
+
+            PSMClass psmClass = psmAssociationMember as PSMClass;
+            if (psmClass != null)
+            {
+                if (generalizationsAsAncestors)
+                {
+                    foreach (PSMGeneralization psmGeneralization in psmClass.GeneralizationsAsGeneral)
+                    {
+                        yield return psmGeneralization.Specific;
+                    }
+                }
+                if (specializationsAsAncestors && psmClass.GeneralizationAsSpecific != null)
+                {
+                    yield return psmClass.GeneralizationAsSpecific.General;
+                }
+            }
+        }
+
+        public static List<PSMCycle> GetPSMCyclesStartingInAssociation(PSMAssociation startingAssociation,
+            bool followGeneralizationsWhereAsGeneral = false,
+            bool followGeneralizationsWhereAsSpecific = false)
+        {
+            List<PSMCycle> cycles = new List<PSMCycle>();
+            return cycles;
+
+            //List<PSMComponent> stack = new List<PSMComponent>();
+            List<PSMComponent> visitedElements = new List<PSMComponent>();
+            List<PSMComponent> currentPath = new List<PSMComponent>();            
+            
+            currentPath.Add(startingAssociation.Parent);
+
+            GetPSMCyclesStartingInAssociationRec(startingAssociation,
+                followGeneralizationsWhereAsGeneral, followGeneralizationsWhereAsSpecific,
+                visitedElements, cycles, currentPath);
+
+            return cycles;
+        }
+
+        private static void GetPSMCyclesStartingInAssociationRec(PSMComponent psmComponent, 
+            bool followGeneralizationsWhereAsGeneral, bool followGeneralizationsWhereAsSpecific, 
+            List<PSMComponent> visitedElements, List<PSMCycle> cycles,
+            List<PSMComponent> currentPath)
+        {
+            //while (!stack.IsEmpty())
+            {
+                if (psmComponent == null)
+                {
+                    return;
+                }
+
+                 
+
+                if (currentPath.First() == psmComponent)
+                {
+                    // cycle detected 
+                    PSMCycle cycle = new PSMCycle();
+                    int li = currentPath.LastIndexOf(psmComponent);
+                    cycle.AddRange(currentPath.GetRange(li, currentPath.Count - li));
+                    cycles.Add(cycle);
+                    cycle.Add(psmComponent);
+                    return;
+                }
+
+                if (visitedElements.Contains(psmComponent))
+                    return;
+                
+                // prolong current path
+                currentPath.Add(psmComponent);
+                
+                if (psmComponent is PSMAssociation)
+                {
+                    GetPSMCyclesStartingInAssociationRec(((PSMAssociation)psmComponent).Child, followGeneralizationsWhereAsGeneral, 
+                        followGeneralizationsWhereAsSpecific, visitedElements, cycles, currentPath);
+                }
+                else if (psmComponent is PSMAssociationMember)
+                {
+                    PSMAssociationMember psmAM = (PSMAssociationMember) psmComponent;
+
+                    foreach (PSMAssociation childAssociation in psmAM.ChildPSMAssociations)
+                    {
+                        GetPSMCyclesStartingInAssociationRec(childAssociation, followGeneralizationsWhereAsGeneral,
+                            followGeneralizationsWhereAsSpecific, visitedElements, cycles, currentPath);
+                    }
+
+                    if (psmAM is PSMClass)
+                    {
+                        PSMClass psmClass = (PSMClass) psmAM;
+                        if (followGeneralizationsWhereAsGeneral)
+                        {
+                            foreach (PSMGeneralization gen in psmClass.GeneralizationsAsGeneral)
+                            {
+                                GetPSMCyclesStartingInAssociationRec(gen.Specific, followGeneralizationsWhereAsGeneral,
+                                followGeneralizationsWhereAsSpecific, visitedElements, cycles, currentPath);
+                            }
+                        }
+                        if (followGeneralizationsWhereAsSpecific && psmClass.GeneralizationAsSpecific != null)
+                        {
+                            GetPSMCyclesStartingInAssociationRec(psmClass.GeneralizationAsSpecific.General, followGeneralizationsWhereAsGeneral,
+                                followGeneralizationsWhereAsSpecific, visitedElements, cycles, currentPath);
+                        }
+                    }
+                }
+                
+                visitedElements.Add(psmComponent);
+                Debug.Assert(currentPath.Last() == psmComponent);
+                currentPath.RemoveAt(currentPath.Count - 1);
+            }
+        }
+
+        /// <summary>
+        /// Cycle in PSM components. First and last elements equal nodes (class or content model). 
+        /// Contains both edges (associations) and nodes (classes and content models). 
+        /// </summary>
+        public class PSMCycle: List<PSMComponent>
+        {
+            public PSMAssociation GetLastNamedAssociation()
+            {
+                return (PSMAssociation)this.LastOrDefault(c => c.IsNamed && c is PSMAssociation);
+            }
+
         }
 
         public static IEnumerable<PSMComponent> GetPSMChildren(PSMComponent component, bool returnAttributesForClass = false, bool returnChildAssociationsForAssociationMembers = false)

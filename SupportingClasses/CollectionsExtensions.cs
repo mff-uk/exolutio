@@ -196,6 +196,11 @@ namespace Exolutio.SupportingClasses
             return groupings.Select(g => g.Key);
         }
 
+        public static void InsertFirst<TType>(this List<TType> list, TType item)
+        {
+            list.Insert(0, item);
+        }
+
 #if SILVERLIGHT
         public static void RemoveAll<TValue>(this List<TValue> list, Func<TValue, bool> predicate)
         {

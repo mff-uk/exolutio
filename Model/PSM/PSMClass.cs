@@ -135,6 +135,19 @@ namespace Exolutio.Model.PSM
             set { generalizationAsSpecificGuid = value == null ? Guid.Empty : value; NotifyPropertyChanged("GeneralizationAsSpecific"); }
         }
 
+
+        public IEnumerable<PSMAssociation> GetIncomingNonTreeAssociations()
+        {
+            return PSMSchema.PSMAssociations.Where(a =>
+                a.IsNonTreeAssociation && a.Child == this);
+        }
+
+        public IEnumerable<PSMAssociation> GetOutgoingNonTreeAssociations()
+        {
+            return ChildPSMAssociations.Where(a =>
+                a.IsNonTreeAssociation && a.Parent == this);
+        }
+
         private bool final = false;
         public bool Final
         {
@@ -158,35 +171,53 @@ namespace Exolutio.Model.PSM
         {
             get
             {
-                Path parentPath = ParentAssociation.XPathFull.DeepCopy();
-                IEnumerable<PSMAssociation> nonTreeAssociations = PSMSchema.PSMAssociations.Where(a => a.IsNonTreeAssociation).Where(a => a.Child == this);
-                bool nonTreeAssociationsExist = nonTreeAssociations.Any();
-                IEnumerable<PSMGeneralization> generalizations = PSMSchema.PSMGeneralizations.Where(g => g.General == this);
-                bool specificationsExists = generalizations.Any();
-                if (nonTreeAssociationsExist || specificationsExists)
+                UnionPath unionPath = new UnionPath();
+
+                List<Path> nonRecursionPaths = new List<Path>();
+                // parent track 
+                if (ParentAssociation != null)
                 {
-                    UnionPath unionPath = new UnionPath();
+                    Path parentPath = ParentAssociation.XPathFull.DeepCopy();
+                    nonRecursionPaths.Add(parentPath);
                     unionPath.ComponentPaths.Add(parentPath);
-
-                    foreach (PSMAssociation nta in nonTreeAssociations)
-                    {
-                        if (nta.IsTransitiveRecursion)
-                        Path ntaPath = nta.XPathFull;
-                        unionPath.ComponentPaths.Add(ntaPath);
-                    }
-
-                    foreach (PSMGeneralization generalization in generalizations)
-                    {
-                        Path specificClassPath = generalization.Specific.XPathFull;
-                        unionPath.ComponentPaths.Add(specificClassPath);
-                    }
-
-                    return unionPath;
                 }
-                else
+
+                // generalizations tracks 
+                foreach (PSMGeneralization generalization in this.GeneralizationsAsGeneral)
                 {
-                    return parentPath;
+                    Path specificClassPath = generalization.Specific.XPathFull;
+                    unionPath.ComponentPaths.Add(specificClassPath);
+                    nonRecursionPaths.Add(specificClassPath);
                 }
+
+                // association tracks
+                List<string> usedDescendants = new List<string>();
+                foreach (PSMAssociation association in ChildPSMAssociations)
+                {
+                    List<ModelIterator.PSMCycle> cycles = ModelIterator.GetPSMCyclesStartingInAssociation(association, 
+                        followGeneralizationsWhereAsGeneral: false, 
+                        followGeneralizationsWhereAsSpecific: true);
+                    foreach (ModelIterator.PSMCycle cycle in cycles)
+                    {
+                        PSMAssociation lastNamedAssociation = cycle.GetLastNamedAssociation();
+                        string descendant = lastNamedAssociation != null ? lastNamedAssociation.Name : null;
+                        if (descendant != null && !usedDescendants.Contains(descendant))
+                        {
+                            foreach (Path nonRecursionPath in nonRecursionPaths)
+                            {
+                                Path path = nonRecursionPath.DeepCopy();
+                                Step step = new Step { Axis = Axis.descendant, NodeTest = descendant };
+                                path.AddStep(step);
+                                unionPath.ComponentPaths.Add(path);
+                            }
+                        }
+                    }
+                }
+                
+                if (unionPath.ComponentPaths.Count == 1)
+                    return unionPath.ComponentPaths[0];
+                else
+                    return unionPath;
             }
         }
         
