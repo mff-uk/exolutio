@@ -115,10 +115,6 @@
     <Compile Include="OCL\Compiler\ErrorItem.cs" />
     <Compile Include="OCL\Compiler\LexerErrors.cs" />
     <Compile Include="OCL\Compiler\OCLAst.cs" />
-    <Compile Include="OCL\Compiler\OCLLexer.cs" />
-    <Compile Include="OCL\Compiler\OCLLexer.Service.cs" />
-    <Compile Include="OCL\Compiler\OCLParser.cs" />
-    <Compile Include="OCL\Compiler\OCLParser.Service.cs" />
     <Compile Include="OCL\Compiler\OCLSyntaxLexer.cs" />
     <Compile Include="OCL\Compiler\OCLSyntaxLexer.Service.cs" />
     <Compile Include="OCL\Compiler\OCLSyntaxParser.cs" />
@@ -298,7 +294,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Antlr3>
     <None Include="OCL\Grammar\OCLSyntax.g3" />
-    <None Include="OCL\Grammar\OCL.g3" />
     <None Include="OCL\TypesTable\StandardTypeName.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>StandardTypeName.cs</LastGenOutput>

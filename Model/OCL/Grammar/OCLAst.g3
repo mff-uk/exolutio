@@ -50,7 +50,7 @@ operationContextHead
 
 classifierContextDecl
 	returns[ClassifierConstraint Decl]
-	@init{List<OclExpression> invs=new List<OclExpression>(); }
+	@init{List<InvariantWithMessage> invs=new List<InvariantWithMessage>(); }
 	@after{EnvironmentStack.Pop();EnvironmentStack.Pop();}
 	: ^(CLASSIFIERCONDITION classifierContextHead (invOrDef {invs.Add($invOrDef.Constraint);})*) {$Decl = new ClassifierConstraint($classifierContextHead.Context,invs,$classifierContextHead.Self);}
 	;
@@ -67,8 +67,11 @@ initOrDerValue
 	;
 
 invOrDef
-	returns[OclExpression Constraint]
-	:^(INV SimpleName? oclExpression) {$Constraint=$oclExpression.Expr;}
+	returns[InvariantWithMessage Constraint]
+	@init{StringLiteralExp message = null;}
+	:^(INV SimpleName? oclExpression 
+		(MESSAGE StringLiteralExp{message = CreateStringLiteral($StringLiteralExp);})?
+	  ) {$Constraint=new InvariantWithMessage($oclExpression.Expr,message); }
 	| ^(DEF 'static'? SimpleName? defExpression) {Errors.AddError(new ErrorItem("Definition of new property/operation do not supported."));}
 	;
 

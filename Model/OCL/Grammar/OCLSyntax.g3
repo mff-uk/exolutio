@@ -9,7 +9,7 @@ options {
 tokens{
  INFIX;UNARY;MESSAGE;PRIMITIVELITERAL;TYPE;CALL;INDEX;ITERATE;CALLARGS;VARDECL;DECL;PATH;COLLECTIONLITERAL; COLLECTIONTYPE;COLLPART;COLLPARTRANGE;TUPLELITERAL;LET;COLLTYPE;
  CONDITION;PROPERTYCONDITION;PROPERTYHEAD;OPERATIONCONDITION; OPERATIONHEAD; CLASSIFIERCONDITION; CLASSIFIERHEAD;
- INIT;DERIVATE;INV; DEF; PRE;POST;BODY;OPERATION;IF;ARGS;ACC;
+ INIT;DERIVATE;INV;MESSAGE; DEF; PRE;POST;BODY;OPERATION;IF;ARGS;ACC;
 }
 
 
@@ -24,7 +24,7 @@ tokens{
 
 public 
 contextDeclarationList
-	:contextDeclaration* -> ^(CONDITION contextDeclaration*)
+	:contextDeclaration* EOF -> ^(CONDITION contextDeclaration*)
 	;
 
 public 
@@ -67,7 +67,8 @@ initOrDerValue
 
 invOrDef
 	:i='inv' (SimpleName )? ':' oclExpression 
-		-> ^(INV[$i] SimpleName? oclExpression)
+		(m='message' ':' StringLiteralExp)?
+		-> ^(INV[$i] SimpleName? oclExpression (MESSAGE[$m] StringLiteralExp)?)
 	| 'static'? d='def' SimpleName? ':' defExpression
 		-> ^(DEF[$d] 'static'? SimpleName? defExpression)
 	;

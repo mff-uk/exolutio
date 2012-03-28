@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// $ANTLR 3.3.1.7705 ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3 2012-03-28 09:40:02
+// $ANTLR 3.3.1.7705 ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3 2012-03-28 16:37:05
 
 // The variable 'variable' is assigned but its value is never used.
 #pragma warning disable 219
@@ -30,7 +30,7 @@ namespace Exolutio.Model.OCL.Compiler
 public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 {
 	internal static readonly string[] tokenNames = new string[] {
-		"<invalid>", "<EOR>", "<DOWN>", "<UP>", "ACC", "ARGS", "BODY", "CALL", "CALLARGS", "CLASSIFIERCONDITION", "CLASSIFIERHEAD", "COLLECTIONLITERAL", "COLLECTIONTYPE", "COLLPART", "COLLPARTRANGE", "COLLTYPE", "CONDITION", "Char", "DECL", "DEF", "DERIVATE", "DoubleDot", "EscapeSequence", "ExponentPart", "Hex", "IF", "INDEX", "INFIX", "INIT", "INV", "ITERATE", "IntegerLiteralExp", "InvalidLiteralExp", "LET", "LINE_COMMENT", "MESSAGE", "NESTED_ML_COMMENT", "NameChar", "NameStartChar", "NullLiteralExp", "Num", "OPERATION", "OPERATIONCONDITION", "OPERATIONHEAD", "PATH", "POST", "PRE", "PRIMITIVELITERAL", "PROPERTYCONDITION", "PROPERTYHEAD", "RealLiteralExp", "SimpleName", "StringChar", "StringLiteralExp", "TUPLELITERAL", "TYPE", "UNARY", "UnlimitedNaturalLiteralExp", "VARDECL", "WS", "WhiteSpaceChar", "'('", "')'", "'+'", "','", "'-'", "'->'", "'.'", "'/'", "':'", "'::'", "';'", "'<'", "'<='", "'<>'", "'='", "'>'", "'>='", "'?'", "'@'", "'Bag'", "'Boolean'", "'Collection'", "'Integer'", "'OclAny'", "'OclInvalid'", "'OclMessage'", "'OclVoid'", "'OrderedSet'", "'Real'", "'Sequence'", "'Set'", "'String'", "'Tuple'", "'UnlimitedNatural'", "'['", "']'", "'^'", "'^^'", "'and'", "'body'", "'context'", "'def'", "'derivate'", "'else'", "'endif'", "'false'", "'if'", "'implies'", "'in'", "'init'", "'inv'", "'iterate'", "'let'", "'not'", "'or'", "'post'", "'pre'", "'static'", "'then'", "'true'", "'xor'", "'{'", "'|'", "'}'"
+		"<invalid>", "<EOR>", "<DOWN>", "<UP>", "ACC", "ARGS", "BODY", "CALL", "CALLARGS", "CLASSIFIERCONDITION", "CLASSIFIERHEAD", "COLLECTIONLITERAL", "COLLECTIONTYPE", "COLLPART", "COLLPARTRANGE", "COLLTYPE", "CONDITION", "Char", "DECL", "DEF", "DERIVATE", "DoubleDot", "EscapeSequence", "ExponentPart", "Hex", "IF", "INDEX", "INFIX", "INIT", "INV", "ITERATE", "IntegerLiteralExp", "InvalidLiteralExp", "LET", "LINE_COMMENT", "MESSAGE", "NESTED_ML_COMMENT", "NameChar", "NameStartChar", "NullLiteralExp", "Num", "OPERATION", "OPERATIONCONDITION", "OPERATIONHEAD", "PATH", "POST", "PRE", "PRIMITIVELITERAL", "PROPERTYCONDITION", "PROPERTYHEAD", "RealLiteralExp", "SimpleName", "StringChar", "StringLiteralExp", "TUPLELITERAL", "TYPE", "UNARY", "UnlimitedNaturalLiteralExp", "VARDECL", "WS", "WhiteSpaceChar", "'('", "')'", "'+'", "','", "'-'", "'->'", "'.'", "'/'", "':'", "'::'", "';'", "'<'", "'<='", "'<>'", "'='", "'>'", "'>='", "'?'", "'@'", "'Bag'", "'Boolean'", "'Collection'", "'Integer'", "'OclAny'", "'OclInvalid'", "'OclMessage'", "'OclVoid'", "'OrderedSet'", "'Real'", "'Sequence'", "'Set'", "'String'", "'Tuple'", "'UnlimitedNatural'", "'['", "']'", "'^'", "'^^'", "'and'", "'body'", "'context'", "'def'", "'derivate'", "'else'", "'endif'", "'false'", "'if'", "'implies'", "'in'", "'init'", "'inv'", "'iterate'", "'let'", "'message'", "'not'", "'or'", "'post'", "'pre'", "'static'", "'then'", "'true'", "'xor'", "'{'", "'|'", "'}'"
 	};
 	public const int EOF=-1;
 	public const int ACC=4;
@@ -154,6 +154,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 	public const int T__122=122;
 	public const int T__123=123;
 	public const int T__124=124;
+	public const int T__125=125;
 
 	// delegates
 	// delegators
@@ -214,7 +215,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 	partial void LeaveRule_contextDeclarationList();
 
 	// $ANTLR start "contextDeclarationList"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:26:1: public contextDeclarationList : ( contextDeclaration )* -> ^( CONDITION ( contextDeclaration )* ) ;
+	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:26:1: public contextDeclarationList : ( contextDeclaration )* EOF -> ^( CONDITION ( contextDeclaration )* ) ;
 	[GrammarRule("contextDeclarationList")]
 	public OCLSyntaxParser.contextDeclarationList_return contextDeclarationList()
 	{
@@ -226,16 +227,19 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 
 		object root_0 = default(object);
 
+		CommonToken EOF2 = default(CommonToken);
 		OCLSyntaxParser.contextDeclaration_return contextDeclaration1 = default(OCLSyntaxParser.contextDeclaration_return);
 
+		object EOF2_tree = default(object);
+		RewriteRuleITokenStream stream_EOF=new RewriteRuleITokenStream(adaptor,"token EOF");
 		RewriteRuleSubtreeStream stream_contextDeclaration=new RewriteRuleSubtreeStream(adaptor,"rule contextDeclaration");
 		try { DebugEnterRule(GrammarFileName, "contextDeclarationList");
 		DebugLocation(26, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:27:2: ( ( contextDeclaration )* -> ^( CONDITION ( contextDeclaration )* ) )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:27:2: ( ( contextDeclaration )* EOF -> ^( CONDITION ( contextDeclaration )* ) )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:27:3: ( contextDeclaration )*
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:27:3: ( contextDeclaration )* EOF
 			{
 			DebugLocation(27, 3);
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:27:3: ( contextDeclaration )*
@@ -260,7 +264,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:27:3: contextDeclaration
 					{
 					DebugLocation(27, 3);
-					PushFollow(Follow._contextDeclaration_in_contextDeclarationList170);
+					PushFollow(Follow._contextDeclaration_in_contextDeclarationList172);
 					contextDeclaration1=contextDeclaration();
 					PopFollow();
 					if (state.failed) return retval;
@@ -279,6 +283,10 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 
 			} finally { DebugExitSubRule(1); }
 
+			DebugLocation(27, 23);
+			EOF2=(CommonToken)Match(input,EOF,Follow._EOF_in_contextDeclarationList175); if (state.failed) return retval; 
+			if (state.backtracking == 0) stream_EOF.Add(EOF2);
+
 
 
 			{
@@ -294,20 +302,20 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 			root_0 = (object)adaptor.Nil();
-			// 27:23: -> ^( CONDITION ( contextDeclaration )* )
+			// 27:27: -> ^( CONDITION ( contextDeclaration )* )
 			{
-				DebugLocation(27, 26);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:27:26: ^( CONDITION ( contextDeclaration )* )
+				DebugLocation(27, 30);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:27:30: ^( CONDITION ( contextDeclaration )* )
 				{
 				object root_1 = (object)adaptor.Nil();
-				DebugLocation(27, 28);
+				DebugLocation(27, 32);
 				root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(CONDITION, "CONDITION"), root_1);
 
-				DebugLocation(27, 38);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:27:38: ( contextDeclaration )*
+				DebugLocation(27, 42);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:27:42: ( contextDeclaration )*
 				while ( stream_contextDeclaration.HasNext )
 				{
-					DebugLocation(27, 38);
+					DebugLocation(27, 42);
 					adaptor.AddChild(root_1, stream_contextDeclaration.NextTree());
 
 				}
@@ -376,9 +384,9 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 
 		object root_0 = default(object);
 
-		OCLSyntaxParser.propertyContextDecl_return propertyContextDecl2 = default(OCLSyntaxParser.propertyContextDecl_return);
-		OCLSyntaxParser.classifierContextDecl_return classifierContextDecl3 = default(OCLSyntaxParser.classifierContextDecl_return);
-		OCLSyntaxParser.operationContextDecl_return operationContextDecl4 = default(OCLSyntaxParser.operationContextDecl_return);
+		OCLSyntaxParser.propertyContextDecl_return propertyContextDecl3 = default(OCLSyntaxParser.propertyContextDecl_return);
+		OCLSyntaxParser.classifierContextDecl_return classifierContextDecl4 = default(OCLSyntaxParser.classifierContextDecl_return);
+		OCLSyntaxParser.operationContextDecl_return operationContextDecl5 = default(OCLSyntaxParser.operationContextDecl_return);
 
 
 		try { DebugEnterRule(GrammarFileName, "contextDeclaration");
@@ -407,11 +415,11 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				root_0 = (object)adaptor.Nil();
 
 				DebugLocation(32, 3);
-				PushFollow(Follow._propertyContextDecl_in_contextDeclaration193);
-				propertyContextDecl2=propertyContextDecl();
+				PushFollow(Follow._propertyContextDecl_in_contextDeclaration197);
+				propertyContextDecl3=propertyContextDecl();
 				PopFollow();
 				if (state.failed) return retval;
-				if (state.backtracking == 0) adaptor.AddChild(root_0, propertyContextDecl2.Tree);
+				if (state.backtracking == 0) adaptor.AddChild(root_0, propertyContextDecl3.Tree);
 
 				}
 				break;
@@ -422,11 +430,11 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				root_0 = (object)adaptor.Nil();
 
 				DebugLocation(33, 3);
-				PushFollow(Follow._classifierContextDecl_in_contextDeclaration197);
-				classifierContextDecl3=classifierContextDecl();
+				PushFollow(Follow._classifierContextDecl_in_contextDeclaration201);
+				classifierContextDecl4=classifierContextDecl();
 				PopFollow();
 				if (state.failed) return retval;
-				if (state.backtracking == 0) adaptor.AddChild(root_0, classifierContextDecl3.Tree);
+				if (state.backtracking == 0) adaptor.AddChild(root_0, classifierContextDecl4.Tree);
 
 				}
 				break;
@@ -437,11 +445,11 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				root_0 = (object)adaptor.Nil();
 
 				DebugLocation(34, 3);
-				PushFollow(Follow._operationContextDecl_in_contextDeclaration201);
-				operationContextDecl4=operationContextDecl();
+				PushFollow(Follow._operationContextDecl_in_contextDeclaration205);
+				operationContextDecl5=operationContextDecl();
 				PopFollow();
 				if (state.failed) return retval;
-				if (state.backtracking == 0) adaptor.AddChild(root_0, operationContextDecl4.Tree);
+				if (state.backtracking == 0) adaptor.AddChild(root_0, operationContextDecl5.Tree);
 
 				}
 				break;
@@ -499,8 +507,8 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 
 		object root_0 = default(object);
 
-		OCLSyntaxParser.propertyContextHead_return propertyContextHead5 = default(OCLSyntaxParser.propertyContextHead_return);
-		OCLSyntaxParser.initOrDerValue_return initOrDerValue6 = default(OCLSyntaxParser.initOrDerValue_return);
+		OCLSyntaxParser.propertyContextHead_return propertyContextHead6 = default(OCLSyntaxParser.propertyContextHead_return);
+		OCLSyntaxParser.initOrDerValue_return initOrDerValue7 = default(OCLSyntaxParser.initOrDerValue_return);
 
 		RewriteRuleSubtreeStream stream_propertyContextHead=new RewriteRuleSubtreeStream(adaptor,"rule propertyContextHead");
 		RewriteRuleSubtreeStream stream_initOrDerValue=new RewriteRuleSubtreeStream(adaptor,"rule initOrDerValue");
@@ -513,11 +521,11 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:38:3: propertyContextHead ( initOrDerValue )*
 			{
 			DebugLocation(38, 3);
-			PushFollow(Follow._propertyContextHead_in_propertyContextDecl211);
-			propertyContextHead5=propertyContextHead();
+			PushFollow(Follow._propertyContextHead_in_propertyContextDecl215);
+			propertyContextHead6=propertyContextHead();
 			PopFollow();
 			if (state.failed) return retval;
-			if (state.backtracking == 0) stream_propertyContextHead.Add(propertyContextHead5.Tree);
+			if (state.backtracking == 0) stream_propertyContextHead.Add(propertyContextHead6.Tree);
 			DebugLocation(38, 23);
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:38:23: ( initOrDerValue )*
 			try { DebugEnterSubRule(3);
@@ -541,11 +549,11 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:38:23: initOrDerValue
 					{
 					DebugLocation(38, 23);
-					PushFollow(Follow._initOrDerValue_in_propertyContextDecl213);
-					initOrDerValue6=initOrDerValue();
+					PushFollow(Follow._initOrDerValue_in_propertyContextDecl217);
+					initOrDerValue7=initOrDerValue();
 					PopFollow();
 					if (state.failed) return retval;
-					if (state.backtracking == 0) stream_initOrDerValue.Add(initOrDerValue6.Tree);
+					if (state.backtracking == 0) stream_initOrDerValue.Add(initOrDerValue7.Tree);
 
 					}
 					break;
@@ -660,17 +668,17 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 		object root_0 = default(object);
 
 		CommonToken c = default(CommonToken);
-		CommonToken SimpleName7 = default(CommonToken);
-		CommonToken string_literal8 = default(CommonToken);
-		CommonToken SimpleName9 = default(CommonToken);
-		CommonToken char_literal10 = default(CommonToken);
-		OCLSyntaxParser.type_return type11 = default(OCLSyntaxParser.type_return);
+		CommonToken SimpleName8 = default(CommonToken);
+		CommonToken string_literal9 = default(CommonToken);
+		CommonToken SimpleName10 = default(CommonToken);
+		CommonToken char_literal11 = default(CommonToken);
+		OCLSyntaxParser.type_return type12 = default(OCLSyntaxParser.type_return);
 
 		object c_tree = default(object);
-		object SimpleName7_tree = default(object);
-		object string_literal8_tree = default(object);
-		object SimpleName9_tree = default(object);
-		object char_literal10_tree = default(object);
+		object SimpleName8_tree = default(object);
+		object string_literal9_tree = default(object);
+		object SimpleName10_tree = default(object);
+		object char_literal11_tree = default(object);
 		RewriteRuleITokenStream stream_101=new RewriteRuleITokenStream(adaptor,"token 101");
 		RewriteRuleITokenStream stream_SimpleName=new RewriteRuleITokenStream(adaptor,"token SimpleName");
 		RewriteRuleITokenStream stream_70=new RewriteRuleITokenStream(adaptor,"token 70");
@@ -685,12 +693,12 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:42:3: c= 'context' SimpleName ( '::' SimpleName )+ ':' type
 			{
 			DebugLocation(42, 4);
-			c=(CommonToken)Match(input,101,Follow._101_in_propertyContextHead236); if (state.failed) return retval; 
+			c=(CommonToken)Match(input,101,Follow._101_in_propertyContextHead240); if (state.failed) return retval; 
 			if (state.backtracking == 0) stream_101.Add(c);
 
 			DebugLocation(42, 15);
-			SimpleName7=(CommonToken)Match(input,SimpleName,Follow._SimpleName_in_propertyContextHead238); if (state.failed) return retval; 
-			if (state.backtracking == 0) stream_SimpleName.Add(SimpleName7);
+			SimpleName8=(CommonToken)Match(input,SimpleName,Follow._SimpleName_in_propertyContextHead242); if (state.failed) return retval; 
+			if (state.backtracking == 0) stream_SimpleName.Add(SimpleName8);
 
 			DebugLocation(42, 26);
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:42:26: ( '::' SimpleName )+
@@ -716,12 +724,12 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:42:27: '::' SimpleName
 					{
 					DebugLocation(42, 27);
-					string_literal8=(CommonToken)Match(input,70,Follow._70_in_propertyContextHead241); if (state.failed) return retval; 
-					if (state.backtracking == 0) stream_70.Add(string_literal8);
+					string_literal9=(CommonToken)Match(input,70,Follow._70_in_propertyContextHead245); if (state.failed) return retval; 
+					if (state.backtracking == 0) stream_70.Add(string_literal9);
 
 					DebugLocation(42, 32);
-					SimpleName9=(CommonToken)Match(input,SimpleName,Follow._SimpleName_in_propertyContextHead243); if (state.failed) return retval; 
-					if (state.backtracking == 0) stream_SimpleName.Add(SimpleName9);
+					SimpleName10=(CommonToken)Match(input,SimpleName,Follow._SimpleName_in_propertyContextHead247); if (state.failed) return retval; 
+					if (state.backtracking == 0) stream_SimpleName.Add(SimpleName10);
 
 
 					}
@@ -744,15 +752,15 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			} finally { DebugExitSubRule(4); }
 
 			DebugLocation(42, 45);
-			char_literal10=(CommonToken)Match(input,69,Follow._69_in_propertyContextHead247); if (state.failed) return retval; 
-			if (state.backtracking == 0) stream_69.Add(char_literal10);
+			char_literal11=(CommonToken)Match(input,69,Follow._69_in_propertyContextHead251); if (state.failed) return retval; 
+			if (state.backtracking == 0) stream_69.Add(char_literal11);
 
 			DebugLocation(42, 49);
-			PushFollow(Follow._type_in_propertyContextHead249);
-			type11=type();
+			PushFollow(Follow._type_in_propertyContextHead253);
+			type12=type();
 			PopFollow();
 			if (state.failed) return retval;
-			if (state.backtracking == 0) stream_type.Add(type11.Tree);
+			if (state.backtracking == 0) stream_type.Add(type12.Tree);
 
 
 			{
@@ -855,8 +863,8 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 
 		object root_0 = default(object);
 
-		OCLSyntaxParser.operationContextHead_return operationContextHead12 = default(OCLSyntaxParser.operationContextHead_return);
-		OCLSyntaxParser.prePostOrBodyDecl_return prePostOrBodyDecl13 = default(OCLSyntaxParser.prePostOrBodyDecl_return);
+		OCLSyntaxParser.operationContextHead_return operationContextHead13 = default(OCLSyntaxParser.operationContextHead_return);
+		OCLSyntaxParser.prePostOrBodyDecl_return prePostOrBodyDecl14 = default(OCLSyntaxParser.prePostOrBodyDecl_return);
 
 		RewriteRuleSubtreeStream stream_operationContextHead=new RewriteRuleSubtreeStream(adaptor,"rule operationContextHead");
 		RewriteRuleSubtreeStream stream_prePostOrBodyDecl=new RewriteRuleSubtreeStream(adaptor,"rule prePostOrBodyDecl");
@@ -869,11 +877,11 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:47:3: operationContextHead ( prePostOrBodyDecl )*
 			{
 			DebugLocation(47, 3);
-			PushFollow(Follow._operationContextHead_in_operationContextDecl273);
-			operationContextHead12=operationContextHead();
+			PushFollow(Follow._operationContextHead_in_operationContextDecl277);
+			operationContextHead13=operationContextHead();
 			PopFollow();
 			if (state.failed) return retval;
-			if (state.backtracking == 0) stream_operationContextHead.Add(operationContextHead12.Tree);
+			if (state.backtracking == 0) stream_operationContextHead.Add(operationContextHead13.Tree);
 			DebugLocation(47, 24);
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:47:24: ( prePostOrBodyDecl )*
 			try { DebugEnterSubRule(5);
@@ -883,7 +891,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				try { DebugEnterDecision(5, false);
 				int LA5_0 = input.LA(1);
 
-				if ((LA5_0==100||(LA5_0>=116 && LA5_0<=117)))
+				if ((LA5_0==100||(LA5_0>=117 && LA5_0<=118)))
 				{
 					alt5 = 1;
 				}
@@ -897,11 +905,11 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:47:24: prePostOrBodyDecl
 					{
 					DebugLocation(47, 24);
-					PushFollow(Follow._prePostOrBodyDecl_in_operationContextDecl275);
-					prePostOrBodyDecl13=prePostOrBodyDecl();
+					PushFollow(Follow._prePostOrBodyDecl_in_operationContextDecl279);
+					prePostOrBodyDecl14=prePostOrBodyDecl();
 					PopFollow();
 					if (state.failed) return retval;
-					if (state.backtracking == 0) stream_prePostOrBodyDecl.Add(prePostOrBodyDecl13.Tree);
+					if (state.backtracking == 0) stream_prePostOrBodyDecl.Add(prePostOrBodyDecl14.Tree);
 
 					}
 					break;
@@ -1016,7 +1024,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 		object root_0 = default(object);
 
 		CommonToken c = default(CommonToken);
-		OCLSyntaxParser.operation_return operation14 = default(OCLSyntaxParser.operation_return);
+		OCLSyntaxParser.operation_return operation15 = default(OCLSyntaxParser.operation_return);
 
 		object c_tree = default(object);
 		RewriteRuleITokenStream stream_101=new RewriteRuleITokenStream(adaptor,"token 101");
@@ -1030,15 +1038,15 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:51:3: c= 'context' operation
 			{
 			DebugLocation(51, 4);
-			c=(CommonToken)Match(input,101,Follow._101_in_operationContextHead298); if (state.failed) return retval; 
+			c=(CommonToken)Match(input,101,Follow._101_in_operationContextHead302); if (state.failed) return retval; 
 			if (state.backtracking == 0) stream_101.Add(c);
 
 			DebugLocation(51, 15);
-			PushFollow(Follow._operation_in_operationContextHead300);
-			operation14=operation();
+			PushFollow(Follow._operation_in_operationContextHead304);
+			operation15=operation();
 			PopFollow();
 			if (state.failed) return retval;
-			if (state.backtracking == 0) stream_operation.Add(operation14.Tree);
+			if (state.backtracking == 0) stream_operation.Add(operation15.Tree);
 
 
 			{
@@ -1129,8 +1137,8 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 
 		object root_0 = default(object);
 
-		OCLSyntaxParser.classifierContextHead_return classifierContextHead15 = default(OCLSyntaxParser.classifierContextHead_return);
-		OCLSyntaxParser.invOrDef_return invOrDef16 = default(OCLSyntaxParser.invOrDef_return);
+		OCLSyntaxParser.classifierContextHead_return classifierContextHead16 = default(OCLSyntaxParser.classifierContextHead_return);
+		OCLSyntaxParser.invOrDef_return invOrDef17 = default(OCLSyntaxParser.invOrDef_return);
 
 		RewriteRuleSubtreeStream stream_classifierContextHead=new RewriteRuleSubtreeStream(adaptor,"rule classifierContextHead");
 		RewriteRuleSubtreeStream stream_invOrDef=new RewriteRuleSubtreeStream(adaptor,"rule invOrDef");
@@ -1143,11 +1151,11 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:55:3: classifierContextHead ( invOrDef )*
 			{
 			DebugLocation(55, 3);
-			PushFollow(Follow._classifierContextHead_in_classifierContextDecl318);
-			classifierContextHead15=classifierContextHead();
+			PushFollow(Follow._classifierContextHead_in_classifierContextDecl322);
+			classifierContextHead16=classifierContextHead();
 			PopFollow();
 			if (state.failed) return retval;
-			if (state.backtracking == 0) stream_classifierContextHead.Add(classifierContextHead15.Tree);
+			if (state.backtracking == 0) stream_classifierContextHead.Add(classifierContextHead16.Tree);
 			DebugLocation(55, 25);
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:55:25: ( invOrDef )*
 			try { DebugEnterSubRule(6);
@@ -1157,7 +1165,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				try { DebugEnterDecision(6, false);
 				int LA6_0 = input.LA(1);
 
-				if ((LA6_0==102||LA6_0==111||LA6_0==118))
+				if ((LA6_0==102||LA6_0==111||LA6_0==119))
 				{
 					alt6 = 1;
 				}
@@ -1171,11 +1179,11 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:55:26: invOrDef
 					{
 					DebugLocation(55, 26);
-					PushFollow(Follow._invOrDef_in_classifierContextDecl321);
-					invOrDef16=invOrDef();
+					PushFollow(Follow._invOrDef_in_classifierContextDecl325);
+					invOrDef17=invOrDef();
 					PopFollow();
 					if (state.failed) return retval;
-					if (state.backtracking == 0) stream_invOrDef.Add(invOrDef16.Tree);
+					if (state.backtracking == 0) stream_invOrDef.Add(invOrDef17.Tree);
 
 					}
 					break;
@@ -1290,14 +1298,14 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 		object root_0 = default(object);
 
 		CommonToken c = default(CommonToken);
-		CommonToken SimpleName18 = default(CommonToken);
-		CommonToken char_literal19 = default(CommonToken);
-		OCLSyntaxParser.pathName_return pathName17 = default(OCLSyntaxParser.pathName_return);
-		OCLSyntaxParser.pathName_return pathName20 = default(OCLSyntaxParser.pathName_return);
+		CommonToken SimpleName19 = default(CommonToken);
+		CommonToken char_literal20 = default(CommonToken);
+		OCLSyntaxParser.pathName_return pathName18 = default(OCLSyntaxParser.pathName_return);
+		OCLSyntaxParser.pathName_return pathName21 = default(OCLSyntaxParser.pathName_return);
 
 		object c_tree = default(object);
-		object SimpleName18_tree = default(object);
-		object char_literal19_tree = default(object);
+		object SimpleName19_tree = default(object);
+		object char_literal20_tree = default(object);
 		RewriteRuleITokenStream stream_101=new RewriteRuleITokenStream(adaptor,"token 101");
 		RewriteRuleITokenStream stream_SimpleName=new RewriteRuleITokenStream(adaptor,"token SimpleName");
 		RewriteRuleITokenStream stream_69=new RewriteRuleITokenStream(adaptor,"token 69");
@@ -1323,7 +1331,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 					{
 						alt7 = 2;
 					}
-					else if ((LA7_2==EOF||LA7_2==70||(LA7_2>=101 && LA7_2<=102)||LA7_2==111||LA7_2==118))
+					else if ((LA7_2==EOF||LA7_2==70||(LA7_2>=101 && LA7_2<=102)||LA7_2==111||LA7_2==119))
 					{
 						alt7 = 1;
 					}
@@ -1358,15 +1366,15 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:59:3: c= 'context' pathName
 				{
 				DebugLocation(59, 4);
-				c=(CommonToken)Match(input,101,Follow._101_in_classifierContextHead346); if (state.failed) return retval; 
+				c=(CommonToken)Match(input,101,Follow._101_in_classifierContextHead350); if (state.failed) return retval; 
 				if (state.backtracking == 0) stream_101.Add(c);
 
 				DebugLocation(59, 15);
-				PushFollow(Follow._pathName_in_classifierContextHead348);
-				pathName17=pathName();
+				PushFollow(Follow._pathName_in_classifierContextHead352);
+				pathName18=pathName();
 				PopFollow();
 				if (state.failed) return retval;
-				if (state.backtracking == 0) stream_pathName.Add(pathName17.Tree);
+				if (state.backtracking == 0) stream_pathName.Add(pathName18.Tree);
 
 
 				{
@@ -1410,23 +1418,23 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:60:3: c= 'context' SimpleName ':' pathName
 				{
 				DebugLocation(60, 4);
-				c=(CommonToken)Match(input,101,Follow._101_in_classifierContextHead364); if (state.failed) return retval; 
+				c=(CommonToken)Match(input,101,Follow._101_in_classifierContextHead368); if (state.failed) return retval; 
 				if (state.backtracking == 0) stream_101.Add(c);
 
 				DebugLocation(60, 15);
-				SimpleName18=(CommonToken)Match(input,SimpleName,Follow._SimpleName_in_classifierContextHead366); if (state.failed) return retval; 
-				if (state.backtracking == 0) stream_SimpleName.Add(SimpleName18);
+				SimpleName19=(CommonToken)Match(input,SimpleName,Follow._SimpleName_in_classifierContextHead370); if (state.failed) return retval; 
+				if (state.backtracking == 0) stream_SimpleName.Add(SimpleName19);
 
 				DebugLocation(60, 25);
-				char_literal19=(CommonToken)Match(input,69,Follow._69_in_classifierContextHead367); if (state.failed) return retval; 
-				if (state.backtracking == 0) stream_69.Add(char_literal19);
+				char_literal20=(CommonToken)Match(input,69,Follow._69_in_classifierContextHead371); if (state.failed) return retval; 
+				if (state.backtracking == 0) stream_69.Add(char_literal20);
 
 				DebugLocation(60, 28);
-				PushFollow(Follow._pathName_in_classifierContextHead368);
-				pathName20=pathName();
+				PushFollow(Follow._pathName_in_classifierContextHead372);
+				pathName21=pathName();
 				PopFollow();
 				if (state.failed) return retval;
-				if (state.backtracking == 0) stream_pathName.Add(pathName20.Tree);
+				if (state.backtracking == 0) stream_pathName.Add(pathName21.Tree);
 
 
 				{
@@ -1523,15 +1531,15 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 
 		CommonToken i = default(CommonToken);
 		CommonToken d = default(CommonToken);
-		CommonToken char_literal21 = default(CommonToken);
-		CommonToken char_literal23 = default(CommonToken);
-		OCLSyntaxParser.oclExpression_return oclExpression22 = default(OCLSyntaxParser.oclExpression_return);
-		OCLSyntaxParser.oclExpression_return oclExpression24 = default(OCLSyntaxParser.oclExpression_return);
+		CommonToken char_literal22 = default(CommonToken);
+		CommonToken char_literal24 = default(CommonToken);
+		OCLSyntaxParser.oclExpression_return oclExpression23 = default(OCLSyntaxParser.oclExpression_return);
+		OCLSyntaxParser.oclExpression_return oclExpression25 = default(OCLSyntaxParser.oclExpression_return);
 
 		object i_tree = default(object);
 		object d_tree = default(object);
-		object char_literal21_tree = default(object);
-		object char_literal23_tree = default(object);
+		object char_literal22_tree = default(object);
+		object char_literal24_tree = default(object);
 		RewriteRuleITokenStream stream_110=new RewriteRuleITokenStream(adaptor,"token 110");
 		RewriteRuleITokenStream stream_69=new RewriteRuleITokenStream(adaptor,"token 69");
 		RewriteRuleITokenStream stream_103=new RewriteRuleITokenStream(adaptor,"token 103");
@@ -1568,19 +1576,19 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:64:3: i= 'init' ':' oclExpression
 				{
 				DebugLocation(64, 4);
-				i=(CommonToken)Match(input,110,Follow._110_in_initOrDerValue391); if (state.failed) return retval; 
+				i=(CommonToken)Match(input,110,Follow._110_in_initOrDerValue395); if (state.failed) return retval; 
 				if (state.backtracking == 0) stream_110.Add(i);
 
 				DebugLocation(64, 12);
-				char_literal21=(CommonToken)Match(input,69,Follow._69_in_initOrDerValue393); if (state.failed) return retval; 
-				if (state.backtracking == 0) stream_69.Add(char_literal21);
+				char_literal22=(CommonToken)Match(input,69,Follow._69_in_initOrDerValue397); if (state.failed) return retval; 
+				if (state.backtracking == 0) stream_69.Add(char_literal22);
 
 				DebugLocation(64, 16);
-				PushFollow(Follow._oclExpression_in_initOrDerValue395);
-				oclExpression22=oclExpression();
+				PushFollow(Follow._oclExpression_in_initOrDerValue399);
+				oclExpression23=oclExpression();
 				PopFollow();
 				if (state.failed) return retval;
-				if (state.backtracking == 0) stream_oclExpression.Add(oclExpression22.Tree);
+				if (state.backtracking == 0) stream_oclExpression.Add(oclExpression23.Tree);
 
 
 				{
@@ -1624,19 +1632,19 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:65:3: d= 'derivate' ':' oclExpression
 				{
 				DebugLocation(65, 4);
-				d=(CommonToken)Match(input,103,Follow._103_in_initOrDerValue410); if (state.failed) return retval; 
+				d=(CommonToken)Match(input,103,Follow._103_in_initOrDerValue414); if (state.failed) return retval; 
 				if (state.backtracking == 0) stream_103.Add(d);
 
 				DebugLocation(65, 16);
-				char_literal23=(CommonToken)Match(input,69,Follow._69_in_initOrDerValue412); if (state.failed) return retval; 
-				if (state.backtracking == 0) stream_69.Add(char_literal23);
+				char_literal24=(CommonToken)Match(input,69,Follow._69_in_initOrDerValue416); if (state.failed) return retval; 
+				if (state.backtracking == 0) stream_69.Add(char_literal24);
 
 				DebugLocation(65, 20);
-				PushFollow(Follow._oclExpression_in_initOrDerValue414);
-				oclExpression24=oclExpression();
+				PushFollow(Follow._oclExpression_in_initOrDerValue418);
+				oclExpression25=oclExpression();
 				PopFollow();
 				if (state.failed) return retval;
-				if (state.backtracking == 0) stream_oclExpression.Add(oclExpression24.Tree);
+				if (state.backtracking == 0) stream_oclExpression.Add(oclExpression25.Tree);
 
 
 				{
@@ -1717,7 +1725,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 	partial void LeaveRule_invOrDef();
 
 	// $ANTLR start "invOrDef"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:68:1: invOrDef : (i= 'inv' ( SimpleName )? ':' oclExpression -> ^( INV[$i] ( SimpleName )? oclExpression ) | ( 'static' )? d= 'def' ( SimpleName )? ':' defExpression -> ^( DEF[$d] ( 'static' )? ( SimpleName )? defExpression ) );
+	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:68:1: invOrDef : (i= 'inv' ( SimpleName )? ':' oclExpression (m= 'message' ':' StringLiteralExp )? -> ^( INV[$i] ( SimpleName )? oclExpression ( MESSAGE[$m] StringLiteralExp )? ) | ( 'static' )? d= 'def' ( SimpleName )? ':' defExpression -> ^( DEF[$d] ( 'static' )? ( SimpleName )? defExpression ) );
 	[GrammarRule("invOrDef")]
 	private OCLSyntaxParser.invOrDef_return invOrDef()
 	{
@@ -1730,26 +1738,34 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 		object root_0 = default(object);
 
 		CommonToken i = default(CommonToken);
+		CommonToken m = default(CommonToken);
 		CommonToken d = default(CommonToken);
-		CommonToken SimpleName25 = default(CommonToken);
-		CommonToken char_literal26 = default(CommonToken);
-		CommonToken string_literal28 = default(CommonToken);
-		CommonToken SimpleName29 = default(CommonToken);
-		CommonToken char_literal30 = default(CommonToken);
-		OCLSyntaxParser.oclExpression_return oclExpression27 = default(OCLSyntaxParser.oclExpression_return);
-		OCLSyntaxParser.defExpression_return defExpression31 = default(OCLSyntaxParser.defExpression_return);
+		CommonToken SimpleName26 = default(CommonToken);
+		CommonToken char_literal27 = default(CommonToken);
+		CommonToken char_literal29 = default(CommonToken);
+		CommonToken StringLiteralExp30 = default(CommonToken);
+		CommonToken string_literal31 = default(CommonToken);
+		CommonToken SimpleName32 = default(CommonToken);
+		CommonToken char_literal33 = default(CommonToken);
+		OCLSyntaxParser.oclExpression_return oclExpression28 = default(OCLSyntaxParser.oclExpression_return);
+		OCLSyntaxParser.defExpression_return defExpression34 = default(OCLSyntaxParser.defExpression_return);
 
 		object i_tree = default(object);
+		object m_tree = default(object);
 		object d_tree = default(object);
-		object SimpleName25_tree = default(object);
-		object char_literal26_tree = default(object);
-		object string_literal28_tree = default(object);
-		object SimpleName29_tree = default(object);
-		object char_literal30_tree = default(object);
+		object SimpleName26_tree = default(object);
+		object char_literal27_tree = default(object);
+		object char_literal29_tree = default(object);
+		object StringLiteralExp30_tree = default(object);
+		object string_literal31_tree = default(object);
+		object SimpleName32_tree = default(object);
+		object char_literal33_tree = default(object);
 		RewriteRuleITokenStream stream_111=new RewriteRuleITokenStream(adaptor,"token 111");
 		RewriteRuleITokenStream stream_SimpleName=new RewriteRuleITokenStream(adaptor,"token SimpleName");
 		RewriteRuleITokenStream stream_69=new RewriteRuleITokenStream(adaptor,"token 69");
-		RewriteRuleITokenStream stream_118=new RewriteRuleITokenStream(adaptor,"token 118");
+		RewriteRuleITokenStream stream_114=new RewriteRuleITokenStream(adaptor,"token 114");
+		RewriteRuleITokenStream stream_StringLiteralExp=new RewriteRuleITokenStream(adaptor,"token StringLiteralExp");
+		RewriteRuleITokenStream stream_119=new RewriteRuleITokenStream(adaptor,"token 119");
 		RewriteRuleITokenStream stream_102=new RewriteRuleITokenStream(adaptor,"token 102");
 		RewriteRuleSubtreeStream stream_oclExpression=new RewriteRuleSubtreeStream(adaptor,"rule oclExpression");
 		RewriteRuleSubtreeStream stream_defExpression=new RewriteRuleSubtreeStream(adaptor,"rule defExpression");
@@ -1757,35 +1773,35 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 		DebugLocation(68, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:69:2: (i= 'inv' ( SimpleName )? ':' oclExpression -> ^( INV[$i] ( SimpleName )? oclExpression ) | ( 'static' )? d= 'def' ( SimpleName )? ':' defExpression -> ^( DEF[$d] ( 'static' )? ( SimpleName )? defExpression ) )
-			int alt12=2;
-			try { DebugEnterDecision(12, false);
-			int LA12_0 = input.LA(1);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:69:2: (i= 'inv' ( SimpleName )? ':' oclExpression (m= 'message' ':' StringLiteralExp )? -> ^( INV[$i] ( SimpleName )? oclExpression ( MESSAGE[$m] StringLiteralExp )? ) | ( 'static' )? d= 'def' ( SimpleName )? ':' defExpression -> ^( DEF[$d] ( 'static' )? ( SimpleName )? defExpression ) )
+			int alt13=2;
+			try { DebugEnterDecision(13, false);
+			int LA13_0 = input.LA(1);
 
-			if ((LA12_0==111))
+			if ((LA13_0==111))
 			{
-				alt12 = 1;
+				alt13 = 1;
 			}
-			else if ((LA12_0==102||LA12_0==118))
+			else if ((LA13_0==102||LA13_0==119))
 			{
-				alt12 = 2;
+				alt13 = 2;
 			}
 			else
 			{
 				if (state.backtracking>0) {state.failed=true; return retval;}
-				NoViableAltException nvae = new NoViableAltException("", 12, 0, input);
+				NoViableAltException nvae = new NoViableAltException("", 13, 0, input);
 				DebugRecognitionException(nvae);
 				throw nvae;
 			}
-			} finally { DebugExitDecision(12); }
-			switch (alt12)
+			} finally { DebugExitDecision(13); }
+			switch (alt13)
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:69:3: i= 'inv' ( SimpleName )? ':' oclExpression
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:69:3: i= 'inv' ( SimpleName )? ':' oclExpression (m= 'message' ':' StringLiteralExp )?
 				{
 				DebugLocation(69, 4);
-				i=(CommonToken)Match(input,111,Follow._111_in_invOrDef434); if (state.failed) return retval; 
+				i=(CommonToken)Match(input,111,Follow._111_in_invOrDef438); if (state.failed) return retval; 
 				if (state.backtracking == 0) stream_111.Add(i);
 
 				DebugLocation(69, 11);
@@ -1807,8 +1823,8 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:69:12: SimpleName
 					{
 					DebugLocation(69, 12);
-					SimpleName25=(CommonToken)Match(input,SimpleName,Follow._SimpleName_in_invOrDef437); if (state.failed) return retval; 
-					if (state.backtracking == 0) stream_SimpleName.Add(SimpleName25);
+					SimpleName26=(CommonToken)Match(input,SimpleName,Follow._SimpleName_in_invOrDef441); if (state.failed) return retval; 
+					if (state.backtracking == 0) stream_SimpleName.Add(SimpleName26);
 
 
 					}
@@ -1818,20 +1834,57 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				} finally { DebugExitSubRule(9); }
 
 				DebugLocation(69, 26);
-				char_literal26=(CommonToken)Match(input,69,Follow._69_in_invOrDef442); if (state.failed) return retval; 
-				if (state.backtracking == 0) stream_69.Add(char_literal26);
+				char_literal27=(CommonToken)Match(input,69,Follow._69_in_invOrDef446); if (state.failed) return retval; 
+				if (state.backtracking == 0) stream_69.Add(char_literal27);
 
 				DebugLocation(69, 30);
-				PushFollow(Follow._oclExpression_in_invOrDef444);
-				oclExpression27=oclExpression();
+				PushFollow(Follow._oclExpression_in_invOrDef448);
+				oclExpression28=oclExpression();
 				PopFollow();
 				if (state.failed) return retval;
-				if (state.backtracking == 0) stream_oclExpression.Add(oclExpression27.Tree);
+				if (state.backtracking == 0) stream_oclExpression.Add(oclExpression28.Tree);
+				DebugLocation(70, 3);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:70:3: (m= 'message' ':' StringLiteralExp )?
+				int alt10=2;
+				try { DebugEnterSubRule(10);
+				try { DebugEnterDecision(10, false);
+				int LA10_0 = input.LA(1);
+
+				if ((LA10_0==114))
+				{
+					alt10 = 1;
+				}
+				} finally { DebugExitDecision(10); }
+				switch (alt10)
+				{
+				case 1:
+					DebugEnterAlt(1);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:70:4: m= 'message' ':' StringLiteralExp
+					{
+					DebugLocation(70, 5);
+					m=(CommonToken)Match(input,114,Follow._114_in_invOrDef456); if (state.failed) return retval; 
+					if (state.backtracking == 0) stream_114.Add(m);
+
+					DebugLocation(70, 16);
+					char_literal29=(CommonToken)Match(input,69,Follow._69_in_invOrDef458); if (state.failed) return retval; 
+					if (state.backtracking == 0) stream_69.Add(char_literal29);
+
+					DebugLocation(70, 20);
+					StringLiteralExp30=(CommonToken)Match(input,StringLiteralExp,Follow._StringLiteralExp_in_invOrDef460); if (state.failed) return retval; 
+					if (state.backtracking == 0) stream_StringLiteralExp.Add(StringLiteralExp30);
+
+
+					}
+					break;
+
+				}
+				} finally { DebugExitSubRule(10); }
+
 
 
 				{
 				// AST REWRITE
-				// elements: SimpleName, oclExpression
+				// elements: SimpleName, oclExpression, StringLiteralExp
 				// token labels: 
 				// rule labels: retval
 				// token list labels: 
@@ -1842,26 +1895,37 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 				root_0 = (object)adaptor.Nil();
-				// 70:3: -> ^( INV[$i] ( SimpleName )? oclExpression )
+				// 71:3: -> ^( INV[$i] ( SimpleName )? oclExpression ( MESSAGE[$m] StringLiteralExp )? )
 				{
-					DebugLocation(70, 6);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:70:6: ^( INV[$i] ( SimpleName )? oclExpression )
+					DebugLocation(71, 6);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:71:6: ^( INV[$i] ( SimpleName )? oclExpression ( MESSAGE[$m] StringLiteralExp )? )
 					{
 					object root_1 = (object)adaptor.Nil();
-					DebugLocation(70, 8);
+					DebugLocation(71, 8);
 					root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(INV, i), root_1);
 
-					DebugLocation(70, 16);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:70:16: ( SimpleName )?
+					DebugLocation(71, 16);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:71:16: ( SimpleName )?
 					if (stream_SimpleName.HasNext)
 					{
-						DebugLocation(70, 16);
+						DebugLocation(71, 16);
 						adaptor.AddChild(root_1, stream_SimpleName.NextNode());
 
 					}
 					stream_SimpleName.Reset();
-					DebugLocation(70, 28);
+					DebugLocation(71, 28);
 					adaptor.AddChild(root_1, stream_oclExpression.NextTree());
+					DebugLocation(71, 42);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:71:42: ( MESSAGE[$m] StringLiteralExp )?
+					if (stream_StringLiteralExp.HasNext)
+					{
+						DebugLocation(71, 43);
+						adaptor.AddChild(root_1, (object)adaptor.Create(MESSAGE, m));
+						DebugLocation(71, 55);
+						adaptor.AddChild(root_1, stream_StringLiteralExp.NextNode());
+
+					}
+					stream_StringLiteralExp.Reset();
 
 					adaptor.AddChild(root_0, root_1);
 					}
@@ -1876,49 +1940,16 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:71:4: ( 'static' )? d= 'def' ( SimpleName )? ':' defExpression
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:72:4: ( 'static' )? d= 'def' ( SimpleName )? ':' defExpression
 				{
-				DebugLocation(71, 4);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:71:4: ( 'static' )?
-				int alt10=2;
-				try { DebugEnterSubRule(10);
-				try { DebugEnterDecision(10, false);
-				int LA10_0 = input.LA(1);
-
-				if ((LA10_0==118))
-				{
-					alt10 = 1;
-				}
-				} finally { DebugExitDecision(10); }
-				switch (alt10)
-				{
-				case 1:
-					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:71:4: 'static'
-					{
-					DebugLocation(71, 4);
-					string_literal28=(CommonToken)Match(input,118,Follow._118_in_invOrDef464); if (state.failed) return retval; 
-					if (state.backtracking == 0) stream_118.Add(string_literal28);
-
-
-					}
-					break;
-
-				}
-				} finally { DebugExitSubRule(10); }
-
-				DebugLocation(71, 15);
-				d=(CommonToken)Match(input,102,Follow._102_in_invOrDef469); if (state.failed) return retval; 
-				if (state.backtracking == 0) stream_102.Add(d);
-
-				DebugLocation(71, 22);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:71:22: ( SimpleName )?
+				DebugLocation(72, 4);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:72:4: ( 'static' )?
 				int alt11=2;
 				try { DebugEnterSubRule(11);
 				try { DebugEnterDecision(11, false);
 				int LA11_0 = input.LA(1);
 
-				if ((LA11_0==SimpleName))
+				if ((LA11_0==119))
 				{
 					alt11 = 1;
 				}
@@ -1927,11 +1958,11 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:71:22: SimpleName
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:72:4: 'static'
 					{
-					DebugLocation(71, 22);
-					SimpleName29=(CommonToken)Match(input,SimpleName,Follow._SimpleName_in_invOrDef471); if (state.failed) return retval; 
-					if (state.backtracking == 0) stream_SimpleName.Add(SimpleName29);
+					DebugLocation(72, 4);
+					string_literal31=(CommonToken)Match(input,119,Follow._119_in_invOrDef489); if (state.failed) return retval; 
+					if (state.backtracking == 0) stream_119.Add(string_literal31);
 
 
 					}
@@ -1940,21 +1971,54 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				}
 				} finally { DebugExitSubRule(11); }
 
-				DebugLocation(71, 34);
-				char_literal30=(CommonToken)Match(input,69,Follow._69_in_invOrDef474); if (state.failed) return retval; 
-				if (state.backtracking == 0) stream_69.Add(char_literal30);
+				DebugLocation(72, 15);
+				d=(CommonToken)Match(input,102,Follow._102_in_invOrDef494); if (state.failed) return retval; 
+				if (state.backtracking == 0) stream_102.Add(d);
 
-				DebugLocation(71, 38);
-				PushFollow(Follow._defExpression_in_invOrDef476);
-				defExpression31=defExpression();
+				DebugLocation(72, 22);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:72:22: ( SimpleName )?
+				int alt12=2;
+				try { DebugEnterSubRule(12);
+				try { DebugEnterDecision(12, false);
+				int LA12_0 = input.LA(1);
+
+				if ((LA12_0==SimpleName))
+				{
+					alt12 = 1;
+				}
+				} finally { DebugExitDecision(12); }
+				switch (alt12)
+				{
+				case 1:
+					DebugEnterAlt(1);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:72:22: SimpleName
+					{
+					DebugLocation(72, 22);
+					SimpleName32=(CommonToken)Match(input,SimpleName,Follow._SimpleName_in_invOrDef496); if (state.failed) return retval; 
+					if (state.backtracking == 0) stream_SimpleName.Add(SimpleName32);
+
+
+					}
+					break;
+
+				}
+				} finally { DebugExitSubRule(12); }
+
+				DebugLocation(72, 34);
+				char_literal33=(CommonToken)Match(input,69,Follow._69_in_invOrDef499); if (state.failed) return retval; 
+				if (state.backtracking == 0) stream_69.Add(char_literal33);
+
+				DebugLocation(72, 38);
+				PushFollow(Follow._defExpression_in_invOrDef501);
+				defExpression34=defExpression();
 				PopFollow();
 				if (state.failed) return retval;
-				if (state.backtracking == 0) stream_defExpression.Add(defExpression31.Tree);
+				if (state.backtracking == 0) stream_defExpression.Add(defExpression34.Tree);
 
 
 				{
 				// AST REWRITE
-				// elements: 118, SimpleName, defExpression
+				// elements: 119, SimpleName, defExpression
 				// token labels: 
 				// rule labels: retval
 				// token list labels: 
@@ -1965,34 +2029,34 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 				root_0 = (object)adaptor.Nil();
-				// 72:3: -> ^( DEF[$d] ( 'static' )? ( SimpleName )? defExpression )
+				// 73:3: -> ^( DEF[$d] ( 'static' )? ( SimpleName )? defExpression )
 				{
-					DebugLocation(72, 6);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:72:6: ^( DEF[$d] ( 'static' )? ( SimpleName )? defExpression )
+					DebugLocation(73, 6);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:73:6: ^( DEF[$d] ( 'static' )? ( SimpleName )? defExpression )
 					{
 					object root_1 = (object)adaptor.Nil();
-					DebugLocation(72, 8);
+					DebugLocation(73, 8);
 					root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(DEF, d), root_1);
 
-					DebugLocation(72, 16);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:72:16: ( 'static' )?
-					if (stream_118.HasNext)
+					DebugLocation(73, 16);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:73:16: ( 'static' )?
+					if (stream_119.HasNext)
 					{
-						DebugLocation(72, 16);
-						adaptor.AddChild(root_1, stream_118.NextNode());
+						DebugLocation(73, 16);
+						adaptor.AddChild(root_1, stream_119.NextNode());
 
 					}
-					stream_118.Reset();
-					DebugLocation(72, 26);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:72:26: ( SimpleName )?
+					stream_119.Reset();
+					DebugLocation(73, 26);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:73:26: ( SimpleName )?
 					if (stream_SimpleName.HasNext)
 					{
-						DebugLocation(72, 26);
+						DebugLocation(73, 26);
 						adaptor.AddChild(root_1, stream_SimpleName.NextNode());
 
 					}
 					stream_SimpleName.Reset();
-					DebugLocation(72, 38);
+					DebugLocation(73, 38);
 					adaptor.AddChild(root_1, stream_defExpression.NextTree());
 
 					adaptor.AddChild(root_0, root_1);
@@ -2028,7 +2092,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			LeaveRule("invOrDef", 10);
 			LeaveRule_invOrDef();
 		}
-		DebugLocation(73, 1);
+		DebugLocation(74, 1);
 		} finally { DebugExitRule(GrammarFileName, "invOrDef"); }
 		return retval;
 
@@ -2048,7 +2112,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 	partial void LeaveRule_prePostOrBodyDecl();
 
 	// $ANTLR start "prePostOrBodyDecl"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:75:1: prePostOrBodyDecl : (h= 'pre' ( SimpleName )? ':' oclExpression -> ^( PRE[h] ( SimpleName )? oclExpression ) |h= 'post' ( SimpleName )? ':' oclExpression -> ^( POST[h] ( SimpleName )? oclExpression ) |h= 'body' ( SimpleName )? ':' oclExpression -> ^( BODY[h] ( SimpleName )? oclExpression ) );
+	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:76:1: prePostOrBodyDecl : (h= 'pre' ( SimpleName )? ':' oclExpression -> ^( PRE[h] ( SimpleName )? oclExpression ) |h= 'post' ( SimpleName )? ':' oclExpression -> ^( POST[h] ( SimpleName )? oclExpression ) |h= 'body' ( SimpleName )? ':' oclExpression -> ^( BODY[h] ( SimpleName )? oclExpression ) );
 	[GrammarRule("prePostOrBodyDecl")]
 	private OCLSyntaxParser.prePostOrBodyDecl_return prePostOrBodyDecl()
 	{
@@ -2061,169 +2125,75 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 		object root_0 = default(object);
 
 		CommonToken h = default(CommonToken);
-		CommonToken SimpleName32 = default(CommonToken);
-		CommonToken char_literal33 = default(CommonToken);
 		CommonToken SimpleName35 = default(CommonToken);
 		CommonToken char_literal36 = default(CommonToken);
 		CommonToken SimpleName38 = default(CommonToken);
 		CommonToken char_literal39 = default(CommonToken);
-		OCLSyntaxParser.oclExpression_return oclExpression34 = default(OCLSyntaxParser.oclExpression_return);
+		CommonToken SimpleName41 = default(CommonToken);
+		CommonToken char_literal42 = default(CommonToken);
 		OCLSyntaxParser.oclExpression_return oclExpression37 = default(OCLSyntaxParser.oclExpression_return);
 		OCLSyntaxParser.oclExpression_return oclExpression40 = default(OCLSyntaxParser.oclExpression_return);
+		OCLSyntaxParser.oclExpression_return oclExpression43 = default(OCLSyntaxParser.oclExpression_return);
 
 		object h_tree = default(object);
-		object SimpleName32_tree = default(object);
-		object char_literal33_tree = default(object);
 		object SimpleName35_tree = default(object);
 		object char_literal36_tree = default(object);
 		object SimpleName38_tree = default(object);
 		object char_literal39_tree = default(object);
-		RewriteRuleITokenStream stream_117=new RewriteRuleITokenStream(adaptor,"token 117");
+		object SimpleName41_tree = default(object);
+		object char_literal42_tree = default(object);
+		RewriteRuleITokenStream stream_118=new RewriteRuleITokenStream(adaptor,"token 118");
 		RewriteRuleITokenStream stream_SimpleName=new RewriteRuleITokenStream(adaptor,"token SimpleName");
 		RewriteRuleITokenStream stream_69=new RewriteRuleITokenStream(adaptor,"token 69");
-		RewriteRuleITokenStream stream_116=new RewriteRuleITokenStream(adaptor,"token 116");
+		RewriteRuleITokenStream stream_117=new RewriteRuleITokenStream(adaptor,"token 117");
 		RewriteRuleITokenStream stream_100=new RewriteRuleITokenStream(adaptor,"token 100");
 		RewriteRuleSubtreeStream stream_oclExpression=new RewriteRuleSubtreeStream(adaptor,"rule oclExpression");
 		try { DebugEnterRule(GrammarFileName, "prePostOrBodyDecl");
-		DebugLocation(75, 1);
+		DebugLocation(76, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:76:2: (h= 'pre' ( SimpleName )? ':' oclExpression -> ^( PRE[h] ( SimpleName )? oclExpression ) |h= 'post' ( SimpleName )? ':' oclExpression -> ^( POST[h] ( SimpleName )? oclExpression ) |h= 'body' ( SimpleName )? ':' oclExpression -> ^( BODY[h] ( SimpleName )? oclExpression ) )
-			int alt16=3;
-			try { DebugEnterDecision(16, false);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:77:2: (h= 'pre' ( SimpleName )? ':' oclExpression -> ^( PRE[h] ( SimpleName )? oclExpression ) |h= 'post' ( SimpleName )? ':' oclExpression -> ^( POST[h] ( SimpleName )? oclExpression ) |h= 'body' ( SimpleName )? ':' oclExpression -> ^( BODY[h] ( SimpleName )? oclExpression ) )
+			int alt17=3;
+			try { DebugEnterDecision(17, false);
 			switch (input.LA(1))
 			{
-			case 117:
+			case 118:
 				{
-				alt16 = 1;
+				alt17 = 1;
 				}
 				break;
-			case 116:
+			case 117:
 				{
-				alt16 = 2;
+				alt17 = 2;
 				}
 				break;
 			case 100:
 				{
-				alt16 = 3;
+				alt17 = 3;
 				}
 				break;
 			default:
 				{
 					if (state.backtracking>0) {state.failed=true; return retval;}
-					NoViableAltException nvae = new NoViableAltException("", 16, 0, input);
+					NoViableAltException nvae = new NoViableAltException("", 17, 0, input);
 					DebugRecognitionException(nvae);
 					throw nvae;
 				}
 			}
 
-			} finally { DebugExitDecision(16); }
-			switch (alt16)
+			} finally { DebugExitDecision(17); }
+			switch (alt17)
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:76:3: h= 'pre' ( SimpleName )? ':' oclExpression
-				{
-				DebugLocation(76, 4);
-				h=(CommonToken)Match(input,117,Follow._117_in_prePostOrBodyDecl505); if (state.failed) return retval; 
-				if (state.backtracking == 0) stream_117.Add(h);
-
-				DebugLocation(76, 11);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:76:11: ( SimpleName )?
-				int alt13=2;
-				try { DebugEnterSubRule(13);
-				try { DebugEnterDecision(13, false);
-				int LA13_0 = input.LA(1);
-
-				if ((LA13_0==SimpleName))
-				{
-					alt13 = 1;
-				}
-				} finally { DebugExitDecision(13); }
-				switch (alt13)
-				{
-				case 1:
-					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:76:12: SimpleName
-					{
-					DebugLocation(76, 12);
-					SimpleName32=(CommonToken)Match(input,SimpleName,Follow._SimpleName_in_prePostOrBodyDecl508); if (state.failed) return retval; 
-					if (state.backtracking == 0) stream_SimpleName.Add(SimpleName32);
-
-
-					}
-					break;
-
-				}
-				} finally { DebugExitSubRule(13); }
-
-				DebugLocation(76, 25);
-				char_literal33=(CommonToken)Match(input,69,Follow._69_in_prePostOrBodyDecl512); if (state.failed) return retval; 
-				if (state.backtracking == 0) stream_69.Add(char_literal33);
-
-				DebugLocation(76, 29);
-				PushFollow(Follow._oclExpression_in_prePostOrBodyDecl514);
-				oclExpression34=oclExpression();
-				PopFollow();
-				if (state.failed) return retval;
-				if (state.backtracking == 0) stream_oclExpression.Add(oclExpression34.Tree);
-
-
-				{
-				// AST REWRITE
-				// elements: SimpleName, oclExpression
-				// token labels: 
-				// rule labels: retval
-				// token list labels: 
-				// rule list labels: 
-				// wildcard labels: 
-				if (state.backtracking == 0) {
-				retval.Tree = root_0;
-				RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
-
-				root_0 = (object)adaptor.Nil();
-				// 76:43: -> ^( PRE[h] ( SimpleName )? oclExpression )
-				{
-					DebugLocation(76, 45);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:76:45: ^( PRE[h] ( SimpleName )? oclExpression )
-					{
-					object root_1 = (object)adaptor.Nil();
-					DebugLocation(76, 47);
-					root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(PRE, h), root_1);
-
-					DebugLocation(76, 54);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:76:54: ( SimpleName )?
-					if (stream_SimpleName.HasNext)
-					{
-						DebugLocation(76, 54);
-						adaptor.AddChild(root_1, stream_SimpleName.NextNode());
-
-					}
-					stream_SimpleName.Reset();
-					DebugLocation(76, 66);
-					adaptor.AddChild(root_1, stream_oclExpression.NextTree());
-
-					adaptor.AddChild(root_0, root_1);
-					}
-
-				}
-
-				retval.Tree = root_0;
-				}
-				}
-
-				}
-				break;
-			case 2:
-				DebugEnterAlt(2);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:77:3: h= 'post' ( SimpleName )? ':' oclExpression
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:77:3: h= 'pre' ( SimpleName )? ':' oclExpression
 				{
 				DebugLocation(77, 4);
-				h=(CommonToken)Match(input,116,Follow._116_in_prePostOrBodyDecl531); if (state.failed) return retval; 
-				if (state.backtracking == 0) stream_116.Add(h);
+				h=(CommonToken)Match(input,118,Follow._118_in_prePostOrBodyDecl530); if (state.failed) return retval; 
+				if (state.backtracking == 0) stream_118.Add(h);
 
-				DebugLocation(77, 12);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:77:12: ( SimpleName )?
+				DebugLocation(77, 11);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:77:11: ( SimpleName )?
 				int alt14=2;
 				try { DebugEnterSubRule(14);
 				try { DebugEnterDecision(14, false);
@@ -2238,10 +2208,10 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:77:13: SimpleName
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:77:12: SimpleName
 					{
-					DebugLocation(77, 13);
-					SimpleName35=(CommonToken)Match(input,SimpleName,Follow._SimpleName_in_prePostOrBodyDecl534); if (state.failed) return retval; 
+					DebugLocation(77, 12);
+					SimpleName35=(CommonToken)Match(input,SimpleName,Follow._SimpleName_in_prePostOrBodyDecl533); if (state.failed) return retval; 
 					if (state.backtracking == 0) stream_SimpleName.Add(SimpleName35);
 
 
@@ -2251,12 +2221,12 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				}
 				} finally { DebugExitSubRule(14); }
 
-				DebugLocation(77, 26);
-				char_literal36=(CommonToken)Match(input,69,Follow._69_in_prePostOrBodyDecl538); if (state.failed) return retval; 
+				DebugLocation(77, 25);
+				char_literal36=(CommonToken)Match(input,69,Follow._69_in_prePostOrBodyDecl537); if (state.failed) return retval; 
 				if (state.backtracking == 0) stream_69.Add(char_literal36);
 
-				DebugLocation(77, 30);
-				PushFollow(Follow._oclExpression_in_prePostOrBodyDecl540);
+				DebugLocation(77, 29);
+				PushFollow(Follow._oclExpression_in_prePostOrBodyDecl539);
 				oclExpression37=oclExpression();
 				PopFollow();
 				if (state.failed) return retval;
@@ -2276,25 +2246,25 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 				root_0 = (object)adaptor.Nil();
-				// 77:44: -> ^( POST[h] ( SimpleName )? oclExpression )
+				// 77:43: -> ^( PRE[h] ( SimpleName )? oclExpression )
 				{
-					DebugLocation(77, 46);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:77:46: ^( POST[h] ( SimpleName )? oclExpression )
+					DebugLocation(77, 45);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:77:45: ^( PRE[h] ( SimpleName )? oclExpression )
 					{
 					object root_1 = (object)adaptor.Nil();
-					DebugLocation(77, 48);
-					root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(POST, h), root_1);
+					DebugLocation(77, 47);
+					root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(PRE, h), root_1);
 
-					DebugLocation(77, 56);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:77:56: ( SimpleName )?
+					DebugLocation(77, 54);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:77:54: ( SimpleName )?
 					if (stream_SimpleName.HasNext)
 					{
-						DebugLocation(77, 56);
+						DebugLocation(77, 54);
 						adaptor.AddChild(root_1, stream_SimpleName.NextNode());
 
 					}
 					stream_SimpleName.Reset();
-					DebugLocation(77, 68);
+					DebugLocation(77, 66);
 					adaptor.AddChild(root_1, stream_oclExpression.NextTree());
 
 					adaptor.AddChild(root_0, root_1);
@@ -2308,13 +2278,13 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 
 				}
 				break;
-			case 3:
-				DebugEnterAlt(3);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:78:3: h= 'body' ( SimpleName )? ':' oclExpression
+			case 2:
+				DebugEnterAlt(2);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:78:3: h= 'post' ( SimpleName )? ':' oclExpression
 				{
 				DebugLocation(78, 4);
-				h=(CommonToken)Match(input,100,Follow._100_in_prePostOrBodyDecl557); if (state.failed) return retval; 
-				if (state.backtracking == 0) stream_100.Add(h);
+				h=(CommonToken)Match(input,117,Follow._117_in_prePostOrBodyDecl556); if (state.failed) return retval; 
+				if (state.backtracking == 0) stream_117.Add(h);
 
 				DebugLocation(78, 12);
 				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:78:12: ( SimpleName )?
@@ -2335,7 +2305,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:78:13: SimpleName
 					{
 					DebugLocation(78, 13);
-					SimpleName38=(CommonToken)Match(input,SimpleName,Follow._SimpleName_in_prePostOrBodyDecl560); if (state.failed) return retval; 
+					SimpleName38=(CommonToken)Match(input,SimpleName,Follow._SimpleName_in_prePostOrBodyDecl559); if (state.failed) return retval; 
 					if (state.backtracking == 0) stream_SimpleName.Add(SimpleName38);
 
 
@@ -2346,11 +2316,11 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				} finally { DebugExitSubRule(15); }
 
 				DebugLocation(78, 26);
-				char_literal39=(CommonToken)Match(input,69,Follow._69_in_prePostOrBodyDecl564); if (state.failed) return retval; 
+				char_literal39=(CommonToken)Match(input,69,Follow._69_in_prePostOrBodyDecl563); if (state.failed) return retval; 
 				if (state.backtracking == 0) stream_69.Add(char_literal39);
 
 				DebugLocation(78, 30);
-				PushFollow(Follow._oclExpression_in_prePostOrBodyDecl566);
+				PushFollow(Follow._oclExpression_in_prePostOrBodyDecl565);
 				oclExpression40=oclExpression();
 				PopFollow();
 				if (state.failed) return retval;
@@ -2370,14 +2340,14 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 				root_0 = (object)adaptor.Nil();
-				// 78:44: -> ^( BODY[h] ( SimpleName )? oclExpression )
+				// 78:44: -> ^( POST[h] ( SimpleName )? oclExpression )
 				{
 					DebugLocation(78, 46);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:78:46: ^( BODY[h] ( SimpleName )? oclExpression )
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:78:46: ^( POST[h] ( SimpleName )? oclExpression )
 					{
 					object root_1 = (object)adaptor.Nil();
 					DebugLocation(78, 48);
-					root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(BODY, h), root_1);
+					root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(POST, h), root_1);
 
 					DebugLocation(78, 56);
 					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:78:56: ( SimpleName )?
@@ -2389,6 +2359,100 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 					}
 					stream_SimpleName.Reset();
 					DebugLocation(78, 68);
+					adaptor.AddChild(root_1, stream_oclExpression.NextTree());
+
+					adaptor.AddChild(root_0, root_1);
+					}
+
+				}
+
+				retval.Tree = root_0;
+				}
+				}
+
+				}
+				break;
+			case 3:
+				DebugEnterAlt(3);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:79:3: h= 'body' ( SimpleName )? ':' oclExpression
+				{
+				DebugLocation(79, 4);
+				h=(CommonToken)Match(input,100,Follow._100_in_prePostOrBodyDecl582); if (state.failed) return retval; 
+				if (state.backtracking == 0) stream_100.Add(h);
+
+				DebugLocation(79, 12);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:79:12: ( SimpleName )?
+				int alt16=2;
+				try { DebugEnterSubRule(16);
+				try { DebugEnterDecision(16, false);
+				int LA16_0 = input.LA(1);
+
+				if ((LA16_0==SimpleName))
+				{
+					alt16 = 1;
+				}
+				} finally { DebugExitDecision(16); }
+				switch (alt16)
+				{
+				case 1:
+					DebugEnterAlt(1);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:79:13: SimpleName
+					{
+					DebugLocation(79, 13);
+					SimpleName41=(CommonToken)Match(input,SimpleName,Follow._SimpleName_in_prePostOrBodyDecl585); if (state.failed) return retval; 
+					if (state.backtracking == 0) stream_SimpleName.Add(SimpleName41);
+
+
+					}
+					break;
+
+				}
+				} finally { DebugExitSubRule(16); }
+
+				DebugLocation(79, 26);
+				char_literal42=(CommonToken)Match(input,69,Follow._69_in_prePostOrBodyDecl589); if (state.failed) return retval; 
+				if (state.backtracking == 0) stream_69.Add(char_literal42);
+
+				DebugLocation(79, 30);
+				PushFollow(Follow._oclExpression_in_prePostOrBodyDecl591);
+				oclExpression43=oclExpression();
+				PopFollow();
+				if (state.failed) return retval;
+				if (state.backtracking == 0) stream_oclExpression.Add(oclExpression43.Tree);
+
+
+				{
+				// AST REWRITE
+				// elements: SimpleName, oclExpression
+				// token labels: 
+				// rule labels: retval
+				// token list labels: 
+				// rule list labels: 
+				// wildcard labels: 
+				if (state.backtracking == 0) {
+				retval.Tree = root_0;
+				RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
+
+				root_0 = (object)adaptor.Nil();
+				// 79:44: -> ^( BODY[h] ( SimpleName )? oclExpression )
+				{
+					DebugLocation(79, 46);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:79:46: ^( BODY[h] ( SimpleName )? oclExpression )
+					{
+					object root_1 = (object)adaptor.Nil();
+					DebugLocation(79, 48);
+					root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(BODY, h), root_1);
+
+					DebugLocation(79, 56);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:79:56: ( SimpleName )?
+					if (stream_SimpleName.HasNext)
+					{
+						DebugLocation(79, 56);
+						adaptor.AddChild(root_1, stream_SimpleName.NextNode());
+
+					}
+					stream_SimpleName.Reset();
+					DebugLocation(79, 68);
 					adaptor.AddChild(root_1, stream_oclExpression.NextTree());
 
 					adaptor.AddChild(root_0, root_1);
@@ -2424,7 +2488,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			LeaveRule("prePostOrBodyDecl", 11);
 			LeaveRule_prePostOrBodyDecl();
 		}
-		DebugLocation(79, 1);
+		DebugLocation(80, 1);
 		} finally { DebugExitRule(GrammarFileName, "prePostOrBodyDecl"); }
 		return retval;
 
@@ -2444,7 +2508,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 	partial void LeaveRule_operation();
 
 	// $ANTLR start "operation"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:82:1: operation : pathName '(' ( parameters )? ')' ( ':' type )? -> ^( OPERATION pathName ( parameters )? ( type )? ) ;
+	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:83:1: operation : pathName '(' ( parameters )? ')' ( ':' type )? -> ^( OPERATION pathName ( parameters )? ( type )? ) ;
 	[GrammarRule("operation")]
 	private OCLSyntaxParser.operation_return operation()
 	{
@@ -2456,16 +2520,16 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 
 		object root_0 = default(object);
 
-		CommonToken char_literal42 = default(CommonToken);
-		CommonToken char_literal44 = default(CommonToken);
 		CommonToken char_literal45 = default(CommonToken);
-		OCLSyntaxParser.pathName_return pathName41 = default(OCLSyntaxParser.pathName_return);
-		OCLSyntaxParser.parameters_return parameters43 = default(OCLSyntaxParser.parameters_return);
-		OCLSyntaxParser.type_return type46 = default(OCLSyntaxParser.type_return);
+		CommonToken char_literal47 = default(CommonToken);
+		CommonToken char_literal48 = default(CommonToken);
+		OCLSyntaxParser.pathName_return pathName44 = default(OCLSyntaxParser.pathName_return);
+		OCLSyntaxParser.parameters_return parameters46 = default(OCLSyntaxParser.parameters_return);
+		OCLSyntaxParser.type_return type49 = default(OCLSyntaxParser.type_return);
 
-		object char_literal42_tree = default(object);
-		object char_literal44_tree = default(object);
 		object char_literal45_tree = default(object);
+		object char_literal47_tree = default(object);
+		object char_literal48_tree = default(object);
 		RewriteRuleITokenStream stream_61=new RewriteRuleITokenStream(adaptor,"token 61");
 		RewriteRuleITokenStream stream_62=new RewriteRuleITokenStream(adaptor,"token 62");
 		RewriteRuleITokenStream stream_69=new RewriteRuleITokenStream(adaptor,"token 69");
@@ -2473,66 +2537,31 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 		RewriteRuleSubtreeStream stream_parameters=new RewriteRuleSubtreeStream(adaptor,"rule parameters");
 		RewriteRuleSubtreeStream stream_type=new RewriteRuleSubtreeStream(adaptor,"rule type");
 		try { DebugEnterRule(GrammarFileName, "operation");
-		DebugLocation(82, 1);
+		DebugLocation(83, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:83:2: ( pathName '(' ( parameters )? ')' ( ':' type )? -> ^( OPERATION pathName ( parameters )? ( type )? ) )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:84:2: ( pathName '(' ( parameters )? ')' ( ':' type )? -> ^( OPERATION pathName ( parameters )? ( type )? ) )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:83:3: pathName '(' ( parameters )? ')' ( ':' type )?
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:84:3: pathName '(' ( parameters )? ')' ( ':' type )?
 			{
-			DebugLocation(83, 3);
-			PushFollow(Follow._pathName_in_operation588);
-			pathName41=pathName();
+			DebugLocation(84, 3);
+			PushFollow(Follow._pathName_in_operation613);
+			pathName44=pathName();
 			PopFollow();
 			if (state.failed) return retval;
-			if (state.backtracking == 0) stream_pathName.Add(pathName41.Tree);
-			DebugLocation(83, 32);
-			char_literal42=(CommonToken)Match(input,61,Follow._61_in_operation592); if (state.failed) return retval; 
-			if (state.backtracking == 0) stream_61.Add(char_literal42);
+			if (state.backtracking == 0) stream_pathName.Add(pathName44.Tree);
+			DebugLocation(84, 32);
+			char_literal45=(CommonToken)Match(input,61,Follow._61_in_operation617); if (state.failed) return retval; 
+			if (state.backtracking == 0) stream_61.Add(char_literal45);
 
-			DebugLocation(83, 36);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:83:36: ( parameters )?
-			int alt17=2;
-			try { DebugEnterSubRule(17);
-			try { DebugEnterDecision(17, false);
-			int LA17_0 = input.LA(1);
-
-			if ((LA17_0==SimpleName))
-			{
-				alt17 = 1;
-			}
-			} finally { DebugExitDecision(17); }
-			switch (alt17)
-			{
-			case 1:
-				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:83:36: parameters
-				{
-				DebugLocation(83, 36);
-				PushFollow(Follow._parameters_in_operation594);
-				parameters43=parameters();
-				PopFollow();
-				if (state.failed) return retval;
-				if (state.backtracking == 0) stream_parameters.Add(parameters43.Tree);
-
-				}
-				break;
-
-			}
-			} finally { DebugExitSubRule(17); }
-
-			DebugLocation(83, 48);
-			char_literal44=(CommonToken)Match(input,62,Follow._62_in_operation597); if (state.failed) return retval; 
-			if (state.backtracking == 0) stream_62.Add(char_literal44);
-
-			DebugLocation(83, 52);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:83:52: ( ':' type )?
+			DebugLocation(84, 36);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:84:36: ( parameters )?
 			int alt18=2;
 			try { DebugEnterSubRule(18);
 			try { DebugEnterDecision(18, false);
 			int LA18_0 = input.LA(1);
 
-			if ((LA18_0==69))
+			if ((LA18_0==SimpleName))
 			{
 				alt18 = 1;
 			}
@@ -2541,24 +2570,59 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:83:53: ':' type
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:84:36: parameters
 				{
-				DebugLocation(83, 53);
-				char_literal45=(CommonToken)Match(input,69,Follow._69_in_operation600); if (state.failed) return retval; 
-				if (state.backtracking == 0) stream_69.Add(char_literal45);
-
-				DebugLocation(83, 57);
-				PushFollow(Follow._type_in_operation602);
-				type46=type();
+				DebugLocation(84, 36);
+				PushFollow(Follow._parameters_in_operation619);
+				parameters46=parameters();
 				PopFollow();
 				if (state.failed) return retval;
-				if (state.backtracking == 0) stream_type.Add(type46.Tree);
+				if (state.backtracking == 0) stream_parameters.Add(parameters46.Tree);
 
 				}
 				break;
 
 			}
 			} finally { DebugExitSubRule(18); }
+
+			DebugLocation(84, 48);
+			char_literal47=(CommonToken)Match(input,62,Follow._62_in_operation622); if (state.failed) return retval; 
+			if (state.backtracking == 0) stream_62.Add(char_literal47);
+
+			DebugLocation(84, 52);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:84:52: ( ':' type )?
+			int alt19=2;
+			try { DebugEnterSubRule(19);
+			try { DebugEnterDecision(19, false);
+			int LA19_0 = input.LA(1);
+
+			if ((LA19_0==69))
+			{
+				alt19 = 1;
+			}
+			} finally { DebugExitDecision(19); }
+			switch (alt19)
+			{
+			case 1:
+				DebugEnterAlt(1);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:84:53: ':' type
+				{
+				DebugLocation(84, 53);
+				char_literal48=(CommonToken)Match(input,69,Follow._69_in_operation625); if (state.failed) return retval; 
+				if (state.backtracking == 0) stream_69.Add(char_literal48);
+
+				DebugLocation(84, 57);
+				PushFollow(Follow._type_in_operation627);
+				type49=type();
+				PopFollow();
+				if (state.failed) return retval;
+				if (state.backtracking == 0) stream_type.Add(type49.Tree);
+
+				}
+				break;
+
+			}
+			} finally { DebugExitSubRule(19); }
 
 
 
@@ -2575,31 +2639,31 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 			root_0 = (object)adaptor.Nil();
-			// 84:3: -> ^( OPERATION pathName ( parameters )? ( type )? )
+			// 85:3: -> ^( OPERATION pathName ( parameters )? ( type )? )
 			{
-				DebugLocation(84, 6);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:84:6: ^( OPERATION pathName ( parameters )? ( type )? )
+				DebugLocation(85, 6);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:85:6: ^( OPERATION pathName ( parameters )? ( type )? )
 				{
 				object root_1 = (object)adaptor.Nil();
-				DebugLocation(84, 8);
+				DebugLocation(85, 8);
 				root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(OPERATION, "OPERATION"), root_1);
 
-				DebugLocation(84, 18);
+				DebugLocation(85, 18);
 				adaptor.AddChild(root_1, stream_pathName.NextTree());
-				DebugLocation(84, 27);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:84:27: ( parameters )?
+				DebugLocation(85, 27);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:85:27: ( parameters )?
 				if (stream_parameters.HasNext)
 				{
-					DebugLocation(84, 27);
+					DebugLocation(85, 27);
 					adaptor.AddChild(root_1, stream_parameters.NextTree());
 
 				}
 				stream_parameters.Reset();
-				DebugLocation(84, 39);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:84:39: ( type )?
+				DebugLocation(85, 39);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:85:39: ( type )?
 				if (stream_type.HasNext)
 				{
-					DebugLocation(84, 39);
+					DebugLocation(85, 39);
 					adaptor.AddChild(root_1, stream_type.NextTree());
 
 				}
@@ -2636,7 +2700,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			LeaveRule("operation", 12);
 			LeaveRule_operation();
 		}
-		DebugLocation(85, 1);
+		DebugLocation(86, 1);
 		} finally { DebugExitRule(GrammarFileName, "operation"); }
 		return retval;
 
@@ -2656,7 +2720,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 	partial void LeaveRule_parameters();
 
 	// $ANTLR start "parameters"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:87:1: parameters : variableDeclarationList[VariableDeclarationRequirement.OperationContext] ;
+	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:88:1: parameters : variableDeclarationList[VariableDeclarationRequirement.OperationContext] ;
 	[GrammarRule("parameters")]
 	private OCLSyntaxParser.parameters_return parameters()
 	{
@@ -2668,25 +2732,25 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 
 		object root_0 = default(object);
 
-		OCLSyntaxParser.variableDeclarationList_return variableDeclarationList47 = default(OCLSyntaxParser.variableDeclarationList_return);
+		OCLSyntaxParser.variableDeclarationList_return variableDeclarationList50 = default(OCLSyntaxParser.variableDeclarationList_return);
 
 
 		try { DebugEnterRule(GrammarFileName, "parameters");
-		DebugLocation(87, 1);
+		DebugLocation(88, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:88:2: ( variableDeclarationList[VariableDeclarationRequirement.OperationContext] )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:89:2: ( variableDeclarationList[VariableDeclarationRequirement.OperationContext] )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:88:3: variableDeclarationList[VariableDeclarationRequirement.OperationContext]
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:89:3: variableDeclarationList[VariableDeclarationRequirement.OperationContext]
 			{
 			root_0 = (object)adaptor.Nil();
 
-			DebugLocation(88, 3);
-			PushFollow(Follow._variableDeclarationList_in_parameters630);
-			variableDeclarationList47=variableDeclarationList(VariableDeclarationRequirement.OperationContext);
+			DebugLocation(89, 3);
+			PushFollow(Follow._variableDeclarationList_in_parameters655);
+			variableDeclarationList50=variableDeclarationList(VariableDeclarationRequirement.OperationContext);
 			PopFollow();
 			if (state.failed) return retval;
-			if (state.backtracking == 0) adaptor.AddChild(root_0, variableDeclarationList47.Tree);
+			if (state.backtracking == 0) adaptor.AddChild(root_0, variableDeclarationList50.Tree);
 
 			}
 
@@ -2710,7 +2774,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			LeaveRule("parameters", 13);
 			LeaveRule_parameters();
 		}
-		DebugLocation(89, 1);
+		DebugLocation(90, 1);
 		} finally { DebugExitRule(GrammarFileName, "parameters"); }
 		return retval;
 
@@ -2730,7 +2794,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 	partial void LeaveRule_defExpression();
 
 	// $ANTLR start "defExpression"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:91:1: defExpression : ( variableDeclaration[VariableDeclarationRequirement.Def] | operation '=' oclExpression -> ^( DECL operation oclExpression ) );
+	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:92:1: defExpression : ( variableDeclaration[VariableDeclarationRequirement.Def] | operation '=' oclExpression -> ^( DECL operation oclExpression ) );
 	[GrammarRule("defExpression")]
 	private OCLSyntaxParser.defExpression_return defExpression()
 	{
@@ -2742,40 +2806,40 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 
 		object root_0 = default(object);
 
-		CommonToken char_literal50 = default(CommonToken);
-		OCLSyntaxParser.variableDeclaration_return variableDeclaration48 = default(OCLSyntaxParser.variableDeclaration_return);
-		OCLSyntaxParser.operation_return operation49 = default(OCLSyntaxParser.operation_return);
-		OCLSyntaxParser.oclExpression_return oclExpression51 = default(OCLSyntaxParser.oclExpression_return);
+		CommonToken char_literal53 = default(CommonToken);
+		OCLSyntaxParser.variableDeclaration_return variableDeclaration51 = default(OCLSyntaxParser.variableDeclaration_return);
+		OCLSyntaxParser.operation_return operation52 = default(OCLSyntaxParser.operation_return);
+		OCLSyntaxParser.oclExpression_return oclExpression54 = default(OCLSyntaxParser.oclExpression_return);
 
-		object char_literal50_tree = default(object);
+		object char_literal53_tree = default(object);
 		RewriteRuleITokenStream stream_75=new RewriteRuleITokenStream(adaptor,"token 75");
 		RewriteRuleSubtreeStream stream_operation=new RewriteRuleSubtreeStream(adaptor,"rule operation");
 		RewriteRuleSubtreeStream stream_oclExpression=new RewriteRuleSubtreeStream(adaptor,"rule oclExpression");
 		try { DebugEnterRule(GrammarFileName, "defExpression");
-		DebugLocation(91, 1);
+		DebugLocation(92, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:92:2: ( variableDeclaration[VariableDeclarationRequirement.Def] | operation '=' oclExpression -> ^( DECL operation oclExpression ) )
-			int alt19=2;
-			try { DebugEnterDecision(19, false);
-			int LA19_0 = input.LA(1);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:93:2: ( variableDeclaration[VariableDeclarationRequirement.Def] | operation '=' oclExpression -> ^( DECL operation oclExpression ) )
+			int alt20=2;
+			try { DebugEnterDecision(20, false);
+			int LA20_0 = input.LA(1);
 
-			if ((LA19_0==SimpleName))
+			if ((LA20_0==SimpleName))
 			{
-				int LA19_1 = input.LA(2);
+				int LA20_1 = input.LA(2);
 
-				if ((LA19_1==69||LA19_1==75))
+				if ((LA20_1==69||LA20_1==75))
 				{
-					alt19 = 1;
+					alt20 = 1;
 				}
-				else if ((LA19_1==61||LA19_1==70))
+				else if ((LA20_1==61||LA20_1==70))
 				{
-					alt19 = 2;
+					alt20 = 2;
 				}
 				else
 				{
 					if (state.backtracking>0) {state.failed=true; return retval;}
-					NoViableAltException nvae = new NoViableAltException("", 19, 1, input);
+					NoViableAltException nvae = new NoViableAltException("", 20, 1, input);
 					DebugRecognitionException(nvae);
 					throw nvae;
 				}
@@ -2783,48 +2847,48 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			else
 			{
 				if (state.backtracking>0) {state.failed=true; return retval;}
-				NoViableAltException nvae = new NoViableAltException("", 19, 0, input);
+				NoViableAltException nvae = new NoViableAltException("", 20, 0, input);
 				DebugRecognitionException(nvae);
 				throw nvae;
 			}
-			} finally { DebugExitDecision(19); }
-			switch (alt19)
+			} finally { DebugExitDecision(20); }
+			switch (alt20)
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:92:4: variableDeclaration[VariableDeclarationRequirement.Def]
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:93:4: variableDeclaration[VariableDeclarationRequirement.Def]
 				{
 				root_0 = (object)adaptor.Nil();
 
-				DebugLocation(92, 4);
-				PushFollow(Follow._variableDeclaration_in_defExpression643);
-				variableDeclaration48=variableDeclaration(VariableDeclarationRequirement.Def);
+				DebugLocation(93, 4);
+				PushFollow(Follow._variableDeclaration_in_defExpression668);
+				variableDeclaration51=variableDeclaration(VariableDeclarationRequirement.Def);
 				PopFollow();
 				if (state.failed) return retval;
-				if (state.backtracking == 0) adaptor.AddChild(root_0, variableDeclaration48.Tree);
+				if (state.backtracking == 0) adaptor.AddChild(root_0, variableDeclaration51.Tree);
 
 				}
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:93:4: operation '=' oclExpression
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:94:4: operation '=' oclExpression
 				{
-				DebugLocation(93, 4);
-				PushFollow(Follow._operation_in_defExpression649);
-				operation49=operation();
+				DebugLocation(94, 4);
+				PushFollow(Follow._operation_in_defExpression674);
+				operation52=operation();
 				PopFollow();
 				if (state.failed) return retval;
-				if (state.backtracking == 0) stream_operation.Add(operation49.Tree);
-				DebugLocation(93, 14);
-				char_literal50=(CommonToken)Match(input,75,Follow._75_in_defExpression651); if (state.failed) return retval; 
-				if (state.backtracking == 0) stream_75.Add(char_literal50);
+				if (state.backtracking == 0) stream_operation.Add(operation52.Tree);
+				DebugLocation(94, 14);
+				char_literal53=(CommonToken)Match(input,75,Follow._75_in_defExpression676); if (state.failed) return retval; 
+				if (state.backtracking == 0) stream_75.Add(char_literal53);
 
-				DebugLocation(93, 18);
-				PushFollow(Follow._oclExpression_in_defExpression653);
-				oclExpression51=oclExpression();
+				DebugLocation(94, 18);
+				PushFollow(Follow._oclExpression_in_defExpression678);
+				oclExpression54=oclExpression();
 				PopFollow();
 				if (state.failed) return retval;
-				if (state.backtracking == 0) stream_oclExpression.Add(oclExpression51.Tree);
+				if (state.backtracking == 0) stream_oclExpression.Add(oclExpression54.Tree);
 
 
 				{
@@ -2840,18 +2904,18 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 				root_0 = (object)adaptor.Nil();
-				// 94:3: -> ^( DECL operation oclExpression )
+				// 95:3: -> ^( DECL operation oclExpression )
 				{
-					DebugLocation(94, 5);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:94:5: ^( DECL operation oclExpression )
+					DebugLocation(95, 5);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:95:5: ^( DECL operation oclExpression )
 					{
 					object root_1 = (object)adaptor.Nil();
-					DebugLocation(94, 7);
+					DebugLocation(95, 7);
 					root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(DECL, "DECL"), root_1);
 
-					DebugLocation(94, 12);
+					DebugLocation(95, 12);
 					adaptor.AddChild(root_1, stream_operation.NextTree());
-					DebugLocation(94, 22);
+					DebugLocation(95, 22);
 					adaptor.AddChild(root_1, stream_oclExpression.NextTree());
 
 					adaptor.AddChild(root_0, root_1);
@@ -2887,7 +2951,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			LeaveRule("defExpression", 14);
 			LeaveRule_defExpression();
 		}
-		DebugLocation(95, 1);
+		DebugLocation(96, 1);
 		} finally { DebugExitRule(GrammarFileName, "defExpression"); }
 		return retval;
 
@@ -2907,7 +2971,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 	partial void LeaveRule_oclExpression();
 
 	// $ANTLR start "oclExpression"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:98:1: public oclExpression : logicalImpliesExpression ;
+	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:99:1: public oclExpression : logicalImpliesExpression ;
 	[GrammarRule("oclExpression")]
 	public OCLSyntaxParser.oclExpression_return oclExpression()
 	{
@@ -2919,25 +2983,25 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 
 		object root_0 = default(object);
 
-		OCLSyntaxParser.logicalImpliesExpression_return logicalImpliesExpression52 = default(OCLSyntaxParser.logicalImpliesExpression_return);
+		OCLSyntaxParser.logicalImpliesExpression_return logicalImpliesExpression55 = default(OCLSyntaxParser.logicalImpliesExpression_return);
 
 
 		try { DebugEnterRule(GrammarFileName, "oclExpression");
-		DebugLocation(98, 1);
+		DebugLocation(99, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:99:2: ( logicalImpliesExpression )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:100:2: ( logicalImpliesExpression )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:99:3: logicalImpliesExpression
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:100:3: logicalImpliesExpression
 			{
 			root_0 = (object)adaptor.Nil();
 
-			DebugLocation(99, 3);
-			PushFollow(Follow._logicalImpliesExpression_in_oclExpression677);
-			logicalImpliesExpression52=logicalImpliesExpression();
+			DebugLocation(100, 3);
+			PushFollow(Follow._logicalImpliesExpression_in_oclExpression702);
+			logicalImpliesExpression55=logicalImpliesExpression();
 			PopFollow();
 			if (state.failed) return retval;
-			if (state.backtracking == 0) adaptor.AddChild(root_0, logicalImpliesExpression52.Tree);
+			if (state.backtracking == 0) adaptor.AddChild(root_0, logicalImpliesExpression55.Tree);
 
 			}
 
@@ -2961,7 +3025,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			LeaveRule("oclExpression", 15);
 			LeaveRule_oclExpression();
 		}
-		DebugLocation(101, 1);
+		DebugLocation(102, 1);
 		} finally { DebugExitRule(GrammarFileName, "oclExpression"); }
 		return retval;
 
@@ -2981,7 +3045,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 	partial void LeaveRule_logicalImpliesExpression();
 
 	// $ANTLR start "logicalImpliesExpression"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:103:1: logicalImpliesExpression : ( logicalXorExpression -> logicalXorExpression ) (opToken= 'implies' expr= logicalXorExpression -> ^( INFIX[$opToken] $logicalImpliesExpression $expr) )* ;
+	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:104:1: logicalImpliesExpression : ( logicalXorExpression -> logicalXorExpression ) (opToken= 'implies' expr= logicalXorExpression -> ^( INFIX[$opToken] $logicalImpliesExpression $expr) )* ;
 	[GrammarRule("logicalImpliesExpression")]
 	private OCLSyntaxParser.logicalImpliesExpression_return logicalImpliesExpression()
 	{
@@ -2995,30 +3059,30 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 
 		CommonToken opToken = default(CommonToken);
 		OCLSyntaxParser.logicalXorExpression_return expr = default(OCLSyntaxParser.logicalXorExpression_return);
-		OCLSyntaxParser.logicalXorExpression_return logicalXorExpression53 = default(OCLSyntaxParser.logicalXorExpression_return);
+		OCLSyntaxParser.logicalXorExpression_return logicalXorExpression56 = default(OCLSyntaxParser.logicalXorExpression_return);
 
 		object opToken_tree = default(object);
 		RewriteRuleITokenStream stream_108=new RewriteRuleITokenStream(adaptor,"token 108");
 		RewriteRuleSubtreeStream stream_logicalXorExpression=new RewriteRuleSubtreeStream(adaptor,"rule logicalXorExpression");
 		try { DebugEnterRule(GrammarFileName, "logicalImpliesExpression");
-		DebugLocation(103, 1);
+		DebugLocation(104, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:104:2: ( ( logicalXorExpression -> logicalXorExpression ) (opToken= 'implies' expr= logicalXorExpression -> ^( INFIX[$opToken] $logicalImpliesExpression $expr) )* )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:105:2: ( ( logicalXorExpression -> logicalXorExpression ) (opToken= 'implies' expr= logicalXorExpression -> ^( INFIX[$opToken] $logicalImpliesExpression $expr) )* )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:104:4: ( logicalXorExpression -> logicalXorExpression ) (opToken= 'implies' expr= logicalXorExpression -> ^( INFIX[$opToken] $logicalImpliesExpression $expr) )*
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:105:4: ( logicalXorExpression -> logicalXorExpression ) (opToken= 'implies' expr= logicalXorExpression -> ^( INFIX[$opToken] $logicalImpliesExpression $expr) )*
 			{
-			DebugLocation(104, 4);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:104:4: ( logicalXorExpression -> logicalXorExpression )
+			DebugLocation(105, 4);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:105:4: ( logicalXorExpression -> logicalXorExpression )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:104:5: logicalXorExpression
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:105:5: logicalXorExpression
 			{
-			DebugLocation(104, 5);
-			PushFollow(Follow._logicalXorExpression_in_logicalImpliesExpression693);
-			logicalXorExpression53=logicalXorExpression();
+			DebugLocation(105, 5);
+			PushFollow(Follow._logicalXorExpression_in_logicalImpliesExpression718);
+			logicalXorExpression56=logicalXorExpression();
 			PopFollow();
 			if (state.failed) return retval;
-			if (state.backtracking == 0) stream_logicalXorExpression.Add(logicalXorExpression53.Tree);
+			if (state.backtracking == 0) stream_logicalXorExpression.Add(logicalXorExpression56.Tree);
 
 
 			{
@@ -3034,9 +3098,9 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 			root_0 = (object)adaptor.Nil();
-			// 104:25: -> logicalXorExpression
+			// 105:25: -> logicalXorExpression
 			{
-				DebugLocation(104, 27);
+				DebugLocation(105, 27);
 				adaptor.AddChild(root_0, stream_logicalXorExpression.NextTree());
 
 			}
@@ -3047,34 +3111,34 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 
 			}
 
-			DebugLocation(104, 50);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:104:50: (opToken= 'implies' expr= logicalXorExpression -> ^( INFIX[$opToken] $logicalImpliesExpression $expr) )*
-			try { DebugEnterSubRule(20);
+			DebugLocation(105, 50);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:105:50: (opToken= 'implies' expr= logicalXorExpression -> ^( INFIX[$opToken] $logicalImpliesExpression $expr) )*
+			try { DebugEnterSubRule(21);
 			while (true)
 			{
-				int alt20=2;
-				try { DebugEnterDecision(20, false);
-				int LA20_0 = input.LA(1);
+				int alt21=2;
+				try { DebugEnterDecision(21, false);
+				int LA21_0 = input.LA(1);
 
-				if ((LA20_0==108))
+				if ((LA21_0==108))
 				{
-					alt20 = 1;
+					alt21 = 1;
 				}
 
 
-				} finally { DebugExitDecision(20); }
-				switch ( alt20 )
+				} finally { DebugExitDecision(21); }
+				switch ( alt21 )
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:104:51: opToken= 'implies' expr= logicalXorExpression
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:105:51: opToken= 'implies' expr= logicalXorExpression
 					{
-					DebugLocation(104, 58);
-					opToken=(CommonToken)Match(input,108,Follow._108_in_logicalImpliesExpression702); if (state.failed) return retval; 
+					DebugLocation(105, 58);
+					opToken=(CommonToken)Match(input,108,Follow._108_in_logicalImpliesExpression727); if (state.failed) return retval; 
 					if (state.backtracking == 0) stream_108.Add(opToken);
 
-					DebugLocation(104, 73);
-					PushFollow(Follow._logicalXorExpression_in_logicalImpliesExpression706);
+					DebugLocation(105, 73);
+					PushFollow(Follow._logicalXorExpression_in_logicalImpliesExpression731);
 					expr=logicalXorExpression();
 					PopFollow();
 					if (state.failed) return retval;
@@ -3095,211 +3159,18 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 					RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 					root_0 = (object)adaptor.Nil();
-					// 104:94: -> ^( INFIX[$opToken] $logicalImpliesExpression $expr)
+					// 105:94: -> ^( INFIX[$opToken] $logicalImpliesExpression $expr)
 					{
-						DebugLocation(104, 96);
-						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:104:96: ^( INFIX[$opToken] $logicalImpliesExpression $expr)
+						DebugLocation(105, 96);
+						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:105:96: ^( INFIX[$opToken] $logicalImpliesExpression $expr)
 						{
 						object root_1 = (object)adaptor.Nil();
-						DebugLocation(104, 98);
+						DebugLocation(105, 98);
 						root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(INFIX, opToken), root_1);
 
-						DebugLocation(104, 115);
+						DebugLocation(105, 115);
 						adaptor.AddChild(root_1, stream_retval.NextTree());
-						DebugLocation(104, 141);
-						adaptor.AddChild(root_1, stream_expr.NextTree());
-
-						adaptor.AddChild(root_0, root_1);
-						}
-
-					}
-
-					retval.Tree = root_0;
-					}
-					}
-
-					}
-					break;
-
-				default:
-					goto loop20;
-				}
-			}
-
-			loop20:
-				;
-
-			} finally { DebugExitSubRule(20); }
-
-
-			}
-
-			retval.Stop = (CommonToken)input.LT(-1);
-
-			if (state.backtracking == 0) {
-			retval.Tree = (object)adaptor.RulePostProcessing(root_0);
-			adaptor.SetTokenBoundaries(retval.Tree, retval.Start, retval.Stop);
-			}
-		}
-		catch (RecognitionException re)
-		{
-			ReportError(re);
-			Recover(input,re);
-		retval.Tree = (object)adaptor.ErrorNode(input, retval.Start, input.LT(-1), re);
-
-		}
-		finally
-		{
-			TraceOut("logicalImpliesExpression", 16);
-			LeaveRule("logicalImpliesExpression", 16);
-			LeaveRule_logicalImpliesExpression();
-		}
-		DebugLocation(105, 1);
-		} finally { DebugExitRule(GrammarFileName, "logicalImpliesExpression"); }
-		return retval;
-
-	}
-	// $ANTLR end "logicalImpliesExpression"
-
-	private sealed partial class logicalXorExpression_return : ParserRuleReturnScope<CommonToken>, IAstRuleReturnScope<object>, IAstRuleReturnScope
-	{
-		private object _tree;
-		public object Tree { get { return _tree; } set { _tree = value; } }
-		object IAstRuleReturnScope.Tree { get { return Tree; } }
-		public logicalXorExpression_return(OCLSyntaxParser grammar) {OnCreated(grammar);}
-		partial void OnCreated(OCLSyntaxParser grammar);
-	}
-
-	partial void EnterRule_logicalXorExpression();
-	partial void LeaveRule_logicalXorExpression();
-
-	// $ANTLR start "logicalXorExpression"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:106:1: logicalXorExpression : ( logicalOrExpression -> logicalOrExpression ) (opToken= 'xor' expr= logicalOrExpression -> ^( INFIX[$opToken] $logicalXorExpression $expr) )* ;
-	[GrammarRule("logicalXorExpression")]
-	private OCLSyntaxParser.logicalXorExpression_return logicalXorExpression()
-	{
-		EnterRule_logicalXorExpression();
-		EnterRule("logicalXorExpression", 17);
-		TraceIn("logicalXorExpression", 17);
-		OCLSyntaxParser.logicalXorExpression_return retval = new OCLSyntaxParser.logicalXorExpression_return(this);
-		retval.Start = (CommonToken)input.LT(1);
-
-		object root_0 = default(object);
-
-		CommonToken opToken = default(CommonToken);
-		OCLSyntaxParser.logicalOrExpression_return expr = default(OCLSyntaxParser.logicalOrExpression_return);
-		OCLSyntaxParser.logicalOrExpression_return logicalOrExpression54 = default(OCLSyntaxParser.logicalOrExpression_return);
-
-		object opToken_tree = default(object);
-		RewriteRuleITokenStream stream_121=new RewriteRuleITokenStream(adaptor,"token 121");
-		RewriteRuleSubtreeStream stream_logicalOrExpression=new RewriteRuleSubtreeStream(adaptor,"rule logicalOrExpression");
-		try { DebugEnterRule(GrammarFileName, "logicalXorExpression");
-		DebugLocation(106, 1);
-		try
-		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:107:2: ( ( logicalOrExpression -> logicalOrExpression ) (opToken= 'xor' expr= logicalOrExpression -> ^( INFIX[$opToken] $logicalXorExpression $expr) )* )
-			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:107:4: ( logicalOrExpression -> logicalOrExpression ) (opToken= 'xor' expr= logicalOrExpression -> ^( INFIX[$opToken] $logicalXorExpression $expr) )*
-			{
-			DebugLocation(107, 4);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:107:4: ( logicalOrExpression -> logicalOrExpression )
-			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:107:5: logicalOrExpression
-			{
-			DebugLocation(107, 5);
-			PushFollow(Follow._logicalOrExpression_in_logicalXorExpression731);
-			logicalOrExpression54=logicalOrExpression();
-			PopFollow();
-			if (state.failed) return retval;
-			if (state.backtracking == 0) stream_logicalOrExpression.Add(logicalOrExpression54.Tree);
-
-
-			{
-			// AST REWRITE
-			// elements: logicalOrExpression
-			// token labels: 
-			// rule labels: retval
-			// token list labels: 
-			// rule list labels: 
-			// wildcard labels: 
-			if (state.backtracking == 0) {
-			retval.Tree = root_0;
-			RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
-
-			root_0 = (object)adaptor.Nil();
-			// 107:24: -> logicalOrExpression
-			{
-				DebugLocation(107, 26);
-				adaptor.AddChild(root_0, stream_logicalOrExpression.NextTree());
-
-			}
-
-			retval.Tree = root_0;
-			}
-			}
-
-			}
-
-			DebugLocation(107, 47);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:107:47: (opToken= 'xor' expr= logicalOrExpression -> ^( INFIX[$opToken] $logicalXorExpression $expr) )*
-			try { DebugEnterSubRule(21);
-			while (true)
-			{
-				int alt21=2;
-				try { DebugEnterDecision(21, false);
-				int LA21_0 = input.LA(1);
-
-				if ((LA21_0==121))
-				{
-					alt21 = 1;
-				}
-
-
-				} finally { DebugExitDecision(21); }
-				switch ( alt21 )
-				{
-				case 1:
-					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:107:48: opToken= 'xor' expr= logicalOrExpression
-					{
-					DebugLocation(107, 55);
-					opToken=(CommonToken)Match(input,121,Follow._121_in_logicalXorExpression739); if (state.failed) return retval; 
-					if (state.backtracking == 0) stream_121.Add(opToken);
-
-					DebugLocation(107, 66);
-					PushFollow(Follow._logicalOrExpression_in_logicalXorExpression743);
-					expr=logicalOrExpression();
-					PopFollow();
-					if (state.failed) return retval;
-					if (state.backtracking == 0) stream_logicalOrExpression.Add(expr.Tree);
-
-
-					{
-					// AST REWRITE
-					// elements: logicalXorExpression, expr
-					// token labels: 
-					// rule labels: expr, retval
-					// token list labels: 
-					// rule list labels: 
-					// wildcard labels: 
-					if (state.backtracking == 0) {
-					retval.Tree = root_0;
-					RewriteRuleSubtreeStream stream_expr=new RewriteRuleSubtreeStream(adaptor,"rule expr",expr!=null?expr.Tree:null);
-					RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
-
-					root_0 = (object)adaptor.Nil();
-					// 107:86: -> ^( INFIX[$opToken] $logicalXorExpression $expr)
-					{
-						DebugLocation(107, 88);
-						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:107:88: ^( INFIX[$opToken] $logicalXorExpression $expr)
-						{
-						object root_1 = (object)adaptor.Nil();
-						DebugLocation(107, 90);
-						root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(INFIX, opToken), root_1);
-
-						DebugLocation(107, 107);
-						adaptor.AddChild(root_1, stream_retval.NextTree());
-						DebugLocation(107, 129);
+						DebugLocation(105, 141);
 						adaptor.AddChild(root_1, stream_expr.NextTree());
 
 						adaptor.AddChild(root_0, root_1);
@@ -3343,73 +3214,73 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 		}
 		finally
 		{
-			TraceOut("logicalXorExpression", 17);
-			LeaveRule("logicalXorExpression", 17);
-			LeaveRule_logicalXorExpression();
+			TraceOut("logicalImpliesExpression", 16);
+			LeaveRule("logicalImpliesExpression", 16);
+			LeaveRule_logicalImpliesExpression();
 		}
-		DebugLocation(108, 1);
-		} finally { DebugExitRule(GrammarFileName, "logicalXorExpression"); }
+		DebugLocation(106, 1);
+		} finally { DebugExitRule(GrammarFileName, "logicalImpliesExpression"); }
 		return retval;
 
 	}
-	// $ANTLR end "logicalXorExpression"
+	// $ANTLR end "logicalImpliesExpression"
 
-	private sealed partial class logicalOrExpression_return : ParserRuleReturnScope<CommonToken>, IAstRuleReturnScope<object>, IAstRuleReturnScope
+	private sealed partial class logicalXorExpression_return : ParserRuleReturnScope<CommonToken>, IAstRuleReturnScope<object>, IAstRuleReturnScope
 	{
 		private object _tree;
 		public object Tree { get { return _tree; } set { _tree = value; } }
 		object IAstRuleReturnScope.Tree { get { return Tree; } }
-		public logicalOrExpression_return(OCLSyntaxParser grammar) {OnCreated(grammar);}
+		public logicalXorExpression_return(OCLSyntaxParser grammar) {OnCreated(grammar);}
 		partial void OnCreated(OCLSyntaxParser grammar);
 	}
 
-	partial void EnterRule_logicalOrExpression();
-	partial void LeaveRule_logicalOrExpression();
+	partial void EnterRule_logicalXorExpression();
+	partial void LeaveRule_logicalXorExpression();
 
-	// $ANTLR start "logicalOrExpression"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:109:1: logicalOrExpression : ( logicalAndExpression -> logicalAndExpression ) (opToken= 'or' expr= logicalAndExpression -> ^( INFIX[$opToken] $logicalOrExpression $expr) )* ;
-	[GrammarRule("logicalOrExpression")]
-	private OCLSyntaxParser.logicalOrExpression_return logicalOrExpression()
+	// $ANTLR start "logicalXorExpression"
+	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:107:1: logicalXorExpression : ( logicalOrExpression -> logicalOrExpression ) (opToken= 'xor' expr= logicalOrExpression -> ^( INFIX[$opToken] $logicalXorExpression $expr) )* ;
+	[GrammarRule("logicalXorExpression")]
+	private OCLSyntaxParser.logicalXorExpression_return logicalXorExpression()
 	{
-		EnterRule_logicalOrExpression();
-		EnterRule("logicalOrExpression", 18);
-		TraceIn("logicalOrExpression", 18);
-		OCLSyntaxParser.logicalOrExpression_return retval = new OCLSyntaxParser.logicalOrExpression_return(this);
+		EnterRule_logicalXorExpression();
+		EnterRule("logicalXorExpression", 17);
+		TraceIn("logicalXorExpression", 17);
+		OCLSyntaxParser.logicalXorExpression_return retval = new OCLSyntaxParser.logicalXorExpression_return(this);
 		retval.Start = (CommonToken)input.LT(1);
 
 		object root_0 = default(object);
 
 		CommonToken opToken = default(CommonToken);
-		OCLSyntaxParser.logicalAndExpression_return expr = default(OCLSyntaxParser.logicalAndExpression_return);
-		OCLSyntaxParser.logicalAndExpression_return logicalAndExpression55 = default(OCLSyntaxParser.logicalAndExpression_return);
+		OCLSyntaxParser.logicalOrExpression_return expr = default(OCLSyntaxParser.logicalOrExpression_return);
+		OCLSyntaxParser.logicalOrExpression_return logicalOrExpression57 = default(OCLSyntaxParser.logicalOrExpression_return);
 
 		object opToken_tree = default(object);
-		RewriteRuleITokenStream stream_115=new RewriteRuleITokenStream(adaptor,"token 115");
-		RewriteRuleSubtreeStream stream_logicalAndExpression=new RewriteRuleSubtreeStream(adaptor,"rule logicalAndExpression");
-		try { DebugEnterRule(GrammarFileName, "logicalOrExpression");
-		DebugLocation(109, 1);
+		RewriteRuleITokenStream stream_122=new RewriteRuleITokenStream(adaptor,"token 122");
+		RewriteRuleSubtreeStream stream_logicalOrExpression=new RewriteRuleSubtreeStream(adaptor,"rule logicalOrExpression");
+		try { DebugEnterRule(GrammarFileName, "logicalXorExpression");
+		DebugLocation(107, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:110:2: ( ( logicalAndExpression -> logicalAndExpression ) (opToken= 'or' expr= logicalAndExpression -> ^( INFIX[$opToken] $logicalOrExpression $expr) )* )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:108:2: ( ( logicalOrExpression -> logicalOrExpression ) (opToken= 'xor' expr= logicalOrExpression -> ^( INFIX[$opToken] $logicalXorExpression $expr) )* )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:110:4: ( logicalAndExpression -> logicalAndExpression ) (opToken= 'or' expr= logicalAndExpression -> ^( INFIX[$opToken] $logicalOrExpression $expr) )*
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:108:4: ( logicalOrExpression -> logicalOrExpression ) (opToken= 'xor' expr= logicalOrExpression -> ^( INFIX[$opToken] $logicalXorExpression $expr) )*
 			{
-			DebugLocation(110, 4);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:110:4: ( logicalAndExpression -> logicalAndExpression )
+			DebugLocation(108, 4);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:108:4: ( logicalOrExpression -> logicalOrExpression )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:110:5: logicalAndExpression
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:108:5: logicalOrExpression
 			{
-			DebugLocation(110, 5);
-			PushFollow(Follow._logicalAndExpression_in_logicalOrExpression767);
-			logicalAndExpression55=logicalAndExpression();
+			DebugLocation(108, 5);
+			PushFollow(Follow._logicalOrExpression_in_logicalXorExpression756);
+			logicalOrExpression57=logicalOrExpression();
 			PopFollow();
 			if (state.failed) return retval;
-			if (state.backtracking == 0) stream_logicalAndExpression.Add(logicalAndExpression55.Tree);
+			if (state.backtracking == 0) stream_logicalOrExpression.Add(logicalOrExpression57.Tree);
 
 
 			{
 			// AST REWRITE
-			// elements: logicalAndExpression
+			// elements: logicalOrExpression
 			// token labels: 
 			// rule labels: retval
 			// token list labels: 
@@ -3420,10 +3291,10 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 			root_0 = (object)adaptor.Nil();
-			// 110:25: -> logicalAndExpression
+			// 108:24: -> logicalOrExpression
 			{
-				DebugLocation(110, 27);
-				adaptor.AddChild(root_0, stream_logicalAndExpression.NextTree());
+				DebugLocation(108, 26);
+				adaptor.AddChild(root_0, stream_logicalOrExpression.NextTree());
 
 			}
 
@@ -3433,8 +3304,8 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 
 			}
 
-			DebugLocation(110, 49);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:110:49: (opToken= 'or' expr= logicalAndExpression -> ^( INFIX[$opToken] $logicalOrExpression $expr) )*
+			DebugLocation(108, 47);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:108:47: (opToken= 'xor' expr= logicalOrExpression -> ^( INFIX[$opToken] $logicalXorExpression $expr) )*
 			try { DebugEnterSubRule(22);
 			while (true)
 			{
@@ -3442,7 +3313,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				try { DebugEnterDecision(22, false);
 				int LA22_0 = input.LA(1);
 
-				if ((LA22_0==115))
+				if ((LA22_0==122))
 				{
 					alt22 = 1;
 				}
@@ -3453,23 +3324,23 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:110:50: opToken= 'or' expr= logicalAndExpression
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:108:48: opToken= 'xor' expr= logicalOrExpression
 					{
-					DebugLocation(110, 57);
-					opToken=(CommonToken)Match(input,115,Follow._115_in_logicalOrExpression775); if (state.failed) return retval; 
-					if (state.backtracking == 0) stream_115.Add(opToken);
+					DebugLocation(108, 55);
+					opToken=(CommonToken)Match(input,122,Follow._122_in_logicalXorExpression764); if (state.failed) return retval; 
+					if (state.backtracking == 0) stream_122.Add(opToken);
 
-					DebugLocation(110, 67);
-					PushFollow(Follow._logicalAndExpression_in_logicalOrExpression779);
-					expr=logicalAndExpression();
+					DebugLocation(108, 66);
+					PushFollow(Follow._logicalOrExpression_in_logicalXorExpression768);
+					expr=logicalOrExpression();
 					PopFollow();
 					if (state.failed) return retval;
-					if (state.backtracking == 0) stream_logicalAndExpression.Add(expr.Tree);
+					if (state.backtracking == 0) stream_logicalOrExpression.Add(expr.Tree);
 
 
 					{
 					// AST REWRITE
-					// elements: logicalOrExpression, expr
+					// elements: logicalXorExpression, expr
 					// token labels: 
 					// rule labels: expr, retval
 					// token list labels: 
@@ -3481,18 +3352,18 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 					RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 					root_0 = (object)adaptor.Nil();
-					// 110:88: -> ^( INFIX[$opToken] $logicalOrExpression $expr)
+					// 108:86: -> ^( INFIX[$opToken] $logicalXorExpression $expr)
 					{
-						DebugLocation(110, 90);
-						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:110:90: ^( INFIX[$opToken] $logicalOrExpression $expr)
+						DebugLocation(108, 88);
+						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:108:88: ^( INFIX[$opToken] $logicalXorExpression $expr)
 						{
 						object root_1 = (object)adaptor.Nil();
-						DebugLocation(110, 92);
+						DebugLocation(108, 90);
 						root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(INFIX, opToken), root_1);
 
-						DebugLocation(110, 109);
+						DebugLocation(108, 107);
 						adaptor.AddChild(root_1, stream_retval.NextTree());
-						DebugLocation(110, 130);
+						DebugLocation(108, 129);
 						adaptor.AddChild(root_1, stream_expr.NextTree());
 
 						adaptor.AddChild(root_0, root_1);
@@ -3536,73 +3407,73 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 		}
 		finally
 		{
-			TraceOut("logicalOrExpression", 18);
-			LeaveRule("logicalOrExpression", 18);
-			LeaveRule_logicalOrExpression();
+			TraceOut("logicalXorExpression", 17);
+			LeaveRule("logicalXorExpression", 17);
+			LeaveRule_logicalXorExpression();
 		}
-		DebugLocation(111, 1);
-		} finally { DebugExitRule(GrammarFileName, "logicalOrExpression"); }
+		DebugLocation(109, 1);
+		} finally { DebugExitRule(GrammarFileName, "logicalXorExpression"); }
 		return retval;
 
 	}
-	// $ANTLR end "logicalOrExpression"
+	// $ANTLR end "logicalXorExpression"
 
-	private sealed partial class logicalAndExpression_return : ParserRuleReturnScope<CommonToken>, IAstRuleReturnScope<object>, IAstRuleReturnScope
+	private sealed partial class logicalOrExpression_return : ParserRuleReturnScope<CommonToken>, IAstRuleReturnScope<object>, IAstRuleReturnScope
 	{
 		private object _tree;
 		public object Tree { get { return _tree; } set { _tree = value; } }
 		object IAstRuleReturnScope.Tree { get { return Tree; } }
-		public logicalAndExpression_return(OCLSyntaxParser grammar) {OnCreated(grammar);}
+		public logicalOrExpression_return(OCLSyntaxParser grammar) {OnCreated(grammar);}
 		partial void OnCreated(OCLSyntaxParser grammar);
 	}
 
-	partial void EnterRule_logicalAndExpression();
-	partial void LeaveRule_logicalAndExpression();
+	partial void EnterRule_logicalOrExpression();
+	partial void LeaveRule_logicalOrExpression();
 
-	// $ANTLR start "logicalAndExpression"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:112:1: logicalAndExpression : ( relationalEqExpression -> relationalEqExpression ) (opToken= 'and' expr= relationalEqExpression -> ^( INFIX[$opToken] $logicalAndExpression $expr) )* ;
-	[GrammarRule("logicalAndExpression")]
-	private OCLSyntaxParser.logicalAndExpression_return logicalAndExpression()
+	// $ANTLR start "logicalOrExpression"
+	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:110:1: logicalOrExpression : ( logicalAndExpression -> logicalAndExpression ) (opToken= 'or' expr= logicalAndExpression -> ^( INFIX[$opToken] $logicalOrExpression $expr) )* ;
+	[GrammarRule("logicalOrExpression")]
+	private OCLSyntaxParser.logicalOrExpression_return logicalOrExpression()
 	{
-		EnterRule_logicalAndExpression();
-		EnterRule("logicalAndExpression", 19);
-		TraceIn("logicalAndExpression", 19);
-		OCLSyntaxParser.logicalAndExpression_return retval = new OCLSyntaxParser.logicalAndExpression_return(this);
+		EnterRule_logicalOrExpression();
+		EnterRule("logicalOrExpression", 18);
+		TraceIn("logicalOrExpression", 18);
+		OCLSyntaxParser.logicalOrExpression_return retval = new OCLSyntaxParser.logicalOrExpression_return(this);
 		retval.Start = (CommonToken)input.LT(1);
 
 		object root_0 = default(object);
 
 		CommonToken opToken = default(CommonToken);
-		OCLSyntaxParser.relationalEqExpression_return expr = default(OCLSyntaxParser.relationalEqExpression_return);
-		OCLSyntaxParser.relationalEqExpression_return relationalEqExpression56 = default(OCLSyntaxParser.relationalEqExpression_return);
+		OCLSyntaxParser.logicalAndExpression_return expr = default(OCLSyntaxParser.logicalAndExpression_return);
+		OCLSyntaxParser.logicalAndExpression_return logicalAndExpression58 = default(OCLSyntaxParser.logicalAndExpression_return);
 
 		object opToken_tree = default(object);
-		RewriteRuleITokenStream stream_99=new RewriteRuleITokenStream(adaptor,"token 99");
-		RewriteRuleSubtreeStream stream_relationalEqExpression=new RewriteRuleSubtreeStream(adaptor,"rule relationalEqExpression");
-		try { DebugEnterRule(GrammarFileName, "logicalAndExpression");
-		DebugLocation(112, 1);
+		RewriteRuleITokenStream stream_116=new RewriteRuleITokenStream(adaptor,"token 116");
+		RewriteRuleSubtreeStream stream_logicalAndExpression=new RewriteRuleSubtreeStream(adaptor,"rule logicalAndExpression");
+		try { DebugEnterRule(GrammarFileName, "logicalOrExpression");
+		DebugLocation(110, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:113:2: ( ( relationalEqExpression -> relationalEqExpression ) (opToken= 'and' expr= relationalEqExpression -> ^( INFIX[$opToken] $logicalAndExpression $expr) )* )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:111:2: ( ( logicalAndExpression -> logicalAndExpression ) (opToken= 'or' expr= logicalAndExpression -> ^( INFIX[$opToken] $logicalOrExpression $expr) )* )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:113:4: ( relationalEqExpression -> relationalEqExpression ) (opToken= 'and' expr= relationalEqExpression -> ^( INFIX[$opToken] $logicalAndExpression $expr) )*
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:111:4: ( logicalAndExpression -> logicalAndExpression ) (opToken= 'or' expr= logicalAndExpression -> ^( INFIX[$opToken] $logicalOrExpression $expr) )*
 			{
-			DebugLocation(113, 4);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:113:4: ( relationalEqExpression -> relationalEqExpression )
+			DebugLocation(111, 4);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:111:4: ( logicalAndExpression -> logicalAndExpression )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:113:5: relationalEqExpression
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:111:5: logicalAndExpression
 			{
-			DebugLocation(113, 5);
-			PushFollow(Follow._relationalEqExpression_in_logicalAndExpression803);
-			relationalEqExpression56=relationalEqExpression();
+			DebugLocation(111, 5);
+			PushFollow(Follow._logicalAndExpression_in_logicalOrExpression792);
+			logicalAndExpression58=logicalAndExpression();
 			PopFollow();
 			if (state.failed) return retval;
-			if (state.backtracking == 0) stream_relationalEqExpression.Add(relationalEqExpression56.Tree);
+			if (state.backtracking == 0) stream_logicalAndExpression.Add(logicalAndExpression58.Tree);
 
 
 			{
 			// AST REWRITE
-			// elements: relationalEqExpression
+			// elements: logicalAndExpression
 			// token labels: 
 			// rule labels: retval
 			// token list labels: 
@@ -3613,10 +3484,10 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 			root_0 = (object)adaptor.Nil();
-			// 113:27: -> relationalEqExpression
+			// 111:25: -> logicalAndExpression
 			{
-				DebugLocation(113, 29);
-				adaptor.AddChild(root_0, stream_relationalEqExpression.NextTree());
+				DebugLocation(111, 27);
+				adaptor.AddChild(root_0, stream_logicalAndExpression.NextTree());
 
 			}
 
@@ -3626,8 +3497,8 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 
 			}
 
-			DebugLocation(113, 54);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:113:54: (opToken= 'and' expr= relationalEqExpression -> ^( INFIX[$opToken] $logicalAndExpression $expr) )*
+			DebugLocation(111, 49);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:111:49: (opToken= 'or' expr= logicalAndExpression -> ^( INFIX[$opToken] $logicalOrExpression $expr) )*
 			try { DebugEnterSubRule(23);
 			while (true)
 			{
@@ -3635,7 +3506,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				try { DebugEnterDecision(23, false);
 				int LA23_0 = input.LA(1);
 
-				if ((LA23_0==99))
+				if ((LA23_0==116))
 				{
 					alt23 = 1;
 				}
@@ -3646,23 +3517,23 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:113:55: opToken= 'and' expr= relationalEqExpression
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:111:50: opToken= 'or' expr= logicalAndExpression
 					{
-					DebugLocation(113, 62);
-					opToken=(CommonToken)Match(input,99,Follow._99_in_logicalAndExpression812); if (state.failed) return retval; 
-					if (state.backtracking == 0) stream_99.Add(opToken);
+					DebugLocation(111, 57);
+					opToken=(CommonToken)Match(input,116,Follow._116_in_logicalOrExpression800); if (state.failed) return retval; 
+					if (state.backtracking == 0) stream_116.Add(opToken);
 
-					DebugLocation(113, 73);
-					PushFollow(Follow._relationalEqExpression_in_logicalAndExpression816);
-					expr=relationalEqExpression();
+					DebugLocation(111, 67);
+					PushFollow(Follow._logicalAndExpression_in_logicalOrExpression804);
+					expr=logicalAndExpression();
 					PopFollow();
 					if (state.failed) return retval;
-					if (state.backtracking == 0) stream_relationalEqExpression.Add(expr.Tree);
+					if (state.backtracking == 0) stream_logicalAndExpression.Add(expr.Tree);
 
 
 					{
 					// AST REWRITE
-					// elements: logicalAndExpression, expr
+					// elements: logicalOrExpression, expr
 					// token labels: 
 					// rule labels: expr, retval
 					// token list labels: 
@@ -3674,18 +3545,18 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 					RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 					root_0 = (object)adaptor.Nil();
-					// 113:96: -> ^( INFIX[$opToken] $logicalAndExpression $expr)
+					// 111:88: -> ^( INFIX[$opToken] $logicalOrExpression $expr)
 					{
-						DebugLocation(113, 98);
-						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:113:98: ^( INFIX[$opToken] $logicalAndExpression $expr)
+						DebugLocation(111, 90);
+						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:111:90: ^( INFIX[$opToken] $logicalOrExpression $expr)
 						{
 						object root_1 = (object)adaptor.Nil();
-						DebugLocation(113, 100);
+						DebugLocation(111, 92);
 						root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(INFIX, opToken), root_1);
 
-						DebugLocation(113, 117);
+						DebugLocation(111, 109);
 						adaptor.AddChild(root_1, stream_retval.NextTree());
-						DebugLocation(113, 139);
+						DebugLocation(111, 130);
 						adaptor.AddChild(root_1, stream_expr.NextTree());
 
 						adaptor.AddChild(root_0, root_1);
@@ -3729,11 +3600,204 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 		}
 		finally
 		{
+			TraceOut("logicalOrExpression", 18);
+			LeaveRule("logicalOrExpression", 18);
+			LeaveRule_logicalOrExpression();
+		}
+		DebugLocation(112, 1);
+		} finally { DebugExitRule(GrammarFileName, "logicalOrExpression"); }
+		return retval;
+
+	}
+	// $ANTLR end "logicalOrExpression"
+
+	private sealed partial class logicalAndExpression_return : ParserRuleReturnScope<CommonToken>, IAstRuleReturnScope<object>, IAstRuleReturnScope
+	{
+		private object _tree;
+		public object Tree { get { return _tree; } set { _tree = value; } }
+		object IAstRuleReturnScope.Tree { get { return Tree; } }
+		public logicalAndExpression_return(OCLSyntaxParser grammar) {OnCreated(grammar);}
+		partial void OnCreated(OCLSyntaxParser grammar);
+	}
+
+	partial void EnterRule_logicalAndExpression();
+	partial void LeaveRule_logicalAndExpression();
+
+	// $ANTLR start "logicalAndExpression"
+	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:113:1: logicalAndExpression : ( relationalEqExpression -> relationalEqExpression ) (opToken= 'and' expr= relationalEqExpression -> ^( INFIX[$opToken] $logicalAndExpression $expr) )* ;
+	[GrammarRule("logicalAndExpression")]
+	private OCLSyntaxParser.logicalAndExpression_return logicalAndExpression()
+	{
+		EnterRule_logicalAndExpression();
+		EnterRule("logicalAndExpression", 19);
+		TraceIn("logicalAndExpression", 19);
+		OCLSyntaxParser.logicalAndExpression_return retval = new OCLSyntaxParser.logicalAndExpression_return(this);
+		retval.Start = (CommonToken)input.LT(1);
+
+		object root_0 = default(object);
+
+		CommonToken opToken = default(CommonToken);
+		OCLSyntaxParser.relationalEqExpression_return expr = default(OCLSyntaxParser.relationalEqExpression_return);
+		OCLSyntaxParser.relationalEqExpression_return relationalEqExpression59 = default(OCLSyntaxParser.relationalEqExpression_return);
+
+		object opToken_tree = default(object);
+		RewriteRuleITokenStream stream_99=new RewriteRuleITokenStream(adaptor,"token 99");
+		RewriteRuleSubtreeStream stream_relationalEqExpression=new RewriteRuleSubtreeStream(adaptor,"rule relationalEqExpression");
+		try { DebugEnterRule(GrammarFileName, "logicalAndExpression");
+		DebugLocation(113, 1);
+		try
+		{
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:114:2: ( ( relationalEqExpression -> relationalEqExpression ) (opToken= 'and' expr= relationalEqExpression -> ^( INFIX[$opToken] $logicalAndExpression $expr) )* )
+			DebugEnterAlt(1);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:114:4: ( relationalEqExpression -> relationalEqExpression ) (opToken= 'and' expr= relationalEqExpression -> ^( INFIX[$opToken] $logicalAndExpression $expr) )*
+			{
+			DebugLocation(114, 4);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:114:4: ( relationalEqExpression -> relationalEqExpression )
+			DebugEnterAlt(1);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:114:5: relationalEqExpression
+			{
+			DebugLocation(114, 5);
+			PushFollow(Follow._relationalEqExpression_in_logicalAndExpression828);
+			relationalEqExpression59=relationalEqExpression();
+			PopFollow();
+			if (state.failed) return retval;
+			if (state.backtracking == 0) stream_relationalEqExpression.Add(relationalEqExpression59.Tree);
+
+
+			{
+			// AST REWRITE
+			// elements: relationalEqExpression
+			// token labels: 
+			// rule labels: retval
+			// token list labels: 
+			// rule list labels: 
+			// wildcard labels: 
+			if (state.backtracking == 0) {
+			retval.Tree = root_0;
+			RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
+
+			root_0 = (object)adaptor.Nil();
+			// 114:27: -> relationalEqExpression
+			{
+				DebugLocation(114, 29);
+				adaptor.AddChild(root_0, stream_relationalEqExpression.NextTree());
+
+			}
+
+			retval.Tree = root_0;
+			}
+			}
+
+			}
+
+			DebugLocation(114, 54);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:114:54: (opToken= 'and' expr= relationalEqExpression -> ^( INFIX[$opToken] $logicalAndExpression $expr) )*
+			try { DebugEnterSubRule(24);
+			while (true)
+			{
+				int alt24=2;
+				try { DebugEnterDecision(24, false);
+				int LA24_0 = input.LA(1);
+
+				if ((LA24_0==99))
+				{
+					alt24 = 1;
+				}
+
+
+				} finally { DebugExitDecision(24); }
+				switch ( alt24 )
+				{
+				case 1:
+					DebugEnterAlt(1);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:114:55: opToken= 'and' expr= relationalEqExpression
+					{
+					DebugLocation(114, 62);
+					opToken=(CommonToken)Match(input,99,Follow._99_in_logicalAndExpression837); if (state.failed) return retval; 
+					if (state.backtracking == 0) stream_99.Add(opToken);
+
+					DebugLocation(114, 73);
+					PushFollow(Follow._relationalEqExpression_in_logicalAndExpression841);
+					expr=relationalEqExpression();
+					PopFollow();
+					if (state.failed) return retval;
+					if (state.backtracking == 0) stream_relationalEqExpression.Add(expr.Tree);
+
+
+					{
+					// AST REWRITE
+					// elements: logicalAndExpression, expr
+					// token labels: 
+					// rule labels: expr, retval
+					// token list labels: 
+					// rule list labels: 
+					// wildcard labels: 
+					if (state.backtracking == 0) {
+					retval.Tree = root_0;
+					RewriteRuleSubtreeStream stream_expr=new RewriteRuleSubtreeStream(adaptor,"rule expr",expr!=null?expr.Tree:null);
+					RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
+
+					root_0 = (object)adaptor.Nil();
+					// 114:96: -> ^( INFIX[$opToken] $logicalAndExpression $expr)
+					{
+						DebugLocation(114, 98);
+						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:114:98: ^( INFIX[$opToken] $logicalAndExpression $expr)
+						{
+						object root_1 = (object)adaptor.Nil();
+						DebugLocation(114, 100);
+						root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(INFIX, opToken), root_1);
+
+						DebugLocation(114, 117);
+						adaptor.AddChild(root_1, stream_retval.NextTree());
+						DebugLocation(114, 139);
+						adaptor.AddChild(root_1, stream_expr.NextTree());
+
+						adaptor.AddChild(root_0, root_1);
+						}
+
+					}
+
+					retval.Tree = root_0;
+					}
+					}
+
+					}
+					break;
+
+				default:
+					goto loop24;
+				}
+			}
+
+			loop24:
+				;
+
+			} finally { DebugExitSubRule(24); }
+
+
+			}
+
+			retval.Stop = (CommonToken)input.LT(-1);
+
+			if (state.backtracking == 0) {
+			retval.Tree = (object)adaptor.RulePostProcessing(root_0);
+			adaptor.SetTokenBoundaries(retval.Tree, retval.Start, retval.Stop);
+			}
+		}
+		catch (RecognitionException re)
+		{
+			ReportError(re);
+			Recover(input,re);
+		retval.Tree = (object)adaptor.ErrorNode(input, retval.Start, input.LT(-1), re);
+
+		}
+		finally
+		{
 			TraceOut("logicalAndExpression", 19);
 			LeaveRule("logicalAndExpression", 19);
 			LeaveRule_logicalAndExpression();
 		}
-		DebugLocation(114, 1);
+		DebugLocation(115, 1);
 		} finally { DebugExitRule(GrammarFileName, "logicalAndExpression"); }
 		return retval;
 
@@ -3753,7 +3817,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 	partial void LeaveRule_relationalEqExpression();
 
 	// $ANTLR start "relationalEqExpression"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:116:1: relationalEqExpression : ( relationalNotEqExprassion -> relationalNotEqExprassion ) ( (opToken= '=' |opToken= '<>' ) expr= relationalNotEqExprassion -> ^( INFIX[$opToken] $relationalEqExpression $expr) )* ;
+	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:117:1: relationalEqExpression : ( relationalNotEqExprassion -> relationalNotEqExprassion ) ( (opToken= '=' |opToken= '<>' ) expr= relationalNotEqExprassion -> ^( INFIX[$opToken] $relationalEqExpression $expr) )* ;
 	[GrammarRule("relationalEqExpression")]
 	private OCLSyntaxParser.relationalEqExpression_return relationalEqExpression()
 	{
@@ -3767,31 +3831,31 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 
 		CommonToken opToken = default(CommonToken);
 		OCLSyntaxParser.relationalNotEqExprassion_return expr = default(OCLSyntaxParser.relationalNotEqExprassion_return);
-		OCLSyntaxParser.relationalNotEqExprassion_return relationalNotEqExprassion57 = default(OCLSyntaxParser.relationalNotEqExprassion_return);
+		OCLSyntaxParser.relationalNotEqExprassion_return relationalNotEqExprassion60 = default(OCLSyntaxParser.relationalNotEqExprassion_return);
 
 		object opToken_tree = default(object);
 		RewriteRuleITokenStream stream_75=new RewriteRuleITokenStream(adaptor,"token 75");
 		RewriteRuleITokenStream stream_74=new RewriteRuleITokenStream(adaptor,"token 74");
 		RewriteRuleSubtreeStream stream_relationalNotEqExprassion=new RewriteRuleSubtreeStream(adaptor,"rule relationalNotEqExprassion");
 		try { DebugEnterRule(GrammarFileName, "relationalEqExpression");
-		DebugLocation(116, 1);
+		DebugLocation(117, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:117:2: ( ( relationalNotEqExprassion -> relationalNotEqExprassion ) ( (opToken= '=' |opToken= '<>' ) expr= relationalNotEqExprassion -> ^( INFIX[$opToken] $relationalEqExpression $expr) )* )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:118:2: ( ( relationalNotEqExprassion -> relationalNotEqExprassion ) ( (opToken= '=' |opToken= '<>' ) expr= relationalNotEqExprassion -> ^( INFIX[$opToken] $relationalEqExpression $expr) )* )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:117:4: ( relationalNotEqExprassion -> relationalNotEqExprassion ) ( (opToken= '=' |opToken= '<>' ) expr= relationalNotEqExprassion -> ^( INFIX[$opToken] $relationalEqExpression $expr) )*
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:118:4: ( relationalNotEqExprassion -> relationalNotEqExprassion ) ( (opToken= '=' |opToken= '<>' ) expr= relationalNotEqExprassion -> ^( INFIX[$opToken] $relationalEqExpression $expr) )*
 			{
-			DebugLocation(117, 4);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:117:4: ( relationalNotEqExprassion -> relationalNotEqExprassion )
+			DebugLocation(118, 4);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:118:4: ( relationalNotEqExprassion -> relationalNotEqExprassion )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:117:5: relationalNotEqExprassion
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:118:5: relationalNotEqExprassion
 			{
-			DebugLocation(117, 5);
-			PushFollow(Follow._relationalNotEqExprassion_in_relationalEqExpression841);
-			relationalNotEqExprassion57=relationalNotEqExprassion();
+			DebugLocation(118, 5);
+			PushFollow(Follow._relationalNotEqExprassion_in_relationalEqExpression866);
+			relationalNotEqExprassion60=relationalNotEqExprassion();
 			PopFollow();
 			if (state.failed) return retval;
-			if (state.backtracking == 0) stream_relationalNotEqExprassion.Add(relationalNotEqExprassion57.Tree);
+			if (state.backtracking == 0) stream_relationalNotEqExprassion.Add(relationalNotEqExprassion60.Tree);
 
 
 			{
@@ -3807,9 +3871,9 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 			root_0 = (object)adaptor.Nil();
-			// 117:30: -> relationalNotEqExprassion
+			// 118:30: -> relationalNotEqExprassion
 			{
-				DebugLocation(117, 32);
+				DebugLocation(118, 32);
 				adaptor.AddChild(root_0, stream_relationalNotEqExprassion.NextTree());
 
 			}
@@ -3820,63 +3884,63 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 
 			}
 
-			DebugLocation(117, 59);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:117:59: ( (opToken= '=' |opToken= '<>' ) expr= relationalNotEqExprassion -> ^( INFIX[$opToken] $relationalEqExpression $expr) )*
-			try { DebugEnterSubRule(25);
+			DebugLocation(118, 59);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:118:59: ( (opToken= '=' |opToken= '<>' ) expr= relationalNotEqExprassion -> ^( INFIX[$opToken] $relationalEqExpression $expr) )*
+			try { DebugEnterSubRule(26);
 			while (true)
 			{
-				int alt25=2;
-				try { DebugEnterDecision(25, false);
-				int LA25_0 = input.LA(1);
+				int alt26=2;
+				try { DebugEnterDecision(26, false);
+				int LA26_0 = input.LA(1);
 
-				if ((LA25_0==75))
+				if ((LA26_0==75))
 				{
-					alt25 = 1;
+					alt26 = 1;
 				}
-				else if ((LA25_0==74))
+				else if ((LA26_0==74))
 				{
-					alt25 = 1;
+					alt26 = 1;
 				}
 
 
-				} finally { DebugExitDecision(25); }
-				switch ( alt25 )
+				} finally { DebugExitDecision(26); }
+				switch ( alt26 )
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:117:60: (opToken= '=' |opToken= '<>' ) expr= relationalNotEqExprassion
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:118:60: (opToken= '=' |opToken= '<>' ) expr= relationalNotEqExprassion
 					{
-					DebugLocation(117, 60);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:117:60: (opToken= '=' |opToken= '<>' )
-					int alt24=2;
-					try { DebugEnterSubRule(24);
-					try { DebugEnterDecision(24, false);
-					int LA24_0 = input.LA(1);
+					DebugLocation(118, 60);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:118:60: (opToken= '=' |opToken= '<>' )
+					int alt25=2;
+					try { DebugEnterSubRule(25);
+					try { DebugEnterDecision(25, false);
+					int LA25_0 = input.LA(1);
 
-					if ((LA24_0==75))
+					if ((LA25_0==75))
 					{
-						alt24 = 1;
+						alt25 = 1;
 					}
-					else if ((LA24_0==74))
+					else if ((LA25_0==74))
 					{
-						alt24 = 2;
+						alt25 = 2;
 					}
 					else
 					{
 						if (state.backtracking>0) {state.failed=true; return retval;}
-						NoViableAltException nvae = new NoViableAltException("", 24, 0, input);
+						NoViableAltException nvae = new NoViableAltException("", 25, 0, input);
 						DebugRecognitionException(nvae);
 						throw nvae;
 					}
-					} finally { DebugExitDecision(24); }
-					switch (alt24)
+					} finally { DebugExitDecision(25); }
+					switch (alt25)
 					{
 					case 1:
 						DebugEnterAlt(1);
-						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:117:61: opToken= '='
+						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:118:61: opToken= '='
 						{
-						DebugLocation(117, 68);
-						opToken=(CommonToken)Match(input,75,Follow._75_in_relationalEqExpression850); if (state.failed) return retval; 
+						DebugLocation(118, 68);
+						opToken=(CommonToken)Match(input,75,Follow._75_in_relationalEqExpression875); if (state.failed) return retval; 
 						if (state.backtracking == 0) stream_75.Add(opToken);
 
 
@@ -3884,10 +3948,10 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 						break;
 					case 2:
 						DebugEnterAlt(2);
-						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:117:73: opToken= '<>'
+						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:118:73: opToken= '<>'
 						{
-						DebugLocation(117, 80);
-						opToken=(CommonToken)Match(input,74,Follow._74_in_relationalEqExpression854); if (state.failed) return retval; 
+						DebugLocation(118, 80);
+						opToken=(CommonToken)Match(input,74,Follow._74_in_relationalEqExpression879); if (state.failed) return retval; 
 						if (state.backtracking == 0) stream_74.Add(opToken);
 
 
@@ -3895,10 +3959,10 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 						break;
 
 					}
-					} finally { DebugExitSubRule(24); }
+					} finally { DebugExitSubRule(25); }
 
-					DebugLocation(117, 91);
-					PushFollow(Follow._relationalNotEqExprassion_in_relationalEqExpression859);
+					DebugLocation(118, 91);
+					PushFollow(Follow._relationalNotEqExprassion_in_relationalEqExpression884);
 					expr=relationalNotEqExprassion();
 					PopFollow();
 					if (state.failed) return retval;
@@ -3919,18 +3983,18 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 					RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 					root_0 = (object)adaptor.Nil();
-					// 117:117: -> ^( INFIX[$opToken] $relationalEqExpression $expr)
+					// 118:117: -> ^( INFIX[$opToken] $relationalEqExpression $expr)
 					{
-						DebugLocation(117, 119);
-						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:117:119: ^( INFIX[$opToken] $relationalEqExpression $expr)
+						DebugLocation(118, 119);
+						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:118:119: ^( INFIX[$opToken] $relationalEqExpression $expr)
 						{
 						object root_1 = (object)adaptor.Nil();
-						DebugLocation(117, 121);
+						DebugLocation(118, 121);
 						root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(INFIX, opToken), root_1);
 
-						DebugLocation(117, 138);
+						DebugLocation(118, 138);
 						adaptor.AddChild(root_1, stream_retval.NextTree());
-						DebugLocation(117, 162);
+						DebugLocation(118, 162);
 						adaptor.AddChild(root_1, stream_expr.NextTree());
 
 						adaptor.AddChild(root_0, root_1);
@@ -3946,14 +4010,14 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 					break;
 
 				default:
-					goto loop25;
+					goto loop26;
 				}
 			}
 
-			loop25:
+			loop26:
 				;
 
-			} finally { DebugExitSubRule(25); }
+			} finally { DebugExitSubRule(26); }
 
 
 			}
@@ -3978,7 +4042,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			LeaveRule("relationalEqExpression", 20);
 			LeaveRule_relationalEqExpression();
 		}
-		DebugLocation(118, 1);
+		DebugLocation(119, 1);
 		} finally { DebugExitRule(GrammarFileName, "relationalEqExpression"); }
 		return retval;
 
@@ -3998,7 +4062,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 	partial void LeaveRule_relationalNotEqExprassion();
 
 	// $ANTLR start "relationalNotEqExprassion"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:119:1: relationalNotEqExprassion : ( additiveExpression -> additiveExpression ) ( (opToken= '<' |opToken= '>' |opToken= '<=' |opToken= '>=' ) expr= additiveExpression -> ^( INFIX[$opToken] $relationalNotEqExprassion $expr) )* ;
+	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:120:1: relationalNotEqExprassion : ( additiveExpression -> additiveExpression ) ( (opToken= '<' |opToken= '>' |opToken= '<=' |opToken= '>=' ) expr= additiveExpression -> ^( INFIX[$opToken] $relationalNotEqExprassion $expr) )* ;
 	[GrammarRule("relationalNotEqExprassion")]
 	private OCLSyntaxParser.relationalNotEqExprassion_return relationalNotEqExprassion()
 	{
@@ -4012,7 +4076,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 
 		CommonToken opToken = default(CommonToken);
 		OCLSyntaxParser.additiveExpression_return expr = default(OCLSyntaxParser.additiveExpression_return);
-		OCLSyntaxParser.additiveExpression_return additiveExpression58 = default(OCLSyntaxParser.additiveExpression_return);
+		OCLSyntaxParser.additiveExpression_return additiveExpression61 = default(OCLSyntaxParser.additiveExpression_return);
 
 		object opToken_tree = default(object);
 		RewriteRuleITokenStream stream_72=new RewriteRuleITokenStream(adaptor,"token 72");
@@ -4021,24 +4085,24 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 		RewriteRuleITokenStream stream_77=new RewriteRuleITokenStream(adaptor,"token 77");
 		RewriteRuleSubtreeStream stream_additiveExpression=new RewriteRuleSubtreeStream(adaptor,"rule additiveExpression");
 		try { DebugEnterRule(GrammarFileName, "relationalNotEqExprassion");
-		DebugLocation(119, 1);
+		DebugLocation(120, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:120:2: ( ( additiveExpression -> additiveExpression ) ( (opToken= '<' |opToken= '>' |opToken= '<=' |opToken= '>=' ) expr= additiveExpression -> ^( INFIX[$opToken] $relationalNotEqExprassion $expr) )* )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:121:2: ( ( additiveExpression -> additiveExpression ) ( (opToken= '<' |opToken= '>' |opToken= '<=' |opToken= '>=' ) expr= additiveExpression -> ^( INFIX[$opToken] $relationalNotEqExprassion $expr) )* )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:120:4: ( additiveExpression -> additiveExpression ) ( (opToken= '<' |opToken= '>' |opToken= '<=' |opToken= '>=' ) expr= additiveExpression -> ^( INFIX[$opToken] $relationalNotEqExprassion $expr) )*
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:121:4: ( additiveExpression -> additiveExpression ) ( (opToken= '<' |opToken= '>' |opToken= '<=' |opToken= '>=' ) expr= additiveExpression -> ^( INFIX[$opToken] $relationalNotEqExprassion $expr) )*
 			{
-			DebugLocation(120, 4);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:120:4: ( additiveExpression -> additiveExpression )
+			DebugLocation(121, 4);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:121:4: ( additiveExpression -> additiveExpression )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:120:5: additiveExpression
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:121:5: additiveExpression
 			{
-			DebugLocation(120, 5);
-			PushFollow(Follow._additiveExpression_in_relationalNotEqExprassion886);
-			additiveExpression58=additiveExpression();
+			DebugLocation(121, 5);
+			PushFollow(Follow._additiveExpression_in_relationalNotEqExprassion911);
+			additiveExpression61=additiveExpression();
 			PopFollow();
 			if (state.failed) return retval;
-			if (state.backtracking == 0) stream_additiveExpression.Add(additiveExpression58.Tree);
+			if (state.backtracking == 0) stream_additiveExpression.Add(additiveExpression61.Tree);
 
 
 			{
@@ -4054,9 +4118,9 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 			root_0 = (object)adaptor.Nil();
-			// 120:24: -> additiveExpression
+			// 121:24: -> additiveExpression
 			{
-				DebugLocation(120, 26);
+				DebugLocation(121, 26);
 				adaptor.AddChild(root_0, stream_additiveExpression.NextTree());
 
 			}
@@ -4067,90 +4131,90 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 
 			}
 
-			DebugLocation(120, 46);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:120:46: ( (opToken= '<' |opToken= '>' |opToken= '<=' |opToken= '>=' ) expr= additiveExpression -> ^( INFIX[$opToken] $relationalNotEqExprassion $expr) )*
-			try { DebugEnterSubRule(27);
+			DebugLocation(121, 46);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:121:46: ( (opToken= '<' |opToken= '>' |opToken= '<=' |opToken= '>=' ) expr= additiveExpression -> ^( INFIX[$opToken] $relationalNotEqExprassion $expr) )*
+			try { DebugEnterSubRule(28);
 			while (true)
 			{
-				int alt27=2;
-				try { DebugEnterDecision(27, false);
+				int alt28=2;
+				try { DebugEnterDecision(28, false);
 				switch (input.LA(1))
 				{
 				case 72:
 					{
-					alt27 = 1;
+					alt28 = 1;
 					}
 					break;
 				case 76:
 					{
-					alt27 = 1;
+					alt28 = 1;
 					}
 					break;
 				case 73:
 					{
-					alt27 = 1;
+					alt28 = 1;
 					}
 					break;
 				case 77:
 					{
-					alt27 = 1;
+					alt28 = 1;
 					}
 					break;
 
 				}
 
-				} finally { DebugExitDecision(27); }
-				switch ( alt27 )
+				} finally { DebugExitDecision(28); }
+				switch ( alt28 )
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:120:47: (opToken= '<' |opToken= '>' |opToken= '<=' |opToken= '>=' ) expr= additiveExpression
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:121:47: (opToken= '<' |opToken= '>' |opToken= '<=' |opToken= '>=' ) expr= additiveExpression
 					{
-					DebugLocation(120, 47);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:120:47: (opToken= '<' |opToken= '>' |opToken= '<=' |opToken= '>=' )
-					int alt26=4;
-					try { DebugEnterSubRule(26);
-					try { DebugEnterDecision(26, false);
+					DebugLocation(121, 47);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:121:47: (opToken= '<' |opToken= '>' |opToken= '<=' |opToken= '>=' )
+					int alt27=4;
+					try { DebugEnterSubRule(27);
+					try { DebugEnterDecision(27, false);
 					switch (input.LA(1))
 					{
 					case 72:
 						{
-						alt26 = 1;
+						alt27 = 1;
 						}
 						break;
 					case 76:
 						{
-						alt26 = 2;
+						alt27 = 2;
 						}
 						break;
 					case 73:
 						{
-						alt26 = 3;
+						alt27 = 3;
 						}
 						break;
 					case 77:
 						{
-						alt26 = 4;
+						alt27 = 4;
 						}
 						break;
 					default:
 						{
 							if (state.backtracking>0) {state.failed=true; return retval;}
-							NoViableAltException nvae = new NoViableAltException("", 26, 0, input);
+							NoViableAltException nvae = new NoViableAltException("", 27, 0, input);
 							DebugRecognitionException(nvae);
 							throw nvae;
 						}
 					}
 
-					} finally { DebugExitDecision(26); }
-					switch (alt26)
+					} finally { DebugExitDecision(27); }
+					switch (alt27)
 					{
 					case 1:
 						DebugEnterAlt(1);
-						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:120:48: opToken= '<'
+						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:121:48: opToken= '<'
 						{
-						DebugLocation(120, 55);
-						opToken=(CommonToken)Match(input,72,Follow._72_in_relationalNotEqExprassion896); if (state.failed) return retval; 
+						DebugLocation(121, 55);
+						opToken=(CommonToken)Match(input,72,Follow._72_in_relationalNotEqExprassion921); if (state.failed) return retval; 
 						if (state.backtracking == 0) stream_72.Add(opToken);
 
 
@@ -4158,10 +4222,10 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 						break;
 					case 2:
 						DebugEnterAlt(2);
-						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:120:61: opToken= '>'
+						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:121:61: opToken= '>'
 						{
-						DebugLocation(120, 68);
-						opToken=(CommonToken)Match(input,76,Follow._76_in_relationalNotEqExprassion901); if (state.failed) return retval; 
+						DebugLocation(121, 68);
+						opToken=(CommonToken)Match(input,76,Follow._76_in_relationalNotEqExprassion926); if (state.failed) return retval; 
 						if (state.backtracking == 0) stream_76.Add(opToken);
 
 
@@ -4169,10 +4233,10 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 						break;
 					case 3:
 						DebugEnterAlt(3);
-						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:120:74: opToken= '<='
+						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:121:74: opToken= '<='
 						{
-						DebugLocation(120, 81);
-						opToken=(CommonToken)Match(input,73,Follow._73_in_relationalNotEqExprassion906); if (state.failed) return retval; 
+						DebugLocation(121, 81);
+						opToken=(CommonToken)Match(input,73,Follow._73_in_relationalNotEqExprassion931); if (state.failed) return retval; 
 						if (state.backtracking == 0) stream_73.Add(opToken);
 
 
@@ -4180,10 +4244,10 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 						break;
 					case 4:
 						DebugEnterAlt(4);
-						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:120:88: opToken= '>='
+						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:121:88: opToken= '>='
 						{
-						DebugLocation(120, 95);
-						opToken=(CommonToken)Match(input,77,Follow._77_in_relationalNotEqExprassion911); if (state.failed) return retval; 
+						DebugLocation(121, 95);
+						opToken=(CommonToken)Match(input,77,Follow._77_in_relationalNotEqExprassion936); if (state.failed) return retval; 
 						if (state.backtracking == 0) stream_77.Add(opToken);
 
 
@@ -4191,10 +4255,10 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 						break;
 
 					}
-					} finally { DebugExitSubRule(26); }
+					} finally { DebugExitSubRule(27); }
 
-					DebugLocation(120, 106);
-					PushFollow(Follow._additiveExpression_in_relationalNotEqExprassion916);
+					DebugLocation(121, 106);
+					PushFollow(Follow._additiveExpression_in_relationalNotEqExprassion941);
 					expr=additiveExpression();
 					PopFollow();
 					if (state.failed) return retval;
@@ -4215,18 +4279,18 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 					RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 					root_0 = (object)adaptor.Nil();
-					// 120:125: -> ^( INFIX[$opToken] $relationalNotEqExprassion $expr)
+					// 121:125: -> ^( INFIX[$opToken] $relationalNotEqExprassion $expr)
 					{
-						DebugLocation(120, 127);
-						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:120:127: ^( INFIX[$opToken] $relationalNotEqExprassion $expr)
+						DebugLocation(121, 127);
+						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:121:127: ^( INFIX[$opToken] $relationalNotEqExprassion $expr)
 						{
 						object root_1 = (object)adaptor.Nil();
-						DebugLocation(120, 129);
+						DebugLocation(121, 129);
 						root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(INFIX, opToken), root_1);
 
-						DebugLocation(120, 146);
+						DebugLocation(121, 146);
 						adaptor.AddChild(root_1, stream_retval.NextTree());
-						DebugLocation(120, 173);
+						DebugLocation(121, 173);
 						adaptor.AddChild(root_1, stream_expr.NextTree());
 
 						adaptor.AddChild(root_0, root_1);
@@ -4242,14 +4306,14 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 					break;
 
 				default:
-					goto loop27;
+					goto loop28;
 				}
 			}
 
-			loop27:
+			loop28:
 				;
 
-			} finally { DebugExitSubRule(27); }
+			} finally { DebugExitSubRule(28); }
 
 
 			}
@@ -4274,7 +4338,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			LeaveRule("relationalNotEqExprassion", 21);
 			LeaveRule_relationalNotEqExprassion();
 		}
-		DebugLocation(121, 1);
+		DebugLocation(122, 1);
 		} finally { DebugExitRule(GrammarFileName, "relationalNotEqExprassion"); }
 		return retval;
 
@@ -4294,7 +4358,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 	partial void LeaveRule_additiveExpression();
 
 	// $ANTLR start "additiveExpression"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:123:1: additiveExpression : ( multiplicativeExpression -> multiplicativeExpression ) ( (opToken= '+' |opToken= '-' ) expr= multiplicativeExpression -> ^( INFIX[$opToken] $additiveExpression $expr) )* ;
+	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:124:1: additiveExpression : ( multiplicativeExpression -> multiplicativeExpression ) ( (opToken= '+' |opToken= '-' ) expr= multiplicativeExpression -> ^( INFIX[$opToken] $additiveExpression $expr) )* ;
 	[GrammarRule("additiveExpression")]
 	private OCLSyntaxParser.additiveExpression_return additiveExpression()
 	{
@@ -4308,31 +4372,31 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 
 		CommonToken opToken = default(CommonToken);
 		OCLSyntaxParser.multiplicativeExpression_return expr = default(OCLSyntaxParser.multiplicativeExpression_return);
-		OCLSyntaxParser.multiplicativeExpression_return multiplicativeExpression59 = default(OCLSyntaxParser.multiplicativeExpression_return);
+		OCLSyntaxParser.multiplicativeExpression_return multiplicativeExpression62 = default(OCLSyntaxParser.multiplicativeExpression_return);
 
 		object opToken_tree = default(object);
 		RewriteRuleITokenStream stream_63=new RewriteRuleITokenStream(adaptor,"token 63");
 		RewriteRuleITokenStream stream_65=new RewriteRuleITokenStream(adaptor,"token 65");
 		RewriteRuleSubtreeStream stream_multiplicativeExpression=new RewriteRuleSubtreeStream(adaptor,"rule multiplicativeExpression");
 		try { DebugEnterRule(GrammarFileName, "additiveExpression");
-		DebugLocation(123, 1);
+		DebugLocation(124, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:124:2: ( ( multiplicativeExpression -> multiplicativeExpression ) ( (opToken= '+' |opToken= '-' ) expr= multiplicativeExpression -> ^( INFIX[$opToken] $additiveExpression $expr) )* )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:125:2: ( ( multiplicativeExpression -> multiplicativeExpression ) ( (opToken= '+' |opToken= '-' ) expr= multiplicativeExpression -> ^( INFIX[$opToken] $additiveExpression $expr) )* )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:124:4: ( multiplicativeExpression -> multiplicativeExpression ) ( (opToken= '+' |opToken= '-' ) expr= multiplicativeExpression -> ^( INFIX[$opToken] $additiveExpression $expr) )*
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:125:4: ( multiplicativeExpression -> multiplicativeExpression ) ( (opToken= '+' |opToken= '-' ) expr= multiplicativeExpression -> ^( INFIX[$opToken] $additiveExpression $expr) )*
 			{
-			DebugLocation(124, 4);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:124:4: ( multiplicativeExpression -> multiplicativeExpression )
+			DebugLocation(125, 4);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:125:4: ( multiplicativeExpression -> multiplicativeExpression )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:124:5: multiplicativeExpression
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:125:5: multiplicativeExpression
 			{
-			DebugLocation(124, 5);
-			PushFollow(Follow._multiplicativeExpression_in_additiveExpression942);
-			multiplicativeExpression59=multiplicativeExpression();
+			DebugLocation(125, 5);
+			PushFollow(Follow._multiplicativeExpression_in_additiveExpression967);
+			multiplicativeExpression62=multiplicativeExpression();
 			PopFollow();
 			if (state.failed) return retval;
-			if (state.backtracking == 0) stream_multiplicativeExpression.Add(multiplicativeExpression59.Tree);
+			if (state.backtracking == 0) stream_multiplicativeExpression.Add(multiplicativeExpression62.Tree);
 
 
 			{
@@ -4348,9 +4412,9 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 			root_0 = (object)adaptor.Nil();
-			// 124:29: -> multiplicativeExpression
+			// 125:29: -> multiplicativeExpression
 			{
-				DebugLocation(124, 31);
+				DebugLocation(125, 31);
 				adaptor.AddChild(root_0, stream_multiplicativeExpression.NextTree());
 
 			}
@@ -4361,63 +4425,63 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 
 			}
 
-			DebugLocation(124, 57);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:124:57: ( (opToken= '+' |opToken= '-' ) expr= multiplicativeExpression -> ^( INFIX[$opToken] $additiveExpression $expr) )*
-			try { DebugEnterSubRule(29);
+			DebugLocation(125, 57);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:125:57: ( (opToken= '+' |opToken= '-' ) expr= multiplicativeExpression -> ^( INFIX[$opToken] $additiveExpression $expr) )*
+			try { DebugEnterSubRule(30);
 			while (true)
 			{
-				int alt29=2;
-				try { DebugEnterDecision(29, false);
-				int LA29_0 = input.LA(1);
+				int alt30=2;
+				try { DebugEnterDecision(30, false);
+				int LA30_0 = input.LA(1);
 
-				if ((LA29_0==63))
+				if ((LA30_0==63))
 				{
-					alt29 = 1;
+					alt30 = 1;
 				}
-				else if ((LA29_0==65))
+				else if ((LA30_0==65))
 				{
-					alt29 = 1;
+					alt30 = 1;
 				}
 
 
-				} finally { DebugExitDecision(29); }
-				switch ( alt29 )
+				} finally { DebugExitDecision(30); }
+				switch ( alt30 )
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:124:58: (opToken= '+' |opToken= '-' ) expr= multiplicativeExpression
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:125:58: (opToken= '+' |opToken= '-' ) expr= multiplicativeExpression
 					{
-					DebugLocation(124, 58);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:124:58: (opToken= '+' |opToken= '-' )
-					int alt28=2;
-					try { DebugEnterSubRule(28);
-					try { DebugEnterDecision(28, false);
-					int LA28_0 = input.LA(1);
+					DebugLocation(125, 58);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:125:58: (opToken= '+' |opToken= '-' )
+					int alt29=2;
+					try { DebugEnterSubRule(29);
+					try { DebugEnterDecision(29, false);
+					int LA29_0 = input.LA(1);
 
-					if ((LA28_0==63))
+					if ((LA29_0==63))
 					{
-						alt28 = 1;
+						alt29 = 1;
 					}
-					else if ((LA28_0==65))
+					else if ((LA29_0==65))
 					{
-						alt28 = 2;
+						alt29 = 2;
 					}
 					else
 					{
 						if (state.backtracking>0) {state.failed=true; return retval;}
-						NoViableAltException nvae = new NoViableAltException("", 28, 0, input);
+						NoViableAltException nvae = new NoViableAltException("", 29, 0, input);
 						DebugRecognitionException(nvae);
 						throw nvae;
 					}
-					} finally { DebugExitDecision(28); }
-					switch (alt28)
+					} finally { DebugExitDecision(29); }
+					switch (alt29)
 					{
 					case 1:
 						DebugEnterAlt(1);
-						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:124:59: opToken= '+'
+						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:125:59: opToken= '+'
 						{
-						DebugLocation(124, 66);
-						opToken=(CommonToken)Match(input,63,Follow._63_in_additiveExpression951); if (state.failed) return retval; 
+						DebugLocation(125, 66);
+						opToken=(CommonToken)Match(input,63,Follow._63_in_additiveExpression976); if (state.failed) return retval; 
 						if (state.backtracking == 0) stream_63.Add(opToken);
 
 
@@ -4425,10 +4489,10 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 						break;
 					case 2:
 						DebugEnterAlt(2);
-						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:124:71: opToken= '-'
+						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:125:71: opToken= '-'
 						{
-						DebugLocation(124, 78);
-						opToken=(CommonToken)Match(input,65,Follow._65_in_additiveExpression955); if (state.failed) return retval; 
+						DebugLocation(125, 78);
+						opToken=(CommonToken)Match(input,65,Follow._65_in_additiveExpression980); if (state.failed) return retval; 
 						if (state.backtracking == 0) stream_65.Add(opToken);
 
 
@@ -4436,10 +4500,10 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 						break;
 
 					}
-					} finally { DebugExitSubRule(28); }
+					} finally { DebugExitSubRule(29); }
 
-					DebugLocation(124, 88);
-					PushFollow(Follow._multiplicativeExpression_in_additiveExpression961);
+					DebugLocation(125, 88);
+					PushFollow(Follow._multiplicativeExpression_in_additiveExpression986);
 					expr=multiplicativeExpression();
 					PopFollow();
 					if (state.failed) return retval;
@@ -4460,18 +4524,18 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 					RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 					root_0 = (object)adaptor.Nil();
-					// 124:114: -> ^( INFIX[$opToken] $additiveExpression $expr)
+					// 125:114: -> ^( INFIX[$opToken] $additiveExpression $expr)
 					{
-						DebugLocation(124, 116);
-						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:124:116: ^( INFIX[$opToken] $additiveExpression $expr)
+						DebugLocation(125, 116);
+						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:125:116: ^( INFIX[$opToken] $additiveExpression $expr)
 						{
 						object root_1 = (object)adaptor.Nil();
-						DebugLocation(124, 118);
+						DebugLocation(125, 118);
 						root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(INFIX, opToken), root_1);
 
-						DebugLocation(124, 135);
+						DebugLocation(125, 135);
 						adaptor.AddChild(root_1, stream_retval.NextTree());
-						DebugLocation(124, 155);
+						DebugLocation(125, 155);
 						adaptor.AddChild(root_1, stream_expr.NextTree());
 
 						adaptor.AddChild(root_0, root_1);
@@ -4487,14 +4551,14 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 					break;
 
 				default:
-					goto loop29;
+					goto loop30;
 				}
 			}
 
-			loop29:
+			loop30:
 				;
 
-			} finally { DebugExitSubRule(29); }
+			} finally { DebugExitSubRule(30); }
 
 
 			}
@@ -4519,7 +4583,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			LeaveRule("additiveExpression", 22);
 			LeaveRule_additiveExpression();
 		}
-		DebugLocation(125, 1);
+		DebugLocation(126, 1);
 		} finally { DebugExitRule(GrammarFileName, "additiveExpression"); }
 		return retval;
 
@@ -4539,7 +4603,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 	partial void LeaveRule_multiplicativeExpression();
 
 	// $ANTLR start "multiplicativeExpression"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:127:1: multiplicativeExpression : ( unaryExpression -> unaryExpression ) ( (opToken= '*' |opToken= '/' ) expr= unaryExpression -> ^( INFIX[$opToken] $multiplicativeExpression $expr) )* ;
+	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:128:1: multiplicativeExpression : ( unaryExpression -> unaryExpression ) ( (opToken= '*' |opToken= '/' ) expr= unaryExpression -> ^( INFIX[$opToken] $multiplicativeExpression $expr) )* ;
 	[GrammarRule("multiplicativeExpression")]
 	private OCLSyntaxParser.multiplicativeExpression_return multiplicativeExpression()
 	{
@@ -4553,31 +4617,31 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 
 		CommonToken opToken = default(CommonToken);
 		OCLSyntaxParser.unaryExpression_return expr = default(OCLSyntaxParser.unaryExpression_return);
-		OCLSyntaxParser.unaryExpression_return unaryExpression60 = default(OCLSyntaxParser.unaryExpression_return);
+		OCLSyntaxParser.unaryExpression_return unaryExpression63 = default(OCLSyntaxParser.unaryExpression_return);
 
 		object opToken_tree = default(object);
 		RewriteRuleITokenStream stream_UnlimitedNaturalLiteralExp=new RewriteRuleITokenStream(adaptor,"token UnlimitedNaturalLiteralExp");
 		RewriteRuleITokenStream stream_68=new RewriteRuleITokenStream(adaptor,"token 68");
 		RewriteRuleSubtreeStream stream_unaryExpression=new RewriteRuleSubtreeStream(adaptor,"rule unaryExpression");
 		try { DebugEnterRule(GrammarFileName, "multiplicativeExpression");
-		DebugLocation(127, 1);
+		DebugLocation(128, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:128:2: ( ( unaryExpression -> unaryExpression ) ( (opToken= '*' |opToken= '/' ) expr= unaryExpression -> ^( INFIX[$opToken] $multiplicativeExpression $expr) )* )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:129:2: ( ( unaryExpression -> unaryExpression ) ( (opToken= '*' |opToken= '/' ) expr= unaryExpression -> ^( INFIX[$opToken] $multiplicativeExpression $expr) )* )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:128:4: ( unaryExpression -> unaryExpression ) ( (opToken= '*' |opToken= '/' ) expr= unaryExpression -> ^( INFIX[$opToken] $multiplicativeExpression $expr) )*
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:129:4: ( unaryExpression -> unaryExpression ) ( (opToken= '*' |opToken= '/' ) expr= unaryExpression -> ^( INFIX[$opToken] $multiplicativeExpression $expr) )*
 			{
-			DebugLocation(128, 4);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:128:4: ( unaryExpression -> unaryExpression )
+			DebugLocation(129, 4);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:129:4: ( unaryExpression -> unaryExpression )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:128:5: unaryExpression
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:129:5: unaryExpression
 			{
-			DebugLocation(128, 5);
-			PushFollow(Follow._unaryExpression_in_multiplicativeExpression988);
-			unaryExpression60=unaryExpression();
+			DebugLocation(129, 5);
+			PushFollow(Follow._unaryExpression_in_multiplicativeExpression1013);
+			unaryExpression63=unaryExpression();
 			PopFollow();
 			if (state.failed) return retval;
-			if (state.backtracking == 0) stream_unaryExpression.Add(unaryExpression60.Tree);
+			if (state.backtracking == 0) stream_unaryExpression.Add(unaryExpression63.Tree);
 
 
 			{
@@ -4593,9 +4657,9 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 			root_0 = (object)adaptor.Nil();
-			// 128:20: -> unaryExpression
+			// 129:20: -> unaryExpression
 			{
-				DebugLocation(128, 22);
+				DebugLocation(129, 22);
 				adaptor.AddChild(root_0, stream_unaryExpression.NextTree());
 
 			}
@@ -4606,63 +4670,63 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 
 			}
 
-			DebugLocation(128, 39);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:128:39: ( (opToken= '*' |opToken= '/' ) expr= unaryExpression -> ^( INFIX[$opToken] $multiplicativeExpression $expr) )*
-			try { DebugEnterSubRule(31);
+			DebugLocation(129, 39);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:129:39: ( (opToken= '*' |opToken= '/' ) expr= unaryExpression -> ^( INFIX[$opToken] $multiplicativeExpression $expr) )*
+			try { DebugEnterSubRule(32);
 			while (true)
 			{
-				int alt31=2;
-				try { DebugEnterDecision(31, false);
-				int LA31_0 = input.LA(1);
+				int alt32=2;
+				try { DebugEnterDecision(32, false);
+				int LA32_0 = input.LA(1);
 
-				if ((LA31_0==UnlimitedNaturalLiteralExp))
+				if ((LA32_0==UnlimitedNaturalLiteralExp))
 				{
-					alt31 = 1;
+					alt32 = 1;
 				}
-				else if ((LA31_0==68))
+				else if ((LA32_0==68))
 				{
-					alt31 = 1;
+					alt32 = 1;
 				}
 
 
-				} finally { DebugExitDecision(31); }
-				switch ( alt31 )
+				} finally { DebugExitDecision(32); }
+				switch ( alt32 )
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:128:40: (opToken= '*' |opToken= '/' ) expr= unaryExpression
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:129:40: (opToken= '*' |opToken= '/' ) expr= unaryExpression
 					{
-					DebugLocation(128, 40);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:128:40: (opToken= '*' |opToken= '/' )
-					int alt30=2;
-					try { DebugEnterSubRule(30);
-					try { DebugEnterDecision(30, false);
-					int LA30_0 = input.LA(1);
+					DebugLocation(129, 40);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:129:40: (opToken= '*' |opToken= '/' )
+					int alt31=2;
+					try { DebugEnterSubRule(31);
+					try { DebugEnterDecision(31, false);
+					int LA31_0 = input.LA(1);
 
-					if ((LA30_0==UnlimitedNaturalLiteralExp))
+					if ((LA31_0==UnlimitedNaturalLiteralExp))
 					{
-						alt30 = 1;
+						alt31 = 1;
 					}
-					else if ((LA30_0==68))
+					else if ((LA31_0==68))
 					{
-						alt30 = 2;
+						alt31 = 2;
 					}
 					else
 					{
 						if (state.backtracking>0) {state.failed=true; return retval;}
-						NoViableAltException nvae = new NoViableAltException("", 30, 0, input);
+						NoViableAltException nvae = new NoViableAltException("", 31, 0, input);
 						DebugRecognitionException(nvae);
 						throw nvae;
 					}
-					} finally { DebugExitDecision(30); }
-					switch (alt30)
+					} finally { DebugExitDecision(31); }
+					switch (alt31)
 					{
 					case 1:
 						DebugEnterAlt(1);
-						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:128:41: opToken= '*'
+						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:129:41: opToken= '*'
 						{
-						DebugLocation(128, 48);
-						opToken=(CommonToken)Match(input,UnlimitedNaturalLiteralExp,Follow._UnlimitedNaturalLiteralExp_in_multiplicativeExpression997); if (state.failed) return retval; 
+						DebugLocation(129, 48);
+						opToken=(CommonToken)Match(input,UnlimitedNaturalLiteralExp,Follow._UnlimitedNaturalLiteralExp_in_multiplicativeExpression1022); if (state.failed) return retval; 
 						if (state.backtracking == 0) stream_UnlimitedNaturalLiteralExp.Add(opToken);
 
 
@@ -4670,10 +4734,10 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 						break;
 					case 2:
 						DebugEnterAlt(2);
-						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:128:53: opToken= '/'
+						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:129:53: opToken= '/'
 						{
-						DebugLocation(128, 60);
-						opToken=(CommonToken)Match(input,68,Follow._68_in_multiplicativeExpression1001); if (state.failed) return retval; 
+						DebugLocation(129, 60);
+						opToken=(CommonToken)Match(input,68,Follow._68_in_multiplicativeExpression1026); if (state.failed) return retval; 
 						if (state.backtracking == 0) stream_68.Add(opToken);
 
 
@@ -4681,10 +4745,10 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 						break;
 
 					}
-					} finally { DebugExitSubRule(30); }
+					} finally { DebugExitSubRule(31); }
 
-					DebugLocation(128, 70);
-					PushFollow(Follow._unaryExpression_in_multiplicativeExpression1006);
+					DebugLocation(129, 70);
+					PushFollow(Follow._unaryExpression_in_multiplicativeExpression1031);
 					expr=unaryExpression();
 					PopFollow();
 					if (state.failed) return retval;
@@ -4705,18 +4769,18 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 					RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 					root_0 = (object)adaptor.Nil();
-					// 128:86: -> ^( INFIX[$opToken] $multiplicativeExpression $expr)
+					// 129:86: -> ^( INFIX[$opToken] $multiplicativeExpression $expr)
 					{
-						DebugLocation(128, 88);
-						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:128:88: ^( INFIX[$opToken] $multiplicativeExpression $expr)
+						DebugLocation(129, 88);
+						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:129:88: ^( INFIX[$opToken] $multiplicativeExpression $expr)
 						{
 						object root_1 = (object)adaptor.Nil();
-						DebugLocation(128, 90);
+						DebugLocation(129, 90);
 						root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(INFIX, opToken), root_1);
 
-						DebugLocation(128, 107);
+						DebugLocation(129, 107);
 						adaptor.AddChild(root_1, stream_retval.NextTree());
-						DebugLocation(128, 133);
+						DebugLocation(129, 133);
 						adaptor.AddChild(root_1, stream_expr.NextTree());
 
 						adaptor.AddChild(root_0, root_1);
@@ -4732,14 +4796,14 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 					break;
 
 				default:
-					goto loop31;
+					goto loop32;
 				}
 			}
 
-			loop31:
+			loop32:
 				;
 
-			} finally { DebugExitSubRule(31); }
+			} finally { DebugExitSubRule(32); }
 
 
 			}
@@ -4764,7 +4828,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			LeaveRule("multiplicativeExpression", 23);
 			LeaveRule_multiplicativeExpression();
 		}
-		DebugLocation(129, 1);
+		DebugLocation(130, 1);
 		} finally { DebugExitRule(GrammarFileName, "multiplicativeExpression"); }
 		return retval;
 
@@ -4784,7 +4848,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 	partial void LeaveRule_unaryExpression();
 
 	// $ANTLR start "unaryExpression"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:131:1: unaryExpression : ( (opToken= '-' |opToken= 'not' ) term= termExpression -> ^( UNARY[$opToken] $term) | termExpression );
+	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:132:1: unaryExpression : ( (opToken= '-' |opToken= 'not' ) term= termExpression -> ^( UNARY[$opToken] $term) | termExpression );
 	[GrammarRule("unaryExpression")]
 	private OCLSyntaxParser.unaryExpression_return unaryExpression()
 	{
@@ -4798,74 +4862,74 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 
 		CommonToken opToken = default(CommonToken);
 		OCLSyntaxParser.termExpression_return term = default(OCLSyntaxParser.termExpression_return);
-		OCLSyntaxParser.termExpression_return termExpression61 = default(OCLSyntaxParser.termExpression_return);
+		OCLSyntaxParser.termExpression_return termExpression64 = default(OCLSyntaxParser.termExpression_return);
 
 		object opToken_tree = default(object);
 		RewriteRuleITokenStream stream_65=new RewriteRuleITokenStream(adaptor,"token 65");
-		RewriteRuleITokenStream stream_114=new RewriteRuleITokenStream(adaptor,"token 114");
+		RewriteRuleITokenStream stream_115=new RewriteRuleITokenStream(adaptor,"token 115");
 		RewriteRuleSubtreeStream stream_termExpression=new RewriteRuleSubtreeStream(adaptor,"rule termExpression");
 		try { DebugEnterRule(GrammarFileName, "unaryExpression");
-		DebugLocation(131, 1);
+		DebugLocation(132, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:132:2: ( (opToken= '-' |opToken= 'not' ) term= termExpression -> ^( UNARY[$opToken] $term) | termExpression )
-			int alt33=2;
-			try { DebugEnterDecision(33, false);
-			int LA33_0 = input.LA(1);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:133:2: ( (opToken= '-' |opToken= 'not' ) term= termExpression -> ^( UNARY[$opToken] $term) | termExpression )
+			int alt34=2;
+			try { DebugEnterDecision(34, false);
+			int LA34_0 = input.LA(1);
 
-			if ((LA33_0==65||LA33_0==114))
+			if ((LA34_0==65||LA34_0==115))
 			{
-				alt33 = 1;
+				alt34 = 1;
 			}
-			else if (((LA33_0>=IntegerLiteralExp && LA33_0<=InvalidLiteralExp)||LA33_0==NullLiteralExp||(LA33_0>=RealLiteralExp && LA33_0<=SimpleName)||LA33_0==StringLiteralExp||LA33_0==UnlimitedNaturalLiteralExp||LA33_0==61||(LA33_0>=80 && LA33_0<=94)||(LA33_0>=106 && LA33_0<=107)||(LA33_0>=112 && LA33_0<=113)||LA33_0==120))
+			else if (((LA34_0>=IntegerLiteralExp && LA34_0<=InvalidLiteralExp)||LA34_0==NullLiteralExp||(LA34_0>=RealLiteralExp && LA34_0<=SimpleName)||LA34_0==StringLiteralExp||LA34_0==UnlimitedNaturalLiteralExp||LA34_0==61||(LA34_0>=80 && LA34_0<=94)||(LA34_0>=106 && LA34_0<=107)||(LA34_0>=112 && LA34_0<=113)||LA34_0==121))
 			{
-				alt33 = 2;
+				alt34 = 2;
 			}
 			else
 			{
 				if (state.backtracking>0) {state.failed=true; return retval;}
-				NoViableAltException nvae = new NoViableAltException("", 33, 0, input);
+				NoViableAltException nvae = new NoViableAltException("", 34, 0, input);
 				DebugRecognitionException(nvae);
 				throw nvae;
 			}
-			} finally { DebugExitDecision(33); }
-			switch (alt33)
+			} finally { DebugExitDecision(34); }
+			switch (alt34)
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:132:4: (opToken= '-' |opToken= 'not' ) term= termExpression
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:133:4: (opToken= '-' |opToken= 'not' ) term= termExpression
 				{
-				DebugLocation(132, 4);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:132:4: (opToken= '-' |opToken= 'not' )
-				int alt32=2;
-				try { DebugEnterSubRule(32);
-				try { DebugEnterDecision(32, false);
-				int LA32_0 = input.LA(1);
+				DebugLocation(133, 4);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:133:4: (opToken= '-' |opToken= 'not' )
+				int alt33=2;
+				try { DebugEnterSubRule(33);
+				try { DebugEnterDecision(33, false);
+				int LA33_0 = input.LA(1);
 
-				if ((LA32_0==65))
+				if ((LA33_0==65))
 				{
-					alt32 = 1;
+					alt33 = 1;
 				}
-				else if ((LA32_0==114))
+				else if ((LA33_0==115))
 				{
-					alt32 = 2;
+					alt33 = 2;
 				}
 				else
 				{
 					if (state.backtracking>0) {state.failed=true; return retval;}
-					NoViableAltException nvae = new NoViableAltException("", 32, 0, input);
+					NoViableAltException nvae = new NoViableAltException("", 33, 0, input);
 					DebugRecognitionException(nvae);
 					throw nvae;
 				}
-				} finally { DebugExitDecision(32); }
-				switch (alt32)
+				} finally { DebugExitDecision(33); }
+				switch (alt33)
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:132:5: opToken= '-'
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:133:5: opToken= '-'
 					{
-					DebugLocation(132, 12);
-					opToken=(CommonToken)Match(input,65,Follow._65_in_unaryExpression1034); if (state.failed) return retval; 
+					DebugLocation(133, 12);
+					opToken=(CommonToken)Match(input,65,Follow._65_in_unaryExpression1059); if (state.failed) return retval; 
 					if (state.backtracking == 0) stream_65.Add(opToken);
 
 
@@ -4873,21 +4937,21 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 					break;
 				case 2:
 					DebugEnterAlt(2);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:132:17: opToken= 'not'
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:133:17: opToken= 'not'
 					{
-					DebugLocation(132, 24);
-					opToken=(CommonToken)Match(input,114,Follow._114_in_unaryExpression1038); if (state.failed) return retval; 
-					if (state.backtracking == 0) stream_114.Add(opToken);
+					DebugLocation(133, 24);
+					opToken=(CommonToken)Match(input,115,Follow._115_in_unaryExpression1063); if (state.failed) return retval; 
+					if (state.backtracking == 0) stream_115.Add(opToken);
 
 
 					}
 					break;
 
 				}
-				} finally { DebugExitSubRule(32); }
+				} finally { DebugExitSubRule(33); }
 
-				DebugLocation(132, 36);
-				PushFollow(Follow._termExpression_in_unaryExpression1043);
+				DebugLocation(133, 36);
+				PushFollow(Follow._termExpression_in_unaryExpression1068);
 				term=termExpression();
 				PopFollow();
 				if (state.failed) return retval;
@@ -4908,16 +4972,16 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 				root_0 = (object)adaptor.Nil();
-				// 132:52: -> ^( UNARY[$opToken] $term)
+				// 133:52: -> ^( UNARY[$opToken] $term)
 				{
-					DebugLocation(132, 54);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:132:54: ^( UNARY[$opToken] $term)
+					DebugLocation(133, 54);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:133:54: ^( UNARY[$opToken] $term)
 					{
 					object root_1 = (object)adaptor.Nil();
-					DebugLocation(132, 56);
+					DebugLocation(133, 56);
 					root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(UNARY, opToken), root_1);
 
-					DebugLocation(132, 73);
+					DebugLocation(133, 73);
 					adaptor.AddChild(root_1, stream_term.NextTree());
 
 					adaptor.AddChild(root_0, root_1);
@@ -4933,16 +4997,16 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:133:4: termExpression
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:134:4: termExpression
 				{
 				root_0 = (object)adaptor.Nil();
 
-				DebugLocation(133, 4);
-				PushFollow(Follow._termExpression_in_unaryExpression1057);
-				termExpression61=termExpression();
+				DebugLocation(134, 4);
+				PushFollow(Follow._termExpression_in_unaryExpression1082);
+				termExpression64=termExpression();
 				PopFollow();
 				if (state.failed) return retval;
-				if (state.backtracking == 0) adaptor.AddChild(root_0, termExpression61.Tree);
+				if (state.backtracking == 0) adaptor.AddChild(root_0, termExpression64.Tree);
 
 				}
 				break;
@@ -4968,7 +5032,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			LeaveRule("unaryExpression", 24);
 			LeaveRule_unaryExpression();
 		}
-		DebugLocation(134, 1);
+		DebugLocation(135, 1);
 		} finally { DebugExitRule(GrammarFileName, "unaryExpression"); }
 		return retval;
 
@@ -4988,7 +5052,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 	partial void LeaveRule_termExpression();
 
 	// $ANTLR start "termExpression"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:136:1: termExpression : ( primaryExperession -> primaryExperession ) ( ( (token= '.' |token= '->' ) expr= propertyCall -> ^( $token $termExpression $expr) ) | ( oclMessageExp -> MESSAGE oclMessageExp ) )* ;
+	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:137:1: termExpression : ( primaryExperession -> primaryExperession ) ( ( (token= '.' |token= '->' ) expr= propertyCall -> ^( $token $termExpression $expr) ) | ( oclMessageExp -> MESSAGE oclMessageExp ) )* ;
 	[GrammarRule("termExpression")]
 	private OCLSyntaxParser.termExpression_return termExpression()
 	{
@@ -5002,8 +5066,8 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 
 		CommonToken token = default(CommonToken);
 		OCLSyntaxParser.propertyCall_return expr = default(OCLSyntaxParser.propertyCall_return);
-		OCLSyntaxParser.primaryExperession_return primaryExperession62 = default(OCLSyntaxParser.primaryExperession_return);
-		OCLSyntaxParser.oclMessageExp_return oclMessageExp63 = default(OCLSyntaxParser.oclMessageExp_return);
+		OCLSyntaxParser.primaryExperession_return primaryExperession65 = default(OCLSyntaxParser.primaryExperession_return);
+		OCLSyntaxParser.oclMessageExp_return oclMessageExp66 = default(OCLSyntaxParser.oclMessageExp_return);
 
 		object token_tree = default(object);
 		RewriteRuleITokenStream stream_67=new RewriteRuleITokenStream(adaptor,"token 67");
@@ -5012,24 +5076,24 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 		RewriteRuleSubtreeStream stream_propertyCall=new RewriteRuleSubtreeStream(adaptor,"rule propertyCall");
 		RewriteRuleSubtreeStream stream_oclMessageExp=new RewriteRuleSubtreeStream(adaptor,"rule oclMessageExp");
 		try { DebugEnterRule(GrammarFileName, "termExpression");
-		DebugLocation(136, 1);
+		DebugLocation(137, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:137:2: ( ( primaryExperession -> primaryExperession ) ( ( (token= '.' |token= '->' ) expr= propertyCall -> ^( $token $termExpression $expr) ) | ( oclMessageExp -> MESSAGE oclMessageExp ) )* )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:138:2: ( ( primaryExperession -> primaryExperession ) ( ( (token= '.' |token= '->' ) expr= propertyCall -> ^( $token $termExpression $expr) ) | ( oclMessageExp -> MESSAGE oclMessageExp ) )* )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:137:4: ( primaryExperession -> primaryExperession ) ( ( (token= '.' |token= '->' ) expr= propertyCall -> ^( $token $termExpression $expr) ) | ( oclMessageExp -> MESSAGE oclMessageExp ) )*
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:138:4: ( primaryExperession -> primaryExperession ) ( ( (token= '.' |token= '->' ) expr= propertyCall -> ^( $token $termExpression $expr) ) | ( oclMessageExp -> MESSAGE oclMessageExp ) )*
 			{
-			DebugLocation(137, 4);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:137:4: ( primaryExperession -> primaryExperession )
+			DebugLocation(138, 4);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:138:4: ( primaryExperession -> primaryExperession )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:137:5: primaryExperession
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:138:5: primaryExperession
 			{
-			DebugLocation(137, 5);
-			PushFollow(Follow._primaryExperession_in_termExpression1071);
-			primaryExperession62=primaryExperession();
+			DebugLocation(138, 5);
+			PushFollow(Follow._primaryExperession_in_termExpression1096);
+			primaryExperession65=primaryExperession();
 			PopFollow();
 			if (state.failed) return retval;
-			if (state.backtracking == 0) stream_primaryExperession.Add(primaryExperession62.Tree);
+			if (state.backtracking == 0) stream_primaryExperession.Add(primaryExperession65.Tree);
 
 
 			{
@@ -5045,9 +5109,9 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 			root_0 = (object)adaptor.Nil();
-			// 137:23: -> primaryExperession
+			// 138:23: -> primaryExperession
 			{
-				DebugLocation(137, 25);
+				DebugLocation(138, 25);
 				adaptor.AddChild(root_0, stream_primaryExperession.NextTree());
 
 			}
@@ -5058,81 +5122,81 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 
 			}
 
-			DebugLocation(137, 45);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:137:45: ( ( (token= '.' |token= '->' ) expr= propertyCall -> ^( $token $termExpression $expr) ) | ( oclMessageExp -> MESSAGE oclMessageExp ) )*
-			try { DebugEnterSubRule(35);
+			DebugLocation(138, 45);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:138:45: ( ( (token= '.' |token= '->' ) expr= propertyCall -> ^( $token $termExpression $expr) ) | ( oclMessageExp -> MESSAGE oclMessageExp ) )*
+			try { DebugEnterSubRule(36);
 			while (true)
 			{
-				int alt35=3;
-				try { DebugEnterDecision(35, false);
+				int alt36=3;
+				try { DebugEnterDecision(36, false);
 				switch (input.LA(1))
 				{
 				case 67:
 					{
-					alt35 = 1;
+					alt36 = 1;
 					}
 					break;
 				case 66:
 					{
-					alt35 = 1;
+					alt36 = 1;
 					}
 					break;
 				case 98:
 					{
-					alt35 = 2;
+					alt36 = 2;
 					}
 					break;
 				case 97:
 					{
-					alt35 = 2;
+					alt36 = 2;
 					}
 					break;
 
 				}
 
-				} finally { DebugExitDecision(35); }
-				switch ( alt35 )
+				} finally { DebugExitDecision(36); }
+				switch ( alt36 )
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:137:47: ( (token= '.' |token= '->' ) expr= propertyCall -> ^( $token $termExpression $expr) )
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:138:47: ( (token= '.' |token= '->' ) expr= propertyCall -> ^( $token $termExpression $expr) )
 					{
-					DebugLocation(137, 47);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:137:47: ( (token= '.' |token= '->' ) expr= propertyCall -> ^( $token $termExpression $expr) )
+					DebugLocation(138, 47);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:138:47: ( (token= '.' |token= '->' ) expr= propertyCall -> ^( $token $termExpression $expr) )
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:137:48: (token= '.' |token= '->' ) expr= propertyCall
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:138:48: (token= '.' |token= '->' ) expr= propertyCall
 					{
-					DebugLocation(137, 48);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:137:48: (token= '.' |token= '->' )
-					int alt34=2;
-					try { DebugEnterSubRule(34);
-					try { DebugEnterDecision(34, false);
-					int LA34_0 = input.LA(1);
+					DebugLocation(138, 48);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:138:48: (token= '.' |token= '->' )
+					int alt35=2;
+					try { DebugEnterSubRule(35);
+					try { DebugEnterDecision(35, false);
+					int LA35_0 = input.LA(1);
 
-					if ((LA34_0==67))
+					if ((LA35_0==67))
 					{
-						alt34 = 1;
+						alt35 = 1;
 					}
-					else if ((LA34_0==66))
+					else if ((LA35_0==66))
 					{
-						alt34 = 2;
+						alt35 = 2;
 					}
 					else
 					{
 						if (state.backtracking>0) {state.failed=true; return retval;}
-						NoViableAltException nvae = new NoViableAltException("", 34, 0, input);
+						NoViableAltException nvae = new NoViableAltException("", 35, 0, input);
 						DebugRecognitionException(nvae);
 						throw nvae;
 					}
-					} finally { DebugExitDecision(34); }
-					switch (alt34)
+					} finally { DebugExitDecision(35); }
+					switch (alt35)
 					{
 					case 1:
 						DebugEnterAlt(1);
-						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:137:49: token= '.'
+						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:138:49: token= '.'
 						{
-						DebugLocation(137, 54);
-						token=(CommonToken)Match(input,67,Follow._67_in_termExpression1082); if (state.failed) return retval; 
+						DebugLocation(138, 54);
+						token=(CommonToken)Match(input,67,Follow._67_in_termExpression1107); if (state.failed) return retval; 
 						if (state.backtracking == 0) stream_67.Add(token);
 
 
@@ -5140,10 +5204,10 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 						break;
 					case 2:
 						DebugEnterAlt(2);
-						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:137:59: token= '->'
+						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:138:59: token= '->'
 						{
-						DebugLocation(137, 64);
-						token=(CommonToken)Match(input,66,Follow._66_in_termExpression1086); if (state.failed) return retval; 
+						DebugLocation(138, 64);
+						token=(CommonToken)Match(input,66,Follow._66_in_termExpression1111); if (state.failed) return retval; 
 						if (state.backtracking == 0) stream_66.Add(token);
 
 
@@ -5151,10 +5215,10 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 						break;
 
 					}
-					} finally { DebugExitSubRule(34); }
+					} finally { DebugExitSubRule(35); }
 
-					DebugLocation(137, 75);
-					PushFollow(Follow._propertyCall_in_termExpression1091);
+					DebugLocation(138, 75);
+					PushFollow(Follow._propertyCall_in_termExpression1116);
 					expr=propertyCall();
 					PopFollow();
 					if (state.failed) return retval;
@@ -5176,18 +5240,18 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 					RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 					root_0 = (object)adaptor.Nil();
-					// 137:89: -> ^( $token $termExpression $expr)
+					// 138:89: -> ^( $token $termExpression $expr)
 					{
-						DebugLocation(137, 92);
-						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:137:92: ^( $token $termExpression $expr)
+						DebugLocation(138, 92);
+						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:138:92: ^( $token $termExpression $expr)
 						{
 						object root_1 = (object)adaptor.Nil();
-						DebugLocation(137, 95);
+						DebugLocation(138, 95);
 						root_1 = (object)adaptor.BecomeRoot(stream_token.NextNode(), root_1);
 
-						DebugLocation(137, 102);
+						DebugLocation(138, 102);
 						adaptor.AddChild(root_1, stream_retval.NextTree());
-						DebugLocation(137, 118);
+						DebugLocation(138, 118);
 						adaptor.AddChild(root_1, stream_expr.NextTree());
 
 						adaptor.AddChild(root_0, root_1);
@@ -5206,19 +5270,19 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 					break;
 				case 2:
 					DebugEnterAlt(2);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:138:6: ( oclMessageExp -> MESSAGE oclMessageExp )
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:139:6: ( oclMessageExp -> MESSAGE oclMessageExp )
 					{
-					DebugLocation(138, 6);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:138:6: ( oclMessageExp -> MESSAGE oclMessageExp )
+					DebugLocation(139, 6);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:139:6: ( oclMessageExp -> MESSAGE oclMessageExp )
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:138:7: oclMessageExp
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:139:7: oclMessageExp
 					{
-					DebugLocation(138, 7);
-					PushFollow(Follow._oclMessageExp_in_termExpression1115);
-					oclMessageExp63=oclMessageExp();
+					DebugLocation(139, 7);
+					PushFollow(Follow._oclMessageExp_in_termExpression1140);
+					oclMessageExp66=oclMessageExp();
 					PopFollow();
 					if (state.failed) return retval;
-					if (state.backtracking == 0) stream_oclMessageExp.Add(oclMessageExp63.Tree);
+					if (state.backtracking == 0) stream_oclMessageExp.Add(oclMessageExp66.Tree);
 
 
 					{
@@ -5234,11 +5298,11 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 					RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 					root_0 = (object)adaptor.Nil();
-					// 138:21: -> MESSAGE oclMessageExp
+					// 139:21: -> MESSAGE oclMessageExp
 					{
-						DebugLocation(138, 24);
+						DebugLocation(139, 24);
 						adaptor.AddChild(root_0, (object)adaptor.Create(MESSAGE, "MESSAGE"));
-						DebugLocation(138, 32);
+						DebugLocation(139, 32);
 						adaptor.AddChild(root_0, stream_oclMessageExp.NextTree());
 
 					}
@@ -5254,14 +5318,14 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 					break;
 
 				default:
-					goto loop35;
+					goto loop36;
 				}
 			}
 
-			loop35:
+			loop36:
 				;
 
-			} finally { DebugExitSubRule(35); }
+			} finally { DebugExitSubRule(36); }
 
 
 			}
@@ -5286,7 +5350,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			LeaveRule("termExpression", 25);
 			LeaveRule_termExpression();
 		}
-		DebugLocation(141, 1);
+		DebugLocation(142, 1);
 		} finally { DebugExitRule(GrammarFileName, "termExpression"); }
 		return retval;
 
@@ -5306,7 +5370,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 	partial void LeaveRule_primaryExperession();
 
 	// $ANTLR start "primaryExperession"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:143:1: primaryExperession : ( collectionLiteralExpAndType | tupleLiteralExp | primitiveLiteralExp -> ^( PRIMITIVELITERAL primitiveLiteralExp ) | enumAndType -> ^( TYPE enumAndType ) | propertyCall | '(' oclExpression ')' | ifExp | letExp );
+	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:144:1: primaryExperession : ( collectionLiteralExpAndType | tupleLiteralExp | primitiveLiteralExp -> ^( PRIMITIVELITERAL primitiveLiteralExp ) | enumAndType -> ^( TYPE enumAndType ) | propertyCall | '(' oclExpression ')' | ifExp | letExp );
 	[GrammarRule("primaryExperession")]
 	private OCLSyntaxParser.primaryExperession_return primaryExperession()
 	{
@@ -5318,80 +5382,80 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 
 		object root_0 = default(object);
 
-		CommonToken char_literal69 = default(CommonToken);
-		CommonToken char_literal71 = default(CommonToken);
-		OCLSyntaxParser.collectionLiteralExpAndType_return collectionLiteralExpAndType64 = default(OCLSyntaxParser.collectionLiteralExpAndType_return);
-		OCLSyntaxParser.tupleLiteralExp_return tupleLiteralExp65 = default(OCLSyntaxParser.tupleLiteralExp_return);
-		OCLSyntaxParser.primitiveLiteralExp_return primitiveLiteralExp66 = default(OCLSyntaxParser.primitiveLiteralExp_return);
-		OCLSyntaxParser.enumAndType_return enumAndType67 = default(OCLSyntaxParser.enumAndType_return);
-		OCLSyntaxParser.propertyCall_return propertyCall68 = default(OCLSyntaxParser.propertyCall_return);
-		OCLSyntaxParser.oclExpression_return oclExpression70 = default(OCLSyntaxParser.oclExpression_return);
-		OCLSyntaxParser.ifExp_return ifExp72 = default(OCLSyntaxParser.ifExp_return);
-		OCLSyntaxParser.letExp_return letExp73 = default(OCLSyntaxParser.letExp_return);
+		CommonToken char_literal72 = default(CommonToken);
+		CommonToken char_literal74 = default(CommonToken);
+		OCLSyntaxParser.collectionLiteralExpAndType_return collectionLiteralExpAndType67 = default(OCLSyntaxParser.collectionLiteralExpAndType_return);
+		OCLSyntaxParser.tupleLiteralExp_return tupleLiteralExp68 = default(OCLSyntaxParser.tupleLiteralExp_return);
+		OCLSyntaxParser.primitiveLiteralExp_return primitiveLiteralExp69 = default(OCLSyntaxParser.primitiveLiteralExp_return);
+		OCLSyntaxParser.enumAndType_return enumAndType70 = default(OCLSyntaxParser.enumAndType_return);
+		OCLSyntaxParser.propertyCall_return propertyCall71 = default(OCLSyntaxParser.propertyCall_return);
+		OCLSyntaxParser.oclExpression_return oclExpression73 = default(OCLSyntaxParser.oclExpression_return);
+		OCLSyntaxParser.ifExp_return ifExp75 = default(OCLSyntaxParser.ifExp_return);
+		OCLSyntaxParser.letExp_return letExp76 = default(OCLSyntaxParser.letExp_return);
 
-		object char_literal69_tree = default(object);
-		object char_literal71_tree = default(object);
+		object char_literal72_tree = default(object);
+		object char_literal74_tree = default(object);
 		RewriteRuleSubtreeStream stream_primitiveLiteralExp=new RewriteRuleSubtreeStream(adaptor,"rule primitiveLiteralExp");
 		RewriteRuleSubtreeStream stream_enumAndType=new RewriteRuleSubtreeStream(adaptor,"rule enumAndType");
 		try { DebugEnterRule(GrammarFileName, "primaryExperession");
-		DebugLocation(143, 1);
+		DebugLocation(144, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:144:2: ( collectionLiteralExpAndType | tupleLiteralExp | primitiveLiteralExp -> ^( PRIMITIVELITERAL primitiveLiteralExp ) | enumAndType -> ^( TYPE enumAndType ) | propertyCall | '(' oclExpression ')' | ifExp | letExp )
-			int alt36=8;
-			try { DebugEnterDecision(36, false);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:145:2: ( collectionLiteralExpAndType | tupleLiteralExp | primitiveLiteralExp -> ^( PRIMITIVELITERAL primitiveLiteralExp ) | enumAndType -> ^( TYPE enumAndType ) | propertyCall | '(' oclExpression ')' | ifExp | letExp )
+			int alt37=8;
+			try { DebugEnterDecision(37, false);
 			try
 			{
-				alt36 = dfa36.Predict(input);
+				alt37 = dfa37.Predict(input);
 			}
 			catch (NoViableAltException nvae)
 			{
 				DebugRecognitionException(nvae);
 				throw;
 			}
-			} finally { DebugExitDecision(36); }
-			switch (alt36)
+			} finally { DebugExitDecision(37); }
+			switch (alt37)
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:148:8: collectionLiteralExpAndType
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:149:8: collectionLiteralExpAndType
 				{
 				root_0 = (object)adaptor.Nil();
 
-				DebugLocation(148, 8);
-				PushFollow(Follow._collectionLiteralExpAndType_in_primaryExperession1157);
-				collectionLiteralExpAndType64=collectionLiteralExpAndType();
+				DebugLocation(149, 8);
+				PushFollow(Follow._collectionLiteralExpAndType_in_primaryExperession1182);
+				collectionLiteralExpAndType67=collectionLiteralExpAndType();
 				PopFollow();
 				if (state.failed) return retval;
-				if (state.backtracking == 0) adaptor.AddChild(root_0, collectionLiteralExpAndType64.Tree);
+				if (state.backtracking == 0) adaptor.AddChild(root_0, collectionLiteralExpAndType67.Tree);
 
 				}
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:150:4: tupleLiteralExp
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:151:4: tupleLiteralExp
 				{
 				root_0 = (object)adaptor.Nil();
 
-				DebugLocation(150, 4);
-				PushFollow(Follow._tupleLiteralExp_in_primaryExperession1165);
-				tupleLiteralExp65=tupleLiteralExp();
+				DebugLocation(151, 4);
+				PushFollow(Follow._tupleLiteralExp_in_primaryExperession1190);
+				tupleLiteralExp68=tupleLiteralExp();
 				PopFollow();
 				if (state.failed) return retval;
-				if (state.backtracking == 0) adaptor.AddChild(root_0, tupleLiteralExp65.Tree);
+				if (state.backtracking == 0) adaptor.AddChild(root_0, tupleLiteralExp68.Tree);
 
 				}
 				break;
 			case 3:
 				DebugEnterAlt(3);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:152:4: primitiveLiteralExp
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:153:4: primitiveLiteralExp
 				{
-				DebugLocation(152, 4);
-				PushFollow(Follow._primitiveLiteralExp_in_primaryExperession1175);
-				primitiveLiteralExp66=primitiveLiteralExp();
+				DebugLocation(153, 4);
+				PushFollow(Follow._primitiveLiteralExp_in_primaryExperession1200);
+				primitiveLiteralExp69=primitiveLiteralExp();
 				PopFollow();
 				if (state.failed) return retval;
-				if (state.backtracking == 0) stream_primitiveLiteralExp.Add(primitiveLiteralExp66.Tree);
+				if (state.backtracking == 0) stream_primitiveLiteralExp.Add(primitiveLiteralExp69.Tree);
 
 
 				{
@@ -5407,16 +5471,16 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 				root_0 = (object)adaptor.Nil();
-				// 153:4: -> ^( PRIMITIVELITERAL primitiveLiteralExp )
+				// 154:4: -> ^( PRIMITIVELITERAL primitiveLiteralExp )
 				{
-					DebugLocation(153, 6);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:153:6: ^( PRIMITIVELITERAL primitiveLiteralExp )
+					DebugLocation(154, 6);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:154:6: ^( PRIMITIVELITERAL primitiveLiteralExp )
 					{
 					object root_1 = (object)adaptor.Nil();
-					DebugLocation(153, 8);
+					DebugLocation(154, 8);
 					root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(PRIMITIVELITERAL, "PRIMITIVELITERAL"), root_1);
 
-					DebugLocation(153, 25);
+					DebugLocation(154, 25);
 					adaptor.AddChild(root_1, stream_primitiveLiteralExp.NextTree());
 
 					adaptor.AddChild(root_0, root_1);
@@ -5432,14 +5496,14 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				break;
 			case 4:
 				DebugEnterAlt(4);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:155:4: enumAndType
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:156:4: enumAndType
 				{
-				DebugLocation(155, 4);
-				PushFollow(Follow._enumAndType_in_primaryExperession1193);
-				enumAndType67=enumAndType();
+				DebugLocation(156, 4);
+				PushFollow(Follow._enumAndType_in_primaryExperession1218);
+				enumAndType70=enumAndType();
 				PopFollow();
 				if (state.failed) return retval;
-				if (state.backtracking == 0) stream_enumAndType.Add(enumAndType67.Tree);
+				if (state.backtracking == 0) stream_enumAndType.Add(enumAndType70.Tree);
 
 
 				{
@@ -5455,16 +5519,16 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 				root_0 = (object)adaptor.Nil();
-				// 156:4: -> ^( TYPE enumAndType )
+				// 157:4: -> ^( TYPE enumAndType )
 				{
-					DebugLocation(156, 6);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:156:6: ^( TYPE enumAndType )
+					DebugLocation(157, 6);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:157:6: ^( TYPE enumAndType )
 					{
 					object root_1 = (object)adaptor.Nil();
-					DebugLocation(156, 8);
+					DebugLocation(157, 8);
 					root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(TYPE, "TYPE"), root_1);
 
-					DebugLocation(156, 13);
+					DebugLocation(157, 13);
 					adaptor.AddChild(root_1, stream_enumAndType.NextTree());
 
 					adaptor.AddChild(root_0, root_1);
@@ -5480,65 +5544,65 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				break;
 			case 5:
 				DebugEnterAlt(5);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:157:4: propertyCall
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:158:4: propertyCall
 				{
 				root_0 = (object)adaptor.Nil();
 
-				DebugLocation(157, 4);
-				PushFollow(Follow._propertyCall_in_primaryExperession1209);
-				propertyCall68=propertyCall();
+				DebugLocation(158, 4);
+				PushFollow(Follow._propertyCall_in_primaryExperession1234);
+				propertyCall71=propertyCall();
 				PopFollow();
 				if (state.failed) return retval;
-				if (state.backtracking == 0) adaptor.AddChild(root_0, propertyCall68.Tree);
+				if (state.backtracking == 0) adaptor.AddChild(root_0, propertyCall71.Tree);
 
 				}
 				break;
 			case 6:
 				DebugEnterAlt(6);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:158:4: '(' oclExpression ')'
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:159:4: '(' oclExpression ')'
 				{
 				root_0 = (object)adaptor.Nil();
 
-				DebugLocation(158, 7);
-				char_literal69=(CommonToken)Match(input,61,Follow._61_in_primaryExperession1214); if (state.failed) return retval;
-				DebugLocation(158, 8);
-				PushFollow(Follow._oclExpression_in_primaryExperession1216);
-				oclExpression70=oclExpression();
+				DebugLocation(159, 7);
+				char_literal72=(CommonToken)Match(input,61,Follow._61_in_primaryExperession1239); if (state.failed) return retval;
+				DebugLocation(159, 8);
+				PushFollow(Follow._oclExpression_in_primaryExperession1241);
+				oclExpression73=oclExpression();
 				PopFollow();
 				if (state.failed) return retval;
-				if (state.backtracking == 0) adaptor.AddChild(root_0, oclExpression70.Tree);
-				DebugLocation(158, 24);
-				char_literal71=(CommonToken)Match(input,62,Follow._62_in_primaryExperession1217); if (state.failed) return retval;
+				if (state.backtracking == 0) adaptor.AddChild(root_0, oclExpression73.Tree);
+				DebugLocation(159, 24);
+				char_literal74=(CommonToken)Match(input,62,Follow._62_in_primaryExperession1242); if (state.failed) return retval;
 
 				}
 				break;
 			case 7:
 				DebugEnterAlt(7);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:159:4: ifExp
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:160:4: ifExp
 				{
 				root_0 = (object)adaptor.Nil();
 
-				DebugLocation(159, 4);
-				PushFollow(Follow._ifExp_in_primaryExperession1223);
-				ifExp72=ifExp();
+				DebugLocation(160, 4);
+				PushFollow(Follow._ifExp_in_primaryExperession1248);
+				ifExp75=ifExp();
 				PopFollow();
 				if (state.failed) return retval;
-				if (state.backtracking == 0) adaptor.AddChild(root_0, ifExp72.Tree);
+				if (state.backtracking == 0) adaptor.AddChild(root_0, ifExp75.Tree);
 
 				}
 				break;
 			case 8:
 				DebugEnterAlt(8);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:160:4: letExp
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:161:4: letExp
 				{
 				root_0 = (object)adaptor.Nil();
 
-				DebugLocation(160, 4);
-				PushFollow(Follow._letExp_in_primaryExperession1228);
-				letExp73=letExp();
+				DebugLocation(161, 4);
+				PushFollow(Follow._letExp_in_primaryExperession1253);
+				letExp76=letExp();
 				PopFollow();
 				if (state.failed) return retval;
-				if (state.backtracking == 0) adaptor.AddChild(root_0, letExp73.Tree);
+				if (state.backtracking == 0) adaptor.AddChild(root_0, letExp76.Tree);
 
 				}
 				break;
@@ -5564,7 +5628,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			LeaveRule("primaryExperession", 26);
 			LeaveRule_primaryExperession();
 		}
-		DebugLocation(161, 1);
+		DebugLocation(162, 1);
 		} finally { DebugExitRule(GrammarFileName, "primaryExperession"); }
 		return retval;
 
@@ -5584,7 +5648,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 	partial void LeaveRule_propertyCall();
 
 	// $ANTLR start "propertyCall"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:162:1: propertyCall : ( pathName ( '[' arguments ']' )? ( isMarkedPre )? ( '(' propertyCallParametrs ')' )? -> ^( CALL pathName ( propertyCallParametrs )? ( ^( INDEX arguments ) )? ( isMarkedPre )? ) |it= 'iterate' '(' ( ( ( SimpleName ( ( ':' ) type )? ';' )=>itName= SimpleName ( ( ':' ) itType= type )? ';' accName= SimpleName ( ':' accType= type )? '=' accExpr= oclExpression ) | (accName= SimpleName ( ':' accType= type )? '=' accExpr= oclExpression ) ) '|' body= oclExpression ')' -> ^( ITERATE[$it] ( ^( DECL $itName ( $itType)? ) )? ^( ACC $accName ( $accType)? $accExpr) $body) );
+	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:163:1: propertyCall : ( pathName ( '[' arguments ']' )? ( isMarkedPre )? ( '(' propertyCallParametrs ')' )? -> ^( CALL pathName ( propertyCallParametrs )? ( ^( INDEX arguments ) )? ( isMarkedPre )? ) |it= 'iterate' '(' ( ( ( SimpleName ( ( ':' ) type )? ';' )=>itName= SimpleName ( ( ':' ) itType= type )? ';' accName= SimpleName ( ':' accType= type )? '=' accExpr= oclExpression ) | (accName= SimpleName ( ':' accType= type )? '=' accExpr= oclExpression ) ) '|' body= oclExpression ')' -> ^( ITERATE[$it] ( ^( DECL $itName ( $itType)? ) )? ^( ACC $accName ( $accType)? $accExpr) $body) );
 	[GrammarRule("propertyCall")]
 	private OCLSyntaxParser.propertyCall_return propertyCall()
 	{
@@ -5599,12 +5663,9 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 		CommonToken it = default(CommonToken);
 		CommonToken itName = default(CommonToken);
 		CommonToken accName = default(CommonToken);
-		CommonToken char_literal75 = default(CommonToken);
-		CommonToken char_literal77 = default(CommonToken);
-		CommonToken char_literal79 = default(CommonToken);
-		CommonToken char_literal81 = default(CommonToken);
+		CommonToken char_literal78 = default(CommonToken);
+		CommonToken char_literal80 = default(CommonToken);
 		CommonToken char_literal82 = default(CommonToken);
-		CommonToken char_literal83 = default(CommonToken);
 		CommonToken char_literal84 = default(CommonToken);
 		CommonToken char_literal85 = default(CommonToken);
 		CommonToken char_literal86 = default(CommonToken);
@@ -5612,24 +5673,24 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 		CommonToken char_literal88 = default(CommonToken);
 		CommonToken char_literal89 = default(CommonToken);
 		CommonToken char_literal90 = default(CommonToken);
+		CommonToken char_literal91 = default(CommonToken);
+		CommonToken char_literal92 = default(CommonToken);
+		CommonToken char_literal93 = default(CommonToken);
 		OCLSyntaxParser.type_return itType = default(OCLSyntaxParser.type_return);
 		OCLSyntaxParser.type_return accType = default(OCLSyntaxParser.type_return);
 		OCLSyntaxParser.oclExpression_return accExpr = default(OCLSyntaxParser.oclExpression_return);
 		OCLSyntaxParser.oclExpression_return body = default(OCLSyntaxParser.oclExpression_return);
-		OCLSyntaxParser.pathName_return pathName74 = default(OCLSyntaxParser.pathName_return);
-		OCLSyntaxParser.arguments_return arguments76 = default(OCLSyntaxParser.arguments_return);
-		OCLSyntaxParser.isMarkedPre_return isMarkedPre78 = default(OCLSyntaxParser.isMarkedPre_return);
-		OCLSyntaxParser.propertyCallParametrs_return propertyCallParametrs80 = default(OCLSyntaxParser.propertyCallParametrs_return);
+		OCLSyntaxParser.pathName_return pathName77 = default(OCLSyntaxParser.pathName_return);
+		OCLSyntaxParser.arguments_return arguments79 = default(OCLSyntaxParser.arguments_return);
+		OCLSyntaxParser.isMarkedPre_return isMarkedPre81 = default(OCLSyntaxParser.isMarkedPre_return);
+		OCLSyntaxParser.propertyCallParametrs_return propertyCallParametrs83 = default(OCLSyntaxParser.propertyCallParametrs_return);
 
 		object it_tree = default(object);
 		object itName_tree = default(object);
 		object accName_tree = default(object);
-		object char_literal75_tree = default(object);
-		object char_literal77_tree = default(object);
-		object char_literal79_tree = default(object);
-		object char_literal81_tree = default(object);
+		object char_literal78_tree = default(object);
+		object char_literal80_tree = default(object);
 		object char_literal82_tree = default(object);
-		object char_literal83_tree = default(object);
 		object char_literal84_tree = default(object);
 		object char_literal85_tree = default(object);
 		object char_literal86_tree = default(object);
@@ -5637,6 +5698,9 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 		object char_literal88_tree = default(object);
 		object char_literal89_tree = default(object);
 		object char_literal90_tree = default(object);
+		object char_literal91_tree = default(object);
+		object char_literal92_tree = default(object);
+		object char_literal93_tree = default(object);
 		RewriteRuleITokenStream stream_95=new RewriteRuleITokenStream(adaptor,"token 95");
 		RewriteRuleITokenStream stream_96=new RewriteRuleITokenStream(adaptor,"token 96");
 		RewriteRuleITokenStream stream_61=new RewriteRuleITokenStream(adaptor,"token 61");
@@ -5646,7 +5710,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 		RewriteRuleITokenStream stream_69=new RewriteRuleITokenStream(adaptor,"token 69");
 		RewriteRuleITokenStream stream_71=new RewriteRuleITokenStream(adaptor,"token 71");
 		RewriteRuleITokenStream stream_75=new RewriteRuleITokenStream(adaptor,"token 75");
-		RewriteRuleITokenStream stream_123=new RewriteRuleITokenStream(adaptor,"token 123");
+		RewriteRuleITokenStream stream_124=new RewriteRuleITokenStream(adaptor,"token 124");
 		RewriteRuleSubtreeStream stream_pathName=new RewriteRuleSubtreeStream(adaptor,"rule pathName");
 		RewriteRuleSubtreeStream stream_arguments=new RewriteRuleSubtreeStream(adaptor,"rule arguments");
 		RewriteRuleSubtreeStream stream_isMarkedPre=new RewriteRuleSubtreeStream(adaptor,"rule isMarkedPre");
@@ -5654,89 +5718,50 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 		RewriteRuleSubtreeStream stream_type=new RewriteRuleSubtreeStream(adaptor,"rule type");
 		RewriteRuleSubtreeStream stream_oclExpression=new RewriteRuleSubtreeStream(adaptor,"rule oclExpression");
 		try { DebugEnterRule(GrammarFileName, "propertyCall");
-		DebugLocation(162, 1);
+		DebugLocation(163, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:163:2: ( pathName ( '[' arguments ']' )? ( isMarkedPre )? ( '(' propertyCallParametrs ')' )? -> ^( CALL pathName ( propertyCallParametrs )? ( ^( INDEX arguments ) )? ( isMarkedPre )? ) |it= 'iterate' '(' ( ( ( SimpleName ( ( ':' ) type )? ';' )=>itName= SimpleName ( ( ':' ) itType= type )? ';' accName= SimpleName ( ':' accType= type )? '=' accExpr= oclExpression ) | (accName= SimpleName ( ':' accType= type )? '=' accExpr= oclExpression ) ) '|' body= oclExpression ')' -> ^( ITERATE[$it] ( ^( DECL $itName ( $itType)? ) )? ^( ACC $accName ( $accType)? $accExpr) $body) )
-			int alt44=2;
-			try { DebugEnterDecision(44, false);
-			int LA44_0 = input.LA(1);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:164:2: ( pathName ( '[' arguments ']' )? ( isMarkedPre )? ( '(' propertyCallParametrs ')' )? -> ^( CALL pathName ( propertyCallParametrs )? ( ^( INDEX arguments ) )? ( isMarkedPre )? ) |it= 'iterate' '(' ( ( ( SimpleName ( ( ':' ) type )? ';' )=>itName= SimpleName ( ( ':' ) itType= type )? ';' accName= SimpleName ( ':' accType= type )? '=' accExpr= oclExpression ) | (accName= SimpleName ( ':' accType= type )? '=' accExpr= oclExpression ) ) '|' body= oclExpression ')' -> ^( ITERATE[$it] ( ^( DECL $itName ( $itType)? ) )? ^( ACC $accName ( $accType)? $accExpr) $body) )
+			int alt45=2;
+			try { DebugEnterDecision(45, false);
+			int LA45_0 = input.LA(1);
 
-			if ((LA44_0==SimpleName))
+			if ((LA45_0==SimpleName))
 			{
-				alt44 = 1;
+				alt45 = 1;
 			}
-			else if ((LA44_0==112))
+			else if ((LA45_0==112))
 			{
-				alt44 = 2;
+				alt45 = 2;
 			}
 			else
 			{
 				if (state.backtracking>0) {state.failed=true; return retval;}
-				NoViableAltException nvae = new NoViableAltException("", 44, 0, input);
+				NoViableAltException nvae = new NoViableAltException("", 45, 0, input);
 				DebugRecognitionException(nvae);
 				throw nvae;
 			}
-			} finally { DebugExitDecision(44); }
-			switch (alt44)
+			} finally { DebugExitDecision(45); }
+			switch (alt45)
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:163:4: pathName ( '[' arguments ']' )? ( isMarkedPre )? ( '(' propertyCallParametrs ')' )?
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:164:4: pathName ( '[' arguments ']' )? ( isMarkedPre )? ( '(' propertyCallParametrs ')' )?
 				{
-				DebugLocation(163, 4);
-				PushFollow(Follow._pathName_in_propertyCall1238);
-				pathName74=pathName();
+				DebugLocation(164, 4);
+				PushFollow(Follow._pathName_in_propertyCall1263);
+				pathName77=pathName();
 				PopFollow();
 				if (state.failed) return retval;
-				if (state.backtracking == 0) stream_pathName.Add(pathName74.Tree);
-				DebugLocation(163, 13);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:163:13: ( '[' arguments ']' )?
-				int alt37=2;
-				try { DebugEnterSubRule(37);
-				try { DebugEnterDecision(37, false);
-				int LA37_0 = input.LA(1);
-
-				if ((LA37_0==95))
-				{
-					alt37 = 1;
-				}
-				} finally { DebugExitDecision(37); }
-				switch (alt37)
-				{
-				case 1:
-					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:163:14: '[' arguments ']'
-					{
-					DebugLocation(163, 14);
-					char_literal75=(CommonToken)Match(input,95,Follow._95_in_propertyCall1241); if (state.failed) return retval; 
-					if (state.backtracking == 0) stream_95.Add(char_literal75);
-
-					DebugLocation(163, 17);
-					PushFollow(Follow._arguments_in_propertyCall1242);
-					arguments76=arguments();
-					PopFollow();
-					if (state.failed) return retval;
-					if (state.backtracking == 0) stream_arguments.Add(arguments76.Tree);
-					DebugLocation(163, 26);
-					char_literal77=(CommonToken)Match(input,96,Follow._96_in_propertyCall1243); if (state.failed) return retval; 
-					if (state.backtracking == 0) stream_96.Add(char_literal77);
-
-
-					}
-					break;
-
-				}
-				} finally { DebugExitSubRule(37); }
-
-				DebugLocation(163, 32);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:163:32: ( isMarkedPre )?
+				if (state.backtracking == 0) stream_pathName.Add(pathName77.Tree);
+				DebugLocation(164, 13);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:164:13: ( '[' arguments ']' )?
 				int alt38=2;
 				try { DebugEnterSubRule(38);
 				try { DebugEnterDecision(38, false);
 				int LA38_0 = input.LA(1);
 
-				if ((LA38_0==79))
+				if ((LA38_0==95))
 				{
 					alt38 = 1;
 				}
@@ -5745,14 +5770,22 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:163:32: isMarkedPre
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:164:14: '[' arguments ']'
 					{
-					DebugLocation(163, 32);
-					PushFollow(Follow._isMarkedPre_in_propertyCall1247);
-					isMarkedPre78=isMarkedPre();
+					DebugLocation(164, 14);
+					char_literal78=(CommonToken)Match(input,95,Follow._95_in_propertyCall1266); if (state.failed) return retval; 
+					if (state.backtracking == 0) stream_95.Add(char_literal78);
+
+					DebugLocation(164, 17);
+					PushFollow(Follow._arguments_in_propertyCall1267);
+					arguments79=arguments();
 					PopFollow();
 					if (state.failed) return retval;
-					if (state.backtracking == 0) stream_isMarkedPre.Add(isMarkedPre78.Tree);
+					if (state.backtracking == 0) stream_arguments.Add(arguments79.Tree);
+					DebugLocation(164, 26);
+					char_literal80=(CommonToken)Match(input,96,Follow._96_in_propertyCall1268); if (state.failed) return retval; 
+					if (state.backtracking == 0) stream_96.Add(char_literal80);
+
 
 					}
 					break;
@@ -5760,14 +5793,14 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				}
 				} finally { DebugExitSubRule(38); }
 
-				DebugLocation(163, 45);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:163:45: ( '(' propertyCallParametrs ')' )?
+				DebugLocation(164, 32);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:164:32: ( isMarkedPre )?
 				int alt39=2;
 				try { DebugEnterSubRule(39);
 				try { DebugEnterDecision(39, false);
 				int LA39_0 = input.LA(1);
 
-				if ((LA39_0==61))
+				if ((LA39_0==79))
 				{
 					alt39 = 1;
 				}
@@ -5776,28 +5809,59 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:163:46: '(' propertyCallParametrs ')'
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:164:32: isMarkedPre
 					{
-					DebugLocation(163, 46);
-					char_literal79=(CommonToken)Match(input,61,Follow._61_in_propertyCall1251); if (state.failed) return retval; 
-					if (state.backtracking == 0) stream_61.Add(char_literal79);
-
-					DebugLocation(163, 49);
-					PushFollow(Follow._propertyCallParametrs_in_propertyCall1252);
-					propertyCallParametrs80=propertyCallParametrs();
+					DebugLocation(164, 32);
+					PushFollow(Follow._isMarkedPre_in_propertyCall1272);
+					isMarkedPre81=isMarkedPre();
 					PopFollow();
 					if (state.failed) return retval;
-					if (state.backtracking == 0) stream_propertyCallParametrs.Add(propertyCallParametrs80.Tree);
-					DebugLocation(163, 70);
-					char_literal81=(CommonToken)Match(input,62,Follow._62_in_propertyCall1253); if (state.failed) return retval; 
-					if (state.backtracking == 0) stream_62.Add(char_literal81);
-
+					if (state.backtracking == 0) stream_isMarkedPre.Add(isMarkedPre81.Tree);
 
 					}
 					break;
 
 				}
 				} finally { DebugExitSubRule(39); }
+
+				DebugLocation(164, 45);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:164:45: ( '(' propertyCallParametrs ')' )?
+				int alt40=2;
+				try { DebugEnterSubRule(40);
+				try { DebugEnterDecision(40, false);
+				int LA40_0 = input.LA(1);
+
+				if ((LA40_0==61))
+				{
+					alt40 = 1;
+				}
+				} finally { DebugExitDecision(40); }
+				switch (alt40)
+				{
+				case 1:
+					DebugEnterAlt(1);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:164:46: '(' propertyCallParametrs ')'
+					{
+					DebugLocation(164, 46);
+					char_literal82=(CommonToken)Match(input,61,Follow._61_in_propertyCall1276); if (state.failed) return retval; 
+					if (state.backtracking == 0) stream_61.Add(char_literal82);
+
+					DebugLocation(164, 49);
+					PushFollow(Follow._propertyCallParametrs_in_propertyCall1277);
+					propertyCallParametrs83=propertyCallParametrs();
+					PopFollow();
+					if (state.failed) return retval;
+					if (state.backtracking == 0) stream_propertyCallParametrs.Add(propertyCallParametrs83.Tree);
+					DebugLocation(164, 70);
+					char_literal84=(CommonToken)Match(input,62,Follow._62_in_propertyCall1278); if (state.failed) return retval; 
+					if (state.backtracking == 0) stream_62.Add(char_literal84);
+
+
+					}
+					break;
+
+				}
+				} finally { DebugExitSubRule(40); }
 
 
 
@@ -5814,38 +5878,38 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 				root_0 = (object)adaptor.Nil();
-				// 166:4: -> ^( CALL pathName ( propertyCallParametrs )? ( ^( INDEX arguments ) )? ( isMarkedPre )? )
+				// 167:4: -> ^( CALL pathName ( propertyCallParametrs )? ( ^( INDEX arguments ) )? ( isMarkedPre )? )
 				{
-					DebugLocation(166, 6);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:166:6: ^( CALL pathName ( propertyCallParametrs )? ( ^( INDEX arguments ) )? ( isMarkedPre )? )
+					DebugLocation(167, 6);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:167:6: ^( CALL pathName ( propertyCallParametrs )? ( ^( INDEX arguments ) )? ( isMarkedPre )? )
 					{
 					object root_1 = (object)adaptor.Nil();
-					DebugLocation(166, 8);
+					DebugLocation(167, 8);
 					root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(CALL, "CALL"), root_1);
 
-					DebugLocation(166, 13);
+					DebugLocation(167, 13);
 					adaptor.AddChild(root_1, stream_pathName.NextTree());
-					DebugLocation(166, 22);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:166:22: ( propertyCallParametrs )?
+					DebugLocation(167, 22);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:167:22: ( propertyCallParametrs )?
 					if (stream_propertyCallParametrs.HasNext)
 					{
-						DebugLocation(166, 22);
+						DebugLocation(167, 22);
 						adaptor.AddChild(root_1, stream_propertyCallParametrs.NextTree());
 
 					}
 					stream_propertyCallParametrs.Reset();
-					DebugLocation(166, 46);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:166:46: ( ^( INDEX arguments ) )?
+					DebugLocation(167, 46);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:167:46: ( ^( INDEX arguments ) )?
 					if (stream_arguments.HasNext)
 					{
-						DebugLocation(166, 46);
-						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:166:46: ^( INDEX arguments )
+						DebugLocation(167, 46);
+						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:167:46: ^( INDEX arguments )
 						{
 						object root_2 = (object)adaptor.Nil();
-						DebugLocation(166, 48);
+						DebugLocation(167, 48);
 						root_2 = (object)adaptor.BecomeRoot((object)adaptor.Create(INDEX, "INDEX"), root_2);
 
-						DebugLocation(166, 54);
+						DebugLocation(167, 54);
 						adaptor.AddChild(root_2, stream_arguments.NextTree());
 
 						adaptor.AddChild(root_1, root_2);
@@ -5853,11 +5917,11 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 
 					}
 					stream_arguments.Reset();
-					DebugLocation(166, 66);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:166:66: ( isMarkedPre )?
+					DebugLocation(167, 66);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:167:66: ( isMarkedPre )?
 					if (stream_isMarkedPre.HasNext)
 					{
-						DebugLocation(166, 66);
+						DebugLocation(167, 66);
 						adaptor.AddChild(root_1, stream_isMarkedPre.NextTree());
 
 					}
@@ -5876,39 +5940,39 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:171:3: it= 'iterate' '(' ( ( ( SimpleName ( ( ':' ) type )? ';' )=>itName= SimpleName ( ( ':' ) itType= type )? ';' accName= SimpleName ( ':' accType= type )? '=' accExpr= oclExpression ) | (accName= SimpleName ( ':' accType= type )? '=' accExpr= oclExpression ) ) '|' body= oclExpression ')'
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:172:3: it= 'iterate' '(' ( ( ( SimpleName ( ( ':' ) type )? ';' )=>itName= SimpleName ( ( ':' ) itType= type )? ';' accName= SimpleName ( ':' accType= type )? '=' accExpr= oclExpression ) | (accName= SimpleName ( ':' accType= type )? '=' accExpr= oclExpression ) ) '|' body= oclExpression ')'
 				{
-				DebugLocation(171, 5);
-				it=(CommonToken)Match(input,112,Follow._112_in_propertyCall1302); if (state.failed) return retval; 
+				DebugLocation(172, 5);
+				it=(CommonToken)Match(input,112,Follow._112_in_propertyCall1327); if (state.failed) return retval; 
 				if (state.backtracking == 0) stream_112.Add(it);
 
-				DebugLocation(171, 16);
-				char_literal82=(CommonToken)Match(input,61,Follow._61_in_propertyCall1304); if (state.failed) return retval; 
-				if (state.backtracking == 0) stream_61.Add(char_literal82);
+				DebugLocation(172, 16);
+				char_literal85=(CommonToken)Match(input,61,Follow._61_in_propertyCall1329); if (state.failed) return retval; 
+				if (state.backtracking == 0) stream_61.Add(char_literal85);
 
-				DebugLocation(171, 20);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:171:20: ( ( ( SimpleName ( ( ':' ) type )? ';' )=>itName= SimpleName ( ( ':' ) itType= type )? ';' accName= SimpleName ( ':' accType= type )? '=' accExpr= oclExpression ) | (accName= SimpleName ( ':' accType= type )? '=' accExpr= oclExpression ) )
-				int alt43=2;
-				try { DebugEnterSubRule(43);
-				try { DebugEnterDecision(43, false);
-				int LA43_0 = input.LA(1);
+				DebugLocation(172, 20);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:172:20: ( ( ( SimpleName ( ( ':' ) type )? ';' )=>itName= SimpleName ( ( ':' ) itType= type )? ';' accName= SimpleName ( ':' accType= type )? '=' accExpr= oclExpression ) | (accName= SimpleName ( ':' accType= type )? '=' accExpr= oclExpression ) )
+				int alt44=2;
+				try { DebugEnterSubRule(44);
+				try { DebugEnterDecision(44, false);
+				int LA44_0 = input.LA(1);
 
-				if ((LA43_0==SimpleName))
+				if ((LA44_0==SimpleName))
 				{
-					int LA43_1 = input.LA(2);
+					int LA44_1 = input.LA(2);
 
 					if ((EvaluatePredicate(synpred1_OCLSyntax_fragment)))
 					{
-						alt43 = 1;
+						alt44 = 1;
 					}
 					else if ((true))
 					{
-						alt43 = 2;
+						alt44 = 2;
 					}
 					else
 					{
 						if (state.backtracking>0) {state.failed=true; return retval;}
-						NoViableAltException nvae = new NoViableAltException("", 43, 1, input);
+						NoViableAltException nvae = new NoViableAltException("", 44, 1, input);
 						DebugRecognitionException(nvae);
 						throw nvae;
 					}
@@ -5916,79 +5980,28 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				else
 				{
 					if (state.backtracking>0) {state.failed=true; return retval;}
-					NoViableAltException nvae = new NoViableAltException("", 43, 0, input);
+					NoViableAltException nvae = new NoViableAltException("", 44, 0, input);
 					DebugRecognitionException(nvae);
 					throw nvae;
 				}
-				} finally { DebugExitDecision(43); }
-				switch (alt43)
+				} finally { DebugExitDecision(44); }
+				switch (alt44)
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:172:5: ( ( SimpleName ( ( ':' ) type )? ';' )=>itName= SimpleName ( ( ':' ) itType= type )? ';' accName= SimpleName ( ':' accType= type )? '=' accExpr= oclExpression )
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:173:5: ( ( SimpleName ( ( ':' ) type )? ';' )=>itName= SimpleName ( ( ':' ) itType= type )? ';' accName= SimpleName ( ':' accType= type )? '=' accExpr= oclExpression )
 					{
-					DebugLocation(172, 5);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:172:5: ( ( SimpleName ( ( ':' ) type )? ';' )=>itName= SimpleName ( ( ':' ) itType= type )? ';' accName= SimpleName ( ':' accType= type )? '=' accExpr= oclExpression )
+					DebugLocation(173, 5);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:173:5: ( ( SimpleName ( ( ':' ) type )? ';' )=>itName= SimpleName ( ( ':' ) itType= type )? ';' accName= SimpleName ( ':' accType= type )? '=' accExpr= oclExpression )
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:172:6: ( SimpleName ( ( ':' ) type )? ';' )=>itName= SimpleName ( ( ':' ) itType= type )? ';' accName= SimpleName ( ':' accType= type )? '=' accExpr= oclExpression
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:173:6: ( SimpleName ( ( ':' ) type )? ';' )=>itName= SimpleName ( ( ':' ) itType= type )? ';' accName= SimpleName ( ':' accType= type )? '=' accExpr= oclExpression
 					{
-					DebugLocation(172, 44);
-					itName=(CommonToken)Match(input,SimpleName,Follow._SimpleName_in_propertyCall1331); if (state.failed) return retval; 
+					DebugLocation(173, 44);
+					itName=(CommonToken)Match(input,SimpleName,Follow._SimpleName_in_propertyCall1356); if (state.failed) return retval; 
 					if (state.backtracking == 0) stream_SimpleName.Add(itName);
 
-					DebugLocation(172, 56);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:172:56: ( ( ':' ) itType= type )?
-					int alt40=2;
-					try { DebugEnterSubRule(40);
-					try { DebugEnterDecision(40, false);
-					int LA40_0 = input.LA(1);
-
-					if ((LA40_0==69))
-					{
-						alt40 = 1;
-					}
-					} finally { DebugExitDecision(40); }
-					switch (alt40)
-					{
-					case 1:
-						DebugEnterAlt(1);
-						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:172:57: ( ':' ) itType= type
-						{
-						DebugLocation(172, 57);
-						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:172:57: ( ':' )
-						DebugEnterAlt(1);
-						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:172:58: ':'
-						{
-						DebugLocation(172, 58);
-						char_literal83=(CommonToken)Match(input,69,Follow._69_in_propertyCall1335); if (state.failed) return retval; 
-						if (state.backtracking == 0) stream_69.Add(char_literal83);
-
-
-						}
-
-						DebugLocation(172, 70);
-						PushFollow(Follow._type_in_propertyCall1342);
-						itType=type();
-						PopFollow();
-						if (state.failed) return retval;
-						if (state.backtracking == 0) stream_type.Add(itType.Tree);
-
-						}
-						break;
-
-					}
-					} finally { DebugExitSubRule(40); }
-
-					DebugLocation(172, 79);
-					char_literal84=(CommonToken)Match(input,71,Follow._71_in_propertyCall1346); if (state.failed) return retval; 
-					if (state.backtracking == 0) stream_71.Add(char_literal84);
-
-					DebugLocation(172, 90);
-					accName=(CommonToken)Match(input,SimpleName,Follow._SimpleName_in_propertyCall1351); if (state.failed) return retval; 
-					if (state.backtracking == 0) stream_SimpleName.Add(accName);
-
-					DebugLocation(172, 103);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:172:103: ( ':' accType= type )?
+					DebugLocation(173, 56);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:173:56: ( ( ':' ) itType= type )?
 					int alt41=2;
 					try { DebugEnterSubRule(41);
 					try { DebugEnterDecision(41, false);
@@ -6003,18 +6016,26 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 					{
 					case 1:
 						DebugEnterAlt(1);
-						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:172:104: ':' accType= type
+						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:173:57: ( ':' ) itType= type
 						{
-						DebugLocation(172, 104);
-						char_literal85=(CommonToken)Match(input,69,Follow._69_in_propertyCall1354); if (state.failed) return retval; 
-						if (state.backtracking == 0) stream_69.Add(char_literal85);
+						DebugLocation(173, 57);
+						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:173:57: ( ':' )
+						DebugEnterAlt(1);
+						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:173:58: ':'
+						{
+						DebugLocation(173, 58);
+						char_literal86=(CommonToken)Match(input,69,Follow._69_in_propertyCall1360); if (state.failed) return retval; 
+						if (state.backtracking == 0) stream_69.Add(char_literal86);
 
-						DebugLocation(172, 116);
-						PushFollow(Follow._type_in_propertyCall1360);
-						accType=type();
+
+						}
+
+						DebugLocation(173, 70);
+						PushFollow(Follow._type_in_propertyCall1367);
+						itType=type();
 						PopFollow();
 						if (state.failed) return retval;
-						if (state.backtracking == 0) stream_type.Add(accType.Tree);
+						if (state.backtracking == 0) stream_type.Add(itType.Tree);
 
 						}
 						break;
@@ -6022,37 +6043,16 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 					}
 					} finally { DebugExitSubRule(41); }
 
-					DebugLocation(172, 124);
-					char_literal86=(CommonToken)Match(input,75,Follow._75_in_propertyCall1363); if (state.failed) return retval; 
-					if (state.backtracking == 0) stream_75.Add(char_literal86);
+					DebugLocation(173, 79);
+					char_literal87=(CommonToken)Match(input,71,Follow._71_in_propertyCall1371); if (state.failed) return retval; 
+					if (state.backtracking == 0) stream_71.Add(char_literal87);
 
-					DebugLocation(172, 136);
-					PushFollow(Follow._oclExpression_in_propertyCall1369);
-					accExpr=oclExpression();
-					PopFollow();
-					if (state.failed) return retval;
-					if (state.backtracking == 0) stream_oclExpression.Add(accExpr.Tree);
-
-					}
-
-
-					}
-					break;
-				case 2:
-					DebugEnterAlt(2);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:173:7: (accName= SimpleName ( ':' accType= type )? '=' accExpr= oclExpression )
-					{
-					DebugLocation(173, 7);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:173:7: (accName= SimpleName ( ':' accType= type )? '=' accExpr= oclExpression )
-					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:173:8: accName= SimpleName ( ':' accType= type )? '=' accExpr= oclExpression
-					{
-					DebugLocation(173, 16);
-					accName=(CommonToken)Match(input,SimpleName,Follow._SimpleName_in_propertyCall1385); if (state.failed) return retval; 
+					DebugLocation(173, 90);
+					accName=(CommonToken)Match(input,SimpleName,Follow._SimpleName_in_propertyCall1376); if (state.failed) return retval; 
 					if (state.backtracking == 0) stream_SimpleName.Add(accName);
 
-					DebugLocation(173, 29);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:173:29: ( ':' accType= type )?
+					DebugLocation(173, 103);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:173:103: ( ':' accType= type )?
 					int alt42=2;
 					try { DebugEnterSubRule(42);
 					try { DebugEnterDecision(42, false);
@@ -6067,14 +6067,14 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 					{
 					case 1:
 						DebugEnterAlt(1);
-						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:173:30: ':' accType= type
+						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:173:104: ':' accType= type
 						{
-						DebugLocation(173, 30);
-						char_literal87=(CommonToken)Match(input,69,Follow._69_in_propertyCall1388); if (state.failed) return retval; 
-						if (state.backtracking == 0) stream_69.Add(char_literal87);
+						DebugLocation(173, 104);
+						char_literal88=(CommonToken)Match(input,69,Follow._69_in_propertyCall1379); if (state.failed) return retval; 
+						if (state.backtracking == 0) stream_69.Add(char_literal88);
 
-						DebugLocation(173, 42);
-						PushFollow(Follow._type_in_propertyCall1393);
+						DebugLocation(173, 116);
+						PushFollow(Follow._type_in_propertyCall1385);
 						accType=type();
 						PopFollow();
 						if (state.failed) return retval;
@@ -6086,12 +6086,76 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 					}
 					} finally { DebugExitSubRule(42); }
 
-					DebugLocation(173, 49);
-					char_literal88=(CommonToken)Match(input,75,Follow._75_in_propertyCall1396); if (state.failed) return retval; 
-					if (state.backtracking == 0) stream_75.Add(char_literal88);
+					DebugLocation(173, 124);
+					char_literal89=(CommonToken)Match(input,75,Follow._75_in_propertyCall1388); if (state.failed) return retval; 
+					if (state.backtracking == 0) stream_75.Add(char_literal89);
 
-					DebugLocation(173, 62);
-					PushFollow(Follow._oclExpression_in_propertyCall1402);
+					DebugLocation(173, 136);
+					PushFollow(Follow._oclExpression_in_propertyCall1394);
+					accExpr=oclExpression();
+					PopFollow();
+					if (state.failed) return retval;
+					if (state.backtracking == 0) stream_oclExpression.Add(accExpr.Tree);
+
+					}
+
+
+					}
+					break;
+				case 2:
+					DebugEnterAlt(2);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:174:7: (accName= SimpleName ( ':' accType= type )? '=' accExpr= oclExpression )
+					{
+					DebugLocation(174, 7);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:174:7: (accName= SimpleName ( ':' accType= type )? '=' accExpr= oclExpression )
+					DebugEnterAlt(1);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:174:8: accName= SimpleName ( ':' accType= type )? '=' accExpr= oclExpression
+					{
+					DebugLocation(174, 16);
+					accName=(CommonToken)Match(input,SimpleName,Follow._SimpleName_in_propertyCall1410); if (state.failed) return retval; 
+					if (state.backtracking == 0) stream_SimpleName.Add(accName);
+
+					DebugLocation(174, 29);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:174:29: ( ':' accType= type )?
+					int alt43=2;
+					try { DebugEnterSubRule(43);
+					try { DebugEnterDecision(43, false);
+					int LA43_0 = input.LA(1);
+
+					if ((LA43_0==69))
+					{
+						alt43 = 1;
+					}
+					} finally { DebugExitDecision(43); }
+					switch (alt43)
+					{
+					case 1:
+						DebugEnterAlt(1);
+						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:174:30: ':' accType= type
+						{
+						DebugLocation(174, 30);
+						char_literal90=(CommonToken)Match(input,69,Follow._69_in_propertyCall1413); if (state.failed) return retval; 
+						if (state.backtracking == 0) stream_69.Add(char_literal90);
+
+						DebugLocation(174, 42);
+						PushFollow(Follow._type_in_propertyCall1418);
+						accType=type();
+						PopFollow();
+						if (state.failed) return retval;
+						if (state.backtracking == 0) stream_type.Add(accType.Tree);
+
+						}
+						break;
+
+					}
+					} finally { DebugExitSubRule(43); }
+
+					DebugLocation(174, 49);
+					char_literal91=(CommonToken)Match(input,75,Follow._75_in_propertyCall1421); if (state.failed) return retval; 
+					if (state.backtracking == 0) stream_75.Add(char_literal91);
+
+					DebugLocation(174, 62);
+					PushFollow(Follow._oclExpression_in_propertyCall1427);
 					accExpr=oclExpression();
 					PopFollow();
 					if (state.failed) return retval;
@@ -6104,21 +6168,21 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 					break;
 
 				}
-				} finally { DebugExitSubRule(43); }
+				} finally { DebugExitSubRule(44); }
 
-				DebugLocation(175, 4);
-				char_literal89=(CommonToken)Match(input,123,Follow._123_in_propertyCall1414); if (state.failed) return retval; 
-				if (state.backtracking == 0) stream_123.Add(char_literal89);
+				DebugLocation(176, 4);
+				char_literal92=(CommonToken)Match(input,124,Follow._124_in_propertyCall1439); if (state.failed) return retval; 
+				if (state.backtracking == 0) stream_124.Add(char_literal92);
 
-				DebugLocation(175, 13);
-				PushFollow(Follow._oclExpression_in_propertyCall1420);
+				DebugLocation(176, 13);
+				PushFollow(Follow._oclExpression_in_propertyCall1445);
 				body=oclExpression();
 				PopFollow();
 				if (state.failed) return retval;
 				if (state.backtracking == 0) stream_oclExpression.Add(body.Tree);
-				DebugLocation(175, 29);
-				char_literal90=(CommonToken)Match(input,62,Follow._62_in_propertyCall1422); if (state.failed) return retval; 
-				if (state.backtracking == 0) stream_62.Add(char_literal90);
+				DebugLocation(176, 29);
+				char_literal93=(CommonToken)Match(input,62,Follow._62_in_propertyCall1447); if (state.failed) return retval; 
+				if (state.backtracking == 0) stream_62.Add(char_literal93);
 
 
 
@@ -6141,33 +6205,33 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 				root_0 = (object)adaptor.Nil();
-				// 176:3: -> ^( ITERATE[$it] ( ^( DECL $itName ( $itType)? ) )? ^( ACC $accName ( $accType)? $accExpr) $body)
+				// 177:3: -> ^( ITERATE[$it] ( ^( DECL $itName ( $itType)? ) )? ^( ACC $accName ( $accType)? $accExpr) $body)
 				{
-					DebugLocation(176, 5);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:176:5: ^( ITERATE[$it] ( ^( DECL $itName ( $itType)? ) )? ^( ACC $accName ( $accType)? $accExpr) $body)
+					DebugLocation(177, 5);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:177:5: ^( ITERATE[$it] ( ^( DECL $itName ( $itType)? ) )? ^( ACC $accName ( $accType)? $accExpr) $body)
 					{
 					object root_1 = (object)adaptor.Nil();
-					DebugLocation(176, 7);
+					DebugLocation(177, 7);
 					root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(ITERATE, it), root_1);
 
-					DebugLocation(176, 21);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:176:21: ( ^( DECL $itName ( $itType)? ) )?
+					DebugLocation(177, 21);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:177:21: ( ^( DECL $itName ( $itType)? ) )?
 					if (stream_itName.HasNext||stream_itType.HasNext)
 					{
-						DebugLocation(176, 21);
-						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:176:21: ^( DECL $itName ( $itType)? )
+						DebugLocation(177, 21);
+						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:177:21: ^( DECL $itName ( $itType)? )
 						{
 						object root_2 = (object)adaptor.Nil();
-						DebugLocation(176, 23);
+						DebugLocation(177, 23);
 						root_2 = (object)adaptor.BecomeRoot((object)adaptor.Create(DECL, "DECL"), root_2);
 
-						DebugLocation(176, 29);
+						DebugLocation(177, 29);
 						adaptor.AddChild(root_2, stream_itName.NextNode());
-						DebugLocation(176, 37);
-						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:176:37: ( $itType)?
+						DebugLocation(177, 37);
+						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:177:37: ( $itType)?
 						if (stream_itType.HasNext)
 						{
-							DebugLocation(176, 37);
+							DebugLocation(177, 37);
 							adaptor.AddChild(root_2, stream_itType.NextTree());
 
 						}
@@ -6179,30 +6243,30 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 					}
 					stream_itName.Reset();
 					stream_itType.Reset();
-					DebugLocation(176, 47);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:176:47: ^( ACC $accName ( $accType)? $accExpr)
+					DebugLocation(177, 47);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:177:47: ^( ACC $accName ( $accType)? $accExpr)
 					{
 					object root_2 = (object)adaptor.Nil();
-					DebugLocation(176, 49);
+					DebugLocation(177, 49);
 					root_2 = (object)adaptor.BecomeRoot((object)adaptor.Create(ACC, "ACC"), root_2);
 
-					DebugLocation(176, 54);
+					DebugLocation(177, 54);
 					adaptor.AddChild(root_2, stream_accName.NextNode());
-					DebugLocation(176, 63);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:176:63: ( $accType)?
+					DebugLocation(177, 63);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:177:63: ( $accType)?
 					if (stream_accType.HasNext)
 					{
-						DebugLocation(176, 63);
+						DebugLocation(177, 63);
 						adaptor.AddChild(root_2, stream_accType.NextTree());
 
 					}
 					stream_accType.Reset();
-					DebugLocation(176, 73);
+					DebugLocation(177, 73);
 					adaptor.AddChild(root_2, stream_accExpr.NextTree());
 
 					adaptor.AddChild(root_1, root_2);
 					}
-					DebugLocation(176, 83);
+					DebugLocation(177, 83);
 					adaptor.AddChild(root_1, stream_body.NextTree());
 
 					adaptor.AddChild(root_0, root_1);
@@ -6238,7 +6302,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			LeaveRule("propertyCall", 27);
 			LeaveRule_propertyCall();
 		}
-		DebugLocation(179, 1);
+		DebugLocation(180, 1);
 		} finally { DebugExitRule(GrammarFileName, "propertyCall"); }
 		return retval;
 
@@ -6258,7 +6322,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 	partial void LeaveRule_propertyCallParametrs();
 
 	// $ANTLR start "propertyCallParametrs"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:180:1: propertyCallParametrs : ( declarePropertyCallParametrs )? ( arguments )? -> ^( ARGS ( declarePropertyCallParametrs )? ( arguments )? ) ;
+	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:181:1: propertyCallParametrs : ( declarePropertyCallParametrs )? ( arguments )? -> ^( ARGS ( declarePropertyCallParametrs )? ( arguments )? ) ;
 	[GrammarRule("propertyCallParametrs")]
 	private OCLSyntaxParser.propertyCallParametrs_return propertyCallParametrs()
 	{
@@ -6270,99 +6334,99 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 
 		object root_0 = default(object);
 
-		OCLSyntaxParser.declarePropertyCallParametrs_return declarePropertyCallParametrs91 = default(OCLSyntaxParser.declarePropertyCallParametrs_return);
-		OCLSyntaxParser.arguments_return arguments92 = default(OCLSyntaxParser.arguments_return);
+		OCLSyntaxParser.declarePropertyCallParametrs_return declarePropertyCallParametrs94 = default(OCLSyntaxParser.declarePropertyCallParametrs_return);
+		OCLSyntaxParser.arguments_return arguments95 = default(OCLSyntaxParser.arguments_return);
 
 		RewriteRuleSubtreeStream stream_declarePropertyCallParametrs=new RewriteRuleSubtreeStream(adaptor,"rule declarePropertyCallParametrs");
 		RewriteRuleSubtreeStream stream_arguments=new RewriteRuleSubtreeStream(adaptor,"rule arguments");
 		try { DebugEnterRule(GrammarFileName, "propertyCallParametrs");
-		DebugLocation(180, 1);
+		DebugLocation(181, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:181:2: ( ( declarePropertyCallParametrs )? ( arguments )? -> ^( ARGS ( declarePropertyCallParametrs )? ( arguments )? ) )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:182:2: ( ( declarePropertyCallParametrs )? ( arguments )? -> ^( ARGS ( declarePropertyCallParametrs )? ( arguments )? ) )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:181:4: ( declarePropertyCallParametrs )? ( arguments )?
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:182:4: ( declarePropertyCallParametrs )? ( arguments )?
 			{
-			DebugLocation(181, 4);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:181:4: ( declarePropertyCallParametrs )?
-			int alt45=2;
-			try { DebugEnterSubRule(45);
-			try { DebugEnterDecision(45, false);
-			int LA45_0 = input.LA(1);
-
-			if ((LA45_0==SimpleName))
-			{
-				int LA45_1 = input.LA(2);
-
-				if ((LA45_1==69||LA45_1==123))
-				{
-					alt45 = 1;
-				}
-				else if ((LA45_1==64))
-				{
-					int LA45_4 = input.LA(3);
-
-					if ((LA45_4==SimpleName))
-					{
-						int LA45_5 = input.LA(4);
-
-						if ((LA45_5==69||LA45_5==123))
-						{
-							alt45 = 1;
-						}
-					}
-				}
-			}
-			} finally { DebugExitDecision(45); }
-			switch (alt45)
-			{
-			case 1:
-				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:181:4: declarePropertyCallParametrs
-				{
-				DebugLocation(181, 4);
-				PushFollow(Follow._declarePropertyCallParametrs_in_propertyCallParametrs1478);
-				declarePropertyCallParametrs91=declarePropertyCallParametrs();
-				PopFollow();
-				if (state.failed) return retval;
-				if (state.backtracking == 0) stream_declarePropertyCallParametrs.Add(declarePropertyCallParametrs91.Tree);
-
-				}
-				break;
-
-			}
-			} finally { DebugExitSubRule(45); }
-
-			DebugLocation(181, 34);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:181:34: ( arguments )?
+			DebugLocation(182, 4);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:182:4: ( declarePropertyCallParametrs )?
 			int alt46=2;
 			try { DebugEnterSubRule(46);
 			try { DebugEnterDecision(46, false);
 			int LA46_0 = input.LA(1);
 
-			if (((LA46_0>=IntegerLiteralExp && LA46_0<=InvalidLiteralExp)||LA46_0==NullLiteralExp||(LA46_0>=RealLiteralExp && LA46_0<=SimpleName)||LA46_0==StringLiteralExp||LA46_0==UnlimitedNaturalLiteralExp||LA46_0==61||LA46_0==65||(LA46_0>=80 && LA46_0<=94)||(LA46_0>=106 && LA46_0<=107)||(LA46_0>=112 && LA46_0<=114)||LA46_0==120))
+			if ((LA46_0==SimpleName))
 			{
-				alt46 = 1;
+				int LA46_1 = input.LA(2);
+
+				if ((LA46_1==69||LA46_1==124))
+				{
+					alt46 = 1;
+				}
+				else if ((LA46_1==64))
+				{
+					int LA46_4 = input.LA(3);
+
+					if ((LA46_4==SimpleName))
+					{
+						int LA46_5 = input.LA(4);
+
+						if ((LA46_5==69||LA46_5==124))
+						{
+							alt46 = 1;
+						}
+					}
+				}
 			}
 			} finally { DebugExitDecision(46); }
 			switch (alt46)
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:181:34: arguments
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:182:4: declarePropertyCallParametrs
 				{
-				DebugLocation(181, 34);
-				PushFollow(Follow._arguments_in_propertyCallParametrs1481);
-				arguments92=arguments();
+				DebugLocation(182, 4);
+				PushFollow(Follow._declarePropertyCallParametrs_in_propertyCallParametrs1503);
+				declarePropertyCallParametrs94=declarePropertyCallParametrs();
 				PopFollow();
 				if (state.failed) return retval;
-				if (state.backtracking == 0) stream_arguments.Add(arguments92.Tree);
+				if (state.backtracking == 0) stream_declarePropertyCallParametrs.Add(declarePropertyCallParametrs94.Tree);
 
 				}
 				break;
 
 			}
 			} finally { DebugExitSubRule(46); }
+
+			DebugLocation(182, 34);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:182:34: ( arguments )?
+			int alt47=2;
+			try { DebugEnterSubRule(47);
+			try { DebugEnterDecision(47, false);
+			int LA47_0 = input.LA(1);
+
+			if (((LA47_0>=IntegerLiteralExp && LA47_0<=InvalidLiteralExp)||LA47_0==NullLiteralExp||(LA47_0>=RealLiteralExp && LA47_0<=SimpleName)||LA47_0==StringLiteralExp||LA47_0==UnlimitedNaturalLiteralExp||LA47_0==61||LA47_0==65||(LA47_0>=80 && LA47_0<=94)||(LA47_0>=106 && LA47_0<=107)||(LA47_0>=112 && LA47_0<=113)||LA47_0==115||LA47_0==121))
+			{
+				alt47 = 1;
+			}
+			} finally { DebugExitDecision(47); }
+			switch (alt47)
+			{
+			case 1:
+				DebugEnterAlt(1);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:182:34: arguments
+				{
+				DebugLocation(182, 34);
+				PushFollow(Follow._arguments_in_propertyCallParametrs1506);
+				arguments95=arguments();
+				PopFollow();
+				if (state.failed) return retval;
+				if (state.backtracking == 0) stream_arguments.Add(arguments95.Tree);
+
+				}
+				break;
+
+			}
+			} finally { DebugExitSubRule(47); }
 
 
 
@@ -6379,29 +6443,29 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 			root_0 = (object)adaptor.Nil();
-			// 181:45: -> ^( ARGS ( declarePropertyCallParametrs )? ( arguments )? )
+			// 182:45: -> ^( ARGS ( declarePropertyCallParametrs )? ( arguments )? )
 			{
-				DebugLocation(181, 48);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:181:48: ^( ARGS ( declarePropertyCallParametrs )? ( arguments )? )
+				DebugLocation(182, 48);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:182:48: ^( ARGS ( declarePropertyCallParametrs )? ( arguments )? )
 				{
 				object root_1 = (object)adaptor.Nil();
-				DebugLocation(181, 50);
+				DebugLocation(182, 50);
 				root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(ARGS, "ARGS"), root_1);
 
-				DebugLocation(181, 55);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:181:55: ( declarePropertyCallParametrs )?
+				DebugLocation(182, 55);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:182:55: ( declarePropertyCallParametrs )?
 				if (stream_declarePropertyCallParametrs.HasNext)
 				{
-					DebugLocation(181, 55);
+					DebugLocation(182, 55);
 					adaptor.AddChild(root_1, stream_declarePropertyCallParametrs.NextTree());
 
 				}
 				stream_declarePropertyCallParametrs.Reset();
-				DebugLocation(181, 85);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:181:85: ( arguments )?
+				DebugLocation(182, 85);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:182:85: ( arguments )?
 				if (stream_arguments.HasNext)
 				{
-					DebugLocation(181, 85);
+					DebugLocation(182, 85);
 					adaptor.AddChild(root_1, stream_arguments.NextTree());
 
 				}
@@ -6438,7 +6502,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			LeaveRule("propertyCallParametrs", 28);
 			LeaveRule_propertyCallParametrs();
 		}
-		DebugLocation(184, 1);
+		DebugLocation(185, 1);
 		} finally { DebugExitRule(GrammarFileName, "propertyCallParametrs"); }
 		return retval;
 
@@ -6458,7 +6522,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 	partial void LeaveRule_declarePropertyCallParametrs();
 
 	// $ANTLR start "declarePropertyCallParametrs"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:185:1: declarePropertyCallParametrs : (t1= typedef ( ',' t2= typedef )? '|' ) -> ^( VARDECL $t1 ( $t2)? ) ;
+	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:186:1: declarePropertyCallParametrs : (t1= typedef ( ',' t2= typedef )? '|' ) -> ^( VARDECL $t1 ( $t2)? ) ;
 	[GrammarRule("declarePropertyCallParametrs")]
 	private OCLSyntaxParser.declarePropertyCallParametrs_return declarePropertyCallParametrs()
 	{
@@ -6470,59 +6534,59 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 
 		object root_0 = default(object);
 
-		CommonToken char_literal93 = default(CommonToken);
-		CommonToken char_literal94 = default(CommonToken);
+		CommonToken char_literal96 = default(CommonToken);
+		CommonToken char_literal97 = default(CommonToken);
 		OCLSyntaxParser.typedef_return t1 = default(OCLSyntaxParser.typedef_return);
 		OCLSyntaxParser.typedef_return t2 = default(OCLSyntaxParser.typedef_return);
 
-		object char_literal93_tree = default(object);
-		object char_literal94_tree = default(object);
+		object char_literal96_tree = default(object);
+		object char_literal97_tree = default(object);
 		RewriteRuleITokenStream stream_64=new RewriteRuleITokenStream(adaptor,"token 64");
-		RewriteRuleITokenStream stream_123=new RewriteRuleITokenStream(adaptor,"token 123");
+		RewriteRuleITokenStream stream_124=new RewriteRuleITokenStream(adaptor,"token 124");
 		RewriteRuleSubtreeStream stream_typedef=new RewriteRuleSubtreeStream(adaptor,"rule typedef");
 		try { DebugEnterRule(GrammarFileName, "declarePropertyCallParametrs");
-		DebugLocation(185, 1);
+		DebugLocation(186, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:186:2: ( (t1= typedef ( ',' t2= typedef )? '|' ) -> ^( VARDECL $t1 ( $t2)? ) )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:187:2: ( (t1= typedef ( ',' t2= typedef )? '|' ) -> ^( VARDECL $t1 ( $t2)? ) )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:186:4: (t1= typedef ( ',' t2= typedef )? '|' )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:187:4: (t1= typedef ( ',' t2= typedef )? '|' )
 			{
-			DebugLocation(186, 4);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:186:4: (t1= typedef ( ',' t2= typedef )? '|' )
+			DebugLocation(187, 4);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:187:4: (t1= typedef ( ',' t2= typedef )? '|' )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:186:6: t1= typedef ( ',' t2= typedef )? '|'
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:187:6: t1= typedef ( ',' t2= typedef )? '|'
 			{
-			DebugLocation(186, 8);
-			PushFollow(Follow._typedef_in_declarePropertyCallParametrs1515);
+			DebugLocation(187, 8);
+			PushFollow(Follow._typedef_in_declarePropertyCallParametrs1540);
 			t1=typedef();
 			PopFollow();
 			if (state.failed) return retval;
 			if (state.backtracking == 0) stream_typedef.Add(t1.Tree);
-			DebugLocation(186, 17);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:186:17: ( ',' t2= typedef )?
-			int alt47=2;
-			try { DebugEnterSubRule(47);
-			try { DebugEnterDecision(47, false);
-			int LA47_0 = input.LA(1);
+			DebugLocation(187, 17);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:187:17: ( ',' t2= typedef )?
+			int alt48=2;
+			try { DebugEnterSubRule(48);
+			try { DebugEnterDecision(48, false);
+			int LA48_0 = input.LA(1);
 
-			if ((LA47_0==64))
+			if ((LA48_0==64))
 			{
-				alt47 = 1;
+				alt48 = 1;
 			}
-			} finally { DebugExitDecision(47); }
-			switch (alt47)
+			} finally { DebugExitDecision(48); }
+			switch (alt48)
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:186:18: ',' t2= typedef
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:187:18: ',' t2= typedef
 				{
-				DebugLocation(186, 18);
-				char_literal93=(CommonToken)Match(input,64,Follow._64_in_declarePropertyCallParametrs1518); if (state.failed) return retval; 
-				if (state.backtracking == 0) stream_64.Add(char_literal93);
+				DebugLocation(187, 18);
+				char_literal96=(CommonToken)Match(input,64,Follow._64_in_declarePropertyCallParametrs1543); if (state.failed) return retval; 
+				if (state.backtracking == 0) stream_64.Add(char_literal96);
 
-				DebugLocation(186, 24);
-				PushFollow(Follow._typedef_in_declarePropertyCallParametrs1522);
+				DebugLocation(187, 24);
+				PushFollow(Follow._typedef_in_declarePropertyCallParametrs1547);
 				t2=typedef();
 				PopFollow();
 				if (state.failed) return retval;
@@ -6532,11 +6596,11 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				break;
 
 			}
-			} finally { DebugExitSubRule(47); }
+			} finally { DebugExitSubRule(48); }
 
-			DebugLocation(186, 35);
-			char_literal94=(CommonToken)Match(input,123,Follow._123_in_declarePropertyCallParametrs1526); if (state.failed) return retval; 
-			if (state.backtracking == 0) stream_123.Add(char_literal94);
+			DebugLocation(187, 35);
+			char_literal97=(CommonToken)Match(input,124,Follow._124_in_declarePropertyCallParametrs1551); if (state.failed) return retval; 
+			if (state.backtracking == 0) stream_124.Add(char_literal97);
 
 
 			}
@@ -6558,22 +6622,22 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 			root_0 = (object)adaptor.Nil();
-			// 187:3: -> ^( VARDECL $t1 ( $t2)? )
+			// 188:3: -> ^( VARDECL $t1 ( $t2)? )
 			{
-				DebugLocation(187, 6);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:187:6: ^( VARDECL $t1 ( $t2)? )
+				DebugLocation(188, 6);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:188:6: ^( VARDECL $t1 ( $t2)? )
 				{
 				object root_1 = (object)adaptor.Nil();
-				DebugLocation(187, 8);
+				DebugLocation(188, 8);
 				root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(VARDECL, "VARDECL"), root_1);
 
-				DebugLocation(187, 17);
+				DebugLocation(188, 17);
 				adaptor.AddChild(root_1, stream_t1.NextTree());
-				DebugLocation(187, 21);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:187:21: ( $t2)?
+				DebugLocation(188, 21);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:188:21: ( $t2)?
 				if (stream_t2.HasNext)
 				{
-					DebugLocation(187, 21);
+					DebugLocation(188, 21);
 					adaptor.AddChild(root_1, stream_t2.NextTree());
 
 				}
@@ -6610,7 +6674,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			LeaveRule("declarePropertyCallParametrs", 29);
 			LeaveRule_declarePropertyCallParametrs();
 		}
-		DebugLocation(189, 1);
+		DebugLocation(190, 1);
 		} finally { DebugExitRule(GrammarFileName, "declarePropertyCallParametrs"); }
 		return retval;
 
@@ -6630,7 +6694,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 	partial void LeaveRule_typedef();
 
 	// $ANTLR start "typedef"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:190:1: typedef : SimpleName ( ':' type )? -> ^( DECL SimpleName ( type )? ) ;
+	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:191:1: typedef : SimpleName ( ':' type )? -> ^( DECL SimpleName ( type )? ) ;
 	[GrammarRule("typedef")]
 	private OCLSyntaxParser.typedef_return typedef()
 	{
@@ -6642,61 +6706,61 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 
 		object root_0 = default(object);
 
-		CommonToken SimpleName95 = default(CommonToken);
-		CommonToken char_literal96 = default(CommonToken);
-		OCLSyntaxParser.type_return type97 = default(OCLSyntaxParser.type_return);
+		CommonToken SimpleName98 = default(CommonToken);
+		CommonToken char_literal99 = default(CommonToken);
+		OCLSyntaxParser.type_return type100 = default(OCLSyntaxParser.type_return);
 
-		object SimpleName95_tree = default(object);
-		object char_literal96_tree = default(object);
+		object SimpleName98_tree = default(object);
+		object char_literal99_tree = default(object);
 		RewriteRuleITokenStream stream_SimpleName=new RewriteRuleITokenStream(adaptor,"token SimpleName");
 		RewriteRuleITokenStream stream_69=new RewriteRuleITokenStream(adaptor,"token 69");
 		RewriteRuleSubtreeStream stream_type=new RewriteRuleSubtreeStream(adaptor,"rule type");
 		try { DebugEnterRule(GrammarFileName, "typedef");
-		DebugLocation(190, 1);
+		DebugLocation(191, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:191:2: ( SimpleName ( ':' type )? -> ^( DECL SimpleName ( type )? ) )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:192:2: ( SimpleName ( ':' type )? -> ^( DECL SimpleName ( type )? ) )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:191:4: SimpleName ( ':' type )?
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:192:4: SimpleName ( ':' type )?
 			{
-			DebugLocation(191, 4);
-			SimpleName95=(CommonToken)Match(input,SimpleName,Follow._SimpleName_in_typedef1554); if (state.failed) return retval; 
-			if (state.backtracking == 0) stream_SimpleName.Add(SimpleName95);
+			DebugLocation(192, 4);
+			SimpleName98=(CommonToken)Match(input,SimpleName,Follow._SimpleName_in_typedef1579); if (state.failed) return retval; 
+			if (state.backtracking == 0) stream_SimpleName.Add(SimpleName98);
 
-			DebugLocation(191, 14);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:191:14: ( ':' type )?
-			int alt48=2;
-			try { DebugEnterSubRule(48);
-			try { DebugEnterDecision(48, false);
-			int LA48_0 = input.LA(1);
+			DebugLocation(192, 14);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:192:14: ( ':' type )?
+			int alt49=2;
+			try { DebugEnterSubRule(49);
+			try { DebugEnterDecision(49, false);
+			int LA49_0 = input.LA(1);
 
-			if ((LA48_0==69))
+			if ((LA49_0==69))
 			{
-				alt48 = 1;
+				alt49 = 1;
 			}
-			} finally { DebugExitDecision(48); }
-			switch (alt48)
+			} finally { DebugExitDecision(49); }
+			switch (alt49)
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:191:15: ':' type
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:192:15: ':' type
 				{
-				DebugLocation(191, 15);
-				char_literal96=(CommonToken)Match(input,69,Follow._69_in_typedef1556); if (state.failed) return retval; 
-				if (state.backtracking == 0) stream_69.Add(char_literal96);
+				DebugLocation(192, 15);
+				char_literal99=(CommonToken)Match(input,69,Follow._69_in_typedef1581); if (state.failed) return retval; 
+				if (state.backtracking == 0) stream_69.Add(char_literal99);
 
-				DebugLocation(191, 18);
-				PushFollow(Follow._type_in_typedef1557);
-				type97=type();
+				DebugLocation(192, 18);
+				PushFollow(Follow._type_in_typedef1582);
+				type100=type();
 				PopFollow();
 				if (state.failed) return retval;
-				if (state.backtracking == 0) stream_type.Add(type97.Tree);
+				if (state.backtracking == 0) stream_type.Add(type100.Tree);
 
 				}
 				break;
 
 			}
-			} finally { DebugExitSubRule(48); }
+			} finally { DebugExitSubRule(49); }
 
 
 
@@ -6713,22 +6777,22 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 			root_0 = (object)adaptor.Nil();
-			// 192:3: -> ^( DECL SimpleName ( type )? )
+			// 193:3: -> ^( DECL SimpleName ( type )? )
 			{
-				DebugLocation(192, 6);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:192:6: ^( DECL SimpleName ( type )? )
+				DebugLocation(193, 6);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:193:6: ^( DECL SimpleName ( type )? )
 				{
 				object root_1 = (object)adaptor.Nil();
-				DebugLocation(192, 8);
+				DebugLocation(193, 8);
 				root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(DECL, "DECL"), root_1);
 
-				DebugLocation(192, 13);
+				DebugLocation(193, 13);
 				adaptor.AddChild(root_1, stream_SimpleName.NextNode());
-				DebugLocation(192, 24);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:192:24: ( type )?
+				DebugLocation(193, 24);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:193:24: ( type )?
 				if (stream_type.HasNext)
 				{
-					DebugLocation(192, 24);
+					DebugLocation(193, 24);
 					adaptor.AddChild(root_1, stream_type.NextTree());
 
 				}
@@ -6765,7 +6829,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			LeaveRule("typedef", 30);
 			LeaveRule_typedef();
 		}
-		DebugLocation(193, 1);
+		DebugLocation(194, 1);
 		} finally { DebugExitRule(GrammarFileName, "typedef"); }
 		return retval;
 
@@ -6785,7 +6849,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 	partial void LeaveRule_enumAndType();
 
 	// $ANTLR start "enumAndType"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:195:1: enumAndType : ( tupleType tupleType | primitiveType primitiveType | oclType oclType );
+	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:196:1: enumAndType : ( tupleType tupleType | primitiveType primitiveType | oclType oclType );
 	[GrammarRule("enumAndType")]
 	private OCLSyntaxParser.enumAndType_return enumAndType()
 	{
@@ -6797,26 +6861,26 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 
 		object root_0 = default(object);
 
-		OCLSyntaxParser.tupleType_return tupleType98 = default(OCLSyntaxParser.tupleType_return);
-		OCLSyntaxParser.tupleType_return tupleType99 = default(OCLSyntaxParser.tupleType_return);
-		OCLSyntaxParser.primitiveType_return primitiveType100 = default(OCLSyntaxParser.primitiveType_return);
-		OCLSyntaxParser.primitiveType_return primitiveType101 = default(OCLSyntaxParser.primitiveType_return);
-		OCLSyntaxParser.oclType_return oclType102 = default(OCLSyntaxParser.oclType_return);
-		OCLSyntaxParser.oclType_return oclType103 = default(OCLSyntaxParser.oclType_return);
+		OCLSyntaxParser.tupleType_return tupleType101 = default(OCLSyntaxParser.tupleType_return);
+		OCLSyntaxParser.tupleType_return tupleType102 = default(OCLSyntaxParser.tupleType_return);
+		OCLSyntaxParser.primitiveType_return primitiveType103 = default(OCLSyntaxParser.primitiveType_return);
+		OCLSyntaxParser.primitiveType_return primitiveType104 = default(OCLSyntaxParser.primitiveType_return);
+		OCLSyntaxParser.oclType_return oclType105 = default(OCLSyntaxParser.oclType_return);
+		OCLSyntaxParser.oclType_return oclType106 = default(OCLSyntaxParser.oclType_return);
 
 
 		try { DebugEnterRule(GrammarFileName, "enumAndType");
-		DebugLocation(195, 1);
+		DebugLocation(196, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:199:2: ( tupleType tupleType | primitiveType primitiveType | oclType oclType )
-			int alt49=3;
-			try { DebugEnterDecision(49, false);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:200:2: ( tupleType tupleType | primitiveType primitiveType | oclType oclType )
+			int alt50=3;
+			try { DebugEnterDecision(50, false);
 			switch (input.LA(1))
 			{
 			case 93:
 				{
-				alt49 = 1;
+				alt50 = 1;
 				}
 				break;
 			case 81:
@@ -6825,7 +6889,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			case 92:
 			case 94:
 				{
-				alt49 = 2;
+				alt50 = 2;
 				}
 				break;
 			case 84:
@@ -6833,81 +6897,81 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			case 86:
 			case 87:
 				{
-				alt49 = 3;
+				alt50 = 3;
 				}
 				break;
 			default:
 				{
 					if (state.backtracking>0) {state.failed=true; return retval;}
-					NoViableAltException nvae = new NoViableAltException("", 49, 0, input);
+					NoViableAltException nvae = new NoViableAltException("", 50, 0, input);
 					DebugRecognitionException(nvae);
 					throw nvae;
 				}
 			}
 
-			} finally { DebugExitDecision(49); }
-			switch (alt49)
+			} finally { DebugExitDecision(50); }
+			switch (alt50)
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:199:4: tupleType tupleType
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:200:4: tupleType tupleType
 				{
 				root_0 = (object)adaptor.Nil();
 
-				DebugLocation(199, 4);
-				PushFollow(Follow._tupleType_in_enumAndType1594);
-				tupleType98=tupleType();
-				PopFollow();
-				if (state.failed) return retval;
-				if (state.backtracking == 0) adaptor.AddChild(root_0, tupleType98.Tree);
 				DebugLocation(200, 4);
-				PushFollow(Follow._tupleType_in_enumAndType1602);
-				tupleType99=tupleType();
+				PushFollow(Follow._tupleType_in_enumAndType1619);
+				tupleType101=tupleType();
 				PopFollow();
 				if (state.failed) return retval;
-				if (state.backtracking == 0) adaptor.AddChild(root_0, tupleType99.Tree);
+				if (state.backtracking == 0) adaptor.AddChild(root_0, tupleType101.Tree);
+				DebugLocation(201, 4);
+				PushFollow(Follow._tupleType_in_enumAndType1627);
+				tupleType102=tupleType();
+				PopFollow();
+				if (state.failed) return retval;
+				if (state.backtracking == 0) adaptor.AddChild(root_0, tupleType102.Tree);
 
 				}
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:201:4: primitiveType primitiveType
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:202:4: primitiveType primitiveType
 				{
 				root_0 = (object)adaptor.Nil();
 
-				DebugLocation(201, 4);
-				PushFollow(Follow._primitiveType_in_enumAndType1607);
-				primitiveType100=primitiveType();
-				PopFollow();
-				if (state.failed) return retval;
-				if (state.backtracking == 0) adaptor.AddChild(root_0, primitiveType100.Tree);
 				DebugLocation(202, 4);
-				PushFollow(Follow._primitiveType_in_enumAndType1612);
-				primitiveType101=primitiveType();
+				PushFollow(Follow._primitiveType_in_enumAndType1632);
+				primitiveType103=primitiveType();
 				PopFollow();
 				if (state.failed) return retval;
-				if (state.backtracking == 0) adaptor.AddChild(root_0, primitiveType101.Tree);
+				if (state.backtracking == 0) adaptor.AddChild(root_0, primitiveType103.Tree);
+				DebugLocation(203, 4);
+				PushFollow(Follow._primitiveType_in_enumAndType1637);
+				primitiveType104=primitiveType();
+				PopFollow();
+				if (state.failed) return retval;
+				if (state.backtracking == 0) adaptor.AddChild(root_0, primitiveType104.Tree);
 
 				}
 				break;
 			case 3:
 				DebugEnterAlt(3);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:203:4: oclType oclType
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:204:4: oclType oclType
 				{
 				root_0 = (object)adaptor.Nil();
 
-				DebugLocation(203, 4);
-				PushFollow(Follow._oclType_in_enumAndType1617);
-				oclType102=oclType();
+				DebugLocation(204, 4);
+				PushFollow(Follow._oclType_in_enumAndType1642);
+				oclType105=oclType();
 				PopFollow();
 				if (state.failed) return retval;
-				if (state.backtracking == 0) adaptor.AddChild(root_0, oclType102.Tree);
-				DebugLocation(204, 3);
-				PushFollow(Follow._oclType_in_enumAndType1621);
-				oclType103=oclType();
+				if (state.backtracking == 0) adaptor.AddChild(root_0, oclType105.Tree);
+				DebugLocation(205, 3);
+				PushFollow(Follow._oclType_in_enumAndType1646);
+				oclType106=oclType();
 				PopFollow();
 				if (state.failed) return retval;
-				if (state.backtracking == 0) adaptor.AddChild(root_0, oclType103.Tree);
+				if (state.backtracking == 0) adaptor.AddChild(root_0, oclType106.Tree);
 
 				}
 				break;
@@ -6933,7 +6997,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			LeaveRule("enumAndType", 31);
 			LeaveRule_enumAndType();
 		}
-		DebugLocation(206, 1);
+		DebugLocation(207, 1);
 		} finally { DebugExitRule(GrammarFileName, "enumAndType"); }
 		return retval;
 
@@ -6953,7 +7017,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 	partial void LeaveRule_pathName();
 
 	// $ANTLR start "pathName"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:210:1: pathName : SimpleName ( '::' SimpleName )* -> ^( PATH ( SimpleName )+ ) ;
+	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:211:1: pathName : SimpleName ( '::' SimpleName )* -> ^( PATH ( SimpleName )+ ) ;
 	[GrammarRule("pathName")]
 	private OCLSyntaxParser.pathName_return pathName()
 	{
@@ -6965,52 +7029,59 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 
 		object root_0 = default(object);
 
-		CommonToken SimpleName104 = default(CommonToken);
-		CommonToken string_literal105 = default(CommonToken);
-		CommonToken SimpleName106 = default(CommonToken);
+		CommonToken SimpleName107 = default(CommonToken);
+		CommonToken string_literal108 = default(CommonToken);
+		CommonToken SimpleName109 = default(CommonToken);
 
-		object SimpleName104_tree = default(object);
-		object string_literal105_tree = default(object);
-		object SimpleName106_tree = default(object);
+		object SimpleName107_tree = default(object);
+		object string_literal108_tree = default(object);
+		object SimpleName109_tree = default(object);
 		RewriteRuleITokenStream stream_SimpleName=new RewriteRuleITokenStream(adaptor,"token SimpleName");
 		RewriteRuleITokenStream stream_70=new RewriteRuleITokenStream(adaptor,"token 70");
 
 		try { DebugEnterRule(GrammarFileName, "pathName");
-		DebugLocation(210, 1);
+		DebugLocation(211, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:212:2: ( SimpleName ( '::' SimpleName )* -> ^( PATH ( SimpleName )+ ) )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:213:2: ( SimpleName ( '::' SimpleName )* -> ^( PATH ( SimpleName )+ ) )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:212:4: SimpleName ( '::' SimpleName )*
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:213:4: SimpleName ( '::' SimpleName )*
 			{
-			DebugLocation(212, 4);
-			SimpleName104=(CommonToken)Match(input,SimpleName,Follow._SimpleName_in_pathName1638); if (state.failed) return retval; 
-			if (state.backtracking == 0) stream_SimpleName.Add(SimpleName104);
+			DebugLocation(213, 4);
+			SimpleName107=(CommonToken)Match(input,SimpleName,Follow._SimpleName_in_pathName1663); if (state.failed) return retval; 
+			if (state.backtracking == 0) stream_SimpleName.Add(SimpleName107);
 
-			DebugLocation(212, 15);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:212:15: ( '::' SimpleName )*
-			try { DebugEnterSubRule(50);
+			DebugLocation(213, 15);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:213:15: ( '::' SimpleName )*
+			try { DebugEnterSubRule(51);
 			while (true)
 			{
-				int alt50=2;
-				try { DebugEnterDecision(50, false);
-				int LA50_0 = input.LA(1);
+				int alt51=2;
+				try { DebugEnterDecision(51, false);
+				int LA51_0 = input.LA(1);
 
-				if ((LA50_0==70))
+				if ((LA51_0==70))
 				{
-					int LA50_2 = input.LA(2);
+					int LA51_2 = input.LA(2);
 
-					if ((LA50_2==SimpleName))
+					if ((LA51_2==SimpleName))
 					{
-						int LA50_3 = input.LA(3);
+						int LA51_3 = input.LA(3);
 
-						if ((LA50_3==EOF))
+						if ((LA51_3==EOF))
 						{
-							alt50 = 1;
+							int LA51_4 = input.LA(4);
+
+							if ((LA51_4==EOF))
+							{
+								alt51 = 1;
+							}
+
+
 						}
-						else if ((LA50_3==DoubleDot||LA50_3==UnlimitedNaturalLiteralExp||(LA50_3>=61 && LA50_3<=68)||(LA50_3>=70 && LA50_3<=77)||LA50_3==79||(LA50_3>=95 && LA50_3<=105)||(LA50_3>=108 && LA50_3<=111)||(LA50_3>=115 && LA50_3<=119)||LA50_3==121||(LA50_3>=123 && LA50_3<=124)))
+						else if ((LA51_3==DoubleDot||LA51_3==UnlimitedNaturalLiteralExp||(LA51_3>=61 && LA51_3<=68)||(LA51_3>=70 && LA51_3<=77)||LA51_3==79||(LA51_3>=95 && LA51_3<=105)||(LA51_3>=108 && LA51_3<=111)||LA51_3==114||(LA51_3>=116 && LA51_3<=120)||LA51_3==122||(LA51_3>=124 && LA51_3<=125)))
 						{
-							alt50 = 1;
+							alt51 = 1;
 						}
 
 
@@ -7020,34 +7091,34 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				}
 
 
-				} finally { DebugExitDecision(50); }
-				switch ( alt50 )
+				} finally { DebugExitDecision(51); }
+				switch ( alt51 )
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:212:16: '::' SimpleName
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:213:16: '::' SimpleName
 					{
-					DebugLocation(212, 16);
-					string_literal105=(CommonToken)Match(input,70,Follow._70_in_pathName1641); if (state.failed) return retval; 
-					if (state.backtracking == 0) stream_70.Add(string_literal105);
+					DebugLocation(213, 16);
+					string_literal108=(CommonToken)Match(input,70,Follow._70_in_pathName1666); if (state.failed) return retval; 
+					if (state.backtracking == 0) stream_70.Add(string_literal108);
 
-					DebugLocation(212, 21);
-					SimpleName106=(CommonToken)Match(input,SimpleName,Follow._SimpleName_in_pathName1643); if (state.failed) return retval; 
-					if (state.backtracking == 0) stream_SimpleName.Add(SimpleName106);
+					DebugLocation(213, 21);
+					SimpleName109=(CommonToken)Match(input,SimpleName,Follow._SimpleName_in_pathName1668); if (state.failed) return retval; 
+					if (state.backtracking == 0) stream_SimpleName.Add(SimpleName109);
 
 
 					}
 					break;
 
 				default:
-					goto loop50;
+					goto loop51;
 				}
 			}
 
-			loop50:
+			loop51:
 				;
 
-			} finally { DebugExitSubRule(50); }
+			} finally { DebugExitSubRule(51); }
 
 
 
@@ -7064,23 +7135,23 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 			root_0 = (object)adaptor.Nil();
-			// 213:3: -> ^( PATH ( SimpleName )+ )
+			// 214:3: -> ^( PATH ( SimpleName )+ )
 			{
-				DebugLocation(213, 6);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:213:6: ^( PATH ( SimpleName )+ )
+				DebugLocation(214, 6);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:214:6: ^( PATH ( SimpleName )+ )
 				{
 				object root_1 = (object)adaptor.Nil();
-				DebugLocation(213, 8);
+				DebugLocation(214, 8);
 				root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(PATH, "PATH"), root_1);
 
-				DebugLocation(213, 13);
+				DebugLocation(214, 13);
 				if (!(stream_SimpleName.HasNext))
 				{
 					throw new RewriteEarlyExitException();
 				}
 				while ( stream_SimpleName.HasNext )
 				{
-					DebugLocation(213, 13);
+					DebugLocation(214, 13);
 					adaptor.AddChild(root_1, stream_SimpleName.NextNode());
 
 				}
@@ -7117,7 +7188,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			LeaveRule("pathName", 32);
 			LeaveRule_pathName();
 		}
-		DebugLocation(214, 1);
+		DebugLocation(215, 1);
 		} finally { DebugExitRule(GrammarFileName, "pathName"); }
 		return retval;
 
@@ -7137,7 +7208,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 	partial void LeaveRule_collectionLiteralExpAndType();
 
 	// $ANTLR start "collectionLiteralExpAndType"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:217:1: collectionLiteralExpAndType : ( collectionTypeIdentifier ( '{' ( collectionLiteralParts )? '}' )? -> ^( COLLECTIONLITERAL collectionTypeIdentifier ( collectionLiteralParts )? ) | collectionTypeIdentifier ( '(' type ')' ) ( ( '{' ( collectionLiteralParts )? '}' -> ^( COLLECTIONLITERAL collectionTypeIdentifier type ( collectionLiteralParts )? ) ) | -> ^( COLLTYPE collectionTypeIdentifier type ) ) );
+	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:218:1: collectionLiteralExpAndType : ( collectionTypeIdentifier ( '{' ( collectionLiteralParts )? '}' )? -> ^( COLLECTIONLITERAL collectionTypeIdentifier ( collectionLiteralParts )? ) | collectionTypeIdentifier ( '(' type ')' ) ( ( '{' ( collectionLiteralParts )? '}' -> ^( COLLECTIONLITERAL collectionTypeIdentifier type ( collectionLiteralParts )? ) ) | -> ^( COLLTYPE collectionTypeIdentifier type ) ) );
 	[GrammarRule("collectionLiteralExpAndType")]
 	private OCLSyntaxParser.collectionLiteralExpAndType_return collectionLiteralExpAndType()
 	{
@@ -7149,56 +7220,56 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 
 		object root_0 = default(object);
 
-		CommonToken char_literal108 = default(CommonToken);
-		CommonToken char_literal110 = default(CommonToken);
-		CommonToken char_literal112 = default(CommonToken);
-		CommonToken char_literal114 = default(CommonToken);
+		CommonToken char_literal111 = default(CommonToken);
+		CommonToken char_literal113 = default(CommonToken);
 		CommonToken char_literal115 = default(CommonToken);
 		CommonToken char_literal117 = default(CommonToken);
-		OCLSyntaxParser.collectionTypeIdentifier_return collectionTypeIdentifier107 = default(OCLSyntaxParser.collectionTypeIdentifier_return);
-		OCLSyntaxParser.collectionLiteralParts_return collectionLiteralParts109 = default(OCLSyntaxParser.collectionLiteralParts_return);
-		OCLSyntaxParser.collectionTypeIdentifier_return collectionTypeIdentifier111 = default(OCLSyntaxParser.collectionTypeIdentifier_return);
-		OCLSyntaxParser.type_return type113 = default(OCLSyntaxParser.type_return);
-		OCLSyntaxParser.collectionLiteralParts_return collectionLiteralParts116 = default(OCLSyntaxParser.collectionLiteralParts_return);
+		CommonToken char_literal118 = default(CommonToken);
+		CommonToken char_literal120 = default(CommonToken);
+		OCLSyntaxParser.collectionTypeIdentifier_return collectionTypeIdentifier110 = default(OCLSyntaxParser.collectionTypeIdentifier_return);
+		OCLSyntaxParser.collectionLiteralParts_return collectionLiteralParts112 = default(OCLSyntaxParser.collectionLiteralParts_return);
+		OCLSyntaxParser.collectionTypeIdentifier_return collectionTypeIdentifier114 = default(OCLSyntaxParser.collectionTypeIdentifier_return);
+		OCLSyntaxParser.type_return type116 = default(OCLSyntaxParser.type_return);
+		OCLSyntaxParser.collectionLiteralParts_return collectionLiteralParts119 = default(OCLSyntaxParser.collectionLiteralParts_return);
 
-		object char_literal108_tree = default(object);
-		object char_literal110_tree = default(object);
-		object char_literal112_tree = default(object);
-		object char_literal114_tree = default(object);
+		object char_literal111_tree = default(object);
+		object char_literal113_tree = default(object);
 		object char_literal115_tree = default(object);
 		object char_literal117_tree = default(object);
-		RewriteRuleITokenStream stream_122=new RewriteRuleITokenStream(adaptor,"token 122");
-		RewriteRuleITokenStream stream_124=new RewriteRuleITokenStream(adaptor,"token 124");
+		object char_literal118_tree = default(object);
+		object char_literal120_tree = default(object);
+		RewriteRuleITokenStream stream_123=new RewriteRuleITokenStream(adaptor,"token 123");
+		RewriteRuleITokenStream stream_125=new RewriteRuleITokenStream(adaptor,"token 125");
 		RewriteRuleITokenStream stream_61=new RewriteRuleITokenStream(adaptor,"token 61");
 		RewriteRuleITokenStream stream_62=new RewriteRuleITokenStream(adaptor,"token 62");
 		RewriteRuleSubtreeStream stream_collectionTypeIdentifier=new RewriteRuleSubtreeStream(adaptor,"rule collectionTypeIdentifier");
 		RewriteRuleSubtreeStream stream_collectionLiteralParts=new RewriteRuleSubtreeStream(adaptor,"rule collectionLiteralParts");
 		RewriteRuleSubtreeStream stream_type=new RewriteRuleSubtreeStream(adaptor,"rule type");
 		try { DebugEnterRule(GrammarFileName, "collectionLiteralExpAndType");
-		DebugLocation(217, 1);
+		DebugLocation(218, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:219:2: ( collectionTypeIdentifier ( '{' ( collectionLiteralParts )? '}' )? -> ^( COLLECTIONLITERAL collectionTypeIdentifier ( collectionLiteralParts )? ) | collectionTypeIdentifier ( '(' type ')' ) ( ( '{' ( collectionLiteralParts )? '}' -> ^( COLLECTIONLITERAL collectionTypeIdentifier type ( collectionLiteralParts )? ) ) | -> ^( COLLTYPE collectionTypeIdentifier type ) ) )
-			int alt55=2;
-			try { DebugEnterDecision(55, false);
-			int LA55_0 = input.LA(1);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:220:2: ( collectionTypeIdentifier ( '{' ( collectionLiteralParts )? '}' )? -> ^( COLLECTIONLITERAL collectionTypeIdentifier ( collectionLiteralParts )? ) | collectionTypeIdentifier ( '(' type ')' ) ( ( '{' ( collectionLiteralParts )? '}' -> ^( COLLECTIONLITERAL collectionTypeIdentifier type ( collectionLiteralParts )? ) ) | -> ^( COLLTYPE collectionTypeIdentifier type ) ) )
+			int alt56=2;
+			try { DebugEnterDecision(56, false);
+			int LA56_0 = input.LA(1);
 
-			if ((LA55_0==80||LA55_0==82||LA55_0==88||(LA55_0>=90 && LA55_0<=91)))
+			if ((LA56_0==80||LA56_0==82||LA56_0==88||(LA56_0>=90 && LA56_0<=91)))
 			{
-				int LA55_1 = input.LA(2);
+				int LA56_1 = input.LA(2);
 
-				if ((LA55_1==EOF||LA55_1==DoubleDot||LA55_1==UnlimitedNaturalLiteralExp||(LA55_1>=62 && LA55_1<=68)||(LA55_1>=72 && LA55_1<=77)||(LA55_1>=96 && LA55_1<=105)||(LA55_1>=108 && LA55_1<=111)||(LA55_1>=115 && LA55_1<=119)||(LA55_1>=121 && LA55_1<=124)))
+				if ((LA56_1==EOF||LA56_1==DoubleDot||LA56_1==UnlimitedNaturalLiteralExp||(LA56_1>=62 && LA56_1<=68)||(LA56_1>=72 && LA56_1<=77)||(LA56_1>=96 && LA56_1<=105)||(LA56_1>=108 && LA56_1<=111)||LA56_1==114||(LA56_1>=116 && LA56_1<=120)||(LA56_1>=122 && LA56_1<=125)))
 				{
-					alt55 = 1;
+					alt56 = 1;
 				}
-				else if ((LA55_1==61))
+				else if ((LA56_1==61))
 				{
-					alt55 = 2;
+					alt56 = 2;
 				}
 				else
 				{
 					if (state.backtracking>0) {state.failed=true; return retval;}
-					NoViableAltException nvae = new NoViableAltException("", 55, 1, input);
+					NoViableAltException nvae = new NoViableAltException("", 56, 1, input);
 					DebugRecognitionException(nvae);
 					throw nvae;
 				}
@@ -7206,86 +7277,86 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			else
 			{
 				if (state.backtracking>0) {state.failed=true; return retval;}
-				NoViableAltException nvae = new NoViableAltException("", 55, 0, input);
+				NoViableAltException nvae = new NoViableAltException("", 56, 0, input);
 				DebugRecognitionException(nvae);
 				throw nvae;
 			}
-			} finally { DebugExitDecision(55); }
-			switch (alt55)
+			} finally { DebugExitDecision(56); }
+			switch (alt56)
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:219:3: collectionTypeIdentifier ( '{' ( collectionLiteralParts )? '}' )?
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:220:3: collectionTypeIdentifier ( '{' ( collectionLiteralParts )? '}' )?
 				{
-				DebugLocation(219, 3);
-				PushFollow(Follow._collectionTypeIdentifier_in_collectionLiteralExpAndType1672);
-				collectionTypeIdentifier107=collectionTypeIdentifier();
+				DebugLocation(220, 3);
+				PushFollow(Follow._collectionTypeIdentifier_in_collectionLiteralExpAndType1697);
+				collectionTypeIdentifier110=collectionTypeIdentifier();
 				PopFollow();
 				if (state.failed) return retval;
-				if (state.backtracking == 0) stream_collectionTypeIdentifier.Add(collectionTypeIdentifier107.Tree);
-				DebugLocation(219, 28);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:219:28: ( '{' ( collectionLiteralParts )? '}' )?
-				int alt52=2;
-				try { DebugEnterSubRule(52);
-				try { DebugEnterDecision(52, false);
-				int LA52_0 = input.LA(1);
+				if (state.backtracking == 0) stream_collectionTypeIdentifier.Add(collectionTypeIdentifier110.Tree);
+				DebugLocation(220, 28);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:220:28: ( '{' ( collectionLiteralParts )? '}' )?
+				int alt53=2;
+				try { DebugEnterSubRule(53);
+				try { DebugEnterDecision(53, false);
+				int LA53_0 = input.LA(1);
 
-				if ((LA52_0==122))
+				if ((LA53_0==123))
 				{
-					alt52 = 1;
+					alt53 = 1;
 				}
-				} finally { DebugExitDecision(52); }
-				switch (alt52)
+				} finally { DebugExitDecision(53); }
+				switch (alt53)
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:219:29: '{' ( collectionLiteralParts )? '}'
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:220:29: '{' ( collectionLiteralParts )? '}'
 					{
-					DebugLocation(219, 29);
-					char_literal108=(CommonToken)Match(input,122,Follow._122_in_collectionLiteralExpAndType1675); if (state.failed) return retval; 
-					if (state.backtracking == 0) stream_122.Add(char_literal108);
+					DebugLocation(220, 29);
+					char_literal111=(CommonToken)Match(input,123,Follow._123_in_collectionLiteralExpAndType1700); if (state.failed) return retval; 
+					if (state.backtracking == 0) stream_123.Add(char_literal111);
 
-					DebugLocation(219, 33);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:219:33: ( collectionLiteralParts )?
-					int alt51=2;
-					try { DebugEnterSubRule(51);
-					try { DebugEnterDecision(51, false);
-					int LA51_0 = input.LA(1);
+					DebugLocation(220, 33);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:220:33: ( collectionLiteralParts )?
+					int alt52=2;
+					try { DebugEnterSubRule(52);
+					try { DebugEnterDecision(52, false);
+					int LA52_0 = input.LA(1);
 
-					if (((LA51_0>=IntegerLiteralExp && LA51_0<=InvalidLiteralExp)||LA51_0==NullLiteralExp||(LA51_0>=RealLiteralExp && LA51_0<=SimpleName)||LA51_0==StringLiteralExp||LA51_0==UnlimitedNaturalLiteralExp||LA51_0==61||LA51_0==65||(LA51_0>=80 && LA51_0<=94)||(LA51_0>=106 && LA51_0<=107)||(LA51_0>=112 && LA51_0<=114)||LA51_0==120))
+					if (((LA52_0>=IntegerLiteralExp && LA52_0<=InvalidLiteralExp)||LA52_0==NullLiteralExp||(LA52_0>=RealLiteralExp && LA52_0<=SimpleName)||LA52_0==StringLiteralExp||LA52_0==UnlimitedNaturalLiteralExp||LA52_0==61||LA52_0==65||(LA52_0>=80 && LA52_0<=94)||(LA52_0>=106 && LA52_0<=107)||(LA52_0>=112 && LA52_0<=113)||LA52_0==115||LA52_0==121))
 					{
-						alt51 = 1;
+						alt52 = 1;
 					}
-					} finally { DebugExitDecision(51); }
-					switch (alt51)
+					} finally { DebugExitDecision(52); }
+					switch (alt52)
 					{
 					case 1:
 						DebugEnterAlt(1);
-						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:219:33: collectionLiteralParts
+						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:220:33: collectionLiteralParts
 						{
-						DebugLocation(219, 33);
-						PushFollow(Follow._collectionLiteralParts_in_collectionLiteralExpAndType1677);
-						collectionLiteralParts109=collectionLiteralParts();
+						DebugLocation(220, 33);
+						PushFollow(Follow._collectionLiteralParts_in_collectionLiteralExpAndType1702);
+						collectionLiteralParts112=collectionLiteralParts();
 						PopFollow();
 						if (state.failed) return retval;
-						if (state.backtracking == 0) stream_collectionLiteralParts.Add(collectionLiteralParts109.Tree);
+						if (state.backtracking == 0) stream_collectionLiteralParts.Add(collectionLiteralParts112.Tree);
 
 						}
 						break;
 
 					}
-					} finally { DebugExitSubRule(51); }
+					} finally { DebugExitSubRule(52); }
 
-					DebugLocation(219, 57);
-					char_literal110=(CommonToken)Match(input,124,Follow._124_in_collectionLiteralExpAndType1680); if (state.failed) return retval; 
-					if (state.backtracking == 0) stream_124.Add(char_literal110);
+					DebugLocation(220, 57);
+					char_literal113=(CommonToken)Match(input,125,Follow._125_in_collectionLiteralExpAndType1705); if (state.failed) return retval; 
+					if (state.backtracking == 0) stream_125.Add(char_literal113);
 
 
 					}
 					break;
 
 				}
-				} finally { DebugExitSubRule(52); }
+				} finally { DebugExitSubRule(53); }
 
 
 
@@ -7302,22 +7373,22 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 				root_0 = (object)adaptor.Nil();
-				// 220:3: -> ^( COLLECTIONLITERAL collectionTypeIdentifier ( collectionLiteralParts )? )
+				// 221:3: -> ^( COLLECTIONLITERAL collectionTypeIdentifier ( collectionLiteralParts )? )
 				{
-					DebugLocation(220, 6);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:220:6: ^( COLLECTIONLITERAL collectionTypeIdentifier ( collectionLiteralParts )? )
+					DebugLocation(221, 6);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:221:6: ^( COLLECTIONLITERAL collectionTypeIdentifier ( collectionLiteralParts )? )
 					{
 					object root_1 = (object)adaptor.Nil();
-					DebugLocation(220, 8);
+					DebugLocation(221, 8);
 					root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(COLLECTIONLITERAL, "COLLECTIONLITERAL"), root_1);
 
-					DebugLocation(220, 26);
+					DebugLocation(221, 26);
 					adaptor.AddChild(root_1, stream_collectionTypeIdentifier.NextTree());
-					DebugLocation(220, 51);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:220:51: ( collectionLiteralParts )?
+					DebugLocation(221, 51);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:221:51: ( collectionLiteralParts )?
 					if (stream_collectionLiteralParts.HasNext)
 					{
-						DebugLocation(220, 51);
+						DebugLocation(221, 51);
 						adaptor.AddChild(root_1, stream_collectionLiteralParts.NextTree());
 
 					}
@@ -7336,108 +7407,108 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:222:4: collectionTypeIdentifier ( '(' type ')' ) ( ( '{' ( collectionLiteralParts )? '}' -> ^( COLLECTIONLITERAL collectionTypeIdentifier type ( collectionLiteralParts )? ) ) | -> ^( COLLTYPE collectionTypeIdentifier type ) )
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:223:4: collectionTypeIdentifier ( '(' type ')' ) ( ( '{' ( collectionLiteralParts )? '}' -> ^( COLLECTIONLITERAL collectionTypeIdentifier type ( collectionLiteralParts )? ) ) | -> ^( COLLTYPE collectionTypeIdentifier type ) )
 				{
-				DebugLocation(222, 4);
-				PushFollow(Follow._collectionTypeIdentifier_in_collectionLiteralExpAndType1702);
-				collectionTypeIdentifier111=collectionTypeIdentifier();
+				DebugLocation(223, 4);
+				PushFollow(Follow._collectionTypeIdentifier_in_collectionLiteralExpAndType1727);
+				collectionTypeIdentifier114=collectionTypeIdentifier();
 				PopFollow();
 				if (state.failed) return retval;
-				if (state.backtracking == 0) stream_collectionTypeIdentifier.Add(collectionTypeIdentifier111.Tree);
-				DebugLocation(222, 29);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:222:29: ( '(' type ')' )
+				if (state.backtracking == 0) stream_collectionTypeIdentifier.Add(collectionTypeIdentifier114.Tree);
+				DebugLocation(223, 29);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:223:29: ( '(' type ')' )
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:222:30: '(' type ')'
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:223:30: '(' type ')'
 				{
-				DebugLocation(222, 30);
-				char_literal112=(CommonToken)Match(input,61,Follow._61_in_collectionLiteralExpAndType1705); if (state.failed) return retval; 
-				if (state.backtracking == 0) stream_61.Add(char_literal112);
+				DebugLocation(223, 30);
+				char_literal115=(CommonToken)Match(input,61,Follow._61_in_collectionLiteralExpAndType1730); if (state.failed) return retval; 
+				if (state.backtracking == 0) stream_61.Add(char_literal115);
 
-				DebugLocation(222, 34);
-				PushFollow(Follow._type_in_collectionLiteralExpAndType1707);
-				type113=type();
+				DebugLocation(223, 34);
+				PushFollow(Follow._type_in_collectionLiteralExpAndType1732);
+				type116=type();
 				PopFollow();
 				if (state.failed) return retval;
-				if (state.backtracking == 0) stream_type.Add(type113.Tree);
-				DebugLocation(222, 40);
-				char_literal114=(CommonToken)Match(input,62,Follow._62_in_collectionLiteralExpAndType1710); if (state.failed) return retval; 
-				if (state.backtracking == 0) stream_62.Add(char_literal114);
+				if (state.backtracking == 0) stream_type.Add(type116.Tree);
+				DebugLocation(223, 40);
+				char_literal117=(CommonToken)Match(input,62,Follow._62_in_collectionLiteralExpAndType1735); if (state.failed) return retval; 
+				if (state.backtracking == 0) stream_62.Add(char_literal117);
 
 
 				}
 
-				DebugLocation(223, 2);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:223:2: ( ( '{' ( collectionLiteralParts )? '}' -> ^( COLLECTIONLITERAL collectionTypeIdentifier type ( collectionLiteralParts )? ) ) | -> ^( COLLTYPE collectionTypeIdentifier type ) )
-				int alt54=2;
-				try { DebugEnterSubRule(54);
-				try { DebugEnterDecision(54, false);
-				int LA54_0 = input.LA(1);
+				DebugLocation(224, 2);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:224:2: ( ( '{' ( collectionLiteralParts )? '}' -> ^( COLLECTIONLITERAL collectionTypeIdentifier type ( collectionLiteralParts )? ) ) | -> ^( COLLTYPE collectionTypeIdentifier type ) )
+				int alt55=2;
+				try { DebugEnterSubRule(55);
+				try { DebugEnterDecision(55, false);
+				int LA55_0 = input.LA(1);
 
-				if ((LA54_0==122))
+				if ((LA55_0==123))
 				{
-					alt54 = 1;
+					alt55 = 1;
 				}
-				else if ((LA54_0==EOF||LA54_0==DoubleDot||LA54_0==UnlimitedNaturalLiteralExp||(LA54_0>=62 && LA54_0<=68)||(LA54_0>=72 && LA54_0<=77)||(LA54_0>=96 && LA54_0<=105)||(LA54_0>=108 && LA54_0<=111)||(LA54_0>=115 && LA54_0<=119)||LA54_0==121||(LA54_0>=123 && LA54_0<=124)))
+				else if ((LA55_0==EOF||LA55_0==DoubleDot||LA55_0==UnlimitedNaturalLiteralExp||(LA55_0>=62 && LA55_0<=68)||(LA55_0>=72 && LA55_0<=77)||(LA55_0>=96 && LA55_0<=105)||(LA55_0>=108 && LA55_0<=111)||LA55_0==114||(LA55_0>=116 && LA55_0<=120)||LA55_0==122||(LA55_0>=124 && LA55_0<=125)))
 				{
-					alt54 = 2;
+					alt55 = 2;
 				}
 				else
 				{
 					if (state.backtracking>0) {state.failed=true; return retval;}
-					NoViableAltException nvae = new NoViableAltException("", 54, 0, input);
+					NoViableAltException nvae = new NoViableAltException("", 55, 0, input);
 					DebugRecognitionException(nvae);
 					throw nvae;
 				}
-				} finally { DebugExitDecision(54); }
-				switch (alt54)
+				} finally { DebugExitDecision(55); }
+				switch (alt55)
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:224:3: ( '{' ( collectionLiteralParts )? '}' -> ^( COLLECTIONLITERAL collectionTypeIdentifier type ( collectionLiteralParts )? ) )
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:225:3: ( '{' ( collectionLiteralParts )? '}' -> ^( COLLECTIONLITERAL collectionTypeIdentifier type ( collectionLiteralParts )? ) )
 					{
-					DebugLocation(224, 3);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:224:3: ( '{' ( collectionLiteralParts )? '}' -> ^( COLLECTIONLITERAL collectionTypeIdentifier type ( collectionLiteralParts )? ) )
+					DebugLocation(225, 3);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:225:3: ( '{' ( collectionLiteralParts )? '}' -> ^( COLLECTIONLITERAL collectionTypeIdentifier type ( collectionLiteralParts )? ) )
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:224:4: '{' ( collectionLiteralParts )? '}'
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:225:4: '{' ( collectionLiteralParts )? '}'
 					{
-					DebugLocation(224, 4);
-					char_literal115=(CommonToken)Match(input,122,Follow._122_in_collectionLiteralExpAndType1720); if (state.failed) return retval; 
-					if (state.backtracking == 0) stream_122.Add(char_literal115);
+					DebugLocation(225, 4);
+					char_literal118=(CommonToken)Match(input,123,Follow._123_in_collectionLiteralExpAndType1745); if (state.failed) return retval; 
+					if (state.backtracking == 0) stream_123.Add(char_literal118);
 
-					DebugLocation(224, 8);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:224:8: ( collectionLiteralParts )?
-					int alt53=2;
-					try { DebugEnterSubRule(53);
-					try { DebugEnterDecision(53, false);
-					int LA53_0 = input.LA(1);
+					DebugLocation(225, 8);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:225:8: ( collectionLiteralParts )?
+					int alt54=2;
+					try { DebugEnterSubRule(54);
+					try { DebugEnterDecision(54, false);
+					int LA54_0 = input.LA(1);
 
-					if (((LA53_0>=IntegerLiteralExp && LA53_0<=InvalidLiteralExp)||LA53_0==NullLiteralExp||(LA53_0>=RealLiteralExp && LA53_0<=SimpleName)||LA53_0==StringLiteralExp||LA53_0==UnlimitedNaturalLiteralExp||LA53_0==61||LA53_0==65||(LA53_0>=80 && LA53_0<=94)||(LA53_0>=106 && LA53_0<=107)||(LA53_0>=112 && LA53_0<=114)||LA53_0==120))
+					if (((LA54_0>=IntegerLiteralExp && LA54_0<=InvalidLiteralExp)||LA54_0==NullLiteralExp||(LA54_0>=RealLiteralExp && LA54_0<=SimpleName)||LA54_0==StringLiteralExp||LA54_0==UnlimitedNaturalLiteralExp||LA54_0==61||LA54_0==65||(LA54_0>=80 && LA54_0<=94)||(LA54_0>=106 && LA54_0<=107)||(LA54_0>=112 && LA54_0<=113)||LA54_0==115||LA54_0==121))
 					{
-						alt53 = 1;
+						alt54 = 1;
 					}
-					} finally { DebugExitDecision(53); }
-					switch (alt53)
+					} finally { DebugExitDecision(54); }
+					switch (alt54)
 					{
 					case 1:
 						DebugEnterAlt(1);
-						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:224:8: collectionLiteralParts
+						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:225:8: collectionLiteralParts
 						{
-						DebugLocation(224, 8);
-						PushFollow(Follow._collectionLiteralParts_in_collectionLiteralExpAndType1722);
-						collectionLiteralParts116=collectionLiteralParts();
+						DebugLocation(225, 8);
+						PushFollow(Follow._collectionLiteralParts_in_collectionLiteralExpAndType1747);
+						collectionLiteralParts119=collectionLiteralParts();
 						PopFollow();
 						if (state.failed) return retval;
-						if (state.backtracking == 0) stream_collectionLiteralParts.Add(collectionLiteralParts116.Tree);
+						if (state.backtracking == 0) stream_collectionLiteralParts.Add(collectionLiteralParts119.Tree);
 
 						}
 						break;
 
 					}
-					} finally { DebugExitSubRule(53); }
+					} finally { DebugExitSubRule(54); }
 
-					DebugLocation(224, 32);
-					char_literal117=(CommonToken)Match(input,124,Follow._124_in_collectionLiteralExpAndType1725); if (state.failed) return retval; 
-					if (state.backtracking == 0) stream_124.Add(char_literal117);
+					DebugLocation(225, 32);
+					char_literal120=(CommonToken)Match(input,125,Follow._125_in_collectionLiteralExpAndType1750); if (state.failed) return retval; 
+					if (state.backtracking == 0) stream_125.Add(char_literal120);
 
 
 
@@ -7454,24 +7525,24 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 					RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 					root_0 = (object)adaptor.Nil();
-					// 225:4: -> ^( COLLECTIONLITERAL collectionTypeIdentifier type ( collectionLiteralParts )? )
+					// 226:4: -> ^( COLLECTIONLITERAL collectionTypeIdentifier type ( collectionLiteralParts )? )
 					{
-						DebugLocation(225, 7);
-						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:225:7: ^( COLLECTIONLITERAL collectionTypeIdentifier type ( collectionLiteralParts )? )
+						DebugLocation(226, 7);
+						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:226:7: ^( COLLECTIONLITERAL collectionTypeIdentifier type ( collectionLiteralParts )? )
 						{
 						object root_1 = (object)adaptor.Nil();
-						DebugLocation(225, 9);
+						DebugLocation(226, 9);
 						root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(COLLECTIONLITERAL, "COLLECTIONLITERAL"), root_1);
 
-						DebugLocation(225, 27);
+						DebugLocation(226, 27);
 						adaptor.AddChild(root_1, stream_collectionTypeIdentifier.NextTree());
-						DebugLocation(225, 52);
+						DebugLocation(226, 52);
 						adaptor.AddChild(root_1, stream_type.NextTree());
-						DebugLocation(225, 57);
-						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:225:57: ( collectionLiteralParts )?
+						DebugLocation(226, 57);
+						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:226:57: ( collectionLiteralParts )?
 						if (stream_collectionLiteralParts.HasNext)
 						{
-							DebugLocation(225, 57);
+							DebugLocation(226, 57);
 							adaptor.AddChild(root_1, stream_collectionLiteralParts.NextTree());
 
 						}
@@ -7493,7 +7564,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 					break;
 				case 2:
 					DebugEnterAlt(2);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:227:5: 
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:228:5: 
 					{
 
 					{
@@ -7509,18 +7580,18 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 					RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 					root_0 = (object)adaptor.Nil();
-					// 227:5: -> ^( COLLTYPE collectionTypeIdentifier type )
+					// 228:5: -> ^( COLLTYPE collectionTypeIdentifier type )
 					{
-						DebugLocation(227, 7);
-						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:227:7: ^( COLLTYPE collectionTypeIdentifier type )
+						DebugLocation(228, 7);
+						// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:228:7: ^( COLLTYPE collectionTypeIdentifier type )
 						{
 						object root_1 = (object)adaptor.Nil();
-						DebugLocation(227, 9);
+						DebugLocation(228, 9);
 						root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(COLLTYPE, "COLLTYPE"), root_1);
 
-						DebugLocation(227, 18);
+						DebugLocation(228, 18);
 						adaptor.AddChild(root_1, stream_collectionTypeIdentifier.NextTree());
-						DebugLocation(227, 43);
+						DebugLocation(228, 43);
 						adaptor.AddChild(root_1, stream_type.NextTree());
 
 						adaptor.AddChild(root_0, root_1);
@@ -7536,7 +7607,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 					break;
 
 				}
-				} finally { DebugExitSubRule(54); }
+				} finally { DebugExitSubRule(55); }
 
 
 				}
@@ -7563,7 +7634,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			LeaveRule("collectionLiteralExpAndType", 33);
 			LeaveRule_collectionLiteralExpAndType();
 		}
-		DebugLocation(229, 1);
+		DebugLocation(230, 1);
 		} finally { DebugExitRule(GrammarFileName, "collectionLiteralExpAndType"); }
 		return retval;
 
@@ -7583,7 +7654,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 	partial void LeaveRule_enumLiteralExp();
 
 	// $ANTLR start "enumLiteralExp"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:231:1: enumLiteralExp : pathName '::' SimpleName ;
+	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:232:1: enumLiteralExp : pathName '::' SimpleName ;
 	[GrammarRule("enumLiteralExp")]
 	private OCLSyntaxParser.enumLiteralExp_return enumLiteralExp()
 	{
@@ -7595,40 +7666,40 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 
 		object root_0 = default(object);
 
-		CommonToken string_literal119 = default(CommonToken);
-		CommonToken SimpleName120 = default(CommonToken);
-		OCLSyntaxParser.pathName_return pathName118 = default(OCLSyntaxParser.pathName_return);
+		CommonToken string_literal122 = default(CommonToken);
+		CommonToken SimpleName123 = default(CommonToken);
+		OCLSyntaxParser.pathName_return pathName121 = default(OCLSyntaxParser.pathName_return);
 
-		object string_literal119_tree = default(object);
-		object SimpleName120_tree = default(object);
+		object string_literal122_tree = default(object);
+		object SimpleName123_tree = default(object);
 
 		try { DebugEnterRule(GrammarFileName, "enumLiteralExp");
-		DebugLocation(231, 1);
+		DebugLocation(232, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:232:2: ( pathName '::' SimpleName )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:233:2: ( pathName '::' SimpleName )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:232:3: pathName '::' SimpleName
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:233:3: pathName '::' SimpleName
 			{
 			root_0 = (object)adaptor.Nil();
 
-			DebugLocation(232, 3);
-			PushFollow(Follow._pathName_in_enumLiteralExp1773);
-			pathName118=pathName();
+			DebugLocation(233, 3);
+			PushFollow(Follow._pathName_in_enumLiteralExp1798);
+			pathName121=pathName();
 			PopFollow();
 			if (state.failed) return retval;
-			if (state.backtracking == 0) adaptor.AddChild(root_0, pathName118.Tree);
-			DebugLocation(232, 11);
-			string_literal119=(CommonToken)Match(input,70,Follow._70_in_enumLiteralExp1774); if (state.failed) return retval;
+			if (state.backtracking == 0) adaptor.AddChild(root_0, pathName121.Tree);
+			DebugLocation(233, 11);
+			string_literal122=(CommonToken)Match(input,70,Follow._70_in_enumLiteralExp1799); if (state.failed) return retval;
 			if (state.backtracking == 0) {
-			string_literal119_tree = (object)adaptor.Create(string_literal119);
-			adaptor.AddChild(root_0, string_literal119_tree);
+			string_literal122_tree = (object)adaptor.Create(string_literal122);
+			adaptor.AddChild(root_0, string_literal122_tree);
 			}
-			DebugLocation(232, 16);
-			SimpleName120=(CommonToken)Match(input,SimpleName,Follow._SimpleName_in_enumLiteralExp1776); if (state.failed) return retval;
+			DebugLocation(233, 16);
+			SimpleName123=(CommonToken)Match(input,SimpleName,Follow._SimpleName_in_enumLiteralExp1801); if (state.failed) return retval;
 			if (state.backtracking == 0) {
-			SimpleName120_tree = (object)adaptor.Create(SimpleName120);
-			adaptor.AddChild(root_0, SimpleName120_tree);
+			SimpleName123_tree = (object)adaptor.Create(SimpleName123);
+			adaptor.AddChild(root_0, SimpleName123_tree);
 			}
 
 			}
@@ -7653,7 +7724,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			LeaveRule("enumLiteralExp", 34);
 			LeaveRule_enumLiteralExp();
 		}
-		DebugLocation(233, 1);
+		DebugLocation(234, 1);
 		} finally { DebugExitRule(GrammarFileName, "enumLiteralExp"); }
 		return retval;
 
@@ -7673,7 +7744,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 	partial void LeaveRule_collectionLiteralExp();
 
 	// $ANTLR start "collectionLiteralExp"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:235:1: collectionLiteralExp : ( collectionTypeIdentifier '{' ( collectionLiteralParts )? '}' | collectionType '{' ( collectionLiteralParts )? '}' );
+	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:236:1: collectionLiteralExp : ( collectionTypeIdentifier '{' ( collectionLiteralParts )? '}' | collectionType '{' ( collectionLiteralParts )? '}' );
 	[GrammarRule("collectionLiteralExp")]
 	private OCLSyntaxParser.collectionLiteralExp_return collectionLiteralExp()
 	{
@@ -7685,45 +7756,45 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 
 		object root_0 = default(object);
 
-		CommonToken char_literal122 = default(CommonToken);
-		CommonToken char_literal124 = default(CommonToken);
-		CommonToken char_literal126 = default(CommonToken);
-		CommonToken char_literal128 = default(CommonToken);
-		OCLSyntaxParser.collectionTypeIdentifier_return collectionTypeIdentifier121 = default(OCLSyntaxParser.collectionTypeIdentifier_return);
-		OCLSyntaxParser.collectionLiteralParts_return collectionLiteralParts123 = default(OCLSyntaxParser.collectionLiteralParts_return);
-		OCLSyntaxParser.collectionType_return collectionType125 = default(OCLSyntaxParser.collectionType_return);
-		OCLSyntaxParser.collectionLiteralParts_return collectionLiteralParts127 = default(OCLSyntaxParser.collectionLiteralParts_return);
+		CommonToken char_literal125 = default(CommonToken);
+		CommonToken char_literal127 = default(CommonToken);
+		CommonToken char_literal129 = default(CommonToken);
+		CommonToken char_literal131 = default(CommonToken);
+		OCLSyntaxParser.collectionTypeIdentifier_return collectionTypeIdentifier124 = default(OCLSyntaxParser.collectionTypeIdentifier_return);
+		OCLSyntaxParser.collectionLiteralParts_return collectionLiteralParts126 = default(OCLSyntaxParser.collectionLiteralParts_return);
+		OCLSyntaxParser.collectionType_return collectionType128 = default(OCLSyntaxParser.collectionType_return);
+		OCLSyntaxParser.collectionLiteralParts_return collectionLiteralParts130 = default(OCLSyntaxParser.collectionLiteralParts_return);
 
-		object char_literal122_tree = default(object);
-		object char_literal124_tree = default(object);
-		object char_literal126_tree = default(object);
-		object char_literal128_tree = default(object);
+		object char_literal125_tree = default(object);
+		object char_literal127_tree = default(object);
+		object char_literal129_tree = default(object);
+		object char_literal131_tree = default(object);
 
 		try { DebugEnterRule(GrammarFileName, "collectionLiteralExp");
-		DebugLocation(235, 1);
+		DebugLocation(236, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:236:2: ( collectionTypeIdentifier '{' ( collectionLiteralParts )? '}' | collectionType '{' ( collectionLiteralParts )? '}' )
-			int alt58=2;
-			try { DebugEnterDecision(58, false);
-			int LA58_0 = input.LA(1);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:237:2: ( collectionTypeIdentifier '{' ( collectionLiteralParts )? '}' | collectionType '{' ( collectionLiteralParts )? '}' )
+			int alt59=2;
+			try { DebugEnterDecision(59, false);
+			int LA59_0 = input.LA(1);
 
-			if ((LA58_0==80||LA58_0==82||LA58_0==88||(LA58_0>=90 && LA58_0<=91)))
+			if ((LA59_0==80||LA59_0==82||LA59_0==88||(LA59_0>=90 && LA59_0<=91)))
 			{
-				int LA58_1 = input.LA(2);
+				int LA59_1 = input.LA(2);
 
-				if ((LA58_1==122))
+				if ((LA59_1==123))
 				{
-					alt58 = 1;
+					alt59 = 1;
 				}
-				else if ((LA58_1==61))
+				else if ((LA59_1==61))
 				{
-					alt58 = 2;
+					alt59 = 2;
 				}
 				else
 				{
 					if (state.backtracking>0) {state.failed=true; return retval;}
-					NoViableAltException nvae = new NoViableAltException("", 58, 1, input);
+					NoViableAltException nvae = new NoViableAltException("", 59, 1, input);
 					DebugRecognitionException(nvae);
 					throw nvae;
 				}
@@ -7731,97 +7802,39 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			else
 			{
 				if (state.backtracking>0) {state.failed=true; return retval;}
-				NoViableAltException nvae = new NoViableAltException("", 58, 0, input);
+				NoViableAltException nvae = new NoViableAltException("", 59, 0, input);
 				DebugRecognitionException(nvae);
 				throw nvae;
 			}
-			} finally { DebugExitDecision(58); }
-			switch (alt58)
+			} finally { DebugExitDecision(59); }
+			switch (alt59)
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:236:3: collectionTypeIdentifier '{' ( collectionLiteralParts )? '}'
-				{
-				root_0 = (object)adaptor.Nil();
-
-				DebugLocation(236, 3);
-				PushFollow(Follow._collectionTypeIdentifier_in_collectionLiteralExp1788);
-				collectionTypeIdentifier121=collectionTypeIdentifier();
-				PopFollow();
-				if (state.failed) return retval;
-				if (state.backtracking == 0) adaptor.AddChild(root_0, collectionTypeIdentifier121.Tree);
-				DebugLocation(236, 29);
-				char_literal122=(CommonToken)Match(input,122,Follow._122_in_collectionLiteralExp1791); if (state.failed) return retval;
-				if (state.backtracking == 0) {
-				char_literal122_tree = (object)adaptor.Create(char_literal122);
-				adaptor.AddChild(root_0, char_literal122_tree);
-				}
-				DebugLocation(236, 33);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:236:33: ( collectionLiteralParts )?
-				int alt56=2;
-				try { DebugEnterSubRule(56);
-				try { DebugEnterDecision(56, false);
-				int LA56_0 = input.LA(1);
-
-				if (((LA56_0>=IntegerLiteralExp && LA56_0<=InvalidLiteralExp)||LA56_0==NullLiteralExp||(LA56_0>=RealLiteralExp && LA56_0<=SimpleName)||LA56_0==StringLiteralExp||LA56_0==UnlimitedNaturalLiteralExp||LA56_0==61||LA56_0==65||(LA56_0>=80 && LA56_0<=94)||(LA56_0>=106 && LA56_0<=107)||(LA56_0>=112 && LA56_0<=114)||LA56_0==120))
-				{
-					alt56 = 1;
-				}
-				} finally { DebugExitDecision(56); }
-				switch (alt56)
-				{
-				case 1:
-					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:236:33: collectionLiteralParts
-					{
-					DebugLocation(236, 33);
-					PushFollow(Follow._collectionLiteralParts_in_collectionLiteralExp1793);
-					collectionLiteralParts123=collectionLiteralParts();
-					PopFollow();
-					if (state.failed) return retval;
-					if (state.backtracking == 0) adaptor.AddChild(root_0, collectionLiteralParts123.Tree);
-
-					}
-					break;
-
-				}
-				} finally { DebugExitSubRule(56); }
-
-				DebugLocation(236, 57);
-				char_literal124=(CommonToken)Match(input,124,Follow._124_in_collectionLiteralExp1796); if (state.failed) return retval;
-				if (state.backtracking == 0) {
-				char_literal124_tree = (object)adaptor.Create(char_literal124);
-				adaptor.AddChild(root_0, char_literal124_tree);
-				}
-
-				}
-				break;
-			case 2:
-				DebugEnterAlt(2);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:237:3: collectionType '{' ( collectionLiteralParts )? '}'
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:237:3: collectionTypeIdentifier '{' ( collectionLiteralParts )? '}'
 				{
 				root_0 = (object)adaptor.Nil();
 
 				DebugLocation(237, 3);
-				PushFollow(Follow._collectionType_in_collectionLiteralExp1800);
-				collectionType125=collectionType();
+				PushFollow(Follow._collectionTypeIdentifier_in_collectionLiteralExp1813);
+				collectionTypeIdentifier124=collectionTypeIdentifier();
 				PopFollow();
 				if (state.failed) return retval;
-				if (state.backtracking == 0) adaptor.AddChild(root_0, collectionType125.Tree);
-				DebugLocation(237, 18);
-				char_literal126=(CommonToken)Match(input,122,Follow._122_in_collectionLiteralExp1802); if (state.failed) return retval;
+				if (state.backtracking == 0) adaptor.AddChild(root_0, collectionTypeIdentifier124.Tree);
+				DebugLocation(237, 29);
+				char_literal125=(CommonToken)Match(input,123,Follow._123_in_collectionLiteralExp1816); if (state.failed) return retval;
 				if (state.backtracking == 0) {
-				char_literal126_tree = (object)adaptor.Create(char_literal126);
-				adaptor.AddChild(root_0, char_literal126_tree);
+				char_literal125_tree = (object)adaptor.Create(char_literal125);
+				adaptor.AddChild(root_0, char_literal125_tree);
 				}
-				DebugLocation(237, 22);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:237:22: ( collectionLiteralParts )?
+				DebugLocation(237, 33);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:237:33: ( collectionLiteralParts )?
 				int alt57=2;
 				try { DebugEnterSubRule(57);
 				try { DebugEnterDecision(57, false);
 				int LA57_0 = input.LA(1);
 
-				if (((LA57_0>=IntegerLiteralExp && LA57_0<=InvalidLiteralExp)||LA57_0==NullLiteralExp||(LA57_0>=RealLiteralExp && LA57_0<=SimpleName)||LA57_0==StringLiteralExp||LA57_0==UnlimitedNaturalLiteralExp||LA57_0==61||LA57_0==65||(LA57_0>=80 && LA57_0<=94)||(LA57_0>=106 && LA57_0<=107)||(LA57_0>=112 && LA57_0<=114)||LA57_0==120))
+				if (((LA57_0>=IntegerLiteralExp && LA57_0<=InvalidLiteralExp)||LA57_0==NullLiteralExp||(LA57_0>=RealLiteralExp && LA57_0<=SimpleName)||LA57_0==StringLiteralExp||LA57_0==UnlimitedNaturalLiteralExp||LA57_0==61||LA57_0==65||(LA57_0>=80 && LA57_0<=94)||(LA57_0>=106 && LA57_0<=107)||(LA57_0>=112 && LA57_0<=113)||LA57_0==115||LA57_0==121))
 				{
 					alt57 = 1;
 				}
@@ -7830,14 +7843,14 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:237:22: collectionLiteralParts
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:237:33: collectionLiteralParts
 					{
-					DebugLocation(237, 22);
-					PushFollow(Follow._collectionLiteralParts_in_collectionLiteralExp1804);
-					collectionLiteralParts127=collectionLiteralParts();
+					DebugLocation(237, 33);
+					PushFollow(Follow._collectionLiteralParts_in_collectionLiteralExp1818);
+					collectionLiteralParts126=collectionLiteralParts();
 					PopFollow();
 					if (state.failed) return retval;
-					if (state.backtracking == 0) adaptor.AddChild(root_0, collectionLiteralParts127.Tree);
+					if (state.backtracking == 0) adaptor.AddChild(root_0, collectionLiteralParts126.Tree);
 
 					}
 					break;
@@ -7845,11 +7858,69 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				}
 				} finally { DebugExitSubRule(57); }
 
-				DebugLocation(237, 46);
-				char_literal128=(CommonToken)Match(input,124,Follow._124_in_collectionLiteralExp1807); if (state.failed) return retval;
+				DebugLocation(237, 57);
+				char_literal127=(CommonToken)Match(input,125,Follow._125_in_collectionLiteralExp1821); if (state.failed) return retval;
 				if (state.backtracking == 0) {
-				char_literal128_tree = (object)adaptor.Create(char_literal128);
-				adaptor.AddChild(root_0, char_literal128_tree);
+				char_literal127_tree = (object)adaptor.Create(char_literal127);
+				adaptor.AddChild(root_0, char_literal127_tree);
+				}
+
+				}
+				break;
+			case 2:
+				DebugEnterAlt(2);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:238:3: collectionType '{' ( collectionLiteralParts )? '}'
+				{
+				root_0 = (object)adaptor.Nil();
+
+				DebugLocation(238, 3);
+				PushFollow(Follow._collectionType_in_collectionLiteralExp1825);
+				collectionType128=collectionType();
+				PopFollow();
+				if (state.failed) return retval;
+				if (state.backtracking == 0) adaptor.AddChild(root_0, collectionType128.Tree);
+				DebugLocation(238, 18);
+				char_literal129=(CommonToken)Match(input,123,Follow._123_in_collectionLiteralExp1827); if (state.failed) return retval;
+				if (state.backtracking == 0) {
+				char_literal129_tree = (object)adaptor.Create(char_literal129);
+				adaptor.AddChild(root_0, char_literal129_tree);
+				}
+				DebugLocation(238, 22);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:238:22: ( collectionLiteralParts )?
+				int alt58=2;
+				try { DebugEnterSubRule(58);
+				try { DebugEnterDecision(58, false);
+				int LA58_0 = input.LA(1);
+
+				if (((LA58_0>=IntegerLiteralExp && LA58_0<=InvalidLiteralExp)||LA58_0==NullLiteralExp||(LA58_0>=RealLiteralExp && LA58_0<=SimpleName)||LA58_0==StringLiteralExp||LA58_0==UnlimitedNaturalLiteralExp||LA58_0==61||LA58_0==65||(LA58_0>=80 && LA58_0<=94)||(LA58_0>=106 && LA58_0<=107)||(LA58_0>=112 && LA58_0<=113)||LA58_0==115||LA58_0==121))
+				{
+					alt58 = 1;
+				}
+				} finally { DebugExitDecision(58); }
+				switch (alt58)
+				{
+				case 1:
+					DebugEnterAlt(1);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:238:22: collectionLiteralParts
+					{
+					DebugLocation(238, 22);
+					PushFollow(Follow._collectionLiteralParts_in_collectionLiteralExp1829);
+					collectionLiteralParts130=collectionLiteralParts();
+					PopFollow();
+					if (state.failed) return retval;
+					if (state.backtracking == 0) adaptor.AddChild(root_0, collectionLiteralParts130.Tree);
+
+					}
+					break;
+
+				}
+				} finally { DebugExitSubRule(58); }
+
+				DebugLocation(238, 46);
+				char_literal131=(CommonToken)Match(input,125,Follow._125_in_collectionLiteralExp1832); if (state.failed) return retval;
+				if (state.backtracking == 0) {
+				char_literal131_tree = (object)adaptor.Create(char_literal131);
+				adaptor.AddChild(root_0, char_literal131_tree);
 				}
 
 				}
@@ -7876,7 +7947,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			LeaveRule("collectionLiteralExp", 35);
 			LeaveRule_collectionLiteralExp();
 		}
-		DebugLocation(238, 1);
+		DebugLocation(239, 1);
 		} finally { DebugExitRule(GrammarFileName, "collectionLiteralExp"); }
 		return retval;
 
@@ -7896,7 +7967,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 	partial void LeaveRule_collectionTypeIdentifier();
 
 	// $ANTLR start "collectionTypeIdentifier"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:245:1: collectionTypeIdentifier : ( 'Set' | 'Bag' | 'Sequence' | 'Collection' | 'OrderedSet' );
+	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:246:1: collectionTypeIdentifier : ( 'Set' | 'Bag' | 'Sequence' | 'Collection' | 'OrderedSet' );
 	[GrammarRule("collectionTypeIdentifier")]
 	private OCLSyntaxParser.collectionTypeIdentifier_return collectionTypeIdentifier()
 	{
@@ -7908,26 +7979,26 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 
 		object root_0 = default(object);
 
-		CommonToken set129 = default(CommonToken);
+		CommonToken set132 = default(CommonToken);
 
-		object set129_tree = default(object);
+		object set132_tree = default(object);
 
 		try { DebugEnterRule(GrammarFileName, "collectionTypeIdentifier");
-		DebugLocation(245, 1);
+		DebugLocation(246, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:246:2: ( 'Set' | 'Bag' | 'Sequence' | 'Collection' | 'OrderedSet' )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:247:2: ( 'Set' | 'Bag' | 'Sequence' | 'Collection' | 'OrderedSet' )
 			DebugEnterAlt(1);
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:
 			{
 			root_0 = (object)adaptor.Nil();
 
-			DebugLocation(246, 2);
-			set129=(CommonToken)input.LT(1);
+			DebugLocation(247, 2);
+			set132=(CommonToken)input.LT(1);
 			if (input.LA(1)==80||input.LA(1)==82||input.LA(1)==88||(input.LA(1)>=90 && input.LA(1)<=91))
 			{
 				input.Consume();
-				if (state.backtracking == 0) adaptor.AddChild(root_0, (object)adaptor.Create(set129));
+				if (state.backtracking == 0) adaptor.AddChild(root_0, (object)adaptor.Create(set132));
 				state.errorRecovery=false;state.failed=false;
 			}
 			else
@@ -7961,7 +8032,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			LeaveRule("collectionTypeIdentifier", 36);
 			LeaveRule_collectionTypeIdentifier();
 		}
-		DebugLocation(251, 1);
+		DebugLocation(252, 1);
 		} finally { DebugExitRule(GrammarFileName, "collectionTypeIdentifier"); }
 		return retval;
 
@@ -7981,7 +8052,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 	partial void LeaveRule_collectionLiteralParts();
 
 	// $ANTLR start "collectionLiteralParts"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:253:1: collectionLiteralParts : collectionLiteralPart ( ',' collectionLiteralPart )* ;
+	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:254:1: collectionLiteralParts : collectionLiteralPart ( ',' collectionLiteralPart )* ;
 	[GrammarRule("collectionLiteralParts")]
 	private OCLSyntaxParser.collectionLiteralParts_return collectionLiteralParts()
 	{
@@ -7993,71 +8064,71 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 
 		object root_0 = default(object);
 
-		CommonToken char_literal131 = default(CommonToken);
-		OCLSyntaxParser.collectionLiteralPart_return collectionLiteralPart130 = default(OCLSyntaxParser.collectionLiteralPart_return);
-		OCLSyntaxParser.collectionLiteralPart_return collectionLiteralPart132 = default(OCLSyntaxParser.collectionLiteralPart_return);
+		CommonToken char_literal134 = default(CommonToken);
+		OCLSyntaxParser.collectionLiteralPart_return collectionLiteralPart133 = default(OCLSyntaxParser.collectionLiteralPart_return);
+		OCLSyntaxParser.collectionLiteralPart_return collectionLiteralPart135 = default(OCLSyntaxParser.collectionLiteralPart_return);
 
-		object char_literal131_tree = default(object);
+		object char_literal134_tree = default(object);
 
 		try { DebugEnterRule(GrammarFileName, "collectionLiteralParts");
-		DebugLocation(253, 1);
+		DebugLocation(254, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:254:2: ( collectionLiteralPart ( ',' collectionLiteralPart )* )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:255:2: ( collectionLiteralPart ( ',' collectionLiteralPart )* )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:254:4: collectionLiteralPart ( ',' collectionLiteralPart )*
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:255:4: collectionLiteralPart ( ',' collectionLiteralPart )*
 			{
 			root_0 = (object)adaptor.Nil();
 
-			DebugLocation(254, 4);
-			PushFollow(Follow._collectionLiteralPart_in_collectionLiteralParts1854);
-			collectionLiteralPart130=collectionLiteralPart();
+			DebugLocation(255, 4);
+			PushFollow(Follow._collectionLiteralPart_in_collectionLiteralParts1879);
+			collectionLiteralPart133=collectionLiteralPart();
 			PopFollow();
 			if (state.failed) return retval;
-			if (state.backtracking == 0) adaptor.AddChild(root_0, collectionLiteralPart130.Tree);
-			DebugLocation(254, 26);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:254:26: ( ',' collectionLiteralPart )*
-			try { DebugEnterSubRule(59);
+			if (state.backtracking == 0) adaptor.AddChild(root_0, collectionLiteralPart133.Tree);
+			DebugLocation(255, 26);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:255:26: ( ',' collectionLiteralPart )*
+			try { DebugEnterSubRule(60);
 			while (true)
 			{
-				int alt59=2;
-				try { DebugEnterDecision(59, false);
-				int LA59_0 = input.LA(1);
+				int alt60=2;
+				try { DebugEnterDecision(60, false);
+				int LA60_0 = input.LA(1);
 
-				if ((LA59_0==64))
+				if ((LA60_0==64))
 				{
-					alt59 = 1;
+					alt60 = 1;
 				}
 
 
-				} finally { DebugExitDecision(59); }
-				switch ( alt59 )
+				} finally { DebugExitDecision(60); }
+				switch ( alt60 )
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:254:28: ',' collectionLiteralPart
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:255:28: ',' collectionLiteralPart
 					{
-					DebugLocation(254, 31);
-					char_literal131=(CommonToken)Match(input,64,Follow._64_in_collectionLiteralParts1858); if (state.failed) return retval;
-					DebugLocation(254, 33);
-					PushFollow(Follow._collectionLiteralPart_in_collectionLiteralParts1861);
-					collectionLiteralPart132=collectionLiteralPart();
+					DebugLocation(255, 31);
+					char_literal134=(CommonToken)Match(input,64,Follow._64_in_collectionLiteralParts1883); if (state.failed) return retval;
+					DebugLocation(255, 33);
+					PushFollow(Follow._collectionLiteralPart_in_collectionLiteralParts1886);
+					collectionLiteralPart135=collectionLiteralPart();
 					PopFollow();
 					if (state.failed) return retval;
-					if (state.backtracking == 0) adaptor.AddChild(root_0, collectionLiteralPart132.Tree);
+					if (state.backtracking == 0) adaptor.AddChild(root_0, collectionLiteralPart135.Tree);
 
 					}
 					break;
 
 				default:
-					goto loop59;
+					goto loop60;
 				}
 			}
 
-			loop59:
+			loop60:
 				;
 
-			} finally { DebugExitSubRule(59); }
+			} finally { DebugExitSubRule(60); }
 
 
 			}
@@ -8082,7 +8153,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			LeaveRule("collectionLiteralParts", 37);
 			LeaveRule_collectionLiteralParts();
 		}
-		DebugLocation(255, 1);
+		DebugLocation(256, 1);
 		} finally { DebugExitRule(GrammarFileName, "collectionLiteralParts"); }
 		return retval;
 
@@ -8102,7 +8173,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 	partial void LeaveRule_collectionLiteralPart();
 
 	// $ANTLR start "collectionLiteralPart"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:257:1: collectionLiteralPart : exp1= oclExpression ( ( DoubleDot exp2= oclExpression ) -> ^( COLLPARTRANGE $exp1 $exp2) | -> ^( COLLPART $exp1) ) ;
+	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:258:1: collectionLiteralPart : exp1= oclExpression ( ( DoubleDot exp2= oclExpression ) -> ^( COLLPARTRANGE $exp1 $exp2) | -> ^( COLLPART $exp1) ) ;
 	[GrammarRule("collectionLiteralPart")]
 	private OCLSyntaxParser.collectionLiteralPart_return collectionLiteralPart()
 	{
@@ -8114,67 +8185,67 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 
 		object root_0 = default(object);
 
-		CommonToken DoubleDot133 = default(CommonToken);
+		CommonToken DoubleDot136 = default(CommonToken);
 		OCLSyntaxParser.oclExpression_return exp1 = default(OCLSyntaxParser.oclExpression_return);
 		OCLSyntaxParser.oclExpression_return exp2 = default(OCLSyntaxParser.oclExpression_return);
 
-		object DoubleDot133_tree = default(object);
+		object DoubleDot136_tree = default(object);
 		RewriteRuleITokenStream stream_DoubleDot=new RewriteRuleITokenStream(adaptor,"token DoubleDot");
 		RewriteRuleSubtreeStream stream_oclExpression=new RewriteRuleSubtreeStream(adaptor,"rule oclExpression");
 		try { DebugEnterRule(GrammarFileName, "collectionLiteralPart");
-		DebugLocation(257, 1);
+		DebugLocation(258, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:258:2: (exp1= oclExpression ( ( DoubleDot exp2= oclExpression ) -> ^( COLLPARTRANGE $exp1 $exp2) | -> ^( COLLPART $exp1) ) )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:259:2: (exp1= oclExpression ( ( DoubleDot exp2= oclExpression ) -> ^( COLLPARTRANGE $exp1 $exp2) | -> ^( COLLPART $exp1) ) )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:258:4: exp1= oclExpression ( ( DoubleDot exp2= oclExpression ) -> ^( COLLPARTRANGE $exp1 $exp2) | -> ^( COLLPART $exp1) )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:259:4: exp1= oclExpression ( ( DoubleDot exp2= oclExpression ) -> ^( COLLPARTRANGE $exp1 $exp2) | -> ^( COLLPART $exp1) )
 			{
-			DebugLocation(258, 8);
-			PushFollow(Follow._oclExpression_in_collectionLiteralPart1878);
+			DebugLocation(259, 8);
+			PushFollow(Follow._oclExpression_in_collectionLiteralPart1903);
 			exp1=oclExpression();
 			PopFollow();
 			if (state.failed) return retval;
 			if (state.backtracking == 0) stream_oclExpression.Add(exp1.Tree);
-			DebugLocation(258, 23);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:258:23: ( ( DoubleDot exp2= oclExpression ) -> ^( COLLPARTRANGE $exp1 $exp2) | -> ^( COLLPART $exp1) )
-			int alt60=2;
-			try { DebugEnterSubRule(60);
-			try { DebugEnterDecision(60, false);
-			int LA60_0 = input.LA(1);
+			DebugLocation(259, 23);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:259:23: ( ( DoubleDot exp2= oclExpression ) -> ^( COLLPARTRANGE $exp1 $exp2) | -> ^( COLLPART $exp1) )
+			int alt61=2;
+			try { DebugEnterSubRule(61);
+			try { DebugEnterDecision(61, false);
+			int LA61_0 = input.LA(1);
 
-			if ((LA60_0==DoubleDot))
+			if ((LA61_0==DoubleDot))
 			{
-				alt60 = 1;
+				alt61 = 1;
 			}
-			else if ((LA60_0==64||LA60_0==124))
+			else if ((LA61_0==64||LA61_0==125))
 			{
-				alt60 = 2;
+				alt61 = 2;
 			}
 			else
 			{
 				if (state.backtracking>0) {state.failed=true; return retval;}
-				NoViableAltException nvae = new NoViableAltException("", 60, 0, input);
+				NoViableAltException nvae = new NoViableAltException("", 61, 0, input);
 				DebugRecognitionException(nvae);
 				throw nvae;
 			}
-			} finally { DebugExitDecision(60); }
-			switch (alt60)
+			} finally { DebugExitDecision(61); }
+			switch (alt61)
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:258:24: ( DoubleDot exp2= oclExpression )
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:259:24: ( DoubleDot exp2= oclExpression )
 				{
-				DebugLocation(258, 24);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:258:24: ( DoubleDot exp2= oclExpression )
+				DebugLocation(259, 24);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:259:24: ( DoubleDot exp2= oclExpression )
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:258:25: DoubleDot exp2= oclExpression
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:259:25: DoubleDot exp2= oclExpression
 				{
-				DebugLocation(258, 25);
-				DoubleDot133=(CommonToken)Match(input,DoubleDot,Follow._DoubleDot_in_collectionLiteralPart1882); if (state.failed) return retval; 
-				if (state.backtracking == 0) stream_DoubleDot.Add(DoubleDot133);
+				DebugLocation(259, 25);
+				DoubleDot136=(CommonToken)Match(input,DoubleDot,Follow._DoubleDot_in_collectionLiteralPart1907); if (state.failed) return retval; 
+				if (state.backtracking == 0) stream_DoubleDot.Add(DoubleDot136);
 
-				DebugLocation(258, 39);
-				PushFollow(Follow._oclExpression_in_collectionLiteralPart1886);
+				DebugLocation(259, 39);
+				PushFollow(Follow._oclExpression_in_collectionLiteralPart1911);
 				exp2=oclExpression();
 				PopFollow();
 				if (state.failed) return retval;
@@ -8199,18 +8270,18 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 				root_0 = (object)adaptor.Nil();
-				// 258:54: -> ^( COLLPARTRANGE $exp1 $exp2)
+				// 259:54: -> ^( COLLPARTRANGE $exp1 $exp2)
 				{
-					DebugLocation(258, 56);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:258:56: ^( COLLPARTRANGE $exp1 $exp2)
+					DebugLocation(259, 56);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:259:56: ^( COLLPARTRANGE $exp1 $exp2)
 					{
 					object root_1 = (object)adaptor.Nil();
-					DebugLocation(258, 58);
+					DebugLocation(259, 58);
 					root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(COLLPARTRANGE, "COLLPARTRANGE"), root_1);
 
-					DebugLocation(258, 73);
+					DebugLocation(259, 73);
 					adaptor.AddChild(root_1, stream_exp1.NextTree());
-					DebugLocation(258, 79);
+					DebugLocation(259, 79);
 					adaptor.AddChild(root_1, stream_exp2.NextTree());
 
 					adaptor.AddChild(root_0, root_1);
@@ -8226,7 +8297,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:258:85: 
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:259:85: 
 				{
 
 				{
@@ -8243,16 +8314,16 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 				root_0 = (object)adaptor.Nil();
-				// 258:85: -> ^( COLLPART $exp1)
+				// 259:85: -> ^( COLLPART $exp1)
 				{
-					DebugLocation(258, 87);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:258:87: ^( COLLPART $exp1)
+					DebugLocation(259, 87);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:259:87: ^( COLLPART $exp1)
 					{
 					object root_1 = (object)adaptor.Nil();
-					DebugLocation(258, 89);
+					DebugLocation(259, 89);
 					root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(COLLPART, "COLLPART"), root_1);
 
-					DebugLocation(258, 99);
+					DebugLocation(259, 99);
 					adaptor.AddChild(root_1, stream_exp1.NextTree());
 
 					adaptor.AddChild(root_0, root_1);
@@ -8268,7 +8339,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				break;
 
 			}
-			} finally { DebugExitSubRule(60); }
+			} finally { DebugExitSubRule(61); }
 
 
 			}
@@ -8293,7 +8364,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			LeaveRule("collectionLiteralPart", 38);
 			LeaveRule_collectionLiteralPart();
 		}
-		DebugLocation(259, 1);
+		DebugLocation(260, 1);
 		} finally { DebugExitRule(GrammarFileName, "collectionLiteralPart"); }
 		return retval;
 
@@ -8313,7 +8384,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 	partial void LeaveRule_primitiveLiteralExp();
 
 	// $ANTLR start "primitiveLiteralExp"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:262:1: primitiveLiteralExp : ( IntegerLiteralExp | RealLiteralExp | StringLiteralExp | 'true' | 'false' | UnlimitedNaturalLiteralExp | NullLiteralExp | InvalidLiteralExp );
+	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:263:1: primitiveLiteralExp : ( IntegerLiteralExp | RealLiteralExp | StringLiteralExp | 'true' | 'false' | UnlimitedNaturalLiteralExp | NullLiteralExp | InvalidLiteralExp );
 	[GrammarRule("primitiveLiteralExp")]
 	private OCLSyntaxParser.primitiveLiteralExp_return primitiveLiteralExp()
 	{
@@ -8325,26 +8396,26 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 
 		object root_0 = default(object);
 
-		CommonToken set134 = default(CommonToken);
+		CommonToken set137 = default(CommonToken);
 
-		object set134_tree = default(object);
+		object set137_tree = default(object);
 
 		try { DebugEnterRule(GrammarFileName, "primitiveLiteralExp");
-		DebugLocation(262, 1);
+		DebugLocation(263, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:263:2: ( IntegerLiteralExp | RealLiteralExp | StringLiteralExp | 'true' | 'false' | UnlimitedNaturalLiteralExp | NullLiteralExp | InvalidLiteralExp )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:264:2: ( IntegerLiteralExp | RealLiteralExp | StringLiteralExp | 'true' | 'false' | UnlimitedNaturalLiteralExp | NullLiteralExp | InvalidLiteralExp )
 			DebugEnterAlt(1);
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:
 			{
 			root_0 = (object)adaptor.Nil();
 
-			DebugLocation(263, 2);
-			set134=(CommonToken)input.LT(1);
-			if ((input.LA(1)>=IntegerLiteralExp && input.LA(1)<=InvalidLiteralExp)||input.LA(1)==NullLiteralExp||input.LA(1)==RealLiteralExp||input.LA(1)==StringLiteralExp||input.LA(1)==UnlimitedNaturalLiteralExp||input.LA(1)==106||input.LA(1)==120)
+			DebugLocation(264, 2);
+			set137=(CommonToken)input.LT(1);
+			if ((input.LA(1)>=IntegerLiteralExp && input.LA(1)<=InvalidLiteralExp)||input.LA(1)==NullLiteralExp||input.LA(1)==RealLiteralExp||input.LA(1)==StringLiteralExp||input.LA(1)==UnlimitedNaturalLiteralExp||input.LA(1)==106||input.LA(1)==121)
 			{
 				input.Consume();
-				if (state.backtracking == 0) adaptor.AddChild(root_0, (object)adaptor.Create(set134));
+				if (state.backtracking == 0) adaptor.AddChild(root_0, (object)adaptor.Create(set137));
 				state.errorRecovery=false;state.failed=false;
 			}
 			else
@@ -8378,7 +8449,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			LeaveRule("primitiveLiteralExp", 39);
 			LeaveRule_primitiveLiteralExp();
 		}
-		DebugLocation(271, 1);
+		DebugLocation(272, 1);
 		} finally { DebugExitRule(GrammarFileName, "primitiveLiteralExp"); }
 		return retval;
 
@@ -8398,7 +8469,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 	partial void LeaveRule_tupleLiteralExp();
 
 	// $ANTLR start "tupleLiteralExp"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:272:1: tupleLiteralExp : roottoken= 'Tuple' '{' variableDeclarationList[VariableDeclarationRequirement.TupleLiteral] '}' -> ^( TUPLELITERAL[$roottoken] variableDeclarationList ) ;
+	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:273:1: tupleLiteralExp : roottoken= 'Tuple' '{' variableDeclarationList[VariableDeclarationRequirement.TupleLiteral] '}' -> ^( TUPLELITERAL[$roottoken] variableDeclarationList ) ;
 	[GrammarRule("tupleLiteralExp")]
 	private OCLSyntaxParser.tupleLiteralExp_return tupleLiteralExp()
 	{
@@ -8411,42 +8482,42 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 		object root_0 = default(object);
 
 		CommonToken roottoken = default(CommonToken);
-		CommonToken char_literal135 = default(CommonToken);
-		CommonToken char_literal137 = default(CommonToken);
-		OCLSyntaxParser.variableDeclarationList_return variableDeclarationList136 = default(OCLSyntaxParser.variableDeclarationList_return);
+		CommonToken char_literal138 = default(CommonToken);
+		CommonToken char_literal140 = default(CommonToken);
+		OCLSyntaxParser.variableDeclarationList_return variableDeclarationList139 = default(OCLSyntaxParser.variableDeclarationList_return);
 
 		object roottoken_tree = default(object);
-		object char_literal135_tree = default(object);
-		object char_literal137_tree = default(object);
+		object char_literal138_tree = default(object);
+		object char_literal140_tree = default(object);
 		RewriteRuleITokenStream stream_93=new RewriteRuleITokenStream(adaptor,"token 93");
-		RewriteRuleITokenStream stream_122=new RewriteRuleITokenStream(adaptor,"token 122");
-		RewriteRuleITokenStream stream_124=new RewriteRuleITokenStream(adaptor,"token 124");
+		RewriteRuleITokenStream stream_123=new RewriteRuleITokenStream(adaptor,"token 123");
+		RewriteRuleITokenStream stream_125=new RewriteRuleITokenStream(adaptor,"token 125");
 		RewriteRuleSubtreeStream stream_variableDeclarationList=new RewriteRuleSubtreeStream(adaptor,"rule variableDeclarationList");
 		try { DebugEnterRule(GrammarFileName, "tupleLiteralExp");
-		DebugLocation(272, 1);
+		DebugLocation(273, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:274:2: (roottoken= 'Tuple' '{' variableDeclarationList[VariableDeclarationRequirement.TupleLiteral] '}' -> ^( TUPLELITERAL[$roottoken] variableDeclarationList ) )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:275:2: (roottoken= 'Tuple' '{' variableDeclarationList[VariableDeclarationRequirement.TupleLiteral] '}' -> ^( TUPLELITERAL[$roottoken] variableDeclarationList ) )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:274:4: roottoken= 'Tuple' '{' variableDeclarationList[VariableDeclarationRequirement.TupleLiteral] '}'
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:275:4: roottoken= 'Tuple' '{' variableDeclarationList[VariableDeclarationRequirement.TupleLiteral] '}'
 			{
-			DebugLocation(274, 13);
-			roottoken=(CommonToken)Match(input,93,Follow._93_in_tupleLiteralExp1975); if (state.failed) return retval; 
+			DebugLocation(275, 13);
+			roottoken=(CommonToken)Match(input,93,Follow._93_in_tupleLiteralExp2000); if (state.failed) return retval; 
 			if (state.backtracking == 0) stream_93.Add(roottoken);
 
-			DebugLocation(274, 22);
-			char_literal135=(CommonToken)Match(input,122,Follow._122_in_tupleLiteralExp1977); if (state.failed) return retval; 
-			if (state.backtracking == 0) stream_122.Add(char_literal135);
+			DebugLocation(275, 22);
+			char_literal138=(CommonToken)Match(input,123,Follow._123_in_tupleLiteralExp2002); if (state.failed) return retval; 
+			if (state.backtracking == 0) stream_123.Add(char_literal138);
 
-			DebugLocation(274, 26);
-			PushFollow(Follow._variableDeclarationList_in_tupleLiteralExp1979);
-			variableDeclarationList136=variableDeclarationList(VariableDeclarationRequirement.TupleLiteral);
+			DebugLocation(275, 26);
+			PushFollow(Follow._variableDeclarationList_in_tupleLiteralExp2004);
+			variableDeclarationList139=variableDeclarationList(VariableDeclarationRequirement.TupleLiteral);
 			PopFollow();
 			if (state.failed) return retval;
-			if (state.backtracking == 0) stream_variableDeclarationList.Add(variableDeclarationList136.Tree);
-			DebugLocation(274, 95);
-			char_literal137=(CommonToken)Match(input,124,Follow._124_in_tupleLiteralExp1982); if (state.failed) return retval; 
-			if (state.backtracking == 0) stream_124.Add(char_literal137);
+			if (state.backtracking == 0) stream_variableDeclarationList.Add(variableDeclarationList139.Tree);
+			DebugLocation(275, 95);
+			char_literal140=(CommonToken)Match(input,125,Follow._125_in_tupleLiteralExp2007); if (state.failed) return retval; 
+			if (state.backtracking == 0) stream_125.Add(char_literal140);
 
 
 
@@ -8463,16 +8534,16 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 			root_0 = (object)adaptor.Nil();
-			// 274:99: -> ^( TUPLELITERAL[$roottoken] variableDeclarationList )
+			// 275:99: -> ^( TUPLELITERAL[$roottoken] variableDeclarationList )
 			{
-				DebugLocation(274, 102);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:274:102: ^( TUPLELITERAL[$roottoken] variableDeclarationList )
+				DebugLocation(275, 102);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:275:102: ^( TUPLELITERAL[$roottoken] variableDeclarationList )
 				{
 				object root_1 = (object)adaptor.Nil();
-				DebugLocation(274, 104);
+				DebugLocation(275, 104);
 				root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(TUPLELITERAL, roottoken), root_1);
 
-				DebugLocation(274, 130);
+				DebugLocation(275, 130);
 				adaptor.AddChild(root_1, stream_variableDeclarationList.NextTree());
 
 				adaptor.AddChild(root_0, root_1);
@@ -8506,7 +8577,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			LeaveRule("tupleLiteralExp", 40);
 			LeaveRule_tupleLiteralExp();
 		}
-		DebugLocation(275, 1);
+		DebugLocation(276, 1);
 		} finally { DebugExitRule(GrammarFileName, "tupleLiteralExp"); }
 		return retval;
 
@@ -8526,7 +8597,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 	partial void LeaveRule_typeLiteralExp();
 
 	// $ANTLR start "typeLiteralExp"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:277:1: typeLiteralExp : type ;
+	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:278:1: typeLiteralExp : type ;
 	[GrammarRule("typeLiteralExp")]
 	private OCLSyntaxParser.typeLiteralExp_return typeLiteralExp()
 	{
@@ -8538,25 +8609,25 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 
 		object root_0 = default(object);
 
-		OCLSyntaxParser.type_return type138 = default(OCLSyntaxParser.type_return);
+		OCLSyntaxParser.type_return type141 = default(OCLSyntaxParser.type_return);
 
 
 		try { DebugEnterRule(GrammarFileName, "typeLiteralExp");
-		DebugLocation(277, 1);
+		DebugLocation(278, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:278:2: ( type )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:279:2: ( type )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:278:3: type
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:279:3: type
 			{
 			root_0 = (object)adaptor.Nil();
 
-			DebugLocation(278, 3);
-			PushFollow(Follow._type_in_typeLiteralExp2004);
-			type138=type();
+			DebugLocation(279, 3);
+			PushFollow(Follow._type_in_typeLiteralExp2029);
+			type141=type();
 			PopFollow();
 			if (state.failed) return retval;
-			if (state.backtracking == 0) adaptor.AddChild(root_0, type138.Tree);
+			if (state.backtracking == 0) adaptor.AddChild(root_0, type141.Tree);
 
 			}
 
@@ -8580,7 +8651,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			LeaveRule("typeLiteralExp", 41);
 			LeaveRule_typeLiteralExp();
 		}
-		DebugLocation(279, 1);
+		DebugLocation(280, 1);
 		} finally { DebugExitRule(GrammarFileName, "typeLiteralExp"); }
 		return retval;
 
@@ -8600,7 +8671,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 	partial void LeaveRule_variableDeclaration();
 
 	// $ANTLR start "variableDeclaration"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:281:1: variableDeclaration[VariableDeclarationRequirement requirement] : ({...}? SimpleName ':' type -> ^( DECL SimpleName ( type )? ) |{...}? SimpleName ( ':' type )? '=' oclExpression -> ^( DECL SimpleName ( type )? ( oclExpression )? ) );
+	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:282:1: variableDeclaration[VariableDeclarationRequirement requirement] : ({...}? SimpleName ':' type -> ^( DECL SimpleName ( type )? ) |{...}? SimpleName ( ':' type )? '=' oclExpression -> ^( DECL SimpleName ( type )? ( oclExpression )? ) );
 	[GrammarRule("variableDeclaration")]
 	private OCLSyntaxParser.variableDeclaration_return variableDeclaration(VariableDeclarationRequirement requirement)
 	{
@@ -8612,52 +8683,52 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 
 		object root_0 = default(object);
 
-		CommonToken SimpleName139 = default(CommonToken);
-		CommonToken char_literal140 = default(CommonToken);
 		CommonToken SimpleName142 = default(CommonToken);
 		CommonToken char_literal143 = default(CommonToken);
-		CommonToken char_literal145 = default(CommonToken);
-		OCLSyntaxParser.type_return type141 = default(OCLSyntaxParser.type_return);
+		CommonToken SimpleName145 = default(CommonToken);
+		CommonToken char_literal146 = default(CommonToken);
+		CommonToken char_literal148 = default(CommonToken);
 		OCLSyntaxParser.type_return type144 = default(OCLSyntaxParser.type_return);
-		OCLSyntaxParser.oclExpression_return oclExpression146 = default(OCLSyntaxParser.oclExpression_return);
+		OCLSyntaxParser.type_return type147 = default(OCLSyntaxParser.type_return);
+		OCLSyntaxParser.oclExpression_return oclExpression149 = default(OCLSyntaxParser.oclExpression_return);
 
-		object SimpleName139_tree = default(object);
-		object char_literal140_tree = default(object);
 		object SimpleName142_tree = default(object);
 		object char_literal143_tree = default(object);
-		object char_literal145_tree = default(object);
+		object SimpleName145_tree = default(object);
+		object char_literal146_tree = default(object);
+		object char_literal148_tree = default(object);
 		RewriteRuleITokenStream stream_SimpleName=new RewriteRuleITokenStream(adaptor,"token SimpleName");
 		RewriteRuleITokenStream stream_69=new RewriteRuleITokenStream(adaptor,"token 69");
 		RewriteRuleITokenStream stream_75=new RewriteRuleITokenStream(adaptor,"token 75");
 		RewriteRuleSubtreeStream stream_type=new RewriteRuleSubtreeStream(adaptor,"rule type");
 		RewriteRuleSubtreeStream stream_oclExpression=new RewriteRuleSubtreeStream(adaptor,"rule oclExpression");
 		try { DebugEnterRule(GrammarFileName, "variableDeclaration");
-		DebugLocation(281, 1);
+		DebugLocation(282, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:282:2: ({...}? SimpleName ':' type -> ^( DECL SimpleName ( type )? ) |{...}? SimpleName ( ':' type )? '=' oclExpression -> ^( DECL SimpleName ( type )? ( oclExpression )? ) )
-			int alt62=2;
-			try { DebugEnterDecision(62, false);
-			int LA62_0 = input.LA(1);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:283:2: ({...}? SimpleName ':' type -> ^( DECL SimpleName ( type )? ) |{...}? SimpleName ( ':' type )? '=' oclExpression -> ^( DECL SimpleName ( type )? ( oclExpression )? ) )
+			int alt63=2;
+			try { DebugEnterDecision(63, false);
+			int LA63_0 = input.LA(1);
 
-			if ((LA62_0==SimpleName))
+			if ((LA63_0==SimpleName))
 			{
-				int LA62_1 = input.LA(2);
+				int LA63_1 = input.LA(2);
 
 				if (((requirement==VariableDeclarationRequirement.TupleType ||
 						requirement==VariableDeclarationRequirement.Iterator)))
 				{
-					alt62 = 1;
+					alt63 = 1;
 				}
 				else if (((requirement==VariableDeclarationRequirement.TupleLiteral ||
 						requirement==VariableDeclarationRequirement.Let)))
 				{
-					alt62 = 2;
+					alt63 = 2;
 				}
 				else
 				{
 					if (state.backtracking>0) {state.failed=true; return retval;}
-					NoViableAltException nvae = new NoViableAltException("", 62, 1, input);
+					NoViableAltException nvae = new NoViableAltException("", 63, 1, input);
 					DebugRecognitionException(nvae);
 					throw nvae;
 				}
@@ -8665,38 +8736,38 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			else
 			{
 				if (state.backtracking>0) {state.failed=true; return retval;}
-				NoViableAltException nvae = new NoViableAltException("", 62, 0, input);
+				NoViableAltException nvae = new NoViableAltException("", 63, 0, input);
 				DebugRecognitionException(nvae);
 				throw nvae;
 			}
-			} finally { DebugExitDecision(62); }
-			switch (alt62)
+			} finally { DebugExitDecision(63); }
+			switch (alt63)
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:282:3: {...}? SimpleName ':' type
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:283:3: {...}? SimpleName ':' type
 				{
-				DebugLocation(282, 3);
+				DebugLocation(283, 3);
 				if (!((requirement==VariableDeclarationRequirement.TupleType ||
 						requirement==VariableDeclarationRequirement.Iterator)))
 				{
 					if (state.backtracking>0) {state.failed=true; return retval;}
 					throw new FailedPredicateException(input, "variableDeclaration", "$requirement==VariableDeclarationRequirement.TupleType ||\r\n\t\t$requirement==VariableDeclarationRequirement.Iterator");
 				}
-				DebugLocation(284, 3);
-				SimpleName139=(CommonToken)Match(input,SimpleName,Follow._SimpleName_in_variableDeclaration2019); if (state.failed) return retval; 
-				if (state.backtracking == 0) stream_SimpleName.Add(SimpleName139);
+				DebugLocation(285, 3);
+				SimpleName142=(CommonToken)Match(input,SimpleName,Follow._SimpleName_in_variableDeclaration2044); if (state.failed) return retval; 
+				if (state.backtracking == 0) stream_SimpleName.Add(SimpleName142);
 
-				DebugLocation(284, 14);
-				char_literal140=(CommonToken)Match(input,69,Follow._69_in_variableDeclaration2021); if (state.failed) return retval; 
-				if (state.backtracking == 0) stream_69.Add(char_literal140);
+				DebugLocation(285, 14);
+				char_literal143=(CommonToken)Match(input,69,Follow._69_in_variableDeclaration2046); if (state.failed) return retval; 
+				if (state.backtracking == 0) stream_69.Add(char_literal143);
 
-				DebugLocation(284, 18);
-				PushFollow(Follow._type_in_variableDeclaration2023);
-				type141=type();
+				DebugLocation(285, 18);
+				PushFollow(Follow._type_in_variableDeclaration2048);
+				type144=type();
 				PopFollow();
 				if (state.failed) return retval;
-				if (state.backtracking == 0) stream_type.Add(type141.Tree);
+				if (state.backtracking == 0) stream_type.Add(type144.Tree);
 
 
 				{
@@ -8712,22 +8783,22 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 				root_0 = (object)adaptor.Nil();
-				// 284:24: -> ^( DECL SimpleName ( type )? )
+				// 285:24: -> ^( DECL SimpleName ( type )? )
 				{
-					DebugLocation(284, 27);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:284:27: ^( DECL SimpleName ( type )? )
+					DebugLocation(285, 27);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:285:27: ^( DECL SimpleName ( type )? )
 					{
 					object root_1 = (object)adaptor.Nil();
-					DebugLocation(284, 29);
+					DebugLocation(285, 29);
 					root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(DECL, "DECL"), root_1);
 
-					DebugLocation(284, 34);
+					DebugLocation(285, 34);
 					adaptor.AddChild(root_1, stream_SimpleName.NextNode());
-					DebugLocation(284, 45);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:284:45: ( type )?
+					DebugLocation(285, 45);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:285:45: ( type )?
 					if (stream_type.HasNext)
 					{
-						DebugLocation(284, 45);
+						DebugLocation(285, 45);
 						adaptor.AddChild(root_1, stream_type.NextTree());
 
 					}
@@ -8746,64 +8817,64 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:285:3: {...}? SimpleName ( ':' type )? '=' oclExpression
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:286:3: {...}? SimpleName ( ':' type )? '=' oclExpression
 				{
-				DebugLocation(285, 3);
+				DebugLocation(286, 3);
 				if (!((requirement==VariableDeclarationRequirement.TupleLiteral ||
 						requirement==VariableDeclarationRequirement.Let)))
 				{
 					if (state.backtracking>0) {state.failed=true; return retval;}
 					throw new FailedPredicateException(input, "variableDeclaration", "$requirement==VariableDeclarationRequirement.TupleLiteral ||\r\n\t\t$requirement==VariableDeclarationRequirement.Let");
 				}
-				DebugLocation(287, 3);
-				SimpleName142=(CommonToken)Match(input,SimpleName,Follow._SimpleName_in_variableDeclaration2046); if (state.failed) return retval; 
-				if (state.backtracking == 0) stream_SimpleName.Add(SimpleName142);
+				DebugLocation(288, 3);
+				SimpleName145=(CommonToken)Match(input,SimpleName,Follow._SimpleName_in_variableDeclaration2071); if (state.failed) return retval; 
+				if (state.backtracking == 0) stream_SimpleName.Add(SimpleName145);
 
-				DebugLocation(287, 14);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:287:14: ( ':' type )?
-				int alt61=2;
-				try { DebugEnterSubRule(61);
-				try { DebugEnterDecision(61, false);
-				int LA61_0 = input.LA(1);
+				DebugLocation(288, 14);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:288:14: ( ':' type )?
+				int alt62=2;
+				try { DebugEnterSubRule(62);
+				try { DebugEnterDecision(62, false);
+				int LA62_0 = input.LA(1);
 
-				if ((LA61_0==69))
+				if ((LA62_0==69))
 				{
-					alt61 = 1;
+					alt62 = 1;
 				}
-				} finally { DebugExitDecision(61); }
-				switch (alt61)
+				} finally { DebugExitDecision(62); }
+				switch (alt62)
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:287:15: ':' type
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:288:15: ':' type
 					{
-					DebugLocation(287, 15);
-					char_literal143=(CommonToken)Match(input,69,Follow._69_in_variableDeclaration2049); if (state.failed) return retval; 
-					if (state.backtracking == 0) stream_69.Add(char_literal143);
+					DebugLocation(288, 15);
+					char_literal146=(CommonToken)Match(input,69,Follow._69_in_variableDeclaration2074); if (state.failed) return retval; 
+					if (state.backtracking == 0) stream_69.Add(char_literal146);
 
-					DebugLocation(287, 19);
-					PushFollow(Follow._type_in_variableDeclaration2051);
-					type144=type();
+					DebugLocation(288, 19);
+					PushFollow(Follow._type_in_variableDeclaration2076);
+					type147=type();
 					PopFollow();
 					if (state.failed) return retval;
-					if (state.backtracking == 0) stream_type.Add(type144.Tree);
+					if (state.backtracking == 0) stream_type.Add(type147.Tree);
 
 					}
 					break;
 
 				}
-				} finally { DebugExitSubRule(61); }
+				} finally { DebugExitSubRule(62); }
 
-				DebugLocation(287, 27);
-				char_literal145=(CommonToken)Match(input,75,Follow._75_in_variableDeclaration2056); if (state.failed) return retval; 
-				if (state.backtracking == 0) stream_75.Add(char_literal145);
+				DebugLocation(288, 27);
+				char_literal148=(CommonToken)Match(input,75,Follow._75_in_variableDeclaration2081); if (state.failed) return retval; 
+				if (state.backtracking == 0) stream_75.Add(char_literal148);
 
-				DebugLocation(287, 31);
-				PushFollow(Follow._oclExpression_in_variableDeclaration2058);
-				oclExpression146=oclExpression();
+				DebugLocation(288, 31);
+				PushFollow(Follow._oclExpression_in_variableDeclaration2083);
+				oclExpression149=oclExpression();
 				PopFollow();
 				if (state.failed) return retval;
-				if (state.backtracking == 0) stream_oclExpression.Add(oclExpression146.Tree);
+				if (state.backtracking == 0) stream_oclExpression.Add(oclExpression149.Tree);
 
 
 				{
@@ -8819,31 +8890,31 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 				root_0 = (object)adaptor.Nil();
-				// 287:46: -> ^( DECL SimpleName ( type )? ( oclExpression )? )
+				// 288:46: -> ^( DECL SimpleName ( type )? ( oclExpression )? )
 				{
-					DebugLocation(287, 49);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:287:49: ^( DECL SimpleName ( type )? ( oclExpression )? )
+					DebugLocation(288, 49);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:288:49: ^( DECL SimpleName ( type )? ( oclExpression )? )
 					{
 					object root_1 = (object)adaptor.Nil();
-					DebugLocation(287, 51);
+					DebugLocation(288, 51);
 					root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(DECL, "DECL"), root_1);
 
-					DebugLocation(287, 56);
+					DebugLocation(288, 56);
 					adaptor.AddChild(root_1, stream_SimpleName.NextNode());
-					DebugLocation(287, 67);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:287:67: ( type )?
+					DebugLocation(288, 67);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:288:67: ( type )?
 					if (stream_type.HasNext)
 					{
-						DebugLocation(287, 67);
+						DebugLocation(288, 67);
 						adaptor.AddChild(root_1, stream_type.NextTree());
 
 					}
 					stream_type.Reset();
-					DebugLocation(287, 73);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:287:73: ( oclExpression )?
+					DebugLocation(288, 73);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:288:73: ( oclExpression )?
 					if (stream_oclExpression.HasNext)
 					{
-						DebugLocation(287, 73);
+						DebugLocation(288, 73);
 						adaptor.AddChild(root_1, stream_oclExpression.NextTree());
 
 					}
@@ -8882,7 +8953,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			LeaveRule("variableDeclaration", 42);
 			LeaveRule_variableDeclaration();
 		}
-		DebugLocation(289, 1);
+		DebugLocation(290, 1);
 		} finally { DebugExitRule(GrammarFileName, "variableDeclaration"); }
 		return retval;
 
@@ -8902,7 +8973,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 	partial void LeaveRule_type();
 
 	// $ANTLR start "type"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:291:1: type : ( pathName | collectionType | tupleType | primitiveType | oclType );
+	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:292:1: type : ( pathName | collectionType | tupleType | primitiveType | oclType );
 	[GrammarRule("type")]
 	private OCLSyntaxParser.type_return type()
 	{
@@ -8914,25 +8985,25 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 
 		object root_0 = default(object);
 
-		OCLSyntaxParser.pathName_return pathName147 = default(OCLSyntaxParser.pathName_return);
-		OCLSyntaxParser.collectionType_return collectionType148 = default(OCLSyntaxParser.collectionType_return);
-		OCLSyntaxParser.tupleType_return tupleType149 = default(OCLSyntaxParser.tupleType_return);
-		OCLSyntaxParser.primitiveType_return primitiveType150 = default(OCLSyntaxParser.primitiveType_return);
-		OCLSyntaxParser.oclType_return oclType151 = default(OCLSyntaxParser.oclType_return);
+		OCLSyntaxParser.pathName_return pathName150 = default(OCLSyntaxParser.pathName_return);
+		OCLSyntaxParser.collectionType_return collectionType151 = default(OCLSyntaxParser.collectionType_return);
+		OCLSyntaxParser.tupleType_return tupleType152 = default(OCLSyntaxParser.tupleType_return);
+		OCLSyntaxParser.primitiveType_return primitiveType153 = default(OCLSyntaxParser.primitiveType_return);
+		OCLSyntaxParser.oclType_return oclType154 = default(OCLSyntaxParser.oclType_return);
 
 
 		try { DebugEnterRule(GrammarFileName, "type");
-		DebugLocation(291, 1);
+		DebugLocation(292, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:292:2: ( pathName | collectionType | tupleType | primitiveType | oclType )
-			int alt63=5;
-			try { DebugEnterDecision(63, false);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:293:2: ( pathName | collectionType | tupleType | primitiveType | oclType )
+			int alt64=5;
+			try { DebugEnterDecision(64, false);
 			switch (input.LA(1))
 			{
 			case SimpleName:
 				{
-				alt63 = 1;
+				alt64 = 1;
 				}
 				break;
 			case 80:
@@ -8941,12 +9012,12 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			case 90:
 			case 91:
 				{
-				alt63 = 2;
+				alt64 = 2;
 				}
 				break;
 			case 93:
 				{
-				alt63 = 3;
+				alt64 = 3;
 				}
 				break;
 			case 81:
@@ -8955,7 +9026,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			case 92:
 			case 94:
 				{
-				alt63 = 4;
+				alt64 = 4;
 				}
 				break;
 			case 84:
@@ -8963,93 +9034,93 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			case 86:
 			case 87:
 				{
-				alt63 = 5;
+				alt64 = 5;
 				}
 				break;
 			default:
 				{
 					if (state.backtracking>0) {state.failed=true; return retval;}
-					NoViableAltException nvae = new NoViableAltException("", 63, 0, input);
+					NoViableAltException nvae = new NoViableAltException("", 64, 0, input);
 					DebugRecognitionException(nvae);
 					throw nvae;
 				}
 			}
 
-			} finally { DebugExitDecision(63); }
-			switch (alt63)
+			} finally { DebugExitDecision(64); }
+			switch (alt64)
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:292:4: pathName
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:293:4: pathName
 				{
 				root_0 = (object)adaptor.Nil();
 
-				DebugLocation(292, 4);
-				PushFollow(Follow._pathName_in_type2087);
-				pathName147=pathName();
+				DebugLocation(293, 4);
+				PushFollow(Follow._pathName_in_type2112);
+				pathName150=pathName();
 				PopFollow();
 				if (state.failed) return retval;
-				if (state.backtracking == 0) adaptor.AddChild(root_0, pathName147.Tree);
+				if (state.backtracking == 0) adaptor.AddChild(root_0, pathName150.Tree);
 
 				}
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:293:4: collectionType
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:294:4: collectionType
 				{
 				root_0 = (object)adaptor.Nil();
 
-				DebugLocation(293, 4);
-				PushFollow(Follow._collectionType_in_type2095);
-				collectionType148=collectionType();
+				DebugLocation(294, 4);
+				PushFollow(Follow._collectionType_in_type2120);
+				collectionType151=collectionType();
 				PopFollow();
 				if (state.failed) return retval;
-				if (state.backtracking == 0) adaptor.AddChild(root_0, collectionType148.Tree);
+				if (state.backtracking == 0) adaptor.AddChild(root_0, collectionType151.Tree);
 
 				}
 				break;
 			case 3:
 				DebugEnterAlt(3);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:294:4: tupleType
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:295:4: tupleType
 				{
 				root_0 = (object)adaptor.Nil();
 
-				DebugLocation(294, 4);
-				PushFollow(Follow._tupleType_in_type2101);
-				tupleType149=tupleType();
+				DebugLocation(295, 4);
+				PushFollow(Follow._tupleType_in_type2126);
+				tupleType152=tupleType();
 				PopFollow();
 				if (state.failed) return retval;
-				if (state.backtracking == 0) adaptor.AddChild(root_0, tupleType149.Tree);
+				if (state.backtracking == 0) adaptor.AddChild(root_0, tupleType152.Tree);
 
 				}
 				break;
 			case 4:
 				DebugEnterAlt(4);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:295:4: primitiveType
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:296:4: primitiveType
 				{
 				root_0 = (object)adaptor.Nil();
 
-				DebugLocation(295, 4);
-				PushFollow(Follow._primitiveType_in_type2108);
-				primitiveType150=primitiveType();
+				DebugLocation(296, 4);
+				PushFollow(Follow._primitiveType_in_type2133);
+				primitiveType153=primitiveType();
 				PopFollow();
 				if (state.failed) return retval;
-				if (state.backtracking == 0) adaptor.AddChild(root_0, primitiveType150.Tree);
+				if (state.backtracking == 0) adaptor.AddChild(root_0, primitiveType153.Tree);
 
 				}
 				break;
 			case 5:
 				DebugEnterAlt(5);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:296:4: oclType
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:297:4: oclType
 				{
 				root_0 = (object)adaptor.Nil();
 
-				DebugLocation(296, 4);
-				PushFollow(Follow._oclType_in_type2115);
-				oclType151=oclType();
+				DebugLocation(297, 4);
+				PushFollow(Follow._oclType_in_type2140);
+				oclType154=oclType();
 				PopFollow();
 				if (state.failed) return retval;
-				if (state.backtracking == 0) adaptor.AddChild(root_0, oclType151.Tree);
+				if (state.backtracking == 0) adaptor.AddChild(root_0, oclType154.Tree);
 
 				}
 				break;
@@ -9075,7 +9146,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			LeaveRule("type", 43);
 			LeaveRule_type();
 		}
-		DebugLocation(297, 1);
+		DebugLocation(298, 1);
 		} finally { DebugExitRule(GrammarFileName, "type"); }
 		return retval;
 
@@ -9095,7 +9166,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 	partial void LeaveRule_primitiveType();
 
 	// $ANTLR start "primitiveType"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:299:1: primitiveType : ( 'Boolean' | 'Integer' | 'Real' | 'String' | 'UnlimitedNatural' );
+	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:300:1: primitiveType : ( 'Boolean' | 'Integer' | 'Real' | 'String' | 'UnlimitedNatural' );
 	[GrammarRule("primitiveType")]
 	private OCLSyntaxParser.primitiveType_return primitiveType()
 	{
@@ -9107,26 +9178,26 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 
 		object root_0 = default(object);
 
-		CommonToken set152 = default(CommonToken);
+		CommonToken set155 = default(CommonToken);
 
-		object set152_tree = default(object);
+		object set155_tree = default(object);
 
 		try { DebugEnterRule(GrammarFileName, "primitiveType");
-		DebugLocation(299, 1);
+		DebugLocation(300, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:300:2: ( 'Boolean' | 'Integer' | 'Real' | 'String' | 'UnlimitedNatural' )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:301:2: ( 'Boolean' | 'Integer' | 'Real' | 'String' | 'UnlimitedNatural' )
 			DebugEnterAlt(1);
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:
 			{
 			root_0 = (object)adaptor.Nil();
 
-			DebugLocation(300, 2);
-			set152=(CommonToken)input.LT(1);
+			DebugLocation(301, 2);
+			set155=(CommonToken)input.LT(1);
 			if (input.LA(1)==81||input.LA(1)==83||input.LA(1)==89||input.LA(1)==92||input.LA(1)==94)
 			{
 				input.Consume();
-				if (state.backtracking == 0) adaptor.AddChild(root_0, (object)adaptor.Create(set152));
+				if (state.backtracking == 0) adaptor.AddChild(root_0, (object)adaptor.Create(set155));
 				state.errorRecovery=false;state.failed=false;
 			}
 			else
@@ -9160,7 +9231,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			LeaveRule("primitiveType", 44);
 			LeaveRule_primitiveType();
 		}
-		DebugLocation(305, 1);
+		DebugLocation(306, 1);
 		} finally { DebugExitRule(GrammarFileName, "primitiveType"); }
 		return retval;
 
@@ -9180,7 +9251,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 	partial void LeaveRule_oclType();
 
 	// $ANTLR start "oclType"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:307:1: oclType : ( 'OclAny' | 'OclInvalid' | 'OclMessage' | 'OclVoid' );
+	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:308:1: oclType : ( 'OclAny' | 'OclInvalid' | 'OclMessage' | 'OclVoid' );
 	[GrammarRule("oclType")]
 	private OCLSyntaxParser.oclType_return oclType()
 	{
@@ -9192,26 +9263,26 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 
 		object root_0 = default(object);
 
-		CommonToken set153 = default(CommonToken);
+		CommonToken set156 = default(CommonToken);
 
-		object set153_tree = default(object);
+		object set156_tree = default(object);
 
 		try { DebugEnterRule(GrammarFileName, "oclType");
-		DebugLocation(307, 1);
+		DebugLocation(308, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:308:2: ( 'OclAny' | 'OclInvalid' | 'OclMessage' | 'OclVoid' )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:309:2: ( 'OclAny' | 'OclInvalid' | 'OclMessage' | 'OclVoid' )
 			DebugEnterAlt(1);
 			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:
 			{
 			root_0 = (object)adaptor.Nil();
 
-			DebugLocation(308, 2);
-			set153=(CommonToken)input.LT(1);
+			DebugLocation(309, 2);
+			set156=(CommonToken)input.LT(1);
 			if ((input.LA(1)>=84 && input.LA(1)<=87))
 			{
 				input.Consume();
-				if (state.backtracking == 0) adaptor.AddChild(root_0, (object)adaptor.Create(set153));
+				if (state.backtracking == 0) adaptor.AddChild(root_0, (object)adaptor.Create(set156));
 				state.errorRecovery=false;state.failed=false;
 			}
 			else
@@ -9245,7 +9316,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			LeaveRule("oclType", 45);
 			LeaveRule_oclType();
 		}
-		DebugLocation(312, 1);
+		DebugLocation(313, 1);
 		} finally { DebugExitRule(GrammarFileName, "oclType"); }
 		return retval;
 
@@ -9265,7 +9336,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 	partial void LeaveRule_collectionType();
 
 	// $ANTLR start "collectionType"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:314:1: collectionType : collectionTypeIdentifier '(' type ')' -> ^( COLLTYPE collectionTypeIdentifier type ) ;
+	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:315:1: collectionType : collectionTypeIdentifier '(' type ')' -> ^( COLLTYPE collectionTypeIdentifier type ) ;
 	[GrammarRule("collectionType")]
 	private OCLSyntaxParser.collectionType_return collectionType()
 	{
@@ -9277,44 +9348,44 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 
 		object root_0 = default(object);
 
-		CommonToken char_literal155 = default(CommonToken);
-		CommonToken char_literal157 = default(CommonToken);
-		OCLSyntaxParser.collectionTypeIdentifier_return collectionTypeIdentifier154 = default(OCLSyntaxParser.collectionTypeIdentifier_return);
-		OCLSyntaxParser.type_return type156 = default(OCLSyntaxParser.type_return);
+		CommonToken char_literal158 = default(CommonToken);
+		CommonToken char_literal160 = default(CommonToken);
+		OCLSyntaxParser.collectionTypeIdentifier_return collectionTypeIdentifier157 = default(OCLSyntaxParser.collectionTypeIdentifier_return);
+		OCLSyntaxParser.type_return type159 = default(OCLSyntaxParser.type_return);
 
-		object char_literal155_tree = default(object);
-		object char_literal157_tree = default(object);
+		object char_literal158_tree = default(object);
+		object char_literal160_tree = default(object);
 		RewriteRuleITokenStream stream_61=new RewriteRuleITokenStream(adaptor,"token 61");
 		RewriteRuleITokenStream stream_62=new RewriteRuleITokenStream(adaptor,"token 62");
 		RewriteRuleSubtreeStream stream_collectionTypeIdentifier=new RewriteRuleSubtreeStream(adaptor,"rule collectionTypeIdentifier");
 		RewriteRuleSubtreeStream stream_type=new RewriteRuleSubtreeStream(adaptor,"rule type");
 		try { DebugEnterRule(GrammarFileName, "collectionType");
-		DebugLocation(314, 1);
+		DebugLocation(315, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:315:2: ( collectionTypeIdentifier '(' type ')' -> ^( COLLTYPE collectionTypeIdentifier type ) )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:316:2: ( collectionTypeIdentifier '(' type ')' -> ^( COLLTYPE collectionTypeIdentifier type ) )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:315:4: collectionTypeIdentifier '(' type ')'
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:316:4: collectionTypeIdentifier '(' type ')'
 			{
-			DebugLocation(315, 4);
-			PushFollow(Follow._collectionTypeIdentifier_in_collectionType2221);
-			collectionTypeIdentifier154=collectionTypeIdentifier();
+			DebugLocation(316, 4);
+			PushFollow(Follow._collectionTypeIdentifier_in_collectionType2246);
+			collectionTypeIdentifier157=collectionTypeIdentifier();
 			PopFollow();
 			if (state.failed) return retval;
-			if (state.backtracking == 0) stream_collectionTypeIdentifier.Add(collectionTypeIdentifier154.Tree);
-			DebugLocation(315, 29);
-			char_literal155=(CommonToken)Match(input,61,Follow._61_in_collectionType2223); if (state.failed) return retval; 
-			if (state.backtracking == 0) stream_61.Add(char_literal155);
+			if (state.backtracking == 0) stream_collectionTypeIdentifier.Add(collectionTypeIdentifier157.Tree);
+			DebugLocation(316, 29);
+			char_literal158=(CommonToken)Match(input,61,Follow._61_in_collectionType2248); if (state.failed) return retval; 
+			if (state.backtracking == 0) stream_61.Add(char_literal158);
 
-			DebugLocation(315, 33);
-			PushFollow(Follow._type_in_collectionType2225);
-			type156=type();
+			DebugLocation(316, 33);
+			PushFollow(Follow._type_in_collectionType2250);
+			type159=type();
 			PopFollow();
 			if (state.failed) return retval;
-			if (state.backtracking == 0) stream_type.Add(type156.Tree);
-			DebugLocation(315, 39);
-			char_literal157=(CommonToken)Match(input,62,Follow._62_in_collectionType2228); if (state.failed) return retval; 
-			if (state.backtracking == 0) stream_62.Add(char_literal157);
+			if (state.backtracking == 0) stream_type.Add(type159.Tree);
+			DebugLocation(316, 39);
+			char_literal160=(CommonToken)Match(input,62,Follow._62_in_collectionType2253); if (state.failed) return retval; 
+			if (state.backtracking == 0) stream_62.Add(char_literal160);
 
 
 
@@ -9331,18 +9402,18 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 			root_0 = (object)adaptor.Nil();
-			// 315:43: -> ^( COLLTYPE collectionTypeIdentifier type )
+			// 316:43: -> ^( COLLTYPE collectionTypeIdentifier type )
 			{
-				DebugLocation(315, 46);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:315:46: ^( COLLTYPE collectionTypeIdentifier type )
+				DebugLocation(316, 46);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:316:46: ^( COLLTYPE collectionTypeIdentifier type )
 				{
 				object root_1 = (object)adaptor.Nil();
-				DebugLocation(315, 48);
+				DebugLocation(316, 48);
 				root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(COLLTYPE, "COLLTYPE"), root_1);
 
-				DebugLocation(315, 58);
+				DebugLocation(316, 58);
 				adaptor.AddChild(root_1, stream_collectionTypeIdentifier.NextTree());
-				DebugLocation(315, 83);
+				DebugLocation(316, 83);
 				adaptor.AddChild(root_1, stream_type.NextTree());
 
 				adaptor.AddChild(root_0, root_1);
@@ -9376,7 +9447,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			LeaveRule("collectionType", 46);
 			LeaveRule_collectionType();
 		}
-		DebugLocation(316, 1);
+		DebugLocation(317, 1);
 		} finally { DebugExitRule(GrammarFileName, "collectionType"); }
 		return retval;
 
@@ -9396,7 +9467,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 	partial void LeaveRule_tupleType();
 
 	// $ANTLR start "tupleType"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:318:1: tupleType : 'Tuple' '(' ( variableDeclarationList[VariableDeclarationRequirement.TupleType] )? ')' ;
+	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:319:1: tupleType : 'Tuple' '(' ( variableDeclarationList[VariableDeclarationRequirement.TupleType] )? ')' ;
 	[GrammarRule("tupleType")]
 	private OCLSyntaxParser.tupleType_return tupleType()
 	{
@@ -9408,66 +9479,66 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 
 		object root_0 = default(object);
 
-		CommonToken string_literal158 = default(CommonToken);
-		CommonToken char_literal159 = default(CommonToken);
-		CommonToken char_literal161 = default(CommonToken);
-		OCLSyntaxParser.variableDeclarationList_return variableDeclarationList160 = default(OCLSyntaxParser.variableDeclarationList_return);
+		CommonToken string_literal161 = default(CommonToken);
+		CommonToken char_literal162 = default(CommonToken);
+		CommonToken char_literal164 = default(CommonToken);
+		OCLSyntaxParser.variableDeclarationList_return variableDeclarationList163 = default(OCLSyntaxParser.variableDeclarationList_return);
 
-		object string_literal158_tree = default(object);
-		object char_literal159_tree = default(object);
-		object char_literal161_tree = default(object);
+		object string_literal161_tree = default(object);
+		object char_literal162_tree = default(object);
+		object char_literal164_tree = default(object);
 
 		try { DebugEnterRule(GrammarFileName, "tupleType");
-		DebugLocation(318, 1);
+		DebugLocation(319, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:319:2: ( 'Tuple' '(' ( variableDeclarationList[VariableDeclarationRequirement.TupleType] )? ')' )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:320:2: ( 'Tuple' '(' ( variableDeclarationList[VariableDeclarationRequirement.TupleType] )? ')' )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:319:4: 'Tuple' '(' ( variableDeclarationList[VariableDeclarationRequirement.TupleType] )? ')'
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:320:4: 'Tuple' '(' ( variableDeclarationList[VariableDeclarationRequirement.TupleType] )? ')'
 			{
 			root_0 = (object)adaptor.Nil();
 
-			DebugLocation(319, 11);
-			string_literal158=(CommonToken)Match(input,93,Follow._93_in_tupleType2253); if (state.failed) return retval;
+			DebugLocation(320, 11);
+			string_literal161=(CommonToken)Match(input,93,Follow._93_in_tupleType2278); if (state.failed) return retval;
 			if (state.backtracking == 0) {
-			string_literal158_tree = (object)adaptor.Create(string_literal158);
-			root_0 = (object)adaptor.BecomeRoot(string_literal158_tree, root_0);
+			string_literal161_tree = (object)adaptor.Create(string_literal161);
+			root_0 = (object)adaptor.BecomeRoot(string_literal161_tree, root_0);
 			}
-			DebugLocation(319, 16);
-			char_literal159=(CommonToken)Match(input,61,Follow._61_in_tupleType2256); if (state.failed) return retval;
-			DebugLocation(319, 18);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:319:18: ( variableDeclarationList[VariableDeclarationRequirement.TupleType] )?
-			int alt64=2;
-			try { DebugEnterSubRule(64);
-			try { DebugEnterDecision(64, false);
-			int LA64_0 = input.LA(1);
+			DebugLocation(320, 16);
+			char_literal162=(CommonToken)Match(input,61,Follow._61_in_tupleType2281); if (state.failed) return retval;
+			DebugLocation(320, 18);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:320:18: ( variableDeclarationList[VariableDeclarationRequirement.TupleType] )?
+			int alt65=2;
+			try { DebugEnterSubRule(65);
+			try { DebugEnterDecision(65, false);
+			int LA65_0 = input.LA(1);
 
-			if ((LA64_0==SimpleName))
+			if ((LA65_0==SimpleName))
 			{
-				alt64 = 1;
+				alt65 = 1;
 			}
-			} finally { DebugExitDecision(64); }
-			switch (alt64)
+			} finally { DebugExitDecision(65); }
+			switch (alt65)
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:319:18: variableDeclarationList[VariableDeclarationRequirement.TupleType]
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:320:18: variableDeclarationList[VariableDeclarationRequirement.TupleType]
 				{
-				DebugLocation(319, 18);
-				PushFollow(Follow._variableDeclarationList_in_tupleType2259);
-				variableDeclarationList160=variableDeclarationList(VariableDeclarationRequirement.TupleType);
+				DebugLocation(320, 18);
+				PushFollow(Follow._variableDeclarationList_in_tupleType2284);
+				variableDeclarationList163=variableDeclarationList(VariableDeclarationRequirement.TupleType);
 				PopFollow();
 				if (state.failed) return retval;
-				if (state.backtracking == 0) adaptor.AddChild(root_0, variableDeclarationList160.Tree);
+				if (state.backtracking == 0) adaptor.AddChild(root_0, variableDeclarationList163.Tree);
 
 				}
 				break;
 
 			}
-			} finally { DebugExitSubRule(64); }
+			} finally { DebugExitSubRule(65); }
 
-			DebugLocation(319, 88);
-			char_literal161=(CommonToken)Match(input,62,Follow._62_in_tupleType2263); if (state.failed) return retval;
+			DebugLocation(320, 88);
+			char_literal164=(CommonToken)Match(input,62,Follow._62_in_tupleType2288); if (state.failed) return retval;
 
 			}
 
@@ -9491,7 +9562,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			LeaveRule("tupleType", 47);
 			LeaveRule_tupleType();
 		}
-		DebugLocation(320, 1);
+		DebugLocation(321, 1);
 		} finally { DebugExitRule(GrammarFileName, "tupleType"); }
 		return retval;
 
@@ -9511,7 +9582,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 	partial void LeaveRule_variableDeclarationList();
 
 	// $ANTLR start "variableDeclarationList"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:323:1: variableDeclarationList[VariableDeclarationRequirement requirement] : variableDeclaration[requirement] ( ',' variableDeclaration[requirement] )* ;
+	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:324:1: variableDeclarationList[VariableDeclarationRequirement requirement] : variableDeclaration[requirement] ( ',' variableDeclaration[requirement] )* ;
 	[GrammarRule("variableDeclarationList")]
 	private OCLSyntaxParser.variableDeclarationList_return variableDeclarationList(VariableDeclarationRequirement requirement)
 	{
@@ -9523,230 +9594,30 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 
 		object root_0 = default(object);
 
-		CommonToken char_literal163 = default(CommonToken);
-		OCLSyntaxParser.variableDeclaration_return variableDeclaration162 = default(OCLSyntaxParser.variableDeclaration_return);
-		OCLSyntaxParser.variableDeclaration_return variableDeclaration164 = default(OCLSyntaxParser.variableDeclaration_return);
+		CommonToken char_literal166 = default(CommonToken);
+		OCLSyntaxParser.variableDeclaration_return variableDeclaration165 = default(OCLSyntaxParser.variableDeclaration_return);
+		OCLSyntaxParser.variableDeclaration_return variableDeclaration167 = default(OCLSyntaxParser.variableDeclaration_return);
 
-		object char_literal163_tree = default(object);
+		object char_literal166_tree = default(object);
 
 		try { DebugEnterRule(GrammarFileName, "variableDeclarationList");
-		DebugLocation(323, 1);
+		DebugLocation(324, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:324:2: ( variableDeclaration[requirement] ( ',' variableDeclaration[requirement] )* )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:325:2: ( variableDeclaration[requirement] ( ',' variableDeclaration[requirement] )* )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:324:4: variableDeclaration[requirement] ( ',' variableDeclaration[requirement] )*
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:325:4: variableDeclaration[requirement] ( ',' variableDeclaration[requirement] )*
 			{
 			root_0 = (object)adaptor.Nil();
 
-			DebugLocation(324, 4);
-			PushFollow(Follow._variableDeclaration_in_variableDeclarationList2279);
-			variableDeclaration162=variableDeclaration(requirement);
+			DebugLocation(325, 4);
+			PushFollow(Follow._variableDeclaration_in_variableDeclarationList2304);
+			variableDeclaration165=variableDeclaration(requirement);
 			PopFollow();
 			if (state.failed) return retval;
-			if (state.backtracking == 0) adaptor.AddChild(root_0, variableDeclaration162.Tree);
-			DebugLocation(324, 37);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:324:37: ( ',' variableDeclaration[requirement] )*
-			try { DebugEnterSubRule(65);
-			while (true)
-			{
-				int alt65=2;
-				try { DebugEnterDecision(65, false);
-				int LA65_0 = input.LA(1);
-
-				if ((LA65_0==64))
-				{
-					alt65 = 1;
-				}
-
-
-				} finally { DebugExitDecision(65); }
-				switch ( alt65 )
-				{
-				case 1:
-					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:324:38: ',' variableDeclaration[requirement]
-					{
-					DebugLocation(324, 41);
-					char_literal163=(CommonToken)Match(input,64,Follow._64_in_variableDeclarationList2283); if (state.failed) return retval;
-					DebugLocation(324, 43);
-					PushFollow(Follow._variableDeclaration_in_variableDeclarationList2286);
-					variableDeclaration164=variableDeclaration(requirement);
-					PopFollow();
-					if (state.failed) return retval;
-					if (state.backtracking == 0) adaptor.AddChild(root_0, variableDeclaration164.Tree);
-
-					}
-					break;
-
-				default:
-					goto loop65;
-				}
-			}
-
-			loop65:
-				;
-
-			} finally { DebugExitSubRule(65); }
-
-
-			}
-
-			retval.Stop = (CommonToken)input.LT(-1);
-
-			if (state.backtracking == 0) {
-			retval.Tree = (object)adaptor.RulePostProcessing(root_0);
-			adaptor.SetTokenBoundaries(retval.Tree, retval.Start, retval.Stop);
-			}
-		}
-		catch (RecognitionException re)
-		{
-			ReportError(re);
-			Recover(input,re);
-		retval.Tree = (object)adaptor.ErrorNode(input, retval.Start, input.LT(-1), re);
-
-		}
-		finally
-		{
-			TraceOut("variableDeclarationList", 48);
-			LeaveRule("variableDeclarationList", 48);
-			LeaveRule_variableDeclarationList();
-		}
-		DebugLocation(325, 1);
-		} finally { DebugExitRule(GrammarFileName, "variableDeclarationList"); }
-		return retval;
-
-	}
-	// $ANTLR end "variableDeclarationList"
-
-	private sealed partial class isMarkedPre_return : ParserRuleReturnScope<CommonToken>, IAstRuleReturnScope<object>, IAstRuleReturnScope
-	{
-		private object _tree;
-		public object Tree { get { return _tree; } set { _tree = value; } }
-		object IAstRuleReturnScope.Tree { get { return Tree; } }
-		public isMarkedPre_return(OCLSyntaxParser grammar) {OnCreated(grammar);}
-		partial void OnCreated(OCLSyntaxParser grammar);
-	}
-
-	partial void EnterRule_isMarkedPre();
-	partial void LeaveRule_isMarkedPre();
-
-	// $ANTLR start "isMarkedPre"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:326:1: isMarkedPre : '@' 'pre' ;
-	[GrammarRule("isMarkedPre")]
-	private OCLSyntaxParser.isMarkedPre_return isMarkedPre()
-	{
-		EnterRule_isMarkedPre();
-		EnterRule("isMarkedPre", 49);
-		TraceIn("isMarkedPre", 49);
-		OCLSyntaxParser.isMarkedPre_return retval = new OCLSyntaxParser.isMarkedPre_return(this);
-		retval.Start = (CommonToken)input.LT(1);
-
-		object root_0 = default(object);
-
-		CommonToken char_literal165 = default(CommonToken);
-		CommonToken string_literal166 = default(CommonToken);
-
-		object char_literal165_tree = default(object);
-		object string_literal166_tree = default(object);
-
-		try { DebugEnterRule(GrammarFileName, "isMarkedPre");
-		DebugLocation(326, 1);
-		try
-		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:327:2: ( '@' 'pre' )
-			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:327:4: '@' 'pre'
-			{
-			root_0 = (object)adaptor.Nil();
-
-			DebugLocation(327, 7);
-			char_literal165=(CommonToken)Match(input,79,Follow._79_in_isMarkedPre2302); if (state.failed) return retval;
-			DebugLocation(327, 9);
-			string_literal166=(CommonToken)Match(input,117,Follow._117_in_isMarkedPre2305); if (state.failed) return retval;
-			if (state.backtracking == 0) {
-			string_literal166_tree = (object)adaptor.Create(string_literal166);
-			adaptor.AddChild(root_0, string_literal166_tree);
-			}
-
-			}
-
-			retval.Stop = (CommonToken)input.LT(-1);
-
-			if (state.backtracking == 0) {
-			retval.Tree = (object)adaptor.RulePostProcessing(root_0);
-			adaptor.SetTokenBoundaries(retval.Tree, retval.Start, retval.Stop);
-			}
-		}
-		catch (RecognitionException re)
-		{
-			ReportError(re);
-			Recover(input,re);
-		retval.Tree = (object)adaptor.ErrorNode(input, retval.Start, input.LT(-1), re);
-
-		}
-		finally
-		{
-			TraceOut("isMarkedPre", 49);
-			LeaveRule("isMarkedPre", 49);
-			LeaveRule_isMarkedPre();
-		}
-		DebugLocation(328, 1);
-		} finally { DebugExitRule(GrammarFileName, "isMarkedPre"); }
-		return retval;
-
-	}
-	// $ANTLR end "isMarkedPre"
-
-	private sealed partial class arguments_return : ParserRuleReturnScope<CommonToken>, IAstRuleReturnScope<object>, IAstRuleReturnScope
-	{
-		private object _tree;
-		public object Tree { get { return _tree; } set { _tree = value; } }
-		object IAstRuleReturnScope.Tree { get { return Tree; } }
-		public arguments_return(OCLSyntaxParser grammar) {OnCreated(grammar);}
-		partial void OnCreated(OCLSyntaxParser grammar);
-	}
-
-	partial void EnterRule_arguments();
-	partial void LeaveRule_arguments();
-
-	// $ANTLR start "arguments"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:330:1: arguments : exp1= oclExpression ( ',' exp2= oclExpression )* ;
-	[GrammarRule("arguments")]
-	private OCLSyntaxParser.arguments_return arguments()
-	{
-		EnterRule_arguments();
-		EnterRule("arguments", 50);
-		TraceIn("arguments", 50);
-		OCLSyntaxParser.arguments_return retval = new OCLSyntaxParser.arguments_return(this);
-		retval.Start = (CommonToken)input.LT(1);
-
-		object root_0 = default(object);
-
-		CommonToken char_literal167 = default(CommonToken);
-		OCLSyntaxParser.oclExpression_return exp1 = default(OCLSyntaxParser.oclExpression_return);
-		OCLSyntaxParser.oclExpression_return exp2 = default(OCLSyntaxParser.oclExpression_return);
-
-		object char_literal167_tree = default(object);
-
-		try { DebugEnterRule(GrammarFileName, "arguments");
-		DebugLocation(330, 1);
-		try
-		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:331:2: (exp1= oclExpression ( ',' exp2= oclExpression )* )
-			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:331:4: exp1= oclExpression ( ',' exp2= oclExpression )*
-			{
-			root_0 = (object)adaptor.Nil();
-
-			DebugLocation(331, 9);
-			PushFollow(Follow._oclExpression_in_arguments2321);
-			exp1=oclExpression();
-			PopFollow();
-			if (state.failed) return retval;
-			if (state.backtracking == 0) adaptor.AddChild(root_0, exp1.Tree);
-			DebugLocation(331, 26);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:331:26: ( ',' exp2= oclExpression )*
+			if (state.backtracking == 0) adaptor.AddChild(root_0, variableDeclaration165.Tree);
+			DebugLocation(325, 37);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:325:37: ( ',' variableDeclaration[requirement] )*
 			try { DebugEnterSubRule(66);
 			while (true)
 			{
@@ -9765,16 +9636,16 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:331:28: ',' exp2= oclExpression
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:325:38: ',' variableDeclaration[requirement]
 					{
-					DebugLocation(331, 31);
-					char_literal167=(CommonToken)Match(input,64,Follow._64_in_arguments2326); if (state.failed) return retval;
-					DebugLocation(331, 37);
-					PushFollow(Follow._oclExpression_in_arguments2331);
-					exp2=oclExpression();
+					DebugLocation(325, 41);
+					char_literal166=(CommonToken)Match(input,64,Follow._64_in_variableDeclarationList2308); if (state.failed) return retval;
+					DebugLocation(325, 43);
+					PushFollow(Follow._variableDeclaration_in_variableDeclarationList2311);
+					variableDeclaration167=variableDeclaration(requirement);
 					PopFollow();
 					if (state.failed) return retval;
-					if (state.backtracking == 0) adaptor.AddChild(root_0, exp2.Tree);
+					if (state.backtracking == 0) adaptor.AddChild(root_0, variableDeclaration167.Tree);
 
 					}
 					break;
@@ -9808,11 +9679,211 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 		}
 		finally
 		{
+			TraceOut("variableDeclarationList", 48);
+			LeaveRule("variableDeclarationList", 48);
+			LeaveRule_variableDeclarationList();
+		}
+		DebugLocation(326, 1);
+		} finally { DebugExitRule(GrammarFileName, "variableDeclarationList"); }
+		return retval;
+
+	}
+	// $ANTLR end "variableDeclarationList"
+
+	private sealed partial class isMarkedPre_return : ParserRuleReturnScope<CommonToken>, IAstRuleReturnScope<object>, IAstRuleReturnScope
+	{
+		private object _tree;
+		public object Tree { get { return _tree; } set { _tree = value; } }
+		object IAstRuleReturnScope.Tree { get { return Tree; } }
+		public isMarkedPre_return(OCLSyntaxParser grammar) {OnCreated(grammar);}
+		partial void OnCreated(OCLSyntaxParser grammar);
+	}
+
+	partial void EnterRule_isMarkedPre();
+	partial void LeaveRule_isMarkedPre();
+
+	// $ANTLR start "isMarkedPre"
+	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:327:1: isMarkedPre : '@' 'pre' ;
+	[GrammarRule("isMarkedPre")]
+	private OCLSyntaxParser.isMarkedPre_return isMarkedPre()
+	{
+		EnterRule_isMarkedPre();
+		EnterRule("isMarkedPre", 49);
+		TraceIn("isMarkedPre", 49);
+		OCLSyntaxParser.isMarkedPre_return retval = new OCLSyntaxParser.isMarkedPre_return(this);
+		retval.Start = (CommonToken)input.LT(1);
+
+		object root_0 = default(object);
+
+		CommonToken char_literal168 = default(CommonToken);
+		CommonToken string_literal169 = default(CommonToken);
+
+		object char_literal168_tree = default(object);
+		object string_literal169_tree = default(object);
+
+		try { DebugEnterRule(GrammarFileName, "isMarkedPre");
+		DebugLocation(327, 1);
+		try
+		{
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:328:2: ( '@' 'pre' )
+			DebugEnterAlt(1);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:328:4: '@' 'pre'
+			{
+			root_0 = (object)adaptor.Nil();
+
+			DebugLocation(328, 7);
+			char_literal168=(CommonToken)Match(input,79,Follow._79_in_isMarkedPre2327); if (state.failed) return retval;
+			DebugLocation(328, 9);
+			string_literal169=(CommonToken)Match(input,118,Follow._118_in_isMarkedPre2330); if (state.failed) return retval;
+			if (state.backtracking == 0) {
+			string_literal169_tree = (object)adaptor.Create(string_literal169);
+			adaptor.AddChild(root_0, string_literal169_tree);
+			}
+
+			}
+
+			retval.Stop = (CommonToken)input.LT(-1);
+
+			if (state.backtracking == 0) {
+			retval.Tree = (object)adaptor.RulePostProcessing(root_0);
+			adaptor.SetTokenBoundaries(retval.Tree, retval.Start, retval.Stop);
+			}
+		}
+		catch (RecognitionException re)
+		{
+			ReportError(re);
+			Recover(input,re);
+		retval.Tree = (object)adaptor.ErrorNode(input, retval.Start, input.LT(-1), re);
+
+		}
+		finally
+		{
+			TraceOut("isMarkedPre", 49);
+			LeaveRule("isMarkedPre", 49);
+			LeaveRule_isMarkedPre();
+		}
+		DebugLocation(329, 1);
+		} finally { DebugExitRule(GrammarFileName, "isMarkedPre"); }
+		return retval;
+
+	}
+	// $ANTLR end "isMarkedPre"
+
+	private sealed partial class arguments_return : ParserRuleReturnScope<CommonToken>, IAstRuleReturnScope<object>, IAstRuleReturnScope
+	{
+		private object _tree;
+		public object Tree { get { return _tree; } set { _tree = value; } }
+		object IAstRuleReturnScope.Tree { get { return Tree; } }
+		public arguments_return(OCLSyntaxParser grammar) {OnCreated(grammar);}
+		partial void OnCreated(OCLSyntaxParser grammar);
+	}
+
+	partial void EnterRule_arguments();
+	partial void LeaveRule_arguments();
+
+	// $ANTLR start "arguments"
+	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:331:1: arguments : exp1= oclExpression ( ',' exp2= oclExpression )* ;
+	[GrammarRule("arguments")]
+	private OCLSyntaxParser.arguments_return arguments()
+	{
+		EnterRule_arguments();
+		EnterRule("arguments", 50);
+		TraceIn("arguments", 50);
+		OCLSyntaxParser.arguments_return retval = new OCLSyntaxParser.arguments_return(this);
+		retval.Start = (CommonToken)input.LT(1);
+
+		object root_0 = default(object);
+
+		CommonToken char_literal170 = default(CommonToken);
+		OCLSyntaxParser.oclExpression_return exp1 = default(OCLSyntaxParser.oclExpression_return);
+		OCLSyntaxParser.oclExpression_return exp2 = default(OCLSyntaxParser.oclExpression_return);
+
+		object char_literal170_tree = default(object);
+
+		try { DebugEnterRule(GrammarFileName, "arguments");
+		DebugLocation(331, 1);
+		try
+		{
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:332:2: (exp1= oclExpression ( ',' exp2= oclExpression )* )
+			DebugEnterAlt(1);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:332:4: exp1= oclExpression ( ',' exp2= oclExpression )*
+			{
+			root_0 = (object)adaptor.Nil();
+
+			DebugLocation(332, 9);
+			PushFollow(Follow._oclExpression_in_arguments2346);
+			exp1=oclExpression();
+			PopFollow();
+			if (state.failed) return retval;
+			if (state.backtracking == 0) adaptor.AddChild(root_0, exp1.Tree);
+			DebugLocation(332, 26);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:332:26: ( ',' exp2= oclExpression )*
+			try { DebugEnterSubRule(67);
+			while (true)
+			{
+				int alt67=2;
+				try { DebugEnterDecision(67, false);
+				int LA67_0 = input.LA(1);
+
+				if ((LA67_0==64))
+				{
+					alt67 = 1;
+				}
+
+
+				} finally { DebugExitDecision(67); }
+				switch ( alt67 )
+				{
+				case 1:
+					DebugEnterAlt(1);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:332:28: ',' exp2= oclExpression
+					{
+					DebugLocation(332, 31);
+					char_literal170=(CommonToken)Match(input,64,Follow._64_in_arguments2351); if (state.failed) return retval;
+					DebugLocation(332, 37);
+					PushFollow(Follow._oclExpression_in_arguments2356);
+					exp2=oclExpression();
+					PopFollow();
+					if (state.failed) return retval;
+					if (state.backtracking == 0) adaptor.AddChild(root_0, exp2.Tree);
+
+					}
+					break;
+
+				default:
+					goto loop67;
+				}
+			}
+
+			loop67:
+				;
+
+			} finally { DebugExitSubRule(67); }
+
+
+			}
+
+			retval.Stop = (CommonToken)input.LT(-1);
+
+			if (state.backtracking == 0) {
+			retval.Tree = (object)adaptor.RulePostProcessing(root_0);
+			adaptor.SetTokenBoundaries(retval.Tree, retval.Start, retval.Stop);
+			}
+		}
+		catch (RecognitionException re)
+		{
+			ReportError(re);
+			Recover(input,re);
+		retval.Tree = (object)adaptor.ErrorNode(input, retval.Start, input.LT(-1), re);
+
+		}
+		finally
+		{
 			TraceOut("arguments", 50);
 			LeaveRule("arguments", 50);
 			LeaveRule_arguments();
 		}
-		DebugLocation(332, 1);
+		DebugLocation(333, 1);
 		} finally { DebugExitRule(GrammarFileName, "arguments"); }
 		return retval;
 
@@ -9832,7 +9903,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 	partial void LeaveRule_letExp();
 
 	// $ANTLR start "letExp"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:335:1: letExp : 'let' variableDeclaration[VariableDeclarationRequirement.Let] letExpSub -> ^( LET variableDeclaration letExpSub ) ;
+	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:336:1: letExp : 'let' variableDeclaration[VariableDeclarationRequirement.Let] letExpSub -> ^( LET variableDeclaration letExpSub ) ;
 	[GrammarRule("letExp")]
 	private OCLSyntaxParser.letExp_return letExp()
 	{
@@ -9844,38 +9915,38 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 
 		object root_0 = default(object);
 
-		CommonToken string_literal168 = default(CommonToken);
-		OCLSyntaxParser.variableDeclaration_return variableDeclaration169 = default(OCLSyntaxParser.variableDeclaration_return);
-		OCLSyntaxParser.letExpSub_return letExpSub170 = default(OCLSyntaxParser.letExpSub_return);
+		CommonToken string_literal171 = default(CommonToken);
+		OCLSyntaxParser.variableDeclaration_return variableDeclaration172 = default(OCLSyntaxParser.variableDeclaration_return);
+		OCLSyntaxParser.letExpSub_return letExpSub173 = default(OCLSyntaxParser.letExpSub_return);
 
-		object string_literal168_tree = default(object);
+		object string_literal171_tree = default(object);
 		RewriteRuleITokenStream stream_113=new RewriteRuleITokenStream(adaptor,"token 113");
 		RewriteRuleSubtreeStream stream_variableDeclaration=new RewriteRuleSubtreeStream(adaptor,"rule variableDeclaration");
 		RewriteRuleSubtreeStream stream_letExpSub=new RewriteRuleSubtreeStream(adaptor,"rule letExpSub");
 		try { DebugEnterRule(GrammarFileName, "letExp");
-		DebugLocation(335, 1);
+		DebugLocation(336, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:336:2: ( 'let' variableDeclaration[VariableDeclarationRequirement.Let] letExpSub -> ^( LET variableDeclaration letExpSub ) )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:337:2: ( 'let' variableDeclaration[VariableDeclarationRequirement.Let] letExpSub -> ^( LET variableDeclaration letExpSub ) )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:336:4: 'let' variableDeclaration[VariableDeclarationRequirement.Let] letExpSub
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:337:4: 'let' variableDeclaration[VariableDeclarationRequirement.Let] letExpSub
 			{
-			DebugLocation(336, 4);
-			string_literal168=(CommonToken)Match(input,113,Follow._113_in_letExp2347); if (state.failed) return retval; 
-			if (state.backtracking == 0) stream_113.Add(string_literal168);
+			DebugLocation(337, 4);
+			string_literal171=(CommonToken)Match(input,113,Follow._113_in_letExp2372); if (state.failed) return retval; 
+			if (state.backtracking == 0) stream_113.Add(string_literal171);
 
-			DebugLocation(336, 10);
-			PushFollow(Follow._variableDeclaration_in_letExp2349);
-			variableDeclaration169=variableDeclaration(VariableDeclarationRequirement.Let);
+			DebugLocation(337, 10);
+			PushFollow(Follow._variableDeclaration_in_letExp2374);
+			variableDeclaration172=variableDeclaration(VariableDeclarationRequirement.Let);
 			PopFollow();
 			if (state.failed) return retval;
-			if (state.backtracking == 0) stream_variableDeclaration.Add(variableDeclaration169.Tree);
-			DebugLocation(336, 66);
-			PushFollow(Follow._letExpSub_in_letExp2352);
-			letExpSub170=letExpSub();
+			if (state.backtracking == 0) stream_variableDeclaration.Add(variableDeclaration172.Tree);
+			DebugLocation(337, 66);
+			PushFollow(Follow._letExpSub_in_letExp2377);
+			letExpSub173=letExpSub();
 			PopFollow();
 			if (state.failed) return retval;
-			if (state.backtracking == 0) stream_letExpSub.Add(letExpSub170.Tree);
+			if (state.backtracking == 0) stream_letExpSub.Add(letExpSub173.Tree);
 
 
 			{
@@ -9891,18 +9962,18 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 			root_0 = (object)adaptor.Nil();
-			// 336:76: -> ^( LET variableDeclaration letExpSub )
+			// 337:76: -> ^( LET variableDeclaration letExpSub )
 			{
-				DebugLocation(336, 79);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:336:79: ^( LET variableDeclaration letExpSub )
+				DebugLocation(337, 79);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:337:79: ^( LET variableDeclaration letExpSub )
 				{
 				object root_1 = (object)adaptor.Nil();
-				DebugLocation(336, 81);
+				DebugLocation(337, 81);
 				root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(LET, "LET"), root_1);
 
-				DebugLocation(336, 85);
+				DebugLocation(337, 85);
 				adaptor.AddChild(root_1, stream_variableDeclaration.NextTree());
-				DebugLocation(336, 105);
+				DebugLocation(337, 105);
 				adaptor.AddChild(root_1, stream_letExpSub.NextTree());
 
 				adaptor.AddChild(root_0, root_1);
@@ -9936,7 +10007,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			LeaveRule("letExp", 51);
 			LeaveRule_letExp();
 		}
-		DebugLocation(337, 1);
+		DebugLocation(338, 1);
 		} finally { DebugExitRule(GrammarFileName, "letExp"); }
 		return retval;
 
@@ -9956,7 +10027,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 	partial void LeaveRule_letExpSub();
 
 	// $ANTLR start "letExpSub"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:339:1: letExpSub : ( ',' variableDeclaration[VariableDeclarationRequirement.Let] letExpSub -> ^( LET variableDeclaration letExpSub ) | 'in' ( options {greedy=false; } : oclExpression ) -> oclExpression );
+	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:340:1: letExpSub : ( ',' variableDeclaration[VariableDeclarationRequirement.Let] letExpSub -> ^( LET variableDeclaration letExpSub ) | 'in' ( options {greedy=false; } : oclExpression ) -> oclExpression );
 	[GrammarRule("letExpSub")]
 	private OCLSyntaxParser.letExpSub_return letExpSub()
 	{
@@ -9968,66 +10039,66 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 
 		object root_0 = default(object);
 
-		CommonToken char_literal171 = default(CommonToken);
-		CommonToken string_literal174 = default(CommonToken);
-		OCLSyntaxParser.variableDeclaration_return variableDeclaration172 = default(OCLSyntaxParser.variableDeclaration_return);
-		OCLSyntaxParser.letExpSub_return letExpSub173 = default(OCLSyntaxParser.letExpSub_return);
-		OCLSyntaxParser.oclExpression_return oclExpression175 = default(OCLSyntaxParser.oclExpression_return);
+		CommonToken char_literal174 = default(CommonToken);
+		CommonToken string_literal177 = default(CommonToken);
+		OCLSyntaxParser.variableDeclaration_return variableDeclaration175 = default(OCLSyntaxParser.variableDeclaration_return);
+		OCLSyntaxParser.letExpSub_return letExpSub176 = default(OCLSyntaxParser.letExpSub_return);
+		OCLSyntaxParser.oclExpression_return oclExpression178 = default(OCLSyntaxParser.oclExpression_return);
 
-		object char_literal171_tree = default(object);
-		object string_literal174_tree = default(object);
+		object char_literal174_tree = default(object);
+		object string_literal177_tree = default(object);
 		RewriteRuleITokenStream stream_64=new RewriteRuleITokenStream(adaptor,"token 64");
 		RewriteRuleITokenStream stream_109=new RewriteRuleITokenStream(adaptor,"token 109");
 		RewriteRuleSubtreeStream stream_variableDeclaration=new RewriteRuleSubtreeStream(adaptor,"rule variableDeclaration");
 		RewriteRuleSubtreeStream stream_letExpSub=new RewriteRuleSubtreeStream(adaptor,"rule letExpSub");
 		RewriteRuleSubtreeStream stream_oclExpression=new RewriteRuleSubtreeStream(adaptor,"rule oclExpression");
 		try { DebugEnterRule(GrammarFileName, "letExpSub");
-		DebugLocation(339, 1);
+		DebugLocation(340, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:340:2: ( ',' variableDeclaration[VariableDeclarationRequirement.Let] letExpSub -> ^( LET variableDeclaration letExpSub ) | 'in' ( options {greedy=false; } : oclExpression ) -> oclExpression )
-			int alt67=2;
-			try { DebugEnterDecision(67, false);
-			int LA67_0 = input.LA(1);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:341:2: ( ',' variableDeclaration[VariableDeclarationRequirement.Let] letExpSub -> ^( LET variableDeclaration letExpSub ) | 'in' ( options {greedy=false; } : oclExpression ) -> oclExpression )
+			int alt68=2;
+			try { DebugEnterDecision(68, false);
+			int LA68_0 = input.LA(1);
 
-			if ((LA67_0==64))
+			if ((LA68_0==64))
 			{
-				alt67 = 1;
+				alt68 = 1;
 			}
-			else if ((LA67_0==109))
+			else if ((LA68_0==109))
 			{
-				alt67 = 2;
+				alt68 = 2;
 			}
 			else
 			{
 				if (state.backtracking>0) {state.failed=true; return retval;}
-				NoViableAltException nvae = new NoViableAltException("", 67, 0, input);
+				NoViableAltException nvae = new NoViableAltException("", 68, 0, input);
 				DebugRecognitionException(nvae);
 				throw nvae;
 			}
-			} finally { DebugExitDecision(67); }
-			switch (alt67)
+			} finally { DebugExitDecision(68); }
+			switch (alt68)
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:340:4: ',' variableDeclaration[VariableDeclarationRequirement.Let] letExpSub
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:341:4: ',' variableDeclaration[VariableDeclarationRequirement.Let] letExpSub
 				{
-				DebugLocation(340, 4);
-				char_literal171=(CommonToken)Match(input,64,Follow._64_in_letExpSub2374); if (state.failed) return retval; 
-				if (state.backtracking == 0) stream_64.Add(char_literal171);
+				DebugLocation(341, 4);
+				char_literal174=(CommonToken)Match(input,64,Follow._64_in_letExpSub2399); if (state.failed) return retval; 
+				if (state.backtracking == 0) stream_64.Add(char_literal174);
 
-				DebugLocation(340, 8);
-				PushFollow(Follow._variableDeclaration_in_letExpSub2376);
-				variableDeclaration172=variableDeclaration(VariableDeclarationRequirement.Let);
+				DebugLocation(341, 8);
+				PushFollow(Follow._variableDeclaration_in_letExpSub2401);
+				variableDeclaration175=variableDeclaration(VariableDeclarationRequirement.Let);
 				PopFollow();
 				if (state.failed) return retval;
-				if (state.backtracking == 0) stream_variableDeclaration.Add(variableDeclaration172.Tree);
-				DebugLocation(340, 64);
-				PushFollow(Follow._letExpSub_in_letExpSub2379);
-				letExpSub173=letExpSub();
+				if (state.backtracking == 0) stream_variableDeclaration.Add(variableDeclaration175.Tree);
+				DebugLocation(341, 64);
+				PushFollow(Follow._letExpSub_in_letExpSub2404);
+				letExpSub176=letExpSub();
 				PopFollow();
 				if (state.failed) return retval;
-				if (state.backtracking == 0) stream_letExpSub.Add(letExpSub173.Tree);
+				if (state.backtracking == 0) stream_letExpSub.Add(letExpSub176.Tree);
 
 
 				{
@@ -10043,18 +10114,18 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 				root_0 = (object)adaptor.Nil();
-				// 340:74: -> ^( LET variableDeclaration letExpSub )
+				// 341:74: -> ^( LET variableDeclaration letExpSub )
 				{
-					DebugLocation(340, 77);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:340:77: ^( LET variableDeclaration letExpSub )
+					DebugLocation(341, 77);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:341:77: ^( LET variableDeclaration letExpSub )
 					{
 					object root_1 = (object)adaptor.Nil();
-					DebugLocation(340, 79);
+					DebugLocation(341, 79);
 					root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(LET, "LET"), root_1);
 
-					DebugLocation(340, 83);
+					DebugLocation(341, 83);
 					adaptor.AddChild(root_1, stream_variableDeclaration.NextTree());
-					DebugLocation(340, 103);
+					DebugLocation(341, 103);
 					adaptor.AddChild(root_1, stream_letExpSub.NextTree());
 
 					adaptor.AddChild(root_0, root_1);
@@ -10070,23 +10141,23 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:341:4: 'in' ( options {greedy=false; } : oclExpression )
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:342:4: 'in' ( options {greedy=false; } : oclExpression )
 				{
-				DebugLocation(341, 4);
-				string_literal174=(CommonToken)Match(input,109,Follow._109_in_letExpSub2394); if (state.failed) return retval; 
-				if (state.backtracking == 0) stream_109.Add(string_literal174);
+				DebugLocation(342, 4);
+				string_literal177=(CommonToken)Match(input,109,Follow._109_in_letExpSub2419); if (state.failed) return retval; 
+				if (state.backtracking == 0) stream_109.Add(string_literal177);
 
-				DebugLocation(341, 9);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:341:9: ( options {greedy=false; } : oclExpression )
+				DebugLocation(342, 9);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:342:9: ( options {greedy=false; } : oclExpression )
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:341:35: oclExpression
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:342:35: oclExpression
 				{
-				DebugLocation(341, 35);
-				PushFollow(Follow._oclExpression_in_letExpSub2405);
-				oclExpression175=oclExpression();
+				DebugLocation(342, 35);
+				PushFollow(Follow._oclExpression_in_letExpSub2430);
+				oclExpression178=oclExpression();
 				PopFollow();
 				if (state.failed) return retval;
-				if (state.backtracking == 0) stream_oclExpression.Add(oclExpression175.Tree);
+				if (state.backtracking == 0) stream_oclExpression.Add(oclExpression178.Tree);
 
 				}
 
@@ -10105,9 +10176,9 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 				root_0 = (object)adaptor.Nil();
-				// 341:50: -> oclExpression
+				// 342:50: -> oclExpression
 				{
-					DebugLocation(341, 53);
+					DebugLocation(342, 53);
 					adaptor.AddChild(root_0, stream_oclExpression.NextTree());
 
 				}
@@ -10140,7 +10211,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			LeaveRule("letExpSub", 52);
 			LeaveRule_letExpSub();
 		}
-		DebugLocation(342, 1);
+		DebugLocation(343, 1);
 		} finally { DebugExitRule(GrammarFileName, "letExpSub"); }
 		return retval;
 
@@ -10160,7 +10231,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 	partial void LeaveRule_oclMessageExp();
 
 	// $ANTLR start "oclMessageExp"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:344:1: oclMessageExp : ( '^^' SimpleName '(' ( oclMessageArguments )? ')' | '^' SimpleName '(' ( oclMessageArguments )? ')' );
+	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:345:1: oclMessageExp : ( '^^' SimpleName '(' ( oclMessageArguments )? ')' | '^' SimpleName '(' ( oclMessageArguments )? ')' );
 	[GrammarRule("oclMessageExp")]
 	private OCLSyntaxParser.oclMessageExp_return oclMessageExp()
 	{
@@ -10172,149 +10243,85 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 
 		object root_0 = default(object);
 
-		CommonToken string_literal176 = default(CommonToken);
-		CommonToken SimpleName177 = default(CommonToken);
-		CommonToken char_literal178 = default(CommonToken);
-		CommonToken char_literal180 = default(CommonToken);
+		CommonToken string_literal179 = default(CommonToken);
+		CommonToken SimpleName180 = default(CommonToken);
 		CommonToken char_literal181 = default(CommonToken);
-		CommonToken SimpleName182 = default(CommonToken);
 		CommonToken char_literal183 = default(CommonToken);
-		CommonToken char_literal185 = default(CommonToken);
-		OCLSyntaxParser.oclMessageArguments_return oclMessageArguments179 = default(OCLSyntaxParser.oclMessageArguments_return);
-		OCLSyntaxParser.oclMessageArguments_return oclMessageArguments184 = default(OCLSyntaxParser.oclMessageArguments_return);
+		CommonToken char_literal184 = default(CommonToken);
+		CommonToken SimpleName185 = default(CommonToken);
+		CommonToken char_literal186 = default(CommonToken);
+		CommonToken char_literal188 = default(CommonToken);
+		OCLSyntaxParser.oclMessageArguments_return oclMessageArguments182 = default(OCLSyntaxParser.oclMessageArguments_return);
+		OCLSyntaxParser.oclMessageArguments_return oclMessageArguments187 = default(OCLSyntaxParser.oclMessageArguments_return);
 
-		object string_literal176_tree = default(object);
-		object SimpleName177_tree = default(object);
-		object char_literal178_tree = default(object);
-		object char_literal180_tree = default(object);
+		object string_literal179_tree = default(object);
+		object SimpleName180_tree = default(object);
 		object char_literal181_tree = default(object);
-		object SimpleName182_tree = default(object);
 		object char_literal183_tree = default(object);
-		object char_literal185_tree = default(object);
+		object char_literal184_tree = default(object);
+		object SimpleName185_tree = default(object);
+		object char_literal186_tree = default(object);
+		object char_literal188_tree = default(object);
 
 		try { DebugEnterRule(GrammarFileName, "oclMessageExp");
-		DebugLocation(344, 1);
+		DebugLocation(345, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:345:2: ( '^^' SimpleName '(' ( oclMessageArguments )? ')' | '^' SimpleName '(' ( oclMessageArguments )? ')' )
-			int alt70=2;
-			try { DebugEnterDecision(70, false);
-			int LA70_0 = input.LA(1);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:346:2: ( '^^' SimpleName '(' ( oclMessageArguments )? ')' | '^' SimpleName '(' ( oclMessageArguments )? ')' )
+			int alt71=2;
+			try { DebugEnterDecision(71, false);
+			int LA71_0 = input.LA(1);
 
-			if ((LA70_0==98))
+			if ((LA71_0==98))
 			{
-				alt70 = 1;
+				alt71 = 1;
 			}
-			else if ((LA70_0==97))
+			else if ((LA71_0==97))
 			{
-				alt70 = 2;
+				alt71 = 2;
 			}
 			else
 			{
 				if (state.backtracking>0) {state.failed=true; return retval;}
-				NoViableAltException nvae = new NoViableAltException("", 70, 0, input);
+				NoViableAltException nvae = new NoViableAltException("", 71, 0, input);
 				DebugRecognitionException(nvae);
 				throw nvae;
 			}
-			} finally { DebugExitDecision(70); }
-			switch (alt70)
+			} finally { DebugExitDecision(71); }
+			switch (alt71)
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:345:4: '^^' SimpleName '(' ( oclMessageArguments )? ')'
-				{
-				root_0 = (object)adaptor.Nil();
-
-				DebugLocation(345, 4);
-				string_literal176=(CommonToken)Match(input,98,Follow._98_in_oclMessageExp2421); if (state.failed) return retval;
-				if (state.backtracking == 0) {
-				string_literal176_tree = (object)adaptor.Create(string_literal176);
-				adaptor.AddChild(root_0, string_literal176_tree);
-				}
-				DebugLocation(345, 9);
-				SimpleName177=(CommonToken)Match(input,SimpleName,Follow._SimpleName_in_oclMessageExp2423); if (state.failed) return retval;
-				if (state.backtracking == 0) {
-				SimpleName177_tree = (object)adaptor.Create(SimpleName177);
-				adaptor.AddChild(root_0, SimpleName177_tree);
-				}
-				DebugLocation(345, 20);
-				char_literal178=(CommonToken)Match(input,61,Follow._61_in_oclMessageExp2425); if (state.failed) return retval;
-				if (state.backtracking == 0) {
-				char_literal178_tree = (object)adaptor.Create(char_literal178);
-				adaptor.AddChild(root_0, char_literal178_tree);
-				}
-				DebugLocation(345, 24);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:345:24: ( oclMessageArguments )?
-				int alt68=2;
-				try { DebugEnterSubRule(68);
-				try { DebugEnterDecision(68, false);
-				int LA68_0 = input.LA(1);
-
-				if (((LA68_0>=IntegerLiteralExp && LA68_0<=InvalidLiteralExp)||LA68_0==NullLiteralExp||(LA68_0>=RealLiteralExp && LA68_0<=SimpleName)||LA68_0==StringLiteralExp||LA68_0==UnlimitedNaturalLiteralExp||LA68_0==61||LA68_0==65||LA68_0==78||(LA68_0>=80 && LA68_0<=94)||(LA68_0>=106 && LA68_0<=107)||(LA68_0>=112 && LA68_0<=114)||LA68_0==120))
-				{
-					alt68 = 1;
-				}
-				} finally { DebugExitDecision(68); }
-				switch (alt68)
-				{
-				case 1:
-					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:345:24: oclMessageArguments
-					{
-					DebugLocation(345, 24);
-					PushFollow(Follow._oclMessageArguments_in_oclMessageExp2427);
-					oclMessageArguments179=oclMessageArguments();
-					PopFollow();
-					if (state.failed) return retval;
-					if (state.backtracking == 0) adaptor.AddChild(root_0, oclMessageArguments179.Tree);
-
-					}
-					break;
-
-				}
-				} finally { DebugExitSubRule(68); }
-
-				DebugLocation(345, 45);
-				char_literal180=(CommonToken)Match(input,62,Follow._62_in_oclMessageExp2430); if (state.failed) return retval;
-				if (state.backtracking == 0) {
-				char_literal180_tree = (object)adaptor.Create(char_literal180);
-				adaptor.AddChild(root_0, char_literal180_tree);
-				}
-
-				}
-				break;
-			case 2:
-				DebugEnterAlt(2);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:346:4: '^' SimpleName '(' ( oclMessageArguments )? ')'
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:346:4: '^^' SimpleName '(' ( oclMessageArguments )? ')'
 				{
 				root_0 = (object)adaptor.Nil();
 
 				DebugLocation(346, 4);
-				char_literal181=(CommonToken)Match(input,97,Follow._97_in_oclMessageExp2435); if (state.failed) return retval;
+				string_literal179=(CommonToken)Match(input,98,Follow._98_in_oclMessageExp2446); if (state.failed) return retval;
+				if (state.backtracking == 0) {
+				string_literal179_tree = (object)adaptor.Create(string_literal179);
+				adaptor.AddChild(root_0, string_literal179_tree);
+				}
+				DebugLocation(346, 9);
+				SimpleName180=(CommonToken)Match(input,SimpleName,Follow._SimpleName_in_oclMessageExp2448); if (state.failed) return retval;
+				if (state.backtracking == 0) {
+				SimpleName180_tree = (object)adaptor.Create(SimpleName180);
+				adaptor.AddChild(root_0, SimpleName180_tree);
+				}
+				DebugLocation(346, 20);
+				char_literal181=(CommonToken)Match(input,61,Follow._61_in_oclMessageExp2450); if (state.failed) return retval;
 				if (state.backtracking == 0) {
 				char_literal181_tree = (object)adaptor.Create(char_literal181);
 				adaptor.AddChild(root_0, char_literal181_tree);
 				}
-				DebugLocation(346, 8);
-				SimpleName182=(CommonToken)Match(input,SimpleName,Follow._SimpleName_in_oclMessageExp2437); if (state.failed) return retval;
-				if (state.backtracking == 0) {
-				SimpleName182_tree = (object)adaptor.Create(SimpleName182);
-				adaptor.AddChild(root_0, SimpleName182_tree);
-				}
-				DebugLocation(346, 19);
-				char_literal183=(CommonToken)Match(input,61,Follow._61_in_oclMessageExp2439); if (state.failed) return retval;
-				if (state.backtracking == 0) {
-				char_literal183_tree = (object)adaptor.Create(char_literal183);
-				adaptor.AddChild(root_0, char_literal183_tree);
-				}
-				DebugLocation(346, 23);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:346:23: ( oclMessageArguments )?
+				DebugLocation(346, 24);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:346:24: ( oclMessageArguments )?
 				int alt69=2;
 				try { DebugEnterSubRule(69);
 				try { DebugEnterDecision(69, false);
 				int LA69_0 = input.LA(1);
 
-				if (((LA69_0>=IntegerLiteralExp && LA69_0<=InvalidLiteralExp)||LA69_0==NullLiteralExp||(LA69_0>=RealLiteralExp && LA69_0<=SimpleName)||LA69_0==StringLiteralExp||LA69_0==UnlimitedNaturalLiteralExp||LA69_0==61||LA69_0==65||LA69_0==78||(LA69_0>=80 && LA69_0<=94)||(LA69_0>=106 && LA69_0<=107)||(LA69_0>=112 && LA69_0<=114)||LA69_0==120))
+				if (((LA69_0>=IntegerLiteralExp && LA69_0<=InvalidLiteralExp)||LA69_0==NullLiteralExp||(LA69_0>=RealLiteralExp && LA69_0<=SimpleName)||LA69_0==StringLiteralExp||LA69_0==UnlimitedNaturalLiteralExp||LA69_0==61||LA69_0==65||LA69_0==78||(LA69_0>=80 && LA69_0<=94)||(LA69_0>=106 && LA69_0<=107)||(LA69_0>=112 && LA69_0<=113)||LA69_0==115||LA69_0==121))
 				{
 					alt69 = 1;
 				}
@@ -10323,14 +10330,14 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:346:23: oclMessageArguments
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:346:24: oclMessageArguments
 					{
-					DebugLocation(346, 23);
-					PushFollow(Follow._oclMessageArguments_in_oclMessageExp2441);
-					oclMessageArguments184=oclMessageArguments();
+					DebugLocation(346, 24);
+					PushFollow(Follow._oclMessageArguments_in_oclMessageExp2452);
+					oclMessageArguments182=oclMessageArguments();
 					PopFollow();
 					if (state.failed) return retval;
-					if (state.backtracking == 0) adaptor.AddChild(root_0, oclMessageArguments184.Tree);
+					if (state.backtracking == 0) adaptor.AddChild(root_0, oclMessageArguments182.Tree);
 
 					}
 					break;
@@ -10338,11 +10345,75 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				}
 				} finally { DebugExitSubRule(69); }
 
-				DebugLocation(346, 44);
-				char_literal185=(CommonToken)Match(input,62,Follow._62_in_oclMessageExp2444); if (state.failed) return retval;
+				DebugLocation(346, 45);
+				char_literal183=(CommonToken)Match(input,62,Follow._62_in_oclMessageExp2455); if (state.failed) return retval;
 				if (state.backtracking == 0) {
-				char_literal185_tree = (object)adaptor.Create(char_literal185);
-				adaptor.AddChild(root_0, char_literal185_tree);
+				char_literal183_tree = (object)adaptor.Create(char_literal183);
+				adaptor.AddChild(root_0, char_literal183_tree);
+				}
+
+				}
+				break;
+			case 2:
+				DebugEnterAlt(2);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:347:4: '^' SimpleName '(' ( oclMessageArguments )? ')'
+				{
+				root_0 = (object)adaptor.Nil();
+
+				DebugLocation(347, 4);
+				char_literal184=(CommonToken)Match(input,97,Follow._97_in_oclMessageExp2460); if (state.failed) return retval;
+				if (state.backtracking == 0) {
+				char_literal184_tree = (object)adaptor.Create(char_literal184);
+				adaptor.AddChild(root_0, char_literal184_tree);
+				}
+				DebugLocation(347, 8);
+				SimpleName185=(CommonToken)Match(input,SimpleName,Follow._SimpleName_in_oclMessageExp2462); if (state.failed) return retval;
+				if (state.backtracking == 0) {
+				SimpleName185_tree = (object)adaptor.Create(SimpleName185);
+				adaptor.AddChild(root_0, SimpleName185_tree);
+				}
+				DebugLocation(347, 19);
+				char_literal186=(CommonToken)Match(input,61,Follow._61_in_oclMessageExp2464); if (state.failed) return retval;
+				if (state.backtracking == 0) {
+				char_literal186_tree = (object)adaptor.Create(char_literal186);
+				adaptor.AddChild(root_0, char_literal186_tree);
+				}
+				DebugLocation(347, 23);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:347:23: ( oclMessageArguments )?
+				int alt70=2;
+				try { DebugEnterSubRule(70);
+				try { DebugEnterDecision(70, false);
+				int LA70_0 = input.LA(1);
+
+				if (((LA70_0>=IntegerLiteralExp && LA70_0<=InvalidLiteralExp)||LA70_0==NullLiteralExp||(LA70_0>=RealLiteralExp && LA70_0<=SimpleName)||LA70_0==StringLiteralExp||LA70_0==UnlimitedNaturalLiteralExp||LA70_0==61||LA70_0==65||LA70_0==78||(LA70_0>=80 && LA70_0<=94)||(LA70_0>=106 && LA70_0<=107)||(LA70_0>=112 && LA70_0<=113)||LA70_0==115||LA70_0==121))
+				{
+					alt70 = 1;
+				}
+				} finally { DebugExitDecision(70); }
+				switch (alt70)
+				{
+				case 1:
+					DebugEnterAlt(1);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:347:23: oclMessageArguments
+					{
+					DebugLocation(347, 23);
+					PushFollow(Follow._oclMessageArguments_in_oclMessageExp2466);
+					oclMessageArguments187=oclMessageArguments();
+					PopFollow();
+					if (state.failed) return retval;
+					if (state.backtracking == 0) adaptor.AddChild(root_0, oclMessageArguments187.Tree);
+
+					}
+					break;
+
+				}
+				} finally { DebugExitSubRule(70); }
+
+				DebugLocation(347, 44);
+				char_literal188=(CommonToken)Match(input,62,Follow._62_in_oclMessageExp2469); if (state.failed) return retval;
+				if (state.backtracking == 0) {
+				char_literal188_tree = (object)adaptor.Create(char_literal188);
+				adaptor.AddChild(root_0, char_literal188_tree);
 				}
 
 				}
@@ -10369,7 +10440,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			LeaveRule("oclMessageExp", 53);
 			LeaveRule_oclMessageExp();
 		}
-		DebugLocation(347, 1);
+		DebugLocation(348, 1);
 		} finally { DebugExitRule(GrammarFileName, "oclMessageExp"); }
 		return retval;
 
@@ -10389,7 +10460,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 	partial void LeaveRule_oclMessageArguments();
 
 	// $ANTLR start "oclMessageArguments"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:348:1: oclMessageArguments : oclMessageArg ( ',' oclMessageArguments )? ;
+	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:349:1: oclMessageArguments : oclMessageArg ( ',' oclMessageArguments )? ;
 	[GrammarRule("oclMessageArguments")]
 	private OCLSyntaxParser.oclMessageArguments_return oclMessageArguments()
 	{
@@ -10401,64 +10472,64 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 
 		object root_0 = default(object);
 
-		CommonToken char_literal187 = default(CommonToken);
-		OCLSyntaxParser.oclMessageArg_return oclMessageArg186 = default(OCLSyntaxParser.oclMessageArg_return);
-		OCLSyntaxParser.oclMessageArguments_return oclMessageArguments188 = default(OCLSyntaxParser.oclMessageArguments_return);
+		CommonToken char_literal190 = default(CommonToken);
+		OCLSyntaxParser.oclMessageArg_return oclMessageArg189 = default(OCLSyntaxParser.oclMessageArg_return);
+		OCLSyntaxParser.oclMessageArguments_return oclMessageArguments191 = default(OCLSyntaxParser.oclMessageArguments_return);
 
-		object char_literal187_tree = default(object);
+		object char_literal190_tree = default(object);
 
 		try { DebugEnterRule(GrammarFileName, "oclMessageArguments");
-		DebugLocation(348, 1);
+		DebugLocation(349, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:349:2: ( oclMessageArg ( ',' oclMessageArguments )? )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:350:2: ( oclMessageArg ( ',' oclMessageArguments )? )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:349:4: oclMessageArg ( ',' oclMessageArguments )?
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:350:4: oclMessageArg ( ',' oclMessageArguments )?
 			{
 			root_0 = (object)adaptor.Nil();
 
-			DebugLocation(349, 4);
-			PushFollow(Follow._oclMessageArg_in_oclMessageArguments2454);
-			oclMessageArg186=oclMessageArg();
+			DebugLocation(350, 4);
+			PushFollow(Follow._oclMessageArg_in_oclMessageArguments2479);
+			oclMessageArg189=oclMessageArg();
 			PopFollow();
 			if (state.failed) return retval;
-			if (state.backtracking == 0) adaptor.AddChild(root_0, oclMessageArg186.Tree);
-			DebugLocation(349, 18);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:349:18: ( ',' oclMessageArguments )?
-			int alt71=2;
-			try { DebugEnterSubRule(71);
-			try { DebugEnterDecision(71, false);
-			int LA71_0 = input.LA(1);
+			if (state.backtracking == 0) adaptor.AddChild(root_0, oclMessageArg189.Tree);
+			DebugLocation(350, 18);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:350:18: ( ',' oclMessageArguments )?
+			int alt72=2;
+			try { DebugEnterSubRule(72);
+			try { DebugEnterDecision(72, false);
+			int LA72_0 = input.LA(1);
 
-			if ((LA71_0==64))
+			if ((LA72_0==64))
 			{
-				alt71 = 1;
+				alt72 = 1;
 			}
-			} finally { DebugExitDecision(71); }
-			switch (alt71)
+			} finally { DebugExitDecision(72); }
+			switch (alt72)
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:349:20: ',' oclMessageArguments
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:350:20: ',' oclMessageArguments
 				{
-				DebugLocation(349, 20);
-				char_literal187=(CommonToken)Match(input,64,Follow._64_in_oclMessageArguments2458); if (state.failed) return retval;
+				DebugLocation(350, 20);
+				char_literal190=(CommonToken)Match(input,64,Follow._64_in_oclMessageArguments2483); if (state.failed) return retval;
 				if (state.backtracking == 0) {
-				char_literal187_tree = (object)adaptor.Create(char_literal187);
-				adaptor.AddChild(root_0, char_literal187_tree);
+				char_literal190_tree = (object)adaptor.Create(char_literal190);
+				adaptor.AddChild(root_0, char_literal190_tree);
 				}
-				DebugLocation(349, 24);
-				PushFollow(Follow._oclMessageArguments_in_oclMessageArguments2460);
-				oclMessageArguments188=oclMessageArguments();
+				DebugLocation(350, 24);
+				PushFollow(Follow._oclMessageArguments_in_oclMessageArguments2485);
+				oclMessageArguments191=oclMessageArguments();
 				PopFollow();
 				if (state.failed) return retval;
-				if (state.backtracking == 0) adaptor.AddChild(root_0, oclMessageArguments188.Tree);
+				if (state.backtracking == 0) adaptor.AddChild(root_0, oclMessageArguments191.Tree);
 
 				}
 				break;
 
 			}
-			} finally { DebugExitSubRule(71); }
+			} finally { DebugExitSubRule(72); }
 
 
 			}
@@ -10483,7 +10554,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			LeaveRule("oclMessageArguments", 54);
 			LeaveRule_oclMessageArguments();
 		}
-		DebugLocation(350, 1);
+		DebugLocation(351, 1);
 		} finally { DebugExitRule(GrammarFileName, "oclMessageArguments"); }
 		return retval;
 
@@ -10503,7 +10574,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 	partial void LeaveRule_oclMessageArg();
 
 	// $ANTLR start "oclMessageArg"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:352:1: oclMessageArg : ( '?' ( ':' type )? | oclExpression );
+	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:353:1: oclMessageArg : ( '?' ( ':' type )? | oclExpression );
 	[GrammarRule("oclMessageArg")]
 	private OCLSyntaxParser.oclMessageArg_return oclMessageArg()
 	{
@@ -10515,105 +10586,105 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 
 		object root_0 = default(object);
 
-		CommonToken char_literal189 = default(CommonToken);
-		CommonToken char_literal190 = default(CommonToken);
-		OCLSyntaxParser.type_return type191 = default(OCLSyntaxParser.type_return);
-		OCLSyntaxParser.oclExpression_return oclExpression192 = default(OCLSyntaxParser.oclExpression_return);
+		CommonToken char_literal192 = default(CommonToken);
+		CommonToken char_literal193 = default(CommonToken);
+		OCLSyntaxParser.type_return type194 = default(OCLSyntaxParser.type_return);
+		OCLSyntaxParser.oclExpression_return oclExpression195 = default(OCLSyntaxParser.oclExpression_return);
 
-		object char_literal189_tree = default(object);
-		object char_literal190_tree = default(object);
+		object char_literal192_tree = default(object);
+		object char_literal193_tree = default(object);
 
 		try { DebugEnterRule(GrammarFileName, "oclMessageArg");
-		DebugLocation(352, 1);
+		DebugLocation(353, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:353:2: ( '?' ( ':' type )? | oclExpression )
-			int alt73=2;
-			try { DebugEnterDecision(73, false);
-			int LA73_0 = input.LA(1);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:354:2: ( '?' ( ':' type )? | oclExpression )
+			int alt74=2;
+			try { DebugEnterDecision(74, false);
+			int LA74_0 = input.LA(1);
 
-			if ((LA73_0==78))
+			if ((LA74_0==78))
 			{
-				alt73 = 1;
+				alt74 = 1;
 			}
-			else if (((LA73_0>=IntegerLiteralExp && LA73_0<=InvalidLiteralExp)||LA73_0==NullLiteralExp||(LA73_0>=RealLiteralExp && LA73_0<=SimpleName)||LA73_0==StringLiteralExp||LA73_0==UnlimitedNaturalLiteralExp||LA73_0==61||LA73_0==65||(LA73_0>=80 && LA73_0<=94)||(LA73_0>=106 && LA73_0<=107)||(LA73_0>=112 && LA73_0<=114)||LA73_0==120))
+			else if (((LA74_0>=IntegerLiteralExp && LA74_0<=InvalidLiteralExp)||LA74_0==NullLiteralExp||(LA74_0>=RealLiteralExp && LA74_0<=SimpleName)||LA74_0==StringLiteralExp||LA74_0==UnlimitedNaturalLiteralExp||LA74_0==61||LA74_0==65||(LA74_0>=80 && LA74_0<=94)||(LA74_0>=106 && LA74_0<=107)||(LA74_0>=112 && LA74_0<=113)||LA74_0==115||LA74_0==121))
 			{
-				alt73 = 2;
+				alt74 = 2;
 			}
 			else
 			{
 				if (state.backtracking>0) {state.failed=true; return retval;}
-				NoViableAltException nvae = new NoViableAltException("", 73, 0, input);
+				NoViableAltException nvae = new NoViableAltException("", 74, 0, input);
 				DebugRecognitionException(nvae);
 				throw nvae;
 			}
-			} finally { DebugExitDecision(73); }
-			switch (alt73)
+			} finally { DebugExitDecision(74); }
+			switch (alt74)
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:353:4: '?' ( ':' type )?
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:354:4: '?' ( ':' type )?
 				{
 				root_0 = (object)adaptor.Nil();
 
-				DebugLocation(353, 4);
-				char_literal189=(CommonToken)Match(input,78,Follow._78_in_oclMessageArg2475); if (state.failed) return retval;
+				DebugLocation(354, 4);
+				char_literal192=(CommonToken)Match(input,78,Follow._78_in_oclMessageArg2500); if (state.failed) return retval;
 				if (state.backtracking == 0) {
-				char_literal189_tree = (object)adaptor.Create(char_literal189);
-				adaptor.AddChild(root_0, char_literal189_tree);
+				char_literal192_tree = (object)adaptor.Create(char_literal192);
+				adaptor.AddChild(root_0, char_literal192_tree);
 				}
-				DebugLocation(353, 8);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:353:8: ( ':' type )?
-				int alt72=2;
-				try { DebugEnterSubRule(72);
-				try { DebugEnterDecision(72, false);
-				int LA72_0 = input.LA(1);
+				DebugLocation(354, 8);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:354:8: ( ':' type )?
+				int alt73=2;
+				try { DebugEnterSubRule(73);
+				try { DebugEnterDecision(73, false);
+				int LA73_0 = input.LA(1);
 
-				if ((LA72_0==69))
+				if ((LA73_0==69))
 				{
-					alt72 = 1;
+					alt73 = 1;
 				}
-				} finally { DebugExitDecision(72); }
-				switch (alt72)
+				} finally { DebugExitDecision(73); }
+				switch (alt73)
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:353:9: ':' type
+					// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:354:9: ':' type
 					{
-					DebugLocation(353, 9);
-					char_literal190=(CommonToken)Match(input,69,Follow._69_in_oclMessageArg2478); if (state.failed) return retval;
+					DebugLocation(354, 9);
+					char_literal193=(CommonToken)Match(input,69,Follow._69_in_oclMessageArg2503); if (state.failed) return retval;
 					if (state.backtracking == 0) {
-					char_literal190_tree = (object)adaptor.Create(char_literal190);
-					adaptor.AddChild(root_0, char_literal190_tree);
+					char_literal193_tree = (object)adaptor.Create(char_literal193);
+					adaptor.AddChild(root_0, char_literal193_tree);
 					}
-					DebugLocation(353, 13);
-					PushFollow(Follow._type_in_oclMessageArg2480);
-					type191=type();
+					DebugLocation(354, 13);
+					PushFollow(Follow._type_in_oclMessageArg2505);
+					type194=type();
 					PopFollow();
 					if (state.failed) return retval;
-					if (state.backtracking == 0) adaptor.AddChild(root_0, type191.Tree);
+					if (state.backtracking == 0) adaptor.AddChild(root_0, type194.Tree);
 
 					}
 					break;
 
 				}
-				} finally { DebugExitSubRule(72); }
+				} finally { DebugExitSubRule(73); }
 
 
 				}
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:354:4: oclExpression
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:355:4: oclExpression
 				{
 				root_0 = (object)adaptor.Nil();
 
-				DebugLocation(354, 4);
-				PushFollow(Follow._oclExpression_in_oclMessageArg2487);
-				oclExpression192=oclExpression();
+				DebugLocation(355, 4);
+				PushFollow(Follow._oclExpression_in_oclMessageArg2512);
+				oclExpression195=oclExpression();
 				PopFollow();
 				if (state.failed) return retval;
-				if (state.backtracking == 0) adaptor.AddChild(root_0, oclExpression192.Tree);
+				if (state.backtracking == 0) adaptor.AddChild(root_0, oclExpression195.Tree);
 
 				}
 				break;
@@ -10639,7 +10710,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			LeaveRule("oclMessageArg", 55);
 			LeaveRule_oclMessageArg();
 		}
-		DebugLocation(355, 1);
+		DebugLocation(356, 1);
 		} finally { DebugExitRule(GrammarFileName, "oclMessageArg"); }
 		return retval;
 
@@ -10659,7 +10730,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 	partial void LeaveRule_ifExp();
 
 	// $ANTLR start "ifExp"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:357:1: ifExp : i= 'if' oclExpression 'then' oclExpression 'else' oclExpression 'endif' -> ^( IF[$i] ( oclExpression )+ ) ;
+	// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:358:1: ifExp : i= 'if' oclExpression 'then' oclExpression 'else' oclExpression 'endif' -> ^( IF[$i] ( oclExpression )+ ) ;
 	[GrammarRule("ifExp")]
 	private OCLSyntaxParser.ifExp_return ifExp()
 	{
@@ -10672,63 +10743,63 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 		object root_0 = default(object);
 
 		CommonToken i = default(CommonToken);
-		CommonToken string_literal194 = default(CommonToken);
-		CommonToken string_literal196 = default(CommonToken);
-		CommonToken string_literal198 = default(CommonToken);
-		OCLSyntaxParser.oclExpression_return oclExpression193 = default(OCLSyntaxParser.oclExpression_return);
-		OCLSyntaxParser.oclExpression_return oclExpression195 = default(OCLSyntaxParser.oclExpression_return);
-		OCLSyntaxParser.oclExpression_return oclExpression197 = default(OCLSyntaxParser.oclExpression_return);
+		CommonToken string_literal197 = default(CommonToken);
+		CommonToken string_literal199 = default(CommonToken);
+		CommonToken string_literal201 = default(CommonToken);
+		OCLSyntaxParser.oclExpression_return oclExpression196 = default(OCLSyntaxParser.oclExpression_return);
+		OCLSyntaxParser.oclExpression_return oclExpression198 = default(OCLSyntaxParser.oclExpression_return);
+		OCLSyntaxParser.oclExpression_return oclExpression200 = default(OCLSyntaxParser.oclExpression_return);
 
 		object i_tree = default(object);
-		object string_literal194_tree = default(object);
-		object string_literal196_tree = default(object);
-		object string_literal198_tree = default(object);
+		object string_literal197_tree = default(object);
+		object string_literal199_tree = default(object);
+		object string_literal201_tree = default(object);
 		RewriteRuleITokenStream stream_107=new RewriteRuleITokenStream(adaptor,"token 107");
-		RewriteRuleITokenStream stream_119=new RewriteRuleITokenStream(adaptor,"token 119");
+		RewriteRuleITokenStream stream_120=new RewriteRuleITokenStream(adaptor,"token 120");
 		RewriteRuleITokenStream stream_104=new RewriteRuleITokenStream(adaptor,"token 104");
 		RewriteRuleITokenStream stream_105=new RewriteRuleITokenStream(adaptor,"token 105");
 		RewriteRuleSubtreeStream stream_oclExpression=new RewriteRuleSubtreeStream(adaptor,"rule oclExpression");
 		try { DebugEnterRule(GrammarFileName, "ifExp");
-		DebugLocation(357, 1);
+		DebugLocation(358, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:358:2: (i= 'if' oclExpression 'then' oclExpression 'else' oclExpression 'endif' -> ^( IF[$i] ( oclExpression )+ ) )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:359:2: (i= 'if' oclExpression 'then' oclExpression 'else' oclExpression 'endif' -> ^( IF[$i] ( oclExpression )+ ) )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:358:4: i= 'if' oclExpression 'then' oclExpression 'else' oclExpression 'endif'
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:359:4: i= 'if' oclExpression 'then' oclExpression 'else' oclExpression 'endif'
 			{
-			DebugLocation(358, 5);
-			i=(CommonToken)Match(input,107,Follow._107_in_ifExp2501); if (state.failed) return retval; 
+			DebugLocation(359, 5);
+			i=(CommonToken)Match(input,107,Follow._107_in_ifExp2526); if (state.failed) return retval; 
 			if (state.backtracking == 0) stream_107.Add(i);
 
-			DebugLocation(358, 11);
-			PushFollow(Follow._oclExpression_in_ifExp2503);
-			oclExpression193=oclExpression();
+			DebugLocation(359, 11);
+			PushFollow(Follow._oclExpression_in_ifExp2528);
+			oclExpression196=oclExpression();
 			PopFollow();
 			if (state.failed) return retval;
-			if (state.backtracking == 0) stream_oclExpression.Add(oclExpression193.Tree);
-			DebugLocation(358, 25);
-			string_literal194=(CommonToken)Match(input,119,Follow._119_in_ifExp2505); if (state.failed) return retval; 
-			if (state.backtracking == 0) stream_119.Add(string_literal194);
+			if (state.backtracking == 0) stream_oclExpression.Add(oclExpression196.Tree);
+			DebugLocation(359, 25);
+			string_literal197=(CommonToken)Match(input,120,Follow._120_in_ifExp2530); if (state.failed) return retval; 
+			if (state.backtracking == 0) stream_120.Add(string_literal197);
 
-			DebugLocation(358, 32);
-			PushFollow(Follow._oclExpression_in_ifExp2507);
-			oclExpression195=oclExpression();
+			DebugLocation(359, 32);
+			PushFollow(Follow._oclExpression_in_ifExp2532);
+			oclExpression198=oclExpression();
 			PopFollow();
 			if (state.failed) return retval;
-			if (state.backtracking == 0) stream_oclExpression.Add(oclExpression195.Tree);
-			DebugLocation(358, 46);
-			string_literal196=(CommonToken)Match(input,104,Follow._104_in_ifExp2509); if (state.failed) return retval; 
-			if (state.backtracking == 0) stream_104.Add(string_literal196);
+			if (state.backtracking == 0) stream_oclExpression.Add(oclExpression198.Tree);
+			DebugLocation(359, 46);
+			string_literal199=(CommonToken)Match(input,104,Follow._104_in_ifExp2534); if (state.failed) return retval; 
+			if (state.backtracking == 0) stream_104.Add(string_literal199);
 
-			DebugLocation(358, 53);
-			PushFollow(Follow._oclExpression_in_ifExp2511);
-			oclExpression197=oclExpression();
+			DebugLocation(359, 53);
+			PushFollow(Follow._oclExpression_in_ifExp2536);
+			oclExpression200=oclExpression();
 			PopFollow();
 			if (state.failed) return retval;
-			if (state.backtracking == 0) stream_oclExpression.Add(oclExpression197.Tree);
-			DebugLocation(358, 67);
-			string_literal198=(CommonToken)Match(input,105,Follow._105_in_ifExp2513); if (state.failed) return retval; 
-			if (state.backtracking == 0) stream_105.Add(string_literal198);
+			if (state.backtracking == 0) stream_oclExpression.Add(oclExpression200.Tree);
+			DebugLocation(359, 67);
+			string_literal201=(CommonToken)Match(input,105,Follow._105_in_ifExp2538); if (state.failed) return retval; 
+			if (state.backtracking == 0) stream_105.Add(string_literal201);
 
 
 
@@ -10745,23 +10816,23 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 			root_0 = (object)adaptor.Nil();
-			// 358:75: -> ^( IF[$i] ( oclExpression )+ )
+			// 359:75: -> ^( IF[$i] ( oclExpression )+ )
 			{
-				DebugLocation(358, 78);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:358:78: ^( IF[$i] ( oclExpression )+ )
+				DebugLocation(359, 78);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:359:78: ^( IF[$i] ( oclExpression )+ )
 				{
 				object root_1 = (object)adaptor.Nil();
-				DebugLocation(358, 80);
+				DebugLocation(359, 80);
 				root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(IF, i), root_1);
 
-				DebugLocation(358, 87);
+				DebugLocation(359, 87);
 				if (!(stream_oclExpression.HasNext))
 				{
 					throw new RewriteEarlyExitException();
 				}
 				while ( stream_oclExpression.HasNext )
 				{
-					DebugLocation(358, 87);
+					DebugLocation(359, 87);
 					adaptor.AddChild(root_1, stream_oclExpression.NextTree());
 
 				}
@@ -10798,7 +10869,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			LeaveRule("ifExp", 56);
 			LeaveRule_ifExp();
 		}
-		DebugLocation(359, 1);
+		DebugLocation(360, 1);
 		} finally { DebugExitRule(GrammarFileName, "ifExp"); }
 		return retval;
 
@@ -10816,42 +10887,42 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 		TraceIn("synpred1_OCLSyntax_fragment", 57);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:172:6: ( SimpleName ( ( ':' ) type )? ';' )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:173:6: ( SimpleName ( ( ':' ) type )? ';' )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:172:7: SimpleName ( ( ':' ) type )? ';'
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:173:7: SimpleName ( ( ':' ) type )? ';'
 			{
-			DebugLocation(172, 7);
-			Match(input,SimpleName,Follow._SimpleName_in_synpred1_OCLSyntax1315); if (state.failed) return;
-			DebugLocation(172, 18);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:172:18: ( ( ':' ) type )?
-			int alt74=2;
-			try { DebugEnterSubRule(74);
-			try { DebugEnterDecision(74, false);
-			int LA74_0 = input.LA(1);
+			DebugLocation(173, 7);
+			Match(input,SimpleName,Follow._SimpleName_in_synpred1_OCLSyntax1340); if (state.failed) return;
+			DebugLocation(173, 18);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:173:18: ( ( ':' ) type )?
+			int alt75=2;
+			try { DebugEnterSubRule(75);
+			try { DebugEnterDecision(75, false);
+			int LA75_0 = input.LA(1);
 
-			if ((LA74_0==69))
+			if ((LA75_0==69))
 			{
-				alt74 = 1;
+				alt75 = 1;
 			}
-			} finally { DebugExitDecision(74); }
-			switch (alt74)
+			} finally { DebugExitDecision(75); }
+			switch (alt75)
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:172:19: ( ':' ) type
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:173:19: ( ':' ) type
 				{
-				DebugLocation(172, 19);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:172:19: ( ':' )
+				DebugLocation(173, 19);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:173:19: ( ':' )
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:172:20: ':'
+				// ..\\..\\Model\\OCL\\Grammar\\OCLSyntax.g3:173:20: ':'
 				{
-				DebugLocation(172, 20);
-				Match(input,69,Follow._69_in_synpred1_OCLSyntax1319); if (state.failed) return;
+				DebugLocation(173, 20);
+				Match(input,69,Follow._69_in_synpred1_OCLSyntax1344); if (state.failed) return;
 
 				}
 
-				DebugLocation(172, 25);
-				PushFollow(Follow._type_in_synpred1_OCLSyntax1322);
+				DebugLocation(173, 25);
+				PushFollow(Follow._type_in_synpred1_OCLSyntax1347);
 				type();
 				PopFollow();
 				if (state.failed) return;
@@ -10860,10 +10931,10 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				break;
 
 			}
-			} finally { DebugExitSubRule(74); }
+			} finally { DebugExitSubRule(75); }
 
-			DebugLocation(172, 32);
-			Match(input,71,Follow._71_in_synpred1_OCLSyntax1326); if (state.failed) return;
+			DebugLocation(173, 32);
+			Match(input,71,Follow._71_in_synpred1_OCLSyntax1351); if (state.failed) return;
 
 			}
 
@@ -10905,13 +10976,13 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 
 	#region DFA
 	private DFA2 dfa2;
-	private DFA36 dfa36;
+	private DFA37 dfa37;
 
 	protected override void InitDFAs()
 	{
 		base.InitDFAs();
 		dfa2 = new DFA2( this );
-		dfa36 = new DFA36( this );
+		dfa37 = new DFA37( this );
 	}
 
 	private class DFA2 : DFA
@@ -10923,7 +10994,7 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 		private const string DFA2_minS =
 			"\x1\x65\x1\x33\x1\x3D\x1\xFFFF\x1\x33\x1\xFFFF\x1\x3D\x1\xFFFF";
 		private const string DFA2_maxS =
-			"\x1\x65\x1\x33\x1\x76\x1\xFFFF\x1\x33\x1\xFFFF\x1\x76\x1\xFFFF";
+			"\x1\x65\x1\x33\x1\x77\x1\xFFFF\x1\x33\x1\xFFFF\x1\x77\x1\xFFFF";
 		private const string DFA2_acceptS =
 			"\x3\xFFFF\x1\x2\x1\xFFFF\x1\x3\x1\xFFFF\x1\x1";
 		private const string DFA2_specialS =
@@ -10932,12 +11003,12 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 			{
 				"\x1\x1",
 				"\x1\x2",
-				"\x1\x5\x7\xFFFF\x1\x3\x1\x4\x1E\xFFFF\x2\x3\x8\xFFFF\x1\x3\x6\xFFFF"+
+				"\x1\x5\x7\xFFFF\x1\x3\x1\x4\x1E\xFFFF\x2\x3\x8\xFFFF\x1\x3\x7\xFFFF"+
 				"\x1\x3",
 				"",
 				"\x1\x6",
 				"",
-				"\x1\x5\x7\xFFFF\x1\x7\x1\x4\x1E\xFFFF\x2\x3\x8\xFFFF\x1\x3\x6\xFFFF"+
+				"\x1\x5\x7\xFFFF\x1\x7\x1\x4\x1E\xFFFF\x2\x3\x8\xFFFF\x1\x3\x7\xFFFF"+
 				"\x1\x3",
 				""
 			};
@@ -10981,28 +11052,28 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 		}
 	}
 
-	private class DFA36 : DFA
+	private class DFA37 : DFA
 	{
-		private const string DFA36_eotS =
+		private const string DFA37_eotS =
 			"\xA\xFFFF";
-		private const string DFA36_eofS =
+		private const string DFA37_eofS =
 			"\xA\xFFFF";
-		private const string DFA36_minS =
+		private const string DFA37_minS =
 			"\x1\x1F\x1\xFFFF\x1\x3D\x7\xFFFF";
-		private const string DFA36_maxS =
-			"\x1\x78\x1\xFFFF\x1\x7A\x7\xFFFF";
-		private const string DFA36_acceptS =
+		private const string DFA37_maxS =
+			"\x1\x79\x1\xFFFF\x1\x7B\x7\xFFFF";
+		private const string DFA37_acceptS =
 			"\x1\xFFFF\x1\x1\x1\xFFFF\x1\x3\x1\x4\x1\x5\x1\x6\x1\x7\x1\x8\x1\x2";
-		private const string DFA36_specialS =
+		private const string DFA37_specialS =
 			"\xA\xFFFF}>";
-		private static readonly string[] DFA36_transitionS =
+		private static readonly string[] DFA37_transitionS =
 			{
 				"\x2\x3\x6\xFFFF\x1\x3\xA\xFFFF\x1\x3\x1\x5\x1\xFFFF\x1\x3\x3\xFFFF\x1"+
 				"\x3\x3\xFFFF\x1\x6\x12\xFFFF\x1\x1\x1\x4\x1\x1\x5\x4\x1\x1\x1\x4\x2"+
-				"\x1\x1\x4\x1\x2\x1\x4\xB\xFFFF\x1\x3\x1\x7\x4\xFFFF\x1\x5\x1\x8\x6\xFFFF"+
+				"\x1\x1\x4\x1\x2\x1\x4\xB\xFFFF\x1\x3\x1\x7\x4\xFFFF\x1\x5\x1\x8\x7\xFFFF"+
 				"\x1\x3",
 				"",
-				"\x1\x4\x3C\xFFFF\x1\x9",
+				"\x1\x4\x3D\xFFFF\x1\x9",
 				"",
 				"",
 				"",
@@ -11012,38 +11083,38 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 				""
 			};
 
-		private static readonly short[] DFA36_eot = DFA.UnpackEncodedString(DFA36_eotS);
-		private static readonly short[] DFA36_eof = DFA.UnpackEncodedString(DFA36_eofS);
-		private static readonly char[] DFA36_min = DFA.UnpackEncodedStringToUnsignedChars(DFA36_minS);
-		private static readonly char[] DFA36_max = DFA.UnpackEncodedStringToUnsignedChars(DFA36_maxS);
-		private static readonly short[] DFA36_accept = DFA.UnpackEncodedString(DFA36_acceptS);
-		private static readonly short[] DFA36_special = DFA.UnpackEncodedString(DFA36_specialS);
-		private static readonly short[][] DFA36_transition;
+		private static readonly short[] DFA37_eot = DFA.UnpackEncodedString(DFA37_eotS);
+		private static readonly short[] DFA37_eof = DFA.UnpackEncodedString(DFA37_eofS);
+		private static readonly char[] DFA37_min = DFA.UnpackEncodedStringToUnsignedChars(DFA37_minS);
+		private static readonly char[] DFA37_max = DFA.UnpackEncodedStringToUnsignedChars(DFA37_maxS);
+		private static readonly short[] DFA37_accept = DFA.UnpackEncodedString(DFA37_acceptS);
+		private static readonly short[] DFA37_special = DFA.UnpackEncodedString(DFA37_specialS);
+		private static readonly short[][] DFA37_transition;
 
-		static DFA36()
+		static DFA37()
 		{
-			int numStates = DFA36_transitionS.Length;
-			DFA36_transition = new short[numStates][];
+			int numStates = DFA37_transitionS.Length;
+			DFA37_transition = new short[numStates][];
 			for ( int i=0; i < numStates; i++ )
 			{
-				DFA36_transition[i] = DFA.UnpackEncodedString(DFA36_transitionS[i]);
+				DFA37_transition[i] = DFA.UnpackEncodedString(DFA37_transitionS[i]);
 			}
 		}
 
-		public DFA36( BaseRecognizer recognizer )
+		public DFA37( BaseRecognizer recognizer )
 		{
 			this.recognizer = recognizer;
-			this.decisionNumber = 36;
-			this.eot = DFA36_eot;
-			this.eof = DFA36_eof;
-			this.min = DFA36_min;
-			this.max = DFA36_max;
-			this.accept = DFA36_accept;
-			this.special = DFA36_special;
-			this.transition = DFA36_transition;
+			this.decisionNumber = 37;
+			this.eot = DFA37_eot;
+			this.eof = DFA37_eof;
+			this.min = DFA37_min;
+			this.max = DFA37_max;
+			this.accept = DFA37_accept;
+			this.special = DFA37_special;
+			this.transition = DFA37_transition;
 		}
 
-		public override string Description { get { return "143:1: primaryExperession : ( collectionLiteralExpAndType | tupleLiteralExp | primitiveLiteralExp -> ^( PRIMITIVELITERAL primitiveLiteralExp ) | enumAndType -> ^( TYPE enumAndType ) | propertyCall | '(' oclExpression ')' | ifExp | letExp );"; } }
+		public override string Description { get { return "144:1: primaryExperession : ( collectionLiteralExpAndType | tupleLiteralExp | primitiveLiteralExp -> ^( PRIMITIVELITERAL primitiveLiteralExp ) | enumAndType -> ^( TYPE enumAndType ) | propertyCall | '(' oclExpression ')' | ifExp | letExp );"; } }
 
 		public override void Error(NoViableAltException nvae)
 		{
@@ -11057,265 +11128,269 @@ public partial class OCLSyntaxParser : Antlr.Runtime.Parser
 	#region Follow sets
 	private static class Follow
 	{
-		public static readonly BitSet _contextDeclaration_in_contextDeclarationList170 = new BitSet(new ulong[]{0x2UL,0x2000000000UL});
-		public static readonly BitSet _propertyContextDecl_in_contextDeclaration193 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _classifierContextDecl_in_contextDeclaration197 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _operationContextDecl_in_contextDeclaration201 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _propertyContextHead_in_propertyContextDecl211 = new BitSet(new ulong[]{0x2UL,0x408000000000UL});
-		public static readonly BitSet _initOrDerValue_in_propertyContextDecl213 = new BitSet(new ulong[]{0x2UL,0x408000000000UL});
-		public static readonly BitSet _101_in_propertyContextHead236 = new BitSet(new ulong[]{0x8000000000000UL});
-		public static readonly BitSet _SimpleName_in_propertyContextHead238 = new BitSet(new ulong[]{0x0UL,0x40UL});
-		public static readonly BitSet _70_in_propertyContextHead241 = new BitSet(new ulong[]{0x8000000000000UL});
-		public static readonly BitSet _SimpleName_in_propertyContextHead243 = new BitSet(new ulong[]{0x0UL,0x60UL});
-		public static readonly BitSet _69_in_propertyContextHead247 = new BitSet(new ulong[]{0x8000000000000UL,0x7FFF0000UL});
-		public static readonly BitSet _type_in_propertyContextHead249 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _operationContextHead_in_operationContextDecl273 = new BitSet(new ulong[]{0x2UL,0x30001000000000UL});
-		public static readonly BitSet _prePostOrBodyDecl_in_operationContextDecl275 = new BitSet(new ulong[]{0x2UL,0x30001000000000UL});
-		public static readonly BitSet _101_in_operationContextHead298 = new BitSet(new ulong[]{0x8000000000000UL});
-		public static readonly BitSet _operation_in_operationContextHead300 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _classifierContextHead_in_classifierContextDecl318 = new BitSet(new ulong[]{0x2UL,0x40804000000000UL});
-		public static readonly BitSet _invOrDef_in_classifierContextDecl321 = new BitSet(new ulong[]{0x2UL,0x40804000000000UL});
-		public static readonly BitSet _101_in_classifierContextHead346 = new BitSet(new ulong[]{0x8000000000000UL});
-		public static readonly BitSet _pathName_in_classifierContextHead348 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _101_in_classifierContextHead364 = new BitSet(new ulong[]{0x8000000000000UL});
-		public static readonly BitSet _SimpleName_in_classifierContextHead366 = new BitSet(new ulong[]{0x0UL,0x20UL});
-		public static readonly BitSet _69_in_classifierContextHead367 = new BitSet(new ulong[]{0x8000000000000UL});
-		public static readonly BitSet _pathName_in_classifierContextHead368 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _110_in_initOrDerValue391 = new BitSet(new ulong[]{0x0UL,0x20UL});
-		public static readonly BitSet _69_in_initOrDerValue393 = new BitSet(new ulong[]{0x222C008180000000UL,0x1070C007FFF0002UL});
-		public static readonly BitSet _oclExpression_in_initOrDerValue395 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _103_in_initOrDerValue410 = new BitSet(new ulong[]{0x0UL,0x20UL});
-		public static readonly BitSet _69_in_initOrDerValue412 = new BitSet(new ulong[]{0x222C008180000000UL,0x1070C007FFF0002UL});
-		public static readonly BitSet _oclExpression_in_initOrDerValue414 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _111_in_invOrDef434 = new BitSet(new ulong[]{0x8000000000000UL,0x20UL});
-		public static readonly BitSet _SimpleName_in_invOrDef437 = new BitSet(new ulong[]{0x0UL,0x20UL});
-		public static readonly BitSet _69_in_invOrDef442 = new BitSet(new ulong[]{0x222C008180000000UL,0x1070C007FFF0002UL});
-		public static readonly BitSet _oclExpression_in_invOrDef444 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _118_in_invOrDef464 = new BitSet(new ulong[]{0x0UL,0x4000000000UL});
-		public static readonly BitSet _102_in_invOrDef469 = new BitSet(new ulong[]{0x8000000000000UL,0x20UL});
-		public static readonly BitSet _SimpleName_in_invOrDef471 = new BitSet(new ulong[]{0x0UL,0x20UL});
-		public static readonly BitSet _69_in_invOrDef474 = new BitSet(new ulong[]{0x8000000000000UL});
-		public static readonly BitSet _defExpression_in_invOrDef476 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _117_in_prePostOrBodyDecl505 = new BitSet(new ulong[]{0x8000000000000UL,0x20UL});
-		public static readonly BitSet _SimpleName_in_prePostOrBodyDecl508 = new BitSet(new ulong[]{0x0UL,0x20UL});
-		public static readonly BitSet _69_in_prePostOrBodyDecl512 = new BitSet(new ulong[]{0x222C008180000000UL,0x1070C007FFF0002UL});
-		public static readonly BitSet _oclExpression_in_prePostOrBodyDecl514 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _116_in_prePostOrBodyDecl531 = new BitSet(new ulong[]{0x8000000000000UL,0x20UL});
-		public static readonly BitSet _SimpleName_in_prePostOrBodyDecl534 = new BitSet(new ulong[]{0x0UL,0x20UL});
-		public static readonly BitSet _69_in_prePostOrBodyDecl538 = new BitSet(new ulong[]{0x222C008180000000UL,0x1070C007FFF0002UL});
-		public static readonly BitSet _oclExpression_in_prePostOrBodyDecl540 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _100_in_prePostOrBodyDecl557 = new BitSet(new ulong[]{0x8000000000000UL,0x20UL});
-		public static readonly BitSet _SimpleName_in_prePostOrBodyDecl560 = new BitSet(new ulong[]{0x0UL,0x20UL});
-		public static readonly BitSet _69_in_prePostOrBodyDecl564 = new BitSet(new ulong[]{0x222C008180000000UL,0x1070C007FFF0002UL});
-		public static readonly BitSet _oclExpression_in_prePostOrBodyDecl566 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _pathName_in_operation588 = new BitSet(new ulong[]{0x2000000000000000UL});
-		public static readonly BitSet _61_in_operation592 = new BitSet(new ulong[]{0x4008000000000000UL});
-		public static readonly BitSet _parameters_in_operation594 = new BitSet(new ulong[]{0x4000000000000000UL});
-		public static readonly BitSet _62_in_operation597 = new BitSet(new ulong[]{0x2UL,0x20UL});
-		public static readonly BitSet _69_in_operation600 = new BitSet(new ulong[]{0x8000000000000UL,0x7FFF0000UL});
-		public static readonly BitSet _type_in_operation602 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _variableDeclarationList_in_parameters630 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _variableDeclaration_in_defExpression643 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _operation_in_defExpression649 = new BitSet(new ulong[]{0x0UL,0x800UL});
-		public static readonly BitSet _75_in_defExpression651 = new BitSet(new ulong[]{0x222C008180000000UL,0x1070C007FFF0002UL});
-		public static readonly BitSet _oclExpression_in_defExpression653 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _logicalImpliesExpression_in_oclExpression677 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _logicalXorExpression_in_logicalImpliesExpression693 = new BitSet(new ulong[]{0x2UL,0x100000000000UL});
-		public static readonly BitSet _108_in_logicalImpliesExpression702 = new BitSet(new ulong[]{0x222C008180000000UL,0x1070C007FFF0002UL});
-		public static readonly BitSet _logicalXorExpression_in_logicalImpliesExpression706 = new BitSet(new ulong[]{0x2UL,0x100000000000UL});
-		public static readonly BitSet _logicalOrExpression_in_logicalXorExpression731 = new BitSet(new ulong[]{0x2UL,0x200000000000000UL});
-		public static readonly BitSet _121_in_logicalXorExpression739 = new BitSet(new ulong[]{0x222C008180000000UL,0x1070C007FFF0002UL});
-		public static readonly BitSet _logicalOrExpression_in_logicalXorExpression743 = new BitSet(new ulong[]{0x2UL,0x200000000000000UL});
-		public static readonly BitSet _logicalAndExpression_in_logicalOrExpression767 = new BitSet(new ulong[]{0x2UL,0x8000000000000UL});
-		public static readonly BitSet _115_in_logicalOrExpression775 = new BitSet(new ulong[]{0x222C008180000000UL,0x1070C007FFF0002UL});
-		public static readonly BitSet _logicalAndExpression_in_logicalOrExpression779 = new BitSet(new ulong[]{0x2UL,0x8000000000000UL});
-		public static readonly BitSet _relationalEqExpression_in_logicalAndExpression803 = new BitSet(new ulong[]{0x2UL,0x800000000UL});
-		public static readonly BitSet _99_in_logicalAndExpression812 = new BitSet(new ulong[]{0x222C008180000000UL,0x1070C007FFF0002UL});
-		public static readonly BitSet _relationalEqExpression_in_logicalAndExpression816 = new BitSet(new ulong[]{0x2UL,0x800000000UL});
-		public static readonly BitSet _relationalNotEqExprassion_in_relationalEqExpression841 = new BitSet(new ulong[]{0x2UL,0xC00UL});
-		public static readonly BitSet _75_in_relationalEqExpression850 = new BitSet(new ulong[]{0x222C008180000000UL,0x1070C007FFF0002UL});
-		public static readonly BitSet _74_in_relationalEqExpression854 = new BitSet(new ulong[]{0x222C008180000000UL,0x1070C007FFF0002UL});
-		public static readonly BitSet _relationalNotEqExprassion_in_relationalEqExpression859 = new BitSet(new ulong[]{0x2UL,0xC00UL});
-		public static readonly BitSet _additiveExpression_in_relationalNotEqExprassion886 = new BitSet(new ulong[]{0x2UL,0x3300UL});
-		public static readonly BitSet _72_in_relationalNotEqExprassion896 = new BitSet(new ulong[]{0x222C008180000000UL,0x1070C007FFF0002UL});
-		public static readonly BitSet _76_in_relationalNotEqExprassion901 = new BitSet(new ulong[]{0x222C008180000000UL,0x1070C007FFF0002UL});
-		public static readonly BitSet _73_in_relationalNotEqExprassion906 = new BitSet(new ulong[]{0x222C008180000000UL,0x1070C007FFF0002UL});
-		public static readonly BitSet _77_in_relationalNotEqExprassion911 = new BitSet(new ulong[]{0x222C008180000000UL,0x1070C007FFF0002UL});
-		public static readonly BitSet _additiveExpression_in_relationalNotEqExprassion916 = new BitSet(new ulong[]{0x2UL,0x3300UL});
-		public static readonly BitSet _multiplicativeExpression_in_additiveExpression942 = new BitSet(new ulong[]{0x8000000000000002UL,0x2UL});
-		public static readonly BitSet _63_in_additiveExpression951 = new BitSet(new ulong[]{0x222C008180000000UL,0x1070C007FFF0002UL});
-		public static readonly BitSet _65_in_additiveExpression955 = new BitSet(new ulong[]{0x222C008180000000UL,0x1070C007FFF0002UL});
-		public static readonly BitSet _multiplicativeExpression_in_additiveExpression961 = new BitSet(new ulong[]{0x8000000000000002UL,0x2UL});
-		public static readonly BitSet _unaryExpression_in_multiplicativeExpression988 = new BitSet(new ulong[]{0x200000000000002UL,0x10UL});
-		public static readonly BitSet _UnlimitedNaturalLiteralExp_in_multiplicativeExpression997 = new BitSet(new ulong[]{0x222C008180000000UL,0x1070C007FFF0002UL});
-		public static readonly BitSet _68_in_multiplicativeExpression1001 = new BitSet(new ulong[]{0x222C008180000000UL,0x1070C007FFF0002UL});
-		public static readonly BitSet _unaryExpression_in_multiplicativeExpression1006 = new BitSet(new ulong[]{0x200000000000002UL,0x10UL});
-		public static readonly BitSet _65_in_unaryExpression1034 = new BitSet(new ulong[]{0x222C008180000000UL,0x1070C007FFF0002UL});
-		public static readonly BitSet _114_in_unaryExpression1038 = new BitSet(new ulong[]{0x222C008180000000UL,0x1070C007FFF0002UL});
-		public static readonly BitSet _termExpression_in_unaryExpression1043 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _termExpression_in_unaryExpression1057 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _primaryExperession_in_termExpression1071 = new BitSet(new ulong[]{0x2UL,0x60000000CUL});
-		public static readonly BitSet _67_in_termExpression1082 = new BitSet(new ulong[]{0x8000000000000UL,0x1000000000000UL});
-		public static readonly BitSet _66_in_termExpression1086 = new BitSet(new ulong[]{0x8000000000000UL,0x1000000000000UL});
-		public static readonly BitSet _propertyCall_in_termExpression1091 = new BitSet(new ulong[]{0x2UL,0x60000000CUL});
-		public static readonly BitSet _oclMessageExp_in_termExpression1115 = new BitSet(new ulong[]{0x2UL,0x60000000CUL});
-		public static readonly BitSet _collectionLiteralExpAndType_in_primaryExperession1157 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _tupleLiteralExp_in_primaryExperession1165 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _primitiveLiteralExp_in_primaryExperession1175 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _enumAndType_in_primaryExperession1193 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _propertyCall_in_primaryExperession1209 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _61_in_primaryExperession1214 = new BitSet(new ulong[]{0x222C008180000000UL,0x1070C007FFF0002UL});
-		public static readonly BitSet _oclExpression_in_primaryExperession1216 = new BitSet(new ulong[]{0x4000000000000000UL});
-		public static readonly BitSet _62_in_primaryExperession1217 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _ifExp_in_primaryExperession1223 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _letExp_in_primaryExperession1228 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _pathName_in_propertyCall1238 = new BitSet(new ulong[]{0x2000000000000002UL,0x80008000UL});
-		public static readonly BitSet _95_in_propertyCall1241 = new BitSet(new ulong[]{0x222C008180000000UL,0x1070C007FFF0002UL});
-		public static readonly BitSet _arguments_in_propertyCall1242 = new BitSet(new ulong[]{0x0UL,0x100000000UL});
-		public static readonly BitSet _96_in_propertyCall1243 = new BitSet(new ulong[]{0x2000000000000002UL,0x8000UL});
-		public static readonly BitSet _isMarkedPre_in_propertyCall1247 = new BitSet(new ulong[]{0x2000000000000002UL});
-		public static readonly BitSet _61_in_propertyCall1251 = new BitSet(new ulong[]{0x622C008180000000UL,0x1070C007FFF0002UL});
-		public static readonly BitSet _propertyCallParametrs_in_propertyCall1252 = new BitSet(new ulong[]{0x4000000000000000UL});
-		public static readonly BitSet _62_in_propertyCall1253 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _112_in_propertyCall1302 = new BitSet(new ulong[]{0x2000000000000000UL});
-		public static readonly BitSet _61_in_propertyCall1304 = new BitSet(new ulong[]{0x8000000000000UL});
-		public static readonly BitSet _SimpleName_in_propertyCall1331 = new BitSet(new ulong[]{0x0UL,0xA0UL});
-		public static readonly BitSet _69_in_propertyCall1335 = new BitSet(new ulong[]{0x8000000000000UL,0x7FFF0000UL});
-		public static readonly BitSet _type_in_propertyCall1342 = new BitSet(new ulong[]{0x0UL,0x80UL});
-		public static readonly BitSet _71_in_propertyCall1346 = new BitSet(new ulong[]{0x8000000000000UL});
-		public static readonly BitSet _SimpleName_in_propertyCall1351 = new BitSet(new ulong[]{0x0UL,0x820UL});
-		public static readonly BitSet _69_in_propertyCall1354 = new BitSet(new ulong[]{0x8000000000000UL,0x7FFF0000UL});
-		public static readonly BitSet _type_in_propertyCall1360 = new BitSet(new ulong[]{0x0UL,0x800UL});
-		public static readonly BitSet _75_in_propertyCall1363 = new BitSet(new ulong[]{0x222C008180000000UL,0x1070C007FFF0002UL});
-		public static readonly BitSet _oclExpression_in_propertyCall1369 = new BitSet(new ulong[]{0x0UL,0x800000000000000UL});
-		public static readonly BitSet _SimpleName_in_propertyCall1385 = new BitSet(new ulong[]{0x0UL,0x820UL});
-		public static readonly BitSet _69_in_propertyCall1388 = new BitSet(new ulong[]{0x8000000000000UL,0x7FFF0000UL});
-		public static readonly BitSet _type_in_propertyCall1393 = new BitSet(new ulong[]{0x0UL,0x800UL});
-		public static readonly BitSet _75_in_propertyCall1396 = new BitSet(new ulong[]{0x222C008180000000UL,0x1070C007FFF0002UL});
-		public static readonly BitSet _oclExpression_in_propertyCall1402 = new BitSet(new ulong[]{0x0UL,0x800000000000000UL});
-		public static readonly BitSet _123_in_propertyCall1414 = new BitSet(new ulong[]{0x222C008180000000UL,0x1070C007FFF0002UL});
-		public static readonly BitSet _oclExpression_in_propertyCall1420 = new BitSet(new ulong[]{0x4000000000000000UL});
-		public static readonly BitSet _62_in_propertyCall1422 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _declarePropertyCallParametrs_in_propertyCallParametrs1478 = new BitSet(new ulong[]{0x222C008180000002UL,0x1070C007FFF0002UL});
-		public static readonly BitSet _arguments_in_propertyCallParametrs1481 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _typedef_in_declarePropertyCallParametrs1515 = new BitSet(new ulong[]{0x0UL,0x800000000000001UL});
-		public static readonly BitSet _64_in_declarePropertyCallParametrs1518 = new BitSet(new ulong[]{0x8000000000000UL});
-		public static readonly BitSet _typedef_in_declarePropertyCallParametrs1522 = new BitSet(new ulong[]{0x0UL,0x800000000000000UL});
-		public static readonly BitSet _123_in_declarePropertyCallParametrs1526 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _SimpleName_in_typedef1554 = new BitSet(new ulong[]{0x2UL,0x20UL});
-		public static readonly BitSet _69_in_typedef1556 = new BitSet(new ulong[]{0x8000000000000UL,0x7FFF0000UL});
-		public static readonly BitSet _type_in_typedef1557 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _tupleType_in_enumAndType1594 = new BitSet(new ulong[]{0x0UL,0x20000000UL});
-		public static readonly BitSet _tupleType_in_enumAndType1602 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _primitiveType_in_enumAndType1607 = new BitSet(new ulong[]{0x0UL,0x520A0000UL});
-		public static readonly BitSet _primitiveType_in_enumAndType1612 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _oclType_in_enumAndType1617 = new BitSet(new ulong[]{0x8000000000000UL,0x7FFF0000UL});
-		public static readonly BitSet _oclType_in_enumAndType1621 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _SimpleName_in_pathName1638 = new BitSet(new ulong[]{0x2UL,0x40UL});
-		public static readonly BitSet _70_in_pathName1641 = new BitSet(new ulong[]{0x8000000000000UL});
-		public static readonly BitSet _SimpleName_in_pathName1643 = new BitSet(new ulong[]{0x2UL,0x40UL});
-		public static readonly BitSet _collectionTypeIdentifier_in_collectionLiteralExpAndType1672 = new BitSet(new ulong[]{0x2UL,0x400000000000000UL});
-		public static readonly BitSet _122_in_collectionLiteralExpAndType1675 = new BitSet(new ulong[]{0x222C008180000000UL,0x11070C007FFF0002UL});
-		public static readonly BitSet _collectionLiteralParts_in_collectionLiteralExpAndType1677 = new BitSet(new ulong[]{0x0UL,0x1000000000000000UL});
-		public static readonly BitSet _124_in_collectionLiteralExpAndType1680 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _collectionTypeIdentifier_in_collectionLiteralExpAndType1702 = new BitSet(new ulong[]{0x2000000000000000UL});
-		public static readonly BitSet _61_in_collectionLiteralExpAndType1705 = new BitSet(new ulong[]{0x8000000000000UL,0x7FFF0000UL});
-		public static readonly BitSet _type_in_collectionLiteralExpAndType1707 = new BitSet(new ulong[]{0x4000000000000000UL});
-		public static readonly BitSet _62_in_collectionLiteralExpAndType1710 = new BitSet(new ulong[]{0x2UL,0x400000000000000UL});
-		public static readonly BitSet _122_in_collectionLiteralExpAndType1720 = new BitSet(new ulong[]{0x222C008180000000UL,0x11070C007FFF0002UL});
-		public static readonly BitSet _collectionLiteralParts_in_collectionLiteralExpAndType1722 = new BitSet(new ulong[]{0x0UL,0x1000000000000000UL});
-		public static readonly BitSet _124_in_collectionLiteralExpAndType1725 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _pathName_in_enumLiteralExp1773 = new BitSet(new ulong[]{0x0UL,0x40UL});
-		public static readonly BitSet _70_in_enumLiteralExp1774 = new BitSet(new ulong[]{0x8000000000000UL});
-		public static readonly BitSet _SimpleName_in_enumLiteralExp1776 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _collectionTypeIdentifier_in_collectionLiteralExp1788 = new BitSet(new ulong[]{0x0UL,0x400000000000000UL});
-		public static readonly BitSet _122_in_collectionLiteralExp1791 = new BitSet(new ulong[]{0x222C008180000000UL,0x11070C007FFF0002UL});
-		public static readonly BitSet _collectionLiteralParts_in_collectionLiteralExp1793 = new BitSet(new ulong[]{0x0UL,0x1000000000000000UL});
-		public static readonly BitSet _124_in_collectionLiteralExp1796 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _collectionType_in_collectionLiteralExp1800 = new BitSet(new ulong[]{0x0UL,0x400000000000000UL});
-		public static readonly BitSet _122_in_collectionLiteralExp1802 = new BitSet(new ulong[]{0x222C008180000000UL,0x11070C007FFF0002UL});
-		public static readonly BitSet _collectionLiteralParts_in_collectionLiteralExp1804 = new BitSet(new ulong[]{0x0UL,0x1000000000000000UL});
-		public static readonly BitSet _124_in_collectionLiteralExp1807 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _set_in_collectionTypeIdentifier1823 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _collectionLiteralPart_in_collectionLiteralParts1854 = new BitSet(new ulong[]{0x2UL,0x1UL});
-		public static readonly BitSet _64_in_collectionLiteralParts1858 = new BitSet(new ulong[]{0x222C008180000000UL,0x1070C007FFF0002UL});
-		public static readonly BitSet _collectionLiteralPart_in_collectionLiteralParts1861 = new BitSet(new ulong[]{0x2UL,0x1UL});
-		public static readonly BitSet _oclExpression_in_collectionLiteralPart1878 = new BitSet(new ulong[]{0x200002UL});
-		public static readonly BitSet _DoubleDot_in_collectionLiteralPart1882 = new BitSet(new ulong[]{0x222C008180000000UL,0x1070C007FFF0002UL});
-		public static readonly BitSet _oclExpression_in_collectionLiteralPart1886 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _set_in_primitiveLiteralExp1918 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _93_in_tupleLiteralExp1975 = new BitSet(new ulong[]{0x0UL,0x400000000000000UL});
-		public static readonly BitSet _122_in_tupleLiteralExp1977 = new BitSet(new ulong[]{0x8000000000000UL});
-		public static readonly BitSet _variableDeclarationList_in_tupleLiteralExp1979 = new BitSet(new ulong[]{0x0UL,0x1000000000000000UL});
-		public static readonly BitSet _124_in_tupleLiteralExp1982 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _type_in_typeLiteralExp2004 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _SimpleName_in_variableDeclaration2019 = new BitSet(new ulong[]{0x0UL,0x20UL});
-		public static readonly BitSet _69_in_variableDeclaration2021 = new BitSet(new ulong[]{0x8000000000000UL,0x7FFF0000UL});
-		public static readonly BitSet _type_in_variableDeclaration2023 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _SimpleName_in_variableDeclaration2046 = new BitSet(new ulong[]{0x0UL,0x820UL});
-		public static readonly BitSet _69_in_variableDeclaration2049 = new BitSet(new ulong[]{0x8000000000000UL,0x7FFF0000UL});
-		public static readonly BitSet _type_in_variableDeclaration2051 = new BitSet(new ulong[]{0x0UL,0x800UL});
-		public static readonly BitSet _75_in_variableDeclaration2056 = new BitSet(new ulong[]{0x222C008180000000UL,0x1070C007FFF0002UL});
-		public static readonly BitSet _oclExpression_in_variableDeclaration2058 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _pathName_in_type2087 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _collectionType_in_type2095 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _tupleType_in_type2101 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _primitiveType_in_type2108 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _oclType_in_type2115 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _set_in_primitiveType2129 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _set_in_oclType2179 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _collectionTypeIdentifier_in_collectionType2221 = new BitSet(new ulong[]{0x2000000000000000UL});
-		public static readonly BitSet _61_in_collectionType2223 = new BitSet(new ulong[]{0x8000000000000UL,0x7FFF0000UL});
-		public static readonly BitSet _type_in_collectionType2225 = new BitSet(new ulong[]{0x4000000000000000UL});
-		public static readonly BitSet _62_in_collectionType2228 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _93_in_tupleType2253 = new BitSet(new ulong[]{0x2000000000000000UL});
-		public static readonly BitSet _61_in_tupleType2256 = new BitSet(new ulong[]{0x4008000000000000UL});
-		public static readonly BitSet _variableDeclarationList_in_tupleType2259 = new BitSet(new ulong[]{0x4000000000000000UL});
-		public static readonly BitSet _62_in_tupleType2263 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _variableDeclaration_in_variableDeclarationList2279 = new BitSet(new ulong[]{0x2UL,0x1UL});
-		public static readonly BitSet _64_in_variableDeclarationList2283 = new BitSet(new ulong[]{0x8000000000000UL});
-		public static readonly BitSet _variableDeclaration_in_variableDeclarationList2286 = new BitSet(new ulong[]{0x2UL,0x1UL});
-		public static readonly BitSet _79_in_isMarkedPre2302 = new BitSet(new ulong[]{0x0UL,0x20000000000000UL});
-		public static readonly BitSet _117_in_isMarkedPre2305 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _oclExpression_in_arguments2321 = new BitSet(new ulong[]{0x2UL,0x1UL});
-		public static readonly BitSet _64_in_arguments2326 = new BitSet(new ulong[]{0x222C008180000000UL,0x1070C007FFF0002UL});
-		public static readonly BitSet _oclExpression_in_arguments2331 = new BitSet(new ulong[]{0x2UL,0x1UL});
-		public static readonly BitSet _113_in_letExp2347 = new BitSet(new ulong[]{0x8000000000000UL});
-		public static readonly BitSet _variableDeclaration_in_letExp2349 = new BitSet(new ulong[]{0x0UL,0x200000000001UL});
-		public static readonly BitSet _letExpSub_in_letExp2352 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _64_in_letExpSub2374 = new BitSet(new ulong[]{0x8000000000000UL});
-		public static readonly BitSet _variableDeclaration_in_letExpSub2376 = new BitSet(new ulong[]{0x0UL,0x200000000001UL});
-		public static readonly BitSet _letExpSub_in_letExpSub2379 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _109_in_letExpSub2394 = new BitSet(new ulong[]{0x222C008180000000UL,0x1070C007FFF0002UL});
-		public static readonly BitSet _oclExpression_in_letExpSub2405 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _98_in_oclMessageExp2421 = new BitSet(new ulong[]{0x8000000000000UL});
-		public static readonly BitSet _SimpleName_in_oclMessageExp2423 = new BitSet(new ulong[]{0x2000000000000000UL});
-		public static readonly BitSet _61_in_oclMessageExp2425 = new BitSet(new ulong[]{0x622C008180000000UL,0x1070C007FFF4002UL});
-		public static readonly BitSet _oclMessageArguments_in_oclMessageExp2427 = new BitSet(new ulong[]{0x4000000000000000UL});
-		public static readonly BitSet _62_in_oclMessageExp2430 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _97_in_oclMessageExp2435 = new BitSet(new ulong[]{0x8000000000000UL});
-		public static readonly BitSet _SimpleName_in_oclMessageExp2437 = new BitSet(new ulong[]{0x2000000000000000UL});
-		public static readonly BitSet _61_in_oclMessageExp2439 = new BitSet(new ulong[]{0x622C008180000000UL,0x1070C007FFF4002UL});
-		public static readonly BitSet _oclMessageArguments_in_oclMessageExp2441 = new BitSet(new ulong[]{0x4000000000000000UL});
-		public static readonly BitSet _62_in_oclMessageExp2444 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _oclMessageArg_in_oclMessageArguments2454 = new BitSet(new ulong[]{0x2UL,0x1UL});
-		public static readonly BitSet _64_in_oclMessageArguments2458 = new BitSet(new ulong[]{0x222C008180000000UL,0x1070C007FFF4002UL});
-		public static readonly BitSet _oclMessageArguments_in_oclMessageArguments2460 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _78_in_oclMessageArg2475 = new BitSet(new ulong[]{0x2UL,0x20UL});
-		public static readonly BitSet _69_in_oclMessageArg2478 = new BitSet(new ulong[]{0x8000000000000UL,0x7FFF0000UL});
-		public static readonly BitSet _type_in_oclMessageArg2480 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _oclExpression_in_oclMessageArg2487 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _107_in_ifExp2501 = new BitSet(new ulong[]{0x222C008180000000UL,0x1070C007FFF0002UL});
-		public static readonly BitSet _oclExpression_in_ifExp2503 = new BitSet(new ulong[]{0x0UL,0x80000000000000UL});
-		public static readonly BitSet _119_in_ifExp2505 = new BitSet(new ulong[]{0x222C008180000000UL,0x1070C007FFF0002UL});
-		public static readonly BitSet _oclExpression_in_ifExp2507 = new BitSet(new ulong[]{0x0UL,0x10000000000UL});
-		public static readonly BitSet _104_in_ifExp2509 = new BitSet(new ulong[]{0x222C008180000000UL,0x1070C007FFF0002UL});
-		public static readonly BitSet _oclExpression_in_ifExp2511 = new BitSet(new ulong[]{0x0UL,0x20000000000UL});
-		public static readonly BitSet _105_in_ifExp2513 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _SimpleName_in_synpred1_OCLSyntax1315 = new BitSet(new ulong[]{0x0UL,0xA0UL});
-		public static readonly BitSet _69_in_synpred1_OCLSyntax1319 = new BitSet(new ulong[]{0x8000000000000UL,0x7FFF0000UL});
-		public static readonly BitSet _type_in_synpred1_OCLSyntax1322 = new BitSet(new ulong[]{0x0UL,0x80UL});
-		public static readonly BitSet _71_in_synpred1_OCLSyntax1326 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _contextDeclaration_in_contextDeclarationList172 = new BitSet(new ulong[]{0x0UL,0x2000000000UL});
+		public static readonly BitSet _EOF_in_contextDeclarationList175 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _propertyContextDecl_in_contextDeclaration197 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _classifierContextDecl_in_contextDeclaration201 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _operationContextDecl_in_contextDeclaration205 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _propertyContextHead_in_propertyContextDecl215 = new BitSet(new ulong[]{0x2UL,0x408000000000UL});
+		public static readonly BitSet _initOrDerValue_in_propertyContextDecl217 = new BitSet(new ulong[]{0x2UL,0x408000000000UL});
+		public static readonly BitSet _101_in_propertyContextHead240 = new BitSet(new ulong[]{0x8000000000000UL});
+		public static readonly BitSet _SimpleName_in_propertyContextHead242 = new BitSet(new ulong[]{0x0UL,0x40UL});
+		public static readonly BitSet _70_in_propertyContextHead245 = new BitSet(new ulong[]{0x8000000000000UL});
+		public static readonly BitSet _SimpleName_in_propertyContextHead247 = new BitSet(new ulong[]{0x0UL,0x60UL});
+		public static readonly BitSet _69_in_propertyContextHead251 = new BitSet(new ulong[]{0x8000000000000UL,0x7FFF0000UL});
+		public static readonly BitSet _type_in_propertyContextHead253 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _operationContextHead_in_operationContextDecl277 = new BitSet(new ulong[]{0x2UL,0x60001000000000UL});
+		public static readonly BitSet _prePostOrBodyDecl_in_operationContextDecl279 = new BitSet(new ulong[]{0x2UL,0x60001000000000UL});
+		public static readonly BitSet _101_in_operationContextHead302 = new BitSet(new ulong[]{0x8000000000000UL});
+		public static readonly BitSet _operation_in_operationContextHead304 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _classifierContextHead_in_classifierContextDecl322 = new BitSet(new ulong[]{0x2UL,0x80804000000000UL});
+		public static readonly BitSet _invOrDef_in_classifierContextDecl325 = new BitSet(new ulong[]{0x2UL,0x80804000000000UL});
+		public static readonly BitSet _101_in_classifierContextHead350 = new BitSet(new ulong[]{0x8000000000000UL});
+		public static readonly BitSet _pathName_in_classifierContextHead352 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _101_in_classifierContextHead368 = new BitSet(new ulong[]{0x8000000000000UL});
+		public static readonly BitSet _SimpleName_in_classifierContextHead370 = new BitSet(new ulong[]{0x0UL,0x20UL});
+		public static readonly BitSet _69_in_classifierContextHead371 = new BitSet(new ulong[]{0x8000000000000UL});
+		public static readonly BitSet _pathName_in_classifierContextHead372 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _110_in_initOrDerValue395 = new BitSet(new ulong[]{0x0UL,0x20UL});
+		public static readonly BitSet _69_in_initOrDerValue397 = new BitSet(new ulong[]{0x222C008180000000UL,0x20B0C007FFF0002UL});
+		public static readonly BitSet _oclExpression_in_initOrDerValue399 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _103_in_initOrDerValue414 = new BitSet(new ulong[]{0x0UL,0x20UL});
+		public static readonly BitSet _69_in_initOrDerValue416 = new BitSet(new ulong[]{0x222C008180000000UL,0x20B0C007FFF0002UL});
+		public static readonly BitSet _oclExpression_in_initOrDerValue418 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _111_in_invOrDef438 = new BitSet(new ulong[]{0x8000000000000UL,0x20UL});
+		public static readonly BitSet _SimpleName_in_invOrDef441 = new BitSet(new ulong[]{0x0UL,0x20UL});
+		public static readonly BitSet _69_in_invOrDef446 = new BitSet(new ulong[]{0x222C008180000000UL,0x20B0C007FFF0002UL});
+		public static readonly BitSet _oclExpression_in_invOrDef448 = new BitSet(new ulong[]{0x2UL,0x4000000000000UL});
+		public static readonly BitSet _114_in_invOrDef456 = new BitSet(new ulong[]{0x0UL,0x20UL});
+		public static readonly BitSet _69_in_invOrDef458 = new BitSet(new ulong[]{0x20000000000000UL});
+		public static readonly BitSet _StringLiteralExp_in_invOrDef460 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _119_in_invOrDef489 = new BitSet(new ulong[]{0x0UL,0x4000000000UL});
+		public static readonly BitSet _102_in_invOrDef494 = new BitSet(new ulong[]{0x8000000000000UL,0x20UL});
+		public static readonly BitSet _SimpleName_in_invOrDef496 = new BitSet(new ulong[]{0x0UL,0x20UL});
+		public static readonly BitSet _69_in_invOrDef499 = new BitSet(new ulong[]{0x8000000000000UL});
+		public static readonly BitSet _defExpression_in_invOrDef501 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _118_in_prePostOrBodyDecl530 = new BitSet(new ulong[]{0x8000000000000UL,0x20UL});
+		public static readonly BitSet _SimpleName_in_prePostOrBodyDecl533 = new BitSet(new ulong[]{0x0UL,0x20UL});
+		public static readonly BitSet _69_in_prePostOrBodyDecl537 = new BitSet(new ulong[]{0x222C008180000000UL,0x20B0C007FFF0002UL});
+		public static readonly BitSet _oclExpression_in_prePostOrBodyDecl539 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _117_in_prePostOrBodyDecl556 = new BitSet(new ulong[]{0x8000000000000UL,0x20UL});
+		public static readonly BitSet _SimpleName_in_prePostOrBodyDecl559 = new BitSet(new ulong[]{0x0UL,0x20UL});
+		public static readonly BitSet _69_in_prePostOrBodyDecl563 = new BitSet(new ulong[]{0x222C008180000000UL,0x20B0C007FFF0002UL});
+		public static readonly BitSet _oclExpression_in_prePostOrBodyDecl565 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _100_in_prePostOrBodyDecl582 = new BitSet(new ulong[]{0x8000000000000UL,0x20UL});
+		public static readonly BitSet _SimpleName_in_prePostOrBodyDecl585 = new BitSet(new ulong[]{0x0UL,0x20UL});
+		public static readonly BitSet _69_in_prePostOrBodyDecl589 = new BitSet(new ulong[]{0x222C008180000000UL,0x20B0C007FFF0002UL});
+		public static readonly BitSet _oclExpression_in_prePostOrBodyDecl591 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _pathName_in_operation613 = new BitSet(new ulong[]{0x2000000000000000UL});
+		public static readonly BitSet _61_in_operation617 = new BitSet(new ulong[]{0x4008000000000000UL});
+		public static readonly BitSet _parameters_in_operation619 = new BitSet(new ulong[]{0x4000000000000000UL});
+		public static readonly BitSet _62_in_operation622 = new BitSet(new ulong[]{0x2UL,0x20UL});
+		public static readonly BitSet _69_in_operation625 = new BitSet(new ulong[]{0x8000000000000UL,0x7FFF0000UL});
+		public static readonly BitSet _type_in_operation627 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _variableDeclarationList_in_parameters655 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _variableDeclaration_in_defExpression668 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _operation_in_defExpression674 = new BitSet(new ulong[]{0x0UL,0x800UL});
+		public static readonly BitSet _75_in_defExpression676 = new BitSet(new ulong[]{0x222C008180000000UL,0x20B0C007FFF0002UL});
+		public static readonly BitSet _oclExpression_in_defExpression678 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _logicalImpliesExpression_in_oclExpression702 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _logicalXorExpression_in_logicalImpliesExpression718 = new BitSet(new ulong[]{0x2UL,0x100000000000UL});
+		public static readonly BitSet _108_in_logicalImpliesExpression727 = new BitSet(new ulong[]{0x222C008180000000UL,0x20B0C007FFF0002UL});
+		public static readonly BitSet _logicalXorExpression_in_logicalImpliesExpression731 = new BitSet(new ulong[]{0x2UL,0x100000000000UL});
+		public static readonly BitSet _logicalOrExpression_in_logicalXorExpression756 = new BitSet(new ulong[]{0x2UL,0x400000000000000UL});
+		public static readonly BitSet _122_in_logicalXorExpression764 = new BitSet(new ulong[]{0x222C008180000000UL,0x20B0C007FFF0002UL});
+		public static readonly BitSet _logicalOrExpression_in_logicalXorExpression768 = new BitSet(new ulong[]{0x2UL,0x400000000000000UL});
+		public static readonly BitSet _logicalAndExpression_in_logicalOrExpression792 = new BitSet(new ulong[]{0x2UL,0x10000000000000UL});
+		public static readonly BitSet _116_in_logicalOrExpression800 = new BitSet(new ulong[]{0x222C008180000000UL,0x20B0C007FFF0002UL});
+		public static readonly BitSet _logicalAndExpression_in_logicalOrExpression804 = new BitSet(new ulong[]{0x2UL,0x10000000000000UL});
+		public static readonly BitSet _relationalEqExpression_in_logicalAndExpression828 = new BitSet(new ulong[]{0x2UL,0x800000000UL});
+		public static readonly BitSet _99_in_logicalAndExpression837 = new BitSet(new ulong[]{0x222C008180000000UL,0x20B0C007FFF0002UL});
+		public static readonly BitSet _relationalEqExpression_in_logicalAndExpression841 = new BitSet(new ulong[]{0x2UL,0x800000000UL});
+		public static readonly BitSet _relationalNotEqExprassion_in_relationalEqExpression866 = new BitSet(new ulong[]{0x2UL,0xC00UL});
+		public static readonly BitSet _75_in_relationalEqExpression875 = new BitSet(new ulong[]{0x222C008180000000UL,0x20B0C007FFF0002UL});
+		public static readonly BitSet _74_in_relationalEqExpression879 = new BitSet(new ulong[]{0x222C008180000000UL,0x20B0C007FFF0002UL});
+		public static readonly BitSet _relationalNotEqExprassion_in_relationalEqExpression884 = new BitSet(new ulong[]{0x2UL,0xC00UL});
+		public static readonly BitSet _additiveExpression_in_relationalNotEqExprassion911 = new BitSet(new ulong[]{0x2UL,0x3300UL});
+		public static readonly BitSet _72_in_relationalNotEqExprassion921 = new BitSet(new ulong[]{0x222C008180000000UL,0x20B0C007FFF0002UL});
+		public static readonly BitSet _76_in_relationalNotEqExprassion926 = new BitSet(new ulong[]{0x222C008180000000UL,0x20B0C007FFF0002UL});
+		public static readonly BitSet _73_in_relationalNotEqExprassion931 = new BitSet(new ulong[]{0x222C008180000000UL,0x20B0C007FFF0002UL});
+		public static readonly BitSet _77_in_relationalNotEqExprassion936 = new BitSet(new ulong[]{0x222C008180000000UL,0x20B0C007FFF0002UL});
+		public static readonly BitSet _additiveExpression_in_relationalNotEqExprassion941 = new BitSet(new ulong[]{0x2UL,0x3300UL});
+		public static readonly BitSet _multiplicativeExpression_in_additiveExpression967 = new BitSet(new ulong[]{0x8000000000000002UL,0x2UL});
+		public static readonly BitSet _63_in_additiveExpression976 = new BitSet(new ulong[]{0x222C008180000000UL,0x20B0C007FFF0002UL});
+		public static readonly BitSet _65_in_additiveExpression980 = new BitSet(new ulong[]{0x222C008180000000UL,0x20B0C007FFF0002UL});
+		public static readonly BitSet _multiplicativeExpression_in_additiveExpression986 = new BitSet(new ulong[]{0x8000000000000002UL,0x2UL});
+		public static readonly BitSet _unaryExpression_in_multiplicativeExpression1013 = new BitSet(new ulong[]{0x200000000000002UL,0x10UL});
+		public static readonly BitSet _UnlimitedNaturalLiteralExp_in_multiplicativeExpression1022 = new BitSet(new ulong[]{0x222C008180000000UL,0x20B0C007FFF0002UL});
+		public static readonly BitSet _68_in_multiplicativeExpression1026 = new BitSet(new ulong[]{0x222C008180000000UL,0x20B0C007FFF0002UL});
+		public static readonly BitSet _unaryExpression_in_multiplicativeExpression1031 = new BitSet(new ulong[]{0x200000000000002UL,0x10UL});
+		public static readonly BitSet _65_in_unaryExpression1059 = new BitSet(new ulong[]{0x222C008180000000UL,0x20B0C007FFF0002UL});
+		public static readonly BitSet _115_in_unaryExpression1063 = new BitSet(new ulong[]{0x222C008180000000UL,0x20B0C007FFF0002UL});
+		public static readonly BitSet _termExpression_in_unaryExpression1068 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _termExpression_in_unaryExpression1082 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _primaryExperession_in_termExpression1096 = new BitSet(new ulong[]{0x2UL,0x60000000CUL});
+		public static readonly BitSet _67_in_termExpression1107 = new BitSet(new ulong[]{0x8000000000000UL,0x1000000000000UL});
+		public static readonly BitSet _66_in_termExpression1111 = new BitSet(new ulong[]{0x8000000000000UL,0x1000000000000UL});
+		public static readonly BitSet _propertyCall_in_termExpression1116 = new BitSet(new ulong[]{0x2UL,0x60000000CUL});
+		public static readonly BitSet _oclMessageExp_in_termExpression1140 = new BitSet(new ulong[]{0x2UL,0x60000000CUL});
+		public static readonly BitSet _collectionLiteralExpAndType_in_primaryExperession1182 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _tupleLiteralExp_in_primaryExperession1190 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _primitiveLiteralExp_in_primaryExperession1200 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _enumAndType_in_primaryExperession1218 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _propertyCall_in_primaryExperession1234 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _61_in_primaryExperession1239 = new BitSet(new ulong[]{0x222C008180000000UL,0x20B0C007FFF0002UL});
+		public static readonly BitSet _oclExpression_in_primaryExperession1241 = new BitSet(new ulong[]{0x4000000000000000UL});
+		public static readonly BitSet _62_in_primaryExperession1242 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _ifExp_in_primaryExperession1248 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _letExp_in_primaryExperession1253 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _pathName_in_propertyCall1263 = new BitSet(new ulong[]{0x2000000000000002UL,0x80008000UL});
+		public static readonly BitSet _95_in_propertyCall1266 = new BitSet(new ulong[]{0x222C008180000000UL,0x20B0C007FFF0002UL});
+		public static readonly BitSet _arguments_in_propertyCall1267 = new BitSet(new ulong[]{0x0UL,0x100000000UL});
+		public static readonly BitSet _96_in_propertyCall1268 = new BitSet(new ulong[]{0x2000000000000002UL,0x8000UL});
+		public static readonly BitSet _isMarkedPre_in_propertyCall1272 = new BitSet(new ulong[]{0x2000000000000002UL});
+		public static readonly BitSet _61_in_propertyCall1276 = new BitSet(new ulong[]{0x622C008180000000UL,0x20B0C007FFF0002UL});
+		public static readonly BitSet _propertyCallParametrs_in_propertyCall1277 = new BitSet(new ulong[]{0x4000000000000000UL});
+		public static readonly BitSet _62_in_propertyCall1278 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _112_in_propertyCall1327 = new BitSet(new ulong[]{0x2000000000000000UL});
+		public static readonly BitSet _61_in_propertyCall1329 = new BitSet(new ulong[]{0x8000000000000UL});
+		public static readonly BitSet _SimpleName_in_propertyCall1356 = new BitSet(new ulong[]{0x0UL,0xA0UL});
+		public static readonly BitSet _69_in_propertyCall1360 = new BitSet(new ulong[]{0x8000000000000UL,0x7FFF0000UL});
+		public static readonly BitSet _type_in_propertyCall1367 = new BitSet(new ulong[]{0x0UL,0x80UL});
+		public static readonly BitSet _71_in_propertyCall1371 = new BitSet(new ulong[]{0x8000000000000UL});
+		public static readonly BitSet _SimpleName_in_propertyCall1376 = new BitSet(new ulong[]{0x0UL,0x820UL});
+		public static readonly BitSet _69_in_propertyCall1379 = new BitSet(new ulong[]{0x8000000000000UL,0x7FFF0000UL});
+		public static readonly BitSet _type_in_propertyCall1385 = new BitSet(new ulong[]{0x0UL,0x800UL});
+		public static readonly BitSet _75_in_propertyCall1388 = new BitSet(new ulong[]{0x222C008180000000UL,0x20B0C007FFF0002UL});
+		public static readonly BitSet _oclExpression_in_propertyCall1394 = new BitSet(new ulong[]{0x0UL,0x1000000000000000UL});
+		public static readonly BitSet _SimpleName_in_propertyCall1410 = new BitSet(new ulong[]{0x0UL,0x820UL});
+		public static readonly BitSet _69_in_propertyCall1413 = new BitSet(new ulong[]{0x8000000000000UL,0x7FFF0000UL});
+		public static readonly BitSet _type_in_propertyCall1418 = new BitSet(new ulong[]{0x0UL,0x800UL});
+		public static readonly BitSet _75_in_propertyCall1421 = new BitSet(new ulong[]{0x222C008180000000UL,0x20B0C007FFF0002UL});
+		public static readonly BitSet _oclExpression_in_propertyCall1427 = new BitSet(new ulong[]{0x0UL,0x1000000000000000UL});
+		public static readonly BitSet _124_in_propertyCall1439 = new BitSet(new ulong[]{0x222C008180000000UL,0x20B0C007FFF0002UL});
+		public static readonly BitSet _oclExpression_in_propertyCall1445 = new BitSet(new ulong[]{0x4000000000000000UL});
+		public static readonly BitSet _62_in_propertyCall1447 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _declarePropertyCallParametrs_in_propertyCallParametrs1503 = new BitSet(new ulong[]{0x222C008180000002UL,0x20B0C007FFF0002UL});
+		public static readonly BitSet _arguments_in_propertyCallParametrs1506 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _typedef_in_declarePropertyCallParametrs1540 = new BitSet(new ulong[]{0x0UL,0x1000000000000001UL});
+		public static readonly BitSet _64_in_declarePropertyCallParametrs1543 = new BitSet(new ulong[]{0x8000000000000UL});
+		public static readonly BitSet _typedef_in_declarePropertyCallParametrs1547 = new BitSet(new ulong[]{0x0UL,0x1000000000000000UL});
+		public static readonly BitSet _124_in_declarePropertyCallParametrs1551 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _SimpleName_in_typedef1579 = new BitSet(new ulong[]{0x2UL,0x20UL});
+		public static readonly BitSet _69_in_typedef1581 = new BitSet(new ulong[]{0x8000000000000UL,0x7FFF0000UL});
+		public static readonly BitSet _type_in_typedef1582 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _tupleType_in_enumAndType1619 = new BitSet(new ulong[]{0x0UL,0x20000000UL});
+		public static readonly BitSet _tupleType_in_enumAndType1627 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _primitiveType_in_enumAndType1632 = new BitSet(new ulong[]{0x0UL,0x520A0000UL});
+		public static readonly BitSet _primitiveType_in_enumAndType1637 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _oclType_in_enumAndType1642 = new BitSet(new ulong[]{0x8000000000000UL,0x7FFF0000UL});
+		public static readonly BitSet _oclType_in_enumAndType1646 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _SimpleName_in_pathName1663 = new BitSet(new ulong[]{0x2UL,0x40UL});
+		public static readonly BitSet _70_in_pathName1666 = new BitSet(new ulong[]{0x8000000000000UL});
+		public static readonly BitSet _SimpleName_in_pathName1668 = new BitSet(new ulong[]{0x2UL,0x40UL});
+		public static readonly BitSet _collectionTypeIdentifier_in_collectionLiteralExpAndType1697 = new BitSet(new ulong[]{0x2UL,0x800000000000000UL});
+		public static readonly BitSet _123_in_collectionLiteralExpAndType1700 = new BitSet(new ulong[]{0x222C008180000000UL,0x220B0C007FFF0002UL});
+		public static readonly BitSet _collectionLiteralParts_in_collectionLiteralExpAndType1702 = new BitSet(new ulong[]{0x0UL,0x2000000000000000UL});
+		public static readonly BitSet _125_in_collectionLiteralExpAndType1705 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _collectionTypeIdentifier_in_collectionLiteralExpAndType1727 = new BitSet(new ulong[]{0x2000000000000000UL});
+		public static readonly BitSet _61_in_collectionLiteralExpAndType1730 = new BitSet(new ulong[]{0x8000000000000UL,0x7FFF0000UL});
+		public static readonly BitSet _type_in_collectionLiteralExpAndType1732 = new BitSet(new ulong[]{0x4000000000000000UL});
+		public static readonly BitSet _62_in_collectionLiteralExpAndType1735 = new BitSet(new ulong[]{0x2UL,0x800000000000000UL});
+		public static readonly BitSet _123_in_collectionLiteralExpAndType1745 = new BitSet(new ulong[]{0x222C008180000000UL,0x220B0C007FFF0002UL});
+		public static readonly BitSet _collectionLiteralParts_in_collectionLiteralExpAndType1747 = new BitSet(new ulong[]{0x0UL,0x2000000000000000UL});
+		public static readonly BitSet _125_in_collectionLiteralExpAndType1750 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _pathName_in_enumLiteralExp1798 = new BitSet(new ulong[]{0x0UL,0x40UL});
+		public static readonly BitSet _70_in_enumLiteralExp1799 = new BitSet(new ulong[]{0x8000000000000UL});
+		public static readonly BitSet _SimpleName_in_enumLiteralExp1801 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _collectionTypeIdentifier_in_collectionLiteralExp1813 = new BitSet(new ulong[]{0x0UL,0x800000000000000UL});
+		public static readonly BitSet _123_in_collectionLiteralExp1816 = new BitSet(new ulong[]{0x222C008180000000UL,0x220B0C007FFF0002UL});
+		public static readonly BitSet _collectionLiteralParts_in_collectionLiteralExp1818 = new BitSet(new ulong[]{0x0UL,0x2000000000000000UL});
+		public static readonly BitSet _125_in_collectionLiteralExp1821 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _collectionType_in_collectionLiteralExp1825 = new BitSet(new ulong[]{0x0UL,0x800000000000000UL});
+		public static readonly BitSet _123_in_collectionLiteralExp1827 = new BitSet(new ulong[]{0x222C008180000000UL,0x220B0C007FFF0002UL});
+		public static readonly BitSet _collectionLiteralParts_in_collectionLiteralExp1829 = new BitSet(new ulong[]{0x0UL,0x2000000000000000UL});
+		public static readonly BitSet _125_in_collectionLiteralExp1832 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _set_in_collectionTypeIdentifier1848 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _collectionLiteralPart_in_collectionLiteralParts1879 = new BitSet(new ulong[]{0x2UL,0x1UL});
+		public static readonly BitSet _64_in_collectionLiteralParts1883 = new BitSet(new ulong[]{0x222C008180000000UL,0x20B0C007FFF0002UL});
+		public static readonly BitSet _collectionLiteralPart_in_collectionLiteralParts1886 = new BitSet(new ulong[]{0x2UL,0x1UL});
+		public static readonly BitSet _oclExpression_in_collectionLiteralPart1903 = new BitSet(new ulong[]{0x200002UL});
+		public static readonly BitSet _DoubleDot_in_collectionLiteralPart1907 = new BitSet(new ulong[]{0x222C008180000000UL,0x20B0C007FFF0002UL});
+		public static readonly BitSet _oclExpression_in_collectionLiteralPart1911 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _set_in_primitiveLiteralExp1943 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _93_in_tupleLiteralExp2000 = new BitSet(new ulong[]{0x0UL,0x800000000000000UL});
+		public static readonly BitSet _123_in_tupleLiteralExp2002 = new BitSet(new ulong[]{0x8000000000000UL});
+		public static readonly BitSet _variableDeclarationList_in_tupleLiteralExp2004 = new BitSet(new ulong[]{0x0UL,0x2000000000000000UL});
+		public static readonly BitSet _125_in_tupleLiteralExp2007 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _type_in_typeLiteralExp2029 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _SimpleName_in_variableDeclaration2044 = new BitSet(new ulong[]{0x0UL,0x20UL});
+		public static readonly BitSet _69_in_variableDeclaration2046 = new BitSet(new ulong[]{0x8000000000000UL,0x7FFF0000UL});
+		public static readonly BitSet _type_in_variableDeclaration2048 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _SimpleName_in_variableDeclaration2071 = new BitSet(new ulong[]{0x0UL,0x820UL});
+		public static readonly BitSet _69_in_variableDeclaration2074 = new BitSet(new ulong[]{0x8000000000000UL,0x7FFF0000UL});
+		public static readonly BitSet _type_in_variableDeclaration2076 = new BitSet(new ulong[]{0x0UL,0x800UL});
+		public static readonly BitSet _75_in_variableDeclaration2081 = new BitSet(new ulong[]{0x222C008180000000UL,0x20B0C007FFF0002UL});
+		public static readonly BitSet _oclExpression_in_variableDeclaration2083 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _pathName_in_type2112 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _collectionType_in_type2120 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _tupleType_in_type2126 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _primitiveType_in_type2133 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _oclType_in_type2140 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _set_in_primitiveType2154 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _set_in_oclType2204 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _collectionTypeIdentifier_in_collectionType2246 = new BitSet(new ulong[]{0x2000000000000000UL});
+		public static readonly BitSet _61_in_collectionType2248 = new BitSet(new ulong[]{0x8000000000000UL,0x7FFF0000UL});
+		public static readonly BitSet _type_in_collectionType2250 = new BitSet(new ulong[]{0x4000000000000000UL});
+		public static readonly BitSet _62_in_collectionType2253 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _93_in_tupleType2278 = new BitSet(new ulong[]{0x2000000000000000UL});
+		public static readonly BitSet _61_in_tupleType2281 = new BitSet(new ulong[]{0x4008000000000000UL});
+		public static readonly BitSet _variableDeclarationList_in_tupleType2284 = new BitSet(new ulong[]{0x4000000000000000UL});
+		public static readonly BitSet _62_in_tupleType2288 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _variableDeclaration_in_variableDeclarationList2304 = new BitSet(new ulong[]{0x2UL,0x1UL});
+		public static readonly BitSet _64_in_variableDeclarationList2308 = new BitSet(new ulong[]{0x8000000000000UL});
+		public static readonly BitSet _variableDeclaration_in_variableDeclarationList2311 = new BitSet(new ulong[]{0x2UL,0x1UL});
+		public static readonly BitSet _79_in_isMarkedPre2327 = new BitSet(new ulong[]{0x0UL,0x40000000000000UL});
+		public static readonly BitSet _118_in_isMarkedPre2330 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _oclExpression_in_arguments2346 = new BitSet(new ulong[]{0x2UL,0x1UL});
+		public static readonly BitSet _64_in_arguments2351 = new BitSet(new ulong[]{0x222C008180000000UL,0x20B0C007FFF0002UL});
+		public static readonly BitSet _oclExpression_in_arguments2356 = new BitSet(new ulong[]{0x2UL,0x1UL});
+		public static readonly BitSet _113_in_letExp2372 = new BitSet(new ulong[]{0x8000000000000UL});
+		public static readonly BitSet _variableDeclaration_in_letExp2374 = new BitSet(new ulong[]{0x0UL,0x200000000001UL});
+		public static readonly BitSet _letExpSub_in_letExp2377 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _64_in_letExpSub2399 = new BitSet(new ulong[]{0x8000000000000UL});
+		public static readonly BitSet _variableDeclaration_in_letExpSub2401 = new BitSet(new ulong[]{0x0UL,0x200000000001UL});
+		public static readonly BitSet _letExpSub_in_letExpSub2404 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _109_in_letExpSub2419 = new BitSet(new ulong[]{0x222C008180000000UL,0x20B0C007FFF0002UL});
+		public static readonly BitSet _oclExpression_in_letExpSub2430 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _98_in_oclMessageExp2446 = new BitSet(new ulong[]{0x8000000000000UL});
+		public static readonly BitSet _SimpleName_in_oclMessageExp2448 = new BitSet(new ulong[]{0x2000000000000000UL});
+		public static readonly BitSet _61_in_oclMessageExp2450 = new BitSet(new ulong[]{0x622C008180000000UL,0x20B0C007FFF4002UL});
+		public static readonly BitSet _oclMessageArguments_in_oclMessageExp2452 = new BitSet(new ulong[]{0x4000000000000000UL});
+		public static readonly BitSet _62_in_oclMessageExp2455 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _97_in_oclMessageExp2460 = new BitSet(new ulong[]{0x8000000000000UL});
+		public static readonly BitSet _SimpleName_in_oclMessageExp2462 = new BitSet(new ulong[]{0x2000000000000000UL});
+		public static readonly BitSet _61_in_oclMessageExp2464 = new BitSet(new ulong[]{0x622C008180000000UL,0x20B0C007FFF4002UL});
+		public static readonly BitSet _oclMessageArguments_in_oclMessageExp2466 = new BitSet(new ulong[]{0x4000000000000000UL});
+		public static readonly BitSet _62_in_oclMessageExp2469 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _oclMessageArg_in_oclMessageArguments2479 = new BitSet(new ulong[]{0x2UL,0x1UL});
+		public static readonly BitSet _64_in_oclMessageArguments2483 = new BitSet(new ulong[]{0x222C008180000000UL,0x20B0C007FFF4002UL});
+		public static readonly BitSet _oclMessageArguments_in_oclMessageArguments2485 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _78_in_oclMessageArg2500 = new BitSet(new ulong[]{0x2UL,0x20UL});
+		public static readonly BitSet _69_in_oclMessageArg2503 = new BitSet(new ulong[]{0x8000000000000UL,0x7FFF0000UL});
+		public static readonly BitSet _type_in_oclMessageArg2505 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _oclExpression_in_oclMessageArg2512 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _107_in_ifExp2526 = new BitSet(new ulong[]{0x222C008180000000UL,0x20B0C007FFF0002UL});
+		public static readonly BitSet _oclExpression_in_ifExp2528 = new BitSet(new ulong[]{0x0UL,0x100000000000000UL});
+		public static readonly BitSet _120_in_ifExp2530 = new BitSet(new ulong[]{0x222C008180000000UL,0x20B0C007FFF0002UL});
+		public static readonly BitSet _oclExpression_in_ifExp2532 = new BitSet(new ulong[]{0x0UL,0x10000000000UL});
+		public static readonly BitSet _104_in_ifExp2534 = new BitSet(new ulong[]{0x222C008180000000UL,0x20B0C007FFF0002UL});
+		public static readonly BitSet _oclExpression_in_ifExp2536 = new BitSet(new ulong[]{0x0UL,0x20000000000UL});
+		public static readonly BitSet _105_in_ifExp2538 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _SimpleName_in_synpred1_OCLSyntax1340 = new BitSet(new ulong[]{0x0UL,0xA0UL});
+		public static readonly BitSet _69_in_synpred1_OCLSyntax1344 = new BitSet(new ulong[]{0x8000000000000UL,0x7FFF0000UL});
+		public static readonly BitSet _type_in_synpred1_OCLSyntax1347 = new BitSet(new ulong[]{0x0UL,0x80UL});
+		public static readonly BitSet _71_in_synpred1_OCLSyntax1351 = new BitSet(new ulong[]{0x2UL});
 
 	}
 	#endregion Follow sets
