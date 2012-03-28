@@ -67,8 +67,8 @@ initOrDerValue
 
 invOrDef
 	:i='inv' (SimpleName )? ':' oclExpression 
-		(m='message' ':' StringLiteralExp)?
-		-> ^(INV[$i] SimpleName? oclExpression (MESSAGE[$m] StringLiteralExp)?)
+		(m='message' ':' msgExp = oclExpression)?
+		-> ^(INV[$i] SimpleName? oclExpression (MESSAGE[$m] $msgExp)?)
 	| 'static'? d='def' SimpleName? ':' defExpression
 		-> ^(DEF[$d] 'static'? SimpleName? defExpression)
 	;
