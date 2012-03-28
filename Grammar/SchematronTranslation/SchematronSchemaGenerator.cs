@@ -167,9 +167,9 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 
         private void TranslateInvariantsToXPath(ClassifierConstraint constraint, XElement ruleElement, OCLScript oclScript, PSMBridge psmBridge, TranslationSettings translationSettings)
         {
-            foreach (OclExpression invariant in constraint.Invariants)
+            foreach (InvariantWithMessage invariant in constraint.Invariants)
             {
-                string xpath = TranslateInvariantToXPath(oclScript, constraint, psmBridge, invariant, translationSettings);
+                string xpath = TranslateInvariantToXPath(oclScript, constraint, psmBridge, invariant.Constarint, translationSettings);
 
                 try
                 {

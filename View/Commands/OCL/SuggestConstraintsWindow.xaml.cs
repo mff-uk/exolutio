@@ -42,9 +42,9 @@ namespace Exolutio.View.Commands.OCL
                     sb.AppendFormat("context {0}:{1}", constraint.Self.Name, ((Component)constraint.Context.Tag).Name);
                 }
                 sb.AppendLine();
-                foreach (OclExpression invariant in constraint.Invariants)
+                foreach (InvariantWithMessage invariant in constraint.Invariants)
                 {
-                    string invariantStr = pv.AstToString(invariant);
+                    string invariantStr = pv.AstToString(invariant.Constarint);
                     sb.AppendFormat("inv: ");
                     sb.Append(invariantStr);
                     sb.AppendLine();

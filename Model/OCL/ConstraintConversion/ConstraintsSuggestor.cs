@@ -37,23 +37,23 @@ namespace Exolutio.Model.OCL.ConstraintConversion
                         Dictionary<Classifier, ClassifierConstraint> translatedInvariants =
                             new Dictionary<Classifier, ClassifierConstraint>();
 
-                        foreach (OclExpression pimInvariant in classifierConstraint.Invariants)
+                        foreach (InvariantWithMessage pimInvariant in classifierConstraint.Invariants)
                         {
                             constraintSuitabilityChecker.Clear();
                             bool suitable = constraintSuitabilityChecker.CheckConstraintSuitability(
-                                classifierConstraint, pimInvariant);
+                                classifierConstraint, pimInvariant.Constarint);
                             if (suitable)
                             {
                                 Classifier psmContextSuggestion = null; 
                                 constraintConvertor.Clear();
-                                OclExpression psmInvariant = constraintConvertor.TranslateConstraint(classifierConstraint, pimInvariant, constraintSuitabilityChecker.VariableClassMappings, 
+                                OclExpression psmInvariant = constraintConvertor.TranslateConstraint(classifierConstraint, pimInvariant.Constarint, constraintSuitabilityChecker.VariableClassMappings, 
                                      constraintSuitabilityChecker.PathMappings, constraintSuitabilityChecker.VariableTranslations, out psmContextSuggestion);
                                 if (!translatedInvariants.ContainsKey(psmContextSuggestion))
                                 {
                                     translatedInvariants[psmContextSuggestion] = new ClassifierConstraint(psmContextSuggestion,
-                                        new List<OclExpression>(), constraintConvertor.SelfVariableDeclaration);
+                                        new List<InvariantWithMessage>(), constraintConvertor.SelfVariableDeclaration);
                                 }
-                                translatedInvariants[psmContextSuggestion].Invariants.Add(psmInvariant);
+                                translatedInvariants[psmContextSuggestion].Invariants.Add(new InvariantWithMessage(psmInvariant));
                             }
                         }
 
