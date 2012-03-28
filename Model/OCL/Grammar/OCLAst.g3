@@ -68,10 +68,9 @@ initOrDerValue
 
 invOrDef
 	returns[InvariantWithMessage Constraint]
-	@init{StringLiteralExp message = null;}
-	:^(INV SimpleName? oclExpression 
-		(MESSAGE StringLiteralExp{message = CreateStringLiteral($StringLiteralExp);})?
-	  ) {$Constraint=new InvariantWithMessage($oclExpression.Expr,message); }
+	:^(INV SimpleName? inv = oclExpression 
+		(MESSAGE msgExp = oclExpression)?
+	  ) {$Constraint=new InvariantWithMessage($inv.Expr,$msgExp.Expr); }
 	| ^(DEF 'static'? SimpleName? defExpression) {Errors.AddError(new ErrorItem("Definition of new property/operation do not supported."));}
 	;
 

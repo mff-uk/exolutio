@@ -43,12 +43,12 @@ namespace Exolutio.Model.OCL.AST {
             private set;
         }
 
-        public StringLiteralExp Message {
+        public OclExpression Message {
             get;
             private set;
         }
 
-        public InvariantWithMessage(OclExpression constraint, StringLiteralExp message) {
+        public InvariantWithMessage(OclExpression constraint, OclExpression message) {
             Constarint = constraint;
             Message = message;
         }
