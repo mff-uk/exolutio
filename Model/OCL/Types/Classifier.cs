@@ -160,7 +160,10 @@ namespace Exolutio.Model.OCL.Types
         public virtual Operation LookupOperation(string name,IEnumerable<Classifier> parameterTypes) {
             OperationList ops;
             if (Operations.TryGetValue(name,out ops)) {
-                return ops.LookupOperation(parameterTypes);
+                var op =  ops.LookupOperation(parameterTypes);
+                if (op != null) {
+                    return op;
+                }
             }
             if (SuperClassifier != null) {
                 return SuperClassifier.LookupOperation(name, parameterTypes);

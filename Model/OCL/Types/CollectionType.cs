@@ -151,14 +151,15 @@ namespace Exolutio.Model.OCL.Types {
 
                 RegistredOperation("closure", c => c == 1,
                     (s, b, t) => {
+
                         if (s.CollectionKind == CollectionKind.Sequence || s.CollectionKind == CollectionKind.OrderedSet) {
-                            OrderedSetType ordSet = (OrderedSetType)t.Library.CreateCollection(CollectionKind.OrderedSet, b);
+                            OrderedSetType ordSet = (OrderedSetType)t.Library.CreateCollection(CollectionKind.OrderedSet, s.ElementType);
                             return ordSet;
                         }
                         else {
-                            BagType bag = (BagType)t.Library.CreateCollection(CollectionKind.Bag, b);
-                            t.RegisterType(bag);
-                            return bag;
+                            SetType set = (SetType)t.Library.CreateCollection(CollectionKind.Set, s.ElementType);
+                            t.RegisterType(set);
+                            return set;
                         }
                     }
                     , (s, b, t) => { // TODO revise
