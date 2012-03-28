@@ -207,6 +207,16 @@ namespace Exolutio.Model.OCL.Compiler {
                 .SetCodeSource(codeSource);
         }
 
+        bool IsIteratorOperation(AST.OclExpression expr, List<IToken> tokenPath) {
+            if (tokenPath == null && tokenPath.Count != 1) {
+                return false;
+            }
+
+            string name = tokenPath[0].Text;
+            IteratorOperation iteratorOperation = ((CollectionType)(expr.Type)).LookupIteratorOperation(name);
+            return iteratorOperation != null;
+        }
+
         AST.OclExpression ProcessIteratorCall(AST.OclExpression expr, List<IToken> tokenPath, List<VariableDeclaration> decls, List<AST.OclExpression> args) {
             if (TestNull(expr, tokenPath, decls, args)) {
                 return new AST.ErrorExp(Library.Invalid);
@@ -214,7 +224,7 @@ namespace Exolutio.Model.OCL.Compiler {
 
             // apply oclAsSet opretion on not collect type
             if (expr.Type is CollectionType == false) {
-                Operation asSetOp = expr.Type.LookupOperation(Library.OclAsSet,new Classifier[0]);
+                Operation asSetOp = expr.Type.LookupOperation(Library.OclAsSet, new Classifier[0]);
                 if (asSetOp == null) {
                     Errors.AddError(new ErrorItem(String.Format(CompilerErrors.OCLParser_OperationNotFound_1, Library.OclAsSet)));
                     return new AST.ErrorExp(Library.Invalid);
@@ -290,7 +300,7 @@ namespace Exolutio.Model.OCL.Compiler {
 
             Operation collectionOperation = expr.Type.LookupOperation(name,
                 args.Select(arg => arg.Type));
-         
+
             if (collectionOperation != null) { // 36b
                 return new AST.OperationCallExp(expr, false, collectionOperation, args)
                     .SetCodeSource(new CodeSource(tokenPath[0]));
@@ -652,6 +662,30 @@ namespace Exolutio.Model.OCL.Compiler {
             //pushedVar is ref variable
             pushedVar++;
             return decl;
+        }
+
+        VariableDeclaration ProcessImplicitVarDef(AST.OclExpression expr, ref int pushedVar) {
+            if (TestNull(expr)) {
+                return new VariableDeclaration("", Library.Invalid, new AST.ErrorExp(Library.Invalid));
+            }
+
+            Classifier type;
+            if (expr.Type is CollectionType) {
+                type = ((CollectionType)expr.Type).ElementType;
+            }
+            else {
+                type = expr.Type;
+            }
+
+            VariableDeclaration decl = new VariableDeclaration("", type, null);
+            //add variable to EnviromentStack
+            var env = Environment.CreateFromClassifier(decl.PropertyType, decl);
+            EnvironmentStack.Push(env);
+            //inc pushedVar to future pop EnviromentStack
+            //pushedVar is ref variable
+            pushedVar++;
+            return decl;
+
         }
 
         VariableDeclaration CreateVariableDeclaration(IToken name, Classifier type, AST.OclExpression value) {

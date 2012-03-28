@@ -163,7 +163,7 @@ propertyCall
 	:	pathName ('['arguments']')? isMarkedPre? ('('propertyCallParametrs')' )?
 			//9 pokud se alspon jednou zopakuje, 28A, 3A - pokud je na zacatku
 			//23,24,25,34,35,36,37,38
-			->^(CALL propertyCallParametrs? pathName ^(INDEX arguments)? isMarkedPre? )
+			->^(CALL pathName propertyCallParametrs?  ^(INDEX arguments)? isMarkedPre? )
 //	|it='iterate' '('(variableDeclaration[VariableDeclarationRequirement.Iterate] ';'?)+ '|' oclExpression ')'
 	//		->^(ITERATE[$it] variableDeclaration+  oclExpression)   
 	//|('iterate' '(' variableDeclaration ';')=>'iterate' '('variableDeclaration ';'variableDeclaration '|' oclExpression ')'
