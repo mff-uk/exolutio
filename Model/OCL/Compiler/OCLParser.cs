@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// $ANTLR 3.3.1.7705 ..\\..\\Model\\OCL\\Grammar\\OCL.g3 2012-02-27 21:04:29
+// $ANTLR 3.3.1.7705 ..\\..\\Model\\OCL\\Grammar\\OCL.g3 2012-03-28 09:39:58
 
 // The variable 'variable' is assigned but its value is never used.
 #pragma warning disable 219
@@ -778,7 +778,7 @@ public partial class OCLParser : Antlr.Runtime.Parser
 				PopFollow();
 
 				DebugLocation(54, 23);
-				Context =ClassifierContextHead((pathName4!=null?pathName4.Path:default(List<string>)),"self");
+				Context =ClassifierContextHead((pathName4!=null?pathName4.Path:default(List<string>)),VariableDeclaration.SELF);
 
 				}
 				break;

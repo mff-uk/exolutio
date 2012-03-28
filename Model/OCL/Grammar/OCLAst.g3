@@ -129,7 +129,7 @@ primaryExperession
 	//3a, 9, 28a, 36b,36c
 	|^(CALL pathName isMarkedPre) {$Expr = ResolvePath($pathName.Path, $isMarkedPre.IsPre);}
 	//35dfg
-	| ^(CALL ^(ARGS  args=arguments) pathName isMarkedPre ) 
+	| ^(CALL pathName ^(ARGS  args=arguments)  isMarkedPre ) 
 		{$Expr = ResolveImplicitOperation($pathName.Path,$isMarkedPre.IsPre,$args.Args);}
 	;
 
@@ -143,7 +143,7 @@ propertyCall
 //25b,35ce(ij)
 operationCall
 	returns[OclExpression Expr]
-	: ^(CALL (^(ARGS args = arguments)|ARGS) pathName pre=isMarkedPre)  
+	: ^(CALL pathName (^(ARGS args = arguments)|ARGS)  pre=isMarkedPre)  
 		{$Expr = ProcessOperationCall($oclExpression::RootExpr,$pathName.Path,$pre.IsPre,$args.Args);}
 	;
 
@@ -159,29 +159,41 @@ itCall
 	@after{
 		for(int i=0;i<$itCall::PushedVar;i++){
 			EnvironmentStack.Pop();
-			}
+		}
 	}
-	:iteratorCall {$Expr = $iteratorCall.Expr;}
-	|iterateCall {$Expr = $iterateCall.Expr;}
+	: ^(CALL iteratorCall) {$Expr = $iteratorCall.Expr;}
+	| iterateCall {$Expr = $iterateCall.Expr;}
 	;
 
 //25a
 iteratorCall
 	returns[OclExpression Expr]
-	:^(CALL ^(ARGS ^(VARDECL typedefs)args = arguments )pathName){
+	: pathName ^(ARGS ^(VARDECL typedefs) args = arguments ) {
 		$Expr = ProcessIteratorCall($oclExpression::RootExpr,$pathName.Path,$typedefs.Decls,$arguments.Args);}
-	| ^(CALL (^(ARGS  args = arguments)|ARGS) pathName){
-		$Expr = ProcessCollectionOperationCall($oclExpression::RootExpr,$pathName.Path,$arguments.Args);}
+	| pathName (
+			// Is iterator operation without variable declaration
+			({IsIteratorOperation($oclExpression::RootExpr,$pathName.Path)}? => implicitVarDecl) |  
+		) 
+		(^(ARGS  args = arguments)|ARGS) 
+		{ 
+			if(IsIteratorOperation($oclExpression::RootExpr,$pathName.Path)){
+				var decls = new List<VariableDeclaration>();
+				decls.Add($implicitVarDecl.Decl);
+				$Expr = ProcessIteratorCall($oclExpression::RootExpr,$pathName.Path,decls,$arguments.Args);
+			} else {
+				$Expr = ProcessCollectionOperationCall($oclExpression::RootExpr,$pathName.Path,$arguments.Args);
+			}
+		}
 	;
 
 iterateCall
 	returns[OclExpression Expr]
 	: ^(it=ITERATE 
-			(iterator=typedef)? 
+			(iterator=typedef | iterator=implicitVarDecl)
 			^(ACC accName = SimpleName (accType = type)? accExpr = oclExpression) { var acc = ProcessAccDef($accName.Token,$accType.Type,$accExpr.Expr,ref $itCall::PushedVar);}
 			expr = oclExpression
 	 ) 
-	{ $Expr = ProcessIterate($oclExpression::RootExpr,$it.Token,$iterator.Decl,acc,$expr.Expr);}
+	 { $Expr = ProcessIterate($oclExpression::RootExpr,$it.Token,$iterator.Decl,acc,$expr.Expr);}
 	;
 	
 arguments
@@ -205,15 +217,19 @@ arguments
 
 typedefs
 	returns[List<VariableDeclaration> Decls = new List<VariableDeclaration>()]
-	:(typedef{$Decls.Add($typedef.Decl);})+
+	: (typedef{$Decls.Add($typedef.Decl);})+
 	;
+
 typedef
 	returns[VariableDeclaration Decl]
 	: ^(DECL SimpleName type?) 
 			{$Decl = ProcessVarDef($oclExpression::RootExpr,$SimpleName.Token,$type.Type,ref $itCall::PushedVar);}	
 	;
 	
-
+implicitVarDecl
+	returns[VariableDeclaration Decl]
+	: {$Decl = ProcessImplicitVarDef($oclExpression::RootExpr, ref $itCall::PushedVar); }
+	;
 
 
 
