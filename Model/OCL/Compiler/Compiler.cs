@@ -1,8 +1,11 @@
-﻿using System;
+﻿//#define timeDebug
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Antlr.Runtime;
+using Antlr.Runtime.Tree;
 using Exolutio.Model.OCL.AST;
 using Exolutio.Model.OCL.TypesTable;
 using Exolutio.Model.OCL.Types;
@@ -11,49 +14,83 @@ using Exolutio.Model.OCL.Types;
 namespace Exolutio.Model.OCL.Compiler {
     public class Compiler {
 
-        //public TypesTable.TypesTable TypesTable {
-        //    set {
-        //        Parser.TypesTable = value;
-        //    }
+        public CompilerResult CompileScript(string text, Bridge.IBridgeToOCL bridge) {
 
-        //    get {
-        //        return Parser.TypesTable;
-        //    }
-        //}
+            TypesTable.TypesTable tt = bridge.TypesTable;
+            ErrorCollection errColl = new ErrorCollection();
 
+            // lexer
+            ANTLRStringStream stringStream = new ANTLRStringStream(text);
+            OCLSyntaxLexer lexer = new OCLSyntaxLexer(stringStream, errColl);
 
+            // syntax
+            CommonTokenStream tokenStream = new CommonTokenStream(lexer);
+            OCLSyntaxParser parser = new OCLSyntaxParser(tokenStream, errColl);
+            var output = parser.contextDeclarationList();
 
-        //public ClassifierConstraint TestCompiler(string s,TypesTable.TypesTable tt, Environment env) {
-        //    ANTLRStringStream stringStream = new ANTLRStringStream(s);
-        //    OCLLexer lexer = new OCLLexer(stringStream);
+            // semantic
+            Antlr.Runtime.Tree.CommonTreeNodeStream treeStream = new CommonTreeNodeStream(output.Tree);
+            OCLAst semantic = new OCLAst(treeStream, errColl);
+            semantic.TypesTable = tt;
+            semantic.EnvironmentStack.Push(new NamespaceEnvironment(tt.Library.RootNamespace));
+            AST.Constraints constraints;
+            // try {
+            constraints = semantic.contextDeclarationList();
+            // }
+            //catch{
+            //     constraints = new AST.Constraints();
+            //    errColl.AddError(new ErrorItem("Fatal error."));
+            // }
 
-        //    CommonTokenStream tokenStream = new CommonTokenStream(lexer);
-        //    OCLParser parser = new OCLParser(tokenStream);
+            return new CompilerResult(constraints, errColl, tt.Library, bridge);
+        }
 
-        //    parser.TypesTable = tt;
-        //    parser.EnvironmentStack.Push(env);
-           
-        //    return parser.contextDeclaration();
-        //}
+        /// <summary>
+        /// Compile stand-alone expression.
+        /// </summary>
+        /// <example>
+        /// Example shows how to parse stand-alone invariant.
+        /// <code>
+        /// <![CDATA[
+        /// // ...
+        /// Environment nsEnv = new NamespaceEnvironment(tt.Library.RootNamespace);
+        /// VariableDeclaration varSelf = new VariableDeclaration(selfName, contextClassifier, null);
+        /// Environment classifierEnv = nsEnv.CreateFromClassifier(contextClassifier, varSelf);
+        /// Environment selfEnv = Environment.AddElement(selfName, contextClassifier, varSelf, true);
+        /// 
+        /// Compiler.Compiler compiler = new Compiler.Compiler();
+        /// var result = compiler.CompileStandAloneExpression(expressionText, tt, selfEnv);
+        /// ]]>
+        /// </code>
+        /// </example>
+        public ExpressionCompilerResult CompileStandAloneExpression(string text, TypesTable.TypesTable tt, Environment env) {
+            ErrorCollection errColl = new ErrorCollection();
 
-        //public string TestCompiler2(string s, TypesTable.TypesTable tt, Environment env) {
-        //    ANTLRStringStream stringStream = new ANTLRStringStream(s);
-        //    OCLLexer lexer = new OCLLexer(stringStream);
+            // lexer
+            ANTLRStringStream stringStream = new ANTLRStringStream(text);
+            OCLSyntaxLexer lexer = new OCLSyntaxLexer(stringStream, errColl);
 
-        //    CommonTokenStream tokenStream = new CommonTokenStream(lexer);
-        //    OCLParser parser = new OCLParser(tokenStream);
+            // syntax
+            CommonTokenStream tokenStream = new CommonTokenStream(lexer);
+            OCLSyntaxParser parser = new OCLSyntaxParser(tokenStream, errColl);
+            var output = parser.oclExpression();
 
-        //    parser.TypesTable = tt;
-        //    parser.EnvironmentStack.Push(env);
+            // semantic
+            Antlr.Runtime.Tree.CommonTreeNodeStream treeStream = new CommonTreeNodeStream(output.Tree);
+            OCLAst semantic = new OCLAst(treeStream, errColl);
+            semantic.TypesTable = tt;
+            semantic.EnvironmentStack.Push(env);
+            AST.OclExpression expression;
+            // try {
+            expression = semantic.oclExpression();
+            // }
+            //catch{
+            //     constraints = new AST.Constraints();
+            //    errColl.AddError(new ErrorItem("Fatal error."));
+            // }
 
-        //     parser.contextDeclarationList();
+            return new ExpressionCompilerResult(expression, errColl, tt.Library);
 
-        //     if (parser.Errors.HasError || parser.NumberOfSyntaxErrors >0 ) {
-        //         return "Fail";
-        //     }
-        //     else {
-        //         return "OK";
-        //     }
-        //}
+        }
     }
 }

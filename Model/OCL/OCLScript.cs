@@ -1,5 +1,3 @@
-//#define timeDebug
-
 using System;
 using System.Xml.Linq;
 using System.Linq;
@@ -42,9 +40,8 @@ namespace Exolutio.Model.OCL {
         /// Creates an ocl script and adds it to <paramref name="schema"/>.<see cref="Schema.OCLScripts"/> collection.
         /// </summary>
         public OCLScript(Schema schema)
-            : this(schema.Project, Guid.NewGuid(), schema)
-        {
-            
+            : this(schema.Project, Guid.NewGuid(), schema) {
+
         }
 
         #endregion
@@ -52,50 +49,22 @@ namespace Exolutio.Model.OCL {
         public string Contents { get; set; }
 
         public CompilerResult CompileToAst() {
-#if timeDebug
-            System.Diagnostics.Stopwatch translateTime = new System.Diagnostics.Stopwatch();
-            System.Diagnostics.Stopwatch compileTime = new System.Diagnostics.Stopwatch();
-#endif
-
             Bridge.BridgeFactory factor = new Bridge.BridgeFactory();
-#if timeDebug
-            translateTime.Start();
-#endif
             Bridge.IBridgeToOCL bridge = factor.Create(Schema);
-            TypesTable.TypesTable tt = bridge.TypesTable;
-#if timeDebug
-            translateTime.Stop();
-            compileTime.Start();
-#endif
 
-            ErrorCollection errColl = new ErrorCollection();
+            Compiler.Compiler compiler = new Compiler.Compiler();
+            //Environment nsEnv = new NamespaceEnvironment(tt.Library.RootNamespace);
 
-            ANTLRStringStream stringStream = new ANTLRStringStream(Contents);
-            OCLSyntaxLexer lexer = new OCLSyntaxLexer(stringStream, errColl);
-            CommonTokenStream tokenStream = new CommonTokenStream(lexer);
-            OCLSyntaxParser parser = new OCLSyntaxParser(tokenStream, errColl);
-            var output = parser.contextDeclarationList();
-            Antlr.Runtime.Tree.CommonTreeNodeStream treeStream = new CommonTreeNodeStream(output.Tree);
-            OCLAst semantic = new OCLAst(treeStream, errColl);
-            semantic.TypesTable = tt;
-            semantic.EnvironmentStack.Push(new NamespaceEnvironment(tt.Library.RootNamespace));
-            AST.Constraints constraints;
-           // try {
-                constraints = semantic.contextDeclarationList();
-           // }
-            //catch{
-           //     constraints = new AST.Constraints();
-            //    errColl.AddError(new ErrorItem("Fatal error."));
-           // }
-#if timeDebug
-            compileTime.Stop();
-            errColl.AddError(new ErrorItem(String.Format("Translate time:{0} Compile time:{1}",translateTime.ElapsedMilliseconds,compileTime.ElapsedMilliseconds)));
-#endif
-            
-            return new CompilerResult(constraints, errColl, tt.Library, bridge);
+            //VariableDeclaration varSelf = new VariableDeclaration(selfName, contextClassifier, null);
+            //Environment classifierEnv = nsEnv.CreateFromClassifier(contextClassifier, varSelf);
+
+            //Environment selfEnv = Environment.AddElement(selfName, contextClassifier, varSelf, true);
+
+
+            return compiler.CompileScript(Contents, bridge);
         }
 
-        
+
 
         #region Implementation of IExolutioSerializable
 
