@@ -33,4 +33,27 @@ namespace Exolutio.Model.OCL {
             this.Bridge = bridge;
         }
     }
+
+    public class ExpressionCompilerResult {
+        public OclExpression Expression {
+            private set;
+            get;
+        }
+
+        public ErrorCollection Errors {
+            private set;
+            get;
+        }
+
+        public TypesTable.Library Library {
+            private set;
+            get;
+        }
+
+        public ExpressionCompilerResult(OclExpression expression, ErrorCollection errColl, Library lib) {
+            this.Expression = expression;
+            this.Errors = errColl;
+            this.Library = lib;
+        }
+    }
 }
