@@ -135,7 +135,7 @@ namespace Exolutio.WPFClient {
                 }
                 else {
                     sb.AppendLine("Compilation OK.");
-                    foreach (var context in res.Constraints.Classifiers) {
+                    foreach (var context in res.Constraints.ClassifierConstraintBlocks) {
                         sb.AppendLine("context " + context.Context.ToString());
                         foreach (var constraint in context.Invariants) {
                             sb.AppendLine("inv: " + constraint.ToString());
