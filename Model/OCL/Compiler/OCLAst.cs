@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// $ANTLR 3.3.1.7705 ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3 2012-03-28 21:33:10
+// $ANTLR 3.3.1.7705 ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3 2012-04-01 22:53:34
 
 // The variable 'variable' is assigned but its value is never used.
 #pragma warning disable 219
@@ -303,7 +303,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 		EnterRule_contextDeclaration();
 		EnterRule("contextDeclaration", 2);
 		TraceIn("contextDeclaration", 2);
-		ClassifierConstraint classifierContextDecl1 = default(ClassifierConstraint);
+		ClassifierConstraintBlock classifierContextDecl1 = default(ClassifierConstraintBlock);
 
 		try { DebugEnterRule(GrammarFileName, "contextDeclaration");
 		DebugLocation(29, 1);
@@ -362,7 +362,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 				PopFollow();
 
 				DebugLocation(31, 25);
-				contextDeclarationList_stack.Peek().Conts.Classifiers.Add(classifierContextDecl1);
+				contextDeclarationList_stack.Peek().Conts.ClassifierConstraintBlocks.Add(classifierContextDecl1);
 
 				}
 				break;
@@ -746,14 +746,14 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 	partial void LeaveRule_classifierContextDecl();
 
 	// $ANTLR start "classifierContextDecl"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:51:1: classifierContextDecl returns [ClassifierConstraint Decl] : ^( CLASSIFIERCONDITION classifierContextHead ( invOrDef )* ) ;
+	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:51:1: classifierContextDecl returns [ClassifierConstraintBlock Decl] : ^( CLASSIFIERCONDITION classifierContextHead ( invOrDef )* ) ;
 	[GrammarRule("classifierContextDecl")]
-	private ClassifierConstraint classifierContextDecl()
+	private ClassifierConstraintBlock classifierContextDecl()
 	{
 		EnterRule_classifierContextDecl();
 		EnterRule("classifierContextDecl", 7);
 		TraceIn("classifierContextDecl", 7);
-		ClassifierConstraint Decl = default(ClassifierConstraint);
+		ClassifierConstraintBlock Decl = default(ClassifierConstraintBlock);
 
 		InvariantWithMessage invOrDef2 = default(InvariantWithMessage);
 		OCLAst.classifierContextHead_return classifierContextHead3 = default(OCLAst.classifierContextHead_return);
@@ -823,7 +823,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 
 			Match(input, TokenTypes.Up, null); 
 			DebugLocation(55, 95);
-			Decl = new ClassifierConstraint((classifierContextHead3!=null?classifierContextHead3.Context:default(Classifier)),invs,(classifierContextHead3!=null?classifierContextHead3.Self:default(VariableDeclaration)));
+			Decl = new ClassifierConstraintBlock((classifierContextHead3!=null?classifierContextHead3.Context:default(Classifier)),invs,(classifierContextHead3!=null?classifierContextHead3.Self:default(VariableDeclaration)));
 
 			}
 

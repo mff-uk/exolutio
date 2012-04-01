@@ -10,9 +10,9 @@ namespace Exolutio.Model.OCL.ConstraintConversion
 {
     public class ConstraintsSuggestor
     {
-        public IList<ClassifierConstraint> FindSuitableConstraints(PIMSchema pimSchema, PSMSchema psmSchema)
+        public IList<ClassifierConstraintBlock> FindSuitableConstraints(PIMSchema pimSchema, PSMSchema psmSchema)
         {
-            List<ClassifierConstraint> result = new List<ClassifierConstraint>();
+            List<ClassifierConstraintBlock> result = new List<ClassifierConstraintBlock>();
             foreach (OCLScript oclScript in pimSchema.OCLScripts)
             {
                 CompilerResult compilerResult = oclScript.CompileToAst();
@@ -30,34 +30,34 @@ namespace Exolutio.Model.OCL.ConstraintConversion
                                                                   };
 
 
-                    foreach (ClassifierConstraint classifierConstraint in compilerResult.Constraints.Classifiers)
+                    foreach (ClassifierConstraintBlock classifierConstraint in compilerResult.Constraints.ClassifierConstraintBlocks)
                     {
                         /* constraints from one PIM context can be distributed amont several 
                          * PSM contexts (different PSM classes with identical interpretation) */
-                        Dictionary<Classifier, ClassifierConstraint> translatedInvariants =
-                            new Dictionary<Classifier, ClassifierConstraint>();
+                        Dictionary<Classifier, ClassifierConstraintBlock> translatedInvariants =
+                            new Dictionary<Classifier, ClassifierConstraintBlock>();
 
                         foreach (InvariantWithMessage pimInvariant in classifierConstraint.Invariants)
                         {
                             constraintSuitabilityChecker.Clear();
                             bool suitable = constraintSuitabilityChecker.CheckConstraintSuitability(
-                                classifierConstraint, pimInvariant.Constarint);
+                                classifierConstraint, pimInvariant.Constraint);
                             if (suitable)
                             {
                                 Classifier psmContextSuggestion = null; 
                                 constraintConvertor.Clear();
-                                OclExpression psmInvariant = constraintConvertor.TranslateConstraint(classifierConstraint, pimInvariant.Constarint, constraintSuitabilityChecker.VariableClassMappings, 
+                                OclExpression psmInvariant = constraintConvertor.TranslateConstraint(classifierConstraint, pimInvariant.Constraint, constraintSuitabilityChecker.VariableClassMappings, 
                                      constraintSuitabilityChecker.PathMappings, constraintSuitabilityChecker.VariableTranslations, out psmContextSuggestion);
                                 if (!translatedInvariants.ContainsKey(psmContextSuggestion))
                                 {
-                                    translatedInvariants[psmContextSuggestion] = new ClassifierConstraint(psmContextSuggestion,
+                                    translatedInvariants[psmContextSuggestion] = new ClassifierConstraintBlock(psmContextSuggestion,
                                         new List<InvariantWithMessage>(), constraintConvertor.SelfVariableDeclaration);
                                 }
                                 translatedInvariants[psmContextSuggestion].Invariants.Add(new InvariantWithMessage(psmInvariant));
                             }
                         }
 
-                        foreach (KeyValuePair<Classifier, ClassifierConstraint> kvp in translatedInvariants)
+                        foreach (KeyValuePair<Classifier, ClassifierConstraintBlock> kvp in translatedInvariants)
                         {
                             result.Add(kvp.Value);
                         }

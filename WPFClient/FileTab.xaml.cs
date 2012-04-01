@@ -88,7 +88,13 @@ namespace Exolutio.WPFClient
 
         public void ReDisplayFile(XDocument xmlDocument, EDisplayedFileType displayedFileType, string fileName = null, ILog log = null, PSMSchema validationSchema = null, PSMSchema sourcePSMSchema = null, FilePresenterButtonInfo[] additionalActions = null)
         {
-            DisplayFile(displayedFileType, xmlDocument.ToString(), fileName, log, validationSchema, sourcePSMSchema);
+            StringBuilder sb = new StringBuilder();
+            using (TextWriter tw = new UTF8StringWriter(sb))
+            {                
+                xmlDocument.Save(tw);
+            }
+
+            DisplayFile(displayedFileType, sb.ToString(), fileName, log, validationSchema, sourcePSMSchema);
         }
 
         private readonly List<FilePresenterButtonInfo> filePresenterButtons = new List<FilePresenterButtonInfo>(); 

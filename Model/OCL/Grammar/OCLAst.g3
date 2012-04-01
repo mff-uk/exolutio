@@ -28,7 +28,7 @@ contextDeclarationList
 	
 contextDeclaration
 	:propertyContextDecl
-	|classifierContextDecl {$contextDeclarationList::Conts.Classifiers.Add($classifierContextDecl.Decl);}
+	|classifierContextDecl {$contextDeclarationList::Conts.ClassifierConstraintBlocks.Add($classifierContextDecl.Decl);}
 	|operationContextDecl
 	;
 
@@ -49,10 +49,10 @@ operationContextHead
 	;
 
 classifierContextDecl
-	returns[ClassifierConstraint Decl]
+	returns[ClassifierConstraintBlock Decl]
 	@init{List<InvariantWithMessage> invs=new List<InvariantWithMessage>(); }
 	@after{EnvironmentStack.Pop();EnvironmentStack.Pop();}
-	: ^(CLASSIFIERCONDITION classifierContextHead (invOrDef {invs.Add($invOrDef.Constraint);})*) {$Decl = new ClassifierConstraint($classifierContextHead.Context,invs,$classifierContextHead.Self);}
+	: ^(CLASSIFIERCONDITION classifierContextHead (invOrDef {invs.Add($invOrDef.Constraint);})*) {$Decl = new ClassifierConstraintBlock($classifierContextHead.Context,invs,$classifierContextHead.Self);}
 	;
 
 classifierContextHead

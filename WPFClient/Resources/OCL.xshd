@@ -2,9 +2,12 @@
         xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
   <Color name="Comment" foreground="Green" />
   <Color name="String" foreground="Maroon" />
+  <Color name="Black" foreground="Black" fontWeight="normal" />
+  <Color name="Message" foreground="Green" />
   <Color name="Keywords" fontWeight="bold" foreground="Blue" />
+  
   <!-- This is the main ruleset. -->
-  <RuleSet>
+  <RuleSet name="oclMain">
     <Span color="Comment" begin="--" />
     <Span color="Comment" multiline="true"
        begin="/\*" end="\*/" />
@@ -15,6 +18,66 @@
       <RuleSet>
         <!-- nested span for escape sequences -->
         <Span begin="\\" end="." />
+      </RuleSet>
+    </Span>
+
+    <Span multiline="false" color="Keywords">
+      <Begin>message</Begin>
+      <RuleSet>
+        <Span color="Black">
+          <Begin>:</Begin>
+          <RuleSet>
+
+            <Keywords color="Keywords">
+              <Word>message</Word>
+            </Keywords>
+
+            <Span color="String">
+              <Begin>'</Begin>
+              <End>'</End>
+              <RuleSet>
+                <Span color="Black">
+                  <Begin>{</Begin>
+                  <End>}</End>
+                  <RuleSet>
+                    <!-- this does not work, don't know why 
+                <Import ruleSet="oclMain" />
+                -->
+                    <Keywords color="Keywords">
+                      <Word>and</Word>
+                      <Word>body</Word>
+                      <Word>context</Word>
+                      <Word>def</Word>
+                      <Word>derive</Word>
+                      <Word>else</Word>
+                      <Word>endif</Word>
+                      <Word>endpackage</Word>
+                      <Word>false</Word>
+                      <Word>if</Word>
+                      <Word>implies</Word>
+                      <Word>in</Word>
+                      <Word>init</Word>
+                      <Word>inv</Word>
+                      <Word>invalid</Word>
+                      <Word>let</Word>
+                      <Word>not</Word>
+                      <Word>null</Word>
+                      <Word>or</Word>
+                      <Word>package</Word>
+                      <Word>post</Word>
+                      <Word>pre</Word>
+                      <Word>static</Word>
+                      <Word>then</Word>
+                      <Word>true</Word>
+                      <Word>xor</Word>
+                      <Word>message</Word>
+                    </Keywords>
+                  </RuleSet>
+                </Span>
+              </RuleSet>
+            </Span>
+          </RuleSet>
+        </Span>
       </RuleSet>
     </Span>
 
@@ -41,11 +104,11 @@
       <Word>package</Word>
       <Word>post</Word>
       <Word>pre</Word>
-      <Word>self</Word>
       <Word>static</Word>
       <Word>then</Word>
       <Word>true</Word>
       <Word>xor</Word>
+      <Word>message</Word>
     </Keywords>
 
     <!-- Digits -->
@@ -58,4 +121,8 @@
       ([eE][+-]?[0-9]+)? # optional exponent
     </Rule>
   </RuleSet>
+  <RuleSet>
+    <Import ruleSet="oclMain" />
+  </RuleSet>
+  
 </SyntaxDefinition>

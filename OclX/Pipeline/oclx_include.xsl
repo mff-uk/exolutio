@@ -119,28 +119,6 @@
 
   <xd:doc>
     <xd:desc>
-      <xd:p>Define the context variable in each rule. </xd:p>
-      <xd:p>The context variable is usually named <xd:i>self</xd:i>,
-      but this default name may be overriden in the OCL constraint. </xd:p>      
-    </xd:desc>
-  </xd:doc>
-  <xsl:template match="xsl:template[svrl:fired-rule]" mode="functional">
-    <xsl:copy>
-      <xsl:copy-of select="@*" />
-      <xsl:choose>
-        <xsl:when test="oclX:context-variable">
-          <axsl:variable name="{oclX:context-variable/@name}" as="item()" select="current()" />    
-        </xsl:when>
-        <xsl:otherwise>
-          <axsl:variable name="self" as="item()" select="current()" />
-        </xsl:otherwise>
-      </xsl:choose>          
-      <xsl:apply-templates mode="#current" />
-    </xsl:copy>
-  </xsl:template>
-  
-  <xd:doc>
-    <xd:desc>
       <xd:p>Schematron puts test expression into the attribute of test
         of 
         <xd:i>svrl:failed-assert</xd:i> literal. Since svrl:failed-assert@test is
@@ -201,8 +179,8 @@
     <xsl:copy>
       <xsl:copy-of select="@*" />
       <xsl:choose>
-        <xsl:when test="oclX:context-variable">          
-          <axsl:variable name="variables" as="item()*" select="oclX:vars(., '{oclX:context-variable/@name}')" />
+        <xsl:when test="xsl:variable[@select eq 'current()']">          
+          <axsl:variable name="variables" as="item()*" select="oclX:vars(., '{xsl:variable[@select eq 'current()']/@name}')" />
         </xsl:when>
         <xsl:otherwise>
           <axsl:variable name="variables" as="item()*" select="oclX:vars(.)" />          

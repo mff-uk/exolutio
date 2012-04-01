@@ -22,7 +22,7 @@ namespace Exolutio.Model.OCL.ConstraintConversion
 
             public PSMBridge Bridge { get; set; }
 
-            public ClassifierConstraint ClassifierConstraint { get; set; }
+            public ClassifierConstraintBlock ClassifierConstraintBlock { get; set; }
 
             public VariableNamer VariableNamer { get; set; }
         }
@@ -385,13 +385,13 @@ namespace Exolutio.Model.OCL.ConstraintConversion
 
     public static class PSMPathBuilder
     {
-        public static PSMPath BuildPSMPath(PropertyCallExp node, ClassifierConstraint constraint, VariableNamer variableNamer, 
+        public static PSMPath BuildPSMPath(PropertyCallExp node, ClassifierConstraintBlock constraintBlock, VariableNamer variableNamer, 
             TupleLiteralToXPathCallbackHandler tupleLiteralToXPathCallback, GenericExpressionToXPathCallbackHandler genericExpressionToXPathCallback)
         {
             PSMPath path = new PSMPath();
             path.TupleLiteralToXPathCallback = tupleLiteralToXPathCallback;
             path.GenericExpressionToXPathCallback = genericExpressionToXPathCallback;
-            path.Context.ClassifierConstraint = constraint;
+            path.Context.ClassifierConstraintBlock = constraintBlock;
             path.Context.VariableNamer = variableNamer;
 
             OclExpression s;
@@ -465,11 +465,11 @@ namespace Exolutio.Model.OCL.ConstraintConversion
             return path;
         }
 
-        public static PSMPath BuildPSMPath(VariableExp variableExp, ClassifierConstraint constraint, VariableNamer variableNamer, 
+        public static PSMPath BuildPSMPath(VariableExp variableExp, ClassifierConstraintBlock constraintBlock, VariableNamer variableNamer, 
             TupleLiteralToXPathCallbackHandler tupleLiteralToXPathCallback, GenericExpressionToXPathCallbackHandler genericExpressionToXPathCallback)
         {
             PSMPath path = new PSMPath();
-            path.Context.ClassifierConstraint = constraint;
+            path.Context.ClassifierConstraintBlock = constraintBlock;
             path.Context.VariableNamer = variableNamer;
             path.TupleLiteralToXPathCallback = tupleLiteralToXPathCallback;
             path.GenericExpressionToXPathCallback = genericExpressionToXPathCallback;
@@ -483,11 +483,11 @@ namespace Exolutio.Model.OCL.ConstraintConversion
             return path;
         }
 
-        public static PSMPath BuildPSMPath(TupleLiteralExp tupleLiteral, ClassifierConstraint constraint, VariableNamer variableNamer, 
+        public static PSMPath BuildPSMPath(TupleLiteralExp tupleLiteral, ClassifierConstraintBlock constraintBlock, VariableNamer variableNamer, 
             TupleLiteralToXPathCallbackHandler tupleLiteralToXPathCallback, GenericExpressionToXPathCallbackHandler genericExpressionToXPathCallback)
         {
             PSMPath path = new PSMPath();
-            path.Context.ClassifierConstraint = constraint;
+            path.Context.ClassifierConstraintBlock = constraintBlock;
             path.Context.VariableNamer = variableNamer;
             path.TupleLiteralToXPathCallback = tupleLiteralToXPathCallback;
             path.GenericExpressionToXPathCallback = genericExpressionToXPathCallback;

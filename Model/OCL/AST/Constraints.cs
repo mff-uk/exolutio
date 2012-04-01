@@ -5,13 +5,13 @@ using System.Text;
 
 namespace Exolutio.Model.OCL.AST {
     public class Constraints {
-        public List<ClassifierConstraint> Classifiers {
+        public List<ClassifierConstraintBlock> ClassifierConstraintBlocks {
             get;
             private set;
         }
 
         public Constraints() {
-            Classifiers = new List<ClassifierConstraint>();
+            ClassifierConstraintBlocks = new List<ClassifierConstraintBlock>();
         }
     }
 }

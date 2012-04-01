@@ -20,6 +20,8 @@
              Name="textBox1"
              FontFamily="Consolas"
              FontSize="10pt"
+             ShowLineNumbers="true"
+             Padding="5"
              KeyUp="textBox1_KeyUp"
             /></DockPanel>
 </UserControl>
