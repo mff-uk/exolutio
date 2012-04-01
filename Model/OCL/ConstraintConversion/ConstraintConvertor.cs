@@ -241,7 +241,7 @@ namespace Exolutio.Model.OCL.ConstraintConversion
 
         #endregion
 
-        public OclExpression TranslateConstraint(ClassifierConstraint classifierConstraint, OclExpression pimInvariant, Dictionary<VariableDeclaration, List<PSMClass>> initialVariableMappings, Dictionary<PIMPath, List<PSMPath>> initialPathMappings, Dictionary<VariableDeclaration, VariableDeclaration> variableTranslations, out Classifier psmContextSuggestion)
+        public OclExpression TranslateConstraint(ClassifierConstraintBlock classifierConstraintBlock, OclExpression pimInvariant, Dictionary<VariableDeclaration, List<PSMClass>> initialVariableMappings, Dictionary<PIMPath, List<PSMPath>> initialPathMappings, Dictionary<VariableDeclaration, VariableDeclaration> variableTranslations, out Classifier psmContextSuggestion)
         {
             #region fill prepared translations
 
@@ -268,15 +268,15 @@ namespace Exolutio.Model.OCL.ConstraintConversion
 
             #region prepare self variable 
 
-            PSMClass psmClass = VariableClassMappings[classifierConstraint.Self].First();
+            PSMClass psmClass = VariableClassMappings[classifierConstraintBlock.Self].First();
             Classifier variableType = psmBridge.Find(psmClass);
-            VariableDeclaration vd = new VariableDeclaration(classifierConstraint.Self.Name, variableType, null);
+            VariableDeclaration vd = new VariableDeclaration(classifierConstraintBlock.Self.Name, variableType, null);
             this.SelfVariableDeclaration = vd;
 
             #endregion
 
             OclExpression translateConstraint = pimInvariant.Accept(this);
-            psmContextSuggestion = psmBridge.Find(VariableClassMappings[classifierConstraint.Self].First()); 
+            psmContextSuggestion = psmBridge.Find(VariableClassMappings[classifierConstraintBlock.Self].First()); 
             if (isSuitable)
                 return translateConstraint;
             else

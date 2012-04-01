@@ -223,13 +223,13 @@ namespace Exolutio.Model.OCL.ConstraintConversion
 
         #endregion
 
-        public bool CheckConstraintSuitability(ClassifierConstraint classifierConstraint, OclExpression oclExpression)
+        public bool CheckConstraintSuitability(ClassifierConstraintBlock classifierConstraintBlock, OclExpression oclExpression)
         {
             Clear();
             psmBridge = new PSMBridge(TargetPSMSchema);
-            PIMClass contextClass = (PIMClass) classifierConstraint.Context.Tag;
-            VariableClassMappings.CreateSubCollectionIfNeeded(classifierConstraint.Self);
-            VariableClassMappings[classifierConstraint.Self].AddRange(GetInterpretations(contextClass));
+            PIMClass contextClass = (PIMClass) classifierConstraintBlock.Context.Tag;
+            VariableClassMappings.CreateSubCollectionIfNeeded(classifierConstraintBlock.Self);
+            VariableClassMappings[classifierConstraintBlock.Self].AddRange(GetInterpretations(contextClass));
             
             oclExpression.Accept(this);
 

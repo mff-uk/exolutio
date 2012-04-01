@@ -8,7 +8,7 @@
       <eXo:AttributeType ID="bc694e1d-d1e7-4ac6-8e1f-071255a6bc71" Name="Tournament" IsSealed="False" componentId="1e014a11-c043-423c-b4a6-5d0553ac31bd" displayName="PIMClass: *Tournament*" />
     </eXo:PIMAttributeTypes>
     <eXo:PIMSchema ID="049cb593-8ee0-48a6-a597-fb9500ec3f00" Caption="PIMSchema">
-      <eXo:PIMClasses Count="7">
+      <eXo:PIMClasses Count="8">
         <eXo:PIMClass ID="836e8961-7cac-4732-8679-abf778d6a68d" Name="TournamentForm" abstract="False" final="False">
           <eXo:PIMAttributes Count="0" />
           <eXo:PIMOperations Count="1">
@@ -19,7 +19,7 @@
             <eXo:PIMAssociationEnd pimAssociationEndID="c1bd5fc2-1c75-4701-b15d-6cb4b50a280e" pimAssociationEnd="PIMAssociationEnd: A:  [TournamentForm] " />
           </eXo:PIMAssociationEnds>
         </eXo:PIMClass>
-        <eXo:PIMClass ID="2c95f723-f908-4c13-817d-cf26d54a9837" Name="TournamentControl" abstract="False" final="False">
+        <eXo:PIMClass ID="2c95f723-f908-4c13-817d-cf26d54a9837" Name="TournamentControl" pimGeneralizationAsSpecificID="8f3a8d81-a12e-4889-9179-c56d7b94b9eb" pimGeneralizationAsSpecific="PIMGeneralization: PIMClass: *TournamentControl* -&gt; PIMClass: *defaultname*" abstract="False" final="False">
           <eXo:PIMAttributes Count="0" />
           <eXo:PIMOperations Count="1">
             <eXo:PIMOperation ID="29181676-7051-4fb4-ba3a-128e1d75500a" Name="selectSponsors" pimClassID="2c95f723-f908-4c13-817d-cf26d54a9837">
@@ -135,8 +135,18 @@
             <eXo:PIMAssociationEnd pimAssociationEndID="1520b138-f547-4adb-8cbc-d95e950b6bcd" pimAssociationEnd="PIMAssociationEnd: A:  [League] " />
           </eXo:PIMAssociationEnds>
         </eXo:PIMClass>
+        <eXo:PIMClass ID="f93d9c0a-ab9d-4da0-9159-10cd4e4ff137" Name="defaultname" abstract="False" final="False">
+          <eXo:PIMAttributes Count="0" />
+          <eXo:PIMOperations Count="0" />
+          <eXo:GeneralizationsAsGeneral Count="1">
+            <eXo:PIMGeneralization pimGeneralizationsAsGeneralID="8f3a8d81-a12e-4889-9179-c56d7b94b9eb" pimGeneralizationsAsGeneral="PIMGeneralization: PIMClass: *TournamentControl* -&gt; PIMClass: *defaultname*" />
+          </eXo:GeneralizationsAsGeneral>
+          <eXo:PIMAssociationEnds Count="0" />
+        </eXo:PIMClass>
       </eXo:PIMClasses>
-      <eXo:PIMGeneralizations Count="0" />
+      <eXo:PIMGeneralizations Count="1">
+        <eXo:PIMGeneralization ID="8f3a8d81-a12e-4889-9179-c56d7b94b9eb" Name="defaultname" refGeneralID="f93d9c0a-ab9d-4da0-9159-10cd4e4ff137" refGeneral="PIMClass: *defaultname*" refSpecificID="2c95f723-f908-4c13-817d-cf26d54a9837" refSpecific="PIMClass: *TournamentControl*" />
+      </eXo:PIMGeneralizations>
       <eXo:PIMAssociations Count="10">
         <eXo:PIMAssociation ID="71bfb6dd-1526-425a-a260-5d6d47f35b71" Name="">
           <eXo:PIMAssociationEnds Count="2">
@@ -228,7 +238,8 @@ context Tournament::acceptPlayer(p)
 pre: league.players->includes(p)
 
 context League::getActivePlayers
-post: result = tournaments.players->asSet()]]></eXo:Contents>
+post: result = tournaments.players->asSet()
+]]></eXo:Contents>
         </eXo:OCLScript>
         <eXo:OCLScript ID="627fce62-3ce6-4981-b826-27a7450e4904" Name="collections">
           <eXo:Contents><![CDATA[/* more complex invariants, integrity, forall construct */
@@ -479,6 +490,7 @@ context Tournament
 inv:
 matches.day.match->forAll(m:Match |
 m.start.after(start) and m.end.before(end))
+message: 'asdf {1 > 2} or 3'
  
 /* Each Tournament conducts at
 least one Match on the first
@@ -1159,6 +1171,17 @@ qualification.CH_Qualification_OpenTournament_League.League.leagueName <> null
                   <eXo:Points />
                 </eXo:AssociationEndViewHelper>
               </eXo:AssociationEndsViewHelpers>
+            </eXo:ViewHelper>
+          </eXo:Component>
+          <eXo:Component Type="PIMClass" componentID="f93d9c0a-ab9d-4da0-9159-10cd4e4ff137" component="PIMClass: *defaultname*">
+            <eXo:ViewHelper X="673" Y="53" Width="NaN" Height="NaN" />
+          </eXo:Component>
+          <eXo:Component Type="PIMGeneralization" componentID="8f3a8d81-a12e-4889-9179-c56d7b94b9eb" component="PIMGeneralization: PIMClass: *TournamentControl* -&gt; PIMClass: *defaultname*">
+            <eXo:ViewHelper>
+              <eXo:Points>
+                <eXo:Point X="213" Y="12" />
+                <eXo:Point X="0" Y="17" />
+              </eXo:Points>
             </eXo:ViewHelper>
           </eXo:Component>
         </eXo:Components>

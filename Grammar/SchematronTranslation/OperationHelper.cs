@@ -317,9 +317,16 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 
         public bool RequiresDataCall(OclExpression expression, OperationInfo ? operationInfo)
         {
-            return (!(operationInfo != null && operationInfo.Value.CanOmitDataCall )
-                && (expression is VariableExp || expression is PropertyCallExp) 
-                && IsXPathAtomic(expression.Type));
+            if (expression.IsMessageInlinedSubexpression)
+            {
+                return false;
+            }
+            else
+            {
+                return (!(operationInfo != null && operationInfo.Value.CanOmitDataCall)
+                    && (expression is VariableExp || expression is PropertyCallExp)
+                    && IsXPathAtomic(expression.Type));    
+            }
         }
 
         public string CreateBasicFormatString(OperationCallExp expression, OclExpression[] arguments)

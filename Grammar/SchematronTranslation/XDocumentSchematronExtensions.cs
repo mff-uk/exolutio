@@ -81,6 +81,13 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             return let;
         }
 
+        public static XElement SchematronValueOf(this XElement parentElement, string select)
+        {
+            XElement valueOf = parentElement.SchematronGenericElement("value-of");
+            valueOf.AddAttributeWithValue("select", select);
+            return valueOf;
+        }
+
         public static XElement SchematronParam(this XElement parentElement, string name, string value)
         {
             XElement param = parentElement.SchematronGenericElement("param");

@@ -50,10 +50,24 @@ namespace Exolutio.Model.OCL.AST
         public bool IsInvariant { get; set; }
 
         /// <summary>
+        /// True when the expression is part of the error message of an invariant. 
+        /// e.g <code>self.ID</code> in the following: <code>message: 'This ID is wrong: {self.ID}'.</code>
+        /// Assigned in <see cref="CompilerResult.CompileExpressionsInMessages"/>.
+        /// </summary>
+        public bool IsMessageInlinedSubexpression { get; set; }
+
+        /// <summary>
+        /// True when the expression is a part of 'body' of some iterator experession. 
+        /// NOTE: also true when he body is 
+        /// The value is assigned manually, not by parsing. 
+        /// </summary>
+        public bool IsPartOfIteratorBody { get; set; }
+
+        /// <summary>
         /// When <see cref="IsInvariant"/> == true, this property holds a reference 
         /// to the containing constraint. 
         /// The value is assigned manually, not by parsing.
         /// </summary>
-        public ClassifierConstraint ClassifierConstraint { get; set; }
+        public ClassifierConstraintBlock ClassifierConstraintBlock { get; set; }
     }
 }

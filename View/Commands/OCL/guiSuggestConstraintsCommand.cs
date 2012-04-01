@@ -14,7 +14,7 @@ namespace Exolutio.View.Commands.OCL
             {
                 ConstraintsSuggestor suggestor = new ConstraintsSuggestor();
                 PSMSchema psmSchema = (PSMSchema) Current.ActiveDiagram.Schema;
-                IList<ClassifierConstraint> constraints = suggestor.FindSuitableConstraints(Current.ProjectVersion.PIMSchema, psmSchema);
+                IList<ClassifierConstraintBlock> constraints = suggestor.FindSuitableConstraints(Current.ProjectVersion.PIMSchema, psmSchema);
                 SuggestConstraintsWindow w = new SuggestConstraintsWindow();
                 w.PSMSchema = psmSchema;
                 w.Show();

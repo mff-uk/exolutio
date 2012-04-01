@@ -12,13 +12,10 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
     {
         public SubexpressionTranslations()
         {
+            
         }
 
-        public Guid Guid = Guid.NewGuid();
-
         private readonly  Dictionary<OclExpression, TranslationOptions> translations = new Dictionary<OclExpression, TranslationOptions>();
-        
-        private readonly Dictionary<OclExpression, int> selectedTranslations = new Dictionary<OclExpression, int>();
 
         public Dictionary<OclExpression, TranslationOptions> Translations
         {
@@ -30,6 +27,8 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             get { return Translations.Where(kvp => kvp.Value.Options.Count > 1).Select(o => o.Value); }        
         }
 
+        private readonly Dictionary<OclExpression, int> selectedTranslations = new Dictionary<OclExpression, int>();
+
         public Dictionary<OclExpression, int> SelectedTranslations
         {
             get { return selectedTranslations; }
@@ -38,12 +37,6 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
         public VariableDeclaration SelfVariableDeclaration { get; set; }
 
         public Log<OclExpression> Log { get; set; }
-
-        //private readonly Stack<VariableDeclaration> contextVariableStack = new Stack<VariableDeclaration>();
-        //public Stack<VariableDeclaration> ContextVariableStack
-        //{
-        //    get { return contextVariableStack; }
-        //}
 
         public TranslationOption GetSubexpressionTranslation(OclExpression expression)
         {
@@ -132,6 +125,14 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
                 this.SelectedTranslations.Add(otherKVP.Key, otherKVP.Value);
             }
         }
+    
+        public enum EContextVariableReplacementMode
+        {
+            OutermostContextOnly, 
+            AnyContextVariable
+        }
+
+        public EContextVariableReplacementMode XPathContextVariableReplacementMode { get; set; }
     }
 
     public class TranslationOptions
@@ -167,6 +168,11 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             set;
         }
 
+        public SubexpressionTranslations SubexpressionTranslations
+        {
+            get { return OptionsContainer != null ? OptionsContainer.SubexpressionTranslations : null; }
+        }
+
         public string FormatString { get; set; }
 
         public override string ToString()
@@ -190,7 +196,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
                 
                 if (co.CallingOption == null)
                 {
-                    result = co.OptionsContainer.Expression.ClassifierConstraint.Self;
+                    result = co.OptionsContainer.Expression.ClassifierConstraintBlock.Self;
                 }
                 co = co.CallingOption;
             }
@@ -213,20 +219,36 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
                 translatedSubexpressions[index] = selectedSubexpressionTranslationOption.GetString(false);
             }
 
-            string result;
+            string result = null;
             if (!ContextVariableSubstitution)
             {
                 result = string.Format(FormatString, translatedSubexpressions);
             }
             else
             {
+                bool standardVariableTranslation = true;
                 if (StartingVariable == FindContextVariable())
                 {
-                    result = string.Format(FormatString, @".");
-                    if (result.StartsWith(@"./"))
-                        result = result.Substring(2);
+                    if (SubexpressionTranslations.XPathContextVariableReplacementMode == SubexpressionTranslations.EContextVariableReplacementMode.AnyContextVariable)
+                    {
+                        result = string.Format(FormatString, @".");
+                        if (result.StartsWith(@"./"))
+                            result = result.Substring(2);
+                        standardVariableTranslation = false; 
+                    }
+                    else //i.e. SubexpressionTranslations.ContextVariableReplacementMode == SubexpressionTranslations.EContextVariableReplacementMode.OutermostSelfOnly
+                    {
+                        if (!this.OptionsContainer.Expression.IsPartOfIteratorBody && StartingVariable.IsContextVariable)
+                        {
+                            result = string.Format(FormatString, @".");
+                            if (result.StartsWith(@"./"))
+                                result = result.Substring(2);
+                            standardVariableTranslation = false; 
+                        }
+                    }
                 }
-                else
+                
+                if (standardVariableTranslation)
                 {
                     result = string.Format(FormatString, "$" + StartingVariable.Name);
                 }

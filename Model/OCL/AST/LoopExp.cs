@@ -17,7 +17,7 @@ namespace Exolutio.Model.OCL.AST
             : base(source,type) {
             this.Body = body;
             this.Iterator = iterators;
-        }
+            }
 
         public LoopExp(OclExpression source, OclExpression body, VariableDeclaration iterator, Classifier type)
             : base(source, type) {
@@ -25,7 +25,7 @@ namespace Exolutio.Model.OCL.AST
             List<VariableDeclaration> its =new List<VariableDeclaration>();
             its.Add(iterator);
             this.Iterator = new List<VariableDeclaration>(its);
-        }
+            }
 
         /// <summary>
         /// The OclExpression that is evaluated for each element in the source collection.

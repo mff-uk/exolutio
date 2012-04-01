@@ -26,29 +26,39 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 
         public SubexpressionTranslations SubexpressionTranslations { get; private set; }
 
-        public OCLScript OCLScript { get; set; }
-
         public PSMBridge Bridge { get; set; }
 
-        public ClassifierConstraint OclContext { get; set; }
+        public ClassifierConstraintBlock OclContext { get; set; }
         
         public Log<OclExpression> Log { get; set; }
-        
+
         protected VariableNamer VariableNamer { get; set; }
 
         protected OclExpression TranslatedOclExpression { get; set; }
-       
+
+        private void AssignIspartOfIteratorBody(OclExpression node)
+        {
+            node.IsPartOfIteratorBody = loopStack.Count > 0;
+        }
+
         public virtual void Visit(ErrorExp node)
         {
             throw new ExpressionNotSupportedInXPath(node);
         }
 
-        public abstract void Visit(IterateExp node);
+        public virtual void Visit(IterateExp node)
+        {
+            AssignIspartOfIteratorBody(node);
+        }
 
-        public abstract void Visit(IteratorExp node);
+        public virtual void Visit(IteratorExp node)
+        {
+            AssignIspartOfIteratorBody(node);
+        }
 
         public virtual void Visit(OperationCallExp node)
         {
+            AssignIspartOfIteratorBody(node);
             OclExpression[] arguments = new OclExpression[node.Arguments.Count + 1];
             if (node.Source is PropertyCallExp)
                 this.Visit((PropertyCallExp)node.Source, true);
@@ -72,11 +82,13 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 
         public virtual void Visit(PropertyCallExp node)
         {
+            AssignIspartOfIteratorBody(node);
             Visit(node, false);
         }
 
         public virtual void Visit(PropertyCallExp node, bool isOperationArgument)
         {
+            AssignIspartOfIteratorBody(node);
             PSMPath psmPath = PSMPathBuilder.BuildPSMPath(node, OclContext, VariableNamer, TupleLiteralToXPath, GenericExpressionLiteralToXPath);
             string xpath = psmPath.ToXPath(delayFirstVariableStep:true);
             if (!isOperationArgument)
@@ -103,6 +115,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 
         public virtual void Visit(VariableExp node)
         {
+            AssignIspartOfIteratorBody(node);
             PSMPath psmPath = PSMPathBuilder.BuildPSMPath(node, OclContext, VariableNamer, TupleLiteralToXPath, GenericExpressionLiteralToXPath);
             string xpath = psmPath.ToXPath(delayFirstVariableStep:true);
 
@@ -116,12 +129,16 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             SubexpressionTranslations.AddTranslationOption(node, option, psmPath.SubExpressions.ToArray());
         }
 
+        public virtual void Visit(LetExp node)
+        {
+            AssignIspartOfIteratorBody(node);
+        }
+
         #region not supported yet 
 
-        public abstract void Visit(LetExp node);
-        
         public virtual void Visit(TypeExp node)
         {
+            AssignIspartOfIteratorBody(node);
             // TODO: PSM2XPath: there should be some suport for types in the future
             throw new ExpressionNotSupportedInXPath(node);
         }
@@ -144,21 +161,27 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 
         #region literals
 
-        public abstract void Visit(TupleLiteralExp node);
+        public virtual void Visit(TupleLiteralExp node)
+        {
+            AssignIspartOfIteratorBody(node);
+        }
 
         public virtual void Visit(InvalidLiteralExp node)
         {
+            AssignIspartOfIteratorBody(node);
             SubexpressionTranslations.AddTrivialTranslation(node, "invalid()");
         }
 
         public virtual void Visit(BooleanLiteralExp node)
         {
+            AssignIspartOfIteratorBody(node);
             // instead boolean literals, functions are used
             SubexpressionTranslations.AddTrivialTranslation(node, node.Value ? "true()" : "false()");
         }
 
         public virtual void Visit(CollectionLiteralExp node)
         {
+            AssignIspartOfIteratorBody(node);
             StringBuilder formatBuilder = new StringBuilder();
             List<OclExpression> subExpressions = new List<OclExpression>();
 
@@ -222,31 +245,37 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 
         public virtual void Visit(EnumLiteralExp node)
         {
+            AssignIspartOfIteratorBody(node);
             throw new ExpressionNotSupportedInXPath(node);
         }
 
         public virtual void Visit(NullLiteralExp node)
         {
+            AssignIspartOfIteratorBody(node);
             SubexpressionTranslations.AddTrivialTranslation(node, "()");
         }
 
         public virtual void Visit(UnlimitedNaturalLiteralExp node)
         {
+            AssignIspartOfIteratorBody(node);
             SubexpressionTranslations.AddTrivialTranslation(node, node.ToString());
         }
 
         public virtual void Visit(IntegerLiteralExp node)
         {
+            AssignIspartOfIteratorBody(node);
             SubexpressionTranslations.AddTrivialTranslation(node, node.Value.ToString());
         }
 
         public virtual void Visit(RealLiteralExp node)
         {
+            AssignIspartOfIteratorBody(node);
             SubexpressionTranslations.AddTrivialTranslation(node, node.Value.ToString());
         }
 
         public virtual void Visit(StringLiteralExp node)
         {
+            AssignIspartOfIteratorBody(node);
             SubexpressionTranslations.AddTrivialTranslation(node, string.Format("'{0}'", node.Value));
         }
 
@@ -261,20 +290,18 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
         public string TranslateExpression(OclExpression expression)
         {
             OperationHelper = new OperationHelper();
-            OperationHelper.PSMSchema = (PSMSchema) this.OCLScript.Schema;
+            OperationHelper.PSMSchema = Bridge.Schema;
             OperationHelper.Log = Log;
             OperationHelper.ExplicitCastAtomicOperands = !Settings.SchemaAware;
             OperationHelper.PSMBridge = Bridge;
             OperationHelper.InitStandard();
             TranslatedOclExpression = expression;
             VariableNamer = new VariableNamer();
-            SubexpressionTranslations = new SubexpressionTranslations();
-            SubexpressionTranslations.Log = Log; 
+            SubexpressionTranslations = new SubexpressionTranslations { XPathContextVariableReplacementMode = ContextVariableReplacementMode };
+            SubexpressionTranslations.Log = Log;
             expression.Accept(this);
-            //SubexpressionTranslations.ContextVariableStack.Push(OclContext.Self);
             SubexpressionTranslations.SelfVariableDeclaration = OclContext.Self;
             string result = SubexpressionTranslations.GetSubexpressionTranslation(expression).GetString(true);
-            //SubexpressionTranslations.ContextVariableStack.Pop();
             return result;
         }
 
@@ -283,32 +310,20 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
         protected virtual string GenericExpressionLiteralToXPath(OclExpression expression, List<OclExpression> subExpressions)
         {
             expression.Accept(this);
-            //TranslationOption option = SubexpressionTranslations.GetSubexpressionTranslation(expression);
             subExpressions.Add(expression);
             return "{0}";
-
-            //StringBuilder formatBuilder = new StringBuilder();
-            //formatBuilder.Append("(map{{");
-            //foreach (KeyValuePair<string, TupleLiteralPart> kvp in tupleLiteral.Parts)
-            //{
-            //    kvp.Value.Value.Accept(this);
-            //    formatBuilder.AppendFormat("'{0}' := {{{1}}}, ", kvp.Value.Attribute.Name, subExpressions.Count);
-            //    subExpressions.Add(kvp.Value.Value);
-            //}
-            //if (formatBuilder.Length > 0)
-            //{
-            //    formatBuilder.Length = formatBuilder.Length - 2; 
-            //}
-            //formatBuilder.Append("}})");
-            //TranslationOption option = new TranslationOption();
-            //option.FormatString = formatBuilder.ToString();
-            //SubexpressionTranslations.AddTranslationOption(tupleLiteral, option, subExpressions.ToArray());
-            //return option.FormatString;
         }
+
+        public abstract SubexpressionTranslations.EContextVariableReplacementMode ContextVariableReplacementMode { get; }
     }
 
     public class PSMOCLtoXPathConverterFunctional : PSMOCLtoXPathConverter
     {
+        public override SubexpressionTranslations.EContextVariableReplacementMode ContextVariableReplacementMode
+        {
+            get { return SubexpressionTranslations.EContextVariableReplacementMode.AnyContextVariable; }
+        }
+
         private readonly Dictionary<string, Action<IteratorExp>> predefinedIteratorExpressionRewritings = new Dictionary<string, Action<IteratorExp>>();
         private Dictionary<string, Action<IteratorExp>> PredefinedIteratorExpressionRewritings { get { return predefinedIteratorExpressionRewritings; } }
         private readonly Dictionary<OperationInfo, Action<OperationCallExp, OperationInfo>> operationsRewritings = new Dictionary<OperationInfo, Action<OperationCallExp, OperationInfo>>();
@@ -616,10 +631,9 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 
         public override void Visit(IterateExp node)
         {
-            loopStack.Push(node);
-            
-
+            base.Visit(node);
             node.Source.Accept(this);
+            loopStack.Push(node);
             node.Body.Accept(this);
             node.Result.Value.Accept(this);
 
@@ -632,9 +646,9 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 
         public override void Visit(IteratorExp node)
         {
-            loopStack.Push(node);
-            
+            base.Visit(node);
             node.Source.Accept(this);
+            loopStack.Push(node);
             node.Body.Accept(this);
 
             TranslationOption option = new TranslationOption();
@@ -658,6 +672,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 
         public override void Visit(LetExp node)
         {
+            base.Visit(node);
             node.Variable.Value.Accept(this);
             node.InExpression.Accept(this);
             TranslationOption translationOption = new TranslationOption();
@@ -667,12 +682,32 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 
         public override void Visit(TupleLiteralExp node)
         {
+            base.Visit(node);
             PSMPath psmPath = PSMPathBuilder.BuildPSMPath(node, OclContext, VariableNamer, TupleLiteralToXPath, GenericExpressionLiteralToXPath);
             string xpath = psmPath.ToXPath();
 
             TranslationOption option = new TranslationOption();
             option.FormatString = xpath;
             SubexpressionTranslations.AddTranslationOption(node, option, psmPath.SubExpressions.ToArray());
+        }
+
+        public override void Visit(OperationCallExp node)
+        {
+            base.Visit(node);
+
+            if (OperationRewritings.IsEmpty())
+            {
+                OperationRewritings[OperationHelper.firstOperationInfo] = AddFirstRewritings;
+                OperationRewritings[OperationHelper.lastOperationInfo] = AddLastRewritings;
+                OperationRewritings[OperationHelper.atOperationInfo] = AddAtRewritings;
+            }
+
+            TranslationOption standardTranslation = SubexpressionTranslations.GetSubexpressionTranslation(node);
+            OperationInfo? operationInfo = OperationHelper.LookupOperation(node, standardTranslation.OptionsContainer.SubExpressions.ToArray());
+            if (operationInfo != null && OperationRewritings.ContainsKey(operationInfo.Value))
+            {
+                OperationRewritings[operationInfo.Value](node, operationInfo.Value);
+            }
         }
 
         protected override string TupleLiteralToXPath(TupleLiteralExp tupleLiteral, List<OclExpression> subExpressions)
@@ -695,36 +730,22 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             SubexpressionTranslations.AddTranslationOption(tupleLiteral, option, subExpressions.ToArray());
             return option.FormatString;
         }
-
-        public override void Visit(OperationCallExp node)
-        {
-            base.Visit(node);
-
-            if (OperationRewritings.IsEmpty())
-            {
-                OperationRewritings[OperationHelper.firstOperationInfo] = AddFirstRewritings;
-                OperationRewritings[OperationHelper.lastOperationInfo] = AddLastRewritings;
-                OperationRewritings[OperationHelper.atOperationInfo] = AddAtRewritings;
-            }
-
-            TranslationOption standardTranslation = SubexpressionTranslations.GetSubexpressionTranslation(node);
-            OperationInfo? operationInfo = OperationHelper.LookupOperation(node, standardTranslation.OptionsContainer.SubExpressions.ToArray());
-            if (operationInfo != null && OperationRewritings.ContainsKey(operationInfo.Value))
-            {
-                OperationRewritings[operationInfo.Value](node, operationInfo.Value);
-            }
-        }
     }
 
     public class PSMOCLtoXPathConverterDynamic : PSMOCLtoXPathConverter
     {
+        public override SubexpressionTranslations.EContextVariableReplacementMode ContextVariableReplacementMode
+        {
+            get { return SubexpressionTranslations.EContextVariableReplacementMode.OutermostContextOnly; }
+        }
+
         private bool insideDynamicEvaluation;
 
         public override void Visit(IterateExp node)
         {
-            loopStack.Push(node);
-            
+            base.Visit(node);
             node.Source.Accept(this);
+            loopStack.Push(node);
             node.Result.Value.Accept(this);
             var prevInsideDynamicEvaluation = insideDynamicEvaluation;
             insideDynamicEvaluation = true;
@@ -742,9 +763,9 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 
         public override void Visit(IteratorExp node)
         {
-            loopStack.Push(node);
-            
+            base.Visit(node);
             node.Source.Accept(this);
+            loopStack.Push(node);
             var prevInsideDynamicEvaluation = insideDynamicEvaluation;
             insideDynamicEvaluation = true;
             node.Body.Accept(this);
@@ -768,6 +789,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 
         public override void Visit(LetExp node)
         {
+            base.Visit(node);
             node.Variable.Value.Accept(this);
             node.InExpression.Accept(this);
             TranslationOption translationOption = new TranslationOption();
@@ -777,6 +799,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 
         public override void Visit(TupleLiteralExp node)
         {
+            base.Visit(node);
             throw new ExpressionNotSupportedInXPath(node, "Tuples are supported only in 'functional' schemas. ");
         }
 

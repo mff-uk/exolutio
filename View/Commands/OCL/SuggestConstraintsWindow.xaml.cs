@@ -23,7 +23,7 @@ namespace Exolutio.View.Commands.OCL
 
         public PSMSchema PSMSchema { get; set; }
 
-        public void DisplayConstraints(IList<ClassifierConstraint> constraints)
+        public void DisplayConstraints(IList<ClassifierConstraintBlock> constraints)
         {
             StringBuilder sb = new StringBuilder();
             PrintVisitor pv = new PrintVisitor();
@@ -31,7 +31,7 @@ namespace Exolutio.View.Commands.OCL
             sb.Append("/* Constraints suggested from the PIM schema */");
             sb.AppendLine();
 
-            foreach (ClassifierConstraint constraint in constraints)
+            foreach (ClassifierConstraintBlock constraint in constraints)
             {
                 if (constraint.Self.Name == VariableDeclaration.SELF)
                 {
@@ -44,7 +44,7 @@ namespace Exolutio.View.Commands.OCL
                 sb.AppendLine();
                 foreach (InvariantWithMessage invariant in constraint.Invariants)
                 {
-                    string invariantStr = pv.AstToString(invariant.Constarint);
+                    string invariantStr = pv.AstToString(invariant.Constraint);
                     sb.AppendFormat("inv: ");
                     sb.Append(invariantStr);
                     sb.AppendLine();

@@ -10,6 +10,7 @@
         <avalonEdit:TextEditor Name="tbDocument" Padding="5" Background="White" 
                                    Dialogs:AccessKeyScoper.IsAccessKeyScope="True" 
                                    FontFamily="Consolas" 
+                                   ShowLineNumbers="true" 
                                    FontSize="12"
                                    TextChanged="tbDocument_TextChanged" Margin="5">
 

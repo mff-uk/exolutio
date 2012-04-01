@@ -49,8 +49,8 @@ namespace Exolutio.Model.OCL {
         public string Contents { get; set; }
 
         public CompilerResult CompileToAst() {
-            Bridge.BridgeFactory factor = new Bridge.BridgeFactory();
-            Bridge.IBridgeToOCL bridge = factor.Create(Schema);
+            Bridge.BridgeFactory factory = new Bridge.BridgeFactory();
+            Bridge.IBridgeToOCL bridge = factory.Create(Schema);
 
             Compiler.Compiler compiler = new Compiler.Compiler();
             //Environment nsEnv = new NamespaceEnvironment(tt.Library.RootNamespace);
