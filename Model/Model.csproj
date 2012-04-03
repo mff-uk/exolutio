@@ -90,6 +90,7 @@
       <DependentUpon>CompilerErrors.resx</DependentUpon>
     </Compile>
     <Compile Include="OCL\Compiler\CodeSource.cs" />
+    <Compile Include="OCL\Compiler\UnescapeString.cs" />
     <Compile Include="OCL\ConstraintConversion\ConstraintConvertor.cs" />
     <Compile Include="OCL\ConstraintConversion\ConvertToPSMVisitorBase.cs" />
     <Compile Include="OCL\ConstraintConversion\PSMPath.cs" />
