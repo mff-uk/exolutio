@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
+using Exolutio.Model.OCL.AST;
 using Exolutio.Model.OCL.Bridge;
 using Exolutio.Model.OCL.Types;
 using Exolutio.Model.OCL.TypesTable;
@@ -129,10 +130,43 @@ inv: (Tuple {x: Integer = 5, y: String = 10}).x = 5");
 inv: Tuple {name = 'John' age = 10}.age = 10");
         }
 
+
+
+        void testString(Compiler compiler, TypesTable tt, Exolutio.Model.OCL.Environment env, string oclString,string expected) {
+            var res = compiler.CompileStandAloneExpression(oclString, tt, env);
+            Assert.IsFalse(res.Errors.HasError);
+            Assert.IsTrue(res.Expression is StringLiteralExp);
+            Assert.AreEqual(expected, (res.Expression as StringLiteralExp).Value);
+        }
+
         [Test]
         public void StringTest() {
             TryCompile(@"context Tournament 
 inv: 'a'='a'");
+
+            TypesTable tt = new TypesTable();
+            StandardLibraryCreator sLC = new StandardLibraryCreator();
+            sLC.CreateStandardLibrary(tt);
+
+            Compiler compiler = new Compiler();
+            Exolutio.Model.OCL.Environment env = new NamespaceEnvironment(tt.Library.RootNamespace);
+            testString(compiler, tt, env, "''", "");
+            testString(compiler, tt, env, "'a'", "a");
+            testString(compiler, tt, env, "'aa'", "aa");
+            testString(compiler, tt, env, "'\\b'", "\b");
+            testString(compiler, tt, env, "'\\t'", "\t");
+            testString(compiler, tt, env, "'\\n'", "\n");
+            testString(compiler, tt, env, "'\\f'", "\f");
+            testString(compiler, tt, env, "'\\r'", "\r");
+            testString(compiler, tt, env, "'\\\"'", "\"");
+            testString(compiler, tt, env, "'\\''", "'");
+            testString(compiler, tt, env, "'\\x27'", "\x27");
+            testString(compiler, tt, env, "'\\u1127'", "\x1127");
+            testString(compiler, tt, env, @"'\\t'", @"\t");
+            testString(compiler, tt, env, @"'\\\t'", "\\\t");
+            testString(compiler, tt, env, @"'\\\\t'", "\\\\t");
+            testString(compiler, tt, env, @"'\\\\\t'", "\\\\\t");
+            testString(compiler, tt, env, @"'\\\\\\t'", "\\\\\\t");
         }
 
 
@@ -206,6 +240,8 @@ inv: null = null");
             TryCompile(@"context Tournament 
 inv: invalid = invalid");
         }
+
+      
 
 
 

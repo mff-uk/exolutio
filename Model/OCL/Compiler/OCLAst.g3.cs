@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using Antlr.Runtime;
 using Antlr.Runtime.Tree;
 
@@ -442,7 +443,14 @@ namespace Exolutio.Model.OCL.Compiler {
             if (TestNull(token)) {
                 return new AST.StringLiteralExp("", Library.String);
             }
-            return new AST.StringLiteralExp(token.Text, Library.String)
+
+            string value = token.Text;
+            if (value.Length >= 2) {
+                // Remove apostrophes
+                value = token.Text.Substring(1, token.Text.Length - 2);
+                value = UnescapeString.Replace(value);
+            }
+            return new AST.StringLiteralExp(value, Library.String)
                 .SetCodeSource(new CodeSource(token));
         }
 
