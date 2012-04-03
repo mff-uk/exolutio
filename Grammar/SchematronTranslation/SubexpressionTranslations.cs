@@ -156,7 +156,8 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 
         public override string ToString()
         {
-            throw new Exception("TO STRING IN TRANSLATIONOPTIONS");
+            //throw new Exception("TO STRING IN TRANSLATIONOPTIONS");
+            return null;
         }
     }
 

@@ -167,60 +167,117 @@ namespace Exolutio.Model.PSM
             get { return ParentAssociation.XPath; }
         }
 
-        public override Path XPathFull
+        public override Path GetXPathFull(bool followGeneralizations = true)
         {
-            get
+            UnionPath unionPath = new UnionPath();
+
+            List<Path> nonRecursionPaths = new List<Path>();
+            
+            #region parent track 
+            if (ParentAssociation != null)
             {
-                UnionPath unionPath = new UnionPath();
+                Path parentPath = ParentAssociation.GetXPathFull(followGeneralizations).DeepCopy();
+                nonRecursionPaths.Add(parentPath);
+                unionPath.ComponentPaths.Add(parentPath);
+            }
+            #endregion 
 
-                List<Path> nonRecursionPaths = new List<Path>();
-                // parent track 
-                if (ParentAssociation != null)
-                {
-                    Path parentPath = ParentAssociation.XPathFull.DeepCopy();
-                    nonRecursionPaths.Add(parentPath);
-                    unionPath.ComponentPaths.Add(parentPath);
-                }
-
-                // generalizations tracks 
+            #region generalizations tracks
+            if (followGeneralizations)
+            {
                 foreach (PSMGeneralization generalization in this.GeneralizationsAsGeneral)
                 {
-                    Path specificClassPath = generalization.Specific.XPathFull;
+                    Path specificClassPath = generalization.Specific.GetXPathFull(followGeneralizations);
                     unionPath.ComponentPaths.Add(specificClassPath);
                     nonRecursionPaths.Add(specificClassPath);
                 }
+            }
 
-                // association tracks
-                List<string> usedDescendants = new List<string>();
-                foreach (PSMAssociation association in ChildPSMAssociations)
+            #endregion 
+
+            #region  first find cycles
+
+            List<PSMComponent> componentsParticipatingInCycles = new List<PSMComponent>();
+            Dictionary<PSMAssociation, List<ModelIterator.PSMCycle>> cyclesForAssociations
+                = new Dictionary<PSMAssociation, List<ModelIterator.PSMCycle>>();
+            foreach (PSMAssociation association in ChildPSMAssociations)
+            {
+                List<ModelIterator.PSMCycle> cycles = ModelIterator.GetPSMCyclesStartingInAssociation(association,
+                                                                                                      followGeneralizationsWhereAsGeneral
+                                                                                                          : false,
+                                                                                                      followGeneralizationsWhereAsSpecific
+                                                                                                          : true);
+                cyclesForAssociations.Add(association, cycles);
+
+                foreach (ModelIterator.PSMCycle cycle in cycles)
                 {
-                    List<ModelIterator.PSMCycle> cycles = ModelIterator.GetPSMCyclesStartingInAssociation(association, 
-                        followGeneralizationsWhereAsGeneral: false, 
-                        followGeneralizationsWhereAsSpecific: true);
-                    foreach (ModelIterator.PSMCycle cycle in cycles)
+                    componentsParticipatingInCycles.AddRange(cycle);
+                }
+            }
+
+            #endregion
+
+            #region process incoming NTAs, which then will be also used as prefixes for cycles
+
+            foreach (PSMAssociation incomingNTA in GetIncomingNonTreeAssociations())
+            {
+                if (componentsParticipatingInCycles.Contains(incomingNTA))
+                    continue;
+                Path ntaPath = incomingNTA.GetXPathFull(followGeneralizations);
+                unionPath.ComponentPaths.Add(ntaPath);
+                nonRecursionPaths.Add(ntaPath);
+            }
+
+            #endregion
+
+            #region process cycles
+            
+            List<string> usedDescendants = new List<string>();
+            foreach (KeyValuePair<PSMAssociation, List<ModelIterator.PSMCycle>> kvp in cyclesForAssociations)
+            {
+                PSMAssociation association = kvp.Key;
+                List<ModelIterator.PSMCycle> cycles = kvp.Value;
+
+                foreach (ModelIterator.PSMCycle cycle in cycles)
+                {
+                    PSMAssociation lastNamedAssociation = cycle.GetLastNamedAssociation();
+                    string descendant = lastNamedAssociation != null ? lastNamedAssociation.Name : null;
+                    if (descendant != null && !usedDescendants.Contains(descendant))
                     {
-                        PSMAssociation lastNamedAssociation = cycle.GetLastNamedAssociation();
-                        string descendant = lastNamedAssociation != null ? lastNamedAssociation.Name : null;
-                        if (descendant != null && !usedDescendants.Contains(descendant))
+                        foreach (Path nonRecursionPath in nonRecursionPaths)
                         {
-                            foreach (Path nonRecursionPath in nonRecursionPaths)
+                            Path path = nonRecursionPath.DeepCopy();
+                            SimplePath simplePath = path as SimplePath;
+                            bool optimized = false;
+                            if (simplePath != null && simplePath.Steps.Any())
                             {
-                                Path path = nonRecursionPath.DeepCopy();
-                                Step step = new Step { Axis = Axis.descendant, NodeTest = descendant };
-                                path.AddStep(step);
-                                unionPath.ComponentPaths.Add(path);
+                                Step laststep = simplePath.Steps.Last();
+                                if (laststep.NodeTest == descendant && laststep.Axis == Axis.child)
+                                {
+                                    laststep.Axis = Axis.descendant;
+                                    optimized = true; 
+                                }
                             }
+                            if (!optimized)
+                            {
+                                Step step = new Step {Axis = Axis.descendant, NodeTest = descendant};
+                                path.AddStep(step);
+                            }
+                            unionPath.ComponentPaths.Add(path);
                         }
+                        usedDescendants.Add(descendant);
                     }
                 }
-                
-                if (unionPath.ComponentPaths.Count == 1)
-                    return unionPath.ComponentPaths[0];
-                else
-                    return unionPath;
             }
+
+            #endregion
+
+            if (unionPath.ComponentPaths.Count == 1)
+                return unionPath.ComponentPaths[0];
+            else
+                return unionPath;
         }
-        
+
         #region Implementation of IExolutioSerializable
 
         public override void Serialize(XElement parentNode, SerializationContext context)

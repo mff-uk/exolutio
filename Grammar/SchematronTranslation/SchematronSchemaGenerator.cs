@@ -137,7 +137,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 
                     foreach (ClassifierConstraintBlock constraint in group)
                     {
-                        XElement ruleElement = patternElement.SchematronRule(!abstractPattern ? contextClass.XPathFull.ToString() : "$" + constraint.Self.Name);
+                        XElement ruleElement = patternElement.SchematronRule(!abstractPattern ? contextClass.GetXPathFull(true).ToString() : "$" + constraint.Self.Name);
                         patterns[contextClass].ContextVariableNames.AddIfNotContained(constraint.Self.Name);
                         if (!abstractPattern /* && constraint.Self.Name != VariableDeclaration.SELF */)
                         {
@@ -161,18 +161,19 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
                         {
                             if (ancestorClass != contextClass)
                             {
-                                schSchema.Add(new XComment(string.Format("instance pattern for {0}'s ancestor {1}", contextClass, ancestorClass.Name)));
+                                schSchema.Add(new XComment(string.Format("instance pattern for {0}'s ancestor {1}", 
+                                    contextClass, ancestorClass.Name)));
                             }
                             else
                             {
-                                schSchema.Add(new XComment(string.Format("instance pattern for {0}'s", contextClass)));
+                                schSchema.Add(new XComment(string.Format("instance pattern for {0}", contextClass)));
                             }
                             XElement instancePattern = schSchema.SchematronPattern();
                             instancePattern.AddAttributeWithValue("id", string.Format("{0}-as-{1}", contextClass.Name, ancestorClass.Name));
                             instancePattern.AddAttributeWithValue("is-a", patterns[ancestorClass].PatternName);
                             foreach (string contextVariableName in patterns[ancestorClass].ContextVariableNames)
                             {
-                                instancePattern.SchematronParam(contextVariableName, ".");
+                                instancePattern.SchematronParam(contextVariableName, contextClass.GetXPathFull(false).ToString());
                             }
                         }
                     }

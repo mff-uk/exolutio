@@ -100,15 +100,12 @@ namespace Exolutio.Model.PSM
             get { return string.Format("{0}/{1}{2}", PSMClass.XPath, Element ? string.Empty : "@", Name); }
         }
 
-        public override Path XPathFull
+        public override Path GetXPathFull(bool followGeneralizations)
         {
-            get
-            {
-                Path result = PSMClass.XPathFull.DeepCopy();
-                Step attributeStep = new Step {NodeTest = Name, Axis = Axis.attribute};
-                result.AddStep(attributeStep);
-                return result;
-            }
+            Path result = PSMClass.GetXPathFull().DeepCopy();
+            Step attributeStep = new Step {NodeTest = Name, Axis = Axis.attribute};
+            result.AddStep(attributeStep);
+            return result;
         }
 
         #region IHasCardinality Members

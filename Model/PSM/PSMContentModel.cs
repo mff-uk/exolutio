@@ -59,13 +59,10 @@ namespace Exolutio.Model.PSM
             get { return ParentAssociation.XPath; }
         }
 
-        public override Path XPathFull
+        public override Path GetXPathFull(bool followGeneralizations)
         {
-            get
-            {
-                Path result = ParentAssociation.XPathFull.DeepCopy();
-                return result;
-            }
+            Path result = ParentAssociation.GetXPathFull().DeepCopy();
+            return result;
         }
 
         #region Implementation of IExolutioSerializable
