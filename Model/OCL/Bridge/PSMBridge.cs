@@ -159,6 +159,8 @@ namespace Exolutio.Model.OCL.Bridge {
             }
 
             classToProcess.ForEach(cl => cl.TranslateMembers());
+            List<PSMBridgeClass> orderedSRs = ModelIterator.GetPSMClassesStructuralRepresentativeRelationBFS(schema).Where(c => c.IsStructuralRepresentative).Select(psmc => PSMAssociationMembers[psmc]).ToList();
+            orderedSRs.ForEach(cl => cl.IncludeSRMembers(PSMAssociationMembers[((PSMClass)cl.PSMSource).RepresentedClass]));
         }
 
         private string GetContentModelOCLName(PSM.PSMContentModel c) {
