@@ -129,21 +129,18 @@ namespace Exolutio.Model.PSM
             get { return string.Format("{0}{1}", Parent.XPath, !string.IsNullOrEmpty(this.Name) && !(this.Child is PSMContentModel) ? "/" + this.Name : string.Empty); }
         }
 
-        public override Path XPathFull
+        public override Path GetXPathFull(bool followGeneralizations = true)
         {
-            get
+            Path result = Parent.GetXPathFull(followGeneralizations).DeepCopy();
+
+            if (!string.IsNullOrEmpty(Name) && !(this.Child is PSMContentModel))
             {
-                Path result = Parent.XPathFull.DeepCopy();
-
-                if (!string.IsNullOrEmpty(Name) && !(this.Child is PSMContentModel))
-                {
-                    result.AddStep(new Step {Axis = Axis.child, NodeTest = this.Name});
-                }
-
-                return result;
+                result.AddStep(new Step {Axis = Axis.child, NodeTest = this.Name});
             }
+
+            return result;
         }
-        
+
         #region IHasCardinality Members
 
         private uint lower = 1;

@@ -78,14 +78,11 @@ namespace Exolutio.Model.PSM
             get { return /*string.Format("{0}{1}", General.XPath, !string.IsNullOrEmpty(this.Name) ? "/" + this.Name :*/ string.Empty/*)*/; }
         }
 
-        public override Path XPathFull
+        public override Path GetXPathFull(bool followGeneralizations)
         {
-            get 
-            {
-                // it makes no sense to ask for a path to generalization. 
-                // Classes should be queried instead. 
-                return null;
-            }
+            // it makes no sense to ask for a path to generalization. 
+            // Classes should be queried instead. 
+            return null;
         }
 
         #region Implementation of IExolutioSerializable

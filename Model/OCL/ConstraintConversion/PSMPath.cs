@@ -148,17 +148,6 @@ namespace Exolutio.Model.OCL.ConstraintConversion
             {
                 return Steps.Select(s => s == Steps.First() ? @"{0}" : s.ToXPath()).ConcatWithSeparator(String.Empty);
             }
-
-            //if (variableRepresentingContext != null &&
-            //    StartingVariableExp != null && 
-            //    StartingVariableExp.referredVariable == variableRepresentingContext)
-            //{
-            //    string path = Steps.Select(s => s == Steps.First() ? @"." : s.ToXPath()).ConcatWithSeparator(String.Empty);
-            //    if (path.StartsWith(@"./"))
-            //        return path.Substring(2);
-            //    else 
-            //        return path;
-            //}
             
             return Steps.Select(s => s.ToXPath()).ConcatWithSeparator(String.Empty);
         }
@@ -402,7 +391,7 @@ namespace Exolutio.Model.OCL.ConstraintConversion
             else if (node.Source is TupleLiteralExp)
             {
                 TuplePartStep tuplePartStep = new TuplePartStep(path) { TupleExpresion = (TupleLiteralExp) node.Source };
-                tuplePartStep.TuplePart = tuplePartStep.TupleExpresion.Parts[((PropertyCallExp) node).ReferredProperty.Name];
+                tuplePartStep.TuplePart = tuplePartStep.TupleExpresion.Parts[node.ReferredProperty.Name];
                 path.Steps.Add(tuplePartStep);
                 s = node.Source;
             }

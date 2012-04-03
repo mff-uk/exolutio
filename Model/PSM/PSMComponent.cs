@@ -43,7 +43,7 @@ namespace Exolutio.Model.PSM
 
         public abstract string XPath { get; }
 
-        public abstract Path XPathFull { get; }
+        public abstract Path GetXPathFull(bool followGeneralizations = true);
 
         private void InitializeCollections()
         {
