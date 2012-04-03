@@ -1041,5 +1041,11 @@ namespace Exolutio.Model
             IEnumerable<PSMClass> inheritanceRoots = psmSchema.PSMClasses.Where(c => c.GeneralizationAsSpecific == null);
             return inheritanceRoots.Closure(parent => parent.GeneralizationsAsGeneral.Select(gen => gen.Specific));
         }
+
+        public static IEnumerable<PSMClass> GetPSMClassesStructuralRepresentativeRelationBFS(PSMSchema psmSchema)
+        {
+            IEnumerable<PSMClass> inheritanceRoots = psmSchema.PSMClasses.Where(c => !c.IsStructuralRepresentative);
+            return inheritanceRoots.Closure(parent => parent.GetReferencingStructuralRepresentatives(false));
+        }
     }
 }

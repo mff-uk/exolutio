@@ -185,6 +185,30 @@ namespace Exolutio.Model.OCL.Bridge {
             }
         }
 
+        /// <summary>
+        /// Adds members included from structural representatives 
+        /// </summary>
+        internal void IncludeSRMembers(PSMBridgeClass representedClass)
+        {
+            foreach (KeyValuePair<PSMAttribute, PSMBridgeAttribute> kvp in representedClass.PSMAttribute)
+            {
+                PSMBridgeAttribute copy = new PSMBridgeAttribute(kvp.Key, kvp.Value.PropertyType, kvp.Value.Type);
+                PSMAttribute.Add(kvp.Key, copy);
+                copy.Tag = kvp.Value.Tag;
+                Properties.Add(copy);
+            }
+            foreach (KeyValuePair<PSMAssociation, PSMBridgeAssociation> kvp in PSMChildMembers)
+            {
+                if (kvp.Value.Direction == PSMBridgeAssociation.AssociationDirection.Down)
+                {
+                    PSMBridgeAssociation copy = new PSMBridgeAssociation(kvp.Value.DefaultName, kvp.Value.Aliases, kvp.Value.SourceAsscociation, kvp.Value.Direction, kvp.Value.PropertyType, kvp.Value.Type);
+                    PSMChildMembers.Add(kvp.Key, copy);
+                    copy.Tag = kvp.Value.Tag;
+                    Properties.Add(copy, kvp.Value.Name);
+                }
+            }
+        }
+
         private static string GetContentModelOCLName(PSM.PSMContentModel c) {
             PSM.PSMAssociation parentAssocitation = c.ParentAssociation;
             string parentName = parentAssocitation.Parent.Name;
