@@ -16,7 +16,7 @@
       <Begin>'</Begin>
       <End>'</End>
       <RuleSet>
-        <!-- nested span for escape sequences -->
+        <!-- nested span for escape sequences -->          
         <Span begin="\\" end="." />
       </RuleSet>
     </Span>
@@ -34,8 +34,9 @@
 
             <Span color="String">
               <Begin>'</Begin>
-              <End>'</End>
+              <End>'</End>              
               <RuleSet>
+                <Span begin="\\" end="." />
                 <Span color="Black">
                   <Begin>{</Begin>
                   <End>}</End>

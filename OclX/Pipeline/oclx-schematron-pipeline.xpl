@@ -2,6 +2,7 @@
 <p:pipeline 
   xmlns:p="http://www.w3.org/ns/xproc" 
   xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
+  xmlns:cx="http://xmlcalabash.com/ns/extensions"
   version="1.0" name="main">
   
   <p:documentation> 
@@ -38,26 +39,46 @@
         is saved in a separate file.
       </xd:param>
       <xd:param name="protect-invalid">        
-        <xd:p>If set to 'true', the XPath assert tests are wrapped using 
+        <xd:p>If set to <xd:i>'true'</xd:i>, the XPath assert tests are wrapped using 
           <xd:i>xsl:try</xd:i> intrsuction, which prevents the XSLT 
           compiler from stopping on dynamic errors. I.e. when a dynamic error
           is encountered, the assert fails and the validation proceeds. 
-          Default is 'false'.
+          Default is <xd:i>'false'</xd:i>.
         </xd:p>
         <xd:p>        
           Note: this settings is only relevant for functional OclX.  
         </xd:p>        
       </xd:param>
+      <xd:param name="schema-aware">
+        <xd:p>When set to <xd:i>'true'</xd:i>, the input document is first 
+        validated with an XSD schema. The schema must be specified using 
+        the port <xd:i>xsd</xd:i></xd:p>        
+      </xd:param>
     </xd:desc>
   </p:documentation>
   
+  <p:import href="http://xmlcalabash.com/extension/steps/library-1.0.xpl"/>
   <p:serialization port="result" omit-xml-declaration="false" indent="true"/>
   <p:option name="functional" select="'true'"/>
-  <p:option name="oclx-import-href" select="'oclX-functional.xsl'" ></p:option>
+  <p:option name="oclx-import-href" select="'oclX-functional.xsl'" />
   <p:option name="output-intermediate-steps" select="'false'" />
-  <p:option name="protect-invalid" select="'false'"></p:option>
-
+  <p:option name="protect-invalid" select="'false'" />
+  <p:option name="schema-aware" select="'false'" />
+  
+  <p:documentation>
+    <xd:desc>
+      <xd:p>This port is used for the schematron schema. </xd:p>      
+    </xd:desc>
+  </p:documentation>
   <p:input port="schema"/>
+  <p:documentation>
+    <xd:desc>
+      <xd:p>This port is used for the xsd schema. The input document is validated 
+      with the schema when <xd:code>schema-aware</xd:code> option is set to 
+        <xd:i>'true'</xd:i>. </xd:p>      
+    </xd:desc>
+  </p:documentation>  
+  <p:input port="xsd" />  
   
   <p:documentation> 
     <xd:desc>
@@ -70,7 +91,7 @@
     </p:input>
     <p:input port="stylesheet">
       <p:document href="iso_dsdl_include.xsl"/>
-    </p:input>
+    </p:input>    
   </p:xslt>
 
   <p:documentation> 
@@ -163,13 +184,37 @@
       on an XML document. The result is an XML in SVRL format. </xd:p>      
     </xd:desc>
   </p:documentation>
-  <p:xslt name="validation">
-    <p:input port="stylesheet">
-      <p:pipe step="oclx_include" port="result"/>
-    </p:input>
-    <p:input port="source">
-      <p:pipe port="source" step="main"/>
-    </p:input>
-  </p:xslt>
+  <p:choose>    
+    <p:when test="xs:boolean($schema-aware)">      
+      <p:validate-with-xml-schema name="xsd">
+        <p:input port="source">
+          <p:pipe port="source" step="main"/>
+        </p:input>
+        <p:input port="schema">
+          <p:pipe port="xsd" step="main"/>
+        </p:input>        
+      </p:validate-with-xml-schema>
+      
+      <p:xslt name="validation">
+        <p:input port="stylesheet">
+          <p:pipe step="oclx_include" port="result"/>
+        </p:input>
+        <p:input port="source">
+          <p:pipe step="xsd" port="result" />
+        </p:input>
+      </p:xslt>
+    </p:when>
+    <p:otherwise>
+      <p:xslt name="validation">
+        <p:input port="stylesheet">
+          <p:pipe step="oclx_include" port="result"/>
+        </p:input>
+        <p:input port="source">
+          <p:pipe port="source" step="main"/>
+        </p:input>
+      </p:xslt>
+    </p:otherwise>    
+  </p:choose>
+  
 
 </p:pipeline>

@@ -9,6 +9,7 @@ using Antlr.Runtime.Tree;
 using Exolutio.Model.OCL.Types;
 using Exolutio.Model.OCL.TypesTable;
 using AST = Exolutio.Model.OCL.AST;
+using Exolutio.SupportingClasses;
 
 namespace Exolutio.Model.OCL.Compiler {
     partial class OCLAst {
@@ -68,7 +69,9 @@ namespace Exolutio.Model.OCL.Compiler {
             if (element is Classifier == false) {
                 // error
                 selfOut = null;
-                Errors.AddError(new ErrorItem(CompilerErrors.OCLAst_ClassifierContextHead_Nenalezena_trida_v_ClassifierContextHeader));
+                Errors.AddError(new ErrorItem(string.Format(CompilerErrors.OCLAst_ClassifierContextHead_ClassifierNotFound_1, path.ConcatWithSeparator(@"::"))));
+                EnvironmentStack.Push(ErrorEnvironment.Instance);
+                EnvironmentStack.Push(ErrorEnvironment.Instance);
                 return null;
             }
             Classifier contextClassifier = element as Classifier;
@@ -212,9 +215,12 @@ namespace Exolutio.Model.OCL.Compiler {
             if (tokenPath == null && tokenPath.Count != 1) {
                 return false;
             }
-
+            if (expr.Type is InvalidType)
+            {
+                return false; 
+            }
             string name = tokenPath[0].Text;
-            IteratorOperation iteratorOperation = ((CollectionType)(expr.Type)).LookupIteratorOperation(name);
+            IteratorOperation iteratorOperation = ((CollectionType) (expr.Type)).LookupIteratorOperation(name);
             return iteratorOperation != null;
         }
 
@@ -307,7 +313,7 @@ namespace Exolutio.Model.OCL.Compiler {
                     .SetCodeSource(new CodeSource(tokenPath[0]));
             }
 
-            Errors.AddError(new CodeErrorItem(String.Format(CompilerErrors.OCLAst_ProcessCollectionOperationCall_Unknown_collection_operation, tokenPath[0]), tokenPath.First(), tokenPath.Last()));
+            Errors.AddError(new CodeErrorItem(String.Format(CompilerErrors.OCLAst_ProcessCollectionOperationCall_Unknown_collection_operation, name), tokenPath.First(), tokenPath.Last()));
             return new AST.ErrorExp(Library.Invalid);
         }
 

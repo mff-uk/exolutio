@@ -128,6 +128,11 @@ namespace Exolutio.Model.OCL.Bridge {
                 PIMOperations.Add(op, newOp);
             }
 
+            // allInstances
+            {
+                Operation allInstancesOp = new Operation(@"allInstances", true, this);
+                Operations.Add(allInstancesOp);
+            }
         }
 
         

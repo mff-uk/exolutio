@@ -92,6 +92,45 @@ namespace Exolutio.Model.OCL {
         }
     }
 
+    public class ErrorEnvironment : Environment
+    {
+        private ErrorEnvironment()
+        {
+        }
+
+        public static ErrorEnvironment Instance = new ErrorEnvironment();
+
+        public override IModelElement LookupLocal(string name)
+        {
+            return null;
+        }
+
+        public override IModelElement LookupNamespaceLocal(string name)
+        {
+            return null;
+        }
+
+        public override IModelElement Lookup(string name)
+        {
+            return null;
+        }
+
+        public override IModelElement LookupPathName(IEnumerable<string> path)
+        {
+            return null;
+        }
+
+        public override ImplicitPropertyData LookupImplicitAttribute(string name)
+        {
+            return null;
+        }
+
+        public override ImplicitOperationData LookupImplicitOperation(string name, IEnumerable<Classifier> parameters)
+        {
+            return null;
+        }
+    }
+
 
     public class NamespaceEnvironment : Environment {
         private Namespace internalNamespace;

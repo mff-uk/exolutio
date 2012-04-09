@@ -110,7 +110,25 @@ namespace Exolutio.WPFClient
             tabItem.Content = contentControl;
             tcAdditional.Items.Add(tabItem);
             tcAdditional.Visibility = Visibility.Visible;
+            tcAdditional.SelectedItem = tabItem;
+            //columnAdditional.Width = new GridLength(200, GridUnitType.Pixel);
             columnAdditional.Width = new GridLength(1, GridUnitType.Star);
+            gridContent.ColumnDefinitions[0].Width = new GridLength(1, GridUnitType.Star);
+            columnAdditional.MinWidth = 23;
+        }
+
+        private void Expander_Collapsed(object sender, RoutedEventArgs e)
+        {
+            var columnIndex = Grid.GetColumn((Expander)sender);
+            var column = gridContent.ColumnDefinitions[columnIndex];
+            column.Width = GridLength.Auto;
+        }
+
+        private void Expander_Expanded(object sender, RoutedEventArgs e)
+        {
+            var columnIndex = Grid.GetColumn((Expander)sender);
+            var column = gridContent.ColumnDefinitions[columnIndex];
+            column.Width = new GridLength(1, GridUnitType.Star);
         }
 
         private void ShowHideRelevantButtons()
@@ -449,6 +467,13 @@ namespace Exolutio.WPFClient
             {
                 RefreshCallback(this);
             }
+        }
+
+
+        private void bWordWrap_Toggled(object sender, RoutedEventArgs e)
+        {
+            if (fileView != null)
+                fileView.WordWrap = bWordWrap.IsChecked == true;
         }
     }
 }

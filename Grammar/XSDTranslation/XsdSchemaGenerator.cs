@@ -33,7 +33,9 @@ namespace Exolutio.Model.PSM.Grammar.XSDTranslation
                 nodeInfo.Node = node;
                 nodeInfos[node] = nodeInfo;
 
-                if (node.DownCastSatisfies<PSMClass>(c => c.ParentAssociation != null && c.ParentAssociation.IsNamed))
+                if (node.DownCastSatisfies<PSMClass>(c => c.ParentAssociation != null && c.ParentAssociation.IsNamed) ||
+                    node.DownCastSatisfies<PSMClass>(c => c.GeneralizationsAsGeneral.Count > 0) ||
+                    node.DownCastSatisfies<PSMClass>(c => c.GetIncomingNonTreeAssociations().Count(a => a.IsNamed) > 0))
                 {
                     nodeInfo.ComplexTypeRequired = true;
                     nodeInfo.ComplexTypeName = NamingSupport.SuggestName(node, complexType: true);
@@ -44,7 +46,8 @@ namespace Exolutio.Model.PSM.Grammar.XSDTranslation
                     nodeInfo.GroupsRequired = true; 
                 }
 
-                if (node.DownCastSatisfies<PSMClass>(c => c.ParentAssociation == null || !c.ParentAssociation.IsNamed))
+                if (node.DownCastSatisfies<PSMClass>(c => c.ParentAssociation != null && !c.ParentAssociation.IsNamed) ||
+                    node.DownCastSatisfies<PSMClass>(c => c.GetIncomingNonTreeAssociations().Count(a => !a.IsNamed) > 0))
                 {
                     nodeInfo.GroupsRequired = true;
                 }
@@ -192,7 +195,21 @@ namespace Exolutio.Model.PSM.Grammar.XSDTranslation
             if (nodeInfo.ComplexTypeRequired)
             {
                 XElement complexType = parentElement.XsdComplexType(nodeInfo.ComplexTypeName);
-                XElement complexTypeContent = !ContentIsSet(psmClass) ? complexType.XsdSequence() : complexType.XsdAll();
+
+                XElement complexTypeContent;
+                if (psmClass.SuperClass != null)
+                {
+                    XsdNodeTranslationInfo generalInfo = nodeInfos[psmClass.SuperClass];
+                    XElement complexContent = complexType.XsdComplexContent();
+                    XElement extension = complexContent.XsdExtension(generalInfo.ComplexTypeName);
+                    complexTypeContent = !ContentIsSet(psmClass) ? extension.XsdSequence() : extension.XsdAll();        
+                }
+                else
+                {
+                    complexTypeContent = !ContentIsSet(psmClass) ? complexType.XsdSequence() : complexType.XsdAll();
+                }
+                
+                
 
                 if (ContentIsSet(psmClass) && CountContentForSet(psmClass) > 1)
                 {

@@ -18,7 +18,7 @@ namespace Exolutio.Model.OCL.ConstraintConversion
                 CompilerResult compilerResult = oclScript.CompileToAst();
                 if (!compilerResult.Errors.HasError)
                 {
-                    PSMConstraintSuitabilityChecker constraintSuitabilityChecker = new PSMConstraintSuitabilityChecker
+                    ConstraintSuitabilityChecker constraintSuitabilityChecker = new ConstraintSuitabilityChecker
                                                                                        {
                                                                                            TargetPSMSchema = psmSchema,
                                                                                            Bridge = compilerResult.Bridge
@@ -46,14 +46,22 @@ namespace Exolutio.Model.OCL.ConstraintConversion
                             {
                                 Classifier psmContextSuggestion = null; 
                                 constraintConvertor.Clear();
-                                OclExpression psmInvariant = constraintConvertor.TranslateConstraint(classifierConstraint, pimInvariant.Constraint, constraintSuitabilityChecker.VariableClassMappings, 
-                                     constraintSuitabilityChecker.PathMappings, constraintSuitabilityChecker.VariableTranslations, out psmContextSuggestion);
-                                if (!translatedInvariants.ContainsKey(psmContextSuggestion))
+                                try
                                 {
-                                    translatedInvariants[psmContextSuggestion] = new ClassifierConstraintBlock(psmContextSuggestion,
-                                        new List<InvariantWithMessage>(), constraintConvertor.SelfVariableDeclaration);
+                                    OclExpression psmInvariant = constraintConvertor.TranslateConstraint(classifierConstraint, pimInvariant.Constraint, constraintSuitabilityChecker.VariableClassMappings,
+                                         constraintSuitabilityChecker.PathMappings, constraintSuitabilityChecker.VariableTranslations, out psmContextSuggestion);
+
+                                    if (!translatedInvariants.ContainsKey(psmContextSuggestion))
+                                    {
+                                        translatedInvariants[psmContextSuggestion] = new ClassifierConstraintBlock(psmContextSuggestion,
+                                            new List<InvariantWithMessage>(), constraintConvertor.SelfVariableDeclaration);
+                                    }
+                                    translatedInvariants[psmContextSuggestion].Invariants.Add(new InvariantWithMessage(psmInvariant));
                                 }
-                                translatedInvariants[psmContextSuggestion].Invariants.Add(new InvariantWithMessage(psmInvariant));
+                                catch
+                                {
+
+                                }
                             }
                         }
 

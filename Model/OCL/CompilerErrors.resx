@@ -117,8 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="OCLAst_ClassifierContextHead_Nenalezena_trida_v_ClassifierContextHeader" xml:space="preserve">
-    <value>Classifier not found in context header.</value>
+  <data name="OCLAst_ClassifierContextHead_ClassifierNotFound_1" xml:space="preserve">
+    <value>Classifier `{0}` (used in context header) not found.</value>
   </data>
   <data name="OCLAst_InfixOperation_NotDefined_2" xml:space="preserve">
     <value>Infix operation `{1}` is not defined on type `{0}`.</value>

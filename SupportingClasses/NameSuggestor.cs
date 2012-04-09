@@ -94,7 +94,7 @@ namespace Exolutio.SupportingClasses
 		/// <param name="getItemName">delegate of a function that returns name of object of type  <typeparamref name="Type"/></param>
 		/// <param name="firstItemWithout1">if set to true, first returned name will not use number suffix</param>
 		/// <param name="startWithCount">if set to <c>true</c> first suggestion will be {prefix}{number} where {number is count of 
-		/// itmes in <paramref name="collection"/> + 1, otherwise first suggestion will be {prefix}1.</param>
+		/// items in <paramref name="collection"/> + 1, otherwise first suggestion will be {prefix}1.</param>
 		/// <returns>new unique name</returns>
 		public static string SuggestUniqueName(IEnumerable<Type> collection, string prefix, GetItemName getItemName, bool firstItemWithout1, bool startWithCount)
 		{

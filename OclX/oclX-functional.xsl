@@ -1067,6 +1067,15 @@
     <xsl:sequence select="xs:date(format-dateTime($dateTime, '[Y]-[M,2]-[D,2]'))"/>
   </xsl:function>
 
+  <doc:doc>
+    <doc:desc>Returns a dateTime value where the time component is truncated.</doc:desc>
+    <doc:param name="dateTime">Input dateTime. </doc:param>
+  </doc:doc>
+  <xsl:function name="oclDate:trunc" as="xs:dateTime">
+    <xsl:param name="dateTime" />
+    <xsl:sequence select="xs:dateTime(xs:date(format-dateTime($dateTime, '[Y]-[M,2]-[D,2]')))"/>
+  </xsl:function>
+
   <!-- 
     Boolean
     -->

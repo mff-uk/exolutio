@@ -135,6 +135,10 @@ namespace Exolutio.Model.PSM
             set { generalizationAsSpecificGuid = value == null ? Guid.Empty : value; NotifyPropertyChanged("GeneralizationAsSpecific"); }
         }
 
+        public PSMClass SuperClass
+        {
+            get { return GeneralizationAsSpecific != null ? GeneralizationAsSpecific.General : null; }
+        }
 
         public IEnumerable<PSMAssociation> GetIncomingNonTreeAssociations()
         {

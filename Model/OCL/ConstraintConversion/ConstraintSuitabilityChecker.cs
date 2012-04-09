@@ -11,7 +11,7 @@ using Exolutio.SupportingClasses;
 
 namespace Exolutio.Model.OCL.ConstraintConversion
 {
-    internal class PSMConstraintSuitabilityChecker : ConvertToPSMVisitorBase<bool>
+    internal class ConstraintSuitabilityChecker : ConvertToPSMVisitorBase<bool>
     {
         private bool isSuitable;
         private OclExpression violatingExpression;
@@ -44,6 +44,9 @@ namespace Exolutio.Model.OCL.ConstraintConversion
         public override bool Visit(LetExp node)
         {
             violatingExpression = node;
+            bool valueDefAccept = node.Variable.Value.Accept(this);
+            VariableClassMappings.CreateSubCollectionIfNeeded(node.Variable);
+            
             isSuitable = false;
             return false;
         }
@@ -107,6 +110,7 @@ namespace Exolutio.Model.OCL.ConstraintConversion
                     }                    
                 }
             }
+
             loopStacks.Push(node);
             bool bodyAccept = node.Body.Accept(this);
             loopStacks.Pop();

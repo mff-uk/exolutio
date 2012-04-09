@@ -127,9 +127,6 @@
     <Compile Include="Commands\Atomic\PIM\acmdUpdatePIMAssociationEndCardinality.cs" />
     <Compile Include="Commands\Atomic\PIM\acmdUpdatePIMAttributeDefaultValue.cs" />
     <Compile Include="Commands\Atomic\PIM\MacroWrappers\cmdMoveAssociationEnd.cs" />
-    <Compile Include="Commands\Atomic\PIM\MacroWrappers\cmdDeletePIMAssociation.cs" />
-    <Compile Include="Commands\Atomic\PIM\MacroWrappers\cmdDeletePIMAttribute.cs" />
-    <Compile Include="Commands\Atomic\PIM\MacroWrappers\cmdDeletePIMClass.cs" />
     <Compile Include="Commands\Atomic\PIM\MacroWrappers\cmdNewPIMAssociation.cs" />
     <Compile Include="Commands\Atomic\PIM\MacroWrappers\cmdNewPIMAttribute.cs" />
     <Compile Include="Commands\Atomic\PIM\MacroWrappers\cmdNewPIMClass.cs" />

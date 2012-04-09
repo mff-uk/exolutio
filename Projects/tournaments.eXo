@@ -8,7 +8,7 @@
       <eXo:AttributeType ID="bc694e1d-d1e7-4ac6-8e1f-071255a6bc71" Name="Tournament" IsSealed="False" componentId="1e014a11-c043-423c-b4a6-5d0553ac31bd" displayName="PIMClass: *Tournament*" />
     </eXo:PIMAttributeTypes>
     <eXo:PIMSchema ID="049cb593-8ee0-48a6-a597-fb9500ec3f00" Caption="PIMSchema">
-      <eXo:PIMClasses Count="8">
+      <eXo:PIMClasses Count="7">
         <eXo:PIMClass ID="836e8961-7cac-4732-8679-abf778d6a68d" Name="TournamentForm" abstract="False" final="False">
           <eXo:PIMAttributes Count="0" />
           <eXo:PIMOperations Count="1">
@@ -19,7 +19,7 @@
             <eXo:PIMAssociationEnd pimAssociationEndID="c1bd5fc2-1c75-4701-b15d-6cb4b50a280e" pimAssociationEnd="PIMAssociationEnd: A:  [TournamentForm] " />
           </eXo:PIMAssociationEnds>
         </eXo:PIMClass>
-        <eXo:PIMClass ID="2c95f723-f908-4c13-817d-cf26d54a9837" Name="TournamentControl" pimGeneralizationAsSpecificID="8f3a8d81-a12e-4889-9179-c56d7b94b9eb" pimGeneralizationAsSpecific="PIMGeneralization: PIMClass: *TournamentControl* -&gt; PIMClass: *defaultname*" abstract="False" final="False">
+        <eXo:PIMClass ID="2c95f723-f908-4c13-817d-cf26d54a9837" Name="TournamentControl" abstract="False" final="False">
           <eXo:PIMAttributes Count="0" />
           <eXo:PIMOperations Count="1">
             <eXo:PIMOperation ID="29181676-7051-4fb4-ba3a-128e1d75500a" Name="selectSponsors" pimClassID="2c95f723-f908-4c13-817d-cf26d54a9837">
@@ -135,18 +135,8 @@
             <eXo:PIMAssociationEnd pimAssociationEndID="1520b138-f547-4adb-8cbc-d95e950b6bcd" pimAssociationEnd="PIMAssociationEnd: A:  [League] " />
           </eXo:PIMAssociationEnds>
         </eXo:PIMClass>
-        <eXo:PIMClass ID="f93d9c0a-ab9d-4da0-9159-10cd4e4ff137" Name="defaultname" abstract="False" final="False">
-          <eXo:PIMAttributes Count="0" />
-          <eXo:PIMOperations Count="0" />
-          <eXo:GeneralizationsAsGeneral Count="1">
-            <eXo:PIMGeneralization pimGeneralizationsAsGeneralID="8f3a8d81-a12e-4889-9179-c56d7b94b9eb" pimGeneralizationsAsGeneral="PIMGeneralization: PIMClass: *TournamentControl* -&gt; PIMClass: *defaultname*" />
-          </eXo:GeneralizationsAsGeneral>
-          <eXo:PIMAssociationEnds Count="0" />
-        </eXo:PIMClass>
       </eXo:PIMClasses>
-      <eXo:PIMGeneralizations Count="1">
-        <eXo:PIMGeneralization ID="8f3a8d81-a12e-4889-9179-c56d7b94b9eb" Name="defaultname" refGeneralID="f93d9c0a-ab9d-4da0-9159-10cd4e4ff137" refGeneral="PIMClass: *defaultname*" refSpecificID="2c95f723-f908-4c13-817d-cf26d54a9837" refSpecific="PIMClass: *TournamentControl*" />
-      </eXo:PIMGeneralizations>
+      <eXo:PIMGeneralizations Count="0" />
       <eXo:PIMAssociations Count="10">
         <eXo:PIMAssociation ID="71bfb6dd-1526-425a-a260-5d6d47f35b71" Name="">
           <eXo:PIMAssociationEnds Count="2">
@@ -209,10 +199,45 @@
           </eXo:PIMAssociationEnds>
         </eXo:PIMAssociation>
       </eXo:PIMAssociations>
-      <eXo:OCLScripts Count="4">
-        <eXo:OCLScript ID="c9c736eb-3985-4683-83b7-8748121496e8" Name="methods pre and post conditions">
-          <eXo:Contents><![CDATA[/* methods pre and post conditions */
+      <eXo:OCLScripts Count="2">
+        <eXo:OCLScript ID="627fce62-3ce6-4981-b826-27a7450e4904" Name="collections">
+          <eXo:Contents><![CDATA[context Tournament /*PIM1*/
+inv : start <= end
+message: 'Dates inconsistent {start} is grater than {end} in {name}' 
 
+context Tournament /* PIM2 */
+inv: matches->forAll(m:Match|m.start >= start and m.end <= end)
+message: 'All matches in a tournament occur within the tournament’s time frame'
+
+context Match /* PIM3 */ 
+inv: players->forAll(p|p.tournaments->exists(t|t.matches->includes(self)))
+message: 'A match can only involve players who are accepted in the tournament'
+
+context Tournament /* PIM4 */
+inv: matches->exists(m:Match|m.start.trunc() = start.trunc())
+message: 'Each tournament conducts at least one match on the first day of the tournament'
+
+context TournamentControl
+inv: Tournament.players->forAll(p|p.tournaments->forAll(t| 
+       t <> Tournament implies not t.overlap(Tournament)))
+message: 'No player can take part in two or more tournaments that overlap'
+
+/* different version */
+context Tournament
+inv: matches->forAll(m|m.players->forAll(mp|mp.tournaments->includes(self)))
+message: 'A match can only involve players who are accepted in the tournament'
+
+context Tournament
+inv: requiredQualificationPoints = null or 
+       players->forAll(p | p.points >= requiredQualificationPoints)
+message: 'participating players must meet the requirements of the tournament'
+
+context Player
+inv: not League->isEmpty() implies regNo <> null 
+message: 'players playing leagues must have registration numbers']]></eXo:Contents>
+        </eXo:OCLScript>
+        <eXo:OCLScript ID="252ed172-ba2d-41fa-afde-b2332b35f90e" Name="other pre and post conditions">
+          <eXo:Contents><![CDATA[/* other pre and post conditions */
 context Tournament::acceptPlayer(p)
 pre: not isPlayerAccepted(p)
 
@@ -239,52 +264,6 @@ pre: league.players->includes(p)
 
 context League::getActivePlayers
 post: result = tournaments.players->asSet()
-]]></eXo:Contents>
-        </eXo:OCLScript>
-        <eXo:OCLScript ID="627fce62-3ce6-4981-b826-27a7450e4904" Name="collections">
-          <eXo:Contents><![CDATA[/* more complex invariants, integrity, forall construct */
-
-/* All Matches in a Tournament occur
-within the Tournament’s time frame */
-
-context Tournament
-inv:
-matches->forAll(m:Match |
-m.start.after(start) and m.end.before(end))
-
-/* Each Tournament conducts at
-least one Match on the first
-day of the Tournament */
-
-/* TODO: this constraint asserts datetimes, it should assert dates */
-context Tournament
-inv: matches->exists(m:Match | m.start.equals(start))
-
-/* No Player can take part in two or
-more Tournaments that overlap */
-
-context TournamentControl
-inv: Tournament.players->forAll(p|
-p.tournaments->forAll(t|
-t <> Tournament implies
-not t.overlap(Tournament)))
-
-/* A match can only involve players who are
-accepted in the tournament */
-
-context Match
-inv: players->forAll(p|
-p.tournaments->exists(t|
-t.matches->includes(self)))
-
-/* A match can only involve players who are
-accepted in the tournament -- different version*/
-context Tournament
-inv: matches->forAll(m|m.players->forAll(mp|mp.tournaments->includes(self)))
-]]></eXo:Contents>
-        </eXo:OCLScript>
-        <eXo:OCLScript ID="252ed172-ba2d-41fa-afde-b2332b35f90e" Name="other pre and post conditions">
-          <eXo:Contents><![CDATA[/* other pre and post conditions */
 
 context TournamentControl::selectSponsors(advertisers)
 pre: interestedSponsors->notEmpty and
@@ -307,25 +286,6 @@ not isPlayerOverbooked(p)
 
 context TournamentControl::acceptPlayer(p)
 post: tournament.players->includes(p)]]></eXo:Contents>
-        </eXo:OCLScript>
-        <eXo:OCLScript ID="4c06e9cd-0942-48bd-a24c-fde2b32f7a55" Name="data and coocurence">
-          <eXo:Contents><![CDATA[/* data, coocurrence tests */
-
-/* dates consistency */
-context Tournament
-inv : start <= end
-
-/* participating players meet the requirements of the tournament */
-context Tournament
-inv: requiredQualificationPoints = null or 
-players->forAll(p | p.points >= requiredQualificationPoints)
-
-/* players playing leagues must have registration numbers */
-context Player
-inv: not 
-League->isEmpty() implies regNo <> null 
-
-]]></eXo:Contents>
         </eXo:OCLScript>
       </eXo:OCLScripts>
     </eXo:PIMSchema>
@@ -479,30 +439,23 @@ League->isEmpty() implies regNo <> null
           </eXo:PSMAssociation>
         </eXo:PSMAssociations>
         <eXo:PSMContentModels Count="0" />
-        <eXo:OCLScripts Count="3">
+        <eXo:OCLScripts Count="2">
           <eXo:OCLScript ID="e7ac709c-e419-467b-8ce3-acbe1074e440" Name="collections">
-            <eXo:Contents><![CDATA[/* more complex invariants, integrity, forall construct */
+            <eXo:Contents><![CDATA[context Tournament 
+/* PSM1 */ 
+inv: start <= end
+message: 'Dates inconsistent, {start} is greater than {end} in {name}' 
+/* PSM2 */
+inv: matches.day.match->forAll(m:Match | m.start >= start and m.end <= end)
+message: 'All matches in a tournament occur within the tournament\'s time frame'
+/* PSM4 */ 
+inv: matches.day.match->exists(m:Match | m.start.trunc() = start.trunc())
+message: 'Each tournament conducts at least one match on the first day of the tournament'
 
-/* All Matches in a Tournament occur
-within the Tournament’s time frame */
+inv: matches.day->forAll(d1, d2 | d1 <> d2 implies d1.date <> d2.date)
+message: 'Days must be unique'
 
-context Tournament
-inv:
-matches.day.match->forAll(m:Match |
-m.start.after(start) and m.end.before(end))
-message: 'asdf {1 > 2} or 3'
- 
-/* Each Tournament conducts at
-least one Match on the first
-day of the Tournament */
-
-/* TODO: this constraint asserts datetimes, it should assert dates */
-context Tournament
-inv: matches.day.match->exists(m:Match | m.start = start)
-
-/* A match can only involve players who are
-accepted in the tournament 
-
+/*
 the original constraint: 
   
 context Match
@@ -515,22 +468,20 @@ we are traversing an associations in an opposite direction
 (player-tournament)
 */
 
-context Match
+context Match /* PSM3 */
 inv: matchPlayers.player->forAll(p|
-p.parent.parent.parent.parent.parent.participatingPlayers.player->exists(px |
-px.name = p.name))
-
-
-
-/*
-Test of type-defined function
-context Player
-inv: email.substring(0) = email
-*/
-
-/* players have unique email */
+  p.parent.parent.parent.parent.parent.participatingPlayers.player->exists(px |
+    px.name = p.name))
+message: 'A match can only involve players who are accepted in the tournament'
+ 
 context Players
-inv: player->isUnique(p | p.email)]]></eXo:Contents>
+inv: player->isUnique(p | p.email)
+message: 'Players must have unique email'
+
+-- PSM only constraint
+context Day
+inv: self.match->forAll(m | m.start.getDate() = date)
+message: 'Each day shows only matches taking place that day' ]]></eXo:Contents>
           </eXo:OCLScript>
           <eXo:OCLScript ID="fb8e63fa-e432-484e-9672-a0363284c48a" Name="empty">
             <eXo:Contents><![CDATA[/* Example of a PIM constraint that is not used, even though it could be,
@@ -547,26 +498,6 @@ t <> tournament implies
 not t.overlap(tournament)))
 */
 ]]></eXo:Contents>
-          </eXo:OCLScript>
-          <eXo:OCLScript ID="eebd91cf-1ebf-43e1-85a0-f22319e5d3be" Name="days">
-            <eXo:Contents><![CDATA[-- PSM only constraint
-
-/*
-Each day shows only matches taking place that day
-expects conversion dateTime -> date using getDate() function
-*/
-
-/*context Day
-inv: self.match->forAll(m | m.start.getDate() = date)
-*/
-
-/* days are unique */
-context Tournament
-inv: matches.day->forAll(d1, d2 | d1 <> d2 implies d1.date <> d2.date)
-
-/* dates consistency */
-context Tournament
-inv: start <= end]]></eXo:Contents>
           </eXo:OCLScript>
         </eXo:OCLScripts>
       </eXo:PSMSchema>
@@ -665,12 +596,11 @@ inv: start <= end]]></eXo:Contents>
         <eXo:PSMContentModels Count="0" />
         <eXo:OCLScripts Count="1">
           <eXo:OCLScript ID="f8144be1-e473-40ba-aed1-f24b4962ebf0" Name="defaultname">
-            <eXo:Contents><![CDATA[/*Má být associace player s jednoduchou kardinalitou?*/
-
-/*
+            <eXo:Contents><![CDATA[/*
 context Tournament
 inv: requiredQualificationPoints = null or player->forAll(p | p.points >= requiredQualificationPoints)
 */
+
 /*
 smarter enginge should rewrite the preceding expression into a simpler one 
 (seeing that the collection player can have only one instance)
@@ -679,10 +609,11 @@ The rewrited expression would be:
 
 context Tournament
 inv: requiredQualificationPoints = null or (player.points >= requiredQualificationPoints)
+message: 'Participating players must meet the requirements of the tournament'
 
-/* leagues are correct */
 context Player
 inv: playerLeague.name = parent.tournamentLeague.name
+message: 'Leagues are not correct'
 
 ]]></eXo:Contents>
           </eXo:OCLScript>
@@ -807,15 +738,14 @@ inv: playerLeague.name = parent.tournamentLeague.name
             <eXo:Contents><![CDATA[/* choice tests - choice between attributes is not possible to 
 define sufficiently in XSD */
 
-/* either open tournament or belongs to some league */
-
+/* PSM5 */
 context Tournament
 inv: qualification.choice_1.child_OpenTournament.open = true or 
 qualification.choice_1.child_League.leagueName <> null 
+message: 'Tournament must be either open tournament or belong to a league'
 
 /* now some other methods how to rewrite previous constraint
 to demonstrate choice naming and PSM navigation */
-
 
 context Tournament
 inv: qualification.choice_1.child_1.open = true or 
@@ -1082,15 +1012,15 @@ qualification.CH_Qualification_OpenTournament_League.League.leagueName <> null
               </eXo:MainLabelViewHelper>
               <eXo:AssociationEndsViewHelpers Count="2">
                 <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="26090e42-604b-4de4-947d-9455da0a8ae2" AssociationEnd="PIMAssociationEnd: A:  [TournamentControl] {0..*}">
-                  <eXo:CardinalityLabelViewHelper X="-40" Y="4" Width="NaN" Height="NaN">
+                  <eXo:CardinalityLabelViewHelper X="5" Y="-26" Width="NaN" Height="NaN">
                     <eXo:LabelVisible>True</eXo:LabelVisible>
                   </eXo:CardinalityLabelViewHelper>
                   <eXo:RoleLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
                     <eXo:LabelVisible>True</eXo:LabelVisible>
                   </eXo:RoleLabelViewHelper>
                   <eXo:Points>
-                    <eXo:Point X="156" Y="43" />
-                    <eXo:Point X="616" Y="102" />
+                    <eXo:Point X="213" Y="28" />
+                    <eXo:Point X="616" Y="98" />
                     <eXo:Point X="616" Y="414" />
                     <eXo:Point X="94" Y="13" />
                   </eXo:Points>
@@ -1156,7 +1086,7 @@ qualification.CH_Qualification_OpenTournament_League.League.leagueName <> null
                     <eXo:LabelVisible>True</eXo:LabelVisible>
                   </eXo:RoleLabelViewHelper>
                   <eXo:Points>
-                    <eXo:Point X="9" Y="220" />
+                    <eXo:Point X="0" Y="193" />
                     <eXo:Point X="345" Y="392" />
                     <eXo:Point X="109" Y="66" />
                   </eXo:Points>
@@ -1171,17 +1101,6 @@ qualification.CH_Qualification_OpenTournament_League.League.leagueName <> null
                   <eXo:Points />
                 </eXo:AssociationEndViewHelper>
               </eXo:AssociationEndsViewHelpers>
-            </eXo:ViewHelper>
-          </eXo:Component>
-          <eXo:Component Type="PIMClass" componentID="f93d9c0a-ab9d-4da0-9159-10cd4e4ff137" component="PIMClass: *defaultname*">
-            <eXo:ViewHelper X="673" Y="53" Width="NaN" Height="NaN" />
-          </eXo:Component>
-          <eXo:Component Type="PIMGeneralization" componentID="8f3a8d81-a12e-4889-9179-c56d7b94b9eb" component="PIMGeneralization: PIMClass: *TournamentControl* -&gt; PIMClass: *defaultname*">
-            <eXo:ViewHelper>
-              <eXo:Points>
-                <eXo:Point X="213" Y="12" />
-                <eXo:Point X="0" Y="17" />
-              </eXo:Points>
             </eXo:ViewHelper>
           </eXo:Component>
         </eXo:Components>

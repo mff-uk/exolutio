@@ -104,4 +104,13 @@
   <data name="UNSAFE_VARIABLE_EXP">
     <value xml:space="preserve">Unsafe use of variable '{0}'. Variables of type derived from Class can not be translated to XPath. Access properties of '{0}' in the expression instead. </value>
   </data>
+  <data name="OperationHelper_OperationNotFound_2">
+    <value xml:space="preserve">Operation `{0} (arity: {1})` not found. </value>
+  </data>
+  <data name="OperationHelper_OperationNotFound_1">
+    <value xml:space="preserve">Operation `{0}` not found. </value>
+  </data>
+  <data name="OperationHelper_OperationCallAmbiguous_2">
+    <value xml:space="preserve">Call of operation `{0}` (arity: {1}) is ambiguous. </value>
+  </data>
 </root>
