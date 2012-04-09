@@ -54,6 +54,7 @@
 				'prs_F_afterS_oclX-functional.xsl', 
 				'prs_F_beforeS_oclX-functional.xsl', 
 				'prs_F_getDateS_oclX-functional.xsl', 
+				'prs_F_truncS_oclX-functional.xsl', 
 				'prs_F_xorS_oclX-functional.xsl', 
 				'prs_F_checkedS_oclX-functional.xsl', 
 				'prs_F_oclIsInvalidS_oclX-functional.xsl', 
@@ -128,6 +129,7 @@
 				'dS_F_afterS_oclX-functional.xsl', 
 				'dS_F_beforeS_oclX-functional.xsl', 
 				'dS_F_getDateS_oclX-functional.xsl', 
+				'dS_F_truncS_oclX-functional.xsl', 
 				'dS_F_xorS_oclX-functional.xsl', 
 				'dS_F_checkedS_oclX-functional.xsl', 
 				'dS_F_oclIsInvalidS_oclX-functional.xsl', 
@@ -188,6 +190,7 @@
 				'src_F_afterS_oclX-functional.xsl', 
 				'src_F_beforeS_oclX-functional.xsl', 
 				'src_F_getDateS_oclX-functional.xsl', 
+				'src_F_truncS_oclX-functional.xsl', 
 				'src_F_xorS_oclX-functional.xsl', 
 				'src_F_checkedS_oclX-functional.xsl', 
 				'src_F_oclIsInvalidS_oclX-functional.xsl', 
@@ -6832,6 +6835,101 @@
                                     <td width="100%"><pre><span class="tXSLEl">&lt;xsl:function</span><span class="tAN"> name=</span><span class="tAV">"oclDate:getDate"</span><span class="tAN"> as=</span><span class="tAV">"xs:date"</span><span class="tXSLEl">&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"dateTime"</span><span class="tAN"> as=</span><span class="tAV">"xs:dateTime"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:sequence</span><span class="tAN"> select=</span><span class="tAV">"xs:date(format-dateTime($dateTime, '[Y]-[M,2]-[D,2]'))"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+</span><span class="tXSLEl">&lt;/xsl:function&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lR"></td>
+         </tr>
+         <tr>
+            <td class="rt_cBL"></td>
+            <td class="rt_lB"></td>
+            <td class="rt_cBR"></td>
+         </tr>
+      </table><a id="F_truncS_oclX-functional.xsl"></a><div class="cmpT">Function
+         <span class="qname">oclDate:trunc (<span class="fParams">dateTime</span>)</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cTL"></td>
+            <td class="rt_lT"></td>
+            <td class="rt_cTR"></td>
+         </tr>
+         <tr>
+            <td class="rt_lL"></td>
+            <td class="rt_cnt">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Documentation</div>
+                           <div class="flR"><input id="bt_dS_F_truncS_oclX-functional.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('dS_F_truncS_oclX-functional.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="dS_F_truncS_oclX-functional.xsl" style="display:block">
+                              <div>
+                                 <h3>Description</h3>Returns a dateTime value where the time component is truncated.
+                                 <table>
+                                    <tr>
+                                       <h4>Parameters</h4>
+                                       <td class="paramName"><b>dateTime</b></td>
+                                       <td>Input dateTime. </td>
+                                    </tr>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Namespace</td>
+                        <td>http://eXolutio.com/oclX/types/date</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Type</td>
+                        <td>xs:dateTime</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Parameters</div>
+                           <div class="flR"><input id="bt_prs_F_truncS_oclX-functional.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('prs_F_truncS_oclX-functional.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="prs_F_truncS_oclX-functional.xsl" style="display:block">
+                              <table class="attsT">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th>Namespace</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="fCol">dateTime</td>
+                                    <td>No namespace</td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">Import precedence</td>
+                        <td>0</td>
+                     </tr>
+                     <tr>
+                        <td class="fCol">
+                           <div class="flL">Source</div>
+                           <div class="flR"><input id="bt_src_F_truncS_oclX-functional.xsl" type="image" src="img/btM.gif" value="-" onclick="switchState('src_F_truncS_oclX-functional.xsl');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="src_F_truncS_oclX-functional.xsl" style="display:block">
+                              <table class="pWCont">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tXSLEl">&lt;xsl:function</span><span class="tAN"> name=</span><span class="tAV">"oclDate:trunc"</span><span class="tAN"> as=</span><span class="tAV">"xs:dateTime"</span><span class="tXSLEl">&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"dateTime"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:sequence</span><span class="tAN"> select=</span><span class="tAV">"xs:dateTime(xs:date(format-dateTime($dateTime, '[Y]-[M,2]-[D,2]')))"</span><span class="tXSLEl">/&gt;</span><span class="tI">
 </span><span class="tXSLEl">&lt;/xsl:function&gt;</span></pre></td>
                                  </tr>
                               </table>

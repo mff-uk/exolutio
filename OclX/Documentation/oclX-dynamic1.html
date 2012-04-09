@@ -592,7 +592,7 @@
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"varName"</span><span class="tAN"> as=</span><span class="tAV">"xs:string"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"varValue"</span><span class="tAN"> as=</span><span class="tAV">"item()*"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:variable</span><span class="tAN"> name=</span><span class="tAV">"newVar"</span><span class="tAN"> as=</span><span class="tAV">"item()*"</span><span class="tXSLEl">&gt;</span><span class="tI">
-    </span><span class="tXSLEl">&lt;xsl:element</span><span class="tAN"> name=</span><span class="tAV">"{$varName}"</span><span class="tXSLEl">/&gt;</span><span class="tI">
+    </span><span class="tXSLEl">&lt;xsl:element</span><span class="tAN"> name=</span><span class="tAV">"{$varName}"</span><span class="tAN"> validation=</span><span class="tAV">"preserve"</span><span class="tXSLEl">/&gt;</span><span class="tI">
     </span><span class="tC">&lt;!-- use placeholder ##EMPTY to represente empty sequence --&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;xsl:choose</span><span class="tXSLEl">&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;xsl:when</span><span class="tAN"> test=</span><span class="tAV">"count($varValue) eq 0"</span><span class="tXSLEl">&gt;</span><span class="tI">
@@ -602,7 +602,7 @@
         </span><span class="tXSLEl">&lt;xsl:sequence</span><span class="tAN"> select=</span><span class="tAV">"$varValue"</span><span class="tXSLEl">/&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;/xsl:when&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;xsl:otherwise</span><span class="tXSLEl">&gt;</span><span class="tI">
-        </span><span class="tEl">&lt;SEQ</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;SEQ</span><span class="tAN"> xsl:validation=</span><span class="tAV">"preserve"</span><span class="tEl">&gt;</span><span class="tI">
           </span><span class="tXSLEl">&lt;xsl:sequence</span><span class="tAN"> select=</span><span class="tAV">"for $i in $varValue return oclXin:wrap($i, 'ITEM')"</span><span class="tXSLEl">/&gt;</span><span class="tI">
         </span><span class="tEl">&lt;/SEQ&gt;</span><span class="tI">
       </span><span class="tXSLEl">&lt;/xsl:otherwise&gt;</span><span class="tI">
@@ -852,7 +852,7 @@
                                     <td width="100%"><pre><span class="tXSLEl">&lt;xsl:function</span><span class="tAN"> name=</span><span class="tAV">"oclXin:wrap"</span><span class="tXSLEl">&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"value"</span><span class="tAN"> as=</span><span class="tAV">"item()"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;xsl:param</span><span class="tAN"> name=</span><span class="tAV">"text"</span><span class="tAN"> as=</span><span class="tAV">"xs:string"</span><span class="tXSLEl">/&gt;</span><span class="tI">
-  </span><span class="tXSLEl">&lt;xsl:element</span><span class="tAN"> name=</span><span class="tAV">"{$text}"</span><span class="tXSLEl">&gt;</span><span class="tI">
+  </span><span class="tXSLEl">&lt;xsl:element</span><span class="tAN"> name=</span><span class="tAV">"{$text}"</span><span class="tAN"> validation=</span><span class="tAV">"preserve"</span><span class="tXSLEl">&gt;</span><span class="tI">
     </span><span class="tXSLEl">&lt;xsl:sequence</span><span class="tAN"> select=</span><span class="tAV">"$value"</span><span class="tXSLEl">/&gt;</span><span class="tI">
   </span><span class="tXSLEl">&lt;/xsl:element&gt;</span><span class="tI">
 </span><span class="tXSLEl">&lt;/xsl:function&gt;</span></pre></td>
