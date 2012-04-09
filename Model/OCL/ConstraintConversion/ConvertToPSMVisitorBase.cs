@@ -119,9 +119,9 @@ namespace Exolutio.Model.OCL.ConstraintConversion
                  * whether it is really a restriction
                  */ 
                 List<PSMAssociation> candidatesAssociations = currentMember.ChildPSMAssociations.Where(a => allowNonTree || !a.IsNonTreeAssociation).ToList();
-                PSMAssociationMember parent = currentMember.ParentAssociation.Parent;
+                PSMAssociationMember parent = currentMember.ParentAssociation != null ? currentMember.ParentAssociation.Parent : null;
 
-                if (canGoToParent && !(parent is PSMSchemaClass))
+                if (parent != null && canGoToParent && !(parent is PSMSchemaClass))
                 {
                     bool candidateParent = true;
                     if (currentMember.ParentAssociation.Interpretation != null)
@@ -182,6 +182,10 @@ namespace Exolutio.Model.OCL.ConstraintConversion
                 Debug.Assert(currentMember == null);
                 PIMPathVariableStep pathVariableStep = (PIMPathVariableStep)currentStep;
                 IEnumerable<PSMClass> candidates = TargetPSMSchema.PSMClasses.Where(c => c.Interpretation == pimPath.StartingClass);
+                if (!VariableClassMappings.ContainsKey(pathVariableStep.Variable))
+                {
+                    return false;
+                }
                 candidates = candidates.Intersect(VariableClassMappings[pathVariableStep.Variable]);
                 bool found = false;
                 List<PSMClass> eliminatedCandidates = new List<PSMClass>();

@@ -49,6 +49,7 @@ namespace Exolutio.View
         {
             DisplayedFileType = displayedFileType;
             FileContents = fileContents;
+            tbDocument.WordWrap = true;
             Init();
         }
 
@@ -106,6 +107,12 @@ namespace Exolutio.View
             set { 
                 tbDocument.Clear();
                 tbDocument.Text = value; }
+        }
+
+        public bool WordWrap
+        {
+            get { return tbDocument.WordWrap; }
+            set { tbDocument.WordWrap = value; }
         }
 
         public void Init()

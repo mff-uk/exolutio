@@ -13,10 +13,10 @@ echo in this batch file accordingly.
 echo _
 echo _
 
-Transform.exe -s:%2   -o:%21 -xsl:iso_dsdl_include.xsl 
-Transform.exe -s:%21  -o:%22 -xsl:iso_abstract_expand.xsl 
-Transform.exe -s:%22  -o:%23 -xsl:iso_svrl_for_xslt2.xsl allow-foreign=true
-Transform.exe -s:%23  -o:%24 -xsl:oclx_include.xsl functional=true oclx-import-href=oclX-functional.xsl
-Transform.exe -s:%1 -o:%3 -xsl:%24
+%java -jar D:\Install\XML\Saxon\saxon9ee.jar -s:%2   -o:%21 -xsl:iso_dsdl_include.xsl 
+%java -jar D:\Install\XML\Saxon\saxon9ee.jar -s:%21  -o:%22 -xsl:iso_abstract_expand.xsl 
+%java -jar D:\Install\XML\Saxon\saxon9ee.jar -s:%22  -o:%23 -xsl:iso_svrl_for_xslt2.xsl allow-foreign=true
+%java -jar D:\Install\XML\Saxon\saxon9ee.jar -s:%23  -o:%24 -xsl:oclx_include.xsl functional=true oclx-import-href=oclX-functional.xsl
+java -jar D:\Install\XML\Saxon\saxon9ee.jar -sa -s:%1 -o:%3 -xsl:%24
 
 

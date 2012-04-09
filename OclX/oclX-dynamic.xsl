@@ -595,6 +595,15 @@ documentation of <doc:i>oclX:evaluate</doc:i> for more information.">
   </xsl:function>
   
   <doc:doc>
+    <doc:desc>Returns a dateTime value where the time component is truncated.</doc:desc>
+    <doc:param name="dateTime">Input dateTime. </doc:param>
+  </doc:doc>
+  <xsl:function name="oclDate:trunc" as="xs:dateTime">
+    <xsl:param name="dateTime" />
+    <xsl:sequence select="xs:dateTime(xs:date(format-dateTime($dateTime, '[Y]-[M,2]-[D,2]')))"/>
+  </xsl:function>
+  
+  <doc:doc>
     <doc:desc>
       <doc:p>Dynamically evaluates an expression passed as string. The expression can contain
         variables defined in <doc:i>variables</doc:i>. The function is used internally by many

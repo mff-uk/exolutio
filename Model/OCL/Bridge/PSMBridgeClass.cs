@@ -96,6 +96,12 @@ namespace Exolutio.Model.OCL.Bridge {
                 }
             }
 
+            // allInstances
+            {
+                Operation allInstancesOp = new Operation(@"allInstances", true, this);
+                Operations.Add(allInstancesOp);
+            }
+
             //parent
             PSM.PSMAssociation parentAss = PSMSource.ParentAssociation;
             if (parentAss != null) {

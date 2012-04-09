@@ -1,8 +1,7 @@
 <tournaments
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"   
-  
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="TournamentsSchedule.xsd"
   >
-  <!--xsi:noNamespaceSchemaLocation="TournamentsSchedule.xsd"-->
   <tournament>
     <name>West PRO</name>
     <start>2012-01-01</start>

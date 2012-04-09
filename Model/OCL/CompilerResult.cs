@@ -50,13 +50,15 @@ namespace Exolutio.Model.OCL {
                         foreach (Match match in matchCollection)
                         {
                             SubExpressionInfo subInfo = new SubExpressionInfo();
-                            subInfo.Parsed = false; 
+                            subInfo.Parsed = false;
                             try
                             {
-                                VariableDeclaration varSelf = new VariableDeclaration(constraint.Self.Name, constraint.Context, null);
+                                VariableDeclaration varSelf = new VariableDeclaration(constraint.Self.Name,
+                                                                                      constraint.Context, null);
                                 Environment nsEnv = new NamespaceEnvironment(this.Library.RootNamespace);
                                 Environment classifierEnv = nsEnv.CreateFromClassifier(constraint.Context, varSelf);
-                                Environment selfEnv = classifierEnv.AddElement(constraint.Self.Name, constraint.Context, varSelf, true);
+                                Environment selfEnv = classifierEnv.AddElement(constraint.Self.Name, constraint.Context,
+                                                                               varSelf, true);
                                 if (match.Groups.Count >= 1)
                                 {
                                     subInfo.MessageStartIndex = match.Groups[1].Index;
@@ -64,11 +66,12 @@ namespace Exolutio.Model.OCL {
                                     string subExpression = match.Groups[1].Value;
                                     subInfo.PartAsString = subExpression;
                                     ExpressionCompilerResult r =
-                                        compiler.CompileStandAloneExpression(subExpression, this.Library.TypeTable, selfEnv);
+                                        compiler.CompileStandAloneExpression(subExpression, this.Library.TypeTable,
+                                                                             selfEnv);
                                     subInfo.SubExpression = r.Expression;
                                     subInfo.SubExpression.IsMessageInlinedSubexpression = true;
                                     if (!r.Errors.HasError)
-                                        subInfo.Parsed = true; 
+                                        subInfo.Parsed = true;
                                 }
                             }
                             catch
@@ -78,47 +81,50 @@ namespace Exolutio.Model.OCL {
                             invariant.MessageSubExpressions.Add(subInfo);
                         }
 
-                        List<SubExpressionInfo> tmpList = invariant.MessageSubExpressions.ToList();
-                        int writeIndex = 0; 
-                        for (int readIndex = 0; readIndex <= tmpList.Count; readIndex++, writeIndex++)
+                        if (invariant.MessageSubExpressions.Count != 0)
                         {
-                            int partStartIndex;
-                            int partEndIndex;
-                            if (readIndex == 0 && tmpList[readIndex].MessageStartIndex == 0)
+                            List<SubExpressionInfo> tmpList = invariant.MessageSubExpressions.ToList();
+                            int writeIndex = 0;
+                            for (int readIndex = 0; readIndex <= tmpList.Count; readIndex++, writeIndex++)
                             {
-                                continue;
-                            }
+                                int partStartIndex;
+                                int partEndIndex;
+                                if (readIndex == 0 && tmpList[readIndex].MessageStartIndex == 0)
+                                {
+                                    continue;
+                                }
 
-                            bool isFirst = readIndex == 0;
-                            bool isLast = readIndex == tmpList.Count; 
+                                bool isFirst = readIndex == 0;
+                                bool isLast = readIndex == tmpList.Count;
 
-                            if (isFirst)
-                            {
-                                partStartIndex = 0;
-                            }
-                            else
-                            {
-                                partStartIndex = tmpList[readIndex - 1].MessageEndIndex + 1;
-                            }
-                            
-                            if (!isLast)
-                            {
-                                partEndIndex = tmpList[readIndex].MessageStartIndex - 1;
-                            }
-                            else
-                            {
-                                partEndIndex = message.Length; 
-                            }
+                                if (isFirst)
+                                {
+                                    partStartIndex = 0;
+                                }
+                                else
+                                {
+                                    partStartIndex = tmpList[readIndex - 1].MessageEndIndex + 1;
+                                }
 
-                            if (partEndIndex - partStartIndex > 1)
-                            {
-                                string messagePart = message.Substring(partStartIndex, partEndIndex - partStartIndex);
-                                SubExpressionInfo partInfo = new SubExpressionInfo();
-                                partInfo.MessageStartIndex = partStartIndex;
-                                partInfo.MessageEndIndex = partEndIndex;
-                                partInfo.PartAsString = messagePart; 
-                                invariant.MessageSubExpressions.Insert(writeIndex, partInfo);
-                                writeIndex++;
+                                if (!isLast)
+                                {
+                                    partEndIndex = tmpList[readIndex].MessageStartIndex - 1;
+                                }
+                                else
+                                {
+                                    partEndIndex = message.Length;
+                                }
+
+                                if (partEndIndex - partStartIndex > 1)
+                                {
+                                    string messagePart = message.Substring(partStartIndex, partEndIndex - partStartIndex);
+                                    SubExpressionInfo partInfo = new SubExpressionInfo();
+                                    partInfo.MessageStartIndex = partStartIndex;
+                                    partInfo.MessageEndIndex = partEndIndex;
+                                    partInfo.PartAsString = messagePart;
+                                    invariant.MessageSubExpressions.Insert(writeIndex, partInfo);
+                                    writeIndex++;
+                                }
                             }
                         }
                     }

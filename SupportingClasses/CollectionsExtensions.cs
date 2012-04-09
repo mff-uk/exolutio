@@ -201,6 +201,28 @@ namespace Exolutio.SupportingClasses
             list.Insert(0, item);
         }
 
+        public static bool TransitiveTrue<T>(this IEnumerable<T> collection, Func<T, T, bool> predicate)
+        {
+            int i = 0;
+            T prev = default(T);
+            foreach (T current in collection)
+            {
+                if (i == 0)
+                {
+                    prev = current;
+                    i++;
+                    continue;
+                }
+
+                if (!predicate(prev, current))
+                    return false; 
+
+                prev = current;
+                i++;
+            }
+            return true; 
+        }
+
 #if SILVERLIGHT
         public static void RemoveAll<TValue>(this List<TValue> list, Func<TValue, bool> predicate)
         {

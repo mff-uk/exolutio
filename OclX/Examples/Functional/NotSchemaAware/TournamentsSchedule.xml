@@ -27,6 +27,6 @@
     <end>dictum</end>
     <requiredQualificationPoints>4</requiredQualificationPoints>
     <maxNumPlayers>24</maxNumPlayers>
-    <qualification open="false" />
+    <qualification open="true" />
   </tournament>
 </tournaments>

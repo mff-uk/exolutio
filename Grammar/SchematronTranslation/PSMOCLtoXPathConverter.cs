@@ -321,7 +321,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
     {
         public override SubexpressionTranslations.EContextVariableReplacementMode ContextVariableReplacementMode
         {
-            get { return SubexpressionTranslations.EContextVariableReplacementMode.AnyContextVariable; }
+            get { return SubexpressionTranslations.EContextVariableReplacementMode.OutermostContextOnly; }
         }
 
         private readonly Dictionary<string, Action<IteratorExp>> predefinedIteratorExpressionRewritings = new Dictionary<string, Action<IteratorExp>>();

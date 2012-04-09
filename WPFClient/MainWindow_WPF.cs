@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows;
+using System.Windows.Forms;
 using System.Xml.Linq;
 using Exolutio.Model;
 using Exolutio.SupportingClasses;
@@ -59,13 +60,14 @@ namespace Exolutio.WPFClient
 
             if (Environment.MachineName.Contains("TRUPIK"))
             {
-                if (System.Windows.Forms.Screen.AllScreens.Length > 1)
+                if (Screen.AllScreens.Length > 1)
                 {
                     this.WindowState = WindowState.Normal;
-                    this.Left = System.Windows.Forms.Screen.AllScreens[0].Bounds.X;
-                    this.Top = System.Windows.Forms.Screen.AllScreens[0].Bounds.Y;
-                    this.Width = System.Windows.Forms.Screen.AllScreens[0].Bounds.Width;
-                    this.Height = System.Windows.Forms.Screen.AllScreens[0].Bounds.Height;
+                    Screen smallerScreen = Screen.AllScreens.OrderBy(s => s.Bounds.Width).First();
+                    this.Left = smallerScreen.Bounds.X;
+                    this.Top = smallerScreen.Bounds.Y;
+                    this.Width = smallerScreen.Bounds.Width;
+                    this.Height = smallerScreen.Bounds.Height;
                 }
             }
         }

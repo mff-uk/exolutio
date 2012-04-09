@@ -19,7 +19,6 @@ using Exolutio.Model;
 using Exolutio.Controller;
 using Exolutio.Model.PSM;
 using Exolutio.SupportingClasses;
-using cmdDeletePIMAttribute = Exolutio.Controller.Commands.Atomic.PIM.MacroWrappers.cmdDeletePIMAttribute;
 using Exolutio.Controller.Commands.Atomic.MacroWrappers;
 
 namespace Exolutio.View

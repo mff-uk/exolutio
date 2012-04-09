@@ -20,7 +20,12 @@
 					<Label Padding="2">Save to file</Label>
 				</StackPanel>
 			</Button>
-			<Button Click="bRefresh_Click" Name="bRefresh">
+            <ToggleButton Name="bWordWrap" Checked="bWordWrap_Toggled" IsChecked="True">
+                <StackPanel Orientation="Horizontal">                    
+                    <Label Padding="2">Word Wrap</Label>
+                </StackPanel>
+            </ToggleButton>
+            <Button Click="bRefresh_Click" Name="bRefresh">
 				<StackPanel Orientation="Horizontal">
 					<Image Source="{StaticResource refresh}" Height="16" Margin="2"></Image>
 					<Label Padding="2">Refresh</Label>
@@ -59,19 +64,20 @@
 			<Grid.ColumnDefinitions >
 				<ColumnDefinition Width="*"/>
 				<ColumnDefinition Width="Auto" />
-				<ColumnDefinition Width="*" Name="columnAdditional"/>
+				<ColumnDefinition Width="Auto" Name="columnAdditional"/>
 			</Grid.ColumnDefinitions>
 			<ev:FileView Name="fileView" Grid.Row="0" Grid.Column="0">
 
 			</ev:FileView>
-			<GridSplitter Grid.Column="1" Grid.Row="0"
-				ResizeDirection="Columns"
+			<GridSplitter Grid.Column="1" Grid.Row="0" ResizeDirection="Columns" Name="additionalContentSplitter"
 				Width="3" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0"
 				/>
-			<TabControl Grid.Row="0" Grid.Column="2" Visibility="Collapsed" Name="tcAdditional">
-
-			</TabControl>
-		</Grid>
+            <Expander Grid.Row="0" Grid.Column="2" ExpandDirection="Left" IsExpanded="True" Collapsed="Expander_Collapsed" Expanded="Expander_Expanded" >
+			    <TabControl Visibility="Visible" Name="tcAdditional">
+                    
+			    </TabControl>
+            </Expander>
+        </Grid>
 		<!--</StackPanel>-->
 		<Expander Header="Translation results:"  MaxHeight="130"
 								  Name="expander1" Grid.Row="2"

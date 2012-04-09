@@ -12,10 +12,10 @@
   <xsl:function name="oclXin:appendVarToSequence" as="item()*">
     <xsl:param name="sequence" as="item()*"/>
     <xsl:param name="varName" as="xs:string"/>
-    <xsl:param name="varValue" as="item()*" />
+    <xsl:param name="varValue" as="item()*" />    
     
     <xsl:variable name="newVar" as="item()*">
-      <xsl:element name="{$varName}"/>
+      <xsl:element name="{$varName}" validation="preserve"/>
       <!-- use placeholder ##EMPTY to represente empty sequence -->
       <xsl:choose>
         <xsl:when test="count($varValue) eq 0">
@@ -25,7 +25,7 @@
           <xsl:sequence select="$varValue" />
         </xsl:when>
         <xsl:otherwise>
-          <SEQ>
+          <SEQ xsl:validation="preserve">
             <xsl:sequence select="for $i in $varValue return oclXin:wrap($i, 'ITEM')" />
           </SEQ>
         </xsl:otherwise>
@@ -57,7 +57,7 @@
   <xsl:function name="oclXin:wrap">
     <xsl:param name="value" as="item()" />
     <xsl:param name="text" as="xs:string"/>
-    <xsl:element name="{$text}">
+    <xsl:element name="{$text}" validation="preserve">
       <xsl:sequence select="$value" />
     </xsl:element>
   </xsl:function>

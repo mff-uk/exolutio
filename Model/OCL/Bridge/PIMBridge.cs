@@ -57,7 +57,12 @@ namespace Exolutio.Model.OCL.Bridge {
             date.Operations.Add(new Operation("after", true, TypesTable.Library.Boolean, new Parameter[] { new Parameter("time", date) }));
             date.Operations.Add(new Operation("before", true, TypesTable.Library.Boolean, new Parameter[] { new Parameter("time", date) }));
             date.Operations.Add(new Operation("equals", true, TypesTable.Library.Boolean, new Parameter[] { new Parameter("time", date) }));
-            date.Operations.Add(new Operation("<=", true, TypesTable.Library.Boolean, new Parameter[] { new Parameter("time", date) }));
+            date.Operations.Add(new Operation("trunc", true, date, new Parameter[] { }));
+            date.Operations.Add(new Operation("=", true, TypesTable.Library.Boolean, new Parameter[] { new Parameter("other", date) }));
+            date.Operations.Add(new Operation("<=", true, TypesTable.Library.Boolean, new Parameter[] { new Parameter("other", date) }));
+            date.Operations.Add(new Operation("<", true, TypesTable.Library.Boolean, new Parameter[] { new Parameter("other", date) }));
+            date.Operations.Add(new Operation(">", true, TypesTable.Library.Boolean, new Parameter[] { new Parameter("other", date) }));
+            date.Operations.Add(new Operation(">=", true, TypesTable.Library.Boolean, new Parameter[] { new Parameter("other", date) }));
 
         //    TypesTable.Library.RootNamespace.NestedClassifier.Add(date);
             TypesTable.RegisterType(date);

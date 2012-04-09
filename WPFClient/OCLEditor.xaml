@@ -12,7 +12,8 @@
             <Button Content="Rename" Click="Rename_Click" Margin="3" />
             <Label Content="Scripts:" Margin="3" />
             <ComboBox Height="23" Name="cbScripts" Width="136" SelectionChanged="cbScripts_SelectionChanged" Margin="3" DisplayMemberPath="Name"  />
-            <Button Content="AST" Height="23" Name="button3" Width="75" Click="button3_Click" />
+            <Button Content="AST" Height="23" Name="button3" Width="75" Click="button3_Click" Margin="3" />
+            <Button Content="Save variants" Height="23" Name="bSaveVariants" Width="98" Margin="3" Click="bSaveVariants_Click" />
         </StackPanel>
         <!--<TextBox Name="textBox1" AcceptsReturn="True" KeyUp="textBox1_KeyUp" />-->
         <avalonEdit:TextEditor
