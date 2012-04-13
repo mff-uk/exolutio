@@ -17,10 +17,13 @@ namespace Exolutio.Controller.Commands.Complex.PIM
         [Scope(ScopeAttribute.EScope.PIMClass)]
         public Guid PIMClassGuid { get; set; }
 
+        [GeneratedIDArgument("PSMSchemaClassGuid", typeof(PSMSchemaClass))]
         public Guid PSMSchemaClassGuid { get; set; }
 
+        [GeneratedIDArgument("RootGuid", typeof(PSMAssociationMember))]
         public Guid RootGuid { get; set; }
 
+        [GeneratedIDArgument("AssociationGuid", typeof(PIMAssociation))]
         public Guid AssociationGuid { get; set; }
 
         public cmdDerivePSMRoot()
@@ -48,7 +51,7 @@ namespace Exolutio.Controller.Commands.Complex.PIM
             if (SchemaGuid == Guid.Empty)
             {
                 if (PSMSchemaClassGuid == Guid.Empty) PSMSchemaClassGuid = Guid.NewGuid();
-                SchemaGuid = Guid.NewGuid();
+                if (SchemaGuid == Guid.Empty) SchemaGuid = Guid.NewGuid();
                 Commands.Add(new acmdNewPSMSchema(Controller) { SchemaGuid = SchemaGuid, SchemaClassGuid = PSMSchemaClassGuid });
                 Commands.Add(new acmdNewPSMDiagram(Controller) { SchemaGuid = SchemaGuid });
             }

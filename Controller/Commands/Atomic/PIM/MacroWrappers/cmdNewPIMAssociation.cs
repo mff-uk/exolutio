@@ -6,12 +6,23 @@ using Exolutio.Model;
 using Exolutio.Model.PIM;
 using Exolutio.Controller.Commands.Atomic;
 using Exolutio.Controller.Commands.Atomic.PIM;
+using Exolutio.Model.PSM;
 
 namespace Exolutio.Controller.Commands.Atomic.PIM.MacroWrappers
 {
     [PublicCommand("Create new PIM association", PublicCommandAttribute.EPulicCommandCategory.PIM_atomic)]
     public class cmdNewPIMAssociation : MacroCommand, ICommandWithDiagramParameter
     {
+        [GeneratedIDArgument("AssociationGuid", typeof(PIMAssociation))]
+        public Guid AssociationGuid { get; set; }
+
+        [GeneratedIDArgument("AssociationEnd1Guid", typeof(PIMAssociationEnd))]
+        public Guid AssociationEnd1Guid { get; set; }
+
+        [GeneratedIDArgument("AssociationEnd2Guid", typeof(PIMAssociationEnd))]
+        public Guid AssociationEnd2Guid { get; set; }
+
+        [PublicArgument("Schema", typeof(Schema), CreateControlInEditors = false, AllowNullInput = true)]
         public Guid SchemaGuid { get; set; }
         
         [Scope(ScopeAttribute.EScope.PIMDiagram)]
@@ -44,9 +55,9 @@ namespace Exolutio.Controller.Commands.Atomic.PIM.MacroWrappers
 
         internal override void GenerateSubCommands()
         {
-            Guid AssociationGuid = Guid.NewGuid();
-            Guid AssociationEnd1Guid = Guid.NewGuid();
-            Guid AssociationEnd2Guid = Guid.NewGuid();    
+            if (AssociationGuid == Guid.Empty) AssociationGuid = Guid.NewGuid();
+            if (AssociationEnd1Guid == Guid.Empty) AssociationEnd1Guid = Guid.NewGuid();
+            if (AssociationEnd2Guid == Guid.Empty) AssociationEnd2Guid = Guid.NewGuid();    
             Commands.Add(new acmdNewPIMAssociation(Controller, PIMClassGuid1, AssociationEnd1Guid, PIMClassGuid2, AssociationEnd2Guid, SchemaGuid) { AssociationGuid = AssociationGuid, Propagate = false });
             if (DiagramGuid != Guid.Empty)
             {

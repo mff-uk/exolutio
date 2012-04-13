@@ -21,6 +21,7 @@ namespace Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers
         /// If set before execution, creates a new class with this GUID.
         /// After execution contains GUID of the created class.
         /// </summary>
+        [GeneratedIDArgument("ClassGuid", typeof(PSMClass))]
         public Guid ClassGuid
         {
             get { return classGuid; }

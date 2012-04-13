@@ -24,6 +24,7 @@ namespace Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers
         /// If set before execution, creates a new content model with this GUID.
         /// After execution contains GUID of the created content model.
         /// </summary>
+        [GeneratedIDArgument("ContentModelGuid", typeof(PSMContentModel))]
         public Guid ContentModelGuid
         {
             get { return cmodelGuid; }

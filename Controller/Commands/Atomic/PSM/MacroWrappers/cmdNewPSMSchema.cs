@@ -22,6 +22,7 @@ namespace Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers
         /// If set before execution, creates a new schema with this GUID.
         /// After execution contains GUID of the created schema.
         /// </summary>
+        [GeneratedIDArgument("SchemaGuid", typeof(PSMSchema))]
         public Guid SchemaGuid
         {
             get { return schemaGuid; }
@@ -36,6 +37,7 @@ namespace Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers
         /// If set before execution, creates a new diagram with this GUID.
         /// After execution contains GUID of the created diagram.
         /// </summary>
+        [GeneratedIDArgument("DiagramGuid", typeof(PSMDiagram))]
         public Guid DiagramGuid
         {
             get { return diagramGuid; }
@@ -50,6 +52,7 @@ namespace Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers
         /// If set before execution, creates a new schemaClass with this GUID.
         /// After execution contains GUID of the created schemaClass.
         /// </summary>
+        [GeneratedIDArgument("SchemaClassGuid", typeof(PSMSchemaClass))]
         public Guid SchemaClassGuid
         {
             get { return schemaClassGuid; }
@@ -71,6 +74,5 @@ namespace Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers
             Commands.Add(new acmdNewPSMSchema(Controller) { SchemaGuid = SchemaGuid, SchemaClassGuid = SchemaClassGuid });
             Commands.Add(new acmdNewPSMDiagram(Controller) { SchemaGuid = SchemaGuid, DiagramGuid = DiagramGuid });
         }
-
     }
 }

@@ -12,6 +12,7 @@ namespace Exolutio.Controller.Commands.Atomic.PIM.MacroWrappers
     [PublicCommand("Create new PIM class", PublicCommandAttribute.EPulicCommandCategory.PIM_atomic)]
     public class cmdCreateNewPIMClass : MacroCommand, ICommandWithDiagramParameter
     {
+        [PublicArgument("Schema", typeof(Schema), CreateControlInEditors = false,  AllowNullInput = true)]
         public Guid SchemaGuid { get; set; }
 
         [Scope(ScopeAttribute.EScope.PIMDiagram)]
@@ -24,6 +25,7 @@ namespace Exolutio.Controller.Commands.Atomic.PIM.MacroWrappers
         /// If set before execution, creates a new class with this GUID.
         /// After execution contains GUID of the created class.
         /// </summary>
+        [GeneratedIDArgument("ClassGuid", typeof(PIMClass))]
         public Guid ClassGuid
         {
             get { return classGuid; }

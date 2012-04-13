@@ -24,8 +24,7 @@ namespace Tests.Serialization
             cmdDeletePIMAttribute command = new cmdDeletePIMAttribute(c);
             command.Set(sampleProject.SingleVersion.PIMSchema.PIMAttributes[0]);
 
-            CommandSerializer ser = new CommandSerializer();
-            XDocument document = ser.CreateEmptySerializationDocument();
+            XDocument document = CommandSerializer.CreateEmptySerializationDocument();
             
             //ser.Serialize(command, rootElement);
             //ser.Serialize(command, rootElement);
@@ -42,8 +41,7 @@ namespace Tests.Serialization
             XDocument scriptDocument = new XDocument();
             //scriptDocument.Load("TestCommandSerialization.xml");
 
-            CommandSerializer ser = new CommandSerializer();
-            List<CommandBase> deserializeScript = ser.DeserializeScript(scriptDocument);
+            List<CommandBase> deserializeScript = CommandSerializer.DeserializeDocument(scriptDocument);
 
             Assert.Inconclusive();
         }

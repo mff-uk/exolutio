@@ -4,6 +4,7 @@ using System.Xml.Linq;
 using Exolutio.Controller;
 using Exolutio.Controller.Commands;
 using Exolutio.Dialogs;
+using Exolutio.Model;
 using Exolutio.ResourceLibrary;
 using Exolutio.View;
 using Exolutio.View.Commands;
@@ -185,10 +186,14 @@ namespace Exolutio.WPFClient.Commands
                     bool? sresult = dlg.ShowDialog();
                     if (sresult == true)
                     {
-                        XDocument doc = CommandLogger.GetLoggedDocument();
+                        XDocument doc = CommandLogger.SerializationDocument;
                         doc.Save(dlg.FileName);
                         CommandLogger.StopLogging();
                     }
+                }
+                else
+                {
+                    CommandLogger.StopLogging();
                 }
             }
         }
@@ -279,12 +284,20 @@ namespace Exolutio.WPFClient.Commands
                 ToggleButton = (ToggleButton) parameter;
             }
 
-            CommandBase commandBase = CommandLogger.GetNextCommand();
-            if (commandBase is StackedCommand)
+            CommandBase command = CommandLogger.GetNextCommand();
+            if (command is StackedCommand)
             {
-                ((StackedCommand) commandBase).Controller = Current.Controller;
+                ((StackedCommand) command).Controller = Current.Controller;
+
+                ICommandWithDiagramParameter commandWithDiagramParameter = command as ICommandWithDiagramParameter;
+                if (commandWithDiagramParameter != null && commandWithDiagramParameter.DiagramGuid != Guid.Empty)
+                {
+                    Diagram diagram = Current.Controller.Project.TranslateComponent<Diagram>(commandWithDiagramParameter.DiagramGuid);
+                    if (diagram.Schema != null)
+                        commandWithDiagramParameter.SchemaGuid = diagram.Schema;
+                }
             }
-            commandBase.Execute();
+            command.Execute();
         }
 
         public override bool CanExecute(object parameter = null)

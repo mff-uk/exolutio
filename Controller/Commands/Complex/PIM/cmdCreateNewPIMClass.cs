@@ -12,6 +12,7 @@ namespace Exolutio.Controller.Commands.Complex.PIM
     [PublicCommand("Create new PIM class (complex)", PublicCommandAttribute.EPulicCommandCategory.PIM_complex)]
     public class cmdCreateNewPIMClass : ComposedCommand, ICommandWithDiagramParameter
     {
+        [PublicArgument("Schema", typeof(Schema), CreateControlInEditors = false, AllowNullInput = true)]
         public Guid SchemaGuid { get; set; }
 
         [Scope(ScopeAttribute.EScope.PIMDiagram)]
@@ -21,6 +22,7 @@ namespace Exolutio.Controller.Commands.Complex.PIM
         [PublicArgument("Name", SuggestedValue = "Class")]
         public string Name { get; set; }
 
+        [GeneratedIDArgument("ClassGuid", typeof(PIMClass))]
         public Guid ClassGuid { get; set; }
         
         public cmdCreateNewPIMClass()

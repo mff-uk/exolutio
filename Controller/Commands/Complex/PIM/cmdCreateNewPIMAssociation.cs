@@ -12,10 +12,18 @@ namespace Exolutio.Controller.Commands.Complex.PIM
     [PublicCommand("Create new PIM association (complex)", PublicCommandAttribute.EPulicCommandCategory.PIM_complex)]
     public class cmdCreateNewPIMAssociation : ComposedCommand, ICommandWithDiagramParameter
     {
+        [PublicArgument("Schema", typeof(Schema), CreateControlInEditors = false, AllowNullInput = true)]
         public Guid SchemaGuid { get; set; }
 
+        [GeneratedIDArgument("AssociationGuid", typeof(PIMAssociation))]
         public Guid AssociationGuid { get; set; }
-        
+
+        [GeneratedIDArgument("AssociationEnd1Guid", typeof(PIMAssociationEnd))]
+        private Guid AssociationEnd1Guid { get; set; }
+
+        [GeneratedIDArgument("AssociationEnd2Guid", typeof(PIMAssociationEnd))]
+        private Guid AssociationEnd2Guid { get; set; }
+
         [Scope(ScopeAttribute.EScope.PIMDiagram)]
         [PublicArgument("Diagram", typeof(Diagram), AllowNullInput = true)]
         public Guid DiagramGuid { get; set; }
@@ -75,8 +83,8 @@ namespace Exolutio.Controller.Commands.Complex.PIM
         internal override void GenerateSubCommands()
         {
             if (AssociationGuid == Guid.Empty) AssociationGuid = Guid.NewGuid();
-            Guid AssociationEnd1Guid = Guid.NewGuid();
-            Guid AssociationEnd2Guid = Guid.NewGuid();
+            if (AssociationEnd1Guid == Guid.Empty) AssociationEnd1Guid = Guid.NewGuid();
+            if (AssociationEnd2Guid == Guid.Empty) AssociationEnd2Guid = Guid.NewGuid();
             
             Commands.Add(new acmdNewPIMAssociation(Controller, PIMClassGuid1, AssociationEnd1Guid, PIMClassGuid2, AssociationEnd2Guid, SchemaGuid) { AssociationGuid = AssociationGuid, Propagate = false });
             Commands.Add(new acmdRenameComponent(Controller, AssociationGuid, Name) { Propagate = false });

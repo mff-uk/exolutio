@@ -150,7 +150,7 @@ namespace Exolutio.Controller.Commands.Reflection
         private static List<ParameterDescriptor> GetCommandParameters(Type commandType)
         {
             List<PropertyInfo> parameterProperties
-                = AttributesHelper.FindPropertiesWithAttribute<PublicArgumentAttribute>(commandType);
+                = AttributesHelper.FindPropertiesWithAttribute<CommandArgumentAttribute>(commandType);
 
             List<ParameterDescriptor> result = new List<ParameterDescriptor>();
 
@@ -159,7 +159,7 @@ namespace Exolutio.Controller.Commands.Reflection
                 ParameterDescriptor parameter = new ParameterDescriptor();
                 parameter.ParameterPropertyInfo = parameterProperty;
 
-                PublicArgumentAttribute a;
+                CommandArgumentAttribute a;
                 parameterProperty.TryGetAttribute(out a);
                 parameter.ParameterName = a.ArgumentName;
 
@@ -181,7 +181,8 @@ namespace Exolutio.Controller.Commands.Reflection
                 }
                 
                 parameter.CreateEditorHierarchy = a.CreateEditorHierarchy;
-                
+                parameter.CreateControlInEdtors = a.CreateControlInEditors;
+
                 result.Add(parameter);
             }
 

@@ -66,5 +66,7 @@ namespace Exolutio.Controller.Commands.Reflection
         public bool IsScopeParamater { get; set; }
 
         public bool CreateEditorHierarchy { get; set; }
+
+        public bool CreateControlInEdtors { get; set; }
     }
 }

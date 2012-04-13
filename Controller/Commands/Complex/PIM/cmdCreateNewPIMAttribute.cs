@@ -31,6 +31,7 @@ namespace Exolutio.Controller.Commands.Complex.PIM
         [Scope(ScopeAttribute.EScope.PIMClass)]
         public Guid PIMClassGuid { get; set; }
 
+        [GeneratedIDArgument("AttributeGuid", typeof(PIMAttribute))]
         public Guid AttributeGuid { get; set; }
         
         public cmdCreateNewPIMAttribute()
