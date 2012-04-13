@@ -11,7 +11,7 @@ using Exolutio.Controller.Commands.Atomic.PSM;
 namespace Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers
 {
     [PublicCommand("Rename PSM schema", PublicCommandAttribute.EPulicCommandCategory.PSM_atomic)]
-    public class cmdRenamePSMSchema : MacroCommand
+    public class cmdRenamePSMSchema : WrapperCommand
     {
         [PublicArgument("Schema", typeof(PSMSchema))]
         [Scope(ScopeAttribute.EScope.PSMSchema)]

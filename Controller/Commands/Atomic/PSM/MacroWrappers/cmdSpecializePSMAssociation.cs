@@ -9,7 +9,7 @@ using Exolutio.Model;
 namespace Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers
 {
     [PublicCommand("Specialize PSM association (atomic)", PublicCommandAttribute.EPulicCommandCategory.PSM_atomic)]
-    public class cmdSpecializePSMAssociation : MacroCommand
+    public class cmdSpecializePSMAssociation : WrapperCommand
     {
         [PublicArgument("Association", typeof(PSMAssociation))]
         [Scope(ScopeAttribute.EScope.PSMAssociation)]

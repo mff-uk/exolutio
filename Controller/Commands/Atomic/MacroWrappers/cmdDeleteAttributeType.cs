@@ -9,7 +9,7 @@ using Exolutio.Model;
 
 namespace Exolutio.Controller.Commands.Atomic.MacroWrappers
 {
-    public class cmdDeleteAttributeType : MacroCommand
+    public class cmdDeleteAttributeType : WrapperCommand
     {
         public Guid AttributeTypeGuid { get; set; }
 

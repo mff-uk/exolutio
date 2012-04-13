@@ -110,6 +110,7 @@
     <Compile Include="Commands\Atomic\PSM\MacroWrappers\cmdNewPSMAssociationNonTree.cs" />
     <Compile Include="Commands\Base\AtomicCommand.cs" />
     <Compile Include="Commands\Base\ComposedCommand.cs" />
+    <Compile Include="Commands\Base\WrapperCommand.cs" />
     <Compile Include="Commands\Complex\PSM\cmdGeneralizePSMGeneralization.cs" />
     <Compile Include="Commands\Complex\PIM\cmdDeletePIMGeneralization.cs" />
     <Compile Include="Commands\Atomic\PSM\acmdRenamePSMSchema.cs" />

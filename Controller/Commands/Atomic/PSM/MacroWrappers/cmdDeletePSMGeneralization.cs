@@ -10,7 +10,7 @@ using Exolutio.Controller.Commands.Atomic.PSM;
 namespace Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers
 {
     [PublicCommand("Delete PSM generalization", PublicCommandAttribute.EPulicCommandCategory.PSM_atomic)]
-    public class cmdDeletePSMGeneralization : ComposedCommand
+    public class cmdDeletePSMGeneralization : WrapperCommand
     {
         [PublicArgument("Deleted generalization", typeof(PSMGeneralization))]
         [Scope(ScopeAttribute.EScope.PSMGeneralization)]

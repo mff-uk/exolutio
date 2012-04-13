@@ -11,7 +11,7 @@ using Exolutio.Model.PSM;
 namespace Exolutio.Controller.Commands.Atomic.PIM.MacroWrappers
 {
     [PublicCommand("Create new PIM association", PublicCommandAttribute.EPulicCommandCategory.PIM_atomic)]
-    public class cmdNewPIMAssociation : MacroCommand, ICommandWithDiagramParameter
+    public class cmdNewPIMAssociation : WrapperCommand, ICommandWithDiagramParameter
     {
         [GeneratedIDArgument("AssociationGuid", typeof(PIMAssociation))]
         public Guid AssociationGuid { get; set; }

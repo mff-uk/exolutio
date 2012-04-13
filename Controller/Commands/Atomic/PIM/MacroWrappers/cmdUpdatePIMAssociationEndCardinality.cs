@@ -11,7 +11,7 @@ using Exolutio.Controller.Commands.Atomic.PSM;
 namespace Exolutio.Controller.Commands.Atomic.PIM.MacroWrappers
 {
     [PublicCommand("Update PIM association end cardinality", PublicCommandAttribute.EPulicCommandCategory.PIM_atomic)]
-    public class cmdUpdatePIMAssociationEndCardinality : MacroCommand
+    public class cmdUpdatePIMAssociationEndCardinality : WrapperCommand
     {
         [PublicArgument("PIMAssociationEnd", typeof(PIMAssociationEnd))]
         [Scope(ScopeAttribute.EScope.PIMAssociationEnd)]

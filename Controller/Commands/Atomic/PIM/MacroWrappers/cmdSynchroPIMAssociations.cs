@@ -13,7 +13,7 @@ using Exolutio.Controller.Commands.Complex.PSM;
 namespace Exolutio.Controller.Commands.Atomic.PIM.MacroWrappers
 {
     [PublicCommand("Synchronize two PIMAssociation sets", PublicCommandAttribute.EPulicCommandCategory.PIM_atomic)]
-    public class cmdSynchroPIMAssociations : MacroCommand
+    public class cmdSynchroPIMAssociations : WrapperCommand
     {
         private List<Guid> x1 = new List<Guid>();
         

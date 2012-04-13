@@ -10,7 +10,7 @@ using Exolutio.Model;
 namespace Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers
 {
     [PublicCommand("Create new PSM association", PublicCommandAttribute.EPulicCommandCategory.PSM_atomic)]
-    public class cmdNewPSMAssociation : MacroCommand
+    public class cmdNewPSMAssociation : WrapperCommand
     {
         [PublicArgument("Schema", typeof(PSMSchema))]
         [Scope(ScopeAttribute.EScope.PSMSchema)]

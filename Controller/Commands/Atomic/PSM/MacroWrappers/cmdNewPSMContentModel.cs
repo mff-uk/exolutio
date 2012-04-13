@@ -9,7 +9,7 @@ using Exolutio.Model;
 namespace Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers
 {
     [PublicCommand("Create new PSM content model", PublicCommandAttribute.EPulicCommandCategory.PSM_atomic)]
-    public class cmdNewPSMContentModel : MacroCommand
+    public class cmdNewPSMContentModel : WrapperCommand
     {
         [PublicArgument("Schema", typeof(PSMSchema))]
         [Scope(ScopeAttribute.EScope.PSMSchema)]

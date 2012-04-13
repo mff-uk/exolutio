@@ -11,7 +11,7 @@ using Exolutio.Controller.Commands.Atomic.PSM;
 namespace Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers
 {
     [PublicCommand("Update PSM association cardinality (with propagation)", PublicCommandAttribute.EPulicCommandCategory.PSM_atomic)]
-    public class cmdUpdatePSMAssociationCardinality : MacroCommand
+    public class cmdUpdatePSMAssociationCardinality : WrapperCommand
     {
         [PublicArgument("PSMAssociation", typeof(PSMAssociation))]
         [Scope(ScopeAttribute.EScope.PSMAssociation)]

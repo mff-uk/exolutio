@@ -10,7 +10,7 @@ using Exolutio.Controller.Commands.Atomic.PIM;
 namespace Exolutio.Controller.Commands.Atomic.PIM.MacroWrappers
 {
     [PublicCommand("Create new PIM generalization", PublicCommandAttribute.EPulicCommandCategory.PIM_atomic)]
-    public class cmdNewPIMGeneralization : MacroCommand, ICommandWithDiagramParameter
+    public class cmdNewPIMGeneralization : WrapperCommand, ICommandWithDiagramParameter
     {
         [GeneratedIDArgument("GeneralizationGuid", typeof(PIMGeneralization))]
         public Guid GeneralizationGuid { get; set; }

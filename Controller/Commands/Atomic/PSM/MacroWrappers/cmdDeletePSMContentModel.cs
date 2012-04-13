@@ -12,7 +12,7 @@ namespace Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers
     /// Atomic operation that deletes the content model and moves its associations to a parent PSMAssociationMember
     /// </summary>
     [PublicCommand("Delete PSM content model", PublicCommandAttribute.EPulicCommandCategory.PSM_atomic)]
-    public class cmdDeletePSMContentModel : MacroCommand
+    public class cmdDeletePSMContentModel : WrapperCommand
     {
         [PublicArgument("Content Model", typeof(PSMContentModel))]
         [Scope(ScopeAttribute.EScope.PSMContentModel)]

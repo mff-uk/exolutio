@@ -9,7 +9,7 @@ using Exolutio.Model;
 namespace Exolutio.Controller.Commands.Atomic.PIM.MacroWrappers
 {
     [PublicCommand("Move PIM association end to neighboring PIM Class", PublicCommandAttribute.EPulicCommandCategory.PIM_atomic)]
-    public class cmdMoveAssociationEnd : MacroCommand
+    public class cmdMoveAssociationEnd : WrapperCommand
     {
         [PublicArgument("PIMAssociationEnd", typeof(PIMAssociationEnd))]
         [Scope(ScopeAttribute.EScope.PIMAssociationEnd)]

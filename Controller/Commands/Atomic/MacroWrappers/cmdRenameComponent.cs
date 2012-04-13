@@ -11,7 +11,7 @@ using Exolutio.Controller.Commands.Atomic.PSM;
 namespace Exolutio.Controller.Commands.Atomic.MacroWrappers
 {
     [PublicCommand("Rename component", PublicCommandAttribute.EPulicCommandCategory.Common_atomic)]
-    public class cmdRenameComponent : MacroCommand
+    public class cmdRenameComponent : WrapperCommand
     {
         [PublicArgument("Component", typeof(Component))]
         [Scope(ScopeAttribute.EScope.PIMAssociation | ScopeAttribute.EScope.PIMClass | ScopeAttribute.EScope.PIMAttribute | ScopeAttribute.EScope.PIMAssociationEnd

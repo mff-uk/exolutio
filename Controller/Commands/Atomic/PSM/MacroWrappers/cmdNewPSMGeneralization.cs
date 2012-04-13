@@ -11,7 +11,7 @@ using Exolutio.Controller.Commands.Reflection;
 namespace Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers
 {
     [PublicCommand("Create new PSM generalization", PublicCommandAttribute.EPulicCommandCategory.PSM_atomic)]
-    public class cmdNewPSMGeneralization : MacroCommand
+    public class cmdNewPSMGeneralization : WrapperCommand
     {
         [GeneratedIDArgument("GeneralizationGuid", typeof(PSMGeneralization))]
         public Guid GeneralizationGuid { get; set; }

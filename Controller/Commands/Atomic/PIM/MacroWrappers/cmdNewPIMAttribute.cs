@@ -10,7 +10,7 @@ using Exolutio.Controller.Commands.Atomic.PIM;
 namespace Exolutio.Controller.Commands.Atomic.PIM.MacroWrappers
 {
     [PublicCommand("Create new PIM attribute", PublicCommandAttribute.EPulicCommandCategory.PIM_atomic)]
-    public class cmdNewPIMAttribute : MacroCommand
+    public class cmdNewPIMAttribute : WrapperCommand
     {
         [PublicArgument("PIMClass", typeof(PIMClass))]
         [Scope(ScopeAttribute.EScope.PIMClass)]

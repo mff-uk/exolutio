@@ -9,7 +9,7 @@ using Exolutio.Model;
 namespace Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers
 {
     [PublicCommand("Generalize PSM generalization (atomic)", PublicCommandAttribute.EPulicCommandCategory.PSM_atomic)]
-    public class cmdGeneralizePSMGeneralization : MacroCommand
+    public class cmdGeneralizePSMGeneralization : WrapperCommand
     {
         [PublicArgument("Generalization", typeof(PSMGeneralization))]
         [Scope(ScopeAttribute.EScope.PSMGeneralization)]

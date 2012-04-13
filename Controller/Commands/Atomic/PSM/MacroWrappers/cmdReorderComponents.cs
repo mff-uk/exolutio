@@ -4,7 +4,7 @@ using Exolutio.Model;
 
 namespace Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers
 {
-    public class cmdReorderComponents<TComponentType> : MacroCommand where TComponentType : ExolutioObject
+    public class cmdReorderComponents<TComponentType> : WrapperCommand where TComponentType : ExolutioObject
     {
         public UndirectCollection<TComponentType> OwnerCollection { get; set; }
 

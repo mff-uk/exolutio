@@ -9,7 +9,7 @@ using Exolutio.Model;
 namespace Exolutio.Controller.Commands.Atomic.PIM.MacroWrappers
 {
     [PublicCommand("Shift PIM attribute", PublicCommandAttribute.EPulicCommandCategory.PIM_atomic)]
-    public class cmdShiftPIMAttribute : MacroCommand
+    public class cmdShiftPIMAttribute : WrapperCommand
     {
         [PublicArgument("Attribute", typeof(PIMAttribute))]
         [Scope(ScopeAttribute.EScope.PIMAttribute)]

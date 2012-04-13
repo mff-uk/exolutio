@@ -10,7 +10,7 @@ using Exolutio.Model;
 namespace Exolutio.Controller.Commands.Atomic.PIM.MacroWrappers
 {
     [PublicCommand("Move PIM Attribute to neighboring PIM Class", PublicCommandAttribute.EPulicCommandCategory.PIM_atomic)]
-    public class cmdMovePIMAttribute : MacroCommand
+    public class cmdMovePIMAttribute : WrapperCommand
     {
         [PublicArgument("PIMAttribute", typeof(PIMAttribute))]
         [Scope(ScopeAttribute.EScope.PIMAttribute)]

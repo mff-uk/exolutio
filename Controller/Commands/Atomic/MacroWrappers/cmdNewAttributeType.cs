@@ -9,7 +9,7 @@ using Exolutio.Model;
 
 namespace Exolutio.Controller.Commands.Atomic.MacroWrappers
 {
-    public class cmdNewAttributeType : MacroCommand
+    public class cmdNewAttributeType : WrapperCommand
     {
         public Guid AttributeTypeGuid { get; set; }
 
