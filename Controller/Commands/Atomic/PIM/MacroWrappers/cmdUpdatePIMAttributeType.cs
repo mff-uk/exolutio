@@ -11,7 +11,7 @@ using Exolutio.Controller.Commands.Atomic.PSM;
 namespace Exolutio.Controller.Commands.Atomic.PIM.MacroWrappers
 {
     [PublicCommand("Update PIM attribute type", PublicCommandAttribute.EPulicCommandCategory.PIM_atomic)]
-    public class cmdUpdatePIMAttributeType : MacroCommand
+    public class cmdUpdatePIMAttributeType : WrapperCommand
     {
         [PublicArgument("Attribute", typeof (PIMAttribute))]
         [Scope(ScopeAttribute.EScope.PIMAttribute)]

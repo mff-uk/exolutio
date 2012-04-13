@@ -10,7 +10,7 @@ using Exolutio.Controller.Commands.Atomic.PIM;
 namespace Exolutio.Controller.Commands.Atomic.PIM.MacroWrappers
 {
     [PublicCommand("Create new PIM class", PublicCommandAttribute.EPulicCommandCategory.PIM_atomic)]
-    public class cmdCreateNewPIMClass : MacroCommand, ICommandWithDiagramParameter
+    public class cmdCreateNewPIMClass : WrapperCommand, ICommandWithDiagramParameter
     {
         [PublicArgument("Schema", typeof(Schema), CreateControlInEditors = false,  AllowNullInput = true)]
         public Guid SchemaGuid { get; set; }

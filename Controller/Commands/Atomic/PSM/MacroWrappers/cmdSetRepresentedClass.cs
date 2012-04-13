@@ -11,7 +11,7 @@ using Exolutio.Model;
 namespace Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers
 {
     [PublicCommand("Set PSM class as structural representative", PublicCommandAttribute.EPulicCommandCategory.PSM_atomic)]
-    public class cmdSetRepresentedClass : MacroCommand
+    public class cmdSetRepresentedClass : WrapperCommand
     {
         [PublicArgument("Representant PSM class", typeof(PSMClass))]
         [Scope(ScopeAttribute.EScope.PSMClass)]

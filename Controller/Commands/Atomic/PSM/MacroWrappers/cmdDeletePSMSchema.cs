@@ -10,7 +10,7 @@ using Exolutio.Model;
 namespace Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers
 {
     [PublicCommand("Delete PSM schema", PublicCommandAttribute.EPulicCommandCategory.PSM_atomic)]
-    public class cmdDeletePSMSchema : MacroCommand
+    public class cmdDeletePSMSchema : WrapperCommand
     {
         [PublicArgument("PSMSchema", typeof(PSMSchema))]
         [Scope(ScopeAttribute.EScope.PSMSchema)]

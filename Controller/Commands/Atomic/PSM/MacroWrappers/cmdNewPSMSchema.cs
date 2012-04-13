@@ -9,7 +9,7 @@ using Exolutio.Model;
 namespace Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers
 {
     [PublicCommand("Create new PSM schema", PublicCommandAttribute.EPulicCommandCategory.PSM_atomic)]
-    public class cmdNewPSMSchema : MacroCommand
+    public class cmdNewPSMSchema : WrapperCommand
     {
         private Guid schemaGuid;
 

@@ -10,7 +10,7 @@ using Exolutio.Controller.Commands.Atomic.PSM;
 namespace Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers
 {
     [PublicCommand("Delete PSM class", PublicCommandAttribute.EPulicCommandCategory.PSM_atomic)]
-    public class cmdDeletePSMClass : MacroCommand
+    public class cmdDeletePSMClass : WrapperCommand
     {
         [PublicArgument("PSMClass", typeof(PSMClass))]
         [Scope(ScopeAttribute.EScope.PSMClass)]

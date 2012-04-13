@@ -13,7 +13,7 @@ using Exolutio.Controller.Commands.Reflection;
 namespace Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers
 {
     [PublicCommand("Synchronize two PSMAssociation sets", PublicCommandAttribute.EPulicCommandCategory.PSM_atomic)]
-    public class cmdSynchroPSMAssociations : MacroCommand
+    public class cmdSynchroPSMAssociations : WrapperCommand
     {
         private List<Guid> x1 = new List<Guid>();
         

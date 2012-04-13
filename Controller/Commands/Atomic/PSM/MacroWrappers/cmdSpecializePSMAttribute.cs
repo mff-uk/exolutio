@@ -9,7 +9,7 @@ using Exolutio.Model;
 namespace Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers
 {
     [PublicCommand("Specialize PSM attribute (atomic)", PublicCommandAttribute.EPulicCommandCategory.PSM_atomic)]
-    public class cmdSpecializePSMAttribute : MacroCommand
+    public class cmdSpecializePSMAttribute : WrapperCommand
     {
         [PublicArgument("Attribute", typeof(PSMAttribute))]
         [Scope(ScopeAttribute.EScope.PSMAttribute)]

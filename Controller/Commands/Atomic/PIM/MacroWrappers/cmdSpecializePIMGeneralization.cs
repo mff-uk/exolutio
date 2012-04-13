@@ -9,7 +9,7 @@ using Exolutio.Model;
 namespace Exolutio.Controller.Commands.Atomic.PIM.MacroWrappers
 {
     [PublicCommand("Specialize PIM generalization (atomic)", PublicCommandAttribute.EPulicCommandCategory.PIM_atomic)]
-    public class cmdSpecializePIMGeneralization : MacroCommand
+    public class cmdSpecializePIMGeneralization : WrapperCommand
     {
         [PublicArgument("Generalization", typeof(PIMGeneralization))]
         [Scope(ScopeAttribute.EScope.PIMGeneralization)]

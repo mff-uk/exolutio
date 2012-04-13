@@ -11,7 +11,7 @@ using Exolutio.Controller.Commands.Atomic.PSM;
 namespace Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers
 {
     [PublicCommand("Update PSM attribute type", PublicCommandAttribute.EPulicCommandCategory.PSM_atomic)]
-    public class cmdUpdatePSMAttributeType : MacroCommand
+    public class cmdUpdatePSMAttributeType : WrapperCommand
     {
         [PublicArgument("Attribute", typeof (PSMAttribute))]
         [Scope(ScopeAttribute.EScope.PSMAttribute)]

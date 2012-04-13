@@ -11,7 +11,7 @@ using Exolutio.Controller.Commands.Atomic.PSM;
 namespace Exolutio.Controller.Commands.Atomic.MacroWrappers
 {
     [PublicCommand("Rename project", PublicCommandAttribute.EPulicCommandCategory.Common_atomic)]
-    public class cmdRenameProject : MacroCommand
+    public class cmdRenameProject : WrapperCommand
     {
         [PublicArgument("New name", ModifiedPropertyName = "Name")]
         public string NewName { get; set; }

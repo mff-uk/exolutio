@@ -12,7 +12,7 @@ namespace Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers
     /// Atomic operation that updates the class' final property
     /// </summary>
     [PublicCommand("Update PSM class final property", PublicCommandAttribute.EPulicCommandCategory.PSM_atomic)]
-    public class cmdUpdatePSMClassFinal : MacroCommand
+    public class cmdUpdatePSMClassFinal : WrapperCommand
     {
         [PublicArgument("PSM Class", typeof(PSMClass))]
         [Scope(ScopeAttribute.EScope.PSMClass)]

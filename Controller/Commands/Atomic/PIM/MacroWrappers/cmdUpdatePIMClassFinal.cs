@@ -13,9 +13,9 @@ namespace Exolutio.Controller.Commands.Atomic.PIM.MacroWrappers
     /// Atomic operation that updates the class' final property
     /// </summary>
     [PublicCommand("Update PIM class final property", PublicCommandAttribute.EPulicCommandCategory.PIM_atomic)]
-    public class cmdUpdatePIMClassFinal : MacroCommand
+    public class cmdUpdatePIMClassFinal : WrapperCommand
     {
-        [PublicArgument("PIM Class", typeof(PIMClass))]
+        [PublicArgument("PIM Class", typeof(PIMClass))] 
         [Scope(ScopeAttribute.EScope.PIMClass)]
         public Guid ClassGuid { get; set; }
 

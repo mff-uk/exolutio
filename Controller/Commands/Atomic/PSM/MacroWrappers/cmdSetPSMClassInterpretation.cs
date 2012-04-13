@@ -11,7 +11,7 @@ using Exolutio.Model;
 namespace Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers
 {
     [PublicCommand("Set PSM classes interpretation", PublicCommandAttribute.EPulicCommandCategory.PSM_atomic)]
-    public class cmdSetPSMClassInterpretation : MacroCommand
+    public class cmdSetPSMClassInterpretation : WrapperCommand
     {
         [PublicArgument("PSM component", typeof(PSMClass))]
         [Scope(ScopeAttribute.EScope.PSMClass)]

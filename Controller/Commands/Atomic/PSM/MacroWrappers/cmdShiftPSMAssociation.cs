@@ -9,7 +9,7 @@ using Exolutio.Model;
 namespace Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers
 {
     [PublicCommand("Shift PSM association", PublicCommandAttribute.EPulicCommandCategory.PSM_atomic)]
-    public class cmdShiftPSMAssociation : MacroCommand
+    public class cmdShiftPSMAssociation : WrapperCommand
     {
         [PublicArgument("Association", typeof(PSMAssociation))]
         [Scope(ScopeAttribute.EScope.PSMAssociation)]

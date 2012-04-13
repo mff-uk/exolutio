@@ -11,7 +11,7 @@ using Exolutio.Controller.Commands.Atomic.PSM;
 namespace Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers
 {
     [PublicCommand("Update PSM attribute XML form", PublicCommandAttribute.EPulicCommandCategory.PSM_atomic)]
-    public class cmdUpdatePSMAttributeXForm : MacroCommand
+    public class cmdUpdatePSMAttributeXForm : WrapperCommand
     {
         [PublicArgument("Attribute", typeof(PSMAttribute))]
         [Scope(ScopeAttribute.EScope.PSMAttribute)]

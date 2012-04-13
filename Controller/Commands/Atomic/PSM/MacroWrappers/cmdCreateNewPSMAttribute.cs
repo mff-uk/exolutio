@@ -10,7 +10,7 @@ using Exolutio.Controller.Commands.Atomic.PSM;
 namespace Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers
 {
     [PublicCommand("Create new PSM attribute", PublicCommandAttribute.EPulicCommandCategory.PSM_atomic)]
-    public class cmdCreateNewPSMAttribute : MacroCommand
+    public class cmdCreateNewPSMAttribute : WrapperCommand
     {
         [PublicArgument("PSMClass", typeof(PSMClass))]
         [Scope(ScopeAttribute.EScope.PSMClass)]

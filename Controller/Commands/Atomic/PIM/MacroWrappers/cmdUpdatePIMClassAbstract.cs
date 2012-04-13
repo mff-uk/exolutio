@@ -12,7 +12,7 @@ namespace Exolutio.Controller.Commands.Atomic.PIM.MacroWrappers
     /// Atomic operation that updates the class' abstract property
     /// </summary>
     [PublicCommand("Update PIM class abstract property", PublicCommandAttribute.EPulicCommandCategory.PIM_atomic)]
-    public class cmdUpdatePIMClassAbstract : MacroCommand
+    public class cmdUpdatePIMClassAbstract : WrapperCommand
     {
         [PublicArgument("PIM Class", typeof(PIMClass))]
         [Scope(ScopeAttribute.EScope.PIMClass)]

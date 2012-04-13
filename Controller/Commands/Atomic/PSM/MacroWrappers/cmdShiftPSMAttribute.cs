@@ -9,7 +9,7 @@ using Exolutio.Model;
 namespace Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers
 {
     [PublicCommand("Shift PSM attribute", PublicCommandAttribute.EPulicCommandCategory.PSM_atomic)]
-    public class cmdShiftPSMAttribute : MacroCommand
+    public class cmdShiftPSMAttribute : WrapperCommand
     {
         [PublicArgument("Attribute", typeof(PSMAttribute))]
         [Scope(ScopeAttribute.EScope.PSMAttribute)]

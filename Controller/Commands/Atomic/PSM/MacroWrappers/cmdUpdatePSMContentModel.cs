@@ -12,7 +12,7 @@ namespace Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers
     /// Atomic operation that updates the content model's type
     /// </summary>
     [PublicCommand("Update PSM content model type", PublicCommandAttribute.EPulicCommandCategory.PSM_atomic)]
-    public class cmdUpdatePSMContentModel : MacroCommand
+    public class cmdUpdatePSMContentModel : WrapperCommand
     {
         [PublicArgument("Content Model", typeof(PSMContentModel))]
         [Scope(ScopeAttribute.EScope.PSMContentModel)]
