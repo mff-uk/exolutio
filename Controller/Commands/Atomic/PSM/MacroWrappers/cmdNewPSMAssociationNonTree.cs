@@ -30,6 +30,7 @@ namespace Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers
         /// If set before execution, creates a new association with this GUID.
         /// After execution contains GUID of the created association.
         /// </summary>
+        [GeneratedIDArgument("AssociationGuid", typeof(PSMAssociation))]
         public Guid AssociationGuid
         {
             get { return associationGuid; }

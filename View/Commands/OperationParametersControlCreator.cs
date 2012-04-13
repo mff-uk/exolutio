@@ -101,6 +101,9 @@ namespace Exolutio.View.Commands
                 PropertyInfo parameterProperty = parameter.ParameterPropertyInfo;
                 List<Control> controlsForProperty = createdControls.CreateSubCollectionIfNeeded(parameterProperty);
 
+                if (!parameter.CreateControlInEdtors)
+                    continue;
+
                 Control _editor = null;
 
                 if (parameterProperty != commandDescriptior.ScopeProperty)

@@ -8,13 +8,6 @@ namespace Exolutio.Controller
 {
     public class CommandLogger
     {
-        public CommandSerializer Serializer { get; set; }
-
-        public CommandLogger()
-        {
-            Serializer = new CommandSerializer();
-        }
-
         public bool LoggingStarted { get; protected set; }
 
         public bool LoggingPaused { get; set; }
@@ -27,9 +20,11 @@ namespace Exolutio.Controller
             if (handler != null) handler();
         }
 
+        public XDocument SerializationDocument { get; private set; }
+
         public void StartLogging()
         {
-            Serializer.CreateEmptySerializationDocument();
+            SerializationDocument = CommandSerializer.CreateEmptySerializationDocument();
 
             LoggingStarted = true;
             InvokeStateChanged();
@@ -59,18 +54,14 @@ namespace Exolutio.Controller
                 return;
             else if (LoggingStarted && !LoggingPaused)
             {
-                Serializer.Serialize(command, isUndo, isRedo);
+                XElement serializedCommand = CommandSerializer.SerializeCommand(command, isUndo, isRedo);
+                SerializationDocument.Root.Add(serializedCommand);
             }
         }
-
-        public XDocument GetLoggedDocument()
-        {
-            return Serializer.SerializationDocument;
-        }
-
+        
         public void LoadLogFile(string fileName)
         {
-            Commands = Serializer.DeserializeDocument(fileName);
+            Commands = CommandSerializer.DeserializeDocument(fileName);
             ReplayStarted = true;
             ReplayIndex = 0;
             InvokeStateChanged();

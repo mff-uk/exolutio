@@ -32,8 +32,10 @@ namespace Exolutio.Controller.Commands.Complex.PSM
         [PublicArgument("Represents XML element")]
         public bool Element { get; set; }
 
+        [PublicArgument("InterpretedAttribute", ComponentType = typeof(PIMAttribute), CreateControlInEditors = false, AllowNullInput = true)]
         public Guid InterpretedAttribute { get; set; }
 
+        [GeneratedIDArgument("AssociationGuid", typeof(PIMAssociation))]
         public Guid AttributeGuid { get; set; }
         
         public cmdCreateNewPSMAttribute()

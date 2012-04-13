@@ -16,6 +16,7 @@ namespace Exolutio.Controller.Commands.Atomic.PIM.MacroWrappers
         [Scope(ScopeAttribute.EScope.PIMClass)]
         public Guid PIMClassGuid { get; set; }
 
+        [GeneratedIDArgument("AttributeGuid", typeof(PIMAttribute))]
         public Guid AttributeGuid { get; set; }
         
         public cmdNewPIMAttribute() {}
@@ -31,7 +32,7 @@ namespace Exolutio.Controller.Commands.Atomic.PIM.MacroWrappers
 
         internal override void GenerateSubCommands()
         {
-            AttributeGuid = Guid.NewGuid();
+            if (AttributeGuid == Guid.Empty) AttributeGuid = Guid.NewGuid();
             Commands.Add(new acmdNewPIMAttribute(Controller, PIMClassGuid, Project.TranslateComponent<PIMClass>(PIMClassGuid).Schema) { AttributeGuid = AttributeGuid });
         }
 

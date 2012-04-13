@@ -13,6 +13,9 @@ namespace Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers
     [PublicCommand("Create new PSM generalization", PublicCommandAttribute.EPulicCommandCategory.PSM_atomic)]
     public class cmdNewPSMGeneralization : MacroCommand
     {
+        [GeneratedIDArgument("GeneralizationGuid", typeof(PSMGeneralization))]
+        public Guid GeneralizationGuid { get; set; }
+
         [PublicArgument("Schema", typeof(PSMSchema))]
         [Scope(ScopeAttribute.EScope.PSMSchema)]
         public Guid SchemaGuid { get; set; }
@@ -46,9 +49,8 @@ namespace Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers
 
         internal override void GenerateSubCommands()
         {
-            Guid GeneralizationGuid = Guid.NewGuid();
+            if (GeneralizationGuid == Guid.Empty) GeneralizationGuid = Guid.NewGuid();
             Commands.Add(new acmdNewPSMGeneralization(Controller, GeneralClass, SpecificClass, SchemaGuid) { GeneralizationGuid = GeneralizationGuid, Propagate = false });
         }
-
     }
 }

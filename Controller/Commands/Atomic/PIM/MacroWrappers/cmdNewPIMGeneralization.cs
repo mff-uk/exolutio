@@ -12,6 +12,10 @@ namespace Exolutio.Controller.Commands.Atomic.PIM.MacroWrappers
     [PublicCommand("Create new PIM generalization", PublicCommandAttribute.EPulicCommandCategory.PIM_atomic)]
     public class cmdNewPIMGeneralization : MacroCommand, ICommandWithDiagramParameter
     {
+        [GeneratedIDArgument("GeneralizationGuid", typeof(PIMGeneralization))]
+        public Guid GeneralizationGuid { get; set; }
+
+        [PublicArgument("Schema", typeof(Schema), CreateControlInEditors = false, AllowNullInput = true)]
         public Guid SchemaGuid { get; set; }
         
         [Scope(ScopeAttribute.EScope.PIMDiagram)]
@@ -45,7 +49,7 @@ namespace Exolutio.Controller.Commands.Atomic.PIM.MacroWrappers
 
         internal override void GenerateSubCommands()
         {
-            Guid GeneralizationGuid = Guid.NewGuid();
+            if (GeneralizationGuid == Guid.Empty) GeneralizationGuid = Guid.NewGuid();
             Commands.Add(new acmdNewPIMGeneralization(Controller, GeneralClass, SpecificClass, SchemaGuid) { GeneralizationGuid = GeneralizationGuid, Propagate = false });
             if (DiagramGuid != Guid.Empty)
             {

@@ -16,6 +16,7 @@ namespace Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers
         [Scope(ScopeAttribute.EScope.PSMClass)]
         public Guid PSMClassGuid { get; set; }
 
+        [GeneratedIDArgument("AttributeGuid", typeof(PSMAttribute))]
         public Guid AttributeGuid { get; set; }
         
         public cmdCreateNewPSMAttribute() { }

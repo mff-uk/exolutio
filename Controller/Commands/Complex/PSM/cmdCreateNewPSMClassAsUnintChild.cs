@@ -20,11 +20,13 @@ namespace Exolutio.Controller.Commands.Complex.PSM
         /// <summary>
         /// Preffered Guid of the new PSM class
         /// </summary>
+        [GeneratedIDArgument("ClassGuid", typeof(PSMClass))]
         public Guid ClassGuid { get; set; }
 
         /// <summary>
         /// Preffered Guid of the new PSM association
         /// </summary>
+        [GeneratedIDArgument("AssociationGuid", typeof(PSMAssociation))]
         public Guid AssociationGuid { get; set; }
 
         public cmdCreateNewPSMClassAsUnintChild()

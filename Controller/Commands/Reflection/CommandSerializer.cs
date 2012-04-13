@@ -1,24 +1,14 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using System.Runtime.Remoting;
 using System.Xml.Linq;
 using Exolutio.Model;
-using Exolutio.Model.PIM;
-using Exolutio.SupportingClasses.Reflection;
 
 namespace Exolutio.Controller.Commands.Reflection
 {
-    public class CommandSerializer
+    public static class CommandSerializer
     {
-        #region reflection
-
-
-
-
-        #endregion
-
         #region instantiation
 
         public static CommandBase CreateCommandObject(string selectedOperationStr)
@@ -51,7 +41,7 @@ namespace Exolutio.Controller.Commands.Reflection
             return commandObject;
         }
 
-        public CommandBase CreateCommand(Controller controller, CommandDescriptor commandDescriptor)
+        public static CommandBase CreateCommand(Controller controller, CommandDescriptor commandDescriptor)
         {
             CommandBase commandObject = CreateCommandObject(commandDescriptor.CommandName);
 
@@ -71,24 +61,25 @@ namespace Exolutio.Controller.Commands.Reflection
             {
                 PropertyInfo propertyInfo = parameter.ParameterPropertyInfo;
                 object value = parameter.ParameterValue;
-
+                if (value == null && parameter.CreateControlInEdtors == false)
+                    continue;
                 propertyInfo.SetValue(commandObject, value, null);
             }
         }
 
         #endregion
 
-        public void Serialize(CommandBase commandBase, bool isUndo, bool isRedo)
+        public static XElement SerializeCommand(CommandBase commandBase, bool isUndo, bool isRedo)
         {
-            SerializeRec(commandBase, true, RootElement, isUndo, isRedo);
+            return SerializeRec(commandBase, true, isUndo, isRedo);
         }
 
-        public void SerializeRec(CommandBase command, bool isInitial, XElement parentElement, bool isUndo, bool isRedo)
+        private static XElement SerializeRec(CommandBase command, bool isInitial, bool isUndo, bool isRedo)
         {
             Type commandType = command.GetType();
             
             XElement commandElement;
-            commandElement = new XElement(exolutioNS + "Command");
+            commandElement = new XElement(SERIALIZATION_NS + "Command");
             if (isInitial)
             {
                 commandElement.Add(new XAttribute("initial", "true"));
@@ -107,18 +98,16 @@ namespace Exolutio.Controller.Commands.Reflection
                 commandElement.Add(new XAttribute("propagation", "true"));
             }
             
-            parentElement.Add(commandElement);
-
             XAttribute nameAttribute = new XAttribute("Name", commandType.Name);
             commandElement.Add(nameAttribute);
 
-            XElement fullNameElement = new XElement(exolutioNS + "FullName");
+            XElement fullNameElement = new XElement(SERIALIZATION_NS + "FullName");
             fullNameElement.Add(new XText(commandType.FullName));
             commandElement.Add(fullNameElement);
 
             if (command.Report != null && !string.IsNullOrEmpty(command.Report.Contents))
             {
-                XElement report = new XElement(exolutioNS + "Report");
+                XElement report = new XElement(SERIALIZATION_NS + "Report");
                 report.Add(new XText(command.Report.Contents));
                 commandElement.Add(report);
             }
@@ -129,39 +118,39 @@ namespace Exolutio.Controller.Commands.Reflection
                 CommandDescriptor commandParametersDescriptors = PublicCommandsHelper.GetCommandDescriptor(commandType);
                 if (commandParametersDescriptors.Parameters.Count > 0)
                 {
-                    XElement parametersElement = new XElement(exolutioNS + "Parameters");
+                    XElement parametersElement = new XElement(SERIALIZATION_NS + "Parameters");
                     commandElement.Add(parametersElement);
                     foreach (ParameterDescriptor parameter in commandParametersDescriptors.Parameters)
                     {
-                        XElement parameterElement = new XElement(exolutioNS + "Parameter");
-                        parameterElement.Add(new XElement(exolutioNS + "Name", parameter.ParameterName));
-                        parameterElement.Add(new XElement(exolutioNS + "PropertyName", parameter.ParameterPropertyName));
+                        XElement parameterElement = new XElement(SERIALIZATION_NS + "Parameter");
+                        parameterElement.Add(new XElement(SERIALIZATION_NS + "Name", parameter.ParameterName));
+                        parameterElement.Add(new XElement(SERIALIZATION_NS + "PropertyName", parameter.ParameterPropertyName));
 
                         object value = parameter.ParameterPropertyInfo.GetValue(command, new object[0]);
                         if (value is Guid)
                         {
                             string idText = value.ToString();
-                            parameterElement.Add(new XElement(exolutioNS + "Value", idText));
+                            parameterElement.Add(new XElement(SERIALIZATION_NS + "Value", idText));
                             if (command is StackedCommand)
                             {
                                 Project p = ((StackedCommand)command).Controller.Project;
                                 ExolutioObject component;
                                 if (p.TryTranslateObject((Guid)value, out component))
                                 {
-                                    parameterElement.Add(new XElement(exolutioNS + "ValueText", component.ToString()));
+                                    parameterElement.Add(new XElement(SERIALIZATION_NS + "ValueText", component.ToString()));
                                 }
                             }
                         }
                         else if (value is ExolutioObject)
                         {
                             string idText = ((ExolutioObject)value).ID.ToString();
-                            parameterElement.Add(new XElement(exolutioNS + "ValueID", idText));
-                            parameterElement.Add(new XElement(exolutioNS + "ValueText", idText));
+                            parameterElement.Add(new XElement(SERIALIZATION_NS + "ValueID", idText));
+                            parameterElement.Add(new XElement(SERIALIZATION_NS + "ValueText", idText));
                         }
                         else
                         {
                             string valueText = value.ToString();
-                            parameterElement.Add(new XElement(exolutioNS + "Value", valueText));
+                            parameterElement.Add(new XElement(SERIALIZATION_NS + "Value", valueText));
                         }
                         parametersElement.Add(parameterElement);
                     }
@@ -172,29 +161,31 @@ namespace Exolutio.Controller.Commands.Reflection
 
             if (command is MacroCommand && ((MacroCommand)command).Commands.Count > 0)
             {
-                XElement subCommandsElement = new XElement(exolutioNS + "SubCommands");
+                XElement subCommandsElement = new XElement(SERIALIZATION_NS + "SubCommands");
                 subCommandsElement.Add(new XAttribute("count", ((MacroCommand)command).Commands.Count));
                 commandElement.Add(subCommandsElement);
                 foreach (CommandBase subCommand in ((MacroCommand)command).Commands)
                 {
-                    SerializeRec(subCommand, false, subCommandsElement, isUndo, isRedo);
+                    SerializeRec(subCommand, false, isUndo, isRedo);
                 }
             }
+
+            return commandElement;
         }
 
-        public CommandBase DeserializeCommand(XElement commandElement)
+        public static CommandBase DeserializeCommand(XElement commandElement)
         {
-            XElement fullNameElement = commandElement.Element(exolutioNS + "FullName");
+            XElement fullNameElement = commandElement.Element(SERIALIZATION_NS + "FullName");
             CommandBase commandObject = CreateCommandObject(fullNameElement.Value);
 
             CommandDescriptor commandParametersDescriptors = PublicCommandsHelper.GetCommandDescriptor(commandObject.GetType());
 
-            foreach (XElement parameterElement in commandElement.Element(exolutioNS + "Parameters").Elements(exolutioNS + "Parameter"))
+            foreach (XElement parameterElement in commandElement.Element(SERIALIZATION_NS + "Parameters").Elements(SERIALIZATION_NS + "Parameter"))
             {
-                string propertyName = parameterElement.Element(exolutioNS + "PropertyName").Value;
+                string propertyName = parameterElement.Element(SERIALIZATION_NS + "PropertyName").Value;
                 ParameterDescriptor parameter = commandParametersDescriptors.GetParameterByPropertyName(propertyName);
                 PropertyInfo propertyInfo = parameter.ParameterPropertyInfo;
-                string stringValue = parameterElement.Element(exolutioNS + "Value").Value;
+                string stringValue = parameterElement.Element(SERIALIZATION_NS + "Value").Value;
                 object value = DeserializePropertyValue(propertyInfo, stringValue);
                 parameter.ParameterValue = value;
             }
@@ -222,48 +213,22 @@ namespace Exolutio.Controller.Commands.Reflection
             }
         }
 
-        public List<CommandBase> DeserializeScript(XDocument document)
+        private static readonly XNamespace SERIALIZATION_NS = @"http://eXolutio.eu/Commands/CommandLog/";
+
+        public static XDocument CreateEmptySerializationDocument()
         {
-            //List<CommandBase> result = new List<CommandBase>();
-
-            //XmlElement root = (XmlElement)document.ChildNodes[1];
-            //foreach (XmlElement commandNode in root.ChildNodes)
-            //{
-            //    CommandBase command = DeserializeCommand(commandNode);
-            //    result.Add(command);
-            //}
-
-            //return result;
-            throw new NotImplementedException("Member CommandSerializer.DeserializeScript not implemented.");
-        }
-
-        public void RunScript(Controller controller, XDocument document)
-        {
-            List<CommandBase> commands = DeserializeScript(document);
-            controller.ExecuteCommands(commands);
-        }
-
-        private static readonly XNamespace exolutioNS = @"http://eXolutio.eu/Commands/CommandLog/";
-
-        public XDocument SerializationDocument { get; private set; }
-        private XElement RootElement { get; set; }
-
-        public XDocument CreateEmptySerializationDocument()
-        {
-            SerializationDocument = new XDocument(new XDeclaration("1.0", "utf-8", null));
+            XDocument serializationDocument = new XDocument(new XDeclaration("1.0", "utf-8", null));
             
-            XElement elCommandLog = new XElement(exolutioNS + "CommandLog");
-            elCommandLog.Add(new XAttribute(XNamespace.Xmlns + "eXoLog", exolutioNS.NamespaceName));
-            SerializationDocument.Add(elCommandLog);
-            RootElement = elCommandLog;
-            return SerializationDocument;
+            XElement elCommandLog = new XElement(SERIALIZATION_NS + "CommandLog");
+            elCommandLog.Add(new XAttribute(XNamespace.Xmlns + "eXoLog", SERIALIZATION_NS.NamespaceName));
+            serializationDocument.Add(elCommandLog);
+            return serializationDocument;
         }
 
-        public IList<CommandBase> DeserializeDocument(string fileName)
+        public static List<CommandBase> DeserializeDocument(XDocument document)
         {
             List<CommandBase> result = new List<CommandBase>();
-            SerializationDocument = XDocument.Load(fileName);
-            foreach (XElement commandElement in SerializationDocument.Element(exolutioNS + "CommandLog").Elements(exolutioNS + "Command"))
+            foreach (XElement commandElement in document.Element(SERIALIZATION_NS + "CommandLog").Elements(SERIALIZATION_NS + "Command"))
             {
                 XAttribute initialAttribute = commandElement.Attribute("initial");
                 if (initialAttribute == null || initialAttribute.Value != "true")
@@ -275,6 +240,12 @@ namespace Exolutio.Controller.Commands.Reflection
             }
 
             return result;
+        }
+
+        public static IList<CommandBase> DeserializeDocument(string fileName)
+        {
+            XDocument document = XDocument.Load(fileName);
+            return DeserializeDocument(document);
         }
     }
 
