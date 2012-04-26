@@ -98,11 +98,12 @@ namespace Exolutio.View.Commands
             for (int index = 0; index < commandDescriptior.Parameters.Count; index++)
             {
                 ParameterDescriptor parameter = commandDescriptior.Parameters[index];
-                PropertyInfo parameterProperty = parameter.ParameterPropertyInfo;
-                List<Control> controlsForProperty = createdControls.CreateSubCollectionIfNeeded(parameterProperty);
+                PropertyInfo parameterProperty = parameter.ParameterPropertyInfo;                
 
                 if (!parameter.CreateControlInEdtors)
                     continue;
+
+                List<Control> controlsForProperty = createdControls.CreateSubCollectionIfNeeded(parameterProperty);
 
                 Control _editor = null;
 
@@ -323,6 +324,11 @@ namespace Exolutio.View.Commands
                 {
                     continue;
                 }
+                if (!parameter.CreateControlInEdtors)
+                {
+                    continue;
+                }
+
                 if (parameterProperty.PropertyType.IsAmong(typeof (Guid), typeof (List<Guid>)))
                 {
                     List<Control> controlsForProperty = createdControls[parameterProperty];
