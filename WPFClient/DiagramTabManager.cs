@@ -116,7 +116,7 @@ namespace Exolutio.WPFClient
         /// </summary>
         private DiagramTab FindTab(Diagram diag)
         {
-            foreach (DiagramTab tab in DockManager.Documents)
+            foreach (DiagramTab tab in DockManager.Documents.OfType<DiagramTab>())
             {
                 if (tab.DiagramView.Diagram == diag)
                 {

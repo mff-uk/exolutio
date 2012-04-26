@@ -34,5 +34,17 @@ namespace System
 
             return predicate((T) item);
         }
+
+        public static bool NotNullAndSatisfies<T>(this T item, Func<T, bool> predicate)
+            where T : class 
+        {
+            if (item == null)
+            {
+                return false; 
+            }
+
+            return predicate(item);
+        }
+
     }
 }
