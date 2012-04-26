@@ -42,6 +42,7 @@ namespace Exolutio.ResourceLibrary
         public const string folder = "folder";
         public const string font = "font";
         public const string generalize = "generalize";
+        public const string gen = "gen";
         public const string GenericDocument = "GenericDocument";
         public const string Group = "Group";
         public const string help = "help";

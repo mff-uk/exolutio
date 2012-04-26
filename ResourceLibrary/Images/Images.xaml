@@ -34,6 +34,7 @@
     <ImageSource x:Key="FolderDownload">FolderDownload.png</ImageSource>
     <ImageSource x:Key="folder">folder.png</ImageSource>
     <ImageSource x:Key="font">font.png</ImageSource>
+    <ImageSource x:Key="gen">gen.png</ImageSource>
     <ImageSource x:Key="generalize">generalize.png</ImageSource>
     <ImageSource x:Key="GenericDocument">GenericDocument.png</ImageSource>
     <ImageSource x:Key="Group">Group.png</ImageSource>

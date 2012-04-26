@@ -27,6 +27,32 @@ namespace Exolutio.Model
 
         private static List<PSMClass> visited;
         private static List<PSMAssociationMember> visitedAM;
+
+        public static IEnumerable<Tuple<PSMClass, IEnumerable<PSMClass>>> GetSpecialClassesWithPaths(this PSMClass psmClass)
+        {
+            List<Tuple<PSMClass, IEnumerable<PSMClass>>> list = psmClass.getSpecialClassesWithPaths(new List<PSMClass>(), true).ToList();
+
+            return list;
+        }
+
+        private static IEnumerable<Tuple<PSMClass, IEnumerable<PSMClass>>> getSpecialClassesWithPaths(this PSMClass psmClass, List<PSMClass> currentPath, bool first = false)
+        {
+            List<Tuple<PSMClass, IEnumerable<PSMClass>>> list = new List<Tuple<PSMClass, IEnumerable<PSMClass>>>();
+
+            if (!first)
+            {
+                currentPath.Add(psmClass);
+                list.Add(new Tuple<PSMClass, IEnumerable<PSMClass>>(psmClass, currentPath));
+            }
+
+            foreach (PSMClass c in psmClass.GeneralizationsAsGeneral.Select<PSMGeneralization, PSMClass>(g => g.Specific))
+            {
+                list.AddRange(c.getSpecialClassesWithPaths(currentPath));
+            }
+            
+            return list;
+        }
+
         
         public static IEnumerable<Tuple<PSMAttribute, IEnumerable<MoveStep>>> GetContextPSMAttributesWithPaths(this PSMClass psmClass)
         {
