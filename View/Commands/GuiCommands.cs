@@ -294,7 +294,7 @@ namespace Exolutio.View.Commands
                 NoScope = true,
                 PIMOnly = true,
                 OpenDialog = true,
-                Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.generalize)
+                Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.gen)
             };
             SplitPIMAttributeCommand = new guiSplitPIMAttribute();
             SplitPIMAssociationCommand = new guiSplitPIMAssociation();
@@ -404,7 +404,7 @@ namespace Exolutio.View.Commands
                                                 NoScope = true,
                                                 PSMOnly = true,
                                                 OpenDialog = true,
-                                                Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.generalize),
+                                                Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.gen),
                                             };
 
             AddPSMChildInterpreted = new guiControllerCommand

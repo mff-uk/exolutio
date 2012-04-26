@@ -1,6 +1,11 @@
 ﻿using System;
 using Exolutio.Model.PIM;
 using Exolutio.Model;
+using System.Collections.Generic;
+using Exolutio.Model.PSM;
+using Exolutio.Controller.Commands.Complex.PSM;
+using System.Linq;
+using Exolutio.Controller.Commands.Atomic.PSM;
 
 namespace Exolutio.Controller.Commands.Atomic.PIM
 {
@@ -60,9 +65,41 @@ namespace Exolutio.Controller.Commands.Atomic.PIM
             return OperationResult.OK;
         }
 
-        /*internal override PropagationMacroCommand PrePropagation()
+        internal override PropagationMacroCommand PrePropagation()
         {
-            
-        }*/
+            PIMAttribute pimAttribute = Project.TranslateComponent<PIMAttribute>(attributeGuid);
+            PIMClass specialPIMClass = Project.TranslateComponent<PIMClass>(specialClassGuid);
+            PIMClass generalPIMClass = pimAttribute.PIMClass;
+            List<PSMAttribute> psmAttributes = pimAttribute.GetInterpretedComponents().Cast<PSMAttribute>().ToList();
+
+            PropagationMacroCommand command = new PropagationMacroCommand(Controller) { CheckFirstOnlyInCanExecute = true };
+            command.Report = new CommandReport("Pre-propagation (specialize PIM attribute)");
+
+            foreach (PSMAttribute a in psmAttributes)
+            {
+                IEnumerable<Tuple<PSMClass, IEnumerable<PSMClass>>> paths = a.PSMClass.GetSpecialClassesWithPaths();
+                if (paths.Any(p => p.Item1.Interpretation == specialPIMClass))
+                //1) there is special PIMClass counterpart -> move there
+                {
+                    IEnumerable<PSMClass> path = paths.First(p => p.Item1.Interpretation == specialPIMClass).Item2;
+                    foreach (PSMClass c in path)
+                    {
+                        command.Commands.Add(new acmdSpecializePSMAttribute(Controller, a, c));
+                    }
+                }
+                else
+                //2) There is none... create. TODO: FIX: multiple attributes in one class => multiple classes
+                {
+                    Guid newClassGuid = Guid.NewGuid();
+                    command.Commands.Add(new acmdNewPSMClass(Controller, a.PSMSchema) { ClassGuid = newClassGuid });
+                    command.Commands.Add(new acmdRenameComponent(Controller, newClassGuid, specialPIMClass.Name));
+                    command.Commands.Add(new acmdSetPSMClassInterpretation(Controller, newClassGuid, specialPIMClass));
+                    command.Commands.Add(new acmdNewPSMGeneralization(Controller, generalPIMClass, newClassGuid, a.PSMSchema));
+                    command.Commands.Add(new acmdSpecializePSMAttribute(Controller, a, newClassGuid));
+                }
+            }
+
+            return command;  
+        }
     }
 }
