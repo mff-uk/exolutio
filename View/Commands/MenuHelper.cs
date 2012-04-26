@@ -88,7 +88,7 @@ namespace Exolutio.View
             guiControllerCommand guiCommandForControllerCommand = guiCommandsForControllerCommands[commandDescriptor.CommandType];
             menuItem.Command = guiCommandForControllerCommand;
             
-            guiCommandForControllerCommand.OpenDialog = commandDescriptor.Parameters.Count > 1;
+            guiCommandForControllerCommand.OpenDialog = commandDescriptor.Parameters.Count(p => p.CreateControlInEdtors) > 1;
             guiCommandForControllerCommand.NoScope = commandDescriptor.Scope == ScopeAttribute.EScope.None;
             
             if (guiCommandForControllerCommand.OpenDialog)
