@@ -94,7 +94,7 @@ namespace Exolutio.Controller.Commands.Atomic.PIM
                     command.Commands.Add(new acmdNewPSMClass(Controller, a.PSMSchema) { ClassGuid = newClassGuid });
                     command.Commands.Add(new acmdRenameComponent(Controller, newClassGuid, specialPIMClass.Name));
                     command.Commands.Add(new acmdSetPSMClassInterpretation(Controller, newClassGuid, specialPIMClass));
-                    command.Commands.Add(new acmdNewPSMGeneralization(Controller, generalPIMClass, newClassGuid, a.PSMSchema));
+                    command.Commands.Add(new acmdNewPSMGeneralization(Controller, a.PSMClass, newClassGuid, a.PSMSchema));
                     command.Commands.Add(new acmdSpecializePSMAttribute(Controller, a, newClassGuid));
                 }
             }
