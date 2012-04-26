@@ -69,6 +69,17 @@ namespace Exolutio.View
 
         private static void DrawConnector(Connector connector, out bool movelabel)
         {
+            /* 
+             * draw connector is sometimes called when the association/generalization is 
+             * being removed from the diagram, in that case, the method returns 
+             * immediately
+             */
+            if (connector.ExolutioCanvas == null)
+            {
+                movelabel = false;
+                return;
+            }
+
             movelabel = false;
             if (connector.StartNode == null || connector.EndNode == null)
                 return;
