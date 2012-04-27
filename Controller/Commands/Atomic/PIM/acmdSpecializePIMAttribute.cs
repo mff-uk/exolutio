@@ -77,6 +77,12 @@ namespace Exolutio.Controller.Commands.Atomic.PIM
 
             foreach (PSMAttribute a in psmAttributes)
             {
+                if (a.PSMClass.Interpretation == null)
+                {
+                    //class without interpretation, maybe including impl.inheritance
+                    command.Commands.Add(new cmdMovePSMAttribute(Controller) { AttributeGuid = a, ClassGuid = a.PSMClass.NearestInterpretedClass() });
+                }
+
                 IEnumerable<Tuple<PSMClass, IEnumerable<PSMClass>>> paths = a.PSMClass.GetSpecialClassesWithPaths();
                 if (paths.Any(p => p.Item1.Interpretation == specialPIMClass))
                 //1) there is special PIMClass counterpart -> move there
@@ -94,7 +100,7 @@ namespace Exolutio.Controller.Commands.Atomic.PIM
                     command.Commands.Add(new acmdNewPSMClass(Controller, a.PSMSchema) { ClassGuid = newClassGuid });
                     command.Commands.Add(new acmdRenameComponent(Controller, newClassGuid, specialPIMClass.Name));
                     command.Commands.Add(new acmdSetPSMClassInterpretation(Controller, newClassGuid, specialPIMClass));
-                    command.Commands.Add(new acmdNewPSMGeneralization(Controller, a.PSMClass, newClassGuid, a.PSMSchema));
+                    command.Commands.Add(new acmdNewPSMGeneralization(Controller, a.PSMClass.NearestInterpretedClass(), newClassGuid, a.PSMSchema));
                     command.Commands.Add(new acmdSpecializePSMAttribute(Controller, a, newClassGuid));
                 }
             }

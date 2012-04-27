@@ -80,7 +80,7 @@ namespace Exolutio.Controller.Commands.Atomic.PIM
                 {
                     if (a.PSMClass.Interpretation == null)
                     {
-                        //classa neinterpret, mozna i s impl.inheritance
+                        //class without interpretation, maybe including impl.inheritance
                         command.Commands.Add(new cmdMovePSMAttribute(Controller) { AttributeGuid = a, ClassGuid = a.PSMClass.NearestInterpretedClass() });
                     }
 
