@@ -188,9 +188,11 @@ namespace Exolutio.Model.OCL.Compiler {
                             .SetCodeSource(new CodeSource(tokenPath[0]));
                     }
                 }
-                else {
+                else 
+                {
                     //35eg
-                    Operation op = expr.Type.LookupOperation(path[0], args.Select(arg => arg.Type));
+                    IEnumerable<Classifier> parameterTypes = args.Select(arg => arg.Type);
+                    Operation op = expr.Type.LookupOperation(path[0], parameterTypes);
                     if (op != null) {
                         return new AST.OperationCallExp(expr, isPre, op, args, Environment)
                             .SetCodeSource(new CodeSource(tokenPath[0]));

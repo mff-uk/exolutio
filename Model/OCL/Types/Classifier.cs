@@ -45,7 +45,7 @@ namespace Exolutio.Model.OCL.Types
             }
         }
 
-        internal  TypesTable.TypesTable TypeTable
+        internal TypesTable.TypesTable TypeTable
         {
             get;
             set;
