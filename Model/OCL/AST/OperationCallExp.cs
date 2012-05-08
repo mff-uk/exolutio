@@ -13,6 +13,8 @@ namespace Exolutio.Model.OCL.AST
     /// </summary>
     public class OperationCallExp : FeatureCallExp
     {
+        public Environment Environment { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
@@ -20,10 +22,13 @@ namespace Exolutio.Model.OCL.AST
         /// <param name="isPre">Is marked by pre</param>
         /// <param name="refOperation">Called operation</param>
         /// <param name="args">Parameters of operation</param>
-        public OperationCallExp(OclExpression source, bool isPre, Operation refOperation, List<OclExpression> args):base(source,isPre,refOperation.ReturnType) {
+        /// <param name="environment">Environment</param>
+        public OperationCallExp(OclExpression source, bool isPre, Operation refOperation, List<OclExpression> args, 
+            Environment environment = null):base(source,isPre,refOperation.ReturnType) {
             this.ReferredOperation = refOperation;
             this.Arguments = args;
-        }
+            this.Environment = environment;
+            }
 
         /// <summary>
         /// The arguments denote the arguments to the operation call. This is only useful when the

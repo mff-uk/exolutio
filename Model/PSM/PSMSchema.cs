@@ -115,7 +115,46 @@ namespace Exolutio.Model.PSM
         {
             return PSMSchemaDefinedTypes.Concat(Project.PSMBuiltInTypes);
         }
-        
+
+        public Dictionary<string, int> GetAllXMLElementNames(bool followRepresentantsToOtherSchemas = false)
+        {
+            if (followRepresentantsToOtherSchemas)
+            {
+                throw new NotImplementedException("Not implemented for followRepresentantsToOtherSchemas == true");
+            }
+            
+            Dictionary<string, int> result = new Dictionary<string, int>();
+            var associationNames = from a in PSMAssociations where a.IsNamed select a.Name  ;
+            var attributeNames = from a in PSMAttributes where a.Element select a.Name;
+            foreach (string name in attributeNames.Concat(associationNames))
+            {
+                if (!result.ContainsKey(name))
+                    result[name] = 1;
+                else
+                    result[name]++;
+            }
+            return result;
+        }
+
+        public Dictionary<string, int> GetAllXMLAttributeNames(bool followRepresentantsToOtherSchemas = false)
+        {
+            if (followRepresentantsToOtherSchemas)
+            {
+                throw new NotImplementedException("Not implemented for followRepresentantsToOtherSchemas == true");
+            }
+
+            var attributeNames = from a in PSMAttributes where !a.Element select a.Name;
+            Dictionary<string, int> result = new Dictionary<string, int>();
+            foreach (string name in attributeNames)
+            {
+                if (!result.ContainsKey(name))
+                    result[name] = 1;
+                else
+                    result[name]++;
+            }
+            return result;
+        }
+
         #region schema class
 
         private Guid psmSchemaClassGuid;

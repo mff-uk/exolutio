@@ -354,7 +354,7 @@ namespace Exolutio.WPFClient
         public IList<DiagramView> GetOpenedDiagramViews()
         {
             List<DiagramView> result = new List<DiagramView>();
-            foreach (DocumentContent d in MainWindow.dockManager.Documents)
+            foreach (DocumentContent d in MainWindow.dockManager.Documents.OfType<DiagramTab>())
             {
                 result.Add(((DiagramTab) d).DiagramView);
             }

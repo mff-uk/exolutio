@@ -80,11 +80,14 @@ namespace Exolutio.Model.OCL.Bridge {
             return PSMAttribute[att];
         }
 
-        internal void TranslateMembers() {
+        internal void TranslateMembers(PSMBridge bridge)
+        {
             // property
-            if (PSMSource is PSMClass) {
+            if (PSMSource is PSMClass)
+            {
                 PSMClass sourceClass = (PSMClass)PSMSource;
-                foreach (var pr in sourceClass.PSMAttributes) {
+                foreach (var pr in sourceClass.PSMAttributes)
+                {
                     Classifier baseType = TypeTable.Library.RootNamespace.NestedClassifier[pr.AttributeType.Name];
                     Classifier propType = BridgeHelpers.GetTypeByCardinality(TypeTable, pr, baseType);
                     PSMBridgeAttribute newProp = new PSMBridgeAttribute(pr, PropertyType.One, propType);
@@ -102,32 +105,67 @@ namespace Exolutio.Model.OCL.Bridge {
                 Operations.Add(allInstancesOp);
             }
 
+            //skip
+            if (PSMSource is PSMClass && PSMSource.Interpretation != null)
+            {
+                PSMClass sourceClass = (PSMClass)PSMSource;
+                IEnumerable<PSMComponent> components = 
+                    ((Exolutio.Model.PIM.PIMClass)sourceClass.Interpretation).GetInterpretedComponents().Where(ic => ic != sourceClass 
+                        && ic.PSMSchema == sourceClass.PSMSchema); 
+                foreach (PSMClass targetClass in components)
+                {
+                    SkipOperationTag tag = new SkipOperationTag { Source = this, Target = bridge.PSMAssociationMembers[targetClass] }; 
+                    Operation skipOp = new Operation(string.Format(@"to{0}", targetClass.Name), true, tag.Target);
+                    skipOp.Tag = tag;
+                    Operations.Add(skipOp);        
+                }
+            }
+
+            // J.M.: 20.4.2012 - update, there may be other incoming associations besides parent, 
+            // - non tree associations. These are treated the same as parent associations. 
+            List<PSMAssociation> incomingAssociations = new List<PSMAssociation>();
             //parent
-            PSM.PSMAssociation parentAss = PSMSource.ParentAssociation;
-            if (parentAss != null) {
+            if (PSMSource.ParentAssociation != null)
+                incomingAssociations.Add(PSMSource.ParentAssociation);
+            if (PSMSource is PSMClass)
+            {
+                incomingAssociations.AddRange(((PSMClass)PSMSource).GetIncomingNonTreeAssociations().Where(a => a.IsNonTreeAssociation));
+            }
+
+            foreach (PSMAssociation incomingAssociation in incomingAssociations)
+            {
                 string parentName = null;
                 string defaultName = null;
                 List<string> namesInOcl = new List<string>();
 
-                if (parentAss.Parent is PSM.PSMClass) {
-                    parentName = parentAss.Parent.Name;
+                if (incomingAssociation.Parent is PSM.PSMClass)
+                {
+                    parentName = incomingAssociation.Parent.Name;
                     defaultName = parentName;
                     namesInOcl.Add(parentName);
                 }
-                else if (parentAss.Parent is PSM.PSMContentModel) {
-                    parentName = GetContentModelOCLName((PSM.PSMContentModel)parentAss.Parent);
+                else if (incomingAssociation.Parent is PSM.PSMContentModel)
+                {
+                    parentName = GetContentModelOCLName((PSM.PSMContentModel)incomingAssociation.Parent);
                     defaultName = PSMBridgeAssociation.PARENT_STEP;
                 }
 
+                if (incomingAssociation.IsNamed)
+                {
+                    namesInOcl.Add(incomingAssociation.Name);
+                }
                 namesInOcl.Add(PSMBridgeAssociation.PARENT_STEP);
 
-                if (parentName != null) {
+                if (parentName != null)
+                {
                     Classifier propType = TypeTable.Library.RootNamespace.NestedClassifier[parentName];
-                    PSMBridgeAssociation newProp = new PSMBridgeAssociation(defaultName, namesInOcl, parentAss, PSMBridgeAssociation.AssociationDirection.Up, PropertyType.One, propType);
+                    PSMBridgeAssociation newProp = new PSMBridgeAssociation(defaultName, namesInOcl, incomingAssociation,
+                                                                            PSMBridgeAssociation.AssociationDirection.Up,
+                                                                            PropertyType.One, propType);
                     //Properties.Add(newProp);
                     namesInOcl.ForEach(name => Properties.Add(newProp, name));
                     //Hack
-                    newProp.Tag = parentAss.Parent;
+                    newProp.Tag = incomingAssociation.Parent;
 
                     this.Parent = newProp;
                 }
@@ -140,19 +178,22 @@ namespace Exolutio.Model.OCL.Bridge {
             childContentModelCount[PSM.PSMContentModelType.Set] = 0;
 
             //child 
-            foreach (var ass in PSMSource.ChildPSMAssociations) {
+            foreach (var ass in PSMSource.ChildPSMAssociations)
+            {
                 string childClassName;
                 string defaultName;
                 // Association can have more than one name in OCL
                 List<string> namesInOcl = new List<string>();
 
                 // Resolve association end type name
-                if (ass.Child is PSM.PSMClass) {
+                if (ass.Child is PSM.PSMClass)
+                {
                     childClassName = ass.Child.Name;
                     namesInOcl.Add(childClassName);
                     defaultName = childClassName;
                 }
-                else if (ass.Child is PSM.PSMContentModel) {
+                else if (ass.Child is PSM.PSMContentModel)
+                {
                     var cM = (PSM.PSMContentModel)ass.Child;
                     childClassName = GetContentModelOCLName((PSM.PSMContentModel)ass.Child);
                     childContentModelCount[cM.Type] = childContentModelCount[cM.Type] + 1;
@@ -160,13 +201,14 @@ namespace Exolutio.Model.OCL.Bridge {
                     namesInOcl.Add(cmName);
                     defaultName = cmName;
                 }
-                else {
+                else
+                {
                     System.Diagnostics.Debug.Fail("Nepodporovany typ v PSM.");
                     continue;
                 }
 
-                bool hasAssName = !string.IsNullOrEmpty(ass.Name);
-                if (hasAssName) {
+                if (ass.IsNamed)
+                {
                     namesInOcl.Add(ass.Name);
                     defaultName = ass.Name;
                 }
@@ -185,7 +227,8 @@ namespace Exolutio.Model.OCL.Bridge {
                 //Registre to find
                 PSMChildMembers.Add(ass, newAss);
                 //Registred all name in tables
-                foreach (string name in namesInOcl) {
+                foreach (string name in namesInOcl)
+                {
                     Properties.Add(newAss, name);
                 }
             }
@@ -228,5 +271,16 @@ namespace Exolutio.Model.OCL.Bridge {
         public enum SourceType {
             PSMClass, PSMContentModel
         }
+    }
+
+    public abstract class OperationTag
+    {
+
+    }
+
+    public class SkipOperationTag: OperationTag
+    {
+        public PSMBridgeClass Source { get; set; }
+        public PSMBridgeClass Target { get; set; } 
     }
 }

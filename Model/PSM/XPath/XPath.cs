@@ -8,6 +8,13 @@ namespace Exolutio.Model.PSM.XPath
 {
     public abstract class Path : IFormattable, ISupportsDeepCopy<Path>
     {
+        public PSMSchema Schema { get; protected set; }
+
+        protected Path(PSMSchema schema)
+        {
+            Schema = schema;
+        }
+
         public bool IsAbsolute { get; set; }
 
         protected virtual void FillCopy(Path copy)
@@ -35,6 +42,10 @@ namespace Exolutio.Model.PSM.XPath
     {
         private readonly List<Path> componentPaths = new List<Path>();
 
+        public UnionPath(PSMSchema schema) : base(schema)
+        {
+        }
+
         public List<Path> ComponentPaths
         {
             get { return componentPaths; }
@@ -51,20 +62,25 @@ namespace Exolutio.Model.PSM.XPath
             else
             {
                 StringBuilder result = new StringBuilder();
+                result.Append(@"(");
                 for (int index = 0; index < ComponentPaths.Count; index++)
                 {
                     Path componentPath = ComponentPaths[index];
-                    result.AppendFormat(@"({0})", componentPath.ToString(format, formatProvider));
+                    if (componentPath is SimplePath)
+                        result.AppendFormat(@"{0}", componentPath.ToString(format, formatProvider));
+                    else
+                        result.AppendFormat(@"({0})", componentPath.ToString(format, formatProvider));
                     if (index < ComponentPaths.Count - 1)
                         result.Append(@" | ");
                 }
+                result.Append(@")");
                 return result.ToString();
             }
         }
 
         public override bool GetOptimized(out Path optimizedPath)
         {
-            UnionPath optimizedComponents = new UnionPath();
+            UnionPath optimizedComponents = new UnionPath(Schema);
             bool componentsOptimized = false;  
             foreach (Path componentPath in ComponentPaths)
             {
@@ -98,7 +114,7 @@ namespace Exolutio.Model.PSM.XPath
 
         private Path JoinInSteps(UnionPath optimizedComponents)
         {
-            SimplePath joined = new SimplePath();
+            SimplePath joined = new SimplePath(Schema);
             for (int i = 0; i < ((SimplePath) optimizedComponents.ComponentPaths.First()).Steps.Count; i++)
             {
                 if (optimizedComponents.ComponentPaths.Select(path => ((SimplePath)path).Steps[i]).TransitiveTrue((s1, s2) => s1 == s2))
@@ -127,7 +143,7 @@ namespace Exolutio.Model.PSM.XPath
                 SimplePath sp2 = (SimplePath) path2;
                 if (sp1.Steps.Count == sp2.Steps.Count)
                 {
-                    for (int i = 0; i < sp1.Steps.Count - 1; i++)
+                    for (int i = 0; i < sp1.Steps.Count; i++)
                     {
                         Step step1 = sp1.Steps[i];
                         Step step2 = sp2.Steps[i];
@@ -161,7 +177,7 @@ namespace Exolutio.Model.PSM.XPath
 
         public override Path DeepCopy()
         {
-            UnionPath copy = new UnionPath();
+            UnionPath copy = new UnionPath(Schema);
             base.FillCopy(copy);
             foreach (Path componentPath in ComponentPaths)
             {
@@ -185,6 +201,10 @@ namespace Exolutio.Model.PSM.XPath
     {
         private readonly List<Step> steps = new List<Step>();
 
+        public SimplePath(PSMSchema schema) : base(schema)
+        {
+        }
+
         public List<Step> Steps
         {
             get { return steps; }
@@ -204,16 +224,16 @@ namespace Exolutio.Model.PSM.XPath
             }
             else
             {
-                if (IsAbsolute)
-                    return @"/" + Steps.ConcatWithSeparator(step => step.ToString(format, formatProvider), @"/");
-                else
-                    return Steps.ConcatWithSeparator(step => step.ToString(format, formatProvider), @"/");
+                string result = (IsAbsolute ? @"/" : string.Empty) + Steps.ConcatWithSeparator(step => step.ToString(format, formatProvider), @"/");
+                if (result.StartsWith(@"///"))
+                    result = result.Substring(1);
+                return result;
             }
         }
 
         public override Path DeepCopy()
         {
-            SimplePath copy = new SimplePath();
+            SimplePath copy = new SimplePath(Schema);
             base.FillCopy(copy);
             foreach (Step step in Steps)
             {
@@ -229,6 +249,26 @@ namespace Exolutio.Model.PSM.XPath
 
         public override bool GetOptimized(out Path optimizedPath)
         {
+            if (Steps.Count > 1
+                && (Steps[0].NodeTest != Step.NODE_TEST_ANY_NODE)
+                && (from psmClass in Schema.PSMClasses where psmClass.IsStructuralRepresentative select psmClass.RepresentedClass).All(rep => rep.Schema == Schema)
+                && Steps.Take(Steps.Count - 1).All(s => s.Axis.IsAmong(Axis.child, Axis.descendant, Axis.descendantOrSelf)))
+            {
+                Step lastStep = Steps.Last();
+                if (!string.IsNullOrEmpty(lastStep.NodeTest) 
+                    && lastStep.NodeTest != Step.NODE_TEST_ANY_NODE
+                    && Schema.GetAllXMLElementNames()[lastStep.NodeTest] == 1
+                    && lastStep.Axis.IsAmong(Axis.child, Axis.descendant, Axis.descendantOrSelf, Axis.attribute)
+                    )
+                {
+                    SimplePath simplePath = new SimplePath(Schema);
+                    simplePath.AddStep(new Step { Axis = Axis.descendantOrSelf, NodeTest = Step.NODE_TEST_ANY_NODE });
+                    simplePath.AddStep(new Step { Axis = lastStep.Axis != Axis.attribute ? Axis.child : Axis.attribute, NodeTest = lastStep.NodeTest});
+                    optimizedPath = simplePath;
+                    return true;
+                }
+            }
+
             optimizedPath = this;
             return false;
         }
@@ -262,6 +302,10 @@ namespace Exolutio.Model.PSM.XPath
                 if (Axis == Axis.child)
                 {
                     return NodeTest;
+                }
+                if (Axis == Axis.descendantOrSelf && NodeTest == NODE_TEST_ANY_NODE)
+                {
+                    return @"//";
                 }
                 if (Axis == Axis.parent && NodeTest == NODE_TEST_ANY_NODE)
                 {
