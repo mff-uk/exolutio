@@ -160,7 +160,13 @@ namespace Exolutio.Model.OCL.TypesTable {
             AddOperation(oclAny, "<>", boolean, oclAny);
             AddOperation(oclAny, "oclIsUndefined", boolean);
             AddOperation(oclAny, "oclIsInvalid", boolean);
-            AddOperation(oclAny, "oclAsType", boolean);
+            //AddOperation(oclAny, "oclAsType", boolean);
+            {
+                Operation oclAsTypeOp = new Operation(@"oclAsType", true, tt.Library.Any,
+                    new Parameter[] { new Parameter("type", tt.Library.Type) });
+                oclAsTypeOp.ReturnTypeDependsOnArguments = true;
+                oclAny.Operations.Add(oclAsTypeOp);
+            }
             AddOperation(oclAny, "oclIsNew", boolean);
 
             //par dalsi operaci chybi

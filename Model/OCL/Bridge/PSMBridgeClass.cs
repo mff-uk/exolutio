@@ -105,6 +105,14 @@ namespace Exolutio.Model.OCL.Bridge {
                 Operations.Add(allInstancesOp);
             }
 
+            // oclAsType 
+            //{
+            //    Operation oclAsTypeOp = new Operation(@"oclAsType", true, this.TypeTable.Library.Any,
+            //        new Parameter[] { new Parameter("type", this.TypeTable.Library.Type) });
+            //    oclAsTypeOp.ReturnTypeDependsOnArguments = true;
+            //    Operations.Add(oclAsTypeOp);
+            //}
+
             //skip
             if (PSMSource is PSMClass && PSMSource.Interpretation != null)
             {
@@ -234,6 +242,7 @@ namespace Exolutio.Model.OCL.Bridge {
             }
         }
 
+        
         /// <summary>
         /// Adds members included from structural representatives 
         /// </summary>

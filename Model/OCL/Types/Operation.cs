@@ -17,10 +17,13 @@ namespace Exolutio.Model.OCL.Types
             protected set;
         }
 
+
+
+        internal Lazy<Classifier> _ReturnType; 
+        
         public virtual Classifier ReturnType
         {
-            get;
-            protected set;
+            get { return _ReturnType.Value; }
         }
 
         public virtual ParameterCollection Parametrs
@@ -28,9 +31,7 @@ namespace Exolutio.Model.OCL.Types
             get;
             protected set;
         }
-
-
-
+        
         #region IModelElement Members
 
         public string Name {
@@ -68,7 +69,7 @@ namespace Exolutio.Model.OCL.Types
         public Operation(string name, Classifier returnType) {
             this.Name = name;
             IsQuery = false;
-            this.ReturnType = returnType;
+            this._ReturnType = new Lazy<Classifier>(() => returnType);
             Parametrs = new ParameterCollection(this);
             _QualifiedName = new Lazy<string>(() => Owner.QualifiedName + "." + Name);
         }
@@ -81,7 +82,7 @@ namespace Exolutio.Model.OCL.Types
         public Operation(string name, bool isQuery, Classifier returnType)
             : this(name, returnType) {
             IsQuery = isQuery;
-            this.ReturnType = returnType;
+            this._ReturnType = new Lazy<Classifier>(() => returnType);
             Parametrs = new ParameterCollection(this);
         }
 
@@ -89,7 +90,7 @@ namespace Exolutio.Model.OCL.Types
             : this(name, isQuery, returnType) {
             this.Parametrs.AddRange(parametrs);
         }
-
+        
         public override bool Equals(object obj)
         {
             Operation other = obj as Operation;
@@ -110,6 +111,29 @@ namespace Exolutio.Model.OCL.Types
             return QualifiedName + Parametrs.ToString();
         }
 
- 
+        internal Classifier oclAsTypeReturnType()
+        {
+            return this.Owner.TypeTable.Library.Invalid;
+        }
+
+        public bool ReturnTypeDependsOnArguments { get; set; }
+
+        internal Classifier GetReturnType(List<AST.OclExpression> args)
+        {
+            if (ReturnTypeDependsOnArguments)
+            {
+                if (Name == @"oclAsType")
+                {
+                    System.Diagnostics.Debug.Assert(args.First() is AST.TypeExp);
+                    return (((AST.TypeExp)args.First()).ReferredType);
+                }
+                else
+                {
+                    throw new NotImplementedException(string.Format(CompilerErrors.Operation_GetReturnType_1, this));
+                }
+            }
+            else
+                return ReturnType;
+        }
     }
 }

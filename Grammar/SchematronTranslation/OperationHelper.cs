@@ -42,6 +42,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
         {
             // Any
             Add(new OperationInfo { Priority = 1, CanOmitDataCall = true, OclName = "oclAsSet", XPathName = "oclAsSet", Arity = 1, CustomTranslateHandler = ReplaceByArgumentHandler });
+            Add(new OperationInfo { Priority = 1, CanOmitDataCall = true, OclName = "oclAsType", XPathName = "oclAsType", Arity = 2, CustomTranslateHandler = OclAsTypeArgumentHandler });
             Add(new OperationInfo { Priority = 1, CanOmitDataCall = true, OclName = "allInstances", XPathName = "allInstances", Arity = 1, CustomTranslateHandler = AllInstancesHandler });
 
             // operators
@@ -130,7 +131,24 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             Add(skipOperationInfo);
         }
 
-        private string AllInstancesHandler(OperationCallExp operationexpression, OperationInfo operationinfo, OclExpression[] arguments)
+        private string OclAsTypeArgumentHandler(OperationCallExp operationExpression, OperationInfo operationInfo, OclExpression[] arguments)
+        {
+            Debug.Assert(arguments[1] is TypeExp);
+            Classifier castType = ((TypeExp) (arguments[1])).ReferredType;
+            if (IsXPathAtomic(castType))
+            {
+                string op = WrapAtomicOperand(arguments[0], operationInfo, 0);
+                AttributeType attributeType = FindCorrespondingAtomicType(castType);
+                string xpathTypeName = attributeType.XSDDefinition;
+                return string.Format("{0}{1}{2}", XsdNamespacePrefix, xpathTypeName, op);
+            }
+            else
+            {
+                return ReplaceByArgumentHandler(operationExpression, operationInfo, arguments);
+            }
+        }
+
+        private string AllInstancesHandler(OperationCallExp operationExpression, OperationInfo operationInfo, OclExpression[] arguments)
         {
             var type = arguments[0] is TypeExp ? ((TypeExp)arguments[0]).ReferredType : arguments[0].Type;
             PSMBridgeClass psmBridgeClass = (PSMBridgeClass)type;
@@ -139,10 +157,10 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             return allInstancesXPath.ToString();
         }
 
-        private string SkipHandler(OperationCallExp operationexpression, OperationInfo operationinfo, OclExpression[] arguments)
+        private string SkipHandler(OperationCallExp operationExpression, OperationInfo operationInfo, OclExpression[] arguments)
         {
-            Debug.Assert(operationexpression.ReferredOperation != null && operationexpression.ReferredOperation.Tag is SkipOperationTag);
-            SkipOperationTag tag = (SkipOperationTag)operationexpression.ReferredOperation.Tag;
+            Debug.Assert(operationExpression.ReferredOperation != null && operationExpression.ReferredOperation.Tag is SkipOperationTag);
+            SkipOperationTag tag = (SkipOperationTag)operationExpression.ReferredOperation.Tag;
 
             Func<PSMAttribute, PSMAttribute> findAttribute =
                 a => ((PSMClass) tag.Target.PSMSource).PSMAttributes.Single(ta => ta.Interpretation == a.Interpretation);
@@ -153,7 +171,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             string varNameLetter = tag.Source.PSMSource.Name.Substring(0,1).ToLower();
             string varName = varNameLetter;
             int i = 1;
-            while (operationexpression.Environment.LookupLocal(varName) != null)
+            while (operationExpression.Environment.LookupLocal(varName) != null)
             {
                 i++;
                 varName = varNameLetter + i;
@@ -344,15 +362,22 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
                 return true;
             }
 
+            if (FindCorrespondingAtomicType(obj) != null) 
+                return true;
+
+            return false;
+        }
+
+        private AttributeType FindCorrespondingAtomicType(Classifier obj)
+        {
             foreach (var t in PSMSchema.Project.PSMBuiltInTypes)
             {
                 if (t.Name == obj.Name)
                 {
-                    return true;
+                    return t; 
                 }
             }
-
-            return false;
+            return null;
         }
 
         private bool IsXPathNonAtomic(Classifier obj)

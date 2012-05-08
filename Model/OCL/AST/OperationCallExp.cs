@@ -24,7 +24,7 @@ namespace Exolutio.Model.OCL.AST
         /// <param name="args">Parameters of operation</param>
         /// <param name="environment">Environment</param>
         public OperationCallExp(OclExpression source, bool isPre, Operation refOperation, List<OclExpression> args, 
-            Environment environment = null):base(source,isPre,refOperation.ReturnType) {
+            Environment environment = null):base(source,isPre,refOperation.GetReturnType(args)) {
             this.ReferredOperation = refOperation;
             this.Arguments = args;
             this.Environment = environment;
