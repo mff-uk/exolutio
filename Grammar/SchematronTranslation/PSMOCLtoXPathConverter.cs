@@ -139,8 +139,9 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
         public virtual void Visit(TypeExp node)
         {
             AssignIspartOfIteratorBody(node);
+            this.SubexpressionTranslations.AddTrivialTranslation(node, string.Empty);
             // TODO: PSM2XPath: there should be some suport for types in the future
-            throw new ExpressionNotSupportedInXPath(node);
+            //throw new ExpressionNotSupportedInXPath(node);
         }
 
         #endregion

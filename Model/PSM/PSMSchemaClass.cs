@@ -35,7 +35,7 @@ namespace Exolutio.Model.PSM
 
         public override Path GetXPathFull(bool followGeneralizations)
         {
-            return new SimplePath() {IsAbsolute = true};
+            return new SimplePath(PSMSchema) {IsAbsolute = true};
         }
 
         #region Implementation of IExolutioCloneable

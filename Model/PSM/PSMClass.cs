@@ -173,7 +173,7 @@ namespace Exolutio.Model.PSM
 
         public override Path GetXPathFull(bool followGeneralizations = true)
         {
-            UnionPath unionPath = new UnionPath();
+            UnionPath unionPath = new UnionPath(PSMSchema);
 
             List<Path> nonRecursionPaths = new List<Path>();
             

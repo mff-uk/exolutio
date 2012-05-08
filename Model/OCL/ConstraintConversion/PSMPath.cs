@@ -358,7 +358,20 @@ namespace Exolutio.Model.OCL.ConstraintConversion
             {
                 if (IsUp)
                 {
-                    return string.Format(@"/..");   
+                    bool useFullParentStep = false; 
+                    if (From is PSMClass)
+                    {
+                        useFullParentStep = ((PSMClass) From).GetIncomingNonTreeAssociations().Count() > 0;
+                    }
+                    if (useFullParentStep)
+                    {
+                        //HACK : this works for tree-like schemas, could cause problems where non-tree features appear (inheritance, SR, non-tree associations)
+                        IEnumerable<PSMAssociation> associations = ModelIterator.GetAncestorAssociations(To).Where(a => a.IsNamed);
+                        if (associations.Count() > 0)
+                            return string.Format(@"/parent::{0}", associations.First().Name);
+                    }
+                    
+                    return string.Format(@"/..");                    
                 }
                 else
                 {
@@ -384,7 +397,7 @@ namespace Exolutio.Model.OCL.ConstraintConversion
             path.Context.VariableNamer = variableNamer;
 
             OclExpression s;
-            if (node.ReferredProperty.Tag is PSMAssociation)
+            if (node.ReferredProperty is PSMBridgeAssociation)
             {
                 s = node;
             }
@@ -395,10 +408,10 @@ namespace Exolutio.Model.OCL.ConstraintConversion
                 path.Steps.Add(tuplePartStep);
                 s = node.Source;
             }
-            else
+            else 
             {
-                PSMAttribute a = (PSMAttribute) node.ReferredProperty.Tag;
-                PSMPathAttributeStep pathAttributeStep = new PSMPathAttributeStep(path) {Attribute = a};
+                PSMAttribute a = (PSMAttribute)node.ReferredProperty.Tag;
+                PSMPathAttributeStep pathAttributeStep = new PSMPathAttributeStep(path) { Attribute = a };
                 path.Steps.Add(pathAttributeStep);
                 s = node.Source;
             }

@@ -1073,7 +1073,13 @@ namespace Exolutio.Model
             IEnumerable<PSMClass> inheritanceRoots = psmSchema.PSMClasses.Where(c => !c.IsStructuralRepresentative);
             return inheritanceRoots.Closure(parent => parent.GetReferencingStructuralRepresentatives(false));
         }
-
-
+        
+        internal static IEnumerable<PSMAssociation> GetAncestorAssociations(PSMAssociationMember To)
+        {
+            if (To.ParentAssociation == null)
+                return new PSMAssociation[0];
+            else
+                return To.ParentAssociation.Closure(a => a.Parent.ParentAssociation);
+        }
     }
 }

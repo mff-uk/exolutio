@@ -97,7 +97,7 @@ namespace Exolutio.Model.OCL.Compiler {
                 Errors.AddError(new ErrorItem(String.Format(CompilerErrors.OCLAst_InfixOperation_NotDefined_2, exp1.Type, nameTree)));
                 return new AST.ErrorExp(Library.Any);
             }
-            return (new AST.OperationCallExp(exp1, false, op, new List<AST.OclExpression>(new AST.OclExpression[] { exp2 })))
+            return (new AST.OperationCallExp(exp1, false, op, new List<AST.OclExpression>(new AST.OclExpression[] { exp2 }), Environment))
                 .SetCodeSource(new CodeSource(nameTree));
 
         }
@@ -112,7 +112,7 @@ namespace Exolutio.Model.OCL.Compiler {
                 Errors.AddError(new CodeErrorItem(String.Format(CompilerErrors.OCLAst_InfixOperation_NotDefined_2, exp1.Type, name), name, name));
                 return new AST.ErrorExp(Library.Any);
             }
-            return new AST.OperationCallExp(exp1, false, op, new List<AST.OclExpression>(new AST.OclExpression[] { }))
+            return new AST.OperationCallExp(exp1, false, op, new List<AST.OclExpression>(new AST.OclExpression[] { }), Environment)
                 .SetCodeSource(new CodeSource(name));
         }
 
@@ -178,11 +178,21 @@ namespace Exolutio.Model.OCL.Compiler {
                         return CreateImplicitCollectIterator(expr, tokenPath[0], args, sourceType, op);
                     }
                 }
+                // JM 2.5. 2012
+                if (expr is AST.TypeExp)
+                {
+                    Operation op = (((AST.TypeExp)expr).ReferredType).LookupOperation(path[0], args.Select(arg => arg.Type));
+                    if (op != null)
+                    {
+                        return new AST.OperationCallExp(expr, isPre, op, args, Environment)
+                            .SetCodeSource(new CodeSource(tokenPath[0]));
+                    }
+                }
                 else {
                     //35eg
                     Operation op = expr.Type.LookupOperation(path[0], args.Select(arg => arg.Type));
                     if (op != null) {
-                        return new AST.OperationCallExp(expr, isPre, op, args)
+                        return new AST.OperationCallExp(expr, isPre, op, args, Environment)
                             .SetCodeSource(new CodeSource(tokenPath[0]));
                     }
                 }
@@ -203,7 +213,7 @@ namespace Exolutio.Model.OCL.Compiler {
             varList.Add(varDecl);
             AST.VariableExp localVar = new AST.VariableExp(varDecl)
                 .SetCodeSource(codeSource);
-            AST.OperationCallExp localOp = new AST.OperationCallExp(localVar, false, op, args)
+            AST.OperationCallExp localOp = new AST.OperationCallExp(localVar, false, op, args, Environment)
                 .SetCodeSource(codeSource);
             //Napevno zafixovany navratovy typ collect
             Classifier returnType = Library.CreateCollection(CollectionKind.Collection, op.ReturnType);
@@ -236,7 +246,7 @@ namespace Exolutio.Model.OCL.Compiler {
                     Errors.AddError(new ErrorItem(String.Format(CompilerErrors.OCLParser_OperationNotFound_1, Library.OclAsSet)));
                     return new AST.ErrorExp(Library.Invalid);
                 }
-                expr = new AST.OperationCallExp(expr, false, asSetOp, new List<AST.OclExpression>())
+                expr = new AST.OperationCallExp(expr, false, asSetOp, new List<AST.OclExpression>(), Environment)
                     .SetCodeSource(new CodeSource(tokenPath[0]));
             }
 
@@ -301,7 +311,7 @@ namespace Exolutio.Model.OCL.Compiler {
                     Errors.AddError(new ErrorItem(String.Format(CompilerErrors.OCLParser_OperationNotFound_1, Library.OclAsSet)));
                     return new AST.ErrorExp(Library.Invalid);
                 }
-                expr = new AST.OperationCallExp(expr, false, asSetOp, new List<AST.OclExpression>())
+                expr = new AST.OperationCallExp(expr, false, asSetOp, new List<AST.OclExpression>(), Environment)
                     .SetCodeSource(new CodeSource(tokenPath[0]));
             }
 
@@ -309,7 +319,7 @@ namespace Exolutio.Model.OCL.Compiler {
                 args.Select(arg => arg.Type));
 
             if (collectionOperation != null) { // 36b
-                return new AST.OperationCallExp(expr, false, collectionOperation, args)
+                return new AST.OperationCallExp(expr, false, collectionOperation, args, Environment)
                     .SetCodeSource(new CodeSource(tokenPath[0]));
             }
 
@@ -346,7 +356,13 @@ namespace Exolutio.Model.OCL.Compiler {
                         .SetCodeSource(codeSource);
                 }
                 // chyby naky to pravidlo
-
+                
+                // JM > type exp
+                if (element is Classifier)
+                {
+                    return new AST.TypeExp((Classifier)element, Library.Type)
+                        .SetCodeSource(codeSource);
+                }
             }
             else {
                 // path
@@ -382,7 +398,7 @@ namespace Exolutio.Model.OCL.Compiler {
                 // tady by melo byt vyreseno self
                 AST.VariableExp operationSource = new AST.VariableExp(operation.Source)
                     .SetCodeSource(codeSource);
-                return new AST.OperationCallExp(operationSource, isPre, operation.Operation, callArgs)
+                return new AST.OperationCallExp(operationSource, isPre, operation.Operation, callArgs, Environment)
                     .SetCodeSource(codeSource);
             }
             else {

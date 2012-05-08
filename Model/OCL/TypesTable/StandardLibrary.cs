@@ -224,6 +224,10 @@ namespace Exolutio.Model.OCL.TypesTable {
             AddOperation(boolean, "implies", boolean, boolean);
             AddOperation(boolean, "toString", str);
 
+            lib.LazyOperation.Add(typeof(Classifier), (c) => {
+                                                       
+            });
+
             lib.LazyOperation.Add(typeof(CollectionType), (c) => {
                 CollectionType coll = c as CollectionType;
                 Classifier t = coll.ElementType;

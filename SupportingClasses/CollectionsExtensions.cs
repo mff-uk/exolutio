@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace Exolutio.SupportingClasses
 {
@@ -52,6 +53,20 @@ namespace Exolutio.SupportingClasses
             return result;
         }
 
+        public static void ConcatWithSeparator<T>(this IEnumerable<T> collection, string op, StringBuilder sb)
+        {
+            int itemsAdded = collection.Aggregate(0, (current, item) => { sb.Append(item); sb.Append(op); return current + 1; });
+            if (itemsAdded > 0)
+                sb.Remove(sb.Length - op.Length, op.Length);
+        }
+
+        public static void ConcatWithSeparator<T>(this IEnumerable<T> collection, Action<T> stringConverter, string op, StringBuilder sb)
+        {
+            int itemsAdded = collection.Aggregate(0, (current, item) => { stringConverter(item); sb.Append(op); return current + 1; });
+            if (itemsAdded > 0)
+                sb.Remove(sb.Length - op.Length, op.Length);
+        }
+
         public static string ConcatWithSeparator<T>(this IEnumerable<T> collection, Func<T, string> stringConverter, string op)
         {
             string result = collection.Aggregate(string.Empty, (current, item) => current + (stringConverter(item) + op));
@@ -59,7 +74,7 @@ namespace Exolutio.SupportingClasses
                 result = result.Remove(result.Length - op.Length, op.Length);
             return result;
         }
-
+        
         public static List<TValue> CreateSubCollectionIfNeeded<TKey, TValue>(this IDictionary<TKey, List<TValue>> collection, TKey key)
         {
             List<TValue> values;

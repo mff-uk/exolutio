@@ -30,6 +30,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
         internal OperationInfo atOperationInfo;
         internal OperationInfo firstOperationInfo;
         internal OperationInfo lastOperationInfo;
+        internal OperationInfo skipOperationInfo; 
 
         public string XsdNamespacePrefix
         {
@@ -124,17 +125,48 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "subSequence", XPathName = "oclX:subSequence", Arity = 1, CustomTranslateHandler = FunctionAtomicHandler, TypeDependent = true, ArgumentCondition = IsXPathNonAtomic });
             Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "-", XPathName = "oclX:setMinus", Arity = 2, CustomTranslateHandler = FunctionAtomicHandler, TypeDependent = true, ArgumentCondition = IsXPathNonAtomic });
             Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "symmetricDifference", XPathName = "oclX:symmetricDifference", Arity = 2, CustomTranslateHandler = FunctionAtomicHandler, TypeDependent = true, ArgumentCondition = IsXPathNonAtomic });
+
+            skipOperationInfo = new OperationInfo { Priority = -1, OclName = "oclSkip", XPathName = "oclX:oclSkip", Arity = 1, CustomTranslateHandler = SkipHandler };
+            Add(skipOperationInfo);
         }
 
         private string AllInstancesHandler(OperationCallExp operationexpression, OperationInfo operationinfo, OclExpression[] arguments)
         {
-            Debug.Assert(arguments[0].Type is PSMBridgeClass);
-            PSMBridgeClass psmBridgeClass = (PSMBridgeClass) arguments[0].Type;
+            var type = arguments[0] is TypeExp ? ((TypeExp)arguments[0]).ReferredType : arguments[0].Type;
+            PSMBridgeClass psmBridgeClass = (PSMBridgeClass)type;
             PSMClass psmClass = (PSMClass) psmBridgeClass.PSMSource;
             Path allInstancesXPath = psmClass.GetXPathFull();
             return allInstancesXPath.ToString();
         }
 
+        private string SkipHandler(OperationCallExp operationexpression, OperationInfo operationinfo, OclExpression[] arguments)
+        {
+            Debug.Assert(operationexpression.ReferredOperation != null && operationexpression.ReferredOperation.Tag is SkipOperationTag);
+            SkipOperationTag tag = (SkipOperationTag)operationexpression.ReferredOperation.Tag;
+
+            Func<PSMAttribute, PSMAttribute> findAttribute =
+                a => ((PSMClass) tag.Target.PSMSource).PSMAttributes.Single(ta => ta.Interpretation == a.Interpretation);
+
+            //let $i := //intern[1] return //employee[./id = $i/id]
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            
+            string varNameLetter = tag.Source.PSMSource.Name.Substring(0,1).ToLower();
+            string varName = varNameLetter;
+            int i = 1;
+            while (operationexpression.Environment.LookupLocal(varName) != null)
+            {
+                i++;
+                varName = varNameLetter + i;
+            }
+            string allInstances = ((PSMClass)tag.Target.PSMSource).GetXPathFull().ToString();
+            sb.AppendFormat("(let ${0} := {{0}} return {1}[", varName, allInstances);
+            ((PSMClass) tag.Source.PSMSource).PSMAttributes.ConcatWithSeparator( 
+                a => sb.AppendFormat("./{0}{1} = ${2}/{0}{1}", findAttribute(a).Element ? string.Empty : "@", findAttribute(a).Name, varName), 
+                " and ", sb);
+            sb.Append("])");
+            return sb.ToString();
+        }
+        
         private string ReplaceByArgumentHandler(OperationCallExp operationExpression, OperationInfo operationInfo, OclExpression[] arguments)
         {
             string op = WrapAtomicOperand(arguments[0], operationInfo, 0);
@@ -325,7 +357,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 
         private bool IsXPathNonAtomic(Classifier obj)
         {
-            return !IsXPathAtomic(obj);
+            return (obj is VoidType) || !IsXPathAtomic(obj);
         }
 
         public bool RequiresDataCall(OclExpression expression, OperationInfo ? operationInfo)
@@ -364,6 +396,10 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
         public OperationInfo? LookupOperation(OperationCallExp operationExpression, OclExpression[] arguments)
         {
             Operation referredOperation = operationExpression.ReferredOperation;
+            if (referredOperation.Tag is SkipOperationTag)
+            {
+                return skipOperationInfo;
+            }
             var nameMatch = this.Where(i => i.OclName == referredOperation.Name);
             if (nameMatch.IsEmpty())
             {

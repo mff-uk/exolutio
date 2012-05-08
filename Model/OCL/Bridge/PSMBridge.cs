@@ -24,14 +24,14 @@ namespace Exolutio.Model.OCL.Bridge {
             }
         }
 
-        private Dictionary<PSM.PSMAssociationMember, PSMBridgeClass> PSMAssociationMembers {
+        internal Dictionary<PSM.PSMAssociationMember, PSMBridgeClass> PSMAssociationMembers {
             get;
-            set;
+            private set;
         }
 
-        private Dictionary<AttributeType, Types.Classifier> PSMAttributeType {
+        internal Dictionary<AttributeType, Types.Classifier> PSMAttributeType {
             get;
-            set;
+            private set;
         }
 
 
@@ -170,7 +170,7 @@ namespace Exolutio.Model.OCL.Bridge {
                 PSMAssociationMembers.Add(cM, newClass);
             }
 
-            classToProcess.ForEach(cl => cl.TranslateMembers());
+            classToProcess.ForEach(cl => cl.TranslateMembers(this));
             List<PSMBridgeClass> orderedSRs = ModelIterator.GetPSMClassesStructuralRepresentativeRelationBFS(schema).Where(c => c.IsStructuralRepresentative).Select(psmc => PSMAssociationMembers[psmc]).ToList();
             orderedSRs.ForEach(cl => cl.IncludeSRMembers(PSMAssociationMembers[((PSMClass)cl.PSMSource).RepresentedClass]));
         }
