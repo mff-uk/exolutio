@@ -522,6 +522,15 @@ namespace Exolutio.Model.OCL {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot decide return type of `{0}`..
+        /// </summary>
+        internal static string Operation_GetReturnType_1 {
+            get {
+                return ResourceManager.GetString("Operation_GetReturnType_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Variable `{0}` has been defined earlier. .
         /// </summary>
         internal static string VariableAlreadyExisted {

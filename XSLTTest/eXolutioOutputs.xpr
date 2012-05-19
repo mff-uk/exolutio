@@ -10,6 +10,50 @@
                         <scenarioAssociation-array>
                             <scenarioAssociation>
                                 <field name="name">
+                                    <String>LastSchemaSch FUN</String>
+                                </field>
+                                <field name="type">
+                                    <String>XPROC</String>
+                                </field>
+                                <field name="url">
+                                    <String>../OclX/Examples/Functional/SchemaAware/CompanyHierarchy.xml</String>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="name">
+                                    <String>LastSchemaSch FUN</String>
+                                </field>
+                                <field name="type">
+                                    <String>XPROC</String>
+                                </field>
+                                <field name="url">
+                                    <String>../OclX/Pipeline/step4.out.xsl</String>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="name">
+                                    <String>CompanyHierarchy F SA</String>
+                                </field>
+                                <field name="type">
+                                    <String>XPROC</String>
+                                </field>
+                                <field name="url">
+                                    <String>../OclX/Examples/Functional/SchemaAware/CompanyHierarchySA.sch</String>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="name">
+                                    <String>docbook/docbook5.framework/DocBook 5/Docbook XHTML</String>
+                                </field>
+                                <field name="type">
+                                    <String>XSL</String>
+                                </field>
+                                <field name="url">
+                                    <String>../../../Skola/Papers/r2012_maly_x3/x3.xml</String>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="name">
                                     <String>MatchSchedule F SA</String>
                                 </field>
                                 <field name="type">
@@ -50,17 +94,6 @@
                                 </field>
                                 <field name="url">
                                     <String>../OclX/Pipeline/oclx-schematron-pipeline.xpl</String>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="name">
-                                    <String>TournamentsSchedule F SA</String>
-                                </field>
-                                <field name="type">
-                                    <String>XPROC</String>
-                                </field>
-                                <field name="url">
-                                    <String>../OclX/Pipeline/step4.out.xsl</String>
                                 </field>
                             </scenarioAssociation>
                             <scenarioAssociation>
@@ -237,17 +270,6 @@
                                 </field>
                                 <field name="url">
                                     <String>../OclX/Examples/Dynamic/NotSchemaAware/MatchSchedule.sch</String>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="name">
-                                    <String>current file saxon 9.4</String>
-                                </field>
-                                <field name="type">
-                                    <String>XSL</String>
-                                </field>
-                                <field name="url">
-                                    <String>../SchematronTest/MatchSchedule.xml</String>
                                 </field>
                             </scenarioAssociation>
                             <scenarioAssociation>
@@ -537,33 +559,155 @@
                                     <String-array/>
                                 </field>
                             </scenario>
-                            <scenario>
+                            <xprocScenario>
+                                <field name="inputPorts">
+                                    <xprocInputPort-array>
+                                        <xprocInputPort>
+                                            <field name="portName">
+                                                <String>source</String>
+                                            </field>
+                                            <field name="urls">
+                                                <String-array>
+                                                    <String>file:/D:/Programov%C3%A1n%C3%AD/EvoXSVN/OclX/Examples/Functional/SchemaAware/CompanyHierarchy.xml</String>
+                                                </String-array>
+                                            </field>
+                                        </xprocInputPort>
+                                        <xprocInputPort>
+                                            <field name="portName">
+                                                <String>schema</String>
+                                            </field>
+                                            <field name="urls">
+                                                <String-array>
+                                                    <String>file:/D:/Programov%C3%A1n%C3%AD/EvoXSVN/OclX/Examples/Functional/SchemaAware/CompanyHierarchySA.sch</String>
+                                                </String-array>
+                                            </field>
+                                        </xprocInputPort>
+                                        <xprocInputPort>
+                                            <field name="portName">
+                                                <String>xsd</String>
+                                            </field>
+                                            <field name="urls">
+                                                <String-array>
+                                                    <String>file:/D:/Programov%C3%A1n%C3%AD/EvoXSVN/OclX/Examples/Functional/SchemaAware/CompanyHierarchy.xsd</String>
+                                                </String-array>
+                                            </field>
+                                        </xprocInputPort>
+                                    </xprocInputPort-array>
+                                </field>
+                                <field name="outputPorts">
+                                    <xprocOutputPort-array>
+                                        <xprocOutputPort>
+                                            <field name="portName">
+                                                <String>result</String>
+                                            </field>
+                                            <field name="url">
+                                                <null/>
+                                            </field>
+                                            <field name="showInSequenceView">
+                                                <Boolean>true</Boolean>
+                                            </field>
+                                        </xprocOutputPort>
+                                    </xprocOutputPort-array>
+                                </field>
+                                <field name="xprocOptions">
+                                    <xprocOption-array>
+                                        <xprocOption>
+                                            <field name="namespaceURI">
+                                                <String></String>
+                                            </field>
+                                            <field name="localName">
+                                                <String>debug</String>
+                                            </field>
+                                            <field name="value">
+                                                <String></String>
+                                            </field>
+                                        </xprocOption>
+                                        <xprocOption>
+                                            <field name="namespaceURI">
+                                                <String></String>
+                                            </field>
+                                            <field name="localName">
+                                                <String>functional</String>
+                                            </field>
+                                            <field name="value">
+                                                <String>true</String>
+                                            </field>
+                                        </xprocOption>
+                                        <xprocOption>
+                                            <field name="namespaceURI">
+                                                <String></String>
+                                            </field>
+                                            <field name="localName">
+                                                <String>oclx-import-href</String>
+                                            </field>
+                                            <field name="value">
+                                                <String>../../../oclX-functional.xsl</String>
+                                            </field>
+                                        </xprocOption>
+                                        <xprocOption>
+                                            <field name="namespaceURI">
+                                                <String></String>
+                                            </field>
+                                            <field name="localName">
+                                                <String>output-intermediate-steps</String>
+                                            </field>
+                                            <field name="value">
+                                                <String>true</String>
+                                            </field>
+                                        </xprocOption>
+                                        <xprocOption>
+                                            <field name="namespaceURI">
+                                                <String></String>
+                                            </field>
+                                            <field name="localName">
+                                                <String>protect-invalid</String>
+                                            </field>
+                                            <field name="value">
+                                                <String>true</String>
+                                            </field>
+                                        </xprocOption>
+                                        <xprocOption>
+                                            <field name="namespaceURI">
+                                                <String></String>
+                                            </field>
+                                            <field name="localName">
+                                                <String>schema-aware</String>
+                                            </field>
+                                            <field name="value">
+                                                <String>true</String>
+                                            </field>
+                                        </xprocOption>
+                                    </xprocOption-array>
+                                </field>
+                                <field name="xprocParameters">
+                                    <xprocParameterPort-array/>
+                                </field>
                                 <field name="advancedOptionsMap">
                                     <null/>
                                 </field>
                                 <field name="name">
-                                    <String>current file saxon 9.4</String>
+                                    <String>CompanyHierarchy F SA</String>
                                 </field>
                                 <field name="baseURL">
-                                    <String></String>
+                                    <null/>
                                 </field>
                                 <field name="footerURL">
-                                    <String></String>
+                                    <null/>
                                 </field>
                                 <field name="fOPMethod">
-                                    <String>pdf</String>
+                                    <null/>
                                 </field>
                                 <field name="fOProcessorName">
-                                    <String>Apache FOP</String>
+                                    <null/>
                                 </field>
                                 <field name="headerURL">
-                                    <String></String>
+                                    <null/>
                                 </field>
                                 <field name="inputXSLURL">
-                                    <String>${cfn}.xsl</String>
+                                    <String>file:/D:/Programov%C3%A1n%C3%AD/EvoXSVN/OclX/Pipeline/oclx-schematron-pipeline.xpl</String>
                                 </field>
                                 <field name="inputXMLURL">
-                                    <String>${cfn}.xml</String>
+                                    <String></String>
                                 </field>
                                 <field name="defaultScenario">
                                     <Boolean>false</Boolean>
@@ -572,10 +716,10 @@
                                     <Boolean>false</Boolean>
                                 </field>
                                 <field name="type">
-                                    <String>XSL</String>
+                                    <String>XPROC</String>
                                 </field>
                                 <field name="saveAs">
-                                    <Boolean>true</Boolean>
+                                    <Boolean>false</Boolean>
                                 </field>
                                 <field name="openInBrowser">
                                     <Boolean>false</Boolean>
@@ -605,7 +749,7 @@
                                     <Boolean>false</Boolean>
                                 </field>
                                 <field name="useXSLTInput">
-                                    <Boolean>true</Boolean>
+                                    <Boolean>false</Boolean>
                                 </field>
                                 <field name="xsltParams">
                                     <list/>
@@ -614,12 +758,12 @@
                                     <String-array/>
                                 </field>
                                 <field name="xslTransformer">
-                                    <String>Saxon 9.4</String>
+                                    <String>Calabash XProc</String>
                                 </field>
                                 <field name="extensionURLs">
                                     <String-array/>
                                 </field>
-                            </scenario>
+                            </xprocScenario>
                             <xprocScenario>
                                 <field name="inputPorts">
                                     <xprocInputPort-array>
@@ -1293,24 +1437,7 @@
                                     </xprocOption-array>
                                 </field>
                                 <field name="xprocParameters">
-                                    <xprocParameterPort-array>
-                                        <xprocParameterPort>
-                                            <field name="portName">
-                                                <String>parameters</String>
-                                            </field>
-                                            <field name="parameters">
-                                                <xprocParameter-array/>
-                                            </field>
-                                        </xprocParameterPort>
-                                        <xprocParameterPort>
-                                            <field name="portName">
-                                                <String>*</String>
-                                            </field>
-                                            <field name="parameters">
-                                                <xprocParameter-array/>
-                                            </field>
-                                        </xprocParameterPort>
-                                    </xprocParameterPort-array>
+                                    <xprocParameterPort-array/>
                                 </field>
                                 <field name="advancedOptionsMap">
                                     <null/>
@@ -1699,24 +1826,7 @@
                                     </xprocOption-array>
                                 </field>
                                 <field name="xprocParameters">
-                                    <xprocParameterPort-array>
-                                        <xprocParameterPort>
-                                            <field name="portName">
-                                                <String>parameters</String>
-                                            </field>
-                                            <field name="parameters">
-                                                <xprocParameter-array/>
-                                            </field>
-                                        </xprocParameterPort>
-                                        <xprocParameterPort>
-                                            <field name="portName">
-                                                <String>*</String>
-                                            </field>
-                                            <field name="parameters">
-                                                <xprocParameter-array/>
-                                            </field>
-                                        </xprocParameterPort>
-                                    </xprocParameterPort-array>
+                                    <xprocParameterPort-array/>
                                 </field>
                                 <field name="advancedOptionsMap">
                                     <null/>
@@ -2473,24 +2583,7 @@
                                     </xprocOption-array>
                                 </field>
                                 <field name="xprocParameters">
-                                    <xprocParameterPort-array>
-                                        <xprocParameterPort>
-                                            <field name="portName">
-                                                <String>parameters</String>
-                                            </field>
-                                            <field name="parameters">
-                                                <xprocParameter-array/>
-                                            </field>
-                                        </xprocParameterPort>
-                                        <xprocParameterPort>
-                                            <field name="portName">
-                                                <String>*</String>
-                                            </field>
-                                            <field name="parameters">
-                                                <xprocParameter-array/>
-                                            </field>
-                                        </xprocParameterPort>
-                                    </xprocParameterPort-array>
+                                    <xprocParameterPort-array/>
                                 </field>
                                 <field name="advancedOptionsMap">
                                     <null/>
@@ -2879,24 +2972,7 @@
                                     </xprocOption-array>
                                 </field>
                                 <field name="xprocParameters">
-                                    <xprocParameterPort-array>
-                                        <xprocParameterPort>
-                                            <field name="portName">
-                                                <String>parameters</String>
-                                            </field>
-                                            <field name="parameters">
-                                                <xprocParameter-array/>
-                                            </field>
-                                        </xprocParameterPort>
-                                        <xprocParameterPort>
-                                            <field name="portName">
-                                                <String>*</String>
-                                            </field>
-                                            <field name="parameters">
-                                                <xprocParameter-array/>
-                                            </field>
-                                        </xprocParameterPort>
-                                    </xprocParameterPort-array>
+                                    <xprocParameterPort-array/>
                                 </field>
                                 <field name="advancedOptionsMap">
                                     <null/>
@@ -3285,24 +3361,7 @@
                                     </xprocOption-array>
                                 </field>
                                 <field name="xprocParameters">
-                                    <xprocParameterPort-array>
-                                        <xprocParameterPort>
-                                            <field name="portName">
-                                                <String>parameters</String>
-                                            </field>
-                                            <field name="parameters">
-                                                <xprocParameter-array/>
-                                            </field>
-                                        </xprocParameterPort>
-                                        <xprocParameterPort>
-                                            <field name="portName">
-                                                <String>*</String>
-                                            </field>
-                                            <field name="parameters">
-                                                <xprocParameter-array/>
-                                            </field>
-                                        </xprocParameterPort>
-                                    </xprocParameterPort-array>
+                                    <xprocParameterPort-array/>
                                 </field>
                                 <field name="advancedOptionsMap">
                                     <null/>

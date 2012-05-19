@@ -273,4 +273,7 @@
   <data name="OCLAst_CreateIntegerLiteral_Number__0__is_overflow_" xml:space="preserve">
     <value>Literal `{0}` results in overflow.</value>
   </data>
+  <data name="Operation_GetReturnType_1">
+    <value xml:space="preserve">Cannot decide return type of `{0}`.</value>
+  </data>
 </root>
