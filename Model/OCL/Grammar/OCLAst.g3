@@ -27,16 +27,19 @@ contextDeclarationList
 	;
 	
 contextDeclaration
-	:propertyContextDecl
+	:propertyContextDecl   {$contextDeclarationList::Conts.ClassifierConstraintBlocks.Add($propertyContextDecl.Decl);}
 	|classifierContextDecl {$contextDeclarationList::Conts.ClassifierConstraintBlocks.Add($classifierContextDecl.Decl);}
 	|operationContextDecl
 	;
 
 propertyContextDecl
-	:^(PROPERTYCONDITION propertyContextHead initOrDerValue*)
+	returns[ClassifierConstraintBlock Decl]
+	@init{List<InvariantWithMessage> invs=new List<InvariantWithMessage>(); }
+	:^(PROPERTYCONDITION propertyContextHead (initOrDerValue {invs.Add($initOrDerValue.Constraint);})*) {$Decl = new ClassifierConstraintBlock(null,invs,$propertyContextHead.Self);}
 	;
 
 propertyContextHead
+	returns [Classifier Context, VariableDeclaration Self]
 	:^(PROPERTYHEAD SimpleName+ type)
 	;
 
@@ -62,6 +65,7 @@ classifierContextHead
 	;
 
 initOrDerValue
+	returns[InvariantWithMessage Constraint]
 	:^(INIT oclExpression)
 	|^(DERIVATE oclExpression)
 	;
@@ -121,6 +125,8 @@ primaryExperession
 	 collectionLiteralExp {$Expr = $collectionLiteralExp.Expr;}
 	|		//8C 
 	 tupleLiteralExp {$Expr = $tupleLiteralExp.Literal;}
+	|		
+	 classLiteralExp {$Expr = $classLiteralExp.Literal;}
 	|	 // 8D
 	 ^(PRIMITIVELITERAL primitiveLiteralExp) {$Expr = $primitiveLiteralExp.Literal;}
 	//|	typeLiteralExp //8E
@@ -295,9 +301,13 @@ primitiveLiteralExp //15
 
 tupleLiteralExp //16
 	returns [TupleLiteralExp Literal]
-	:  ^(TUPLELITERAL   variableDeclarationList) {$Literal = CreateTupleLiteral($TUPLELITERAL.Token,$variableDeclarationList.Declarations);}
+	:  ^(TUPLELITERAL   variableDeclarationList ) {$Literal = CreateTupleLiteral($TUPLELITERAL.Token,$variableDeclarationList.Declarations);}
 	;
-	
+
+classLiteralExp 
+	returns [ClassLiteralExp Literal]
+	:  ^(CLASSLITERAL   variableDeclarationList pathName) {$Literal = CreateClassLiteral($CLASSLITERAL.Token,$variableDeclarationList.Declarations, $pathName.Path);}
+	;
 
 variableDeclaration//27
 	returns [VariableDeclarationBag Declaration]

@@ -596,6 +596,71 @@ namespace Exolutio.Model.OCL.Compiler {
                 .SetCodeSource(new CodeSource(rootToken)); ;
         }
 
+        AST.ClassLiteralExp CreateClassLiteral(IToken rootToken, List<VariableDeclarationBag> vars, List<IToken> tokenPath)
+        {
+            if (TestNull(rootToken, vars))
+            {
+                TupleType tupleTypeErr = new TupleType(TypesTable, new List<Property>());
+                TypesTable.RegisterType(tupleTypeErr);
+                return new AST.ClassLiteralExp(new Dictionary<string, AST.TupleLiteralPart>(), tupleTypeErr)
+                     .SetCodeSource(new CodeSource(rootToken));
+            }
+
+            List<string> path = tokenPath.ToStringList();
+            IModelElement element = Environment.LookupPathName(path);
+
+            if (element == null || ! (element is Classifier))
+            {
+                //TODO 
+            }
+
+            Classifier createdClass = (Classifier)element;
+
+            Dictionary<string, AST.TupleLiteralPart> parts = new Dictionary<string, AST.TupleLiteralPart>();
+
+            List<Property> tupleParts = new List<Property>();
+            foreach (var var in vars)
+            {
+                if (parts.ContainsKey(var.Name))
+                {
+                    Errors.AddError(new CodeErrorItem(String.Format(CompilerErrors.OCLAst_CreateTupleLiteral_Name_repeated_1, var.Name), rootToken, rootToken));
+                    continue;
+                }
+
+                AST.OclExpression expr = var.Expression;
+                if (var.Expression == null)
+                {
+                    expr = new AST.ErrorExp(Library.Invalid);
+                }
+
+                Classifier type = var.Type;
+                if (type == null)
+                {
+                    type = expr.Type;
+                }
+
+                if (expr.Type.ConformsTo(type) == false)
+                {
+                    Errors.AddError(new ErrorItem(CompilerErrors.OCLAst_CreateTupleLiteral_Type_does_not_comform_to_declared_type));
+                }
+
+
+                //hodnota
+                var newProterty = new Property(var.Name, PropertyType.One, type);
+                var newPart = new AST.TupleLiteralPart(newProterty, expr);
+                parts.Add(var.Name, newPart);
+
+                //typ
+                tupleParts.Add(newProterty);
+            }
+            //TupleType tupleType = new TupleType(TypesTable, tupleParts);
+            //TypesTable.RegisterType(tupleType);
+
+            return new AST.ClassLiteralExp(parts, createdClass)
+                .SetCodeSource(new CodeSource(rootToken)); 
+        }
+
+
         Classifier ResolveTypePathName(List<IToken> tokenPath) {
             if (TestNull(tokenPath)) {
                 return Library.Invalid;

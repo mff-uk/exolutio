@@ -37,6 +37,8 @@ namespace Exolutio.Model.OCL.AST {
 
         T Visit(TupleLiteralExp node);
 
+        T Visit(ClassLiteralExp node);
+
         T Visit(TypeExp node);
 
         T Visit(UnlimitedNaturalLiteralExp node);
@@ -76,6 +78,8 @@ namespace Exolutio.Model.OCL.AST {
         void Visit(StringLiteralExp node);
 
         void Visit(TupleLiteralExp node);
+
+        void Visit(ClassLiteralExp node);
 
         void Visit(TypeExp node);
 

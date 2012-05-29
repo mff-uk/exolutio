@@ -36,7 +36,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 
         protected OclExpression TranslatedOclExpression { get; set; }
 
-        private void AssignIspartOfIteratorBody(OclExpression node)
+        private void AssignIsPartOfIteratorBody(OclExpression node)
         {
             node.IsPartOfIteratorBody = loopStack.Count > 0;
         }
@@ -48,17 +48,17 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 
         public virtual void Visit(IterateExp node)
         {
-            AssignIspartOfIteratorBody(node);
+            AssignIsPartOfIteratorBody(node);
         }
 
         public virtual void Visit(IteratorExp node)
         {
-            AssignIspartOfIteratorBody(node);
+            AssignIsPartOfIteratorBody(node);
         }
 
         public virtual void Visit(OperationCallExp node)
         {
-            AssignIspartOfIteratorBody(node);
+            AssignIsPartOfIteratorBody(node);
             OclExpression[] arguments = new OclExpression[node.Arguments.Count + 1];
             if (node.Source is PropertyCallExp)
                 this.Visit((PropertyCallExp)node.Source, true);
@@ -82,13 +82,13 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 
         public virtual void Visit(PropertyCallExp node)
         {
-            AssignIspartOfIteratorBody(node);
+            AssignIsPartOfIteratorBody(node);
             Visit(node, false);
         }
 
         public virtual void Visit(PropertyCallExp node, bool isOperationArgument)
         {
-            AssignIspartOfIteratorBody(node);
+            AssignIsPartOfIteratorBody(node);
             PSMPath psmPath = PSMPathBuilder.BuildPSMPath(node, OclContext, VariableNamer, TupleLiteralToXPath, GenericExpressionLiteralToXPath);
             string xpath = psmPath.ToXPath(delayFirstVariableStep:true);
             if (!isOperationArgument)
@@ -115,7 +115,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 
         public virtual void Visit(VariableExp node)
         {
-            AssignIspartOfIteratorBody(node);
+            AssignIsPartOfIteratorBody(node);
             PSMPath psmPath = PSMPathBuilder.BuildPSMPath(node, OclContext, VariableNamer, TupleLiteralToXPath, GenericExpressionLiteralToXPath);
             string xpath = psmPath.ToXPath(delayFirstVariableStep:true);
 
@@ -131,14 +131,14 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 
         public virtual void Visit(LetExp node)
         {
-            AssignIspartOfIteratorBody(node);
+            AssignIsPartOfIteratorBody(node);
         }
 
         #region not supported yet 
 
         public virtual void Visit(TypeExp node)
         {
-            AssignIspartOfIteratorBody(node);
+            AssignIsPartOfIteratorBody(node);
             this.SubexpressionTranslations.AddTrivialTranslation(node, string.Empty);
             // TODO: PSM2XPath: there should be some suport for types in the future
             //throw new ExpressionNotSupportedInXPath(node);
@@ -164,25 +164,30 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 
         public virtual void Visit(TupleLiteralExp node)
         {
-            AssignIspartOfIteratorBody(node);
+            AssignIsPartOfIteratorBody(node);
+        }
+
+        public virtual void Visit(ClassLiteralExp node)
+        {
+            AssignIsPartOfIteratorBody(node);
         }
 
         public virtual void Visit(InvalidLiteralExp node)
         {
-            AssignIspartOfIteratorBody(node);
+            AssignIsPartOfIteratorBody(node);
             SubexpressionTranslations.AddTrivialTranslation(node, "invalid()");
         }
 
         public virtual void Visit(BooleanLiteralExp node)
         {
-            AssignIspartOfIteratorBody(node);
+            AssignIsPartOfIteratorBody(node);
             // instead boolean literals, functions are used
             SubexpressionTranslations.AddTrivialTranslation(node, node.Value ? "true()" : "false()");
         }
 
         public virtual void Visit(CollectionLiteralExp node)
         {
-            AssignIspartOfIteratorBody(node);
+            AssignIsPartOfIteratorBody(node);
             StringBuilder formatBuilder = new StringBuilder();
             List<OclExpression> subExpressions = new List<OclExpression>();
 
@@ -246,37 +251,37 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 
         public virtual void Visit(EnumLiteralExp node)
         {
-            AssignIspartOfIteratorBody(node);
+            AssignIsPartOfIteratorBody(node);
             throw new ExpressionNotSupportedInXPath(node);
         }
 
         public virtual void Visit(NullLiteralExp node)
         {
-            AssignIspartOfIteratorBody(node);
+            AssignIsPartOfIteratorBody(node);
             SubexpressionTranslations.AddTrivialTranslation(node, "()");
         }
 
         public virtual void Visit(UnlimitedNaturalLiteralExp node)
         {
-            AssignIspartOfIteratorBody(node);
+            AssignIsPartOfIteratorBody(node);
             SubexpressionTranslations.AddTrivialTranslation(node, node.ToString());
         }
 
         public virtual void Visit(IntegerLiteralExp node)
         {
-            AssignIspartOfIteratorBody(node);
+            AssignIsPartOfIteratorBody(node);
             SubexpressionTranslations.AddTrivialTranslation(node, node.Value.ToString());
         }
 
         public virtual void Visit(RealLiteralExp node)
         {
-            AssignIspartOfIteratorBody(node);
+            AssignIsPartOfIteratorBody(node);
             SubexpressionTranslations.AddTrivialTranslation(node, node.Value.ToString());
         }
 
         public virtual void Visit(StringLiteralExp node)
         {
-            AssignIspartOfIteratorBody(node);
+            AssignIsPartOfIteratorBody(node);
             SubexpressionTranslations.AddTrivialTranslation(node, string.Format("'{0}'", node.Value));
         }
 

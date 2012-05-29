@@ -133,6 +133,11 @@ namespace Exolutio.Model.OCL.Utils {
             throw new NotImplementedException();
         }
 
+        public void Visit(ClassLiteralExp node)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Visit(TypeExp node) {
             throw new NotImplementedException();
         }
