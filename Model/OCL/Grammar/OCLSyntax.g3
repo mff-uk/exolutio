@@ -9,7 +9,7 @@ options {
 tokens{
  INFIX;UNARY;MESSAGE;PRIMITIVELITERAL;TYPE;CALL;INDEX;ITERATE;CALLARGS;VARDECL;DECL;PATH;COLLECTIONLITERAL; COLLECTIONTYPE;COLLPART;COLLPARTRANGE;TUPLELITERAL;LET;COLLTYPE;
  CONDITION;PROPERTYCONDITION;PROPERTYHEAD;OPERATIONCONDITION; OPERATIONHEAD; CLASSIFIERCONDITION; CLASSIFIERHEAD;
- INIT;DERIVATE;INV;MESSAGE; DEF; PRE;POST;BODY;OPERATION;IF;ARGS;ACC;
+ INIT;DERIVATE;INV;MESSAGE; DEF; PRE;POST;BODY;OPERATION;IF;ARGS;ACC;CLASSLITERAL;
 }
 
 
@@ -62,7 +62,7 @@ classifierContextHead
 
 initOrDerValue
 	:i='init' ':' oclExpression -> ^(INIT[$i] oclExpression)
-	|d='derivate' ':' oclExpression ->^(DERIVATE[$d] oclExpression)
+	|d='derive' ':' oclExpression ->^(DERIVATE[$d] oclExpression)
 	;
 
 invOrDef
@@ -71,6 +71,7 @@ invOrDef
 		-> ^(INV[$i] SimpleName? oclExpression (MESSAGE[$m] $msgExp)?)
 	| 'static'? d='def' SimpleName? ':' defExpression
 		-> ^(DEF[$d] 'static'? SimpleName? defExpression)
+	
 	;
 
 prePostOrBodyDecl
@@ -149,7 +150,7 @@ primaryExperession
 	/*|*/	collectionLiteralExpAndType //8B, castecne 8E(22)
 	
 	|	tupleLiteralExp	//8C 
-			
+	|	classLiteralExp		
 	|	primitiveLiteralExp // 8D
 			->^(PRIMITIVELITERAL primitiveLiteralExp)
 	//|	typeLiteralExp //8E
@@ -270,11 +271,15 @@ primitiveLiteralExp //15
 	| NullLiteralExp	
 	| InvalidLiteralExp
 	;
+
 tupleLiteralExp //16
-	
 	: roottoken='Tuple' '{' variableDeclarationList[VariableDeclarationRequirement.TupleLiteral] '}' -> ^(TUPLELITERAL[$roottoken]  variableDeclarationList)
 	;
 	
+classLiteralExp
+	: roottoken='new' pathName '{' variableDeclarationList[VariableDeclarationRequirement.TupleLiteral] '}'-> ^(CLASSLITERAL[$roottoken]  variableDeclarationList pathName)
+	;
+
 typeLiteralExp //22 nepouzite pravidlo
 	:type
 	;

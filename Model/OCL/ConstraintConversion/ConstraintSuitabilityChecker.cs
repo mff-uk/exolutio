@@ -59,6 +59,14 @@ namespace Exolutio.Model.OCL.ConstraintConversion
             return false;
         }
 
+        public override bool Visit(ClassLiteralExp node)
+        {
+            /* Class literals we can't handle yet */
+            isSuitable = false;
+            violatingExpression = node;
+            return false;
+        }
+
         public override bool Visit(TypeExp node)
         {
             /* Types we can't handle yet */

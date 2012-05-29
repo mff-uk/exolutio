@@ -213,6 +213,14 @@ namespace Exolutio.Model.OCL.ConstraintConversion
             throw new OclConstructNotAvailableInPSM(node); 
         }
 
+        public override OclExpression Visit(ClassLiteralExp node)
+        {
+            /* Class literals we can't handle yet */
+            isSuitable = false;
+            notSupportedExpression = node;
+            throw new OclConstructNotAvailableInPSM(node);
+        }
+
         public override OclExpression Visit(TypeExp node)
         {
             /* Types we can't handle yet */

@@ -144,6 +144,15 @@ namespace Exolutio.Model.OCL.Utils
             }
         }
 
+        public void Visit(ClassLiteralExp node)
+        {
+            foreach (KeyValuePair<string, TupleLiteralPart> kvp in node.Parts)
+            {
+                Expressions.Add(kvp.Value.Value);
+                kvp.Value.Value.Accept(this);
+            }
+        }
+
         public void Visit(TypeExp node) { }
 
         public void Visit(UnlimitedNaturalLiteralExp node) { }

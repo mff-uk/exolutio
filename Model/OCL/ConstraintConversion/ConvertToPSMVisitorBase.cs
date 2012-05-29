@@ -53,6 +53,7 @@ namespace Exolutio.Model.OCL.ConstraintConversion
         public abstract TType Visit(ErrorExp node);
         public abstract TType Visit(LetExp node);
         public abstract TType Visit(TupleLiteralExp node);
+        public abstract TType Visit(ClassLiteralExp node);
         public abstract TType Visit(TypeExp node);
 
         private LoopExp GetLoopExpForVariable(VariableExp v)

@@ -218,8 +218,29 @@ namespace Exolutio.Model.OCL.Utils {
 
         public void Visit(TupleLiteralExp node) {
             sb.Append("Tuple");
-            sb.Append("{");
+            sb.Append(" {");
             PrintArgs(node.Parts, ",", (v) => {
+                if (v.Value.Type != null)
+                {
+                    sb.AppendFormat("{0} : {1} = ", v.Key, v.Value.Type.Name);
+                }
+                else
+                {
+                    sb.AppendFormat("{0} = ", v.Key);
+                }
+                v.Value.Value.Accept(this);
+            });
+            sb.Append("} ");
+        }
+
+
+        public void Visit(ClassLiteralExp node)
+        {
+            sb.Append("new ");
+            sb.Append(node.Type.ToString());
+            sb.Append(" {");
+            PrintArgs(node.Parts, ",", (v) =>
+            {
                 if (v.Value.Type != null)
                 {
                     sb.AppendFormat("{0} : {1} = ", v.Key, v.Value.Type.Name);
