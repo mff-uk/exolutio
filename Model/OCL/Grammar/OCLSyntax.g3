@@ -39,7 +39,7 @@ propertyContextDecl
 	;
 
 propertyContextHead
-	:c='context' SimpleName ('::' SimpleName)+ ':' type
+	:c='context' SimpleName ('::' SimpleName)* '::' SimpleName ':' type
 		-> ^(PROPERTYHEAD[$c] SimpleName+ type)
 	;
 

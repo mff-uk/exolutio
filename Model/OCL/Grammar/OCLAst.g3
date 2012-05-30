@@ -17,45 +17,40 @@ using Exolutio.Model.OCL.Types;
 
 public
 contextDeclarationList
-	returns[Constraints Constraints]
+	returns[Constraints Constraints, PropertyInitializations PropertyInitializations]
 	scope{
 		Constraints Conts;
+		PropertyInitializations Props;
 	}
-	@init{$contextDeclarationList::Conts = new Constraints();}
-	@after{$Constraints = $contextDeclarationList::Conts;}
+	@init{$contextDeclarationList::Conts = new Constraints(); $contextDeclarationList::Props = new PropertyInitializations();}
+	@after{$Constraints = $contextDeclarationList::Conts; $PropertyInitializations = $contextDeclarationList::Props;}
 	: ^(CONDITION contextDeclaration*)
 	;
 	
 contextDeclaration
-	:propertyContextDecl   {$contextDeclarationList::Conts.ClassifierConstraintBlocks.Add($propertyContextDecl.Decl);}
+	:propertyContextDecl   {$contextDeclarationList::Props.PropertyInitializationBlocks.Add($propertyContextDecl.Decl);}
 	|classifierContextDecl {$contextDeclarationList::Conts.ClassifierConstraintBlocks.Add($classifierContextDecl.Decl);}
 	|operationContextDecl
 	;
 
 propertyContextDecl
-	returns[ClassifierConstraintBlock Decl]
-	@init{List<InvariantWithMessage> invs=new List<InvariantWithMessage>(); }
-	:^(PROPERTYCONDITION propertyContextHead (initOrDerValue {invs.Add($initOrDerValue.Constraint);})*) {$Decl = new ClassifierConstraintBlock(null,invs,$propertyContextHead.Self);}
+	returns[PropertyInitializationBlock Decl]
+	@init{List<PropertyInitialization> invs=new List<PropertyInitialization>(); }
+	@after{EnvironmentStack.Pop();EnvironmentStack.Pop();}
+	:^(PROPERTYCONDITION propertyContextHead (initOrDerValue {$initOrDerValue.Initialization.Property = $propertyContextHead.Property; invs.Add($initOrDerValue.Initialization);})*) {$Decl = new PropertyInitializationBlock($propertyContextHead.Context, invs);}
 	;
 
 propertyContextHead
-	returns [Classifier Context, VariableDeclaration Self]
-	:^(PROPERTYHEAD SimpleName+ type)
-	;
-
-operationContextDecl
-	:^(OPERATIONCONDITION operationContextHead prePostOrBodyDecl*)
-	;
-
-operationContextHead
-	:^(OPERATIONHEAD operation)
+	returns [Classifier Context, Property Property, VariableDeclaration Self]
+	@init{List<string> simpleNames=new List<string>(); }
+	:^(PROPERTYHEAD (SimpleName { simpleNames.Add($SimpleName.Text);})+ type ) {$Context=PropertyContextHead(simpleNames, VariableDeclaration.SELF, $type.Type, out $Self, out $Property);}
 	;
 
 classifierContextDecl
 	returns[ClassifierConstraintBlock Decl]
 	@init{List<InvariantWithMessage> invs=new List<InvariantWithMessage>(); }
 	@after{EnvironmentStack.Pop();EnvironmentStack.Pop();}
-	: ^(CLASSIFIERCONDITION classifierContextHead (invOrDef {invs.Add($invOrDef.Constraint);})*) {$Decl = new ClassifierConstraintBlock($classifierContextHead.Context,invs,$classifierContextHead.Self);}
+	: ^(CLASSIFIERCONDITION classifierContextHead (invOrDef {invs.Add($invOrDef.Invariant);})*) {$Decl = new ClassifierConstraintBlock($classifierContextHead.Context,invs,$classifierContextHead.Self);}
 	;
 
 classifierContextHead
@@ -65,25 +60,32 @@ classifierContextHead
 	;
 
 initOrDerValue
-	returns[InvariantWithMessage Constraint]
-	:^(INIT oclExpression)
+	returns[PropertyInitialization Initialization]
+	:^(INIT inv = oclExpression) {$Initialization=new PropertyInitialization($inv.Expr); }
 	|^(DERIVATE oclExpression)
 	;
 
 invOrDef
-	returns[InvariantWithMessage Constraint]
+	returns[InvariantWithMessage Invariant]
 	:^(INV SimpleName? inv = oclExpression 
 		(MESSAGE msgExp = oclExpression)?
-	  ) {$Constraint=new InvariantWithMessage($inv.Expr,$msgExp.Expr); }
+	  ) {$Invariant=new InvariantWithMessage($inv.Expr,$msgExp.Expr); }
 	| ^(DEF 'static'? SimpleName? defExpression) {Errors.AddError(new ErrorItem("Definition of new property/operation do not supported."));}
 	;
 
+operationContextDecl
+	:^(OPERATIONCONDITION operationContextHead prePostOrBodyDecl*)
+	;
+
+operationContextHead
+	:^(OPERATIONHEAD operation)
+	;
+	
 prePostOrBodyDecl
 	:^(PRE SimpleName? oclExpression)
 	|^(POST SimpleName? oclExpression)
 	|^(BODY SimpleName? oclExpression)
 	;
-
 
 operation
 	:^(OPERATION pathName parameters? type?)
