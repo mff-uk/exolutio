@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// $ANTLR 3.3.1.7705 ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3 2012-05-29 15:25:38
+// $ANTLR 3.3.1.7705 ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3 2012-05-30 11:10:20
 
 // The variable 'variable' is assigned but its value is never used.
 #pragma warning disable 219
@@ -186,6 +186,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 	protected sealed partial class contextDeclarationList_scope
 	{
 		public Constraints Conts;
+		public PropertyInitializations Props;
 
 		public contextDeclarationList_scope(OCLAst grammar) { OnCreated(grammar); }
 		partial void OnCreated(OCLAst grammar);
@@ -194,39 +195,47 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 	partial void contextDeclarationList_scopeAfter( contextDeclarationList_scope scope );
 	protected readonly Stack<contextDeclarationList_scope> contextDeclarationList_stack = new Stack<contextDeclarationList_scope>();
 
+	public sealed partial class contextDeclarationList_return : TreeRuleReturnScope<CommonTree>
+	{
+		public Constraints Constraints;
+		public PropertyInitializations PropertyInitializations;
+		public contextDeclarationList_return(OCLAst grammar) {OnCreated(grammar);}
+		partial void OnCreated(OCLAst grammar);
+	}
 
 	partial void EnterRule_contextDeclarationList();
 	partial void LeaveRule_contextDeclarationList();
 
 	// $ANTLR start "contextDeclarationList"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:19:1: public contextDeclarationList returns [Constraints Constraints] : ^( CONDITION ( contextDeclaration )* ) ;
+	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:19:1: public contextDeclarationList returns [Constraints Constraints, PropertyInitializations PropertyInitializations] : ^( CONDITION ( contextDeclaration )* ) ;
 	[GrammarRule("contextDeclarationList")]
-	public Constraints contextDeclarationList()
+	public OCLAst.contextDeclarationList_return contextDeclarationList()
 	{
 		EnterRule_contextDeclarationList();
 		EnterRule("contextDeclarationList", 1);
 		TraceIn("contextDeclarationList", 1);
 		contextDeclarationList_stack.Push(new contextDeclarationList_scope(this));contextDeclarationList_scopeInit(contextDeclarationList_stack.Peek());
-		Constraints Constraints = default(Constraints);
+		OCLAst.contextDeclarationList_return retval = new OCLAst.contextDeclarationList_return(this);
+		retval.Start = (CommonTree)input.LT(1);
 
-		contextDeclarationList_stack.Peek().Conts =  new Constraints();
+		contextDeclarationList_stack.Peek().Conts =  new Constraints(); contextDeclarationList_stack.Peek().Props =  new PropertyInitializations();
 		try { DebugEnterRule(GrammarFileName, "contextDeclarationList");
 		DebugLocation(19, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:26:2: ( ^( CONDITION ( contextDeclaration )* ) )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:27:2: ( ^( CONDITION ( contextDeclaration )* ) )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:26:4: ^( CONDITION ( contextDeclaration )* )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:27:4: ^( CONDITION ( contextDeclaration )* )
 			{
-			DebugLocation(26, 4);
-			DebugLocation(26, 6);
+			DebugLocation(27, 4);
+			DebugLocation(27, 6);
 			Match(input,CONDITION,Follow._CONDITION_in_contextDeclarationList76); 
 
 			if (input.LA(1) == TokenTypes.Down)
 			{
 				Match(input, TokenTypes.Down, null); 
-				DebugLocation(26, 16);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:26:16: ( contextDeclaration )*
+				DebugLocation(27, 16);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:27:16: ( contextDeclaration )*
 				try { DebugEnterSubRule(1);
 				while (true)
 				{
@@ -245,9 +254,9 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 					{
 					case 1:
 						DebugEnterAlt(1);
-						// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:26:16: contextDeclaration
+						// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:27:16: contextDeclaration
 						{
-						DebugLocation(26, 16);
+						DebugLocation(27, 16);
 						PushFollow(Follow._contextDeclaration_in_contextDeclarationList78);
 						contextDeclaration();
 						PopFollow();
@@ -272,7 +281,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 
 			}
 
-			Constraints = contextDeclarationList_stack.Peek().Conts;
+			retval.Constraints = contextDeclarationList_stack.Peek().Conts; retval.PropertyInitializations = contextDeclarationList_stack.Peek().Props;
 		}
 		catch (RecognitionException re)
 		{
@@ -286,9 +295,9 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			LeaveRule_contextDeclarationList();
 			contextDeclarationList_scopeAfter(contextDeclarationList_stack.Peek());contextDeclarationList_stack.Pop();
 		}
-		DebugLocation(27, 1);
+		DebugLocation(28, 1);
 		} finally { DebugExitRule(GrammarFileName, "contextDeclarationList"); }
-		return Constraints;
+		return retval;
 
 	}
 	// $ANTLR end "contextDeclarationList"
@@ -298,21 +307,21 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 	partial void LeaveRule_contextDeclaration();
 
 	// $ANTLR start "contextDeclaration"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:29:1: contextDeclaration : ( propertyContextDecl | classifierContextDecl | operationContextDecl );
+	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:30:1: contextDeclaration : ( propertyContextDecl | classifierContextDecl | operationContextDecl );
 	[GrammarRule("contextDeclaration")]
 	private void contextDeclaration()
 	{
 		EnterRule_contextDeclaration();
 		EnterRule("contextDeclaration", 2);
 		TraceIn("contextDeclaration", 2);
-		ClassifierConstraintBlock propertyContextDecl1 = default(ClassifierConstraintBlock);
+		PropertyInitializationBlock propertyContextDecl1 = default(PropertyInitializationBlock);
 		ClassifierConstraintBlock classifierContextDecl2 = default(ClassifierConstraintBlock);
 
 		try { DebugEnterRule(GrammarFileName, "contextDeclaration");
-		DebugLocation(29, 1);
+		DebugLocation(30, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:30:2: ( propertyContextDecl | classifierContextDecl | operationContextDecl )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:31:2: ( propertyContextDecl | classifierContextDecl | operationContextDecl )
 			int alt2=3;
 			try { DebugEnterDecision(2, false);
 			switch (input.LA(1))
@@ -345,37 +354,37 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:30:3: propertyContextDecl
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:31:3: propertyContextDecl
 				{
-				DebugLocation(30, 3);
+				DebugLocation(31, 3);
 				PushFollow(Follow._propertyContextDecl_in_contextDeclaration91);
 				propertyContextDecl1=propertyContextDecl();
 				PopFollow();
 
-				DebugLocation(30, 25);
-				contextDeclarationList_stack.Peek().Conts.ClassifierConstraintBlocks.Add(propertyContextDecl1);
+				DebugLocation(31, 25);
+				contextDeclarationList_stack.Peek().Props.PropertyInitializationBlocks.Add(propertyContextDecl1);
 
 				}
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:31:3: classifierContextDecl
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:32:3: classifierContextDecl
 				{
-				DebugLocation(31, 3);
+				DebugLocation(32, 3);
 				PushFollow(Follow._classifierContextDecl_in_contextDeclaration99);
 				classifierContextDecl2=classifierContextDecl();
 				PopFollow();
 
-				DebugLocation(31, 25);
+				DebugLocation(32, 25);
 				contextDeclarationList_stack.Peek().Conts.ClassifierConstraintBlocks.Add(classifierContextDecl2);
 
 				}
 				break;
 			case 3:
 				DebugEnterAlt(3);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:32:3: operationContextDecl
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:33:3: operationContextDecl
 				{
-				DebugLocation(32, 3);
+				DebugLocation(33, 3);
 				PushFollow(Follow._operationContextDecl_in_contextDeclaration105);
 				operationContextDecl();
 				PopFollow();
@@ -397,7 +406,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			LeaveRule("contextDeclaration", 2);
 			LeaveRule_contextDeclaration();
 		}
-		DebugLocation(33, 1);
+		DebugLocation(34, 1);
 		} finally { DebugExitRule(GrammarFileName, "contextDeclaration"); }
 		return;
 
@@ -409,39 +418,39 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 	partial void LeaveRule_propertyContextDecl();
 
 	// $ANTLR start "propertyContextDecl"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:35:1: propertyContextDecl returns [ClassifierConstraintBlock Decl] : ^( PROPERTYCONDITION propertyContextHead ( initOrDerValue )* ) ;
+	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:36:1: propertyContextDecl returns [PropertyInitializationBlock Decl] : ^( PROPERTYCONDITION propertyContextHead ( initOrDerValue )* ) ;
 	[GrammarRule("propertyContextDecl")]
-	private ClassifierConstraintBlock propertyContextDecl()
+	private PropertyInitializationBlock propertyContextDecl()
 	{
 		EnterRule_propertyContextDecl();
 		EnterRule("propertyContextDecl", 3);
 		TraceIn("propertyContextDecl", 3);
-		ClassifierConstraintBlock Decl = default(ClassifierConstraintBlock);
+		PropertyInitializationBlock Decl = default(PropertyInitializationBlock);
 
-		InvariantWithMessage initOrDerValue3 = default(InvariantWithMessage);
+		PropertyInitialization initOrDerValue3 = default(PropertyInitialization);
 		OCLAst.propertyContextHead_return propertyContextHead4 = default(OCLAst.propertyContextHead_return);
 
-		List<InvariantWithMessage> invs=new List<InvariantWithMessage>(); 
+		List<PropertyInitialization> invs=new List<PropertyInitialization>(); 
 		try { DebugEnterRule(GrammarFileName, "propertyContextDecl");
-		DebugLocation(35, 1);
+		DebugLocation(36, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:38:2: ( ^( PROPERTYCONDITION propertyContextHead ( initOrDerValue )* ) )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:40:2: ( ^( PROPERTYCONDITION propertyContextHead ( initOrDerValue )* ) )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:38:3: ^( PROPERTYCONDITION propertyContextHead ( initOrDerValue )* )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:40:3: ^( PROPERTYCONDITION propertyContextHead ( initOrDerValue )* )
 			{
-			DebugLocation(38, 3);
-			DebugLocation(38, 5);
-			Match(input,PROPERTYCONDITION,Follow._PROPERTYCONDITION_in_propertyContextDecl125); 
+			DebugLocation(40, 3);
+			DebugLocation(40, 5);
+			Match(input,PROPERTYCONDITION,Follow._PROPERTYCONDITION_in_propertyContextDecl130); 
 
 			Match(input, TokenTypes.Down, null); 
-			DebugLocation(38, 23);
-			PushFollow(Follow._propertyContextHead_in_propertyContextDecl127);
+			DebugLocation(40, 23);
+			PushFollow(Follow._propertyContextHead_in_propertyContextDecl132);
 			propertyContextHead4=propertyContextHead();
 			PopFollow();
 
-			DebugLocation(38, 43);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:38:43: ( initOrDerValue )*
+			DebugLocation(40, 43);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:40:43: ( initOrDerValue )*
 			try { DebugEnterSubRule(3);
 			while (true)
 			{
@@ -460,15 +469,15 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:38:44: initOrDerValue
+					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:40:44: initOrDerValue
 					{
-					DebugLocation(38, 44);
-					PushFollow(Follow._initOrDerValue_in_propertyContextDecl130);
+					DebugLocation(40, 44);
+					PushFollow(Follow._initOrDerValue_in_propertyContextDecl135);
 					initOrDerValue3=initOrDerValue();
 					PopFollow();
 
-					DebugLocation(38, 59);
-					invs.Add(initOrDerValue3);
+					DebugLocation(40, 59);
+					initOrDerValue3.Property = (propertyContextHead4!=null?propertyContextHead4.Property:default(Property)); invs.Add(initOrDerValue3);
 
 					}
 					break;
@@ -485,11 +494,12 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 
 
 			Match(input, TokenTypes.Up, null); 
-			DebugLocation(38, 102);
-			Decl = new ClassifierConstraintBlock(null,invs,(propertyContextHead4!=null?propertyContextHead4.Self:default(VariableDeclaration)));
+			DebugLocation(40, 179);
+			Decl = new PropertyInitializationBlock((propertyContextHead4!=null?propertyContextHead4.Context:default(Classifier)), invs);
 
 			}
 
+			EnvironmentStack.Pop();EnvironmentStack.Pop();
 		}
 		catch (RecognitionException re)
 		{
@@ -502,7 +512,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			LeaveRule("propertyContextDecl", 3);
 			LeaveRule_propertyContextDecl();
 		}
-		DebugLocation(39, 1);
+		DebugLocation(41, 1);
 		} finally { DebugExitRule(GrammarFileName, "propertyContextDecl"); }
 		return Decl;
 
@@ -512,6 +522,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 	private sealed partial class propertyContextHead_return : TreeRuleReturnScope<CommonTree>
 	{
 		public Classifier Context;
+		public Property Property;
 		public VariableDeclaration Self;
 		public propertyContextHead_return(OCLAst grammar) {OnCreated(grammar);}
 		partial void OnCreated(OCLAst grammar);
@@ -521,7 +532,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 	partial void LeaveRule_propertyContextHead();
 
 	// $ANTLR start "propertyContextHead"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:41:1: propertyContextHead returns [Classifier Context, VariableDeclaration Self] : ^( PROPERTYHEAD ( SimpleName )+ type ) ;
+	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:43:1: propertyContextHead returns [Classifier Context, Property Property, VariableDeclaration Self] : ^( PROPERTYHEAD ( SimpleName )+ type ) ;
 	[GrammarRule("propertyContextHead")]
 	private OCLAst.propertyContextHead_return propertyContextHead()
 	{
@@ -531,21 +542,25 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 		OCLAst.propertyContextHead_return retval = new OCLAst.propertyContextHead_return(this);
 		retval.Start = (CommonTree)input.LT(1);
 
+		CommonTree SimpleName5 = default(CommonTree);
+		Classifier type6 = default(Classifier);
+
+		List<string> simpleNames=new List<string>(); 
 		try { DebugEnterRule(GrammarFileName, "propertyContextHead");
-		DebugLocation(41, 1);
+		DebugLocation(43, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:43:2: ( ^( PROPERTYHEAD ( SimpleName )+ type ) )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:46:2: ( ^( PROPERTYHEAD ( SimpleName )+ type ) )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:43:3: ^( PROPERTYHEAD ( SimpleName )+ type )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:46:3: ^( PROPERTYHEAD ( SimpleName )+ type )
 			{
-			DebugLocation(43, 3);
-			DebugLocation(43, 5);
-			Match(input,PROPERTYHEAD,Follow._PROPERTYHEAD_in_propertyContextHead153); 
+			DebugLocation(46, 3);
+			DebugLocation(46, 5);
+			Match(input,PROPERTYHEAD,Follow._PROPERTYHEAD_in_propertyContextHead163); 
 
 			Match(input, TokenTypes.Down, null); 
-			DebugLocation(43, 18);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:43:18: ( SimpleName )+
+			DebugLocation(46, 18);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:46:18: ( SimpleName )+
 			int cnt4=0;
 			try { DebugEnterSubRule(4);
 			while (true)
@@ -565,10 +580,12 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:43:18: SimpleName
+					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:46:19: SimpleName
 					{
-					DebugLocation(43, 18);
-					Match(input,SimpleName,Follow._SimpleName_in_propertyContextHead155); 
+					DebugLocation(46, 19);
+					SimpleName5=(CommonTree)Match(input,SimpleName,Follow._SimpleName_in_propertyContextHead166); 
+					DebugLocation(46, 30);
+					 simpleNames.Add(SimpleName5.Text);
 
 					}
 					break;
@@ -588,13 +605,15 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 
 			} finally { DebugExitSubRule(4); }
 
-			DebugLocation(43, 30);
-			PushFollow(Follow._type_in_propertyContextHead158);
-			type();
+			DebugLocation(46, 70);
+			PushFollow(Follow._type_in_propertyContextHead172);
+			type6=type();
 			PopFollow();
 
 
 			Match(input, TokenTypes.Up, null); 
+			DebugLocation(46, 77);
+			retval.Context =PropertyContextHead(simpleNames, VariableDeclaration.SELF, type6, out retval.Self, out retval.Property);
 
 			}
 
@@ -610,7 +629,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			LeaveRule("propertyContextHead", 4);
 			LeaveRule_propertyContextHead();
 		}
-		DebugLocation(44, 1);
+		DebugLocation(47, 1);
 		} finally { DebugExitRule(GrammarFileName, "propertyContextHead"); }
 		return retval;
 
@@ -618,37 +637,43 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 	// $ANTLR end "propertyContextHead"
 
 
-	partial void EnterRule_operationContextDecl();
-	partial void LeaveRule_operationContextDecl();
+	partial void EnterRule_classifierContextDecl();
+	partial void LeaveRule_classifierContextDecl();
 
-	// $ANTLR start "operationContextDecl"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:46:1: operationContextDecl : ^( OPERATIONCONDITION operationContextHead ( prePostOrBodyDecl )* ) ;
-	[GrammarRule("operationContextDecl")]
-	private void operationContextDecl()
+	// $ANTLR start "classifierContextDecl"
+	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:49:1: classifierContextDecl returns [ClassifierConstraintBlock Decl] : ^( CLASSIFIERCONDITION classifierContextHead ( invOrDef )* ) ;
+	[GrammarRule("classifierContextDecl")]
+	private ClassifierConstraintBlock classifierContextDecl()
 	{
-		EnterRule_operationContextDecl();
-		EnterRule("operationContextDecl", 5);
-		TraceIn("operationContextDecl", 5);
-		try { DebugEnterRule(GrammarFileName, "operationContextDecl");
-		DebugLocation(46, 1);
+		EnterRule_classifierContextDecl();
+		EnterRule("classifierContextDecl", 5);
+		TraceIn("classifierContextDecl", 5);
+		ClassifierConstraintBlock Decl = default(ClassifierConstraintBlock);
+
+		InvariantWithMessage invOrDef7 = default(InvariantWithMessage);
+		OCLAst.classifierContextHead_return classifierContextHead8 = default(OCLAst.classifierContextHead_return);
+
+		List<InvariantWithMessage> invs=new List<InvariantWithMessage>(); 
+		try { DebugEnterRule(GrammarFileName, "classifierContextDecl");
+		DebugLocation(49, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:47:2: ( ^( OPERATIONCONDITION operationContextHead ( prePostOrBodyDecl )* ) )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:53:2: ( ^( CLASSIFIERCONDITION classifierContextHead ( invOrDef )* ) )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:47:3: ^( OPERATIONCONDITION operationContextHead ( prePostOrBodyDecl )* )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:53:4: ^( CLASSIFIERCONDITION classifierContextHead ( invOrDef )* )
 			{
-			DebugLocation(47, 3);
-			DebugLocation(47, 5);
-			Match(input,OPERATIONCONDITION,Follow._OPERATIONCONDITION_in_operationContextDecl170); 
+			DebugLocation(53, 4);
+			DebugLocation(53, 6);
+			Match(input,CLASSIFIERCONDITION,Follow._CLASSIFIERCONDITION_in_classifierContextDecl202); 
 
 			Match(input, TokenTypes.Down, null); 
-			DebugLocation(47, 24);
-			PushFollow(Follow._operationContextHead_in_operationContextDecl172);
-			operationContextHead();
+			DebugLocation(53, 26);
+			PushFollow(Follow._classifierContextHead_in_classifierContextDecl204);
+			classifierContextHead8=classifierContextHead();
 			PopFollow();
 
-			DebugLocation(47, 45);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:47:45: ( prePostOrBodyDecl )*
+			DebugLocation(53, 48);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:53:48: ( invOrDef )*
 			try { DebugEnterSubRule(5);
 			while (true)
 			{
@@ -656,7 +681,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 				try { DebugEnterDecision(5, false);
 				int LA5_0 = input.LA(1);
 
-				if ((LA5_0==BODY||(LA5_0>=POST && LA5_0<=PRE)))
+				if ((LA5_0==DEF||LA5_0==INV))
 				{
 					alt5 = 1;
 				}
@@ -667,13 +692,15 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:47:45: prePostOrBodyDecl
+					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:53:49: invOrDef
 					{
-					DebugLocation(47, 45);
-					PushFollow(Follow._prePostOrBodyDecl_in_operationContextDecl174);
-					prePostOrBodyDecl();
+					DebugLocation(53, 49);
+					PushFollow(Follow._invOrDef_in_classifierContextDecl207);
+					invOrDef7=invOrDef();
 					PopFollow();
 
+					DebugLocation(53, 58);
+					invs.Add(invOrDef7);
 
 					}
 					break;
@@ -690,165 +717,8 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 
 
 			Match(input, TokenTypes.Up, null); 
-
-			}
-
-		}
-		catch (RecognitionException re)
-		{
-			ReportError(re);
-			Recover(input,re);
-		}
-		finally
-		{
-			TraceOut("operationContextDecl", 5);
-			LeaveRule("operationContextDecl", 5);
-			LeaveRule_operationContextDecl();
-		}
-		DebugLocation(48, 1);
-		} finally { DebugExitRule(GrammarFileName, "operationContextDecl"); }
-		return;
-
-	}
-	// $ANTLR end "operationContextDecl"
-
-
-	partial void EnterRule_operationContextHead();
-	partial void LeaveRule_operationContextHead();
-
-	// $ANTLR start "operationContextHead"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:50:1: operationContextHead : ^( OPERATIONHEAD operation ) ;
-	[GrammarRule("operationContextHead")]
-	private void operationContextHead()
-	{
-		EnterRule_operationContextHead();
-		EnterRule("operationContextHead", 6);
-		TraceIn("operationContextHead", 6);
-		try { DebugEnterRule(GrammarFileName, "operationContextHead");
-		DebugLocation(50, 1);
-		try
-		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:51:2: ( ^( OPERATIONHEAD operation ) )
-			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:51:3: ^( OPERATIONHEAD operation )
-			{
-			DebugLocation(51, 3);
-			DebugLocation(51, 5);
-			Match(input,OPERATIONHEAD,Follow._OPERATIONHEAD_in_operationContextHead187); 
-
-			Match(input, TokenTypes.Down, null); 
-			DebugLocation(51, 19);
-			PushFollow(Follow._operation_in_operationContextHead189);
-			operation();
-			PopFollow();
-
-
-			Match(input, TokenTypes.Up, null); 
-
-			}
-
-		}
-		catch (RecognitionException re)
-		{
-			ReportError(re);
-			Recover(input,re);
-		}
-		finally
-		{
-			TraceOut("operationContextHead", 6);
-			LeaveRule("operationContextHead", 6);
-			LeaveRule_operationContextHead();
-		}
-		DebugLocation(52, 1);
-		} finally { DebugExitRule(GrammarFileName, "operationContextHead"); }
-		return;
-
-	}
-	// $ANTLR end "operationContextHead"
-
-
-	partial void EnterRule_classifierContextDecl();
-	partial void LeaveRule_classifierContextDecl();
-
-	// $ANTLR start "classifierContextDecl"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:54:1: classifierContextDecl returns [ClassifierConstraintBlock Decl] : ^( CLASSIFIERCONDITION classifierContextHead ( invOrDef )* ) ;
-	[GrammarRule("classifierContextDecl")]
-	private ClassifierConstraintBlock classifierContextDecl()
-	{
-		EnterRule_classifierContextDecl();
-		EnterRule("classifierContextDecl", 7);
-		TraceIn("classifierContextDecl", 7);
-		ClassifierConstraintBlock Decl = default(ClassifierConstraintBlock);
-
-		InvariantWithMessage invOrDef5 = default(InvariantWithMessage);
-		OCLAst.classifierContextHead_return classifierContextHead6 = default(OCLAst.classifierContextHead_return);
-
-		List<InvariantWithMessage> invs=new List<InvariantWithMessage>(); 
-		try { DebugEnterRule(GrammarFileName, "classifierContextDecl");
-		DebugLocation(54, 1);
-		try
-		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:58:2: ( ^( CLASSIFIERCONDITION classifierContextHead ( invOrDef )* ) )
-			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:58:4: ^( CLASSIFIERCONDITION classifierContextHead ( invOrDef )* )
-			{
-			DebugLocation(58, 4);
-			DebugLocation(58, 6);
-			Match(input,CLASSIFIERCONDITION,Follow._CLASSIFIERCONDITION_in_classifierContextDecl216); 
-
-			Match(input, TokenTypes.Down, null); 
-			DebugLocation(58, 26);
-			PushFollow(Follow._classifierContextHead_in_classifierContextDecl218);
-			classifierContextHead6=classifierContextHead();
-			PopFollow();
-
-			DebugLocation(58, 48);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:58:48: ( invOrDef )*
-			try { DebugEnterSubRule(6);
-			while (true)
-			{
-				int alt6=2;
-				try { DebugEnterDecision(6, false);
-				int LA6_0 = input.LA(1);
-
-				if ((LA6_0==DEF||LA6_0==INV))
-				{
-					alt6 = 1;
-				}
-
-
-				} finally { DebugExitDecision(6); }
-				switch ( alt6 )
-				{
-				case 1:
-					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:58:49: invOrDef
-					{
-					DebugLocation(58, 49);
-					PushFollow(Follow._invOrDef_in_classifierContextDecl221);
-					invOrDef5=invOrDef();
-					PopFollow();
-
-					DebugLocation(58, 58);
-					invs.Add(invOrDef5);
-
-					}
-					break;
-
-				default:
-					goto loop6;
-				}
-			}
-
-			loop6:
-				;
-
-			} finally { DebugExitSubRule(6); }
-
-
-			Match(input, TokenTypes.Up, null); 
-			DebugLocation(58, 95);
-			Decl = new ClassifierConstraintBlock((classifierContextHead6!=null?classifierContextHead6.Context:default(Classifier)),invs,(classifierContextHead6!=null?classifierContextHead6.Self:default(VariableDeclaration)));
+			DebugLocation(53, 94);
+			Decl = new ClassifierConstraintBlock((classifierContextHead8!=null?classifierContextHead8.Context:default(Classifier)),invs,(classifierContextHead8!=null?classifierContextHead8.Self:default(VariableDeclaration)));
 
 			}
 
@@ -861,11 +731,11 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 		}
 		finally
 		{
-			TraceOut("classifierContextDecl", 7);
-			LeaveRule("classifierContextDecl", 7);
+			TraceOut("classifierContextDecl", 5);
+			LeaveRule("classifierContextDecl", 5);
 			LeaveRule_classifierContextDecl();
 		}
-		DebugLocation(59, 1);
+		DebugLocation(54, 1);
 		} finally { DebugExitRule(GrammarFileName, "classifierContextDecl"); }
 		return Decl;
 
@@ -884,80 +754,80 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 	partial void LeaveRule_classifierContextHead();
 
 	// $ANTLR start "classifierContextHead"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:61:1: classifierContextHead returns [Classifier Context, VariableDeclaration Self] : ( ^( CLASSIFIERHEAD pathName ) | ^( CLASSIFIERHEAD pathName SimpleName ) );
+	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:56:1: classifierContextHead returns [Classifier Context, VariableDeclaration Self] : ( ^( CLASSIFIERHEAD pathName ) | ^( CLASSIFIERHEAD pathName SimpleName ) );
 	[GrammarRule("classifierContextHead")]
 	private OCLAst.classifierContextHead_return classifierContextHead()
 	{
 		EnterRule_classifierContextHead();
-		EnterRule("classifierContextHead", 8);
-		TraceIn("classifierContextHead", 8);
+		EnterRule("classifierContextHead", 6);
+		TraceIn("classifierContextHead", 6);
 		OCLAst.classifierContextHead_return retval = new OCLAst.classifierContextHead_return(this);
 		retval.Start = (CommonTree)input.LT(1);
 
-		CommonTree SimpleName9 = default(CommonTree);
-		List<IToken> pathName7 = default(List<IToken>);
-		List<IToken> pathName8 = default(List<IToken>);
+		CommonTree SimpleName11 = default(CommonTree);
+		List<IToken> pathName9 = default(List<IToken>);
+		List<IToken> pathName10 = default(List<IToken>);
 
 		try { DebugEnterRule(GrammarFileName, "classifierContextHead");
-		DebugLocation(61, 1);
+		DebugLocation(56, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:63:2: ( ^( CLASSIFIERHEAD pathName ) | ^( CLASSIFIERHEAD pathName SimpleName ) )
-			int alt7=2;
-			try { DebugEnterDecision(7, false);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:58:2: ( ^( CLASSIFIERHEAD pathName ) | ^( CLASSIFIERHEAD pathName SimpleName ) )
+			int alt6=2;
+			try { DebugEnterDecision(6, false);
 			try
 			{
-				alt7 = dfa7.Predict(input);
+				alt6 = dfa6.Predict(input);
 			}
 			catch (NoViableAltException nvae)
 			{
 				DebugRecognitionException(nvae);
 				throw;
 			}
-			} finally { DebugExitDecision(7); }
-			switch (alt7)
+			} finally { DebugExitDecision(6); }
+			switch (alt6)
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:63:3: ^( CLASSIFIERHEAD pathName )
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:58:3: ^( CLASSIFIERHEAD pathName )
 				{
-				DebugLocation(63, 3);
-				DebugLocation(63, 5);
-				Match(input,CLASSIFIERHEAD,Follow._CLASSIFIERHEAD_in_classifierContextHead244); 
+				DebugLocation(58, 3);
+				DebugLocation(58, 5);
+				Match(input,CLASSIFIERHEAD,Follow._CLASSIFIERHEAD_in_classifierContextHead230); 
 
 				Match(input, TokenTypes.Down, null); 
-				DebugLocation(63, 20);
-				PushFollow(Follow._pathName_in_classifierContextHead246);
-				pathName7=pathName();
+				DebugLocation(58, 20);
+				PushFollow(Follow._pathName_in_classifierContextHead232);
+				pathName9=pathName();
 				PopFollow();
 
 
 				Match(input, TokenTypes.Up, null); 
-				DebugLocation(63, 31);
-				retval.Context =ClassifierContextHead(pathName7,VariableDeclaration.SELF,out retval.Self);
+				DebugLocation(58, 31);
+				retval.Context =ClassifierContextHead(pathName9,VariableDeclaration.SELF,out retval.Self);
 
 				}
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:64:3: ^( CLASSIFIERHEAD pathName SimpleName )
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:59:3: ^( CLASSIFIERHEAD pathName SimpleName )
 				{
-				DebugLocation(64, 3);
-				DebugLocation(64, 5);
-				Match(input,CLASSIFIERHEAD,Follow._CLASSIFIERHEAD_in_classifierContextHead255); 
+				DebugLocation(59, 3);
+				DebugLocation(59, 5);
+				Match(input,CLASSIFIERHEAD,Follow._CLASSIFIERHEAD_in_classifierContextHead241); 
 
 				Match(input, TokenTypes.Down, null); 
-				DebugLocation(64, 20);
-				PushFollow(Follow._pathName_in_classifierContextHead257);
-				pathName8=pathName();
+				DebugLocation(59, 20);
+				PushFollow(Follow._pathName_in_classifierContextHead243);
+				pathName10=pathName();
 				PopFollow();
 
-				DebugLocation(64, 29);
-				SimpleName9=(CommonTree)Match(input,SimpleName,Follow._SimpleName_in_classifierContextHead259); 
+				DebugLocation(59, 29);
+				SimpleName11=(CommonTree)Match(input,SimpleName,Follow._SimpleName_in_classifierContextHead245); 
 
 				Match(input, TokenTypes.Up, null); 
-				DebugLocation(64, 42);
-				retval.Context =ClassifierContextHead(pathName8,SimpleName9.Text,out retval.Self);
+				DebugLocation(59, 42);
+				retval.Context =ClassifierContextHead(pathName10,SimpleName11.Text,out retval.Self);
 
 				}
 				break;
@@ -971,11 +841,11 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 		}
 		finally
 		{
-			TraceOut("classifierContextHead", 8);
-			LeaveRule("classifierContextHead", 8);
+			TraceOut("classifierContextHead", 6);
+			LeaveRule("classifierContextHead", 6);
 			LeaveRule_classifierContextHead();
 		}
-		DebugLocation(65, 1);
+		DebugLocation(60, 1);
 		} finally { DebugExitRule(GrammarFileName, "classifierContextHead"); }
 		return retval;
 
@@ -987,71 +857,75 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 	partial void LeaveRule_initOrDerValue();
 
 	// $ANTLR start "initOrDerValue"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:67:1: initOrDerValue returns [InvariantWithMessage Constraint] : ( ^( INIT oclExpression ) | ^( DERIVATE oclExpression ) );
+	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:62:1: initOrDerValue returns [PropertyInitialization Initialization] : ( ^( INIT inv= oclExpression ) | ^( DERIVATE oclExpression ) );
 	[GrammarRule("initOrDerValue")]
-	private InvariantWithMessage initOrDerValue()
+	private PropertyInitialization initOrDerValue()
 	{
 		EnterRule_initOrDerValue();
-		EnterRule("initOrDerValue", 9);
-		TraceIn("initOrDerValue", 9);
-		InvariantWithMessage Constraint = default(InvariantWithMessage);
+		EnterRule("initOrDerValue", 7);
+		TraceIn("initOrDerValue", 7);
+		PropertyInitialization Initialization = default(PropertyInitialization);
+
+		OclExpression inv = default(OclExpression);
 
 		try { DebugEnterRule(GrammarFileName, "initOrDerValue");
-		DebugLocation(67, 1);
+		DebugLocation(62, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:69:2: ( ^( INIT oclExpression ) | ^( DERIVATE oclExpression ) )
-			int alt8=2;
-			try { DebugEnterDecision(8, false);
-			int LA8_0 = input.LA(1);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:64:2: ( ^( INIT inv= oclExpression ) | ^( DERIVATE oclExpression ) )
+			int alt7=2;
+			try { DebugEnterDecision(7, false);
+			int LA7_0 = input.LA(1);
 
-			if ((LA8_0==INIT))
+			if ((LA7_0==INIT))
 			{
-				alt8 = 1;
+				alt7 = 1;
 			}
-			else if ((LA8_0==DERIVATE))
+			else if ((LA7_0==DERIVATE))
 			{
-				alt8 = 2;
+				alt7 = 2;
 			}
 			else
 			{
-				NoViableAltException nvae = new NoViableAltException("", 8, 0, input);
+				NoViableAltException nvae = new NoViableAltException("", 7, 0, input);
 				DebugRecognitionException(nvae);
 				throw nvae;
 			}
-			} finally { DebugExitDecision(8); }
-			switch (alt8)
+			} finally { DebugExitDecision(7); }
+			switch (alt7)
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:69:3: ^( INIT oclExpression )
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:64:3: ^( INIT inv= oclExpression )
 				{
-				DebugLocation(69, 3);
-				DebugLocation(69, 5);
-				Match(input,INIT,Follow._INIT_in_initOrDerValue278); 
+				DebugLocation(64, 3);
+				DebugLocation(64, 5);
+				Match(input,INIT,Follow._INIT_in_initOrDerValue264); 
 
 				Match(input, TokenTypes.Down, null); 
-				DebugLocation(69, 10);
-				PushFollow(Follow._oclExpression_in_initOrDerValue280);
-				oclExpression();
+				DebugLocation(64, 14);
+				PushFollow(Follow._oclExpression_in_initOrDerValue270);
+				inv=oclExpression();
 				PopFollow();
 
 
 				Match(input, TokenTypes.Up, null); 
+				DebugLocation(64, 31);
+				Initialization =new PropertyInitialization(inv); 
 
 				}
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:70:3: ^( DERIVATE oclExpression )
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:65:3: ^( DERIVATE oclExpression )
 				{
-				DebugLocation(70, 3);
-				DebugLocation(70, 5);
-				Match(input,DERIVATE,Follow._DERIVATE_in_initOrDerValue286); 
+				DebugLocation(65, 3);
+				DebugLocation(65, 5);
+				Match(input,DERIVATE,Follow._DERIVATE_in_initOrDerValue278); 
 
 				Match(input, TokenTypes.Down, null); 
-				DebugLocation(70, 14);
-				PushFollow(Follow._oclExpression_in_initOrDerValue288);
+				DebugLocation(65, 14);
+				PushFollow(Follow._oclExpression_in_initOrDerValue280);
 				oclExpression();
 				PopFollow();
 
@@ -1070,13 +944,13 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 		}
 		finally
 		{
-			TraceOut("initOrDerValue", 9);
-			LeaveRule("initOrDerValue", 9);
+			TraceOut("initOrDerValue", 7);
+			LeaveRule("initOrDerValue", 7);
 			LeaveRule_initOrDerValue();
 		}
-		DebugLocation(71, 1);
+		DebugLocation(66, 1);
 		} finally { DebugExitRule(GrammarFileName, "initOrDerValue"); }
-		return Constraint;
+		return Initialization;
 
 	}
 	// $ANTLR end "initOrDerValue"
@@ -1086,61 +960,93 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 	partial void LeaveRule_invOrDef();
 
 	// $ANTLR start "invOrDef"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:73:1: invOrDef returns [InvariantWithMessage Constraint] : ( ^( INV ( SimpleName )? inv= oclExpression ( MESSAGE msgExp= oclExpression )? ) | ^( DEF ( 'static' )? ( SimpleName )? defExpression ) );
+	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:68:1: invOrDef returns [InvariantWithMessage Invariant] : ( ^( INV ( SimpleName )? inv= oclExpression ( MESSAGE msgExp= oclExpression )? ) | ^( DEF ( 'static' )? ( SimpleName )? defExpression ) );
 	[GrammarRule("invOrDef")]
 	private InvariantWithMessage invOrDef()
 	{
 		EnterRule_invOrDef();
-		EnterRule("invOrDef", 10);
-		TraceIn("invOrDef", 10);
-		InvariantWithMessage Constraint = default(InvariantWithMessage);
+		EnterRule("invOrDef", 8);
+		TraceIn("invOrDef", 8);
+		InvariantWithMessage Invariant = default(InvariantWithMessage);
 
 		OclExpression inv = default(OclExpression);
 		OclExpression msgExp = default(OclExpression);
 
 		try { DebugEnterRule(GrammarFileName, "invOrDef");
-		DebugLocation(73, 1);
+		DebugLocation(68, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:75:2: ( ^( INV ( SimpleName )? inv= oclExpression ( MESSAGE msgExp= oclExpression )? ) | ^( DEF ( 'static' )? ( SimpleName )? defExpression ) )
-			int alt13=2;
-			try { DebugEnterDecision(13, false);
-			int LA13_0 = input.LA(1);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:70:2: ( ^( INV ( SimpleName )? inv= oclExpression ( MESSAGE msgExp= oclExpression )? ) | ^( DEF ( 'static' )? ( SimpleName )? defExpression ) )
+			int alt12=2;
+			try { DebugEnterDecision(12, false);
+			int LA12_0 = input.LA(1);
 
-			if ((LA13_0==INV))
+			if ((LA12_0==INV))
 			{
-				alt13 = 1;
+				alt12 = 1;
 			}
-			else if ((LA13_0==DEF))
+			else if ((LA12_0==DEF))
 			{
-				alt13 = 2;
+				alt12 = 2;
 			}
 			else
 			{
-				NoViableAltException nvae = new NoViableAltException("", 13, 0, input);
+				NoViableAltException nvae = new NoViableAltException("", 12, 0, input);
 				DebugRecognitionException(nvae);
 				throw nvae;
 			}
-			} finally { DebugExitDecision(13); }
-			switch (alt13)
+			} finally { DebugExitDecision(12); }
+			switch (alt12)
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:75:3: ^( INV ( SimpleName )? inv= oclExpression ( MESSAGE msgExp= oclExpression )? )
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:70:3: ^( INV ( SimpleName )? inv= oclExpression ( MESSAGE msgExp= oclExpression )? )
 				{
-				DebugLocation(75, 3);
-				DebugLocation(75, 5);
-				Match(input,INV,Follow._INV_in_invOrDef304); 
+				DebugLocation(70, 3);
+				DebugLocation(70, 5);
+				Match(input,INV,Follow._INV_in_invOrDef296); 
 
 				Match(input, TokenTypes.Down, null); 
-				DebugLocation(75, 9);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:75:9: ( SimpleName )?
+				DebugLocation(70, 9);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:70:9: ( SimpleName )?
+				int alt8=2;
+				try { DebugEnterSubRule(8);
+				try { DebugEnterDecision(8, false);
+				int LA8_0 = input.LA(1);
+
+				if ((LA8_0==SimpleName))
+				{
+					alt8 = 1;
+				}
+				} finally { DebugExitDecision(8); }
+				switch (alt8)
+				{
+				case 1:
+					DebugEnterAlt(1);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:70:9: SimpleName
+					{
+					DebugLocation(70, 9);
+					Match(input,SimpleName,Follow._SimpleName_in_invOrDef298); 
+
+					}
+					break;
+
+				}
+				} finally { DebugExitSubRule(8); }
+
+				DebugLocation(70, 25);
+				PushFollow(Follow._oclExpression_in_invOrDef305);
+				inv=oclExpression();
+				PopFollow();
+
+				DebugLocation(71, 3);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:71:3: ( MESSAGE msgExp= oclExpression )?
 				int alt9=2;
 				try { DebugEnterSubRule(9);
 				try { DebugEnterDecision(9, false);
 				int LA9_0 = input.LA(1);
 
-				if ((LA9_0==SimpleName))
+				if ((LA9_0==MESSAGE))
 				{
 					alt9 = 1;
 				}
@@ -1149,44 +1055,12 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:75:9: SimpleName
+					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:71:4: MESSAGE msgExp= oclExpression
 					{
-					DebugLocation(75, 9);
-					Match(input,SimpleName,Follow._SimpleName_in_invOrDef306); 
-
-					}
-					break;
-
-				}
-				} finally { DebugExitSubRule(9); }
-
-				DebugLocation(75, 25);
-				PushFollow(Follow._oclExpression_in_invOrDef313);
-				inv=oclExpression();
-				PopFollow();
-
-				DebugLocation(76, 3);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:76:3: ( MESSAGE msgExp= oclExpression )?
-				int alt10=2;
-				try { DebugEnterSubRule(10);
-				try { DebugEnterDecision(10, false);
-				int LA10_0 = input.LA(1);
-
-				if ((LA10_0==MESSAGE))
-				{
-					alt10 = 1;
-				}
-				} finally { DebugExitDecision(10); }
-				switch (alt10)
-				{
-				case 1:
-					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:76:4: MESSAGE msgExp= oclExpression
-					{
-					DebugLocation(76, 4);
-					Match(input,MESSAGE,Follow._MESSAGE_in_invOrDef319); 
-					DebugLocation(76, 19);
-					PushFollow(Follow._oclExpression_in_invOrDef325);
+					DebugLocation(71, 4);
+					Match(input,MESSAGE,Follow._MESSAGE_in_invOrDef311); 
+					DebugLocation(71, 19);
+					PushFollow(Follow._oclExpression_in_invOrDef317);
 					msgExp=oclExpression();
 					PopFollow();
 
@@ -1195,32 +1069,59 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 					break;
 
 				}
-				} finally { DebugExitSubRule(10); }
+				} finally { DebugExitSubRule(9); }
 
 
 				Match(input, TokenTypes.Up, null); 
-				DebugLocation(77, 6);
-				Constraint =new InvariantWithMessage(inv,msgExp); 
+				DebugLocation(72, 6);
+				Invariant =new InvariantWithMessage(inv,msgExp); 
 
 				}
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:78:4: ^( DEF ( 'static' )? ( SimpleName )? defExpression )
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:73:4: ^( DEF ( 'static' )? ( SimpleName )? defExpression )
 				{
-				DebugLocation(78, 4);
-				DebugLocation(78, 6);
-				Match(input,DEF,Follow._DEF_in_invOrDef340); 
+				DebugLocation(73, 4);
+				DebugLocation(73, 6);
+				Match(input,DEF,Follow._DEF_in_invOrDef332); 
 
 				Match(input, TokenTypes.Down, null); 
-				DebugLocation(78, 10);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:78:10: ( 'static' )?
+				DebugLocation(73, 10);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:73:10: ( 'static' )?
+				int alt10=2;
+				try { DebugEnterSubRule(10);
+				try { DebugEnterDecision(10, false);
+				int LA10_0 = input.LA(1);
+
+				if ((LA10_0==121))
+				{
+					alt10 = 1;
+				}
+				} finally { DebugExitDecision(10); }
+				switch (alt10)
+				{
+				case 1:
+					DebugEnterAlt(1);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:73:10: 'static'
+					{
+					DebugLocation(73, 10);
+					Match(input,121,Follow._121_in_invOrDef334); 
+
+					}
+					break;
+
+				}
+				} finally { DebugExitSubRule(10); }
+
+				DebugLocation(73, 20);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:73:20: ( SimpleName )?
 				int alt11=2;
 				try { DebugEnterSubRule(11);
 				try { DebugEnterDecision(11, false);
 				int LA11_0 = input.LA(1);
 
-				if ((LA11_0==121))
+				if ((LA11_0==SimpleName))
 				{
 					alt11 = 1;
 				}
@@ -1229,10 +1130,10 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:78:10: 'static'
+					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:73:20: SimpleName
 					{
-					DebugLocation(78, 10);
-					Match(input,121,Follow._121_in_invOrDef342); 
+					DebugLocation(73, 20);
+					Match(input,SimpleName,Follow._SimpleName_in_invOrDef337); 
 
 					}
 					break;
@@ -1240,41 +1141,14 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 				}
 				} finally { DebugExitSubRule(11); }
 
-				DebugLocation(78, 20);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:78:20: ( SimpleName )?
-				int alt12=2;
-				try { DebugEnterSubRule(12);
-				try { DebugEnterDecision(12, false);
-				int LA12_0 = input.LA(1);
-
-				if ((LA12_0==SimpleName))
-				{
-					alt12 = 1;
-				}
-				} finally { DebugExitDecision(12); }
-				switch (alt12)
-				{
-				case 1:
-					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:78:20: SimpleName
-					{
-					DebugLocation(78, 20);
-					Match(input,SimpleName,Follow._SimpleName_in_invOrDef345); 
-
-					}
-					break;
-
-				}
-				} finally { DebugExitSubRule(12); }
-
-				DebugLocation(78, 32);
-				PushFollow(Follow._defExpression_in_invOrDef348);
+				DebugLocation(73, 32);
+				PushFollow(Follow._defExpression_in_invOrDef340);
 				defExpression();
 				PopFollow();
 
 
 				Match(input, TokenTypes.Up, null); 
-				DebugLocation(78, 47);
+				DebugLocation(73, 47);
 				Errors.AddError(new ErrorItem("Definition of new property/operation do not supported."));
 
 				}
@@ -1289,23 +1163,172 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 		}
 		finally
 		{
-			TraceOut("invOrDef", 10);
-			LeaveRule("invOrDef", 10);
+			TraceOut("invOrDef", 8);
+			LeaveRule("invOrDef", 8);
 			LeaveRule_invOrDef();
 		}
-		DebugLocation(79, 1);
+		DebugLocation(74, 1);
 		} finally { DebugExitRule(GrammarFileName, "invOrDef"); }
-		return Constraint;
+		return Invariant;
 
 	}
 	// $ANTLR end "invOrDef"
+
+
+	partial void EnterRule_operationContextDecl();
+	partial void LeaveRule_operationContextDecl();
+
+	// $ANTLR start "operationContextDecl"
+	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:76:1: operationContextDecl : ^( OPERATIONCONDITION operationContextHead ( prePostOrBodyDecl )* ) ;
+	[GrammarRule("operationContextDecl")]
+	private void operationContextDecl()
+	{
+		EnterRule_operationContextDecl();
+		EnterRule("operationContextDecl", 9);
+		TraceIn("operationContextDecl", 9);
+		try { DebugEnterRule(GrammarFileName, "operationContextDecl");
+		DebugLocation(76, 1);
+		try
+		{
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:77:2: ( ^( OPERATIONCONDITION operationContextHead ( prePostOrBodyDecl )* ) )
+			DebugEnterAlt(1);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:77:3: ^( OPERATIONCONDITION operationContextHead ( prePostOrBodyDecl )* )
+			{
+			DebugLocation(77, 3);
+			DebugLocation(77, 5);
+			Match(input,OPERATIONCONDITION,Follow._OPERATIONCONDITION_in_operationContextDecl354); 
+
+			Match(input, TokenTypes.Down, null); 
+			DebugLocation(77, 24);
+			PushFollow(Follow._operationContextHead_in_operationContextDecl356);
+			operationContextHead();
+			PopFollow();
+
+			DebugLocation(77, 45);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:77:45: ( prePostOrBodyDecl )*
+			try { DebugEnterSubRule(13);
+			while (true)
+			{
+				int alt13=2;
+				try { DebugEnterDecision(13, false);
+				int LA13_0 = input.LA(1);
+
+				if ((LA13_0==BODY||(LA13_0>=POST && LA13_0<=PRE)))
+				{
+					alt13 = 1;
+				}
+
+
+				} finally { DebugExitDecision(13); }
+				switch ( alt13 )
+				{
+				case 1:
+					DebugEnterAlt(1);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:77:45: prePostOrBodyDecl
+					{
+					DebugLocation(77, 45);
+					PushFollow(Follow._prePostOrBodyDecl_in_operationContextDecl358);
+					prePostOrBodyDecl();
+					PopFollow();
+
+
+					}
+					break;
+
+				default:
+					goto loop13;
+				}
+			}
+
+			loop13:
+				;
+
+			} finally { DebugExitSubRule(13); }
+
+
+			Match(input, TokenTypes.Up, null); 
+
+			}
+
+		}
+		catch (RecognitionException re)
+		{
+			ReportError(re);
+			Recover(input,re);
+		}
+		finally
+		{
+			TraceOut("operationContextDecl", 9);
+			LeaveRule("operationContextDecl", 9);
+			LeaveRule_operationContextDecl();
+		}
+		DebugLocation(78, 1);
+		} finally { DebugExitRule(GrammarFileName, "operationContextDecl"); }
+		return;
+
+	}
+	// $ANTLR end "operationContextDecl"
+
+
+	partial void EnterRule_operationContextHead();
+	partial void LeaveRule_operationContextHead();
+
+	// $ANTLR start "operationContextHead"
+	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:80:1: operationContextHead : ^( OPERATIONHEAD operation ) ;
+	[GrammarRule("operationContextHead")]
+	private void operationContextHead()
+	{
+		EnterRule_operationContextHead();
+		EnterRule("operationContextHead", 10);
+		TraceIn("operationContextHead", 10);
+		try { DebugEnterRule(GrammarFileName, "operationContextHead");
+		DebugLocation(80, 1);
+		try
+		{
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:81:2: ( ^( OPERATIONHEAD operation ) )
+			DebugEnterAlt(1);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:81:3: ^( OPERATIONHEAD operation )
+			{
+			DebugLocation(81, 3);
+			DebugLocation(81, 5);
+			Match(input,OPERATIONHEAD,Follow._OPERATIONHEAD_in_operationContextHead371); 
+
+			Match(input, TokenTypes.Down, null); 
+			DebugLocation(81, 19);
+			PushFollow(Follow._operation_in_operationContextHead373);
+			operation();
+			PopFollow();
+
+
+			Match(input, TokenTypes.Up, null); 
+
+			}
+
+		}
+		catch (RecognitionException re)
+		{
+			ReportError(re);
+			Recover(input,re);
+		}
+		finally
+		{
+			TraceOut("operationContextHead", 10);
+			LeaveRule("operationContextHead", 10);
+			LeaveRule_operationContextHead();
+		}
+		DebugLocation(82, 1);
+		} finally { DebugExitRule(GrammarFileName, "operationContextHead"); }
+		return;
+
+	}
+	// $ANTLR end "operationContextHead"
 
 
 	partial void EnterRule_prePostOrBodyDecl();
 	partial void LeaveRule_prePostOrBodyDecl();
 
 	// $ANTLR start "prePostOrBodyDecl"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:81:1: prePostOrBodyDecl : ( ^( PRE ( SimpleName )? oclExpression ) | ^( POST ( SimpleName )? oclExpression ) | ^( BODY ( SimpleName )? oclExpression ) );
+	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:84:1: prePostOrBodyDecl : ( ^( PRE ( SimpleName )? oclExpression ) | ^( POST ( SimpleName )? oclExpression ) | ^( BODY ( SimpleName )? oclExpression ) );
 	[GrammarRule("prePostOrBodyDecl")]
 	private void prePostOrBodyDecl()
 	{
@@ -1313,10 +1336,10 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 		EnterRule("prePostOrBodyDecl", 11);
 		TraceIn("prePostOrBodyDecl", 11);
 		try { DebugEnterRule(GrammarFileName, "prePostOrBodyDecl");
-		DebugLocation(81, 1);
+		DebugLocation(84, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:82:2: ( ^( PRE ( SimpleName )? oclExpression ) | ^( POST ( SimpleName )? oclExpression ) | ^( BODY ( SimpleName )? oclExpression ) )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:85:2: ( ^( PRE ( SimpleName )? oclExpression ) | ^( POST ( SimpleName )? oclExpression ) | ^( BODY ( SimpleName )? oclExpression ) )
 			int alt17=3;
 			try { DebugEnterDecision(17, false);
 			switch (input.LA(1))
@@ -1349,15 +1372,15 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:82:3: ^( PRE ( SimpleName )? oclExpression )
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:85:3: ^( PRE ( SimpleName )? oclExpression )
 				{
-				DebugLocation(82, 3);
-				DebugLocation(82, 5);
-				Match(input,PRE,Follow._PRE_in_prePostOrBodyDecl362); 
+				DebugLocation(85, 3);
+				DebugLocation(85, 5);
+				Match(input,PRE,Follow._PRE_in_prePostOrBodyDecl386); 
 
 				Match(input, TokenTypes.Down, null); 
-				DebugLocation(82, 9);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:82:9: ( SimpleName )?
+				DebugLocation(85, 9);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:85:9: ( SimpleName )?
 				int alt14=2;
 				try { DebugEnterSubRule(14);
 				try { DebugEnterDecision(14, false);
@@ -1372,10 +1395,10 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:82:9: SimpleName
+					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:85:9: SimpleName
 					{
-					DebugLocation(82, 9);
-					Match(input,SimpleName,Follow._SimpleName_in_prePostOrBodyDecl364); 
+					DebugLocation(85, 9);
+					Match(input,SimpleName,Follow._SimpleName_in_prePostOrBodyDecl388); 
 
 					}
 					break;
@@ -1383,8 +1406,8 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 				}
 				} finally { DebugExitSubRule(14); }
 
-				DebugLocation(82, 21);
-				PushFollow(Follow._oclExpression_in_prePostOrBodyDecl367);
+				DebugLocation(85, 21);
+				PushFollow(Follow._oclExpression_in_prePostOrBodyDecl391);
 				oclExpression();
 				PopFollow();
 
@@ -1395,15 +1418,15 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:83:3: ^( POST ( SimpleName )? oclExpression )
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:86:3: ^( POST ( SimpleName )? oclExpression )
 				{
-				DebugLocation(83, 3);
-				DebugLocation(83, 5);
-				Match(input,POST,Follow._POST_in_prePostOrBodyDecl373); 
+				DebugLocation(86, 3);
+				DebugLocation(86, 5);
+				Match(input,POST,Follow._POST_in_prePostOrBodyDecl397); 
 
 				Match(input, TokenTypes.Down, null); 
-				DebugLocation(83, 10);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:83:10: ( SimpleName )?
+				DebugLocation(86, 10);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:86:10: ( SimpleName )?
 				int alt15=2;
 				try { DebugEnterSubRule(15);
 				try { DebugEnterDecision(15, false);
@@ -1418,10 +1441,10 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:83:10: SimpleName
+					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:86:10: SimpleName
 					{
-					DebugLocation(83, 10);
-					Match(input,SimpleName,Follow._SimpleName_in_prePostOrBodyDecl375); 
+					DebugLocation(86, 10);
+					Match(input,SimpleName,Follow._SimpleName_in_prePostOrBodyDecl399); 
 
 					}
 					break;
@@ -1429,8 +1452,8 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 				}
 				} finally { DebugExitSubRule(15); }
 
-				DebugLocation(83, 22);
-				PushFollow(Follow._oclExpression_in_prePostOrBodyDecl378);
+				DebugLocation(86, 22);
+				PushFollow(Follow._oclExpression_in_prePostOrBodyDecl402);
 				oclExpression();
 				PopFollow();
 
@@ -1441,15 +1464,15 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 				break;
 			case 3:
 				DebugEnterAlt(3);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:84:3: ^( BODY ( SimpleName )? oclExpression )
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:87:3: ^( BODY ( SimpleName )? oclExpression )
 				{
-				DebugLocation(84, 3);
-				DebugLocation(84, 5);
-				Match(input,BODY,Follow._BODY_in_prePostOrBodyDecl384); 
+				DebugLocation(87, 3);
+				DebugLocation(87, 5);
+				Match(input,BODY,Follow._BODY_in_prePostOrBodyDecl408); 
 
 				Match(input, TokenTypes.Down, null); 
-				DebugLocation(84, 10);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:84:10: ( SimpleName )?
+				DebugLocation(87, 10);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:87:10: ( SimpleName )?
 				int alt16=2;
 				try { DebugEnterSubRule(16);
 				try { DebugEnterDecision(16, false);
@@ -1464,10 +1487,10 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:84:10: SimpleName
+					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:87:10: SimpleName
 					{
-					DebugLocation(84, 10);
-					Match(input,SimpleName,Follow._SimpleName_in_prePostOrBodyDecl386); 
+					DebugLocation(87, 10);
+					Match(input,SimpleName,Follow._SimpleName_in_prePostOrBodyDecl410); 
 
 					}
 					break;
@@ -1475,8 +1498,8 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 				}
 				} finally { DebugExitSubRule(16); }
 
-				DebugLocation(84, 22);
-				PushFollow(Follow._oclExpression_in_prePostOrBodyDecl389);
+				DebugLocation(87, 22);
+				PushFollow(Follow._oclExpression_in_prePostOrBodyDecl413);
 				oclExpression();
 				PopFollow();
 
@@ -1499,7 +1522,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			LeaveRule("prePostOrBodyDecl", 11);
 			LeaveRule_prePostOrBodyDecl();
 		}
-		DebugLocation(85, 1);
+		DebugLocation(88, 1);
 		} finally { DebugExitRule(GrammarFileName, "prePostOrBodyDecl"); }
 		return;
 
@@ -1511,7 +1534,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 	partial void LeaveRule_operation();
 
 	// $ANTLR start "operation"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:88:1: operation : ^( OPERATION pathName ( parameters )? ( type )? ) ;
+	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:90:1: operation : ^( OPERATION pathName ( parameters )? ( type )? ) ;
 	[GrammarRule("operation")]
 	private void operation()
 	{
@@ -1519,25 +1542,25 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 		EnterRule("operation", 12);
 		TraceIn("operation", 12);
 		try { DebugEnterRule(GrammarFileName, "operation");
-		DebugLocation(88, 1);
+		DebugLocation(90, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:89:2: ( ^( OPERATION pathName ( parameters )? ( type )? ) )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:91:2: ( ^( OPERATION pathName ( parameters )? ( type )? ) )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:89:3: ^( OPERATION pathName ( parameters )? ( type )? )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:91:3: ^( OPERATION pathName ( parameters )? ( type )? )
 			{
-			DebugLocation(89, 3);
-			DebugLocation(89, 5);
-			Match(input,OPERATION,Follow._OPERATION_in_operation402); 
+			DebugLocation(91, 3);
+			DebugLocation(91, 5);
+			Match(input,OPERATION,Follow._OPERATION_in_operation425); 
 
 			Match(input, TokenTypes.Down, null); 
-			DebugLocation(89, 15);
-			PushFollow(Follow._pathName_in_operation404);
+			DebugLocation(91, 15);
+			PushFollow(Follow._pathName_in_operation427);
 			pathName();
 			PopFollow();
 
-			DebugLocation(89, 24);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:89:24: ( parameters )?
+			DebugLocation(91, 24);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:91:24: ( parameters )?
 			int alt18=2;
 			try { DebugEnterSubRule(18);
 			try { DebugEnterDecision(18, false);
@@ -1552,10 +1575,10 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:89:24: parameters
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:91:24: parameters
 				{
-				DebugLocation(89, 24);
-				PushFollow(Follow._parameters_in_operation406);
+				DebugLocation(91, 24);
+				PushFollow(Follow._parameters_in_operation429);
 				parameters();
 				PopFollow();
 
@@ -1566,8 +1589,8 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			}
 			} finally { DebugExitSubRule(18); }
 
-			DebugLocation(89, 36);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:89:36: ( type )?
+			DebugLocation(91, 36);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:91:36: ( type )?
 			int alt19=2;
 			try { DebugEnterSubRule(19);
 			try { DebugEnterDecision(19, false);
@@ -1582,10 +1605,10 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:89:36: type
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:91:36: type
 				{
-				DebugLocation(89, 36);
-				PushFollow(Follow._type_in_operation409);
+				DebugLocation(91, 36);
+				PushFollow(Follow._type_in_operation432);
 				type();
 				PopFollow();
 
@@ -1613,7 +1636,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			LeaveRule("operation", 12);
 			LeaveRule_operation();
 		}
-		DebugLocation(90, 1);
+		DebugLocation(92, 1);
 		} finally { DebugExitRule(GrammarFileName, "operation"); }
 		return;
 
@@ -1625,7 +1648,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 	partial void LeaveRule_parameters();
 
 	// $ANTLR start "parameters"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:92:1: parameters : variableDeclaration ( variableDeclaration )* ;
+	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:94:1: parameters : variableDeclaration ( variableDeclaration )* ;
 	[GrammarRule("parameters")]
 	private void parameters()
 	{
@@ -1633,20 +1656,20 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 		EnterRule("parameters", 13);
 		TraceIn("parameters", 13);
 		try { DebugEnterRule(GrammarFileName, "parameters");
-		DebugLocation(92, 1);
+		DebugLocation(94, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:93:2: ( variableDeclaration ( variableDeclaration )* )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:95:2: ( variableDeclaration ( variableDeclaration )* )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:93:3: variableDeclaration ( variableDeclaration )*
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:95:3: variableDeclaration ( variableDeclaration )*
 			{
-			DebugLocation(93, 3);
-			PushFollow(Follow._variableDeclaration_in_parameters421);
+			DebugLocation(95, 3);
+			PushFollow(Follow._variableDeclaration_in_parameters444);
 			variableDeclaration();
 			PopFollow();
 
-			DebugLocation(93, 23);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:93:23: ( variableDeclaration )*
+			DebugLocation(95, 23);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:95:23: ( variableDeclaration )*
 			try { DebugEnterSubRule(20);
 			while (true)
 			{
@@ -1665,10 +1688,10 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:93:24: variableDeclaration
+					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:95:24: variableDeclaration
 					{
-					DebugLocation(93, 24);
-					PushFollow(Follow._variableDeclaration_in_parameters424);
+					DebugLocation(95, 24);
+					PushFollow(Follow._variableDeclaration_in_parameters447);
 					variableDeclaration();
 					PopFollow();
 
@@ -1701,7 +1724,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			LeaveRule("parameters", 13);
 			LeaveRule_parameters();
 		}
-		DebugLocation(94, 1);
+		DebugLocation(96, 1);
 		} finally { DebugExitRule(GrammarFileName, "parameters"); }
 		return;
 
@@ -1713,7 +1736,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 	partial void LeaveRule_defExpression();
 
 	// $ANTLR start "defExpression"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:96:1: defExpression : ( variableDeclaration | ^( DECL operation oclExpression ) );
+	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:98:1: defExpression : ( variableDeclaration | ^( DECL operation oclExpression ) );
 	[GrammarRule("defExpression")]
 	private void defExpression()
 	{
@@ -1721,10 +1744,10 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 		EnterRule("defExpression", 14);
 		TraceIn("defExpression", 14);
 		try { DebugEnterRule(GrammarFileName, "defExpression");
-		DebugLocation(96, 1);
+		DebugLocation(98, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:97:2: ( variableDeclaration | ^( DECL operation oclExpression ) )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:99:2: ( variableDeclaration | ^( DECL operation oclExpression ) )
 			int alt21=2;
 			try { DebugEnterDecision(21, false);
 			int LA21_0 = input.LA(1);
@@ -1770,10 +1793,10 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:97:4: variableDeclaration
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:99:4: variableDeclaration
 				{
-				DebugLocation(97, 4);
-				PushFollow(Follow._variableDeclaration_in_defExpression437);
+				DebugLocation(99, 4);
+				PushFollow(Follow._variableDeclaration_in_defExpression460);
 				variableDeclaration();
 				PopFollow();
 
@@ -1782,20 +1805,20 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:98:4: ^( DECL operation oclExpression )
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:100:4: ^( DECL operation oclExpression )
 				{
-				DebugLocation(98, 4);
-				DebugLocation(98, 6);
-				Match(input,DECL,Follow._DECL_in_defExpression443); 
+				DebugLocation(100, 4);
+				DebugLocation(100, 6);
+				Match(input,DECL,Follow._DECL_in_defExpression466); 
 
 				Match(input, TokenTypes.Down, null); 
-				DebugLocation(98, 11);
-				PushFollow(Follow._operation_in_defExpression445);
+				DebugLocation(100, 11);
+				PushFollow(Follow._operation_in_defExpression468);
 				operation();
 				PopFollow();
 
-				DebugLocation(98, 21);
-				PushFollow(Follow._oclExpression_in_defExpression447);
+				DebugLocation(100, 21);
+				PushFollow(Follow._oclExpression_in_defExpression470);
 				oclExpression();
 				PopFollow();
 
@@ -1818,7 +1841,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			LeaveRule("defExpression", 14);
 			LeaveRule_defExpression();
 		}
-		DebugLocation(99, 1);
+		DebugLocation(101, 1);
 		} finally { DebugExitRule(GrammarFileName, "defExpression"); }
 		return;
 
@@ -1841,7 +1864,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 	partial void LeaveRule_oclExpression();
 
 	// $ANTLR start "oclExpression"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:104:1: public oclExpression returns [OclExpression Expr] : ( ^( INFIX e1= oclExpression e2= oclExpression ) | ^( UNARY e= oclExpression ) | ^( '.' e= oclExpression (res= propertyCall |res= operationCall ) ) | ^( '->' e= oclExpression ( itCall ) ) | ^( MESSAGE oclMessageExp ) | primaryExperession );
+	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:106:1: public oclExpression returns [OclExpression Expr] : ( ^( INFIX e1= oclExpression e2= oclExpression ) | ^( UNARY e= oclExpression ) | ^( '.' e= oclExpression (res= propertyCall |res= operationCall ) ) | ^( '->' e= oclExpression ( itCall ) ) | ^( MESSAGE oclMessageExp ) | primaryExperession );
 	[GrammarRule("oclExpression")]
 	public OclExpression oclExpression()
 	{
@@ -1851,20 +1874,20 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 		oclExpression_stack.Push(new oclExpression_scope(this));oclExpression_scopeInit(oclExpression_stack.Peek());
 		OclExpression Expr = default(OclExpression);
 
-		CommonTree INFIX10 = default(CommonTree);
-		CommonTree UNARY11 = default(CommonTree);
+		CommonTree INFIX12 = default(CommonTree);
+		CommonTree UNARY13 = default(CommonTree);
 		OclExpression e1 = default(OclExpression);
 		OclExpression e2 = default(OclExpression);
 		OclExpression e = default(OclExpression);
 		OclExpression res = default(OclExpression);
-		OclExpression itCall12 = default(OclExpression);
-		OclExpression primaryExperession13 = default(OclExpression);
+		OclExpression itCall14 = default(OclExpression);
+		OclExpression primaryExperession15 = default(OclExpression);
 
 		try { DebugEnterRule(GrammarFileName, "oclExpression");
-		DebugLocation(104, 1);
+		DebugLocation(106, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:109:2: ( ^( INFIX e1= oclExpression e2= oclExpression ) | ^( UNARY e= oclExpression ) | ^( '.' e= oclExpression (res= propertyCall |res= operationCall ) ) | ^( '->' e= oclExpression ( itCall ) ) | ^( MESSAGE oclMessageExp ) | primaryExperession )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:111:2: ( ^( INFIX e1= oclExpression e2= oclExpression ) | ^( UNARY e= oclExpression ) | ^( '.' e= oclExpression (res= propertyCall |res= operationCall ) ) | ^( '->' e= oclExpression ( itCall ) ) | ^( MESSAGE oclMessageExp ) | primaryExperession )
 			int alt23=6;
 			try { DebugEnterDecision(23, false);
 			switch (input.LA(1))
@@ -1919,69 +1942,69 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:109:3: ^( INFIX e1= oclExpression e2= oclExpression )
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:111:3: ^( INFIX e1= oclExpression e2= oclExpression )
 				{
-				DebugLocation(109, 3);
-				DebugLocation(109, 5);
-				INFIX10=(CommonTree)Match(input,INFIX,Follow._INFIX_in_oclExpression473); 
+				DebugLocation(111, 3);
+				DebugLocation(111, 5);
+				INFIX12=(CommonTree)Match(input,INFIX,Follow._INFIX_in_oclExpression496); 
 
 				Match(input, TokenTypes.Down, null); 
-				DebugLocation(109, 14);
-				PushFollow(Follow._oclExpression_in_oclExpression478);
+				DebugLocation(111, 14);
+				PushFollow(Follow._oclExpression_in_oclExpression501);
 				e1=oclExpression();
 				PopFollow();
 
-				DebugLocation(109, 31);
-				PushFollow(Follow._oclExpression_in_oclExpression482);
+				DebugLocation(111, 31);
+				PushFollow(Follow._oclExpression_in_oclExpression505);
 				e2=oclExpression();
 				PopFollow();
 
 
 				Match(input, TokenTypes.Up, null); 
-				DebugLocation(109, 47);
-				Expr = InfixOperation(e1,INFIX10,e2);
+				DebugLocation(111, 47);
+				Expr = InfixOperation(e1,INFIX12,e2);
 
 				}
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:110:3: ^( UNARY e= oclExpression )
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:112:3: ^( UNARY e= oclExpression )
 				{
-				DebugLocation(110, 3);
-				DebugLocation(110, 5);
-				UNARY11=(CommonTree)Match(input,UNARY,Follow._UNARY_in_oclExpression490); 
+				DebugLocation(112, 3);
+				DebugLocation(112, 5);
+				UNARY13=(CommonTree)Match(input,UNARY,Follow._UNARY_in_oclExpression513); 
 
 				Match(input, TokenTypes.Down, null); 
-				DebugLocation(110, 13);
-				PushFollow(Follow._oclExpression_in_oclExpression495);
+				DebugLocation(112, 13);
+				PushFollow(Follow._oclExpression_in_oclExpression518);
 				e=oclExpression();
 				PopFollow();
 
 
 				Match(input, TokenTypes.Up, null); 
-				DebugLocation(110, 30);
-				Expr = UnaryOperation(UNARY11.Token,e);
+				DebugLocation(112, 30);
+				Expr = UnaryOperation(UNARY13.Token,e);
 
 				}
 				break;
 			case 3:
 				DebugEnterAlt(3);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:111:3: ^( '.' e= oclExpression (res= propertyCall |res= operationCall ) )
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:113:3: ^( '.' e= oclExpression (res= propertyCall |res= operationCall ) )
 				{
-				DebugLocation(111, 3);
-				DebugLocation(111, 5);
-				Match(input,68,Follow._68_in_oclExpression504); 
+				DebugLocation(113, 3);
+				DebugLocation(113, 5);
+				Match(input,68,Follow._68_in_oclExpression527); 
 
 				Match(input, TokenTypes.Down, null); 
-				DebugLocation(111, 10);
-				PushFollow(Follow._oclExpression_in_oclExpression508);
+				DebugLocation(113, 10);
+				PushFollow(Follow._oclExpression_in_oclExpression531);
 				e=oclExpression();
 				PopFollow();
 
-				DebugLocation(111, 24);
+				DebugLocation(113, 24);
 				oclExpression_stack.Peek().RootExpr =  e;
-				DebugLocation(111, 62);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:111:62: (res= propertyCall |res= operationCall )
+				DebugLocation(113, 62);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:113:62: (res= propertyCall |res= operationCall )
 				int alt22=2;
 				try { DebugEnterSubRule(22);
 				try { DebugEnterDecision(22, false);
@@ -1999,10 +2022,10 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:111:63: res= propertyCall
+					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:113:63: res= propertyCall
 					{
-					DebugLocation(111, 66);
-					PushFollow(Follow._propertyCall_in_oclExpression514);
+					DebugLocation(113, 66);
+					PushFollow(Follow._propertyCall_in_oclExpression537);
 					res=propertyCall();
 					PopFollow();
 
@@ -2011,10 +2034,10 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 					break;
 				case 2:
 					DebugEnterAlt(2);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:111:82: res= operationCall
+					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:113:82: res= operationCall
 					{
-					DebugLocation(111, 85);
-					PushFollow(Follow._operationCall_in_oclExpression520);
+					DebugLocation(113, 85);
+					PushFollow(Follow._operationCall_in_oclExpression543);
 					res=operationCall();
 					PopFollow();
 
@@ -2027,35 +2050,35 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 
 
 				Match(input, TokenTypes.Up, null); 
-				DebugLocation(111, 102);
+				DebugLocation(113, 102);
 				Expr =res;
 
 				}
 				break;
 			case 4:
 				DebugEnterAlt(4);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:112:3: ^( '->' e= oclExpression ( itCall ) )
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:114:3: ^( '->' e= oclExpression ( itCall ) )
 				{
-				DebugLocation(112, 3);
-				DebugLocation(112, 5);
-				Match(input,67,Follow._67_in_oclExpression529); 
+				DebugLocation(114, 3);
+				DebugLocation(114, 5);
+				Match(input,67,Follow._67_in_oclExpression552); 
 
 				Match(input, TokenTypes.Down, null); 
-				DebugLocation(112, 11);
-				PushFollow(Follow._oclExpression_in_oclExpression533);
+				DebugLocation(114, 11);
+				PushFollow(Follow._oclExpression_in_oclExpression556);
 				e=oclExpression();
 				PopFollow();
 
-				DebugLocation(112, 25);
+				DebugLocation(114, 25);
 				oclExpression_stack.Peek().RootExpr =  e;
-				DebugLocation(112, 63);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:112:63: ( itCall )
+				DebugLocation(114, 63);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:114:63: ( itCall )
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:112:64: itCall
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:114:64: itCall
 				{
-				DebugLocation(112, 64);
-				PushFollow(Follow._itCall_in_oclExpression537);
-				itCall12=itCall();
+				DebugLocation(114, 64);
+				PushFollow(Follow._itCall_in_oclExpression560);
+				itCall14=itCall();
 				PopFollow();
 
 
@@ -2063,22 +2086,22 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 
 
 				Match(input, TokenTypes.Up, null); 
-				DebugLocation(112, 73);
-				Expr =itCall12;
+				DebugLocation(114, 73);
+				Expr =itCall14;
 
 				}
 				break;
 			case 5:
 				DebugEnterAlt(5);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:113:3: ^( MESSAGE oclMessageExp )
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:115:3: ^( MESSAGE oclMessageExp )
 				{
-				DebugLocation(113, 3);
-				DebugLocation(113, 5);
-				Match(input,MESSAGE,Follow._MESSAGE_in_oclExpression546); 
+				DebugLocation(115, 3);
+				DebugLocation(115, 5);
+				Match(input,MESSAGE,Follow._MESSAGE_in_oclExpression569); 
 
 				Match(input, TokenTypes.Down, null); 
-				DebugLocation(113, 13);
-				PushFollow(Follow._oclMessageExp_in_oclExpression548);
+				DebugLocation(115, 13);
+				PushFollow(Follow._oclMessageExp_in_oclExpression571);
 				oclMessageExp();
 				PopFollow();
 
@@ -2089,15 +2112,15 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 				break;
 			case 6:
 				DebugEnterAlt(6);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:114:4: primaryExperession
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:116:4: primaryExperession
 				{
-				DebugLocation(114, 4);
-				PushFollow(Follow._primaryExperession_in_oclExpression554);
-				primaryExperession13=primaryExperession();
+				DebugLocation(116, 4);
+				PushFollow(Follow._primaryExperession_in_oclExpression577);
+				primaryExperession15=primaryExperession();
 				PopFollow();
 
-				DebugLocation(114, 23);
-				Expr = primaryExperession13; 
+				DebugLocation(116, 23);
+				Expr = primaryExperession15; 
 
 				}
 				break;
@@ -2116,7 +2139,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			LeaveRule_oclExpression();
 			oclExpression_scopeAfter(oclExpression_stack.Peek());oclExpression_stack.Pop();
 		}
-		DebugLocation(115, 1);
+		DebugLocation(117, 1);
 		} finally { DebugExitRule(GrammarFileName, "oclExpression"); }
 		return Expr;
 
@@ -2128,7 +2151,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 	partial void LeaveRule_primaryExperession();
 
 	// $ANTLR start "primaryExperession"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:118:1: primaryExperession returns [OclExpression Expr] : ( collectionLiteralExp | tupleLiteralExp | classLiteralExp | ^( PRIMITIVELITERAL primitiveLiteralExp ) | ^( TYPE type ) | ifExp | letExp | ^( CALL pathName isMarkedPre ) | ^( CALL pathName ^( ARGS args= arguments ) isMarkedPre ) );
+	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:120:1: primaryExperession returns [OclExpression Expr] : ( collectionLiteralExp | tupleLiteralExp | classLiteralExp | ^( PRIMITIVELITERAL primitiveLiteralExp ) | ^( TYPE type ) | ifExp | letExp | ^( CALL pathName isMarkedPre ) | ^( CALL pathName ^( ARGS args= arguments ) isMarkedPre ) );
 	[GrammarRule("primaryExperession")]
 	private OclExpression primaryExperession()
 	{
@@ -2137,25 +2160,25 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 		TraceIn("primaryExperession", 16);
 		OclExpression Expr = default(OclExpression);
 
-		CommonTree TYPE19 = default(CommonTree);
+		CommonTree TYPE21 = default(CommonTree);
 		List<OclExpression> args = default(List<OclExpression>);
-		OclExpression collectionLiteralExp14 = default(OclExpression);
-		TupleLiteralExp tupleLiteralExp15 = default(TupleLiteralExp);
-		ClassLiteralExp classLiteralExp16 = default(ClassLiteralExp);
-		LiteralExp primitiveLiteralExp17 = default(LiteralExp);
-		Classifier type18 = default(Classifier);
-		OclExpression ifExp20 = default(OclExpression);
-		OclExpression letExp21 = default(OclExpression);
-		List<IToken> pathName22 = default(List<IToken>);
-		bool isMarkedPre23 = default(bool);
+		OclExpression collectionLiteralExp16 = default(OclExpression);
+		TupleLiteralExp tupleLiteralExp17 = default(TupleLiteralExp);
+		ClassLiteralExp classLiteralExp18 = default(ClassLiteralExp);
+		LiteralExp primitiveLiteralExp19 = default(LiteralExp);
+		Classifier type20 = default(Classifier);
+		OclExpression ifExp22 = default(OclExpression);
+		OclExpression letExp23 = default(OclExpression);
 		List<IToken> pathName24 = default(List<IToken>);
 		bool isMarkedPre25 = default(bool);
+		List<IToken> pathName26 = default(List<IToken>);
+		bool isMarkedPre27 = default(bool);
 
 		try { DebugEnterRule(GrammarFileName, "primaryExperession");
-		DebugLocation(118, 1);
+		DebugLocation(120, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:120:2: ( collectionLiteralExp | tupleLiteralExp | classLiteralExp | ^( PRIMITIVELITERAL primitiveLiteralExp ) | ^( TYPE type ) | ifExp | letExp | ^( CALL pathName isMarkedPre ) | ^( CALL pathName ^( ARGS args= arguments ) isMarkedPre ) )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:122:2: ( collectionLiteralExp | tupleLiteralExp | classLiteralExp | ^( PRIMITIVELITERAL primitiveLiteralExp ) | ^( TYPE type ) | ifExp | letExp | ^( CALL pathName isMarkedPre ) | ^( CALL pathName ^( ARGS args= arguments ) isMarkedPre ) )
 			int alt24=9;
 			try { DebugEnterDecision(24, false);
 			try
@@ -2172,180 +2195,180 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:125:3: collectionLiteralExp
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:127:3: collectionLiteralExp
 				{
-				DebugLocation(125, 3);
-				PushFollow(Follow._collectionLiteralExp_in_primaryExperession587);
-				collectionLiteralExp14=collectionLiteralExp();
+				DebugLocation(127, 3);
+				PushFollow(Follow._collectionLiteralExp_in_primaryExperession610);
+				collectionLiteralExp16=collectionLiteralExp();
 				PopFollow();
 
-				DebugLocation(125, 24);
-				Expr = collectionLiteralExp14;
+				DebugLocation(127, 24);
+				Expr = collectionLiteralExp16;
 
 				}
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:127:3: tupleLiteralExp
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:129:3: tupleLiteralExp
 				{
-				DebugLocation(127, 3);
-				PushFollow(Follow._tupleLiteralExp_in_primaryExperession598);
-				tupleLiteralExp15=tupleLiteralExp();
+				DebugLocation(129, 3);
+				PushFollow(Follow._tupleLiteralExp_in_primaryExperession621);
+				tupleLiteralExp17=tupleLiteralExp();
 				PopFollow();
 
-				DebugLocation(127, 19);
-				Expr = tupleLiteralExp15;
+				DebugLocation(129, 19);
+				Expr = tupleLiteralExp17;
 
 				}
 				break;
 			case 3:
 				DebugEnterAlt(3);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:129:3: classLiteralExp
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:131:3: classLiteralExp
 				{
-				DebugLocation(129, 3);
-				PushFollow(Follow._classLiteralExp_in_primaryExperession609);
-				classLiteralExp16=classLiteralExp();
+				DebugLocation(131, 3);
+				PushFollow(Follow._classLiteralExp_in_primaryExperession632);
+				classLiteralExp18=classLiteralExp();
 				PopFollow();
 
-				DebugLocation(129, 19);
-				Expr = classLiteralExp16;
+				DebugLocation(131, 19);
+				Expr = classLiteralExp18;
 
 				}
 				break;
 			case 4:
 				DebugEnterAlt(4);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:131:3: ^( PRIMITIVELITERAL primitiveLiteralExp )
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:133:3: ^( PRIMITIVELITERAL primitiveLiteralExp )
 				{
-				DebugLocation(131, 3);
-				DebugLocation(131, 5);
-				Match(input,PRIMITIVELITERAL,Follow._PRIMITIVELITERAL_in_primaryExperession621); 
+				DebugLocation(133, 3);
+				DebugLocation(133, 5);
+				Match(input,PRIMITIVELITERAL,Follow._PRIMITIVELITERAL_in_primaryExperession644); 
 
 				Match(input, TokenTypes.Down, null); 
-				DebugLocation(131, 22);
-				PushFollow(Follow._primitiveLiteralExp_in_primaryExperession623);
-				primitiveLiteralExp17=primitiveLiteralExp();
+				DebugLocation(133, 22);
+				PushFollow(Follow._primitiveLiteralExp_in_primaryExperession646);
+				primitiveLiteralExp19=primitiveLiteralExp();
 				PopFollow();
 
 
 				Match(input, TokenTypes.Up, null); 
-				DebugLocation(131, 43);
-				Expr = primitiveLiteralExp17;
+				DebugLocation(133, 43);
+				Expr = primitiveLiteralExp19;
 
 				}
 				break;
 			case 5:
 				DebugEnterAlt(5);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:134:3: ^( TYPE type )
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:136:3: ^( TYPE type )
 				{
-				DebugLocation(134, 3);
-				DebugLocation(134, 5);
-				TYPE19=(CommonTree)Match(input,TYPE,Follow._TYPE_in_primaryExperession637); 
+				DebugLocation(136, 3);
+				DebugLocation(136, 5);
+				TYPE21=(CommonTree)Match(input,TYPE,Follow._TYPE_in_primaryExperession660); 
 
 				Match(input, TokenTypes.Down, null); 
-				DebugLocation(134, 10);
-				PushFollow(Follow._type_in_primaryExperession639);
-				type18=type();
+				DebugLocation(136, 10);
+				PushFollow(Follow._type_in_primaryExperession662);
+				type20=type();
 				PopFollow();
 
 
 				Match(input, TokenTypes.Up, null); 
-				DebugLocation(134, 16);
-				 Expr = new TypeExp(type18,TypesTable.Library.Type).SetCodeSource(new CodeSource(TYPE19));
+				DebugLocation(136, 16);
+				 Expr = new TypeExp(type20,TypesTable.Library.Type).SetCodeSource(new CodeSource(TYPE21));
 
 				}
 				break;
 			case 6:
 				DebugEnterAlt(6);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:135:3: ifExp
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:137:3: ifExp
 				{
-				DebugLocation(135, 3);
-				PushFollow(Follow._ifExp_in_primaryExperession646);
-				ifExp20=ifExp();
+				DebugLocation(137, 3);
+				PushFollow(Follow._ifExp_in_primaryExperession669);
+				ifExp22=ifExp();
 				PopFollow();
 
-				DebugLocation(135, 9);
-				Expr = ifExp20;
+				DebugLocation(137, 9);
+				Expr = ifExp22;
 
 				}
 				break;
 			case 7:
 				DebugEnterAlt(7);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:136:3: letExp
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:138:3: letExp
 				{
-				DebugLocation(136, 3);
-				PushFollow(Follow._letExp_in_primaryExperession652);
-				letExp21=letExp();
+				DebugLocation(138, 3);
+				PushFollow(Follow._letExp_in_primaryExperession675);
+				letExp23=letExp();
 				PopFollow();
 
-				DebugLocation(136, 10);
-				Expr = letExp21;
+				DebugLocation(138, 10);
+				Expr = letExp23;
 
 				}
 				break;
 			case 8:
 				DebugEnterAlt(8);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:138:3: ^( CALL pathName isMarkedPre )
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:140:3: ^( CALL pathName isMarkedPre )
 				{
-				DebugLocation(138, 3);
-				DebugLocation(138, 5);
-				Match(input,CALL,Follow._CALL_in_primaryExperession661); 
+				DebugLocation(140, 3);
+				DebugLocation(140, 5);
+				Match(input,CALL,Follow._CALL_in_primaryExperession684); 
 
 				Match(input, TokenTypes.Down, null); 
-				DebugLocation(138, 10);
-				PushFollow(Follow._pathName_in_primaryExperession663);
-				pathName22=pathName();
+				DebugLocation(140, 10);
+				PushFollow(Follow._pathName_in_primaryExperession686);
+				pathName24=pathName();
 				PopFollow();
 
-				DebugLocation(138, 19);
-				PushFollow(Follow._isMarkedPre_in_primaryExperession665);
-				isMarkedPre23=isMarkedPre();
+				DebugLocation(140, 19);
+				PushFollow(Follow._isMarkedPre_in_primaryExperession688);
+				isMarkedPre25=isMarkedPre();
 				PopFollow();
 
 
 				Match(input, TokenTypes.Up, null); 
-				DebugLocation(138, 32);
-				Expr = ResolvePath(pathName22, isMarkedPre23);
+				DebugLocation(140, 32);
+				Expr = ResolvePath(pathName24, isMarkedPre25);
 
 				}
 				break;
 			case 9:
 				DebugEnterAlt(9);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:140:4: ^( CALL pathName ^( ARGS args= arguments ) isMarkedPre )
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:142:4: ^( CALL pathName ^( ARGS args= arguments ) isMarkedPre )
 				{
-				DebugLocation(140, 4);
-				DebugLocation(140, 6);
-				Match(input,CALL,Follow._CALL_in_primaryExperession676); 
+				DebugLocation(142, 4);
+				DebugLocation(142, 6);
+				Match(input,CALL,Follow._CALL_in_primaryExperession699); 
 
 				Match(input, TokenTypes.Down, null); 
-				DebugLocation(140, 11);
-				PushFollow(Follow._pathName_in_primaryExperession678);
-				pathName24=pathName();
+				DebugLocation(142, 11);
+				PushFollow(Follow._pathName_in_primaryExperession701);
+				pathName26=pathName();
 				PopFollow();
 
-				DebugLocation(140, 20);
-				DebugLocation(140, 22);
-				Match(input,ARGS,Follow._ARGS_in_primaryExperession681); 
+				DebugLocation(142, 20);
+				DebugLocation(142, 22);
+				Match(input,ARGS,Follow._ARGS_in_primaryExperession704); 
 
 				if (input.LA(1) == TokenTypes.Down)
 				{
 					Match(input, TokenTypes.Down, null); 
-					DebugLocation(140, 32);
-					PushFollow(Follow._arguments_in_primaryExperession686);
+					DebugLocation(142, 32);
+					PushFollow(Follow._arguments_in_primaryExperession709);
 					args=arguments();
 					PopFollow();
 
 
 					Match(input, TokenTypes.Up, null); 
 				}
-				DebugLocation(140, 45);
-				PushFollow(Follow._isMarkedPre_in_primaryExperession690);
-				isMarkedPre25=isMarkedPre();
+				DebugLocation(142, 45);
+				PushFollow(Follow._isMarkedPre_in_primaryExperession713);
+				isMarkedPre27=isMarkedPre();
 				PopFollow();
 
 
 				Match(input, TokenTypes.Up, null); 
-				DebugLocation(141, 3);
-				Expr = ResolveImplicitOperation(pathName24,isMarkedPre25,args);
+				DebugLocation(143, 3);
+				Expr = ResolveImplicitOperation(pathName26,isMarkedPre27,args);
 
 				}
 				break;
@@ -2363,7 +2386,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			LeaveRule("primaryExperession", 16);
 			LeaveRule_primaryExperession();
 		}
-		DebugLocation(142, 1);
+		DebugLocation(144, 1);
 		} finally { DebugExitRule(GrammarFileName, "primaryExperession"); }
 		return Expr;
 
@@ -2375,7 +2398,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 	partial void LeaveRule_propertyCall();
 
 	// $ANTLR start "propertyCall"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:145:1: propertyCall returns [OclExpression Expr] : ^( CALL pathName isMarkedPre ) ;
+	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:147:1: propertyCall returns [OclExpression Expr] : ^( CALL pathName isMarkedPre ) ;
 	[GrammarRule("propertyCall")]
 	private OclExpression propertyCall()
 	{
@@ -2384,36 +2407,36 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 		TraceIn("propertyCall", 17);
 		OclExpression Expr = default(OclExpression);
 
-		List<IToken> pathName26 = default(List<IToken>);
-		bool isMarkedPre27 = default(bool);
+		List<IToken> pathName28 = default(List<IToken>);
+		bool isMarkedPre29 = default(bool);
 
 		try { DebugEnterRule(GrammarFileName, "propertyCall");
-		DebugLocation(145, 1);
+		DebugLocation(147, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:147:2: ( ^( CALL pathName isMarkedPre ) )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:149:2: ( ^( CALL pathName isMarkedPre ) )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:147:5: ^( CALL pathName isMarkedPre )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:149:5: ^( CALL pathName isMarkedPre )
 			{
-			DebugLocation(147, 5);
-			DebugLocation(147, 7);
-			Match(input,CALL,Follow._CALL_in_propertyCall715); 
+			DebugLocation(149, 5);
+			DebugLocation(149, 7);
+			Match(input,CALL,Follow._CALL_in_propertyCall738); 
 
 			Match(input, TokenTypes.Down, null); 
-			DebugLocation(147, 12);
-			PushFollow(Follow._pathName_in_propertyCall717);
-			pathName26=pathName();
+			DebugLocation(149, 12);
+			PushFollow(Follow._pathName_in_propertyCall740);
+			pathName28=pathName();
 			PopFollow();
 
-			DebugLocation(147, 21);
-			PushFollow(Follow._isMarkedPre_in_propertyCall719);
-			isMarkedPre27=isMarkedPre();
+			DebugLocation(149, 21);
+			PushFollow(Follow._isMarkedPre_in_propertyCall742);
+			isMarkedPre29=isMarkedPre();
 			PopFollow();
 
 
 			Match(input, TokenTypes.Up, null); 
-			DebugLocation(148, 3);
-			Expr = ProcessPropertyCall(oclExpression_stack.Peek().RootExpr,pathName26,isMarkedPre27);
+			DebugLocation(150, 3);
+			Expr = ProcessPropertyCall(oclExpression_stack.Peek().RootExpr,pathName28,isMarkedPre29);
 
 			}
 
@@ -2429,7 +2452,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			LeaveRule("propertyCall", 17);
 			LeaveRule_propertyCall();
 		}
-		DebugLocation(149, 1);
+		DebugLocation(151, 1);
 		} finally { DebugExitRule(GrammarFileName, "propertyCall"); }
 		return Expr;
 
@@ -2441,7 +2464,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 	partial void LeaveRule_operationCall();
 
 	// $ANTLR start "operationCall"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:152:1: operationCall returns [OclExpression Expr] : ^( CALL pathName ( ^( ARGS args= arguments ) | ARGS ) pre= isMarkedPre ) ;
+	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:154:1: operationCall returns [OclExpression Expr] : ^( CALL pathName ( ^( ARGS args= arguments ) | ARGS ) pre= isMarkedPre ) ;
 	[GrammarRule("operationCall")]
 	private OclExpression operationCall()
 	{
@@ -2452,28 +2475,28 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 
 		List<OclExpression> args = default(List<OclExpression>);
 		bool pre = default(bool);
-		List<IToken> pathName28 = default(List<IToken>);
+		List<IToken> pathName30 = default(List<IToken>);
 
 		try { DebugEnterRule(GrammarFileName, "operationCall");
-		DebugLocation(152, 1);
+		DebugLocation(154, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:154:2: ( ^( CALL pathName ( ^( ARGS args= arguments ) | ARGS ) pre= isMarkedPre ) )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:156:2: ( ^( CALL pathName ( ^( ARGS args= arguments ) | ARGS ) pre= isMarkedPre ) )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:154:4: ^( CALL pathName ( ^( ARGS args= arguments ) | ARGS ) pre= isMarkedPre )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:156:4: ^( CALL pathName ( ^( ARGS args= arguments ) | ARGS ) pre= isMarkedPre )
 			{
-			DebugLocation(154, 4);
-			DebugLocation(154, 6);
-			Match(input,CALL,Follow._CALL_in_operationCall743); 
+			DebugLocation(156, 4);
+			DebugLocation(156, 6);
+			Match(input,CALL,Follow._CALL_in_operationCall766); 
 
 			Match(input, TokenTypes.Down, null); 
-			DebugLocation(154, 11);
-			PushFollow(Follow._pathName_in_operationCall745);
-			pathName28=pathName();
+			DebugLocation(156, 11);
+			PushFollow(Follow._pathName_in_operationCall768);
+			pathName30=pathName();
 			PopFollow();
 
-			DebugLocation(154, 20);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:154:20: ( ^( ARGS args= arguments ) | ARGS )
+			DebugLocation(156, 20);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:156:20: ( ^( ARGS args= arguments ) | ARGS )
 			int alt25=2;
 			try { DebugEnterSubRule(25);
 			try { DebugEnterDecision(25, false);
@@ -2509,17 +2532,17 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:154:21: ^( ARGS args= arguments )
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:156:21: ^( ARGS args= arguments )
 				{
-				DebugLocation(154, 21);
-				DebugLocation(154, 23);
-				Match(input,ARGS,Follow._ARGS_in_operationCall749); 
+				DebugLocation(156, 21);
+				DebugLocation(156, 23);
+				Match(input,ARGS,Follow._ARGS_in_operationCall772); 
 
 				if (input.LA(1) == TokenTypes.Down)
 				{
 					Match(input, TokenTypes.Down, null); 
-					DebugLocation(154, 33);
-					PushFollow(Follow._arguments_in_operationCall755);
+					DebugLocation(156, 33);
+					PushFollow(Follow._arguments_in_operationCall778);
 					args=arguments();
 					PopFollow();
 
@@ -2531,10 +2554,10 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:154:46: ARGS
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:156:46: ARGS
 				{
-				DebugLocation(154, 46);
-				Match(input,ARGS,Follow._ARGS_in_operationCall758); 
+				DebugLocation(156, 46);
+				Match(input,ARGS,Follow._ARGS_in_operationCall781); 
 
 				}
 				break;
@@ -2542,15 +2565,15 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			}
 			} finally { DebugExitSubRule(25); }
 
-			DebugLocation(154, 56);
-			PushFollow(Follow._isMarkedPre_in_operationCall764);
+			DebugLocation(156, 56);
+			PushFollow(Follow._isMarkedPre_in_operationCall787);
 			pre=isMarkedPre();
 			PopFollow();
 
 
 			Match(input, TokenTypes.Up, null); 
-			DebugLocation(155, 3);
-			Expr = ProcessOperationCall(oclExpression_stack.Peek().RootExpr,pathName28,pre,args);
+			DebugLocation(157, 3);
+			Expr = ProcessOperationCall(oclExpression_stack.Peek().RootExpr,pathName30,pre,args);
 
 			}
 
@@ -2566,7 +2589,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			LeaveRule("operationCall", 18);
 			LeaveRule_operationCall();
 		}
-		DebugLocation(156, 1);
+		DebugLocation(158, 1);
 		} finally { DebugExitRule(GrammarFileName, "operationCall"); }
 		return Expr;
 
@@ -2589,7 +2612,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 	partial void LeaveRule_itCall();
 
 	// $ANTLR start "itCall"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:159:1: itCall returns [OclExpression Expr] : ( ^( CALL iteratorCall ) | iterateCall );
+	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:161:1: itCall returns [OclExpression Expr] : ( ^( CALL iteratorCall ) | iterateCall );
 	[GrammarRule("itCall")]
 	private OclExpression itCall()
 	{
@@ -2599,17 +2622,17 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 		itCall_stack.Push(new itCall_scope(this));itCall_scopeInit(itCall_stack.Peek());
 		OclExpression Expr = default(OclExpression);
 
-		OclExpression iteratorCall29 = default(OclExpression);
-		OclExpression iterateCall30 = default(OclExpression);
+		OclExpression iteratorCall31 = default(OclExpression);
+		OclExpression iterateCall32 = default(OclExpression);
 
 
 				itCall_stack.Peek().PushedVar =  0;
 			
 		try { DebugEnterRule(GrammarFileName, "itCall");
-		DebugLocation(159, 1);
+		DebugLocation(161, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:172:2: ( ^( CALL iteratorCall ) | iterateCall )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:174:2: ( ^( CALL iteratorCall ) | iterateCall )
 			int alt26=2;
 			try { DebugEnterDecision(26, false);
 			int LA26_0 = input.LA(1);
@@ -2633,36 +2656,36 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:172:4: ^( CALL iteratorCall )
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:174:4: ^( CALL iteratorCall )
 				{
-				DebugLocation(172, 4);
-				DebugLocation(172, 6);
-				Match(input,CALL,Follow._CALL_in_itCall802); 
+				DebugLocation(174, 4);
+				DebugLocation(174, 6);
+				Match(input,CALL,Follow._CALL_in_itCall825); 
 
 				Match(input, TokenTypes.Down, null); 
-				DebugLocation(172, 11);
-				PushFollow(Follow._iteratorCall_in_itCall804);
-				iteratorCall29=iteratorCall();
+				DebugLocation(174, 11);
+				PushFollow(Follow._iteratorCall_in_itCall827);
+				iteratorCall31=iteratorCall();
 				PopFollow();
 
 
 				Match(input, TokenTypes.Up, null); 
-				DebugLocation(172, 25);
-				Expr = iteratorCall29;
+				DebugLocation(174, 25);
+				Expr = iteratorCall31;
 
 				}
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:173:4: iterateCall
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:175:4: iterateCall
 				{
-				DebugLocation(173, 4);
-				PushFollow(Follow._iterateCall_in_itCall812);
-				iterateCall30=iterateCall();
+				DebugLocation(175, 4);
+				PushFollow(Follow._iterateCall_in_itCall835);
+				iterateCall32=iterateCall();
 				PopFollow();
 
-				DebugLocation(173, 16);
-				Expr = iterateCall30;
+				DebugLocation(175, 16);
+				Expr = iterateCall32;
 
 				}
 				break;
@@ -2686,7 +2709,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			LeaveRule_itCall();
 			itCall_scopeAfter(itCall_stack.Peek());itCall_stack.Pop();
 		}
-		DebugLocation(174, 1);
+		DebugLocation(176, 1);
 		} finally { DebugExitRule(GrammarFileName, "itCall"); }
 		return Expr;
 
@@ -2698,7 +2721,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 	partial void LeaveRule_iteratorCall();
 
 	// $ANTLR start "iteratorCall"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:177:1: iteratorCall returns [OclExpression Expr] : ( pathName ^( ARGS ^( VARDECL typedefs ) args= arguments ) | pathName ( ({...}? => implicitVarDecl ) |) ( ^( ARGS args= arguments ) | ARGS ) );
+	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:179:1: iteratorCall returns [OclExpression Expr] : ( pathName ^( ARGS ^( VARDECL typedefs ) args= arguments ) | pathName ( ({...}? => implicitVarDecl ) |) ( ^( ARGS args= arguments ) | ARGS ) );
 	[GrammarRule("iteratorCall")]
 	private OclExpression iteratorCall()
 	{
@@ -2708,16 +2731,16 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 		OclExpression Expr = default(OclExpression);
 
 		List<OclExpression> args = default(List<OclExpression>);
-		List<IToken> pathName31 = default(List<IToken>);
-		List<VariableDeclaration> typedefs32 = default(List<VariableDeclaration>);
 		List<IToken> pathName33 = default(List<IToken>);
-		VariableDeclaration implicitVarDecl34 = default(VariableDeclaration);
+		List<VariableDeclaration> typedefs34 = default(List<VariableDeclaration>);
+		List<IToken> pathName35 = default(List<IToken>);
+		VariableDeclaration implicitVarDecl36 = default(VariableDeclaration);
 
 		try { DebugEnterRule(GrammarFileName, "iteratorCall");
-		DebugLocation(177, 1);
+		DebugLocation(179, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:179:2: ( pathName ^( ARGS ^( VARDECL typedefs ) args= arguments ) | pathName ( ({...}? => implicitVarDecl ) |) ( ^( ARGS args= arguments ) | ARGS ) )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:181:2: ( pathName ^( ARGS ^( VARDECL typedefs ) args= arguments ) | pathName ( ({...}? => implicitVarDecl ) |) ( ^( ARGS args= arguments ) | ARGS ) )
 			int alt29=2;
 			try { DebugEnterDecision(29, false);
 			try
@@ -2734,54 +2757,54 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:179:4: pathName ^( ARGS ^( VARDECL typedefs ) args= arguments )
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:181:4: pathName ^( ARGS ^( VARDECL typedefs ) args= arguments )
 				{
-				DebugLocation(179, 4);
-				PushFollow(Follow._pathName_in_iteratorCall830);
-				pathName31=pathName();
+				DebugLocation(181, 4);
+				PushFollow(Follow._pathName_in_iteratorCall853);
+				pathName33=pathName();
 				PopFollow();
 
-				DebugLocation(179, 13);
-				DebugLocation(179, 15);
-				Match(input,ARGS,Follow._ARGS_in_iteratorCall833); 
+				DebugLocation(181, 13);
+				DebugLocation(181, 15);
+				Match(input,ARGS,Follow._ARGS_in_iteratorCall856); 
 
 				Match(input, TokenTypes.Down, null); 
-				DebugLocation(179, 20);
-				DebugLocation(179, 22);
-				Match(input,VARDECL,Follow._VARDECL_in_iteratorCall836); 
+				DebugLocation(181, 20);
+				DebugLocation(181, 22);
+				Match(input,VARDECL,Follow._VARDECL_in_iteratorCall859); 
 
 				Match(input, TokenTypes.Down, null); 
-				DebugLocation(179, 30);
-				PushFollow(Follow._typedefs_in_iteratorCall838);
-				typedefs32=typedefs();
+				DebugLocation(181, 30);
+				PushFollow(Follow._typedefs_in_iteratorCall861);
+				typedefs34=typedefs();
 				PopFollow();
 
 
 				Match(input, TokenTypes.Up, null); 
-				DebugLocation(179, 45);
-				PushFollow(Follow._arguments_in_iteratorCall845);
+				DebugLocation(181, 45);
+				PushFollow(Follow._arguments_in_iteratorCall868);
 				args=arguments();
 				PopFollow();
 
 
 				Match(input, TokenTypes.Up, null); 
-				DebugLocation(179, 59);
+				DebugLocation(181, 59);
 
-						Expr = ProcessIteratorCall(oclExpression_stack.Peek().RootExpr,pathName31,typedefs32,args);
+						Expr = ProcessIteratorCall(oclExpression_stack.Peek().RootExpr,pathName33,typedefs34,args);
 
 				}
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:181:4: pathName ( ({...}? => implicitVarDecl ) |) ( ^( ARGS args= arguments ) | ARGS )
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:183:4: pathName ( ({...}? => implicitVarDecl ) |) ( ^( ARGS args= arguments ) | ARGS )
 				{
-				DebugLocation(181, 4);
-				PushFollow(Follow._pathName_in_iteratorCall854);
-				pathName33=pathName();
+				DebugLocation(183, 4);
+				PushFollow(Follow._pathName_in_iteratorCall877);
+				pathName35=pathName();
 				PopFollow();
 
-				DebugLocation(181, 13);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:181:13: ( ({...}? => implicitVarDecl ) |)
+				DebugLocation(183, 13);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:183:13: ( ({...}? => implicitVarDecl ) |)
 				int alt27=2;
 				try { DebugEnterSubRule(27);
 				try { DebugEnterDecision(27, false);
@@ -2791,7 +2814,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 				{
 					int LA27_1 = input.LA(2);
 
-					if (((IsIteratorOperation(oclExpression_stack.Peek().RootExpr,pathName33))))
+					if (((IsIteratorOperation(oclExpression_stack.Peek().RootExpr,pathName35))))
 					{
 						alt27 = 1;
 					}
@@ -2817,21 +2840,21 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:183:4: ({...}? => implicitVarDecl )
+					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:185:4: ({...}? => implicitVarDecl )
 					{
-					DebugLocation(183, 4);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:183:4: ({...}? => implicitVarDecl )
+					DebugLocation(185, 4);
+					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:185:4: ({...}? => implicitVarDecl )
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:183:5: {...}? => implicitVarDecl
+					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:185:5: {...}? => implicitVarDecl
 					{
-					DebugLocation(183, 5);
-					if (!((IsIteratorOperation(oclExpression_stack.Peek().RootExpr,pathName33))))
+					DebugLocation(185, 5);
+					if (!((IsIteratorOperation(oclExpression_stack.Peek().RootExpr,pathName35))))
 					{
 						throw new FailedPredicateException(input, "iteratorCall", "IsIteratorOperation($oclExpression::RootExpr,$pathName.Path)");
 					}
-					DebugLocation(183, 72);
-					PushFollow(Follow._implicitVarDecl_in_iteratorCall870);
-					implicitVarDecl34=implicitVarDecl();
+					DebugLocation(185, 72);
+					PushFollow(Follow._implicitVarDecl_in_iteratorCall893);
+					implicitVarDecl36=implicitVarDecl();
 					PopFollow();
 
 
@@ -2842,7 +2865,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 					break;
 				case 2:
 					DebugEnterAlt(2);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:184:3: 
+					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:186:3: 
 					{
 					}
 					break;
@@ -2850,8 +2873,8 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 				}
 				} finally { DebugExitSubRule(27); }
 
-				DebugLocation(185, 3);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:185:3: ( ^( ARGS args= arguments ) | ARGS )
+				DebugLocation(187, 3);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:187:3: ( ^( ARGS args= arguments ) | ARGS )
 				int alt28=2;
 				try { DebugEnterSubRule(28);
 				try { DebugEnterDecision(28, false);
@@ -2887,17 +2910,17 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:185:4: ^( ARGS args= arguments )
+					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:187:4: ^( ARGS args= arguments )
 					{
-					DebugLocation(185, 4);
-					DebugLocation(185, 6);
-					Match(input,ARGS,Follow._ARGS_in_iteratorCall886); 
+					DebugLocation(187, 4);
+					DebugLocation(187, 6);
+					Match(input,ARGS,Follow._ARGS_in_iteratorCall909); 
 
 					if (input.LA(1) == TokenTypes.Down)
 					{
 						Match(input, TokenTypes.Down, null); 
-						DebugLocation(185, 17);
-						PushFollow(Follow._arguments_in_iteratorCall893);
+						DebugLocation(187, 17);
+						PushFollow(Follow._arguments_in_iteratorCall916);
 						args=arguments();
 						PopFollow();
 
@@ -2909,10 +2932,10 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 					break;
 				case 2:
 					DebugEnterAlt(2);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:185:30: ARGS
+					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:187:30: ARGS
 					{
-					DebugLocation(185, 30);
-					Match(input,ARGS,Follow._ARGS_in_iteratorCall896); 
+					DebugLocation(187, 30);
+					Match(input,ARGS,Follow._ARGS_in_iteratorCall919); 
 
 					}
 					break;
@@ -2920,14 +2943,14 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 				}
 				} finally { DebugExitSubRule(28); }
 
-				DebugLocation(186, 3);
+				DebugLocation(188, 3);
 				 
-							if(IsIteratorOperation(oclExpression_stack.Peek().RootExpr,pathName33)){
+							if(IsIteratorOperation(oclExpression_stack.Peek().RootExpr,pathName35)){
 								var decls = new List<VariableDeclaration>();
-								decls.Add(implicitVarDecl34);
-								Expr = ProcessIteratorCall(oclExpression_stack.Peek().RootExpr,pathName33,decls,args);
+								decls.Add(implicitVarDecl36);
+								Expr = ProcessIteratorCall(oclExpression_stack.Peek().RootExpr,pathName35,decls,args);
 							} else {
-								Expr = ProcessCollectionOperationCall(oclExpression_stack.Peek().RootExpr,pathName33,args);
+								Expr = ProcessCollectionOperationCall(oclExpression_stack.Peek().RootExpr,pathName35,args);
 							}
 						
 
@@ -2947,7 +2970,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			LeaveRule("iteratorCall", 20);
 			LeaveRule_iteratorCall();
 		}
-		DebugLocation(195, 1);
+		DebugLocation(197, 1);
 		} finally { DebugExitRule(GrammarFileName, "iteratorCall"); }
 		return Expr;
 
@@ -2959,7 +2982,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 	partial void LeaveRule_iterateCall();
 
 	// $ANTLR start "iterateCall"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:197:1: iterateCall returns [OclExpression Expr] : ^(it= ITERATE (iterator= typedef |iterator= implicitVarDecl ) ^( ACC accName= SimpleName (accType= type )? accExpr= oclExpression ) expr= oclExpression ) ;
+	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:199:1: iterateCall returns [OclExpression Expr] : ^(it= ITERATE (iterator= typedef |iterator= implicitVarDecl ) ^( ACC accName= SimpleName (accType= type )? accExpr= oclExpression ) expr= oclExpression ) ;
 	[GrammarRule("iterateCall")]
 	private OclExpression iterateCall()
 	{
@@ -2976,20 +2999,20 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 		OclExpression expr = default(OclExpression);
 
 		try { DebugEnterRule(GrammarFileName, "iterateCall");
-		DebugLocation(197, 1);
+		DebugLocation(199, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:199:2: ( ^(it= ITERATE (iterator= typedef |iterator= implicitVarDecl ) ^( ACC accName= SimpleName (accType= type )? accExpr= oclExpression ) expr= oclExpression ) )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:201:2: ( ^(it= ITERATE (iterator= typedef |iterator= implicitVarDecl ) ^( ACC accName= SimpleName (accType= type )? accExpr= oclExpression ) expr= oclExpression ) )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:199:4: ^(it= ITERATE (iterator= typedef |iterator= implicitVarDecl ) ^( ACC accName= SimpleName (accType= type )? accExpr= oclExpression ) expr= oclExpression )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:201:4: ^(it= ITERATE (iterator= typedef |iterator= implicitVarDecl ) ^( ACC accName= SimpleName (accType= type )? accExpr= oclExpression ) expr= oclExpression )
 			{
-			DebugLocation(199, 4);
-			DebugLocation(199, 8);
-			it=(CommonTree)Match(input,ITERATE,Follow._ITERATE_in_iterateCall920); 
+			DebugLocation(201, 4);
+			DebugLocation(201, 8);
+			it=(CommonTree)Match(input,ITERATE,Follow._ITERATE_in_iterateCall943); 
 
 			Match(input, TokenTypes.Down, null); 
-			DebugLocation(200, 4);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:200:4: (iterator= typedef |iterator= implicitVarDecl )
+			DebugLocation(202, 4);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:202:4: (iterator= typedef |iterator= implicitVarDecl )
 			int alt30=2;
 			try { DebugEnterSubRule(30);
 			try { DebugEnterDecision(30, false);
@@ -3014,10 +3037,10 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:200:5: iterator= typedef
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:202:5: iterator= typedef
 				{
-				DebugLocation(200, 13);
-				PushFollow(Follow._typedef_in_iterateCall929);
+				DebugLocation(202, 13);
+				PushFollow(Follow._typedef_in_iterateCall952);
 				iterator=typedef();
 				PopFollow();
 
@@ -3026,10 +3049,10 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:200:24: iterator= implicitVarDecl
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:202:24: iterator= implicitVarDecl
 				{
-				DebugLocation(200, 32);
-				PushFollow(Follow._implicitVarDecl_in_iterateCall935);
+				DebugLocation(202, 32);
+				PushFollow(Follow._implicitVarDecl_in_iterateCall958);
 				iterator=implicitVarDecl();
 				PopFollow();
 
@@ -3040,15 +3063,15 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			}
 			} finally { DebugExitSubRule(30); }
 
-			DebugLocation(201, 4);
-			DebugLocation(201, 6);
-			Match(input,ACC,Follow._ACC_in_iterateCall942); 
+			DebugLocation(203, 4);
+			DebugLocation(203, 6);
+			Match(input,ACC,Follow._ACC_in_iterateCall965); 
 
 			Match(input, TokenTypes.Down, null); 
-			DebugLocation(201, 18);
-			accName=(CommonTree)Match(input,SimpleName,Follow._SimpleName_in_iterateCall948); 
-			DebugLocation(201, 31);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:201:31: (accType= type )?
+			DebugLocation(203, 18);
+			accName=(CommonTree)Match(input,SimpleName,Follow._SimpleName_in_iterateCall971); 
+			DebugLocation(203, 31);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:203:31: (accType= type )?
 			int alt31=2;
 			try { DebugEnterSubRule(31);
 			try { DebugEnterDecision(31, false);
@@ -3063,10 +3086,10 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:201:32: accType= type
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:203:32: accType= type
 				{
-				DebugLocation(201, 40);
-				PushFollow(Follow._type_in_iterateCall955);
+				DebugLocation(203, 40);
+				PushFollow(Follow._type_in_iterateCall978);
 				accType=type();
 				PopFollow();
 
@@ -3077,23 +3100,23 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			}
 			} finally { DebugExitSubRule(31); }
 
-			DebugLocation(201, 57);
-			PushFollow(Follow._oclExpression_in_iterateCall963);
+			DebugLocation(203, 57);
+			PushFollow(Follow._oclExpression_in_iterateCall986);
 			accExpr=oclExpression();
 			PopFollow();
 
 
 			Match(input, TokenTypes.Up, null); 
-			DebugLocation(201, 74);
+			DebugLocation(203, 74);
 			 var acc = ProcessAccDef(accName.Token,accType,accExpr,ref itCall_stack.Peek().PushedVar);
-			DebugLocation(202, 9);
-			PushFollow(Follow._oclExpression_in_iterateCall975);
+			DebugLocation(204, 9);
+			PushFollow(Follow._oclExpression_in_iterateCall998);
 			expr=oclExpression();
 			PopFollow();
 
 
 			Match(input, TokenTypes.Up, null); 
-			DebugLocation(204, 3);
+			DebugLocation(206, 3);
 			 Expr = ProcessIterate(oclExpression_stack.Peek().RootExpr,it.Token,iterator,acc,expr);
 
 			}
@@ -3110,7 +3133,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			LeaveRule("iterateCall", 21);
 			LeaveRule_iterateCall();
 		}
-		DebugLocation(205, 1);
+		DebugLocation(207, 1);
 		} finally { DebugExitRule(GrammarFileName, "iterateCall"); }
 		return Expr;
 
@@ -3122,7 +3145,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 	partial void LeaveRule_arguments();
 
 	// $ANTLR start "arguments"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:207:1: arguments returns [List<OclExpression> Args = new List<OclExpression>()] : (e= oclExpression )* ;
+	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:209:1: arguments returns [List<OclExpression> Args = new List<OclExpression>()] : (e= oclExpression )* ;
 	[GrammarRule("arguments")]
 	private List<OclExpression> arguments()
 	{
@@ -3134,15 +3157,15 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 		OclExpression e = default(OclExpression);
 
 		try { DebugEnterRule(GrammarFileName, "arguments");
-		DebugLocation(207, 1);
+		DebugLocation(209, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:209:2: ( (e= oclExpression )* )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:211:2: ( (e= oclExpression )* )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:209:4: (e= oclExpression )*
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:211:4: (e= oclExpression )*
 			{
-			DebugLocation(209, 4);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:209:4: (e= oclExpression )*
+			DebugLocation(211, 4);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:211:4: (e= oclExpression )*
 			try { DebugEnterSubRule(32);
 			while (true)
 			{
@@ -3161,14 +3184,14 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:209:5: e= oclExpression
+					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:211:5: e= oclExpression
 					{
-					DebugLocation(209, 7);
-					PushFollow(Follow._oclExpression_in_arguments1005);
+					DebugLocation(211, 7);
+					PushFollow(Follow._oclExpression_in_arguments1028);
 					e=oclExpression();
 					PopFollow();
 
-					DebugLocation(209, 23);
+					DebugLocation(211, 23);
 					Args.Add(e);
 
 					}
@@ -3199,7 +3222,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			LeaveRule("arguments", 22);
 			LeaveRule_arguments();
 		}
-		DebugLocation(210, 1);
+		DebugLocation(212, 1);
 		} finally { DebugExitRule(GrammarFileName, "arguments"); }
 		return Args;
 
@@ -3211,7 +3234,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 	partial void LeaveRule_typedefs();
 
 	// $ANTLR start "typedefs"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:226:1: typedefs returns [List<VariableDeclaration> Decls = new List<VariableDeclaration>()] : ( typedef )+ ;
+	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:228:1: typedefs returns [List<VariableDeclaration> Decls = new List<VariableDeclaration>()] : ( typedef )+ ;
 	[GrammarRule("typedefs")]
 	private List<VariableDeclaration> typedefs()
 	{
@@ -3220,18 +3243,18 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 		TraceIn("typedefs", 23);
 		List<VariableDeclaration> Decls =  new List<VariableDeclaration>();
 
-		VariableDeclaration typedef35 = default(VariableDeclaration);
+		VariableDeclaration typedef37 = default(VariableDeclaration);
 
 		try { DebugEnterRule(GrammarFileName, "typedefs");
-		DebugLocation(226, 1);
+		DebugLocation(228, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:228:2: ( ( typedef )+ )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:230:2: ( ( typedef )+ )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:228:4: ( typedef )+
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:230:4: ( typedef )+
 			{
-			DebugLocation(228, 4);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:228:4: ( typedef )+
+			DebugLocation(230, 4);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:230:4: ( typedef )+
 			int cnt33=0;
 			try { DebugEnterSubRule(33);
 			while (true)
@@ -3251,15 +3274,15 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:228:5: typedef
+					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:230:5: typedef
 					{
-					DebugLocation(228, 5);
-					PushFollow(Follow._typedef_in_typedefs1053);
-					typedef35=typedef();
+					DebugLocation(230, 5);
+					PushFollow(Follow._typedef_in_typedefs1076);
+					typedef37=typedef();
 					PopFollow();
 
-					DebugLocation(228, 12);
-					Decls.Add(typedef35);
+					DebugLocation(230, 12);
+					Decls.Add(typedef37);
 
 					}
 					break;
@@ -3294,7 +3317,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			LeaveRule("typedefs", 23);
 			LeaveRule_typedefs();
 		}
-		DebugLocation(229, 1);
+		DebugLocation(231, 1);
 		} finally { DebugExitRule(GrammarFileName, "typedefs"); }
 		return Decls;
 
@@ -3306,7 +3329,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 	partial void LeaveRule_typedef();
 
 	// $ANTLR start "typedef"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:231:1: typedef returns [VariableDeclaration Decl] : ^( DECL SimpleName ( type )? ) ;
+	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:233:1: typedef returns [VariableDeclaration Decl] : ^( DECL SimpleName ( type )? ) ;
 	[GrammarRule("typedef")]
 	private VariableDeclaration typedef()
 	{
@@ -3315,26 +3338,26 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 		TraceIn("typedef", 24);
 		VariableDeclaration Decl = default(VariableDeclaration);
 
-		CommonTree SimpleName36 = default(CommonTree);
-		Classifier type37 = default(Classifier);
+		CommonTree SimpleName38 = default(CommonTree);
+		Classifier type39 = default(Classifier);
 
 		try { DebugEnterRule(GrammarFileName, "typedef");
-		DebugLocation(231, 1);
+		DebugLocation(233, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:233:2: ( ^( DECL SimpleName ( type )? ) )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:235:2: ( ^( DECL SimpleName ( type )? ) )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:233:4: ^( DECL SimpleName ( type )? )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:235:4: ^( DECL SimpleName ( type )? )
 			{
-			DebugLocation(233, 4);
-			DebugLocation(233, 6);
-			Match(input,DECL,Follow._DECL_in_typedef1072); 
+			DebugLocation(235, 4);
+			DebugLocation(235, 6);
+			Match(input,DECL,Follow._DECL_in_typedef1095); 
 
 			Match(input, TokenTypes.Down, null); 
-			DebugLocation(233, 11);
-			SimpleName36=(CommonTree)Match(input,SimpleName,Follow._SimpleName_in_typedef1074); 
-			DebugLocation(233, 22);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:233:22: ( type )?
+			DebugLocation(235, 11);
+			SimpleName38=(CommonTree)Match(input,SimpleName,Follow._SimpleName_in_typedef1097); 
+			DebugLocation(235, 22);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:235:22: ( type )?
 			int alt34=2;
 			try { DebugEnterSubRule(34);
 			try { DebugEnterDecision(34, false);
@@ -3349,11 +3372,11 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:233:22: type
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:235:22: type
 				{
-				DebugLocation(233, 22);
-				PushFollow(Follow._type_in_typedef1076);
-				type37=type();
+				DebugLocation(235, 22);
+				PushFollow(Follow._type_in_typedef1099);
+				type39=type();
 				PopFollow();
 
 
@@ -3365,8 +3388,8 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 
 
 			Match(input, TokenTypes.Up, null); 
-			DebugLocation(234, 4);
-			Decl = ProcessVarDef(oclExpression_stack.Peek().RootExpr,SimpleName36.Token,type37,ref itCall_stack.Peek().PushedVar);
+			DebugLocation(236, 4);
+			Decl = ProcessVarDef(oclExpression_stack.Peek().RootExpr,SimpleName38.Token,type39,ref itCall_stack.Peek().PushedVar);
 
 			}
 
@@ -3382,7 +3405,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			LeaveRule("typedef", 24);
 			LeaveRule_typedef();
 		}
-		DebugLocation(235, 1);
+		DebugLocation(237, 1);
 		} finally { DebugExitRule(GrammarFileName, "typedef"); }
 		return Decl;
 
@@ -3394,7 +3417,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 	partial void LeaveRule_implicitVarDecl();
 
 	// $ANTLR start "implicitVarDecl"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:237:1: implicitVarDecl returns [VariableDeclaration Decl] :;
+	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:239:1: implicitVarDecl returns [VariableDeclaration Decl] :;
 	[GrammarRule("implicitVarDecl")]
 	private VariableDeclaration implicitVarDecl()
 	{
@@ -3404,14 +3427,14 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 		VariableDeclaration Decl = default(VariableDeclaration);
 
 		try { DebugEnterRule(GrammarFileName, "implicitVarDecl");
-		DebugLocation(237, 1);
+		DebugLocation(239, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:239:2: ()
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:241:2: ()
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:239:4: 
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:241:4: 
 			{
-			DebugLocation(239, 4);
+			DebugLocation(241, 4);
 			Decl = ProcessImplicitVarDef(oclExpression_stack.Peek().RootExpr, ref itCall_stack.Peek().PushedVar); 
 
 			}
@@ -3428,7 +3451,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			LeaveRule("implicitVarDecl", 25);
 			LeaveRule_implicitVarDecl();
 		}
-		DebugLocation(240, 1);
+		DebugLocation(242, 1);
 		} finally { DebugExitRule(GrammarFileName, "implicitVarDecl"); }
 		return Decl;
 
@@ -3440,7 +3463,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 	partial void LeaveRule_pathName();
 
 	// $ANTLR start "pathName"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:244:1: pathName returns [List<IToken> Path = new List<IToken>()] : ^( PATH ( SimpleName )+ ) ;
+	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:246:1: pathName returns [List<IToken> Path = new List<IToken>()] : ^( PATH ( SimpleName )+ ) ;
 	[GrammarRule("pathName")]
 	private List<IToken> pathName()
 	{
@@ -3449,23 +3472,23 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 		TraceIn("pathName", 26);
 		List<IToken> Path =  new List<IToken>();
 
-		CommonTree SimpleName38 = default(CommonTree);
+		CommonTree SimpleName40 = default(CommonTree);
 
 		try { DebugEnterRule(GrammarFileName, "pathName");
-		DebugLocation(244, 1);
+		DebugLocation(246, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:246:2: ( ^( PATH ( SimpleName )+ ) )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:248:2: ( ^( PATH ( SimpleName )+ ) )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:247:4: ^( PATH ( SimpleName )+ )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:249:4: ^( PATH ( SimpleName )+ )
 			{
-			DebugLocation(247, 4);
-			DebugLocation(247, 6);
-			Match(input,PATH,Follow._PATH_in_pathName1125); 
+			DebugLocation(249, 4);
+			DebugLocation(249, 6);
+			Match(input,PATH,Follow._PATH_in_pathName1148); 
 
 			Match(input, TokenTypes.Down, null); 
-			DebugLocation(247, 11);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:247:11: ( SimpleName )+
+			DebugLocation(249, 11);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:249:11: ( SimpleName )+
 			int cnt35=0;
 			try { DebugEnterSubRule(35);
 			while (true)
@@ -3485,12 +3508,12 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:247:12: SimpleName
+					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:249:12: SimpleName
 					{
-					DebugLocation(247, 12);
-					SimpleName38=(CommonTree)Match(input,SimpleName,Follow._SimpleName_in_pathName1128); 
-					DebugLocation(247, 23);
-					Path.Add(SimpleName38.Token);
+					DebugLocation(249, 12);
+					SimpleName40=(CommonTree)Match(input,SimpleName,Follow._SimpleName_in_pathName1151); 
+					DebugLocation(249, 23);
+					Path.Add(SimpleName40.Token);
 
 					}
 					break;
@@ -3527,7 +3550,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			LeaveRule("pathName", 26);
 			LeaveRule_pathName();
 		}
-		DebugLocation(248, 1);
+		DebugLocation(250, 1);
 		} finally { DebugExitRule(GrammarFileName, "pathName"); }
 		return Path;
 
@@ -3539,7 +3562,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 	partial void LeaveRule_collectionLiteralExp();
 
 	// $ANTLR start "collectionLiteralExp"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:251:1: collectionLiteralExp returns [OclExpression Expr] : ( ^( COLLECTIONLITERAL collectionTypeIdentifier collectionLiteralParts ) | ^( COLLECTIONLITERAL collectionTypeIdentifier type collectionLiteralParts ) );
+	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:253:1: collectionLiteralExp returns [OclExpression Expr] : ( ^( COLLECTIONLITERAL collectionTypeIdentifier collectionLiteralParts ) | ^( COLLECTIONLITERAL collectionTypeIdentifier type collectionLiteralParts ) );
 	[GrammarRule("collectionLiteralExp")]
 	private OclExpression collectionLiteralExp()
 	{
@@ -3548,17 +3571,17 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 		TraceIn("collectionLiteralExp", 27);
 		OclExpression Expr = default(OclExpression);
 
-		OCLAst.collectionTypeIdentifier_return collectionTypeIdentifier39 = default(OCLAst.collectionTypeIdentifier_return);
-		List<CollectionLiteralPart> collectionLiteralParts40 = default(List<CollectionLiteralPart>);
 		OCLAst.collectionTypeIdentifier_return collectionTypeIdentifier41 = default(OCLAst.collectionTypeIdentifier_return);
-		Classifier type42 = default(Classifier);
-		List<CollectionLiteralPart> collectionLiteralParts43 = default(List<CollectionLiteralPart>);
+		List<CollectionLiteralPart> collectionLiteralParts42 = default(List<CollectionLiteralPart>);
+		OCLAst.collectionTypeIdentifier_return collectionTypeIdentifier43 = default(OCLAst.collectionTypeIdentifier_return);
+		Classifier type44 = default(Classifier);
+		List<CollectionLiteralPart> collectionLiteralParts45 = default(List<CollectionLiteralPart>);
 
 		try { DebugEnterRule(GrammarFileName, "collectionLiteralExp");
-		DebugLocation(251, 1);
+		DebugLocation(253, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:253:2: ( ^( COLLECTIONLITERAL collectionTypeIdentifier collectionLiteralParts ) | ^( COLLECTIONLITERAL collectionTypeIdentifier type collectionLiteralParts ) )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:255:2: ( ^( COLLECTIONLITERAL collectionTypeIdentifier collectionLiteralParts ) | ^( COLLECTIONLITERAL collectionTypeIdentifier type collectionLiteralParts ) )
 			int alt36=2;
 			try { DebugEnterDecision(36, false);
 			try
@@ -3575,58 +3598,58 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:254:3: ^( COLLECTIONLITERAL collectionTypeIdentifier collectionLiteralParts )
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:256:3: ^( COLLECTIONLITERAL collectionTypeIdentifier collectionLiteralParts )
 				{
-				DebugLocation(254, 3);
-				DebugLocation(254, 5);
-				Match(input,COLLECTIONLITERAL,Follow._COLLECTIONLITERAL_in_collectionLiteralExp1155); 
+				DebugLocation(256, 3);
+				DebugLocation(256, 5);
+				Match(input,COLLECTIONLITERAL,Follow._COLLECTIONLITERAL_in_collectionLiteralExp1178); 
 
 				Match(input, TokenTypes.Down, null); 
-				DebugLocation(254, 23);
-				PushFollow(Follow._collectionTypeIdentifier_in_collectionLiteralExp1157);
-				collectionTypeIdentifier39=collectionTypeIdentifier();
+				DebugLocation(256, 23);
+				PushFollow(Follow._collectionTypeIdentifier_in_collectionLiteralExp1180);
+				collectionTypeIdentifier41=collectionTypeIdentifier();
 				PopFollow();
 
-				DebugLocation(254, 48);
-				PushFollow(Follow._collectionLiteralParts_in_collectionLiteralExp1159);
-				collectionLiteralParts40=collectionLiteralParts();
+				DebugLocation(256, 48);
+				PushFollow(Follow._collectionLiteralParts_in_collectionLiteralExp1182);
+				collectionLiteralParts42=collectionLiteralParts();
 				PopFollow();
 
 
 				Match(input, TokenTypes.Up, null); 
-				DebugLocation(255, 3);
-				Expr = CollectionLiteralExp((collectionTypeIdentifier39!=null?collectionTypeIdentifier39.Kind:default(CollectionKind)),(collectionTypeIdentifier39!=null?collectionTypeIdentifier39.Tree:default(CommonTree)),collectionLiteralParts40);
+				DebugLocation(257, 3);
+				Expr = CollectionLiteralExp((collectionTypeIdentifier41!=null?collectionTypeIdentifier41.Kind:default(CollectionKind)),(collectionTypeIdentifier41!=null?collectionTypeIdentifier41.Tree:default(CommonTree)),collectionLiteralParts42);
 
 				}
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:258:3: ^( COLLECTIONLITERAL collectionTypeIdentifier type collectionLiteralParts )
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:260:3: ^( COLLECTIONLITERAL collectionTypeIdentifier type collectionLiteralParts )
 				{
-				DebugLocation(258, 3);
-				DebugLocation(258, 5);
-				Match(input,COLLECTIONLITERAL,Follow._COLLECTIONLITERAL_in_collectionLiteralExp1174); 
+				DebugLocation(260, 3);
+				DebugLocation(260, 5);
+				Match(input,COLLECTIONLITERAL,Follow._COLLECTIONLITERAL_in_collectionLiteralExp1197); 
 
 				Match(input, TokenTypes.Down, null); 
-				DebugLocation(258, 23);
-				PushFollow(Follow._collectionTypeIdentifier_in_collectionLiteralExp1176);
-				collectionTypeIdentifier41=collectionTypeIdentifier();
+				DebugLocation(260, 23);
+				PushFollow(Follow._collectionTypeIdentifier_in_collectionLiteralExp1199);
+				collectionTypeIdentifier43=collectionTypeIdentifier();
 				PopFollow();
 
-				DebugLocation(258, 48);
-				PushFollow(Follow._type_in_collectionLiteralExp1178);
-				type42=type();
+				DebugLocation(260, 48);
+				PushFollow(Follow._type_in_collectionLiteralExp1201);
+				type44=type();
 				PopFollow();
 
-				DebugLocation(258, 53);
-				PushFollow(Follow._collectionLiteralParts_in_collectionLiteralExp1180);
-				collectionLiteralParts43=collectionLiteralParts();
+				DebugLocation(260, 53);
+				PushFollow(Follow._collectionLiteralParts_in_collectionLiteralExp1203);
+				collectionLiteralParts45=collectionLiteralParts();
 				PopFollow();
 
 
 				Match(input, TokenTypes.Up, null); 
-				DebugLocation(259, 3);
-				Expr = CollectionLiteralExp((collectionTypeIdentifier41!=null?collectionTypeIdentifier41.Kind:default(CollectionKind)),(collectionTypeIdentifier41!=null?collectionTypeIdentifier41.Tree:default(CommonTree)),type42,collectionLiteralParts43);
+				DebugLocation(261, 3);
+				Expr = CollectionLiteralExp((collectionTypeIdentifier43!=null?collectionTypeIdentifier43.Kind:default(CollectionKind)),(collectionTypeIdentifier43!=null?collectionTypeIdentifier43.Tree:default(CommonTree)),type44,collectionLiteralParts45);
 
 				}
 				break;
@@ -3644,7 +3667,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			LeaveRule("collectionLiteralExp", 27);
 			LeaveRule_collectionLiteralExp();
 		}
-		DebugLocation(261, 1);
+		DebugLocation(263, 1);
 		} finally { DebugExitRule(GrammarFileName, "collectionLiteralExp"); }
 		return Expr;
 
@@ -3663,7 +3686,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 	partial void LeaveRule_collectionTypeIdentifier();
 
 	// $ANTLR start "collectionTypeIdentifier"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:265:1: collectionTypeIdentifier returns [CollectionKind Kind,CommonTree Tree] : ( 'Set' | 'Bag' | 'Sequence' | 'Collection' | 'OrderedSet' );
+	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:267:1: collectionTypeIdentifier returns [CollectionKind Kind,CommonTree Tree] : ( 'Set' | 'Bag' | 'Sequence' | 'Collection' | 'OrderedSet' );
 	[GrammarRule("collectionTypeIdentifier")]
 	private OCLAst.collectionTypeIdentifier_return collectionTypeIdentifier()
 	{
@@ -3674,10 +3697,10 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 		retval.Start = (CommonTree)input.LT(1);
 
 		try { DebugEnterRule(GrammarFileName, "collectionTypeIdentifier");
-		DebugLocation(265, 1);
+		DebugLocation(267, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:270:2: ( 'Set' | 'Bag' | 'Sequence' | 'Collection' | 'OrderedSet' )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:272:2: ( 'Set' | 'Bag' | 'Sequence' | 'Collection' | 'OrderedSet' )
 			int alt37=5;
 			try { DebugEnterDecision(37, false);
 			switch (input.LA(1))
@@ -3720,55 +3743,55 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:270:3: 'Set'
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:272:3: 'Set'
 				{
-				DebugLocation(270, 3);
-				Match(input,92,Follow._92_in_collectionTypeIdentifier1210); 
-				DebugLocation(270, 9);
+				DebugLocation(272, 3);
+				Match(input,92,Follow._92_in_collectionTypeIdentifier1233); 
+				DebugLocation(272, 9);
 				retval.Kind = CollectionKind.Set;
 
 				}
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:271:3: 'Bag'
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:273:3: 'Bag'
 				{
-				DebugLocation(271, 3);
-				Match(input,81,Follow._81_in_collectionTypeIdentifier1216); 
-				DebugLocation(271, 9);
+				DebugLocation(273, 3);
+				Match(input,81,Follow._81_in_collectionTypeIdentifier1239); 
+				DebugLocation(273, 9);
 				retval.Kind = CollectionKind.Bag;
 
 				}
 				break;
 			case 3:
 				DebugEnterAlt(3);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:272:3: 'Sequence'
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:274:3: 'Sequence'
 				{
-				DebugLocation(272, 3);
-				Match(input,91,Follow._91_in_collectionTypeIdentifier1222); 
-				DebugLocation(272, 15);
+				DebugLocation(274, 3);
+				Match(input,91,Follow._91_in_collectionTypeIdentifier1245); 
+				DebugLocation(274, 15);
 				retval.Kind = CollectionKind.Sequence;
 
 				}
 				break;
 			case 4:
 				DebugEnterAlt(4);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:273:3: 'Collection'
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:275:3: 'Collection'
 				{
-				DebugLocation(273, 3);
-				Match(input,83,Follow._83_in_collectionTypeIdentifier1229); 
-				DebugLocation(273, 16);
+				DebugLocation(275, 3);
+				Match(input,83,Follow._83_in_collectionTypeIdentifier1252); 
+				DebugLocation(275, 16);
 				retval.Kind = CollectionKind.Collection;
 
 				}
 				break;
 			case 5:
 				DebugEnterAlt(5);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:274:3: 'OrderedSet'
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:276:3: 'OrderedSet'
 				{
-				DebugLocation(274, 3);
-				Match(input,89,Follow._89_in_collectionTypeIdentifier1235); 
-				DebugLocation(274, 16);
+				DebugLocation(276, 3);
+				Match(input,89,Follow._89_in_collectionTypeIdentifier1258); 
+				DebugLocation(276, 16);
 				retval.Kind = CollectionKind.OrderedSet;
 
 				}
@@ -3790,7 +3813,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			LeaveRule("collectionTypeIdentifier", 28);
 			LeaveRule_collectionTypeIdentifier();
 		}
-		DebugLocation(275, 1);
+		DebugLocation(277, 1);
 		} finally { DebugExitRule(GrammarFileName, "collectionTypeIdentifier"); }
 		return retval;
 
@@ -3802,7 +3825,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 	partial void LeaveRule_collectionLiteralParts();
 
 	// $ANTLR start "collectionLiteralParts"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:277:1: collectionLiteralParts returns [List<CollectionLiteralPart> Parts = new List<CollectionLiteralPart>();] : ( collectionLiteralPart )* ;
+	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:279:1: collectionLiteralParts returns [List<CollectionLiteralPart> Parts = new List<CollectionLiteralPart>();] : ( collectionLiteralPart )* ;
 	[GrammarRule("collectionLiteralParts")]
 	private List<CollectionLiteralPart> collectionLiteralParts()
 	{
@@ -3811,18 +3834,18 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 		TraceIn("collectionLiteralParts", 29);
 		List<CollectionLiteralPart> Parts =  new List<CollectionLiteralPart>();;
 
-		CollectionLiteralPart collectionLiteralPart44 = default(CollectionLiteralPart);
+		CollectionLiteralPart collectionLiteralPart46 = default(CollectionLiteralPart);
 
 		try { DebugEnterRule(GrammarFileName, "collectionLiteralParts");
-		DebugLocation(277, 1);
+		DebugLocation(279, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:279:2: ( ( collectionLiteralPart )* )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:281:2: ( ( collectionLiteralPart )* )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:279:4: ( collectionLiteralPart )*
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:281:4: ( collectionLiteralPart )*
 			{
-			DebugLocation(279, 4);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:279:4: ( collectionLiteralPart )*
+			DebugLocation(281, 4);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:281:4: ( collectionLiteralPart )*
 			try { DebugEnterSubRule(38);
 			while (true)
 			{
@@ -3841,15 +3864,15 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:279:5: collectionLiteralPart
+					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:281:5: collectionLiteralPart
 					{
-					DebugLocation(279, 5);
-					PushFollow(Follow._collectionLiteralPart_in_collectionLiteralParts1254);
-					collectionLiteralPart44=collectionLiteralPart();
+					DebugLocation(281, 5);
+					PushFollow(Follow._collectionLiteralPart_in_collectionLiteralParts1277);
+					collectionLiteralPart46=collectionLiteralPart();
 					PopFollow();
 
-					DebugLocation(279, 27);
-					Parts.Add(collectionLiteralPart44);
+					DebugLocation(281, 27);
+					Parts.Add(collectionLiteralPart46);
 
 					}
 					break;
@@ -3879,7 +3902,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			LeaveRule("collectionLiteralParts", 29);
 			LeaveRule_collectionLiteralParts();
 		}
-		DebugLocation(280, 1);
+		DebugLocation(282, 1);
 		} finally { DebugExitRule(GrammarFileName, "collectionLiteralParts"); }
 		return Parts;
 
@@ -3891,7 +3914,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 	partial void LeaveRule_collectionLiteralPart();
 
 	// $ANTLR start "collectionLiteralPart"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:282:1: collectionLiteralPart returns [ CollectionLiteralPart Item] : ( ^( COLLPARTRANGE e1= oclExpression e2= oclExpression ) | ^( COLLPART oclExpression ) );
+	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:284:1: collectionLiteralPart returns [ CollectionLiteralPart Item] : ( ^( COLLPARTRANGE e1= oclExpression e2= oclExpression ) | ^( COLLPART oclExpression ) );
 	[GrammarRule("collectionLiteralPart")]
 	private CollectionLiteralPart collectionLiteralPart()
 	{
@@ -3902,13 +3925,13 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 
 		OclExpression e1 = default(OclExpression);
 		OclExpression e2 = default(OclExpression);
-		OclExpression oclExpression45 = default(OclExpression);
+		OclExpression oclExpression47 = default(OclExpression);
 
 		try { DebugEnterRule(GrammarFileName, "collectionLiteralPart");
-		DebugLocation(282, 1);
+		DebugLocation(284, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:284:2: ( ^( COLLPARTRANGE e1= oclExpression e2= oclExpression ) | ^( COLLPART oclExpression ) )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:286:2: ( ^( COLLPARTRANGE e1= oclExpression e2= oclExpression ) | ^( COLLPART oclExpression ) )
 			int alt39=2;
 			try { DebugEnterDecision(39, false);
 			int LA39_0 = input.LA(1);
@@ -3932,48 +3955,48 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:285:2: ^( COLLPARTRANGE e1= oclExpression e2= oclExpression )
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:287:2: ^( COLLPARTRANGE e1= oclExpression e2= oclExpression )
 				{
-				DebugLocation(285, 2);
-				DebugLocation(285, 4);
-				Match(input,COLLPARTRANGE,Follow._COLLPARTRANGE_in_collectionLiteralPart1279); 
+				DebugLocation(287, 2);
+				DebugLocation(287, 4);
+				Match(input,COLLPARTRANGE,Follow._COLLPARTRANGE_in_collectionLiteralPart1302); 
 
 				Match(input, TokenTypes.Down, null); 
-				DebugLocation(285, 20);
-				PushFollow(Follow._oclExpression_in_collectionLiteralPart1283);
+				DebugLocation(287, 20);
+				PushFollow(Follow._oclExpression_in_collectionLiteralPart1306);
 				e1=oclExpression();
 				PopFollow();
 
-				DebugLocation(285, 37);
-				PushFollow(Follow._oclExpression_in_collectionLiteralPart1287);
+				DebugLocation(287, 37);
+				PushFollow(Follow._oclExpression_in_collectionLiteralPart1310);
 				e2=oclExpression();
 				PopFollow();
 
 
 				Match(input, TokenTypes.Up, null); 
-				DebugLocation(285, 53);
+				DebugLocation(287, 53);
 				Item =new AST.CollectionRange(e1,e2);
 
 				}
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:286:3: ^( COLLPART oclExpression )
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:288:3: ^( COLLPART oclExpression )
 				{
-				DebugLocation(286, 3);
-				DebugLocation(286, 5);
-				Match(input,COLLPART,Follow._COLLPART_in_collectionLiteralPart1295); 
+				DebugLocation(288, 3);
+				DebugLocation(288, 5);
+				Match(input,COLLPART,Follow._COLLPART_in_collectionLiteralPart1318); 
 
 				Match(input, TokenTypes.Down, null); 
-				DebugLocation(286, 14);
-				PushFollow(Follow._oclExpression_in_collectionLiteralPart1297);
-				oclExpression45=oclExpression();
+				DebugLocation(288, 14);
+				PushFollow(Follow._oclExpression_in_collectionLiteralPart1320);
+				oclExpression47=oclExpression();
 				PopFollow();
 
 
 				Match(input, TokenTypes.Up, null); 
-				DebugLocation(286, 34);
-				Item =new AST.CollectionItem(oclExpression45);
+				DebugLocation(288, 34);
+				Item =new AST.CollectionItem(oclExpression47);
 
 				}
 				break;
@@ -3991,7 +4014,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			LeaveRule("collectionLiteralPart", 30);
 			LeaveRule_collectionLiteralPart();
 		}
-		DebugLocation(287, 1);
+		DebugLocation(289, 1);
 		} finally { DebugExitRule(GrammarFileName, "collectionLiteralPart"); }
 		return Item;
 
@@ -4003,7 +4026,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 	partial void LeaveRule_primitiveLiteralExp();
 
 	// $ANTLR start "primitiveLiteralExp"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:290:1: primitiveLiteralExp returns [LiteralExp Literal] : ( IntegerLiteralExp | RealLiteralExp | StringLiteralExp |tok= 'true' |tok= 'false' | UnlimitedNaturalLiteralExp | NullLiteralExp | InvalidLiteralExp );
+	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:292:1: primitiveLiteralExp returns [LiteralExp Literal] : ( IntegerLiteralExp | RealLiteralExp | StringLiteralExp |tok= 'true' |tok= 'false' | UnlimitedNaturalLiteralExp | NullLiteralExp | InvalidLiteralExp );
 	[GrammarRule("primitiveLiteralExp")]
 	private LiteralExp primitiveLiteralExp()
 	{
@@ -4013,18 +4036,18 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 		LiteralExp Literal = default(LiteralExp);
 
 		CommonTree tok = default(CommonTree);
-		CommonTree IntegerLiteralExp46 = default(CommonTree);
-		CommonTree RealLiteralExp47 = default(CommonTree);
-		CommonTree StringLiteralExp48 = default(CommonTree);
-		CommonTree UnlimitedNaturalLiteralExp49 = default(CommonTree);
-		CommonTree NullLiteralExp50 = default(CommonTree);
-		CommonTree InvalidLiteralExp51 = default(CommonTree);
+		CommonTree IntegerLiteralExp48 = default(CommonTree);
+		CommonTree RealLiteralExp49 = default(CommonTree);
+		CommonTree StringLiteralExp50 = default(CommonTree);
+		CommonTree UnlimitedNaturalLiteralExp51 = default(CommonTree);
+		CommonTree NullLiteralExp52 = default(CommonTree);
+		CommonTree InvalidLiteralExp53 = default(CommonTree);
 
 		try { DebugEnterRule(GrammarFileName, "primitiveLiteralExp");
-		DebugLocation(290, 1);
+		DebugLocation(292, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:292:2: ( IntegerLiteralExp | RealLiteralExp | StringLiteralExp |tok= 'true' |tok= 'false' | UnlimitedNaturalLiteralExp | NullLiteralExp | InvalidLiteralExp )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:294:2: ( IntegerLiteralExp | RealLiteralExp | StringLiteralExp |tok= 'true' |tok= 'false' | UnlimitedNaturalLiteralExp | NullLiteralExp | InvalidLiteralExp )
 			int alt40=8;
 			try { DebugEnterDecision(40, false);
 			switch (input.LA(1))
@@ -4082,89 +4105,89 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:292:4: IntegerLiteralExp
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:294:4: IntegerLiteralExp
 				{
-				DebugLocation(292, 4);
-				IntegerLiteralExp46=(CommonTree)Match(input,IntegerLiteralExp,Follow._IntegerLiteralExp_in_primitiveLiteralExp1323); 
-				DebugLocation(292, 25);
-				Literal = CreateIntegerLiteral(IntegerLiteralExp46);
+				DebugLocation(294, 4);
+				IntegerLiteralExp48=(CommonTree)Match(input,IntegerLiteralExp,Follow._IntegerLiteralExp_in_primitiveLiteralExp1346); 
+				DebugLocation(294, 25);
+				Literal = CreateIntegerLiteral(IntegerLiteralExp48);
 
 				}
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:293:4: RealLiteralExp
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:295:4: RealLiteralExp
 				{
-				DebugLocation(293, 4);
-				RealLiteralExp47=(CommonTree)Match(input,RealLiteralExp,Follow._RealLiteralExp_in_primitiveLiteralExp1333); 
-				DebugLocation(293, 22);
-				Literal = CreateRealLiteral(RealLiteralExp47);
+				DebugLocation(295, 4);
+				RealLiteralExp49=(CommonTree)Match(input,RealLiteralExp,Follow._RealLiteralExp_in_primitiveLiteralExp1356); 
+				DebugLocation(295, 22);
+				Literal = CreateRealLiteral(RealLiteralExp49);
 
 				}
 				break;
 			case 3:
 				DebugEnterAlt(3);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:294:4: StringLiteralExp
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:296:4: StringLiteralExp
 				{
-				DebugLocation(294, 4);
-				StringLiteralExp48=(CommonTree)Match(input,StringLiteralExp,Follow._StringLiteralExp_in_primitiveLiteralExp1343); 
-				DebugLocation(294, 24);
-				Literal = CreateStringLiteral(StringLiteralExp48);
+				DebugLocation(296, 4);
+				StringLiteralExp50=(CommonTree)Match(input,StringLiteralExp,Follow._StringLiteralExp_in_primitiveLiteralExp1366); 
+				DebugLocation(296, 24);
+				Literal = CreateStringLiteral(StringLiteralExp50);
 
 				}
 				break;
 			case 4:
 				DebugEnterAlt(4);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:295:4: tok= 'true'
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:297:4: tok= 'true'
 				{
-				DebugLocation(295, 8);
-				tok=(CommonTree)Match(input,123,Follow._123_in_primitiveLiteralExp1357); 
-				DebugLocation(295, 21);
+				DebugLocation(297, 8);
+				tok=(CommonTree)Match(input,123,Follow._123_in_primitiveLiteralExp1380); 
+				DebugLocation(297, 21);
 				Literal = CreateBooleanLiteral(true,tok);
 
 				}
 				break;
 			case 5:
 				DebugEnterAlt(5);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:296:4: tok= 'false'
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:298:4: tok= 'false'
 				{
-				DebugLocation(296, 8);
-				tok=(CommonTree)Match(input,107,Follow._107_in_primitiveLiteralExp1372); 
-				DebugLocation(296, 22);
+				DebugLocation(298, 8);
+				tok=(CommonTree)Match(input,107,Follow._107_in_primitiveLiteralExp1395); 
+				DebugLocation(298, 22);
 				Literal = CreateBooleanLiteral(false,tok);
 
 				}
 				break;
 			case 6:
 				DebugEnterAlt(6);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:297:4: UnlimitedNaturalLiteralExp
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:299:4: UnlimitedNaturalLiteralExp
 				{
-				DebugLocation(297, 4);
-				UnlimitedNaturalLiteralExp49=(CommonTree)Match(input,UnlimitedNaturalLiteralExp,Follow._UnlimitedNaturalLiteralExp_in_primitiveLiteralExp1383); 
-				DebugLocation(297, 31);
-				Literal = CreateUnlimitedNaturalLiteral(UnlimitedNaturalLiteralExp49);
+				DebugLocation(299, 4);
+				UnlimitedNaturalLiteralExp51=(CommonTree)Match(input,UnlimitedNaturalLiteralExp,Follow._UnlimitedNaturalLiteralExp_in_primitiveLiteralExp1406); 
+				DebugLocation(299, 31);
+				Literal = CreateUnlimitedNaturalLiteral(UnlimitedNaturalLiteralExp51);
 
 				}
 				break;
 			case 7:
 				DebugEnterAlt(7);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:298:4: NullLiteralExp
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:300:4: NullLiteralExp
 				{
-				DebugLocation(298, 4);
-				NullLiteralExp50=(CommonTree)Match(input,NullLiteralExp,Follow._NullLiteralExp_in_primitiveLiteralExp1390); 
-				DebugLocation(298, 22);
-				Literal = CreateNullLiteral(NullLiteralExp50);
+				DebugLocation(300, 4);
+				NullLiteralExp52=(CommonTree)Match(input,NullLiteralExp,Follow._NullLiteralExp_in_primitiveLiteralExp1413); 
+				DebugLocation(300, 22);
+				Literal = CreateNullLiteral(NullLiteralExp52);
 
 				}
 				break;
 			case 8:
 				DebugEnterAlt(8);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:299:4: InvalidLiteralExp
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:301:4: InvalidLiteralExp
 				{
-				DebugLocation(299, 4);
-				InvalidLiteralExp51=(CommonTree)Match(input,InvalidLiteralExp,Follow._InvalidLiteralExp_in_primitiveLiteralExp1400); 
-				DebugLocation(299, 25);
-				Literal = CreateInvalidLiteral(InvalidLiteralExp51);
+				DebugLocation(301, 4);
+				InvalidLiteralExp53=(CommonTree)Match(input,InvalidLiteralExp,Follow._InvalidLiteralExp_in_primitiveLiteralExp1423); 
+				DebugLocation(301, 25);
+				Literal = CreateInvalidLiteral(InvalidLiteralExp53);
 
 				}
 				break;
@@ -4182,7 +4205,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			LeaveRule("primitiveLiteralExp", 31);
 			LeaveRule_primitiveLiteralExp();
 		}
-		DebugLocation(300, 1);
+		DebugLocation(302, 1);
 		} finally { DebugExitRule(GrammarFileName, "primitiveLiteralExp"); }
 		return Literal;
 
@@ -4194,7 +4217,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 	partial void LeaveRule_tupleLiteralExp();
 
 	// $ANTLR start "tupleLiteralExp"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:302:1: tupleLiteralExp returns [TupleLiteralExp Literal] : ^( TUPLELITERAL variableDeclarationList ) ;
+	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:304:1: tupleLiteralExp returns [TupleLiteralExp Literal] : ^( TUPLELITERAL variableDeclarationList ) ;
 	[GrammarRule("tupleLiteralExp")]
 	private TupleLiteralExp tupleLiteralExp()
 	{
@@ -4203,34 +4226,34 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 		TraceIn("tupleLiteralExp", 32);
 		TupleLiteralExp Literal = default(TupleLiteralExp);
 
-		CommonTree TUPLELITERAL52 = default(CommonTree);
-		List<VariableDeclarationBag> variableDeclarationList53 = default(List<VariableDeclarationBag>);
+		CommonTree TUPLELITERAL54 = default(CommonTree);
+		List<VariableDeclarationBag> variableDeclarationList55 = default(List<VariableDeclarationBag>);
 
 		try { DebugEnterRule(GrammarFileName, "tupleLiteralExp");
-		DebugLocation(302, 1);
+		DebugLocation(304, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:304:2: ( ^( TUPLELITERAL variableDeclarationList ) )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:306:2: ( ^( TUPLELITERAL variableDeclarationList ) )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:304:5: ^( TUPLELITERAL variableDeclarationList )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:306:5: ^( TUPLELITERAL variableDeclarationList )
 			{
-			DebugLocation(304, 5);
-			DebugLocation(304, 7);
-			TUPLELITERAL52=(CommonTree)Match(input,TUPLELITERAL,Follow._TUPLELITERAL_in_tupleLiteralExp1424); 
+			DebugLocation(306, 5);
+			DebugLocation(306, 7);
+			TUPLELITERAL54=(CommonTree)Match(input,TUPLELITERAL,Follow._TUPLELITERAL_in_tupleLiteralExp1447); 
 
 			if (input.LA(1) == TokenTypes.Down)
 			{
 				Match(input, TokenTypes.Down, null); 
-				DebugLocation(304, 22);
-				PushFollow(Follow._variableDeclarationList_in_tupleLiteralExp1428);
-				variableDeclarationList53=variableDeclarationList();
+				DebugLocation(306, 22);
+				PushFollow(Follow._variableDeclarationList_in_tupleLiteralExp1451);
+				variableDeclarationList55=variableDeclarationList();
 				PopFollow();
 
 
 				Match(input, TokenTypes.Up, null); 
 			}
-			DebugLocation(304, 48);
-			Literal = CreateTupleLiteral(TUPLELITERAL52.Token,variableDeclarationList53);
+			DebugLocation(306, 48);
+			Literal = CreateTupleLiteral(TUPLELITERAL54.Token,variableDeclarationList55);
 
 			}
 
@@ -4246,7 +4269,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			LeaveRule("tupleLiteralExp", 32);
 			LeaveRule_tupleLiteralExp();
 		}
-		DebugLocation(305, 1);
+		DebugLocation(307, 1);
 		} finally { DebugExitRule(GrammarFileName, "tupleLiteralExp"); }
 		return Literal;
 
@@ -4258,7 +4281,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 	partial void LeaveRule_classLiteralExp();
 
 	// $ANTLR start "classLiteralExp"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:307:1: classLiteralExp returns [ClassLiteralExp Literal] : ^( CLASSLITERAL variableDeclarationList pathName ) ;
+	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:309:1: classLiteralExp returns [ClassLiteralExp Literal] : ^( CLASSLITERAL variableDeclarationList pathName ) ;
 	[GrammarRule("classLiteralExp")]
 	private ClassLiteralExp classLiteralExp()
 	{
@@ -4267,40 +4290,40 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 		TraceIn("classLiteralExp", 33);
 		ClassLiteralExp Literal = default(ClassLiteralExp);
 
-		CommonTree CLASSLITERAL54 = default(CommonTree);
-		List<VariableDeclarationBag> variableDeclarationList55 = default(List<VariableDeclarationBag>);
-		List<IToken> pathName56 = default(List<IToken>);
+		CommonTree CLASSLITERAL56 = default(CommonTree);
+		List<VariableDeclarationBag> variableDeclarationList57 = default(List<VariableDeclarationBag>);
+		List<IToken> pathName58 = default(List<IToken>);
 
 		try { DebugEnterRule(GrammarFileName, "classLiteralExp");
-		DebugLocation(307, 1);
+		DebugLocation(309, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:309:2: ( ^( CLASSLITERAL variableDeclarationList pathName ) )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:311:2: ( ^( CLASSLITERAL variableDeclarationList pathName ) )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:309:5: ^( CLASSLITERAL variableDeclarationList pathName )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:311:5: ^( CLASSLITERAL variableDeclarationList pathName )
 			{
-			DebugLocation(309, 5);
-			DebugLocation(309, 7);
-			CLASSLITERAL54=(CommonTree)Match(input,CLASSLITERAL,Follow._CLASSLITERAL_in_classLiteralExp1451); 
+			DebugLocation(311, 5);
+			DebugLocation(311, 7);
+			CLASSLITERAL56=(CommonTree)Match(input,CLASSLITERAL,Follow._CLASSLITERAL_in_classLiteralExp1474); 
 
 			if (input.LA(1) == TokenTypes.Down)
 			{
 				Match(input, TokenTypes.Down, null); 
-				DebugLocation(309, 22);
-				PushFollow(Follow._variableDeclarationList_in_classLiteralExp1455);
-				variableDeclarationList55=variableDeclarationList();
+				DebugLocation(311, 22);
+				PushFollow(Follow._variableDeclarationList_in_classLiteralExp1478);
+				variableDeclarationList57=variableDeclarationList();
 				PopFollow();
 
-				DebugLocation(309, 46);
-				PushFollow(Follow._pathName_in_classLiteralExp1457);
-				pathName56=pathName();
+				DebugLocation(311, 46);
+				PushFollow(Follow._pathName_in_classLiteralExp1480);
+				pathName58=pathName();
 				PopFollow();
 
 
 				Match(input, TokenTypes.Up, null); 
 			}
-			DebugLocation(309, 56);
-			Literal = CreateClassLiteral(CLASSLITERAL54.Token,variableDeclarationList55, pathName56);
+			DebugLocation(311, 56);
+			Literal = CreateClassLiteral(CLASSLITERAL56.Token,variableDeclarationList57, pathName58);
 
 			}
 
@@ -4316,7 +4339,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			LeaveRule("classLiteralExp", 33);
 			LeaveRule_classLiteralExp();
 		}
-		DebugLocation(310, 1);
+		DebugLocation(312, 1);
 		} finally { DebugExitRule(GrammarFileName, "classLiteralExp"); }
 		return Literal;
 
@@ -4328,7 +4351,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 	partial void LeaveRule_variableDeclaration();
 
 	// $ANTLR start "variableDeclaration"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:312:1: variableDeclaration returns [VariableDeclarationBag Declaration] : ^( DECL SimpleName ( type )? ( oclExpression )? ) ;
+	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:314:1: variableDeclaration returns [VariableDeclarationBag Declaration] : ^( DECL SimpleName ( type )? ( oclExpression )? ) ;
 	[GrammarRule("variableDeclaration")]
 	private VariableDeclarationBag variableDeclaration()
 	{
@@ -4337,27 +4360,27 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 		TraceIn("variableDeclaration", 34);
 		VariableDeclarationBag Declaration = default(VariableDeclarationBag);
 
-		CommonTree SimpleName57 = default(CommonTree);
-		Classifier type58 = default(Classifier);
-		OclExpression oclExpression59 = default(OclExpression);
+		CommonTree SimpleName59 = default(CommonTree);
+		Classifier type60 = default(Classifier);
+		OclExpression oclExpression61 = default(OclExpression);
 
 		try { DebugEnterRule(GrammarFileName, "variableDeclaration");
-		DebugLocation(312, 1);
+		DebugLocation(314, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:314:2: ( ^( DECL SimpleName ( type )? ( oclExpression )? ) )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:316:2: ( ^( DECL SimpleName ( type )? ( oclExpression )? ) )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:314:4: ^( DECL SimpleName ( type )? ( oclExpression )? )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:316:4: ^( DECL SimpleName ( type )? ( oclExpression )? )
 			{
-			DebugLocation(314, 4);
-			DebugLocation(314, 6);
-			Match(input,DECL,Follow._DECL_in_variableDeclaration1477); 
+			DebugLocation(316, 4);
+			DebugLocation(316, 6);
+			Match(input,DECL,Follow._DECL_in_variableDeclaration1500); 
 
 			Match(input, TokenTypes.Down, null); 
-			DebugLocation(314, 11);
-			SimpleName57=(CommonTree)Match(input,SimpleName,Follow._SimpleName_in_variableDeclaration1479); 
-			DebugLocation(314, 22);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:314:22: ( type )?
+			DebugLocation(316, 11);
+			SimpleName59=(CommonTree)Match(input,SimpleName,Follow._SimpleName_in_variableDeclaration1502); 
+			DebugLocation(316, 22);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:316:22: ( type )?
 			int alt41=2;
 			try { DebugEnterSubRule(41);
 			try { DebugEnterDecision(41, false);
@@ -4372,11 +4395,11 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:314:22: type
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:316:22: type
 				{
-				DebugLocation(314, 22);
-				PushFollow(Follow._type_in_variableDeclaration1481);
-				type58=type();
+				DebugLocation(316, 22);
+				PushFollow(Follow._type_in_variableDeclaration1504);
+				type60=type();
 				PopFollow();
 
 
@@ -4386,8 +4409,8 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			}
 			} finally { DebugExitSubRule(41); }
 
-			DebugLocation(314, 28);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:314:28: ( oclExpression )?
+			DebugLocation(316, 28);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:316:28: ( oclExpression )?
 			int alt42=2;
 			try { DebugEnterSubRule(42);
 			try { DebugEnterDecision(42, false);
@@ -4402,11 +4425,11 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:314:28: oclExpression
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:316:28: oclExpression
 				{
-				DebugLocation(314, 28);
-				PushFollow(Follow._oclExpression_in_variableDeclaration1484);
-				oclExpression59=oclExpression();
+				DebugLocation(316, 28);
+				PushFollow(Follow._oclExpression_in_variableDeclaration1507);
+				oclExpression61=oclExpression();
 				PopFollow();
 
 
@@ -4418,8 +4441,8 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 
 
 			Match(input, TokenTypes.Up, null); 
-			DebugLocation(314, 44);
-			Declaration = new VariableDeclarationBag(SimpleName57.Text,type58,oclExpression59);
+			DebugLocation(316, 44);
+			Declaration = new VariableDeclarationBag(SimpleName59.Text,type60,oclExpression61);
 
 			}
 
@@ -4435,7 +4458,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			LeaveRule("variableDeclaration", 34);
 			LeaveRule_variableDeclaration();
 		}
-		DebugLocation(315, 1);
+		DebugLocation(317, 1);
 		} finally { DebugExitRule(GrammarFileName, "variableDeclaration"); }
 		return Declaration;
 
@@ -4447,7 +4470,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 	partial void LeaveRule_type();
 
 	// $ANTLR start "type"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:317:1: type returns [Classifier Type] : ( pathName | collectionType | tupleType | primitiveType | oclType );
+	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:319:1: type returns [Classifier Type] : ( pathName | collectionType | tupleType | primitiveType | oclType );
 	[GrammarRule("type")]
 	private Classifier type()
 	{
@@ -4456,17 +4479,17 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 		TraceIn("type", 35);
 		Classifier Type = default(Classifier);
 
-		List<IToken> pathName60 = default(List<IToken>);
-		CollectionType collectionType61 = default(CollectionType);
-		TupleType tupleType62 = default(TupleType);
-		Classifier primitiveType63 = default(Classifier);
-		Classifier oclType64 = default(Classifier);
+		List<IToken> pathName62 = default(List<IToken>);
+		CollectionType collectionType63 = default(CollectionType);
+		TupleType tupleType64 = default(TupleType);
+		Classifier primitiveType65 = default(Classifier);
+		Classifier oclType66 = default(Classifier);
 
 		try { DebugEnterRule(GrammarFileName, "type");
-		DebugLocation(317, 1);
+		DebugLocation(319, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:319:2: ( pathName | collectionType | tupleType | primitiveType | oclType )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:321:2: ( pathName | collectionType | tupleType | primitiveType | oclType )
 			int alt43=5;
 			try { DebugEnterDecision(43, false);
 			switch (input.LA(1))
@@ -4516,71 +4539,71 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:319:4: pathName
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:321:4: pathName
 				{
-				DebugLocation(319, 4);
-				PushFollow(Follow._pathName_in_type1504);
-				pathName60=pathName();
+				DebugLocation(321, 4);
+				PushFollow(Follow._pathName_in_type1527);
+				pathName62=pathName();
 				PopFollow();
 
-				DebugLocation(319, 15);
-				Type = ResolveTypePathName(pathName60);
+				DebugLocation(321, 15);
+				Type = ResolveTypePathName(pathName62);
 
 				}
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:320:4: collectionType
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:322:4: collectionType
 				{
-				DebugLocation(320, 4);
-				PushFollow(Follow._collectionType_in_type1513);
-				collectionType61=collectionType();
+				DebugLocation(322, 4);
+				PushFollow(Follow._collectionType_in_type1536);
+				collectionType63=collectionType();
 				PopFollow();
 
-				DebugLocation(320, 19);
-				Type = collectionType61;
+				DebugLocation(322, 19);
+				Type = collectionType63;
 
 				}
 				break;
 			case 3:
 				DebugEnterAlt(3);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:321:4: tupleType
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:323:4: tupleType
 				{
-				DebugLocation(321, 4);
-				PushFollow(Follow._tupleType_in_type1521);
-				tupleType62=tupleType();
+				DebugLocation(323, 4);
+				PushFollow(Follow._tupleType_in_type1544);
+				tupleType64=tupleType();
 				PopFollow();
 
-				DebugLocation(321, 15);
-				Type = tupleType62;
+				DebugLocation(323, 15);
+				Type = tupleType64;
 
 				}
 				break;
 			case 4:
 				DebugEnterAlt(4);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:322:4: primitiveType
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:324:4: primitiveType
 				{
-				DebugLocation(322, 4);
-				PushFollow(Follow._primitiveType_in_type1530);
-				primitiveType63=primitiveType();
+				DebugLocation(324, 4);
+				PushFollow(Follow._primitiveType_in_type1553);
+				primitiveType65=primitiveType();
 				PopFollow();
 
-				DebugLocation(322, 18);
-				Type = primitiveType63;
+				DebugLocation(324, 18);
+				Type = primitiveType65;
 
 				}
 				break;
 			case 5:
 				DebugEnterAlt(5);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:323:4: oclType
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:325:4: oclType
 				{
-				DebugLocation(323, 4);
-				PushFollow(Follow._oclType_in_type1538);
-				oclType64=oclType();
+				DebugLocation(325, 4);
+				PushFollow(Follow._oclType_in_type1561);
+				oclType66=oclType();
 				PopFollow();
 
-				DebugLocation(323, 13);
-				Type = oclType64;
+				DebugLocation(325, 13);
+				Type = oclType66;
 
 				}
 				break;
@@ -4598,7 +4621,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			LeaveRule("type", 35);
 			LeaveRule_type();
 		}
-		DebugLocation(324, 1);
+		DebugLocation(326, 1);
 		} finally { DebugExitRule(GrammarFileName, "type"); }
 		return Type;
 
@@ -4610,7 +4633,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 	partial void LeaveRule_primitiveType();
 
 	// $ANTLR start "primitiveType"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:326:1: primitiveType returns [Classifier Type] : ( 'Boolean' | 'Integer' | 'Real' | 'String' | 'UnlimitedNatural' );
+	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:328:1: primitiveType returns [Classifier Type] : ( 'Boolean' | 'Integer' | 'Real' | 'String' | 'UnlimitedNatural' );
 	[GrammarRule("primitiveType")]
 	private Classifier primitiveType()
 	{
@@ -4620,10 +4643,10 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 		Classifier Type = default(Classifier);
 
 		try { DebugEnterRule(GrammarFileName, "primitiveType");
-		DebugLocation(326, 1);
+		DebugLocation(328, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:328:2: ( 'Boolean' | 'Integer' | 'Real' | 'String' | 'UnlimitedNatural' )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:330:2: ( 'Boolean' | 'Integer' | 'Real' | 'String' | 'UnlimitedNatural' )
 			int alt44=5;
 			try { DebugEnterDecision(44, false);
 			switch (input.LA(1))
@@ -4666,55 +4689,55 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:328:4: 'Boolean'
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:330:4: 'Boolean'
 				{
-				DebugLocation(328, 4);
-				Match(input,82,Follow._82_in_primitiveType1560); 
-				DebugLocation(328, 17);
+				DebugLocation(330, 4);
+				Match(input,82,Follow._82_in_primitiveType1583); 
+				DebugLocation(330, 17);
 				Type = TypesTable.Library.Boolean;
 
 				}
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:329:4: 'Integer'
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:331:4: 'Integer'
 				{
-				DebugLocation(329, 4);
-				Match(input,84,Follow._84_in_primitiveType1572); 
-				DebugLocation(329, 17);
+				DebugLocation(331, 4);
+				Match(input,84,Follow._84_in_primitiveType1595); 
+				DebugLocation(331, 17);
 				Type = TypesTable.Library.Integer;
 
 				}
 				break;
 			case 3:
 				DebugEnterAlt(3);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:330:4: 'Real'
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:332:4: 'Real'
 				{
-				DebugLocation(330, 4);
-				Match(input,90,Follow._90_in_primitiveType1582); 
-				DebugLocation(330, 14);
+				DebugLocation(332, 4);
+				Match(input,90,Follow._90_in_primitiveType1605); 
+				DebugLocation(332, 14);
 				Type = TypesTable.Library.Real;
 
 				}
 				break;
 			case 4:
 				DebugEnterAlt(4);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:331:4: 'String'
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:333:4: 'String'
 				{
-				DebugLocation(331, 4);
-				Match(input,93,Follow._93_in_primitiveType1592); 
-				DebugLocation(331, 16);
+				DebugLocation(333, 4);
+				Match(input,93,Follow._93_in_primitiveType1615); 
+				DebugLocation(333, 16);
 				Type = TypesTable.Library.String;
 
 				}
 				break;
 			case 5:
 				DebugEnterAlt(5);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:332:4: 'UnlimitedNatural'
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:334:4: 'UnlimitedNatural'
 				{
-				DebugLocation(332, 4);
-				Match(input,95,Follow._95_in_primitiveType1602); 
-				DebugLocation(332, 23);
+				DebugLocation(334, 4);
+				Match(input,95,Follow._95_in_primitiveType1625); 
+				DebugLocation(334, 23);
 				Type = TypesTable.Library.UnlimitedNatural;
 
 				}
@@ -4733,7 +4756,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			LeaveRule("primitiveType", 36);
 			LeaveRule_primitiveType();
 		}
-		DebugLocation(333, 1);
+		DebugLocation(335, 1);
 		} finally { DebugExitRule(GrammarFileName, "primitiveType"); }
 		return Type;
 
@@ -4745,7 +4768,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 	partial void LeaveRule_oclType();
 
 	// $ANTLR start "oclType"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:335:1: oclType returns [Classifier Type] : ( 'OclAny' | 'OclInvalid' | 'OclMessage' | 'OclVoid' );
+	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:337:1: oclType returns [Classifier Type] : ( 'OclAny' | 'OclInvalid' | 'OclMessage' | 'OclVoid' );
 	[GrammarRule("oclType")]
 	private Classifier oclType()
 	{
@@ -4755,10 +4778,10 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 		Classifier Type = default(Classifier);
 
 		try { DebugEnterRule(GrammarFileName, "oclType");
-		DebugLocation(335, 1);
+		DebugLocation(337, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:337:2: ( 'OclAny' | 'OclInvalid' | 'OclMessage' | 'OclVoid' )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:339:2: ( 'OclAny' | 'OclInvalid' | 'OclMessage' | 'OclVoid' )
 			int alt45=4;
 			try { DebugEnterDecision(45, false);
 			switch (input.LA(1))
@@ -4796,44 +4819,44 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:337:4: 'OclAny'
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:339:4: 'OclAny'
 				{
-				DebugLocation(337, 4);
-				Match(input,85,Follow._85_in_oclType1622); 
-				DebugLocation(337, 14);
+				DebugLocation(339, 4);
+				Match(input,85,Follow._85_in_oclType1645); 
+				DebugLocation(339, 14);
 				Type = TypesTable.Library.Any;
 
 				}
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:338:4: 'OclInvalid'
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:340:4: 'OclInvalid'
 				{
-				DebugLocation(338, 4);
-				Match(input,86,Follow._86_in_oclType1632); 
-				DebugLocation(338, 17);
+				DebugLocation(340, 4);
+				Match(input,86,Follow._86_in_oclType1655); 
+				DebugLocation(340, 17);
 				Type = TypesTable.Library.Invalid;
 
 				}
 				break;
 			case 3:
 				DebugEnterAlt(3);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:339:4: 'OclMessage'
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:341:4: 'OclMessage'
 				{
-				DebugLocation(339, 4);
-				Match(input,87,Follow._87_in_oclType1641); 
-				DebugLocation(339, 17);
+				DebugLocation(341, 4);
+				Match(input,87,Follow._87_in_oclType1664); 
+				DebugLocation(341, 17);
 				Type = TypesTable.Library.Message; throw new System.NotSupportedException();
 
 				}
 				break;
 			case 4:
 				DebugEnterAlt(4);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:340:4: 'OclVoid'
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:342:4: 'OclVoid'
 				{
-				DebugLocation(340, 4);
-				Match(input,88,Follow._88_in_oclType1650); 
-				DebugLocation(340, 15);
+				DebugLocation(342, 4);
+				Match(input,88,Follow._88_in_oclType1673); 
+				DebugLocation(342, 15);
 				Type = TypesTable.Library.Void;
 
 				}
@@ -4852,7 +4875,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			LeaveRule("oclType", 37);
 			LeaveRule_oclType();
 		}
-		DebugLocation(341, 1);
+		DebugLocation(343, 1);
 		} finally { DebugExitRule(GrammarFileName, "oclType"); }
 		return Type;
 
@@ -4864,7 +4887,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 	partial void LeaveRule_collectionType();
 
 	// $ANTLR start "collectionType"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:343:1: collectionType returns [CollectionType Type] : ^( COLLTYPE collectionTypeIdentifier type ) ;
+	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:345:1: collectionType returns [CollectionType Type] : ^( COLLTYPE collectionTypeIdentifier type ) ;
 	[GrammarRule("collectionType")]
 	private CollectionType collectionType()
 	{
@@ -4873,36 +4896,36 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 		TraceIn("collectionType", 38);
 		CollectionType Type = default(CollectionType);
 
-		OCLAst.collectionTypeIdentifier_return collectionTypeIdentifier65 = default(OCLAst.collectionTypeIdentifier_return);
-		Classifier type66 = default(Classifier);
+		OCLAst.collectionTypeIdentifier_return collectionTypeIdentifier67 = default(OCLAst.collectionTypeIdentifier_return);
+		Classifier type68 = default(Classifier);
 
 		try { DebugEnterRule(GrammarFileName, "collectionType");
-		DebugLocation(343, 1);
+		DebugLocation(345, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:345:2: ( ^( COLLTYPE collectionTypeIdentifier type ) )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:347:2: ( ^( COLLTYPE collectionTypeIdentifier type ) )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:345:4: ^( COLLTYPE collectionTypeIdentifier type )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:347:4: ^( COLLTYPE collectionTypeIdentifier type )
 			{
-			DebugLocation(345, 4);
-			DebugLocation(345, 7);
-			Match(input,COLLTYPE,Follow._COLLTYPE_in_collectionType1673); 
+			DebugLocation(347, 4);
+			DebugLocation(347, 7);
+			Match(input,COLLTYPE,Follow._COLLTYPE_in_collectionType1696); 
 
 			Match(input, TokenTypes.Down, null); 
-			DebugLocation(345, 17);
-			PushFollow(Follow._collectionTypeIdentifier_in_collectionType1676);
-			collectionTypeIdentifier65=collectionTypeIdentifier();
+			DebugLocation(347, 17);
+			PushFollow(Follow._collectionTypeIdentifier_in_collectionType1699);
+			collectionTypeIdentifier67=collectionTypeIdentifier();
 			PopFollow();
 
-			DebugLocation(345, 42);
-			PushFollow(Follow._type_in_collectionType1678);
-			type66=type();
+			DebugLocation(347, 42);
+			PushFollow(Follow._type_in_collectionType1701);
+			type68=type();
 			PopFollow();
 
 
 			Match(input, TokenTypes.Up, null); 
-			DebugLocation(345, 48);
-			Type = CreateCollectionType((collectionTypeIdentifier65!=null?collectionTypeIdentifier65.Kind:default(CollectionKind)),type66);
+			DebugLocation(347, 48);
+			Type = CreateCollectionType((collectionTypeIdentifier67!=null?collectionTypeIdentifier67.Kind:default(CollectionKind)),type68);
 
 			}
 
@@ -4918,7 +4941,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			LeaveRule("collectionType", 38);
 			LeaveRule_collectionType();
 		}
-		DebugLocation(346, 1);
+		DebugLocation(348, 1);
 		} finally { DebugExitRule(GrammarFileName, "collectionType"); }
 		return Type;
 
@@ -4930,7 +4953,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 	partial void LeaveRule_tupleType();
 
 	// $ANTLR start "tupleType"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:348:1: tupleType returns [TupleType Type] : ^(tuple= 'Tuple' variableDeclarationList ) ;
+	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:350:1: tupleType returns [TupleType Type] : ^(tuple= 'Tuple' variableDeclarationList ) ;
 	[GrammarRule("tupleType")]
 	private TupleType tupleType()
 	{
@@ -4940,33 +4963,33 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 		TupleType Type = default(TupleType);
 
 		CommonTree tuple = default(CommonTree);
-		List<VariableDeclarationBag> variableDeclarationList67 = default(List<VariableDeclarationBag>);
+		List<VariableDeclarationBag> variableDeclarationList69 = default(List<VariableDeclarationBag>);
 
 		try { DebugEnterRule(GrammarFileName, "tupleType");
-		DebugLocation(348, 1);
+		DebugLocation(350, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:350:2: ( ^(tuple= 'Tuple' variableDeclarationList ) )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:352:2: ( ^(tuple= 'Tuple' variableDeclarationList ) )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:350:4: ^(tuple= 'Tuple' variableDeclarationList )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:352:4: ^(tuple= 'Tuple' variableDeclarationList )
 			{
-			DebugLocation(350, 4);
-			DebugLocation(350, 12);
-			tuple=(CommonTree)Match(input,94,Follow._94_in_tupleType1703); 
+			DebugLocation(352, 4);
+			DebugLocation(352, 12);
+			tuple=(CommonTree)Match(input,94,Follow._94_in_tupleType1726); 
 
 			if (input.LA(1) == TokenTypes.Down)
 			{
 				Match(input, TokenTypes.Down, null); 
-				DebugLocation(350, 22);
-				PushFollow(Follow._variableDeclarationList_in_tupleType1706);
-				variableDeclarationList67=variableDeclarationList();
+				DebugLocation(352, 22);
+				PushFollow(Follow._variableDeclarationList_in_tupleType1729);
+				variableDeclarationList69=variableDeclarationList();
 				PopFollow();
 
 
 				Match(input, TokenTypes.Up, null); 
 			}
-			DebugLocation(350, 48);
-			Type =CreateTupleType(tuple.Token,variableDeclarationList67);
+			DebugLocation(352, 48);
+			Type =CreateTupleType(tuple.Token,variableDeclarationList69);
 
 			}
 
@@ -4982,7 +5005,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			LeaveRule("tupleType", 39);
 			LeaveRule_tupleType();
 		}
-		DebugLocation(351, 1);
+		DebugLocation(353, 1);
 		} finally { DebugExitRule(GrammarFileName, "tupleType"); }
 		return Type;
 
@@ -4994,7 +5017,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 	partial void LeaveRule_variableDeclarationList();
 
 	// $ANTLR start "variableDeclarationList"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:354:1: variableDeclarationList returns [List<VariableDeclarationBag> Declarations =new List<VariableDeclarationBag>()] : ( variableDeclaration )* ;
+	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:356:1: variableDeclarationList returns [List<VariableDeclarationBag> Declarations =new List<VariableDeclarationBag>()] : ( variableDeclaration )* ;
 	[GrammarRule("variableDeclarationList")]
 	private List<VariableDeclarationBag> variableDeclarationList()
 	{
@@ -5003,18 +5026,18 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 		TraceIn("variableDeclarationList", 40);
 		List<VariableDeclarationBag> Declarations = new List<VariableDeclarationBag>();
 
-		VariableDeclarationBag variableDeclaration68 = default(VariableDeclarationBag);
+		VariableDeclarationBag variableDeclaration70 = default(VariableDeclarationBag);
 
 		try { DebugEnterRule(GrammarFileName, "variableDeclarationList");
-		DebugLocation(354, 1);
+		DebugLocation(356, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:356:2: ( ( variableDeclaration )* )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:358:2: ( ( variableDeclaration )* )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:356:4: ( variableDeclaration )*
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:358:4: ( variableDeclaration )*
 			{
-			DebugLocation(356, 4);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:356:4: ( variableDeclaration )*
+			DebugLocation(358, 4);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:358:4: ( variableDeclaration )*
 			try { DebugEnterSubRule(46);
 			while (true)
 			{
@@ -5033,15 +5056,15 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:356:6: variableDeclaration
+					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:358:6: variableDeclaration
 					{
-					DebugLocation(356, 6);
-					PushFollow(Follow._variableDeclaration_in_variableDeclarationList1729);
-					variableDeclaration68=variableDeclaration();
+					DebugLocation(358, 6);
+					PushFollow(Follow._variableDeclaration_in_variableDeclarationList1752);
+					variableDeclaration70=variableDeclaration();
 					PopFollow();
 
-					DebugLocation(356, 26);
-					Declarations.Add(variableDeclaration68);
+					DebugLocation(358, 26);
+					Declarations.Add(variableDeclaration70);
 
 					}
 					break;
@@ -5071,7 +5094,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			LeaveRule("variableDeclarationList", 40);
 			LeaveRule_variableDeclarationList();
 		}
-		DebugLocation(357, 1);
+		DebugLocation(359, 1);
 		} finally { DebugExitRule(GrammarFileName, "variableDeclarationList"); }
 		return Declarations;
 
@@ -5083,7 +5106,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 	partial void LeaveRule_isMarkedPre();
 
 	// $ANTLR start "isMarkedPre"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:358:1: isMarkedPre returns [bool IsPre = false] : ( 'pre' |);
+	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:360:1: isMarkedPre returns [bool IsPre = false] : ( 'pre' |);
 	[GrammarRule("isMarkedPre")]
 	private bool isMarkedPre()
 	{
@@ -5093,10 +5116,10 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 		bool IsPre =  false;
 
 		try { DebugEnterRule(GrammarFileName, "isMarkedPre");
-		DebugLocation(358, 1);
+		DebugLocation(360, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:360:2: ( 'pre' |)
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:362:2: ( 'pre' |)
 			int alt47=2;
 			try { DebugEnterDecision(47, false);
 			int LA47_0 = input.LA(1);
@@ -5120,20 +5143,20 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:360:4: 'pre'
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:362:4: 'pre'
 				{
-				DebugLocation(360, 4);
-				Match(input,120,Follow._120_in_isMarkedPre1750); 
-				DebugLocation(360, 10);
+				DebugLocation(362, 4);
+				Match(input,120,Follow._120_in_isMarkedPre1773); 
+				DebugLocation(362, 10);
 				IsPre = true;
 
 				}
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:361:4: 
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:363:4: 
 				{
-				DebugLocation(361, 4);
+				DebugLocation(363, 4);
 				IsPre = false;
 
 				}
@@ -5152,7 +5175,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			LeaveRule("isMarkedPre", 41);
 			LeaveRule_isMarkedPre();
 		}
-		DebugLocation(362, 1);
+		DebugLocation(364, 1);
 		} finally { DebugExitRule(GrammarFileName, "isMarkedPre"); }
 		return IsPre;
 
@@ -5164,7 +5187,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 	partial void LeaveRule_letExp();
 
 	// $ANTLR start "letExp"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:366:1: letExp returns [OclExpression Expr] : ^( LET d= variableDeclaration expr= oclExpression ) ;
+	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:368:1: letExp returns [OclExpression Expr] : ^( LET d= variableDeclaration expr= oclExpression ) ;
 	[GrammarRule("letExp")]
 	private OclExpression letExp()
 	{
@@ -5173,7 +5196,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 		TraceIn("letExp", 42);
 		OclExpression Expr = default(OclExpression);
 
-		CommonTree LET69 = default(CommonTree);
+		CommonTree LET71 = default(CommonTree);
 		VariableDeclarationBag d = default(VariableDeclarationBag);
 		OclExpression expr = default(OclExpression);
 
@@ -5181,34 +5204,34 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 				VariableDeclaration decl= null;
 			
 		try { DebugEnterRule(GrammarFileName, "letExp");
-		DebugLocation(366, 1);
+		DebugLocation(368, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:376:2: ( ^( LET d= variableDeclaration expr= oclExpression ) )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:378:2: ( ^( LET d= variableDeclaration expr= oclExpression ) )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:376:4: ^( LET d= variableDeclaration expr= oclExpression )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:378:4: ^( LET d= variableDeclaration expr= oclExpression )
 			{
-			DebugLocation(376, 4);
-			DebugLocation(376, 6);
-			LET69=(CommonTree)Match(input,LET,Follow._LET_in_letExp1787); 
+			DebugLocation(378, 4);
+			DebugLocation(378, 6);
+			LET71=(CommonTree)Match(input,LET,Follow._LET_in_letExp1810); 
 
 			Match(input, TokenTypes.Down, null); 
-			DebugLocation(376, 12);
-			PushFollow(Follow._variableDeclaration_in_letExp1793);
+			DebugLocation(378, 12);
+			PushFollow(Follow._variableDeclaration_in_letExp1816);
 			d=variableDeclaration();
 			PopFollow();
 
-			DebugLocation(376, 34);
-			decl=LetDecl(LET69.Token,d);
-			DebugLocation(377, 8);
-			PushFollow(Follow._oclExpression_in_letExp1803);
+			DebugLocation(378, 34);
+			decl=LetDecl(LET71.Token,d);
+			DebugLocation(379, 8);
+			PushFollow(Follow._oclExpression_in_letExp1826);
 			expr=oclExpression();
 			PopFollow();
 
 
 			Match(input, TokenTypes.Up, null); 
-			DebugLocation(377, 25);
-			Expr = CreateLet(LET69.Token,decl,expr);
+			DebugLocation(379, 25);
+			Expr = CreateLet(LET71.Token,decl,expr);
 
 			}
 
@@ -5229,7 +5252,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			LeaveRule("letExp", 42);
 			LeaveRule_letExp();
 		}
-		DebugLocation(378, 1);
+		DebugLocation(380, 1);
 		} finally { DebugExitRule(GrammarFileName, "letExp"); }
 		return Expr;
 
@@ -5241,7 +5264,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 	partial void LeaveRule_ifExp();
 
 	// $ANTLR start "ifExp"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:380:1: ifExp returns [OclExpression Expr] : ^( IF c= oclExpression t= oclExpression f= oclExpression ) ;
+	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:382:1: ifExp returns [OclExpression Expr] : ^( IF c= oclExpression t= oclExpression f= oclExpression ) ;
 	[GrammarRule("ifExp")]
 	private OclExpression ifExp()
 	{
@@ -5250,43 +5273,43 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 		TraceIn("ifExp", 43);
 		OclExpression Expr = default(OclExpression);
 
-		CommonTree IF70 = default(CommonTree);
+		CommonTree IF72 = default(CommonTree);
 		OclExpression c = default(OclExpression);
 		OclExpression t = default(OclExpression);
 		OclExpression f = default(OclExpression);
 
 		try { DebugEnterRule(GrammarFileName, "ifExp");
-		DebugLocation(380, 1);
+		DebugLocation(382, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:382:2: ( ^( IF c= oclExpression t= oclExpression f= oclExpression ) )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:384:2: ( ^( IF c= oclExpression t= oclExpression f= oclExpression ) )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:382:4: ^( IF c= oclExpression t= oclExpression f= oclExpression )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:384:4: ^( IF c= oclExpression t= oclExpression f= oclExpression )
 			{
-			DebugLocation(382, 4);
-			DebugLocation(382, 6);
-			IF70=(CommonTree)Match(input,IF,Follow._IF_in_ifExp1823); 
+			DebugLocation(384, 4);
+			DebugLocation(384, 6);
+			IF72=(CommonTree)Match(input,IF,Follow._IF_in_ifExp1846); 
 
 			Match(input, TokenTypes.Down, null); 
-			DebugLocation(382, 10);
-			PushFollow(Follow._oclExpression_in_ifExp1827);
+			DebugLocation(384, 10);
+			PushFollow(Follow._oclExpression_in_ifExp1850);
 			c=oclExpression();
 			PopFollow();
 
-			DebugLocation(382, 26);
-			PushFollow(Follow._oclExpression_in_ifExp1831);
+			DebugLocation(384, 26);
+			PushFollow(Follow._oclExpression_in_ifExp1854);
 			t=oclExpression();
 			PopFollow();
 
-			DebugLocation(382, 42);
-			PushFollow(Follow._oclExpression_in_ifExp1835);
+			DebugLocation(384, 42);
+			PushFollow(Follow._oclExpression_in_ifExp1858);
 			f=oclExpression();
 			PopFollow();
 
 
 			Match(input, TokenTypes.Up, null); 
-			DebugLocation(382, 58);
-			Expr = CreateIf(IF70.Token,c,t,f);
+			DebugLocation(384, 58);
+			Expr = CreateIf(IF72.Token,c,t,f);
 
 			}
 
@@ -5302,7 +5325,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			LeaveRule("ifExp", 43);
 			LeaveRule_ifExp();
 		}
-		DebugLocation(383, 1);
+		DebugLocation(385, 1);
 		} finally { DebugExitRule(GrammarFileName, "ifExp"); }
 		return Expr;
 
@@ -5314,7 +5337,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 	partial void LeaveRule_oclMessageExp();
 
 	// $ANTLR start "oclMessageExp"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:385:1: oclMessageExp : ( '^^' SimpleName '(' ( oclMessageArguments )? ')' | '^' SimpleName '(' ( oclMessageArguments )? ')' );
+	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:387:1: oclMessageExp : ( '^^' SimpleName '(' ( oclMessageArguments )? ')' | '^' SimpleName '(' ( oclMessageArguments )? ')' );
 	[GrammarRule("oclMessageExp")]
 	private void oclMessageExp()
 	{
@@ -5322,10 +5345,10 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 		EnterRule("oclMessageExp", 44);
 		TraceIn("oclMessageExp", 44);
 		try { DebugEnterRule(GrammarFileName, "oclMessageExp");
-		DebugLocation(385, 1);
+		DebugLocation(387, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:386:2: ( '^^' SimpleName '(' ( oclMessageArguments )? ')' | '^' SimpleName '(' ( oclMessageArguments )? ')' )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:388:2: ( '^^' SimpleName '(' ( oclMessageArguments )? ')' | '^' SimpleName '(' ( oclMessageArguments )? ')' )
 			int alt50=2;
 			try { DebugEnterDecision(50, false);
 			int LA50_0 = input.LA(1);
@@ -5349,16 +5372,16 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:386:4: '^^' SimpleName '(' ( oclMessageArguments )? ')'
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:388:4: '^^' SimpleName '(' ( oclMessageArguments )? ')'
 				{
-				DebugLocation(386, 4);
-				Match(input,99,Follow._99_in_oclMessageExp1849); 
-				DebugLocation(386, 9);
-				Match(input,SimpleName,Follow._SimpleName_in_oclMessageExp1851); 
-				DebugLocation(386, 20);
-				Match(input,62,Follow._62_in_oclMessageExp1853); 
-				DebugLocation(386, 24);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:386:24: ( oclMessageArguments )?
+				DebugLocation(388, 4);
+				Match(input,99,Follow._99_in_oclMessageExp1872); 
+				DebugLocation(388, 9);
+				Match(input,SimpleName,Follow._SimpleName_in_oclMessageExp1874); 
+				DebugLocation(388, 20);
+				Match(input,62,Follow._62_in_oclMessageExp1876); 
+				DebugLocation(388, 24);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:388:24: ( oclMessageArguments )?
 				int alt48=2;
 				try { DebugEnterSubRule(48);
 				try { DebugEnterDecision(48, false);
@@ -5373,10 +5396,10 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:386:24: oclMessageArguments
+					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:388:24: oclMessageArguments
 					{
-					DebugLocation(386, 24);
-					PushFollow(Follow._oclMessageArguments_in_oclMessageExp1855);
+					DebugLocation(388, 24);
+					PushFollow(Follow._oclMessageArguments_in_oclMessageExp1878);
 					oclMessageArguments();
 					PopFollow();
 
@@ -5387,23 +5410,23 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 				}
 				} finally { DebugExitSubRule(48); }
 
-				DebugLocation(386, 45);
-				Match(input,63,Follow._63_in_oclMessageExp1858); 
+				DebugLocation(388, 45);
+				Match(input,63,Follow._63_in_oclMessageExp1881); 
 
 				}
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:387:4: '^' SimpleName '(' ( oclMessageArguments )? ')'
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:389:4: '^' SimpleName '(' ( oclMessageArguments )? ')'
 				{
-				DebugLocation(387, 4);
-				Match(input,98,Follow._98_in_oclMessageExp1863); 
-				DebugLocation(387, 8);
-				Match(input,SimpleName,Follow._SimpleName_in_oclMessageExp1865); 
-				DebugLocation(387, 19);
-				Match(input,62,Follow._62_in_oclMessageExp1867); 
-				DebugLocation(387, 23);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:387:23: ( oclMessageArguments )?
+				DebugLocation(389, 4);
+				Match(input,98,Follow._98_in_oclMessageExp1886); 
+				DebugLocation(389, 8);
+				Match(input,SimpleName,Follow._SimpleName_in_oclMessageExp1888); 
+				DebugLocation(389, 19);
+				Match(input,62,Follow._62_in_oclMessageExp1890); 
+				DebugLocation(389, 23);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:389:23: ( oclMessageArguments )?
 				int alt49=2;
 				try { DebugEnterSubRule(49);
 				try { DebugEnterDecision(49, false);
@@ -5418,10 +5441,10 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:387:23: oclMessageArguments
+					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:389:23: oclMessageArguments
 					{
-					DebugLocation(387, 23);
-					PushFollow(Follow._oclMessageArguments_in_oclMessageExp1869);
+					DebugLocation(389, 23);
+					PushFollow(Follow._oclMessageArguments_in_oclMessageExp1892);
 					oclMessageArguments();
 					PopFollow();
 
@@ -5432,8 +5455,8 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 				}
 				} finally { DebugExitSubRule(49); }
 
-				DebugLocation(387, 44);
-				Match(input,63,Follow._63_in_oclMessageExp1872); 
+				DebugLocation(389, 44);
+				Match(input,63,Follow._63_in_oclMessageExp1895); 
 
 				}
 				break;
@@ -5451,7 +5474,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			LeaveRule("oclMessageExp", 44);
 			LeaveRule_oclMessageExp();
 		}
-		DebugLocation(388, 1);
+		DebugLocation(390, 1);
 		} finally { DebugExitRule(GrammarFileName, "oclMessageExp"); }
 		return;
 
@@ -5463,7 +5486,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 	partial void LeaveRule_oclMessageArguments();
 
 	// $ANTLR start "oclMessageArguments"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:389:1: oclMessageArguments : oclMessageArg ( ',' oclMessageArguments )? ;
+	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:391:1: oclMessageArguments : oclMessageArg ( ',' oclMessageArguments )? ;
 	[GrammarRule("oclMessageArguments")]
 	private void oclMessageArguments()
 	{
@@ -5471,20 +5494,20 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 		EnterRule("oclMessageArguments", 45);
 		TraceIn("oclMessageArguments", 45);
 		try { DebugEnterRule(GrammarFileName, "oclMessageArguments");
-		DebugLocation(389, 1);
+		DebugLocation(391, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:390:2: ( oclMessageArg ( ',' oclMessageArguments )? )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:392:2: ( oclMessageArg ( ',' oclMessageArguments )? )
 			DebugEnterAlt(1);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:390:4: oclMessageArg ( ',' oclMessageArguments )?
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:392:4: oclMessageArg ( ',' oclMessageArguments )?
 			{
-			DebugLocation(390, 4);
-			PushFollow(Follow._oclMessageArg_in_oclMessageArguments1882);
+			DebugLocation(392, 4);
+			PushFollow(Follow._oclMessageArg_in_oclMessageArguments1905);
 			oclMessageArg();
 			PopFollow();
 
-			DebugLocation(390, 18);
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:390:18: ( ',' oclMessageArguments )?
+			DebugLocation(392, 18);
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:392:18: ( ',' oclMessageArguments )?
 			int alt51=2;
 			try { DebugEnterSubRule(51);
 			try { DebugEnterDecision(51, false);
@@ -5499,12 +5522,12 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:390:20: ',' oclMessageArguments
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:392:20: ',' oclMessageArguments
 				{
-				DebugLocation(390, 20);
-				Match(input,65,Follow._65_in_oclMessageArguments1886); 
-				DebugLocation(390, 24);
-				PushFollow(Follow._oclMessageArguments_in_oclMessageArguments1888);
+				DebugLocation(392, 20);
+				Match(input,65,Follow._65_in_oclMessageArguments1909); 
+				DebugLocation(392, 24);
+				PushFollow(Follow._oclMessageArguments_in_oclMessageArguments1911);
 				oclMessageArguments();
 				PopFollow();
 
@@ -5530,7 +5553,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			LeaveRule("oclMessageArguments", 45);
 			LeaveRule_oclMessageArguments();
 		}
-		DebugLocation(391, 1);
+		DebugLocation(393, 1);
 		} finally { DebugExitRule(GrammarFileName, "oclMessageArguments"); }
 		return;
 
@@ -5542,7 +5565,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 	partial void LeaveRule_oclMessageArg();
 
 	// $ANTLR start "oclMessageArg"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:393:1: oclMessageArg : ( '?' ( ':' type )? | oclExpression );
+	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:395:1: oclMessageArg : ( '?' ( ':' type )? | oclExpression );
 	[GrammarRule("oclMessageArg")]
 	private void oclMessageArg()
 	{
@@ -5550,10 +5573,10 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 		EnterRule("oclMessageArg", 46);
 		TraceIn("oclMessageArg", 46);
 		try { DebugEnterRule(GrammarFileName, "oclMessageArg");
-		DebugLocation(393, 1);
+		DebugLocation(395, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:394:2: ( '?' ( ':' type )? | oclExpression )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:396:2: ( '?' ( ':' type )? | oclExpression )
 			int alt53=2;
 			try { DebugEnterDecision(53, false);
 			int LA53_0 = input.LA(1);
@@ -5577,12 +5600,12 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:394:4: '?' ( ':' type )?
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:396:4: '?' ( ':' type )?
 				{
-				DebugLocation(394, 4);
-				Match(input,79,Follow._79_in_oclMessageArg1903); 
-				DebugLocation(394, 8);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:394:8: ( ':' type )?
+				DebugLocation(396, 4);
+				Match(input,79,Follow._79_in_oclMessageArg1926); 
+				DebugLocation(396, 8);
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:396:8: ( ':' type )?
 				int alt52=2;
 				try { DebugEnterSubRule(52);
 				try { DebugEnterDecision(52, false);
@@ -5597,12 +5620,12 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:394:9: ':' type
+					// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:396:9: ':' type
 					{
-					DebugLocation(394, 9);
-					Match(input,70,Follow._70_in_oclMessageArg1906); 
-					DebugLocation(394, 13);
-					PushFollow(Follow._type_in_oclMessageArg1908);
+					DebugLocation(396, 9);
+					Match(input,70,Follow._70_in_oclMessageArg1929); 
+					DebugLocation(396, 13);
+					PushFollow(Follow._type_in_oclMessageArg1931);
 					type();
 					PopFollow();
 
@@ -5618,10 +5641,10 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:395:4: oclExpression
+				// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:397:4: oclExpression
 				{
-				DebugLocation(395, 4);
-				PushFollow(Follow._oclExpression_in_oclMessageArg1915);
+				DebugLocation(397, 4);
+				PushFollow(Follow._oclExpression_in_oclMessageArg1938);
 				oclExpression();
 				PopFollow();
 
@@ -5642,7 +5665,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			LeaveRule("oclMessageArg", 46);
 			LeaveRule_oclMessageArg();
 		}
-		DebugLocation(396, 1);
+		DebugLocation(398, 1);
 		} finally { DebugExitRule(GrammarFileName, "oclMessageArg"); }
 		return;
 
@@ -5654,7 +5677,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 	partial void LeaveRule_inToken();
 
 	// $ANTLR start "inToken"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:401:1: inToken : ( 'implies' | 'xor' | 'or' | 'and' | '=' | '<>' | '<' | '<=' | '>' | '>=' | '+' | '-' | '*' | '/' );
+	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:403:1: inToken : ( 'implies' | 'xor' | 'or' | 'and' | '=' | '<>' | '<' | '<=' | '>' | '>=' | '+' | '-' | '*' | '/' );
 	[GrammarRule("inToken")]
 	private void inToken()
 	{
@@ -5662,14 +5685,14 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 		EnterRule("inToken", 47);
 		TraceIn("inToken", 47);
 		try { DebugEnterRule(GrammarFileName, "inToken");
-		DebugLocation(401, 1);
+		DebugLocation(403, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:402:2: ( 'implies' | 'xor' | 'or' | 'and' | '=' | '<>' | '<' | '<=' | '>' | '>=' | '+' | '-' | '*' | '/' )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:404:2: ( 'implies' | 'xor' | 'or' | 'and' | '=' | '<>' | '<' | '<=' | '>' | '>=' | '+' | '-' | '*' | '/' )
 			DebugEnterAlt(1);
 			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:
 			{
-			DebugLocation(402, 2);
+			DebugLocation(404, 2);
 			if (input.LA(1)==UnlimitedNaturalLiteralExp||input.LA(1)==64||input.LA(1)==66||input.LA(1)==69||(input.LA(1)>=73 && input.LA(1)<=78)||input.LA(1)==100||input.LA(1)==109||input.LA(1)==118||input.LA(1)==124)
 			{
 				input.Consume();
@@ -5697,7 +5720,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			LeaveRule("inToken", 47);
 			LeaveRule_inToken();
 		}
-		DebugLocation(416, 1);
+		DebugLocation(418, 1);
 		} finally { DebugExitRule(GrammarFileName, "inToken"); }
 		return;
 
@@ -5709,7 +5732,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 	partial void LeaveRule_unToken();
 
 	// $ANTLR start "unToken"
-	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:418:1: unToken : ( 'not' | '-' );
+	// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:420:1: unToken : ( 'not' | '-' );
 	[GrammarRule("unToken")]
 	private void unToken()
 	{
@@ -5717,14 +5740,14 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 		EnterRule("unToken", 48);
 		TraceIn("unToken", 48);
 		try { DebugEnterRule(GrammarFileName, "unToken");
-		DebugLocation(418, 1);
+		DebugLocation(420, 1);
 		try
 		{
-			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:419:2: ( 'not' | '-' )
+			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:421:2: ( 'not' | '-' )
 			DebugEnterAlt(1);
 			// ..\\..\\Model\\OCL\\Grammar\\OCLAst.g3:
 			{
-			DebugLocation(419, 2);
+			DebugLocation(421, 2);
 			if (input.LA(1)==66||input.LA(1)==117)
 			{
 				input.Consume();
@@ -5752,7 +5775,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			LeaveRule("unToken", 48);
 			LeaveRule_unToken();
 		}
-		DebugLocation(421, 1);
+		DebugLocation(423, 1);
 		} finally { DebugExitRule(GrammarFileName, "unToken"); }
 		return;
 
@@ -5762,7 +5785,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 
 
 	#region DFA
-	private DFA7 dfa7;
+	private DFA6 dfa6;
 	private DFA22 dfa22;
 	private DFA24 dfa24;
 	private DFA29 dfa29;
@@ -5771,28 +5794,28 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 	protected override void InitDFAs()
 	{
 		base.InitDFAs();
-		dfa7 = new DFA7( this );
+		dfa6 = new DFA6( this );
 		dfa22 = new DFA22( this );
 		dfa24 = new DFA24( this );
 		dfa29 = new DFA29( this );
 		dfa36 = new DFA36( this );
 	}
 
-	private class DFA7 : DFA
+	private class DFA6 : DFA
 	{
-		private const string DFA7_eotS =
+		private const string DFA6_eotS =
 			"\x9\xFFFF";
-		private const string DFA7_eofS =
+		private const string DFA6_eofS =
 			"\x9\xFFFF";
-		private const string DFA7_minS =
+		private const string DFA6_minS =
 			"\x1\xA\x1\x2\x1\x2D\x1\x2\x1\x34\x2\x3\x2\xFFFF";
-		private const string DFA7_maxS =
+		private const string DFA6_maxS =
 			"\x1\xA\x1\x2\x1\x2D\x1\x2\x3\x34\x2\xFFFF";
-		private const string DFA7_acceptS =
+		private const string DFA6_acceptS =
 			"\x7\xFFFF\x1\x1\x1\x2";
-		private const string DFA7_specialS =
+		private const string DFA6_specialS =
 			"\x9\xFFFF}>";
-		private static readonly string[] DFA7_transitionS =
+		private static readonly string[] DFA6_transitionS =
 			{
 				"\x1\x1",
 				"\x1\x2",
@@ -5805,38 +5828,38 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 				""
 			};
 
-		private static readonly short[] DFA7_eot = DFA.UnpackEncodedString(DFA7_eotS);
-		private static readonly short[] DFA7_eof = DFA.UnpackEncodedString(DFA7_eofS);
-		private static readonly char[] DFA7_min = DFA.UnpackEncodedStringToUnsignedChars(DFA7_minS);
-		private static readonly char[] DFA7_max = DFA.UnpackEncodedStringToUnsignedChars(DFA7_maxS);
-		private static readonly short[] DFA7_accept = DFA.UnpackEncodedString(DFA7_acceptS);
-		private static readonly short[] DFA7_special = DFA.UnpackEncodedString(DFA7_specialS);
-		private static readonly short[][] DFA7_transition;
+		private static readonly short[] DFA6_eot = DFA.UnpackEncodedString(DFA6_eotS);
+		private static readonly short[] DFA6_eof = DFA.UnpackEncodedString(DFA6_eofS);
+		private static readonly char[] DFA6_min = DFA.UnpackEncodedStringToUnsignedChars(DFA6_minS);
+		private static readonly char[] DFA6_max = DFA.UnpackEncodedStringToUnsignedChars(DFA6_maxS);
+		private static readonly short[] DFA6_accept = DFA.UnpackEncodedString(DFA6_acceptS);
+		private static readonly short[] DFA6_special = DFA.UnpackEncodedString(DFA6_specialS);
+		private static readonly short[][] DFA6_transition;
 
-		static DFA7()
+		static DFA6()
 		{
-			int numStates = DFA7_transitionS.Length;
-			DFA7_transition = new short[numStates][];
+			int numStates = DFA6_transitionS.Length;
+			DFA6_transition = new short[numStates][];
 			for ( int i=0; i < numStates; i++ )
 			{
-				DFA7_transition[i] = DFA.UnpackEncodedString(DFA7_transitionS[i]);
+				DFA6_transition[i] = DFA.UnpackEncodedString(DFA6_transitionS[i]);
 			}
 		}
 
-		public DFA7( BaseRecognizer recognizer )
+		public DFA6( BaseRecognizer recognizer )
 		{
 			this.recognizer = recognizer;
-			this.decisionNumber = 7;
-			this.eot = DFA7_eot;
-			this.eof = DFA7_eof;
-			this.min = DFA7_min;
-			this.max = DFA7_max;
-			this.accept = DFA7_accept;
-			this.special = DFA7_special;
-			this.transition = DFA7_transition;
+			this.decisionNumber = 6;
+			this.eot = DFA6_eot;
+			this.eof = DFA6_eof;
+			this.min = DFA6_min;
+			this.max = DFA6_max;
+			this.accept = DFA6_accept;
+			this.special = DFA6_special;
+			this.transition = DFA6_transition;
 		}
 
-		public override string Description { get { return "61:1: classifierContextHead returns [Classifier Context, VariableDeclaration Self] : ( ^( CLASSIFIERHEAD pathName ) | ^( CLASSIFIERHEAD pathName SimpleName ) );"; } }
+		public override string Description { get { return "56:1: classifierContextHead returns [Classifier Context, VariableDeclaration Self] : ( ^( CLASSIFIERHEAD pathName ) | ^( CLASSIFIERHEAD pathName SimpleName ) );"; } }
 
 		public override void Error(NoViableAltException nvae)
 		{
@@ -5902,7 +5925,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			this.transition = DFA22_transition;
 		}
 
-		public override string Description { get { return "111:62: (res= propertyCall |res= operationCall )"; } }
+		public override string Description { get { return "113:62: (res= propertyCall |res= operationCall )"; } }
 
 		public override void Error(NoViableAltException nvae)
 		{
@@ -5977,7 +6000,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			this.transition = DFA24_transition;
 		}
 
-		public override string Description { get { return "118:1: primaryExperession returns [OclExpression Expr] : ( collectionLiteralExp | tupleLiteralExp | classLiteralExp | ^( PRIMITIVELITERAL primitiveLiteralExp ) | ^( TYPE type ) | ifExp | letExp | ^( CALL pathName isMarkedPre ) | ^( CALL pathName ^( ARGS args= arguments ) isMarkedPre ) );"; } }
+		public override string Description { get { return "120:1: primaryExperession returns [OclExpression Expr] : ( collectionLiteralExp | tupleLiteralExp | classLiteralExp | ^( PRIMITIVELITERAL primitiveLiteralExp ) | ^( TYPE type ) | ifExp | letExp | ^( CALL pathName isMarkedPre ) | ^( CALL pathName ^( ARGS args= arguments ) isMarkedPre ) );"; } }
 
 		public override void Error(NoViableAltException nvae)
 		{
@@ -6045,7 +6068,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			this.transition = DFA29_transition;
 		}
 
-		public override string Description { get { return "177:1: iteratorCall returns [OclExpression Expr] : ( pathName ^( ARGS ^( VARDECL typedefs ) args= arguments ) | pathName ( ({...}? => implicitVarDecl ) |) ( ^( ARGS args= arguments ) | ARGS ) );"; } }
+		public override string Description { get { return "179:1: iteratorCall returns [OclExpression Expr] : ( pathName ^( ARGS ^( VARDECL typedefs ) args= arguments ) | pathName ( ({...}? => implicitVarDecl ) |) ( ^( ARGS args= arguments ) | ARGS ) );"; } }
 
 		public override void Error(NoViableAltException nvae)
 		{
@@ -6117,7 +6140,7 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 			this.transition = DFA36_transition;
 		}
 
-		public override string Description { get { return "251:1: collectionLiteralExp returns [OclExpression Expr] : ( ^( COLLECTIONLITERAL collectionTypeIdentifier collectionLiteralParts ) | ^( COLLECTIONLITERAL collectionTypeIdentifier type collectionLiteralParts ) );"; } }
+		public override string Description { get { return "253:1: collectionLiteralExp returns [OclExpression Expr] : ( ^( COLLECTIONLITERAL collectionTypeIdentifier collectionLiteralParts ) | ^( COLLECTIONLITERAL collectionTypeIdentifier type collectionLiteralParts ) );"; } }
 
 		public override void Error(NoViableAltException nvae)
 		{
@@ -6136,208 +6159,208 @@ public partial class OCLAst : Antlr.Runtime.Tree.TreeParser
 		public static readonly BitSet _propertyContextDecl_in_contextDeclaration91 = new BitSet(new ulong[]{0x2UL});
 		public static readonly BitSet _classifierContextDecl_in_contextDeclaration99 = new BitSet(new ulong[]{0x2UL});
 		public static readonly BitSet _operationContextDecl_in_contextDeclaration105 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _PROPERTYCONDITION_in_propertyContextDecl125 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _propertyContextHead_in_propertyContextDecl127 = new BitSet(new ulong[]{0x20200008UL});
-		public static readonly BitSet _initOrDerValue_in_propertyContextDecl130 = new BitSet(new ulong[]{0x20200008UL});
-		public static readonly BitSet _PROPERTYHEAD_in_propertyContextHead153 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _SimpleName_in_propertyContextHead155 = new BitSet(new ulong[]{0x10200000010000UL,0xE5F40000UL});
-		public static readonly BitSet _type_in_propertyContextHead158 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _OPERATIONCONDITION_in_operationContextDecl170 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _operationContextHead_in_operationContextDecl172 = new BitSet(new ulong[]{0xC00000000048UL});
-		public static readonly BitSet _prePostOrBodyDecl_in_operationContextDecl174 = new BitSet(new ulong[]{0xC00000000048UL});
-		public static readonly BitSet _OPERATIONHEAD_in_operationContextHead187 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _operation_in_operationContextHead189 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _CLASSIFIERCONDITION_in_classifierContextDecl216 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _classifierContextHead_in_classifierContextDecl218 = new BitSet(new ulong[]{0x40100008UL});
-		public static readonly BitSet _invOrDef_in_classifierContextDecl221 = new BitSet(new ulong[]{0x40100008UL});
-		public static readonly BitSet _CLASSIFIERHEAD_in_classifierContextHead244 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _pathName_in_classifierContextHead246 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _CLASSIFIERHEAD_in_classifierContextHead255 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _pathName_in_classifierContextHead257 = new BitSet(new ulong[]{0x10000000000000UL});
-		public static readonly BitSet _SimpleName_in_classifierContextHead259 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _INIT_in_initOrDerValue278 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _PROPERTYCONDITION_in_propertyContextDecl130 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _propertyContextHead_in_propertyContextDecl132 = new BitSet(new ulong[]{0x20200008UL});
+		public static readonly BitSet _initOrDerValue_in_propertyContextDecl135 = new BitSet(new ulong[]{0x20200008UL});
+		public static readonly BitSet _PROPERTYHEAD_in_propertyContextHead163 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _SimpleName_in_propertyContextHead166 = new BitSet(new ulong[]{0x10200000010000UL,0xE5F40000UL});
+		public static readonly BitSet _type_in_propertyContextHead172 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _CLASSIFIERCONDITION_in_classifierContextDecl202 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _classifierContextHead_in_classifierContextDecl204 = new BitSet(new ulong[]{0x40100008UL});
+		public static readonly BitSet _invOrDef_in_classifierContextDecl207 = new BitSet(new ulong[]{0x40100008UL});
+		public static readonly BitSet _CLASSIFIERHEAD_in_classifierContextHead230 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _pathName_in_classifierContextHead232 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _CLASSIFIERHEAD_in_classifierContextHead241 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _pathName_in_classifierContextHead243 = new BitSet(new ulong[]{0x10000000000000UL});
+		public static readonly BitSet _SimpleName_in_classifierContextHead245 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _INIT_in_initOrDerValue264 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _oclExpression_in_initOrDerValue270 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _DERIVATE_in_initOrDerValue278 = new BitSet(new ulong[]{0x4UL});
 		public static readonly BitSet _oclExpression_in_initOrDerValue280 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _DERIVATE_in_initOrDerValue286 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _oclExpression_in_initOrDerValue288 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _INV_in_invOrDef304 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _SimpleName_in_invOrDef306 = new BitSet(new ulong[]{0x381001414001880UL,0x18UL});
-		public static readonly BitSet _oclExpression_in_invOrDef313 = new BitSet(new ulong[]{0x1000000008UL});
-		public static readonly BitSet _MESSAGE_in_invOrDef319 = new BitSet(new ulong[]{0x381001414001880UL,0x18UL});
-		public static readonly BitSet _oclExpression_in_invOrDef325 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _DEF_in_invOrDef340 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _121_in_invOrDef342 = new BitSet(new ulong[]{0x10000000080000UL});
-		public static readonly BitSet _SimpleName_in_invOrDef345 = new BitSet(new ulong[]{0x10000000080000UL});
-		public static readonly BitSet _defExpression_in_invOrDef348 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _PRE_in_prePostOrBodyDecl362 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _SimpleName_in_prePostOrBodyDecl364 = new BitSet(new ulong[]{0x381001414001880UL,0x18UL});
-		public static readonly BitSet _oclExpression_in_prePostOrBodyDecl367 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _POST_in_prePostOrBodyDecl373 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _SimpleName_in_prePostOrBodyDecl375 = new BitSet(new ulong[]{0x381001414001880UL,0x18UL});
-		public static readonly BitSet _oclExpression_in_prePostOrBodyDecl378 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _BODY_in_prePostOrBodyDecl384 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _SimpleName_in_prePostOrBodyDecl386 = new BitSet(new ulong[]{0x381001414001880UL,0x18UL});
-		public static readonly BitSet _oclExpression_in_prePostOrBodyDecl389 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _OPERATION_in_operation402 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _pathName_in_operation404 = new BitSet(new ulong[]{0x200000090008UL,0xE5F40000UL});
-		public static readonly BitSet _parameters_in_operation406 = new BitSet(new ulong[]{0x200000010008UL,0xE5F40000UL});
-		public static readonly BitSet _type_in_operation409 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _variableDeclaration_in_parameters421 = new BitSet(new ulong[]{0x80002UL});
-		public static readonly BitSet _variableDeclaration_in_parameters424 = new BitSet(new ulong[]{0x80002UL});
-		public static readonly BitSet _variableDeclaration_in_defExpression437 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _DECL_in_defExpression443 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _operation_in_defExpression445 = new BitSet(new ulong[]{0x381001414001880UL,0x18UL});
-		public static readonly BitSet _oclExpression_in_defExpression447 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _INFIX_in_oclExpression473 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _oclExpression_in_oclExpression478 = new BitSet(new ulong[]{0x381001414001880UL,0x18UL});
-		public static readonly BitSet _oclExpression_in_oclExpression482 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _UNARY_in_oclExpression490 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _oclExpression_in_oclExpression495 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _68_in_oclExpression504 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _oclExpression_in_oclExpression508 = new BitSet(new ulong[]{0x80UL});
-		public static readonly BitSet _propertyCall_in_oclExpression514 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _operationCall_in_oclExpression520 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _67_in_oclExpression529 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _oclExpression_in_oclExpression533 = new BitSet(new ulong[]{0x80000080UL});
-		public static readonly BitSet _itCall_in_oclExpression537 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _MESSAGE_in_oclExpression546 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _oclMessageExp_in_oclExpression548 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _primaryExperession_in_oclExpression554 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _collectionLiteralExp_in_primaryExperession587 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _tupleLiteralExp_in_primaryExperession598 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _classLiteralExp_in_primaryExperession609 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _PRIMITIVELITERAL_in_primaryExperession621 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _primitiveLiteralExp_in_primaryExperession623 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _TYPE_in_primaryExperession637 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _type_in_primaryExperession639 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _ifExp_in_primaryExperession646 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _letExp_in_primaryExperession652 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _CALL_in_primaryExperession661 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _pathName_in_primaryExperession663 = new BitSet(new ulong[]{0x8UL,0x100000000000000UL});
-		public static readonly BitSet _isMarkedPre_in_primaryExperession665 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _CALL_in_primaryExperession676 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _pathName_in_primaryExperession678 = new BitSet(new ulong[]{0x20UL});
-		public static readonly BitSet _ARGS_in_primaryExperession681 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _arguments_in_primaryExperession686 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _isMarkedPre_in_primaryExperession690 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _CALL_in_propertyCall715 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _pathName_in_propertyCall717 = new BitSet(new ulong[]{0x8UL,0x100000000000000UL});
-		public static readonly BitSet _isMarkedPre_in_propertyCall719 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _CALL_in_operationCall743 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _pathName_in_operationCall745 = new BitSet(new ulong[]{0x20UL});
-		public static readonly BitSet _ARGS_in_operationCall749 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _arguments_in_operationCall755 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _ARGS_in_operationCall758 = new BitSet(new ulong[]{0x8UL,0x100000000000000UL});
-		public static readonly BitSet _isMarkedPre_in_operationCall764 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _CALL_in_itCall802 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _iteratorCall_in_itCall804 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _iterateCall_in_itCall812 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _pathName_in_iteratorCall830 = new BitSet(new ulong[]{0x20UL});
-		public static readonly BitSet _ARGS_in_iteratorCall833 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _VARDECL_in_iteratorCall836 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _typedefs_in_iteratorCall838 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _arguments_in_iteratorCall845 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _pathName_in_iteratorCall854 = new BitSet(new ulong[]{0x20UL});
-		public static readonly BitSet _implicitVarDecl_in_iteratorCall870 = new BitSet(new ulong[]{0x20UL});
-		public static readonly BitSet _ARGS_in_iteratorCall886 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _arguments_in_iteratorCall893 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _ARGS_in_iteratorCall896 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _ITERATE_in_iterateCall920 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _typedef_in_iterateCall929 = new BitSet(new ulong[]{0x10UL});
-		public static readonly BitSet _implicitVarDecl_in_iterateCall935 = new BitSet(new ulong[]{0x10UL});
-		public static readonly BitSet _ACC_in_iterateCall942 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _SimpleName_in_iterateCall948 = new BitSet(new ulong[]{0x381201414011880UL,0xE5F40018UL});
-		public static readonly BitSet _type_in_iterateCall955 = new BitSet(new ulong[]{0x381001414001880UL,0x18UL});
-		public static readonly BitSet _oclExpression_in_iterateCall963 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _oclExpression_in_iterateCall975 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _oclExpression_in_arguments1005 = new BitSet(new ulong[]{0x381001414001882UL,0x18UL});
-		public static readonly BitSet _typedef_in_typedefs1053 = new BitSet(new ulong[]{0x80002UL});
-		public static readonly BitSet _DECL_in_typedef1072 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _SimpleName_in_typedef1074 = new BitSet(new ulong[]{0x200000010008UL,0xE5F40000UL});
-		public static readonly BitSet _type_in_typedef1076 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _PATH_in_pathName1125 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _SimpleName_in_pathName1128 = new BitSet(new ulong[]{0x10000000000008UL});
-		public static readonly BitSet _COLLECTIONLITERAL_in_collectionLiteralExp1155 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _collectionTypeIdentifier_in_collectionLiteralExp1157 = new BitSet(new ulong[]{0xC008UL});
-		public static readonly BitSet _collectionLiteralParts_in_collectionLiteralExp1159 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _COLLECTIONLITERAL_in_collectionLiteralExp1174 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _collectionTypeIdentifier_in_collectionLiteralExp1176 = new BitSet(new ulong[]{0x200000010000UL,0xE5F40000UL});
-		public static readonly BitSet _type_in_collectionLiteralExp1178 = new BitSet(new ulong[]{0xC008UL});
-		public static readonly BitSet _collectionLiteralParts_in_collectionLiteralExp1180 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _92_in_collectionTypeIdentifier1210 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _81_in_collectionTypeIdentifier1216 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _91_in_collectionTypeIdentifier1222 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _83_in_collectionTypeIdentifier1229 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _89_in_collectionTypeIdentifier1235 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _collectionLiteralPart_in_collectionLiteralParts1254 = new BitSet(new ulong[]{0xC002UL});
-		public static readonly BitSet _COLLPARTRANGE_in_collectionLiteralPart1279 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _oclExpression_in_collectionLiteralPart1283 = new BitSet(new ulong[]{0x381001414001880UL,0x18UL});
-		public static readonly BitSet _oclExpression_in_collectionLiteralPart1287 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _COLLPART_in_collectionLiteralPart1295 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _oclExpression_in_collectionLiteralPart1297 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _IntegerLiteralExp_in_primitiveLiteralExp1323 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _RealLiteralExp_in_primitiveLiteralExp1333 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _StringLiteralExp_in_primitiveLiteralExp1343 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _123_in_primitiveLiteralExp1357 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _107_in_primitiveLiteralExp1372 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _UnlimitedNaturalLiteralExp_in_primitiveLiteralExp1383 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _NullLiteralExp_in_primitiveLiteralExp1390 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _InvalidLiteralExp_in_primitiveLiteralExp1400 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _TUPLELITERAL_in_tupleLiteralExp1424 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _variableDeclarationList_in_tupleLiteralExp1428 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _CLASSLITERAL_in_classLiteralExp1451 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _variableDeclarationList_in_classLiteralExp1455 = new BitSet(new ulong[]{0x200000000000UL});
-		public static readonly BitSet _pathName_in_classLiteralExp1457 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _DECL_in_variableDeclaration1477 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _SimpleName_in_variableDeclaration1479 = new BitSet(new ulong[]{0x381201414011888UL,0xE5F40018UL});
-		public static readonly BitSet _type_in_variableDeclaration1481 = new BitSet(new ulong[]{0x381001414001888UL,0x18UL});
-		public static readonly BitSet _oclExpression_in_variableDeclaration1484 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _pathName_in_type1504 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _collectionType_in_type1513 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _tupleType_in_type1521 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _primitiveType_in_type1530 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _oclType_in_type1538 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _82_in_primitiveType1560 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _84_in_primitiveType1572 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _90_in_primitiveType1582 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _93_in_primitiveType1592 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _95_in_primitiveType1602 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _85_in_oclType1622 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _86_in_oclType1632 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _87_in_oclType1641 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _88_in_oclType1650 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _COLLTYPE_in_collectionType1673 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _collectionTypeIdentifier_in_collectionType1676 = new BitSet(new ulong[]{0x200000010000UL,0xE5F40000UL});
-		public static readonly BitSet _type_in_collectionType1678 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _94_in_tupleType1703 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _variableDeclarationList_in_tupleType1706 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _variableDeclaration_in_variableDeclarationList1729 = new BitSet(new ulong[]{0x80002UL});
-		public static readonly BitSet _120_in_isMarkedPre1750 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _LET_in_letExp1787 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _variableDeclaration_in_letExp1793 = new BitSet(new ulong[]{0x381001414001880UL,0x18UL});
-		public static readonly BitSet _oclExpression_in_letExp1803 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _IF_in_ifExp1823 = new BitSet(new ulong[]{0x4UL});
-		public static readonly BitSet _oclExpression_in_ifExp1827 = new BitSet(new ulong[]{0x381001414001880UL,0x18UL});
-		public static readonly BitSet _oclExpression_in_ifExp1831 = new BitSet(new ulong[]{0x381001414001880UL,0x18UL});
-		public static readonly BitSet _oclExpression_in_ifExp1835 = new BitSet(new ulong[]{0x8UL});
-		public static readonly BitSet _99_in_oclMessageExp1849 = new BitSet(new ulong[]{0x10000000000000UL});
-		public static readonly BitSet _SimpleName_in_oclMessageExp1851 = new BitSet(new ulong[]{0x4000000000000000UL});
-		public static readonly BitSet _62_in_oclMessageExp1853 = new BitSet(new ulong[]{0x8381001414001880UL,0x8018UL});
-		public static readonly BitSet _oclMessageArguments_in_oclMessageExp1855 = new BitSet(new ulong[]{0x8000000000000000UL});
-		public static readonly BitSet _63_in_oclMessageExp1858 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _98_in_oclMessageExp1863 = new BitSet(new ulong[]{0x10000000000000UL});
-		public static readonly BitSet _SimpleName_in_oclMessageExp1865 = new BitSet(new ulong[]{0x4000000000000000UL});
-		public static readonly BitSet _62_in_oclMessageExp1867 = new BitSet(new ulong[]{0x8381001414001880UL,0x8018UL});
-		public static readonly BitSet _oclMessageArguments_in_oclMessageExp1869 = new BitSet(new ulong[]{0x8000000000000000UL});
-		public static readonly BitSet _63_in_oclMessageExp1872 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _oclMessageArg_in_oclMessageArguments1882 = new BitSet(new ulong[]{0x2UL,0x2UL});
-		public static readonly BitSet _65_in_oclMessageArguments1886 = new BitSet(new ulong[]{0x381001414001880UL,0x8018UL});
-		public static readonly BitSet _oclMessageArguments_in_oclMessageArguments1888 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _79_in_oclMessageArg1903 = new BitSet(new ulong[]{0x2UL,0x40UL});
-		public static readonly BitSet _70_in_oclMessageArg1906 = new BitSet(new ulong[]{0x200000010000UL,0xE5F40000UL});
-		public static readonly BitSet _type_in_oclMessageArg1908 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _oclExpression_in_oclMessageArg1915 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _set_in_inToken1928 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _set_in_unToken2004 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _INV_in_invOrDef296 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _SimpleName_in_invOrDef298 = new BitSet(new ulong[]{0x381001414001880UL,0x18UL});
+		public static readonly BitSet _oclExpression_in_invOrDef305 = new BitSet(new ulong[]{0x1000000008UL});
+		public static readonly BitSet _MESSAGE_in_invOrDef311 = new BitSet(new ulong[]{0x381001414001880UL,0x18UL});
+		public static readonly BitSet _oclExpression_in_invOrDef317 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _DEF_in_invOrDef332 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _121_in_invOrDef334 = new BitSet(new ulong[]{0x10000000080000UL});
+		public static readonly BitSet _SimpleName_in_invOrDef337 = new BitSet(new ulong[]{0x10000000080000UL});
+		public static readonly BitSet _defExpression_in_invOrDef340 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _OPERATIONCONDITION_in_operationContextDecl354 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _operationContextHead_in_operationContextDecl356 = new BitSet(new ulong[]{0xC00000000048UL});
+		public static readonly BitSet _prePostOrBodyDecl_in_operationContextDecl358 = new BitSet(new ulong[]{0xC00000000048UL});
+		public static readonly BitSet _OPERATIONHEAD_in_operationContextHead371 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _operation_in_operationContextHead373 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _PRE_in_prePostOrBodyDecl386 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _SimpleName_in_prePostOrBodyDecl388 = new BitSet(new ulong[]{0x381001414001880UL,0x18UL});
+		public static readonly BitSet _oclExpression_in_prePostOrBodyDecl391 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _POST_in_prePostOrBodyDecl397 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _SimpleName_in_prePostOrBodyDecl399 = new BitSet(new ulong[]{0x381001414001880UL,0x18UL});
+		public static readonly BitSet _oclExpression_in_prePostOrBodyDecl402 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _BODY_in_prePostOrBodyDecl408 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _SimpleName_in_prePostOrBodyDecl410 = new BitSet(new ulong[]{0x381001414001880UL,0x18UL});
+		public static readonly BitSet _oclExpression_in_prePostOrBodyDecl413 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _OPERATION_in_operation425 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _pathName_in_operation427 = new BitSet(new ulong[]{0x200000090008UL,0xE5F40000UL});
+		public static readonly BitSet _parameters_in_operation429 = new BitSet(new ulong[]{0x200000010008UL,0xE5F40000UL});
+		public static readonly BitSet _type_in_operation432 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _variableDeclaration_in_parameters444 = new BitSet(new ulong[]{0x80002UL});
+		public static readonly BitSet _variableDeclaration_in_parameters447 = new BitSet(new ulong[]{0x80002UL});
+		public static readonly BitSet _variableDeclaration_in_defExpression460 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _DECL_in_defExpression466 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _operation_in_defExpression468 = new BitSet(new ulong[]{0x381001414001880UL,0x18UL});
+		public static readonly BitSet _oclExpression_in_defExpression470 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _INFIX_in_oclExpression496 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _oclExpression_in_oclExpression501 = new BitSet(new ulong[]{0x381001414001880UL,0x18UL});
+		public static readonly BitSet _oclExpression_in_oclExpression505 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _UNARY_in_oclExpression513 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _oclExpression_in_oclExpression518 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _68_in_oclExpression527 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _oclExpression_in_oclExpression531 = new BitSet(new ulong[]{0x80UL});
+		public static readonly BitSet _propertyCall_in_oclExpression537 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _operationCall_in_oclExpression543 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _67_in_oclExpression552 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _oclExpression_in_oclExpression556 = new BitSet(new ulong[]{0x80000080UL});
+		public static readonly BitSet _itCall_in_oclExpression560 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _MESSAGE_in_oclExpression569 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _oclMessageExp_in_oclExpression571 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _primaryExperession_in_oclExpression577 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _collectionLiteralExp_in_primaryExperession610 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _tupleLiteralExp_in_primaryExperession621 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _classLiteralExp_in_primaryExperession632 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _PRIMITIVELITERAL_in_primaryExperession644 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _primitiveLiteralExp_in_primaryExperession646 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _TYPE_in_primaryExperession660 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _type_in_primaryExperession662 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _ifExp_in_primaryExperession669 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _letExp_in_primaryExperession675 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _CALL_in_primaryExperession684 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _pathName_in_primaryExperession686 = new BitSet(new ulong[]{0x8UL,0x100000000000000UL});
+		public static readonly BitSet _isMarkedPre_in_primaryExperession688 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _CALL_in_primaryExperession699 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _pathName_in_primaryExperession701 = new BitSet(new ulong[]{0x20UL});
+		public static readonly BitSet _ARGS_in_primaryExperession704 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _arguments_in_primaryExperession709 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _isMarkedPre_in_primaryExperession713 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _CALL_in_propertyCall738 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _pathName_in_propertyCall740 = new BitSet(new ulong[]{0x8UL,0x100000000000000UL});
+		public static readonly BitSet _isMarkedPre_in_propertyCall742 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _CALL_in_operationCall766 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _pathName_in_operationCall768 = new BitSet(new ulong[]{0x20UL});
+		public static readonly BitSet _ARGS_in_operationCall772 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _arguments_in_operationCall778 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _ARGS_in_operationCall781 = new BitSet(new ulong[]{0x8UL,0x100000000000000UL});
+		public static readonly BitSet _isMarkedPre_in_operationCall787 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _CALL_in_itCall825 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _iteratorCall_in_itCall827 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _iterateCall_in_itCall835 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _pathName_in_iteratorCall853 = new BitSet(new ulong[]{0x20UL});
+		public static readonly BitSet _ARGS_in_iteratorCall856 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _VARDECL_in_iteratorCall859 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _typedefs_in_iteratorCall861 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _arguments_in_iteratorCall868 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _pathName_in_iteratorCall877 = new BitSet(new ulong[]{0x20UL});
+		public static readonly BitSet _implicitVarDecl_in_iteratorCall893 = new BitSet(new ulong[]{0x20UL});
+		public static readonly BitSet _ARGS_in_iteratorCall909 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _arguments_in_iteratorCall916 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _ARGS_in_iteratorCall919 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _ITERATE_in_iterateCall943 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _typedef_in_iterateCall952 = new BitSet(new ulong[]{0x10UL});
+		public static readonly BitSet _implicitVarDecl_in_iterateCall958 = new BitSet(new ulong[]{0x10UL});
+		public static readonly BitSet _ACC_in_iterateCall965 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _SimpleName_in_iterateCall971 = new BitSet(new ulong[]{0x381201414011880UL,0xE5F40018UL});
+		public static readonly BitSet _type_in_iterateCall978 = new BitSet(new ulong[]{0x381001414001880UL,0x18UL});
+		public static readonly BitSet _oclExpression_in_iterateCall986 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _oclExpression_in_iterateCall998 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _oclExpression_in_arguments1028 = new BitSet(new ulong[]{0x381001414001882UL,0x18UL});
+		public static readonly BitSet _typedef_in_typedefs1076 = new BitSet(new ulong[]{0x80002UL});
+		public static readonly BitSet _DECL_in_typedef1095 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _SimpleName_in_typedef1097 = new BitSet(new ulong[]{0x200000010008UL,0xE5F40000UL});
+		public static readonly BitSet _type_in_typedef1099 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _PATH_in_pathName1148 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _SimpleName_in_pathName1151 = new BitSet(new ulong[]{0x10000000000008UL});
+		public static readonly BitSet _COLLECTIONLITERAL_in_collectionLiteralExp1178 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _collectionTypeIdentifier_in_collectionLiteralExp1180 = new BitSet(new ulong[]{0xC008UL});
+		public static readonly BitSet _collectionLiteralParts_in_collectionLiteralExp1182 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _COLLECTIONLITERAL_in_collectionLiteralExp1197 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _collectionTypeIdentifier_in_collectionLiteralExp1199 = new BitSet(new ulong[]{0x200000010000UL,0xE5F40000UL});
+		public static readonly BitSet _type_in_collectionLiteralExp1201 = new BitSet(new ulong[]{0xC008UL});
+		public static readonly BitSet _collectionLiteralParts_in_collectionLiteralExp1203 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _92_in_collectionTypeIdentifier1233 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _81_in_collectionTypeIdentifier1239 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _91_in_collectionTypeIdentifier1245 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _83_in_collectionTypeIdentifier1252 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _89_in_collectionTypeIdentifier1258 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _collectionLiteralPart_in_collectionLiteralParts1277 = new BitSet(new ulong[]{0xC002UL});
+		public static readonly BitSet _COLLPARTRANGE_in_collectionLiteralPart1302 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _oclExpression_in_collectionLiteralPart1306 = new BitSet(new ulong[]{0x381001414001880UL,0x18UL});
+		public static readonly BitSet _oclExpression_in_collectionLiteralPart1310 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _COLLPART_in_collectionLiteralPart1318 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _oclExpression_in_collectionLiteralPart1320 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _IntegerLiteralExp_in_primitiveLiteralExp1346 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _RealLiteralExp_in_primitiveLiteralExp1356 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _StringLiteralExp_in_primitiveLiteralExp1366 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _123_in_primitiveLiteralExp1380 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _107_in_primitiveLiteralExp1395 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _UnlimitedNaturalLiteralExp_in_primitiveLiteralExp1406 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _NullLiteralExp_in_primitiveLiteralExp1413 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _InvalidLiteralExp_in_primitiveLiteralExp1423 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _TUPLELITERAL_in_tupleLiteralExp1447 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _variableDeclarationList_in_tupleLiteralExp1451 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _CLASSLITERAL_in_classLiteralExp1474 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _variableDeclarationList_in_classLiteralExp1478 = new BitSet(new ulong[]{0x200000000000UL});
+		public static readonly BitSet _pathName_in_classLiteralExp1480 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _DECL_in_variableDeclaration1500 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _SimpleName_in_variableDeclaration1502 = new BitSet(new ulong[]{0x381201414011888UL,0xE5F40018UL});
+		public static readonly BitSet _type_in_variableDeclaration1504 = new BitSet(new ulong[]{0x381001414001888UL,0x18UL});
+		public static readonly BitSet _oclExpression_in_variableDeclaration1507 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _pathName_in_type1527 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _collectionType_in_type1536 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _tupleType_in_type1544 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _primitiveType_in_type1553 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _oclType_in_type1561 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _82_in_primitiveType1583 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _84_in_primitiveType1595 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _90_in_primitiveType1605 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _93_in_primitiveType1615 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _95_in_primitiveType1625 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _85_in_oclType1645 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _86_in_oclType1655 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _87_in_oclType1664 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _88_in_oclType1673 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _COLLTYPE_in_collectionType1696 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _collectionTypeIdentifier_in_collectionType1699 = new BitSet(new ulong[]{0x200000010000UL,0xE5F40000UL});
+		public static readonly BitSet _type_in_collectionType1701 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _94_in_tupleType1726 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _variableDeclarationList_in_tupleType1729 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _variableDeclaration_in_variableDeclarationList1752 = new BitSet(new ulong[]{0x80002UL});
+		public static readonly BitSet _120_in_isMarkedPre1773 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _LET_in_letExp1810 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _variableDeclaration_in_letExp1816 = new BitSet(new ulong[]{0x381001414001880UL,0x18UL});
+		public static readonly BitSet _oclExpression_in_letExp1826 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _IF_in_ifExp1846 = new BitSet(new ulong[]{0x4UL});
+		public static readonly BitSet _oclExpression_in_ifExp1850 = new BitSet(new ulong[]{0x381001414001880UL,0x18UL});
+		public static readonly BitSet _oclExpression_in_ifExp1854 = new BitSet(new ulong[]{0x381001414001880UL,0x18UL});
+		public static readonly BitSet _oclExpression_in_ifExp1858 = new BitSet(new ulong[]{0x8UL});
+		public static readonly BitSet _99_in_oclMessageExp1872 = new BitSet(new ulong[]{0x10000000000000UL});
+		public static readonly BitSet _SimpleName_in_oclMessageExp1874 = new BitSet(new ulong[]{0x4000000000000000UL});
+		public static readonly BitSet _62_in_oclMessageExp1876 = new BitSet(new ulong[]{0x8381001414001880UL,0x8018UL});
+		public static readonly BitSet _oclMessageArguments_in_oclMessageExp1878 = new BitSet(new ulong[]{0x8000000000000000UL});
+		public static readonly BitSet _63_in_oclMessageExp1881 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _98_in_oclMessageExp1886 = new BitSet(new ulong[]{0x10000000000000UL});
+		public static readonly BitSet _SimpleName_in_oclMessageExp1888 = new BitSet(new ulong[]{0x4000000000000000UL});
+		public static readonly BitSet _62_in_oclMessageExp1890 = new BitSet(new ulong[]{0x8381001414001880UL,0x8018UL});
+		public static readonly BitSet _oclMessageArguments_in_oclMessageExp1892 = new BitSet(new ulong[]{0x8000000000000000UL});
+		public static readonly BitSet _63_in_oclMessageExp1895 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _oclMessageArg_in_oclMessageArguments1905 = new BitSet(new ulong[]{0x2UL,0x2UL});
+		public static readonly BitSet _65_in_oclMessageArguments1909 = new BitSet(new ulong[]{0x381001414001880UL,0x8018UL});
+		public static readonly BitSet _oclMessageArguments_in_oclMessageArguments1911 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _79_in_oclMessageArg1926 = new BitSet(new ulong[]{0x2UL,0x40UL});
+		public static readonly BitSet _70_in_oclMessageArg1929 = new BitSet(new ulong[]{0x200000010000UL,0xE5F40000UL});
+		public static readonly BitSet _type_in_oclMessageArg1931 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _oclExpression_in_oclMessageArg1938 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _set_in_inToken1951 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _set_in_unToken2027 = new BitSet(new ulong[]{0x2UL});
 
 	}
 	#endregion Follow sets

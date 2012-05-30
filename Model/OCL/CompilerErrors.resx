@@ -276,4 +276,13 @@
   <data name="Operation_GetReturnType_1">
     <value xml:space="preserve">Cannot decide return type of `{0}`.</value>
   </data>
+  <data name="OCLAst_PropertyContextHead_Incorrect_context_declaration___0___Class_and_operation_name_expected_1">
+    <value xml:space="preserve">Incorrect context declaration: `{0}`. Class and operation name expected.</value>
+  </data>
+  <data name="OCLAst_PropertyContextHead_PropertyNotFound_2">
+    <value xml:space="preserve">Property `{0}` of class `{1}` does not exist.</value>
+  </data>
+  <data name="OCLAst_PropertyContextHead_TypeMismatch_3">
+    <value xml:space="preserve">Type of property `{0}` is `{1}`, but the initialization header states `{2}`.</value>
+  </data>
 </root>
