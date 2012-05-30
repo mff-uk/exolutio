@@ -8,7 +8,7 @@ namespace Exolutio.Model.OCL.AST
 
         public PropertyInitializations()
         {
-        
+            PropertyInitializationBlocks = new List<PropertyInitializationBlock>();
         }
     }
 }
