@@ -71,6 +71,8 @@
     <Compile Include="OCL\AST\ErrorExp.cs" />
     <Compile Include="OCL\AST\IAstVisitor.cs" />
     <Compile Include="OCL\AST\IExpressionSource.cs" />
+    <Compile Include="OCL\AST\PropertyInitialization.cs" />
+    <Compile Include="OCL\AST\PropertyInitializations.cs" />
     <Compile Include="OCL\Bridge\BridgeFactory.cs" />
     <Compile Include="OCL\Bridge\BridgeHelpers.cs" />
     <Compile Include="OCL\Bridge\IBridgeToOCL.cs" />

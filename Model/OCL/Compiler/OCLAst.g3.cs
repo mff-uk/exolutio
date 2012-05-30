@@ -87,6 +87,62 @@ namespace Exolutio.Model.OCL.Compiler {
 
         }
 
+        Classifier PropertyContextHead(List<string> path, string selfName, Classifier declaredPropertyType, out VariableDeclaration selfOut, out Property property)
+        {
+            if (path.Count < 2)
+            {
+                // error
+                selfOut = null; property = null;
+                Errors.AddError(new ErrorItem(string.Format(CompilerErrors.OCLAst_PropertyContextHead_Incorrect_context_declaration___0___Class_and_operation_name_expected_1, path.ConcatWithSeparator("::"))));
+                EnvironmentStack.Push(ErrorEnvironment.Instance);
+                EnvironmentStack.Push(ErrorEnvironment.Instance);
+                return null;
+            }
+
+            string propertyName = path.Last();
+            IModelElement element = Environment.LookupPathName(path.Take(path.Count - 1));
+            if (element is Classifier == false)
+            {
+                // error
+                selfOut = null; property = null;
+                Errors.AddError(new ErrorItem(string.Format(CompilerErrors.OCLAst_ClassifierContextHead_ClassifierNotFound_1, path.Take(path.Count - 1).ConcatWithSeparator(@"::"))));
+                EnvironmentStack.Push(ErrorEnvironment.Instance);
+                EnvironmentStack.Push(ErrorEnvironment.Instance);
+                return null;
+            }
+            Classifier contextClassifier = element as Classifier;
+            property = contextClassifier.LookupProperty(propertyName);
+            if (property == null)
+            {
+                // error
+                selfOut = null; property = null;
+                Errors.AddError(new ErrorItem(string.Format(CompilerErrors.OCLAst_PropertyContextHead_PropertyNotFound_2, property.Name, contextClassifier)));
+                EnvironmentStack.Push(ErrorEnvironment.Instance);
+                EnvironmentStack.Push(ErrorEnvironment.Instance);
+                return null;
+            }
+
+            if (property.Type != declaredPropertyType)
+            {
+                // error
+                selfOut = null;
+                Errors.AddError(new ErrorItem(string.Format(CompilerErrors.OCLAst_PropertyContextHead_TypeMismatch_3, property.Name, property.Type, declaredPropertyType)));
+                EnvironmentStack.Push(ErrorEnvironment.Instance);
+                EnvironmentStack.Push(ErrorEnvironment.Instance);
+                return null;
+            }
+
+            VariableDeclaration varSelf = new VariableDeclaration(selfName, contextClassifier, null);// tady by to chtelo doplnit initValue
+            selfOut = varSelf;
+            Environment classifierEnv = Environment.CreateFromClassifier(contextClassifier, varSelf);
+            EnvironmentStack.Push(classifierEnv);
+
+            Environment self = Environment.AddElement(selfName, contextClassifier, varSelf, true);
+            EnvironmentStack.Push(self);
+
+            return contextClassifier;
+        }
+
         AST.OclExpression InfixOperation(AST.OclExpression exp1, CommonTree nameTree, AST.OclExpression exp2) {
             if (TestNull(exp1, nameTree, exp2)) {
                 return new AST.ErrorExp(Library.Invalid);

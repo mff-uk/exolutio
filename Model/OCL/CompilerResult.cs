@@ -16,6 +16,12 @@ namespace Exolutio.Model.OCL {
             get;
         }
 
+        public PropertyInitializations PropertyInitializations
+        {
+            private set;
+            get;
+        }
+
         public ErrorCollection Errors {
             private set;
             get;
@@ -28,8 +34,9 @@ namespace Exolutio.Model.OCL {
 
         public IBridgeToOCL Bridge { get; set; }
 
-        public CompilerResult(Constraints con, ErrorCollection errColl, Library lib, IBridgeToOCL bridge) {
+        public CompilerResult(Constraints con, PropertyInitializations initializations, ErrorCollection errColl, Library lib, IBridgeToOCL bridge) {
             this.Constraints = con;
+            this.PropertyInitializations = initializations;
             this.Errors = errColl;
             this.Library = lib;
             this.Bridge = bridge;

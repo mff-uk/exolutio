@@ -34,15 +34,18 @@ namespace Exolutio.Model.OCL.Compiler {
             semantic.TypesTable = tt;
             semantic.EnvironmentStack.Push(new NamespaceEnvironment(tt.Library.RootNamespace));
             AST.Constraints constraints;
+            AST.PropertyInitializations initializations;
             // try {
-            constraints = semantic.contextDeclarationList();
+            OCLAst.contextDeclarationList_return contextDeclarationListReturn = semantic.contextDeclarationList();
+            constraints = contextDeclarationListReturn.Constraints;
+            initializations = contextDeclarationListReturn.PropertyInitializations;
             // }
             //catch{
             //     constraints = new AST.Constraints();
             //    errColl.AddError(new ErrorItem("Fatal error."));
             // }
 
-            return new CompilerResult(constraints, errColl, tt.Library, bridge);
+            return new CompilerResult(constraints, initializations, errColl, tt.Library, bridge);
         }
 
         /// <summary>
