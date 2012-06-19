@@ -16,6 +16,7 @@ using System.Xml;
 using System.Xml.Schema;
 using Exolutio.SupportingClasses;
 using ICSharpCode.AvalonEdit.Folding;
+using ICSharpCode.AvalonEdit.Highlighting;
 using Microsoft.Win32;
 
 namespace Exolutio.View
@@ -117,11 +118,26 @@ namespace Exolutio.View
 
         public void Init()
         {
-            if (DisplayedFileType.IsAmong(EDisplayedFileType.XML, EDisplayedFileType.XSD, EDisplayedFileType.SCH) && tbDocument.SyntaxHighlighting == null)
+            if (DisplayedFileType.IsAmong(EDisplayedFileType.XML, EDisplayedFileType.XSD, EDisplayedFileType.RNG, EDisplayedFileType.SCH) && 
+                (tbDocument.SyntaxHighlighting == null || tbDocument.SyntaxHighlighting.Name != "XML"))
             {
                 tbDocument.SyntaxHighlighting = ICSharpCode.AvalonEdit.Highlighting.HighlightingManager.Instance.GetDefinition("XML");
-                foldingManager = FoldingManager.Install(tbDocument.TextArea);
-                foldingStrategy = new XmlFoldingStrategy();
+                if (foldingStrategy == null)
+                {
+                    foldingManager = FoldingManager.Install(tbDocument.TextArea);
+                    foldingStrategy = new XmlFoldingStrategy();
+                }
+            }
+
+            if (DisplayedFileType == EDisplayedFileType.RNC &&
+                (tbDocument.SyntaxHighlighting == null || tbDocument.SyntaxHighlighting.Name != "RNC"))
+            {
+                System.Xml.XmlReader reader;
+                using (StringReader sr = new StringReader(Properties.Resources.RNC))
+                {
+                    reader = new System.Xml.XmlTextReader(sr);
+                    tbDocument.SyntaxHighlighting = ICSharpCode.AvalonEdit.Highlighting.Xshd.HighlightingLoader.Load(reader, HighlightingManager.Instance);                    
+                }
             }
 
             tbDocument.ShowLineNumbers = true;
@@ -132,7 +148,8 @@ namespace Exolutio.View
         private void UpdateFolding()
         {
             if (foldingStrategy != null && !string.IsNullOrEmpty(FileContents))
-                foldingStrategy.UpdateFoldings(foldingManager, tbDocument.Document);
+                foldingStrategy.UpdateFoldings(foldingManager, tbDocument.Document);            
+
         }
 
        

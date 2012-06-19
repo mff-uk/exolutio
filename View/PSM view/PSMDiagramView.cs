@@ -125,5 +125,15 @@ namespace Exolutio.View
         {
             DoLayout();
         }
+
+        public PSMAttributeTextBox GetTextBoxOfAttribute(PSMAttribute psmAttribute)
+        {
+            if (RepresentantsCollection.ContainsKey(psmAttribute.PSMClass))
+            {
+                PSMClassView cv = (PSMClassView)RepresentantsCollection[psmAttribute.PSMClass];
+                return cv.AttributeTextBoxes.FirstOrDefault(tb => tb.PSMAttribute == psmAttribute);
+            }
+            return null;
+        }
     }
 }

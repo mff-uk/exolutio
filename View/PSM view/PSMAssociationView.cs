@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using Exolutio.Controller.Commands;
 using Exolutio.Model;
@@ -240,12 +241,12 @@ namespace Exolutio.View
             this.Selected = Connector.Selected;
         }
 
-        private void CardinalityLabel_PositionChanged()
+        private void CardinalityLabel_PositionChanged(DragDeltaEventArgs dragDeltaEventArgs)
         {
             ViewHelper.CardinalityLabelViewHelper.SetPositionSilent(CardinalityLabel.Position);
         }
         
-        void NameLabel_PositionChanged()
+        void NameLabel_PositionChanged(DragDeltaEventArgs dragDeltaEventArgs)
         {
             ViewHelper.MainLabelViewHelper.SetPositionSilent(NameLabel.Position);
         }

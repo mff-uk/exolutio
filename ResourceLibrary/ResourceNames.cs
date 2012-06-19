@@ -28,6 +28,7 @@ namespace Exolutio.ResourceLibrary
         public const string compose = "compose";
         public const string Copy = "Copy";
         public const string cut = "cut";
+        public const string data_gear = "data_gear";
         public const string delete = "delete";
         public const string delete2 = "delete2";
         public const string disk = "disk";
@@ -36,6 +37,11 @@ namespace Exolutio.ResourceLibrary
         public const string disk_multiple = "disk_multiple";
         public const string DistributeObjectsHorizontal = "DistributeObjectsHorizontal";
         public const string DistributeObjectsVertical = "DistributeObjectsVertical";
+        public const string document_add = "document_add";
+        public const string document_delete = "document_delete";
+        public const string document_edit = "document_edit";
+        public const string document_check = "document_check";
+        public const string documents_new = "documents_new";
         public const string error_button = "error_button";
         public const string eye = "eye";
         public const string FolderDownload = "FolderDownload";
@@ -72,6 +78,8 @@ namespace Exolutio.ResourceLibrary
         public const string question_mark = "question_mark";
         public const string redo = "redo";
         public const string refresh = "refresh";
+        public const string relaxNG = "relaxNG";
+        public const string relaxNG_compact = "relaxNG_compact";
         public const string Save = "Save";
         public const string SendBackward = "SendBackward";
         public const string SendToBack = "SendToBack";

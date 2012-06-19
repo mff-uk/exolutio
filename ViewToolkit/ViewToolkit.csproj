@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FrameworkElementImageExporter.cs" />
+    <Compile Include="GlobalViewEvents.cs" />
     <Compile Include="IChangesInScreenShotView.cs" />
     <Compile Include="SnapshotAdorner.cs" />
     <Compile Include="EConnectorCapStyle.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="FormControls\UIExtensions.cs" />
     <Compile Include="FormControls\WPFHelpers.cs" />
     <Compile Include="FormControls\LinkLabel.cs" />
+    <Compile Include="WPFExtensions.cs" />
     <Compile Include="Zoomer.xaml.cs">
       <DependentUpon>Zoomer.xaml</DependentUpon>
     </Compile>

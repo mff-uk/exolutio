@@ -65,6 +65,7 @@ namespace Exolutio.ViewToolkit
         {
             Action handler = ContentChanged;
             if (handler != null) handler();
+            GlobalViewEvents.InvokeCanvasContentChanged();
         }
 
         public void AddNode(Node node)

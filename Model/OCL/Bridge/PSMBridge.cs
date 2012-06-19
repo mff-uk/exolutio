@@ -13,6 +13,8 @@ namespace Exolutio.Model.OCL.Bridge {
             private set;
         }
 
+        Schema IBridgeToOCL.Schema { get { return Schema; } }
+
         public TypesTable.TypesTable TypesTable {
             get;
             private set;
@@ -56,6 +58,19 @@ namespace Exolutio.Model.OCL.Bridge {
         /// <exception cref="KeyNotFoundException">Attribute type does not exist in collection.</exception>
         public Types.Classifier Find(AttributeType psmAttType) {
             return PSMAttributeType[psmAttType];
+        }
+
+        public Classifier Find(Component component)
+        {
+            if (component is PSMAssociationMember)
+            {
+                return Find((PSMAssociationMember)component);
+            }
+            else
+                throw new ExolutioModelException(
+                    string.Format(
+                        "PSMBridge can locate only components of type `PSMAssociationMember`. Type of component `{0}` is `{1}`.",
+                        component, component.GetType().Name));
         }
 
         private void CreateTypesTable() {

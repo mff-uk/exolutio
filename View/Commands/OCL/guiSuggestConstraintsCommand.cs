@@ -39,7 +39,7 @@ namespace Exolutio.View.Commands.OCL
 
         public override System.Windows.Media.ImageSource Icon
         {
-            get { return ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.Copy); }
+            get { return ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.documents_new); }
         }
     }
 }

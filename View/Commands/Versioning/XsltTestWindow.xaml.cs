@@ -164,9 +164,12 @@ namespace Exolutio.View.Commands
             int ei = sampleDoc.IndexOf("\"", si + "xmlns:xsi=\"".Length) + 1;
             string text = si != -1 ? sampleDoc.Remove(si, ei - si) : sampleDoc;
             si = text.IndexOf("xmlns=\"");
-            ei = text.IndexOf("\"", si + "xmlns=\"".Length) + 1;
-            string xmlns = text.Substring(si, ei - si);
-            text = text.Remove(si, ei - si);
+            if (si >= 0)
+            {
+                ei = text.IndexOf("\"", si + "xmlns=\"".Length) + 1;
+                string xmlns = text.Substring(si, ei - si);
+                text = text.Remove(si, ei - si);
+            }
             File.WriteAllText(SAVE_DOCUMENT, text.Replace("utf-16", "utf-8"), Encoding.UTF8);
         }
 

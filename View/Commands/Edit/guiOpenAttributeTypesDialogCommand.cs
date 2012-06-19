@@ -1,4 +1,6 @@
-﻿namespace Exolutio.View.Commands.Edit
+﻿using Exolutio.ResourceLibrary;
+
+namespace Exolutio.View.Commands.Edit
 {
     public class guiOpenAttributeTypesDialogCommand : guiCommandBase
     {
@@ -27,6 +29,11 @@
         public override string ScreenTipText
         {
             get { return "Open data type manager window."; }
+        }
+
+        public override System.Windows.Media.ImageSource Icon
+        {
+            get { return ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.data_gear); }
         }
     }
 }

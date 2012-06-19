@@ -10,7 +10,7 @@ namespace Exolutio.ViewToolkit
 	/// This class contains several methods for drawing connectors and 
 	/// computations used by connectors.
 	/// </summary>
-	internal class GeometryHelper
+	public class GeometryHelper
 	{
         public static Rect GetFirstElementBounds(Connector connector)
         {

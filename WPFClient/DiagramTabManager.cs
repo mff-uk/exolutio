@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.IO;
 using System.Linq;
+using System.Text;
+using System.Windows;
 using System.Xml.Linq;
 using AvalonDock;
 using Exolutio.Model;
@@ -19,7 +22,12 @@ namespace Exolutio.WPFClient
         public MainWindow MainWindow { get; private set; }
 
         public DockingManager DockManager { get { return MainWindow.dockManager; } }
-        
+
+        public UIElement TopElement
+        {
+            get { return DockManager; }
+        }
+
         public DiagramView ActiveDiagramView
         {
             get
@@ -327,7 +335,13 @@ namespace Exolutio.WPFClient
         public IFilePresenterTab DisplayFile(XDocument xmlDocument, EDisplayedFileType fileType, string fileName = null, ILog log = null, PSMSchema validationSchema = null, PSMSchema sourcePSMSchema = null, FilePresenterButtonInfo[] additionalActions = null, object tag = null)
         {
             FileTab f = new FileTab();
-            f.DisplayFile(fileType, xmlDocument.ToString(), fileName, log, validationSchema, sourcePSMSchema);
+            StringBuilder sb = new StringBuilder();
+            using (TextWriter tw = new UTF8StringWriter(sb))
+            {
+                xmlDocument.Save(tw);
+            }
+
+            f.DisplayFile(fileType, sb.ToString(), fileName, log, validationSchema, sourcePSMSchema);
             f.FloatingWindowSize = new System.Windows.Size(800, 600);
             if (additionalActions != null)
             {
@@ -359,11 +373,6 @@ namespace Exolutio.WPFClient
                 result.Add(((DiagramTab) d).DiagramView);
             }
             return result;
-        }
-
-        public void ShowOCLScript(OCLScript oclScript)
-        {
-            MainWindow.OCLEditor.ShowScript(oclScript);
         }
 
         public IEnumerable<ExolutioVersionedObject> AnotherOpenedVersions(ExolutioVersionedObject item)

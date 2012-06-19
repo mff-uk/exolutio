@@ -8,7 +8,7 @@ options {
 
 tokens{
  INFIX;UNARY;MESSAGE;PRIMITIVELITERAL;TYPE;CALL;INDEX;ITERATE;CALLARGS;VARDECL;DECL;PATH;COLLECTIONLITERAL; COLLECTIONTYPE;COLLPART;COLLPARTRANGE;TUPLELITERAL;LET;COLLTYPE;
- CONDITION;PROPERTYCONDITION;PROPERTYHEAD;OPERATIONCONDITION; OPERATIONHEAD; CLASSIFIERCONDITION; CLASSIFIERHEAD;
+ CONDITION;PROPERTYCONDITION;PROPERTYHEAD;OPERATIONCONDITION; OPERATIONHEAD; CLASSIFIERCONDITION; CLASSIFIERHEAD; EVOLUTIONHEAD;
  INIT;DERIVATE;INV;MESSAGE; DEF; PRE;POST;BODY;OPERATION;IF;ARGS;ACC;CLASSLITERAL;
 }
 
@@ -20,7 +20,10 @@ tokens{
 @lexer::members {    Queue<IToken> tokens = new Queue<IToken>();    public override void Emit(IToken token)     {        state.token = token;        tokens.Enqueue(token);    }    public override IToken NextToken()    {        base.NextToken();        if ( tokens.Count ==0 )            return Tokens.EndOfFile;        return tokens.Dequeue();    }}
 
 
-
+public 
+evolutionDeclarationList
+	:'source version' SimpleName contextDeclarationE* EOF -> ^(EVOLUTIONHEAD SimpleName contextDeclarationE*)
+	;
 
 public 
 contextDeclarationList
@@ -29,6 +32,13 @@ contextDeclarationList
 
 public 
 contextDeclaration
+	:propertyContextDecl
+	|classifierContextDecl
+	|operationContextDecl
+	;
+
+public 
+contextDeclarationE
 	:propertyContextDecl
 	|classifierContextDecl
 	|operationContextDecl

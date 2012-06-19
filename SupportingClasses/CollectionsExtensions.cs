@@ -32,6 +32,11 @@ namespace Exolutio.SupportingClasses
             return collection.Count() == 0;
         }
 
+        public static bool IsLast<T>(this IEnumerable<T> collection, T item)
+        {
+            return collection.Last().Equals(item);
+        }
+
         public static void AddIfNotContained<T>(this ICollection<T> collection, T item)
         {
             if (!collection.Contains(item))

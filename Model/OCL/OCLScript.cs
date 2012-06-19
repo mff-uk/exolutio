@@ -11,17 +11,21 @@ using Exolutio.Model.OCL.Compiler;
 using Exolutio.Model.OCL.Types;
 
 
-namespace Exolutio.Model.OCL {
-    public class OCLScript : Component {
+namespace Exolutio.Model.OCL
+{
+    public class OCLScript : Component
+    {
         #region constructors
 
         public OCLScript(Project p)
-            : base(p) {
+            : base(p)
+        {
 
         }
 
         public OCLScript(Project p, Guid g)
-            : base(p, g) {
+            : base(p, g)
+        {
 
         }
 
@@ -30,7 +34,8 @@ namespace Exolutio.Model.OCL {
         /// Creates an ocl script and adds it to <paramref name="schema"/>.<see cref="Schema.OCLScripts"/> collection.
         /// </summary>
         public OCLScript(Project p, Guid g, Schema schema)
-            : base(p, g) {
+            : base(p, g)
+        {
             this.Schema = schema;
             schema.OCLScripts.Add(this);
         }
@@ -40,7 +45,8 @@ namespace Exolutio.Model.OCL {
         /// Creates an ocl script and adds it to <paramref name="schema"/>.<see cref="Schema.OCLScripts"/> collection.
         /// </summary>
         public OCLScript(Schema schema)
-            : this(schema.Project, Guid.NewGuid(), schema) {
+            : this(schema.Project, Guid.NewGuid(), schema)
+        {
 
         }
 
@@ -48,7 +54,16 @@ namespace Exolutio.Model.OCL {
 
         public string Contents { get; set; }
 
-        public CompilerResult CompileToAst() {
+        public enum EOclScriptType
+        {
+            Validation,
+            Evolution
+        }
+
+        public EOclScriptType Type { get; set; }
+
+        public CompilerResult CompileToAst()
+        {
             Bridge.BridgeFactory factory = new Bridge.BridgeFactory();
             Bridge.IBridgeToOCL bridge = factory.Create(Schema);
 
@@ -60,34 +75,43 @@ namespace Exolutio.Model.OCL {
 
             //Environment selfEnv = Environment.AddElement(selfName, contextClassifier, varSelf, true);
 
-
-            return compiler.CompileScript(Contents, bridge);
+            if (Type == EOclScriptType.Evolution)
+                return compiler.CompileEvolutionScript(Contents, bridge);
+            else 
+                return compiler.CompileScript(Contents, bridge);
         }
-
-
 
         #region Implementation of IExolutioSerializable
 
-        public override void Serialize(System.Xml.Linq.XElement parentNode, Serialization.SerializationContext context) {
+        public override void Serialize(System.Xml.Linq.XElement parentNode, Serialization.SerializationContext context)
+        {
             base.Serialize(parentNode, context);
-            this.SerializeSimpleValueToCDATA("Contents", Contents, parentNode, context);
+            this.SerializeSimpleValueToElement(@"Type", Type.ToString(), parentNode, context);
+            this.SerializeSimpleValueToCDATA(@"Contents", Contents, parentNode, context);
         }
 
-        public override void Deserialize(System.Xml.Linq.XElement parentNode, Serialization.SerializationContext context) {
+        public override void Deserialize(System.Xml.Linq.XElement parentNode, Serialization.SerializationContext context)
+        {
             base.Deserialize(parentNode, context);
-            this.Contents = this.DeserializeSimpleValueFromCDATA("Contents", parentNode, context);
+            string typeValue = this.DeserializeSimpleValueFromElement("Type", parentNode, context, true);
+            if (!string.IsNullOrEmpty(typeValue))
+                Type = (EOclScriptType)Enum.Parse(typeof (EOclScriptType), typeValue);
+
+            this.Contents = this.DeserializeSimpleValueFromCDATA(@"Contents", parentNode, context);
         }
 
         #endregion
 
         #region Implementation of IExolutioCloneable
 
-        public override IExolutioCloneable Clone(ProjectVersion projectVersion, ElementCopiesMap createdCopies) {
+        public override IExolutioCloneable Clone(ProjectVersion projectVersion, ElementCopiesMap createdCopies)
+        {
             return new OCLScript(projectVersion.Project, createdCopies.SuggestGuid(this));
         }
 
         public override void FillCopy(IExolutioCloneable copyComponent, ProjectVersion projectVersion,
-                                      ElementCopiesMap createdCopies) {
+                                      ElementCopiesMap createdCopies)
+        {
             base.FillCopy(copyComponent, projectVersion, createdCopies);
 
             OCLScript copyOCLScript = (OCLScript)copyComponent;
@@ -96,7 +120,8 @@ namespace Exolutio.Model.OCL {
 
         #endregion
 
-        public static OCLScript CreateInstance(Project project) {
+        public static OCLScript CreateInstance(Project project)
+        {
             return new OCLScript(project, Guid.Empty);
         }
 

@@ -37,11 +37,13 @@ namespace Exolutio.ViewToolkit
 #if SILVERLIGHT
         
 #else
-        private static Pen solidBlackPen;
+        private static readonly Pen solidBlackPen;
 
         private static readonly Pen transparentPen;
-        private static Pen junctionSelectedPen;
-        private static Pen interpretedAssociationPen;
+        private static readonly Pen junctionSelectedPen;
+        private static readonly Pen interpretedAssociationPen;
+        private static readonly Pen strongVersionLinkPen;
+        private static readonly Pen lightVersionLinkPen;
 
         public static Pen SolidBlackPen
         {
@@ -67,6 +69,23 @@ namespace Exolutio.ViewToolkit
                 return junctionSelectedPen;
             }
         }
+
+        public static Pen StrongVersionLinkPen
+        {
+            get
+            {
+                return strongVersionLinkPen;
+            }
+        }
+
+        public static Pen LightVersionLinkPen
+        {
+            get
+            {
+                return lightVersionLinkPen;
+            }
+        }
+
 #endif
 
         public static Brush NodeBorderBrush
@@ -132,6 +151,7 @@ namespace Exolutio.ViewToolkit
         public static Brush ClassHeader { get { return classHeader; } }
 
         public static Brush NoInterpretationBrush { get { return noInterpretationBrush; } }
+
         public static Brush NoInterpretationBrushSelected { get { return noInterpretationBrushSelected; } }
 
         public static Brush StructuralRepresentativeBody { get { return structuralRepresentativeBody; } }
@@ -196,6 +216,8 @@ namespace Exolutio.ViewToolkit
             solidBlackPen = new Pen(blackBrush, 1);
             transparentPen = new Pen(Brushes.Transparent, 10);
             interpretedAssociationPen = new Pen(greyBrush, 1);
+            strongVersionLinkPen = new Pen(Brushes.LightCoral, 1);
+            lightVersionLinkPen = new Pen(new SolidColorBrush(Color.FromArgb(120,240,128,128)), 1);
 #endif
         }
     }

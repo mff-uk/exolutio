@@ -1,28 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using AvalonDock;
 using Exolutio.Controller.Commands;
 using Exolutio.View;
 using Exolutio.View.Commands;
 using Exolutio.Model;
 using Exolutio.Model.PIM;
-using Exolutio.Model.PSM;
 using Exolutio.ResourceLibrary;
 using Exolutio.SupportingClasses;
-using Exolutio.ViewToolkit;
 using Exolutio.WPFClient.Converters;
 using Component = Exolutio.Model.Component;
 
@@ -51,7 +40,6 @@ namespace Exolutio.WPFClient
             
             this.Loaded += MainWindow_Loaded;
             dockManager.Loaded += dockManager_Loaded;
-            Current.ActiveDiagramChanged += OCLEditor.LoadScriptsForActiveSchema;
             Current.RecentFile += OnRecentFile;
             ExolutioRibbon.FillRecent(ConfigurationManager.Configuration.RecentFiles, ConfigurationManager.Configuration.RecentDirectories);
             

@@ -1,0 +1,40 @@
+﻿<SyntaxDefinition name="RNC"
+        xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+  <Color name="Comment" foreground="Green" />
+  <Color name="Special" foreground="Maroon" />
+  <Color name="Black" foreground="Black" fontWeight="normal" />
+  <Color name="Message" foreground="Green" />
+  <Color name="Keywords" fontWeight="bold" foreground="Blue" />
+  
+  <!-- This is the main ruleset. -->
+  <RuleSet>
+    <Span color="Comment" begin="#" />
+    
+    <Keywords color="Keywords">
+      <Word>attribute</Word>
+      <Word>default</Word>
+      <Word>datatypes</Word>
+      <Word>div</Word>
+      <Word>element</Word>
+      <Word>empty</Word>
+      <Word>external</Word>
+      <Word>grammar</Word>
+      <Word>include</Word>
+      <Word>inherit</Word>
+      <Word>list</Word>
+      <Word>mixed</Word>
+      <Word>namespace</Word>
+      <Word>notAllowed</Word>
+      <Word>parent</Word>
+      <Word>start</Word>
+      <Word>string</Word>
+      <Word>text</Word>
+      <Word>token</Word>      
+    </Keywords>
+
+    <!-- Digits -->
+    <Rule foreground="Maroon">
+      [+*?,{}()=]
+    </Rule>
+  </RuleSet>  
+</SyntaxDefinition>

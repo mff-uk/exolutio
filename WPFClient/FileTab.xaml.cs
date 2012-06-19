@@ -26,9 +26,12 @@ using Exolutio.ResourceLibrary;
 using Exolutio.SupportingClasses;
 using Exolutio.View;
 using Exolutio.ViewToolkit;
+using Fluent;
 using Microsoft.Win32;
 using Label = Exolutio.ViewToolkit.Label;
 using System.Windows.Controls.Primitives;
+using Button = System.Windows.Controls.Button;
+using ToggleButton = System.Windows.Controls.Primitives.ToggleButton;
 
 namespace Exolutio.WPFClient
 {
@@ -97,6 +100,11 @@ namespace Exolutio.WPFClient
             DisplayFile(displayedFileType, sb.ToString(), fileName, log, validationSchema, sourcePSMSchema);
         }
 
+        public void ReDisplayFile(string document, EDisplayedFileType displayedFileType, string fileName = null, ILog log = null, PSMSchema validationSchema = null, PSMSchema sourcePSMSchema = null, FilePresenterButtonInfo[] additionalActions = null)
+        {
+            DisplayFile(displayedFileType, document, fileName, log, validationSchema, sourcePSMSchema);
+        }
+
         private readonly List<FilePresenterButtonInfo> filePresenterButtons = new List<FilePresenterButtonInfo>(); 
         public IEnumerable<FilePresenterButtonInfo> FilePresenterButtons
         {
@@ -137,7 +145,7 @@ namespace Exolutio.WPFClient
             bValidateSchematronSchema.Visibility = fileView.DisplayedFileType == EDisplayedFileType.SCH ? Visibility.Visible : Visibility.Collapsed;
             bValidateAgainstSchema.Visibility = ValidationSchema != null ? Visibility.Visible : Visibility.Collapsed;
             bExecuteSchematronPipeline.Visibility = Visibility.Collapsed; // fileView.DisplayedFileType == EDisplayedFileType.SCH ? Visibility.Visible : Visibility.Collapsed;
-            bRefresh.Visibility = fileView.DisplayedFileType == EDisplayedFileType.SCH ? Visibility.Visible : Visibility.Collapsed;
+            bRefresh.Visibility = fileView.DisplayedFileType.IsAmong(EDisplayedFileType.SCH, EDisplayedFileType.RNG, EDisplayedFileType.RNC) ? Visibility.Visible : Visibility.Collapsed;
         }
 
         public string GetDocumentText()
@@ -168,6 +176,16 @@ namespace Exolutio.WPFClient
             {
                 defaultExt = "xml";
                 filter = "XML files (*.xml)|*.xml|All files (*.*)|*.*";
+            }
+            else if (fileView.DisplayedFileType == EDisplayedFileType.RNG)
+            {
+                defaultExt = "rng";
+                filter = "Relax NG files (*.rng)|*.rng|XML files (*.xml)|*.xml|All files (*.*)|*.*";
+            }
+            else if (fileView.DisplayedFileType == EDisplayedFileType.RNC)
+            {
+                defaultExt = "rnc";
+                filter = "Relax NG files - compact (*.rnc)|*.rnc|All files (*.*)|*.*";
             }
             else
             {
@@ -400,42 +418,64 @@ namespace Exolutio.WPFClient
 
         #endregion
 
+        Dictionary<FilePresenterButtonInfo, ButtonBase> additionalButtons = new Dictionary<FilePresenterButtonInfo, ButtonBase>(); 
+
         public void CreateAdditionalActionsButtons(FilePresenterButtonInfo[] additionalActions)
         {
             foreach (FilePresenterButtonInfo buttonInfo in additionalActions)
             {
-                FilePresenterButtonInfo fpb = buttonInfo;
                 ButtonBase b;
-                if (!fpb.ToggleButton)
+                if (!buttonInfo.ToggleButton && !buttonInfo.RadioToggleButton)
                 {
                     b = new Button();
                 }
+                else if (buttonInfo.RadioToggleButton)
+                {
+                    Style style = new Style
+                        {
+                            TargetType = typeof (System.Windows.Controls.RadioButton)
+                        };
+                    System.Windows.Controls.RadioButton radioButton = new System.Windows.Controls.RadioButton() { Style = style, IsChecked = buttonInfo.IsToggled };
+                    radioButton.Checked += (sender, args) => buttonInfo.IsToggled = radioButton.IsChecked == true;
+                    radioButton.GroupName = "AAA";
+                    b = radioButton;
+                }
                 else
                 {
-                    ToggleButton toggleButton = new ToggleButton {IsChecked = fpb.IsToggled};
-                    toggleButton.Checked += (sender, args) => fpb.IsToggled = toggleButton.IsChecked == true;
+                    ToggleButton toggleButton = new ToggleButton {IsChecked = buttonInfo.IsToggled};
+                    toggleButton.Checked += (sender, args) => buttonInfo.IsToggled = toggleButton.IsChecked == true;
                     b = toggleButton;
                 }
-                if (!string.IsNullOrEmpty(fpb.ButtonName))
+                additionalButtons[buttonInfo] = b;
+                if (!string.IsNullOrEmpty(buttonInfo.ButtonName))
                 {
-                    b.Name = fpb.ButtonName;
+                    b.Name = buttonInfo.ButtonName;
                 }
 
                 StackPanel stackPanel = new StackPanel();
                 stackPanel.Orientation = Orientation.Horizontal;
                 b.Content = stackPanel;
-                stackPanel.Children.Add(new Image() {Source = fpb.Icon, Height=16, Margin=ViewToolkitResources.Thickness2 });
-                stackPanel.Children.Add(new System.Windows.Controls.Label() { Content = fpb.Text, Padding = ViewToolkitResources.Thickness2 });
+                stackPanel.Children.Add(new Image() {Source = buttonInfo.Icon, Height=16, Margin=ViewToolkitResources.Thickness2 });
+                stackPanel.Children.Add(new System.Windows.Controls.Label() { Content = buttonInfo.Text, Padding = ViewToolkitResources.Thickness2 });
                 b.Click += delegate(object sender, RoutedEventArgs args)
                                {
-                                   if (sender is ToggleButton)
+                                   ButtonBase bSender = (ButtonBase)sender;
+                                   if (bSender is ToggleButton)
                                    {
-                                       fpb.IsToggled = ((ToggleButton) sender).IsChecked ==true;
+                                       foreach (KeyValuePair<FilePresenterButtonInfo, ButtonBase> otherButton in additionalButtons)
+                                       {
+                                           if (otherButton.Value is System.Windows.Controls.RadioButton && !otherButton.Value.Equals(sender))
+                                           {
+                                               otherButton.Key.IsToggled = false;
+                                           }
+                                       }
+
+                                       additionalButtons.FindByValue(bSender).Key.IsToggled = ((ToggleButton)sender).IsChecked == true;
                                    }
-                                   fpb.UpdateFileContentAction(this);
+                                   additionalButtons.FindByValue(bSender).Key.UpdateFileContentAction(this);
                                };
                 MainToolBar.Items.Add(b);
-                filePresenterButtons.Add(fpb);
+                filePresenterButtons.Add(buttonInfo);
             }
         }
 

@@ -292,4 +292,10 @@ namespace Exolutio.Model.OCL.Bridge {
         public PSMBridgeClass Source { get; set; }
         public PSMBridgeClass Target { get; set; } 
     }
+
+    public class PrevOperatonTag: OperationTag
+    {
+        public Classifier TargetVersionClassifier { get; set; }
+        public Classifier SourceVersionClassifier { get; set; }
+    }
 }

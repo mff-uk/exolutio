@@ -81,9 +81,15 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Commands\Edit\guiOpenAttributeTypesDialogCommand.cs" />
+    <Compile Include="Commands\Grammar\guiGenerateRngCommand.cs" />
     <Compile Include="Commands\Grammar\ExpressionTweakingPanel.xaml.cs">
       <DependentUpon>ExpressionTweakingPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Commands\OCL\guiActiveOCLScriptCommand.cs" />
+    <Compile Include="Commands\OCL\guiOCLSyntaxCheckCommand.cs" />
+    <Compile Include="Commands\OCL\guiRenameOCLScriptCommand.cs" />
+    <Compile Include="Commands\OCL\guiRemoveOCLScriptCommand.cs" />
+    <Compile Include="Commands\OCL\guiCreateOCLScriptCommand.cs" />
     <Compile Include="Commands\OCL\SuggestConstraintsWindow.xaml.cs">
       <DependentUpon>SuggestConstraintsWindow.xaml</DependentUpon>
     </Compile>
@@ -95,6 +101,7 @@
     <Compile Include="Commands\PIM\guiSplitPIMAssociation.cs" />
     <Compile Include="Commands\PIM\guiSplitPIMAttribute.cs" />
     <Compile Include="Commands\PSM\guiSplitPSMAttribute.cs" />
+    <Compile Include="Commands\Versioning\guiVisualizeLinks.cs" />
     <Compile Include="Commands\Versioning\guiRevalidation.cs" />
     <Compile Include="Commands\Versioning\XsltTestWindow.xaml.cs">
       <DependentUpon>XsltTestWindow.xaml</DependentUpon>
@@ -199,6 +206,9 @@
     <Compile Include="IconConverter.cs" />
     <Compile Include="DiagramImageExporter.cs" />
     <Compile Include="INodeComponentViewBase.cs" />
+    <Compile Include="OCLEditor.xaml.cs">
+      <DependentUpon>OCLEditor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PIM view\AttributeTypeDialog.xaml.cs">
       <DependentUpon>AttributeTypeDialog.xaml</DependentUpon>
     </Compile>
@@ -272,6 +282,12 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="Resources\RNC.xshd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Resources\OCL.xshd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
@@ -374,6 +390,10 @@
     <Page Include="MenuCommandStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="OCLEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="PIM view\AttributeTypeDialog.xaml">
       <Generator>MSBuild:Compile</Generator>

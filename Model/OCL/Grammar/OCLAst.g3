@@ -15,6 +15,19 @@ using Exolutio.Model.OCL.Types;
 
 @namespace{Exolutio.Model.OCL.Compiler}
 
+
+public
+evolutionDeclarationList
+	returns[Constraints Constraints, PropertyInitializations PropertyInitializations]
+	scope{
+		Constraints Conts;
+		PropertyInitializations Props;
+	}
+	@init{$evolutionDeclarationList::Conts = new Constraints(); $evolutionDeclarationList::Props = new PropertyInitializations();}
+	@after{$Constraints = $evolutionDeclarationList::Conts; $PropertyInitializations = $evolutionDeclarationList::Props;}
+	: ^(EVOLUTIONHEAD SimpleName { ResolveVersion($SimpleName.Text); } contextDeclarationE*) 
+	;
+
 public
 contextDeclarationList
 	returns[Constraints Constraints, PropertyInitializations PropertyInitializations]
@@ -30,6 +43,12 @@ contextDeclarationList
 contextDeclaration
 	:propertyContextDecl   {$contextDeclarationList::Props.PropertyInitializationBlocks.Add($propertyContextDecl.Decl);}
 	|classifierContextDecl {$contextDeclarationList::Conts.ClassifierConstraintBlocks.Add($classifierContextDecl.Decl);}
+	|operationContextDecl
+	;
+
+contextDeclarationE
+	:propertyContextDecl   {$evolutionDeclarationList::Props.PropertyInitializationBlocks.Add($propertyContextDecl.Decl);}
+	|classifierContextDecl {$evolutionDeclarationList::Conts.ClassifierConstraintBlocks.Add($classifierContextDecl.Decl);}
 	|operationContextDecl
 	;
 

@@ -14,8 +14,8 @@ using Exolutio.Model.OCL.Types;
 namespace Exolutio.Model.OCL.Compiler {
     public class Compiler {
 
-        public CompilerResult CompileScript(string text, Bridge.IBridgeToOCL bridge) {
-
+        public CompilerResult CompileScript(string text, Bridge.IBridgeToOCL bridge) 
+        {
             TypesTable.TypesTable tt = bridge.TypesTable;
             ErrorCollection errColl = new ErrorCollection();
 
@@ -39,6 +39,41 @@ namespace Exolutio.Model.OCL.Compiler {
             OCLAst.contextDeclarationList_return contextDeclarationListReturn = semantic.contextDeclarationList();
             constraints = contextDeclarationListReturn.Constraints;
             initializations = contextDeclarationListReturn.PropertyInitializations;
+            // }
+            //catch{
+            //     constraints = new AST.Constraints();
+            //    errColl.AddError(new ErrorItem("Fatal error."));
+            // }
+
+            return new CompilerResult(constraints, initializations, errColl, tt.Library, bridge);
+        }
+
+        public CompilerResult CompileEvolutionScript(string text, Bridge.IBridgeToOCL bridge)
+        {
+            TypesTable.TypesTable tt = bridge.TypesTable;
+            ErrorCollection errColl = new ErrorCollection();
+
+            // lexer
+            ANTLRStringStream stringStream = new ANTLRStringStream(text);
+            OCLSyntaxLexer lexer = new OCLSyntaxLexer(stringStream, errColl);
+
+            // syntax
+            CommonTokenStream tokenStream = new CommonTokenStream(lexer);
+            OCLSyntaxParser parser = new OCLSyntaxParser(tokenStream, errColl);
+            var output = parser.evolutionDeclarationList();
+
+            // semantic
+            Antlr.Runtime.Tree.CommonTreeNodeStream treeStream = new CommonTreeNodeStream(output.Tree);
+            OCLAst semantic = new OCLAst(treeStream, errColl);
+            semantic.TypesTable = tt;
+            semantic.Bridge = bridge; 
+            semantic.EnvironmentStack.Push(new NamespaceEnvironment(tt.Library.RootNamespace));
+            AST.Constraints constraints;
+            AST.PropertyInitializations initializations;
+            // try {
+            OCLAst.evolutionDeclarationList_return evolutionDeclarationListReturn = semantic.evolutionDeclarationList();
+            constraints = evolutionDeclarationListReturn.Constraints;
+            initializations = evolutionDeclarationListReturn.PropertyInitializations;
             // }
             //catch{
             //     constraints = new AST.Constraints();

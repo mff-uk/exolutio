@@ -70,5 +70,15 @@ namespace Exolutio.View
 
             return withoutViewHelpers;
         }
+
+        public PIMAttributeTextBox GetTextBoxOfAttribute(PIMAttribute pimAttribute)
+        {
+            if (RepresentantsCollection.ContainsKey(pimAttribute.PIMClass))
+            {
+                PIMClassView cv = (PIMClassView) RepresentantsCollection[pimAttribute.PIMClass];
+                return cv.AttributeTextBoxes.FirstOrDefault(tb => tb.PIMAttribute == pimAttribute);
+            }
+            return null; 
+        }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Exolutio.Model.OCL.Types;
 using Exolutio.Model.OCL.TypesTable;
+using Exolutio.SupportingClasses;
 
 namespace Exolutio.Model.OCL.TypesTable {
 
@@ -53,10 +54,28 @@ namespace Exolutio.Model.OCL.TypesTable {
             TypeName = naming;
         }
 
+        private Dictionary<Tuple<Classifier, CollectionKind>, CollectionType> collectionTypeCache
+            = new Dictionary<Tuple<Classifier, CollectionKind>, CollectionType>(new ColComp()); 
 
+        private class ColComp:IEqualityComparer<Tuple<Classifier, CollectionKind>>
+        {
+            public bool Equals(Tuple<Classifier, CollectionKind> x, Tuple<Classifier, CollectionKind> y)
+            {
+                return x.Item1 == y.Item1 && x.Item2 == y.Item2;
+            }
+
+            public int GetHashCode(Tuple<Classifier, CollectionKind> obj)
+            {
+                return obj.Item1.GetHashCode() ^ obj.Item2.GetHashCode();
+            }
+        }
 
         public CollectionType CreateCollection(CollectionKind kind, Classifier elementType) {
             CollectionType newType;
+            var tupleCacheKey = new Tuple<Classifier, CollectionKind>(elementType, kind);
+            if (collectionTypeCache.ContainsKey(tupleCacheKey))
+                return collectionTypeCache[tupleCacheKey];
+
             if (kind == CollectionKind.Collection) {
                 newType = new CollectionType(TypeTable, elementType, Any);
             }
@@ -98,6 +117,7 @@ namespace Exolutio.Model.OCL.TypesTable {
             }
 
             TypeTable.RegisterType(newType);
+            collectionTypeCache[tupleCacheKey] = newType;
             return newType;
         }
     }

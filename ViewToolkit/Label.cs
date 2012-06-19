@@ -1,6 +1,7 @@
 using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
 
@@ -43,12 +44,12 @@ namespace Exolutio.ViewToolkit
             base.InnerContentControl.Content = textBox;
 
             LayoutUpdated += new EventHandler(Label_LayoutUpdated);
-            PositionChanged += new Action(Label_PositionChanged);
+            PositionChanged += Label_PositionChanged;
         }
 
         
 
-        void Label_PositionChanged()
+        void Label_PositionChanged(DragDeltaEventArgs dragDeltaEventArgs)
         {
             if (DragThumb != null)
             {

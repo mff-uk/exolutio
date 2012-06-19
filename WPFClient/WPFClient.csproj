@@ -139,9 +139,6 @@
     <Compile Include="ExceptionWindow.xaml.cs">
       <DependentUpon>ExceptionWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="OCLEditor.xaml.cs">
-      <DependentUpon>OCLEditor.xaml</DependentUpon>
-    </Compile>
     <Compile Include="PSMDiagramTab.xaml.cs">
       <DependentUpon>PSMDiagramTab.xaml</DependentUpon>
     </Compile>
@@ -164,10 +161,6 @@
     <Page Include="ExceptionWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="OCLEditor.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PSMDiagramTab.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -218,9 +211,6 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="App.config" />
-    <None Include="Resources\OCL.xshd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
