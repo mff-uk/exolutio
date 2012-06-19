@@ -170,7 +170,9 @@
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.CreateVersionLinkCommand}"
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.RemoveVersionLinkCommand}"
-                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />                
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.VisualizeLinksCommand}"
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
             </Fluent:RibbonGroupBox>
             <Fluent:RibbonGroupBox Header="Revalidation">
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.FindChangesCommand}"
@@ -418,7 +420,7 @@
             </Fluent:RibbonGroupBox>
         </Fluent:RibbonTabItem>
 
-        <Fluent:RibbonTabItem x:Name="tabTranslation" Header="Translation" Group="{Binding ElementName=psmGroup}">
+        <Fluent:RibbonTabItem x:Name="tabTranslation" Header="Translation/Schema" Group="{Binding ElementName=psmGroup}">
             <Fluent:RibbonGroupBox Header="Grammar">
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.TestNormalizationCommand}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
@@ -431,16 +433,40 @@
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.CreateSampleDocumentCommand}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
             </Fluent:RibbonGroupBox>
-            <Fluent:RibbonGroupBox Header="OCL / XSD / Schematron">
+            <Fluent:RibbonGroupBox Header="XSD / Relax NG / Schematron">
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.GenerateXsdCommand}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
-                <Fluent:Button Command="{x:Static Commands:GuiCommands.GenerateSchematronSchemaCommand}" 
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.GenerateRngCommand}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
-                <Fluent:Button Command="{x:Static Commands:GuiCommands.SuggestConstraintsCommand}" 
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.GenerateSchematronSchemaCommand}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
             </Fluent:RibbonGroupBox>
         </Fluent:RibbonTabItem>
 
+        <Fluent:RibbonTabItem Header="OCL/Constraints">
+            <Fluent:RibbonGroupBox Header="OCL/Constraints">
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.CreateOCLValidationScriptCommand}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" 
+                               SizeDefinition="Large,Large,Small"/>
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.CreateOCLEvolutionScriptCommand}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" 
+                               SizeDefinition="Large,Large,Small"/>
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.SuggestConstraintsCommand}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"
+                               SizeDefinition="Large,Large,Small"/>
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.RemoveOCLScriptCommand}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"
+                               SizeDefinition="Middle,Middle,Small" />
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.RenameOCLScriptCommand}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"
+                               SizeDefinition="Middle,Middle,Small" />
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.OCLSyntaxCheckCommand}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"
+                               SizeDefinition="Large,Large,Small" />
+                <Fluent:ComboBox Name="cbOCLScripts" DisplayMemberPath="Name" MinWidth="200" SelectionChanged="cbOCLScripts_SelectionChanged" />
+            </Fluent:RibbonGroupBox>
+        </Fluent:RibbonTabItem>
+        
         <Fluent:RibbonTabItem Header="View">
             <Fluent:RibbonGroupBox Header="Layout">
                 <Fluent:Button Command="{x:Static ClientCommands:StaticWPFClientCommands.LayoutPIMLeftPSMRight}" 

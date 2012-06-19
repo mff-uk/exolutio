@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Exolutio.Dialogs;
+using Exolutio.Model.OCL;
+using Exolutio.View;
 using Exolutio.View.Commands;
 using Exolutio.View.Commands.Project;
 using Exolutio.ViewToolkit;
@@ -29,6 +31,30 @@ namespace Exolutio.WPFClient
         public ExolutioRibbon()
         {
             InitializeComponent();
+
+            Current.ActiveDiagramChanged += Current_ActiveDiagramChanged;
+            Current.ActiveOCLScriptChanged += Current_ActiveOCLScriptChanged;
+        }
+
+        void Current_ActiveDiagramChanged()
+        {
+            if (Current.ActiveDiagram != null && Current.ActiveDiagram.Schema != null)
+            {
+                cbOCLScripts.ItemsSource = Current.ActiveDiagram.Schema.OCLScripts;
+                if (Current.ActiveDiagram.Schema.OCLScripts.Count > 0)
+                {
+                    cbOCLScripts.SelectedIndex = 0;
+                }
+            }
+            else
+            {
+                cbOCLScripts.ItemsSource = null; 
+            }
+        }
+
+        void Current_ActiveOCLScriptChanged()
+        {
+            cbOCLScripts.SelectedItem = Current.ActiveOCLScript;
         }
 
         public void FillRecent(IEnumerable<FileInfo> recentFiles, IEnumerable<DirectoryInfo> recentDirectories)
@@ -188,6 +214,11 @@ namespace Exolutio.WPFClient
                 AvalonDock.ThemeFactory.ChangeTheme("aero.normalcolor");
                 ((this.Parent as DockPanel).Parent as MainWindow).dockManager.MainDocumentPane.Background = Brushes.Transparent;
             }));
+        }
+
+        private void cbOCLScripts_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Current.ActiveOCLScript = cbOCLScripts.SelectedItem as OCLScript;
         }
 
     

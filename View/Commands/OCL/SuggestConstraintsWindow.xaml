@@ -17,7 +17,7 @@
         <Button Content="OK" Grid.Row="4" Margin="0,0,93,12" Name="bOK" Height="23" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Click="bOK_Click" />
         <Button Content="Cancel" Grid.Row="4" Margin="0,0,12,12" Name="bCancel" Height="23" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Click="bCancel_Click" />
         <Border Grid.Row="2" Margin="0,0,0,0" Padding="5" Background="White">
-            <TextBox Name="tbConstraints" />
+            <View:OCLEditor x:Name="tbConstraints" />
         </Border>
         <Controls:DialogLabel Content="Suggested constraints:" Height="28" HorizontalAlignment="Left" Margin="12,7,0,0" Name="lTitle" VerticalAlignment="Top" Width="374" FontSize="12" FontWeight="SemiBold" />
     </Grid>

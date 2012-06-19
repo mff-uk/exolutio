@@ -136,9 +136,9 @@ namespace Exolutio.ViewToolkit
             }
         }
 
-        void dragThumb_PositionChanged()
+        void dragThumb_PositionChanged(DragDeltaEventArgs dragDeltaEventArgs)
         {
-            InvokePositionChanged();
+            InvokePositionChanged(dragDeltaEventArgs);
         }
 
         public void ResetPoint()
@@ -383,7 +383,7 @@ namespace Exolutio.ViewToolkit
         /// <summary>
         /// Invokes the PositionChanged event
         /// </summary>
-        protected void InvokePositionChanged()
+        protected void InvokePositionChanged(DragDeltaEventArgs dragDeltaEventArgs)
         {
             //InvokePositionChanged();
 

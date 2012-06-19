@@ -1,0 +1,497 @@
+grammar OCLSyntax;
+
+options {
+    language=CSharp3;
+    TokenLabelType=CommonToken;
+	output=AST;
+}
+
+tokens{
+ INFIX;UNARY;MESSAGE;PRIMITIVELITERAL;TYPE;CALL;INDEX;ITERATE;CALLARGS;VARDECL;DECL;PATH;COLLECTIONLITERAL; COLLECTIONTYPE;COLLPART;COLLPARTRANGE;TUPLELITERAL;LET;COLLTYPE;
+ CONDITION;PROPERTYCONDITION;PROPERTYHEAD;OPERATIONCONDITION; OPERATIONHEAD; CLASSIFIERCONDITION; CLASSIFIERHEAD; EVOLUTIONHEAD;
+ INIT;DERIVATE;INV;MESSAGE; DEF; PRE;POST;BODY;OPERATION;IF;ARGS;ACC;CLASSLITERAL;
+}
+
+
+@lexer::namespace{Exolutio.Model.OCL.Compiler}
+@parser::namespace{Exolutio.Model.OCL.Compiler}
+
+@lexer::header {    using System.Collections.Generic;} 
+@lexer::members {    Queue<IToken> tokens = new Queue<IToken>();    public override void Emit(IToken token)     {        state.token = token;        tokens.Enqueue(token);    }    public override IToken NextToken()    {        base.NextToken();        if ( tokens.Count ==0 )            return Tokens.EndOfFile;        return tokens.Dequeue();    }}
+
+
+public 
+evolutionDeclaration
+	:'source version' SimpleName contextDeclarationList EOF -> ^(contextDeclarationList)
+	;
+
+public 
+contextDeclarationListE
+	:contextDeclarationList EOF -> ^(contextDeclarationList)
+	; 
+
+
+contextDeclarationList
+	:contextDeclaration* -> ^(CONDITION contextDeclaration*)
+	;
+
+contextDeclaration
+	:propertyContextDecl
+	|classifierContextDecl
+	|operationContextDecl
+	;
+
+propertyContextDecl
+	:propertyContextHead initOrDerValue* ->^(PROPERTYCONDITION propertyContextHead initOrDerValue*)
+	;
+
+propertyContextHead
+	:c='context' SimpleName ('::' SimpleName)* '::' SimpleName ':' type
+		-> ^(PROPERTYHEAD[$c] SimpleName+ type)
+	;
+
+operationContextDecl
+	:operationContextHead prePostOrBodyDecl* ->^(OPERATIONCONDITION operationContextHead prePostOrBodyDecl*)
+	;
+
+operationContextHead
+	:c='context' operation ->^(OPERATIONHEAD[$c] operation)
+	;
+
+classifierContextDecl
+	:classifierContextHead (invOrDef)* -> ^(CLASSIFIERCONDITION classifierContextHead invOrDef*)
+	;
+
+classifierContextHead
+	:c='context' pathName		->^(CLASSIFIERHEAD[$c] pathName )
+	|c='context' SimpleName':'pathName ->^(CLASSIFIERHEAD[$c] pathName SimpleName )
+	;
+
+initOrDerValue
+	:i='init' ':' oclExpression -> ^(INIT[$i] oclExpression)
+	|d='derive' ':' oclExpression ->^(DERIVATE[$d] oclExpression)
+	;
+
+invOrDef
+	:i='inv' (SimpleName )? ':' oclExpression 
+		(m='message' ':' msgExp = oclExpression)?
+		-> ^(INV[$i] SimpleName? oclExpression (MESSAGE[$m] $msgExp)?)
+	| 'static'? d='def' SimpleName? ':' defExpression
+		-> ^(DEF[$d] 'static'? SimpleName? defExpression)
+	
+	;
+
+prePostOrBodyDecl
+	:h='pre' (SimpleName)? ':' oclExpression ->^(PRE[h] SimpleName? oclExpression)
+	|h='post' (SimpleName)? ':' oclExpression ->^(POST[h] SimpleName? oclExpression)
+	|h='body' (SimpleName)? ':' oclExpression ->^(BODY[h] SimpleName? oclExpression)
+	;
+
+
+operation
+	:pathName /*'::' SimpleName*/ '(' parameters? ')' (':' type)?
+		-> ^(OPERATION pathName parameters? type?)
+	;
+
+parameters
+	:variableDeclarationList[VariableDeclarationRequirement.OperationContext] 
+	;
+
+defExpression
+	: variableDeclaration[VariableDeclarationRequirement.Def]
+	| operation '=' oclExpression
+		->^(DECL operation oclExpression)
+	;
+
+public 
+oclExpression
+	:logicalImpliesExpression 
+	
+	;
+	
+logicalImpliesExpression
+	: (logicalXorExpression->logicalXorExpression)  (opToken='implies' expr=logicalXorExpression->^(INFIX[$opToken] $logicalImpliesExpression $expr))* 
+	;
+logicalXorExpression
+	: (logicalOrExpression->logicalOrExpression) (opToken='xor' expr=logicalOrExpression->^(INFIX[$opToken] $logicalXorExpression $expr))*
+	;
+logicalOrExpression
+	: (logicalAndExpression->logicalAndExpression) (opToken='or' expr=logicalAndExpression->^(INFIX[$opToken] $logicalOrExpression $expr))*
+	;
+logicalAndExpression
+	: (relationalEqExpression->relationalEqExpression)  (opToken='and' expr=relationalEqExpression->^(INFIX[$opToken] $logicalAndExpression $expr))*
+	;
+
+relationalEqExpression
+	: (relationalNotEqExprassion->relationalNotEqExprassion) ((opToken='='|opToken='<>') expr=relationalNotEqExprassion->^(INFIX[$opToken] $relationalEqExpression $expr))*	 	
+	;
+relationalNotEqExprassion
+	: (additiveExpression ->additiveExpression) ((opToken='<'| opToken='>'| opToken='<='| opToken='>=') expr=additiveExpression->^(INFIX[$opToken] $relationalNotEqExprassion $expr))*	
+	;
+
+additiveExpression
+	: (multiplicativeExpression->multiplicativeExpression) ((opToken='+'|opToken='-') expr= multiplicativeExpression->^(INFIX[$opToken] $additiveExpression $expr))* 
+	;	
+
+multiplicativeExpression
+	: (unaryExpression->unaryExpression) ((opToken='*'|opToken='/') expr=unaryExpression->^(INFIX[$opToken] $multiplicativeExpression $expr))*	
+	;
+
+unaryExpression
+	:	(opToken='-'|opToken='not') term=termExpression ->^(UNARY[$opToken] $term)
+	|	termExpression
+	;
+	
+termExpression 
+	:	(primaryExperession->primaryExperession) ( ((token='.'|token='->') expr=propertyCall -> ^($token $termExpression $expr  ))
+			| (oclMessageExp -> MESSAGE oclMessageExp)
+			)* 
+			 
+	;
+
+primaryExperession
+	:		
+	// 	'self'		//3B
+		
+	//|	enumLiteralExp  //8A
+	/*|*/	collectionLiteralExpAndType //8B, castecne 8E(22)
+	
+	|	tupleLiteralExp	//8C 
+	|	classLiteralExp		
+	|	primitiveLiteralExp // 8D
+			->^(PRIMITIVELITERAL primitiveLiteralExp)
+	//|	typeLiteralExp //8E
+	|	enumAndType //8A,8E,22
+			->^(TYPE enumAndType)
+	|	propertyCall
+	|	'('!oclExpression')'!
+	|	ifExp
+	|	letExp
+	;
+propertyCall
+	:	pathName ('['arguments']')? isMarkedPre? ('('propertyCallParametrs')' )?
+			//9 pokud se alspon jednou zopakuje, 28A, 3A - pokud je na zacatku
+			//23,24,25,34,35,36,37,38
+			->^(CALL pathName propertyCallParametrs?  ^(INDEX arguments)? isMarkedPre? )
+//	|it='iterate' '('(variableDeclaration[VariableDeclarationRequirement.Iterate] ';'?)+ '|' oclExpression ')'
+	//		->^(ITERATE[$it] variableDeclaration+  oclExpression)   
+	//|('iterate' '(' variableDeclaration ';')=>'iterate' '('variableDeclaration ';'variableDeclaration '|' oclExpression ')'
+	//|'iterate' '('variableDeclaration  '|' oclExpression ')'
+	|it='iterate' '(' ( 
+				((SimpleName ((':') type)? ';')=>itName=SimpleName ((':') itType = type)? ';'accName = SimpleName (':' accType = type)?'=' accExpr = oclExpression ) 
+				| (accName = SimpleName (':' accType =type)?'='  accExpr =oclExpression) 
+			)
+			'|' body = oclExpression ')'
+		->^(ITERATE[$it]  ^(DECL $itName $itType?)? ^(ACC $accName $accType? $accExpr) $body)  
+		//POZOR NA STREDNIK
+		//26
+	;
+propertyCallParametrs
+	:	declarePropertyCallParametrs? arguments? -> ^(ARGS declarePropertyCallParametrs? arguments?)
+			
+		//25,35
+	;
+declarePropertyCallParametrs
+	:	( t1=typedef (',' t2=typedef )?'|') //25A
+		-> ^(VARDECL $t1 $t2?)
+
+	;
+typedef
+	:	SimpleName(':'type)?
+		-> ^(DECL SimpleName type?)
+	;
+	
+enumAndType  //9,28
+	 //pathName //9 pokud se alspon jednou zopakuje, 28A, 3A
+		//presunuto do propertyCall
+	//|  collectionType//28B  - obsazen v collectionLiteralExpAndType
+	: tupleType   //28C		
+		 tupleType
+	| primitiveType//28D\	
+	  primitiveType
+	| oclType//28E
+		oclType
+
+	;
+
+
+
+pathName //7
+	
+	: SimpleName ('::' SimpleName)*  // RestrictedKeyword -> simple name
+		-> ^(PATH SimpleName+)
+	;
+	
+
+collectionLiteralExpAndType // 
+
+	:collectionTypeIdentifier ('{' collectionLiteralParts? '}')? //10A - bez type
+		-> ^(COLLECTIONLITERAL collectionTypeIdentifier collectionLiteralParts?)
+
+	| collectionTypeIdentifier ('(' type  ')') 
+	(
+		('{' collectionLiteralParts? '}'	//10B - vsechno, 22(28B)-bez hodnoty		
+			-> ^(COLLECTIONLITERAL collectionTypeIdentifier type collectionLiteralParts?)
+		)
+		|	->^(COLLTYPE collectionTypeIdentifier type)
+	)
+	;
+
+enumLiteralExp //9 - nepouzite pravidlo, je soucasti propertyCall
+	:pathName'::' SimpleName
+	;
+	
+collectionLiteralExp //10 - nepouzite pravidlo, je soucasti collectionLiteralExpAndType
+	:collectionTypeIdentifier  '{' collectionLiteralParts? '}'
+	|collectionType '{' collectionLiteralParts? '}'
+	;
+	
+
+
+
+
+
+collectionTypeIdentifier //11
+	:'Set'	
+	|'Bag'	
+	|'Sequence'
+	|'Collection'
+	|'OrderedSet'
+	;
+
+collectionLiteralParts //12
+	: collectionLiteralPart ( ','! collectionLiteralPart )*
+	;
+
+collectionLiteralPart //13
+	: exp1=oclExpression ((DoubleDot exp2=oclExpression)->^(COLLPARTRANGE $exp1 $exp2)|->^(COLLPART $exp1)) //13B,14
+	;
+
+
+primitiveLiteralExp //15
+	: IntegerLiteralExp		
+	| RealLiteralExp	
+	| StringLiteralExp	
+	| 'true'
+	| 'false'
+	| UnlimitedNaturalLiteralExp
+	| NullLiteralExp	
+	| InvalidLiteralExp
+	;
+
+tupleLiteralExp //16
+	: roottoken='Tuple' '{' variableDeclarationList[VariableDeclarationRequirement.TupleLiteral] '}' -> ^(TUPLELITERAL[$roottoken]  variableDeclarationList)
+	;
+	
+classLiteralExp
+	: roottoken='new' pathName '{' variableDeclarationList[VariableDeclarationRequirement.TupleLiteral] '}'-> ^(CLASSLITERAL[$roottoken]  variableDeclarationList pathName)
+	;
+
+typeLiteralExp //22 nepouzite pravidlo
+	:type
+	;
+
+variableDeclaration[VariableDeclarationRequirement requirement]//27
+	:{$requirement==VariableDeclarationRequirement.TupleType ||
+		$requirement==VariableDeclarationRequirement.Iterator}?
+		SimpleName ':' type  -> ^(DECL SimpleName type? )
+	|{$requirement==VariableDeclarationRequirement.TupleLiteral ||
+		$requirement==VariableDeclarationRequirement.Let}?  
+		SimpleName (':' type)?  '=' oclExpression  -> ^(DECL SimpleName type? oclExpression?)
+	
+	;
+
+type //28
+	: pathName		 
+	| collectionType 
+	| tupleType		
+	| primitiveType	 
+	| oclType		
+	;
+		
+primitiveType //29
+	: 'Boolean'				
+	| 'Integer'				
+	| 'Real'				
+	| 'String'				
+	| 'UnlimitedNatural'	
+	;
+	
+oclType //30
+	: 'OclAny'				
+	| 'OclInvalid'			
+	| 'OclMessage'			
+	| 'OclVoid'			
+	;
+
+collectionType //31
+	: collectionTypeIdentifier '(' type  ')' -> ^(COLLTYPE  collectionTypeIdentifier type)
+	;
+	
+tupleType  ///32
+	: 'Tuple'^ '('! variableDeclarationList[VariableDeclarationRequirement.TupleType]? ')'! 
+	;
+
+
+variableDeclarationList[VariableDeclarationRequirement requirement] //33
+	: variableDeclaration[requirement] (','! variableDeclaration[requirement] )* 
+	;
+isMarkedPre //39
+	: '@'! 'pre'
+	;
+
+arguments //40
+	: exp1 = oclExpression  ( ','! exp2=oclExpression )*
+	;
+
+
+letExp //41
+	: 'let' variableDeclaration[VariableDeclarationRequirement.Let] letExpSub -> ^(LET variableDeclaration letExpSub)
+	;
+
+letExpSub //42
+	: ',' variableDeclaration[VariableDeclarationRequirement.Let] letExpSub -> ^(LET variableDeclaration letExpSub)
+	| 'in' (options {greedy=false;} :oclExpression) -> oclExpression
+	;
+
+oclMessageExp//43
+	: '^^' SimpleName '(' oclMessageArguments? ')'
+	| '^' SimpleName '(' oclMessageArguments? ')'
+	;
+oclMessageArguments//44
+	: oclMessageArg ( ',' oclMessageArguments )?
+	;
+
+oclMessageArg //45
+	: '?' (':' type)?
+	| oclExpression
+	;
+
+ifExp //46
+	: i='if' oclExpression 'then' oclExpression 'else' oclExpression 'endif' -> ^(IF[$i] oclExpression+)
+	;
+
+
+/*
+ * Lexer Rules
+ */
+
+DoubleDot
+	: '..'
+	;
+	
+NullLiteralExp //47
+	: 'null'
+	;
+
+InvalidLiteralExp //48
+	: 'invalid'
+	;
+
+
+
+SimpleName
+	: NameStartChar NameChar*
+	| '_' '\'' StringChar* '\''
+	;//Chybí pravidlo C
+	
+
+UnlimitedNaturalLiteralExp //17
+	:'*'	; // muze obsahovat i cislo, ale potom by se pravidlo bylo s IntegerLiteralExp
+IntegerLiteralExp //18
+	: '0'
+	| '1'..'9' Num*
+	;
+RealLiteralExp //19
+	: n = Num+ d='..' {
+	      $n.Type = IntegerLiteralExp; 
+		  Emit($n);
+		  $d.Type = DoubleDot;
+		  Emit($d); } 
+	 | Num+ (('.'Num+ (ExponentPart)?) |(ExponentPart))
+	;
+	
+StringLiteralExp //20
+	: '\'' StringChar* '\'' 
+	;//Chyby pravidlo B
+
+	
+NESTED_ML_COMMENT
+    :   '/*' 
+        (options {greedy=false;} : NESTED_ML_COMMENT | . )* 
+        '*/' {$channel=Hidden;}
+    ;
+
+LINE_COMMENT
+	:'--'  ~('\n'|'\r')* (('\r'? '\n')|EOF) {$channel=Hidden;}
+	;
+	
+WS
+    :   WhiteSpaceChar {$channel=Hidden;}
+    ;
+	
+	
+
+	
+fragment
+NameStartChar 
+	: 'A'..'Z' | '_' | '$' | 'a'..'z'
+	| '\u00C0'..'\u00D6' | '\u00D8'..'\u00F6' | '\u00F8'..'\u02FF'
+	| '\u0370'..'\u037D' | '\u037F'..'\u1FFF'
+	| '\u200C'..'\u200D' | '\u2070'..'\u218F' | '\u2C00'..'\u2FEF'
+	| '\u3001'..'\uD7FF' | '\uF900'..'\uFDCF' | '\uFDF0'..'\uFFFD'
+	
+	;//chyby podpora pro [#x10000-#xEFFFF]
+fragment
+NameChar 
+	: NameStartChar 
+	| Num
+	;
+
+fragment
+StringChar 
+	: Char | EscapeSequence
+	;
+
+fragment
+WhiteSpaceChar 
+	: '\t' | '\n' 
+	| '\f' | '\r' 
+	| ' '
+	;
+
+fragment
+Char 
+	: '\u0020'..'\u0026' | '\u0028'..'\u005B' 
+	| '\u005D'..'\uD7FF' | '\uE000'..'\uFFFD' 
+	;//chyby podpora pro [#x10000-#xEFFFF]
+	
+fragment	
+EscapeSequence 
+	: '\\'
+		('b' // #x08: backspace BS
+		| 't'  // #x09: horizontal tab HT
+		| 'n'  // #x0a: linefeed LF
+		| 'f'  // #x0c: form feed FF
+		| 'r'  // #x0d: carriage return CR
+		| '\"'  // #x22: double quote "
+		| '\''  // #x27: single quote '
+		| '\\'  // #x5c: backslash 
+		| 'x' Hex Hex // #x00 to #xFF
+		| 'u' Hex Hex Hex Hex // #x0000 to #xFFFF
+	)
+	;
+	
+fragment
+Hex : 
+	'0'..'9' | 'A'..'F' | 'a'..'f'
+	;
+fragment 
+Num	
+	: '0'..'9'
+	;
+
+fragment
+ExponentPart
+	:('e'|'E') ('+'|'-')? Num+
+	;

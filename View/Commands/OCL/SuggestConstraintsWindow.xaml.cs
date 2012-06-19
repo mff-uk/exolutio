@@ -52,7 +52,7 @@ namespace Exolutio.View.Commands.OCL
                 sb.AppendLine();
             }
 
-            tbConstraints.Text = sb.ToString();
+            tbConstraints.avalonEdit.Text = sb.ToString();
         }
 
         private void bOK_Click(object sender, RoutedEventArgs e)
@@ -70,9 +70,10 @@ namespace Exolutio.View.Commands.OCL
         private void bCopyToScript_Click(object sender, RoutedEventArgs e)
         {
             OCLScript s = new OCLScript(PSMSchema);
-            s.Contents = tbConstraints.Text;
+            s.Type = OCLScript.EOclScriptType.Validation;
+            s.Contents = tbConstraints.avalonEdit.Text;
+            Current.ActiveOCLScript = s; 
             CloseWindow();
-            Current.MainWindow.DiagramTabManager.ShowOCLScript(s);
         }
     }
 }

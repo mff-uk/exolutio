@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using Exolutio.Controller.Commands;
 using Exolutio.Model;
@@ -329,7 +330,7 @@ namespace Exolutio.View
             // && labels already removed
         }
 
-        private Label CreateOrRemoveLabel(ref Label currentLabel, LabelViewHelper viewHelper, string name, string cardinality, Action selectedChanged, Action positionChanged, ContextMenu contextMenu, ConnectorPoint snapPoint = null, Connector snapConnector = null, EPlacementCenter placementCenter = EPlacementCenter.TopLeftCorner)
+        private Label CreateOrRemoveLabel(ref Label currentLabel, LabelViewHelper viewHelper, string name, string cardinality, Action selectedChanged, Action<DragDeltaEventArgs> positionChanged, ContextMenu contextMenu, ConnectorPoint snapPoint = null, Connector snapConnector = null, EPlacementCenter placementCenter = EPlacementCenter.TopLeftCorner)
         {
             if (string.IsNullOrEmpty(name) && (cardinality == "1" || string.IsNullOrEmpty(cardinality)))
             {
@@ -466,22 +467,22 @@ namespace Exolutio.View
             this.Selected = Connector.Selected;
         }
         
-        private void SourceCardinalityLabel_PositionChanged()
+        private void SourceCardinalityLabel_PositionChanged(DragDeltaEventArgs dragDeltaEventArgs)
         {
             ViewHelper.AssociationEndsViewHelpers[0].CardinalityLabelViewHelper.SetPositionSilent(SourceCardinalityLabel.Position);
         }
 
-        void TargetCardinalityLabel_PositionChanged()
+        void TargetCardinalityLabel_PositionChanged(DragDeltaEventArgs dragDeltaEventArgs)
         {
             ViewHelper.AssociationEndsViewHelpers[1].CardinalityLabelViewHelper.SetPositionSilent(TargetCardinalityLabel.Position);
         }
 
-        private void SourceRoleLabel_PositionChanged()
+        private void SourceRoleLabel_PositionChanged(DragDeltaEventArgs dragDeltaEventArgs)
         {
             ViewHelper.AssociationEndsViewHelpers[0].RoleLabelViewHelper.SetPositionSilent(SourceRoleLabel.Position);
         }
 
-        void TargetRoleLabel_PositionChanged()
+        void TargetRoleLabel_PositionChanged(DragDeltaEventArgs dragDeltaEventArgs)
         {
             ViewHelper.AssociationEndsViewHelpers[1].RoleLabelViewHelper.SetPositionSilent(TargetRoleLabel.Position);
         }
@@ -494,7 +495,7 @@ namespace Exolutio.View
             }
         }
 
-        void NameLabel_PositionChanged()
+        void NameLabel_PositionChanged(DragDeltaEventArgs dragDeltaEventArgs)
         {
             ViewHelper.MainLabelViewHelper.SetPositionSilent(NameLabel.Position);
         }

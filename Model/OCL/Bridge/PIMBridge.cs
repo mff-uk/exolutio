@@ -17,6 +17,8 @@ namespace Exolutio.Model.OCL.Bridge {
             private set;
         }
 
+        Schema IBridgeToOCL.Schema { get { return Schema; } }
+
         public TypesTable.TypesTable TypesTable {
             get;
             private set;
@@ -45,6 +47,16 @@ namespace Exolutio.Model.OCL.Bridge {
         /// <exception cref="KeyNotFoundException">PIM class does not exist in collection.</exception>
         public PIMBridgeClass Find(PIM.PIMClass pimClass) {
             return PIMClasses[pimClass];
+        }
+
+        public Classifier Find(Component component)
+        {
+            if (component is PIMClass)
+            {
+                return Find((PIMClass) component);
+            }
+            else 
+                throw new ExolutioModelException(string.Format("PIMBridge can locate only components of type `PIMClass`. Type of component `{0}` is `{1}`.", component, component.GetType().Name));
         }
 
         private void CreateTypesTable() {
@@ -78,8 +90,6 @@ namespace Exolutio.Model.OCL.Bridge {
 
         private void Translate(TypesTable.TypesTable tt) {
 
-            PIM.PIMSchema schema = Schema;
-            //obsahuje v Tuplu tridu z OCL a k ni korespondujici tridu z PIM
             List<PIMBridgeClass> classToProcess = new List<PIMBridgeClass>();
             //vytvoreni prazdnych trid
             //musi predchazet propertam a associacim, aby se neodkazovalo na neexistujici typy

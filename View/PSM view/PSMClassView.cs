@@ -394,5 +394,10 @@ namespace Exolutio.View
         {
             foldingButton.Visibility = Visibility.Visible;
         }
+
+        public IEnumerable<PSMAttributeTextBox> AttributeTextBoxes
+        {
+            get { return attributesContainer; }
+        }
     }
 }

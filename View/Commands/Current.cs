@@ -108,12 +108,9 @@ namespace Exolutio.View
                     ProjectVersion = ActiveDiagram.ProjectVersion;
                 }
                 InvokeActiveDiagramChanged();
+                ActiveOCLScript = (ActiveDiagram != null && ActiveDiagram.Schema.OCLScripts.Count > 0) 
+                    ?  ActiveDiagram.Schema.OCLScripts[0] : null;
             }
-        }
-
-        public static DiagramView ActiveDiagramView
-        {
-            get { return MainWindow.ActiveDiagramView; }
         }
 
         public static event Action ActiveDiagramChanged;
@@ -123,6 +120,39 @@ namespace Exolutio.View
             Action handler = ActiveDiagramChanged;
             if (handler != null) handler();
             InvokeSelectionChanged();
+        }
+
+        private static OCLScript activeOCLScript;
+        public static OCLScript ActiveOCLScript
+        {
+            get
+            {
+                if (Project == null || ProjectVersion == null)
+                    return null;
+                else
+                    return activeOCLScript;
+            }
+            set
+            {
+                if (value != null && value.Schema != ActiveDiagram.Schema)
+                    activeOCLScript = null;
+                else 
+                    activeOCLScript = value;
+                InvokeActiveOCLScriptChanged();
+            }
+        }
+
+        public static event Action ActiveOCLScriptChanged;
+
+        public static void InvokeActiveOCLScriptChanged()
+        {
+            Action handler = ActiveOCLScriptChanged;
+            if (handler != null) handler();
+        }
+
+        public static DiagramView ActiveDiagramView
+        {
+            get { return MainWindow.ActiveDiagramView; }
         }
 
         private static IMainWindow mainWindow;
@@ -228,6 +258,8 @@ namespace Exolutio.View
 
         public bool ToggleButton { get; set; }
 
+        public bool RadioToggleButton { get; set; }
+
         public bool IsToggled { get; set; }
 
         public string ButtonName { get; set; }
@@ -244,6 +276,7 @@ namespace Exolutio.View
         Action<IFilePresenterTab> RefreshCallback { get; set; }
         PSMSchema SourcePSMSchema { get; set; }
         void ReDisplayFile(XDocument xmlDocument, EDisplayedFileType fileType, string fileName = null, ILog log = null, PSMSchema validationSchema = null, PSMSchema sourcePSMSchema = null, FilePresenterButtonInfo[] additionalActions = null);
+        void ReDisplayFile(string document, EDisplayedFileType fileType, string fileName = null, ILog log = null, PSMSchema validationSchema = null, PSMSchema sourcePSMSchema = null, FilePresenterButtonInfo[] additionalActions = null);
         IEnumerable<FilePresenterButtonInfo> FilePresenterButtons { get; }
         object Tag { get; }
         void DisplayAdditionalControl(ContentControl contentControl, string tabHeader);
@@ -253,6 +286,7 @@ namespace Exolutio.View
 
     public interface IDiagramTabManager
     {
+        UIElement TopElement { get; }
         /// <summary>
         /// Activates a diagram
         /// </summary>
@@ -270,7 +304,6 @@ namespace Exolutio.View
         DiagramView GetOpenedDiagramView(Diagram diagram);
         IList<DiagramView> GetTopDiagramViews();
         IList<DiagramView> GetOpenedDiagramViews();
-        void ShowOCLScript(OCLScript oclScript);
     }
 
     public interface IMainWindow

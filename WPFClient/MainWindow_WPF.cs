@@ -70,6 +70,8 @@ namespace Exolutio.WPFClient
                     this.Height = smallerScreen.Bounds.Height;
                 }
             }
+
+            dockManager.LayoutUpdated += delegate { ViewToolkit.GlobalViewEvents.InvokeDiagramDisplayChanged(); };
         }
 
         private void MainWindow_FileDropped(object sender, DragEventArgs e)

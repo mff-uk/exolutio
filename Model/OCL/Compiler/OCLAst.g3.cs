@@ -5,11 +5,15 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Antlr.Runtime;
 using Antlr.Runtime.Tree;
-
+using Exolutio.Model.OCL.Bridge;
 using Exolutio.Model.OCL.Types;
 using Exolutio.Model.OCL.TypesTable;
+using Exolutio.Model.PIM;
+using Exolutio.Model.PSM;
+using Exolutio.Model.Versioning;
 using AST = Exolutio.Model.OCL.AST;
 using Exolutio.SupportingClasses;
+using Version = Exolutio.Model.Versioning.Version;
 
 namespace Exolutio.Model.OCL.Compiler {
     partial class OCLAst {
@@ -40,8 +44,9 @@ namespace Exolutio.Model.OCL.Compiler {
             }
         }
 
+        public IBridgeToOCL Bridge { get; set; }
 
-
+        public Version SourceVersion { get; private set; }
 
         public OCLAst(ITreeNodeStream input, ErrorCollection errColl)
             : this(input) {
@@ -60,6 +65,40 @@ namespace Exolutio.Model.OCL.Compiler {
             //EnvironmentStack.Push(new NamespaceEnvironment(new Namespace("")));
             if (Errors == null) {
                 Errors = new ErrorCollection();
+            }
+        }
+
+        void ResolveVersion(string versionName)
+        {
+            Schema targetSchema = this.Bridge.Schema;
+            VersionManager versionManager = this.Bridge.Schema.Project.VersionManager;
+            Version sourceVersion = versionManager.Versions.SingleOrDefault(v => v.Label == versionName);
+            if (sourceVersion == null)
+            {
+                Errors.AddError(new ErrorItem(string.Format("Source version `{0}` not found in the project.", versionName)));
+            }
+            SourceVersion = sourceVersion;
+            if (!targetSchema.ExistsInVersion(sourceVersion))
+            {
+                Errors.AddError(new ErrorItem(string.Format("Schema '{0}' does not exist in version `{1}`.", targetSchema, versionName)));
+            }
+            Schema sourceSchema = targetSchema.GetInVersion(sourceVersion);
+
+            foreach (Component componentT in targetSchema.SchemaComponents)
+            {
+                if (componentT.ExistsInVersion(SourceVersion) && (componentT is PIMClass || componentT is PSMAssociationMember))
+                {
+                    Component componentS = componentT.GetInVersion(SourceVersion);
+                    {
+                        Classifier classifierT = Bridge.Find(componentT);
+                        Classifier classifierS = Bridge.Find(componentS);
+
+                        //SkipOperationTag tag = new SkipOperationTag { Source = this, Target = bridge.PSMAssociationMembers[targetClass] };
+                        Operation prevOp = new Operation(@"prev", true, classifierS);
+                        prevOp.Tag = new PrevOperatonTag() { SourceVersionClassifier = classifierS, TargetVersionClassifier = classifierT };
+                        classifierT.Operations.Add(prevOp);
+                    }
+                }
             }
         }
 
@@ -654,23 +693,27 @@ namespace Exolutio.Model.OCL.Compiler {
 
         AST.ClassLiteralExp CreateClassLiteral(IToken rootToken, List<VariableDeclarationBag> vars, List<IToken> tokenPath)
         {
-            if (TestNull(rootToken, vars))
+            //if (TestNull(rootToken, vars))
+            //{
+            //    TupleType tupleTypeErr = new TupleType(TypesTable, new List<Property>());
+            //    TypesTable.RegisterType(tupleTypeErr);
+            //    return new AST.ClassLiteralExp(new Dictionary<string, AST.TupleLiteralPart>(), tupleTypeErr)
+            //         .SetCodeSource(new CodeSource(rootToken));
+            //}
+
+            //List<string> path = tokenPath.ToStringList();
+            //IModelElement element = Environment.LookupPathName(path);
+            //if (element == null || ! (element is Classifier))
+            //{
+            //    //TODO 
+            //}
+            //Classifier createdClass = (Classifier)element;
+
+            Classifier createdClass = ResolveTypePathName(tokenPath); 
+            if (createdClass== null || createdClass == Library.Invalid)
             {
-                TupleType tupleTypeErr = new TupleType(TypesTable, new List<Property>());
-                TypesTable.RegisterType(tupleTypeErr);
-                return new AST.ClassLiteralExp(new Dictionary<string, AST.TupleLiteralPart>(), tupleTypeErr)
-                     .SetCodeSource(new CodeSource(rootToken));
+                Errors.AddError(new CodeErrorItem(String.Format("Unable to create type '{0}'.", tokenPath.ConcatWithSeparator(@"::")), rootToken, rootToken));
             }
-
-            List<string> path = tokenPath.ToStringList();
-            IModelElement element = Environment.LookupPathName(path);
-
-            if (element == null || ! (element is Classifier))
-            {
-                //TODO 
-            }
-
-            Classifier createdClass = (Classifier)element;
 
             Dictionary<string, AST.TupleLiteralPart> parts = new Dictionary<string, AST.TupleLiteralPart>();
 

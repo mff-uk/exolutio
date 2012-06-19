@@ -45,8 +45,7 @@ namespace Exolutio.Model.OCL {
         /// <param name="name"></param>
         /// <returns></returns>
         public abstract ImplicitPropertyData LookupImplicitAttribute(string name);
-
-    
+        
         /// <summary>
         /// Lookup an operation of an implicitly named element with given name and parameter types in the current environment,
         /// including its parents.
@@ -72,8 +71,7 @@ namespace Exolutio.Model.OCL {
             clEnv.Parent = this;
             return clEnv;
         }
-
-
+        
         /// <summary>
         /// Add a new named element to the environment.
         /// </summary>
@@ -130,8 +128,7 @@ namespace Exolutio.Model.OCL {
             return null;
         }
     }
-
-
+    
     public class NamespaceEnvironment : Environment {
         private Namespace internalNamespace;
 
@@ -244,8 +241,6 @@ namespace Exolutio.Model.OCL {
             this.internalClassifier = classifier;
             this.internalVariableDec = varDecl;
         }
-
-
 
         public override IModelElement LookupLocal(string name) {
             // nekontroluje se vnitrni tridy,??operace??

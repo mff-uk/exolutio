@@ -117,6 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="RngToRncClassic" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\RNGTranslation\RngToRncClassic.xsl;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
+  </data>
   <data name="schematronXSD" xml:space="preserve">
     <value>&lt;!-- schemaVersion of 2001/02/15 --&gt;
 &lt;xs:schema targetNamespace="http://www.ascc.net/xml/schematron" xmlns:sch="http://www.ascc.net/xml/schematron" xmlns="http://www.ascc.net/xml/schematron" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="+//IDN sinica.edu.tw//SGML W3C XML Schema for Schematron 1.5//EN"&gt;

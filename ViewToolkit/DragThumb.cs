@@ -57,7 +57,7 @@ namespace Exolutio.ViewToolkit
             Point parentPos = new Point(Canvas.GetLeft(ParentControl), Canvas.GetTop(ParentControl));
             if (parentPos != parentLastPos)
             {
-                InvokePositionChanged();
+                InvokePositionChanged(new DragDeltaEventArgs(0.1,0.1));
                 FellowTravellersUpdate();
                 parentLastPos = parentPos;
             }
@@ -239,17 +239,18 @@ namespace Exolutio.ViewToolkit
         /// <summary>
         /// Occurs when position of the control changed.
         /// </summary>
-        public event Action PositionChanged;
+        public event Action<DragDeltaEventArgs> PositionChanged;
 
         public event Action Dropped;
 
         /// <summary>
         /// Invokes the PositionChanged event
         /// </summary>
-        private void InvokePositionChanged()
+        private void InvokePositionChanged(DragDeltaEventArgs args)
         {
-            Action positionChangedAction = PositionChanged;
-            if (positionChangedAction != null) positionChangedAction();
+            Action<DragDeltaEventArgs> positionChangedAction = PositionChanged;
+            if (positionChangedAction != null && args != null && !args.IsDeltaEmpty()) 
+                positionChangedAction(args);
         }
 
         /// <summary>
@@ -295,9 +296,9 @@ namespace Exolutio.ViewToolkit
             Canvas.SetLeft(thumb.DraggedControl, idealPosition.X);
             Canvas.SetTop(thumb.DraggedControl, idealPosition.Y);
 
-            if (_x != Canvas.GetLeft(thumb.DraggedControl) || _y != Canvas.GetTop(thumb.DraggedControl))
+            if ((int)_x != (int)Canvas.GetLeft(thumb.DraggedControl) || (int)_y != (int)Canvas.GetTop(thumb.DraggedControl))
             {
-                ((DragThumb) element).InvokePositionChanged();
+                ((DragThumb) element).InvokePositionChanged(new DragDeltaEventArgs(0.1,0.1));
                 ((DragThumb) element).FellowTravellersUpdate();
             }
 
@@ -552,7 +553,7 @@ namespace Exolutio.ViewToolkit
                         dragThumb.Placement = EPlacementKind.AbsoluteSubCanvas;
                     UpdatePos(dragThumb);
                 }
-                InvokePositionChanged();
+                InvokePositionChanged(deltaEventArgs);
                 ExolutioCanvas.InvalidateMeasure();
                 //if (visualAidsAdorner != null)
                 //{

@@ -3,6 +3,7 @@ using Exolutio.Controller.Commands.Atomic.MacroWrappers;
 using Exolutio.Controller.Commands.Atomic.PIM.MacroWrappers;
 using Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers;
 using Exolutio.Controller.Commands.Reflection;
+using Exolutio.Model.OCL;
 using Exolutio.Model.PIM;
 using Exolutio.Model.PSM;
 using Exolutio.ResourceLibrary;
@@ -56,8 +57,8 @@ namespace Exolutio.View.Commands
         public static guiTestNormalizationCommand TestNormalizationCommand { get; set; }
         public static guiGenerateGrammarCommand GenerateGrammarCommand { get; set; }
         public static guiGenerateXsdCommand GenerateXsdCommand { get; set; }
+        public static guiGenerateRngCommand GenerateRngCommand { get; set; }
         public static guiGenerateSchematronSchemaCommand GenerateSchematronSchemaCommand { get; set; }
-        public static guiSuggestConstraintsCommand SuggestConstraintsCommand { get; set; }
 
         #endregion
 
@@ -135,6 +136,7 @@ namespace Exolutio.View.Commands
         public static guiCreateVersionLink CreateVersionLinkCommand { get; set; }
         public static guiRemoveVersionLink RemoveVersionLinkCommand { get; set; }
         public static guiRevalidation RevalidationCommand { get; set; }
+        public static guiVisualizeLinks VisualizeLinksCommand { get; set; }
         #endif
 
         #endregion
@@ -159,7 +161,18 @@ namespace Exolutio.View.Commands
         public static guiSelectNextCommand SelectPrevCommand { get; set; }
         
         #endregion
-        
+
+        #region OCL
+
+        public static guiCreateOCLScriptCommand CreateOCLValidationScriptCommand { get; set; }
+        public static guiCreateOCLScriptCommand CreateOCLEvolutionScriptCommand { get; set; }
+        public static guiOCLSyntaxCheckCommand OCLSyntaxCheckCommand { get; set; }
+        public static guiRemoveOCLScriptCommand RemoveOCLScriptCommand { get; set; }
+        public static guiRenameOCLScriptCommand RenameOCLScriptCommand { get; set; }
+        public static guiSuggestConstraintsCommand SuggestConstraintsCommand { get; set; }
+
+        #endregion
+
         public static void Init(IMainWindow mainWindow)
         {
             #region project
@@ -235,6 +248,7 @@ namespace Exolutio.View.Commands
             GenerateSchematronSchemaCommand = new guiGenerateSchematronSchemaCommand();
             CreateSampleDocumentCommand = new guiSampleDocumentCommand();
             SuggestConstraintsCommand = new guiSuggestConstraintsCommand();
+            GenerateRngCommand = new guiGenerateRngCommand();
 
             #endregion
 
@@ -249,6 +263,7 @@ namespace Exolutio.View.Commands
             CreateVersionLinkCommand = new guiCreateVersionLink();
             RemoveVersionLinkCommand = new guiRemoveVersionLink();
             RevalidationCommand = new guiRevalidation();
+            VisualizeLinksCommand = new guiVisualizeLinks();
             #endif
 
             #endregion
@@ -510,6 +525,17 @@ namespace Exolutio.View.Commands
 
             SelectNextCommand = new guiSelectNextCommand();
             SelectPrevCommand = new guiSelectNextCommand();
+
+            #endregion 
+        
+            #region OCL
+
+            CreateOCLValidationScriptCommand = new guiCreateOCLScriptCommand() { CreatedScriptType = OCLScript.EOclScriptType.Validation };
+            CreateOCLEvolutionScriptCommand = new guiCreateOCLScriptCommand() { CreatedScriptType = OCLScript.EOclScriptType.Evolution };
+            OCLSyntaxCheckCommand = new guiOCLSyntaxCheckCommand();
+            RemoveOCLScriptCommand = new guiRemoveOCLScriptCommand();
+            RenameOCLScriptCommand = new guiRenameOCLScriptCommand();
+            SuggestConstraintsCommand = new guiSuggestConstraintsCommand();
 
             #endregion 
         }

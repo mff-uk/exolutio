@@ -109,7 +109,7 @@ namespace Exolutio.ViewToolkit
             InnerGrid.Children.Add(InnerConnectorControl);
             InnerGrid.Children.Add(InnerContentControl);
 
-            Loaded += delegate { InvokePositionChanged(); };
+            Loaded += delegate { InvokePositionChanged(new DragDeltaEventArgs(1,1)); };
             SizeChanged += this_SizeChanged;
             PositionChanged += this_PositionChanged;
 #if SILVERLIGHT
@@ -296,9 +296,9 @@ namespace Exolutio.ViewToolkit
 
         #endregion
 
-        public event Action PositionChanged;
+        public event Action<DragDeltaEventArgs> PositionChanged;
 
-        protected virtual void this_PositionChanged()
+        protected virtual void this_PositionChanged(DragDeltaEventArgs dragDeltaEventArgs)
         {
             if (ExolutioCanvas != null)
             {
@@ -306,10 +306,10 @@ namespace Exolutio.ViewToolkit
             }
         }
 
-        public void InvokePositionChanged()
+        public void InvokePositionChanged(DragDeltaEventArgs dragDeltaEventArgs)
         {
-            Action handler = PositionChanged;
-            if (handler != null) handler();
+            Action<DragDeltaEventArgs> handler = PositionChanged;
+            if (handler != null) handler(dragDeltaEventArgs);
         }
 
 #if SILVERLIGHT

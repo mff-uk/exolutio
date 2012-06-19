@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Controls.Primitives;
 using Exolutio.Model.ViewHelper;
 using Exolutio.SupportingClasses;
 using Exolutio.ViewToolkit;
@@ -72,7 +73,7 @@ namespace Exolutio.View
             this.Selected = MainNode.Selected;
         }
 
-        void MainNode_PositionChanged()
+        void MainNode_PositionChanged(DragDeltaEventArgs dragDeltaEventArgs)
         {
             if (ViewHelper is PositionableElementViewHelper)
             {
