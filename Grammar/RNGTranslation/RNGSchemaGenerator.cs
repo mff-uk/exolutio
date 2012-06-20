@@ -201,6 +201,7 @@ namespace Exolutio.Model.PSM.Grammar.RNGTranslation
                         }
                         else
                         {
+                            RelaxNGXmlSyntaxWriter.AddComment(elementContainingReference, string.Format("here follows expansion for classes inheriting from '{0}'", childClass.Name));
                             referenceElement = RelaxNGXmlSyntaxWriter.RngChoice(elementContainingReference);
                             foreach (PSMClass allowedClass in allAllowedClasses)
                             {
