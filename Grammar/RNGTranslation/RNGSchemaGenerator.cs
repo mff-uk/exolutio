@@ -68,18 +68,17 @@ namespace Exolutio.Model.PSM.Grammar.RNGTranslation
                 }
             }
 
-            AddSimpleTypes(rngSchema);
+            ReportUsedCustomSimpleTypes();
 
             XDocument doc = RelaxNGXmlSyntaxWriter.GetFinalResult();
             return doc;
         }
 
-        private void AddSimpleTypes(XElement xsdSchema)
+        private void ReportUsedCustomSimpleTypes()
         {
-            foreach (AttributeType attribuXElement in usedNonDefaultAttribuXElements)
+            foreach (AttributeType usedNonDefaultAttribuXElement in usedNonDefaultAttribuXElements)
             {
-                // TODO: output simple types somewhere 
-                //xsdSchema.XsdSimpleType(attribuXElement.Name, attribuXElement.BaseType.Name, attribuXElement.XSDDefinition);
+                Log.AddWarningFormat("Type '{0}' used in the schema is not a built-in type. Use translation to XML schema and reference the type from the XSD. ", usedNonDefaultAttribuXElement.Name);
             }
         }
 
@@ -109,16 +108,8 @@ namespace Exolutio.Model.PSM.Grammar.RNGTranslation
             //XElement complexTypeContent;
             if (psmClass.SuperClass != null)
             {
-                // TODO: handle inheritance 
-                //RngNodeTranslationInfo generalInfo = nodeInfos[psmClass.SuperClass];
-                //XElement complexContent = classPatternElement.XsdComplexContent();
-                //XElement extension = complexContent.XsdExtension(generalInfo.ComplexTypeName);
-                //complexTypeContent = !ContentIsSet(psmClass) ? extension.XsdSequence() : extension.XsdAll();        
-            }
-            else
-            {
-                // TODO: verify correct set handling
-                //complexTypeContent = !ContentIsSet(psmClass) ? classPatternElement.XsdSequence() : classPatternElement.XsdAll();
+                RngNodeTranslationInfo superClassNodeInfo = nodeInfos[psmClass.SuperClass];
+                RelaxNGXmlSyntaxWriter.RngRef(classPatternElement, superClassNodeInfo.ContentPatternName);
             }
 
             AddReferences(classPatternElement, nodeInfo);
@@ -126,7 +117,6 @@ namespace Exolutio.Model.PSM.Grammar.RNGTranslation
 
         private void AddReferences(XElement parentElement, RngNodeTranslationInfo nodeInfo)
         {
-            bool open = false;
             #region SR
             if (nodeInfo.Node is PSMClass)
             {
@@ -189,22 +179,44 @@ namespace Exolutio.Model.PSM.Grammar.RNGTranslation
                 foreach (PSMAssociation psmAssociation in psmAssociationMember.ChildPSMAssociations)
                 {
                     RngNodeTranslationInfo childInfo = nodeInfos[psmAssociation.Child];
-                    XElement applyCardinalityInThisElement = default(XElement);
+                    XElement applyCardinalityInThisElement = null;
 
+                    #region class
                     if (childInfo.Node is PSMClass)
                     {
+                        PSMClass childClass = (PSMClass) childInfo.Node;
+                        XElement elementContainingReference = parentElement;
                         if (psmAssociation.IsNamed)
                         {
                             XElement elementElement = RelaxNGXmlSyntaxWriter.RngElement(parentElement, psmAssociation.Name);
-                            RelaxNGXmlSyntaxWriter.RngRef(elementElement, childInfo.ContentPatternName);
+                            elementContainingReference = elementElement;
                             applyCardinalityInThisElement = elementElement;
+                        }
+                        
+                        XElement referenceElement;
+                        IEnumerable<PSMClass> allAllowedClasses = childClass.GetSpecificClasses(true).Where(c => !c.Abstract);
+                        if (allAllowedClasses.Count() <= 1)
+                        {
+                            referenceElement = RelaxNGXmlSyntaxWriter.RngRef(elementContainingReference, childInfo.ContentPatternName);
                         }
                         else
                         {
-                            applyCardinalityInThisElement = RelaxNGXmlSyntaxWriter.RngRef(parentElement, childInfo.ContentPatternName);
+                            referenceElement = RelaxNGXmlSyntaxWriter.RngChoice(elementContainingReference);
+                            foreach (PSMClass allowedClass in allAllowedClasses)
+                            {
+                                RelaxNGXmlSyntaxWriter.RngRef(referenceElement, nodeInfos[allowedClass].ContentPatternName);
+                            }
+                            applyCardinalityInThisElement = referenceElement;
+                        }
+
+                        if (!psmAssociation.IsNamed)
+                        {
+                            applyCardinalityInThisElement = referenceElement;
                         }
                     }
+                    #endregion 
 
+                    #region content model
                     if (childInfo.Node is PSMContentModel)
                     {
                         /* 
@@ -241,6 +253,7 @@ namespace Exolutio.Model.PSM.Grammar.RNGTranslation
                                 throw new ArgumentOutOfRangeException();
                         }
                     }
+                    #endregion 
 
                     RelaxNGXmlSyntaxWriter.HandleCardinality(applyCardinalityInThisElement, psmAssociation);
                 }
