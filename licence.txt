@@ -9,3 +9,22 @@ Redistributions of source code must retain the above copyright notice, this list
 Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
 
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+Thrid-party libraries
+=====================
+eXolutio uses the following third-party libraries/applications
+
+AjaxControlToolkit, Copyright (c) 2009, CodePlex Foundation, http://ajaxcontroltoolkit.codeplex.com
+Antlr, Copyright (c) 2010 Terence Parr, http://www.antlr.org/
+AvalonDock, Copyright (c) 2007-2012, Adolfo Marinucci, http://avalondock.codeplex.com/
+AvalonEdit, part of SharpDevelop, Copyright (c) 2012 AlphaSierraPapa for the SharpDevelop team, http://www.icsharpcode.net/OpenSource/SD/Default.aspx
+CommandLine Parser, Copyright (c) 2012 Jakub Maly, http://commandlineparser.codeplex.com/
+DataGridDragAndDrop, Copyright (c) Philipp Sumi, http://www.hardcodet.net/2009/03/moving-data-grid-rows-using-drag-and-drop
+FloatingWindowControl, Copyright (c) 2010-2011 Jevgenij Pankov, http://jevgenijpankov.heliocode.com/articles/FloatingWindow.aspx
+Fluent Ribbon, Copyright (c) Fluent Ribbon team, http://fluent.codeplex.com/
+IKVM.NET, Copyright (c) 2002-2011 Jeroen Frijters, http://www.ikvm.net/
+nUnit, Copyright (c) 2002-2007 NUnit.org, http://www.nunit.org/
+NUml, Copyright (c) Rodolfo Campero, http://sourceforge.net/projects/numl/files/
+Numbered And Bulleted Lists for Silverlight, Copyright (c) Matt Perdeck 2008, http://web3.codeproject.com/Articles/26788/Numbered-And-Bulleted-Lists-for-Silverlight
+Saxon HE, Copyright (c) Saxonica, http://www.saxonica.com/
+WPF CheckListBox, Copyright (c) Christoph Braendle 2008, http://www.codeproject.com/Articles/30142/WPF-CheckListBox-RadioListBox-CheckComboBox-RadioC
