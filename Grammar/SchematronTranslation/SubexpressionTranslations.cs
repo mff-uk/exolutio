@@ -197,7 +197,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
                 
                 if (co.CallingOption == null)
                 {
-                    result = co.OptionsContainer.Expression.ClassifierConstraintBlock.Self;
+                    result = co.OptionsContainer.Expression.ConstraintContext.Self;
                 }
                 co = co.CallingOption;
             }

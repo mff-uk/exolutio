@@ -128,7 +128,7 @@ namespace Exolutio.View.Commands.Grammar
 
         public override string Text
         {
-            get { return "Generate Schematron schema"; }
+            get { return "Generate Schematron"; }
         }
 
         public override string ScreenTipText

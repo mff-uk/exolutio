@@ -58,11 +58,6 @@ namespace Exolutio.Revalidation.XSLT
             return string.IsNullOrEmpty(_expr);
         }
 
-        public static XPathExpr DummyUpStep(XPathExpr xPathExpr)
-        {
-            return new XPathExpr("..{0}", xPathExpr._expr.Substring(xPathExpr._expr.LastIndexOf("/")));
-        }
-
         public bool HasPrefix(XPathExpr prefix)
         {
             if (prefix == null)
@@ -72,11 +67,11 @@ namespace Exolutio.Revalidation.XSLT
             return this.ToString().StartsWith(prefix);
         }
 
-        public XPathExpr InsertAfterPrefix(XPathExpr prefix, string insertedExpr)
-        {
-            Debug.Assert(HasPrefix(prefix));
-            return new XPathExpr(this.ToString().Insert(prefix.ToString().Length, insertedExpr));
-        }
+        //public XPathExpr InsertAfterPrefix(XPathExpr prefix, string insertedExpr)
+        //{
+        //    Debug.Assert(HasPrefix(prefix));
+        //    return new XPathExpr(this.ToString().Insert(prefix.ToString().Length, insertedExpr));
+        //}
 
         public XPathExpr Append(string step)
         {
@@ -105,7 +100,7 @@ namespace Exolutio.Revalidation.XSLT
 
         public static readonly XPathExpr INVALID_PATH_EXPRESSION = new XPathExpr("###");
 
-        public static XPathExpr ConcatWithOrOperator(IEnumerable<XPathExpr> xpathExpressions)
+        public static XPathExpr ConcatWithPipeOperator(IEnumerable<XPathExpr> xpathExpressions)
         {
             string result = xpathExpressions.ConcatWithSeparator(PIPE_OPERATOR);
             return new XPathExpr(result);
@@ -122,10 +117,10 @@ namespace Exolutio.Revalidation.XSLT
             }
         }
 
-        public XPathExpr NoCurrentGroup()
-        {
-            return new XPathExpr(this._expr.Replace("/" + CurrentInstanceVariableExpr, String.Empty));
-        }
+        //public XPathExpr NoCurrentGroup()
+        //{
+        //    return new XPathExpr(this._expr.Replace("/" + CurrentInstanceVariableExpr, String.Empty));
+        //}
 
         #region equality members
 

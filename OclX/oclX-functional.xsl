@@ -253,7 +253,7 @@
     <xsl:param name="body" as="function(item()) as item()*"/>
     <xsl:sequence
       select="oclX:iterate($collection, (),
-      function($it, $acc) { $body($it), $acc } 
+      function($it, $acc) { $acc, $body($it) } 
       )"
     />
   </xsl:function>

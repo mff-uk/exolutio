@@ -52,7 +52,13 @@ namespace Exolutio.Controller.Commands.Complex.PIM
             {
                 if (PSMSchemaClassGuid == Guid.Empty) PSMSchemaClassGuid = Guid.NewGuid();
                 if (SchemaGuid == Guid.Empty) SchemaGuid = Guid.NewGuid();
-                Commands.Add(new acmdNewPSMSchema(Controller) { SchemaGuid = SchemaGuid, SchemaClassGuid = PSMSchemaClassGuid });
+                acmdNewPSMSchema acmdNewPsmSchema = new acmdNewPSMSchema(Controller) {SchemaGuid = SchemaGuid, SchemaClassGuid = PSMSchemaClassGuid};
+                if (Project.UsesVersioning)
+                {
+                    PIMClass rootPIM = Project.TranslateComponent<PIMClass>(PIMClassGuid);
+                    acmdNewPsmSchema.ProjectVersionGuid = rootPIM.ProjectVersion.ID;
+                }
+                Commands.Add(acmdNewPsmSchema);
                 Commands.Add(new acmdNewPSMDiagram(Controller) { SchemaGuid = SchemaGuid });
             }
             else

@@ -25,18 +25,18 @@ namespace Tests.OCL {
         }
 
 
-        public CompilerResult TryCompile(string code) {
+        public OclCompilerResult TryCompile(string code) {
             return TryCompile(code, false);
         }
 
-        public CompilerResult TryCompileError(string code) {
+        public OclCompilerResult TryCompileError(string code) {
             return TryCompile(code, true);
         }
 
-        public CompilerResult TryCompile(string code, bool hasError) {
+        public OclCompilerResult TryCompile(string code, bool hasError) {
             var script = CreateTestEnv();
             script.Contents = code;
-            CompilerResult result = script.CompileToAst();
+            OclCompilerResult result = script.CompileToAst();
             Assert.AreEqual(hasError, result.Errors.HasError);
             return result;
         }

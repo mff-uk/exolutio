@@ -4,6 +4,7 @@ using System.Linq;
 using Exolutio.Model.OCL.AST;
 using Exolutio.Model.OCL.ConstraintConversion;
 using Exolutio.Model.OCL.Types;
+using Exolutio.Model.PSM;
 using Exolutio.SupportingClasses;
 
 namespace Exolutio.Model.OCL.Utils
@@ -105,11 +106,17 @@ namespace Exolutio.Model.OCL.Utils
 
         public void Visit(PropertyCallExp node)
         {
-            PSMPath path = PSMPathBuilder.BuildPSMPath(node, null, VariableNamer, TupleLiteralToXPathCallback, GenericExpressionToXPathCallback);
+            PSMPath path = PSMPathBuilder.BuildPSMPath(node, null, VariableNamer,
+                new BuildPSMPathParams(TupleLiteralToXPathCallback, ClassLiteralToXPathCallback, GenericExpressionToXPathCallback, GetRelativeXPathEvolutionCallback));
             if (path.StartingVariableExp != null)
             {
                 ReferredVariables.AddIfNotContained(path.StartingVariableExp.referredVariable);
             }
+        }
+
+        private string GetRelativeXPathEvolutionCallback(PSMComponent node)
+        {
+            return string.Empty;
         }
 
         private string GenericExpressionToXPathCallback(OclExpression oclexpression, List<OclExpression> oclexpressions)
@@ -124,7 +131,10 @@ namespace Exolutio.Model.OCL.Utils
             return string.Empty;
         }
 
-
+        private string ClassLiteralToXPathCallback(ClassLiteralExp tupleLiteral, List<OclExpression> subExpressions)
+        {
+            return string.Empty;
+        }
 
         public void Visit(VariableExp node)
         {

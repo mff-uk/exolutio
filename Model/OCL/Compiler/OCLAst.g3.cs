@@ -83,10 +83,11 @@ namespace Exolutio.Model.OCL.Compiler {
                 Errors.AddError(new ErrorItem(string.Format("Schema '{0}' does not exist in version `{1}`.", targetSchema, versionName)));
             }
             Schema sourceSchema = targetSchema.GetInVersion(sourceVersion);
+            this.Bridge.TranslateSchema(sourceSchema, true);
 
             foreach (Component componentT in targetSchema.SchemaComponents)
             {
-                if (componentT.ExistsInVersion(SourceVersion) && (componentT is PIMClass || componentT is PSMAssociationMember))
+                if (componentT.ExistsInVersion(SourceVersion) && (componentT is PIMClass || componentT is PSMClass || componentT is PSMContentModel))
                 {
                     Component componentS = componentT.GetInVersion(SourceVersion);
                     {
@@ -123,7 +124,6 @@ namespace Exolutio.Model.OCL.Compiler {
             EnvironmentStack.Push(self);
 
             return contextClassifier;
-
         }
 
         Classifier PropertyContextHead(List<string> path, string selfName, Classifier declaredPropertyType, out VariableDeclaration selfOut, out Property property)
@@ -154,8 +154,8 @@ namespace Exolutio.Model.OCL.Compiler {
             if (property == null)
             {
                 // error
-                selfOut = null; property = null;
-                Errors.AddError(new ErrorItem(string.Format(CompilerErrors.OCLAst_PropertyContextHead_PropertyNotFound_2, property.Name, contextClassifier)));
+                selfOut = null; 
+                Errors.AddError(new ErrorItem(string.Format(CompilerErrors.OCLAst_PropertyContextHead_PropertyNotFound_2, propertyName, contextClassifier)));
                 EnvironmentStack.Push(ErrorEnvironment.Instance);
                 EnvironmentStack.Push(ErrorEnvironment.Instance);
                 return null;
@@ -693,22 +693,6 @@ namespace Exolutio.Model.OCL.Compiler {
 
         AST.ClassLiteralExp CreateClassLiteral(IToken rootToken, List<VariableDeclarationBag> vars, List<IToken> tokenPath)
         {
-            //if (TestNull(rootToken, vars))
-            //{
-            //    TupleType tupleTypeErr = new TupleType(TypesTable, new List<Property>());
-            //    TypesTable.RegisterType(tupleTypeErr);
-            //    return new AST.ClassLiteralExp(new Dictionary<string, AST.TupleLiteralPart>(), tupleTypeErr)
-            //         .SetCodeSource(new CodeSource(rootToken));
-            //}
-
-            //List<string> path = tokenPath.ToStringList();
-            //IModelElement element = Environment.LookupPathName(path);
-            //if (element == null || ! (element is Classifier))
-            //{
-            //    //TODO 
-            //}
-            //Classifier createdClass = (Classifier)element;
-
             Classifier createdClass = ResolveTypePathName(tokenPath); 
             if (createdClass== null || createdClass == Library.Invalid)
             {
@@ -717,7 +701,7 @@ namespace Exolutio.Model.OCL.Compiler {
 
             Dictionary<string, AST.TupleLiteralPart> parts = new Dictionary<string, AST.TupleLiteralPart>();
 
-            List<Property> tupleParts = new List<Property>();
+            List<Property> classParts = new List<Property>();
             foreach (var var in vars)
             {
                 if (parts.ContainsKey(var.Name))
@@ -727,7 +711,7 @@ namespace Exolutio.Model.OCL.Compiler {
                 }
 
                 AST.OclExpression expr = var.Expression;
-                if (var.Expression == null)
+                if (var.Expression == null) 
                 {
                     expr = new AST.ErrorExp(Library.Invalid);
                 }
@@ -749,11 +733,9 @@ namespace Exolutio.Model.OCL.Compiler {
                 var newPart = new AST.TupleLiteralPart(newProterty, expr);
                 parts.Add(var.Name, newPart);
 
-                //typ
-                tupleParts.Add(newProterty);
+                //typ 
+                classParts.Add(newProterty);
             }
-            //TupleType tupleType = new TupleType(TypesTable, tupleParts);
-            //TypesTable.RegisterType(tupleType);
 
             return new AST.ClassLiteralExp(parts, createdClass)
                 .SetCodeSource(new CodeSource(rootToken)); 
@@ -766,7 +748,7 @@ namespace Exolutio.Model.OCL.Compiler {
             }
 
             List<string> path = tokenPath.ToStringList();
-            IModelElement foundType = Environment.LookupPathName(path);
+            IModelElement foundType = Environment.LookupPathName(path, true);
             if (foundType == null) {
                 foundType = Library.Invalid;
                 Errors.AddError(new CodeErrorItem(String.Format(CompilerErrors.OCLAst_ResolveTypePathName_Path__0__do_not_exists_1, path), tokenPath.First(), tokenPath.Last()));
@@ -774,7 +756,7 @@ namespace Exolutio.Model.OCL.Compiler {
 
             if (foundType is Classifier == false) {
                 foundType = Library.Invalid;
-                Errors.AddError(new CodeErrorItem(String.Format(CompilerErrors.OCLAst_ResolveTypePathName_Path__0__do_not_referres_type_1, path), tokenPath.First(), tokenPath.Last()));
+                Errors.AddError(new CodeErrorItem(String.Format(CompilerErrors.OCLAst_ResolveTypePathName_Path__0__do_not_referres_type_1, path.ConcatWithSeparator("::")), tokenPath.First(), tokenPath.Last()));
             }
 
             return ((Classifier)foundType);

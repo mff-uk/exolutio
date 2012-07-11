@@ -151,6 +151,15 @@ namespace Exolutio.SupportingClasses
             return items.Concat(moreItems);
         }
 
+
+        public static void AddRange<TKey,TValue>(this Dictionary<TKey, TValue> dictionary, IEnumerable<KeyValuePair<TKey,TValue>> pairs)
+        {
+            foreach (KeyValuePair<TKey, TValue> keyValuePair in pairs)
+            {
+                dictionary.Add(keyValuePair.Key, keyValuePair.Value);
+            }
+        }
+
         public static void EnqueueRange<T>(this Queue<T> queue, IEnumerable<T> values)
         {
             foreach (T value in values)

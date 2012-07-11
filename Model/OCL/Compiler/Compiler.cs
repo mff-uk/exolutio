@@ -14,7 +14,7 @@ using Exolutio.Model.OCL.Types;
 namespace Exolutio.Model.OCL.Compiler {
     public class Compiler {
 
-        public CompilerResult CompileScript(string text, Bridge.IBridgeToOCL bridge) 
+        public OclCompilerResult CompileScript(string text, Bridge.IBridgeToOCL bridge) 
         {
             TypesTable.TypesTable tt = bridge.TypesTable;
             ErrorCollection errColl = new ErrorCollection();
@@ -45,10 +45,10 @@ namespace Exolutio.Model.OCL.Compiler {
             //    errColl.AddError(new ErrorItem("Fatal error."));
             // }
 
-            return new CompilerResult(constraints, initializations, errColl, tt.Library, bridge);
+            return new OclCompilerResult(constraints, initializations, errColl, tt.Library, bridge);
         }
 
-        public CompilerResult CompileEvolutionScript(string text, Bridge.IBridgeToOCL bridge)
+        public OclCompilerResult CompileEvolutionScript(string text, Bridge.IBridgeToOCL bridge)
         {
             TypesTable.TypesTable tt = bridge.TypesTable;
             ErrorCollection errColl = new ErrorCollection();
@@ -80,7 +80,7 @@ namespace Exolutio.Model.OCL.Compiler {
             //    errColl.AddError(new ErrorItem("Fatal error."));
             // }
 
-            return new CompilerResult(constraints, initializations, errColl, tt.Library, bridge);
+            return new OclCompilerResult(constraints, initializations, errColl, tt.Library, bridge);
         }
 
         /// <summary>

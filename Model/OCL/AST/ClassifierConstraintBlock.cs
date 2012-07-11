@@ -5,13 +5,19 @@ using System.Text;
 using Exolutio.Model.OCL.Types;
 
 namespace Exolutio.Model.OCL.AST {
+    public interface IConstraintsContext
+    {
+        VariableDeclaration Self { get; }
+        Classifier Context { get; }
+    }
 
     /// <summary>
     /// Block of constraint definitions. Composed of a classifier (constrained type/class
     /// definition of the context variable (named 'self' by default) and a block of invariants 
     /// about the classifier.
     /// </summary>
-    public class ClassifierConstraintBlock {
+    public class ClassifierConstraintBlock : IConstraintsContext
+    {
 
         public ClassifierConstraintBlock(Classifier context, List<InvariantWithMessage> constraints, VariableDeclaration self) {
             this.Context = context;

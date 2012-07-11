@@ -64,7 +64,7 @@ namespace Exolutio.Model.OCL.Types
 
         public string Name {
             get;
-            private set;
+            internal set;
         }
 
         public object Tag {

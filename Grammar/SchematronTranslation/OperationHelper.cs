@@ -89,7 +89,14 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "at", XPathName = "oclString:at", Arity = 2, CustomTranslateHandler = FunctionAtomicHandler, TypeDependent = true, ArgumentTypes = new[] { PSMBridge.TypesTable.Library.String, PSMBridge.TypesTable.Library.Integer }});
             Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "size", XPathName = "string-length", Arity = 1, CustomTranslateHandler = FunctionAtomicHandler, TypeDependent = true, ArgumentTypes = new[] { PSMBridge.TypesTable.Library.String }});
             Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "indexOf", XPathName = "oclString:indexOf", Arity = 2, CustomTranslateHandler = FunctionAtomicHandler, TypeDependent = true, ArgumentTypes = new[] { PSMBridge.TypesTable.Library.String, PSMBridge.TypesTable.Library.String} });
-
+            // string - non standard 
+            Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "tokenize", XPathName = "tokenize", Arity = 2, CustomTranslateHandler = FunctionAtomicHandler });
+            Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "substring-before", XPathName = "substring-before", Arity = 2, CustomTranslateHandler = FunctionAtomicHandler });
+            Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "substring-after", XPathName = "substring-after", Arity = 2, CustomTranslateHandler = FunctionAtomicHandler });
+            Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "matches", XPathName = "matches", Arity = 2, CustomTranslateHandler = FunctionAtomicHandler });
+            Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "starts-with", XPathName = "starts-with", Arity = 2, CustomTranslateHandler = FunctionAtomicHandler });
+            Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "ends-with", XPathName = "ends-with", Arity = 2, CustomTranslateHandler = FunctionAtomicHandler });
+            
             // arithmetic 
             Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "abs", XPathName = "abs", Arity = 1, CustomTranslateHandler = FunctionAtomicHandler });
             Add(new OperationInfo { Priority = -1, CanOmitDataCall = true, OclName = "floor", XPathName = "floor", Arity = 1, CustomTranslateHandler = FunctionAtomicHandler });
@@ -139,7 +146,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             {
                 string op = WrapAtomicOperand(arguments[0], operationInfo, 0);
                 AttributeType attributeType = FindCorrespondingAtomicType(castType);
-                string xpathTypeName = attributeType.XSDDefinition;
+                string xpathTypeName = attributeType.XSDTypeName;
                 return string.Format("{0}{1}{2}", XsdNamespacePrefix, xpathTypeName, op);
             }
             else

@@ -20,7 +20,11 @@ namespace Exolutio.Revalidation.XSLT
 
         public Version NewVersion { get; set; }
 
-        public XPathExpr GetRelativeXPath(PSMComponent node, bool useCurrentInstanceVariable, string currentInstanceVariableName = "ci")
+        /*
+         useCurrentInstanceVariable is probably always false in the current version of the algorithm. 
+         */
+
+        public XPathExpr GetRelativeXPath(PSMComponent node, bool useCurrentInstanceVariable, string currentInstanceVariableName = XDocumentXsltExtensions.ParamCurrentInstance)
         {
             PSMComponent closestExistingCurrentNode = CurrentNode.GetFirstAncestorOrSelfExistingInVersion(OldVersion).GetInVersion(OldVersion);
             PSMComponent closestExistingTargetNode = node.GetFirstAncestorOrSelfExistingInVersion(OldVersion).GetInVersion(OldVersion);
@@ -111,7 +115,7 @@ namespace Exolutio.Revalidation.XSLT
         public XPathExpr GetRelativeXPath(IEnumerable<PSMComponent> expandedReference, bool useCurrentInstanceVariable)
         {
             IEnumerable<XPathExpr> result = from component in expandedReference select GetRelativeXPath(component, useCurrentInstanceVariable);
-            return XPathExpr.ConcatWithOrOperator(result);
+            return XPathExpr.ConcatWithPipeOperator(result);
         }
 
         public XPathExpr GetGroupMembers(PSMComponent component, bool useCurrentInstanceVariable)
@@ -136,7 +140,7 @@ namespace Exolutio.Revalidation.XSLT
             }
             else
             {
-                return XPathExpr.ConcatWithOrOperator(result);
+                return XPathExpr.ConcatWithPipeOperator(result);
             }
         }
 
@@ -191,7 +195,12 @@ namespace Exolutio.Revalidation.XSLT
         public XPathExpr GetGroupDistinguisher(IEnumerable<PSMComponent> expandedReference)
         {
             IEnumerable<XPathExpr> result = from component in expandedReference select GetGroupDistinguisher(component);
-            return XPathExpr.ConcatWithOrOperator(result);
+            return XPathExpr.ConcatWithPipeOperator(result);
+        }
+
+        public string GetRelativeXPathEvolutionCallback(PSMComponent node)
+        {
+            return GetRelativeXPath(node, true).ToString();
         }
     }
 }

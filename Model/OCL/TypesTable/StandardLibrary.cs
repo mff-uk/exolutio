@@ -221,8 +221,6 @@ namespace Exolutio.Model.OCL.TypesTable {
             AddOperation(integer, "max", integer, integer);
             AddOperation(integer, "toString", str);
 
-            CollectionType strSeq = lib.CreateCollection(CollectionKind.Sequence, str);
-            tt.RegisterType(strSeq);
             //string
             AddOperation(str, "+", str, str);
             AddOperation(str, "size", integer);
@@ -236,11 +234,18 @@ namespace Exolutio.Model.OCL.TypesTable {
             AddOperation(str, "indexOf", integer, str);
             AddOperation(str, "equalsIgnoreCase", str, boolean);
             AddOperation(str, "at", str, integer);
-            AddOperation(str, "characters", strSeq);
             AddOperation(str, "<", str, boolean);
             AddOperation(str, ">", str, boolean);
             AddOperation(str, "<=", str, boolean);
             AddOperation(str, ">=", str, boolean);
+
+            // string - non standard (known in XPath)
+            AddOperation(str, "substring-before", str, str);
+            AddOperation(str, "substring-after", str, str);
+            AddOperation(str, "matches", str, str);
+            AddOperation(str, "starts-with", str, str);
+            AddOperation(str, "ends-with", str, str);
+
 
             //boolean
             AddOperation(boolean, "or", boolean, boolean);
@@ -250,6 +255,7 @@ namespace Exolutio.Model.OCL.TypesTable {
             AddOperation(boolean, "implies", boolean, boolean);
             AddOperation(boolean, "toString", str);
 
+            #region lazy operations
             lib.LazyOperation.Add(typeof(Classifier), (c) => {
                                                        
             });
@@ -327,6 +333,14 @@ namespace Exolutio.Model.OCL.TypesTable {
                 AddOperation(coll, "asSequence", coll, t);
                 //asOrderedSet(),asBag(),asSet() missing
             });
+
+            #endregion 
+
+            // after lazy operations are defined can we use collection types
+            CollectionType strSeq = lib.CreateCollection(CollectionKind.Sequence, str);
+            tt.RegisterType(strSeq);
+            AddOperation(str, "characters", strSeq);
+            AddOperation(str, "tokenize", strSeq, str);
         }
     }
 }

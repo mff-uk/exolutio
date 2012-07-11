@@ -15,7 +15,7 @@ namespace Exolutio.Model.OCL.ConstraintConversion
             List<ClassifierConstraintBlock> result = new List<ClassifierConstraintBlock>();
             foreach (OCLScript oclScript in pimSchema.OCLScripts)
             {
-                CompilerResult compilerResult = oclScript.CompileToAst();
+                OclCompilerResult compilerResult = oclScript.CompileToAst();
                 if (!compilerResult.Errors.HasError)
                 {
                     ConstraintSuitabilityChecker constraintSuitabilityChecker = new ConstraintSuitabilityChecker

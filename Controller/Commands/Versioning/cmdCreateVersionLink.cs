@@ -53,10 +53,10 @@ namespace Exolutio.Controller.Commands.Versioning
             return OperationResult.OK;
         }
 
-        public void Set(Component component1, Component component2)
+        public void Set(IVersionedItem item1, IVersionedItem item2)
         {
-            Item1ID = component1;
-            Item2ID = component2;
+            Item1ID = item1.ID;
+            Item2ID = item2.ID;
         }
     }
 }

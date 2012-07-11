@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Exolutio.Model;
 using Exolutio.Model.PSM;
 using System.Linq;
 
@@ -41,10 +42,10 @@ namespace Exolutio.Revalidation.XSLT
                 if (node is PSMContentModel)
                 {
                     PSMContentModel cm = (PSMContentModel) node;
-                    string distinguisher = string.Empty;
+                    string distinguisher = String.Empty;
                     if (!cm.ParentAssociation.IsNamed)
                     {
-                        List<PSMContentModel> withSiblings = Model.ModelIterator.GetPSMChildren(cm.ParentAssociation.Parent).OfType<PSMContentModel>().ToList();
+                        List<PSMContentModel> withSiblings = ModelIterator.GetPSMChildren(cm.ParentAssociation.Parent).OfType<PSMContentModel>().ToList();
                         if (withSiblings.Count(s => s.Type == cm.Type) > 1)
                         {
                             distinguisher = (withSiblings.Where(c => c.Type == cm.Type).ToList().IndexOf(cm) + 1).ToString();
@@ -57,13 +58,13 @@ namespace Exolutio.Revalidation.XSLT
                     switch (cm.Type)
                     {
                         case PSMContentModelType.Sequence:
-                            result = SuggestName(cm.ParentAssociation.Parent, false, false) + "-" + "SEQ" + (!String.IsNullOrEmpty(distinguisher) ? distinguisher : string.Empty);
+                            result = SuggestName(cm.ParentAssociation.Parent, false, false) + "-" + "SEQ" + (!String.IsNullOrEmpty(distinguisher) ? distinguisher : String.Empty);
                             break;
                         case PSMContentModelType.Choice:
-                            result = SuggestName(cm.ParentAssociation.Parent, false, false) + "-" + "CH" + (!String.IsNullOrEmpty(distinguisher) ? distinguisher : string.Empty);
+                            result = SuggestName(cm.ParentAssociation.Parent, false, false) + "-" + "CH" + (!String.IsNullOrEmpty(distinguisher) ? distinguisher : String.Empty);
                             break;
                         case PSMContentModelType.Set:
-                            result = SuggestName(cm.ParentAssociation.Parent, false, false) + "-" + "SET" + (!String.IsNullOrEmpty(distinguisher) ? distinguisher : string.Empty);
+                            result = SuggestName(cm.ParentAssociation.Parent, false, false) + "-" + "SET" + (!String.IsNullOrEmpty(distinguisher) ? distinguisher : String.Empty);
                             break;
                         default:
                             throw new ArgumentOutOfRangeException();
@@ -137,6 +138,18 @@ namespace Exolutio.Revalidation.XSLT
                 throw new InvalidOperationException();
             }
             return result;
+        }
+
+        public string SuggestNameForConstructor(PSMComponent redNode)
+        {
+            string result = SuggestName(redNode, false, false);
+            result += "-CONST";
+            return result;
+        }
+
+        public string GetWrapElementName(PSMComponent psmComponent)
+        {
+            return psmComponent is PSMAttribute ? psmComponent.Name : ((PSMAssociationMember)psmComponent).ParentAssociation.Name;
         }
     }
 }

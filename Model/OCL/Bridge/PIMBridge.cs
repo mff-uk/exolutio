@@ -83,27 +83,29 @@ namespace Exolutio.Model.OCL.Bridge {
         //    TypesTable.Library.RootNamespace.NestedClassifier.Add(matchesStatus);
             TypesTable.RegisterType(matchesStatus);
 
-            Translate(TypesTable);
+            TranslateSchema(Schema);
 
         }
 
 
-        private void Translate(TypesTable.TypesTable tt) {
+        public void TranslateSchema(Schema pimSchema, bool translateAsOldVersion = false) {
 
             List<PIMBridgeClass> classToProcess = new List<PIMBridgeClass>();
             //vytvoreni prazdnych trid
             //musi predchazet propertam a associacim, aby se neodkazovalo na neexistujici typy
 
             // JM: usporadani trid tak, aby predkove byli zalozeni pred potomky
-            List<PIMClass> pimClassesHierarchy = ModelIterator.GetPIMClassesInheritanceBFS(Schema).ToList();
+            List<PIMClass> pimClassesHierarchy = ModelIterator.GetPIMClassesInheritanceBFS((PIMSchema)pimSchema).ToList();
 
-            foreach (PIM.PIMClass pimClass in pimClassesHierarchy)
+            foreach (PIMClass pimClass in pimClassesHierarchy)
             {
                 // JM: parent - predek v PIM modelu
                 PIMBridgeClass parent = pimClass.GeneralizationAsSpecific != null ? PIMClasses[pimClass.GeneralizationAsSpecific.General] : null;
-                PIMBridgeClass newClass = new PIMBridgeClass(tt,tt.Library.RootNamespace, pimClass, parent);
+                string nameOverride = translateAsOldVersion ? pimClass.Name + @"_old" : null;
+                PIMBridgeClass newClass = new PIMBridgeClass(TypesTable, TypesTable.Library.RootNamespace, pimClass, parent, nameOverride);
+                
                 //  tt.Library.RootNamespace.NestedClassifier.Add(newClass);
-                tt.RegisterType(newClass);
+                TypesTable.RegisterType(newClass);
                 classToProcess.Add(newClass);
                 //Hack
                 newClass.Tag = pimClass;

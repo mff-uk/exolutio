@@ -958,6 +958,10 @@ namespace Exolutio.Model
                                     queue.Enqueue(psmChild);
                                 }
                             }
+                            if (psmChild is PSMAttribute)
+                            {
+                                queue.Enqueue(psmChild);
+                            }
                         }
                     }
                 }

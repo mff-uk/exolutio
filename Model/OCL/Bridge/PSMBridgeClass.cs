@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Exolutio.Model.OCL.ConstraintConversion;
 using Exolutio.Model.OCL.Types;
 using Exolutio.Model.PSM;
+using Exolutio.SupportingClasses;
 
 namespace Exolutio.Model.OCL.Bridge {
     /// <summary>
@@ -50,14 +52,14 @@ namespace Exolutio.Model.OCL.Bridge {
             PSMAttribute = new Dictionary<PSMAttribute, PSMBridgeAttribute>();
         }
 
-        public PSMBridgeClass(TypesTable.TypesTable tt, Namespace ns, PSMClass sourceClass, PSMBridgeClass parent = null)
-            : this(tt, ns, sourceClass.Name, parent) {
+        public PSMBridgeClass(TypesTable.TypesTable tt, Namespace ns, PSMClass sourceClass, PSMBridgeClass parent = null, string nameOverride = null)
+            : this(tt, ns, nameOverride ?? sourceClass.Name, parent) {
             this.PSMSource = sourceClass;
             this.PSMSourceType = SourceType.PSMClass;
 
         }
 
-        public PSMBridgeClass(TypesTable.TypesTable tt, Namespace ns, PSMContentModel sourceContentModel)
+        public PSMBridgeClass(TypesTable.TypesTable tt, Namespace ns, PSMContentModel sourceContentModel, string registerName)
             : this(tt, ns, GetContentModelOCLName(sourceContentModel)) {
             this.PSMSource = sourceContentModel;
             this.PSMSourceType = SourceType.PSMContentModel;
@@ -80,7 +82,7 @@ namespace Exolutio.Model.OCL.Bridge {
             return PSMAttribute[att];
         }
 
-        internal void TranslateMembers(PSMBridge bridge)
+        internal void TranslateMembers(PSMBridge bridge, bool translateAsOldVersion = false)
         {
             // property
             if (PSMSource is PSMClass)
@@ -88,6 +90,8 @@ namespace Exolutio.Model.OCL.Bridge {
                 PSMClass sourceClass = (PSMClass)PSMSource;
                 foreach (var pr in sourceClass.PSMAttributes)
                 {
+                    if (pr.AttributeType == null)
+                        throw new ExolutioException(string.Format("Type of attribute `{0}` is not specified. ", pr)) { ExceptionTitle = "OCL parsing can not continue"};
                     Classifier baseType = TypeTable.Library.RootNamespace.NestedClassifier[pr.AttributeType.Name];
                     Classifier propType = BridgeHelpers.GetTypeByCardinality(TypeTable, pr, baseType);
                     PSMBridgeAttribute newProp = new PSMBridgeAttribute(pr, PropertyType.One, propType);
@@ -197,6 +201,8 @@ namespace Exolutio.Model.OCL.Bridge {
                 if (ass.Child is PSM.PSMClass)
                 {
                     childClassName = ass.Child.Name;
+                    if (translateAsOldVersion)
+                        childClassName += @"_old";
                     namesInOcl.Add(childClassName);
                     defaultName = childClassName;
                 }
@@ -204,6 +210,7 @@ namespace Exolutio.Model.OCL.Bridge {
                 {
                     var cM = (PSM.PSMContentModel)ass.Child;
                     childClassName = GetContentModelOCLName((PSM.PSMContentModel)ass.Child);
+                    childClassName += @"_old";
                     childContentModelCount[cM.Type] = childContentModelCount[cM.Type] + 1;
                     string cmName = String.Format("{0}_{1}", cM.Type.ToString().ToLower(), childContentModelCount[cM.Type]);
                     namesInOcl.Add(cmName);
@@ -226,6 +233,7 @@ namespace Exolutio.Model.OCL.Bridge {
                 // child_{order}
                 namesInOcl.Add(string.Format(PSMBridgeAssociation.CHILD_N_STEP, ++childCount));
 
+                
                 Classifier assType = TypeTable.Library.RootNamespace.NestedClassifier[childClassName];
                 Classifier propType = BridgeHelpers.GetTypeByCardinality(TypeTable, ass, assType);
 
@@ -235,7 +243,7 @@ namespace Exolutio.Model.OCL.Bridge {
                 //Registre to find
                 PSMChildMembers.Add(ass, newAss);
                 //Registred all name in tables
-                foreach (string name in namesInOcl)
+                foreach (string name in namesInOcl.Distinct())
                 {
                     Properties.Add(newAss, name);
                 }
@@ -267,7 +275,7 @@ namespace Exolutio.Model.OCL.Bridge {
             }
         }
 
-        private static string GetContentModelOCLName(PSM.PSMContentModel c) {
+        internal static string GetContentModelOCLName(PSM.PSMContentModel c) {
             PSM.PSMAssociation parentAssocitation = c.ParentAssociation;
             string parentName = parentAssocitation.Parent.Name;
             string name = string.Format("__{0}_{1}_{2}", parentName, c.Type.ToString(), parentAssocitation.Index);

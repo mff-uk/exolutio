@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Exolutio.Model;
+using Exolutio.Model.OCL;
+using Exolutio.Model.OCL.AST;
+using Exolutio.Model.OCL.Bridge;
 using Exolutio.Model.PSM;
 using Exolutio.Model.Versioning;
 using Exolutio.Revalidation.Changes;
@@ -40,6 +43,23 @@ namespace Exolutio.Revalidation
         private readonly List<PSMAttribute> convertedAttributesEA = new List<PSMAttribute>();
 
         public List<PSMAttribute> ConvertedAttributesEA { get { return convertedAttributesEA; } }
+        
+        private readonly Dictionary<PSMAttribute, OclExpression> attributeInitializations = new Dictionary<PSMAttribute, OclExpression>();
+
+        public Dictionary<PSMAttribute, OclExpression> AttributeInitializations
+        {
+            get { return attributeInitializations;  }
+        }
+
+        private readonly Dictionary<PSMAssociation, OclExpression> associationInitializations =
+            new Dictionary<PSMAssociation, OclExpression>();
+
+        public Dictionary<PSMAssociation, OclExpression> AssociationInitializations
+        {
+            get { return associationInitializations; }
+        }
+
+        public OclCompilerResult OclCompilerResult { get; internal set; }
 
         public bool IsAddedNode(PSMComponent component)
         {
@@ -66,7 +86,7 @@ namespace Exolutio.Revalidation
         //public List<PSMComponent> RemovedNodes { get { return removedNodes; } }
         
         public IEnumerable<PSMComponent> AllNodes { get { return RedNodes.Union(BlueNodes).Union(GreenNodes); } }
-
+        
         public Version OldVersion { get; set; }
 
         public Version NewVersion { get; set; }
@@ -216,7 +236,41 @@ namespace Exolutio.Revalidation
             testConstructs(schema1.PSMContentModels, oldVersion, newVersion, changeInstancesSet, EChangePredicateScope.PSMContentModel);
             testConstructs(schema2.PSMContentModels, oldVersion, newVersion, changeInstancesSet, EChangePredicateScope.PSMContentModel);
 
-            #endregion 
+            #endregion
+
+            foreach (OCLScript oclScript in schema2.OCLScripts)
+            {
+                if (oclScript.Type == OCLScript.EOclScriptType.Evolution)
+                {
+                    try
+                    {
+                        OclCompilerResult r = oclScript.CompileToAst();
+                        changeInstancesSet.OclCompilerResult = r;
+                        foreach (PropertyInitializationBlock propertyInitializationBlock in r.PropertyInitializations.PropertyInitializationBlocks)
+                        {
+                            foreach (PropertyInitialization propertyInitialization in propertyInitializationBlock.PropertyInitializations)
+                            {
+                                propertyInitialization.InitializationExpression.ConstraintContext = propertyInitializationBlock;
+                                if (propertyInitialization.Property is PSMBridgeAttribute)
+                                {
+                                    PSMAttribute p = ((PSMBridgeAttribute)propertyInitialization.Property).SourceAttribute;
+                                    changeInstancesSet.AttributeInitializations[p] = propertyInitialization.InitializationExpression;
+                                }
+
+                                if (propertyInitialization.Property is PSMBridgeAssociation)
+                                {
+                                    PSMAssociation p = ((PSMBridgeAssociation)propertyInitialization.Property).SourceAsscociation;
+                                    changeInstancesSet.AssociationInitializations[p] = propertyInitialization.InitializationExpression;
+                                }
+                            }
+                        }
+                    }
+                    catch
+                    {
+                        
+                    }
+                }
+            }
 
             ClassifyNodes(changeInstancesSet, schema2);
 
@@ -308,6 +362,20 @@ namespace Exolutio.Revalidation
 
         private void FindRedNodes(DetectedChangeInstancesSet changeInstances)
         {
+            #region all OCL-initialized associations and attributes make the node red 
+
+            foreach (PSMAttribute initializedAttribute in changeInstances.AttributeInitializations.Keys)
+            {
+                changeInstances.RedNodes.AddIfNotContained(initializedAttribute);
+            }
+
+            foreach (PSMAssociation initializedAssociation in changeInstances.AssociationInitializations.Keys)
+            {
+                changeInstances.RedNodes.AddIfNotContained(initializedAssociation.Parent);
+            }
+
+            #endregion 
+
             foreach (KeyValuePair<Type, List<ChangeInstance>> kvp in changeInstances)
             {
                 foreach (ChangeInstance changeInstance in kvp.Value)
