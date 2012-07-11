@@ -9,6 +9,18 @@ namespace Exolutio.Revalidation.XSLT
     {
         public static XNamespace XSLT_NAMESPACE = @"http://www.w3.org/1999/XSL/Transform";
 
+        public static XNamespace EXOLUTIO_CONSTRUCTORS_NAMESPACE = @"http://eXolutio.com/oclX/types/constructors";
+
+        public static XNamespace XSD_NAMESPACE = @"http://www.w3.org/2001/XMLSchema";
+
+        public static Dictionary<string, XNamespace> OCLX_NAMESPACES = new Dictionary<string, XNamespace>
+            {
+                { "oclX", "http://eXolutio.com/oclX/functional"}, 
+                { "oclXin", "http://eXolutio.com/oclX/functional/internal"}, 
+                { "oclDate", "http://eXolutio.com/oclX/types/date"}, 
+                { "oclString", "http://eXolutio.com/oclX/types/string"}
+            };
+
         private static XElement XslGenericElement(this XElement parentElement, string elementName)
         {
             XElement element = new XElement(XSLT_NAMESPACE + elementName);
@@ -20,6 +32,20 @@ namespace Exolutio.Revalidation.XSLT
         {
             XAttribute XElement = new XAttribute(attributeName, value);
             element.Add(XElement);
+        }
+
+        public static XElement OutputLiteralElement(this XElement parentElement, string elementName)
+        {
+            XElement element = new XElement(elementName);
+            parentElement.Add(element);
+            return element;
+        }
+
+        public static XElement XslImport(this XElement parentElement, string href)
+        {
+            XElement importElement = parentElement.XslGenericElement("import");
+            importElement.AddAttributeWithValue("href", href);
+            return importElement;
         }
 
         public static XElement XslTemplate(this XElement element, XPathExpr matchXPath, params string[] parameters)
@@ -39,6 +65,34 @@ namespace Exolutio.Revalidation.XSLT
         {
             XElement templateElement = element.XslGenericElement("template");
             templateElement.AddAttributeWithValue("name", name);
+            if (parameters != null)
+            {
+                foreach (TemplateParameter parameter in parameters)
+                {
+                    XElement param = templateElement.XslGenericElement("param");
+                    param.AddAttributeWithValue("name", parameter.Name);
+                    if (!string.IsNullOrEmpty(parameter.Type))
+                    {
+                        param.AddAttributeWithValue("as", parameter.Type);
+                    }
+                    if (!XPathExpr.IsNullOrEmpty(parameter.DefaultValue))
+                    {
+                        param.AddAttributeWithValue("select", parameter.DefaultValue);
+                    }
+                }
+            }
+            return templateElement;
+        }
+
+        public static XElement XslFunction(this XElement element, string name, string @as, 
+            params TemplateParameter[] parameters)
+        {
+            XElement templateElement = element.XslGenericElement("function");
+            templateElement.AddAttributeWithValue("name", name);
+            if (!string.IsNullOrEmpty(@as))
+            {
+                templateElement.AddAttributeWithValue("as", @as);
+            }
             if (parameters != null)
             {
                 foreach (TemplateParameter parameter in parameters)
@@ -162,12 +216,21 @@ namespace Exolutio.Revalidation.XSLT
             return valueOfElement;
         }
 
-        public static XElement XslVariable(this XElement element, string name, XPathExpr selectXPath)
+        public static XElement XslSequence(this XElement element, XPathExpr selectXPath)
+        {
+            XElement valueOfElement = element.XslGenericElement("sequence");
+            valueOfElement.AddAttributeWithValue("select", selectXPath);
+            return valueOfElement;
+        }
+
+        public static XElement XslVariable(this XElement element, string name, XPathExpr selectXPath = null, string type = null)
         {
             XElement variableElement = element.XslGenericElement("variable");
             variableElement.AddAttributeWithValue("name", name);
             if (selectXPath != null)
                 variableElement.AddAttributeWithValue("select", selectXPath);
+            if (!string.IsNullOrEmpty(type))
+                variableElement.AddAttributeWithValue("as", type);
             return variableElement;
         }
 

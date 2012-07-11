@@ -62,7 +62,7 @@ namespace Exolutio.Model.OCL
 
         public EOclScriptType Type { get; set; }
 
-        public CompilerResult CompileToAst()
+        public OclCompilerResult CompileToAst()
         {
             Bridge.BridgeFactory factory = new Bridge.BridgeFactory();
             Bridge.IBridgeToOCL bridge = factory.Create(Schema);

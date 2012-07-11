@@ -13,5 +13,6 @@ namespace Exolutio.Model.OCL.Bridge {
 
         Schema Schema { get;  }
         Classifier Find(Component component);
+        void TranslateSchema(Schema pimSchema, bool translateAsOldVersion = false);
     }
 }

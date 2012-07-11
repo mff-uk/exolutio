@@ -78,6 +78,7 @@
       <DependentUpon>XPathTranslationLogMessages.resx</DependentUpon>
     </Compile>
     <Compile Include="Terminal.cs" />
+    <Compile Include="XSDTranslation\XsdValidator.cs" />
     <Compile Include="XSDTranslation\NamingSupport.cs" />
     <Compile Include="XSDTranslation\XDocumentXSDExtensions.cs" />
     <Compile Include="XSDTranslation\XsdSchemaGenerator.cs" />

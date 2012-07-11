@@ -40,7 +40,7 @@ namespace Exolutio.DataGenerator
             valuesGenerator = new DataTypeValuesGenerator(true);
         }
 
-        public override XDocument Translate(PSMSchema schema)
+        public override XDocument Translate(PSMSchema schema, string schemaLocation = null)
         {
             Schema = schema;
 
@@ -63,6 +63,12 @@ namespace Exolutio.DataGenerator
             TranslateComments(null, context);
             TranslateAssociation(root.ParentAssociation, context);
 
+            if (!String.IsNullOrEmpty(schemaLocation))
+            {
+                XNamespace schemaInstance = "http://www.w3.org/2001/XMLSchema-instance";
+                context.Document.Root.Add(new XAttribute(XNamespace.Xmlns + "xsi", schemaInstance.NamespaceName));
+                context.Document.Root.Add(new XAttribute(schemaInstance + "noNamespaceSchemaLocation", schemaLocation));
+            }
             return context.Document;
         }
 

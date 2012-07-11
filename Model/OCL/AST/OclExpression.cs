@@ -52,7 +52,7 @@ namespace Exolutio.Model.OCL.AST
         /// <summary>
         /// True when the expression is part of the error message of an invariant. 
         /// e.g <code>self.ID</code> in the following: <code>message: 'This ID is wrong: {self.ID}'.</code>
-        /// Assigned in <see cref="CompilerResult.CompileExpressionsInMessages"/>.
+        /// Assigned in <see cref="OclCompilerResult.CompileExpressionsInMessages"/>.
         /// </summary>
         public bool IsMessageInlinedSubexpression { get; set; }
 
@@ -68,6 +68,6 @@ namespace Exolutio.Model.OCL.AST
         /// to the containing constraint. 
         /// The value is assigned manually, not by parsing.
         /// </summary>
-        public ClassifierConstraintBlock ClassifierConstraintBlock { get; set; }
+        public IConstraintsContext ConstraintContext { get; set; }
     }
 }

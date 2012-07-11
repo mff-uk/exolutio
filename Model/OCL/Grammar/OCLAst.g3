@@ -56,7 +56,13 @@ propertyContextDecl
 	returns[PropertyInitializationBlock Decl]
 	@init{List<PropertyInitialization> invs=new List<PropertyInitialization>(); }
 	@after{EnvironmentStack.Pop();EnvironmentStack.Pop();}
-	:^(PROPERTYCONDITION propertyContextHead (initOrDerValue {$initOrDerValue.Initialization.Property = $propertyContextHead.Property; invs.Add($initOrDerValue.Initialization);})*) {$Decl = new PropertyInitializationBlock($propertyContextHead.Context, invs);}
+	:^(PROPERTYCONDITION propertyContextHead (initOrDerValue 
+		{
+			if ($initOrDerValue.Initialization != null)
+			{
+				$initOrDerValue.Initialization.Property = $propertyContextHead.Property; invs.Add($initOrDerValue.Initialization);
+			}		
+		})*) {$Decl = new PropertyInitializationBlock($propertyContextHead.Context, invs, $propertyContextHead.Self);}
 	;
 
 propertyContextHead

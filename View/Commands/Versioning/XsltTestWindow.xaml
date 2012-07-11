@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
         xmlns:avalonEdit="clr-namespace:ICSharpCode.AvalonEdit;assembly=ICSharpCode.AvalonEdit" 
         Title="EvolutionChangesWindow" 
-        Height="800" Width="918" WindowStartupLocation="CenterScreen">
+        Height="800" Width="1156" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -13,15 +13,27 @@
     </Window.Resources>
     <DockPanel LastChildFill="True">
         <ToolBar DockPanel.Dock="Top" Height="32">
-            
-            <Button Margin="0" Padding="5" Click="bXsltFromChanges_Click">XSLT from changes</Button>
-            <Button Click="Button_Click" Margin="0" Padding="0" >
+            <Button Margin="0" Padding="0" Click="bXsltFromChanges_Click">
+                <StackPanel Orientation="Horizontal">
+                    <Label Height="Auto" Padding="2">XSLT from changes</Label>
+                </StackPanel>
+            </Button>
+            <ToggleButton Name="bSchemaAware" Margin="0" Padding="0" IsChecked="True" Click="bXsltFromChanges_Click">
+                <StackPanel Orientation="Horizontal">
+                    <Label Height="Auto" Padding="2">Schema Aware</Label>
+                </StackPanel>
+            </ToggleButton>
+            <Button Click="bAnotherSample_Click" Margin="0" Padding="0" >
                 <StackPanel Orientation="Horizontal">
                     <Image Source="{StaticResource xmlIcon}" Height="16" Margin="2"></Image>
                     <Label Height="Auto" Padding="2">Another sample</Label>
                 </StackPanel>
             </Button>
-            <Button Click="Button_Click_1" Margin="0" Padding="5">Transform</Button>
+            <Button Margin="0" Padding="0" Click="bTransform_Click">
+                <StackPanel Orientation="Horizontal">
+                    <Label Height="Auto" Padding="2">Transform</Label>
+                </StackPanel>
+            </Button>
             <Button Margin="0" Padding="0" Click="bValidateOld_Click">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="{StaticResource Validate}" Height="16" Margin="2"></Image>
@@ -34,25 +46,25 @@
                     <Label Height="Auto" Padding="2">Validate New</Label>
                 </StackPanel>
             </Button>
-            <Button Click="SaveRef_Click" Name="bSaveRef" Margin="0" >
+            <Button Click="SaveRef_Click" Name="bSaveRef" Margin="0" Visibility="Collapsed">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="{StaticResource Save}" Height="16" Margin="2"></Image>
                     <Label Height="Auto" Padding="2">Save Input &amp; Output</Label>
                 </StackPanel>
             </Button>
-            <Button Click="TestOutputCreation_Click" Name="bTestOutputCreation" Margin="0" >
+            <Button Click="bTestOutputCreation_Click" Name="bTestOutputCreation" Margin="0" Visibility="Collapsed" >
                 <StackPanel Orientation="Horizontal">
                     <Image Source="{StaticResource Save}" Height="16" Margin="2"></Image>
                     <Label Height="Auto" Padding="2">AS,T,VO,VN,SIO</Label>
                 </StackPanel>
             </Button>
-            <Button Click="GenerateOutput_Click" Margin="0" Padding="0" >
+            <Button Click="bGenerateOutput_Click" Margin="0" Padding="0" Visibility="Collapsed" >
                 <StackPanel Orientation="Horizontal">
                     <Image Source="{StaticResource xmlIcon}" Height="16" Margin="2"></Image>
                     <Label Height="Auto" Padding="2">Gen. output</Label>
                 </StackPanel>
             </Button>
-            <StackPanel Name="pXSLT">
+            <StackPanel Name="pXSLT" Orientation="Horizontal" Visibility="Collapsed">
                 <Button Click="SaveRefCust_Click" Margin="0" >
                     <StackPanel Orientation="Horizontal">
                         <Image Source="{StaticResource Save}" Height="16" Margin="2"></Image>

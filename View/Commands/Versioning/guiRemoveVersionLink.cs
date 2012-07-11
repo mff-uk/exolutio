@@ -3,14 +3,11 @@ using System.Linq;
 using System.Windows.Media;
 using Exolutio.Controller.Commands.Versioning;
 using Exolutio.Model;
-using Exolutio.Model.PIM;
-using Exolutio.Model.PSM;
-using Exolutio.Model.Versioning;
 using Exolutio.ResourceLibrary;
 
 namespace Exolutio.View.Commands.Versioning
 {
-    public class guiCreateVersionLink : guiSelectionDependentCommand
+    public class guiRemoveVersionLink : guiSelectionDependentCommand
     {
         public override void Execute(object parameter = null)
         {
@@ -24,21 +21,21 @@ namespace Exolutio.View.Commands.Versioning
             Component component1 = selectedComponents1.First();
             Component component2 = selectedComponents2.First();
 
-            cmdCreateVersionLink cmdCreateVersionLink = new cmdCreateVersionLink(Current.Controller);
-            cmdCreateVersionLink.Set(component1, component2);
-            cmdCreateVersionLink.Execute();
+            cmdRemoveVersionLink cmdRemoveVersionLink = new cmdRemoveVersionLink(Current.Controller);
+            cmdRemoveVersionLink.Set(component1, component2);
+            cmdRemoveVersionLink.Execute();
             Current.InvokeSelectionChanged();
         }
 
 
         public override string Text
         {
-            get { return "Add version link"; }
+            get { return "Remove version link"; }
         }
 
         public override string ScreenTipText
         {
-            get { return "Add version link between two constructs."; }
+            get { return "Remove version link between two constructs."; }
         }
 
         public override bool CanExecute(object parameter = null)
@@ -47,7 +44,7 @@ namespace Exolutio.View.Commands.Versioning
                 return false; 
             IList<DiagramView> topDiagramViews = Current.MainWindow.DiagramTabManager.GetTopDiagramViews();
             /* there must be two diagrams, each with one selected component, both components must be of the 
-               same type and they must not be linked already */
+               same type and they must be linked already */
             if (Current.Project.UsesVersioning && topDiagramViews.Count == 2)
             {
                 DiagramView diagramView1 = topDiagramViews[0];
@@ -62,7 +59,7 @@ namespace Exolutio.View.Commands.Versioning
                         Component component1 = selectedComponents1.First();
                         Component component2 = selectedComponents2.First();
                         if (component1.GetType() == component2.GetType() && component1.Version != component2.Version
-                            && !component1.ExistsInVersion(component2.Version) && !component2.ExistsInVersion(component1.Version))
+                            && Current.Project.VersionManager.AreItemsLinked(component1, component2))
                         {
                             return true;
                         }
@@ -74,7 +71,7 @@ namespace Exolutio.View.Commands.Versioning
 
         public override ImageSource Icon
         {
-            get { return ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.associate); }
+            get { return ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.branch_delete); }
         }
     }
 }

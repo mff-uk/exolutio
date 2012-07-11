@@ -114,14 +114,14 @@ namespace Tests.XSLTRevalidaton
 
             Project project = serializationManager.LoadProject(projectFile);
 
-            XsltRevalidationScriptGenerator generator = new XsltRevalidationScriptGenerator();
+            XsltAdaptationScriptGenerator generator = new XsltAdaptationScriptGenerator();
             ChangeDetector detector = new ChangeDetector();
             PSMSchema psmSchemaOldVersion = project.ProjectVersions[0].PSMSchemas.First();
             PSMSchema psmSchemaNewVersion = project.ProjectVersions[1].PSMSchemas.First();
             DetectedChangeInstancesSet detectedChangeInstancesSet = detector.DetectChanges(psmSchemaOldVersion, psmSchemaNewVersion);
             generator.Initialize(psmSchemaOldVersion, psmSchemaNewVersion, detectedChangeInstancesSet);
-            generator.GenerateTemplateStructure();
-            XDocument testGeneratedStylesheet = generator.GetRevalidationStylesheet();
+            generator.GenerateTransformationStructure();
+            XDocument testGeneratedStylesheet = generator.GetAdaptationTransformation();
             string testGeneratedStylesheetFile = testDir.FullName + "/" + testDir.Name + "-generated.xslt";
             testGeneratedStylesheet.Save(testGeneratedStylesheetFile);
             Console.WriteLine("Revalidation stylesheet generated.");

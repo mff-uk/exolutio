@@ -44,7 +44,8 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DataGridDnD">
+    <Reference Include="DataGridDnD, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ExternalBinaries\DataGridDragAndDrop\DataGridDnD.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.AvalonEdit">
@@ -101,8 +102,11 @@
     <Compile Include="Commands\PIM\guiSplitPIMAssociation.cs" />
     <Compile Include="Commands\PIM\guiSplitPIMAttribute.cs" />
     <Compile Include="Commands\PSM\guiSplitPSMAttribute.cs" />
+    <Compile Include="Commands\Versioning\guiCreateVersionLinkBetweenSchemas.cs" />
+    <Compile Include="Commands\Versioning\guiRemoveVersionLink.cs" />
+    <Compile Include="Commands\Versioning\guiRemoveVersionLinkBetweenSchemas.cs" />
     <Compile Include="Commands\Versioning\guiVisualizeLinks.cs" />
-    <Compile Include="Commands\Versioning\guiRevalidation.cs" />
+    <Compile Include="Commands\Versioning\guiAdaptationCommand.cs" />
     <Compile Include="Commands\Versioning\XsltTestWindow.xaml.cs">
       <DependentUpon>XsltTestWindow.xaml</DependentUpon>
     </Compile>

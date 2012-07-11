@@ -130,12 +130,14 @@ namespace Exolutio.View.Commands
         public static guiSaveAsSingleVersion SaveAsSingleVersionCommand { get; set; }
         public static guiRemoveCurrentVersion RemoveCurrentVersionCommand { get; set; }
         public static guiVerifyModelCommand VerifyModelCommand { get; set; }
+        public static guiCreateVersionLinkBetweenSchemas CreateVersionLinkBetweenSchemas { get; set; }
+        public static guiRemoveVersionLinkBetweenSchemas RemoveVersionLinkBetweenSchemas { get; set; }
 
         #if SILVERLIGHT
         #else
         public static guiCreateVersionLink CreateVersionLinkCommand { get; set; }
         public static guiRemoveVersionLink RemoveVersionLinkCommand { get; set; }
-        public static guiRevalidation RevalidationCommand { get; set; }
+        public static guiAdaptationCommand AdaptationCommand { get; set; }
         public static guiVisualizeLinks VisualizeLinksCommand { get; set; }
         #endif
 
@@ -262,8 +264,10 @@ namespace Exolutio.View.Commands
             FindChangesCommand = new guiFindChanges();
             CreateVersionLinkCommand = new guiCreateVersionLink();
             RemoveVersionLinkCommand = new guiRemoveVersionLink();
-            RevalidationCommand = new guiRevalidation();
+            AdaptationCommand = new guiAdaptationCommand();
             VisualizeLinksCommand = new guiVisualizeLinks();
+            RemoveVersionLinkBetweenSchemas = new guiRemoveVersionLinkBetweenSchemas();
+            CreateVersionLinkBetweenSchemas = new guiCreateVersionLinkBetweenSchemas();
             #endif
 
             #endregion

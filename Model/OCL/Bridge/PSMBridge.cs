@@ -6,38 +6,47 @@ using Exolutio.Model.OCL.Types;
 using Exolutio.Model.PSM;
 using Exolutio.Model.OCL.TypesTable;
 
-namespace Exolutio.Model.OCL.Bridge {
-    public class PSMBridge:IBridgeToOCL {
-         public PSMSchema Schema {
+namespace Exolutio.Model.OCL.Bridge
+{
+    public class PSMBridge : IBridgeToOCL
+    {
+        public PSMSchema Schema
+        {
             get;
             private set;
         }
 
         Schema IBridgeToOCL.Schema { get { return Schema; } }
 
-        public TypesTable.TypesTable TypesTable {
+        public TypesTable.TypesTable TypesTable
+        {
             get;
             private set;
         }
 
-        public TypesTable.Library Library {
-            get {
+        public TypesTable.Library Library
+        {
+            get
+            {
                 return this.TypesTable.Library;
             }
         }
 
-        internal Dictionary<PSM.PSMAssociationMember, PSMBridgeClass> PSMAssociationMembers {
+        internal Dictionary<PSM.PSMAssociationMember, PSMBridgeClass> PSMAssociationMembers
+        {
             get;
             private set;
         }
 
-        internal Dictionary<AttributeType, Types.Classifier> PSMAttributeType {
+        internal Dictionary<AttributeType, Types.Classifier> PSMAttributeType
+        {
             get;
             private set;
         }
 
 
-        public PSMBridge(PSMSchema schema) {
+        public PSMBridge(PSMSchema schema)
+        {
             PSMAssociationMembers = new Dictionary<PSMAssociationMember, PSMBridgeClass>();
             PSMAttributeType = new Dictionary<AttributeType, Classifier>();
             this.Schema = schema;
@@ -48,7 +57,8 @@ namespace Exolutio.Model.OCL.Bridge {
         /// Gets the class from type associated with the PSM class.
         /// </summary>
         /// <exception cref="KeyNotFoundException">PIM class does not exist in collection.</exception>
-        public PSMBridgeClass Find(PSMAssociationMember psmMember) {
+        public PSMBridgeClass Find(PSMAssociationMember psmMember)
+        {
             return PSMAssociationMembers[psmMember];
         }
 
@@ -56,7 +66,8 @@ namespace Exolutio.Model.OCL.Bridge {
         /// Gets the class from type associated with the attribute type.
         /// </summary>
         /// <exception cref="KeyNotFoundException">Attribute type does not exist in collection.</exception>
-        public Types.Classifier Find(AttributeType psmAttType) {
+        public Types.Classifier Find(AttributeType psmAttType)
+        {
             return PSMAttributeType[psmAttType];
         }
 
@@ -73,7 +84,8 @@ namespace Exolutio.Model.OCL.Bridge {
                         component, component.GetType().Name));
         }
 
-        private void CreateTypesTable() {
+        private void CreateTypesTable()
+        {
             Library.StandardTypeName naming = new OCL.TypesTable.Library.StandardTypeName();
             naming.Any = "any";
             naming.Boolean = "boolean";
@@ -91,7 +103,7 @@ namespace Exolutio.Model.OCL.Bridge {
             sLC.CreateStandardLibrary(TypesTable);
 
             // Docasna podpora pro typy v Tournaments.eXo
-            Class date = new Class(TypesTable,TypesTable.Library.RootNamespace, "date");
+            Class date = new Class(TypesTable, TypesTable.Library.RootNamespace, "date");
             date.Operations.Add(new Operation("after", true, TypesTable.Library.Boolean, new Parameter[] { new Parameter("time", date) }));
             date.Operations.Add(new Operation("before", true, TypesTable.Library.Boolean, new Parameter[] { new Parameter("time", date) }));
             date.Operations.Add(new Operation("equals", true, TypesTable.Library.Boolean, new Parameter[] { new Parameter("time", date) }));
@@ -103,7 +115,7 @@ namespace Exolutio.Model.OCL.Bridge {
             date.Operations.Add(new Operation(">=", true, TypesTable.Library.Boolean, new Parameter[] { new Parameter("other", date) }));
 
             TypesTable.RegisterType(date);
-          //  TypesTable.Library.RootNamespace.NestedClassifier.Add(date);
+            //  TypesTable.Library.RootNamespace.NestedClassifier.Add(date);
 
 
             Class dateTime = new Class(TypesTable, TypesTable.Library.RootNamespace, "dateTime");
@@ -118,55 +130,63 @@ namespace Exolutio.Model.OCL.Bridge {
             dateTime.Operations.Add(new Operation(">", true, TypesTable.Library.Boolean, new Parameter[] { new Parameter("other", dateTime) }));
             dateTime.Operations.Add(new Operation(">=", true, TypesTable.Library.Boolean, new Parameter[] { new Parameter("other", dateTime) }));
             TypesTable.RegisterType(dateTime);
-          //  TypesTable.Library.RootNamespace.NestedClassifier.Add(dateTime);
+            //  TypesTable.Library.RootNamespace.NestedClassifier.Add(dateTime);
 
 
             Class matchesStatus = new Class(TypesTable, TypesTable.Library.RootNamespace, "MatchStatus");
-           // TypesTable.Library.RootNamespace.NestedClassifier.Add(matchesStatus);
+            // TypesTable.Library.RootNamespace.NestedClassifier.Add(matchesStatus);
             TypesTable.RegisterType(matchesStatus);
 
-            Translate(TypesTable);
+            TranslateSchema(Schema, false);
 
         }
 
 
-        private void Translate(TypesTable.TypesTable tt) {
+        public void TranslateSchema(Schema schema, bool translateAsOldVersion = false)
+        {
+            PSMSchema psmSchema = (PSMSchema)schema;
+            IEnumerable<AttributeType> attTypes = psmSchema.GetAvailablePSMTypes();
 
-            PSM.PSMSchema schema = Schema as PSM.PSMSchema;
-            IEnumerable<AttributeType> attTypes = schema.GetAvailablePSMTypes();
-
-            foreach (AttributeType type in attTypes) {
+            foreach (AttributeType type in attTypes)
+            {
+                if (translateAsOldVersion && schema.Project.PSMBuiltInTypes.Contains(type))
+                    continue;
                 Classifier existsCl;
-                if (Library.RootNamespace.NestedClassifier.TryGetValue(type.Name,out existsCl)) {
+                if (Library.RootNamespace.NestedClassifier.TryGetValue(type.Name, out existsCl))
+                {
                     PSMAttributeType.Add(type, existsCl);
                     continue;
                 }
                 Classifier parent;
-                if (type.BaseType == null) {
+                if (type.BaseType == null)
+                {
                     parent = Library.Any;
                 }
-                else {
-                    if (Library.RootNamespace.NestedClassifier.TryGetValue(type.BaseType.Name, out parent) == false) {
+                else
+                {
+                    if (Library.RootNamespace.NestedClassifier.TryGetValue(type.BaseType.Name, out parent) == false)
+                    {
                         parent = Library.Any;
                     }
                 }
-                Classifier newClassifier = new Classifier(tt,tt.Library.RootNamespace, type.Name, parent);
-                tt.RegisterType(newClassifier);
-            //    Library.RootNamespace.NestedClassifier.Add(newClassifier);
+                Classifier newClassifier = new Classifier(Library.TypeTable, Library.TypeTable.Library.RootNamespace, type.Name, parent);
+                Library.TypeTable.RegisterType(newClassifier);
+                //    Library.RootNamespace.NestedClassifier.Add(newClassifier);
                 PSMAttributeType.Add(type, newClassifier);
             }
 
             List<PSMBridgeClass> classToProcess = new List<PSMBridgeClass>();
             // JM: usporadani trid tak, aby predkove byli zalozeni pred potomky
-            List<PSMClass> psmClassesHierarchy = ModelIterator.GetPSMClassesInheritanceBFS(Schema).ToList();
+            List<PSMClass> psmClassesHierarchy = ModelIterator.GetPSMClassesInheritanceBFS(psmSchema).ToList();
 
-            foreach (PSM.PSMClass psmClass in psmClassesHierarchy) 
+            foreach (PSM.PSMClass psmClass in psmClassesHierarchy)
             {
                 // JM: parent - predek v PSM modelu
                 PSMBridgeClass parent = psmClass.GeneralizationAsSpecific != null ? PSMAssociationMembers[psmClass.GeneralizationAsSpecific.General] : null;
-                PSMBridgeClass newClass = new PSMBridgeClass(tt, tt.Library.RootNamespace, psmClass, parent);
-              //  tt.Library.RootNamespace.NestedClassifier.Add(newClass);
-                tt.RegisterType(newClass);
+                string nameOverride = translateAsOldVersion ? psmClass.Name + @"_old" : null;
+                PSMBridgeClass newClass = new PSMBridgeClass(Library.TypeTable, Library.TypeTable.Library.RootNamespace, psmClass, parent, nameOverride);
+                //  tt.Library.RootNamespace.NestedClassifier.Add(newClass);
+                Library.TypeTable.RegisterType(newClass);
                 classToProcess.Add(newClass);
                 //Hack
                 newClass.Tag = psmClass;
@@ -174,27 +194,25 @@ namespace Exolutio.Model.OCL.Bridge {
                 PSMAssociationMembers.Add(psmClass, newClass);
             }
 
-            foreach (var cM in schema.PSMContentModels) {
-                string cMName = GetContentModelOCLName(cM);
-                PSMBridgeClass newClass = new PSMBridgeClass(tt,tt.Library.RootNamespace, cM);
-               // tt.Library.RootNamespace.NestedClassifier.Add(newClass);
-                tt.RegisterType(newClass);
+            foreach (var cM in psmSchema.PSMContentModels)
+            {
+                string cMName = PSMBridgeClass.GetContentModelOCLName(cM);
+                if (translateAsOldVersion)
+                {
+                    cMName += @"_old";
+                }
+                PSMBridgeClass newClass = new PSMBridgeClass(Library.TypeTable, Library.TypeTable.Library.RootNamespace, cM, cMName);
+                // tt.Library.RootNamespace.NestedClassifier.Add(newClass);
+                Library.TypeTable.RegisterType(newClass);
                 classToProcess.Add(newClass);
                 newClass.Tag = cM;
                 //Registred to find
                 PSMAssociationMembers.Add(cM, newClass);
             }
 
-            classToProcess.ForEach(cl => cl.TranslateMembers(this));
-            List<PSMBridgeClass> orderedSRs = ModelIterator.GetPSMClassesStructuralRepresentativeRelationBFS(schema).Where(c => c.IsStructuralRepresentative).Select(psmc => PSMAssociationMembers[psmc]).ToList();
+            classToProcess.ForEach(cl => cl.TranslateMembers(this, translateAsOldVersion));
+            List<PSMBridgeClass> orderedSRs = ModelIterator.GetPSMClassesStructuralRepresentativeRelationBFS(psmSchema).Where(c => c.IsStructuralRepresentative).Select(psmc => PSMAssociationMembers[psmc]).ToList();
             orderedSRs.ForEach(cl => cl.IncludeSRMembers(PSMAssociationMembers[((PSMClass)cl.PSMSource).RepresentedClass]));
-        }
-
-        private string GetContentModelOCLName(PSM.PSMContentModel c) {
-            PSM.PSMAssociation parentAssocitation = c.ParentAssociation;
-            string parentName = parentAssocitation.Parent.Name;
-            string name = string.Format("__{0}_{1}_{2}", parentName, c.Type.ToString(), parentAssocitation.Index);
-            return name;
         }
     }
 }

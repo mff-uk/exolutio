@@ -42,13 +42,21 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="saxon9he, Version=9.3.0.4, Culture=neutral, PublicKeyToken=e1fdd002d5083fe6, processorArchitecture=MSIL">
+    <Reference Include="IKVM.OpenJDK.Core, Version=0.46.0.2, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ExternalBinaries\Saxon\saxon9he.dll</HintPath>
+      <HintPath>..\ExternalBinaries\Saxon\IKVM.OpenJDK.Core.dll</HintPath>
     </Reference>
-    <Reference Include="saxon9he-api, Version=9.3.0.4, Culture=neutral, PublicKeyToken=e1fdd002d5083fe6, processorArchitecture=MSIL">
+    <Reference Include="IKVM.Runtime, Version=0.46.0.2, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ExternalBinaries\Saxon\saxon9he-api.dll</HintPath>
+      <HintPath>..\ExternalBinaries\Saxon\IKVM.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="saxon9ee, Version=9.4.0.3, Culture=neutral, PublicKeyToken=e1fdd002d5083fe6, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ExternalBinaries\Saxon\saxon9ee.dll</HintPath>
+    </Reference>
+    <Reference Include="saxon9ee-api, Version=9.4.0.3, Culture=neutral, PublicKeyToken=e1fdd002d5083fe6, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ExternalBinaries\Saxon\saxon9ee-api.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -69,20 +77,23 @@
     <Compile Include="Changes\ContentModel\ContentModelChangeInstance.cs" />
     <Compile Include="Changes\EChangeCategory.cs" />
     <Compile Include="Changes\EChangePredicateScope.cs" />
-    <Compile Include="DocumentValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XSLT\GeneratorContext.cs" />
-    <Compile Include="XSLT\RevalidationNodeInfo.cs" />
+    <Compile Include="XSLT\AdaptationNodeInfo.cs" />
     <Compile Include="XSLT\TemplateNamingSupport.cs" />
     <Compile Include="XSLT\XPathExpr.cs" />
     <Compile Include="XSLT\XDocumentXsltExtensions.cs" />
-    <Compile Include="XSLT\XsltRevalidationScriptGenerator.cs" />
+    <Compile Include="XSLT\XsltAdaptationScriptGenerator.cs" />
     <Compile Include="XSLT\XsltProcessing.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Controller\Controller.csproj">
       <Project>{71908A36-A760-41AC-BB5A-78BE2A7541DD}</Project>
       <Name>Controller</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grammar\Grammar.csproj">
+      <Project>{1EC12EDD-E854-4493-A821-BB869F7640E3}</Project>
+      <Name>Grammar</Name>
     </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{AA189B65-9AE0-4B5F-9575-AD121B753309}</Project>

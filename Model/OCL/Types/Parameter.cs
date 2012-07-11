@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
@@ -10,7 +11,7 @@ namespace Exolutio.Model.OCL.Types
     /// </summary>
     public class Parameter:IHasOwner<Operation>
     {
-        public Parameter(string name, Classifier type)
+        public Parameter([Localizable(false)] string name, Classifier type)
         {
             _Name = name;
             _Type = type;

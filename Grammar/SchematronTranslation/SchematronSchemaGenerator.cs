@@ -80,7 +80,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
         private void TranslateScript(XElement schSchema, OCLScript oclScript, TranslationSettings translationSettings, 
             ref Dictionary<PSMClass, List<PatternInfo>> patterns)
         {
-            CompilerResult compilerResult = oclScript.CompileToAst();
+            OclCompilerResult compilerResult = oclScript.CompileToAst();
             compilerResult.CompileExpressionsInMessages();
             if (!compilerResult.Errors.HasError)
             {
@@ -177,7 +177,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
             TranslationSettings translationSettings, bool forceTranslation = false)
         {
             invariant.IsInvariant = true;
-            invariant.ClassifierConstraintBlock = constraintBlock;
+            invariant.ConstraintContext = constraintBlock;
 
             PSMOCLtoXPathConverter xpathConverter;
             if (translationSettings.Functional)
@@ -222,7 +222,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
                     {
                         if (translatedExp.ToString() == invariant.ToString())
                         {
-                            translationSettings.SubexpressionTranslations.SelfVariableDeclaration = translatedExp.ClassifierConstraintBlock.Self;
+                            translationSettings.SubexpressionTranslations.SelfVariableDeclaration = translatedExp.ConstraintContext.Self;
                             return translationSettings.SubexpressionTranslations.GetSubexpressionTranslation(translatedExp).GetString(true);
                         }
                     }

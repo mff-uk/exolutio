@@ -109,7 +109,7 @@
     </Compile>
     <Compile Include="OCL\Utils\CanonicPrinterVisitor.cs" />
     <Compile Include="OCL\Utils\PrintVisitor.cs" />
-    <Compile Include="OCL\CompilerResult.cs" />
+    <Compile Include="OCL\OclCompilerResult.cs" />
     <Compile Include="OCL\Compiler\ArgumentBag.cs" />
     <Compile Include="OCL\Compiler\Compiler.cs" />
     <Compile Include="OCL\Compiler\CompilerHelpers.cs" />
@@ -296,10 +296,6 @@
     <Antlr3 Include="OCL\Grammar\OCLAst.g3">
       <Generator>MSBuild:Compile</Generator>
     </Antlr3>
-    <Antlr3 Include="OCL\Grammar\Copy of OCLAst.g3">
-      <Generator>MSBuild:Compile</Generator>
-    </Antlr3>
-    <None Include="OCL\Grammar\Copy of OCLSyntax.g3" />
     <None Include="OCL\Grammar\OCLSyntax.g3" />
     <None Include="OCL\TypesTable\StandardTypeName.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

@@ -8,6 +8,7 @@ using System.Xml.Linq;
 using System.Xml.Xsl;
 using Saxon.Api;
 using Exolutio.SupportingClasses.XML;
+using net.sf.saxon.lib;
 
 namespace Exolutio.Revalidation.XSLT
 {
@@ -26,68 +27,71 @@ namespace Exolutio.Revalidation.XSLT
         {
             Processor processor = new Processor();
             XsltCompiler xsltCompiler = processor.NewXsltCompiler();
-
+            //xsltCompiler.SchemaAware = true; 
+            xsltCompiler.Processor.SetProperty(FeatureKeys.GENERATE_BYTE_CODE, "false");
+            
             if (!Directory.Exists(tmpDir))
             {
                 tmpDir = Path.GetTempPath();
             }
 
-            string tmpXsltFile = tmpDir + "tmp.xslt";
-            File.WriteAllText(tmpXsltFile, xslt, Encoding.UTF8);
-            XsltExecutable xsltExecutable = xsltCompiler.Compile(new Uri(@"file://" + tmpXsltFile));
-
-            int si = document.IndexOf("xmlns:xsi=\"");
-            int ei = document.IndexOf("\"", si + "xmlns:xsi=\"".Length) + 1;
-            string text = si != - 1 ? document.Remove(si, ei - si) : document;
-            si = text.IndexOf("xmlns=\"");
-            ei = text.IndexOf("\"", si + "xmlns=\"".Length) + 1;
-            string xmlns = si != -1 ? text.Substring(si, ei - si) : string.Empty;
-            text = si != -1 ? text.Remove(si, ei - si) : text;
-
-            string tmpDoc = tmpDir + "tmp.xml";
-
-            File.WriteAllText(tmpDoc, text.Replace("utf-16", "utf-8"), Encoding.UTF8);
-
-
-            StringBuilder outputBuilder = new StringBuilder();
-            //XmlWriterSettings outputWriterSettings = new XmlWriterSettings { Indent = true, CheckCharacters = false, NewLineOnAttributes = true };
-            //XmlWriter outputWriter = XmlWriter.Create(outputBuilder, outputWriterSettings);
-            //Debug.Assert(outputWriter != null);
-            XsltArgumentList xsltArgumentList = new XsltArgumentList();
-
-            FileStream fs = null;
-            try
+            using (StringReader sr = new StringReader(xslt))
             {
-                XsltTransformer xsltTransformer = xsltExecutable.Load();
+                XsltExecutable xsltExecutable = xsltCompiler.Compile(sr);
 
-                fs = new FileStream(tmpDoc, FileMode.Open);
-                xsltTransformer.SetInputStream(fs, new Uri(@"file://" + tmpDoc));
-                XdmDestination destination = new XdmDestination();
-                xsltTransformer.Run(destination);
+                int si = document.IndexOf("xmlns:xsi=\"");
+                int ei = document.IndexOf("\"", si + "xmlns:xsi=\"".Length) + 1;
+                string text = si != -1 ? document.Remove(si, ei - si) : document;
+                si = text.IndexOf("xmlns=\"");
+                ei = text.IndexOf("\"", si + "xmlns=\"".Length) + 1;
+                string xmlns = si != -1 ? text.Substring(si, ei - si) : string.Empty;
+                text = si != -1 ? text.Remove(si, ei - si) : text;
 
-                outputBuilder.Append(destination.XdmNode.OuterXml);
-                //outputWriter.Flush();
-                int pos1 = outputBuilder.ToString().IndexOf(">");
-                int pos2 = outputBuilder.ToString().IndexOf("/>");
-                int pos;
-                if (pos1 == -1)
-                    pos = pos2;
-                else if (pos2 == -1)
-                    pos = pos1;
-                else
-                    pos = Math.Min(pos1, pos2);
-                //outputBuilder.Insert(pos,
-                //                     Environment.NewLine + " xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" " + xmlns);
+                string tmpDoc = tmpDir + "tmp.xml";
 
-                StringReader outputReader = new StringReader(outputBuilder.ToString());
-                XDocument d = XDocument.Load(outputReader);
-                outputReader.Close();
-                return d.PrettyPrintXML();
-            }
-            finally
-            {
-                if (fs != null)
-                    fs.Close();
+                File.WriteAllText(tmpDoc, text.Replace("utf-16", "utf-8"), Encoding.UTF8);
+
+
+                StringBuilder outputBuilder = new StringBuilder();
+                //XmlWriterSettings outputWriterSettings = new XmlWriterSettings { Indent = true, CheckCharacters = false, NewLineOnAttributes = true };
+                //XmlWriter outputWriter = XmlWriter.Create(outputBuilder, outputWriterSettings);
+                //Debug.Assert(outputWriter != null);
+                XsltArgumentList xsltArgumentList = new XsltArgumentList();
+
+                FileStream fs = null;
+                try
+                {
+                    XsltTransformer xsltTransformer = xsltExecutable.Load();
+
+                    fs = new FileStream(tmpDoc, FileMode.Open);
+                    xsltTransformer.SetInputStream(fs, new Uri(@"file://" + tmpDoc));
+                    XdmDestination destination = new XdmDestination();
+                    xsltTransformer.Run(destination);
+
+                    outputBuilder.Append(destination.XdmNode.OuterXml);
+                    //outputWriter.Flush();
+                    int pos1 = outputBuilder.ToString().IndexOf(">");
+                    int pos2 = outputBuilder.ToString().IndexOf("/>");
+                    int pos;
+                    if (pos1 == -1)
+                        pos = pos2;
+                    else if (pos2 == -1)
+                        pos = pos1;
+                    else
+                        pos = Math.Min(pos1, pos2);
+                    //outputBuilder.Insert(pos,
+                    //                     Environment.NewLine + " xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" " + xmlns);
+
+                    StringReader outputReader = new StringReader(outputBuilder.ToString());
+                    XDocument d = XDocument.Load(outputReader);
+                    outputReader.Close();
+                    return d.PrettyPrintXML();
+                }
+                finally
+                {
+                    if (fs != null)
+                        fs.Close();
+                }
             }
         }
 

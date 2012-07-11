@@ -46,7 +46,7 @@ namespace Exolutio.Translation
 		/// </summary>
 		/// <param name="schema">The translated schema.</param>
 		/// <returns>string representation of the <paramref name="schema"/></returns>
-        public abstract TTranslationResult Translate(PSMSchema schema);
+        public abstract TTranslationResult Translate(PSMSchema schema, string schemaLocation = null);
 
 		/// <summary>
 		/// Translates class. 

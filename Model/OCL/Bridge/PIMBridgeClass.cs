@@ -34,15 +34,23 @@ namespace Exolutio.Model.OCL.Bridge {
             set;
         }
 
-        
+        public bool IsFromOldVersion
+        {
+            get; set;
+        }
+
+
         /// <summary>
         /// Creates instance which represents <paramref name="sourceClass"/> in OCL type system.
         /// </summary>
         /// <param name="tt">Destination OCL type system.</param>
         /// <param name="sourceClass">Source class</param>
         /// <param name="parent">Parent of <paramref name="sourceClass"/> in inheritance hierarchy (if it has any)</param>
-        public PIMBridgeClass(TypesTable.TypesTable tt, Namespace ns, PIMClass sourceClass, PIMBridgeClass parent = null)
-            : base(tt, ns, sourceClass.Name, parent ?? tt.Library.Any) {
+        /// <param name="nameOverride">Use this parameter when the class in the OCL should be registered under a 
+        /// different name than <paramref name="sourceClass"/>.<see cref="PIMClass.Name"/></param>
+        public PIMBridgeClass(TypesTable.TypesTable tt, Namespace ns, PIMClass sourceClass, PIMBridgeClass parent = null,
+            string nameOverride = null)
+            : base(tt, ns, nameOverride ?? sourceClass.Name, parent ?? tt.Library.Any) {
             this.SourceClass = sourceClass;
             PIMAttribute = new Dictionary<PIMAttribute, PIMBridgeAttribute>();
             PIMAssociations = new Dictionary<PIMAssociationEnd, PIMBridgeAssociation>();

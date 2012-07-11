@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
@@ -86,7 +87,7 @@ namespace Exolutio.Model.OCL.Types
             Parametrs = new ParameterCollection(this);
         }
 
-        public Operation(string name, bool isQuery, Classifier returnType, IEnumerable<Parameter> parametrs)
+        public Operation([Localizable(false)] string name, bool isQuery, Classifier returnType, IEnumerable<Parameter> parametrs)
             : this(name, isQuery, returnType) {
             this.Parametrs.AddRange(parametrs);
         }

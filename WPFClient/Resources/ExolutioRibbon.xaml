@@ -169,15 +169,19 @@
             <Fluent:RibbonGroupBox Header="Version links">
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.CreateVersionLinkCommand}"
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.CreateVersionLinkBetweenSchemas}"
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.RemoveVersionLinkCommand}"
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.RemoveVersionLinkBetweenSchemas}"
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.VisualizeLinksCommand}"
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
             </Fluent:RibbonGroupBox>
-            <Fluent:RibbonGroupBox Header="Revalidation">
+            <Fluent:RibbonGroupBox Header="Document Adaptation">
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.FindChangesCommand}"
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
-                <Fluent:Button Command="{x:Static Commands:GuiCommands.RevalidationCommand}"
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.AdaptationCommand}"
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />
             </Fluent:RibbonGroupBox>
             <Fluent:RibbonGroupBox>
@@ -457,13 +461,23 @@
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.RemoveOCLScriptCommand}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"
                                SizeDefinition="Middle,Middle,Small" />
+            </Fluent:RibbonGroupBox>
+            <Fluent:RibbonGroupBox Header="Existing scripts">
+                <StackPanel Orientation="Vertical">
+                    <Label >Schema's OCL scripts:</Label>
+                    <Fluent:ComboBox Name="cbOCLScripts" DisplayMemberPath="Name" MinWidth="200" Margin="0" Padding="0"
+                                 SelectionChanged="cbOCLScripts_SelectionChanged" IsEditable="False" />
+                </StackPanel>
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.RenameOCLScriptCommand}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"
                                SizeDefinition="Middle,Middle,Small" />
+
+                <Separator />
+
                 <Fluent:Button Command="{x:Static Commands:GuiCommands.OCLSyntaxCheckCommand}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"
                                SizeDefinition="Large,Large,Small" />
-                <Fluent:ComboBox Name="cbOCLScripts" DisplayMemberPath="Name" MinWidth="200" SelectionChanged="cbOCLScripts_SelectionChanged" />
+                
             </Fluent:RibbonGroupBox>
         </Fluent:RibbonTabItem>
         

@@ -12,13 +12,14 @@ namespace Exolutio.Model.OCL.AST
     /// definition of the context variable (named 'self' by default) and a block of invariants 
     /// about the classifier.
     /// </summary>
-    public class PropertyInitializationBlock
+    public class PropertyInitializationBlock : IConstraintsContext
     {
 
-        public PropertyInitializationBlock(Classifier context, List<PropertyInitialization> propertyInitialization)
+        public PropertyInitializationBlock(Classifier context, List<PropertyInitialization> propertyInitialization, VariableDeclaration self)
         {
             this.Context = context;
             this.PropertyInitializations = propertyInitialization;
+            this.Self = self;
         }
 
         public List<PropertyInitialization> PropertyInitializations
@@ -31,6 +32,21 @@ namespace Exolutio.Model.OCL.AST
         {
             get;
             protected set;
+        }
+
+        private VariableDeclaration self;
+
+        public VariableDeclaration Self
+        {
+            get { return self; }
+            private set
+            {
+                self = value;
+                if (self != null)
+                {
+                    self.IsContextVariable = true;
+                }
+            }
         }
     }
 

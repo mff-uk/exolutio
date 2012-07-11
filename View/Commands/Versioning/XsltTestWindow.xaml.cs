@@ -11,6 +11,7 @@ using System.Xml.Schema;
 using Exolutio.DataGenerator;
 using Exolutio.Dialogs;
 using Exolutio.Model.PSM;
+using Exolutio.Model.PSM.Grammar.XSDTranslation;
 using Exolutio.Revalidation;
 using Exolutio.Revalidation.Changes;
 using Exolutio.Revalidation.XSLT;
@@ -149,7 +150,7 @@ namespace Exolutio.View.Commands
         {
             SampleDataGenerator sampleDataGenerator = new SampleDataGenerator();
             sampleDataGenerator.GenerateComments = false;
-            XDocument sampleDoc = sampleDataGenerator.Translate(schemaVersion1);
+            XDocument sampleDoc = sampleDataGenerator.Translate(schemaVersion1, bSchemaAware.IsChecked == true ? "LastSchema.xsd" : null);
 
             string documentString = XDocumentToString(sampleDoc);
             tbOldDoc.Text = documentString;
@@ -160,16 +161,17 @@ namespace Exolutio.View.Commands
 
         private static void SaveOutput(string sampleDoc)
         {
-            int si = sampleDoc.IndexOf("xmlns:xsi=\"");
-            int ei = sampleDoc.IndexOf("\"", si + "xmlns:xsi=\"".Length) + 1;
-            string text = si != -1 ? sampleDoc.Remove(si, ei - si) : sampleDoc;
-            si = text.IndexOf("xmlns=\"");
-            if (si >= 0)
-            {
-                ei = text.IndexOf("\"", si + "xmlns=\"".Length) + 1;
-                string xmlns = text.Substring(si, ei - si);
-                text = text.Remove(si, ei - si);
-            }
+            string text = sampleDoc;
+            //int si = sampleDoc.IndexOf("xmlns:xsi=\"");
+            //int ei = sampleDoc.IndexOf("\"", si + "xmlns:xsi=\"".Length) + 1;
+            //string text = si != -1 ? sampleDoc.Remove(si, ei - si) : sampleDoc;
+            //si = text.IndexOf("xmlns=\"");
+            //if (si >= 0)
+            //{
+            //    ei = text.IndexOf("\"", si + "xmlns=\"".Length) + 1;
+            //    string xmlns = text.Substring(si, ei - si);
+            //    text = text.Remove(si, ei - si);
+            //}
             File.WriteAllText(SAVE_DOCUMENT, text.Replace("utf-16", "utf-8"), Encoding.UTF8);
         }
 
@@ -209,12 +211,12 @@ namespace Exolutio.View.Commands
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void bAnotherSample_Click(object sender, RoutedEventArgs e)
         {
             CreateSampleDocument();
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void bTransform_Click(object sender, RoutedEventArgs e)
         {
             Transform();
         }
@@ -230,12 +232,20 @@ namespace Exolutio.View.Commands
             tbNewDoc.Text = outDoc;
 
             int si = outDoc.IndexOf("xmlns:xsi=\"");
-            int ei = outDoc.IndexOf("\"", si + "xmlns:xsi=\"".Length) + 1;
-            string text = outDoc.Remove(si, ei - si);
+            int ei; 
+            string text = outDoc; 
+            if (si >= 0)
+            {
+                ei = outDoc.IndexOf("\"", si + "xmlns:xsi=\"".Length) + 1;
+                text = outDoc.Remove(si, ei - si);
+            }
             si = text.IndexOf("xmlns=\"");
-            ei = text.IndexOf("\"", si + "xmlns=\"".Length) + 1;
-            string xmlns = text.Substring(si, ei - si);
-            text = text.Remove(si, ei - si);
+            if (si >= 0)
+            {
+                ei = text.IndexOf("\"", si + "xmlns=\"".Length) + 1;
+                string xmlns = text.Substring(si, ei - si);
+                text = text.Remove(si, ei - si);
+            }
 
             if (Environment.MachineName.Contains("TRUPIK"))
             {
@@ -318,13 +328,14 @@ namespace Exolutio.View.Commands
         
         private void bXsltFromChanges_Click(object sender, RoutedEventArgs e)
         {
-            XsltRevalidationScriptGenerator xsltTemplateGenerator = new XsltRevalidationScriptGenerator();
+            XsltAdaptationScriptGenerator xsltTemplateGenerator = new XsltAdaptationScriptGenerator();
             string xslt = null;
             
             xsltTemplateGenerator.Initialize(SchemaVersion1, SchemaVersion2, ChangeInstances);
-            xsltTemplateGenerator.GenerateTemplateStructure();
+            xsltTemplateGenerator.SchemaAware = bSchemaAware.IsChecked == true; 
+            xsltTemplateGenerator.GenerateTransformationStructure();
 
-            XDocument revalidationStylesheet = xsltTemplateGenerator.GetRevalidationStylesheet();
+            XDocument revalidationStylesheet = xsltTemplateGenerator.GetAdaptationTransformation();
             StringBuilder sb = new StringBuilder();
             using (TextWriter tw = new StringWriter(sb))
             {
@@ -354,14 +365,30 @@ namespace Exolutio.View.Commands
 
         private void bValidateOld_Click(object sender, RoutedEventArgs e)
         {
-            DocumentValidator validator = new DocumentValidator();
-            validator.ValidateDocument(schemaVersion1, tbOldDoc.Text);
+            XsdValidator validator = new XsdValidator();
+            bool valid = validator.ValidateDocument(schemaVersion1, tbOldDoc.Text);
+            if (valid)
+            {
+                ExolutioMessageBox.Show("Validation", "Valid", "The old version is valid.");
+            }
+            else
+            {
+                ExolutioErrorMsgBox.Show("ERROR - The old version is not valid!", validator.ErrorMessage);
+            }
         }
 
         private void bValidateNew_Click(object sender, RoutedEventArgs e)
         {
-            DocumentValidator validator = new DocumentValidator();
-            validator.ValidateDocument(schemaVersion2, tbNewDoc.Text);
+            XsdValidator validator = new XsdValidator();
+            bool valid = validator.ValidateDocument(schemaVersion2, tbNewDoc.Text);
+            if (valid)
+            {
+                ExolutioMessageBox.Show("Validation", "Valid", "The new version is valid.");
+            }
+            else
+            {
+                ExolutioErrorMsgBox.Show("ERROR - The new version is not valid!", validator.ErrorMessage);
+            }
         }
 
         private void SaveRef_Click(object sender, RoutedEventArgs e)
@@ -408,18 +435,18 @@ namespace Exolutio.View.Commands
             }
         }
 
-        private void TestOutputCreation_Click(object sender, RoutedEventArgs e)
+        private void bTestOutputCreation_Click(object sender, RoutedEventArgs e)
         {
             CreateSampleDocument();
 
-            DocumentValidator validator = new DocumentValidator { SilentMode = true };
+            XsdValidator validator = new XsdValidator { };
             
             if (!validator.ValidateDocument(schemaVersion1, tbOldDoc.Text))
                 throw new Exception("Old document invalid");
 
             Transform();
 
-            validator = new DocumentValidator { SilentMode = true };
+            validator = new XsdValidator {  };
             if (!validator.ValidateDocument(schemaVersion2, tbNewDoc.Text))
                 throw new Exception("New document invalid");
 
@@ -428,10 +455,15 @@ namespace Exolutio.View.Commands
             MessageBox.Show("Created OK", "Created OK", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
-        private void GenerateOutput_Click(object sender, RoutedEventArgs e)
+        private void bGenerateOutput_Click(object sender, RoutedEventArgs e)
         {
             CreateSampleNewDocument();
             SaveOutput(tbNewDoc.Text);
+        }
+
+        private void SchemaAware_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

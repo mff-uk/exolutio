@@ -9,9 +9,10 @@ namespace Exolutio.Model
 {
     public class AttributeType : ExolutioVersionedObjectNotAPartOfSchema
     {
-        public AttributeType(Project p) : base(p)
+        public AttributeType(Project p)
+            : base(p)
         {
-            InitCollections(); 
+            InitCollections();
         }
 
         private void InitCollections()
@@ -55,6 +56,22 @@ namespace Exolutio.Model
 
         public bool XSDAtomic { get; set; }
 
+        public string XSDTypeName
+        {
+            get
+            {
+                if (XSDAtomic)
+                {
+                    return "xs:" + XSDAtomic;
+                }
+                else
+                {
+                    return Name;
+                }
+
+            }
+        }
+
         private Guid schemaGuid;
         public Schema Schema
         {
@@ -62,10 +79,10 @@ namespace Exolutio.Model
             {
                 return schemaGuid == Guid.Empty ? null : Project.TranslateComponent<Schema>(schemaGuid);
             }
-            set 
+            set
             {
                 schemaGuid = value != null ? value : Guid.Empty;
-                
+
             }
         }
 
@@ -75,7 +92,7 @@ namespace Exolutio.Model
         }
 
         private Guid componentGuid;
-        
+
         public Component Component
         {
             get
@@ -177,13 +194,13 @@ namespace Exolutio.Model
             XElement xsdDefinitionElement = parentNode.Element(context.ExolutioNS + "XSDDefinition");
             if (xsdDefinitionElement != null)
             {
-                this.XSDDefinition = ((XCData) xsdDefinitionElement.Nodes().First()).Value;
+                this.XSDDefinition = ((XCData)xsdDefinitionElement.Nodes().First()).Value;
             }
 
             XAttribute xsdAtomicAtribute = parentNode.Attribute("XSDAtomic");
             if (xsdAtomicAtribute != null)
             {
-                this.XSDAtomic = true; 
+                this.XSDAtomic = true;
 
             }
 
@@ -217,7 +234,7 @@ namespace Exolutio.Model
         {
             base.FillCopy(copyComponent, projectVersion, createdCopies);
 
-            AttributeType copyAttributeType = (AttributeType) copyComponent;
+            AttributeType copyAttributeType = (AttributeType)copyComponent;
             copyAttributeType.Name = this.Name;
             copyAttributeType.IsSealed = this.IsSealed;
             copyAttributeType.XSDDefinition = this.XSDDefinition;
@@ -250,6 +267,5 @@ namespace Exolutio.Model
         }
     }
 
-    
+
 }
- 

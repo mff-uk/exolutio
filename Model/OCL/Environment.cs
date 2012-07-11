@@ -20,8 +20,9 @@ namespace Exolutio.Model.OCL {
         /// Find a named element in the current environment, not in its parents, based on a single name.
         /// </summary>
         /// <param name="name"></param>
+        /// <param name="acceptClassifiersOnly"> </param>
         /// <returns></returns>
-        public abstract IModelElement LookupLocal(string name);
+        public abstract IModelElement LookupLocal(string name, bool acceptClassifiersOnly = false);
 
         public abstract IModelElement LookupNamespaceLocal(string name);
 
@@ -36,8 +37,9 @@ namespace Exolutio.Model.OCL {
         /// Find a named element in the current environment or recursively in its parent environment, based on a path name.
         /// </summary>
         /// <param name="path"></param>
+        /// <param name="acceptClassifiersOnly"> </param>
         /// <returns></returns>
-        public abstract IModelElement LookupPathName(IEnumerable<string> path);
+        public abstract IModelElement LookupPathName(IEnumerable<string> path, bool acceptClassifiersOnly = false);
 
         /// <summary>
         /// Lookup a given association end name of an implicitly named element in the current environment, including its parents.
@@ -98,7 +100,7 @@ namespace Exolutio.Model.OCL {
 
         public static ErrorEnvironment Instance = new ErrorEnvironment();
 
-        public override IModelElement LookupLocal(string name)
+        public override IModelElement LookupLocal(string name, bool acceptClassifiersOnly = false)
         {
             return null;
         }
@@ -113,7 +115,7 @@ namespace Exolutio.Model.OCL {
             return null;
         }
 
-        public override IModelElement LookupPathName(IEnumerable<string> path)
+        public override IModelElement LookupPathName(IEnumerable<string> path, bool acceptClassifiersOnly = false)
         {
             return null;
         }
@@ -136,11 +138,11 @@ namespace Exolutio.Model.OCL {
             internalNamespace = ns;
         }
 
-        public override IModelElement LookupLocal(string name) {
+        public override IModelElement LookupLocal(string name, bool acceptClassifiersOnly = false) {
             if (internalNamespace.NestedClassifier.ContainsKey(name)) {
                 return internalNamespace.NestedClassifier[name];
             }
-            if (internalNamespace.NestedNamespace.ContainsKey(name)) {
+            if (!acceptClassifiersOnly && internalNamespace.NestedNamespace.ContainsKey(name)) {
                 return internalNamespace.NestedNamespace[name];
             }
             return null;
@@ -166,7 +168,7 @@ namespace Exolutio.Model.OCL {
             return null;
         }
 
-        public override IModelElement LookupPathName(IEnumerable<string> path) {
+        public override IModelElement LookupPathName(IEnumerable<string> path, bool acceptClassifiersOnly = false) {
             int pathLength = path.Count();
             if (pathLength == 0) {
                 return null;
@@ -176,7 +178,7 @@ namespace Exolutio.Model.OCL {
 
             if (pathLength == 1) {
                 // musi byt local
-                return LookupLocal(first);
+                return LookupLocal(first, acceptClassifiersOnly);
             }
             else {
                 var forwardLookup = ForwardLookupPathName(path, internalNamespace);
@@ -186,7 +188,7 @@ namespace Exolutio.Model.OCL {
 
 
                 if (Parent != null) {
-                    return Parent.LookupPathName(path);
+                    return Parent.LookupPathName(path, acceptClassifiersOnly);
                 }
                 else {
                     return null;
@@ -242,8 +244,10 @@ namespace Exolutio.Model.OCL {
             this.internalVariableDec = varDecl;
         }
 
-        public override IModelElement LookupLocal(string name) {
+        public override IModelElement LookupLocal(string name, bool acceptClassifiersOnly = false) {
             // nekontroluje se vnitrni tridy,??operace??
+            if (acceptClassifiersOnly)
+                return null;
             return internalClassifier.LookupProperty(name);
         }
 
@@ -262,16 +266,16 @@ namespace Exolutio.Model.OCL {
             return null;
         }
 
-        public override IModelElement LookupPathName(IEnumerable<string> path) {
+        public override IModelElement LookupPathName(IEnumerable<string> path, bool acceptClassifiersOnly = false) {
             // Neuplna implementace !!!!!!!!!!!!!!!!!!!!!!!!!!!
             if (path.Count() == 1) {
-                var el= LookupLocal(path.First());
+                var el = LookupLocal(path.First(), acceptClassifiersOnly);
                 if (el != null) {
                     return el;
                 }
             }
             if (Parent != null) {
-                return Parent.LookupPathName(path);
+                return Parent.LookupPathName(path, acceptClassifiersOnly);
             }
             return null;
         }
@@ -314,12 +318,12 @@ namespace Exolutio.Model.OCL {
             this.IsImplicit = impl;
         }
 
-        public override IModelElement LookupLocal(string name) {
-            if (name == this.Name) {
+        public override IModelElement LookupLocal(string name, bool acceptClassifiersOnly = false) {
+            if (name == this.Name && !acceptClassifiersOnly) {
                 return Type;
             }
             else {
-                return RootEnviroment.LookupLocal(name);
+                return RootEnviroment.LookupLocal(name, acceptClassifiersOnly);
             }
         }
 
@@ -341,9 +345,9 @@ namespace Exolutio.Model.OCL {
             }
         }
 
-        public override IModelElement LookupPathName(IEnumerable<string> path) {
+        public override IModelElement LookupPathName(IEnumerable<string> path, bool acceptClassifiersOnly = false) {
             // AddElemnt neni soucasti konkretniho namespace => nebudeme hledat path v name
-            return RootEnviroment.LookupPathName(path);
+            return RootEnviroment.LookupPathName(path, acceptClassifiersOnly);
         }
 
         public override ImplicitPropertyData LookupImplicitAttribute(string name) {

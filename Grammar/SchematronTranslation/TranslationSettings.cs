@@ -1,3 +1,5 @@
+using Exolutio.Model.OCL.ConstraintConversion;
+
 namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 {
     public class TranslationSettings
@@ -7,6 +9,12 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
         public bool Functional { get; set; }
 
         public bool Retranslation { get; set; }
+
+        public bool Evolution { get; set; }
+
+        public GetRelativeXPathEvolutionCallback GetRelativeXPathEvolutionCallback { get; set; }
+
+        public PSMSchema OldVersionSchema { get; set; }
 
         public SubexpressionTranslations SubexpressionTranslations { get; private set; }
 
