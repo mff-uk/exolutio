@@ -1,0 +1,4 @@
+Copyright (c) Philipp Sumi
+This library has no licence attached. 
+Original source: 
+http://www.hardcodet.net/2009/03/moving-data-grid-rows-using-drag-and-drop
