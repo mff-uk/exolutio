@@ -6,303 +6,40 @@
             <serialized version="14.0" xml:space="preserve">
                 <map>
                     <entry>
+                        <String>enable.project.master.files.support</String>
+                        <Boolean>true</Boolean>
+                    </entry>
+                    <entry>
                         <String>scenario.associations</String>
                         <scenarioAssociation-array>
                             <scenarioAssociation>
-                                <field name="name">
-                                    <String>LastSchemaSch FUN</String>
-                                </field>
-                                <field name="type">
-                                    <String>XPROC</String>
-                                </field>
                                 <field name="url">
-                                    <String>../OclX/Examples/Functional/SchemaAware/CompanyHierarchy.xml</String>
+                                    <String>../XProcTest/testpipe.xpl</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>XProc CurrentFile</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XPROC</String>
+                                    </list>
                                 </field>
                             </scenarioAssociation>
                             <scenarioAssociation>
-                                <field name="name">
-                                    <String>LastSchemaSch FUN</String>
-                                </field>
-                                <field name="type">
-                                    <String>XPROC</String>
-                                </field>
-                                <field name="url">
-                                    <String>../OclX/Pipeline/step4.out.xsl</String>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="name">
-                                    <String>CompanyHierarchy F SA</String>
-                                </field>
-                                <field name="type">
-                                    <String>XPROC</String>
-                                </field>
-                                <field name="url">
-                                    <String>../OclX/Examples/Functional/SchemaAware/CompanyHierarchySA.sch</String>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="name">
-                                    <String>docbook/docbook5.framework/DocBook 5/Docbook XHTML</String>
-                                </field>
-                                <field name="type">
-                                    <String>XSL</String>
-                                </field>
-                                <field name="url">
-                                    <String>../../../Skola/Papers/r2012_maly_x3/x3.xml</String>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="name">
-                                    <String>MatchSchedule F SA</String>
-                                </field>
-                                <field name="type">
-                                    <String>XPROC</String>
-                                </field>
-                                <field name="url">
-                                    <String>../OclX/Examples/Functional/SchemaAware/MatchSchedule.xml</String>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="name">
-                                    <String>MatchSchedule F SA</String>
-                                </field>
-                                <field name="type">
-                                    <String>XPROC</String>
-                                </field>
-                                <field name="url">
-                                    <String>../OclX/Examples/Functional/NotSchemaAware/MatchSchedule.sch</String>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="name">
-                                    <String>TournamentsSchedule D NSA</String>
-                                </field>
-                                <field name="type">
-                                    <String>XPROC</String>
-                                </field>
-                                <field name="url">
-                                    <String>../OclX/Examples/Functional/NotSchemaAware/TournamentsSchedule.xml</String>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="name">
-                                    <String>MatchSchedule F SA</String>
-                                </field>
-                                <field name="type">
-                                    <String>XPROC</String>
-                                </field>
                                 <field name="url">
                                     <String>../OclX/Pipeline/oclx-schematron-pipeline.xpl</String>
                                 </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="name">
-                                    <String>MatchSchedule F SA</String>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>CompanyHierarchy F SA</String>
+                                    </list>
                                 </field>
-                                <field name="type">
-                                    <String>XPROC</String>
-                                </field>
-                                <field name="url">
-                                    <String>../OclX/Examples/Functional/SchemaAware/MatchScheduleSA.sch</String>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="name">
-                                    <String>MatchSchedule D NSA</String>
-                                </field>
-                                <field name="type">
-                                    <String>XPROC</String>
-                                </field>
-                                <field name="url">
-                                    <String>../OclX/Examples/Functional/NotSchemaAware/MatchSchedule.xml</String>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="name">
-                                    <String>TournamentsSchedule F SA</String>
-                                </field>
-                                <field name="type">
-                                    <String>XPROC</String>
-                                </field>
-                                <field name="url">
-                                    <String>../OclX/oclX-functional.xsl</String>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="name">
-                                    <String>TournamentsSchedule F SA</String>
-                                </field>
-                                <field name="type">
-                                    <String>XPROC</String>
-                                </field>
-                                <field name="url">
-                                    <String>../OclX/Examples/Functional/SchemaAware/TournamentsSchedule.xml</String>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="name">
-                                    <String>TournamentsSchedule D SA</String>
-                                </field>
-                                <field name="type">
-                                    <String>XPROC</String>
-                                </field>
-                                <field name="url">
-                                    <String>../OclX/Examples/Functional/SchemaAware/TournamentsScheduleSA.sch</String>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="name">
-                                    <String>MatchSchedule D SA</String>
-                                </field>
-                                <field name="type">
-                                    <String>XPROC</String>
-                                </field>
-                                <field name="url">
-                                    <String>../OclX/oclX-dynamic-internal.xsl</String>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="name">
-                                    <String>LastSchemaSch FUN</String>
-                                </field>
-                                <field name="type">
-                                    <String>XPROC</String>
-                                </field>
-                                <field name="url">
-                                    <String>../OclX/Pipeline/oclx_include.xsl</String>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="name">
-                                    <String>TournamentsSchedule F SA</String>
-                                </field>
-                                <field name="type">
-                                    <String>XPROC</String>
-                                </field>
-                                <field name="url">
-                                    <String>../OclX/Examples/Dynamic/SchemaAware/TournamentsSchedule.xml</String>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="name">
-                                    <String>MatchSchedule D SA</String>
-                                </field>
-                                <field name="type">
-                                    <String>XPROC</String>
-                                </field>
-                                <field name="url">
-                                    <String>../OclX/Examples/Dynamic/SchemaAware/MatchSchedule.xml</String>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="name">
-                                    <String>MatchSchedule D SA</String>
-                                </field>
-                                <field name="type">
-                                    <String>XPROC</String>
-                                </field>
-                                <field name="url">
-                                    <String>../OclX/oclX-dynamic.xsl</String>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="name">
-                                    <String>MatchSchedule D SA</String>
-                                </field>
-                                <field name="type">
-                                    <String>XPROC</String>
-                                </field>
-                                <field name="url">
-                                    <String>../OclX/Examples/Dynamic/SchemaAware/MatchScheduleSA.sch</String>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="name">
-                                    <String>LastSchemaSch FUN</String>
-                                </field>
-                                <field name="type">
-                                    <String>XPROC</String>
-                                </field>
-                                <field name="url">
-                                    <String>../SchematronTest/LastSchSchema.sch</String>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="name">
-                                    <String>TournamentsSchedule D SA</String>
-                                </field>
-                                <field name="type">
-                                    <String>XPROC</String>
-                                </field>
-                                <field name="url">
-                                    <String>../OclX/Examples/Dynamic/SchemaAware/TournamentsScheduleSA.sch</String>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="name">
-                                    <String>TournamentsSchedule F NSA</String>
-                                </field>
-                                <field name="type">
-                                    <String>XPROC</String>
-                                </field>
-                                <field name="url">
-                                    <String>../OclX/Examples/Functional/NotSchemaAware/TournamentsSchedule.sch</String>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="name">
-                                    <String>LastSchemaSch DYN</String>
-                                </field>
-                                <field name="type">
-                                    <String>XPROC</String>
-                                </field>
-                                <field name="url">
-                                    <String>../OclX/Examples/Dynamic/NotSchemaAware/MatchSchedule.xml</String>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="name">
-                                    <String>MatchSchedule D NSA</String>
-                                </field>
-                                <field name="type">
-                                    <String>XPROC</String>
-                                </field>
-                                <field name="url">
-                                    <String>../OclX/Examples/Dynamic/NotSchemaAware/MatchSchedule.sch</String>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="name">
-                                    <String>SR</String>
-                                </field>
-                                <field name="type">
-                                    <String>XML</String>
-                                </field>
-                                <field name="url">
-                                    <String>../OclX/oclX-standard-library.xsl</String>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="name">
-                                    <String>DesiredStylesheet</String>
-                                </field>
-                                <field name="type">
-                                    <String>XML</String>
-                                </field>
-                                <field name="url">
-                                    <String>DesiredStylesheet.xsl</String>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="name">
-                                    <String>LastStylesheet</String>
-                                </field>
-                                <field name="type">
-                                    <String>XML</String>
-                                </field>
-                                <field name="url">
-                                    <String>LastStylesheet.xslt</String>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XPROC</String>
+                                    </list>
                                 </field>
                             </scenarioAssociation>
                         </scenarioAssociation-array>
@@ -3445,19 +3182,154 @@
                                     <String-array/>
                                 </field>
                             </xprocScenario>
+                            <xprocScenario>
+                                <field name="inputPorts">
+                                    <xprocInputPort-array>
+                                        <xprocInputPort>
+                                            <field name="portName">
+                                                <String>source</String>
+                                            </field>
+                                            <field name="urls">
+                                                <String-array/>
+                                            </field>
+                                        </xprocInputPort>
+                                    </xprocInputPort-array>
+                                </field>
+                                <field name="outputPorts">
+                                    <xprocOutputPort-array>
+                                        <xprocOutputPort>
+                                            <field name="portName">
+                                                <String>result</String>
+                                            </field>
+                                            <field name="url">
+                                                <null/>
+                                            </field>
+                                            <field name="showInSequenceView">
+                                                <Boolean>true</Boolean>
+                                            </field>
+                                        </xprocOutputPort>
+                                    </xprocOutputPort-array>
+                                </field>
+                                <field name="xprocOptions">
+                                    <xprocOption-array/>
+                                </field>
+                                <field name="xprocParameters">
+                                    <xprocParameterPort-array>
+                                        <xprocParameterPort>
+                                            <field name="portName">
+                                                <String>*</String>
+                                            </field>
+                                            <field name="parameters">
+                                                <xprocParameter-array/>
+                                            </field>
+                                        </xprocParameterPort>
+                                    </xprocParameterPort-array>
+                                </field>
+                                <field name="advancedOptionsMap">
+                                    <null/>
+                                </field>
+                                <field name="name">
+                                    <String>XProc CurrentFile</String>
+                                </field>
+                                <field name="baseURL">
+                                    <null/>
+                                </field>
+                                <field name="footerURL">
+                                    <null/>
+                                </field>
+                                <field name="fOPMethod">
+                                    <null/>
+                                </field>
+                                <field name="fOProcessorName">
+                                    <null/>
+                                </field>
+                                <field name="headerURL">
+                                    <null/>
+                                </field>
+                                <field name="inputXSLURL">
+                                    <String>${currentFileURL}</String>
+                                </field>
+                                <field name="inputXMLURL">
+                                    <String></String>
+                                </field>
+                                <field name="defaultScenario">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="isFOPPerforming">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="type">
+                                    <String>XPROC</String>
+                                </field>
+                                <field name="saveAs">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="openInBrowser">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="outputFile">
+                                    <null/>
+                                </field>
+                                <field name="openOtherLocationInBrowser">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="locationToOpenInBrowserURL">
+                                    <null/>
+                                </field>
+                                <field name="openInEditor">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="showInHTMLPane">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="showInXMLPane">
+                                    <Boolean>true</Boolean>
+                                </field>
+                                <field name="showInSVGPane">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="showInResultSetPane">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="useXSLTInput">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="xsltParams">
+                                    <list/>
+                                </field>
+                                <field name="cascadingStylesheets">
+                                    <String-array/>
+                                </field>
+                                <field name="xslTransformer">
+                                    <String>Calabash XProc</String>
+                                </field>
+                                <field name="extensionURLs">
+                                    <String-array/>
+                                </field>
+                            </xprocScenario>
                         </scenario-array>
                     </entry>
                     <entry>
                         <String>scenarios.load.from.project</String>
                         <Boolean>true</Boolean>
                     </entry>
+                    <entry>
+                        <String>validation.scenarios</String>
+                        <validationScenario-array/>
+                    </entry>
                 </map>
             </serialized>
         </options>
     </meta>
     <projectTree name="eXolutioOutputs.xpr">
+        <folder masterFiles="true" name="Master Files">
+            <file name="../OclX/oclX-dynamic.xsl"/>
+            <file name="../OclX/oclX-functional.xsl"/>
+            <file name="../OclX/Pipeline/oclx-schematron-pipeline.xpl"/>
+        </folder>
         <folder path="../OclX/"/>
         <folder path="../SchematronTest/"/>
+        <folder path="../XProcTest/"/>
         <folder path="../XSDTest/"/>
         <folder path="."/>
         <file name="LastSchema.xsd"/>
