@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<errors xmlns="http://eXolutio.com/oclX/functional/error">
+<errors 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xml="http://www.w3.org/XML/1998/namespace"
+  xsi:schemaLocation="http://eXolutio.com/oclX/functional/error oclX-error.xsd"
+  xmlns="http://eXolutio.com/oclX/functional/error">
   <error xml:id="E001">
     <description>A maximum of three different iterators are allowed. </description>
   </error>
