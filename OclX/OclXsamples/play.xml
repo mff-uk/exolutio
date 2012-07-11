@@ -1,23 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<a><b/></a>
-
-<!--<aa>
-  <b>
-    <c>1</c>
-    <x>1</x>
-  </b>
-  <b>
-    <c>2</c>
-    <x>2</x>
-  </b>
-  <b>
-    <c>1</c>
-  </b>
-  <b>
-    <c>3</c>
-    <x>4</x>
-  </b>
-  <b>
-    <x>5</x>
-  </b>
-</aa>-->
+<?xml version="1.0"?>
+<ROWSET>
+  <ROW>
+    <X>X</X>
+    <Y>X</Y>
+  </ROW>
+  <ROW>
+    <X>z</X>
+    <Y>bz</Y>
+  </ROW>
+</ROWSET>
