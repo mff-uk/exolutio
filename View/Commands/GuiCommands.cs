@@ -90,6 +90,7 @@ namespace Exolutio.View.Commands
         #region PSM
 
         public static guiControllerCommand AddPSMSchemaCommand { get; set; }
+        public static guiMappingV MappingV { get; set; }
         public static guiControllerCommand RenamePSMSchemaCommand { get; set; }
         public static guiControllerCommand RemovePSMSchemaCommand { get; set; }
         public static guiControllerCommand AddPSMClassCommand { get; set; }
@@ -491,6 +492,9 @@ namespace Exolutio.View.Commands
             PSMDelete = new guiPSMDelete();
             DeleteSubtree = new guiDeleteSubtree();
             DeletePSMSchema = new guiDeletePSMSchema();
+
+            MappingV = new guiMappingV();
+
             #endregion
 
             #region other
