@@ -101,6 +101,7 @@
     <Compile Include="Commands\PIM\guiPIMDeleteGeneralization.cs" />
     <Compile Include="Commands\PIM\guiSplitPIMAssociation.cs" />
     <Compile Include="Commands\PIM\guiSplitPIMAttribute.cs" />
+    <Compile Include="Commands\PSM\guiMappingV.cs" />
     <Compile Include="Commands\PSM\guiSplitPSMAttribute.cs" />
     <Compile Include="Commands\Versioning\guiCreateVersionLinkBetweenSchemas.cs" />
     <Compile Include="Commands\Versioning\guiRemoveVersionLink.cs" />
@@ -320,6 +321,10 @@
     <ProjectReference Include="..\Normalization\Normalization.csproj">
       <Project>{FDD2B4AC-D621-49ED-91D5-80B7F00ED4D5}</Project>
       <Name>Normalization</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PSMtoPIM_v\PSMtoPIM_v.csproj">
+      <Project>{420FB060-7A77-444B-AF10-D3DE09713DEF}</Project>
+      <Name>PSMtoPIM_v</Name>
     </ProjectReference>
     <ProjectReference Include="..\ResourceLibrary\ResourceLibrary.csproj">
       <Project>{2598DE7B-9F5E-46EA-9B81-AE41E0D2D685}</Project>

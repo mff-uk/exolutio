@@ -446,6 +446,12 @@
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
             </Fluent:RibbonGroupBox>
         </Fluent:RibbonTabItem>
+        <Fluent:RibbonTabItem x:Name="tabReverse" Header="Interpretation" Group="{Binding ElementName=psmGroup}">
+            <Fluent:RibbonGroupBox Header="Mapping I">
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.MappingV}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+            </Fluent:RibbonGroupBox>
+        </Fluent:RibbonTabItem>
 
         <Fluent:RibbonTabItem Header="OCL/Constraints">
             <Fluent:RibbonGroupBox Header="OCL/Constraints">
