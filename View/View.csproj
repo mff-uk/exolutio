@@ -64,6 +64,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
@@ -101,6 +102,7 @@
     <Compile Include="Commands\PIM\guiPIMDeleteGeneralization.cs" />
     <Compile Include="Commands\PIM\guiSplitPIMAssociation.cs" />
     <Compile Include="Commands\PIM\guiSplitPIMAttribute.cs" />
+    <Compile Include="Commands\PSM\guiValidateAllCommand.cs" />
     <Compile Include="Commands\PSM\guiMappingV.cs" />
     <Compile Include="Commands\PSM\guiSplitPSMAttribute.cs" />
     <Compile Include="Commands\Versioning\guiCreateVersionLinkBetweenSchemas.cs" />
@@ -108,6 +110,7 @@
     <Compile Include="Commands\Versioning\guiRemoveVersionLinkBetweenSchemas.cs" />
     <Compile Include="Commands\Versioning\guiVisualizeLinks.cs" />
     <Compile Include="Commands\Versioning\guiAdaptationCommand.cs" />
+    <Compile Include="Commands\PSM\guiValidateCommand.cs" />
     <Compile Include="Commands\Versioning\XsltTestWindow.xaml.cs">
       <DependentUpon>XsltTestWindow.xaml</DependentUpon>
     </Compile>
@@ -345,6 +348,10 @@
     <ProjectReference Include="..\Translation\Translation.csproj">
       <Project>{9EB25848-0BF0-4EBB-B879-4F7F7739E850}</Project>
       <Name>Translation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Validation\Validation.csproj">
+      <Project>{A685D42C-1BE0-4C60-81F2-C255431FB937}</Project>
+      <Name>Validation</Name>
     </ProjectReference>
     <ProjectReference Include="..\ViewToolkit\ViewToolkit.csproj">
       <Project>{3FD45349-A060-4098-A8D2-34E5DB5D4296}</Project>

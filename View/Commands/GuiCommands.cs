@@ -89,6 +89,8 @@ namespace Exolutio.View.Commands
 
         #region PSM
 
+        public static guiValidateCommand ValidateXMLFile { get; set; }
+        public static guiValidateAllCommand ValidateAllXMLFiles { get; set; }
         public static guiControllerCommand AddPSMSchemaCommand { get; set; }
         public static guiMappingV MappingV { get; set; }
         public static guiControllerCommand RenamePSMSchemaCommand { get; set; }
@@ -449,6 +451,9 @@ namespace Exolutio.View.Commands
                                                 AcceptedSelectedComponentType = typeof(PSMClass),
                                                 ScopeIsSelectedComponent = true
                                             };
+
+            ValidateXMLFile = new guiValidateCommand();
+            ValidateAllXMLFiles = new guiValidateAllCommand();
 
             SplitPSMAttributeCommand = new guiSplitPSMAttribute();
             SplitPSMAssociationCommand = new guiSplitPSMAssociation();

@@ -487,6 +487,17 @@
             </Fluent:RibbonGroupBox>
         </Fluent:RibbonTabItem>
         
+        <Fluent:RibbonTabItem x:Name="tabValidation" Header="Validation" Group="{Binding ElementName=psmGroup}">
+            <Fluent:RibbonGroupBox Header="XMLValidation">
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.ValidateXMLFile}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>                
+            </Fluent:RibbonGroupBox>
+            <!--<Fluent:RibbonGroupBox Header="XMLValidateAll">
+                <Fluent:Button Command="{x:Static Commands:GuiCommands.ValidateAllXMLFiles}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}"/>
+            </Fluent:RibbonGroupBox>-->
+        </Fluent:RibbonTabItem>
+
         <Fluent:RibbonTabItem Header="View">
             <Fluent:RibbonGroupBox Header="Layout">
                 <Fluent:Button Command="{x:Static ClientCommands:StaticWPFClientCommands.LayoutPIMLeftPSMRight}" 

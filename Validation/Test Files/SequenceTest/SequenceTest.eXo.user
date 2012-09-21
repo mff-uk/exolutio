@@ -1,0 +1,41 @@
+<DockingManager version="1.3.0">
+    <ResizingPanel ResizeWidth="*" ResizeHeight="*" EffectiveSize="0,0" Orientation="Horizontal">
+        <DockablePane ResizeWidth="130" ResizeHeight="*" EffectiveSize="130,530" ID="58c1b7b0-5b3e-4e0e-9a8b-c16ece2e125e" Anchor="Left" IsAutoHidden="false">
+            <DockableContent Name="navigatorTab" FloatingWindowSize="250,400" />
+        </DockablePane>
+        <ResizingPanel ResizeWidth="*" ResizeHeight="*" EffectiveSize="451,530" Orientation="Vertical">
+            <DocumentPane IsMain="true" SelectedIndex="0" ResizeWidth="*" ResizeHeight="*" EffectiveSize="451,414">
+                <DocumentContent Name="D7c8cf4ce_8b81_4e82_8d8f_b43d43cbb23e" />
+                <DocumentContent Name="D65a90525_ea0e_4b94_a860_ee7092e8f712" />
+                <DocumentContent Name="D333bae35_3fe0_495a_9f45_0bda76d8dc42" />
+                <DocumentContent Name="D921b991e_6572_42c8_ab2d_184bf9008f58" />
+                <DocumentContent Name="D6c8799fc_b3c2_4ecc_830b_1a6bca2b51e3" />
+                <DocumentContent Name="D7d47686a_9a94_4a7f_8b51_bb70a010bebd" />
+                <DocumentContent Name="D22cda238_34b7_4e32_8150_c8f9c4d61be2" />
+                <DocumentContent Name="D4c34c008_2b91_4f9a_a595_b74e478e0b59" />
+                <DocumentContent Name="D39d011a8_ee1d_4f13_89bc_ff238d037d19" />
+                <DocumentContent Name="Dfafca42c_fb0b_4f9a_8128_4449f7f311cb" />
+                <DocumentContent Name="D3685b543_22dc_4e06_a522_58612bd77665" />
+                <DocumentContent Name="Ddca4c4d9_4410_4e66_aea9_3ae8f46dc196" />
+                <DocumentContent Name="De1abcf72_8e5c_4330_9636_f5f8d0b8f1aa" />
+                <DocumentContent Name="D2f0a55ed_f617_44b9_8fe6_bd7703193670" />
+                <DocumentContent Name="D14c12d20_ccdb_4dfb_98e4_15f5d6b365ae" />
+                <DocumentContent Name="D38db6b73_aca5_4734_8c71_e3a81ce13f0b" />
+                <DocumentContent Name="Dc019f0d3_ac67_41a3_a5c5_11dd16824695" />
+                <DocumentContent Name="Dd8f135e4_8185_4756_a92b_13f939a352b2" />
+                <DocumentContent Name="D2d8734a5_dd17_47d6_9c0a_ded398b3f863" />
+                <DocumentContent Name="Dff67bf0f_2ded_4c6a_99b0_d684a07f492c" />
+            </DocumentPane>
+            <DockablePane ResizeWidth="*" ResizeHeight="110" EffectiveSize="451,110" ID="59705517-1483-4eef-9328-6e2e9b26c86f" Anchor="Bottom" SelectedIndex="1" IsAutoHidden="false">
+                <DockableContent Name="dcCommandLog" FloatingWindowSize="250,400" />
+                <DockableContent Name="dcProjectView" FloatingWindowSize="250,400" />
+            </DockablePane>
+        </ResizingPanel>
+        <DockablePane ResizeWidth="162" ResizeHeight="*" EffectiveSize="162,530" ID="4f410da0-fd6f-4130-8187-bfa0279e4e58" Anchor="Right" SelectedIndex="0" IsAutoHidden="false">
+            <DockableContent Name="dcProperties" FloatingWindowSize="250,400" />
+            <DockableContent Name="dcOcl" FloatingWindowSize="250,400" />
+        </DockablePane>
+    </ResizingPanel>
+    <Hidden />
+    <Windows />
+</DockingManager>

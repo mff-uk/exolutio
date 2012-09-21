@@ -46,7 +46,19 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PSMtoPIM_v", "PSMtoPIM_v\PSMtoPIM_v.csproj", "{420FB060-7A77-444B-AF10-D3DE09713DEF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Validation", "Validation\Validation.csproj", "{A685D42C-1BE0-4C60-81F2-C255431FB937}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4FF9A6A5-EB8B-4FFA-A592-228FF264B873}"
+	ProjectSection(SolutionItems) = preProject
+		eXolutio.vsmdi = eXolutio.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
 Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = eXolutio.vsmdi
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -255,6 +267,16 @@ Global
 		{420FB060-7A77-444B-AF10-D3DE09713DEF}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{420FB060-7A77-444B-AF10-D3DE09713DEF}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{420FB060-7A77-444B-AF10-D3DE09713DEF}.Release|x86.ActiveCfg = Release|Any CPU
+		{A685D42C-1BE0-4C60-81F2-C255431FB937}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{A685D42C-1BE0-4C60-81F2-C255431FB937}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{A685D42C-1BE0-4C60-81F2-C255431FB937}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{A685D42C-1BE0-4C60-81F2-C255431FB937}.Debug|x86.ActiveCfg = Debug|x86
+		{A685D42C-1BE0-4C60-81F2-C255431FB937}.Debug|x86.Build.0 = Debug|x86
+		{A685D42C-1BE0-4C60-81F2-C255431FB937}.Release|Any CPU.ActiveCfg = Release|x86
+		{A685D42C-1BE0-4C60-81F2-C255431FB937}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{A685D42C-1BE0-4C60-81F2-C255431FB937}.Release|Mixed Platforms.Build.0 = Release|x86
+		{A685D42C-1BE0-4C60-81F2-C255431FB937}.Release|x86.ActiveCfg = Release|x86
+		{A685D42C-1BE0-4C60-81F2-C255431FB937}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
