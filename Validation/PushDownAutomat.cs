@@ -131,28 +131,18 @@ namespace Exolutio.Model.PSM.XMLValidation
             if (currentState.Count > 0)
                 readedNodesStackTrace.Push(xmlElement.Name);
             foreach (XmlAttribute att in xmlElement.Attributes) {
-                currentState = sideFunction(currentState, processAtribute(currentState,att));
+                currentState = sideFunction(currentState,  rightSideToLeftSide[att.Name] );
             }
-            foreach (XmlElement childElement in xmlElement.ChildNodes)
-            {               
-                currentState = sideFunction(currentState, processNode(currentState, childElement));                
+            foreach (XmlNode childNode in xmlElement.ChildNodes)
+            {        
+                if(childNode is XmlElement)
+                    currentState = sideFunction(currentState, processNode(currentState,(XmlElement) childNode));                
             }
             HashSet<String> result = new HashSet<string>();
             result = upFunction(currentState, xmlElement.Name);
             if (result.Count > 0)
                 readedNodesStackTrace.Pop();
             return result;
-        }
-
-        private HashSet<String> processAtribute(HashSet<AutomatState> currentState,XmlAttribute xmlAttribute){
-            currentState = downFunction(currentState, xmlAttribute.Name);
-            if (currentState.Count > 0)
-                readedNodesStackTrace.Push(xmlAttribute.Name);
-            HashSet<String> result = new HashSet<string>();
-            result = upFunction(currentState, xmlAttribute.Name);
-            if (result.Count > 0)
-                readedNodesStackTrace.Pop();
-            return result;  
         }
 
         /**
