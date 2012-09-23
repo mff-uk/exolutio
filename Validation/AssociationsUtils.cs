@@ -36,6 +36,7 @@ namespace Exolutio.Model.PSM.XMLValidation
                         associationFromSet.Name = "";
                         PSMClass fakeAttributeClass = new PSMClass(topAssociation.Project, Guid.NewGuid());
                         fakeAttributeClass.PSMAttributes.Add(attribute);
+                        fakeAttributeClass.ParentAssociation = associationFromSet;
                         associationFromSet.Child = fakeAttributeClass;
                         fakeSet.ChildPSMAssociations.Add(associationFromSet);
                     }
@@ -55,12 +56,14 @@ namespace Exolutio.Model.PSM.XMLValidation
                     if (attribute.Element)
                     {
                         PSMAssociation association = new PSMAssociation(topAssociation.Project, Guid.NewGuid());
-                        association.Lower = 1;
-                        association.Upper = 1;
-                        association.Name = "";
+                        association.Lower = attribute.Lower;
+                        association.Upper = attribute.Upper;
+                        association.Name = attribute.Name;
                         PSMClass fakeAttributeClass = new PSMClass(topAssociation.Project, Guid.NewGuid());
                         fakeAttributeClass.PSMAttributes.Add(attribute);
+                        fakeAttributeClass.ParentAssociation = association;
                         association.Child = fakeAttributeClass;
+                        resultAssociations.Add(association);
                     }
                 }
             }

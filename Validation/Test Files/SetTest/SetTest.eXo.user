@@ -1,10 +1,11 @@
 <DockingManager version="1.3.0">
     <ResizingPanel ResizeWidth="*" ResizeHeight="*" EffectiveSize="0,0" Orientation="Horizontal">
-        <DockablePane ResizeWidth="130" ResizeHeight="*" EffectiveSize="130,530" ID="58c1b7b0-5b3e-4e0e-9a8b-c16ece2e125e" Anchor="Left" IsAutoHidden="false">
+        <DockablePane ResizeWidth="130" ResizeHeight="*" EffectiveSize="130,590" ID="58c1b7b0-5b3e-4e0e-9a8b-c16ece2e125e" Anchor="Left" IsAutoHidden="false">
             <DockableContent Name="navigatorTab" FloatingWindowSize="250,400" />
         </DockablePane>
-        <ResizingPanel ResizeWidth="*" ResizeHeight="*" EffectiveSize="451,530" Orientation="Vertical">
-            <DocumentPane IsMain="true" SelectedIndex="0" ResizeWidth="*" ResizeHeight="*" EffectiveSize="451,414">
+        <ResizingPanel ResizeWidth="*" ResizeHeight="*" EffectiveSize="1062,590" Orientation="Vertical">
+            <DocumentPane IsMain="true" SelectedIndex="0" ResizeWidth="*" ResizeHeight="*" EffectiveSize="1062,474">
+                <DocumentContent Name="D5be58957_3503_436a_a8d7_4fb3ed96a130" />
                 <DocumentContent Name="D9a613bcd_c285_4168_abef_87dc14842b3b" />
                 <DocumentContent Name="Ddb13a5d3_8119_471e_a5b6_4cb8c97c3228" />
                 <DocumentContent Name="Dd8a496e8_d3a1_4d1f_8ac3_f8d94a03f7d7" />
@@ -22,14 +23,13 @@
                 <DocumentContent Name="Ddf9659e9_451e_4694_9aa3_f7f7dfba5b56" />
                 <DocumentContent Name="Da060fb99_d240_4b92_85b4_b51456d6cf35" />
                 <DocumentContent Name="D7b76d579_1ffb_4af4_9456_422753aeb165" />
-                <DocumentContent Name="D5be58957_3503_436a_a8d7_4fb3ed96a130" />
             </DocumentPane>
-            <DockablePane ResizeWidth="*" ResizeHeight="110" EffectiveSize="451,110" ID="59705517-1483-4eef-9328-6e2e9b26c86f" Anchor="Bottom" SelectedIndex="1" IsAutoHidden="false">
+            <DockablePane ResizeWidth="*" ResizeHeight="110" EffectiveSize="1062,110" ID="59705517-1483-4eef-9328-6e2e9b26c86f" Anchor="Bottom" SelectedIndex="1" IsAutoHidden="false">
                 <DockableContent Name="dcCommandLog" FloatingWindowSize="250,400" />
                 <DockableContent Name="dcProjectView" FloatingWindowSize="250,400" />
             </DockablePane>
         </ResizingPanel>
-        <DockablePane ResizeWidth="162" ResizeHeight="*" EffectiveSize="162,530" ID="4f410da0-fd6f-4130-8187-bfa0279e4e58" Anchor="Right" SelectedIndex="0" IsAutoHidden="false">
+        <DockablePane ResizeWidth="162" ResizeHeight="*" EffectiveSize="162,590" ID="4f410da0-fd6f-4130-8187-bfa0279e4e58" Anchor="Right" SelectedIndex="0" IsAutoHidden="false">
             <DockableContent Name="dcProperties" FloatingWindowSize="250,400" />
             <DockableContent Name="dcOcl" FloatingWindowSize="250,400" />
         </DockablePane>
