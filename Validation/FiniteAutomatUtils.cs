@@ -31,6 +31,7 @@ namespace Exolutio.Model.PSM.XMLValidation
         private bool compulsoryAssociationOnRightSideOfRecursion = true;
         private List<String> allLeftSideNames = null;
         private Dictionary<StateWordPair, HashSet<AutomatEdge>> generalTransitFunction;
+        private Dictionary<string, AttributeType> leftSideNameAtributeType;
 
         public FiniteAutomatUtils()
         {
@@ -53,6 +54,8 @@ namespace Exolutio.Model.PSM.XMLValidation
             states = new List<AutomatState>();
             mode = CreationPhase.ATTRIBUTE;
             leftSideOfRecursionStates = null;
+
+            leftSideNameAtributeType = new Dictionary<string, AttributeType>();
 
             Dictionary<StateWordPair, HashSet<AutomatEdge>> transitFunction = new Dictionary<StateWordPair, HashSet<AutomatEdge>>();
             generalTransitFunction = transitFunction;
@@ -135,7 +138,9 @@ namespace Exolutio.Model.PSM.XMLValidation
                             {
                                 wordToState.Add(association.Name, new HashSet<AutomatState>());
                             }
-                            wordToState[association.Name].Add(attState);   
+                            wordToState[association.Name].Add(attState);
+
+                            leftSideNameAtributeType.Add(leftSideNames[index], ((PSMClass)association.Child).PSMAttributes[0].AttributeType);
                         }
                         HashSet<AutomatState> previousStates = actualStates;
                         actualStates = new HashSet<AutomatState>();
@@ -881,7 +886,7 @@ namespace Exolutio.Model.PSM.XMLValidation
                             toState = states.Find(a => a.name.Equals(toState.name));
                         }
                     }
-                    toStates.Add(new AutomatEdge(toState, edge.EdgeMode));
+                    toStates.Add(new AutomatEdge(toState, edge.EdgeMode,edge.AttributeType));
                     if (originalAutomatUncompletedTransitions.Contains(new StateWordPair(edge.EndState)))
                     {
                         behindContentModelBuffer.Add(new StateWordPair(toState));
@@ -933,7 +938,7 @@ namespace Exolutio.Model.PSM.XMLValidation
                     newState.LeftSide = leftSideOfRule;
                 }
                 states.Add(newState);
-                transitFunction[transit].Add(new AutomatEdge(newState));
+                transitFunction[transit].Add(new AutomatEdge(newState,attribute.AttributeType));
                 stateCount++;
                 actualState = newState;
                 if (i == 0)
@@ -958,7 +963,7 @@ namespace Exolutio.Model.PSM.XMLValidation
                         newState.LeftSide = leftSideOfRule;
                     }
                     states.Add(newState);
-                    transitFunction[transit].Add(new AutomatEdge(newState));
+                    transitFunction[transit].Add(new AutomatEdge(newState,attribute.AttributeType));
                     actualState = newState;
                     stateCount++;
                 }
@@ -968,7 +973,7 @@ namespace Exolutio.Model.PSM.XMLValidation
                 {
                     transitFunction.Add(transit, new HashSet<AutomatEdge>());
                 }
-                transitFunction[transit].Add(new AutomatEdge(actualState));
+                transitFunction[transit].Add(new AutomatEdge(actualState,attribute.AttributeType));
 
             }
             else
@@ -1003,7 +1008,7 @@ namespace Exolutio.Model.PSM.XMLValidation
                         newUncompleteTransitionsBuffer.Add(new StateWordPair(actualState));
                     }
                     states.Add(newState);
-                    transitFunction[transit].Add(new AutomatEdge(newState));
+                    transitFunction[transit].Add(new AutomatEdge(newState,attribute.AttributeType));
                     actualState = newState;
                     stateCount++;
                     if (i == 0)
@@ -1029,8 +1034,8 @@ namespace Exolutio.Model.PSM.XMLValidation
                     {
                         transitFunction.Add(newUncompletedTransition, new HashSet<AutomatEdge>());
                     }
-                    if (!transitFunction[newUncompletedTransition].Contains(new AutomatEdge(firstStateForClass), automatEdgeComparer))
-                        transitFunction[newUncompletedTransition].Add(new AutomatEdge(firstStateForClass));
+                    if (!transitFunction[newUncompletedTransition].Contains(new AutomatEdge(firstStateForClass, attribute.AttributeType), automatEdgeComparer))
+                        transitFunction[newUncompletedTransition].Add(new AutomatEdge(firstStateForClass, attribute.AttributeType));
                 }
             }
             foreach (StateWordPair uncompletedTransition in transitionsToRemove)
@@ -1050,6 +1055,7 @@ namespace Exolutio.Model.PSM.XMLValidation
          **/
         private AutomatState createTransitionsForSimpleAssociation(PSMAssociation association, AutomatState actualState, List<String> leftSideNames, Dictionary<StateWordPair, HashSet<AutomatEdge>> transitFunction, HashSet<StateWordPair> unfinishedTransitionsBuffer, HashSet<StateWordPair> outcomingUnfinishedBuffer)
         {
+            AttributeType attType = leftSideNameAtributeType.ContainsKey(leftSideNames[0]) ? leftSideNameAtributeType[leftSideNames[0]] : null; 
             List<StateWordPair> newUncompleteTransitionsBuffer = new List<StateWordPair>();
             int index = 0;
             AutomatState firstStateForClass = actualState;
@@ -1074,7 +1080,7 @@ namespace Exolutio.Model.PSM.XMLValidation
                     newState.LeftSide = leftSideOfRule;
                 }
                 states.Add(newState);
-                transitFunction[transit].Add(new AutomatEdge(newState));
+                transitFunction[transit].Add(new AutomatEdge(newState,attType));
                 stateCount++;
                 actualState = newState;
                 if (i == 0)
@@ -1099,7 +1105,7 @@ namespace Exolutio.Model.PSM.XMLValidation
                         newState.LeftSide = leftSideOfRule;
                     }
                     states.Add(newState);
-                    transitFunction[transit].Add(new AutomatEdge(newState));
+                    transitFunction[transit].Add(new AutomatEdge(newState,attType));
                     actualState = newState;
                     stateCount++;
                 }
@@ -1109,7 +1115,7 @@ namespace Exolutio.Model.PSM.XMLValidation
                 {
                     transitFunction.Add(transit, new HashSet<AutomatEdge>());
                 }
-                transitFunction[transit].Add(new AutomatEdge(actualState));
+                transitFunction[transit].Add(new AutomatEdge(actualState,attType));
 
             }
             else
@@ -1143,7 +1149,7 @@ namespace Exolutio.Model.PSM.XMLValidation
                         newUncompleteTransitionsBuffer.Add(new StateWordPair(actualState));
                     }
                     states.Add(newState);
-                    transitFunction[transit].Add(new AutomatEdge(newState));
+                    transitFunction[transit].Add(new AutomatEdge(newState,attType));
                     actualState = newState;
                     stateCount++;
                     if (i == 0)

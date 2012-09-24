@@ -7,7 +7,7 @@
       <eXo:PIMGeneralizations Count="0" />
       <eXo:PIMAssociations Count="0" />
     </eXo:PIMSchema>
-    <eXo:PSMSchemas Count="3">
+    <eXo:PSMSchemas Count="4">
       <eXo:PSMSchema ID="e7d381d1-9788-4b65-b2ae-4f115aa43869" Caption="PSMSchema 1">
         <eXo:PSMSchemaClass ID="89756e31-4ade-4698-8f5b-ea202efc835c" Name="AttributeTest">
           <eXo:UsedGeneralizations Count="0" />
@@ -30,7 +30,7 @@
               <eXo:PSMAttribute ID="4061de50-fda1-4a80-9126-64b615be1d93" Name="b" Lower="0" Upper="2" Type="a0ea9686-88c7-4cf0-85d2-de03785bf998" displayName="AttributeType: int" Element="False" psmClassID="3b3b865f-28d7-4eaf-b74c-ee1e75b7ee1d">
                 <eXo:UsedGeneralizations Count="0" />
               </eXo:PSMAttribute>
-              <eXo:PSMAttribute ID="c5ddb7de-8705-4d5c-ace8-af442b06beed" Name="c" Lower="0" Upper="4" Type="cb7ab121-4845-4175-84f6-06e08b0f21f9" displayName="AttributeType: duration" Element="False" psmClassID="3b3b865f-28d7-4eaf-b74c-ee1e75b7ee1d">
+              <eXo:PSMAttribute ID="c5ddb7de-8705-4d5c-ace8-af442b06beed" Name="c" Lower="0" Upper="3" Type="cb7ab121-4845-4175-84f6-06e08b0f21f9" displayName="AttributeType: duration" Element="False" psmClassID="3b3b865f-28d7-4eaf-b74c-ee1e75b7ee1d">
                 <eXo:UsedGeneralizations Count="0" />
               </eXo:PSMAttribute>
               <eXo:PSMAttribute ID="c5b3e910-2095-4712-98ce-a30b6395a2f4" Name="e" Lower="0" Element="False" psmClassID="3b3b865f-28d7-4eaf-b74c-ee1e75b7ee1d">
@@ -138,13 +138,54 @@
         </eXo:PSMAssociations>
         <eXo:PSMContentModels Count="0" />
       </eXo:PSMSchema>
+      <eXo:PSMSchema ID="f028d110-f4c6-4211-8c39-43c4772883ea" Caption="PSMSchema 4">
+        <eXo:PSMSchemaClass ID="0517a76e-6ad9-4964-9bc1-6c9e05258f6d" Name="AttributeTypeTest">
+          <eXo:UsedGeneralizations Count="0" />
+          <eXo:ChildPSMAssociations Count="1">
+            <eXo:ChildPSMAssociation childPSMAssociationID="a33c8155-5636-47f4-931f-4b8b679bf3dc" childPSMAssociation="PSMAssociation from PSMSchemaClass: AttributeTypeTest to PSMClass: *R*" />
+          </eXo:ChildPSMAssociations>
+        </eXo:PSMSchemaClass>
+        <eXo:Roots Count="1">
+          <eXo:Root rootID="0517a76e-6ad9-4964-9bc1-6c9e05258f6d" root="PSMSchemaClass: AttributeTypeTest" />
+        </eXo:Roots>
+        <eXo:PSMClasses Count="1">
+          <eXo:PSMClass ID="01a6a723-e838-4531-aa62-fa7219bdfbc4" Name="R" parentAssociationID="a33c8155-5636-47f4-931f-4b8b679bf3dc" parentAssociation="PSMAssociation from PSMSchemaClass: AttributeTypeTest to PSMClass: *R*" abstract="False" final="False">
+            <eXo:UsedGeneralizations Count="0" />
+            <eXo:ChildPSMAssociations Count="0" />
+            <eXo:GeneralizationsAsGeneral Count="0" />
+            <eXo:PSMAttributes Count="4">
+              <eXo:PSMAttribute ID="c4854a50-d7c4-42d8-98c7-38fcbc105834" Name="a" Type="a0ea9686-88c7-4cf0-85d2-de03785bf998" displayName="AttributeType: int" Element="False" psmClassID="01a6a723-e838-4531-aa62-fa7219bdfbc4">
+                <eXo:UsedGeneralizations Count="0" />
+              </eXo:PSMAttribute>
+              <eXo:PSMAttribute ID="df5b29f3-e7ee-4caa-80b2-d9c977b56320" Name="b" Type="f600d6ac-7cf7-4c61-948c-8ef40501c434" displayName="AttributeType: double" Element="False" psmClassID="01a6a723-e838-4531-aa62-fa7219bdfbc4">
+                <eXo:UsedGeneralizations Count="0" />
+              </eXo:PSMAttribute>
+              <eXo:PSMAttribute ID="b6731cd2-bf1a-48d1-9759-975791b944c4" Name="c" Type="34b78259-bed9-4eb9-b770-20b4db5c30bb" displayName="AttributeType: boolean" Element="False" psmClassID="01a6a723-e838-4531-aa62-fa7219bdfbc4">
+                <eXo:UsedGeneralizations Count="0" />
+              </eXo:PSMAttribute>
+              <eXo:PSMAttribute ID="094fd59f-a5ca-44c5-b1fd-62fdfee50bcb" Name="d" Type="2a604d2a-e298-423e-9cf1-70dbfb29f279" displayName="AttributeType: byte" Element="False" psmClassID="01a6a723-e838-4531-aa62-fa7219bdfbc4">
+                <eXo:UsedGeneralizations Count="0" />
+              </eXo:PSMAttribute>
+            </eXo:PSMAttributes>
+          </eXo:PSMClass>
+        </eXo:PSMClasses>
+        <eXo:PSMGeneralizations Count="0" />
+        <eXo:PSMAssociations Count="1">
+          <eXo:PSMAssociation ID="a33c8155-5636-47f4-931f-4b8b679bf3dc" Name="r">
+            <eXo:UsedGeneralizations Count="0" />
+            <eXo:Parent NodeType="PSMSchemaClass" parentID="0517a76e-6ad9-4964-9bc1-6c9e05258f6d" parent="PSMSchemaClass: AttributeTypeTest" />
+            <eXo:Child NodeType="PSMClass" childID="01a6a723-e838-4531-aa62-fa7219bdfbc4" child="PSMClass: *R*" />
+          </eXo:PSMAssociation>
+        </eXo:PSMAssociations>
+        <eXo:PSMContentModels Count="0" />
+      </eXo:PSMSchema>
     </eXo:PSMSchemas>
     <eXo:PIMDiagrams Count="1">
       <eXo:PIMDiagram ID="78b621c1-ba19-4820-9db6-43869c0e0cf3" schemaID="6e6e7160-a184-48ba-a162-bd00dd071c0b" schema="PIMSchema" Caption="PIMSchema">
         <eXo:Components />
       </eXo:PIMDiagram>
     </eXo:PIMDiagrams>
-    <eXo:PSMDiagrams Count="3">
+    <eXo:PSMDiagrams Count="4">
       <eXo:PSMDiagram ID="eb6a6e15-e578-4929-8a9f-1827e1981f0c" schemaID="e7d381d1-9788-4b65-b2ae-4f115aa43869" schema="PSMSchema 1" Caption="PSMSchema 1">
         <eXo:Components>
           <eXo:Component Type="PSMSchemaClass" componentID="89756e31-4ade-4698-8f5b-ea202efc835c" component="PSMSchemaClass: AttributeTest">
@@ -212,6 +253,26 @@
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:MainLabelViewHelper>
               <eXo:CardinalityLabelViewHelper X="21" Y="-23" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:CardinalityLabelViewHelper>
+            </eXo:ViewHelper>
+          </eXo:Component>
+        </eXo:Components>
+      </eXo:PSMDiagram>
+      <eXo:PSMDiagram ID="5ddb1fd6-e802-4cb3-8a06-a481de3bfe1c" schemaID="f028d110-f4c6-4211-8c39-43c4772883ea" schema="PSMSchema 4" Caption="PSMSchema 4">
+        <eXo:Components>
+          <eXo:Component Type="PSMSchemaClass" componentID="0517a76e-6ad9-4964-9bc1-6c9e05258f6d" component="PSMSchemaClass: AttributeTypeTest">
+            <eXo:ViewHelper />
+          </eXo:Component>
+          <eXo:Component Type="PSMClass" componentID="01a6a723-e838-4531-aa62-fa7219bdfbc4" component="PSMClass: *R*">
+            <eXo:ViewHelper />
+          </eXo:Component>
+          <eXo:Component Type="PSMAssociation" componentID="a33c8155-5636-47f4-931f-4b8b679bf3dc" component="PSMAssociation from PSMSchemaClass: AttributeTypeTest to PSMClass: *R*">
+            <eXo:ViewHelper>
+              <eXo:MainLabelViewHelper X="0,116958618164063" Y="0" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:MainLabelViewHelper>
+              <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
                 <eXo:LabelVisible>True</eXo:LabelVisible>
               </eXo:CardinalityLabelViewHelper>
             </eXo:ViewHelper>
