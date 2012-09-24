@@ -95,7 +95,7 @@ namespace Exolutio.Model.Versioning
         /// <summary>
         /// Dictionary used to lookup pivot (Value) for a versioned item (Key)
         /// </summary>
-        private ReadOnlyDictionary<Guid, VersionedItemPivot> PivotLookupDictionary
+        private Exolutio.SupportingClasses.ReadOnlyDictionary<Guid, VersionedItemPivot> PivotLookupDictionary
         {
             get { return pivotLookupDictionary.AsReadOnly(); }
         }
