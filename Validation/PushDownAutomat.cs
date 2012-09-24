@@ -83,21 +83,85 @@ namespace Exolutio.Model.PSM.XMLValidation
         
         private HashSet<AutomatState> sideFunction(HashSet<AutomatState> currentNodes, HashSet<String> readedLeftSides)
         {
+            return sideFunction(currentNodes,readedLeftSides,null);
+        }
+
+        private HashSet<AutomatState> sideFunction(HashSet<AutomatState> currentNodes, HashSet<String> readedLeftSides, String attributeValue)
+        {
             HashSet<AutomatState> sideFunction = new HashSet<AutomatState>();
             foreach (AutomatState node in currentNodes)
             {
                 foreach (String leftSide in readedLeftSides)
-                {    
+                {
                     StateWordPair stateWordPair = new StateWordPair(node.AutomatStateWithoutDepth, leftSide);
                     if (forestStatesTransitions.ContainsKey(stateWordPair))
-                    {  
-                        foreach(AutomatEdge edge in forestStatesTransitions[stateWordPair])
-                            if (!sideFunction.Contains(new AutomatState(node, edge),automatStateComparer))
-                                sideFunction.Add(new AutomatState(node,edge));                       
+                    {
+                        foreach (AutomatEdge edge in forestStatesTransitions[stateWordPair])
+                            if (!sideFunction.Contains(new AutomatState(node, edge), automatStateComparer) && matchType(edge.AttributeType,attributeValue))
+                                sideFunction.Add(new AutomatState(node, edge));
                     }
                 }
             }
             return sideFunction;
+        }
+
+        private bool matchType(AttributeType type, String value) {            
+            if (type == null || value == null)
+                return true;
+            switch (type.Name) { 
+                case "boolean":
+                    bool boolResult;
+                    return Boolean.TryParse(value, out boolResult);
+                case "float":
+                    float floatResult;
+                    return float.TryParse(value, out floatResult);
+                case "double":
+                    double doubleResult;
+                    return double.TryParse(value, out doubleResult);
+                case "decimal":
+                    decimal decimalResult;
+                    return decimal.TryParse(value, out decimalResult);
+                case "int":
+                case "integer":
+                    int intResult;
+                    return int.TryParse(value, out intResult);
+                case "nonPositiveIntegeer":
+                    if (int.TryParse(value, out intResult))
+                        return intResult < 1;
+                    return false;
+                case "negativeInteger":
+                    if (int.TryParse(value, out intResult))
+                        return intResult < 0;
+                    return false;
+                case "long":
+                    long longResult;
+                    return long.TryParse(value, out longResult);
+                case "short":
+                    short shortResult;
+                    return short.TryParse(value, out shortResult);
+                case "unsignedByte":
+                case "byte":
+                    byte byteResult;
+                    return byte.TryParse(value, out byteResult);
+                case "nonNegativeInteger":
+                    if (int.TryParse(value, out intResult))
+                        return intResult > -1;
+                    return false;
+                case "unsignedLong":
+                    ulong ulongResult;
+                    return ulong.TryParse(value, out ulongResult);
+                case "positiveInteger":
+                    if (int.TryParse(value, out intResult))
+                        return intResult > 0;
+                    return false;
+                case "unsignedInt":
+                    uint uintResult;
+                    return uint.TryParse(value, out uintResult);
+                case "unsignedShort":
+                    ushort ushortResult;
+                    return ushort.TryParse(value, out ushortResult);                  
+            }
+            return true;
         }
 
         /**
@@ -131,7 +195,7 @@ namespace Exolutio.Model.PSM.XMLValidation
             if (currentState.Count > 0)
                 readedNodesStackTrace.Push(xmlElement.Name);
             foreach (XmlAttribute att in xmlElement.Attributes) {
-                currentState = sideFunction(currentState,  rightSideToLeftSide[att.Name] );
+                currentState = sideFunction(currentState,  rightSideToLeftSide[att.Name], att.Value );
             }
             foreach (XmlNode childNode in xmlElement.ChildNodes)
             {        
@@ -145,6 +209,10 @@ namespace Exolutio.Model.PSM.XMLValidation
             return result;
         }
 
+        private void removeFromCache(Object o,System.ComponentModel.PropertyChangedEventArgs args){
+            initializationCache.Clear();
+        }
+
         /**
          *  Inicializuje PushDownAutomat a jeho pomocne struktury. 
          **/
@@ -155,6 +223,9 @@ namespace Exolutio.Model.PSM.XMLValidation
             XMLDocument.Load(XMLFilePath);
 
             readedNodesStackTrace = new Stack<String>();
+
+            schema.Project.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(removeFromCache);
+
 
             if (initializationCache.ContainsKey(schema))
             {

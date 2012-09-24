@@ -13,6 +13,7 @@ namespace Exolutio.Model.PSM.XMLValidation
         private AutomatState startState;
         private AutomatState endState;
         private EdgeMode edgeMode;
+        private AttributeType attributeType = null;
 
         /**
          *  Kontruktor pro tridu AutomatEdge.
@@ -25,6 +26,18 @@ namespace Exolutio.Model.PSM.XMLValidation
         }
 
         /**
+       *  Kontruktor pro tridu AutomatEdge.
+       *  
+       *  atribut endState urcuje do ktereho stavu prechod vede
+       *  atribut att Type urcuje, jakyho typu je atribut, pro nejz je konstruovana tato hrana     
+       **/
+        public AutomatEdge(AutomatState endState, AttributeType attType)
+            : this(endState, EdgeMode.NONE)
+        {
+            this.attributeType = attType;
+        }
+
+        /**
          *  Kontruktor pro tridu AutomatEdge.
          *  
          *  atribut endState urcuje do ktereho stavu prechod vede
@@ -33,6 +46,20 @@ namespace Exolutio.Model.PSM.XMLValidation
         public AutomatEdge(AutomatState endState, EdgeMode mode) {
             this.endState = endState;
             this.edgeMode = mode;
+        }
+
+        /**
+         *  Kontruktor pro tridu AutomatEdge.
+         *  
+         *  atribut endState urcuje do ktereho stavu prechod vede
+         *  atribut mode urcuje, zda pokud po hrane prejdeme, tak dochazi k zanorovani, ci vynorovani
+         *  atribut att Type urcuje, jakyho typu je atribut, pro nejz je konstruovana tato hrana
+         **/
+        public AutomatEdge(AutomatState endState, EdgeMode mode, AttributeType attType)
+        {
+            this.endState = endState;
+            this.edgeMode = mode;
+            this.AttributeType = attType;
         }
 
         /**
@@ -50,6 +77,18 @@ namespace Exolutio.Model.PSM.XMLValidation
         public EdgeMode EdgeMode {
             get {
                 return edgeMode;
+            }
+        }
+
+        /**
+         *  Pokud to je hrana pro atribut, tak vraci jakeho typu je atribut, jinak vraci null. 
+         **/
+        public AttributeType AttributeType {
+            get {
+                return attributeType;
+            }
+            set {
+                attributeType = value;
             }
         }
     }
