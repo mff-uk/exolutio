@@ -42,6 +42,7 @@ namespace Exolutio.View.Commands
         //public static guiControllerCommand NewPIMSchema { get; set; }
         public static guiControllerCommand NewPSMSchema { get; set; }
         public static guiOpenAttributeTypesDialogCommand OpenAttributeTypesDialog { get; set; }
+        public static guiXSDtoPSM XSDtoPSM { get; set; }
 
 #if SILVERLIGHT
         public static guiOpenWebProjectCommand OpenWebProjectCommand { get; set; }
@@ -187,6 +188,7 @@ namespace Exolutio.View.Commands
             CloseProjectCommand = new guiCloseProjectCommand();
             SaveProjectCommand = new guiSaveProjectCommand();
             SaveAsProjectCommand = new guiSaveAsProjectCommand();
+            XSDtoPSM = new guiXSDtoPSM();
 #if SILVERLIGHT
             OpenWebProjectCommand = new guiOpenWebProjectCommand();
 #endif

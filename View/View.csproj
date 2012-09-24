@@ -105,6 +105,7 @@
     <Compile Include="Commands\PIM\guiPIMDeleteGeneralization.cs" />
     <Compile Include="Commands\PIM\guiSplitPIMAssociation.cs" />
     <Compile Include="Commands\PIM\guiSplitPIMAttribute.cs" />
+    <Compile Include="Commands\PSM\guiXSDtoPSM.cs" />
     <Compile Include="Commands\PSM\guiValidateAllCommand.cs" />
     <Compile Include="Commands\PSM\guiMappingV.cs" />
     <Compile Include="Commands\PSM\guiSplitPSMAttribute.cs" />
@@ -363,6 +364,10 @@
     <ProjectReference Include="..\XCaseImport\XCaseImport.csproj">
       <Project>{24FF150D-1CD5-4C80-905D-905CAD663717}</Project>
       <Name>XCaseImport</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XSDtoPSM\XSDtoPSM.csproj">
+      <Project>{5387ca2e-4d97-4cd1-ba3c-e2320a8f4395}</Project>
+      <Name>XSDtoPSM</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
