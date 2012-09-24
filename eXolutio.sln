@@ -53,6 +53,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XSDtoPSM", "XSDtoPSM\XSDtoPSM.csproj", "{5387CA2E-4D97-4CD1-BA3C-E2320A8F4395}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = eXolutio.vsmdi
@@ -269,6 +271,16 @@ Global
 		{A685D42C-1BE0-4C60-81F2-C255431FB937}.Release|Mixed Platforms.Build.0 = Release|x86
 		{A685D42C-1BE0-4C60-81F2-C255431FB937}.Release|x86.ActiveCfg = Release|x86
 		{A685D42C-1BE0-4C60-81F2-C255431FB937}.Release|x86.Build.0 = Release|x86
+		{5387CA2E-4D97-4CD1-BA3C-E2320A8F4395}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5387CA2E-4D97-4CD1-BA3C-E2320A8F4395}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5387CA2E-4D97-4CD1-BA3C-E2320A8F4395}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{5387CA2E-4D97-4CD1-BA3C-E2320A8F4395}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{5387CA2E-4D97-4CD1-BA3C-E2320A8F4395}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5387CA2E-4D97-4CD1-BA3C-E2320A8F4395}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5387CA2E-4D97-4CD1-BA3C-E2320A8F4395}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5387CA2E-4D97-4CD1-BA3C-E2320A8F4395}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{5387CA2E-4D97-4CD1-BA3C-E2320A8F4395}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{5387CA2E-4D97-4CD1-BA3C-E2320A8F4395}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
