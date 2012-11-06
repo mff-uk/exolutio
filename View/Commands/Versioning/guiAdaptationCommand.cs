@@ -32,7 +32,7 @@ namespace Exolutio.View.Commands.Versioning
 
         public override ImageSource Icon
         {
-            get { return ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.Validate); }
+            get { return ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.transform); }
         }
 
         public override void Execute(object parameter)

@@ -105,7 +105,8 @@ namespace Exolutio.Model.OCL.Bridge {
 
             // allInstances
             {
-                Operation allInstancesOp = new Operation(@"allInstances", true, this);
+                CollectionType allInstancesReturn = TypeTable.Library.CreateCollection(CollectionKind.Set, this);
+                Operation allInstancesOp = new Operation(@"allInstances", true, allInstancesReturn);
                 Operations.Add(allInstancesOp);
             }
 
@@ -295,15 +296,30 @@ namespace Exolutio.Model.OCL.Bridge {
 
     }
 
+    /// <summary>
+    /// Used by "skip" operaions, i.e. toEmployee()
+    /// </summary>
     public class SkipOperationTag: OperationTag
     {
         public PSMBridgeClass Source { get; set; }
         public PSMBridgeClass Target { get; set; } 
     }
 
-    public class PrevOperatonTag: OperationTag
+    /// <summary>
+    /// Used to traverse between versions (from target to source version)
+    /// </summary>
+    public class PrevOperationTag: OperationTag
     {
-        public Classifier TargetVersionClassifier { get; set; }
         public Classifier SourceVersionClassifier { get; set; }
+        public Classifier TargetVersionClassifier { get; set; }
+    }
+
+    /// <summary>
+    /// Used to traverse between versions (from source to target version)
+    /// </summary>
+    public class NextOperationTag : OperationTag
+    {
+        public Classifier SourceVersionClassifier { get; set; }
+        public Classifier TargetVersionClassifier { get; set; }
     }
 }

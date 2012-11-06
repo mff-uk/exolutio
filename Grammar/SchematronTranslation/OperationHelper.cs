@@ -42,6 +42,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
         {
             // Any
             Add(new OperationInfo { Priority = 1, CanOmitDataCall = true, OclName = "oclAsSet", XPathName = "oclAsSet", Arity = 1, CustomTranslateHandler = ReplaceByArgumentHandler });
+            Add(new OperationInfo { Priority = 1, CanOmitDataCall = true, OclName = "asSet", XPathName = "asSet", Arity = 1, CustomTranslateHandler = ReplaceByArgumentHandler });
             Add(new OperationInfo { Priority = 1, CanOmitDataCall = true, OclName = "oclAsType", XPathName = "oclAsType", Arity = 2, CustomTranslateHandler = OclAsTypeArgumentHandler });
             Add(new OperationInfo { Priority = 1, CanOmitDataCall = true, OclName = "allInstances", XPathName = "allInstances", Arity = 1, CustomTranslateHandler = AllInstancesHandler });
 
@@ -419,10 +420,10 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
                 else
                     throw new OclSubexpressionNotConvertible(string.Format(XPathTranslationLogMessages.OperationHelper_OperationNotFound_2, referredOperation.Name, arguments.Count() - 1));
             }
-            else
-            {
-                return ToStringWithArgsModel(referredOperation, arguments);
-            }
+            //else
+            //{
+            //    return ToStringWithArgsModel(referredOperation, arguments);
+            //}
         }
 
         public OperationInfo? LookupOperation(OperationCallExp operationExpression, OclExpression[] arguments)

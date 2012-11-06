@@ -15,6 +15,7 @@ using Exolutio.Model.PSM.Grammar.XSDTranslation;
 using Exolutio.Revalidation;
 using Exolutio.Revalidation.Changes;
 using Exolutio.Revalidation.XSLT;
+using Exolutio.SupportingClasses.XML;
 using ICSharpCode.AvalonEdit.Folding;
 using Microsoft.Win32;
 using System.Xml;
@@ -28,7 +29,7 @@ namespace Exolutio.View.Commands
     /// </summary>
     public partial class XsltTestWindow
     {
-        private static string BASE_DIR = @"D:\Programování\XCase\Test\Evolution\";
+		private static string BASE_DIR = @"d:\Development\Exolutio\Tests\OCLAdaptation\Cases\";
 
         readonly IEnumerable<string> fileNames;
         
@@ -130,10 +131,10 @@ namespace Exolutio.View.Commands
             UpdateFolding();
         }
 
-        const string SAVE_DIR = @"D:\Programování\EVOXSVN\XSLTTest\";
-        const string SAVE_DOCUMENT = @"D:\Programování\EVOXSVN\XSLTTest\LastInput.xml";
-        
-        public const string SAVE_STYLESHEET = @"D:\Programování\EVOXSVN\XSLTTest\LastStylesheet.xslt";
+		const string SAVE_DIR = @"d:\Development\Exolutio\XSLTTest\";
+		const string SAVE_DOCUMENT = @"d:\Development\Exolutio\XSLTTest\LastInput.xml";
+
+		public const string SAVE_STYLESHEET = @"d:\Development\Exolutio\XSLTTest\LastStylesheet.xslt";
 
         public static string XDocumentToString(XDocument doc)
         {
@@ -172,7 +173,7 @@ namespace Exolutio.View.Commands
             //    string xmlns = text.Substring(si, ei - si);
             //    text = text.Remove(si, ei - si);
             //}
-            File.WriteAllText(SAVE_DOCUMENT, text.Replace("utf-16", "utf-8"), Encoding.UTF8);
+            XmlDocumentHelper.SaveInUtf8(text.Replace("utf-16", "utf-8"), SAVE_DOCUMENT);
         }
 
         public static bool? ShowDialog(DetectedChangeInstancesSet changeInstances, PSMSchema activeDiagramOldVersion, PSMSchema activeDiagramNewVersion)
@@ -228,7 +229,7 @@ namespace Exolutio.View.Commands
                 return;
             }
 
-            string outDoc = XsltProcessing.Transform(tbOldDoc.Text, tbXslt.Text, BASE_DIR);
+            string outDoc = XsltProcessing.Transform(tbOldDoc.Text, tbXslt.Text, BASE_DIR, SchemaVersion1, bSchemaAware.IsChecked == true);
             tbNewDoc.Text = outDoc;
 
             int si = outDoc.IndexOf("xmlns:xsi=\"");
@@ -249,7 +250,7 @@ namespace Exolutio.View.Commands
 
             if (Environment.MachineName.Contains("TRUPIK"))
             {
-                File.WriteAllText(SAVE_DOCUMENT.Replace("LastInput", "LastOutput"), text.Replace("utf-16", "utf-8"), Encoding.UTF8);
+                XmlDocumentHelper.SaveInUtf8(text.Replace("utf-16", "utf-8"), SAVE_DOCUMENT.Replace("LastInput", "LastOutput"));
             }
         }
 
@@ -269,22 +270,34 @@ namespace Exolutio.View.Commands
                 Filter = "XSLT Transformations|*.xslt"
             };
 
-            string path = System.IO.Path.GetDirectoryName(schemaVersion2.Project.ProjectFile.FullName) + "\\" +
-                System.IO.Path.GetFileNameWithoutExtension(schemaVersion2.Project.ProjectFile.FullName) + "-out" + "\\last-template.xslt";
+            string path = System.IO.Path.GetDirectoryName(schemaVersion2.Project.ProjectFile.FullName) +
+                //"\\" + System.IO.Path.GetFileNameWithoutExtension(schemaVersion2.Project.ProjectFile.FullName) + "-out" + 
+                "\\SavedStylesheet.xslt";
 
-            if (path.Contains("Test\\Evolution"))
+            string xsdpath = System.IO.Path.GetDirectoryName(schemaVersion2.Project.ProjectFile.FullName) +
+                "\\LastSchema.xsd";
+            
+            XsdSchemaGenerator schemaGenerator = new XsdSchemaGenerator();
+            schemaGenerator.Initialize(SchemaVersion1);
+            schemaGenerator.GenerateXSDStructure();
+            XDocument xmlSchemaDocument = schemaGenerator.GetXsd();
+
+            if (path.Contains("Tests\\OCLAdaptation"))
             {
                 if (!Directory.Exists(System.IO.Path.GetDirectoryName(path)))
                 {
                     Directory.CreateDirectory(System.IO.Path.GetDirectoryName(path));
                 }
-                File.WriteAllText(path, tbXslt.Text);
+                XmlDocumentHelper.SaveInUtf8(tbXslt.Text, path);
+                xmlSchemaDocument.SaveInUtf8(xsdpath);
+                ExolutioMessageBox.Show("Saved", "Saved", string.Empty);
             }
             else if (saveFileDialog.ShowDialog() == true)
             {
-                File.WriteAllText(saveFileDialog.FileName, tbXslt.Text);
+                XmlDocumentHelper.SaveInUtf8(tbXslt.Text, saveFileDialog.FileName);
+                xmlSchemaDocument.SaveInUtf8(xsdpath);
+                ExolutioMessageBox.Show("Saved", "Saved", string.Empty);
             }
-
             
         }
 
@@ -312,21 +325,7 @@ namespace Exolutio.View.Commands
             UpdateFolding();
         }
 
-        private void bXsltBasic_Click(object sender, RoutedEventArgs e)
-        {
-            tbXslt.Text = String.Empty; // Evolution.Stylesheets.Stylesheets.XSLT_EMPTY;
-        }
-
-        private void cbXsltList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            string file = cbXsltList.SelectedValue.ToString();
-
-            string xsltString = File.ReadAllText(BASE_DIR + file);
-            tbXslt.Text = xsltString;
-            UpdateFolding();
-        }
-        
-        private void bXsltFromChanges_Click(object sender, RoutedEventArgs e)
+       private void bXsltFromChanges_Click(object sender, RoutedEventArgs e)
         {
             XsltAdaptationScriptGenerator xsltTemplateGenerator = new XsltAdaptationScriptGenerator();
             string xslt = null;
@@ -346,16 +345,18 @@ namespace Exolutio.View.Commands
             tbXslt.Text = xslt;
             if (Environment.MachineName.Contains("TRUPIK"))
             {
-                File.WriteAllText(SAVE_STYLESHEET, xslt);
+                XmlDocumentHelper.SaveInUtf8(xslt, SAVE_STYLESHEET);
             }
 
-            string dir = Path.GetDirectoryName(schemaVersion2.Project.ProjectFile.FullName) + "\\" + Path.GetFileNameWithoutExtension(schemaVersion2.Project.ProjectFile.FullName) + "-out";
+           string dir = Path.GetDirectoryName(schemaVersion2.Project.ProjectFile.FullName);
+                //+ "\\" + Path.GetFileNameWithoutExtension(schemaVersion2.Project.ProjectFile.FullName) + "-out"
+                
             if (!Directory.Exists(dir))
                 Directory.CreateDirectory(dir);
             
             if (Environment.MachineName.Contains("TRUPIK"))
             {
-                File.WriteAllText(dir + "\\last-stylesheet.xslt", xslt);
+                XmlDocumentHelper.SaveInUtf8(xslt, dir + "\\LastStylesheet.xslt");
             }
 
             UpdateFolding();
@@ -401,8 +402,8 @@ namespace Exolutio.View.Commands
             string name = Path.GetFileNameWithoutExtension(schemaVersion2.Project.ProjectFile.FullName);
             string dir = Path.GetDirectoryName(schemaVersion2.Project.ProjectFile.FullName);
 
-            string inputDir = dir + "\\" + name + "-in";
-            string outputDir = dir + "\\" + name + "-out";
+            string inputDir = dir; // +"\\" + name + "-in";
+            string outputDir = dir; // + "\\" + name + "-out";
 
             if (!Directory.Exists(inputDir))
                 Directory.CreateDirectory(inputDir);
@@ -419,11 +420,11 @@ namespace Exolutio.View.Commands
             {
                 s = desiredName;
             }
-            string filenameIn = string.Format("{0}.xml", s);
-            string filenameRef = string.Format("{0}-reference.xml", s);
+            string filenameIn = string.Format("{0}-in.xml", s);
+            string filenameRef = string.Format("{0}-out.xml", s);
 
-            File.WriteAllText(inputDir + "\\" + filenameIn, tbOldDoc.Text);
-            File.WriteAllText(outputDir + "\\" + filenameRef, tbNewDoc.Text);
+            XmlDocumentHelper.SaveInUtf8(tbOldDoc.Text, inputDir + "\\" + filenameIn);
+            XmlDocumentHelper.SaveInUtf8(tbNewDoc.Text, outputDir + "\\" + filenameRef);
         }
 
         private void SaveRefCust_Click(object sender, RoutedEventArgs e)

@@ -1,18 +1,12 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 using Exolutio.Model;
-using Exolutio.Model.PIM;
-using Exolutio.Model.PSM;
 using Exolutio.Model.Serialization;
-using Exolutio.Model.Versioning;
 using Exolutio.Revalidation;
 using NUnit.Framework;
-using Version = Exolutio.Model.Versioning.Version;
 
-namespace Tests.ChangeDetection
+namespace Exolutio.Tests.ChangeDetection
 {
     [TestFixture]
     public class ChangeDetectionTest

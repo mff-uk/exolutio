@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using NUnit.Framework;
 using Exolutio.Model.OCL.Types;
 using Exolutio.Model.OCL.TypesTable;
 
-namespace Tests.OCL
+namespace Exolutio.Tests.OCL
 {
     [TestFixture]
     public class TypeSystemTest

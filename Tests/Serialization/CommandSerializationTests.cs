@@ -1,17 +1,12 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Xml.Linq;
-using Exolutio.Controller;
 using Exolutio.Controller.Commands;
 using Exolutio.Controller.Commands.Complex.PIM;
 using Exolutio.Controller.Commands.Reflection;
 using Exolutio.Model;
-using Exolutio.Model.PSM;
-using Exolutio.Model.Serialization;
 using NUnit.Framework;
-using Exolutio.Controller.Commands.Atomic.PIM;
 
-namespace Tests.Serialization
+namespace Exolutio.Tests.Serialization
 {
     [TestFixture]
     public class CommandSerializationTests
@@ -20,7 +15,7 @@ namespace Tests.Serialization
         public void TestSerialization()
         {
             Project sampleProject = TestUtils.CreateSampleProject();
-            Controller c = new Controller(sampleProject);
+            Controller.Controller c = new Controller.Controller(sampleProject);
             cmdDeletePIMAttribute command = new cmdDeletePIMAttribute(c);
             command.Set(sampleProject.SingleVersion.PIMSchema.PIMAttributes[0]);
 

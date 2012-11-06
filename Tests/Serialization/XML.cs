@@ -1,14 +1,8 @@
-using System.IO;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.Xml.Serialization;
 using Exolutio.Model;
 using Exolutio.Model.Serialization;
-using Exolutio.Model.Versioning;
 using NUnit.Framework;
-using Tests.CodeTests;
 
-namespace Tests.Serialization
+namespace Exolutio.Tests.Serialization
 {
     [TestFixture]
     public class XML
@@ -36,7 +30,7 @@ namespace Tests.Serialization
         public void TestProjectSaveWithVersions()
         {
             Project sampleProject3Versions = TestUtils.CreateSampleProject3Versions();
-            ModelIntegrity.ModelConsistency.CheckProject(sampleProject3Versions);
+            global::Exolutio.Tests.ModelIntegrity.ModelConsistency.CheckProject(sampleProject3Versions);
 
             ProjectSerializationManager m = new ProjectSerializationManager();
             m.SaveProject(sampleProject3Versions, "TestProjectSaveWithVersions.xml");

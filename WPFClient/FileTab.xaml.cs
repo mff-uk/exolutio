@@ -119,10 +119,11 @@ namespace Exolutio.WPFClient
             tcAdditional.Items.Add(tabItem);
             tcAdditional.Visibility = Visibility.Visible;
             tcAdditional.SelectedItem = tabItem;
-            //columnAdditional.Width = new GridLength(200, GridUnitType.Pixel);
-            columnAdditional.Width = new GridLength(1, GridUnitType.Star);
+            columnAdditional.Width = new GridLength(23, GridUnitType.Pixel);
+            //columnAdditional.Width = new GridLength(1, GridUnitType.Star);
             gridContent.ColumnDefinitions[0].Width = new GridLength(1, GridUnitType.Star);
             columnAdditional.MinWidth = 23;
+            //columnAdditional.Width = GridLength.Auto;
         }
 
         private void Expander_Collapsed(object sender, RoutedEventArgs e)
@@ -498,7 +499,7 @@ namespace Exolutio.WPFClient
             SchematronPipelineWithSaxonTransform p = new SchematronPipelineWithSaxonTransform();
             p.SaxonTransformExecutablePath = ConfigurationManager.GetApplicationSettings()["SaxonTransformExecutablePath"];
             p.IsoSchematronTemplatesPath = ConfigurationManager.GetApplicationSettings()["IsoSchematronTemplatesPath"];
-            p.Process(@"D:\Programování\EVOXSVN\SchematronTest\LastSchSchema.sch", @"D:\Programování\EVOXSVN\SchematronTest\");
+			p.Process(@"d:\Development\Exolutio\SchematronTest\LastSchSchema.sch", @"D:\Programování\EVOXSVN\SchematronTest\");
         }
 
         private void bRefresh_Click(object sender, RoutedEventArgs e)

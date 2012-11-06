@@ -41,7 +41,7 @@ namespace Exolutio.View.Commands.Grammar
 
             if (Environment.MachineName.Contains("TRUPIK"))
             {
-                xmlSchemaDocument.Save(@"D:\Programování\EVOXSVN\XSLTTest\LastSchema.rng");
+				xmlSchemaDocument.Save(@"d:\Development\Exolutio\XSLTTest\LastSchema.rng");
             }
             return schemaGenerator;
         }
@@ -69,7 +69,6 @@ namespace Exolutio.View.Commands.Grammar
             }
             else
             {
-                string document;
                 XDocument xmlSchemaDocument;
                 var schemaGenerator = GenerateXmlSyntax(out xmlSchemaDocument, filePresenterTab.SourcePSMSchema);
                 StringBuilder sb = new StringBuilder();

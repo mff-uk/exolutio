@@ -472,7 +472,7 @@ namespace Exolutio.Model.OCL.ConstraintConversion
             OperationCallExp operationCallExp = node.Source as OperationCallExp;
             if (operationCallExp != null)
             {
-                if (operationCallExp.ReferredOperation.Tag is PrevOperatonTag)
+                if (operationCallExp.ReferredOperation.Tag is PrevOperationTag)
                 {
                     return true;
                 }
@@ -506,7 +506,7 @@ namespace Exolutio.Model.OCL.ConstraintConversion
                 {
                     throw new InvalidOperationException();
                 }
-                PrevOperatonTag tag = (PrevOperatonTag) ((OperationCallExp) node.Source).ReferredOperation.Tag;
+                PrevOperationTag tag = (PrevOperationTag) ((OperationCallExp) node.Source).ReferredOperation.Tag;
                 prevStep.PSMAssociationMemberTargetVersion = (PSMAssociationMember) tag.TargetVersionClassifier.Tag;
                 prevStep.PSMAssociationMemberSourceVersion = (PSMAssociationMember) tag.SourceVersionClassifier.Tag;
                 path.Steps.Add(prevStep);

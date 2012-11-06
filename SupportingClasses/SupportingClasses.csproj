@@ -53,6 +53,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
+    <Reference Include="xmldiffpatch">
+      <HintPath>..\ExternalBinaries\XmlDiff\xmldiffpatch.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CLRExtensions.cs" />

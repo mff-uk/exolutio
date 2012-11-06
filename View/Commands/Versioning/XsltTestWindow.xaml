@@ -12,7 +12,7 @@
         </ResourceDictionary>
     </Window.Resources>
     <DockPanel LastChildFill="True">
-        <ToolBar DockPanel.Dock="Top" Height="32">
+        <ToolBar DockPanel.Dock="Top" Height="32" HorizontalAlignment="Left" Width="1148">
             <Button Margin="0" Padding="0" Click="bXsltFromChanges_Click">
                 <StackPanel Orientation="Horizontal">
                     <Label Height="Auto" Padding="2">XSLT from changes</Label>
@@ -46,7 +46,7 @@
                     <Label Height="Auto" Padding="2">Validate New</Label>
                 </StackPanel>
             </Button>
-            <Button Click="SaveRef_Click" Name="bSaveRef" Margin="0" Visibility="Collapsed">
+            <Button Click="SaveRef_Click" Name="bSaveRef" Margin="0" Visibility="Visible">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="{StaticResource Save}" Height="16" Margin="2"></Image>
                     <Label Height="Auto" Padding="2">Save Input &amp; Output</Label>
@@ -64,18 +64,16 @@
                     <Label Height="Auto" Padding="2">Gen. output</Label>
                 </StackPanel>
             </Button>
-            <StackPanel Name="pXSLT" Orientation="Horizontal" Visibility="Collapsed">
-                <Button Click="SaveRefCust_Click" Margin="0" >
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="{StaticResource Save}" Height="16" Margin="2"></Image>
-                        <Label Height="Auto" Padding="2">With custom name</Label>
-                    </StackPanel>
-                </Button>
-                <Button Click="Save_Click" Margin="0" Padding="5">Save XSLT...</Button>
-                <Button Click="Load_Click" Margin="0" Padding="5">Load XSLT...</Button>
-                <Button Margin="0" Padding="5" Click="bXsltBasic_Click">XSLT basic</Button>
-                <ComboBox Height="23" Name="cbXsltList" Width="180" SelectionChanged="cbXsltList_SelectionChanged" />
-            </StackPanel>
+            <Button Click="SaveRefCust_Click" Margin="0" >
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="{StaticResource Save}" Height="16" Margin="2"></Image>
+                    <Label Height="Auto" Padding="2">With custom name</Label>
+                </StackPanel>
+            </Button>
+            <Button Click="Save_Click" Margin="0" Padding="5">Save XSLT...</Button>
+            <Button Click="Load_Click" Margin="0" Padding="5">Load XSLT...</Button>
+            
+            <ComboBox Height="23" Name="cbXsltList" Width="180" Visibility="Collapsed"/>
         </ToolBar>
         <Grid>
             <Grid.ColumnDefinitions>

@@ -218,6 +218,21 @@ namespace Exolutio.Model.OCL.Types {
                     (s, b, t) => s
                     , (s, b, t) => t.Library.Boolean);
 
+
+                //RegistredOperation("isUnique", c => c == 1,
+                //    (s, b, t) =>
+                //    {
+                //        return t.Library.Boolean;
+                //    }
+                //    , (s, b, t) => b);
+                //RegistredOperation("select", c => c == 1,
+                //    (s, b, t) => s
+                //    , (s, b, t) => t.Library.Boolean);
+
+                RegistredOperation("selectUnique", c => c == 1,
+                    (s, b, t) => (SetType)t.Library.CreateCollection(CollectionKind.Set, s.ElementType)
+                    , (s, b, t) => b);
+
                 RegistredOperation("reject", c => c == 1,
                     (s, b, t) => s
                     , (s, b, t) => t.Library.Boolean);
@@ -225,12 +240,12 @@ namespace Exolutio.Model.OCL.Types {
                 RegistredOperation("sortedBy", c => c == 1,
                     (s, b, t) => {
                         if (s.CollectionKind == CollectionKind.Sequence || s.CollectionKind == CollectionKind.Bag) {
-                            SequenceType seq = (SequenceType)t.Library.CreateCollection(CollectionKind.Sequence, b); ;
+                            SequenceType seq = (SequenceType)t.Library.CreateCollection(CollectionKind.Sequence, b); 
                             t.RegisterType(seq);
                             return seq;
                         }
                         else {
-                            OrderedSetType ordSet = (OrderedSetType)t.Library.CreateCollection(CollectionKind.OrderedSet, b); ;
+                            OrderedSetType ordSet = (OrderedSetType)t.Library.CreateCollection(CollectionKind.OrderedSet, b);
                             t.RegisterType(ordSet);
                             return ordSet;
                         }
@@ -240,6 +255,6 @@ namespace Exolutio.Model.OCL.Types {
             }
         }
 
-
+		public bool DeferredFullInitialization { get; set; }
     }
 }

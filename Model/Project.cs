@@ -147,18 +147,18 @@ namespace Exolutio.Model
             private set { usesVersioning = value; NotifyPropertyChanged("UsesVersioning"); }
         }
 
-        private string name;
+        //private string name;
         public string Name
         {
             get
             {
-                return !String.IsNullOrEmpty(name) ? name : (ProjectFile != null ? Path.GetFileNameWithoutExtension(ProjectFile.FullName) : "Untitled");
+                return /*!String.IsNullOrEmpty(name) ? name : */(ProjectFile != null ? Path.GetFileNameWithoutExtension(ProjectFile.FullName) : "Untitled");
             }
-            set
-            {
-                //name = value; 
-                NotifyPropertyChanged("Name");
-            }
+            //set
+            //{
+            //    //name = value; 
+            //    NotifyPropertyChanged("Name");
+            //}
         }
 
 
@@ -306,11 +306,11 @@ namespace Exolutio.Model
                 SingleVersion = objSingleVersion;
             }
 
-            XAttribute nameAttribute = parentNode.Attribute("Name");
-            if (nameAttribute != null)
-            {
-                this.Name = nameAttribute.Value;
-            }
+            //XAttribute nameAttribute = parentNode.Attribute("Name");
+            //if (nameAttribute != null)
+            //{
+            //    this.Name = nameAttribute.Value;
+            //}
         }
 
         public void Serialize(XElement parentNode, SerializationContext context)

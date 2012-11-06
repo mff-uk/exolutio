@@ -8,7 +8,7 @@ using Exolutio.Model.PSM;
 using NUnit.Framework;
 using Exolutio.Model.Versioning;
 
-namespace Tests.ModelIntegrity
+namespace Exolutio.Tests.ModelIntegrity
 {
     public static class ModelConsistency
     {

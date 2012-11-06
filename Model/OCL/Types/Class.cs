@@ -15,7 +15,8 @@ namespace Exolutio.Model.OCL.Types
         /// <summary>
         /// This gives the superclasses of a class.
         /// </summary>
-        public virtual List<Class> SuperClass {
+		public virtual List<Classifier> SuperClass
+		{
             get;
             private set;
         }
@@ -24,7 +25,7 @@ namespace Exolutio.Model.OCL.Types
         public Class(TypesTable.TypesTable tt, Namespace ns, string name)
             : base(tt,ns,name,tt.Library.Any)
         {
-            SuperClass = new List<Class>();
+			SuperClass = new List<Classifier>();
         }
 
         public override bool ConformsToRegister(Classifier other)

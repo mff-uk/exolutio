@@ -191,11 +191,11 @@ namespace Exolutio.Revalidation.XSLT
                                 if (nodeInfos.ContainsKey(childComponent))
                                 {
                                     AdaptationNodeInfo childNodeInfo = nodeInfos[childComponent];
-                                    if (childNodeInfo.AttributeTemplateRequired &&
-                                        childComponent.DownCastSatisfies<PSMAssociationMember>(c => !c.ParentAssociation.IsNamed || c is PSMContentModel))
+                                    if (childNodeInfo.AttributeTemplateRequired && (childComponent is PSMContentModel || (associationToChildComponent != null && !associationToChildComponent.IsNamed)))
+                                        //childComponent.DownCastSatisfies<PSMAssociationMember>(c => !c.ParentAssociation.IsNamed || c is PSMContentModel)) // selhavalo u NTA 
                                         processAttributesTemplate.References.Add(reference);
-                                    if (childNodeInfo.ElementTemplateRequired ||
-                                        childComponent.DownCastSatisfies<PSMClass>(c => c.ParentAssociation.IsNamed))
+                                    if (childNodeInfo.ElementTemplateRequired || (childComponent is PSMClass && !associationToChildComponent.IsNamed))
+										//childComponent.DownCastSatisfies<PSMClass>(c => c.ParentAssociation.IsNamed)) // selhavalo u NTA 
                                         processElementsTemplate.References.Add(reference);
                                 }
                                 else
@@ -205,13 +205,13 @@ namespace Exolutio.Revalidation.XSLT
                                     bool dummy;
                                     Debug.Assert(!reference.ReferencesRedNode);
                                     AdaptationNodeInfo.DetermineRequiredTemplates(reference.ReferencedNode, out attributeRequired, out elementRequired, out dummy);
-                                    if (attributeRequired &&
-                                        childComponent.DownCastSatisfies<PSMAssociationMember>(c => !c.ParentAssociation.IsNamed || c is PSMContentModel))
+                                    if (attributeRequired && (childComponent is PSMContentModel || (associationToChildComponent != null && !associationToChildComponent.IsNamed)))
+                                        //childComponent.DownCastSatisfies<PSMAssociationMember>(c => !c.ParentAssociation.IsNamed || c is PSMContentModel)) // selhavalo u NTA 
                                     {
                                         processAttributesTemplate.References.Add(reference);
                                     }
-                                    if (elementRequired ||
-                                        childComponent.DownCastSatisfies<PSMClass>(c => c.ParentAssociation.IsNamed))
+                                    if (elementRequired || (associationToChildComponent != null && !associationToChildComponent.IsNamed))
+                                        //childComponent.DownCastSatisfies<PSMClass>(c => c.ParentAssociation.IsNamed)) // selhavalo u NTA 
                                     {
                                         processElementsTemplate.References.Add(reference);
                                     }
@@ -237,9 +237,11 @@ namespace Exolutio.Revalidation.XSLT
                        and not a content model 
                        => node template (wrapping template)
                     */
-                    if (redNode is PSMClass && PSMSchemaNewVersion.Roots.Contains((PSMClass)redNode))
+                    if (redNode is PSMClass && PSMSchemaNewVersion.Roots.Contains((PSMClass)redNode) 
+						&& ((PSMClass)redNode).GetAllIncomingAssociations().All(a => !a.IsNamed))
                         generateWrappingTemplate = false;
-                    if (DetectedChangeInstances.IsGroupNode(redNode) && redNode.DownCastSatisfies<PSMClass>(g => g.ParentAssociation == null || !g.ParentAssociation.IsNamed))
+                    if (DetectedChangeInstances.IsGroupNode(redNode) && 
+						redNode.DownCastSatisfies<PSMClass>(g => g.ParentAssociation == null || !g.ParentAssociation.IsNamed))
                         generateWrappingTemplate = false;
                     if (redNode.DownCastSatisfies<PSMAttribute>(a => DetectedChangeInstances.IsAddedNode(a)))
                         generateWrappingTemplate = false;
@@ -278,17 +280,6 @@ namespace Exolutio.Revalidation.XSLT
                     }
                     #endregion
                 }
-
-                if (nodeInfo.ConstructorFunctionRequired)
-                {
-                    Template constructorFunction = new Template();
-                    templates.Add(constructorFunction);
-                    constructorFunction.Node = redNode;
-                    constructorFunction.WrapElementName = namingSupport.GetWrapElementName(redNode);
-                    constructorFunction.Name = namingSupport.SuggestNameForConstructor(redNode);
-                    constructorFunction.ConstructorFunction = true;
-                    nodeInfo.ConstructorFunction = constructorFunction;
-                }
             }
         }
 
@@ -297,7 +288,7 @@ namespace Exolutio.Revalidation.XSLT
             XDocument doc = new XDocument(new XDeclaration("1.0", "utf-8", null));
             XElement xslStylesheet = doc.XslStylesheet("3.0");
             xslStylesheet.Add(new XAttribute(XNamespace.Xmlns + "xs", XDocumentXsltExtensions.XSD_NAMESPACE));
-            xslStylesheet.Add(new XAttribute(XNamespace.Xmlns + "const", XDocumentXsltExtensions.EXOLUTIO_CONSTRUCTORS_NAMESPACE));
+            xslStylesheet.Add(new XAttribute("exclude-result-prefixes", "oclX oclXin oclDate oclString xs"));
             foreach (KeyValuePair<string, XNamespace> kvp in XDocumentXsltExtensions.OCLX_NAMESPACES)
             {
                 xslStylesheet.Add(new XAttribute(XNamespace.Xmlns + kvp.Key, kvp.Value));
@@ -305,7 +296,7 @@ namespace Exolutio.Revalidation.XSLT
 
             if (Environment.MachineName.Contains("TRUPIK"))
             {
-                xslStylesheet.XslImport(@"file:/D:\Programování\EvoXSVN\OclX\oclX-functional.xsl");
+				xslStylesheet.XslImport(@"file:/d:\Development\Exolutio\OclX\oclX-functional.xsl");
             }
             else
             {
@@ -321,10 +312,6 @@ namespace Exolutio.Revalidation.XSLT
             {
                 context.CurrentNode = redNode;
                 AdaptationNodeInfo nodeInfo = nodeInfos[redNode];
-                if (nodeInfo.ConstructorFunctionRequired)
-                {
-                    GenConstructorFunction(redNode, xslStylesheet);
-                }
                 if (nodeInfo.ProcessNodeTemplate != null)
                 {
                     GenWrappingNodeTemplate(redNode, xslStylesheet);
@@ -797,7 +784,7 @@ namespace Exolutio.Revalidation.XSLT
                 GetRelativeXPathEvolutionCallback = context.GetRelativeXPathEvolutionCallback,
                 SchemaAware = this.SchemaAware
             };
-            expressionConverter.ConstructorFunctions.AddRange(templates.Where(t => t.ConstructorFunction).Select(t => new KeyValuePair<PSMComponent, string>(t.Node, t.Name)));
+            
             OclTranslationLog = new Log<OclExpression>();
             expressionConverter.Log = OclTranslationLog;
         }
@@ -846,58 +833,6 @@ namespace Exolutio.Revalidation.XSLT
             {
                 xslForEach.XslAttribute(attribute.Name, "{ . }");
             }
-        }
-
-        private void GenConstructorFunction(PSMComponent redNode, XElement xslStylesheet)
-        {
-            AdaptationNodeInfo nodeInfo = nodeInfos[redNode];
-            Template constructorFunction = nodeInfo.ConstructorFunction;
-
-            List<XDocumentXsltExtensions.TemplateParameter> parameters =
-                new List<XDocumentXsltExtensions.TemplateParameter>();
-            parameters.Add(new XDocumentXsltExtensions.TemplateParameter("element-name", null) { Type = "xs:string" });
-
-            IEnumerable<PSMComponent> childComponents = ModelIterator.GetPSMChildren(redNode, returnAttributesForClass: true,
-                            returnChildAssociationsForAssociationMembers: true);
-
-            // first attributes
-            foreach (PSMAttribute psmAttribute in childComponents.Where(cp => cp.DownCastSatisfies<PSMAttribute>(a => !a.Element)))
-            {
-                XDocumentXsltExtensions.TemplateParameter parameter = new XDocumentXsltExtensions.TemplateParameter(psmAttribute.Name, null)
-                    {
-                        Type = psmAttribute.AttributeType.XSDTypeName
-                    };
-                parameters.Add(parameter);
-            }
-
-            // then elements
-            foreach (PSMComponent _childComponent in childComponents.Where(cp => !cp.DownCastSatisfies<PSMAttribute>(a => !a.Element)))
-            {
-                PSMComponent childComponent = _childComponent;
-                PSMAssociation associationToChildComponent = childComponent as PSMAssociation;
-                if (associationToChildComponent != null)
-                {
-                    childComponent = associationToChildComponent.Child;
-                }
-                XDocumentXsltExtensions.TemplateParameter parameter = new XDocumentXsltExtensions.TemplateParameter(childComponent.Name, null)
-                {
-                    Type = "item()*"
-                };
-                parameters.Add(parameter);
-            }
-
-            XElement functionElement = xslStylesheet.XslFunction("const:" + constructorFunction.Name, "item()*", parameters.ToArray());
-            XElement xslChoose = functionElement.XslChoose();
-            XElement xslWhen = xslChoose.XslWhen(new XPathExpr("$element-name ne ''"));
-            XElement xslElement = xslWhen.XslElement("{$element-name}");
-            foreach (XDocumentXsltExtensions.TemplateParameter templateParameter in parameters.Skip(1))
-            {
-                xslElement.XslSequence(new XPathExpr("$" + templateParameter.Name));
-            }
-            XElement xslOtherwise = new XElement(xslElement); // copy content then rename
-            xslOtherwise.Name = XDocumentXsltExtensions.XSLT_NAMESPACE + "otherwise";
-            xslOtherwise.RemoveAttributes();
-            xslChoose.Add(xslOtherwise);
         }
 
         #endregion

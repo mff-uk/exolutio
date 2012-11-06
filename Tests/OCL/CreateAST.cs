@@ -1,19 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using NUnit.Framework;
 using Exolutio.Model.OCL.Bridge;
 using Exolutio.Model.OCL.Types;
-using Exolutio.Model.OCL.TypesTable;
-using Exolutio.Model.OCL.Compiler;
-using Exolutio.Model.OCL;
-using AST = Exolutio.Model.OCL.AST;
+using Exolutio.Model.OCL.AST;
 using Exolutio.Model.Serialization;
 using Exolutio.Model;
 using Exolutio.Model.PIM;
 
-namespace Tests.OCL {
+namespace Exolutio.Tests.OCL {
     [TestFixture]
     class CreateAST {
         public Tuple<PIMBridge, Exolutio.Model.PIM.PIMSchema> CreateTestEnv() {
@@ -34,21 +30,21 @@ namespace Tests.OCL {
         // true
         public void ConstantTrue() {
             PIMBridge br = CreateTestEnv().Item1;
-            AST.BooleanLiteralExp boolConstant = new AST.BooleanLiteralExp(true, br.Library.Boolean);
+            Model.OCL.AST.BooleanLiteralExp boolConstant = new Model.OCL.AST.BooleanLiteralExp(true, br.Library.Boolean);
         }
 
         [Test]
         //true == true
         public void EqOnBoolean() {
             PIMBridge br = CreateTestEnv().Item1;
-            AST.BooleanLiteralExp boolConstant = new AST.BooleanLiteralExp(true, br.Library.Boolean);
-            AST.BooleanLiteralExp boolConstant2 = new AST.BooleanLiteralExp(true, br.Library.Boolean);
+            Model.OCL.AST.BooleanLiteralExp boolConstant = new Model.OCL.AST.BooleanLiteralExp(true, br.Library.Boolean);
+            Model.OCL.AST.BooleanLiteralExp boolConstant2 = new Model.OCL.AST.BooleanLiteralExp(true, br.Library.Boolean);
 
             var eqOp = br.Library.Boolean.LookupOperation("=",new Classifier[]{br.Library.Boolean}) ; // tohle není moc pěkné, první index je výběr operací podle jména a ve druhém jsou tyto operace s různou signaturou.
-            AST.OclExpression expr = new AST.OperationCallExp(boolConstant, // source - na cem se daná operace volá
+            Model.OCL.AST.OclExpression expr = new Model.OCL.AST.OperationCallExp(boolConstant, // source - na cem se daná operace volá
                 false,
                 eqOp,// operace která se volá 
-                new List<AST.OclExpression>(new AST.OclExpression[] { boolConstant2 })); // parametry
+                new List<OclExpression>(new Model.OCL.AST.OclExpression[] { boolConstant2 })); // parametry
         }
 
         // tednkon si dame neco tezsiho
@@ -64,10 +60,10 @@ namespace Tests.OCL {
             PIMBridgeClass OCLtournamentControl = br.Find(PIMtournamentControl);
             //self var 
             VariableDeclaration selfVarDecl = new VariableDeclaration("self",OCLtournamentControl, null);
-            AST.VariableExp selfVar = new AST.VariableExp(selfVarDecl);
+            Model.OCL.AST.VariableExp selfVar = new Model.OCL.AST.VariableExp(selfVarDecl);
 
             // self.Tournament
-            AST.PropertyCallExp selfDotTournament = new AST.PropertyCallExp( 
+            Model.OCL.AST.PropertyCallExp selfDotTournament = new Model.OCL.AST.PropertyCallExp( 
                 selfVar,// nacem se vola properta (associace)
                 false,// isPre
                 null,// nezajima
@@ -80,16 +76,16 @@ namespace Tests.OCL {
             // t:Tournament
             VariableDeclaration tVarDelc = new VariableDeclaration("t", OCLtournament,null);
             // t var
-            AST.VariableExp tVar = new AST.VariableExp(tVarDelc);
+            Model.OCL.AST.VariableExp tVar = new Model.OCL.AST.VariableExp(tVarDelc);
             // t.open
-            AST.PropertyCallExp tDotOpen = new AST.PropertyCallExp( tVar,
+            Model.OCL.AST.PropertyCallExp tDotOpen = new Model.OCL.AST.PropertyCallExp( tVar,
                 false,
                 null,
                 null,
                 OCLtournament.LookupProperty("open"));
 
             // self.Tournament.forAll( )
-            AST.OclExpression expr = new AST.IteratorExp(
+            Model.OCL.AST.OclExpression expr = new Model.OCL.AST.IteratorExp(
                 selfDotTournament, // na cem se iterator vola
                 tDotOpen, // telo iteratoru
                 "forAll",

@@ -1,18 +1,11 @@
-using System.IO;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.Xml.Serialization;
-using Exolutio.Controller;
 using Exolutio.Model;
 using Exolutio.Model.PSM;
 using Exolutio.Model.PSM.Grammar;
 using Exolutio.Model.PSM.Normalization;
 using Exolutio.Model.Serialization;
-using Exolutio.Model.Versioning;
 using NUnit.Framework;
-using Tests.CodeTests;
 
-namespace Tests.Serialization
+namespace Exolutio.Tests.Grammar
 {
     [TestFixture]
     public class GrammarTests
@@ -36,7 +29,7 @@ namespace Tests.Serialization
             System.Diagnostics.Debug.WriteLine(string.Empty);
 
             Normalizer normalizer = new Normalizer();
-            normalizer.Controller = new Controller(sampleProject);
+            normalizer.Controller = new Controller.Controller(sampleProject);
             normalizer.NormalizeSchema(psmSchema);
 
             g = grammarGenerator.GenerateGrammar(psmSchema);

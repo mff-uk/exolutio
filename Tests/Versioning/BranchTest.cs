@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using Exolutio.Model;
@@ -6,9 +5,8 @@ using Exolutio.Model.PIM;
 using Exolutio.Model.PSM;
 using Exolutio.Model.Versioning;
 using NUnit.Framework;
-using Version = Exolutio.Model.Versioning.Version;
 
-namespace Tests.Versioning
+namespace Exolutio.Tests.Versioning
 {
     public class BranchTest
     {
@@ -172,6 +170,12 @@ namespace Tests.Versioning
             }
             else
             {
+                if (member1.ProjectVersion == null)
+                {
+                    Assert.IsNull(getReferredItem(otherT).ProjectVersion);
+                    return;
+                }
+
                 TMember member2 = member1.GetInVersion(other.Version) as TMember;
                 Assert.IsNotNull(member2);
                 Assert.AreEqual(member2.GetInVersion(owner.Version), member1);

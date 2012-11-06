@@ -140,16 +140,33 @@ namespace Exolutio.Revalidation.XSLT
             return result;
         }
 
-        public string SuggestNameForConstructor(PSMComponent redNode)
-        {
-            string result = SuggestName(redNode, false, false);
-            result += "-CONST";
-            return result;
-        }
-
         public string GetWrapElementName(PSMComponent psmComponent)
         {
-            return psmComponent is PSMAttribute ? psmComponent.Name : ((PSMAssociationMember)psmComponent).ParentAssociation.Name;
+            if (psmComponent is PSMAttribute)
+	            return psmComponent.Name;
+
+			List<string> candidateNames = new List<string>();
+	        var am = (PSMAssociationMember) psmComponent;
+			if (am.ParentAssociation != null && am.ParentAssociation.IsNamed)
+				candidateNames.Add(am.ParentAssociation.Name);
+	        var c = (PSMClass) psmComponent; 
+			if (c != null)
+			{
+				foreach (PSMAssociation nta in c.GetIncomingNonTreeAssociations())
+				{
+					if (nta.IsNamed)
+						SupportingClasses.CollectionsExtensions.AddIfNotContained(candidateNames, nta.Name);
+				}
+			}
+
+			// HACK neumim resit kdyz bude candidate names vic, to by se muselo vse prestrukturovat, protoze 
+			//	 by jmeno wrapping nodu muselo byt nejak parametrem wrapovaciho volani...
+			//   vic candidate names nastane pokud mi do tridy vede vic asociaci s ruznymi jmeny
+			if (candidateNames.Count > 0)
+				return candidateNames.First();
+			else 
+				throw new NotImplementedException();
+
         }
     }
 }

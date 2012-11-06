@@ -1,15 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Reflection;
-using Exolutio.Controller;
 using Exolutio.Controller.Commands;
-using Exolutio.Model;
-using Exolutio.Model.Versioning;
 using Exolutio.SupportingClasses.Reflection;
 using NUnit.Framework;
 
-namespace Tests.CodeTests
+namespace Exolutio.Tests.CodeTests
 {
     [TestFixture]
 	public class CommandConstructorTest: CodeTestBase

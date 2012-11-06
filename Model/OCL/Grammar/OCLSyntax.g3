@@ -16,7 +16,7 @@ tokens{
 @lexer::namespace{Exolutio.Model.OCL.Compiler}
 @parser::namespace{Exolutio.Model.OCL.Compiler}
 
-@lexer::header {    using System.Collections.Generic;} 
+//@lexer::header {    using System.Collections.Generic;} 
 @lexer::members {    Queue<IToken> tokens = new Queue<IToken>();    public override void Emit(IToken token)     {        state.token = token;        tokens.Enqueue(token);    }    public override IToken NextToken()    {        base.NextToken();        if ( tokens.Count ==0 )            return Tokens.EndOfFile;        return tokens.Dequeue();    }}
 
 

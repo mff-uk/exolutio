@@ -10,7 +10,6 @@ namespace Exolutio.Model.PSM.XMLValidation
      **/
     class AutomatEdge
     {
-        private AutomatState startState;
         private AutomatState endState;
         private EdgeMode edgeMode;
         private AttributeType attributeType = null;

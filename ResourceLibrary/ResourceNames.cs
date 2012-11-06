@@ -113,6 +113,7 @@ namespace Exolutio.ResourceLibrary
         public const string branch_element = "branch_element";
         public const string split_pim_assoc = "split_pim_assoc";
         public const string split_psm_assoc = "split_psm_assoc";
+        public const string transform = "transform";
 
         public static ImageSource GetResourceImageSource(string resourceKey)
         {

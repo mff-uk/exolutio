@@ -3,22 +3,17 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
-using Exolutio.Controller.Commands;
 using Exolutio.Model;
 using Exolutio.Model.PSM;
 using Exolutio.Model.PSM.Grammar.XSDTranslation;
 using Exolutio.Model.Serialization;
-using Exolutio.Revalidation;
-using Exolutio.Revalidation.XSLT;
 using Exolutio.SupportingClasses.XML;
 using NUnit.Framework;
-using Tests.CodeTests;
 
-namespace Tests.XSDTranslation
+namespace Exolutio.Tests.XSDTranslation
 {
     [TestFixture]
     public class XSDTranslation

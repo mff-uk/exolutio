@@ -156,6 +156,30 @@ namespace Exolutio.View
         private void tbDocument_TextChanged(object sender, EventArgs e)
         {
             UpdateFolding();
+        }
+
+        private void tbDocument_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Add && Keyboard.Modifiers.HasFlag(ModifierKeys.Control))
+            {
+                tbDocument.FontSize *= 1.1;
+                e.Handled = true;
+                return;
+            }
+
+            if (e.Key == Key.Subtract && Keyboard.Modifiers.HasFlag(ModifierKeys.Control))
+            {
+                tbDocument.FontSize *= 0.9;
+                e.Handled = true;
+                return;
+            }
+
+            if (e.Key == Key.Multiply && Keyboard.Modifiers.HasFlag(ModifierKeys.Control))
+            {
+                tbDocument.FontSize = 12;
+                e.Handled = true;
+                return;
+            }
         }       
     }
 }

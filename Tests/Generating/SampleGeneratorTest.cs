@@ -1,15 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Reflection;
 using System.Xml.Linq;
 using Exolutio.DataGenerator;
 using Exolutio.Model;
 using Exolutio.Model.PSM;
-using Exolutio.Model.Versioning;
 using NUnit.Framework;
 
-namespace Tests.CodeTests
+namespace Exolutio.Tests.Generating
 {
     [TestFixture]
 	public class SampleGeneratorTest

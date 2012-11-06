@@ -5,7 +5,7 @@ using Exolutio.Model.Serialization;
 using NUnit.Framework;
 using System.Collections.Generic;
 
-namespace Tests.ExolutioExportTests
+namespace Exolutio.Tests.ModelIntegrity
 {
     [TestFixture]
     public class ExolutioExportTest
@@ -58,7 +58,7 @@ namespace Tests.ExolutioExportTests
         {
             Project loadProject = projectSerializationManager.LoadProject(filename);
             
-            ModelIntegrity.ModelConsistency.CheckProject(loadProject);
+            global::Exolutio.Tests.ModelIntegrity.ModelConsistency.CheckProject(loadProject);
         }
     }
 }

@@ -40,17 +40,7 @@ namespace Exolutio.Revalidation.XSLT
 
         public Template CreateElementsTemplate { get; set; }
 
-        public bool ConstructorFunctionRequired
-        {
-            get
-            {
-                return InitializationExpression != null && !(Node is PSMAttribute);
-            }
-        }
-
         public OclExpression InitializationExpression { get; set; }
-
-        public Template ConstructorFunction { get; set; }
 
         public static void DetermineRequiredTemplates(PSMComponent node, out bool attributeRequired, out bool elementRequired, out bool wrapTemplateRequired)
         {

@@ -15,8 +15,6 @@
 // Unreachable code detected.
 #pragma warning disable 162
 
-    using System.Collections.Generic;
-
 using System.Collections.Generic;
 using Antlr.Runtime;
 

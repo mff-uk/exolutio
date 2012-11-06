@@ -111,7 +111,7 @@ namespace Exolutio.View.Commands.Grammar
             
             if (Environment.MachineName.Contains("TRUPIK"))
             {
-                schematronSchemaDocument.Save(@"D:\Programování\EVOXSVN\SchematronTest\LastSchSchema.sch");
+				schematronSchemaDocument.Save(@"d:\Development\Exolutio\SchematronTest\LastSchSchema.sch");
             }            
 
             log = schemaGenerator.Log;
