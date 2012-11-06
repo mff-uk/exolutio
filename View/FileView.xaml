@@ -12,7 +12,9 @@
                                    FontFamily="Consolas" 
                                    ShowLineNumbers="true" 
                                    FontSize="12"
-                                   TextChanged="tbDocument_TextChanged" Margin="5">
+                                   TextChanged="tbDocument_TextChanged" 
+                                   KeyUp="tbDocument_KeyUp"
+                                    Margin="5">
 
         </avalonEdit:TextEditor>
     </Grid>

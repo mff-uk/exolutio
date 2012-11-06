@@ -94,10 +94,13 @@ namespace Exolutio.Model.OCL.Compiler {
                         Classifier classifierT = Bridge.Find(componentT);
                         Classifier classifierS = Bridge.Find(componentS);
 
-                        //SkipOperationTag tag = new SkipOperationTag { Source = this, Target = bridge.PSMAssociationMembers[targetClass] };
                         Operation prevOp = new Operation(@"prev", true, classifierS);
-                        prevOp.Tag = new PrevOperatonTag() { SourceVersionClassifier = classifierS, TargetVersionClassifier = classifierT };
+                        prevOp.Tag = new PrevOperationTag() { SourceVersionClassifier = classifierS, TargetVersionClassifier = classifierT };
                         classifierT.Operations.Add(prevOp);
+
+                        Operation nextOp = new Operation(@"next", true, classifierT);
+                        nextOp.Tag = new NextOperationTag() { SourceVersionClassifier = classifierS, TargetVersionClassifier = classifierT };
+                        classifierS.Operations.Add(nextOp);
                     }
                 }
             }
@@ -250,7 +253,16 @@ namespace Exolutio.Model.OCL.Compiler {
             AST.PropertyCallExp localProp = CheckAmbiguous(new AST.PropertyCallExp(localVar, false, null, null, property))
                 .SetCodeSource(codeSource);
             //Napevno zafixovany navratovy typ collect
-            Classifier returnType = Library.CreateCollection(CollectionKind.Collection, property.Type);
+            // JM > kdyz je typ Set(Class) nebo Bag(Class) tak by mel implicit collect vracet Bag(Class)
+            Classifier returnType;
+            if (property.Type is CollectionType)
+            {
+                returnType = Library.CreateCollection(CollectionKind.Bag, ((CollectionType)property.Type).ElementType);
+            }
+            else
+            {
+                returnType = Library.CreateCollection(CollectionKind.Collection, property.Type);
+            }
             return new AST.IteratorExp(expr, localProp, @"collect", varList, returnType)
                 .SetCodeSource(codeSource);
         }

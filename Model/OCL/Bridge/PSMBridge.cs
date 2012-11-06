@@ -92,7 +92,7 @@ namespace Exolutio.Model.OCL.Bridge
             naming.Integer = "integer";
             naming.Invalid = "invalid";
             naming.Message = "message";
-            naming.Real = "real";
+            naming.Real = "double";
             naming.String = "string";
             naming.Type = "type";
             naming.UnlimitedNatural = "unlimitedNatural";
@@ -102,8 +102,18 @@ namespace Exolutio.Model.OCL.Bridge
             TypesTable.StandardLibraryCreator sLC = new TypesTable.StandardLibraryCreator();
             sLC.CreateStandardLibrary(TypesTable);
 
-            // Docasna podpora pro typy v Tournaments.eXo
-            Class date = new Class(TypesTable, TypesTable.Library.RootNamespace, "date");
+			#region XML schema additional primitive types 
+
+			var @decimal = new Classifier(TypesTable, TypesTable.Library.RootNamespace, "decimal", TypesTable.Library.Integer);
+			TypesTable.RegisterType(@decimal);
+			var date = new Classifier(TypesTable, TypesTable.Library.RootNamespace, "date");
+			TypesTable.RegisterType(date);
+
+
+			#endregion 
+
+			// Docasna podpora pro typy v Tournaments.eXo
+            
             date.Operations.Add(new Operation("after", true, TypesTable.Library.Boolean, new Parameter[] { new Parameter("time", date) }));
             date.Operations.Add(new Operation("before", true, TypesTable.Library.Boolean, new Parameter[] { new Parameter("time", date) }));
             date.Operations.Add(new Operation("equals", true, TypesTable.Library.Boolean, new Parameter[] { new Parameter("time", date) }));

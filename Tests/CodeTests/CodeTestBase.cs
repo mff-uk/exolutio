@@ -3,7 +3,7 @@ using Exolutio.Model;
 using NUnit.Framework;
 using System.Reflection;
 
-namespace Tests.CodeTests
+namespace Exolutio.Tests.CodeTests
 {
 	public abstract class CodeTestBase
 	{

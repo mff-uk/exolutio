@@ -2,7 +2,7 @@ using Exolutio.Model;
 using Exolutio.Model.Versioning;
 using NUnit.Framework;
 
-namespace Tests.Versioning
+namespace Exolutio.Tests.Versioning
 {
     [TestFixture]
     public class SeparateEmbedTests
@@ -15,7 +15,7 @@ namespace Tests.Versioning
 
             Project separatedProject = simpleSampleProject.VersionManager.SeparateVersion(simpleSampleProject.ProjectVersions[1], keepGuids);
 
-            ModelIntegrity.ModelConsistency.CheckProject(separatedProject);
+            global::Exolutio.Tests.ModelIntegrity.ModelConsistency.CheckProject(separatedProject);
         }
 
         [TestCase(true)]
@@ -26,7 +26,7 @@ namespace Tests.Versioning
 
             Project separatedProject = sampleProject.VersionManager.SeparateVersion(sampleProject.ProjectVersions[1], keepGuids);
 
-            ModelIntegrity.ModelConsistency.CheckProject(separatedProject);
+            global::Exolutio.Tests.ModelIntegrity.ModelConsistency.CheckProject(separatedProject);
         }
 
         [TestCase(true)]
@@ -37,7 +37,7 @@ namespace Tests.Versioning
 
             Project separatedProject = simpleSampleProject.VersionManager.SeparateVersion(simpleSampleProject.ProjectVersions[1], true);
 
-            ModelIntegrity.ModelConsistency.CheckProject(separatedProject);
+            global::Exolutio.Tests.ModelIntegrity.ModelConsistency.CheckProject(separatedProject);
             
             Version separatedVersion = simpleSampleProject.VersionManager.Versions[1];
             if (!createVersionLinks)
@@ -47,7 +47,7 @@ namespace Tests.Versioning
             newVersion.Number = 100;
             newVersion.Label = "new";
             simpleSampleProject.VersionManager.EmbedVersion(separatedProject.SingleVersion, newVersion, separatedVersion.BranchedFrom, !createVersionLinks, createVersionLinks);
-            ModelIntegrity.ModelConsistency.CheckProject(separatedProject);
+            global::Exolutio.Tests.ModelIntegrity.ModelConsistency.CheckProject(separatedProject);
         }
 
         [TestCase(true)]
@@ -58,7 +58,7 @@ namespace Tests.Versioning
 
             Project separatedProject = sampleProject.VersionManager.SeparateVersion(sampleProject.ProjectVersions[1], true);
 
-            ModelIntegrity.ModelConsistency.CheckProject(separatedProject);
+            global::Exolutio.Tests.ModelIntegrity.ModelConsistency.CheckProject(separatedProject);
 
             Version separatedVersion = sampleProject.VersionManager.Versions[1];
             if (!createVersionLinks)
@@ -68,7 +68,7 @@ namespace Tests.Versioning
             newVersion.Number = 100;
             newVersion.Label = "new";
             sampleProject.VersionManager.EmbedVersion(separatedProject.SingleVersion, newVersion, separatedVersion.BranchedFrom, !createVersionLinks, createVersionLinks);
-            ModelIntegrity.ModelConsistency.CheckProject(separatedProject);
+            global::Exolutio.Tests.ModelIntegrity.ModelConsistency.CheckProject(separatedProject);
         }
     }
 }

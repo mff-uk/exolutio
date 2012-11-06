@@ -1,14 +1,10 @@
 using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
 using System.Reflection;
-using Exolutio.Controller.Commands;
 using Exolutio.Model;
 using Exolutio.Model.Versioning;
 using NUnit.Framework;
 
-namespace Tests.CodeTests
+namespace Exolutio.Tests.CodeTests
 {
     [TestFixture]
 	public class CloneCopyTests : CodeTestBase

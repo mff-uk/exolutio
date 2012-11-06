@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Tests.ModelIntegrity
+namespace Exolutio.Tests.ModelIntegrity
 {
     public class ModelConsistencyException : Exception
     {

@@ -9,8 +9,6 @@ namespace Exolutio.Revalidation.XSLT
     {
         public static XNamespace XSLT_NAMESPACE = @"http://www.w3.org/1999/XSL/Transform";
 
-        public static XNamespace EXOLUTIO_CONSTRUCTORS_NAMESPACE = @"http://eXolutio.com/oclX/types/constructors";
-
         public static XNamespace XSD_NAMESPACE = @"http://www.w3.org/2001/XMLSchema";
 
         public static Dictionary<string, XNamespace> OCLX_NAMESPACES = new Dictionary<string, XNamespace>
@@ -296,6 +294,8 @@ namespace Exolutio.Revalidation.XSLT
                 Name = name;
                 Value = value;
             }
+
+            public object Tag { get; set; }
         }
     }
 }

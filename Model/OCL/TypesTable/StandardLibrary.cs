@@ -70,8 +70,12 @@ namespace Exolutio.Model.OCL.TypesTable {
             }
         }
 
-        public CollectionType CreateCollection(CollectionKind kind, Classifier elementType) {
-            CollectionType newType;
+		
+
+        public CollectionType CreateCollection(CollectionKind kind, Classifier elementType, 
+			bool deferFullInitialization = false, List<CollectionType> deferredCollectionList = null) {
+            
+			CollectionType newType;
             var tupleCacheKey = new Tuple<Classifier, CollectionKind>(elementType, kind);
             if (collectionTypeCache.ContainsKey(tupleCacheKey))
                 return collectionTypeCache[tupleCacheKey];
@@ -80,10 +84,10 @@ namespace Exolutio.Model.OCL.TypesTable {
                 newType = new CollectionType(TypeTable, elementType, Any);
             }
             else {
-                CollectionType inheritFrom = inheritFrom = CreateCollection(CollectionKind.Collection, elementType);
+				CollectionType inheritFrom;// = CreateCollection(CollectionKind.Collection, elementType, deferFullInitialization, deferredCollectionList);
                 switch (kind) {
                     case CollectionKind.Bag:
-                        inheritFrom = CreateCollection(CollectionKind.Collection, elementType);
+						inheritFrom = CreateCollection(CollectionKind.Collection, elementType, deferFullInitialization, deferredCollectionList);
                         newType = new BagType(TypeTable, elementType, inheritFrom);
                         break;
                     case CollectionKind.Collection:
@@ -91,15 +95,15 @@ namespace Exolutio.Model.OCL.TypesTable {
                         System.Diagnostics.Debug.Fail("Hups.");
                         break;
                     case CollectionKind.OrderedSet:
-                        inheritFrom = CreateCollection(CollectionKind.Collection, elementType);
+						inheritFrom = CreateCollection(CollectionKind.Collection, elementType, deferFullInitialization, deferredCollectionList);
                         newType = new OrderedSetType(TypeTable, elementType, inheritFrom);
                         break;
                     case CollectionKind.Sequence:
-                        inheritFrom = CreateCollection(CollectionKind.Collection, elementType);
+						inheritFrom = CreateCollection(CollectionKind.Collection, elementType, deferFullInitialization, deferredCollectionList);
                         newType = new SequenceType(TypeTable, elementType, inheritFrom);
                         break;
                     case CollectionKind.Set:
-                        inheritFrom = CreateCollection(CollectionKind.Collection, elementType);
+						inheritFrom = CreateCollection(CollectionKind.Collection, elementType, deferFullInitialization, deferredCollectionList);
                         newType = new SetType(TypeTable, elementType, inheritFrom);
                         break;
                     default:
@@ -109,20 +113,36 @@ namespace Exolutio.Model.OCL.TypesTable {
                 }
             }
 
-            // Operations injection
-            Type actType = newType.GetType();
-            Action<Classifier> lazyOpAction;
-            if (LazyOperation.TryGetValue(actType, out lazyOpAction)) {
-                lazyOpAction(newType);
-            }
+	        newType.DeferredFullInitialization = deferFullInitialization;
 
-            TypeTable.RegisterType(newType);
+			if (!deferFullInitialization)
+			{
+				PerformDeferredInitialization(newType);
+			}
+			else
+			{
+				deferredCollectionList.Add(newType);
+			}
+
+	        TypeTable.RegisterType(newType);
             collectionTypeCache[tupleCacheKey] = newType;
             return newType;
         }
+
+	    internal void PerformDeferredInitialization(CollectionType collectionType)
+	    {
+			// Operations injection
+		    Type actType = collectionType.GetType();
+		    Action<Classifier> lazyOpAction;
+		    if (LazyOperation.TryGetValue(actType, out lazyOpAction))
+		    {
+			    lazyOpAction(collectionType);
+		    }
+		    collectionType.DeferredFullInitialization = false;
+	    }
     }
 
-
+	
 
     public class StandardLibraryCreator {
         Library lib;
@@ -144,11 +164,13 @@ namespace Exolutio.Model.OCL.TypesTable {
             lib = tt.Library;
             Namespace ns = lib.RootNamespace;
 
+			List<CollectionType> defferedCollectionList = new List<CollectionType>();
+
             // add default template / generic operation 
             lib.DefaultLazyOperation = (c) => {
                 // oclAsSet is problem on Set type (infinity recursion)
                 if (c is CollectionType == false) {
-                    CollectionType set = lib.CreateCollection(CollectionKind.Set, c);
+                    CollectionType set = lib.CreateCollection(CollectionKind.Set, c, true, defferedCollectionList);
                     AddOperation(c, Library.OclAsSet, set);
                 }
             };
@@ -275,11 +297,10 @@ namespace Exolutio.Model.OCL.TypesTable {
                 AddOperation(coll, "isEmpty", boolean);
                 AddOperation(coll, "notEmpty", boolean);
 
-                /* musi splnovat nektere podminky
+				/* TODO: musi splnovat nektere podminky (zatim nekontrolujeme) */
+                AddOperation(coll, "sum", t);
                 AddOperation(coll, "max", t);
                 AddOperation(coll, "min", t);
-                AddOperation(coll, "sum", t);
-                */
 
                 //Missing: product, asSet, asOrdredSet,as  sequence,asBag, flatten
 
@@ -316,6 +337,7 @@ namespace Exolutio.Model.OCL.TypesTable {
 
                 AddOperation(coll, "count", integer, t);
                 AddOperation(coll, "=", boolean, coll);
+				SetType set = (SetType)lib.CreateCollection(CollectionKind.Set, t, true, defferedCollectionList);
 
                 AddOperation(coll, "union", coll, coll);
                 //flatten missing
@@ -331,16 +353,34 @@ namespace Exolutio.Model.OCL.TypesTable {
                 AddOperation(coll, "excluding", coll, t);
                 AddOperation(coll, "reverse", coll, t);
                 AddOperation(coll, "asSequence", coll, t);
+                AddOperation(coll, "asSet", set);
+                //asOrderedSet(),asBag(),asSet() missing
+            });
+
+            lib.LazyOperation.Add(typeof(BagType), (c) =>
+            {
+                CollectionType coll = c as CollectionType;
+                Classifier t = coll.ElementType;
+				SetType set = (SetType)lib.CreateCollection(CollectionKind.Set, t, true, defferedCollectionList);
+                AddOperation(coll, "asSet", set);
                 //asOrderedSet(),asBag(),asSet() missing
             });
 
             #endregion 
 
             // after lazy operations are defined can we use collection types
-            CollectionType strSeq = lib.CreateCollection(CollectionKind.Sequence, str);
+			CollectionType strSeq = lib.CreateCollection(CollectionKind.Sequence, str, true, defferedCollectionList);
             tt.RegisterType(strSeq);
             AddOperation(str, "characters", strSeq);
             AddOperation(str, "tokenize", strSeq, str);
+
+	        foreach (CollectionType collectionType in defferedCollectionList)
+	        {
+		        if (collectionType.DeferredFullInitialization)
+		        {
+					lib.PerformDeferredInitialization(collectionType);
+		        }
+	        }
         }
     }
 }

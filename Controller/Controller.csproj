@@ -61,7 +61,6 @@
     <Compile Include="Commands\Atomic\acmdUpdateAttributeType.cs" />
     <Compile Include="Commands\Atomic\MacroWrappers\cmdDeleteAttributeType.cs" />
     <Compile Include="Commands\Atomic\MacroWrappers\cmdRenameComponent.cs" />
-    <Compile Include="Commands\Atomic\MacroWrappers\cmdRenameProject.cs" />
     <Compile Include="Commands\Atomic\MacroWrappers\cmdUpdateAttributeType.cs" />
     <Compile Include="Commands\Atomic\MacroWrappers\cmdNewAttributeType.cs" />
     <Compile Include="Commands\Atomic\PIM\acmdShiftPIMAttribute.cs" />
@@ -262,7 +261,6 @@
     <Compile Include="Commands\Base\CommandNotInitializedException.cs" />
     <Compile Include="Commands\Base\CommandResultAttribute.cs" />
     <Compile Include="Commands\Atomic\PIM\acmdNewPIMClass.cs" />
-    <Compile Include="Commands\Atomic\acmdRenameProject.cs" />
     <Compile Include="Commands\Reflection\CommandDescriptor.cs" />
     <Compile Include="Commands\Versioning\cmdBranchProjectVersion.cs" />
     <Compile Include="Commands\Versioning\cmdRemoveProjectVersion.cs" />

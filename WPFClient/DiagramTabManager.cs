@@ -240,6 +240,11 @@ namespace Exolutio.WPFClient
                 }
                 else
                 {
+                    if (System.Environment.MachineName.Contains("TRUPIK") && DockManager.ActiveDocument is IFilePresenterTab)
+                    {
+                        return;
+                    }
+                    
                     Current.ActiveDiagram = null;
                 }
             }

@@ -258,7 +258,7 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
                 formatBuilder.Append(", ");
             }
 
-            if (formatBuilder.Length > 0) // remove last comma
+            if (formatBuilder.Length > 1) // remove last comma
             {
                 formatBuilder.Length = formatBuilder.Length - 2;
             }
@@ -365,13 +365,6 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
         private readonly Dictionary<OperationInfo, Action<OperationCallExp, OperationInfo>> operationsRewritings = new Dictionary<OperationInfo, Action<OperationCallExp, OperationInfo>>();
         private Dictionary<OperationInfo, Action<OperationCallExp, OperationInfo>> OperationRewritings { get { return operationsRewritings; } }
         
-        private readonly Dictionary<PSMComponent, string> constructorFunctions = new Dictionary<PSMComponent, string>();
-
-        public Dictionary<PSMComponent, string> ConstructorFunctions
-        {
-            get { return constructorFunctions; }
-        }
-
         public PSMOCLtoXPathConverterFunctional()
         {
             if (System.Environment.MachineName.Contains("TRUPIK"))
@@ -745,6 +738,15 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
 
         public override void Visit(OperationCallExp node)
         {
+            if (node.ReferredOperation != null && node.ReferredOperation.Tag is NextOperationTag)
+            {
+                node.Source.Accept(this);
+                TranslationOption option = new TranslationOption();
+                option.FormatString = "oclX:apply-templates({0})";
+                SubexpressionTranslations.AddTranslationOption(node, option, node.Source);
+                return;
+            }
+
             base.Visit(node);
 
             if (OperationRewritings.IsEmpty())
@@ -753,12 +755,14 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
                 OperationRewritings[OperationHelper.lastOperationInfo] = AddLastRewritings;
                 OperationRewritings[OperationHelper.atOperationInfo] = AddAtRewritings;
             }
-
-            TranslationOption standardTranslation = SubexpressionTranslations.GetSubexpressionTranslation(node);
-            OperationInfo? operationInfo = OperationHelper.LookupOperation(node, standardTranslation.OptionsContainer.SubExpressions.ToArray());
-            if (operationInfo != null && OperationRewritings.ContainsKey(operationInfo.Value))
+            
             {
-                OperationRewritings[operationInfo.Value](node, operationInfo.Value);
+                TranslationOption standardTranslation = SubexpressionTranslations.GetSubexpressionTranslation(node);
+                OperationInfo? operationInfo = OperationHelper.LookupOperation(node, standardTranslation.OptionsContainer.SubExpressions.ToArray());
+                if (operationInfo != null && OperationRewritings.ContainsKey(operationInfo.Value))
+                {
+                    OperationRewritings[operationInfo.Value](node, operationInfo.Value);
+                }    
             }
         }
 
@@ -786,30 +790,23 @@ namespace Exolutio.Model.PSM.Grammar.SchematronTranslation
         protected override string ClassLiteralToXPath(ClassLiteralExp tupleLiteral, List<OclExpression> subExpressions)
         {
             StringBuilder formatBuilder = new StringBuilder();
-            string constructorFunctionName = ConstructorFunctions[((PSMBridgeClass) tupleLiteral.Type).PSMSource];
             string elementName = EvolutionAssignmentStack.Peek() != null ? (EvolutionAssignmentStack.Peek().PSMAssociation != null ? EvolutionAssignmentStack.Peek().PSMAssociation.Name: string.Empty): string.Empty;
-            formatBuilder.AppendFormat("const:{0}('{1}', ", constructorFunctionName, elementName); 
+            formatBuilder.AppendFormat("oclX:genericConstructor('{0}', map {{{{", elementName); 
             foreach (KeyValuePair<string, TupleLiteralPart> kvp in tupleLiteral.Parts)
             {
                 kvp.Value.Value.Accept(this);
-                formatBuilder.AppendFormat("{{{0}}}, ", subExpressions.Count);
+                formatBuilder.AppendFormat("'{0}' := {{{1}}}, ", kvp.Key, subExpressions.Count);
                 subExpressions.Add(kvp.Value.Value);
             }
             if (formatBuilder.Length > 0)
             {
                 formatBuilder.Length = formatBuilder.Length - 2;
             }
-            formatBuilder.Append(")");
+            formatBuilder.Append("}} )");
             TranslationOption option = new TranslationOption();
             option.FormatString = formatBuilder.ToString();
             SubexpressionTranslations.AddTranslationOption(tupleLiteral, option, subExpressions.ToArray());
             return option.FormatString;
-        }
-
-        public override void Clear()
-        {
-            base.Clear();
-            ConstructorFunctions.Clear();
         }
     }
 

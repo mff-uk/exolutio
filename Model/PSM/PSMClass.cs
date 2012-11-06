@@ -140,6 +140,11 @@ namespace Exolutio.Model.PSM
             get { return GeneralizationAsSpecific != null ? GeneralizationAsSpecific.General : null; }
         }
 
+		public IEnumerable<PSMAssociation> GetAllIncomingAssociations()
+		{
+			return PSMSchema.PSMAssociations.Where(a => a.Child == this);
+		}
+
         public IEnumerable<PSMAssociation> GetIncomingNonTreeAssociations()
         {
             return PSMSchema.PSMAssociations.Where(a =>

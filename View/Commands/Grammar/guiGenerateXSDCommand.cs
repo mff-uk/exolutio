@@ -21,7 +21,7 @@ namespace Exolutio.View.Commands.Grammar
                 
                 if (Environment.MachineName.Contains("TRUPIK"))
                 {
-                    xmlSchemaDocument.Save(@"D:\Programování\EVOXSVN\XSLTTest\LastSchema.xsd");
+					xmlSchemaDocument.Save(@"d:\Development\Exolutio\XSLTTest\LastSchema.xsd");
                 }
 
                 Current.MainWindow.FilePresenter.DisplayFile(xmlSchemaDocument, EDisplayedFileType.XSD, Current.ActiveDiagram.Caption + ".xsd", schemaGenerator.Log);

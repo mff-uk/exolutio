@@ -74,6 +74,27 @@ namespace Exolutio.View
                     return;
                 }
 
+                if (e.Key == Key.Add && Keyboard.Modifiers.HasFlag(ModifierKeys.Control))
+                {
+                    avalonEdit.FontSize *= 1.1;
+                    e.Handled = true;
+                    return;
+                }
+
+                if (e.Key == Key.Subtract && Keyboard.Modifiers.HasFlag(ModifierKeys.Control))
+                {
+                    avalonEdit.FontSize *= 0.9;
+                    e.Handled = true;
+                    return;
+                }
+
+                if (e.Key == Key.Multiply && Keyboard.Modifiers.HasFlag(ModifierKeys.Control))
+                {
+                    avalonEdit.FontSize = 12;
+                    e.Handled = true;
+                    return;
+                }
+
                 if (Current.ActiveOCLScript.Contents != avalonEdit.Text)
                 {
                     Current.ActiveOCLScript.Contents = avalonEdit.Text;
@@ -103,7 +124,7 @@ namespace Exolutio.View
             //        bool functional = variant.Item2;
             //        TranslationSettings settings = new TranslationSettings(schemaAware, functional);
             //        XDocument sa_fun = generator.GetSchematronSchema(settings);
-            //        string fn = string.Format(@"D:\Programování\EvoXSVN\OclX\Examples\{0}\{1}\{2}{3}.sch",
+			//        string fn = string.Format(@"d:\Development\Exolutio\OclX\Examples\{0}\{1}\{2}{3}.sch",
             //                                  functional ? "Functional" : "Dynamic",
             //                                  schemaAware ? "SchemaAware" : "NotSchemaAware",
             //                                  this.CurrentSchema.Caption,

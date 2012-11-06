@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NUnit.Framework;
-using Exolutio.Model.OCL.Bridge;
-using Exolutio.Model.OCL.Types;
+﻿using NUnit.Framework;
 using Exolutio.Model.OCL.TypesTable;
 using Exolutio.Model.OCL.Compiler;
 using Exolutio.Model.OCL;
 using Exolutio.Model.OCL.AST;
 
-namespace Tests.OCL {
+namespace Exolutio.Tests.OCL {
     [TestFixture]
     class StandAloneExpressionParserTest {
         [Test]

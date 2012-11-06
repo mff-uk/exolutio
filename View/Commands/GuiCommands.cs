@@ -196,14 +196,14 @@ namespace Exolutio.View.Commands
             RedoCommand = new guiRedoCommand();
             Delete = new guiDelete();
             HelpCommand = new guiShowHelpCommand();
-            RenameProjectCommand = new guiControllerCommand
-                                       {
-                                           ControllerCommandFactoryMethod = CommandFactory<cmdRenameProject>.Factory,
-                                           ControllerCommandType = typeof(cmdRenameProject),
-                                           NoScope = true,
-                                           OpenDialog = true,
-                                           Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.pencil)
-                                       };
+            //RenameProjectCommand = new guiControllerCommand
+            //                           {
+            //                               ControllerCommandFactoryMethod = CommandFactory<cmdRenameProject>.Factory,
+            //                               ControllerCommandType = typeof(cmdRenameProject),
+            //                               NoScope = true,
+            //                               OpenDialog = true,
+            //                               Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.pencil)
+            //                           };
             RenamePSMSchemaCommand = new guiControllerCommand
                                          {
                                              ControllerCommandFactoryMethod = CommandFactory<cmdRenamePSMSchema>.Factory,

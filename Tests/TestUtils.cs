@@ -3,19 +3,17 @@ using System.IO;
 using System.Linq;
 using Exolutio.Model;
 using Exolutio.Model.Serialization;
-#if SILVERLIGHT
-#else 
+using Exolutio.Tests.ModelIntegrity;
 using NUnit.Framework;
-using Tests.ModelIntegrity;
-using Exolutio.Controller;
-#endif
-
-using Version = Exolutio.Model.Versioning.Version;
 using Exolutio.Model.PIM;
 using Exolutio.Model.PSM;
-
 using System.Collections.Generic;
-namespace Tests
+using Version = Exolutio.Model.Versioning.Version;
+#if SILVERLIGHT
+#else
+#endif
+
+namespace Exolutio.Tests
 {
 	public static class TestUtils
 	{
@@ -290,7 +288,7 @@ namespace Tests
 			p.SingleVersion.PSMSchemas.Add(sPSM2);
 			p.HasUnsavedChanges = true;
 
-			Controller c = new Controller(p);
+			Controller.Controller c = new Controller.Controller(p);
 
 			Guid sPSM1Guid = sPSM1;
 
@@ -383,7 +381,7 @@ namespace Tests
 		{
 			ProjectSerializationManager m = new ProjectSerializationManager();
 			Project loadedProject = m.LoadProject(fileName);
-			ModelIntegrity.ModelConsistency.CheckProject(loadedProject);
+			global::Exolutio.Tests.ModelIntegrity.ModelConsistency.CheckProject(loadedProject);
 
 			CollectionAssert.IsEmpty(m.Log, "Log contains errors or warnings");
 
@@ -396,5 +394,28 @@ namespace Tests
 			FileAssert.AreEqual(fileName, copyName);
 		}
 		#endif
+
+        public static void ScanDirectoryRecursive(DirectoryInfo dir, ref List<DirectoryInfo> directories)
+        {
+            DirectoryInfo[] subDirectories = dir.GetDirectories("*");
+            int count = 0;
+            if (subDirectories.Length > 0)
+            {
+                foreach (DirectoryInfo subDirectory in subDirectories)
+                {
+                    if (subDirectory.Name.ToUpper().Contains("SVN"))
+                    {
+                        continue;
+                    }
+                    count++;
+                    ScanDirectoryRecursive(subDirectory, ref directories);
+                }
+            }
+
+            if (count == 0)
+            {
+                directories.Add(dir);
+            }
+        }
 	}
 }

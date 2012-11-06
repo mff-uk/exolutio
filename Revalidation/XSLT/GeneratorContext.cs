@@ -103,7 +103,11 @@ namespace Exolutio.Revalidation.XSLT
                         fromCommonToTarget = fromCommonToTarget.Substring(1);
                     }
 
-                    return new XPathExpr(string.Format("{0}{1}", stepsUp, fromCommonToTarget));
+
+                    string joined = string.Format("{0}{1}", stepsUp, fromCommonToTarget);
+                    if (joined.EndsWith("/"))
+                        joined = joined.Substring(0, joined.Length - 1);
+                    return new XPathExpr(joined);
                 }
                 else
                 {

@@ -1,7 +1,7 @@
 using System;
-using Tests.CodeTests;
+using Exolutio.Tests.CodeTests;
 
-namespace Tests
+namespace Exolutio.Tests
 {
 	public class Program
 	{

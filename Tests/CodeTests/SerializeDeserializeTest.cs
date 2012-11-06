@@ -1,13 +1,10 @@
 using System;
-using System.Reflection;
 using Exolutio.Model;
 using Exolutio.Model.PSM;
 using Exolutio.Model.Serialization;
-using Exolutio.Model.Versioning;
-using Exolutio.SupportingClasses;
 using NUnit.Framework;
 
-namespace Tests.CodeTests
+namespace Exolutio.Tests.CodeTests
 {
     [TestFixture]
     public class SerializeDeserializeTest: CodeTestBase

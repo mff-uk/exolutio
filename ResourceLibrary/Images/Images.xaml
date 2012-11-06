@@ -77,6 +77,7 @@
     <ImageSource x:Key="SendBackward">SendBackward.png</ImageSource>
     <ImageSource x:Key="SendToBack">SendToBack.png</ImageSource>
     <ImageSource x:Key="undo">undo.png</ImageSource>
+    <ImageSource x:Key="transform">transform.png</ImageSource>
     <ImageSource x:Key="Ungroup">Ungroup.png</ImageSource>
     <ImageSource x:Key="view_remove">view_remove.ico</ImageSource>
     <ImageSource x:Key="view_tree">view_tree.ico</ImageSource>

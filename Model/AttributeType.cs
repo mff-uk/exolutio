@@ -62,7 +62,7 @@ namespace Exolutio.Model
             {
                 if (XSDAtomic)
                 {
-                    return "xs:" + XSDAtomic;
+                    return "xs:" + Name;
                 }
                 else
                 {

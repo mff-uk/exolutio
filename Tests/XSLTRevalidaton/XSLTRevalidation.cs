@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 using System.Xml.Linq;
-using Exolutio.Controller.Commands;
 using Exolutio.Model;
 using Exolutio.Model.PSM;
 using Exolutio.Model.Serialization;
@@ -14,9 +12,8 @@ using Exolutio.Revalidation;
 using Exolutio.Revalidation.XSLT;
 using Exolutio.SupportingClasses.XML;
 using NUnit.Framework;
-using Tests.CodeTests;
 
-namespace Tests.XSLTRevalidaton
+namespace Exolutio.Tests.XSLTRevalidaton
 {
     [TestFixture]
     public class XSLTRevalidation
