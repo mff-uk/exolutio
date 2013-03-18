@@ -33,7 +33,8 @@ namespace Exolutio.Model.PSM.Grammar.XSDTranslation
                 nodeInfo.Node = node;
                 nodeInfos[node] = nodeInfo;
 
-                if (node.DownCastSatisfies<PSMClass>(c => c.ParentAssociation != null && c.ParentAssociation.IsNamed) ||
+                if (node.DownCastSatisfies<PSMClass>(c => c.ParentAssociation == null) ||
+					node.DownCastSatisfies<PSMClass>(c => c.ParentAssociation != null && c.ParentAssociation.IsNamed) ||
                     node.DownCastSatisfies<PSMClass>(c => c.GeneralizationsAsGeneral.Count > 0) ||
                     node.DownCastSatisfies<PSMClass>(c => c.GetIncomingNonTreeAssociations().Count(a => a.IsNamed) > 0))
                 {

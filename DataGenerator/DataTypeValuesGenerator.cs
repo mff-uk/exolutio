@@ -25,8 +25,11 @@ namespace Exolutio.DataGenerator
             if (type == null)
                 throw new ArgumentException("Values can be generated only for simple data types.", "type");
 
-            if (type.Name.ToUpper() == "int".ToUpper() || type.Name.ToUpper() == "integer".ToUpper())
+            if (type.Name.ToUpper() == "int".ToUpper() || type.Name.ToUpper() == "INTEGER")
                 return GenerateInteger();
+
+			if (type.Name.ToUpper() == "positiveInteger".ToUpper())
+				return Math.Abs(int.Parse(GenerateInteger())).ToString();
 
             if (type.Name.ToUpper() == "string".ToUpper())
                 return GenerateString();

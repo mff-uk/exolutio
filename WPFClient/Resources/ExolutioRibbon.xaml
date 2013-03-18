@@ -499,8 +499,22 @@
                 
             </Fluent:RibbonGroupBox>
         </Fluent:RibbonTabItem>
-        
-        <Fluent:RibbonTabItem Header="View">
+
+		<Fluent:RibbonTabItem Header="XRX">
+			<Fluent:RibbonGroupBox Header="XRX">
+				<Fluent:Button Command="{x:Static Commands:GuiCommands.CreateXRXPSMSchemaCommand}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" 
+                               SizeDefinition="Large,Large,Small"/>
+				<Fluent:Button Command="{x:Static Commands:GuiCommands.GenerateXRXRestInterfaceCommand}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" 
+                               SizeDefinition="Large,Large,Small"/>
+				<Fluent:Button Command="{x:Static Commands:GuiCommands.GenerateXRXXFormsCommand}" 
+                               Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" 
+                               SizeDefinition="Large,Large,Small"/>
+			</Fluent:RibbonGroupBox>
+		</Fluent:RibbonTabItem>
+		
+		<Fluent:RibbonTabItem Header="View">
             <Fluent:RibbonGroupBox Header="Layout">
                 <Fluent:Button Command="{x:Static ClientCommands:StaticWPFClientCommands.LayoutPIMLeftPSMRight}" 
                                Style="{StaticResource ResourceKey=ribbonTabButtonStyle}" />

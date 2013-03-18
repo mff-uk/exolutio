@@ -91,18 +91,28 @@ namespace Exolutio.View
 
         private void RefreshTextContent()
         {
-            if (PIMAttribute.AttributeType != null)
-                this.Text = string.Format("{0} : {1}", PIMAttribute.Name, PIMAttribute.AttributeType.Name);
-            else
-                this.Text = PIMAttribute.Name;
+	        string text = string.Empty;
 
-            //if (property.Default != null)
-            //    this.Text += string.Format(" [{0}]", property.Default);
+            if (PIMAttribute.AttributeType != null)
+				text = string.Format("{0} : {1}", PIMAttribute.Name, PIMAttribute.AttributeType.Name);
+            else
+				text = PIMAttribute.Name;
 
             if (!String.IsNullOrEmpty(PIMAttribute.GetCardinalityString()) && PIMAttribute.GetCardinalityString() != "1")
             {
-                this.Text += String.Format(" {{{0}}}", PIMAttribute.GetCardinalityString());
+				text += String.Format(" {{{0}}}", PIMAttribute.GetCardinalityString());
             }
+
+			if (PIMAttribute.DefaultValue != null)
+				text += string.Format(" [init: {0}]", PIMAttribute.DefaultValue);
+
+	        if (PIMAttribute.AppliedStereotypes.Count > 0)
+	        {
+		        text =
+					PIMAttribute.AppliedStereotypes.GetStereotypesString() + Environment.NewLine + text;
+	        }
+
+	        this.Text = text; 
         }
 
         private Exolutio.Model.AttributeType type;

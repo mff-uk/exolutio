@@ -34,6 +34,8 @@ namespace Exolutio.Model.Serialization
 
         public Guid CurrentSchemaGuid { get; set; }
 
+	    public Guid ? TagGuid { get; set; }
+
         public ProjectVersion CurrentProjectVersion { get; set; }
 
         public Dictionary<string, Guid> TypeDict { get; set; }

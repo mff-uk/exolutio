@@ -8,8 +8,20 @@ namespace Exolutio.Model
 {
     public abstract class Component : ExolutioVersionedObject
     {
-        protected Component(Project p) : base(p) { }
-        protected Component(Project p, Guid g) : base(p, g) {}
+        protected Component(Project p) : base(p)
+        {
+	        InitCollections();
+        }
+        
+		protected Component(Project p, Guid g) : base(p, g)
+		{
+			InitCollections();
+		}
+
+		private void InitCollections()
+		{
+			AppliedStereotypes = new UndirectCollection<StereotypeInstance>(Project);
+		}
 
         private Guid schemaGuid;
         public Schema Schema
@@ -41,6 +53,8 @@ namespace Exolutio.Model
             get { return Schema.ProjectVersion; }
         }
 
+		public UndirectCollection<StereotypeInstance> AppliedStereotypes { get; private set; }
+
         #region Implementation of IExolutioSerializable
 
         public override void Serialize(XElement parentNode, SerializationContext context)
@@ -52,6 +66,8 @@ namespace Exolutio.Model
                 XAttribute nameAttribute = new XAttribute("Name", SerializationContext.EncodeValue(Name, true));
                 parentNode.Add(nameAttribute);
             }
+
+			this.WrapAndSerializeCollection("AppliedStereotypes", "StereotypeInstance", AppliedStereotypes, parentNode, context, true);
         }
 
         public override void Deserialize(XElement parentNode, SerializationContext context)
@@ -68,6 +84,9 @@ namespace Exolutio.Model
                 //this.Name = string.Empty;
             }
 
+	        context.TagGuid = this.ID;
+			this.DeserializeWrappedCollection("AppliedStereotypes", AppliedStereotypes, StereotypeInstance.CreateInstance, parentNode, context, true);
+	        context.TagGuid = null;
             this.schemaGuid = context.CurrentSchemaGuid;
         }
         #endregion

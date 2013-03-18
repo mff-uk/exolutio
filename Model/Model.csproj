@@ -224,6 +224,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SerializationLogMessages.resx</DependentUpon>
     </Compile>
+    <Compile Include="Stereotype.cs" />
     <Compile Include="UndirectCollection.cs" />
     <Compile Include="UnlimitedInt.cs" />
     <Compile Include="Versioning\IVersionedItem.cs" />

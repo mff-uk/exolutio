@@ -352,7 +352,7 @@ namespace Exolutio.ViewToolkit
             CurrentState.Canvas_MouseDown(e);
         }
 
-        internal void ExolutioCanvas_MouseUp(object sender, MouseButtonEventArgs e)
+		internal void ExolutioCanvas_MouseUp(object sender, MouseButtonEventArgs e)
         {
 #if SILVERLIGHT
             bool wasRightButton = CurrentState.RightButton;

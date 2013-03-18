@@ -27,6 +27,7 @@ namespace Exolutio.Model
         {
             InitializeCollections();
             LoadBuiltInTypes();
+	        LoadBuiltInStereotypes(); 
         }
 
         private void InitializeCollections()
@@ -36,6 +37,7 @@ namespace Exolutio.Model
             projectVersions.MemberRemoved += delegate { NotifyPropertyChanged("ProjectVersions"); };
             pimBuiltInTypes = new UndirectCollection<AttributeType>(this);
             psmBuiltInTypes = new UndirectCollection<AttributeType>(this);
+			builtInStereotypes = new UndirectCollection<Stereotype>(this);
         }
 
         private void LoadBuiltInTypes()
@@ -110,6 +112,33 @@ namespace Exolutio.Model
                 }
             }
         }
+
+		private void LoadBuiltInStereotypes()
+		{
+			Stereotype key = new Stereotype(this, Guid.Parse(@"48311640-1bc1-488c-ac40-31e1c0b47d2e"));
+			key.Name = "Key";
+			builtInStereotypes.Add(key);
+
+			Stereotype collection = new Stereotype(this, Guid.Parse(@"b10292c6-430c-4b78-abac-9b5800790bd8"));
+			collection.Name = "Collection";
+			builtInStereotypes.Add(collection);
+
+			Stereotype collectionRef = new Stereotype(this, Guid.Parse(@"81da98bc-3a31-439a-bd7d-760f677cb330"));
+			collectionRef.Name = "CollectionRef";
+			builtInStereotypes.Add(collectionRef);
+
+			Stereotype largeText = new Stereotype(this, Guid.Parse(@"d45f347c-4721-489a-84bf-1e8ca831ef8f"));
+			largeText.Name = "LargeText";
+			builtInStereotypes.Add(largeText);
+
+			Stereotype htmlText = new Stereotype(this, Guid.Parse(@"a68fa1d6-2c99-4ca0-839b-04caee013afb"));
+			htmlText.Name = "HTMLText";
+			builtInStereotypes.Add(htmlText);
+
+			Stereotype ocl = new Stereotype(this, Guid.Parse(@"b96618e7-b948-4bc5-8a92-4669382184ff"));
+			ocl.Name = "OCL";
+			builtInStereotypes.Add(ocl);
+		}
 
         Project IExolutioSerializable.Project
         {
@@ -274,11 +303,18 @@ namespace Exolutio.Model
         {
             get
             {
-
                 return psmBuiltInTypes;
             }
         }
 
+	    private UndirectCollection<Stereotype> builtInStereotypes;
+	    public UndirectCollection<Stereotype> BuiltInStereotypes
+	    {
+		    get
+		    {
+				return builtInStereotypes;
+		    }
+	    }
 
         #region IExolutioSerializable Members
 

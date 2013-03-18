@@ -12,7 +12,7 @@ namespace Exolutio.Model.OCL.TypesTable {
         private BitArray markingTemp = null;
         private int[] distanceTemp = null;
 
-
+		internal List<CollectionType> defferedCollectionList = new List<CollectionType>();
 
         public Library Library {
             get;
@@ -211,5 +211,17 @@ namespace Exolutio.Model.OCL.TypesTable {
             for (int i = 0; i < matrix.Count; i++)
                 distanceTemp[i] = Int32.MaxValue;
         }
+
+	    public void PerformDeferredInitializations()
+	    {
+			foreach (CollectionType collectionType in defferedCollectionList)
+		    {
+			    if (collectionType.DeferredFullInitialization)
+			    {
+					this.Library.PerformDeferredInitialization(collectionType);
+			    }
+		    }
+			defferedCollectionList.Clear();
+	    }
     }
 }

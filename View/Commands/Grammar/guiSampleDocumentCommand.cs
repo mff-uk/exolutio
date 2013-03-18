@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Xml;
 using System.Xml.Linq;
+using Exolutio.Controller.Commands;
 using Exolutio.DataGenerator;
 using Exolutio.Dialogs;
 using Exolutio.Model.PSM;
@@ -10,7 +11,8 @@ using Exolutio.View.Commands.Grammar;
 
 namespace Exolutio.View.Commands
 {
-    public class guiSampleDocumentCommand : guiActiveDiagramCommand
+	[Scope(ScopeAttribute.EScope.PSMAssociation | ScopeAttribute.EScope.PSMAttribute | ScopeAttribute.EScope.PSMClass)]
+	public class guiSampleDocumentCommand : guiScopeCommand
     {
         public override bool CanExecute(object parameter)
         {
@@ -20,6 +22,13 @@ namespace Exolutio.View.Commands
         public override void Execute(object parameter)
         {
             SampleDataGenerator g = new SampleDataGenerator();
+	        g.MinimalTree = true;
+	        g.EmptyValues = true;
+	        g.UseAttributesDefaultValues = false;
+	        if (ScopeObject != null)
+	        {
+		        g.RootForGeneration = (PSMAssociationMember) ScopeObject;
+	        }
             XDocument xmlDocument = g.Translate((PSMSchema) Current.ActiveDiagram.Schema);
             FilePresenterButtonInfo[] additionalButtonsInfo = new [] { new FilePresenterButtonInfo() { Text = "Generate another file", Icon = ExolutioResourceNames.GetResourceImageSource(ExolutioResourceNames.xmlIcon), UpdateFileContentAction = GenerateAnotherFile} };
             Current.MainWindow.FilePresenter.DisplayFile(xmlDocument, EDisplayedFileType.XML, Current.ActiveDiagram.Caption + "_sample.xml", g.Log, (PSMSchema) Current.ActiveDiagram.Schema, null, additionalButtonsInfo);
@@ -30,6 +39,10 @@ namespace Exolutio.View.Commands
         private void GenerateAnotherFile(IFilePresenterTab filetab)
         {
             SampleDataGenerator g = new SampleDataGenerator();
+			if (ScopeObject != null)
+			{
+				g.RootForGeneration = (PSMAssociationMember)ScopeObject;
+			}
             XDocument xmlDocument = g.Translate(filetab.ValidationSchema);
             filetab.SetDocumentText(xmlDocument.ToString());
         }

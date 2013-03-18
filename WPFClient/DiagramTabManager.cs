@@ -332,30 +332,43 @@ namespace Exolutio.WPFClient
 
             foreach (PSMDiagram psmDiagram in projectVersion.PSMDiagrams)
             {
+				if (psmDiagram.Caption == "XRX PSM")
+					continue;
                 if (FindTab(psmDiagram) == null)
                     AddTab(psmDiagram);
             }
+
+	        ActivateDiagram(projectVersion.PIMDiagrams.FirstOrDefault());
         }
 
         public IFilePresenterTab DisplayFile(XDocument xmlDocument, EDisplayedFileType fileType, string fileName = null, ILog log = null, PSMSchema validationSchema = null, PSMSchema sourcePSMSchema = null, FilePresenterButtonInfo[] additionalActions = null, object tag = null)
         {
-            FileTab f = new FileTab();
-            StringBuilder sb = new StringBuilder();
-            using (TextWriter tw = new UTF8StringWriter(sb))
-            {
-                xmlDocument.Save(tw);
-            }
 
-            f.DisplayFile(fileType, sb.ToString(), fileName, log, validationSchema, sourcePSMSchema);
-            f.FloatingWindowSize = new System.Windows.Size(800, 600);
-            if (additionalActions != null)
-            {
-                f.CreateAdditionalActionsButtons(additionalActions);
-            }
-            f.Show(DockManager, true);
-            f.Tag = tag;
+            StringBuilder sb = new StringBuilder();
+			if (xmlDocument != null)
+			{
+				using (TextWriter tw = new UTF8StringWriter(sb))
+				{
+					xmlDocument.Save(tw);
+				}
+			}
+	        var f = DisplayFile(sb.ToString(), fileType, fileName, log, validationSchema, sourcePSMSchema, additionalActions, tag);
             return f;
         }
+
+		public IFilePresenterTab DisplayFile(string fileContents, EDisplayedFileType fileType, string fileName = null, ILog log = null, PSMSchema validationSchema = null, PSMSchema sourcePSMSchema = null, FilePresenterButtonInfo[] additionalActions = null, object tag = null)
+		{
+			FileTab f = new FileTab();
+			f.DisplayFile(fileType, fileContents, fileName, log, validationSchema, sourcePSMSchema);
+			f.FloatingWindowSize = new Size(800, 600);
+			if (additionalActions != null)
+			{
+				f.CreateAdditionalActionsButtons(additionalActions);
+			}
+			f.Show(DockManager, true);
+			f.Tag = tag;
+			return f;
+		}
 
         public IList<DiagramView> GetTopDiagramViews()
         {

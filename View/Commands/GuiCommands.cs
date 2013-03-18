@@ -3,6 +3,7 @@ using Exolutio.Controller.Commands.Atomic.MacroWrappers;
 using Exolutio.Controller.Commands.Atomic.PIM.MacroWrappers;
 using Exolutio.Controller.Commands.Atomic.PSM.MacroWrappers;
 using Exolutio.Controller.Commands.Reflection;
+using Exolutio.Model;
 using Exolutio.Model.OCL;
 using Exolutio.Model.PIM;
 using Exolutio.Model.PSM;
@@ -11,13 +12,12 @@ using Exolutio.View.Commands.Edit;
 using Exolutio.View.Commands.Grammar;
 using Exolutio.View.Commands.OCL;
 using Exolutio.View.Commands.Project;
-using Exolutio.View;
 using Exolutio.View.Commands.Versioning;
 using Exolutio.View.Commands.PSM;
 using Exolutio.Controller.Commands.Complex.PSM;
-using Exolutio.Model;
 using Exolutio.View.Commands.PIM;
 using Exolutio.View.Commands.View;
+using Exolutio.View.Commands.XRX;
 
 namespace Exolutio.View.Commands
 {
@@ -179,7 +179,15 @@ namespace Exolutio.View.Commands
 
         #endregion
 
-        public static void Init(IMainWindow mainWindow)
+		#region XRX
+
+		public static guiCreateXRXPSMSchemaCommand CreateXRXPSMSchemaCommand { get; set; }
+		public static guiGenerateXRXRestInterfaceCommand GenerateXRXRestInterfaceCommand { get; set; }
+		public static guiGenerateXRXXFormsCommand GenerateXRXXFormsCommand { get; set; }
+
+		#endregion 
+
+		public static void Init(IMainWindow mainWindow)
         {
             #region project
             NewProjectCommand = new guiNewProjectCommand();
@@ -553,6 +561,14 @@ namespace Exolutio.View.Commands
             SuggestConstraintsCommand = new guiSuggestConstraintsCommand();
 
             #endregion 
-        }
+
+			#region XRX
+
+			CreateXRXPSMSchemaCommand = new guiCreateXRXPSMSchemaCommand();
+			GenerateXRXRestInterfaceCommand = new guiGenerateXRXRestInterfaceCommand();
+			GenerateXRXXFormsCommand = new guiGenerateXRXXFormsCommand();
+
+			#endregion 
+		}
     }
 }

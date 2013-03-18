@@ -140,6 +140,17 @@ namespace Exolutio.View
                 }
             }
 
+			if (DisplayedFileType == EDisplayedFileType.XQuery &&
+				(tbDocument.SyntaxHighlighting == null || tbDocument.SyntaxHighlighting.Name != "XQuery"))
+			{
+				System.Xml.XmlReader reader;
+				using (StringReader sr = new StringReader(Properties.Resources.XQuery))
+				{
+					reader = new System.Xml.XmlTextReader(sr);
+					tbDocument.SyntaxHighlighting = ICSharpCode.AvalonEdit.Highlighting.Xshd.HighlightingLoader.Load(reader, HighlightingManager.Instance);
+				}
+			}
+
             tbDocument.ShowLineNumbers = true;
             UpdateFolding();
         }

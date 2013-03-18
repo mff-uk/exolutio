@@ -18,9 +18,13 @@ namespace Exolutio.DataGenerator
 
         public bool MinimalTree { get; set; }
 
+		public bool EmptyValues { get; set; }
+
         public bool UseAttributesDefaultValues { get; set; }
 
         public bool GenerateComments { get; set; }
+
+		public PSMAssociationMember RootForGeneration { get; set; }
 
         private readonly DataTypeValuesGenerator valuesGenerator;
 
@@ -44,24 +48,28 @@ namespace Exolutio.DataGenerator
         {
             Schema = schema;
 
-            IEnumerable<PSMAssociationMember> rootCandidates = null;
+			if (RootForGeneration == null)
+			{
+				IEnumerable<PSMAssociationMember> rootCandidates = null;
 
-            if (Schema.PSMSchemaClass != null)
-            {
-                rootCandidates = ModelIterator.GetLabeledChildNodes(Schema.PSMSchemaClass);
-            }
+				if (Schema.PSMSchemaClass != null)
+				{
+					rootCandidates = ModelIterator.GetLabeledChildNodes(Schema.PSMSchemaClass);
+				}
 
-            if (rootCandidates == null || rootCandidates.Count() == 0)
-            {
-                Log.AddError("No possible root element. Schema class containing labeled association needed. ");
-                return null;
-            }
+				if (rootCandidates == null || rootCandidates.Count() == 0)
+				{
+					Log.AddError("No possible root element. Schema class containing labeled association needed. ");
+					return null;
+				}
 
-            PSMAssociationMember root = rootCandidates.ChooseOneRandomly();
-            DataGeneratorContext context = new DataGeneratorContext();
+				RootForGeneration = rootCandidates.ChooseOneRandomly();
+			}
+
+	        DataGeneratorContext context = new DataGeneratorContext();
             context.RootCreated = false;
             TranslateComments(null, context);
-            TranslateAssociation(root.ParentAssociation, context);
+			TranslateAssociation(RootForGeneration.ParentAssociation, context);
 
             if (!String.IsNullOrEmpty(schemaLocation))
             {
@@ -507,13 +515,15 @@ namespace Exolutio.DataGenerator
             {
                 for (int i = 0; i < upper; i++)
                 {
-                    string value;
-                    if (attribute.DefaultValue != null && UseAttributesDefaultValues)
-                        value = attribute.DefaultValue;
-                    else
-                        value = valuesGenerator.GenerateValue(attribute.AttributeType);
-
-                    string attributeName = namingSupport.NormalizeTypeName(attribute);
+                    string value = string.Empty;
+					if (!EmptyValues)
+					{
+						if (attribute.DefaultValue != null && UseAttributesDefaultValues)
+							value = attribute.DefaultValue;
+						else
+							value = valuesGenerator.GenerateValue(attribute.AttributeType);
+					}
+	                string attributeName = namingSupport.NormalizeTypeName(attribute);
 
                     
                     if (attribute.Element)
@@ -654,9 +664,9 @@ namespace Exolutio.DataGenerator
             else
             {
                 if (MinimalTree)
-                    return lower;
+                    return 1;
                 else
-                    return (uint) RandomGenerator.Next((int) lower, (int) (upper + 1));
+                    return (uint) RandomGenerator.Next(Math.Max((int) lower, 1), (int) (upper + 1));
             }
         }
 

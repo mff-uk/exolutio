@@ -148,7 +148,7 @@ namespace Exolutio.Model.OCL.Bridge
             TypesTable.RegisterType(matchesStatus);
 
             TranslateSchema(Schema, false);
-
+	        TypesTable.PerformDeferredInitializations();
         }
 
 

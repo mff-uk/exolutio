@@ -13,21 +13,18 @@
     <Keywords color="Keywords">
       <Word>attribute</Word>
       <Word>default</Word>
-      <Word>datatypes</Word>
-      <Word>div</Word>
+      <Word>datatypes</Word>      
       <Word>element</Word>
       <Word>empty</Word>
       <Word>external</Word>
       <Word>grammar</Word>
-      <Word>include</Word>
-      <Word>inherit</Word>
+      <Word>include</Word>      
       <Word>list</Word>
       <Word>mixed</Word>
       <Word>namespace</Word>
       <Word>notAllowed</Word>
       <Word>parent</Word>
       <Word>start</Word>
-      <Word>string</Word>
       <Word>text</Word>
       <Word>token</Word>      
     </Keywords>

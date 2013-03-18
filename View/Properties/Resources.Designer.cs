@@ -101,5 +101,27 @@ namespace Exolutio.View.Properties {
                 return ResourceManager.GetString("RNC", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;SyntaxDefinition name=&quot;RNC&quot;
+        ///        xmlns=&quot;http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008&quot;&gt;
+        ///  &lt;Color name=&quot;Comment&quot; foreground=&quot;Green&quot; /&gt;
+        ///  &lt;Color name=&quot;Special&quot; foreground=&quot;Maroon&quot; /&gt;
+        ///  &lt;Color name=&quot;Black&quot; foreground=&quot;Black&quot; fontWeight=&quot;normal&quot; /&gt;
+        ///  &lt;Color name=&quot;Message&quot; foreground=&quot;Green&quot; /&gt;
+        ///  &lt;Color name=&quot;Keywords&quot; fontWeight=&quot;bold&quot; foreground=&quot;Blue&quot; /&gt;
+        ///  
+        ///  &lt;!-- This is the main ruleset. --&gt;
+        ///  &lt;RuleSet&gt;
+        ///    &lt;Span color=&quot;Comment&quot; begin=&quot;#&quot; /&gt;
+        ///    
+        ///    &lt;Keywords color=&quot;Keywords&quot;&gt;
+        /// [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string XQuery {
+            get {
+                return ResourceManager.GetString("XQuery", resourceCulture);
+            }
+        }
     }
 }

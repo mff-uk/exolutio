@@ -142,8 +142,6 @@ namespace Exolutio.Model.OCL.TypesTable {
 	    }
     }
 
-	
-
     public class StandardLibraryCreator {
         Library lib;
 
@@ -160,17 +158,17 @@ namespace Exolutio.Model.OCL.TypesTable {
         }
 
 
+		
+
         public void CreateStandardLibrary(TypesTable tt) {
             lib = tt.Library;
             Namespace ns = lib.RootNamespace;
-
-			List<CollectionType> defferedCollectionList = new List<CollectionType>();
 
             // add default template / generic operation 
             lib.DefaultLazyOperation = (c) => {
                 // oclAsSet is problem on Set type (infinity recursion)
                 if (c is CollectionType == false) {
-                    CollectionType set = lib.CreateCollection(CollectionKind.Set, c, true, defferedCollectionList);
+                    CollectionType set = lib.CreateCollection(CollectionKind.Set, c, true, tt.defferedCollectionList);
                     AddOperation(c, Library.OclAsSet, set);
                 }
             };
@@ -337,7 +335,7 @@ namespace Exolutio.Model.OCL.TypesTable {
 
                 AddOperation(coll, "count", integer, t);
                 AddOperation(coll, "=", boolean, coll);
-				SetType set = (SetType)lib.CreateCollection(CollectionKind.Set, t, true, defferedCollectionList);
+				SetType set = (SetType)lib.CreateCollection(CollectionKind.Set, t, true, tt.defferedCollectionList);
 
                 AddOperation(coll, "union", coll, coll);
                 //flatten missing
@@ -361,7 +359,7 @@ namespace Exolutio.Model.OCL.TypesTable {
             {
                 CollectionType coll = c as CollectionType;
                 Classifier t = coll.ElementType;
-				SetType set = (SetType)lib.CreateCollection(CollectionKind.Set, t, true, defferedCollectionList);
+				SetType set = (SetType)lib.CreateCollection(CollectionKind.Set, t, true, tt.defferedCollectionList);
                 AddOperation(coll, "asSet", set);
                 //asOrderedSet(),asBag(),asSet() missing
             });
@@ -369,18 +367,12 @@ namespace Exolutio.Model.OCL.TypesTable {
             #endregion 
 
             // after lazy operations are defined can we use collection types
-			CollectionType strSeq = lib.CreateCollection(CollectionKind.Sequence, str, true, defferedCollectionList);
+			CollectionType strSeq = lib.CreateCollection(CollectionKind.Sequence, str, true, tt.defferedCollectionList);
             tt.RegisterType(strSeq);
             AddOperation(str, "characters", strSeq);
             AddOperation(str, "tokenize", strSeq, str);
 
-	        foreach (CollectionType collectionType in defferedCollectionList)
-	        {
-		        if (collectionType.DeferredFullInitialization)
-		        {
-					lib.PerformDeferredInitialization(collectionType);
-		        }
-	        }
+	        tt.PerformDeferredInitializations();
         }
     }
 }
