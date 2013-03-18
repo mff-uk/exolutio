@@ -189,7 +189,10 @@ namespace Exolutio.View
             base.UpdateView(propertyName);
             if (PIMClass != null)
             {
-                tbClassHeader.Text = PIMClass.Name;
+				string text = PIMClass.Name;
+				if (!PIMClass.AppliedStereotypes.IsEmpty())
+					text = PIMClass.AppliedStereotypes.GetStereotypesString() + Environment.NewLine + text;
+	            tbClassHeader.Text = text;
                 tbClassHeader.FontStyle = PIMClass.Abstract ? FontStyles.Italic : FontStyles.Normal;
                 tbClassHeader.FontWeight = PIMClass.Final ? FontWeights.Normal : FontWeights.Bold;
             }

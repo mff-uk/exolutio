@@ -84,6 +84,9 @@ namespace Exolutio.Model.PSM.Grammar.RNGTranslation
 
         private void AddStartElements(XElement parentElement)
         {
+			if (PSMSchema.TopClasses.Count(c => c.ParentAssociation != null && c.ParentAssociation.IsNamed) == 0)
+				return; 
+
             XElement startElement = RelaxNGXmlSyntaxWriter.RngStart(parentElement);
             if (PSMSchema.TopClasses.Count(p => p.ParentAssociation.IsNamed) > 1)
             {

@@ -196,7 +196,9 @@
     <Compile Include="Commands\Versioning\guiBranchCurrentVersion.cs" />
     <Compile Include="Commands\Versioning\guiSaveAsSingleVersion.cs" />
     <Compile Include="Commands\View\guiImageExportCommand.cs" />
+    <Compile Include="Commands\View\guiToggleSnapshotViewCommand.cs" />
     <Compile Include="Commands\View\guiStraightenLineCommand.cs" />
+    <Compile Include="Commands\XRX\guiCreateXRXPSMSchemaCommand.cs" />
     <Compile Include="Common view\VersionedElementInfo.xaml.cs">
       <DependentUpon>VersionedElementInfo.xaml</DependentUpon>
     </Compile>
@@ -294,6 +296,9 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="Resources\XQuery.xshd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Resources\RNC.xshd">
       <SubType>Designer</SubType>
     </None>

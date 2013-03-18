@@ -7,6 +7,7 @@ namespace Exolutio.SupportingClasses
         RNG,
         RNC,
         SCH,
+		XQuery,
         other
     }
 }

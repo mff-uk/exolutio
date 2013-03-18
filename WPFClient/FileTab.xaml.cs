@@ -499,7 +499,7 @@ namespace Exolutio.WPFClient
             SchematronPipelineWithSaxonTransform p = new SchematronPipelineWithSaxonTransform();
             p.SaxonTransformExecutablePath = ConfigurationManager.GetApplicationSettings()["SaxonTransformExecutablePath"];
             p.IsoSchematronTemplatesPath = ConfigurationManager.GetApplicationSettings()["IsoSchematronTemplatesPath"];
-			p.Process(@"d:\Development\Exolutio\SchematronTest\LastSchSchema.sch", @"D:\Programování\EVOXSVN\SchematronTest\");
+			p.Process(@"d:\Development\Exolutio\SchematronTest\LastSchSchema.sch", @"D:\Development\Exolutio\SchematronTest\");
         }
 
         private void bRefresh_Click(object sender, RoutedEventArgs e)

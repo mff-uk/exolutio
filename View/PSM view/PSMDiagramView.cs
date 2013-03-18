@@ -73,7 +73,8 @@ namespace Exolutio.View
             ContextMenuItem otherItemsMenu = new ContextMenuItem("Other operations");
             MenuHelper.CreateSubmenuForCommandsWithoutScope(otherItemsMenu);
             ExolutioCanvas.ContextMenu.Items.Add(otherItemsMenu);
-#endif 
+#endif
+	        ExolutioCanvas.Tag = "PSM";
         }
 
         void ExolutioCanvas_ContentChanged()

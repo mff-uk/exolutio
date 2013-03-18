@@ -1,0 +1,56 @@
+﻿<SyntaxDefinition name="RNC"
+        xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+  <Color name="Comment" foreground="Green" />
+  <Color name="Special" foreground="Maroon" />
+  <Color name="String" foreground="Maroon" />
+  <Color name="Black" foreground="Black" fontWeight="normal" />
+  <Color name="Message" foreground="Green" />
+  <Color name="Keywords" fontWeight="bold" foreground="Blue" />
+  
+  <!-- This is the main ruleset. -->
+  <RuleSet>
+    <Span color="Comment" begin="%" />
+    <Span color="Comment">
+      <Begin>\(:</Begin>
+      <End>:\)</End>
+    </Span>
+	  
+	<Span color="Special">
+      <Begin>\$</Begin>
+      <End>\s</End>
+    </Span>
+	  
+	<Span color="String">
+      <Begin>'</Begin>
+      <End>'</End>
+      <RuleSet>
+        <!-- nested span for escape sequences -->          
+        <Span begin="\\" end="." />
+      </RuleSet>
+    </Span>
+		  
+    <Keywords color="Keywords">
+      <Word>as</Word>
+      <Word>module</Word>
+      <Word>namespace</Word>      
+      <Word>xquery</Word>
+      <Word>version</Word>
+      <Word>declare</Word>
+      <Word>function</Word>
+      <Word>import</Word>      
+      <Word>variable</Word>
+      <Word>element</Word>
+      <Word>atribute</Word>
+      <Word>for</Word>
+      <Word>where</Word>
+      <Word>some</Word>
+      <Word>satisfies</Word>
+      <Word>in</Word>      
+	  <Word>if</Word>      
+	  <Word>then</Word>      
+	  <Word>else</Word>      
+	  <Word>let</Word>      
+	  <Word>at</Word>      
+    </Keywords>
+  </RuleSet>  
+</SyntaxDefinition>

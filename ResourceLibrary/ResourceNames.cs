@@ -47,11 +47,14 @@ namespace Exolutio.ResourceLibrary
         public const string FolderDownload = "FolderDownload";
         public const string folder = "folder";
         public const string font = "font";
+		public const string form_red = "form_red";
+        public const string gears = "gears";
         public const string generalize = "generalize";
         public const string gen = "gen";
         public const string GenericDocument = "GenericDocument";
         public const string Group = "Group";
         public const string help = "help";
+        public const string index = "index";
         public const string magnifier = "magnifier";
         public const string media_pause = "media_pause";
         public const string media_play_green = "media_play_green";

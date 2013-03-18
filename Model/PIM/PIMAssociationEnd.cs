@@ -105,6 +105,42 @@ namespace Exolutio.Model.PIM
             set { pimAssociationGuid = value; NotifyPropertyChanged("PIMAssociation"); }
         }
 
+		private bool? isNavigable;
+
+		public bool? IsNavigable
+		{
+			get { return isNavigable; }
+			set
+			{
+				isNavigable = value;
+				NotifyPropertyChanged("IsNavigable");
+			}
+		}
+
+		private bool? isShared;
+
+		public bool? IsShared
+		{
+			get { return isShared; }
+			set
+			{
+				isShared = value;
+				NotifyPropertyChanged("IsShared");
+			}
+		}
+
+		private bool? isComposite;
+
+		public bool? IsComposite
+		{
+			get { return isComposite; }
+			set
+			{
+				isComposite = value;
+				NotifyPropertyChanged("IsComposite");
+			}
+		}
+
         #region Implementation of IExolutioSerializable
 
         public override void Serialize(XElement parentNode, SerializationContext context)
@@ -112,6 +148,12 @@ namespace Exolutio.Model.PIM
             base.Serialize(parentNode, context);
             this.SerializeIDRef(PIMClass, "refPIMClassID", parentNode, context);
             this.SerializeIDRef(PIMAssociation, "refPIMAssociationID", parentNode, context);
+			if (IsShared.HasValue)
+				this.SerializeSimpleValueToAttribute("IsShared", IsShared, parentNode, context);
+			if (IsNavigable.HasValue)
+				this.SerializeSimpleValueToAttribute("IsNavigable", IsNavigable, parentNode, context);
+			if (IsComposite.HasValue)
+				this.SerializeSimpleValueToAttribute("IsComposite", IsComposite, parentNode, context);
             this.SerializeCardinality(parentNode, context);
         }
 
@@ -121,6 +163,13 @@ namespace Exolutio.Model.PIM
             pimClassGuid = this.DeserializeIDRef("refPIMClassID", parentNode, context);
             pimAssociationGuid = this.DeserializeIDRef("refPIMAssociationID", parentNode, context);
             this.DeserializeCardinality(parentNode, context);
+	        bool result;
+			if (Boolean.TryParse(this.DeserializeSimpleValueFromAttribute("IsShared", parentNode, context, true), out result))
+				IsShared = result;
+			if (Boolean.TryParse(this.DeserializeSimpleValueFromAttribute("IsNavigable", parentNode, context, true), out result))
+				IsNavigable = result;
+			if (Boolean.TryParse(this.DeserializeSimpleValueFromAttribute("IsComposite", parentNode, context, true), out result))
+				IsComposite = result; 
             this.PIMSchema.PIMAssociationEnds.Add(this);
         }
         public static PIMAssociationEnd CreateInstance(Project project)
@@ -158,6 +207,9 @@ namespace Exolutio.Model.PIM
             PIMAssociationEnd copyPIMAssociationEnd = (PIMAssociationEnd)copyComponent;
             copyPIMAssociationEnd.Lower = this.Lower;
             copyPIMAssociationEnd.Upper = this.Upper;
+	        copyPIMAssociationEnd.IsNavigable = this.IsNavigable;
+	        copyPIMAssociationEnd.IsShared = this.IsShared;
+	        copyPIMAssociationEnd.isComposite = this.IsComposite;
             copyPIMAssociationEnd.pimClassGuid = createdCopies.GetGuidForCopyOf(PIMClass);
             copyPIMAssociationEnd.pimAssociationGuid = createdCopies.GetGuidForCopyOf(PIMAssociation);
         }

@@ -1,7 +1,10 @@
 using System;
 using System.ComponentModel;
+using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using Exolutio.Controller.Commands;
 using Exolutio.Model;
 using Exolutio.Model.PSM;
@@ -98,23 +101,57 @@ namespace Exolutio.View
 
 		public void RefreshTextContent()
 		{
-            if (PSMAttribute.AttributeType != null)
-                this.Text = string.Format("{0} : {1}", PSMAttribute.Name, PSMAttribute.AttributeType.Name);
-			else
-				this.Text = PSMAttribute.Name;
+			string text = string.Empty;
 
-            //if (property.Default != null)
-            //    this.Text += string.Format(" [{0}]", property.Default);
+            if (PSMAttribute.AttributeType != null)
+                text = string.Format("{0} : {1}", PSMAttribute.Name, PSMAttribute.AttributeType.Name);
+			else
+				text = PSMAttribute.Name;
 
             if (!String.IsNullOrEmpty(PSMAttribute.GetCardinalityString()) && PSMAttribute.GetCardinalityString() != "1") 
 			{
-                this.Text += String.Format(" {{{0}}}", PSMAttribute.GetCardinalityString());
+                text += String.Format(" {{{0}}}", PSMAttribute.GetCardinalityString());
 			}
 
+			if (PSMAttribute.DefaultValue != null)
+				text += string.Format(" [init: {0}]", PSMAttribute.DefaultValue);
+
             if (!this.PSMAttribute.Element)
-                this.Text = "@" + this.Text;
-            else
-                this.Text = this.Text;
+                text = "@" + text;
+
+			//if (PSMAttribute.AppliedStereotypes.Count(aps => aps.Stereotype.Name != "OCL") > 0)
+			//{
+			//	text = PSMAttribute.AppliedStereotypes.Where(aps => aps.Stereotype.Name != "OCL").GetStereotypesString() + Environment.NewLine + text;
+			//}
+
+//			var oclS = PSMAttribute.AppliedStereotypes.FirstOrDefault(aps => aps.Stereotype.Name == "OCL");
+//			if (oclS != null)
+//			{
+//				Thickness th = new Thickness(0,0,3,0);
+//				this.BorderThickness = th;
+//				this.BorderBrush = ViewToolkitResources.RedBrush;
+//				if (PSMAttribute.Name == "CDnumber")
+//				{
+//					this.ToolTip = new ToolTip() { Content = "xs:positiveInteger(.) le xs:positiveInteger(../../CDcount)", FontSize = 14, FontFamily = new FontFamily("Consolas") };					
+//				}
+//				else if (PSMAttribute.Name == "Number") 
+//				{
+//					this.ToolTip = new ToolTip()
+//					{
+//						FontSize = 14, 
+//						FontFamily = new FontFamily("Consolas"),
+//						Content = @"for $n in xs:positiveInteger(../CDnumber) return 
+//	xs:positiveInteger(.) eq (count(../preceding-sibling::Track[xs:positiveInteger(CDnumber) eq $n]) + 1)"
+//					};
+//				}
+
+//			}
+//			else
+//			{
+//				this.BorderThickness = ViewToolkitResources.Thickness0;
+//			}
+
+			this.Text = text;
 
             if (this.PSMAttribute.Interpretation == null)
             {

@@ -40,11 +40,14 @@
     <ImageSource x:Key="FolderDownload">FolderDownload.png</ImageSource>
     <ImageSource x:Key="folder">folder.png</ImageSource>
     <ImageSource x:Key="font">font.png</ImageSource>
+	<ImageSource x:Key="form_red">form_red.png</ImageSource>
+	<ImageSource x:Key="gears">gears.png</ImageSource>
     <ImageSource x:Key="gen">gen.png</ImageSource>
     <ImageSource x:Key="generalize">generalize.png</ImageSource>
     <ImageSource x:Key="GenericDocument">GenericDocument.png</ImageSource>
     <ImageSource x:Key="Group">Group.png</ImageSource>
     <ImageSource x:Key="help">help.png</ImageSource>
+	<ImageSource x:Key="index">index.png</ImageSource>
     <ImageSource x:Key="magnifier">magnifier.png</ImageSource>
     <ImageSource x:Key="media_pause">media_pause.png</ImageSource>
     <ImageSource x:Key="media_play_green">media_play_green.png</ImageSource>

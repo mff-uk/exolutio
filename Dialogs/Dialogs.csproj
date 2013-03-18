@@ -71,6 +71,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccessKeyScoper.cs" />
+    <Compile Include="CreateXRXPSMDialog.xaml.cs">
+      <DependentUpon>CreateXRXPSMDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ExolutioMessageBox.xaml.cs">
       <DependentUpon>ExolutioMessageBox.xaml</DependentUpon>
     </Compile>
@@ -112,6 +115,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="CreateXRXPSMDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="ExolutioMessageBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

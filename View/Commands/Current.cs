@@ -248,6 +248,7 @@ namespace Exolutio.View
     public interface IFilePresenter
     {
         IFilePresenterTab DisplayFile(XDocument xmlDocument, EDisplayedFileType fileType, string fileName = null, ILog log = null, PSMSchema validationSchema = null, PSMSchema sourcePSMSchema = null, FilePresenterButtonInfo[] additionalActions = null, object tag = null);
+		IFilePresenterTab DisplayFile(string fileContents, EDisplayedFileType displayedFileType, string fileName = null, ILog log = null, PSMSchema validationSchema = null, PSMSchema sourcePSMSchema = null, FilePresenterButtonInfo[] additionalActions = null, object tag = null);
     }
 
     public class FilePresenterButtonInfo

@@ -89,10 +89,27 @@ namespace Exolutio.View
             
             // labels, multiplicities
             AssociationName = PIMAssociation.Name;
-            SourceCardinality = PIMAssociation.PIMAssociationEnds[0].GetCardinalityString();
-            TargetCardinality = PIMAssociation.PIMAssociationEnds[1].GetCardinalityString();
-            SourceRole = PIMAssociation.PIMAssociationEnds[0].Name;
-            TargetRole = PIMAssociation.PIMAssociationEnds[1].Name;
+	        PIMAssociationEnd sourceEnd = PIMAssociation.PIMAssociationEnds[0];
+	        PIMAssociationEnd targetEnd = PIMAssociation.PIMAssociationEnds[1];
+
+	        SourceCardinality = sourceEnd.GetCardinalityString();
+	        TargetCardinality = targetEnd.GetCardinalityString();
+            SourceRole = sourceEnd.Name;
+            TargetRole = targetEnd.Name;
+
+			if (sourceEnd.IsComposite == true)
+				Connector.StartCapStyle = EConnectorCapStyle.FullDiamond;
+			if (sourceEnd.IsShared == true)
+				Connector.StartCapStyle = EConnectorCapStyle.Diamond;
+			if (sourceEnd.IsNavigable == true)
+				Connector.StartCapStyle = EConnectorCapStyle.Arrow;
+
+			if (targetEnd.IsComposite == true)
+				Connector.EndCapStyle = EConnectorCapStyle.FullDiamond;
+			if (targetEnd.IsShared == true)
+				Connector.EndCapStyle = EConnectorCapStyle.Diamond;
+			if (targetEnd.IsNavigable == true)
+				Connector.EndCapStyle = EConnectorCapStyle.Arrow;
 
             if (NameLabel != null)
             {
