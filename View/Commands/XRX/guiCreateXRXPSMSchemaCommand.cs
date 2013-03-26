@@ -76,7 +76,8 @@ namespace Exolutio.View.Commands.XRX
 	{
 		public override void Execute(object parameter = null)
 		{
-			string fileContents = File.ReadAllText(@"d:\Development\Exolutio\Projects\music-xrx\rest.xqm");
+			string fileContents = Properties.Resources.music_xrx_rest;
+			//File.ReadAllText(@"d:\Development\Exolutio\Projects\music-xrx\rest.xqm");
 			Current.MainWindow.FilePresenter.DisplayFile(fileContents, EDisplayedFileType.XQuery, "rest.xqm");
 		}
 
@@ -108,7 +109,8 @@ namespace Exolutio.View.Commands.XRX
 	{
 		public override void Execute(object parameter = null)
 		{
-			string fileContents = File.ReadAllText(@"d:\Development\Exolutio\Projects\music-xrx\forms.xqm");
+			string fileContents = Properties.Resources.music_xrx_forms;
+			//File.ReadAllText(@"d:\Development\Exolutio\Projects\music-xrx\forms.xqm");
 			Current.MainWindow.FilePresenter.DisplayFile(fileContents, EDisplayedFileType.XQuery, "forms.xqm");
 		}
 

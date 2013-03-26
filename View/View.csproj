@@ -296,6 +296,8 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="Resources\forms.xqm" />
+    <None Include="Resources\rest.xqm" />
     <None Include="Resources\XQuery.xshd">
       <SubType>Designer</SubType>
     </None>
