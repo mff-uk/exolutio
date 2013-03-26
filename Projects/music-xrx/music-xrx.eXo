@@ -1,0 +1,803 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<eXo:Project xmlns:eXo="http://eXolutio.eu/Project/Serialization/" Version="3.0" UsesVersioning="False" Name="music-xrx">
+  <eXo:SingleVersion ID="eb1c45b4-1f36-4f22-bfe4-0522cfc771f9">
+    <eXo:PIMAttributeTypes Count="0" />
+    <eXo:PIMSchema ID="0790b857-b6cb-45d7-aef7-a2a7d6cdcbcd" Caption="PIMSchema">
+      <eXo:PIMClasses Count="3">
+        <eXo:PIMClass ID="3ce7d245-4576-4400-8732-88f45cf4b769" Name="Album" abstract="False" final="False">
+          <eXo:PIMAttributes Count="4">
+            <eXo:PIMAttribute ID="4cb72bf2-9db0-4671-a754-a7e78082b1cc" Name="ID" Type="dc49d35c-feaf-4e9e-9c22-267208d61a77" displayName="AttributeType: Integer" pimClassID="3ce7d245-4576-4400-8732-88f45cf4b769">
+              <eXo:AppliedStereotypes Count="1">
+                <eXo:StereotypeInstance ID="a9c51a17-c37a-42d9-ad4b-791fa3e97781" StereotypeID="48311640-1bc1-488c-ac40-31e1c0b47d2e" Stereotype="Key" />
+              </eXo:AppliedStereotypes>
+            </eXo:PIMAttribute>
+            <eXo:PIMAttribute ID="a456b042-1214-4b2e-ade8-c228830269e0" Name="Title" Type="5d84c73e-74cd-4acc-bd44-e465272fb37a" displayName="AttributeType: String" pimClassID="3ce7d245-4576-4400-8732-88f45cf4b769" />
+            <eXo:PIMAttribute ID="39dab8cb-0996-47ef-a844-01785b8c9261" Name="Description" Lower="0" Type="5d84c73e-74cd-4acc-bd44-e465272fb37a" displayName="AttributeType: String" pimClassID="3ce7d245-4576-4400-8732-88f45cf4b769" />
+            <eXo:PIMAttribute ID="e2a2bb06-e9da-43e2-b1d3-6a83119fb3c6" Name="CDcount" Type="dc49d35c-feaf-4e9e-9c22-267208d61a77" displayName="AttributeType: Integer" DefaultValue="1" pimClassID="3ce7d245-4576-4400-8732-88f45cf4b769" />
+          </eXo:PIMAttributes>
+          <eXo:PIMOperations Count="0" />
+          <eXo:GeneralizationsAsGeneral Count="0" />
+          <eXo:PIMAssociationEnds Count="2">
+            <eXo:PIMAssociationEnd pimAssociationEndID="1fba1b23-f2df-4ef0-b8fb-fde9e1fc0c8a" pimAssociationEnd="PIMAssociationEnd: A:  [Album] " />
+            <eXo:PIMAssociationEnd pimAssociationEndID="65f6f854-a254-4c3f-96d9-9c0a8da3a4c7" pimAssociationEnd="PIMAssociationEnd: A:  [Album] {0..*}" />
+          </eXo:PIMAssociationEnds>
+        </eXo:PIMClass>
+        <eXo:PIMClass ID="d02a56fe-8e2d-466c-b7aa-9ae1ceb178e5" Name="Artist" abstract="False" final="False">
+          <eXo:PIMAttributes Count="3">
+            <eXo:PIMAttribute ID="52259a55-ad73-4cae-9409-e3128e12d714" Name="ID" Type="dc49d35c-feaf-4e9e-9c22-267208d61a77" displayName="AttributeType: Integer" pimClassID="d02a56fe-8e2d-466c-b7aa-9ae1ceb178e5">
+              <eXo:AppliedStereotypes Count="1">
+                <eXo:StereotypeInstance ID="83dd83e5-f460-48ed-9384-f809bbb02fb9" StereotypeID="48311640-1bc1-488c-ac40-31e1c0b47d2e" Stereotype="Key" />
+              </eXo:AppliedStereotypes>
+            </eXo:PIMAttribute>
+            <eXo:PIMAttribute ID="f5f29776-0aba-4861-b956-d56b15c53a9c" Name="FirstName" Lower="0" Type="5d84c73e-74cd-4acc-bd44-e465272fb37a" displayName="AttributeType: String" pimClassID="d02a56fe-8e2d-466c-b7aa-9ae1ceb178e5" />
+            <eXo:PIMAttribute ID="037721f2-7916-4663-a0a5-c0a5db77ac32" Name="LastName" Lower="0" Type="5d84c73e-74cd-4acc-bd44-e465272fb37a" displayName="AttributeType: String" pimClassID="d02a56fe-8e2d-466c-b7aa-9ae1ceb178e5" />
+          </eXo:PIMAttributes>
+          <eXo:PIMOperations Count="0" />
+          <eXo:GeneralizationsAsGeneral Count="0" />
+          <eXo:PIMAssociationEnds Count="2">
+            <eXo:PIMAssociationEnd pimAssociationEndID="7ecd63f1-4295-4507-9076-9c89df69fe59" pimAssociationEnd="PIMAssociationEnd: A:  [Artist] {0..*}" />
+            <eXo:PIMAssociationEnd pimAssociationEndID="8bbbbafa-11d1-4192-9176-0980c51a7c81" pimAssociationEnd="PIMAssociationEnd: A:  [Artist] {0..*}" />
+          </eXo:PIMAssociationEnds>
+        </eXo:PIMClass>
+        <eXo:PIMClass ID="51f89ffb-088c-498e-b4df-49a0d182f878" Name="Track" abstract="False" final="False">
+          <eXo:PIMAttributes Count="6">
+            <eXo:PIMAttribute ID="d20228b7-b917-49f0-a44d-72a94944ddd2" Name="ID" Type="5d84c73e-74cd-4acc-bd44-e465272fb37a" displayName="AttributeType: String" pimClassID="51f89ffb-088c-498e-b4df-49a0d182f878">
+              <eXo:AppliedStereotypes Count="1">
+                <eXo:StereotypeInstance ID="b51508f9-1353-498d-a294-b6930fa7d7db" StereotypeID="48311640-1bc1-488c-ac40-31e1c0b47d2e" Stereotype="Key" />
+              </eXo:AppliedStereotypes>
+            </eXo:PIMAttribute>
+            <eXo:PIMAttribute ID="5bc4734e-eafe-4b97-87c3-0e014ac1930e" Name="CDnumber" Type="dc49d35c-feaf-4e9e-9c22-267208d61a77" displayName="AttributeType: Integer" DefaultValue="1" pimClassID="51f89ffb-088c-498e-b4df-49a0d182f878" />
+            <eXo:PIMAttribute ID="1a9645a4-fe2d-49c1-bb0c-7d88a888fbeb" Name="Number" Type="dc49d35c-feaf-4e9e-9c22-267208d61a77" displayName="AttributeType: Integer" pimClassID="51f89ffb-088c-498e-b4df-49a0d182f878" />
+            <eXo:PIMAttribute ID="cf2ea9d1-5460-401d-8d48-93914ff1e5cd" Name="Title" Type="5d84c73e-74cd-4acc-bd44-e465272fb37a" displayName="AttributeType: String" pimClassID="51f89ffb-088c-498e-b4df-49a0d182f878" />
+            <eXo:PIMAttribute ID="11b289c9-7567-4e04-8a28-b6754263a170" Name="Length" Lower="0" Type="dc49d35c-feaf-4e9e-9c22-267208d61a77" displayName="AttributeType: Integer" pimClassID="51f89ffb-088c-498e-b4df-49a0d182f878" />
+            <eXo:PIMAttribute ID="ccf70976-03f2-44a1-8cb1-d2fa1ac942c0" Name="Lyrics" Lower="0" Type="5d84c73e-74cd-4acc-bd44-e465272fb37a" displayName="AttributeType: String" pimClassID="51f89ffb-088c-498e-b4df-49a0d182f878" />
+          </eXo:PIMAttributes>
+          <eXo:PIMOperations Count="0" />
+          <eXo:GeneralizationsAsGeneral Count="0" />
+          <eXo:PIMAssociationEnds Count="2">
+            <eXo:PIMAssociationEnd pimAssociationEndID="2b4f8eea-0085-4668-8723-23d0f48a06d5" pimAssociationEnd="PIMAssociationEnd: A:  [Track] {1..*}" />
+            <eXo:PIMAssociationEnd pimAssociationEndID="cbc4c687-1bdf-434b-b9e0-2f17219898d1" pimAssociationEnd="PIMAssociationEnd: A:  [Track] {0..*}" />
+          </eXo:PIMAssociationEnds>
+        </eXo:PIMClass>
+      </eXo:PIMClasses>
+      <eXo:PIMGeneralizations Count="0" />
+      <eXo:PIMAssociations Count="3">
+        <eXo:PIMAssociation ID="1c2c9d12-8915-4992-99cf-3406aa9bd1c8" Name="">
+          <eXo:PIMAssociationEnds Count="2">
+            <eXo:PIMAssociationEnd ID="2b4f8eea-0085-4668-8723-23d0f48a06d5" Name="" refPIMClassID="51f89ffb-088c-498e-b4df-49a0d182f878" refPIMClass="PIMClass: *Track*" refPIMAssociationID="1c2c9d12-8915-4992-99cf-3406aa9bd1c8" refPIMAssociation="PIMAssociation **: PIMClass: *Track*, PIMClass: *Album*" IsComposite="True" Upper="*" />
+            <eXo:PIMAssociationEnd ID="1fba1b23-f2df-4ef0-b8fb-fde9e1fc0c8a" Name="" refPIMClassID="3ce7d245-4576-4400-8732-88f45cf4b769" refPIMClass="PIMClass: *Album*" refPIMAssociationID="1c2c9d12-8915-4992-99cf-3406aa9bd1c8" refPIMAssociation="PIMAssociation **: PIMClass: *Track*, PIMClass: *Album*" />
+          </eXo:PIMAssociationEnds>
+        </eXo:PIMAssociation>
+        <eXo:PIMAssociation ID="ca7daba7-75ec-42c7-902d-bd4e4c3dd58a" Name="">
+          <eXo:PIMAssociationEnds Count="2">
+            <eXo:PIMAssociationEnd ID="65f6f854-a254-4c3f-96d9-9c0a8da3a4c7" Name="" refPIMClassID="3ce7d245-4576-4400-8732-88f45cf4b769" refPIMClass="PIMClass: *Album*" refPIMAssociationID="ca7daba7-75ec-42c7-902d-bd4e4c3dd58a" refPIMAssociation="PIMAssociation **: PIMClass: *Album*, PIMClass: *Artist*" Lower="0" Upper="*" />
+            <eXo:PIMAssociationEnd ID="7ecd63f1-4295-4507-9076-9c89df69fe59" Name="" refPIMClassID="d02a56fe-8e2d-466c-b7aa-9ae1ceb178e5" refPIMClass="PIMClass: *Artist*" refPIMAssociationID="ca7daba7-75ec-42c7-902d-bd4e4c3dd58a" refPIMAssociation="PIMAssociation **: PIMClass: *Album*, PIMClass: *Artist*" Lower="0" Upper="*" />
+          </eXo:PIMAssociationEnds>
+        </eXo:PIMAssociation>
+        <eXo:PIMAssociation ID="f70fe86a-5722-489d-87ef-de44196dd32c" Name="">
+          <eXo:PIMAssociationEnds Count="2">
+            <eXo:PIMAssociationEnd ID="cbc4c687-1bdf-434b-b9e0-2f17219898d1" Name="" refPIMClassID="51f89ffb-088c-498e-b4df-49a0d182f878" refPIMClass="PIMClass: *Track*" refPIMAssociationID="f70fe86a-5722-489d-87ef-de44196dd32c" refPIMAssociation="PIMAssociation **: PIMClass: *Track*, PIMClass: *Artist*" Lower="0" Upper="*" />
+            <eXo:PIMAssociationEnd ID="8bbbbafa-11d1-4192-9176-0980c51a7c81" Name="" refPIMClassID="d02a56fe-8e2d-466c-b7aa-9ae1ceb178e5" refPIMClass="PIMClass: *Artist*" refPIMAssociationID="f70fe86a-5722-489d-87ef-de44196dd32c" refPIMAssociation="PIMAssociation **: PIMClass: *Track*, PIMClass: *Artist*" IsNavigable="True" Lower="0" Upper="*" />
+          </eXo:PIMAssociationEnds>
+        </eXo:PIMAssociation>
+      </eXo:PIMAssociations>
+    </eXo:PIMSchema>
+    <eXo:PSMSchemas Count="2">
+      <eXo:PSMSchema ID="604499e9-c348-40f8-bbec-48ab8dce5406" Caption="collections-with-stereotypes">
+        <eXo:PSMSchemaClass ID="c50fb9f2-95a7-4a58-84e1-b08c45dfeb19" Name="db/music">
+          <eXo:UsedGeneralizations Count="0" />
+          <eXo:ChildPSMAssociations Count="2">
+            <eXo:ChildPSMAssociation childPSMAssociationID="f37eb4dc-f5f6-4a40-bb78-d5ca65b15839" childPSMAssociation="PSMAssociation from PSMSchemaClass: db/music to PSMClass: *Album*" />
+            <eXo:ChildPSMAssociation childPSMAssociationID="3909bf86-7dd8-4a0d-a7ee-36b10e20f024" childPSMAssociation="PSMAssociation from PSMSchemaClass: db/music to PSMClass: *Artist*" />
+          </eXo:ChildPSMAssociations>
+        </eXo:PSMSchemaClass>
+        <eXo:Roots Count="1">
+          <eXo:Root rootID="c50fb9f2-95a7-4a58-84e1-b08c45dfeb19" root="PSMSchemaClass: db/music" />
+        </eXo:Roots>
+        <eXo:PSMClasses Count="8">
+          <eXo:PSMClass ID="1abb41bf-c223-46b9-86a5-201e074ab5a6" Name="Album" InterpretationID="3ce7d245-4576-4400-8732-88f45cf4b769" Interpretation="PIMClass: *Album*" parentAssociationID="f37eb4dc-f5f6-4a40-bb78-d5ca65b15839" parentAssociation="PSMAssociation from PSMSchemaClass: db/music to PSMClass: *Album*" abstract="False" final="False">
+            <eXo:AppliedStereotypes Count="1">
+              <eXo:StereotypeInstance ID="9725aacf-f5b9-413a-91dd-605319dcdaa9" StereotypeID="b10292c6-430c-4b78-abac-9b5800790bd8" Stereotype="Collection" />
+            </eXo:AppliedStereotypes>
+            <eXo:UsedGeneralizations Count="0" />
+            <eXo:ChildPSMAssociations Count="2">
+              <eXo:ChildPSMAssociation childPSMAssociationID="26b5c4bb-61ff-4bae-b7b6-8b246b800ea9" childPSMAssociation="PSMAssociation from PSMClass: *Album* to PSMClass: *Tracks*" />
+              <eXo:ChildPSMAssociation childPSMAssociationID="c8904ce1-ebe6-40d5-829c-8fa782828004" childPSMAssociation="PSMAssociation from PSMClass: *Album* to PSMClass: *Artists*" />
+            </eXo:ChildPSMAssociations>
+            <eXo:GeneralizationsAsGeneral Count="0" />
+            <eXo:PSMAttributes Count="4">
+              <eXo:PSMAttribute ID="ad6f9e67-2f76-41e6-9dc5-b6c6d6bef019" Name="ID" InterpretationID="4cb72bf2-9db0-4671-a754-a7e78082b1cc" Interpretation="PIMAttribute: *Album.ID* 1..1" Type="ec089adc-8e36-481d-9c18-e41335d5aebb" displayName="AttributeType: positiveInteger" Element="False" psmClassID="1abb41bf-c223-46b9-86a5-201e074ab5a6">
+                <eXo:UsedGeneralizations Count="0" />
+              </eXo:PSMAttribute>
+              <eXo:PSMAttribute ID="1e52c7ec-ad5e-40be-94ed-b56455945189" Name="Title" InterpretationID="a456b042-1214-4b2e-ade8-c228830269e0" Interpretation="PIMAttribute: *Album.Title* 1..1" Type="e06bc2c1-0ba6-4c8f-a892-93db94b544bb" displayName="AttributeType: string" Element="True" psmClassID="1abb41bf-c223-46b9-86a5-201e074ab5a6">
+                <eXo:UsedGeneralizations Count="0" />
+              </eXo:PSMAttribute>
+              <eXo:PSMAttribute ID="c93e2738-4b2b-4ca9-8885-380849dae65f" Name="CDcount" InterpretationID="e2a2bb06-e9da-43e2-b1d3-6a83119fb3c6" Interpretation="PIMAttribute: *Album.CDcount* 1..1" Type="cc8fb2f9-34eb-445f-80fc-acf8ab017cd1" displayName="AttributeType: integer" DefaultValue="1" Element="True" psmClassID="1abb41bf-c223-46b9-86a5-201e074ab5a6">
+                <eXo:UsedGeneralizations Count="0" />
+              </eXo:PSMAttribute>
+              <eXo:PSMAttribute ID="fef7f7b6-2e3a-406e-ba0c-62cc4730b3b4" Name="Description" InterpretationID="39dab8cb-0996-47ef-a844-01785b8c9261" Interpretation="PIMAttribute: *Album.Description* 0..1" Lower="0" Type="e06bc2c1-0ba6-4c8f-a892-93db94b544bb" displayName="AttributeType: string" Element="True" psmClassID="1abb41bf-c223-46b9-86a5-201e074ab5a6">
+                <eXo:AppliedStereotypes Count="1">
+                  <eXo:StereotypeInstance ID="08f64590-1b01-4a44-a6a7-24aa89d95987" StereotypeID="a68fa1d6-2c99-4ca0-839b-04caee013afb" Stereotype="HTMLText" />
+                </eXo:AppliedStereotypes>
+                <eXo:UsedGeneralizations Count="0" />
+              </eXo:PSMAttribute>
+            </eXo:PSMAttributes>
+          </eXo:PSMClass>
+          <eXo:PSMClass ID="2f02c5cc-1377-4862-8ccb-333bb10f7c1c" Name="Artist" InterpretationID="d02a56fe-8e2d-466c-b7aa-9ae1ceb178e5" Interpretation="PIMClass: *Artist*" parentAssociationID="3909bf86-7dd8-4a0d-a7ee-36b10e20f024" parentAssociation="PSMAssociation from PSMSchemaClass: db/music to PSMClass: *Artist*" abstract="False" final="False">
+            <eXo:AppliedStereotypes Count="1">
+              <eXo:StereotypeInstance ID="412537b3-5a91-4742-9344-ec32cf63fdfa" StereotypeID="b10292c6-430c-4b78-abac-9b5800790bd8" Stereotype="Collection" />
+            </eXo:AppliedStereotypes>
+            <eXo:UsedGeneralizations Count="0" />
+            <eXo:ChildPSMAssociations Count="0" />
+            <eXo:GeneralizationsAsGeneral Count="0" />
+            <eXo:PSMAttributes Count="3">
+              <eXo:PSMAttribute ID="0fd7a2e0-40eb-4a88-a010-0cd99ef70dc8" Name="ID" InterpretationID="52259a55-ad73-4cae-9409-e3128e12d714" Interpretation="PIMAttribute: *Artist.ID* 1..1" Type="ec089adc-8e36-481d-9c18-e41335d5aebb" displayName="AttributeType: positiveInteger" Element="False" psmClassID="2f02c5cc-1377-4862-8ccb-333bb10f7c1c">
+                <eXo:UsedGeneralizations Count="0" />
+              </eXo:PSMAttribute>
+              <eXo:PSMAttribute ID="0595e4c6-a218-4c30-b68d-e79cc629bfca" Name="FirstName" InterpretationID="f5f29776-0aba-4861-b956-d56b15c53a9c" Interpretation="PIMAttribute: *Artist.FirstName* 0..1" Lower="0" Type="e06bc2c1-0ba6-4c8f-a892-93db94b544bb" displayName="AttributeType: string" Element="True" psmClassID="2f02c5cc-1377-4862-8ccb-333bb10f7c1c">
+                <eXo:UsedGeneralizations Count="0" />
+              </eXo:PSMAttribute>
+              <eXo:PSMAttribute ID="c5be5216-9cdf-46a2-9a18-2619a2edf89e" Name="LastName" InterpretationID="037721f2-7916-4663-a0a5-c0a5db77ac32" Interpretation="PIMAttribute: *Artist.LastName* 0..1" Lower="0" Type="e06bc2c1-0ba6-4c8f-a892-93db94b544bb" displayName="AttributeType: string" Element="True" psmClassID="2f02c5cc-1377-4862-8ccb-333bb10f7c1c">
+                <eXo:UsedGeneralizations Count="0" />
+              </eXo:PSMAttribute>
+            </eXo:PSMAttributes>
+          </eXo:PSMClass>
+          <eXo:PSMClass ID="f4ff1954-7d11-492b-a7e9-18181f763121" Name="Track" InterpretationID="51f89ffb-088c-498e-b4df-49a0d182f878" Interpretation="PIMClass: *Track*" parentAssociationID="1c80447c-5860-44d8-a96e-a22bb5ccc030" parentAssociation="PSMAssociation from PSMClass: *Tracks* to PSMClass: *Track*" abstract="False" final="False">
+            <eXo:UsedGeneralizations Count="0" />
+            <eXo:ChildPSMAssociations Count="1">
+              <eXo:ChildPSMAssociation childPSMAssociationID="181cb811-0e68-41e4-b5ef-398233118fa2" childPSMAssociation="PSMAssociation from PSMClass: *Track* to PSMClass: *TrackArtists*" />
+            </eXo:ChildPSMAssociations>
+            <eXo:GeneralizationsAsGeneral Count="0" />
+            <eXo:PSMAttributes Count="6">
+              <eXo:PSMAttribute ID="0c5b84fe-6d13-49b7-a53c-cdb191f21679" Name="ID" InterpretationID="d20228b7-b917-49f0-a44d-72a94944ddd2" Interpretation="PIMAttribute: *Track.ID* 1..1" Type="e06bc2c1-0ba6-4c8f-a892-93db94b544bb" displayName="AttributeType: string" Element="False" psmClassID="f4ff1954-7d11-492b-a7e9-18181f763121">
+                <eXo:UsedGeneralizations Count="0" />
+              </eXo:PSMAttribute>
+              <eXo:PSMAttribute ID="8d364129-cfc1-4c0c-bd12-1677f2cc36c5" Name="CDnumber" InterpretationID="5bc4734e-eafe-4b97-87c3-0e014ac1930e" Interpretation="PIMAttribute: *Track.CDnumber* 1..1" Type="ec089adc-8e36-481d-9c18-e41335d5aebb" displayName="AttributeType: positiveInteger" DefaultValue="1" Element="True" psmClassID="f4ff1954-7d11-492b-a7e9-18181f763121">
+                <eXo:AppliedStereotypes Count="1">
+                  <eXo:StereotypeInstance ID="67a0ec93-4a00-4f9e-9eff-8cbf900bb251" StereotypeID="b96618e7-b948-4bc5-8a92-4669382184ff" Stereotype="OCL" />
+                </eXo:AppliedStereotypes>
+                <eXo:UsedGeneralizations Count="0" />
+              </eXo:PSMAttribute>
+              <eXo:PSMAttribute ID="b07c2642-b797-418a-bb03-da4d5c91c0a9" Name="Number" InterpretationID="1a9645a4-fe2d-49c1-bb0c-7d88a888fbeb" Interpretation="PIMAttribute: *Track.Number* 1..1" Type="ec089adc-8e36-481d-9c18-e41335d5aebb" displayName="AttributeType: positiveInteger" Element="True" psmClassID="f4ff1954-7d11-492b-a7e9-18181f763121">
+                <eXo:AppliedStereotypes Count="1">
+                  <eXo:StereotypeInstance ID="95dfd1c8-8257-4c9f-9aad-76163858d99e" StereotypeID="b96618e7-b948-4bc5-8a92-4669382184ff" Stereotype="OCL" />
+                </eXo:AppliedStereotypes>
+                <eXo:UsedGeneralizations Count="0" />
+              </eXo:PSMAttribute>
+              <eXo:PSMAttribute ID="ca9e443b-181d-4334-9360-bb18922fe2b5" Name="Title" InterpretationID="cf2ea9d1-5460-401d-8d48-93914ff1e5cd" Interpretation="PIMAttribute: *Track.Title* 1..1" Type="e06bc2c1-0ba6-4c8f-a892-93db94b544bb" displayName="AttributeType: string" Element="True" psmClassID="f4ff1954-7d11-492b-a7e9-18181f763121">
+                <eXo:UsedGeneralizations Count="0" />
+              </eXo:PSMAttribute>
+              <eXo:PSMAttribute ID="5facf031-b2df-41ca-b832-212849e94b94" Name="Length" InterpretationID="11b289c9-7567-4e04-8a28-b6754263a170" Interpretation="PIMAttribute: *Track.Length* 0..1" Lower="0" Type="cb7ab121-4845-4175-84f6-06e08b0f21f9" displayName="AttributeType: duration" Element="True" psmClassID="f4ff1954-7d11-492b-a7e9-18181f763121">
+                <eXo:UsedGeneralizations Count="0" />
+              </eXo:PSMAttribute>
+              <eXo:PSMAttribute ID="0faa5d92-d706-473b-9cfc-4015260ff11f" Name="Lyrics" InterpretationID="ccf70976-03f2-44a1-8cb1-d2fa1ac942c0" Interpretation="PIMAttribute: *Track.Lyrics* 0..1" Lower="0" Type="e06bc2c1-0ba6-4c8f-a892-93db94b544bb" displayName="AttributeType: string" Element="True" psmClassID="f4ff1954-7d11-492b-a7e9-18181f763121">
+                <eXo:AppliedStereotypes Count="1">
+                  <eXo:StereotypeInstance ID="1774b4d9-8c53-4c43-a2a0-6b8ced72a623" StereotypeID="a68fa1d6-2c99-4ca0-839b-04caee013afb" Stereotype="HTMLText" />
+                </eXo:AppliedStereotypes>
+                <eXo:UsedGeneralizations Count="0" />
+              </eXo:PSMAttribute>
+            </eXo:PSMAttributes>
+          </eXo:PSMClass>
+          <eXo:PSMClass ID="8162a31e-6a26-436a-9e12-ec547ab6760c" Name="Tracks" parentAssociationID="26b5c4bb-61ff-4bae-b7b6-8b246b800ea9" parentAssociation="PSMAssociation from PSMClass: *Album* to PSMClass: *Tracks*" abstract="False" final="False">
+            <eXo:UsedGeneralizations Count="0" />
+            <eXo:ChildPSMAssociations Count="1">
+              <eXo:ChildPSMAssociation childPSMAssociationID="1c80447c-5860-44d8-a96e-a22bb5ccc030" childPSMAssociation="PSMAssociation from PSMClass: *Tracks* to PSMClass: *Track*" />
+            </eXo:ChildPSMAssociations>
+            <eXo:GeneralizationsAsGeneral Count="0" />
+            <eXo:PSMAttributes Count="0" />
+          </eXo:PSMClass>
+          <eXo:PSMClass ID="4374d7dc-b810-4565-971b-7a6504343016" Name="TrackArtistRef" InterpretationID="d02a56fe-8e2d-466c-b7aa-9ae1ceb178e5" Interpretation="PIMClass: *Artist*" parentAssociationID="148ade9e-6616-45af-b71d-660d91f90b41" parentAssociation="PSMAssociation from PSMClass: *TrackArtists* to PSMClass: *TrackArtistRef*" abstract="False" final="False">
+            <eXo:AppliedStereotypes Count="1">
+              <eXo:StereotypeInstance ID="84a9fda3-c739-4389-b584-4587aa6d64d9" StereotypeID="81da98bc-3a31-439a-bd7d-760f677cb330" Stereotype="CollectionRef" />
+            </eXo:AppliedStereotypes>
+            <eXo:UsedGeneralizations Count="0" />
+            <eXo:ChildPSMAssociations Count="0" />
+            <eXo:GeneralizationsAsGeneral Count="0" />
+            <eXo:PSMAttributes Count="1">
+              <eXo:PSMAttribute ID="a5a8675b-181d-4644-a298-6f7958e9f7a8" Name="ID" InterpretationID="52259a55-ad73-4cae-9409-e3128e12d714" Interpretation="PIMAttribute: *Artist.ID* 1..1" Type="ec089adc-8e36-481d-9c18-e41335d5aebb" displayName="AttributeType: positiveInteger" Element="False" psmClassID="4374d7dc-b810-4565-971b-7a6504343016">
+                <eXo:UsedGeneralizations Count="0" />
+              </eXo:PSMAttribute>
+            </eXo:PSMAttributes>
+          </eXo:PSMClass>
+          <eXo:PSMClass ID="7ac771bf-6fc5-4016-bb59-7464e2a3827a" Name="TrackArtists" parentAssociationID="181cb811-0e68-41e4-b5ef-398233118fa2" parentAssociation="PSMAssociation from PSMClass: *Track* to PSMClass: *TrackArtists*" abstract="False" final="False">
+            <eXo:UsedGeneralizations Count="0" />
+            <eXo:ChildPSMAssociations Count="1">
+              <eXo:ChildPSMAssociation childPSMAssociationID="148ade9e-6616-45af-b71d-660d91f90b41" childPSMAssociation="PSMAssociation from PSMClass: *TrackArtists* to PSMClass: *TrackArtistRef*" />
+            </eXo:ChildPSMAssociations>
+            <eXo:GeneralizationsAsGeneral Count="0" />
+            <eXo:PSMAttributes Count="0" />
+          </eXo:PSMClass>
+          <eXo:PSMClass ID="ccdb6a2d-8d2c-4ac9-98fb-96060c82828e" Name="ArtistRef" InterpretationID="d02a56fe-8e2d-466c-b7aa-9ae1ceb178e5" Interpretation="PIMClass: *Artist*" parentAssociationID="35e19438-e076-4d9f-bd15-b5c3abfd845d" parentAssociation="PSMAssociation from PSMClass: *Artists* to PSMClass: *ArtistRef*" abstract="False" final="False">
+            <eXo:AppliedStereotypes Count="1">
+              <eXo:StereotypeInstance ID="a7e5b2a9-dd90-4eab-8f55-4c9b91b888dd" StereotypeID="81da98bc-3a31-439a-bd7d-760f677cb330" Stereotype="CollectionRef" />
+            </eXo:AppliedStereotypes>
+            <eXo:UsedGeneralizations Count="0" />
+            <eXo:ChildPSMAssociations Count="0" />
+            <eXo:GeneralizationsAsGeneral Count="0" />
+            <eXo:PSMAttributes Count="1">
+              <eXo:PSMAttribute ID="b7b52ac9-50cc-43df-8aa1-aaf11bc6c266" Name="ID" InterpretationID="52259a55-ad73-4cae-9409-e3128e12d714" Interpretation="PIMAttribute: *Artist.ID* 1..1" Type="ec089adc-8e36-481d-9c18-e41335d5aebb" displayName="AttributeType: positiveInteger" Element="False" psmClassID="ccdb6a2d-8d2c-4ac9-98fb-96060c82828e">
+                <eXo:UsedGeneralizations Count="0" />
+              </eXo:PSMAttribute>
+            </eXo:PSMAttributes>
+          </eXo:PSMClass>
+          <eXo:PSMClass ID="650c3b00-66bf-42d7-8160-884cb24c7711" Name="Artists" parentAssociationID="c8904ce1-ebe6-40d5-829c-8fa782828004" parentAssociation="PSMAssociation from PSMClass: *Album* to PSMClass: *Artists*" abstract="False" final="False">
+            <eXo:UsedGeneralizations Count="0" />
+            <eXo:ChildPSMAssociations Count="1">
+              <eXo:ChildPSMAssociation childPSMAssociationID="35e19438-e076-4d9f-bd15-b5c3abfd845d" childPSMAssociation="PSMAssociation from PSMClass: *Artists* to PSMClass: *ArtistRef*" />
+            </eXo:ChildPSMAssociations>
+            <eXo:GeneralizationsAsGeneral Count="0" />
+            <eXo:PSMAttributes Count="0" />
+          </eXo:PSMClass>
+        </eXo:PSMClasses>
+        <eXo:PSMGeneralizations Count="0" />
+        <eXo:PSMAssociations Count="8">
+          <eXo:PSMAssociation ID="f37eb4dc-f5f6-4a40-bb78-d5ca65b15839" Name="Albums">
+            <eXo:UsedGeneralizations Count="0" />
+            <eXo:Parent NodeType="PSMSchemaClass" parentID="c50fb9f2-95a7-4a58-84e1-b08c45dfeb19" parent="PSMSchemaClass: db/music" />
+            <eXo:Child NodeType="PSMClass" childID="1abb41bf-c223-46b9-86a5-201e074ab5a6" child="PSMClass: *Album*" />
+          </eXo:PSMAssociation>
+          <eXo:PSMAssociation ID="3909bf86-7dd8-4a0d-a7ee-36b10e20f024" Name="Artist">
+            <eXo:UsedGeneralizations Count="0" />
+            <eXo:Parent NodeType="PSMSchemaClass" parentID="c50fb9f2-95a7-4a58-84e1-b08c45dfeb19" parent="PSMSchemaClass: db/music" />
+            <eXo:Child NodeType="PSMClass" childID="2f02c5cc-1377-4862-8ccb-333bb10f7c1c" child="PSMClass: *Artist*" />
+          </eXo:PSMAssociation>
+          <eXo:PSMAssociation ID="1c80447c-5860-44d8-a96e-a22bb5ccc030" Name="Track" InterpretationID="1c2c9d12-8915-4992-99cf-3406aa9bd1c8" Interpretation="PIMAssociation **: PIMClass: *Track*, PIMClass: *Album*" Upper="*">
+            <eXo:UsedGeneralizations Count="0" />
+            <eXo:Parent NodeType="PSMClass" parentID="8162a31e-6a26-436a-9e12-ec547ab6760c" parent="PSMClass: *Tracks*" />
+            <eXo:Child NodeType="PSMClass" childID="f4ff1954-7d11-492b-a7e9-18181f763121" child="PSMClass: *Track*" interpretedAssociationEndID="2b4f8eea-0085-4668-8723-23d0f48a06d5" interpretedAssociationEnd="PIMAssociationEnd: A:  [Track] {1..*}" />
+          </eXo:PSMAssociation>
+          <eXo:PSMAssociation ID="26b5c4bb-61ff-4bae-b7b6-8b246b800ea9" Name="Tracks">
+            <eXo:UsedGeneralizations Count="0" />
+            <eXo:Parent NodeType="PSMClass" parentID="1abb41bf-c223-46b9-86a5-201e074ab5a6" parent="PSMClass: *Album*" />
+            <eXo:Child NodeType="PSMClass" childID="8162a31e-6a26-436a-9e12-ec547ab6760c" child="PSMClass: *Tracks*" />
+          </eXo:PSMAssociation>
+          <eXo:PSMAssociation ID="148ade9e-6616-45af-b71d-660d91f90b41" Name="Artist" InterpretationID="f70fe86a-5722-489d-87ef-de44196dd32c" Interpretation="PIMAssociation **: PIMClass: *Track*, PIMClass: *Artist*" Lower="0" Upper="*">
+            <eXo:UsedGeneralizations Count="0" />
+            <eXo:Parent NodeType="PSMClass" parentID="7ac771bf-6fc5-4016-bb59-7464e2a3827a" parent="PSMClass: *TrackArtists*" />
+            <eXo:Child NodeType="PSMClass" childID="4374d7dc-b810-4565-971b-7a6504343016" child="PSMClass: *TrackArtistRef*" interpretedAssociationEndID="8bbbbafa-11d1-4192-9176-0980c51a7c81" interpretedAssociationEnd="PIMAssociationEnd: A:  [Artist] {0..*}" />
+          </eXo:PSMAssociation>
+          <eXo:PSMAssociation ID="181cb811-0e68-41e4-b5ef-398233118fa2" Name="Artists">
+            <eXo:UsedGeneralizations Count="0" />
+            <eXo:Parent NodeType="PSMClass" parentID="f4ff1954-7d11-492b-a7e9-18181f763121" parent="PSMClass: *Track*" />
+            <eXo:Child NodeType="PSMClass" childID="7ac771bf-6fc5-4016-bb59-7464e2a3827a" child="PSMClass: *TrackArtists*" />
+          </eXo:PSMAssociation>
+          <eXo:PSMAssociation ID="35e19438-e076-4d9f-bd15-b5c3abfd845d" Name="Artist" InterpretationID="ca7daba7-75ec-42c7-902d-bd4e4c3dd58a" Interpretation="PIMAssociation **: PIMClass: *Album*, PIMClass: *Artist*" Lower="0" Upper="*">
+            <eXo:UsedGeneralizations Count="0" />
+            <eXo:Parent NodeType="PSMClass" parentID="650c3b00-66bf-42d7-8160-884cb24c7711" parent="PSMClass: *Artists*" />
+            <eXo:Child NodeType="PSMClass" childID="ccdb6a2d-8d2c-4ac9-98fb-96060c82828e" child="PSMClass: *ArtistRef*" interpretedAssociationEndID="7ecd63f1-4295-4507-9076-9c89df69fe59" interpretedAssociationEnd="PIMAssociationEnd: A:  [Artist] {0..*}" />
+          </eXo:PSMAssociation>
+          <eXo:PSMAssociation ID="c8904ce1-ebe6-40d5-829c-8fa782828004" Name="Artists">
+            <eXo:UsedGeneralizations Count="0" />
+            <eXo:Parent NodeType="PSMClass" parentID="1abb41bf-c223-46b9-86a5-201e074ab5a6" parent="PSMClass: *Album*" />
+            <eXo:Child NodeType="PSMClass" childID="650c3b00-66bf-42d7-8160-884cb24c7711" child="PSMClass: *Artists*" />
+          </eXo:PSMAssociation>
+        </eXo:PSMAssociations>
+        <eXo:PSMContentModels Count="0" />
+        <eXo:OCLScripts Count="1">
+          <eXo:OCLScript ID="f5df3017-b6c0-4891-96c4-f88125b452bb" Name="attributes">
+            <eXo:Type>Validation</eXo:Type>
+            <eXo:Contents><![CDATA[context Track
+inv: CDnumber <= parent.Album.CDcount
+inv: Number > 1 implies parent.Track->exists(t | 
+  	t.CDnumber = self.CDnumber and 
+  	t.Number = self.Number - 1)
+
+]]></eXo:Contents>
+          </eXo:OCLScript>
+        </eXo:OCLScripts>
+      </eXo:PSMSchema>
+      <eXo:PSMSchema ID="a7d8ccf8-f90b-498c-87d3-f29d17b0cd98" Caption="XRX PSM">
+        <eXo:PSMSchemaClass ID="cb2808a8-e810-4d3e-ac4f-0f588fa454fd" Name="db/music">
+          <eXo:UsedGeneralizations Count="0" />
+          <eXo:ChildPSMAssociations Count="2">
+            <eXo:ChildPSMAssociation childPSMAssociationID="b1bd8bae-23ec-4bfd-abc7-2a3614c81231" childPSMAssociation="PSMAssociation from PSMSchemaClass: db/music to PSMClass: *Album*" />
+            <eXo:ChildPSMAssociation childPSMAssociationID="d14889c1-4a39-405c-aa31-b43ce9841fc2" childPSMAssociation="PSMAssociation from PSMSchemaClass: db/music to PSMClass: *Artist*" />
+          </eXo:ChildPSMAssociations>
+        </eXo:PSMSchemaClass>
+        <eXo:Roots Count="1">
+          <eXo:Root rootID="cb2808a8-e810-4d3e-ac4f-0f588fa454fd" root="PSMSchemaClass: db/music" />
+        </eXo:Roots>
+        <eXo:PSMClasses Count="8">
+          <eXo:PSMClass ID="bc099ba8-2b00-4db1-ae68-c00b7eafb3c0" Name="Album" InterpretationID="3ce7d245-4576-4400-8732-88f45cf4b769" Interpretation="PIMClass: *Album*" parentAssociationID="b1bd8bae-23ec-4bfd-abc7-2a3614c81231" parentAssociation="PSMAssociation from PSMSchemaClass: db/music to PSMClass: *Album*" abstract="False" final="False">
+            <eXo:AppliedStereotypes Count="1">
+              <eXo:StereotypeInstance ID="c35e3d72-95e8-48fb-a2cd-20260ed92e96" StereotypeID="b10292c6-430c-4b78-abac-9b5800790bd8" Stereotype="Collection" />
+            </eXo:AppliedStereotypes>
+            <eXo:UsedGeneralizations Count="0" />
+            <eXo:ChildPSMAssociations Count="2">
+              <eXo:ChildPSMAssociation childPSMAssociationID="cd2fd0f0-c05a-4811-bc6b-8f6b3f80c462" childPSMAssociation="PSMAssociation from PSMClass: *Album* to PSMClass: *Tracks*" />
+              <eXo:ChildPSMAssociation childPSMAssociationID="1dd9965d-94ae-4e73-b704-b89fcb11c509" childPSMAssociation="PSMAssociation from PSMClass: *Album* to PSMClass: *Artists*" />
+            </eXo:ChildPSMAssociations>
+            <eXo:GeneralizationsAsGeneral Count="0" />
+            <eXo:PSMAttributes Count="4">
+              <eXo:PSMAttribute ID="9dc5e914-9c87-4cc5-9b63-df4a6dfc71ab" Name="ID" InterpretationID="4cb72bf2-9db0-4671-a754-a7e78082b1cc" Interpretation="PIMAttribute: *Album.ID* 1..1" Type="cc8fb2f9-34eb-445f-80fc-acf8ab017cd1" displayName="AttributeType: integer" Element="False" psmClassID="bc099ba8-2b00-4db1-ae68-c00b7eafb3c0">
+                <eXo:UsedGeneralizations Count="0" />
+              </eXo:PSMAttribute>
+              <eXo:PSMAttribute ID="ca9ede35-f64e-4d5b-8677-4ca510d4fba8" Name="Title" InterpretationID="a456b042-1214-4b2e-ade8-c228830269e0" Interpretation="PIMAttribute: *Album.Title* 1..1" Type="e06bc2c1-0ba6-4c8f-a892-93db94b544bb" displayName="AttributeType: string" Element="True" psmClassID="bc099ba8-2b00-4db1-ae68-c00b7eafb3c0">
+                <eXo:UsedGeneralizations Count="0" />
+              </eXo:PSMAttribute>
+              <eXo:PSMAttribute ID="385308ce-5c83-4fd4-b8f0-42254c2cffdf" Name="CDcount" InterpretationID="e2a2bb06-e9da-43e2-b1d3-6a83119fb3c6" Interpretation="PIMAttribute: *Album.CDcount* 1..1" Type="cc8fb2f9-34eb-445f-80fc-acf8ab017cd1" displayName="AttributeType: integer" DefaultValue="1" Element="True" psmClassID="bc099ba8-2b00-4db1-ae68-c00b7eafb3c0">
+                <eXo:UsedGeneralizations Count="0" />
+              </eXo:PSMAttribute>
+              <eXo:PSMAttribute ID="e53761f6-733f-45d2-88bc-30a163ae189a" Name="Description" InterpretationID="39dab8cb-0996-47ef-a844-01785b8c9261" Interpretation="PIMAttribute: *Album.Description* 0..1" Lower="0" Type="e06bc2c1-0ba6-4c8f-a892-93db94b544bb" displayName="AttributeType: string" Element="True" psmClassID="bc099ba8-2b00-4db1-ae68-c00b7eafb3c0">
+                <eXo:UsedGeneralizations Count="0" />
+              </eXo:PSMAttribute>
+            </eXo:PSMAttributes>
+          </eXo:PSMClass>
+          <eXo:PSMClass ID="98482281-ecfa-4e1d-9685-771185ededf8" Name="Artist" InterpretationID="d02a56fe-8e2d-466c-b7aa-9ae1ceb178e5" Interpretation="PIMClass: *Artist*" parentAssociationID="d14889c1-4a39-405c-aa31-b43ce9841fc2" parentAssociation="PSMAssociation from PSMSchemaClass: db/music to PSMClass: *Artist*" abstract="False" final="False">
+            <eXo:AppliedStereotypes Count="1">
+              <eXo:StereotypeInstance ID="c60ef584-3481-4240-90b5-e5b46c2739b9" StereotypeID="b10292c6-430c-4b78-abac-9b5800790bd8" Stereotype="Collection" />
+            </eXo:AppliedStereotypes>
+            <eXo:UsedGeneralizations Count="0" />
+            <eXo:ChildPSMAssociations Count="0" />
+            <eXo:GeneralizationsAsGeneral Count="0" />
+            <eXo:PSMAttributes Count="3">
+              <eXo:PSMAttribute ID="72302f98-93a3-4e35-addf-e491d756e537" Name="ID" InterpretationID="52259a55-ad73-4cae-9409-e3128e12d714" Interpretation="PIMAttribute: *Artist.ID* 1..1" Type="cc8fb2f9-34eb-445f-80fc-acf8ab017cd1" displayName="AttributeType: integer" Element="False" psmClassID="98482281-ecfa-4e1d-9685-771185ededf8">
+                <eXo:UsedGeneralizations Count="0" />
+              </eXo:PSMAttribute>
+              <eXo:PSMAttribute ID="d07af997-417d-435d-be66-d6f39e00a14b" Name="FirstName" InterpretationID="f5f29776-0aba-4861-b956-d56b15c53a9c" Interpretation="PIMAttribute: *Artist.FirstName* 0..1" Lower="0" Type="e06bc2c1-0ba6-4c8f-a892-93db94b544bb" displayName="AttributeType: string" Element="True" psmClassID="98482281-ecfa-4e1d-9685-771185ededf8">
+                <eXo:UsedGeneralizations Count="0" />
+              </eXo:PSMAttribute>
+              <eXo:PSMAttribute ID="81287732-7e8a-4538-9d8c-c6f3ffd06268" Name="LastName" InterpretationID="037721f2-7916-4663-a0a5-c0a5db77ac32" Interpretation="PIMAttribute: *Artist.LastName* 0..1" Lower="0" Type="e06bc2c1-0ba6-4c8f-a892-93db94b544bb" displayName="AttributeType: string" Element="True" psmClassID="98482281-ecfa-4e1d-9685-771185ededf8">
+                <eXo:UsedGeneralizations Count="0" />
+              </eXo:PSMAttribute>
+            </eXo:PSMAttributes>
+          </eXo:PSMClass>
+          <eXo:PSMClass ID="d140eae4-9a49-4a6a-961d-cd16349f0002" Name="Track" InterpretationID="51f89ffb-088c-498e-b4df-49a0d182f878" Interpretation="PIMClass: *Track*" parentAssociationID="54b06850-b22a-4b69-8229-f1e48f946791" parentAssociation="PSMAssociation from PSMClass: *Tracks* to PSMClass: *Track*" abstract="False" final="False">
+            <eXo:UsedGeneralizations Count="0" />
+            <eXo:ChildPSMAssociations Count="1">
+              <eXo:ChildPSMAssociation childPSMAssociationID="cd0df82c-6d92-4576-a929-1f23b75493ee" childPSMAssociation="PSMAssociation from PSMClass: *Track* to PSMClass: *TrackArtists*" />
+            </eXo:ChildPSMAssociations>
+            <eXo:GeneralizationsAsGeneral Count="0" />
+            <eXo:PSMAttributes Count="6">
+              <eXo:PSMAttribute ID="d2f604bb-2181-4cdd-a1f3-e11103ebd038" Name="ID" InterpretationID="d20228b7-b917-49f0-a44d-72a94944ddd2" Interpretation="PIMAttribute: *Track.ID* 1..1" Type="e06bc2c1-0ba6-4c8f-a892-93db94b544bb" displayName="AttributeType: string" Element="False" psmClassID="d140eae4-9a49-4a6a-961d-cd16349f0002">
+                <eXo:UsedGeneralizations Count="0" />
+              </eXo:PSMAttribute>
+              <eXo:PSMAttribute ID="3b5452dc-1de9-4de5-bbbd-88fc2b84d5be" Name="CDnumber" InterpretationID="5bc4734e-eafe-4b97-87c3-0e014ac1930e" Interpretation="PIMAttribute: *Track.CDnumber* 1..1" Type="cc8fb2f9-34eb-445f-80fc-acf8ab017cd1" displayName="AttributeType: integer" DefaultValue="1" Element="True" psmClassID="d140eae4-9a49-4a6a-961d-cd16349f0002">
+                <eXo:UsedGeneralizations Count="0" />
+              </eXo:PSMAttribute>
+              <eXo:PSMAttribute ID="127cccf7-08a1-4190-8ac5-fa6f2e9ef562" Name="Number" InterpretationID="1a9645a4-fe2d-49c1-bb0c-7d88a888fbeb" Interpretation="PIMAttribute: *Track.Number* 1..1" Type="cc8fb2f9-34eb-445f-80fc-acf8ab017cd1" displayName="AttributeType: integer" Element="True" psmClassID="d140eae4-9a49-4a6a-961d-cd16349f0002">
+                <eXo:UsedGeneralizations Count="0" />
+              </eXo:PSMAttribute>
+              <eXo:PSMAttribute ID="c4687b8a-d3eb-499a-87fe-dd269bf018a5" Name="Title" InterpretationID="cf2ea9d1-5460-401d-8d48-93914ff1e5cd" Interpretation="PIMAttribute: *Track.Title* 1..1" Type="e06bc2c1-0ba6-4c8f-a892-93db94b544bb" displayName="AttributeType: string" Element="True" psmClassID="d140eae4-9a49-4a6a-961d-cd16349f0002">
+                <eXo:UsedGeneralizations Count="0" />
+              </eXo:PSMAttribute>
+              <eXo:PSMAttribute ID="d6f99f64-d79f-43c8-814e-f560e08c1c5f" Name="Length" InterpretationID="11b289c9-7567-4e04-8a28-b6754263a170" Interpretation="PIMAttribute: *Track.Length* 0..1" Lower="0" Type="cc8fb2f9-34eb-445f-80fc-acf8ab017cd1" displayName="AttributeType: integer" Element="True" psmClassID="d140eae4-9a49-4a6a-961d-cd16349f0002">
+                <eXo:UsedGeneralizations Count="0" />
+              </eXo:PSMAttribute>
+              <eXo:PSMAttribute ID="6128ab10-525e-411c-9d20-5d8750c6b56a" Name="Lyrics" InterpretationID="ccf70976-03f2-44a1-8cb1-d2fa1ac942c0" Interpretation="PIMAttribute: *Track.Lyrics* 0..1" Lower="0" Type="e06bc2c1-0ba6-4c8f-a892-93db94b544bb" displayName="AttributeType: string" Element="True" psmClassID="d140eae4-9a49-4a6a-961d-cd16349f0002">
+                <eXo:UsedGeneralizations Count="0" />
+              </eXo:PSMAttribute>
+            </eXo:PSMAttributes>
+          </eXo:PSMClass>
+          <eXo:PSMClass ID="24abb124-2ecb-446a-8b1d-d4d9d4d7af76" Name="Tracks" parentAssociationID="cd2fd0f0-c05a-4811-bc6b-8f6b3f80c462" parentAssociation="PSMAssociation from PSMClass: *Album* to PSMClass: *Tracks*" abstract="False" final="False">
+            <eXo:UsedGeneralizations Count="0" />
+            <eXo:ChildPSMAssociations Count="1">
+              <eXo:ChildPSMAssociation childPSMAssociationID="54b06850-b22a-4b69-8229-f1e48f946791" childPSMAssociation="PSMAssociation from PSMClass: *Tracks* to PSMClass: *Track*" />
+            </eXo:ChildPSMAssociations>
+            <eXo:GeneralizationsAsGeneral Count="0" />
+            <eXo:PSMAttributes Count="0" />
+          </eXo:PSMClass>
+          <eXo:PSMClass ID="4fd35593-c5dd-44bb-a136-27088a3465aa" Name="ArtistRef" InterpretationID="d02a56fe-8e2d-466c-b7aa-9ae1ceb178e5" Interpretation="PIMClass: *Artist*" parentAssociationID="7d84b56e-d80e-4f2e-b1e6-0daab2239713" parentAssociation="PSMAssociation from PSMClass: *Artists* to PSMClass: *ArtistRef*" abstract="False" final="False">
+            <eXo:AppliedStereotypes Count="1">
+              <eXo:StereotypeInstance ID="5139c342-6d60-4c4d-a9ed-d59498a9a115" StereotypeID="81da98bc-3a31-439a-bd7d-760f677cb330" Stereotype="CollectionRef" />
+            </eXo:AppliedStereotypes>
+            <eXo:UsedGeneralizations Count="0" />
+            <eXo:ChildPSMAssociations Count="0" />
+            <eXo:GeneralizationsAsGeneral Count="0" />
+            <eXo:PSMAttributes Count="1">
+              <eXo:PSMAttribute ID="6b2b9757-d1de-49f6-93e2-0d018e61092e" Name="ID" InterpretationID="52259a55-ad73-4cae-9409-e3128e12d714" Interpretation="PIMAttribute: *Artist.ID* 1..1" Type="cc8fb2f9-34eb-445f-80fc-acf8ab017cd1" displayName="AttributeType: integer" Element="False" psmClassID="4fd35593-c5dd-44bb-a136-27088a3465aa">
+                <eXo:UsedGeneralizations Count="0" />
+              </eXo:PSMAttribute>
+            </eXo:PSMAttributes>
+          </eXo:PSMClass>
+          <eXo:PSMClass ID="4e46c187-b81f-4eb1-a191-6fdbedfbb9c3" Name="Artists" parentAssociationID="1dd9965d-94ae-4e73-b704-b89fcb11c509" parentAssociation="PSMAssociation from PSMClass: *Album* to PSMClass: *Artists*" abstract="False" final="False">
+            <eXo:UsedGeneralizations Count="0" />
+            <eXo:ChildPSMAssociations Count="1">
+              <eXo:ChildPSMAssociation childPSMAssociationID="7d84b56e-d80e-4f2e-b1e6-0daab2239713" childPSMAssociation="PSMAssociation from PSMClass: *Artists* to PSMClass: *ArtistRef*" />
+            </eXo:ChildPSMAssociations>
+            <eXo:GeneralizationsAsGeneral Count="0" />
+            <eXo:PSMAttributes Count="0" />
+          </eXo:PSMClass>
+          <eXo:PSMClass ID="6e6b6b31-10b2-4cfe-b4c5-3dac31040241" Name="TrackArtistRef" InterpretationID="d02a56fe-8e2d-466c-b7aa-9ae1ceb178e5" Interpretation="PIMClass: *Artist*" parentAssociationID="bf56a58b-875b-451a-991f-2a9fb113c5dc" parentAssociation="PSMAssociation from PSMClass: *TrackArtists* to PSMClass: *TrackArtistRef*" abstract="False" final="False">
+            <eXo:AppliedStereotypes Count="1">
+              <eXo:StereotypeInstance ID="34288e40-7699-4f79-ac4d-bf1f12b46a87" StereotypeID="81da98bc-3a31-439a-bd7d-760f677cb330" Stereotype="CollectionRef" />
+            </eXo:AppliedStereotypes>
+            <eXo:UsedGeneralizations Count="0" />
+            <eXo:ChildPSMAssociations Count="0" />
+            <eXo:GeneralizationsAsGeneral Count="0" />
+            <eXo:PSMAttributes Count="1">
+              <eXo:PSMAttribute ID="42604018-1bf3-4743-a29a-8667b0ae031c" Name="ID" InterpretationID="52259a55-ad73-4cae-9409-e3128e12d714" Interpretation="PIMAttribute: *Artist.ID* 1..1" Type="cc8fb2f9-34eb-445f-80fc-acf8ab017cd1" displayName="AttributeType: integer" Element="False" psmClassID="6e6b6b31-10b2-4cfe-b4c5-3dac31040241">
+                <eXo:UsedGeneralizations Count="0" />
+              </eXo:PSMAttribute>
+            </eXo:PSMAttributes>
+          </eXo:PSMClass>
+          <eXo:PSMClass ID="32548623-c92e-45ff-8a13-3736f9661636" Name="TrackArtists" parentAssociationID="cd0df82c-6d92-4576-a929-1f23b75493ee" parentAssociation="PSMAssociation from PSMClass: *Track* to PSMClass: *TrackArtists*" abstract="False" final="False">
+            <eXo:UsedGeneralizations Count="0" />
+            <eXo:ChildPSMAssociations Count="1">
+              <eXo:ChildPSMAssociation childPSMAssociationID="bf56a58b-875b-451a-991f-2a9fb113c5dc" childPSMAssociation="PSMAssociation from PSMClass: *TrackArtists* to PSMClass: *TrackArtistRef*" />
+            </eXo:ChildPSMAssociations>
+            <eXo:GeneralizationsAsGeneral Count="0" />
+            <eXo:PSMAttributes Count="0" />
+          </eXo:PSMClass>
+        </eXo:PSMClasses>
+        <eXo:PSMGeneralizations Count="0" />
+        <eXo:PSMAssociations Count="8">
+          <eXo:PSMAssociation ID="b1bd8bae-23ec-4bfd-abc7-2a3614c81231" Name="Album">
+            <eXo:UsedGeneralizations Count="0" />
+            <eXo:Parent NodeType="PSMSchemaClass" parentID="cb2808a8-e810-4d3e-ac4f-0f588fa454fd" parent="PSMSchemaClass: db/music" />
+            <eXo:Child NodeType="PSMClass" childID="bc099ba8-2b00-4db1-ae68-c00b7eafb3c0" child="PSMClass: *Album*" />
+          </eXo:PSMAssociation>
+          <eXo:PSMAssociation ID="d14889c1-4a39-405c-aa31-b43ce9841fc2" Name="Artist">
+            <eXo:UsedGeneralizations Count="0" />
+            <eXo:Parent NodeType="PSMSchemaClass" parentID="cb2808a8-e810-4d3e-ac4f-0f588fa454fd" parent="PSMSchemaClass: db/music" />
+            <eXo:Child NodeType="PSMClass" childID="98482281-ecfa-4e1d-9685-771185ededf8" child="PSMClass: *Artist*" />
+          </eXo:PSMAssociation>
+          <eXo:PSMAssociation ID="54b06850-b22a-4b69-8229-f1e48f946791" Name="Track" InterpretationID="1c2c9d12-8915-4992-99cf-3406aa9bd1c8" Interpretation="PIMAssociation **: PIMClass: *Track*, PIMClass: *Album*" Upper="*">
+            <eXo:UsedGeneralizations Count="0" />
+            <eXo:Parent NodeType="PSMClass" parentID="24abb124-2ecb-446a-8b1d-d4d9d4d7af76" parent="PSMClass: *Tracks*" />
+            <eXo:Child NodeType="PSMClass" childID="d140eae4-9a49-4a6a-961d-cd16349f0002" child="PSMClass: *Track*" interpretedAssociationEndID="2b4f8eea-0085-4668-8723-23d0f48a06d5" interpretedAssociationEnd="PIMAssociationEnd: A:  [Track] {1..*}" />
+          </eXo:PSMAssociation>
+          <eXo:PSMAssociation ID="cd2fd0f0-c05a-4811-bc6b-8f6b3f80c462" Name="Tracks">
+            <eXo:UsedGeneralizations Count="0" />
+            <eXo:Parent NodeType="PSMClass" parentID="bc099ba8-2b00-4db1-ae68-c00b7eafb3c0" parent="PSMClass: *Album*" />
+            <eXo:Child NodeType="PSMClass" childID="24abb124-2ecb-446a-8b1d-d4d9d4d7af76" child="PSMClass: *Tracks*" />
+          </eXo:PSMAssociation>
+          <eXo:PSMAssociation ID="7d84b56e-d80e-4f2e-b1e6-0daab2239713" Name="Artist" InterpretationID="ca7daba7-75ec-42c7-902d-bd4e4c3dd58a" Interpretation="PIMAssociation **: PIMClass: *Album*, PIMClass: *Artist*" Lower="0" Upper="*">
+            <eXo:UsedGeneralizations Count="0" />
+            <eXo:Parent NodeType="PSMClass" parentID="4e46c187-b81f-4eb1-a191-6fdbedfbb9c3" parent="PSMClass: *Artists*" />
+            <eXo:Child NodeType="PSMClass" childID="4fd35593-c5dd-44bb-a136-27088a3465aa" child="PSMClass: *ArtistRef*" interpretedAssociationEndID="7ecd63f1-4295-4507-9076-9c89df69fe59" interpretedAssociationEnd="PIMAssociationEnd: A:  [Artist] {0..*}" />
+          </eXo:PSMAssociation>
+          <eXo:PSMAssociation ID="1dd9965d-94ae-4e73-b704-b89fcb11c509" Name="Artists">
+            <eXo:UsedGeneralizations Count="0" />
+            <eXo:Parent NodeType="PSMClass" parentID="bc099ba8-2b00-4db1-ae68-c00b7eafb3c0" parent="PSMClass: *Album*" />
+            <eXo:Child NodeType="PSMClass" childID="4e46c187-b81f-4eb1-a191-6fdbedfbb9c3" child="PSMClass: *Artists*" />
+          </eXo:PSMAssociation>
+          <eXo:PSMAssociation ID="bf56a58b-875b-451a-991f-2a9fb113c5dc" Name="Artist" InterpretationID="f70fe86a-5722-489d-87ef-de44196dd32c" Interpretation="PIMAssociation **: PIMClass: *Track*, PIMClass: *Artist*" Lower="0" Upper="*">
+            <eXo:UsedGeneralizations Count="0" />
+            <eXo:Parent NodeType="PSMClass" parentID="32548623-c92e-45ff-8a13-3736f9661636" parent="PSMClass: *TrackArtists*" />
+            <eXo:Child NodeType="PSMClass" childID="6e6b6b31-10b2-4cfe-b4c5-3dac31040241" child="PSMClass: *TrackArtistRef*" interpretedAssociationEndID="8bbbbafa-11d1-4192-9176-0980c51a7c81" interpretedAssociationEnd="PIMAssociationEnd: A:  [Artist] {0..*}" />
+          </eXo:PSMAssociation>
+          <eXo:PSMAssociation ID="cd0df82c-6d92-4576-a929-1f23b75493ee" Name="Artists">
+            <eXo:UsedGeneralizations Count="0" />
+            <eXo:Parent NodeType="PSMClass" parentID="d140eae4-9a49-4a6a-961d-cd16349f0002" parent="PSMClass: *Track*" />
+            <eXo:Child NodeType="PSMClass" childID="32548623-c92e-45ff-8a13-3736f9661636" child="PSMClass: *TrackArtists*" />
+          </eXo:PSMAssociation>
+        </eXo:PSMAssociations>
+        <eXo:PSMContentModels Count="0" />
+      </eXo:PSMSchema>
+    </eXo:PSMSchemas>
+    <eXo:PIMDiagrams Count="1">
+      <eXo:PIMDiagram ID="b3ef4b0b-47c5-4759-b236-acc63656bddb" schemaID="0790b857-b6cb-45d7-aef7-a2a7d6cdcbcd" schema="PIMSchema" Caption="PIMSchema">
+        <eXo:Components>
+          <eXo:Component Type="PIMClass" componentID="3ce7d245-4576-4400-8732-88f45cf4b769" component="PIMClass: *Album*">
+            <eXo:ViewHelper X="63" Y="54" Width="NaN" Height="NaN" />
+          </eXo:Component>
+          <eXo:Component Type="PIMClass" componentID="d02a56fe-8e2d-466c-b7aa-9ae1ceb178e5" component="PIMClass: *Artist*">
+            <eXo:ViewHelper X="368" Y="59" Width="NaN" Height="NaN" />
+          </eXo:Component>
+          <eXo:Component Type="PIMClass" componentID="51f89ffb-088c-498e-b4df-49a0d182f878" component="PIMClass: *Track*">
+            <eXo:ViewHelper X="71" Y="213" Width="NaN" Height="NaN" />
+          </eXo:Component>
+          <eXo:Component Type="PIMAssociation" componentID="1c2c9d12-8915-4992-99cf-3406aa9bd1c8" component="PIMAssociation **: PIMClass: *Track*, PIMClass: *Album*">
+            <eXo:ViewHelper>
+              <eXo:UseDiamond>False</eXo:UseDiamond>
+              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:MainLabelViewHelper>
+              <eXo:AssociationEndsViewHelpers Count="2">
+                <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="2b4f8eea-0085-4668-8723-23d0f48a06d5" AssociationEnd="PIMAssociationEnd: A:  [Track] {1..*}">
+                  <eXo:CardinalityLabelViewHelper X="12" Y="-21" Width="NaN" Height="NaN">
+                    <eXo:LabelVisible>True</eXo:LabelVisible>
+                  </eXo:CardinalityLabelViewHelper>
+                  <eXo:RoleLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                    <eXo:LabelVisible>True</eXo:LabelVisible>
+                  </eXo:RoleLabelViewHelper>
+                  <eXo:Points>
+                    <eXo:Point X="66" Y="0" />
+                    <eXo:Point X="74" Y="107" />
+                  </eXo:Points>
+                </eXo:AssociationEndViewHelper>
+                <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="1fba1b23-f2df-4ef0-b8fb-fde9e1fc0c8a" AssociationEnd="PIMAssociationEnd: A:  [Album] ">
+                  <eXo:CardinalityLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                    <eXo:LabelVisible>True</eXo:LabelVisible>
+                  </eXo:CardinalityLabelViewHelper>
+                  <eXo:RoleLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                    <eXo:LabelVisible>True</eXo:LabelVisible>
+                  </eXo:RoleLabelViewHelper>
+                  <eXo:Points />
+                </eXo:AssociationEndViewHelper>
+              </eXo:AssociationEndsViewHelpers>
+            </eXo:ViewHelper>
+          </eXo:Component>
+          <eXo:Component Type="PIMAssociation" componentID="ca7daba7-75ec-42c7-902d-bd4e4c3dd58a" component="PIMAssociation **: PIMClass: *Album*, PIMClass: *Artist*">
+            <eXo:ViewHelper>
+              <eXo:UseDiamond>False</eXo:UseDiamond>
+              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:MainLabelViewHelper>
+              <eXo:AssociationEndsViewHelpers Count="2">
+                <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="65f6f854-a254-4c3f-96d9-9c0a8da3a4c7" AssociationEnd="PIMAssociationEnd: A:  [Album] {0..*}">
+                  <eXo:CardinalityLabelViewHelper X="2" Y="7" Width="NaN" Height="NaN">
+                    <eXo:LabelVisible>True</eXo:LabelVisible>
+                  </eXo:CardinalityLabelViewHelper>
+                  <eXo:RoleLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                    <eXo:LabelVisible>True</eXo:LabelVisible>
+                  </eXo:RoleLabelViewHelper>
+                  <eXo:Points>
+                    <eXo:Point X="148" Y="38" />
+                    <eXo:Point X="0" Y="33" />
+                  </eXo:Points>
+                </eXo:AssociationEndViewHelper>
+                <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="7ecd63f1-4295-4507-9076-9c89df69fe59" AssociationEnd="PIMAssociationEnd: A:  [Artist] {0..*}">
+                  <eXo:CardinalityLabelViewHelper X="-40" Y="-22" Width="NaN" Height="NaN">
+                    <eXo:LabelVisible>True</eXo:LabelVisible>
+                  </eXo:CardinalityLabelViewHelper>
+                  <eXo:RoleLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                    <eXo:LabelVisible>True</eXo:LabelVisible>
+                  </eXo:RoleLabelViewHelper>
+                  <eXo:Points />
+                </eXo:AssociationEndViewHelper>
+              </eXo:AssociationEndsViewHelpers>
+            </eXo:ViewHelper>
+          </eXo:Component>
+          <eXo:Component Type="PIMAssociation" componentID="f70fe86a-5722-489d-87ef-de44196dd32c" component="PIMAssociation **: PIMClass: *Track*, PIMClass: *Artist*">
+            <eXo:ViewHelper>
+              <eXo:UseDiamond>False</eXo:UseDiamond>
+              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:MainLabelViewHelper>
+              <eXo:AssociationEndsViewHelpers Count="2">
+                <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="cbc4c687-1bdf-434b-b9e0-2f17219898d1" AssociationEnd="PIMAssociationEnd: A:  [Track] {0..*}">
+                  <eXo:CardinalityLabelViewHelper X="10" Y="-23" Width="NaN" Height="NaN">
+                    <eXo:LabelVisible>True</eXo:LabelVisible>
+                  </eXo:CardinalityLabelViewHelper>
+                  <eXo:RoleLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                    <eXo:LabelVisible>True</eXo:LabelVisible>
+                  </eXo:RoleLabelViewHelper>
+                  <eXo:Points>
+                    <eXo:Point X="156" Y="35" />
+                    <eXo:Point X="383" Y="248" />
+                    <eXo:Point X="15" Y="91" />
+                  </eXo:Points>
+                </eXo:AssociationEndViewHelper>
+                <eXo:AssociationEndViewHelper X="0" Y="0" Width="NaN" Height="NaN" AssociationEndID="8bbbbafa-11d1-4192-9176-0980c51a7c81" AssociationEnd="PIMAssociationEnd: A:  [Artist] {0..*}">
+                  <eXo:CardinalityLabelViewHelper X="-40" Y="22" Width="NaN" Height="NaN">
+                    <eXo:LabelVisible>True</eXo:LabelVisible>
+                  </eXo:CardinalityLabelViewHelper>
+                  <eXo:RoleLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                    <eXo:LabelVisible>True</eXo:LabelVisible>
+                  </eXo:RoleLabelViewHelper>
+                  <eXo:Points />
+                </eXo:AssociationEndViewHelper>
+              </eXo:AssociationEndsViewHelpers>
+            </eXo:ViewHelper>
+          </eXo:Component>
+        </eXo:Components>
+      </eXo:PIMDiagram>
+    </eXo:PIMDiagrams>
+    <eXo:PSMDiagrams Count="2">
+      <eXo:PSMDiagram ID="db2b2a2d-af25-4023-a0e1-e2a03c979257" schemaID="604499e9-c348-40f8-bbec-48ab8dce5406" schema="collections-with-stereotypes" Caption="collections-with-stereotypes">
+        <eXo:Components>
+          <eXo:Component Type="PSMSchemaClass" componentID="c50fb9f2-95a7-4a58-84e1-b08c45dfeb19" component="PSMSchemaClass: db/music">
+            <eXo:ViewHelper />
+          </eXo:Component>
+          <eXo:Component Type="PSMClass" componentID="1abb41bf-c223-46b9-86a5-201e074ab5a6" component="PSMClass: *Album*">
+            <eXo:ViewHelper />
+          </eXo:Component>
+          <eXo:Component Type="PSMAssociation" componentID="f37eb4dc-f5f6-4a40-bb78-d5ca65b15839" component="PSMAssociation from PSMSchemaClass: db/music to PSMClass: *Album*">
+            <eXo:ViewHelper>
+              <eXo:MainLabelViewHelper X="-19" Y="0" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:MainLabelViewHelper>
+              <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:CardinalityLabelViewHelper>
+            </eXo:ViewHelper>
+          </eXo:Component>
+          <eXo:Component Type="PSMClass" componentID="2f02c5cc-1377-4862-8ccb-333bb10f7c1c" component="PSMClass: *Artist*">
+            <eXo:ViewHelper />
+          </eXo:Component>
+          <eXo:Component Type="PSMAssociation" componentID="3909bf86-7dd8-4a0d-a7ee-36b10e20f024" component="PSMAssociation from PSMSchemaClass: db/music to PSMClass: *Artist*">
+            <eXo:ViewHelper>
+              <eXo:MainLabelViewHelper X="69" Y="0" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:MainLabelViewHelper>
+              <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:CardinalityLabelViewHelper>
+            </eXo:ViewHelper>
+          </eXo:Component>
+          <eXo:Component Type="PSMClass" componentID="f4ff1954-7d11-492b-a7e9-18181f763121" component="PSMClass: *Track*">
+            <eXo:ViewHelper />
+          </eXo:Component>
+          <eXo:Component Type="PSMAssociation" componentID="1c80447c-5860-44d8-a96e-a22bb5ccc030" component="PSMAssociation from PSMClass: *Tracks* to PSMClass: *Track*">
+            <eXo:ViewHelper>
+              <eXo:MainLabelViewHelper X="0,0896873474121094" Y="0" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:MainLabelViewHelper>
+              <eXo:CardinalityLabelViewHelper X="-63" Y="-19" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:CardinalityLabelViewHelper>
+            </eXo:ViewHelper>
+          </eXo:Component>
+          <eXo:Component Type="PSMClass" componentID="4374d7dc-b810-4565-971b-7a6504343016" component="PSMClass: *TrackArtistRef*">
+            <eXo:ViewHelper />
+          </eXo:Component>
+          <eXo:Component Type="PSMAssociation" componentID="148ade9e-6616-45af-b71d-660d91f90b41" component="PSMAssociation from PSMClass: *TrackArtists* to PSMClass: *TrackArtistRef*">
+            <eXo:ViewHelper>
+              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:MainLabelViewHelper>
+              <eXo:CardinalityLabelViewHelper X="-54" Y="-20" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:CardinalityLabelViewHelper>
+            </eXo:ViewHelper>
+          </eXo:Component>
+          <eXo:Component Type="PSMClass" componentID="8162a31e-6a26-436a-9e12-ec547ab6760c" component="PSMClass: *Tracks*">
+            <eXo:ViewHelper />
+          </eXo:Component>
+          <eXo:Component Type="PSMAssociation" componentID="26b5c4bb-61ff-4bae-b7b6-8b246b800ea9" component="PSMAssociation from PSMClass: *Album* to PSMClass: *Tracks*">
+            <eXo:ViewHelper>
+              <eXo:MainLabelViewHelper X="0,188678741455078" Y="0" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:MainLabelViewHelper>
+              <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:CardinalityLabelViewHelper>
+            </eXo:ViewHelper>
+          </eXo:Component>
+          <eXo:Component Type="PSMClass" componentID="7ac771bf-6fc5-4016-bb59-7464e2a3827a" component="PSMClass: *TrackArtists*">
+            <eXo:ViewHelper />
+          </eXo:Component>
+          <eXo:Component Type="PSMAssociation" componentID="181cb811-0e68-41e4-b5ef-398233118fa2" component="PSMAssociation from PSMClass: *Track* to PSMClass: *TrackArtists*">
+            <eXo:ViewHelper>
+              <eXo:MainLabelViewHelper X="0,188678741455078" Y="0" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:MainLabelViewHelper>
+              <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:CardinalityLabelViewHelper>
+            </eXo:ViewHelper>
+          </eXo:Component>
+          <eXo:Component Type="PSMClass" componentID="ccdb6a2d-8d2c-4ac9-98fb-96060c82828e" component="PSMClass: *ArtistRef*">
+            <eXo:ViewHelper />
+          </eXo:Component>
+          <eXo:Component Type="PSMAssociation" componentID="35e19438-e076-4d9f-bd15-b5c3abfd845d" component="PSMAssociation from PSMClass: *Artists* to PSMClass: *ArtistRef*">
+            <eXo:ViewHelper>
+              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:MainLabelViewHelper>
+              <eXo:CardinalityLabelViewHelper X="23" Y="-19" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:CardinalityLabelViewHelper>
+            </eXo:ViewHelper>
+          </eXo:Component>
+          <eXo:Component Type="PSMClass" componentID="650c3b00-66bf-42d7-8160-884cb24c7711" component="PSMClass: *Artists*">
+            <eXo:ViewHelper />
+          </eXo:Component>
+          <eXo:Component Type="PSMAssociation" componentID="c8904ce1-ebe6-40d5-829c-8fa782828004" component="PSMAssociation from PSMClass: *Album* to PSMClass: *Artists*">
+            <eXo:ViewHelper>
+              <eXo:MainLabelViewHelper X="17,5" Y="0" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:MainLabelViewHelper>
+              <eXo:CardinalityLabelViewHelper X="-40" Y="4" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:CardinalityLabelViewHelper>
+            </eXo:ViewHelper>
+          </eXo:Component>
+        </eXo:Components>
+      </eXo:PSMDiagram>
+      <eXo:PSMDiagram ID="1f39d0e7-b94c-432f-a880-209b081e350f" schemaID="a7d8ccf8-f90b-498c-87d3-f29d17b0cd98" schema="XRX PSM" Caption="XRX PSM">
+        <eXo:Components>
+          <eXo:Component Type="PSMSchemaClass" componentID="cb2808a8-e810-4d3e-ac4f-0f588fa454fd" component="PSMSchemaClass: db/music">
+            <eXo:ViewHelper />
+          </eXo:Component>
+          <eXo:Component Type="PSMClass" componentID="bc099ba8-2b00-4db1-ae68-c00b7eafb3c0" component="PSMClass: *Album*">
+            <eXo:ViewHelper />
+          </eXo:Component>
+          <eXo:Component Type="PSMAssociation" componentID="b1bd8bae-23ec-4bfd-abc7-2a3614c81231" component="PSMAssociation from PSMSchemaClass: db/music to PSMClass: *Album*">
+            <eXo:ViewHelper>
+              <eXo:MainLabelViewHelper X="-19" Y="0" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:MainLabelViewHelper>
+              <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:CardinalityLabelViewHelper>
+            </eXo:ViewHelper>
+          </eXo:Component>
+          <eXo:Component Type="PSMClass" componentID="98482281-ecfa-4e1d-9685-771185ededf8" component="PSMClass: *Artist*">
+            <eXo:ViewHelper />
+          </eXo:Component>
+          <eXo:Component Type="PSMAssociation" componentID="d14889c1-4a39-405c-aa31-b43ce9841fc2" component="PSMAssociation from PSMSchemaClass: db/music to PSMClass: *Artist*">
+            <eXo:ViewHelper>
+              <eXo:MainLabelViewHelper X="55" Y="0" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:MainLabelViewHelper>
+              <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:CardinalityLabelViewHelper>
+            </eXo:ViewHelper>
+          </eXo:Component>
+          <eXo:Component Type="PSMClass" componentID="d140eae4-9a49-4a6a-961d-cd16349f0002" component="PSMClass: *Track*">
+            <eXo:ViewHelper />
+          </eXo:Component>
+          <eXo:Component Type="PSMAssociation" componentID="54b06850-b22a-4b69-8229-f1e48f946791" component="PSMAssociation from PSMClass: *Tracks* to PSMClass: *Track*">
+            <eXo:ViewHelper>
+              <eXo:MainLabelViewHelper X="0,0985221862792969" Y="0" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:MainLabelViewHelper>
+              <eXo:CardinalityLabelViewHelper X="-81" Y="-24" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:CardinalityLabelViewHelper>
+            </eXo:ViewHelper>
+          </eXo:Component>
+          <eXo:Component Type="PSMClass" componentID="24abb124-2ecb-446a-8b1d-d4d9d4d7af76" component="PSMClass: *Tracks*">
+            <eXo:ViewHelper />
+          </eXo:Component>
+          <eXo:Component Type="PSMAssociation" componentID="cd2fd0f0-c05a-4811-bc6b-8f6b3f80c462" component="PSMAssociation from PSMClass: *Album* to PSMClass: *Tracks*">
+            <eXo:ViewHelper>
+              <eXo:MainLabelViewHelper X="0,188678741455078" Y="0" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:MainLabelViewHelper>
+              <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:CardinalityLabelViewHelper>
+            </eXo:ViewHelper>
+          </eXo:Component>
+          <eXo:Component Type="PSMClass" componentID="4fd35593-c5dd-44bb-a136-27088a3465aa" component="PSMClass: *ArtistRef*">
+            <eXo:ViewHelper />
+          </eXo:Component>
+          <eXo:Component Type="PSMAssociation" componentID="7d84b56e-d80e-4f2e-b1e6-0daab2239713" component="PSMAssociation from PSMClass: *Artists* to PSMClass: *ArtistRef*">
+            <eXo:ViewHelper>
+              <eXo:MainLabelViewHelper X="0,143882751464844" Y="0" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:MainLabelViewHelper>
+              <eXo:CardinalityLabelViewHelper X="-56" Y="-24" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:CardinalityLabelViewHelper>
+            </eXo:ViewHelper>
+          </eXo:Component>
+          <eXo:Component Type="PSMClass" componentID="4e46c187-b81f-4eb1-a191-6fdbedfbb9c3" component="PSMClass: *Artists*">
+            <eXo:ViewHelper />
+          </eXo:Component>
+          <eXo:Component Type="PSMAssociation" componentID="1dd9965d-94ae-4e73-b704-b89fcb11c509" component="PSMAssociation from PSMClass: *Album* to PSMClass: *Artists*">
+            <eXo:ViewHelper>
+              <eXo:MainLabelViewHelper X="7,5" Y="22" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:MainLabelViewHelper>
+              <eXo:CardinalityLabelViewHelper X="-40" Y="4" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:CardinalityLabelViewHelper>
+            </eXo:ViewHelper>
+          </eXo:Component>
+          <eXo:Component Type="PSMClass" componentID="6e6b6b31-10b2-4cfe-b4c5-3dac31040241" component="PSMClass: *TrackArtistRef*">
+            <eXo:ViewHelper />
+          </eXo:Component>
+          <eXo:Component Type="PSMAssociation" componentID="bf56a58b-875b-451a-991f-2a9fb113c5dc" component="PSMAssociation from PSMClass: *TrackArtists* to PSMClass: *TrackArtistRef*">
+            <eXo:ViewHelper>
+              <eXo:MainLabelViewHelper X="0" Y="0" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:MainLabelViewHelper>
+              <eXo:CardinalityLabelViewHelper X="-69,7777777777778" Y="-26" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:CardinalityLabelViewHelper>
+            </eXo:ViewHelper>
+          </eXo:Component>
+          <eXo:Component Type="PSMClass" componentID="32548623-c92e-45ff-8a13-3736f9661636" component="PSMClass: *TrackArtists*">
+            <eXo:ViewHelper />
+          </eXo:Component>
+          <eXo:Component Type="PSMAssociation" componentID="cd0df82c-6d92-4576-a929-1f23b75493ee" component="PSMAssociation from PSMClass: *Track* to PSMClass: *TrackArtists*">
+            <eXo:ViewHelper>
+              <eXo:MainLabelViewHelper X="0,188678741455078" Y="0" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:MainLabelViewHelper>
+              <eXo:CardinalityLabelViewHelper X="-40" Y="-4" Width="NaN" Height="NaN">
+                <eXo:LabelVisible>True</eXo:LabelVisible>
+              </eXo:CardinalityLabelViewHelper>
+            </eXo:ViewHelper>
+          </eXo:Component>
+        </eXo:Components>
+      </eXo:PSMDiagram>
+    </eXo:PSMDiagrams>
+  </eXo:SingleVersion>
+</eXo:Project>
