@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F139F053-5418-4750-B8DE-E14A1B13A3F8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CodeContractsSupport</RootNamespace>
+    <AssemblyName>CodeContractsSupport</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CollectionLiteralPart.cs" />
+    <Compile Include="OclEnum.cs" />
+    <Compile Include="OclUnlimitedNatural.cs" />
+    <Compile Include="OclIntegerT.cs" />
+    <Compile Include="OclRealT.cs" />
+    <Compile Include="OclBagT.cs" />
+    <Compile Include="OclSequenceT.cs" />
+    <Compile Include="OclOrderedSetT.cs" />
+    <Compile Include="OclSetT.cs" />
+    <Compile Include="OclAny.cs" />
+    <Compile Include="OclBoolean.cs" />
+    <Compile Include="OclCollection.cs" />
+    <Compile Include="OclCollectionExtensions.cs" />
+    <Compile Include="OclInteger.cs" />
+    <Compile Include="OclReal.cs" />
+    <Compile Include="OclString.cs" />
+    <Compile Include="OclTuple.cs" />
+    <Compile Include="OclUnlimitedNatural64.cs" />
+    <Compile Include="OclBag.cs" />
+    <Compile Include="OclCollectionUtils.cs" />
+    <Compile Include="OclExtensions.cs" />
+    <Compile Include="OclSet.cs" />
+    <Compile Include="OclSequence.cs" />
+    <Compile Include="OclOrderedSet.cs" />
+    <Compile Include="OclUnlimitedNaturalT.cs" />
+    <Compile Include="OclUnlimitedNatural32.cs" />
+    <Compile Include="OclUtils.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Types\Classifier.cs" />
+    <Compile Include="UnlimitedValueException.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
