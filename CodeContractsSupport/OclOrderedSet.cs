@@ -38,11 +38,11 @@ namespace Exolutio.CodeContracts.Support
         {   
         }
 
-        public OclOrderedSet(OclClassifier elementType, params CollectionLiteralPart[] items) :
+        public OclOrderedSet(OclClassifier elementType, params OclCollectionLiteralPart[] items) :
             base(elementType)
         {
             this.list = new List<OclAny>();
-            foreach(CollectionLiteralPart item in items)
+            foreach(OclCollectionLiteralPart item in items)
                 list.AddRange(item);
         }
 
@@ -62,7 +62,7 @@ namespace Exolutio.CodeContracts.Support
                 int hash = 41;
                 foreach (OclAny item in list)
                 {
-                    hash = hash * 37 + (isNull(item) ? 0 : item.GetHashCode());
+                    hash = hash * 37 + (IsNull(item) ? 0 : item.GetHashCode());
                 }
                 return hash;
             }
@@ -102,29 +102,29 @@ namespace Exolutio.CodeContracts.Support
         #endregion
         #region OCL operations
         [Pure]
-        OclOrderedSet append<T>(T item) where T : OclAny
+        public OclOrderedSet append<T>(OclClassifier newElementType, T item) where T : OclAny
         {
-            OclOrderedSet set = new OclOrderedSet(elementType, list);
+            OclOrderedSet set = new OclOrderedSet(newElementType, list);
             set.list.Add(item);
             return set;
         }
         [Pure]
-        OclOrderedSet prepend<T>(T item) where T : OclAny
+        public OclOrderedSet prepend<T>(OclClassifier newElementType, T item) where T : OclAny
         {
-            OclOrderedSet set = new OclOrderedSet(elementType, list);
+            OclOrderedSet set = new OclOrderedSet(newElementType, list);
             set.list.Insert(0, item);
             return set;
         }
         [Pure]
-        OclOrderedSet insertAt<T>(OclInteger index, T obj) where T : OclAny
+        public OclOrderedSet insertAt<T>(OclClassifier newElementType, OclInteger index, T obj) where T : OclAny
         {
-            OclOrderedSet o = new OclOrderedSet(elementType, list);
+            OclOrderedSet o = new OclOrderedSet(newElementType, list);
             int indexI = (int) index;
-            o.list.Insert(indexI, obj);
+            o.list.Insert(indexI - 1, obj);
             return o;
         }
         [Pure]
-        OclOrderedSet subOrderedSet(OclInteger first, OclInteger last)
+        public OclOrderedSet subOrderedSet(OclInteger first, OclInteger last)
         {
             int firstI = (int)first;
             int lastI = (int)last;
@@ -133,7 +133,7 @@ namespace Exolutio.CodeContracts.Support
         [Pure]
         public T at<T>(OclInteger i) where T : OclAny
         {
-            if (isNull(i))
+            if (IsNull(i))
                 throw new ArgumentNullException();
             return (T)list[(int)i - 1];
         }
@@ -160,7 +160,7 @@ namespace Exolutio.CodeContracts.Support
         }
 
         [Pure]
-        OclOrderedSet reverse()
+        public OclOrderedSet reverse()
         {
             OclOrderedSet l = new OclOrderedSet(elementType, list);
             l.list.Reverse();
@@ -169,21 +169,21 @@ namespace Exolutio.CodeContracts.Support
         [Pure]
         public OclOrderedSet flattenToOrderedSet()
         {
-            //TODO:
-            throw new NotImplementedException();
+            List<OclAny> list = new List<OclAny>();
+            FlattenToList(list, OclCollectionType.Depth(elementType));
+            return new OclOrderedSet(OclCollectionType.BasicElementType(elementType), list);
         }
       
         #endregion
         #region OCL Iterations from Collection
-        public override OclCollection closure<T>(Func<T, OclAny> body)
+        public override OclCollection closure<T>(OclClassifier newElementType, Func<T, OclAny> body)
         {
-            return closureToOrderedSet(body);
+            return closureToOrderedSet(newElementType,body);
         }
         [Pure]
-        public OclOrderedSet closureToOrderedSet<T>(Func<T, OclAny> body) where T : OclAny
+        public OclOrderedSet closureToOrderedSet<T>(OclClassifier newElementType, Func<T, OclAny> body) where T : OclAny
         {
-            //TODO:
-            throw new NotImplementedException();
+            return ClosureToOrderedSet(newElementType,body);
         }
         public override OclCollection collect<T>(OclClassifier newElementType, Func<T, OclAny> f)
         {
@@ -224,7 +224,12 @@ namespace Exolutio.CodeContracts.Support
         }
 
         #endregion
-       
+        #region OCL Type
+        public override OclClassifier oclType()
+        {
+            return OclCollectionType.Collection(OclCollectionKind.OrderedSet, elementType);
+        }
+        #endregion
     }
 
 }

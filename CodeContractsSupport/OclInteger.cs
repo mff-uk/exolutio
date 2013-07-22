@@ -30,14 +30,14 @@ namespace Exolutio.CodeContracts.Support
         {
             if (object.ReferenceEquals(i, null))
                 return null;
-            return i.toInt();
+            return i.ToInt();
         }
 
-        internal abstract int toInt();
+        internal abstract int ToInt();
 
         internal sealed override double toDouble()
         {
-            return (double)toInt();
+            return (double)ToInt();
         }
         internal static new OclInteger Parse(string value)
         {
@@ -49,66 +49,66 @@ namespace Exolutio.CodeContracts.Support
         #region OCL Operations
         public new OclInteger op_UnaryNegation()
         {
-            return ValueOf(checked(-toInt()));
+            return ValueOf(checked(-ToInt()));
         }
         public OclInteger op_Addition(OclInteger i)
         {
-            if (isNull(i))
+            if (IsNull(i))
                 throw new ArgumentNullException();
-            return ValueOf(checked(toInt() + i.toInt()));
+            return ValueOf(checked(ToInt() + i.ToInt()));
         }
 
         public OclInteger op_Subtraction(OclInteger i)
         {
-            if (isNull(i))
+            if (IsNull(i))
                 throw new ArgumentNullException();
-            return ValueOf(checked(toInt() - i.toInt()));
+            return ValueOf(checked(ToInt() - i.ToInt()));
         }
         public OclInteger op_Multiply(OclInteger i)
         {
-            if (isNull(i))
+            if (IsNull(i))
                 throw new ArgumentNullException();
-            return ValueOf(checked(toInt() * i.toInt()));
+            return ValueOf(checked(ToInt() * i.ToInt()));
         }
 
         public OclReal op_Division(OclInteger i)
         {
-            if (isNull(i))
+            if (IsNull(i))
                 throw new ArgumentNullException();
             return OclReal.valueOf(checked(toDouble() / i.toDouble()));
         }
         public new OclInteger abs()
         {
-            return ValueOf(Math.Abs(toInt()));
+            return ValueOf(Math.Abs(ToInt()));
         }
           
         public OclInteger div(OclInteger i)
         {
-            if (isNull(i))
+            if (IsNull(i))
                 throw new ArgumentNullException();
-            return ValueOf(checked(toInt() / i.toInt()));
+            return ValueOf(checked(ToInt() / i.ToInt()));
         }
         public OclInteger mod(OclInteger i)
         {
-            if (isNull(i))
+            if (IsNull(i))
                 throw new ArgumentNullException();
-            return ValueOf(checked(toInt() % i.toInt()));
+            return ValueOf(checked(ToInt() % i.ToInt()));
         }
         public OclInteger max(OclInteger i)
         {
-            if (isNull(i))
+            if (IsNull(i))
                 throw new ArgumentNullException();
-            return ValueOf(Math.Max(toInt(), i.toInt()));
+            return ValueOf(Math.Max(ToInt(), i.ToInt()));
         }
         public OclInteger min(OclInteger i)
         {
-            if (isNull(i))
+            if (IsNull(i))
                 throw new ArgumentNullException();
-            return ValueOf(Math.Min(toInt(), i.toInt()));
+            return ValueOf(Math.Min(ToInt(), i.ToInt()));
         }
         public new OclString toString()
         {
-            return new OclString(toInt().ToString(CultureInfo.InvariantCulture));
+            return new OclString(ToInt().ToString(CultureInfo.InvariantCulture));
         }
         #endregion
 
@@ -154,7 +154,7 @@ namespace Exolutio.CodeContracts.Support
         }
         #endregion
         #region Conversions
-        internal override int toInt()
+        internal override int ToInt()
         {
             return value;
         }

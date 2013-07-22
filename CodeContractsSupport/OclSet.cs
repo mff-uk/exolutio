@@ -9,7 +9,7 @@ namespace Exolutio.CodeContracts.Support
     /// <summary>
     /// Non- generic OCL Set collection
     /// </summary>
-    public class OclSet : OclCollection
+    public class OclSet : OclCollection, IEquatable<OclSet>
     {
         internal readonly HashSet<OclAny> set;
 
@@ -61,11 +61,11 @@ namespace Exolutio.CodeContracts.Support
         /// </summary>
         /// <param name="elementType">Element type</param>
         /// <param name="items">Array of elements or integer ranges</param>
-        public OclSet(OclClassifier elementType, params CollectionLiteralPart[] items) :
+        public OclSet(OclClassifier elementType, params OclCollectionLiteralPart[] items) :
             base(elementType)
         {
             this.set = new HashSet<OclAny>();
-            foreach(CollectionLiteralPart item in items)
+            foreach(OclCollectionLiteralPart item in items)
                 set.UnionWith(item);
         }
         #endregion
@@ -77,9 +77,13 @@ namespace Exolutio.CodeContracts.Support
         /// <returns>True if obj is OclSet and has equal elements.</returns>
         public override bool Equals(object obj)
         {
-            if (!(obj is OclSet))
+            return Equals(obj as OclSet);
+        }
+        public bool Equals(OclSet obj)
+        {
+            if (IsNull(obj))
                 return false;
-            return HashSet<OclAny>.CreateSetComparer().Equals(set, ((OclSet)obj).set);
+            return HashSet<OclAny>.CreateSetComparer().Equals(set, obj.set);
         }
 
         public override int GetHashCode()
@@ -130,24 +134,24 @@ namespace Exolutio.CodeContracts.Support
         #endregion
         #region OCL Operations
         [Pure]
-        public OclSet union(OclSet s2)
+        public OclSet union(OclClassifier newElementType, OclSet s2)
         {
-            OclSet newSet = new OclSet(elementType, set);
+            OclSet newSet = new OclSet(newElementType, set);
             newSet.set.UnionWith(s2.set);
             return newSet;
         }
         [Pure]
-        public OclBag union(OclBag s2)
+        public OclBag union(OclClassifier newElementType, OclBag s2)
         {
-            if (isNull(s2))
+            if (IsNull(s2))
                 throw new ArgumentNullException();
             //Use Bag implemetation
-            return s2.union(this);
+            return s2.union(newElementType, this);
         }
         [Pure]
         public OclSet intersection(OclSet s2)
         {
-            if (isNull(s2))
+            if (IsNull(s2))
                 throw new ArgumentNullException();
             OclSet newSet = new OclSet(elementType, set);
             newSet.set.IntersectWith(s2.set);
@@ -156,10 +160,10 @@ namespace Exolutio.CodeContracts.Support
         [Pure]
         public OclSet intersection(OclBag bag)
         {
-            if (isNull(bag))
+            if (IsNull(bag))
                 throw new ArgumentNullException();
-            OclSet newSet = new OclSet(elementType);
-            //TODO: ???
+            OclSet newSet = new OclSet(elementType,set);
+            newSet.set.IntersectWith(bag.map.Keys);
             return newSet;
         }
         /// <summary>
@@ -170,7 +174,7 @@ namespace Exolutio.CodeContracts.Support
         [Pure]
         public OclSet op_Subtraction(OclSet s)
         {
-            if (isNull(s))
+            if (IsNull(s))
                 throw new ArgumentNullException();
             OclSet newSet = new OclSet(elementType, set);
             newSet.set.ExceptWith(s.set);
@@ -178,9 +182,9 @@ namespace Exolutio.CodeContracts.Support
         }
 
         [Pure]
-        public OclSet including<T>(T item) where T : OclAny
+        public OclSet including<T>(OclClassifier newElementType, T item) where T : OclAny
         {
-            OclSet newSet = new OclSet(elementType, set);
+            OclSet newSet = new OclSet(newElementType, set);
             newSet.set.Add(item);
             return newSet;
         }
@@ -195,7 +199,7 @@ namespace Exolutio.CodeContracts.Support
         [Pure]
         public OclSet symmetricDifference(OclSet s2)
         {
-            if (isNull(s2))
+            if (IsNull(s2))
                 throw new ArgumentNullException();
             OclSet newSet = new OclSet(elementType, set);
             newSet.set.SymmetricExceptWith(s2.set);
@@ -204,20 +208,20 @@ namespace Exolutio.CodeContracts.Support
         [Pure]
         public OclSet flattenToSet()
         {
-            //TODO:
-            return null;
+            List<OclAny> list = new List<OclAny>();
+            FlattenToList(list, OclCollectionType.Depth(elementType));
+            return new OclSet(OclCollectionType.BasicElementType(elementType), list);
         }
         #endregion
         #region OCL Iterations from Collection
-        public override OclCollection closure<T>(Func<T, OclAny> body)
+        public override OclCollection closure<T>(OclClassifier newElementType,Func<T, OclAny> body)
         {
-            return closureToSet(body);
+            return closureToSet(newElementType, body);
         }
         [Pure]
-        public OclSet closureToSet<T>(Func<T, OclAny> body) where T : OclAny
+        public OclSet closureToSet<T>(OclClassifier newElementType, Func<T, OclAny> body) where T : OclAny
         {
-            //TODO:
-            throw new NotImplementedException();
+            return ClosureToSet(newElementType, body);
         }
         public override OclCollection collect<T>(OclClassifier newElementType, Func<T, OclAny> f)
         {
@@ -245,16 +249,22 @@ namespace Exolutio.CodeContracts.Support
             return new OclBag(newElementType, set.Select(x => f((T)x)));
         }
         [Pure]
-        public OclSet select<T>(Func<T, bool> predicate)
+        public OclSet select<T>(Func<T, OclBoolean> predicate)
             where T : OclAny
         {
-            return new OclSet(elementType, set.Where(x => predicate((T)x)));
+            return new OclSet(elementType, set.Where(x => (bool)predicate((T)x)));
         }
         [Pure]
-        public OclSet reject<T>(Func<T, bool> f)
+        public OclSet reject<T>(Func<T, OclBoolean> f)
             where T : OclAny
         {
-            return new OclSet(elementType, set.Where(item => !f((T)item)));
+            return new OclSet(elementType, set.Where(item => !(bool)f((T)item)));
+        }
+        #endregion
+        #region OCL Type
+        public override OclClassifier oclType()
+        {
+            return OclCollectionType.Collection(OclCollectionKind.Set, elementType);
         }
         #endregion
         #region IEnumerable

@@ -15,7 +15,7 @@ namespace Exolutio.CodeContracts.Support
         public static readonly OclBoolean True = new OclBoolean(true);
         public static readonly OclBoolean False = new OclBoolean(false);
 
-        private bool value;
+        private readonly bool value;
         #region Constructors
         private OclBoolean(bool v)
         {
@@ -34,7 +34,7 @@ namespace Exolutio.CodeContracts.Support
         }
         public static explicit operator bool?(OclBoolean from)
         {
-            if(isNull(from))
+            if(IsNull(from))
                 return null;
             else
                 return from.value;
@@ -45,20 +45,25 @@ namespace Exolutio.CodeContracts.Support
             return from.value;
         }
 
+        public override string ToString()
+        {
+            return value ? "true" : "false";
+        }
+
         #endregion
 
         #region Equality
         public override bool Equals(object obj)
         {
-            if (obj is OclBoolean)
-                return Equals((OclBoolean)obj);
-            else
-                return false;
+            return Equals(obj as OclBoolean);
         }
 
         public bool Equals(OclBoolean b)
         {
-            return b.value == value;
+            if (IsNull(b))
+                return false;
+            else
+                return b.value == value;
         }
 
         public override int GetHashCode()
@@ -70,18 +75,22 @@ namespace Exolutio.CodeContracts.Support
 
         #region Static helper methods
 
-        private static OclBoolean checkNonNullArgument(OclBoolean b)
+        private static OclBoolean CheckNonNullArgument(OclBoolean b)
         {
-            if (isNull(b))
+            if (IsNull(b))
                 throw new ArgumentNullException();
             return b;
         }
         #endregion
 
         #region OCL Operations
+        /// <summary>
+        /// Convert  Boolean value to string
+        /// </summary>
+        /// <returns>returns "true" for true and "false" for false</returns>
         OclString toString()
         {
-            return new OclString(value?"true":"false");
+            return new OclString(ToString());
         }
 
         /// <summary>
@@ -90,7 +99,7 @@ namespace Exolutio.CodeContracts.Support
         /// <param name="a">The second operand</param>
         /// <returns>OclBoolean representing true</returns>
         public OclBoolean xor(OclBoolean a){
-            return (OclBoolean)(checkNonNullArgument(a).value!=value);
+            return (OclBoolean)(CheckNonNullArgument(a).value!=value);
         }
 
         public OclBoolean not()
@@ -118,7 +127,7 @@ namespace Exolutio.CodeContracts.Support
             {
                 try
                 {
-                    if ((bool)checkNonNullArgument(e2()))
+                    if ((bool)CheckNonNullArgument(e2()))
                         return True;
                 }
                 catch (Exception ex2)
@@ -127,7 +136,7 @@ namespace Exolutio.CodeContracts.Support
                 }
                 throw;
             }
-            return checkNonNullArgument(e2());
+            return CheckNonNullArgument(e2());
         }
 
         /// <summary>
@@ -163,7 +172,7 @@ namespace Exolutio.CodeContracts.Support
             {
                 try
                 {
-                    if (!(bool)checkNonNullArgument(e2()))
+                    if (!(bool)CheckNonNullArgument(e2()))
                         return False;
                 }
                 catch (Exception ex2)
@@ -172,7 +181,7 @@ namespace Exolutio.CodeContracts.Support
                 }
                 throw;
             }
-            return checkNonNullArgument(e2());
+            return CheckNonNullArgument(e2());
         }
 
         /// <summary>
@@ -207,7 +216,7 @@ namespace Exolutio.CodeContracts.Support
             catch (Exception ex1)
             {
                 try{
-                    if ((bool)checkNonNullArgument(e2()))
+                    if ((bool)CheckNonNullArgument(e2()))
                         return True;
                 }
                 catch (Exception ex2)
@@ -216,14 +225,14 @@ namespace Exolutio.CodeContracts.Support
                 }
                 throw;
             }
-            return checkNonNullArgument(e2());
+            return CheckNonNullArgument(e2());
         }
 
         #endregion
 
         #region OCL Type
 
-        public static readonly OclClassifier Type = PrimitiveType.Boolean;
+        public static new readonly OclClassifier Type = PrimitiveType.Boolean;
 
         public override OclClassifier oclType()
         {

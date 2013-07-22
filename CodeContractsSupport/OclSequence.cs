@@ -33,11 +33,11 @@ namespace Exolutio.CodeContracts.Support
             this(elementType, (IEnumerable<OclAny>)items)
         {
         }
-        public OclSequence(OclClassifier elementType, params CollectionLiteralPart[] items) :
+        public OclSequence(OclClassifier elementType, params OclCollectionLiteralPart[] items) :
             base(elementType)
         {
             this.list = new List<OclAny>();
-            foreach(CollectionLiteralPart item in items)
+            foreach(OclCollectionLiteralPart item in items)
                 list.AddRange(item);
         }
         #endregion
@@ -58,7 +58,7 @@ namespace Exolutio.CodeContracts.Support
                 int hash = 19;
                 foreach (OclAny item in list)
                 {
-                    hash = hash * 31 + (isNull(item) ? 0 : item.GetHashCode());
+                    hash = hash * 31 + (IsNull(item) ? 0 : item.GetHashCode());
                 }
                 return hash;
             }
@@ -94,17 +94,19 @@ namespace Exolutio.CodeContracts.Support
         #endregion
         #region OCL Operations
         [Pure]
-        public OclSequence union(OclSequence s)
+        public OclSequence union(OclClassifier newElementType, OclSequence s)
         {
-            OclSequence newList = new OclSequence(elementType, list);
+            OclSequence newList = new OclSequence(newElementType, list);
             newList.list.AddRange(s);
             return newList;
         }
 
         [Pure]
-        public OclSequence flattenToSequence(){
-            //TODO:
-            throw new NotImplementedException();
+        public OclSequence flattenToSequence()
+        {
+            OclSequence seq = new OclSequence(OclCollectionType.BasicElementType(elementType));
+            FlattenToList(seq.list, OclCollectionType.Depth(elementType));
+            return seq;
         }
         /// <summary>
         /// 
@@ -113,9 +115,9 @@ namespace Exolutio.CodeContracts.Support
         /// <param name="item"></param>
         /// <returns></returns>
         [Pure]
-        public OclSequence append<T>(T item) where T : OclAny
+        public OclSequence append<T>(OclClassifier newElementType, T item) where T : OclAny
         {
-            OclSequence newList = new OclSequence(elementType, list);
+            OclSequence newList = new OclSequence(newElementType, list);
             newList.list.Add(item);
             return newList;
         }
@@ -126,9 +128,9 @@ namespace Exolutio.CodeContracts.Support
         /// <param name="item"></param>
         /// <returns></returns>
         [Pure]
-        public OclSequence prepend<T>(T item) where T : OclAny
+        public OclSequence prepend<T>(OclClassifier newElementType, T item) where T : OclAny
         {
-            OclSequence newList = new OclSequence(elementType, list);
+            OclSequence newList = new OclSequence(newElementType, list);
             newList.list.Insert(0, item);
             return newList;
         }
@@ -141,9 +143,9 @@ namespace Exolutio.CodeContracts.Support
         /// <param name="item"></param>
         /// <returns></returns>
         [Pure]
-        public OclSequence insertAt<T>(OclInteger index, T item) where T : OclAny
+        public OclSequence insertAt<T>(OclClassifier newElementType, OclInteger index, T item) where T : OclAny
         {
-            OclSequence newList = new OclSequence(elementType, list);
+            OclSequence newList = new OclSequence(newElementType, list);
             int intIndex = (int)index;
             newList.list.Insert(intIndex - 1, item);
             return newList;
@@ -152,7 +154,7 @@ namespace Exolutio.CodeContracts.Support
         public OclSequence subSequence(OclInteger start, OclInteger end)
         {
             int intStart = (int)start, intEnd = (int) end;
-            //TODO: throw exceptions
+            
             if (intEnd < intStart || intStart < 1 || intEnd > list.Count)
                 throw new IndexOutOfRangeException();
 
@@ -166,7 +168,7 @@ namespace Exolutio.CodeContracts.Support
         [Pure]
         public T at<T>(OclInteger index) where T : OclAny
         {
-            if (isNull(index))
+            if (IsNull(index))
                 throw new ArgumentNullException();
             return (T)list[(int)index - 1];
         }
@@ -187,9 +189,9 @@ namespace Exolutio.CodeContracts.Support
             return (T)list[list.Count - 1];
         }
         [Pure]
-        public OclSequence including<T>(T item) where T : OclAny
+        public OclSequence including<T>(OclClassifier newElementType, T item) where T : OclAny
         {
-            return append<T>(item);
+            return append<T>(newElementType, item);
         }
         
         /// <summary>
@@ -221,15 +223,14 @@ namespace Exolutio.CodeContracts.Support
         
         #endregion
         #region OCL Iterations from Collection
-        public override OclCollection closure<T>(Func<T, OclAny> body)
+        public override OclCollection closure<T>(OclClassifier newElementType, Func<T, OclAny> body)
         {
-            return closureToOrderedSet(body);
+            return closureToOrderedSet(newElementType, body);
         }
         [Pure]
-        public OclOrderedSet closureToOrderedSet<T>(Func<T, OclAny> body) where T : OclAny
+        public OclOrderedSet closureToOrderedSet<T>(OclClassifier newElementType, Func<T, OclAny> body) where T : OclAny
         {
-            //TODO:
-            throw new NotImplementedException();
+            return ClosureToOrderedSet(newElementType, body);
         }
         public override OclCollection collect<T>(OclClassifier newElementType, Func<T, OclAny> f)
         {
@@ -269,6 +270,12 @@ namespace Exolutio.CodeContracts.Support
         {
             OclOrderedSet os = new OclOrderedSet(elementType);//TODO:!!!!
             return os;
+        }
+        #endregion
+        #region OCL Type
+        public override OclClassifier oclType()
+        {
+            return OclCollectionType.Collection(OclCollectionKind.Sequence, elementType);
         }
         #endregion
         #region IEnumerable implementation

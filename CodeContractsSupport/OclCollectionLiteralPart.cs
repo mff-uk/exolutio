@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Exolutio.CodeContracts.Support
 {
-    public abstract class CollectionLiteralPart : IEnumerable<OclAny>
+    public abstract class OclCollectionLiteralPart : IEnumerable<OclAny>
     {
         public abstract IEnumerator<OclAny> GetEnumerator();
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
@@ -13,16 +13,16 @@ namespace Exolutio.CodeContracts.Support
             return GetEnumerator();
         }
 
-        public static implicit operator CollectionLiteralPart(OclAny o)
+        public static implicit operator OclCollectionLiteralPart(OclAny o)
         {
-            return new CollectionLiteralPartItem(o);
+            return new OclCollectionLiteralPartItem(o);
         }
     }
 
-    public sealed class CollectionLiteralPartRange : CollectionLiteralPart
+    public sealed class OclCollectionLiteralPartRange : OclCollectionLiteralPart
     {
-        OclInteger from, to;
-        public CollectionLiteralPartRange(OclInteger from, OclInteger to)
+        private readonly OclInteger from, to;
+        public OclCollectionLiteralPartRange(OclInteger from, OclInteger to)
         {
             this.from = from;
             this.to = to;
@@ -36,10 +36,10 @@ namespace Exolutio.CodeContracts.Support
             }
         }
     }
-    public sealed class CollectionLiteralPartItem : CollectionLiteralPart
+    public sealed class OclCollectionLiteralPartItem : OclCollectionLiteralPart
     {
-        OclAny item;
-        public CollectionLiteralPartItem(OclAny to)
+        private readonly OclAny item;
+        public OclCollectionLiteralPartItem(OclAny to)
         {
             this.item = to;
         }

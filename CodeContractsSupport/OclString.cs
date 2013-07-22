@@ -16,7 +16,7 @@ namespace Exolutio.CodeContracts.Support
 
     public class OclString : OclAny, IEquatable<OclString>
     {
-        private string value;
+        private readonly string value;
 
         #region Constructors
         public OclString(string str)
@@ -33,7 +33,7 @@ namespace Exolutio.CodeContracts.Support
         #region Conversions
         public static explicit operator string(OclString s)
         {
-            if (isNull(s))
+            if (IsNull(s))
                 return null;
             return s.value;
         }
@@ -116,7 +116,7 @@ namespace Exolutio.CodeContracts.Support
         [Pure]
         public OclString op_Addition(OclString s)
         {
-            if (isNull(s))
+            if (IsNull(s))
                 throw new ArgumentNullException();
             return concat(s);
         }
@@ -139,7 +139,7 @@ namespace Exolutio.CodeContracts.Support
         [Pure]
         public OclString concat(OclString s)
         {
-            if (isNull(s))
+            if (IsNull(s))
                 throw new ArgumentNullException();
             return new OclString(value + s.value);
         }
@@ -153,9 +153,9 @@ namespace Exolutio.CodeContracts.Support
         [Pure]
         public OclString substring(OclInteger from, OclInteger to)
         {
-            if (isNull(from))
+            if (IsNull(from))
                 throw new ArgumentNullException("from");
-            if (isNull(to))
+            if (IsNull(to))
                 throw new ArgumentNullException("to");
 
             //Convert to 32-bit integers.
@@ -223,7 +223,7 @@ namespace Exolutio.CodeContracts.Support
         [Pure]
         public OclInteger indexOf(OclString s)
         {
-            if (isNull(s))
+            if (IsNull(s))
                 throw new ArgumentNullException();
 
             int intIndex = value.IndexOf(s.value);
@@ -242,7 +242,7 @@ namespace Exolutio.CodeContracts.Support
         [Pure]
         public OclBoolean equalsIgnoreCase(OclString s, OclString locale)
         {
-            if (isNull(s))
+            if (IsNull(s))
                 throw new ArgumentNullException();
             return (OclBoolean)(String.Compare(value, s.value, true, OclUtils.GetLocale(locale)) == 0);
         }
@@ -250,7 +250,7 @@ namespace Exolutio.CodeContracts.Support
         [Pure]
         public OclString at(OclInteger pos)
         {
-            if (isNull(pos))
+            if (IsNull(pos))
                 throw new ArgumentNullException();
             return substring(pos, pos);
         }
@@ -288,7 +288,7 @@ namespace Exolutio.CodeContracts.Support
         [Pure]
         public OclBoolean op_LessThan(OclString s, OclString locale)
         {
-            if (isNull(s))
+            if (IsNull(s))
                 throw new ArgumentNullException();
             return (OclBoolean)(String.Compare(value, s.value, false, OclUtils.GetLocale(locale)) < 0);
         }
@@ -296,7 +296,7 @@ namespace Exolutio.CodeContracts.Support
         [Pure]
         public OclBoolean op_LessThanOrEqual(OclString s, OclString locale)
         {
-            if (isNull(s))
+            if (IsNull(s))
                 throw new ArgumentNullException();
             return (OclBoolean)(String.Compare(value, s.value, false, OclUtils.GetLocale(locale)) <= 0);
         }
@@ -304,7 +304,7 @@ namespace Exolutio.CodeContracts.Support
         [Pure]
         public OclBoolean op_GreaterThan(OclString s, OclString locale)
         {
-            if (isNull(s))
+            if (IsNull(s))
                 throw new ArgumentNullException();
             return (OclBoolean)(String.Compare(value, s.value, false, OclUtils.GetLocale(locale)) > 0);
         }
@@ -312,7 +312,7 @@ namespace Exolutio.CodeContracts.Support
         [Pure]
         public OclBoolean op_GreaterThanOrEqual(OclString s, OclString locale)
         {
-            if (isNull(s))
+            if (IsNull(s))
                 throw new ArgumentNullException();
             return (OclBoolean)(String.Compare(value, s.value, false, OclUtils.GetLocale(locale)) >= 0);
         }
@@ -320,23 +320,6 @@ namespace Exolutio.CodeContracts.Support
         #endregion
 
         #region Operators
-
-        /*public static OclBoolean operator <(OclString a, OclString b)
-        {
-            return a.op_LessThan(b, OclAny.oclLocale);
-        }
-        public static OclBoolean operator <=(OclString a, OclString b)
-        {
-            return a.op_LessThanOrEqual(b, OclAny.oclLocale);
-        }
-        public static OclBoolean operator >(OclString a, OclString b)
-        {
-            return a.op_GreaterThan(b, OclAny.oclLocale);
-        }
-        public static OclBoolean operator >=(OclString a, OclString b)
-        {
-            return a.op_GreaterThanOrEqual(b, OclAny.oclLocale);
-        }*/
         public static OclString operator +(OclString a, OclString b)
         {
             return a.op_Addition(b);
@@ -350,20 +333,20 @@ namespace Exolutio.CodeContracts.Support
         }
         public override bool Equals(object obj)
         {
-            if (!(obj is OclString))
-                return false;
-
-            return Equals((OclString)obj);
+            return Equals(obj as OclString);
         }
         public bool Equals(OclString s)
         {
-            return s.value == value;
+            if (IsNull(s))
+                return false;
+            else
+                return s.value == value;
         }
         #endregion
 
         #region OCL Type
 
-        public static readonly OclClassifier Type = PrimitiveType.String;
+        public static new readonly OclClassifier Type = PrimitiveType.String;
 
         public override OclClassifier oclType()
         {
