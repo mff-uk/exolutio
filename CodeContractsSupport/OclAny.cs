@@ -19,20 +19,20 @@ namespace Exolutio.CodeContracts.Support
 
         public static OclBoolean operator ==(OclAny a, OclAny b)
         {
-            if (isNull(a))
-                return (OclBoolean)isNull(b);
+            if (IsNull(a))
+                return (OclBoolean)IsNull(b);
             else
                 return (OclBoolean)a.Equals(b);
         }
 
         public static OclBoolean operator !=(OclAny a, OclAny b){
-            if (isNull(a))
-                return (OclBoolean)!isNull(b);
+            if (IsNull(a))
+                return (OclBoolean)!IsNull(b);
             else
                 return (OclBoolean)!a.Equals(b); 
         }
 
-        internal static bool isNull(OclAny o)
+        internal static bool IsNull(OclAny o)
         {
             return object.ReferenceEquals(o, null);
         }
@@ -41,19 +41,22 @@ namespace Exolutio.CodeContracts.Support
         #region OCL Operations
         public abstract OclClassifier oclType();
 
-        public OclBoolean isKindOf(OclClassifier type)
+        public OclBoolean oclIsKindOf(OclClassifier type)
         {
             return oclType().conformsTo(type);
         }
 
-        public OclBoolean isTypeOf(OclClassifier type)
+        public OclBoolean oclIsTypeOf(OclClassifier type)
         {
             return (OclBoolean)(oclType() == type);
         }
 
         public T oclAsType<T>(OclClassifier type) where T : OclAny
         {
-            return (T)this;
+            if(oclType().ConformsToInternal(type))
+                return (T)this;
+            else
+                throw new InvalidCastException();
         }
 
         public static OclString oclLocale
@@ -73,7 +76,7 @@ namespace Exolutio.CodeContracts.Support
         {
             try
             {
-                return isNull(expression());
+                return IsNull(expression());
             }
             catch (Exception)
             {
@@ -100,5 +103,7 @@ namespace Exolutio.CodeContracts.Support
             }
         }
         #endregion
+
+        public static readonly OclClassifier Type = AnyType.OclAny;
     }
 }

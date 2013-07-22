@@ -41,36 +41,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CollectionLiteralPart.cs" />
+    <Compile Include="OclCollectionLiteralPart.cs" />
     <Compile Include="OclEnum.cs" />
+    <Compile Include="OclObject.cs" />
     <Compile Include="OclUnlimitedNatural.cs" />
-    <Compile Include="OclIntegerT.cs" />
-    <Compile Include="OclRealT.cs" />
-    <Compile Include="OclBagT.cs" />
-    <Compile Include="OclSequenceT.cs" />
-    <Compile Include="OclOrderedSetT.cs" />
-    <Compile Include="OclSetT.cs" />
     <Compile Include="OclAny.cs" />
     <Compile Include="OclBoolean.cs" />
     <Compile Include="OclCollection.cs" />
-    <Compile Include="OclCollectionExtensions.cs" />
     <Compile Include="OclInteger.cs" />
     <Compile Include="OclReal.cs" />
     <Compile Include="OclString.cs" />
     <Compile Include="OclTuple.cs" />
-    <Compile Include="OclUnlimitedNatural64.cs" />
     <Compile Include="OclBag.cs" />
-    <Compile Include="OclCollectionUtils.cs" />
-    <Compile Include="OclExtensions.cs" />
     <Compile Include="OclSet.cs" />
     <Compile Include="OclSequence.cs" />
     <Compile Include="OclOrderedSet.cs" />
-    <Compile Include="OclUnlimitedNaturalT.cs" />
-    <Compile Include="OclUnlimitedNatural32.cs" />
     <Compile Include="OclUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Types\Classifier.cs" />
-    <Compile Include="UnlimitedValueException.cs" />
+    <Compile Include="Types\OclTupleType.cs" />
+    <Compile Include="Types\OclClassifier.cs" />
+    <Compile Include="Types\OclObjectType.cs" />
+    <Compile Include="Types\OclCollectionType.cs" />
+    <Compile Include="Types\OclPrimitiveType.cs" />
+    <Compile Include="Types\OclEnumType.cs" />
+    <Compile Include="OclUnlimitedValueException.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

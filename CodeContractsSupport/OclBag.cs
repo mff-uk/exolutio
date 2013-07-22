@@ -26,13 +26,13 @@ namespace Exolutio.CodeContracts.Support
             map = new Dictionary<OclAny, int>();
         }
         /// <summary>
-        /// Copy constructor.
+        /// Construct new bag with the specified element type and copy the contents of element dictionary.
         /// </summary>
-        /// <param name="bag">The bag to be copied.</param>
-        private OclBag(OclBag bag):
-            base(bag.elementType)
+        
+        private OclBag(OclClassifier elementType, Dictionary<OclAny, int> elements):
+            base(elementType)
         {
-            map = new Dictionary<OclAny, int>(bag.map);
+            map = new Dictionary<OclAny, int>(elements);
         }
 
         /// <summary>
@@ -52,11 +52,11 @@ namespace Exolutio.CodeContracts.Support
         {
         }
 
-        public OclBag(OclClassifier type, params CollectionLiteralPart[] items):
+        public OclBag(OclClassifier type, params OclCollectionLiteralPart[] items):
             base(type)
         {
             this.map = new Dictionary<OclAny, int>();
-            foreach(CollectionLiteralPart item in items)
+            foreach(OclCollectionLiteralPart item in items)
                 AddRange(item);
         }
 
@@ -92,7 +92,7 @@ namespace Exolutio.CodeContracts.Support
                 foreach (KeyValuePair<OclAny, int> pair in map)
                 {
                     OclAny item = pair.Key;
-                    hash += pair.Value * (isNull(item) ? 0 : item.GetHashCode());
+                    hash += pair.Value * (IsNull(item) ? 0 : item.GetHashCode());
                 }
                 return hash;
             }
@@ -202,20 +202,20 @@ namespace Exolutio.CodeContracts.Support
       
     
         [Pure]
-        public OclBag union(OclBag bag)
+        public OclBag union(OclClassifier newElementType, OclBag bag)
         {
-            if (isNull(bag))
+            if (IsNull(bag))
                 throw new ArgumentNullException();
-            OclBag bg = new OclBag(this);
+            OclBag bg = new OclBag(newElementType, map);
             bg.AddRange(bag);
             return bg;
         }
         [Pure]
-        public OclBag union(OclSet set)
+        public OclBag union(OclClassifier newElementType,OclSet set)
         {
-            if (isNull(set))
+            if (IsNull(set))
                 throw new ArgumentNullException();
-            OclBag bg = new OclBag(this);
+            OclBag bg = new OclBag(newElementType, map);
             bg.AddRange(set);
             return bg;
         }
@@ -227,7 +227,7 @@ namespace Exolutio.CodeContracts.Support
         [Pure]
         public OclBag intersection(OclBag bag)
         {
-            if (isNull(bag))
+            if (IsNull(bag))
                 throw new ArgumentNullException();
             OclBag bg = new OclBag(elementType);
             foreach (KeyValuePair<OclAny, int> pair in map)
@@ -247,46 +247,46 @@ namespace Exolutio.CodeContracts.Support
         [Pure]
         public OclSet intersection(OclSet set)
         {
-            if (isNull(set))
+            if (IsNull(set))
                 throw new ArgumentNullException();
             //Use Set implementation
             return set.intersection(this);
         }
         [Pure]
-        public OclBag including<T>(T item) where T : OclAny
+        public OclBag including<T>(OclClassifier newElementType, T item) where T : OclAny
         {
-            OclBag bg = new OclBag(this);
+            OclBag bg = new OclBag(newElementType, map);
             bg.Add(item);
             return bg;
         }
 
         [Pure]
-        public OclBag excluding<T>(T item) where T : OclAny
+        public OclBag excluding<T>(OclClassifier newElementType, T item) where T : OclAny
         {
-            OclBag bg = new OclBag(this);
+            OclBag bg = new OclBag(newElementType, map);
             bg.map.Remove(item);
             return bg;
         }
         [Pure]
         public OclBag flattenToBag()
         {
-            //TODO:
-            throw new NotImplementedException();
+            List<OclAny> list = new List<OclAny>();
+            FlattenToList(list, OclCollectionType.Depth(elementType));
+            return new OclBag(OclCollectionType.BasicElementType(elementType), list);
         }
       
 
         #endregion
 
         #region OCL Iterations from Collection
-        public override OclCollection closure<T>(Func<T, OclAny> body)
+        public override OclCollection closure<T>(OclClassifier newElementType, Func<T, OclAny> body)
         {
-            return closureToSet(body);
+            return closureToSet(newElementType, body);
         }
         [Pure]
-        public OclSet closureToSet<T>(Func<T, OclAny> body) where T : OclAny
+        public OclSet closureToSet<T>(OclClassifier newElementType, Func<T, OclAny> body) where T : OclAny
         {
-            //TODO:
-            throw new NotImplementedException();
+            return ClosureToSet<T>(newElementType, body);
         }
         public override OclCollection collect<T>(OclClassifier newElementType, Func<T, OclAny> f)
         {
@@ -324,6 +324,13 @@ namespace Exolutio.CodeContracts.Support
             return new OclBag(elementType, this.Where(item => !(bool)f((T)item)));
         }
 
+        #endregion
+
+        #region OCL Type
+        public override OclClassifier oclType()
+        {
+            return OclCollectionType.Collection(OclCollectionKind.Bag, elementType);
+        }
         #endregion
     }   
 }

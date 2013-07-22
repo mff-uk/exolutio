@@ -10,7 +10,7 @@ namespace Exolutio.CodeContracts.Support
     /// </summary>
     public abstract class OclCollection : OclAny, IEnumerable<OclAny>
     {
-        protected readonly OclClassifier elementType;
+        internal readonly OclClassifier elementType;
 
         protected OclCollection(OclClassifier elementType)
         {
@@ -24,7 +24,7 @@ namespace Exolutio.CodeContracts.Support
         /// <returns>Number of elements.</returns>
         public virtual OclInteger size()
         {
-            return (OclInteger)((IEnumerable<OclAny>)this).Count();
+            return (OclInteger)this.Count();
         }
         /// <summary>
         /// Find element in the collection
@@ -35,7 +35,7 @@ namespace Exolutio.CodeContracts.Support
         public virtual OclBoolean includes<T>(T obj)
             where T : OclAny
         {
-            return (OclBoolean)((IEnumerable<T>)this).Contains(obj);
+            return (OclBoolean)this.Contains(obj);
         }
         /// <summary>
         /// Find element in the collection
@@ -46,7 +46,7 @@ namespace Exolutio.CodeContracts.Support
         public virtual OclBoolean excludes<T>(T obj)
             where T : OclAny
         {
-            return (OclBoolean)!((IEnumerable<T>)this).Contains(obj);
+            return (OclBoolean)!this.Contains(obj);
         }
         /// <summary>
         /// Count element in the collection
@@ -57,13 +57,7 @@ namespace Exolutio.CodeContracts.Support
         public virtual OclInteger count<T>(T obj)
             where T : OclAny
         {
-            int count = 0;
-            foreach (OclAny t in this)
-            {
-                if (Object.Equals(t, obj))
-                    ++count;
-            }
-            return (OclInteger)count;
+            return (OclInteger)this.Count(t => Object.Equals(t, obj));
         }
 
         public virtual OclBoolean includesAll(OclCollection c2)
@@ -83,28 +77,26 @@ namespace Exolutio.CodeContracts.Support
         public abstract OclBoolean notEmpty();
 
 
-        public virtual T max<T>() where T : OclAny
+        public virtual T max<T>(Func<T,T,T> maxFunc) where T : OclAny
         {
-            //TODO
-            throw new NotImplementedException();
+            return MinMax(maxFunc);
         }
-        public virtual T min<T>() where T : OclAny
+        public virtual T min<T>(Func<T, T, T> minFunc) where T : OclAny
         {
-            //TODO
-            throw new NotImplementedException();
+            return MinMax(minFunc);
         }
-        public virtual T sum<T>() where T : OclAny
+        public virtual T sum<T>(T zero, Func<T,T,T> addFunc) where T : OclAny
         {
-            //TODO
-            throw new NotImplementedException();
+            return this.Aggregate(zero, (current, item) => addFunc(current, (T) item));
         }
 
         public virtual OclSet product(OclCollection c2)
         {
-            OclSet set = new OclSet(null);//TODO:
+            OclTupleType newElementType = OclTupleType.Tuple(OclTupleType.Part("first", elementType), OclTupleType.Part("second", c2.elementType));
+            OclSet set = new OclSet(newElementType);
             foreach (OclAny e1 in this)
                 foreach (OclAny e2 in c2)
-                    set.set.Add(new OclTuple(null));//TODO:
+                    set.set.Add(new OclTuple(newElementType, e1, e2));
             return set;
         }
 
@@ -155,7 +147,7 @@ namespace Exolutio.CodeContracts.Support
             return acc;
         }
 
-        public abstract OclCollection closure<T>(Func<T,OclAny> body)where T:OclAny;
+        public abstract OclCollection closure<T>(OclClassifier newElementType, Func<T, OclAny> body) where T : OclAny;
         public OclBoolean exists<T>(Func<T,OclBoolean> body)where T:OclAny{
             OclBoolean e = OclBoolean.False;
             foreach (OclAny item in this)
@@ -199,25 +191,96 @@ namespace Exolutio.CodeContracts.Support
         public OclBoolean one<T>(Func<T, OclBoolean> f)
             where T : OclAny
         {
-            int count = 0;
-            foreach (OclAny t in this)
-            {
-                if ((bool)f((T)t))
-                    ++count;
-            }
+            int count = this.Count(t => (bool) f((T) t));
             return (OclBoolean)(count == 1);
         }
         public abstract OclCollection collect<T>(OclClassifier newElementType,Func<T, OclAny> body) where T : OclAny;
 
         
         #endregion
-
-        public override OclClassifier oclType()
+        #region Helpers
+        private T MinMax<T>(Func<T, T, T> maxFunc)
+            where T : OclAny
         {
-            //return elementType;
-            throw new NotImplementedException();
+            T currentMax = null;
+            foreach (OclAny item in this)
+            {
+                if (IsNull(currentMax))
+                    currentMax = (T)item;
+                else
+                    currentMax = maxFunc(currentMax, (T)item);
+            }
+            return currentMax;
         }
 
+        protected OclSet ClosureToSet<T>(OclClassifier newElementType, Func<T,OclAny> body)
+            where T:OclAny
+        {
+            OclSet resultSet = new OclSet(newElementType);
+
+            ClosureTo(newElementType, this, resultSet.set, body);
+
+            return resultSet;
+        }
+
+        protected OclOrderedSet ClosureToOrderedSet<T>(OclClassifier newElementType, Func<T, OclAny> body)
+            where T : OclAny
+        {
+            OclOrderedSet resultSet = new OclOrderedSet(newElementType);
+            ClosureTo(newElementType, this, resultSet.list, body);
+            return resultSet;
+        }
+
+        private static void ClosureTo<T>(OclClassifier newElementType, IEnumerable<OclAny> source, ICollection<OclAny> dst, Func<T, OclAny> body)
+            where T : OclAny
+        {
+            //Iterate over added items
+            foreach (OclAny s in source)
+            {
+                //Do not add duplicates
+                if (!dst.Contains(s))
+                {
+                    dst.Add(s);
+                    //Execute body for newly added item
+                    OclAny newItems = body((T)s);
+                    //Ignore null
+                    if(!IsNull(newItems))
+                    {
+                        OclClassifier type = newItems.oclType();
+                        if (type.ConformsToInternal(OclCollectionType.Collection(OclAny.Type)))
+                        {
+                            //Collection must be of new element type
+                            if(type.ConformsToInternal(OclCollectionType.Collection(newElementType)))
+                                ClosureTo(newElementType, (OclCollection) newItems, dst, body);
+                            else
+                                throw new InvalidCastException();
+                        }
+                        else
+                        {
+                            //Non-collection must be kind of new element type
+                            if (type.ConformsToInternal(newElementType))
+                            {
+                                //Add the result
+                                OclAny[] arr = {newItems};
+                                ClosureTo(newElementType, arr, dst, body);
+                            }
+                            else
+                                throw new InvalidCastException();
+                        }
+                    }
+                }
+            }
+        }
+
+        protected void FlattenToList(List<OclAny> dst, int depth)
+        {
+            if (depth <= 0)
+                dst.AddRange(this);
+            else
+                foreach (OclAny n in this)
+                    ((OclCollection)n).FlattenToList(dst, depth - 1);
+        }
+        #endregion
         #region IEnumerable
         public abstract IEnumerator<OclAny> GetEnumerator();
 
@@ -226,5 +289,6 @@ namespace Exolutio.CodeContracts.Support
             return GetEnumerator();
         }
         #endregion
+
     }
 }

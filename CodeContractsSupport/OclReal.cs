@@ -38,7 +38,7 @@ namespace Exolutio.CodeContracts.Support
         }
 
         public static explicit operator double?(OclReal r){
-            if (isNull(r))
+            if (IsNull(r))
                 return null;
             return r.toDouble();
         }
@@ -59,31 +59,22 @@ namespace Exolutio.CodeContracts.Support
         #region Equality
         public override bool Equals(object obj)
         {
-            if (obj is OclReal)
-                return Equals((OclReal)obj);
-            else
-                return false;
+            return Equals(obj as OclReal);
         }
         public bool Equals(OclReal obj)
         {
-            if (unlimited)
-            {
-                return obj.unlimited;
-            }
+            if (IsNull(obj))
+                return false;
+            else if (IsUnlimited)
+                return obj.IsUnlimited;
             else
-                return !obj.unlimited && toDouble() == obj.toDouble();
+                return !obj.IsUnlimited && toDouble() == obj.toDouble();
         }
         public override int GetHashCode()
         {
+            if (IsUnlimited)
+                return Double.PositiveInfinity.GetHashCode();
             return toDouble().GetHashCode();
-        }
-        public static bool operator ==(OclReal a, OclReal b)
-        {
-            return a.Equals(b);
-        }
-        public static bool operator !=(OclReal a, OclReal b)
-        {
-            return !(a == b);
         }
         #endregion
 
@@ -95,7 +86,7 @@ namespace Exolutio.CodeContracts.Support
         /// <returns>Sum of two OclReal values.</returns>
         public OclReal op_Addition(OclReal r)
         {
-            if (isNull(r))
+            if (IsNull(r))
                 throw new ArgumentNullException();
             return OclReal.valueOf(toDouble() + r.toDouble());
         }
@@ -106,13 +97,13 @@ namespace Exolutio.CodeContracts.Support
         /// <returns>Difference of two OclReal values.</returns>
         public OclReal op_Subtraction(OclReal r)
         {
-            if (isNull(r))
+            if (IsNull(r))
                 throw new ArgumentNullException();
             return OclReal.valueOf(toDouble() - r.toDouble());
         }
         public OclReal op_Multiply(OclReal r)
         {
-            if (isNull(r))
+            if (IsNull(r))
                 throw new ArgumentNullException();
             return OclReal.valueOf(toDouble() * r.toDouble());
         }
@@ -122,7 +113,7 @@ namespace Exolutio.CodeContracts.Support
         }
         public OclReal op_Division(OclReal r)
         {
-            if (isNull(r))
+            if (IsNull(r))
                 throw new ArgumentNullException();
             return OclReal.valueOf(toDouble()/r.toDouble());
         }
@@ -137,42 +128,47 @@ namespace Exolutio.CodeContracts.Support
         public OclInteger round()
         {
             double v = toDouble();
-            v = Math.Max(Math.Floor(v), Math.Ceiling(v));
+            double vabs = Math.Abs(v);
+            double d = vabs - Math.Truncate(vabs);
+            if (d == 0.5)
+                v = Math.Ceiling(v);
+            else
+                v = Math.Round(v);
             return OclInteger.ValueOf(checked((int)v));
         }
         public OclReal max(OclReal r)
         {
-            if (isNull(r))
+            if (IsNull(r))
                 throw new ArgumentNullException();
             return toDouble() < r.toDouble() ? r : this;
         }
         public OclReal min(OclReal r)
         {
-            if (isNull(r))
+            if (IsNull(r))
                 throw new ArgumentNullException();
             return toDouble() < r.toDouble() ? this : r;
         }
         public OclBoolean op_LessThan(OclReal r)
         {
-            if (isNull(r))
+            if (IsNull(r))
                 throw new ArgumentNullException();
             return (OclBoolean)(toDouble() < r.toDouble());
         }
         public OclBoolean op_GreaterThan(OclReal r)
         {
-            if (isNull(r))
+            if (IsNull(r))
                 throw new ArgumentNullException();
             return (OclBoolean)(toDouble() > r.toDouble());
         }
         public OclBoolean op_LessThanOrEqual(OclReal r)
         {
-            if (isNull(r))
+            if (IsNull(r))
                 throw new ArgumentNullException();
             return (OclBoolean)(toDouble() <= r.toDouble());
         }
         public OclBoolean op_GreaterThanOrEqual(OclReal r)
         {
-            if (isNull(r))
+            if (IsNull(r))
                 throw new ArgumentNullException();
             return (OclBoolean)(toDouble() >= r.toDouble());
         }
@@ -226,7 +222,7 @@ namespace Exolutio.CodeContracts.Support
         /// <summary>
         /// Check whether the objecgt wraps an integer or is unlimited.
         /// </summary>
-        internal virtual bool unlimited { get { return false; } }
+        internal virtual bool IsUnlimited { get { return false; } }
         #endregion
 
         #region Comparable
@@ -237,7 +233,7 @@ namespace Exolutio.CodeContracts.Support
         #endregion
 
         #region OCL Type
-        public static readonly OclClassifier Type = OclProperReal.Type;
+        public static new readonly OclClassifier Type = OclProperReal.Type;
         #endregion
     }
 
@@ -247,7 +243,7 @@ namespace Exolutio.CodeContracts.Support
     /// </summary>
     internal sealed class OclProperReal : OclReal
     {
-        private double value;
+        private readonly double value;
          
         #region Constructors
         /// <summary>

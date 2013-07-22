@@ -25,13 +25,24 @@ namespace Exolutio.CodeContracts.Support
         }
 
         /// <summary>
+        /// Execute expression returning void and return null
+        /// </summary>
+        /// <param name="expression">Expression to execute</param>
+        /// <returns>Always null.</returns>
+        public static OclAny Void(Action expression)
+        {
+            expression();
+            return null;
+        }
+
+        /// <summary>
         /// Get CultureInfo specified by OCL locale name
         /// </summary>
         /// <param name="name">OCL locale name (example: 'en_US')</param>
-        /// <returns></returns>
+        /// <returns>The requested culture.</returns>
         public static System.Globalization.CultureInfo GetLocale(OclString name)
         {
-            if (OclAny.isNull(name))
+            if (OclAny.IsNull(name))
                 throw new ArgumentNullException();
             return System.Globalization.CultureInfo.GetCultureInfo(((string)name).Replace('_','-'));
         }

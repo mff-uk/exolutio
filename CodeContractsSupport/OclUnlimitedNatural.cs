@@ -14,6 +14,10 @@ namespace Exolutio.CodeContracts.Support
     {    
         public static readonly OclUnlimitedNatural Unlimited = new OclUnlimited();
 
+        #region OCL Type
+        public static new readonly OclClassifier Type = PrimitiveType.UnlimitedNatural;
+        #endregion
+
         #region Conversions
         internal static new OclUnlimitedNatural ValueOf(int? l)
         {
@@ -32,7 +36,7 @@ namespace Exolutio.CodeContracts.Support
         /// <exception cref="UnlimitedValueException">If either of the operands is unlimited.</exception>
         public OclUnlimitedNatural op_Addition(OclUnlimitedNatural u)
         {
-            return ValueOf(toInt() + u.toInt());
+            return ValueOf(ToInt() + u.ToInt());
         }
         /// <summary>
         /// Multiply two unlimited naturals.
@@ -42,7 +46,7 @@ namespace Exolutio.CodeContracts.Support
         /// <exception cref="UnlimitedValueException">If either of the operands is unlimited.</exception>
         public OclUnlimitedNatural op_Multiply(OclUnlimitedNatural u)
         {
-            return ValueOf(toInt() * u.toInt());
+            return ValueOf(ToInt() * u.ToInt());
         }
         /// <summary>
         /// Divide two unlimited naturals.
@@ -64,7 +68,7 @@ namespace Exolutio.CodeContracts.Support
         /// <exception cref="DivideByZeroException">If the second operator is zero.</exception>
         public OclUnlimitedNatural div(OclUnlimitedNatural u)
         {
-            return ValueOf(toInt() / u.toInt());
+            return ValueOf(ToInt() / u.ToInt());
         }
         /// <summary>
         /// Compute modulo of two unlimited naturals.
@@ -75,7 +79,7 @@ namespace Exolutio.CodeContracts.Support
         /// <exception cref="DivideByZeroException">If the second operator is zero.</exception>
         public OclUnlimitedNatural mod(OclUnlimitedNatural u)
         {
-            return ValueOf(toInt() % u.toInt());
+            return ValueOf(ToInt() % u.ToInt());
         }
         public OclUnlimitedNatural max(OclUnlimitedNatural u)
         {
@@ -103,7 +107,7 @@ namespace Exolutio.CodeContracts.Support
         }
         public OclInteger toInteger()
         {
-            return OclInteger.ValueOf(toInt());
+            return OclInteger.ValueOf(ToInt());
         }
         /// <summary>
         /// Convert to OCL String. If this is OclUnlimitedNatural.Unlimited, returns "*".
@@ -111,15 +115,15 @@ namespace Exolutio.CodeContracts.Support
         /// <returns>String representation of this.</returns>
         public new OclString toString()
         {
-            if (unlimited)
+            if (IsUnlimited)
                 return new OclString("*");
             else
-                return new OclString(toInt().ToString(CultureInfo.InvariantCulture));
+                return new OclString(ToInt().ToString(CultureInfo.InvariantCulture));
         }
 
         public override OclClassifier oclType()
         {
-            throw new NotImplementedException();
+            return Type;
         }
 
         #endregion
@@ -158,12 +162,12 @@ namespace Exolutio.CodeContracts.Support
         #region Helper methods
         private bool less(OclUnlimitedNatural u)
         {
-            if (unlimited)
+            if (IsUnlimited)
                 return false;
-            else if (u.unlimited)
+            else if (u.IsUnlimited)
                 return true;
             else
-                return (toInt() < u.toInt());
+                return (ToInt() < u.ToInt());
         }
         #endregion
     }
@@ -181,7 +185,7 @@ namespace Exolutio.CodeContracts.Support
                 throw new ArgumentException("Negative value for natrual constructor.");
             this.value = value;
         }
-        internal override int toInt()
+        internal override int ToInt()
         {
             return value;
         }
@@ -192,11 +196,11 @@ namespace Exolutio.CodeContracts.Support
         internal OclUnlimited()
         {
         }
-        internal override int toInt()
+        internal override int ToInt()
         {
             throw new OclUnlimitedValueException();
         }
-        internal override bool unlimited
+        internal override bool IsUnlimited
         {
             get { return true; }
         }
