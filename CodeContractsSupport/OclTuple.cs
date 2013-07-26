@@ -7,8 +7,8 @@ namespace Exolutio.CodeContracts.Support
 {
     public class OclTuple : OclAny, IEquatable<OclTuple>
     {
-        private OclTupleType type;
-        private OclAny[] parts;
+        private readonly OclTupleType type;
+        private readonly Dictionary<string, OclAny> parts = new Dictionary<string, OclAny>();
 
         public struct TuplePart
         {
@@ -21,23 +21,29 @@ namespace Exolutio.CodeContracts.Support
         {
             return new TuplePart { name = name, type = type, value = value };
         }
-
-        #region Constructors
-        /// <summary>
-        /// Create tuple of the specified type and with the specified values.
-        /// </summary>
-        /// <param name="type">Type of the whole tuple</param>
-        /// <param name="parts">Individual values</param>
-        public OclTuple(OclTupleType type, params OclAny[] parts)
+        public static TuplePart Part(string name, OclAny value)
         {
-            this.parts = parts;
-            this.type = type;
+            return new TuplePart { name = name, type = null, value = value };
         }
 
+
+        #region Constructors
+        
         public OclTuple(params TuplePart[] parts)
         {
-            this.parts = (from x in parts select x.value).ToArray();
-            this.type = OclTupleType.Tuple((from x in parts select OclTupleType.Part(x.name, x.type)).ToArray());
+            if(parts == null)
+                throw new ArgumentNullException();
+            foreach (var part in parts)
+                this.parts[part.name] = part.value;
+            this.type = OclTupleType.Tuple(from x in parts select OclTupleType.Part(x.name, x.type));
+        }
+        public OclTuple(OclTupleType type, params TuplePart[] parts)
+        {
+            if (type == null || parts == null)
+                throw new ArgumentNullException();
+            foreach (var part in parts)
+                this.parts[part.name] = part.value;
+            this.type = type;
         }
         #endregion
 
@@ -52,16 +58,16 @@ namespace Exolutio.CodeContracts.Support
             if (!obj.type.Equals(type))
                 return false;
             //Compare elements
-            return Enumerable.SequenceEqual(parts, obj.parts);
-          
+            return parts.All(part => obj.parts[part.Key].Equals(part.Value));
+
         }
         public override int GetHashCode()
         {
             unchecked
             {
                 int code = type.GetHashCode();
-                foreach (OclAny a in parts)
-                    code = code * 13 + a.GetHashCode();
+                foreach (KeyValuePair<string, OclAny> part in parts)
+                    code = part.Value.GetHashCode();
                 return code;
             }
         }
@@ -69,11 +75,7 @@ namespace Exolutio.CodeContracts.Support
         #endregion
         public T Get<T>(string element) where T : OclAny
         {
-            return (T)parts[type.nameToIndex(element)];
-        }
-        public T Get<T>(int index) where T : OclAny
-        {
-            return (T)parts[index];
+            return (T)parts[element];
         }
 
         public override OclClassifier oclType()

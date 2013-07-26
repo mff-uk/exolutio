@@ -49,14 +49,19 @@ namespace Exolutio.CodeContracts.Support
         }
         public static OclTupleType Tuple(params OclTuplePart[] parts)
         {
-            return new OclTupleType(parts);//TODO: cache
+            return new OclTupleType(parts);
+        }
+        public static OclTupleType Tuple(IEnumerable<OclTuplePart> parts)
+        {
+            return new OclTupleType(parts);
         }
         #endregion
-        private readonly OclTuplePart[] parts;
+        private readonly Dictionary<string, OclClassifier> parts = new Dictionary<string, OclClassifier>();
 
-        private OclTupleType(params OclTuplePart[] parts)
+        private OclTupleType(IEnumerable<OclTuplePart> parts)
         {
-            this.parts = parts;
+            foreach (OclTuplePart part in parts)
+                this.parts[part.name] = part.type;
         }
 
         #region Equality
@@ -64,7 +69,19 @@ namespace Exolutio.CodeContracts.Support
         {
             if (other == null)
                 return false;
-            return Enumerable.SequenceEqual(parts, other.parts);
+            //The type must have same number of parts
+            if (other.parts.Count != parts.Count)
+                return false;
+            //Every part from this type must be in the other type and have the same type
+            foreach (var part in parts)
+            {
+                OclClassifier partType;
+                if (!other.parts.TryGetValue(part.Key, out partType))
+                    return false;
+                if (!part.Value.Equals(partType))
+                    return false;
+            }
+            return true;
         }
         public override bool Equals(object obj)
         {
@@ -74,8 +91,9 @@ namespace Exolutio.CodeContracts.Support
         {
             unchecked{
                 int code = 0;
-                foreach (OclTuplePart tp in parts)
-                    code = code * 17 + tp.GetHashCode();
+                //Combine hash codes of part names and types
+                foreach (KeyValuePair<string, OclClassifier> tp in parts)
+                    code += tp.Key.GetHashCode() + 11*tp.Value.GetHashCode();
                 return code;
             }
         }
@@ -90,31 +108,25 @@ namespace Exolutio.CodeContracts.Support
             {
                 //Tuple conforms to another tuple if they have parts of same names and order and conforming types
                 OclTupleType tt = (OclTupleType)cls;
-                if (tt.parts.Length != parts.Length)
+                if (tt.parts.Count != parts.Count)
                     return false;
                 else
                 {
-                    return !tt.parts.Where((t, i) => !parts[i].conformsTo(t)).Any();
+                    //Each tuple part typ must conform to the corresponding part type
+                    foreach (var part in parts)
+                    {
+                        OclClassifier partType;
+                        if (!tt.parts.TryGetValue(part.Key, out partType))
+                            return false;
+                        if (!part.Value.ConformsToInternal(partType))
+                            return false;
+                    }
+                    return true;
                 }
             }
             else
                 return false;
         }
-
-        /// <summary>
-        /// Convert tuple part name to part index
-        /// </summary>
-        /// <param name="name">Part name. The name must be valid.</param>
-        /// <returns>Zero-based index of the tuple part.</returns>
-        internal int nameToIndex(string name){
-            for (int i = 0; i < parts.Length; ++i)
-            {
-                if (parts[i].name == name)
-                    return i;
-            }
-            throw new ArgumentException();
-        }
-
         
     }
    
