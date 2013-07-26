@@ -96,7 +96,7 @@ namespace Exolutio.CodeContracts.Support
             OclSet set = new OclSet(newElementType);
             foreach (OclAny e1 in this)
                 foreach (OclAny e2 in c2)
-                    set.set.Add(new OclTuple(newElementType, e1, e2));
+                    set.set.Add(new OclTuple(newElementType, OclTuple.Part("first",e1), OclTuple.Part("second",e2)));
             return set;
         }
 
